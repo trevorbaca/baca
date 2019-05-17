@@ -9,6 +9,7 @@ from . import typings
 
 ### CLASSES ###
 
+
 class Counter(object):
     """
     Counter.
@@ -68,10 +69,7 @@ class Counter(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_current',
-        '_start',
-        )
+    __slots__ = ("_current", "_start")
 
     ### INITIALIZER ###
 
@@ -118,6 +116,7 @@ class Counter(object):
         Returns integer.
         """
         return self._start
+
 
 class Cursor(object):
     """
@@ -168,13 +167,13 @@ class Cursor(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_cyclic',
-        '_lone_items',
-        '_position',
-        '_singletons',
-        '_source',
-        '_suppress_exception',
-        )
+        "_cyclic",
+        "_lone_items",
+        "_position",
+        "_singletons",
+        "_source",
+        "_suppress_exception",
+    )
 
     _publish_storage_format = True
 
@@ -188,7 +187,7 @@ class Cursor(object):
         position=None,
         singletons=None,
         suppress_exception=None,
-        ):
+    ):
         if cyclic is not None:
             cyclic = bool(cyclic)
         self._cyclic = cyclic
@@ -700,10 +699,10 @@ class Cursor(object):
         """
         cells = []
         for pitch_class_segment in pitch_class_segments:
-                pitch_class_segment = abjad.PitchClassSegment(
-                    items=pitch_class_segment,
-                    )
-                cells.append(pitch_class_segment)
+            pitch_class_segment = abjad.PitchClassSegment(
+                items=pitch_class_segment
+            )
+            cells.append(pitch_class_segment)
         cursor = Cursor(source=cells, cyclic=True)
         return cursor
 
@@ -827,7 +826,7 @@ class Cursor(object):
                     result.append(element)
                 except IndexError:
                     if not self.suppress_exception:
-                        raise Exception(f'cursor only {len(self.source)}.')
+                        raise Exception(f"cursor only {len(self.source)}.")
                 self._position += 1
         elif count < 0:
             for i in range(abs(count)):
@@ -837,14 +836,14 @@ class Cursor(object):
                     result.append(element)
                 except IndexError:
                     if not self.suppress_exception:
-                        raise Exception(f'cursor only {len(self.source)}.')
+                        raise Exception(f"cursor only {len(self.source)}.")
         if self.singletons:
             if len(result) == 0:
                 result = None
             elif len(result) == 1:
                 result = result[0]
         if exhausted and not self.is_exhausted:
-            raise Exception(f'cusor not exhausted: {self!r}.')
+            raise Exception(f"cusor not exhausted: {self!r}.")
         return result
 
     def reset(self):
@@ -871,6 +870,7 @@ class Cursor(object):
         Returns none.
         """
         self._position = 0
+
 
 class Expression(abjad.Expression):
     r"""
@@ -1174,27 +1174,28 @@ class Expression(abjad.Expression):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Classes'
+    __documentation_section__ = "Classes"
 
     ### PRIVATE METHODS ###
 
     def _evaluate_accumulate(self, *arguments):
         import baca
+
         assert len(arguments) == 1, repr(arguments)
         globals_ = self._make_globals()
-        assert '__argument_0' not in globals_
+        assert "__argument_0" not in globals_
         __argument_0 = arguments[0]
         assert isinstance(__argument_0, baca.Sequence), repr(__argument_0)
         class_ = type(__argument_0)
         operands = self.map_operand
-        globals_['__argument_0'] = __argument_0
-        globals_['class_'] = class_
-        globals_['operands'] = operands
-        statement = '__argument_0.accumulate(operands=operands)'
+        globals_["__argument_0"] = __argument_0
+        globals_["class_"] = class_
+        globals_["operands"] = operands
+        statement = "__argument_0.accumulate(operands=operands)"
         try:
             result = eval(statement, globals_)
         except (NameError, SyntaxError, TypeError) as e:
-            raise Exception(f'{statement!r} raises {e!r}.')
+            raise Exception(f"{statement!r} raises {e!r}.")
         return result
 
     ### PUBLIC METHODS ###
@@ -1257,13 +1258,11 @@ class Expression(abjad.Expression):
         Returns expression.
         """
         import baca
+
         class_ = baca.PitchClassSegment
         callback = self._make_initializer_callback(
-            class_,
-            module_names=['baca'],
-            string_template='{}',
-            **keywords
-            )
+            class_, module_names=["baca"], string_template="{}", **keywords
+        )
         expression = self.append_callback(callback)
         return abjad.new(expression, proxy_class=class_)
 
@@ -1323,18 +1322,14 @@ class Expression(abjad.Expression):
         Returns expression.
         """
         import baca
+
         class_ = baca.Selection
         callback = self._make_initializer_callback(
-            class_,
-            module_names=['baca'],
-            **keywords
-            )
+            class_, module_names=["baca"], **keywords
+        )
         expression = self.append_callback(callback)
-        return abjad.new(
-            expression,
-            proxy_class=class_,
-            template='baca',
-            )
+        return abjad.new(expression, proxy_class=class_, template="baca")
+
 
 class PaddedTuple(object):
     """
@@ -1366,18 +1361,11 @@ class PaddedTuple(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_items',
-        '_pad',
-        )
+    __slots__ = ("_items", "_pad")
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        items: typing.Sequence = None,
-        pad: int = 1,
-        ) -> None:
+    def __init__(self, items: typing.Sequence = None, pad: int = 1) -> None:
         items = items or ()
         items = tuple(items)
         self._items: typing.Tuple = items
@@ -1453,7 +1441,7 @@ class PaddedTuple(object):
                 items.append(item)
             return tuple(items)
         if not self:
-            raise IndexError(f'padded tuple is empty: {self!r}.')
+            raise IndexError(f"padded tuple is empty: {self!r}.")
         length = len(self)
         assert isinstance(self.pad, int)
         if 0 <= argument < len(self):
@@ -1522,7 +1510,7 @@ class PaddedTuple(object):
             client=self,
             repr_is_indented=False,
             storage_format_args_values=[list(self._items)],
-            )
+        )
 
     def _get_slice(self, start_index, stop_index):
         if 0 < stop_index and start_index is None:
@@ -1539,7 +1527,7 @@ class PaddedTuple(object):
                 item = self[i]
                 items.append(item)
         else:
-            raise Exception('slice index signs must be equal.')
+            raise Exception("slice index signs must be equal.")
         return tuple(items)
 
     ### PUBLIC PROPERTIES ###
@@ -1680,6 +1668,7 @@ class PaddedTuple(object):
         """
         return self._pad
 
+
 class SchemeManifest(object):
     """
     Scheme manifest.
@@ -1694,61 +1683,61 @@ class SchemeManifest(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Classes'
+    __documentation_section__ = "Classes"
 
     _dynamics = (
-        ('baca-appena-udibile', 'appena udibile'),
-        ('baca-f-but-accents-sffz', 'f'),
-        ('baca-f-sub-but-accents-continue-sffz', 'f'),
-        ('baca-ffp', 'p'),
-        ('baca-fffp', 'p'),
-        ('niente', 'niente'),
-        ('baca-p-sub-but-accents-continue-sffz', 'p'),
+        ("baca-appena-udibile", "appena udibile"),
+        ("baca-f-but-accents-sffz", "f"),
+        ("baca-f-sub-but-accents-continue-sffz", "f"),
+        ("baca-ffp", "p"),
+        ("baca-fffp", "p"),
+        ("niente", "niente"),
+        ("baca-p-sub-but-accents-continue-sffz", "p"),
         #
-        ('baca-pppf', 'f'),
-        ('baca-pppff', 'ff'),
-        ('baca-pppfff', 'fff'),
+        ("baca-pppf", "f"),
+        ("baca-pppff", "ff"),
+        ("baca-pppfff", "fff"),
         #
-        ('baca-ppf', 'f'),
-        ('baca-ppff', 'ff'),
-        ('baca-ppfff', 'fff'),
+        ("baca-ppf", "f"),
+        ("baca-ppff", "ff"),
+        ("baca-ppfff", "fff"),
         #
-        ('baca-pf', 'f'),
-        ('baca-pff', 'ff'),
-        ('baca-pfff', 'fff'),
+        ("baca-pf", "f"),
+        ("baca-pff", "ff"),
+        ("baca-pfff", "fff"),
         #
-        ('baca-ppp-pp', 'pp'),
-        ('baca-ppp-mp', 'mp'),
-        ('baca-ppp-mf', 'mf'),
-        ('baca-ppp-f', 'f'),
-        ('baca-ppp-ff', 'ff'),
-        ('baca-ppp-fff', 'fff'),
+        ("baca-ppp-pp", "pp"),
+        ("baca-ppp-mp", "mp"),
+        ("baca-ppp-mf", "mf"),
+        ("baca-ppp-f", "f"),
+        ("baca-ppp-ff", "ff"),
+        ("baca-ppp-fff", "fff"),
         #
-        ('baca-pp-ppp', 'ppp'),
-        ('baca-pp-p', 'p'),
-        ('baca-pp-mp', 'mp'),
-        ('baca-pp-mf', 'mf'),
-        ('baca-pp-f', 'f'),
-        ('baca-pp-ff', 'ff'),
-        ('baca-pp-fff', 'fff'),
+        ("baca-pp-ppp", "ppp"),
+        ("baca-pp-p", "p"),
+        ("baca-pp-mp", "mp"),
+        ("baca-pp-mf", "mf"),
+        ("baca-pp-f", "f"),
+        ("baca-pp-ff", "ff"),
+        ("baca-pp-fff", "fff"),
         #
-        ('baca-p-ppp', 'ppp'),
-        ('baca-p-pp', 'pp'),
-        ('baca-p-mp', 'mp'),
-        ('baca-p-mf', 'mf'),
-        ('baca-p-f', 'f'),
-        ('baca-p-ff', 'ff'),
-        ('baca-p-fff', 'fff'),
+        ("baca-p-ppp", "ppp"),
+        ("baca-p-pp", "pp"),
+        ("baca-p-mp", "mp"),
+        ("baca-p-mf", "mf"),
+        ("baca-p-f", "f"),
+        ("baca-p-ff", "ff"),
+        ("baca-p-fff", "fff"),
         #
-        ('baca-sff', 'ff'),
-        ('baca-sffp', 'p'),
-        ('baca-sffpp', 'pp'),
-        ('baca-sfffz', 'fff'),
-        ('baca-sffz', 'ff'),
-        ('baca-sfpp', 'pp'),
-        ('baca-sfz-f', 'f'),
-        ('baca-sfz-p', 'p'),
-        )
+        ("baca-sff", "ff"),
+        ("baca-sffp", "p"),
+        ("baca-sffpp", "pp"),
+        ("baca-sfffz", "fff"),
+        ("baca-sffz", "ff"),
+        ("baca-sfpp", "pp"),
+        ("baca-sfz-f", "f"),
+        ("baca-sfz-p", "p"),
+    )
 
     ### PUBLIC PROPERTIES ###
 
@@ -1829,9 +1818,10 @@ class SchemeManifest(object):
         for dynamic_, steady_state in self._dynamics:
             if dynamic_ == dynamic:
                 return steady_state
-            if dynamic_ == 'baca-' + dynamic:
+            if dynamic_ == "baca-" + dynamic:
                 return steady_state
         raise KeyError(dynamic)
+
 
 class Selection(abjad.Selection):
     """
@@ -1846,19 +1836,15 @@ class Selection(abjad.Selection):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Classes'
+    __documentation_section__ = "Classes"
 
-    __slots__ = (
-        )
+    __slots__ = ()
 
     ### PUBLIC METHODS ###
 
     def chead(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Note, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Note, abjad.Expression]:
         r"""
         Selects chord head ``n``.
 
@@ -1948,10 +1934,8 @@ class Selection(abjad.Selection):
         return self.cheads(exclude=exclude)[n]
 
     def cheads(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects chord heads.
 
@@ -2056,18 +2040,12 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return super().leaves(
-            abjad.Chord,
-            exclude=exclude,
-            head=True,
-            grace_notes=False,
-            )
+            abjad.Chord, exclude=exclude, head=True, grace_notes=False
+        )
 
     def clparts(
-        self,
-        counts: typing.Sequence[int],
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, counts: typing.Sequence[int], *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves cyclically partitioned by ``counts`` (with overhang).
 
@@ -2183,18 +2161,18 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super().leaves(exclude=exclude).partition_by_counts(
-            counts=counts,
-            cyclic=True,
-            overhang=True,
-            )
+        return (
+            super()
+            .leaves(exclude=exclude)
+            .partition_by_counts(counts=counts, cyclic=True, overhang=True)
+        )
 
     def cmgroups(
         self,
         counts: typing.List[int] = [1],
         *,
         exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Expression, 'Selection']:
+    ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped leaves (cyclically).
 
@@ -2273,9 +2251,8 @@ class Selection(abjad.Selection):
         return result_
 
     def enchain(
-        self,
-        counts: typing.Sequence[int],
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, counts: typing.Sequence[int]
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Enchains items in selection.
 
@@ -2515,18 +2492,12 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return self.partition_by_counts(
-            counts=counts,
-            cyclic=True,
-            enchain=True,
-            overhang=True,
-            )
+            counts=counts, cyclic=True, enchain=True, overhang=True
+        )
 
     def grace(
-        self,
-        n: int = 0,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Leaf, abjad.Expression]:
+        self, n: int = 0, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects grace ``n``.
 
@@ -2613,10 +2584,8 @@ class Selection(abjad.Selection):
         return self.graces(exclude=exclude)[n]
 
     def graces(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects graces.
 
@@ -2716,11 +2685,8 @@ class Selection(abjad.Selection):
         return self.leaves(exclude=exclude, grace_notes=True)
 
     def hleaf(
-        self,
-        n: int = 0,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Leaf, abjad.Expression]:
+        self, n: int = 0, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects haupt leaf ``n``.
 
@@ -2807,10 +2773,8 @@ class Selection(abjad.Selection):
         return self.hleaves(exclude=exclude)[n]
 
     def hleaves(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects haupt leaves.
 
@@ -2910,11 +2874,8 @@ class Selection(abjad.Selection):
         return self.leaves(exclude=exclude, grace_notes=False)
 
     def lleaf(
-        self,
-        n: int = 0,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Leaf, abjad.Expression]:
+        self, n: int = 0, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects leaf ``n`` from leaves leaked to the left.
 
@@ -3071,10 +3032,8 @@ class Selection(abjad.Selection):
         return self.with_previous_leaf()
 
     def lleaves(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves, leaked to the left.
 
@@ -3184,11 +3143,8 @@ class Selection(abjad.Selection):
         return self.leaves(exclude=exclude).with_previous_leaf()
 
     def lparts(
-        self,
-        counts: typing.Sequence[int],
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, counts: typing.Sequence[int], *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves partitioned by ``counts``.
 
@@ -3289,15 +3245,13 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super().leaves(exclude=exclude).partition_by_counts(
-            counts=counts)
+        return (
+            super().leaves(exclude=exclude).partition_by_counts(counts=counts)
+        )
 
     def lt(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie ``n``.
 
@@ -3388,11 +3342,8 @@ class Selection(abjad.Selection):
         return self.lts(exclude=exclude)[n]
 
     def ltleaf(
-        self,
-        n: int = 0,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, n: int = 0, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects left-trimmed leaf ``n``.
 
@@ -3481,10 +3432,8 @@ class Selection(abjad.Selection):
         return self.ltleaves(exclude=exclude)[n]
 
     def ltleaves(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects left-trimmed leaves.
 
@@ -3621,17 +3570,12 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return super().leaves(
-            exclude=exclude,
-            grace_notes=False,
-            trim=abjad.Left,
-            )
+            exclude=exclude, grace_notes=False, trim=abjad.Left
+        )
 
     def ltqrun(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie equipitch run ``n``.
 
@@ -3722,10 +3666,8 @@ class Selection(abjad.Selection):
         return self.ltqruns(exclude=exclude)[n]
 
     def ltqruns(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie equipitch runs.
 
@@ -3846,11 +3788,8 @@ class Selection(abjad.Selection):
         return result
 
     def ltrun(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie run ``n``.
 
@@ -3944,10 +3883,8 @@ class Selection(abjad.Selection):
         return self.ltruns(exclude=exclude)[n]
 
     def ltruns(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie runs.
 
@@ -4059,10 +3996,8 @@ class Selection(abjad.Selection):
         return result.map(Selection)
 
     def lts(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical ties.
 
@@ -4203,7 +4138,7 @@ class Selection(abjad.Selection):
         counts: typing.Sequence[int] = [1],
         *,
         exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Expression, 'Selection']:
+    ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped leaves.
 
@@ -4276,11 +4211,8 @@ class Selection(abjad.Selection):
         return result_
 
     def mleaves(
-        self,
-        count: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union['Selection', abjad.Expression]:
+        self, count: int, *, exclude: typings.Strings = None
+    ) -> typing.Union["Selection", abjad.Expression]:
         r"""
         Selects all leaves in ``count`` measures.
 
@@ -4439,11 +4371,8 @@ class Selection(abjad.Selection):
         return result
 
     def mmrest(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Note, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Note, abjad.Expression]:
         r"""
         Selects multimeasure rest ``n``.
 
@@ -4494,10 +4423,8 @@ class Selection(abjad.Selection):
         return self.mmrests(exclude=exclude)[n]
 
     def mmrests(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects multimeasure rests.
 
@@ -4554,16 +4481,12 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return super().leaves(
-            abjad.MultimeasureRest,
-            exclude=exclude,
-            grace_notes=False,
-            )
+            abjad.MultimeasureRest, exclude=exclude, grace_notes=False
+        )
 
     def ntrun(
-        self, n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects nontrivial run ``n``.
 
@@ -4657,10 +4580,8 @@ class Selection(abjad.Selection):
         return self.ntruns(exclude=exclude)[n]
 
     def ntruns(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects nontrivial runs.
 
@@ -4774,7 +4695,7 @@ class Selection(abjad.Selection):
         counts: typing.Sequence[int] = [1],
         *,
         exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Expression, 'Selection']:
+    ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped leaves (with overhang).
 
@@ -4859,7 +4780,7 @@ class Selection(abjad.Selection):
         counts: typing.Sequence[int] = [1],
         *,
         exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Expression, 'Selection']:
+    ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped plts (with overhang).
         """
@@ -4873,11 +4794,8 @@ class Selection(abjad.Selection):
         return result_
 
     def phead(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
         r"""
         Selects pitched head ``n``.
 
@@ -4967,10 +4885,8 @@ class Selection(abjad.Selection):
         return self.pheads(exclude=exclude)[n]
 
     def pheads(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched heads.
 
@@ -5095,11 +5011,8 @@ class Selection(abjad.Selection):
         return self.plts(exclude=exclude).map(_select()[0])
 
     def pleaf(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
         r"""
         Selects pitched leaf ``n``.
 
@@ -5189,10 +5102,8 @@ class Selection(abjad.Selection):
         return self.pleaves(exclude=exclude)[n]
 
     def pleaves(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched leaves.
 
@@ -5323,18 +5234,11 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super().leaves(
-            exclude=exclude,
-            grace_notes=False,
-            pitched=True,
-            )
+        return super().leaves(exclude=exclude, grace_notes=False, pitched=True)
 
     def plt(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched logical tie ``n``.
 
@@ -5425,10 +5329,8 @@ class Selection(abjad.Selection):
         return self.plts(exclude=exclude)[n]
 
     def plts(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched logical ties.
 
@@ -5554,17 +5456,12 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return self.logical_ties(
-            exclude=exclude,
-            grace_notes=None,
-            pitched=True,
-            )
+            exclude=exclude, grace_notes=None, pitched=True
+        )
 
     def ptail(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
         r"""
         Selects pitched tail ``n``.
 
@@ -5654,10 +5551,8 @@ class Selection(abjad.Selection):
         return self.ptails(exclude=exclude)[n]
 
     def ptails(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched tails.
 
@@ -5782,11 +5677,8 @@ class Selection(abjad.Selection):
         return self.plts(exclude=exclude).map(_select()[-1])
 
     def ptlt(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched trivial logical tie ``n``.
 
@@ -5876,10 +5768,8 @@ class Selection(abjad.Selection):
         return self.ptlts(exclude=exclude)[n]
 
     def ptlts(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched trivial logical ties.
 
@@ -5993,18 +5883,12 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return self.logical_ties(
-            exclude=exclude,
-            grace_notes=None,
-            nontrivial=False,
-            pitched=True,
-            )
+            exclude=exclude, grace_notes=None, nontrivial=False, pitched=True
+        )
 
     def qrun(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects equipitch run ``n``.
 
@@ -6095,10 +5979,8 @@ class Selection(abjad.Selection):
         return self.qruns(exclude=exclude)[n]
 
     def qruns(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects equipitch runs.
 
@@ -6219,11 +6101,8 @@ class Selection(abjad.Selection):
         return result
 
     def rleaf(
-        self,
-        n: int = 0,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Leaf, abjad.Expression]:
+        self, n: int = 0, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects leaf ``n`` from leaves leaked to the right.
 
@@ -6380,10 +6259,8 @@ class Selection(abjad.Selection):
         return self.with_next_leaf()
 
     def rleaves(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves, leaked to the right.
 
@@ -6493,11 +6370,8 @@ class Selection(abjad.Selection):
         return self.leaves(exclude=exclude).with_next_leaf()
 
     def rmleaves(
-        self,
-        count: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, count: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects all leaves in ``count`` measures, leaked one leaf to the right.
 
@@ -6574,11 +6448,8 @@ class Selection(abjad.Selection):
         return self.mleaves(count, exclude=exclude).rleak()
 
     def rrun(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects run ``n`` (leaked to the right).
 
@@ -6673,10 +6544,8 @@ class Selection(abjad.Selection):
         return self.rruns(exclude=exclude)[n]
 
     def rruns(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects runs (leaked to the right).
 
@@ -6789,11 +6658,8 @@ class Selection(abjad.Selection):
         return result.map(Selection)
 
     def skip(
-        self,
-        n: int,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Skip, abjad.Expression]:
+        self, n: int, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Skip, abjad.Expression]:
         r"""
         Selects skip ``n``.
 
@@ -6855,10 +6721,8 @@ class Selection(abjad.Selection):
         return self.skips(exclude=exclude)[n]
 
     def skips(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects skips.
 
@@ -6927,10 +6791,8 @@ class Selection(abjad.Selection):
         return self.components(abjad.Skip, exclude=exclude)
 
     def tleaf(
-        self,
-        n: int = 0,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Leaf, abjad.Expression]:
+        self, n: int = 0, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects trimmed leaf ``n``.
 
@@ -7020,10 +6882,8 @@ class Selection(abjad.Selection):
         return self.tleaves(exclude=exclude)[n]
 
     def tleaves(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects trimmed leaves.
 
@@ -7160,18 +7020,11 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super().leaves(
-            exclude=exclude,
-            grace_notes=False,
-            trim=True,
-            )
+        return super().leaves(exclude=exclude, grace_notes=False, trim=True)
 
     def wleaf(
-        self,
-        n: int = 0,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Leaf, abjad.Expression]:
+        self, n: int = 0, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects leaf ``n`` from leaves leaked wide.
 
@@ -7339,10 +7192,8 @@ class Selection(abjad.Selection):
         return self.wleaves(exclude=exclude)[n]
 
     def wleaves(
-        self,
-        *,
-        exclude: typings.Strings = None,
-        ) -> typing.Union[abjad.Selection, abjad.Expression]:
+        self, *, exclude: typings.Strings = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves, leaked "wide" (to both the left and right).
 
@@ -7452,7 +7303,10 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.leaves(exclude=exclude).with_previous_leaf().with_next_leaf()
+        return (
+            self.leaves(exclude=exclude).with_previous_leaf().with_next_leaf()
+        )
+
 
 class Sequence(abjad.Sequence):
     r"""
@@ -7618,10 +7472,9 @@ class Sequence(abjad.Sequence):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Classes'
+    __documentation_section__ = "Classes"
 
-    __slots__ = (
-        )
+    __slots__ = ()
 
     ### PRIVATE METHODS ###
 
@@ -7633,16 +7486,16 @@ class Sequence(abjad.Sequence):
         operands = operands or [abjad.Exact]
         operand_markups = []
         for operand in operands:
-            if hasattr(operand, 'get_markup'):
-                operand_markup = operand.get_markup(name='X')
+            if hasattr(operand, "get_markup"):
+                operand_markup = operand.get_markup(name="X")
             else:
                 operand_markup = str(operand)
             operand_markups.append(operand_markup)
         operand_markup = abjad.MarkupList(operand_markups).concat()
         markup_list.append(operand_markup)
-        infix = 'Φ'
+        infix = "Φ"
         if count != abjad.Exact:
-            infix += '/' + str(count)
+            infix += "/" + str(count)
         markup_list.append(infix)
         markup_list.append(markup)
         markup = markup_list.line()
@@ -7655,20 +7508,20 @@ class Sequence(abjad.Sequence):
         operands = operands or [abjad.Exact]
         operand_strings = []
         for operand in operands:
-            if hasattr(operand, 'get_string'):
-                operand_string = operand.get_string(name='X')
+            if hasattr(operand, "get_string"):
+                operand_string = operand.get_string(name="X")
             else:
                 operand_string = str(operand)
             operand_strings.append(operand_string)
         if len(operand_strings) == 1:
             operands = operand_strings[0]
         else:
-            operands = ', '.join(operand_strings)
-            operands = '[' + operands + ']'
+            operands = ", ".join(operand_strings)
+            operands = "[" + operands + "]"
         if count == abjad.Exact:
-            string_template = f'{operands} Φ {{}}'
+            string_template = f"{operands} Φ {{}}"
         else:
-            string_template = f'{operands} Φ/{count} {{}}'
+            string_template = f"{operands} Φ/{count} {{}}"
         return string_template
 
     def _update_expression(
@@ -7677,21 +7530,21 @@ class Sequence(abjad.Sequence):
         evaluation_template=None,
         map_operand=None,
         subclass_hook=None,
-        ):
+    ):
         callback = Expression._frame_to_callback(
             frame,
             evaluation_template=evaluation_template,
             map_operand=map_operand,
             subclass_hook=subclass_hook,
-            )
+        )
         return self._expression.append_callback(callback)
 
     ### PUBLIC METHODS ###
 
     @abjad.Signature(
-        markup_maker_callback='_make_accumulate_markup',
-        string_template_callback='_make_accumulate_string_template',
-        )
+        markup_maker_callback="_make_accumulate_markup",
+        string_template_callback="_make_accumulate_string_template",
+    )
     def accumulate(self, operands=None, count=None):
         r"""
         Accumulates ``operands`` calls against sequence to identity.
@@ -8201,10 +8054,10 @@ class Sequence(abjad.Sequence):
         if self._expression:
             return self._update_expression(
                 inspect.currentframe(),
-                evaluation_template='accumulate',
-                subclass_hook='_evaluate_accumulate',
+                evaluation_template="accumulate",
+                subclass_hook="_evaluate_accumulate",
                 map_operand=operands,
-                )
+            )
         operands = operands or [Expression()]
         if not isinstance(operands, list):
             operands = [operands]
@@ -8219,8 +8072,8 @@ class Sequence(abjad.Sequence):
                     items.pop(-1)
                     break
             else:
-                message = '1000 iterations without identity:'
-                message += f' {items[0]!r} to {items[-1]!r}.'
+                message = "1000 iterations without identity:"
+                message += f" {items[0]!r} to {items[-1]!r}."
                 raise Exception(message)
         else:
             for i in range(count - 1):
@@ -8230,11 +8083,7 @@ class Sequence(abjad.Sequence):
                     items.append(sequence)
         return type(self)(items=items)
 
-    @abjad.Signature(
-        method_name='β',
-        is_operator=True,
-        superscript='count',
-        )
+    @abjad.Signature(method_name="β", is_operator=True, superscript="count")
     def boustrophedon(self, count=2):
         r"""
         Iterates sequence boustrophedon.
@@ -8553,7 +8402,7 @@ class Sequence(abjad.Sequence):
                     items.append(type(self)([item]))
         return type(self)(items=items)
 
-    @abjad.Signature(method_name='H')
+    @abjad.Signature(method_name="H")
     def helianthate(self, n=0, m=0):
         r"""
         Helianthates sequence.
@@ -8710,12 +8559,13 @@ class Sequence(abjad.Sequence):
         original_m = m
 
         def _generalized_rotate(argument, n=0):
-            if hasattr(argument, 'rotate'):
+            if hasattr(argument, "rotate"):
                 return argument.rotate(n=n)
             argument_type = type(argument)
             argument = type(self)(argument).rotate(n=n)
             argument = argument_type(argument)
             return argument
+
         i = 0
         while True:
             inner = [_generalized_rotate(_, m) for _ in self]
@@ -8727,15 +8577,11 @@ class Sequence(abjad.Sequence):
             m += original_m
             i += 1
             if i == 1000:
-                message = '1000 iterations without identity.'
+                message = "1000 iterations without identity."
                 raise Exception(message)
         return type(self)(items=result)
 
-    @abjad.Signature(
-        is_operator=True,
-        method_name='P',
-        subscript='counts',
-        )
+    @abjad.Signature(is_operator=True, method_name="P", subscript="counts")
     def partition(self, counts=None):
         r"""
         Partitions sequence cyclically by ``counts`` with overhang.
@@ -8794,10 +8640,8 @@ class Sequence(abjad.Sequence):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return self.partition_by_counts(
-            counts=counts,
-            cyclic=True,
-            overhang=True,
-            )
+            counts=counts, cyclic=True, overhang=True
+        )
 
     def period_of_rotation(self):
         """
@@ -9236,6 +9080,7 @@ class Sequence(abjad.Sequence):
                     return type(self)(items=items_)
         return type(self)(items=items_)
 
+
 class Tree(object):
     """
     Tree.
@@ -9355,25 +9200,20 @@ class Tree(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_children',
-        '_item_class',
-        '_items',
-        '_equivalence_markup',
-        '_expression',
-        '_parent',
-        '_payload',
-        )
+        "_children",
+        "_item_class",
+        "_items",
+        "_equivalence_markup",
+        "_expression",
+        "_parent",
+        "_payload",
+    )
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        items=None,
-        *,
-        item_class=None,
-        ):
+    def __init__(self, items=None, *, item_class=None):
         self._children = []
         self._expression = None
         self._item_class = item_class
@@ -9459,14 +9299,15 @@ class Tree(object):
                 return self._payload == argument._payload
             if len(self) == len(argument):
                 for x, y in zip(
-                    self._noncyclic_children, argument._noncyclic_children):
+                    self._noncyclic_children, argument._noncyclic_children
+                ):
                     if not x == y:
                         return False
                 else:
                     return True
         return False
 
-    def __format__(self, format_specification=''):
+    def __format__(self, format_specification=""):
         """
         Formats tree.
 
@@ -9546,84 +9387,84 @@ class Tree(object):
         """
         return self._children.__getitem__(argument)
 
-#    def __graph__(self, **keywords):
-#        """
-#        Graphs tree.
-#
-#        ..  container:: example
-#
-#            Graphs tree:
-#
-#            >>> items = [[[0, 1], [2, 3]], [4, 5]]
-#            >>> tree = baca.Tree(items=items)
-#
-#            >>> graph(tree) # doctest: +SKIP
-#
-#            >>> tree_graph = tree.__graph__()
-#            >>> abjad.f(tree_graph, strict=89)
-#            digraph G {
-#                graph [bgcolor=transparent,
-#                    truecolor=true];
-#                node_0 [label="",
-#                    shape=circle];
-#                node_1 [label="",
-#                    shape=circle];
-#                node_2 [label="",
-#                    shape=circle];
-#                node_3 [label="0",
-#                    shape=box];
-#                node_4 [label="1",
-#                    shape=box];
-#                node_5 [label="",
-#                    shape=circle];
-#                node_6 [label="2",
-#                    shape=box];
-#                node_7 [label="3",
-#                    shape=box];
-#                node_8 [label="",
-#                    shape=circle];
-#                node_9 [label="4",
-#                    shape=box];
-#                node_10 [label="5",
-#                    shape=box];
-#                node_0 -> node_1;
-#                node_0 -> node_8;
-#                node_1 -> node_2;
-#                node_1 -> node_5;
-#                node_2 -> node_3;
-#                node_2 -> node_4;
-#                node_5 -> node_6;
-#                node_5 -> node_7;
-#                node_8 -> node_9;
-#                node_8 -> node_10;
-#            }
-#
-#        Returns Graphviz graph.
-#        """
-#        graph = abjad.graphtools.GraphvizGraph(
-#            attributes={
-#                'bgcolor': 'transparent',
-#                'truecolor': True,
-#                },
-#            name='G',
-#            )
-#        node_mapping = {}
-#        for node in self._iterate_depth_first():
-#            graphviz_node = abjad.graphtools.GraphvizNode()
-#            if list(node):
-#                graphviz_node.attributes['shape'] = 'circle'
-#                graphviz_node.attributes['label'] = ''
-#            else:
-#                graphviz_node.attributes['shape'] = 'box'
-#                graphviz_node.attributes['label'] = str(node._payload)
-#            graph.append(graphviz_node)
-#            node_mapping[node] = graphviz_node
-#            if node._parent is not None:
-#                abjad.graphtools.GraphvizEdge().attach(
-#                    node_mapping[node._parent],
-#                    node_mapping[node],
-#                    )
-#        return graph
+    #    def __graph__(self, **keywords):
+    #        """
+    #        Graphs tree.
+    #
+    #        ..  container:: example
+    #
+    #            Graphs tree:
+    #
+    #            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+    #            >>> tree = baca.Tree(items=items)
+    #
+    #            >>> graph(tree) # doctest: +SKIP
+    #
+    #            >>> tree_graph = tree.__graph__()
+    #            >>> abjad.f(tree_graph, strict=89)
+    #            digraph G {
+    #                graph [bgcolor=transparent,
+    #                    truecolor=true];
+    #                node_0 [label="",
+    #                    shape=circle];
+    #                node_1 [label="",
+    #                    shape=circle];
+    #                node_2 [label="",
+    #                    shape=circle];
+    #                node_3 [label="0",
+    #                    shape=box];
+    #                node_4 [label="1",
+    #                    shape=box];
+    #                node_5 [label="",
+    #                    shape=circle];
+    #                node_6 [label="2",
+    #                    shape=box];
+    #                node_7 [label="3",
+    #                    shape=box];
+    #                node_8 [label="",
+    #                    shape=circle];
+    #                node_9 [label="4",
+    #                    shape=box];
+    #                node_10 [label="5",
+    #                    shape=box];
+    #                node_0 -> node_1;
+    #                node_0 -> node_8;
+    #                node_1 -> node_2;
+    #                node_1 -> node_5;
+    #                node_2 -> node_3;
+    #                node_2 -> node_4;
+    #                node_5 -> node_6;
+    #                node_5 -> node_7;
+    #                node_8 -> node_9;
+    #                node_8 -> node_10;
+    #            }
+    #
+    #        Returns Graphviz graph.
+    #        """
+    #        graph = abjad.graphtools.GraphvizGraph(
+    #            attributes={
+    #                'bgcolor': 'transparent',
+    #                'truecolor': True,
+    #                },
+    #            name='G',
+    #            )
+    #        node_mapping = {}
+    #        for node in self._iterate_depth_first():
+    #            graphviz_node = abjad.graphtools.GraphvizNode()
+    #            if list(node):
+    #                graphviz_node.attributes['shape'] = 'circle'
+    #                graphviz_node.attributes['label'] = ''
+    #            else:
+    #                graphviz_node.attributes['shape'] = 'box'
+    #                graphviz_node.attributes['label'] = str(node._payload)
+    #            graph.append(graphviz_node)
+    #            node_mapping[node] = graphviz_node
+    #            if node._parent is not None:
+    #                abjad.graphtools.GraphvizEdge().attach(
+    #                    node_mapping[node._parent],
+    #                    node_mapping[node],
+    #                    )
+    #        return graph
 
     def __hash__(self):
         """
@@ -9635,22 +9476,22 @@ class Tree(object):
         """
         return super().__hash__()
 
-# TODO: make this work without recursion error
-#    def __iter__(self):
-#        """
-#        Iterates tree at level -1.
-#
-#        ..  container:: example
-#
-#            Gets node:
-#
-#                >>> items = [[[0, 1], [2, 3]], [4, 5]]
-#                >>> tree = baca.Tree(items=items)
-#
-#                >>> tree.__iter__()
-#
-#        """
-#        return self.iterate(level=-1)
+    # TODO: make this work without recursion error
+    #    def __iter__(self):
+    #        """
+    #        Iterates tree at level -1.
+    #
+    #        ..  container:: example
+    #
+    #            Gets node:
+    #
+    #                >>> items = [[[0, 1], [2, 3]], [4, 5]]
+    #                >>> tree = baca.Tree(items=items)
+    #
+    #                >>> tree.__iter__()
+    #
+    #        """
+    #        return self.iterate(level=-1)
 
     def __len__(self):
         """
@@ -9724,8 +9565,9 @@ class Tree(object):
         return result
 
     def _are_internal_nodes(self, argument):
-        if (isinstance(argument, collections.abc.Iterable) and
-            not isinstance(argument, str)):
+        if isinstance(argument, collections.abc.Iterable) and not isinstance(
+            argument, str
+        ):
             return True
         if isinstance(argument, type(self)) and len(argument):
             return True
@@ -9812,11 +9654,8 @@ class Tree(object):
         return len(self._get_parentage()[1:])
 
     def _get_next_n_nodes_at_level(
-        self,
-        n,
-        level,
-        nodes_must_be_complete=False,
-        ):
+        self, n, level, nodes_must_be_complete=False
+    ):
         """
         Gets next ``n`` nodes ``level``.
 
@@ -9997,7 +9836,7 @@ class Tree(object):
 
         """
         if not self._is_valid_level(level):
-            raise Exception(f'invalid level: {level!r}.')
+            raise Exception(f"invalid level: {level!r}.")
         result = []
         self_is_found = False
         first_node_returned_is_trimmed = False
@@ -10012,8 +9851,10 @@ class Tree(object):
         previous_node = None
         for node in generator:
             if not all_nodes_at_level and len(result) == n:
-                if (not first_node_returned_is_trimmed or
-                    not nodes_must_be_complete):
+                if (
+                    not first_node_returned_is_trimmed
+                    or not nodes_must_be_complete
+                ):
                     return result
             if not all_nodes_at_level and len(result) == n + 1:
                 return result
@@ -10022,8 +9863,9 @@ class Tree(object):
                 # test whether node to return is higher in tree than self;
                 # or-clause allows for test of either nonnegative
                 # or negative level
-                if (((0 <= level) and level < self._get_level()) or
-                    ((level < 0) and level < self._get_level(negative=True))):
+                if ((0 <= level) and level < self._get_level()) or (
+                    (level < 0) and level < self._get_level(negative=True)
+                ):
                     first_node_returned_is_trimmed = True
                     subtree_to_trim = node._parent
                     # find subtree to trim where level is nonnegative
@@ -10032,14 +9874,17 @@ class Tree(object):
                             subtree_to_trim = subtree_to_trim._parent
                     # find subtree to trim where level is negative
                     else:
-                        while subtree_to_trim._get_level(negative=True) < level:
+                        while (
+                            subtree_to_trim._get_level(negative=True) < level
+                        ):
                             subtree_to_trim = subtree_to_trim._parent
-                    position_of_descendant = \
-                        subtree_to_trim._get_position_of_descendant(node)
+                    position_of_descendant = subtree_to_trim._get_position_of_descendant(
+                        node
+                    )
                     first_subtree = copy.deepcopy(subtree_to_trim)
-                    reference_node = \
-                        first_subtree._get_node_at_position(
-                            position_of_descendant)
+                    reference_node = first_subtree._get_node_at_position(
+                        position_of_descendant
+                    )
                     reference_node._remove_to_root(reverse=reverse)
                     result.append(first_subtree)
             if self_is_found:
@@ -10055,7 +9900,7 @@ class Tree(object):
             if all_nodes_at_level:
                 return result
             else:
-                raise ValueError(f'not enough nodes at level {level!r}.')
+                raise ValueError(f"not enough nodes at level {level!r}.")
 
     def _get_node_at_position(self, position):
         result = self
@@ -10142,19 +9987,19 @@ class Tree(object):
         if descendant is self:
             return ()
         else:
-            return descendant._get_position()[len(self._get_position()):]
+            return descendant._get_position()[len(self._get_position()) :]
 
     def _index(self, node):
         for i, current_node in enumerate(self):
             if current_node is node:
                 return i
-        raise ValueError(f'not in tree: {node!r}.')
+        raise ValueError(f"not in tree: {node!r}.")
 
     def _initialize_internal_nodes(self, items):
         children = []
         for item in items:
-            expression = getattr(item, '_expression', None)
-            equivalence_markup = getattr(item, '_equivalence_markup', None)
+            expression = getattr(item, "_expression", None)
+            equivalence_markup = getattr(item, "_equivalence_markup", None)
             child = type(self)(items=item, item_class=self.item_class)
             child._expression = expression
             child._equivalence_markup = equivalence_markup
@@ -10173,8 +10018,9 @@ class Tree(object):
         return payload
 
     def _is_at_level(self, level):
-        if ((0 <= level and self._get_level() == level) or
-            self._get_level(negative=True) == level):
+        if (0 <= level and self._get_level() == level) or self._get_level(
+            negative=True
+        ) == level:
             return True
         else:
             return False
@@ -10586,27 +10432,29 @@ class Tree(object):
                 if node._get_level(negative=True) == level:
                     yield node
 
+
 ### FACTORY FUNCTIONS ###
+
 
 def _select(items=None):
     if items is None:
         return Expression().select()
     return Selection(items=items)
 
+
 selector = _select
+
 
 def _sequence(items=None, **keywords):
     if items is not None:
         return Sequence(items=items, **keywords)
-    name = keywords.pop('name', None)
+    name = keywords.pop("name", None)
     expression = Expression(name=name)
     callback = expression._make_initializer_callback(
-        Sequence,
-        module_names=['baca'],
-        string_template='{}',
-        **keywords
-        )
+        Sequence, module_names=["baca"], string_template="{}", **keywords
+    )
     expression = expression.append_callback(callback)
     return abjad.new(expression, proxy_class=Sequence)
+
 
 sequence_expression = _sequence

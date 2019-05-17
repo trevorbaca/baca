@@ -16,6 +16,7 @@ from . import typings
 
 ### CLASSES ###
 
+
 class AcciaccaturaSpecifier(object):
     r"""
     Acciaccatura specifier.
@@ -126,21 +127,11 @@ class AcciaccaturaSpecifier(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_durations',
-        '_lmr_specifier',
-        '_pattern',
-        )
+    __slots__ = ("_durations", "_lmr_specifier", "_pattern")
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        *,
-        durations=None,
-        lmr_specifier=None,
-        pattern=None,
-        ):
+    def __init__(self, *, durations=None, lmr_specifier=None, pattern=None):
         if durations is not None:
             assert isinstance(durations, list), repr(durations)
             durations = [abjad.Duration(_) for _ in durations]
@@ -179,9 +170,8 @@ class AcciaccaturaSpecifier(object):
             acciaccatura_container = abjad.AcciaccaturaContainer(grace_leaves)
             if 1 < len(acciaccatura_container):
                 abjad.beam(
-                    acciaccatura_container[:],
-                    tag='AcciaccaturaSpecifier',
-                    )
+                    acciaccatura_container[:], tag="AcciaccaturaSpecifier"
+                )
             acciaccatura_containers.append(acciaccatura_container)
         assert len(acciaccatura_containers) == len(collection)
         return acciaccatura_containers, collection
@@ -1291,6 +1281,7 @@ class AcciaccaturaSpecifier(object):
         """
         return self._pattern
 
+
 class AnchorSpecifier(object):
     """
     Anchor specifier.
@@ -1305,12 +1296,12 @@ class AnchorSpecifier(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_figure_name',
-        '_local_selector',
-        '_remote_selector',
-        '_remote_voice_name',
-        '_use_remote_stop_offset',
-        )
+        "_figure_name",
+        "_local_selector",
+        "_remote_selector",
+        "_remote_voice_name",
+        "_use_remote_stop_offset",
+    )
 
     _publish_storage_format = True
 
@@ -1324,27 +1315,31 @@ class AnchorSpecifier(object):
         remote_selector=None,
         remote_voice_name=None,
         use_remote_stop_offset=None,
-        ):
+    ):
         # for selector evaluation:
         import baca
+
         if figure_name is not None:
             assert isinstance(figure_name, str), repr(figure_name)
         self._figure_name = figure_name
         if isinstance(local_selector, str):
             local_selector = eval(local_selector)
-        if (local_selector is not None and
-            not isinstance(local_selector, abjad.Expression)):
-            raise TypeError(f'must be selector: {local_selector!r}.')
+        if local_selector is not None and not isinstance(
+            local_selector, abjad.Expression
+        ):
+            raise TypeError(f"must be selector: {local_selector!r}.")
         self._local_selector = local_selector
         if isinstance(remote_selector, str):
             remote_selector = eval(remote_selector)
-        if (remote_selector is not None and
-            not isinstance(remote_selector, abjad.Expression)):
-            raise TypeError(f'must be selector: {remote_selector!r}.')
+        if remote_selector is not None and not isinstance(
+            remote_selector, abjad.Expression
+        ):
+            raise TypeError(f"must be selector: {remote_selector!r}.")
         self._remote_selector = remote_selector
-        if (remote_voice_name is not None and
-            not isinstance(remote_voice_name, str)):
-            raise TypeError(f'must be string: {remote_voice_name!r}.')
+        if remote_voice_name is not None and not isinstance(
+            remote_voice_name, str
+        ):
+            raise TypeError(f"must be string: {remote_voice_name!r}.")
         self._remote_voice_name = remote_voice_name
         if use_remote_stop_offset is not None:
             use_remote_stop_offset = bool(use_remote_stop_offset)
@@ -1359,7 +1354,7 @@ class AnchorSpecifier(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __format__(self, format_specification='') -> str:
+    def __format__(self, format_specification="") -> str:
         """
         Formats Abjad object.
         """
@@ -1373,7 +1368,7 @@ class AnchorSpecifier(object):
         try:
             result = hash(hash_values)
         except TypeError:
-            raise TypeError(f'unhashable type: {self}')
+            raise TypeError(f"unhashable type: {self}")
         return result
 
     def __repr__(self) -> str:
@@ -1437,6 +1432,7 @@ class AnchorSpecifier(object):
         """
         return self._use_remote_stop_offset
 
+
 class Coat(object):
     """
     Coat.
@@ -1444,9 +1440,7 @@ class Coat(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_argument',
-        )
+    __slots__ = ("_argument",)
 
     ### INITIALIZER ###
 
@@ -1461,6 +1455,7 @@ class Coat(object):
         Gets argument.
         """
         return self._argument
+
 
 class ImbricationCommand(scoping.Command):
     r"""
@@ -1992,16 +1987,16 @@ class ImbricationCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_allow_unused_pitches',
-        '_by_pitch_class',
-        '_extend_beam',
-        '_hocket',
-        '_segment',
-        '_selector',
-        '_specifiers',
-        '_truncate_ties',
-        '_voice_name',
-        )
+        "_allow_unused_pitches",
+        "_by_pitch_class",
+        "_extend_beam",
+        "_hocket",
+        "_segment",
+        "_selector",
+        "_specifiers",
+        "_truncate_ties",
+        "_voice_name",
+    )
 
     ### INITIALIZER ###
 
@@ -2015,8 +2010,8 @@ class ImbricationCommand(scoping.Command):
         extend_beam=None,
         hocket=None,
         selector=None,
-        truncate_ties=None
-        ):
+        truncate_ties=None,
+    ):
         if voice_name is not None:
             assert isinstance(voice_name, str), repr(voice_name)
         self._voice_name = voice_name
@@ -2036,7 +2031,7 @@ class ImbricationCommand(scoping.Command):
         self._hocket = hocket
         if selector is not None:
             if not isinstance(selector, abjad.Expression):
-                raise TypeError(f'selector or none only: {selector!r}.')
+                raise TypeError(f"selector or none only: {selector!r}.")
         self._selector = selector
         if truncate_ties is not None:
             truncate_ties = bool(truncate_ties)
@@ -2917,10 +2912,8 @@ class ImbricationCommand(scoping.Command):
         if self.by_pitch_class:
             segment = [abjad.NumberedPitchClass(_) for _ in segment]
         cursor = classes.Cursor(
-            singletons=True,
-            source=segment,
-            suppress_exception=True,
-            )
+            singletons=True, source=segment, suppress_exception=True
+        )
         pitch_number = cursor.next()
         if self.selector is not None:
             selection = self.selector(original_container)
@@ -2935,8 +2928,10 @@ class ImbricationCommand(scoping.Command):
         logical_ties = abjad.select(container).logical_ties()
         pairs = zip(logical_ties, original_logical_ties)
         for logical_tie, original_logical_tie in pairs:
-            if (selected_logical_ties is not None and
-                logical_tie not in selected_logical_ties):
+            if (
+                selected_logical_ties is not None
+                and logical_tie not in selected_logical_ties
+            ):
                 for leaf in logical_tie:
                     duration = leaf.written_duration
                     skip = abjad.Skip(duration)
@@ -2981,7 +2976,7 @@ class ImbricationCommand(scoping.Command):
                     abjad.mutate(leaf).replace([skip])
         if not self.allow_unused_pitches and not cursor.is_exhausted:
             current, total = cursor.position - 1, len(cursor)
-            message = f'{cursor!r} used only {current} of {total} pitches.'
+            message = f"{cursor!r} used only {current} of {total} pitches."
             raise Exception(message)
         self._apply_specifiers(container)
         if self.extend_beam:
@@ -3040,9 +3035,9 @@ class ImbricationCommand(scoping.Command):
         elif isinstance(pitch_object, abjad.NumberedPitchClass):
             source = [abjad.NumberedPitchClass(_) for _ in written_pitches]
         else:
-            raise TypeError(f'unknown pitch object: {pitch_object!r}.')
+            raise TypeError(f"unknown pitch object: {pitch_object!r}.")
         if not type(source[0]) is type(pitch_object):
-            raise TypeError(f'{source!r} type must match {pitch_object!r}.')
+            raise TypeError(f"{source!r} type must match {pitch_object!r}.")
         return pitch_object in source
 
     @staticmethod
@@ -4379,6 +4374,7 @@ class ImbricationCommand(scoping.Command):
         """
         return self._voice_name
 
+
 class LMRSpecifier(object):
     """
     Left-middle-right specifier.
@@ -4430,19 +4426,19 @@ class LMRSpecifier(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_left_counts',
-        '_left_cyclic',
-        '_left_length',
-        '_left_reversed',
-        '_middle_counts',
-        '_middle_cyclic',
-        '_middle_reversed',
-        '_priority',
-        '_right_counts',
-        '_right_cyclic',
-        '_right_length',
-        '_right_reversed',
-        )
+        "_left_counts",
+        "_left_cyclic",
+        "_left_length",
+        "_left_reversed",
+        "_middle_counts",
+        "_middle_cyclic",
+        "_middle_reversed",
+        "_priority",
+        "_right_counts",
+        "_right_cyclic",
+        "_right_length",
+        "_right_reversed",
+    )
 
     ### INITIALIZER ###
 
@@ -4461,7 +4457,7 @@ class LMRSpecifier(object):
         right_cyclic=None,
         right_length=None,
         right_reversed=None,
-        ):
+    ):
         if left_counts is not None:
             assert abjad.mathtools.all_are_positive_integers(left_counts)
         self._left_counts = left_counts
@@ -4511,10 +4507,8 @@ class LMRSpecifier(object):
         """
         top_lengths = self._get_top_lengths(len(sequence))
         top_parts = abjad.sequence(sequence).partition_by_counts(
-            top_lengths,
-            cyclic=False,
-            overhang=abjad.Exact,
-            )
+            top_lengths, cyclic=False, overhang=abjad.Exact
+        )
         parts = []
         left_part, middle_part, right_part = top_parts
         if left_part:
@@ -4524,7 +4518,7 @@ class LMRSpecifier(object):
                     cyclic=self.left_cyclic,
                     overhang=True,
                     reversed_=self.left_reversed,
-                    )
+                )
                 parts.extend(parts_)
             else:
                 parts.append(left_part)
@@ -4535,7 +4529,7 @@ class LMRSpecifier(object):
                     cyclic=self.middle_cyclic,
                     overhang=True,
                     reversed_=self.middle_reversed,
-                    )
+                )
                 parts.extend(parts_)
             else:
                 parts.append(middle_part)
@@ -4546,7 +4540,7 @@ class LMRSpecifier(object):
                     cyclic=self.right_cyclic,
                     overhang=True,
                     reversed_=self.right_reversed,
-                    )
+                )
                 parts.extend(parts_)
             else:
                 parts.append(right_part)
@@ -4575,7 +4569,9 @@ class LMRSpecifier(object):
                 else:
                     right_length = self.right_length or 0
                     right_length = min([right_length, remaining_length])
-                    remaining_length = total_length - (left_length + right_length)
+                    remaining_length = total_length - (
+                        left_length + right_length
+                    )
                     middle_length = remaining_length
             else:
                 right_length = self.right_length or 0
@@ -4587,7 +4583,9 @@ class LMRSpecifier(object):
                 else:
                     left_length = self.left_length or 0
                     left_length = min([left_length, remaining_length])
-                    remaining_length = total_length - (right_length + left_length)
+                    remaining_length = total_length - (
+                        right_length + left_length
+                    )
                     middle_length = remaining_length
         elif left_length and not right_length:
             left_length = min([left_length, total_length])
@@ -5302,6 +5300,7 @@ class LMRSpecifier(object):
         """
         return self._right_reversed
 
+
 class MusicAccumulator(object):
     """
     Music-accumulator.
@@ -5310,23 +5309,20 @@ class MusicAccumulator(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_current_offset',
-        '_figure_index',
-        '_figure_names',
-        '_floating_selections',
-        '_music_maker',
-        '_score_stop_offset',
-        '_score_template',
-        '_time_signatures',
-        '_voice_names',
-        )
+        "_current_offset",
+        "_figure_index",
+        "_figure_names",
+        "_floating_selections",
+        "_music_maker",
+        "_score_stop_offset",
+        "_score_template",
+        "_time_signatures",
+        "_voice_names",
+    )
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        score_template: abjad.ScoreTemplate,
-        ) -> None:
+    def __init__(self, score_template: abjad.ScoreTemplate) -> None:
         self._score_template = score_template
         voice_names = []
         dummy_score = score_template()
@@ -5386,29 +5382,27 @@ class MusicAccumulator(object):
             return
         if music_contribution.figure_name in self._figure_names:
             name = music_contribution.figure_name
-            raise Exception(f'duplicate figure name: {name!r}.')
+            raise Exception(f"duplicate figure name: {name!r}.")
         self._figure_names.append(music_contribution.figure_name)
 
     def _cache_floating_selection(self, music_contribution):
         for voice_name in music_contribution:
             voice_name = self.score_template.voice_abbreviations.get(
-                voice_name,
-                voice_name,
-                )
+                voice_name, voice_name
+            )
             selection = music_contribution[voice_name]
             if not selection:
                 continue
             start_offset = self._get_start_offset(
-                selection,
-                music_contribution,
-                )
+                selection, music_contribution
+            )
             stop_offset = start_offset + abjad.inspect(selection).duration()
             timespan = abjad.Timespan(start_offset, stop_offset)
             floating_selection = abjad.AnnotatedTimespan(
                 timespan.start_offset,
                 timespan.stop_offset,
                 annotation=selection,
-                )
+            )
             self._floating_selections[voice_name].append(floating_selection)
         self._current_offset = stop_offset
         self._score_stop_offset = max(self._score_stop_offset, stop_offset)
@@ -5416,10 +5410,14 @@ class MusicAccumulator(object):
     def _cache_time_signature(self, music_contribution):
         if music_contribution.hide_time_signature:
             return
-        if (music_contribution.anchor is None or
-            music_contribution.hide_time_signature is False or
-            (music_contribution.anchor and
-            music_contribution.anchor.remote_voice_name is None)):
+        if (
+            music_contribution.anchor is None
+            or music_contribution.hide_time_signature is False
+            or (
+                music_contribution.anchor
+                and music_contribution.anchor.remote_voice_name is None
+            )
+        ):
             self.time_signatures.append(music_contribution.time_signature)
 
     def _get_figure_start_offset(self, figure_name):
@@ -5430,18 +5428,18 @@ class MusicAccumulator(object):
                 for leaf in leaves:
                     markup = abjad.inspect(leaf).indicators(abjad.Markup)
                     for markup_ in markup:
-                        if (isinstance(markup_._annotation, str) and
-                            markup_._annotation.startswith('figure name: ')):
+                        if isinstance(
+                            markup_._annotation, str
+                        ) and markup_._annotation.startswith("figure name: "):
                             figure_name_ = markup_._annotation
                             figure_name_ = figure_name_.replace(
-                                'figure name: ',
-                                '',
-                                )
+                                "figure name: ", ""
+                            )
                             if figure_name_ == figure_name:
                                 return leaf_start_offset
                     leaf_duration = abjad.inspect(leaf).duration()
                     leaf_start_offset += leaf_duration
-        raise Exception(f'can not find figure {figure_name!r}.')
+        raise Exception(f"can not find figure {figure_name!r}.")
 
     def _get_leaf_timespan(self, leaf, floating_selections):
         found_leaf = False
@@ -5456,15 +5454,17 @@ class MusicAccumulator(object):
             if found_leaf:
                 break
         if not found_leaf:
-            raise Exception(f'can not find {leaf!r} in floating selections.')
+            raise Exception(f"can not find {leaf!r} in floating selections.")
         selection_start_offset = floating_selection.start_offset
         leaf_start_offset = selection_start_offset + leaf_start_offset
         leaf_stop_offset = leaf_start_offset + leaf_duration
         return abjad.Timespan(leaf_start_offset, leaf_stop_offset)
 
     def _get_start_offset(self, selection, music_contribution):
-        if (music_contribution.anchor is not None and
-            music_contribution.anchor.figure_name is not None):
+        if (
+            music_contribution.anchor is not None
+            and music_contribution.anchor.figure_name is not None
+        ):
             figure_name = music_contribution.anchor.figure_name
             start_offset = self._get_figure_start_offset(figure_name)
             return start_offset
@@ -5472,8 +5472,9 @@ class MusicAccumulator(object):
         if music_contribution.anchor is not None:
             remote_voice_name = music_contribution.anchor.remote_voice_name
             remote_selector = music_contribution.anchor.remote_selector
-            use_remote_stop_offset = \
+            use_remote_stop_offset = (
                 music_contribution.anchor.use_remote_stop_offset
+            )
             anchored = True
         else:
             remote_voice_name = None
@@ -5490,9 +5491,8 @@ class MusicAccumulator(object):
         selected_leaves = list(abjad.iterate(result).leaves())
         first_selected_leaf = selected_leaves[0]
         timespan = self._get_leaf_timespan(
-            first_selected_leaf,
-            floating_selections,
-            )
+            first_selected_leaf, floating_selections
+        )
         if use_remote_stop_offset:
             remote_anchor_offset = timespan.stop_offset
         else:
@@ -5508,7 +5508,7 @@ class MusicAccumulator(object):
             first_selected_leaf = selected_leaves[0]
             dummy_container = abjad.Container(selection)
             timespan = abjad.inspect(first_selected_leaf).timespan()
-            del(dummy_container[:])
+            del dummy_container[:]
             local_anchor_offset = timespan.start_offset
         start_offset = remote_anchor_offset - local_anchor_offset
         return start_offset
@@ -5544,20 +5544,15 @@ class MusicAccumulator(object):
     @staticmethod
     def _make_default_figure_maker():
         return MusicMaker(
-            rmakers.BeamSpecifier(
-                beam_divisions_together=True,
-                ),
+            rmakers.BeamSpecifier(beam_divisions_together=True),
             PitchFirstRhythmCommand(
                 rhythm_maker=PitchFirstRhythmMaker(
-                    talea=rmakers.Talea(
-                        counts=[1],
-                        denominator=16,
-                        ),
-                    ),
-                ),
+                    talea=rmakers.Talea(counts=[1], denominator=16)
+                )
+            ),
             color_unregistered_pitches=True,
             denominator=16,
-            )
+        )
 
     def _make_voice_dictionary(self):
         return dict([(_, []) for _ in self._voice_names])
@@ -5565,7 +5560,7 @@ class MusicAccumulator(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def music_maker(self) -> 'MusicMaker':
+    def music_maker(self) -> "MusicMaker":
         """
         Gets default music-maker.
         """
@@ -5610,9 +5605,8 @@ class MusicAccumulator(object):
             selection = self.assemble(voice_name)
             if selection:
                 segment_maker(
-                    (voice_name, 1),
-                    rhythmcommands.make_rhythm(selection)
-                    )
+                    (voice_name, 1), rhythmcommands.make_rhythm(selection)
+                )
 
     @staticmethod
     def show(contribution, time_signatures):
@@ -5622,10 +5616,9 @@ class MusicAccumulator(object):
         Returns LilyPond file.
         """
         return abjad.LilyPondFile.rhythm(
-            contribution,
-            divisions=time_signatures,
-            pitched_staff=True,
-            )
+            contribution, divisions=time_signatures, pitched_staff=True
+        )
+
 
 class MusicContribution(object):
     """
@@ -5641,15 +5634,15 @@ class MusicContribution(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_anchor',
-        '_color_selector',
-        '_color_selector_result',
-        '_figure_name',
-        '_hide_time_signature',
-        '_selections',
-        '_state_manifest',
-        '_time_signature',
-        )
+        "_anchor",
+        "_color_selector",
+        "_color_selector_result",
+        "_figure_name",
+        "_hide_time_signature",
+        "_selections",
+        "_state_manifest",
+        "_time_signature",
+    )
 
     ### INITIALIZER ###
 
@@ -5664,10 +5657,9 @@ class MusicContribution(object):
         selections=None,
         state_manifest=None,
         time_signature=None,
-        ):
-        if (anchor is not None and
-            not isinstance(anchor, AnchorSpecifier)):
-            raise TypeError(f'anchor specifier only: {anchor!r}.')
+    ):
+        if anchor is not None and not isinstance(anchor, AnchorSpecifier):
+            raise TypeError(f"anchor specifier only: {anchor!r}.")
         self._anchor = anchor
         self._color_selector = color_selector
         self._color_selector_result = color_selector_result
@@ -5807,6 +5799,7 @@ class MusicContribution(object):
             return
         self.color_selector.print(self.color_selector_result)
 
+
 class MusicMaker(object):
     r"""
     Music-maker.
@@ -5868,20 +5861,18 @@ class MusicMaker(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_allow_repeats',
-        '_color_unregistered_pitches',
-        '_denominator',
-        '_next_figure',
-        '_specifiers',
-        '_thread',
-        '_voice_names',
-        )
+        "_allow_repeats",
+        "_color_unregistered_pitches",
+        "_denominator",
+        "_next_figure",
+        "_specifiers",
+        "_thread",
+        "_voice_names",
+    )
 
     _publish_storage_format = True
 
-    _state_variables = (
-        '_next_figure',
-        )
+    _state_variables = ("_next_figure",)
 
     ### INITIALIZER ###
 
@@ -5892,8 +5883,8 @@ class MusicMaker(object):
         color_unregistered_pitches=None,
         denominator=None,
         thread=None,
-        voice_names=None
-        ):
+        voice_names=None,
+    ):
         specifiers = classes.Sequence(specifiers)
         specifiers = specifiers.flatten()
         if allow_repeats is not None:
@@ -5941,8 +5932,8 @@ class MusicMaker(object):
         thread=None,
         time_treatments=None,
         tuplet_denominator=None,
-        tuplet_force_fraction=None
-        ):
+        tuplet_force_fraction=None,
+    ):
         r"""
         Calls music-maker on ``collections`` with keywords.
 
@@ -6499,19 +6490,18 @@ class MusicMaker(object):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
             specifiers = [
-                _ for _ in specifiers
+                _
+                for _ in specifiers
                 if not isinstance(_, PitchFirstRhythmCommand)
-                ]
+            ]
         else:
             collections = self._coerce_collections(collections)
             collections, specifiers = self._apply_pitch_specifiers(
-                collections,
-                specifiers,
-                )
+                collections, specifiers
+            )
             collections, specifiers = self._apply_spacing_specifiers(
-                collections,
-                specifiers,
-                )
+                collections, specifiers
+            )
             selections, specifiers = self._call_rhythm_commands(
                 collections,
                 specifiers,
@@ -6523,21 +6513,19 @@ class MusicMaker(object):
                 time_treatments=time_treatments,
                 tuplet_denominator=tuplet_denominator,
                 tuplet_force_fraction=tuplet_force_fraction,
-                )
+            )
         anchor, specifiers = self._get_anchor_specifier(specifiers)
         container = abjad.Container(selections)
         self._color_unregistered_pitches_(
-            container,
-            color_unregistered_pitches=color_unregistered_pitches,
-            )
+            container, color_unregistered_pitches=color_unregistered_pitches
+        )
         specifiers = self._call_tie_commands(selections, specifiers)
         specifiers = self._call_cluster_commands(selections, specifiers)
         specifiers = self._call_nesting_commands(selections, specifiers)
         specifiers = self._call_register_commands(selections, specifiers)
         imbricated_selections, specifiers = self._call_imbrication_commands(
-            container,
-            specifiers,
-            )
+            container, specifiers
+        )
         result = self._call_color_commands(selections, specifiers)
         specifiers, color_selector, color_selector_result = result
         self._call_remaining_commands(selections, specifiers)
@@ -6547,16 +6535,15 @@ class MusicMaker(object):
             container,
             is_foreshadow=is_foreshadow,
             is_recollection=is_recollection,
-            )
+        )
         self._annotate_repeat_pitches(container)
         self._extend_beam_(container, extend_beam)
         self._check_wellformedness(container)
         state_manifest = self._make_state_manifest()
         selection = abjad.select([container])
         time_signature = self._make_time_signature(
-            selection,
-            denominator=denominator,
-            )
+            selection, denominator=denominator
+        )
         selections = {voice_name: selection}
         selections.update(imbricated_selections)
         for value in selections.values():
@@ -6570,7 +6557,7 @@ class MusicMaker(object):
             selections=selections,
             state_manifest=state_manifest,
             time_signature=time_signature,
-            )
+        )
 
     ### PRIVATE METHODS ###
 
@@ -6591,7 +6578,7 @@ class MusicMaker(object):
         is_foreshadow=False,
         is_incomplete=False,
         is_recollection=False,
-        ):
+    ):
         if not is_foreshadow and not is_recollection and not is_incomplete:
             return
         for leaf in abjad.iterate(argument).leaves():
@@ -6626,7 +6613,7 @@ class MusicMaker(object):
         prototype = (
             pitchclasses.ArpeggiationSpacingSpecifier,
             pitchclasses.ChordalSpacingSpecifier,
-            )
+        )
         for specifier in specifiers:
             if isinstance(specifier, prototype):
                 collections = specifier(collections)
@@ -6691,7 +6678,7 @@ class MusicMaker(object):
             pitchcommands.RegisterCommand,
             pitchcommands.RegisterInterpolationCommand,
             pitchcommands.RegisterToOctaveCommand,
-            )
+        )
         for specifier in specifiers:
             if isinstance(specifier, prototype):
                 specifier(selections)
@@ -6703,7 +6690,9 @@ class MusicMaker(object):
         assert self._all_are_selections(selections), repr(selections)
         for specifier in specifiers:
             if not isinstance(specifier, rmakers.BeamSpecifier):
-                assert isinstance(specifier, scoping.Command), format(specifier)
+                assert isinstance(specifier, scoping.Command), format(
+                    specifier
+                )
             specifier(selections)
 
     def _call_rhythm_commands(
@@ -6718,7 +6707,7 @@ class MusicMaker(object):
         time_treatments=None,
         tuplet_denominator=None,
         tuplet_force_fraction=None,
-        ):
+    ):
         selections = len(collections) * [None]
         rhythm_commands, rest_affix_specifiers, specifiers_ = [], [], []
         for specifier in specifiers:
@@ -6735,7 +6724,7 @@ class MusicMaker(object):
         elif len(rest_affix_specifiers) == 1:
             rest_affix_specifier = rest_affix_specifiers[0]
         else:
-            message = f'max 1 rest affix specifier: {rest_affix_specifiers!r}.'
+            message = f"max 1 rest affix specifier: {rest_affix_specifiers!r}."
             raise Exception(message)
         thread = thread or self.thread
         for rhythm_command in rhythm_commands:
@@ -6751,7 +6740,7 @@ class MusicMaker(object):
                 time_treatments=time_treatments,
                 tuplet_denominator=tuplet_denominator,
                 tuplet_force_fraction=tuplet_force_fraction,
-                )
+            )
         return selections, specifiers_
 
     def _call_tie_commands(self, selections, specifiers):
@@ -6767,7 +6756,7 @@ class MusicMaker(object):
             inspection = abjad.inspect(component)
             if not inspection.wellformed():
                 report = inspection.tabulate_wellformedness()
-                report = repr(component) + '\n' + report
+                report = repr(component) + "\n" + report
                 raise Exception(report)
 
     @staticmethod
@@ -6782,21 +6771,18 @@ class MusicMaker(object):
                     item_class = abjad.NamedPitch
                     break
         return pitchclasses.CollectionList(
-            collections=collections,
-            item_class=item_class,
-            )
+            collections=collections, item_class=item_class
+        )
 
     def _color_unregistered_pitches_(
-        self,
-        argument,
-        color_unregistered_pitches=None,
-        ):
+        self, argument, color_unregistered_pitches=None
+    ):
         if color_unregistered_pitches is None:
             color_unregistered_pitches = self.color_unregistered_pitches
         if not color_unregistered_pitches:
             return
         for pleaf in abjad.iterate(argument).leaves(pitched=True):
-            abjad.attach(abjad.tags.NOT_YET_REGISTERED, pleaf, tag='')
+            abjad.attach(abjad.tags.NOT_YET_REGISTERED, pleaf, tag="")
 
     @staticmethod
     def _exactly_double(selections):
@@ -6808,8 +6794,8 @@ class MusicMaker(object):
             first_selection = selections[index]
             index_ = index + half_length
             second_selection = selections[index_]
-            first_format = format(first_selection, 'lilypond')
-            second_format = format(second_selection, 'lilypond')
+            first_format = format(first_selection, "lilypond")
+            second_format = format(second_selection, "lilypond")
             if not first_format == second_format:
                 return False
         return True
@@ -6834,7 +6820,7 @@ class MusicMaker(object):
         elif len(anchor_specifiers) == 1:
             anchor_specifier = anchor_specifiers[0]
         else:
-            raise Exception(f'max 1 anchor specifier: {anchor_specifiers!r}.')
+            raise Exception(f"max 1 anchor specifier: {anchor_specifiers!r}.")
         return anchor_specifier, specifiers_
 
     def _get_storage_format_specification(self):
@@ -6845,7 +6831,7 @@ class MusicMaker(object):
             self,
             keyword_argument_names=keyword_argument_names,
             positional_argument_values=positional_argument_values,
-            )
+        )
 
     def _is_pitch_input(self, collections):
         prototype = (abjad.PitchSegment, abjad.PitchSet)
@@ -6864,31 +6850,27 @@ class MusicMaker(object):
             return
         figure_name = str(figure_name)
         original_figure_name = figure_name
-        parts = figure_name.split('_')
+        parts = figure_name.split("_")
         if len(parts) == 1:
             body = parts[0]
             figure_name = abjad.Markup(body)
         elif len(parts) == 2:
             body, subscript = parts
-            figure_name = abjad.Markup.concat([
-                abjad.Markup(body),
-                abjad.Markup(subscript).sub(),
-                ])
+            figure_name = abjad.Markup.concat(
+                [abjad.Markup(body), abjad.Markup(subscript).sub()]
+            )
         else:
-            raise Exception(f'unrecognized figure name: {figure_name!r}.')
-        figure_index = f' ({figure_index})'
+            raise Exception(f"unrecognized figure name: {figure_name!r}.")
+        figure_index = f" ({figure_index})"
         figure_index = abjad.Markup(figure_index).fontsize(-2).raise_(0.25)
-        figure_name_markup = abjad.Markup.concat([
-            '[',
-            figure_name,
-            abjad.Markup.hspace(1),
-            figure_index,
-            ']',
-            ])
+        figure_name_markup = abjad.Markup.concat(
+            ["[", figure_name, abjad.Markup.hspace(1), figure_index, "]"]
+        )
         figure_name_markup = figure_name_markup.fontsize(2)
         figure_name_markup = abjad.Markup(
-            figure_name_markup, direction=abjad.Up)
-        annotation = f'figure name: {original_figure_name}'
+            figure_name_markup, direction=abjad.Up
+        )
+        annotation = f"figure name: {original_figure_name}"
         figure_name_markup._annotation = annotation
         leaves = list(abjad.iterate(container).leaves())
         abjad.attach(
@@ -6896,13 +6878,11 @@ class MusicMaker(object):
             leaves[0],
             deactivate=True,
             tag=abjad.const.FIGURE_NAME,
-            )
+        )
 
     @staticmethod
     def _make_default_rhythm_command():
-        return PitchFirstRhythmCommand(
-            rhythm_maker=PitchFirstRhythmMaker(),
-            )
+        return PitchFirstRhythmCommand(rhythm_maker=PitchFirstRhythmMaker())
 
     def _make_state_manifest(self):
         state_manifest = {}
@@ -6933,9 +6913,9 @@ class MusicMaker(object):
 
     def _validate_voice_name(self, voice_name):
         if not isinstance(voice_name, str):
-            raise TypeError(f'voice name must be string: {voice_name!r}.')
+            raise TypeError(f"voice name must be string: {voice_name!r}.")
         if self.voice_names and voice_name not in self.voice_names:
-            raise ValueError(f'unknown voice name: {voice_name!r}.')
+            raise ValueError(f"unknown voice name: {voice_name!r}.")
 
     ### PUBLIC PROPERTIES ###
 
@@ -8771,7 +8751,8 @@ class MusicMaker(object):
             music_contribution.selections,
             time_signatures=time_signatures,
             attach_lilypond_voice_commands=True,
-            )
+        )
+
 
 class NestingCommand(scoping.Command):
     r"""
@@ -9073,19 +9054,11 @@ class NestingCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_lmr_specifier',
-        '_time_treatments',
-        )
+    __slots__ = ("_lmr_specifier", "_time_treatments")
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        *,
-        lmr_specifier=None,
-        time_treatments=None,
-        ):
+    def __init__(self, *, lmr_specifier=None, time_treatments=None):
         if lmr_specifier is not None:
             prototype = LMRSpecifier
             assert isinstance(lmr_specifier, prototype)
@@ -9203,7 +9176,7 @@ class NestingCommand(scoping.Command):
         tuplets = []
         for selection in selections:
             if not isinstance(selection, abjad.Selection):
-                raise Exception(f'should be selection: {selection!r}.')
+                raise Exception(f"should be selection: {selection!r}.")
             assert len(selection) == 1, repr(selection)
             assert isinstance(selection[0], abjad.Tuplet)
             tuplets.append(selection[0])
@@ -9212,20 +9185,21 @@ class NestingCommand(scoping.Command):
         else:
             tuplet_selections = self.lmr_specifier(tuplets)
             tuplet_selections = [
-                abjad.select(list(_)) for _ in tuplet_selections]
+                abjad.select(list(_)) for _ in tuplet_selections
+            ]
         selections_ = []
         prototype = abjad.Selection
         for index, tuplet_selection in enumerate(tuplet_selections):
             assert isinstance(tuplet_selection, prototype), repr(
-                tuplet_selection)
+                tuplet_selection
+            )
             time_treatment = time_treatments[index]
             if time_treatment is None:
                 selections_.append(tuplet_selection)
             else:
                 nested_tuplet = self._make_nested_tuplet(
-                    tuplet_selection,
-                    time_treatment,
-                    )
+                    tuplet_selection, time_treatment
+                )
                 selection_ = abjad.Selection([nested_tuplet])
                 selections_.append(selection_)
         return selections_
@@ -9249,18 +9223,18 @@ class NestingCommand(scoping.Command):
             tuplet = abjad.Tuplet(multiplier, [])
             abjad.mutate(tuplet_selection).wrap(tuplet)
         elif time_treatment.__class__ is abjad.Multiplier:
-            #tuplet = abjad.Tuplet(time_treatment, tuplet_selection)
+            # tuplet = abjad.Tuplet(time_treatment, tuplet_selection)
             tuplet = abjad.Tuplet(time_treatment, [])
             abjad.mutate(tuplet_selection).wrap(tuplet)
         elif time_treatment.__class__ is abjad.Duration:
             target_duration = time_treatment
             contents_duration = abjad.inspect(tuplet_selection).duration()
             multiplier = target_duration / contents_duration
-            #tuplet = abjad.Tuplet(multiplier, tuplet_selection)
+            # tuplet = abjad.Tuplet(multiplier, tuplet_selection)
             tuplet = abjad.Tuplet(multiplier, [])
             abjad.mutate(tuplet_selection).wrap(tuplet)
         else:
-            raise Exception(f'bad time treatment: {time_treatment!r}.')
+            raise Exception(f"bad time treatment: {time_treatment!r}.")
         return tuplet
 
     ### PUBLIC PROPERTIES ###
@@ -9292,6 +9266,7 @@ class NestingCommand(scoping.Command):
         """
         return self._time_treatments
 
+
 class PitchFirstRhythmCommand(scoping.Command):
     """
     Pitch-first rhythm command.
@@ -9305,21 +9280,13 @@ class PitchFirstRhythmCommand(scoping.Command):
 
     ### CLASS ATTRIBUTES ###
 
-    __slots__ = (
-        '_pattern',
-        '_rhythm_maker',
-        )
+    __slots__ = ("_pattern", "_rhythm_maker")
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        *,
-        pattern=None,
-        rhythm_maker=None,
-        ):
+    def __init__(self, *, pattern=None, rhythm_maker=None):
         if pattern is not None:
             assert isinstance(pattern, abjad.Pattern), repr(pattern)
         self._pattern = pattern
@@ -9340,7 +9307,7 @@ class PitchFirstRhythmCommand(scoping.Command):
         time_treatments=None,
         tuplet_denominator=None,
         tuplet_force_fraction=None,
-        ):
+    ):
         assert len(selections) == len(collections)
         rhythm_maker = self._get_rhythm_maker(
             division_masks=division_masks,
@@ -9350,7 +9317,7 @@ class PitchFirstRhythmCommand(scoping.Command):
             time_treatments=time_treatments,
             tuplet_denominator=tuplet_denominator,
             tuplet_force_fraction=tuplet_force_fraction,
-            )
+        )
         length = len(selections)
         pattern = self.pattern or abjad.index_all()
         prototype = (abjad.Segment, abjad.Set, list)
@@ -9367,9 +9334,8 @@ class PitchFirstRhythmCommand(scoping.Command):
             indices.append(index)
         if thread:
             stage_selections, state_manifest = rhythm_maker(
-                collections_,
-                rest_affix_specifier=rest_affix_specifier,
-                )
+                collections_, rest_affix_specifier=rest_affix_specifier
+            )
         else:
             stage_selections = []
             total_collections = len(collections_)
@@ -9379,7 +9345,7 @@ class PitchFirstRhythmCommand(scoping.Command):
                     rest_affix_specifier=rest_affix_specifier,
                     collection_index=collection_index,
                     total_collections=total_collections,
-                    )
+                )
                 stage_selections.extend(stage_selections_)
         triples = zip(indices, stage_selections, collections)
         for index, stage_selection, collection in triples:
@@ -9416,26 +9382,25 @@ class PitchFirstRhythmCommand(scoping.Command):
         time_treatments=None,
         tuplet_denominator=None,
         tuplet_force_fraction=None,
-        ):
+    ):
         rhythm_maker = self.rhythm_maker
         if rhythm_maker is None:
             mask = rmakers.silence([0], 1, use_multimeasure_rests=True)
             rhythm_maker = rmakers.NoteRhythmMaker(division_masks=[mask])
         keywords = {}
         if division_masks is not None:
-            keywords['division_masks'] = division_masks
+            keywords["division_masks"] = division_masks
         if logical_tie_masks is not None:
-            keywords['logical_tie_masks'] = logical_tie_masks
+            keywords["logical_tie_masks"] = logical_tie_masks
         if talea_counts is not None:
-            keywords['talea__counts'] = talea_counts
+            keywords["talea__counts"] = talea_counts
         if talea_denominator is not None:
-            keywords['talea__denominator'] = talea_denominator
+            keywords["talea__denominator"] = talea_denominator
         if time_treatments is not None:
-            keywords['time_treatments'] = time_treatments
+            keywords["time_treatments"] = time_treatments
         if keywords:
             rhythm_maker = abjad.new(rhythm_maker, **keywords)
-        if (tuplet_denominator is not None or
-            tuplet_force_fraction is not None):
+        if tuplet_denominator is not None or tuplet_force_fraction is not None:
             specifier = rhythm_maker.tuplet_specifier
             if specifier is None:
                 specifier = rmakers.TupletSpecifier()
@@ -9443,11 +9408,8 @@ class PitchFirstRhythmCommand(scoping.Command):
                 specifier,
                 denominator=tuplet_denominator,
                 force_fraction=tuplet_force_fraction,
-                )
-            rhythm_maker = abjad.new(
-                rhythm_maker,
-                tuplet_specifier=specifier,
-                )
+            )
+            rhythm_maker = abjad.new(rhythm_maker, tuplet_specifier=specifier)
         return rhythm_maker
 
     ### PUBLIC PROPERTIES ###
@@ -9477,6 +9439,7 @@ class PitchFirstRhythmCommand(scoping.Command):
         Returns rhythm-maker or music.
         """
         return self._rhythm_maker
+
 
 class PitchFirstRhythmMaker(rmakers.RhythmMaker):
     r"""
@@ -9620,17 +9583,14 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_acciaccatura_specifiers',
-        '_next_attack',
-        '_next_segment',
-        '_talea',
-        '_time_treatments',
-        )
+        "_acciaccatura_specifiers",
+        "_next_attack",
+        "_next_segment",
+        "_talea",
+        "_time_treatments",
+    )
 
-    _state_variables = (
-        '_next_attack',
-        '_next_segment',
-        )
+    _state_variables = ("_next_attack", "_next_segment")
 
     ### INITIALIZER ###
 
@@ -9646,7 +9606,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         tie_specifier=None,
         time_treatments=None,
         tuplet_specifier=None,
-        ):
+    ):
         rmakers.RhythmMaker.__init__(
             self,
             beam_specifier=beam_specifier,
@@ -9655,7 +9615,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             logical_tie_masks=logical_tie_masks,
             tie_specifier=tie_specifier,
             tuplet_specifier=tuplet_specifier,
-            )
+        )
         if acciaccatura_specifiers is not None:
             prototype = AcciaccaturaSpecifier
             for acciaccatura_specifier in acciaccatura_specifiers:
@@ -9666,12 +9626,12 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         self._state = abjad.OrderedDict()
         talea = talea or rmakers.Talea()
         if not isinstance(talea, rmakers.Talea):
-            raise TypeError(f'must be talea: {talea!r}.')
+            raise TypeError(f"must be talea: {talea!r}.")
         self._talea = talea
         if time_treatments is not None:
             for time_treatment in time_treatments:
                 if not self._is_time_treatment(time_treatment):
-                    raise Exception(f'bad time treatment: {time_treatment!r}.')
+                    raise Exception(f"bad time treatment: {time_treatment!r}.")
         self._time_treatments = time_treatments
 
     ### SPECIAL METHODS ###
@@ -9683,7 +9643,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         rest_affix_specifier=None,
         state=None,
         total_collections=None,
-        ):
+    ):
         r"""
         Calls rhythm-maker on ``collections``.
 
@@ -9816,10 +9776,10 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             rest_affix_specifier=rest_affix_specifier,
             collection_index=collection_index,
             total_collections=total_collections,
-            )
+        )
         selections = self._apply_tuplet_specifier(selections, divisions=None)
         selections = self._apply_specifiers(selections)
-        #self._check_wellformedness(selections)
+        # self._check_wellformedness(selections)
         state = self._make_state()
         return selections, state
 
@@ -9833,13 +9793,13 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         rest_suffix,
         affix_skips_instead_of_rests,
         increase_durations,
-        ):
+    ):
         if rest_prefix:
             durations = [(_, talea.denominator) for _ in rest_prefix]
             maker = abjad.LeafMaker(
                 increase_monotonic=increase_durations,
                 skips_instead_of_rests=affix_skips_instead_of_rests,
-                )
+            )
             leaves_ = maker([None], durations)
             leaves[0:0] = leaves_
         if rest_suffix:
@@ -9847,7 +9807,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             maker = abjad.LeafMaker(
                 increase_monotonic=increase_durations,
                 skips_instead_of_rests=affix_skips_instead_of_rests,
-                )
+            )
             leaves_ = maker([None], durations)
             leaves.extend(leaves_)
         return leaves
@@ -9913,20 +9873,20 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             return True
         elif argument.__class__ is abjad.Duration:
             return True
-        elif argument in ('accel', 'rit'):
+        elif argument in ("accel", "rit"):
             return True
         return False
 
     @classmethod
     def _make_accelerando(class_, leaf_selection, accelerando_indicator):
-        assert accelerando_indicator in ('accel', 'rit')
+        assert accelerando_indicator in ("accel", "rit")
         tuplet = abjad.Tuplet((1, 1), leaf_selection, hide=True)
         if len(tuplet) == 1:
             return tuplet
         durations = [abjad.inspect(_).duration() for _ in leaf_selection]
-        if accelerando_indicator == 'accel':
+        if accelerando_indicator == "accel":
             exponent = 0.625
-        elif accelerando_indicator == 'rit':
+        elif accelerando_indicator == "rit":
             exponent = 1.625
         multipliers = class_._make_accelerando_multipliers(durations, exponent)
         assert len(leaf_selection) == len(multipliers)
@@ -10004,31 +9964,28 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         pairs = abjad.mathtools.cumulative_sums_pairwise(durations)
         total_duration = pairs[-1][-1]
         start_offsets = [_[0] for _ in pairs]
-        #print(total_duration, start_offsets)
+        # print(total_duration, start_offsets)
         start_offsets = [_ / total_duration for _ in start_offsets]
-        #print(total_duration, start_offsets)
+        # print(total_duration, start_offsets)
         start_offsets_ = []
         rhythm_maker_class = rmakers.AccelerandoRhythmMaker
         for start_offset in start_offsets:
             start_offset_ = rhythm_maker_class._interpolate_exponential(
-                0,
-                total_duration,
-                start_offset,
-                exponent,
-                )
+                0, total_duration, start_offset, exponent
+            )
             start_offsets_.append(start_offset_)
-        #print(start_offsets_)
-        #start_offsets_ = [float(total_duration * _) for _ in start_offsets_]
+        # print(start_offsets_)
+        # start_offsets_ = [float(total_duration * _) for _ in start_offsets_]
         start_offsets_.append(float(total_duration))
         durations_ = abjad.mathtools.difference_series(start_offsets_)
-        durations_ = rhythm_maker_class._round_durations(durations_, 2**10)
+        durations_ = rhythm_maker_class._round_durations(durations_, 2 ** 10)
         durations_ = class_._fix_rounding_error(durations_, total_duration)
         multipliers = []
         assert len(durations) == len(durations_)
         for duration_, duration in zip(durations_, durations):
             multiplier = duration_ / duration
             multiplier = abjad.Multiplier(multiplier)
-            multiplier = multiplier.with_denominator(2**10)
+            multiplier = multiplier.with_denominator(2 ** 10)
             multipliers.append(multiplier)
         return multipliers
 
@@ -10038,7 +9995,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         rest_affix_specifier=None,
         collection_index=None,
         total_collections=None,
-        ):
+    ):
         segment_count = len(collections)
         selections = []
         if collection_index is None:
@@ -10046,8 +10003,9 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 if rest_affix_specifier is not None:
                     result = rest_affix_specifier(i, segment_count)
                     rest_prefix, rest_suffix = result
-                    affix_skips_instead_of_rests = \
+                    affix_skips_instead_of_rests = (
                         rest_affix_specifier.skips_instead_of_rests
+                    )
                 else:
                     rest_prefix, rest_suffix = None, None
                     affix_skips_instead_of_rests = None
@@ -10057,16 +10015,19 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     rest_prefix=rest_prefix,
                     rest_suffix=rest_suffix,
                     affix_skips_instead_of_rests=affix_skips_instead_of_rests,
-                    )
+                )
                 selections.append(selection)
         else:
             assert len(collections) == 1, repr(collections)
             segment = collections[0]
             if rest_affix_specifier is not None:
-                result = rest_affix_specifier(collection_index, total_collections)
+                result = rest_affix_specifier(
+                    collection_index, total_collections
+                )
                 rest_prefix, rest_suffix = result
-                affix_skips_instead_of_rests = \
+                affix_skips_instead_of_rests = (
                     rest_affix_specifier.skips_instead_of_rests
+                )
             else:
                 rest_prefix, rest_suffix = None, None
                 affix_skips_instead_of_rests = None
@@ -10076,7 +10037,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 rest_prefix=rest_prefix,
                 rest_suffix=rest_suffix,
                 affix_skips_instead_of_rests=affix_skips_instead_of_rests,
-                )
+            )
             selections.append(selection)
         beam_specifier = self._get_beam_specifier()
         beam_specifier(selections)
@@ -10090,12 +10051,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         rest_prefix=None,
         rest_suffix=None,
         affix_skips_instead_of_rests=None,
-        ):
+    ):
         collection_index = self._next_segment
         acciaccatura_specifier = self._get_acciaccatura_specifier(
-            collection_index,
-            segment_count,
-            )
+            collection_index, segment_count
+        )
         self._next_segment += 1
         if not segment:
             return abjad.Selection()
@@ -10119,9 +10079,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             while talea[count] < 0:
                 self._next_attack += 1
                 duration = -talea[count]
-                maker = abjad.LeafMaker(
-                    increase_monotonic=increase_durations,
-                    )
+                maker = abjad.LeafMaker(increase_monotonic=increase_durations)
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
                 count = self._next_attack
@@ -10129,28 +10087,28 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             duration = talea[count]
             assert 0 < duration, repr(duration)
             skips_instead_of_rests = False
-            if (isinstance(pitch_expression, tuple) and
-                len(pitch_expression) == 2 and
-                pitch_expression[-1] in (None, 'skip')):
+            if (
+                isinstance(pitch_expression, tuple)
+                and len(pitch_expression) == 2
+                and pitch_expression[-1] in (None, "skip")
+            ):
                 multiplier = pitch_expression[0]
                 duration = abjad.Duration(1, talea.denominator)
                 duration *= multiplier
-                if pitch_expression[-1] == 'skip':
+                if pitch_expression[-1] == "skip":
                     skips_instead_of_rests = True
                 pitch_expression = None
             maker = abjad.LeafMaker(
                 increase_monotonic=increase_durations,
                 skips_instead_of_rests=skips_instead_of_rests,
-                )
+            )
             leaves_ = maker([pitch_expression], [duration])
             leaves.extend(leaves_)
             count = self._next_attack
             while talea[count] < 0 and not count % len(talea) == 0:
                 self._next_attack += 1
                 duration = -talea[count]
-                maker = abjad.LeafMaker(
-                    increase_monotonic=increase_durations,
-                    )
+                maker = abjad.LeafMaker(increase_monotonic=increase_durations)
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
                 count = self._next_attack
@@ -10161,15 +10119,13 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             rest_suffix,
             affix_skips_instead_of_rests,
             increase_durations,
-            )
+        )
         leaf_selection = abjad.select(leaves)
         if isinstance(time_treatment, int):
             tuplet = self._make_tuplet_with_extra_count(
-                leaf_selection,
-                time_treatment,
-                talea.denominator,
-                )
-        elif time_treatment in ('accel', 'rit'):
+                leaf_selection, time_treatment, talea.denominator
+            )
+        elif time_treatment in ("accel", "rit"):
             tuplet = self._make_accelerando(leaf_selection, time_treatment)
         elif isinstance(time_treatment, abjad.Ratio):
             numerator, denominator = time_treatment.numbers
@@ -10185,7 +10141,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             if not tuplet.multiplier.normalized():
                 tuplet.normalize_multiplier()
         else:
-            raise Exception(f'bad time treatment: {time_treatment!r}.')
+            raise Exception(f"bad time treatment: {time_treatment!r}.")
         assert isinstance(tuplet, abjad.Tuplet)
         if grace_containers is not None:
             logical_ties = abjad.iterate(tuplet).logical_ties()
@@ -10193,11 +10149,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             for grace_container, logical_tie in pairs:
                 if grace_container is None:
                     continue
-                abjad.attach(
-                    grace_container,
-                    logical_tie.head,
-                    tag='PFRM_1',
-                    )
+                abjad.attach(grace_container, logical_tie.head, tag="PFRM_1")
         if tuplet.trivial():
             tuplet.hide = True
         selection = abjad.select([tuplet])
@@ -10212,10 +10164,8 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
     @staticmethod
     def _make_tuplet_with_extra_count(
-        leaf_selection,
-        extra_count,
-        denominator,
-        ):
+        leaf_selection, extra_count, denominator
+    ):
         contents_duration = abjad.inspect(leaf_selection).duration()
         contents_duration = contents_duration.with_denominator(denominator)
         contents_count = contents_duration.numerator
@@ -10227,12 +10177,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             extra_count *= -1
         new_contents_count = contents_count + extra_count
         tuplet_multiplier = abjad.Multiplier(
-            new_contents_count,
-            contents_count,
-            )
+            new_contents_count, contents_count
+        )
         if not tuplet_multiplier.normalized():
-            message = f'{leaf_selection!r} gives {tuplet_multiplier}'
-            message += ' with {contents_count} and {new_contents_count}.'
+            message = f"{leaf_selection!r} gives {tuplet_multiplier}"
+            message += " with {contents_count} and {new_contents_count}."
             raise Exception(message)
         tuplet = abjad.Tuplet(tuplet_multiplier, leaf_selection)
         return tuplet
@@ -12383,9 +12332,9 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Returns LilyPond file.
         """
         return abjad.LilyPondFile.rhythm(
-            selections,
-            time_signatures=time_signatures,
-            )
+            selections, time_signatures=time_signatures
+        )
+
 
 class PitchSpecifier(object):
     r"""
@@ -12512,11 +12461,11 @@ class PitchSpecifier(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_expressions',
-        '_remove_duplicate_pitch_classes',
-        '_remove_duplicates',
-        '_to_pitch_classes',
-        )
+        "_expressions",
+        "_remove_duplicate_pitch_classes",
+        "_remove_duplicates",
+        "_to_pitch_classes",
+    )
 
     ### INITIALIZER ###
 
@@ -12527,7 +12476,7 @@ class PitchSpecifier(object):
         remove_duplicate_pitch_classes=None,
         remove_duplicates=None,
         to_pitch_classes=None,
-        ):
+    ):
         self._expressions = expressions
         if to_pitch_classes is not None:
             to_pitch_classes = bool(to_pitch_classes)
@@ -12606,10 +12555,7 @@ class PitchSpecifier(object):
         item_class = None
         if self.to_pitch_classes:
             item_class = abjad.NumberedPitchClass
-        return baca.PitchTree(
-            item_class=item_class,
-            items=collections,
-            )
+        return baca.PitchTree(item_class=item_class, items=collections)
 
     ### PUBLIC PROPERTIES ###
 
@@ -12886,6 +12832,7 @@ class PitchSpecifier(object):
         """
         return self._to_pitch_classes
 
+
 class RestAffixSpecifier(object):
     r"""
     Rest affix specifier.
@@ -13043,12 +12990,7 @@ class RestAffixSpecifier(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_pattern',
-        '_prefix',
-        '_skips_instead_of_rests',
-        '_suffix',
-        )
+    __slots__ = ("_pattern", "_prefix", "_skips_instead_of_rests", "_suffix")
 
     _publish_storage_format = True
 
@@ -13061,10 +13003,9 @@ class RestAffixSpecifier(object):
         prefix=None,
         skips_instead_of_rests=None,
         suffix=None,
-        ):
-        if (pattern is not None and
-            not isinstance(pattern, abjad.Pattern)):
-            raise TypeError(f'pattern or none: {pattern!r}.')
+    ):
+        if pattern is not None and not isinstance(pattern, abjad.Pattern):
+            raise TypeError(f"pattern or none: {pattern!r}.")
         self._pattern = pattern
         if prefix is not None:
             assert isinstance(prefix, collections.abc.Iterable), repr(prefix)
@@ -13143,7 +13084,10 @@ class RestAffixSpecifier(object):
         Returns prefix, suffix pair.
         """
         if self.pattern is None:
-            if collection_index == 0 and collection_index == total_collections - 1:
+            if (
+                collection_index == 0
+                and collection_index == total_collections - 1
+            ):
                 return self.prefix, self.suffix
             if collection_index == 0:
                 return self.prefix, None
@@ -13160,7 +13104,7 @@ class RestAffixSpecifier(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __format__(self, format_specification='') -> str:
+    def __format__(self, format_specification="") -> str:
         """
         Formats Abjad object.
         """
@@ -13174,7 +13118,7 @@ class RestAffixSpecifier(object):
         try:
             result = hash(hash_values)
         except TypeError:
-            raise TypeError(f'unhashable type: {self}')
+            raise TypeError(f"unhashable type: {self}")
         return result
 
     def __repr__(self) -> str:
@@ -13591,13 +13535,15 @@ class RestAffixSpecifier(object):
         """
         return self._suffix
 
+
 ### FACTORY FUNCTIONS ###
+
 
 def anchor(
     remote_voice_name: str,
     remote_selector: typings.Selector = None,
     local_selector: typings.Selector = None,
-    ) -> AnchorSpecifier:
+) -> AnchorSpecifier:
     """
     Anchors music in this figure (filtered by ``local_selector``) to
     start offset of ``remote_voice_name`` (filtered by
@@ -13613,13 +13559,14 @@ def anchor(
         local_selector=local_selector,
         remote_selector=remote_selector,
         remote_voice_name=remote_voice_name,
-        )
+    )
+
 
 def anchor_after(
     remote_voice_name: str,
     remote_selector: typings.Selector = None,
     local_selector: typings.Selector = None,
-    ) -> AnchorSpecifier:
+) -> AnchorSpecifier:
     """
     Anchors music in this figure (filtered by ``local_selector``) to
     stop offset of ``remote_voice_name`` (filtered by ``remote_selector``).
@@ -13635,7 +13582,8 @@ def anchor_after(
         remote_selector=remote_selector,
         remote_voice_name=remote_voice_name,
         use_remote_stop_offset=True,
-        )
+    )
+
 
 def anchor_to_figure(figure_name: str) -> AnchorSpecifier:
     """
@@ -13643,9 +13591,8 @@ def anchor_to_figure(figure_name: str) -> AnchorSpecifier:
 
     :param figure_name: figure name.
     """
-    return AnchorSpecifier(
-        figure_name=figure_name,
-        )
+    return AnchorSpecifier(figure_name=figure_name)
+
 
 def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
     r"""
@@ -13755,6 +13702,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
     """
     return Coat(pitch)
 
+
 def imbricate(
     voice_name: str,
     segment: typing.List,
@@ -13764,8 +13712,8 @@ def imbricate(
     extend_beam: bool = None,
     hocket: bool = None,
     selector: typings.Selector = None,
-    truncate_ties: bool = None
-    ):
+    truncate_ties: bool = None,
+):
     r"""
     Imbricates ``segment`` in voice with ``voice_name``.
 
@@ -13886,11 +13834,10 @@ def imbricate(
         hocket=hocket,
         selector=selector,
         truncate_ties=truncate_ties,
-        )
+    )
 
-def nest(
-    time_treatments: typing.Iterable = None,
-    ) -> NestingCommand:
+
+def nest(time_treatments: typing.Iterable = None,) -> NestingCommand:
     r"""
     Nests music.
 
@@ -13968,10 +13915,8 @@ def nest(
     """
     if not isinstance(time_treatments, list):
         time_treatments = [time_treatments]
-    return NestingCommand(
-        lmr_specifier=None,
-        time_treatments=time_treatments,
-        )
+    return NestingCommand(lmr_specifier=None, time_treatments=time_treatments)
+
 
 def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
     r"""
@@ -14044,14 +13989,12 @@ def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
             >>
 
     """
-    return RestAffixSpecifier(
-        suffix=counts,
-        )
+    return RestAffixSpecifier(suffix=counts)
+
 
 def rests_around(
-    prefix: typing.List[int],
-    suffix: typing.List[int],
-    ) -> RestAffixSpecifier:
+    prefix: typing.List[int], suffix: typing.List[int]
+) -> RestAffixSpecifier:
     r"""
     Makes rests around music.
 
@@ -14123,10 +14066,8 @@ def rests_around(
             >>
 
     """
-    return RestAffixSpecifier(
-        prefix=prefix,
-        suffix=suffix,
-        )
+    return RestAffixSpecifier(prefix=prefix, suffix=suffix)
+
 
 def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
     r"""
@@ -14199,9 +14140,8 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
             >>
 
     """
-    return RestAffixSpecifier(
-        prefix=counts,
-        )
+    return RestAffixSpecifier(prefix=counts)
+
 
 def resume() -> AnchorSpecifier:
     """
@@ -14209,15 +14149,17 @@ def resume() -> AnchorSpecifier:
     """
     return AnchorSpecifier()
 
+
 def resume_after(remote_voice_name) -> AnchorSpecifier:
     """
     Resumes music after remote selection.
     """
     return AnchorSpecifier(
-        remote_selector='baca.leaf(-1)',
+        remote_selector="baca.leaf(-1)",
         remote_voice_name=remote_voice_name,
         use_remote_stop_offset=True,
-        )
+    )
+
 
 def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
     r"""
@@ -14290,15 +14232,12 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
             >>
 
     """
-    return RestAffixSpecifier(
-        skips_instead_of_rests=True,
-        suffix=counts,
-        )
+    return RestAffixSpecifier(skips_instead_of_rests=True, suffix=counts)
+
 
 def skips_around(
-    prefix: typing.List[int],
-    suffix: typing.List[int],
-    ) -> RestAffixSpecifier:
+    prefix: typing.List[int], suffix: typing.List[int]
+) -> RestAffixSpecifier:
     r"""
     Makes skips around music.
 
@@ -14371,14 +14310,11 @@ def skips_around(
 
     """
     return RestAffixSpecifier(
-        prefix=prefix,
-        skips_instead_of_rests=True,
-        suffix=suffix,
-        )
+        prefix=prefix, skips_instead_of_rests=True, suffix=suffix
+    )
 
-def skips_before(
-    counts: typing.List[int],
-    ) -> RestAffixSpecifier:
+
+def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
     r"""
     Makes skips before music.
 
@@ -14449,7 +14385,4 @@ def skips_before(
             >>
 
     """
-    return RestAffixSpecifier(
-        prefix=counts,
-        skips_instead_of_rests=True,
-        )
+    return RestAffixSpecifier(prefix=counts, skips_instead_of_rests=True)

@@ -12,6 +12,7 @@ from . import classes
 
 ### CLASSES ###
 
+
 class ArpeggiationSpacingSpecifier(object):
     """
     Arpeggiation spacing specifier.
@@ -37,21 +38,13 @@ class ArpeggiationSpacingSpecifier(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_direction',
-        '_pattern',
-        )
+    __slots__ = ("_direction", "_pattern")
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        *,
-        direction=None,
-        pattern=None,
-        ):
+    def __init__(self, *, direction=None, pattern=None):
         if direction is not None:
             assert direction in (abjad.Up, abjad.Down), repr(direction)
         self._direction = direction
@@ -100,12 +93,12 @@ class ArpeggiationSpacingSpecifier(object):
                     pitch_classes = list(pitch_class_collection)
                 if direction == abjad.Up:
                     pitches = class_._to_tightly_spaced_pitches_ascending(
-                        pitch_classes,
-                        )
+                        pitch_classes
+                    )
                 else:
                     pitches = class_._to_tightly_spaced_pitches_descending(
-                        pitch_classes,
-                        )
+                        pitch_classes
+                    )
                 if isinstance(pitch_class_collection, abjad.Set):
                     collection_ = PitchSet(items=pitches)
                 else:
@@ -122,7 +115,7 @@ class ArpeggiationSpacingSpecifier(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __format__(self, format_specification='') -> str:
+    def __format__(self, format_specification="") -> str:
         """
         Formats Abjad object.
         """
@@ -136,7 +129,7 @@ class ArpeggiationSpacingSpecifier(object):
         try:
             result = hash(hash_values)
         except TypeError:
-            raise TypeError(f'unhashable type: {self}')
+            raise TypeError(f"unhashable type: {self}")
         return result
 
     def __repr__(self) -> str:
@@ -266,6 +259,7 @@ class ArpeggiationSpacingSpecifier(object):
         """
         return self._pattern
 
+
 class ChordalSpacingSpecifier(object):
     """
     Chordal spacing specifier.
@@ -325,12 +319,12 @@ class ChordalSpacingSpecifier(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_bass',
-        '_direction',
-        '_minimum_semitones',
-        '_pattern',
-        '_soprano',
-        )
+        "_bass",
+        "_direction",
+        "_minimum_semitones",
+        "_pattern",
+        "_soprano",
+    )
 
     _publish_storage_format = True
 
@@ -344,7 +338,7 @@ class ChordalSpacingSpecifier(object):
         minimum_semitones=None,
         pattern=None,
         soprano=None,
-        ):
+    ):
         self._bass = bass
         if direction is not None:
             assert direction in (abjad.Up, abjad.Down)
@@ -395,7 +389,7 @@ class ChordalSpacingSpecifier(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __format__(self, format_specification='') -> str:
+    def __format__(self, format_specification="") -> str:
         """
         Formats Abjad object.
         """
@@ -409,7 +403,7 @@ class ChordalSpacingSpecifier(object):
         try:
             result = hash(hash_values)
         except TypeError:
-            raise TypeError(f'unhashable type: {self}')
+            raise TypeError(f"unhashable type: {self}")
         return result
 
     def __repr__(self) -> str:
@@ -435,7 +429,7 @@ class ChordalSpacingSpecifier(object):
             else:
                 candidate += 1
             if 999 <= iterations:
-                message = 'stuck in while-loop.'
+                message = "stuck in while-loop."
                 raise Exception(message)
             iterations += 1
         assert not pitch_classes, repr(pitch_classes)
@@ -446,7 +440,7 @@ class ChordalSpacingSpecifier(object):
         if self.minimum_semitones is not None:
             candidate = abjad.NumberedPitchClass(
                 start.number - self.minimum_semitones
-                )
+            )
         else:
             candidate = abjad.NumberedPitchClass(start.number - 1)
         while pitch_classes:
@@ -456,11 +450,11 @@ class ChordalSpacingSpecifier(object):
                 if self.minimum_semitones is not None:
                     candidate = abjad.NumberedPitchClass(
                         candidate.number - self.minimum_semitones
-                        )
+                    )
             else:
                 candidate = abjad.NumberedPitchClass(candidate.number - 1)
             if 999 <= iterations:
-                raise Exception('stuck in while-loop.')
+                raise Exception("stuck in while-loop.")
             iterations += 1
         assert not pitch_classes, repr(pitch_classes)
         return pitch_classes_
@@ -476,12 +470,12 @@ class ChordalSpacingSpecifier(object):
         if self.bass is not None:
             bass = abjad.NumberedPitchClass(self.bass)
             if bass not in pitch_classes:
-                raise ValueError(f'bass pc {bass} not in {pitch_classes}.')
+                raise ValueError(f"bass pc {bass} not in {pitch_classes}.")
             outer.append(bass)
         if self.soprano is not None:
             soprano = abjad.NumberedPitchClass(self.soprano)
             if soprano not in pitch_classes:
-                raise ValueError(f'soprano pc {bass} not in {pitch_classes}.')
+                raise ValueError(f"soprano pc {bass} not in {pitch_classes}.")
             outer.append(soprano)
         inner = []
         for pitch_class in pitch_classes:
@@ -809,6 +803,7 @@ class ChordalSpacingSpecifier(object):
         """
         return self._soprano
 
+
 class CollectionList(collections_module.Sequence):
     """
     Collection list.
@@ -996,31 +991,22 @@ class CollectionList(collections_module.Sequence):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_collections',
-        '_expression',
-        '_item_class',
-        )
+    __slots__ = ("_collections", "_expression", "_item_class")
 
     _item_class_prototype = (
         abjad.NumberedPitch,
         abjad.NumberedPitchClass,
         abjad.NamedPitch,
         abjad.NamedPitchClass,
-        )
+    )
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        collections=None,
-        *,
-        item_class=None,
-        ):
+    def __init__(self, collections=None, *, item_class=None):
         self._expression = None
         if item_class is not None:
             if item_class not in self._item_class_prototype:
-                raise TypeError(f'only pitch or pitch-class: {item_class!r}.')
+                raise TypeError(f"only pitch or pitch-class: {item_class!r}.")
         self._item_class = item_class
         collections = self._coerce(collections)
         collections = collections or []
@@ -1042,10 +1028,10 @@ class CollectionList(collections_module.Sequence):
         Returns new collection list.
         """
         if not isinstance(argument, collections_module.Iterable):
-            raise TypeError(f'must be collection list: {argument!r}.')
+            raise TypeError(f"must be collection list: {argument!r}.")
         argument_collections = [
             self._initialize_collection(_) for _ in argument
-            ]
+        ]
         collections = self.collections + argument_collections
         return abjad.new(self, collections=collections)
 
@@ -1106,7 +1092,7 @@ class CollectionList(collections_module.Sequence):
             return False
         return self.collections == argument.collections
 
-    def __format__(self, format_specification=''):
+    def __format__(self, format_specification=""):
         """
         Gets storage format of collections.
 
@@ -1291,21 +1277,16 @@ class CollectionList(collections_module.Sequence):
         Returns string.
         """
         collections = self.collections or []
-        collections = ', '.join([str(_) for _ in collections])
-        string = f'{type(self).__name__}([{collections}])'
+        collections = ", ".join([str(_) for _ in collections])
+        string = f"{type(self).__name__}([{collections}])"
         if self._expression:
-            string = '*' + string
+            string = "*" + string
         return string
 
     ### PRIVATE METHODS ###
 
     def _coerce(self, collections):
-        prototype = (
-            PitchSegment,
-            PitchSet,
-            PitchClassSegment,
-            PitchClassSet,
-            )
+        prototype = (PitchSegment, PitchSet, PitchClassSegment, PitchClassSet)
         collections_ = []
         for item in collections or []:
             if isinstance(item, type(self)):
@@ -1331,7 +1312,7 @@ class CollectionList(collections_module.Sequence):
         elif item_class is abjad.NamedPitch:
             return abjad.NamedPitchClass
         else:
-            raise TypeError(f'only pitch or pc class: {item_class!r}.')
+            raise TypeError(f"only pitch or pc class: {item_class!r}.")
 
     def _initialize_collection(self, argument, prototype=None):
         items = argument
@@ -1348,11 +1329,8 @@ class CollectionList(collections_module.Sequence):
             elif item_class in (
                 abjad.NumberedPitchClass,
                 abjad.NamedPitchClass,
-                ):
-                return PitchClassSet(
-                    items=items,
-                    item_class=item_class,
-                    )
+            ):
+                return PitchClassSet(items=items, item_class=item_class)
             else:
                 raise TypeError(item_class)
         elif self.item_class is not None:
@@ -1361,26 +1339,19 @@ class CollectionList(collections_module.Sequence):
             elif item_class in (
                 abjad.NumberedPitchClass,
                 abjad.NamedPitchClass,
-                ):
-                return PitchClassSegment(
-                    items=items,
-                    item_class=item_class,
-                    )
+            ):
+                return PitchClassSegment(items=items, item_class=item_class)
             else:
                 raise TypeError(item_class)
         else:
             if isinstance(argument, str):
-                return PitchSegment(
-                    items=items,
-                    item_class=abjad.NamedPitch,
-                    )
+                return PitchSegment(items=items, item_class=abjad.NamedPitch)
             elif isinstance(argument, collections_module.Iterable):
                 return PitchSegment(
-                    items=items,
-                    item_class=abjad.NumberedPitch,
-                    )
+                    items=items, item_class=abjad.NumberedPitch
+                )
             else:
-                raise TypeError(f'only string or iterable: {argument!r}.')
+                raise TypeError(f"only string or iterable: {argument!r}.")
 
     @staticmethod
     def _to_baca_collection(collection):
@@ -1389,41 +1360,36 @@ class CollectionList(collections_module.Sequence):
             abjad.PitchClassSet,
             abjad.PitchSegment,
             abjad.PitchSet,
-            )
+        )
         assert isinstance(collection, abjad_prototype), repr(collection)
         baca_prototype = (
             PitchClassSegment,
             PitchClassSet,
             PitchSegment,
             PitchSet,
-            )
+        )
         if isinstance(collection, baca_prototype):
             pass
         elif isinstance(collection, abjad.PitchClassSegment):
             collection = PitchClassSegment(
-                items=collection,
-                item_class=collection.item_class,
-                )
+                items=collection, item_class=collection.item_class
+            )
         elif isinstance(collection, abjad.PitchClassSet):
             collection = PitchClassSet(
-                items=collection,
-                item_class=collection.item_class,
-                )
+                items=collection, item_class=collection.item_class
+            )
         elif isinstance(collection, abjad.PitchSegment):
             collection = PitchSegment(
-                items=collection,
-                item_class=collection.item_class,
-                )
+                items=collection, item_class=collection.item_class
+            )
         elif isinstance(collection, abjad.PitchSet):
             collection = PitchSet(
-                items=collection,
-                item_class=collection.item_class,
-                )
+                items=collection, item_class=collection.item_class
+            )
         elif isinstance(collection, abjad.PitchSet):
             collection = PitchSet(
-                items=collection,
-                item_class=collection.item_class,
-                )
+                items=collection, item_class=collection.item_class
+            )
         else:
             raise TypeError(collection)
         assert isinstance(collection, baca_prototype)
@@ -1600,9 +1566,8 @@ class CollectionList(collections_module.Sequence):
                 if isinstance(collection, abjad.PitchSegment):
                     collection = collection.to_pitch_classes()
                     collection = PitchClassSegment(
-                        items=collection,
-                        item_class=collection.item_class,
-                        )
+                        items=collection, item_class=collection.item_class
+                    )
                 collection = collection.arpeggiate_down()
             collections.append(collection)
         return abjad.new(self, collections=collections)
@@ -1645,9 +1610,8 @@ class CollectionList(collections_module.Sequence):
                 if isinstance(collection, abjad.PitchSegment):
                     collection = collection.to_pitch_classes()
                     collection = PitchClassSegment(
-                        items=collection,
-                        item_class=collection.item_class,
-                        )
+                        items=collection, item_class=collection.item_class
+                    )
                 collection = collection.arpeggiate_up()
             collections.append(collection)
         return abjad.new(self, collections=collections)
@@ -1851,10 +1815,8 @@ class CollectionList(collections_module.Sequence):
         Returns cursor.
         """
         return classes.Cursor(
-            cyclic=cyclic,
-            singletons=singletons,
-            source=self,
-            )
+            cyclic=cyclic, singletons=singletons, source=self
+        )
 
     def flatten(self):
         """
@@ -1922,7 +1884,7 @@ class CollectionList(collections_module.Sequence):
                         return True
                     known_pitch_classes.append(pitch_class)
         else:
-            raise ValueError(f'level must be 1 or -1: {level!r}.')
+            raise ValueError(f"level must be 1 or -1: {level!r}.")
         return False
 
     def has_duplicates(self, level=-1):
@@ -1997,7 +1959,7 @@ class CollectionList(collections_module.Sequence):
                         return True
                     known_items.append(item)
         else:
-            raise ValueError(f'level must be 0, 1 or -1: {level!r}.')
+            raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
         return False
 
     def has_repeat_pitch_classes(self, level=-1):
@@ -2036,7 +1998,7 @@ class CollectionList(collections_module.Sequence):
                         return True
                     previous_pitch_class = pitch_class
         else:
-            raise ValueError(f'level must be 0 or -1: {level!r}.')
+            raise ValueError(f"level must be 0 or -1: {level!r}.")
         return False
 
     def has_repeats(self, level=-1):
@@ -2111,7 +2073,7 @@ class CollectionList(collections_module.Sequence):
                         return True
                     previous_item = item
         else:
-            raise ValueError(f'level must be 0, 1 or -1: {level!r}.')
+            raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
         return False
 
     def helianthate(self, n=0, m=0):
@@ -2238,14 +2200,12 @@ class CollectionList(collections_module.Sequence):
         Returns sequence.
         """
         if isinstance(argument, abjad.Ratio):
-            message = 'implement ratio-partition at some point.'
+            message = "implement ratio-partition at some point."
             raise NotImplementedError(message)
         sequence = classes.Sequence(self)
         parts = sequence.partition_by_counts(
-            argument,
-            cyclic=cyclic,
-            overhang=overhang,
-            )
+            argument, cyclic=cyclic, overhang=overhang
+        )
         collection_lists = [abjad.new(self, collections=_) for _ in parts]
         if join:
             collections = [_.join()[0] for _ in collection_lists]
@@ -2314,8 +2274,8 @@ class CollectionList(collections_module.Sequence):
             result_item_count = len(result.flatten())
             quotient = result_item_count / self_item_count
             if quotient != int(quotient):
-                message = f'call reads {result_item_count} items;'
-                message += f' not a multiple of {self_item_count} items.'
+                message = f"call reads {result_item_count} items;"
+                message += f" not a multiple of {self_item_count} items."
                 raise ValueError(message)
         return result
 
@@ -2381,10 +2341,11 @@ class CollectionList(collections_module.Sequence):
                     items.append(item)
                 if items:
                     collection_ = self._initialize_collection(
-                        items, collection)
+                        items, collection
+                    )
                     collections_.append(collection_)
         else:
-            raise ValueError(f'level must be 1 or -1: {level!r}.')
+            raise ValueError(f"level must be 1 or -1: {level!r}.")
         return abjad.new(self, collections=collections_)
 
     def remove_duplicates(self, level=-1):
@@ -2442,7 +2403,7 @@ class CollectionList(collections_module.Sequence):
                     collection_ = self._initialize_collection(items)
                     collections_.append(collection_)
         else:
-            raise ValueError(f'level must be 0, 1 or -1: {level!r}.')
+            raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
         return abjad.new(self, collections=collections_)
 
     def remove_repeat_pitch_classes(self, level=-1):
@@ -2491,7 +2452,7 @@ class CollectionList(collections_module.Sequence):
                     collection_ = self._initialize_collection(items)
                     collections_.append(collection_)
         else:
-            raise ValueError(f'level must be 1 or -1: {level!r}.')
+            raise ValueError(f"level must be 1 or -1: {level!r}.")
         return abjad.new(self, collections=collections_)
 
     def remove_repeats(self, level=-1):
@@ -2547,7 +2508,7 @@ class CollectionList(collections_module.Sequence):
                     collection_ = self._initialize_collection(items)
                     collections_.append(collection_)
         else:
-            raise ValueError(f'level must be 0, 1 or -1: {level!r}.')
+            raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
         return abjad.new(self, collections=collections_)
 
     def repeat(self, n=1):
@@ -2648,12 +2609,8 @@ class CollectionList(collections_module.Sequence):
         return abjad.new(self, collections=collections)
 
     def space_down(
-        self,
-        bass=None,
-        pattern=None,
-        semitones=None,
-        soprano=None,
-        ):
+        self, bass=None, pattern=None, semitones=None, soprano=None
+    ):
         """
         Spaces collections down.
 
@@ -2675,20 +2632,12 @@ class CollectionList(collections_module.Sequence):
         for i, collection in enumerate(self):
             if pattern.matches_index(i, length):
                 collection = collection.space_down(
-                    bass=bass,
-                    semitones=semitones,
-                    soprano=soprano,
-                    )
+                    bass=bass, semitones=semitones, soprano=soprano
+                )
             collections.append(collection)
         return abjad.new(self, collections=collections)
 
-    def space_up(
-        self,
-        bass=None,
-        pattern=None,
-        semitones=None,
-        soprano=None,
-        ):
+    def space_up(self, bass=None, pattern=None, semitones=None, soprano=None):
         """
         Spaces collections up.
 
@@ -2710,10 +2659,8 @@ class CollectionList(collections_module.Sequence):
         for i, collection in enumerate(self):
             if pattern.matches_index(i, length):
                 collection = collection.space_up(
-                    bass=bass,
-                    semitones=semitones,
-                    soprano=soprano,
-                    )
+                    bass=bass, semitones=semitones, soprano=soprano
+                )
             collections.append(collection)
         return abjad.new(self, collections=collections)
 
@@ -2899,6 +2846,7 @@ class CollectionList(collections_module.Sequence):
             collections_.append(collection_)
         return abjad.new(self, collections=collections_)
 
+
 class Constellation(object):
     """
     Constellation.
@@ -2940,8 +2888,9 @@ class Constellation(object):
 
     def __init__(self, circuit, partitioned_generator_pitch_numbers):
         self._circuit = circuit
-        self._partitioned_generator_pitch_numbers = \
+        self._partitioned_generator_pitch_numbers = (
             partitioned_generator_pitch_numbers
+        )
         self._constellate_partitioned_generator_pitch_numbers()
         self._chord_duration = abjad.Duration(1, 4)
         self._chords = []
@@ -3012,14 +2961,14 @@ class Constellation(object):
             Constellation(180)
 
         """
-        return f'{type(self).__name__}({len(self)})'
+        return f"{type(self).__name__}({len(self)})"
 
     ### PRIVATE PROPERTIES ###
 
     @property
     def _color_map(self):
         pitches = self._partitioned_generator_pitch_numbers
-        colors = ['red', 'blue', 'green']
+        colors = ["red", "blue", "green"]
         return abjad.ColorMap(colors=colors, pitch_iterables=pitches)
 
     @property
@@ -3068,40 +3017,39 @@ class Constellation(object):
 
     def _constellate_partitioned_generator_pitch_numbers(self):
         self._pitch_number_lists = self.constellate(
-            self._partitioned_generator_pitch_numbers,
-            self.pitch_range,
-            )
+            self._partitioned_generator_pitch_numbers, self.pitch_range
+        )
 
     def _label_chord(self, chord):
         chord_number = self.get_number_of_chord(chord)
-        label = f'{self._constellation_number}-{chord_number}'
+        label = f"{self._constellation_number}-{chord_number}"
         markup = abjad.Markup(label)
         abjad.attach(markup, chord)
 
     def _make_lilypond_file_and_score_from_chords(self, chords):
         score, treble, bass = abjad.Score.make_piano_score(
-            leaves=chords,
-            sketch=True,
-            )
+            leaves=chords, sketch=True
+        )
         score.override.text_script.staff_padding = 10
         score.set.proportional_notation_duration = abjad.SchemeMoment((1, 30))
         lilypond_file = abjad.LilyPondFile.new(score)
-        lilypond_file.default_paper_size = 'letter', 'landscape'
+        lilypond_file.default_paper_size = "letter", "landscape"
         lilypond_file.global_staff_size = 18
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.ragged_right = True
         lilypond_file.paper_block.system_system_spacing = abjad.SchemeVector(
-            abjad.SchemePair('basic_distance', 0),
-            abjad.SchemePair('minimum_distance', 0),
-            abjad.SchemePair('padding', 12),
-            abjad.SchemePair('stretchability', 0),
-            )
+            abjad.SchemePair("basic_distance", 0),
+            abjad.SchemePair("minimum_distance", 0),
+            abjad.SchemePair("padding", 12),
+            abjad.SchemePair("stretchability", 0),
+        )
         lilypond_file.paper_block.top_margin = 24
         return lilypond_file, score
 
     def _show_chords(self, chords):
-        lilypond_file, score = \
-            self._make_lilypond_file_and_score_from_chords(chords)
+        lilypond_file, score = self._make_lilypond_file_and_score_from_chords(
+            chords
+        )
         abjad.show(lilypond_file, strict=89)
 
     ### PUBLIC PROPERTIES ###
@@ -3243,7 +3191,7 @@ class Constellation(object):
         ``range``.
         """
         if not isinstance(range, abjad.PitchRange):
-            raise TypeError(f'pitch range only: {range!r}.')
+            raise TypeError(f"pitch range only: {range!r}.")
         transposition_list = []
         for cell in cells:
             transpositions = range.list_octave_transpositions(cell)
@@ -3292,7 +3240,7 @@ class Constellation(object):
         for i, pitch_number_list in enumerate(self):
             if pitch_number_list == pitch_numbers:
                 return i + 1
-        raise ValueError(f'{chord} not in {self}')
+        raise ValueError(f"{chord} not in {self}")
 
     def make_chords(self):
         result = []
@@ -3342,6 +3290,7 @@ class Constellation(object):
         self._label_chord(pivot)
         self._show_chords([pivot])
 
+
 class ConstellationCircuit(object):
     """
     Constellation circuit.
@@ -3378,7 +3327,7 @@ class ConstellationCircuit(object):
         [[-10, -2, 0, 5], [-5, 3, 13, 16], [11, 30, 32, 45]],
         [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]],
         [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]],
-        ]
+    ]
 
     ### INITIALIZER ###
 
@@ -3425,7 +3374,7 @@ class ConstellationCircuit(object):
 
         Returns string.
         """
-        return f'{type(self).__name__}({len(self)})'
+        return f"{type(self).__name__}({len(self)})"
 
     ### PRIVATE PROPERTIES ###
 
@@ -3457,10 +3406,7 @@ class ConstellationCircuit(object):
         self._constellations = []
         enumeration = enumerate(self._partitioned_generator_pnls)
         for i, partitioned_generator_pnl in enumeration:
-            constellation = Constellation(
-                self,
-                partitioned_generator_pnl,
-                )
+            constellation = Constellation(self, partitioned_generator_pnl)
             self._constellations.append(constellation)
 
     def _illustrate_chords(self, chords):
@@ -3469,10 +3415,7 @@ class ConstellationCircuit(object):
         abjad.override(score).text_script.staff_padding = 10
         moment = abjad.SchemeMoment((1, 30))
         abjad.setting(score).proportional_notation_duration = moment
-        lilypond_file = abjad.LilyPondFile.new(
-            score,
-            global_staff_size=18,
-            )
+        lilypond_file = abjad.LilyPondFile.new(score, global_staff_size=18)
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.ragged_right = True
         vector = abjad.SpacingVector(0, 0, 12, 0)
@@ -3911,7 +3854,8 @@ class ConstellationCircuit(object):
 
         Returns constellation circuit.
         """
-        return class_(class_.CC1, abjad.PitchRange('[A0, C8]'))
+        return class_(class_.CC1, abjad.PitchRange("[A0, C8]"))
+
 
 class DesignMaker(object):
     """
@@ -3928,9 +3872,7 @@ class DesignMaker(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_result',
-        )
+    __slots__ = ("_result",)
 
     ### INITIALIZER ###
 
@@ -3961,18 +3903,18 @@ class DesignMaker(object):
     def _apply_operator(segment, operator):
         assert isinstance(segment, PitchClassSegment)
         assert isinstance(operator, str), repr(operator)
-        if operator.startswith('T'):
+        if operator.startswith("T"):
             index = int(operator[1:])
             segment = segment.transpose(index)
-        elif operator == 'I':
+        elif operator == "I":
             segment = segment.invert()
-        elif operator.startswith('M'):
+        elif operator.startswith("M"):
             index = int(operator[1:])
             segment = segment.multiply(index)
-        elif operator == 'alpha':
+        elif operator == "alpha":
             segment = segment.alpha()
         else:
-            raise Exception(f'unrecognized operator: {operator!r}.')
+            raise Exception(f"unrecognized operator: {operator!r}.")
         return segment
 
     @staticmethod
@@ -3980,7 +3922,7 @@ class DesignMaker(object):
         leaves = design.get_payload()
         for leaf_1, leaf_2 in abjad.Sequence(leaves).nwise():
             if leaf_1 == leaf_2:
-                raise Exception(f'duplicate {leaf_1!r}.')
+                raise Exception(f"duplicate {leaf_1!r}.")
 
     ### PUBLIC METHODS ###
 
@@ -4023,12 +3965,11 @@ class DesignMaker(object):
             segment = self._apply_operator(segment, operator)
         sequence = abjad.sequence(segment)
         parts = sequence.partition_by_counts(
-            counts,
-            cyclic=True,
-            overhang=True,
-            )
+            counts, cyclic=True, overhang=True
+        )
         parts = [PitchClassSegment(_) for _ in parts]
         self._result.extend(parts)
+
 
 class HarmonicSeries(object):
     r"""
@@ -4116,16 +4057,13 @@ class HarmonicSeries(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_fundamental',
-        )
+    __slots__ = ("_fundamental",)
 
     ### INITIALIZER ###
 
     def __init__(
-        self,
-        fundamental: typing.Union[str, abjad.NamedPitch] = 'C1',
-        ) -> None:
+        self, fundamental: typing.Union[str, abjad.NamedPitch] = "C1"
+    ) -> None:
         fundamental = abjad.NamedPitch(fundamental)
         self._fundamental = fundamental
 
@@ -4222,7 +4160,7 @@ class HarmonicSeries(object):
             staff.append(note)
             deviation = partial.deviation
             if 0 < deviation:
-                markup = abjad.Markup(f'+{deviation}', direction=abjad.Up)
+                markup = abjad.Markup(f"+{deviation}", direction=abjad.Up)
                 abjad.attach(markup, note)
             elif deviation < 0:
                 markup = abjad.Markup(deviation, direction=abjad.Up)
@@ -4230,11 +4168,11 @@ class HarmonicSeries(object):
             markup = abjad.Markup(n, direction=abjad.Down)
             abjad.attach(markup, note)
         notes = abjad.select(staff).notes()
-        if notes[0].written_pitch < abjad.NamedPitch('C4'):
-            abjad.attach(abjad.Clef('bass'), staff[0])
+        if notes[0].written_pitch < abjad.NamedPitch("C4"):
+            abjad.attach(abjad.Clef("bass"), staff[0])
             for note in notes[1:]:
-                if abjad.NamedPitch('C4') <= note.written_pitch:
-                    abjad.attach(abjad.Clef('treble'), note)
+                if abjad.NamedPitch("C4") <= note.written_pitch:
+                    abjad.attach(abjad.Clef("treble"), note)
                     break
         abjad.override(staff).bar_line.stencil = False
         abjad.override(staff).stem.transparent = True
@@ -4264,7 +4202,7 @@ class HarmonicSeries(object):
 
     ### PUBLIC METHODS ###
 
-    def partial(self, n: int) -> 'Partial':
+    def partial(self, n: int) -> "Partial":
         """
         Gets partial ``n``.
 
@@ -4274,10 +4212,8 @@ class HarmonicSeries(object):
             Partial(fundamental=NamedPitch('c,'), number=7)
 
         """
-        return Partial(
-            fundamental=self.fundamental,
-            number=n,
-            )
+        return Partial(fundamental=self.fundamental, number=n)
+
 
 class Partial(object):
     """
@@ -4292,20 +4228,15 @@ class Partial(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_approximation',
-        '_deviation',
-        '_fundamental',
-        '_number',
-        )
+    __slots__ = ("_approximation", "_deviation", "_fundamental", "_number")
 
     ### INITIALIZER ###
 
     def __init__(
         self,
-        fundamental: typing.Union[str, abjad.NamedPitch] = 'C1',
+        fundamental: typing.Union[str, abjad.NamedPitch] = "C1",
         number: int = 1,
-        ) -> None:
+    ) -> None:
         fundamental = abjad.NamedPitch(fundamental)
         self._fundamental = fundamental
         assert isinstance(number, int), repr(number)
@@ -4383,6 +4314,7 @@ class Partial(object):
         """
         return self._number
 
+
 class PitchClassSegment(abjad.PitchClassSegment):
     r"""
     Pitch-class segment.
@@ -4439,8 +4371,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        )
+    __slots__ = ()
 
     ### SPECIAL METHODS ###
 
@@ -4462,14 +4393,15 @@ class PitchClassSegment(abjad.PitchClassSegment):
             True
 
         """
-        if (not issubclass(type(argument), type(self)) and
-            not issubclass(type(self), type(argument))):
+        if not issubclass(type(argument), type(self)) and not issubclass(
+            type(self), type(argument)
+        ):
             return False
         return self._collection == argument._collection
 
     ### PUBLIC METHODS ###
 
-    @abjad.Signature(is_operator=True, method_name='A')
+    @abjad.Signature(is_operator=True, method_name="A")
     def alpha(self):
         r"""
         Gets alpha transform of segment.
@@ -4766,10 +4698,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         Returns pitch-class set.
         """
-        return PitchClassSet(
-            items=self,
-            item_class=self.item_class,
-            )
+        return PitchClassSet(items=self, item_class=self.item_class)
 
     def get_matching_transforms(
         self,
@@ -4779,7 +4708,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         retrograde=False,
         rotation=False,
         transposition=False,
-        ):
+    ):
         r"""
         Gets transforms of segment that match ``segment_2``.
 
@@ -4860,7 +4789,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             retrograde=retrograde,
             rotation=rotation,
             transposition=transposition,
-            )
+        )
         for operator, transform in transforms:
             if transform == segment_2:
                 result.append((operator, transform))
@@ -4874,7 +4803,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         rotation=False,
         show_identity_operators=False,
         transposition=False,
-        ):
+    ):
         r"""
         Gets transforms of ``segment``.
 
@@ -5469,12 +5398,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
             direction=abjad.Down,
             minimum_semitones=semitones,
             soprano=soprano,
-            )
+        )
         segments = specifier([self])
         assert len(segments) == 1, repr(segments)
         segment = segments[0]
         if not isinstance(segment, PitchSegment):
-            raise TypeError(f'pitch segment only: {segment!r}.')
+            raise TypeError(f"pitch segment only: {segment!r}.")
         return segment
 
     def space_up(self, bass=None, semitones=None, soprano=None):
@@ -5551,12 +5480,13 @@ class PitchClassSegment(abjad.PitchClassSegment):
             direction=abjad.Up,
             minimum_semitones=semitones,
             soprano=soprano,
-            )
+        )
         segments = specifier([self])
         assert len(segments) == 1, repr(segments)
         segment = segments[0]
         assert isinstance(segment, PitchSegment)
         return segment
+
 
 class PitchClassSet(abjad.PitchClassSet):
     r"""
@@ -5585,8 +5515,7 @@ class PitchClassSet(abjad.PitchClassSet):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        )
+    __slots__ = ()
 
     ### SPECIAL METHODS ###
 
@@ -5608,8 +5537,9 @@ class PitchClassSet(abjad.PitchClassSet):
             True
 
         """
-        if (not issubclass(type(argument), type(self)) and
-            not issubclass(type(self), type(argument))):
+        if not issubclass(type(argument), type(self)) and not issubclass(
+            type(self), type(argument)
+        ):
             return False
         return self._collection == argument._collection
 
@@ -5653,10 +5583,8 @@ class PitchClassSet(abjad.PitchClassSet):
             item_class = abjad.NumberedPitch
         else:
             raise TypeError(self.item_class)
-        return PitchSet(
-            items=self,
-            item_class=item_class,
-            )
+        return PitchSet(items=self, item_class=item_class)
+
 
 class PitchSegment(abjad.PitchSegment):
     r"""
@@ -5786,12 +5714,10 @@ class PitchSegment(abjad.PitchSegment):
         Returns new segment.
         """
         from .pitchcommands import RegisterToOctaveCommand
+
         # TODO: remove reference to RegisterToOctaveCommand;
         #       implement as segment-only operation
-        command = RegisterToOctaveCommand(
-            anchor=abjad.Down,
-            octave_number=n,
-            )
+        command = RegisterToOctaveCommand(anchor=abjad.Down, octave_number=n)
         selection = self._to_selection()
         command([selection])
         segment = PitchSegment.from_selection(selection)
@@ -5871,12 +5797,10 @@ class PitchSegment(abjad.PitchSegment):
         Returns new segment.
         """
         from .pitchcommands import RegisterToOctaveCommand
+
         # TODO: remove reference to RegisterToOctaveCommand;
         #       implement as segment-only operation
-        command = RegisterToOctaveCommand(
-            anchor=abjad.Center,
-            octave_number=n,
-            )
+        command = RegisterToOctaveCommand(anchor=abjad.Center, octave_number=n)
         selection = self._to_selection()
         command([selection])
         segment = PitchSegment.from_selection(selection)
@@ -5919,10 +5843,7 @@ class PitchSegment(abjad.PitchSegment):
 
         Returns pitch set.
         """
-        return PitchSet(
-            items=self,
-            item_class=self.item_class,
-            )
+        return PitchSet(items=self, item_class=self.item_class)
 
     def soprano_to_octave(self, n=4):
         r"""
@@ -5998,23 +5919,16 @@ class PitchSegment(abjad.PitchSegment):
         Returns new segment.
         """
         from .pitchcommands import RegisterToOctaveCommand
+
         # TODO: remove reference to RegisterToOctaveCommand;
         #       implement as segment-only operation
-        command = RegisterToOctaveCommand(
-            anchor=abjad.Up,
-            octave_number=n,
-            )
+        command = RegisterToOctaveCommand(anchor=abjad.Up, octave_number=n)
         selection = self._to_selection()
         command([selection])
         segment = PitchSegment.from_selection(selection)
         return abjad.new(self, items=segment)
 
-    def space_down(
-        self,
-        bass=None,
-        semitones=None,
-        soprano=None,
-        ):
+    def space_down(self, bass=None, semitones=None, soprano=None):
         r"""
         Spaces pitch segment down.
 
@@ -6145,19 +6059,14 @@ class PitchSegment(abjad.PitchSegment):
             direction=abjad.Down,
             minimum_semitones=semitones,
             soprano=soprano,
-            )
+        )
         result = specifier([self])
         assert isinstance(result, CollectionList), repr(result)
         assert len(result) == 1, repr(result)
         segment = result[0]
         return segment
 
-    def space_up(
-        self,
-        bass=None,
-        semitones=None,
-        soprano=None,
-        ):
+    def space_up(self, bass=None, semitones=None, soprano=None):
         r"""
         Spaces pitch segment up.
 
@@ -6288,7 +6197,7 @@ class PitchSegment(abjad.PitchSegment):
             direction=abjad.Up,
             minimum_semitones=semitones,
             soprano=soprano,
-            )
+        )
         result = specifier([self])
         assert isinstance(result, CollectionList), repr(result)
         assert len(result) == 1, repr(result)
@@ -6401,6 +6310,7 @@ class PitchSegment(abjad.PitchSegment):
         lower = abjad.new(self, items=lower)
         return upper, lower
 
+
 class PitchSet(abjad.PitchSet):
     r"""
     Pitch set.
@@ -6443,8 +6353,7 @@ class PitchSet(abjad.PitchSet):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        )
+    __slots__ = ()
 
     ### SPECIAL METHODS ###
 
@@ -6466,19 +6375,15 @@ class PitchSet(abjad.PitchSet):
             True
 
         """
-        if (not issubclass(type(argument), type(self)) and
-            not issubclass(type(self), type(argument))):
+        if not issubclass(type(argument), type(self)) and not issubclass(
+            type(self), type(argument)
+        ):
             return False
         return self._collection == argument._collection
 
     ### PUBLIC METHODS ###
 
-    def space_down(
-        self,
-        bass=None,
-        semitones=None,
-        soprano=None,
-        ):
+    def space_down(self, bass=None, semitones=None, soprano=None):
         r"""
         Spaces pitch set down.
 
@@ -6601,19 +6506,14 @@ class PitchSet(abjad.PitchSet):
             direction=abjad.Down,
             minimum_semitones=semitones,
             soprano=soprano,
-            )
+        )
         result = specifier([self])
         assert isinstance(result, CollectionList), repr(result)
         assert len(result) == 1, repr(result)
         segment = result[0]
         return segment
 
-    def space_up(
-        self,
-        bass=None,
-        semitones=None,
-        soprano=None,
-        ):
+    def space_up(self, bass=None, semitones=None, soprano=None):
         r"""
         Spaces pitch set up.
 
@@ -6736,7 +6636,7 @@ class PitchSet(abjad.PitchSet):
             direction=abjad.Up,
             minimum_semitones=semitones,
             soprano=soprano,
-            )
+        )
         result = specifier([self])
         assert isinstance(result, CollectionList), repr(result)
         assert len(result) == 1, repr(result)
@@ -6764,10 +6664,8 @@ class PitchSet(abjad.PitchSet):
             item_class = abjad.NamedPitchClass
         else:
             raise TypeError(self.item_class)
-        return PitchClassSet(
-            items=self,
-            item_class=item_class,
-            )
+        return PitchClassSet(items=self, item_class=item_class)
+
 
 class PitchTree(classes.Tree):
     r"""
@@ -7358,172 +7256,162 @@ class PitchTree(classes.Tree):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        )
+    __slots__ = ()
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        items=None,
-        *,
-        item_class=None,
-        ):
+    def __init__(self, items=None, *, item_class=None):
         item_class = item_class or abjad.NumberedPitch
-        classes.Tree.__init__(
-            self,
-            items=items,
-            item_class=item_class,
-            )
+        classes.Tree.__init__(self, items=items, item_class=item_class)
 
     ### SPECIAL METHODS ###
 
-#    def __graph__(self, **keywords):
-#        r"""
-#        Graphs pitch tree.
-#
-#        ..  container:: example
-#
-#            Graphs numbered pitch tree:
-#
-#            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-#            >>> tree = PitchTree(items=items)
-#
-#            >>> graph(tree) # doctest: +SKIP
-#
-#            ..  docs::
-#
-#                >>> tree_graph = tree.__graph__()
-#                >>> abjad.f(tree_graph, strict=89)
-#                digraph G {
-#                    graph [bgcolor=transparent,
-#                        truecolor=true];
-#                    node_0 [label="",
-#                        shape=circle];
-#                    node_1 [label="",
-#                        shape=circle];
-#                    node_2 [label="4",
-#                        shape=box];
-#                    node_3 [label="6",
-#                        shape=box];
-#                    node_4 [label="10",
-#                        shape=box];
-#                    node_5 [label="",
-#                        shape=circle];
-#                    node_6 [label="9",
-#                        shape=box];
-#                    node_7 [label="7",
-#                        shape=box];
-#                    node_8 [label="8",
-#                        shape=box];
-#                    node_9 [label="11",
-#                        shape=box];
-#                    node_10 [label="9",
-#                        shape=box];
-#                    node_11 [label="1",
-#                        shape=box];
-#                    node_12 [label="",
-#                        shape=circle];
-#                    node_13 [label="0",
-#                        shape=box];
-#                    node_14 [label="2",
-#                        shape=box];
-#                    node_15 [label="3",
-#                        shape=box];
-#                    node_16 [label="5",
-#                        shape=box];
-#                    node_0 -> node_1;
-#                    node_0 -> node_5;
-#                    node_0 -> node_12;
-#                    node_1 -> node_2;
-#                    node_1 -> node_3;
-#                    node_1 -> node_4;
-#                    node_5 -> node_6;
-#                    node_5 -> node_7;
-#                    node_5 -> node_8;
-#                    node_5 -> node_9;
-#                    node_5 -> node_10;
-#                    node_5 -> node_11;
-#                    node_12 -> node_13;
-#                    node_12 -> node_14;
-#                    node_12 -> node_15;
-#                    node_12 -> node_16;
-#                }
-#
-#        ..  container:: example
-#
-#            Graphs named pitch tree:
-#
-#            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-#            >>> tree = PitchTree(
-#            ...     items=items,
-#            ...     item_class=abjad.NamedPitch,
-#            ...     )
-#
-#            >>> graph(tree) # doctest: +SKIP
-#
-#            ..  docs::
-#
-#                >>> tree_graph = tree.__graph__()
-#                >>> abjad.f(tree_graph, strict=89)
-#                digraph G {
-#                    graph [bgcolor=transparent,
-#                        truecolor=true];
-#                    node_0 [label="",
-#                        shape=circle];
-#                    node_1 [label="",
-#                        shape=circle];
-#                    node_2 [label="e'",
-#                        shape=box];
-#                    node_3 [label="fs'",
-#                        shape=box];
-#                    node_4 [label="bf'",
-#                        shape=box];
-#                    node_5 [label="",
-#                        shape=circle];
-#                    node_6 [label="a'",
-#                        shape=box];
-#                    node_7 [label="g'",
-#                        shape=box];
-#                    node_8 [label="af'",
-#                        shape=box];
-#                    node_9 [label="b'",
-#                        shape=box];
-#                    node_10 [label="a'",
-#                        shape=box];
-#                    node_11 [label="cs'",
-#                        shape=box];
-#                    node_12 [label="",
-#                        shape=circle];
-#                    node_13 [label="c'",
-#                        shape=box];
-#                    node_14 [label="d'",
-#                        shape=box];
-#                    node_15 [label="ef'",
-#                        shape=box];
-#                    node_16 [label="f'",
-#                        shape=box];
-#                    node_0 -> node_1;
-#                    node_0 -> node_5;
-#                    node_0 -> node_12;
-#                    node_1 -> node_2;
-#                    node_1 -> node_3;
-#                    node_1 -> node_4;
-#                    node_5 -> node_6;
-#                    node_5 -> node_7;
-#                    node_5 -> node_8;
-#                    node_5 -> node_9;
-#                    node_5 -> node_10;
-#                    node_5 -> node_11;
-#                    node_12 -> node_13;
-#                    node_12 -> node_14;
-#                    node_12 -> node_15;
-#                    node_12 -> node_16;
-#                }
-#
-#        Returns Graphviz graph.
-#        """
-#        return super().__graph__(**keywords)
+    #    def __graph__(self, **keywords):
+    #        r"""
+    #        Graphs pitch tree.
+    #
+    #        ..  container:: example
+    #
+    #            Graphs numbered pitch tree:
+    #
+    #            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
+    #            >>> tree = PitchTree(items=items)
+    #
+    #            >>> graph(tree) # doctest: +SKIP
+    #
+    #            ..  docs::
+    #
+    #                >>> tree_graph = tree.__graph__()
+    #                >>> abjad.f(tree_graph, strict=89)
+    #                digraph G {
+    #                    graph [bgcolor=transparent,
+    #                        truecolor=true];
+    #                    node_0 [label="",
+    #                        shape=circle];
+    #                    node_1 [label="",
+    #                        shape=circle];
+    #                    node_2 [label="4",
+    #                        shape=box];
+    #                    node_3 [label="6",
+    #                        shape=box];
+    #                    node_4 [label="10",
+    #                        shape=box];
+    #                    node_5 [label="",
+    #                        shape=circle];
+    #                    node_6 [label="9",
+    #                        shape=box];
+    #                    node_7 [label="7",
+    #                        shape=box];
+    #                    node_8 [label="8",
+    #                        shape=box];
+    #                    node_9 [label="11",
+    #                        shape=box];
+    #                    node_10 [label="9",
+    #                        shape=box];
+    #                    node_11 [label="1",
+    #                        shape=box];
+    #                    node_12 [label="",
+    #                        shape=circle];
+    #                    node_13 [label="0",
+    #                        shape=box];
+    #                    node_14 [label="2",
+    #                        shape=box];
+    #                    node_15 [label="3",
+    #                        shape=box];
+    #                    node_16 [label="5",
+    #                        shape=box];
+    #                    node_0 -> node_1;
+    #                    node_0 -> node_5;
+    #                    node_0 -> node_12;
+    #                    node_1 -> node_2;
+    #                    node_1 -> node_3;
+    #                    node_1 -> node_4;
+    #                    node_5 -> node_6;
+    #                    node_5 -> node_7;
+    #                    node_5 -> node_8;
+    #                    node_5 -> node_9;
+    #                    node_5 -> node_10;
+    #                    node_5 -> node_11;
+    #                    node_12 -> node_13;
+    #                    node_12 -> node_14;
+    #                    node_12 -> node_15;
+    #                    node_12 -> node_16;
+    #                }
+    #
+    #        ..  container:: example
+    #
+    #            Graphs named pitch tree:
+    #
+    #            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
+    #            >>> tree = PitchTree(
+    #            ...     items=items,
+    #            ...     item_class=abjad.NamedPitch,
+    #            ...     )
+    #
+    #            >>> graph(tree) # doctest: +SKIP
+    #
+    #            ..  docs::
+    #
+    #                >>> tree_graph = tree.__graph__()
+    #                >>> abjad.f(tree_graph, strict=89)
+    #                digraph G {
+    #                    graph [bgcolor=transparent,
+    #                        truecolor=true];
+    #                    node_0 [label="",
+    #                        shape=circle];
+    #                    node_1 [label="",
+    #                        shape=circle];
+    #                    node_2 [label="e'",
+    #                        shape=box];
+    #                    node_3 [label="fs'",
+    #                        shape=box];
+    #                    node_4 [label="bf'",
+    #                        shape=box];
+    #                    node_5 [label="",
+    #                        shape=circle];
+    #                    node_6 [label="a'",
+    #                        shape=box];
+    #                    node_7 [label="g'",
+    #                        shape=box];
+    #                    node_8 [label="af'",
+    #                        shape=box];
+    #                    node_9 [label="b'",
+    #                        shape=box];
+    #                    node_10 [label="a'",
+    #                        shape=box];
+    #                    node_11 [label="cs'",
+    #                        shape=box];
+    #                    node_12 [label="",
+    #                        shape=circle];
+    #                    node_13 [label="c'",
+    #                        shape=box];
+    #                    node_14 [label="d'",
+    #                        shape=box];
+    #                    node_15 [label="ef'",
+    #                        shape=box];
+    #                    node_16 [label="f'",
+    #                        shape=box];
+    #                    node_0 -> node_1;
+    #                    node_0 -> node_5;
+    #                    node_0 -> node_12;
+    #                    node_1 -> node_2;
+    #                    node_1 -> node_3;
+    #                    node_1 -> node_4;
+    #                    node_5 -> node_6;
+    #                    node_5 -> node_7;
+    #                    node_5 -> node_8;
+    #                    node_5 -> node_9;
+    #                    node_5 -> node_10;
+    #                    node_5 -> node_11;
+    #                    node_12 -> node_13;
+    #                    node_12 -> node_14;
+    #                    node_12 -> node_15;
+    #                    node_12 -> node_16;
+    #                }
+    #
+    #        Returns Graphviz graph.
+    #        """
+    #        return super().__graph__(**keywords)
 
     def __illustrate__(
         self,
@@ -7534,8 +7422,8 @@ class PitchTree(classes.Tree):
         global_staff_size=16,
         markup_direction=abjad.Up,
         set_classes=False,
-        **keywords
-        ):
+        **keywords,
+    ):
         r"""
         Illustrates pitch tree.
 
@@ -7791,9 +7679,11 @@ class PitchTree(classes.Tree):
 
         Returns LilyPond file.
         """
-        assert cell_indices in (True, False, abjad.Up, abjad.Down), repr(cell_indices)
+        assert cell_indices in (True, False, abjad.Up, abjad.Down), repr(
+            cell_indices
+        )
         voice = abjad.Voice()
-        voice.consists_commands.append('Horizontal_bracket_engraver')
+        voice.consists_commands.append("Horizontal_bracket_engraver")
         staff = abjad.Staff([voice])
         score = abjad.Score([staff])
         leaf_list_stack = []
@@ -7804,7 +7694,7 @@ class PitchTree(classes.Tree):
             after_cell_spacing=after_cell_spacing,
             brackets=brackets,
             markup_direction=markup_direction,
-            )
+        )
         assert leaf_list_stack == [], repr(leaf_list_stack)
         first_leaf = abjad.inspect(voice).leaf(n=0)
         abjad.attach(abjad.TimeSignature((1, 8)), first_leaf)
@@ -7821,42 +7711,42 @@ class PitchTree(classes.Tree):
         abjad.override(score).text_script.staff_padding = 2
         abjad.override(score).time_signature.stencil = False
         final_leaf = abjad.inspect(score).leaf(-1)
-        string = r'\override Score.BarLine.transparent = ##f'
-        literal = abjad.LilyPondLiteral(string, 'after')
+        string = r"\override Score.BarLine.transparent = ##f"
+        literal = abjad.LilyPondLiteral(string, "after")
         abjad.attach(literal, final_leaf)
         moment = abjad.SchemeMoment((1, 16))
         abjad.setting(score).proportional_notation_duration = moment
         lilypond_file = abjad.LilyPondFile.new(
             date_time_token=False,
             global_staff_size=global_staff_size,
-            includes=['/Users/trevorbaca/baca/lilypond/baca.ily'],
+            includes=["/Users/trevorbaca/baca/lilypond/baca.ily"],
             music=score,
-            )
+        )
         abjad.override(score).spacing_spanner.strict_grace_spacing = True
         abjad.override(score).spacing_spanner.strict_note_spacing = True
         abjad.override(score).spacing_spanner.uniform_stretching = True
         abjad.override(score).text_script.X_extent = False
-        if 'title' in keywords:
-            title = keywords.get('title')
+        if "title" in keywords:
+            title = keywords.get("title")
             if not isinstance(title, abjad.Markup):
                 title = abjad.Markup(title)
             lilypond_file.header_block.title = title
-        if 'subtitle' in keywords:
-            markup = abjad.Markup(keywords.get('subtitle'))
+        if "subtitle" in keywords:
+            markup = abjad.Markup(keywords.get("subtitle"))
             lilypond_file.header_block.subtitle = markup
-        string = r'\accidentalStyle dodecaphonic'
+        string = r"\accidentalStyle dodecaphonic"
         literal = abjad.LilyPondLiteral(string)
         lilypond_file.layout_block.items.append(literal)
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.line_width = 287.5
         lilypond_file.layout_block.ragged_right = True
-        string = 'markup-system-spacing.padding = 8'
+        string = "markup-system-spacing.padding = 8"
         literal = abjad.LilyPondLiteral(string)
         lilypond_file.paper_block.items.append(literal)
-        string = 'system-system-spacing.padding = 10'
+        string = "system-system-spacing.padding = 10"
         literal = abjad.LilyPondLiteral(string)
         lilypond_file.paper_block.items.append(literal)
-        string = 'top-markup-spacing.padding = 4'
+        string = "top-markup-spacing.padding = 4"
         literal = abjad.LilyPondLiteral(string)
         lilypond_file.paper_block.items.append(literal)
         return lilypond_file
@@ -7868,7 +7758,7 @@ class PitchTree(classes.Tree):
             return
         leaf_groups.sort(
             key=lambda _: abjad.inspect(_[1][0]).timespan().start_offset
-            )
+        )
         if cell_indices is True:
             direction = abjad.Up
         else:
@@ -7890,22 +7780,18 @@ class PitchTree(classes.Tree):
             return
         leaves = abjad.iterate(voice).components(prototype=abjad.Note)
         pairs = abjad.Sequence(leaves).nwise(n=2, wrapped=True)
-        current_color = 'red'
+        current_color = "red"
         for left, right in pairs:
             if not left.written_pitch == right.written_pitch:
                 continue
             abjad.label(left).color_leaves(current_color)
             abjad.label(right).color_leaves(current_color)
-            if current_color == 'red':
-                current_color = 'blue'
+            if current_color == "red":
+                current_color = "blue"
             else:
-                current_color = 'red'
+                current_color = "red"
 
-    def _label_set_classes(
-        self,
-        set_classes,
-        leaf_groups,
-        ):
+    def _label_set_classes(self, set_classes, leaf_groups):
         if not set_classes:
             return
         for leaf_group in leaf_groups:
@@ -7914,15 +7800,10 @@ class PitchTree(classes.Tree):
             if not pitch_class_set:
                 continue
             set_class = abjad.SetClass.from_pitch_class_set(
-                pitch_class_set,
-                lex_rank=True,
-                transposition_only=True,
-                )
+                pitch_class_set, lex_rank=True, transposition_only=True
+            )
             string = str(set_class)
-            markup = abjad.Markup(
-                string,
-                literal=True,
-                )
+            markup = abjad.Markup(string, literal=True)
             label = abjad.Markup.line([markup], direction=abjad.Up)
             if label is not None:
                 label = label.small()
@@ -7937,7 +7818,7 @@ class PitchTree(classes.Tree):
         after_cell_spacing=False,
         brackets=True,
         markup_direction=None,
-        ):
+    ):
         leaf_groups = []
         if len(node):
             if node._get_level():
@@ -7950,7 +7831,7 @@ class PitchTree(classes.Tree):
                     after_cell_spacing=after_cell_spacing,
                     brackets=brackets,
                     markup_direction=markup_direction,
-                    )
+                )
                 leaf_groups.extend(leaf_groups_)
             if node._get_level():
                 first_note = leaf_list_stack[-1][0]
@@ -7962,9 +7843,9 @@ class PitchTree(classes.Tree):
                     leaf = abjad.inspect(leaf).leaf(n=1)
                 leaves_with_skips.append(leaf)
                 negative_level = node._get_level(negative=True)
-                #spanner = PitchTreeSpanner(level=negative_level)
-                #leaves_with_skips = abjad.select(leaves_with_skips)
-                #abjad.attach(spanner, leaves_with_skips)
+                # spanner = PitchTreeSpanner(level=negative_level)
+                # leaves_with_skips = abjad.select(leaves_with_skips)
+                # abjad.attach(spanner, leaves_with_skips)
                 if brackets:
                     abjad.horizontal_bracket(leaves_with_skips)
                 selection = abjad.select(leaves_with_skips)
@@ -7973,19 +7854,15 @@ class PitchTree(classes.Tree):
                 leaf_list_stack.pop()
         else:
             assert node._payload is not None
-            note = abjad.Note(
-                node._payload,
-                abjad.Duration(1, 8),
-                )
+            note = abjad.Note(node._payload, abjad.Duration(1, 8))
             if node._is_leftmost_leaf():
                 for parent in node._get_parentage():
                     if parent._expression is not None:
                         node_markup = parent._expression.get_markup()
                         if node_markup is not None:
                             node_markup = abjad.new(
-                                node_markup,
-                                direction=markup_direction,
-                                )
+                                node_markup, direction=markup_direction
+                            )
                             abjad.attach(node_markup, note)
             voice.append(note)
             if node._is_rightmost_leaf():
@@ -9200,6 +9077,7 @@ class PitchTree(classes.Tree):
         operator = abjad.Transposition(n=n)
         return self._apply_to_leaves_and_emit_new_tree(operator)
 
+
 class Registration(object):
     """
     Registration.
@@ -9229,18 +9107,13 @@ class Registration(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_components',
-        )
+    __slots__ = ("_components",)
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        components=None,
-        ):
+    def __init__(self, components=None):
         components_ = []
         for component in components or []:
             if isinstance(component, RegistrationComponent):
@@ -9312,7 +9185,7 @@ class Registration(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __format__(self, format_specification='') -> str:
+    def __format__(self, format_specification="") -> str:
         """
         Formats Abjad object.
         """
@@ -9326,7 +9199,7 @@ class Registration(object):
         try:
             result = hash(hash_values)
         except TypeError:
-            raise TypeError(f'unhashable type: {self}')
+            raise TypeError(f"unhashable type: {self}")
         return result
 
     def __repr__(self) -> str:
@@ -9356,7 +9229,7 @@ class Registration(object):
                 else:
                     raise ValueError(pitch, self)
         else:
-            raise ValueError(f'{pitch!r} not in {self!r}.')
+            raise ValueError(f"{pitch!r} not in {self!r}.")
 
     ### PUBLIC PROPERTIES ###
 
@@ -9368,6 +9241,7 @@ class Registration(object):
         Returns list or none.
         """
         return self._components
+
 
 class RegistrationComponent(object):
     """
@@ -9387,24 +9261,20 @@ class RegistrationComponent(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_source_pitch_range',
-        '_target_octave_start_pitch',
-        )
+    __slots__ = ("_source_pitch_range", "_target_octave_start_pitch")
 
     ### INITIALIZER ###
 
     def __init__(
-        self,
-        source_pitch_range='[A0, C8]',
-        target_octave_start_pitch=0,
-        ):
+        self, source_pitch_range="[A0, C8]", target_octave_start_pitch=0
+    ):
         if isinstance(source_pitch_range, abjad.PitchRange):
             source_pitch_range = copy.copy(source_pitch_range)
         else:
             source_pitch_range = abjad.PitchRange(source_pitch_range)
         target_octave_start_pitch = abjad.NumberedPitch(
-            target_octave_start_pitch)
+            target_octave_start_pitch
+        )
         self._source_pitch_range = source_pitch_range
         self._target_octave_start_pitch = target_octave_start_pitch
 
@@ -9420,13 +9290,13 @@ class RegistrationComponent(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __format__(self, format_specification=''):
+    def __format__(self, format_specification=""):
         """
         Formats registration component.
 
         Returns string.
         """
-        if format_specification in ('', 'storage'):
+        if format_specification in ("", "storage"):
             return abjad.StorageFormatManager(self).get_storage_format()
         return str(self)
 
@@ -9442,7 +9312,7 @@ class RegistrationComponent(object):
         try:
             result = hash(hash_values)
         except TypeError:
-            raise TypeError(f'unhashable type: {self}')
+            raise TypeError(f"unhashable type: {self}")
         return result
 
     def __repr__(self) -> str:
@@ -9491,6 +9361,7 @@ class RegistrationComponent(object):
         Returns numbered pitch or none.
         """
         return self._target_octave_start_pitch
+
 
 class ZaggedPitchClassMaker(object):
     r"""
@@ -9555,23 +9426,15 @@ class ZaggedPitchClassMaker(object):
 
     ### CLASS ATTRIBUTES ###
 
-    __slots__ = (
-        '_division_ratios',
-        '_grouping_counts',
-        '_pc_cells',
-        )
+    __slots__ = ("_division_ratios", "_grouping_counts", "_pc_cells")
 
     _call_before_persisting_to_disk = True
 
     ### INITIALIZER ###
 
     def __init__(
-        self,
-        *,
-        pc_cells=None,
-        division_ratios=None,
-        grouping_counts=None,
-        ):
+        self, *, pc_cells=None, division_ratios=None, grouping_counts=None
+    ):
         self._pc_cells = pc_cells
         self._division_ratios = division_ratios
         self._grouping_counts = grouping_counts
@@ -9601,26 +9464,23 @@ class ZaggedPitchClassMaker(object):
         pc_cells = []
         for i, pc_segment in enumerate(pc_cells_copy):
             parts = classes.Sequence(pc_segment).partition_by_ratio_of_lengths(
-                division_ratios[i],
-                )
+                division_ratios[i]
+            )
             pc_cells.extend(parts)
         grouping_counts = self.grouping_counts or [1]
         pc_cells = classes.Sequence(pc_cells).partition_by_counts(
-            grouping_counts,
-            cyclic=True,
-            overhang=True,
-            )
+            grouping_counts, cyclic=True, overhang=True
+        )
         # this block was uncommented during krummzeit
-        #pc_cells = [abjad.join_subsequences(x) for x in pc_cells]
-        #pc_cells = classes.Sequence(pc_cells).partition_by_counts(
+        # pc_cells = [abjad.join_subsequences(x) for x in pc_cells]
+        # pc_cells = classes.Sequence(pc_cells).partition_by_counts(
         #    grouping_counts,
         #    cyclic=True,
         #    overhang=True,
         #    )
         material = PitchTree(
-            items=pc_cells,
-            item_class=abjad.NumberedPitchClass,
-            )
+            items=pc_cells, item_class=abjad.NumberedPitchClass
+        )
         return material
 
     def __eq__(self, argument):
@@ -9752,60 +9612,56 @@ class ZaggedPitchClassMaker(object):
         """
         return self._pc_cells
 
+
 ### EXPRESSION CONSTRUCTORS ###
+
 
 def _pitch_class_segment(items=None, **keywords):
     if items:
         return PitchClassSegment(items=items, **keywords)
-    name = keywords.pop('name', None)
+    name = keywords.pop("name", None)
     expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
         PitchClassSegment,
-        module_names=['baca'],
-        string_template='{}',
-        **keywords
-        )
+        module_names=["baca"],
+        string_template="{}",
+        **keywords,
+    )
     expression = expression.append_callback(callback)
     return abjad.new(expression, proxy_class=PitchClassSegment)
+
 
 def _pitch_class_set(items=None, **keywords):
     if items:
         return PitchClassSet(items=items, **keywords)
-    name = keywords.pop('name', None)
+    name = keywords.pop("name", None)
     expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
-        PitchClassSet,
-        module_names=['baca'],
-        string_template='{}',
-        **keywords
-        )
+        PitchClassSet, module_names=["baca"], string_template="{}", **keywords
+    )
     expression = expression.append_callback(callback)
     return abjad.new(expression, proxy_class=PitchClassSet)
+
 
 def _pitch_segment(items=None, **keywords):
     if items:
         return PitchSegment(items=items, **keywords)
-    name = keywords.pop('name', None)
+    name = keywords.pop("name", None)
     expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
-        PitchSegment,
-        module_names=['baca'],
-        string_template='{}',
-        **keywords
-        )
+        PitchSegment, module_names=["baca"], string_template="{}", **keywords
+    )
     expression = expression.append_callback(callback)
     return abjad.new(expression, proxy_class=PitchSegment)
+
 
 def _pitch_set(items=None, **keywords):
     if items:
         return PitchSet(items=items, **keywords)
-    name = keywords.pop('name', None)
+    name = keywords.pop("name", None)
     expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
-        PitchSet,
-        module_names=['baca'],
-        string_template='{}',
-        **keywords
-        )
+        PitchSet, module_names=["baca"], string_template="{}", **keywords
+    )
     expression = expression.append_callback(callback)
     return abjad.new(expression, proxy_class=PitchSet)

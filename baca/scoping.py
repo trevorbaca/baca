@@ -9,6 +9,7 @@ from . import typings
 
 ### CLASSES ###
 
+
 class Scope(object):
     """
     Scope.
@@ -30,21 +31,15 @@ class Scope(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_measures',
-        '_voice_name',
-        )
+    __slots__ = ("_measures", "_voice_name")
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
     def __init__(
-        self,
-        *,
-        measures: typings.Slice = (1, -1),
-        voice_name: str = None,
-        ) -> None:
+        self, *, measures: typings.Slice = (1, -1), voice_name: str = None
+    ) -> None:
         if isinstance(measures, int):
             measures = (measures, measures)
         assert isinstance(measures, (list, tuple)), repr(measures)
@@ -61,7 +56,7 @@ class Scope(object):
 
     ### SPECIAL METHODS ###
 
-    def __format__(self, format_specification=''):
+    def __format__(self, format_specification=""):
         """
         Formats object.
         """
@@ -93,6 +88,7 @@ class Scope(object):
         Gets voice name.
         """
         return self._voice_name
+
 
 class TimelineScope(object):
     """
@@ -138,19 +134,13 @@ class TimelineScope(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_scopes',
-        )
+    __slots__ = ("_scopes",)
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        *,
-        scopes=None,
-        ):
+    def __init__(self, *, scopes=None):
         if scopes is not None:
             assert isinstance(scopes, (tuple, list))
             scopes_ = []
@@ -164,7 +154,7 @@ class TimelineScope(object):
 
     ### SPECIAL METHODS ###
 
-    def __format__(self, format_specification=''):
+    def __format__(self, format_specification=""):
         """
         Formats object.
         """
@@ -181,6 +171,7 @@ class TimelineScope(object):
     @staticmethod
     def _sort_by_timeline(leaves):
         assert leaves.are_leaves(), repr(leaves)
+
         def compare(leaf_1, leaf_2):
             start_offset_1 = abjad.inspect(leaf_1).timespan().start_offset
             start_offset_2 = abjad.inspect(leaf_2).timespan().start_offset
@@ -195,6 +186,7 @@ class TimelineScope(object):
             if index_2 < index_1:
                 return 1
             return 0
+
         leaves = list(leaves)
         leaves.sort(key=functools.cmp_to_key(compare))
         return abjad.select(leaves)
@@ -213,12 +205,11 @@ class TimelineScope(object):
         """
         Returns ``'Timeline_Scope'``.
         """
-        return 'Timeline_Scope'
+        return "Timeline_Scope"
 
-ScopeTyping = typing.Union[
-    Scope,
-    TimelineScope,
-    ]
+
+ScopeTyping = typing.Union[Scope, TimelineScope]
+
 
 class Command(object):
     """
@@ -228,19 +219,19 @@ class Command(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_deactivate',
-        '_map',
-        '_match',
-        '_measures',
-        '_offset_to_measure_number',
-        '_previous_segment_voice_metadata',
-        '_runtime',
-        '_scope',
-        '_score_template',
-        '_selector',
-        '_tag_measure_number',
-        '_tags',
-        )
+        "_deactivate",
+        "_map",
+        "_match",
+        "_measures",
+        "_offset_to_measure_number",
+        "_previous_segment_voice_metadata",
+        "_runtime",
+        "_scope",
+        "_score_template",
+        "_selector",
+        "_tag_measure_number",
+        "_tags",
+    )
 
     _publish_storage_format = True
 
@@ -257,9 +248,10 @@ class Command(object):
         selector: typings.Selector = None,
         tag_measure_number: bool = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        ) -> None:
+    ) -> None:
         # for selector evaluation
         import baca
+
         self._deactivate = deactivate
         self._map = map
         self._match = match
@@ -279,10 +271,8 @@ class Command(object):
     ### SPECIAL METHODS ###
 
     def __call__(
-        self,
-        argument=None,
-        runtime: abjad.OrderedDict = None,
-        ) -> None:
+        self, argument=None, runtime: abjad.OrderedDict = None
+    ) -> None:
         """
         Calls command on ``argument``.
         """
@@ -299,7 +289,7 @@ class Command(object):
         else:
             return self._call(argument=argument)
 
-    def __format__(self, format_specification=''):
+    def __format__(self, format_specification=""):
         """
         Formats object.
         """
@@ -342,10 +332,10 @@ class Command(object):
     def _initialize_tags(self, tags):
         tags_ = []
         for tag in tags or []:
-            if tag in (None, ''):
+            if tag in (None, ""):
                 continue
             elif isinstance(tag, str):
-                for word in tag.split(':'):
+                for word in tag.split(":"):
                     tag_ = abjad.Tag(word)
                     tags_.append(tag_)
             elif isinstance(tag, abjad.Tag):
@@ -377,7 +367,7 @@ class Command(object):
         if tags is None:
             return []
         if isinstance(tags, str):
-            tags = tags.split(':')
+            tags = tags.split(":")
         assert isinstance(tags, list), repr(tags)
         tags_: typing.List[typing.Union[str, abjad.Tag]] = []
         for item in tags:
@@ -385,26 +375,23 @@ class Command(object):
                 tags_.append(item)
             else:
                 assert isinstance(item, str), repr(item)
-                tags_.extend(item.split(':'))
+                tags_.extend(item.split(":"))
         return tags_
 
     @staticmethod
     def _remove_reapplied_wrappers(leaf, indicator):
-        if not getattr(indicator, 'persistent', False):
+        if not getattr(indicator, "persistent", False):
             return
-        if getattr(indicator, 'parameter', None) == 'TEXT_SPANNER':
+        if getattr(indicator, "parameter", None) == "TEXT_SPANNER":
             return
         if abjad.inspect(leaf).timespan().start_offset != 0:
             return
-        dynamic_prototype = (
-            abjad.Dynamic,
-            abjad.StartHairpin,
-            )
+        dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
         tempo_prototype = (
             abjad.MetronomeMark,
             indicators.Accelerando,
             indicators.Ritardando,
-            )
+        )
         if isinstance(indicator, abjad.Instrument):
             prototype = abjad.Instrument
         elif isinstance(indicator, dynamic_prototype):
@@ -415,19 +402,19 @@ class Command(object):
             prototype = type(indicator)
         stem = abjad.String.to_indicator_stem(indicator)
         assert stem in (
-            'BEAM',
-            'CLEF',
-            'DYNAMIC',
-            'INSTRUMENT',
-            'MARGIN_MARKUP',
-            'METRONOME_MARK',
-            'OTTAVA',
-            'PEDAL',
-            'PERSISTENT_OVERRIDE',
-            'SLUR',
-            'STAFF_LINES',
-            'TRILL',
-            ), repr(stem)
+            "BEAM",
+            "CLEF",
+            "DYNAMIC",
+            "INSTRUMENT",
+            "MARGIN_MARKUP",
+            "METRONOME_MARK",
+            "OTTAVA",
+            "PEDAL",
+            "PERSISTENT_OVERRIDE",
+            "SLUR",
+            "STAFF_LINES",
+            "TRILL",
+        ), repr(stem)
         reapplied_wrappers = []
         reapplied_indicators = []
         wrappers = list(abjad.inspect(leaf).wrappers())
@@ -444,7 +431,7 @@ class Command(object):
                 continue
             is_reapplied_wrapper = False
             for word in abjad.Tag(wrapper.tag):
-                if f'REAPPLIED_{stem}' in word or f'DEFAULT_{stem}' in word:
+                if f"REAPPLIED_{stem}" in word or f"DEFAULT_{stem}" in word:
                     is_reapplied_wrapper = True
             if not is_reapplied_wrapper:
                 continue
@@ -457,9 +444,9 @@ class Command(object):
             if count != 1:
                 for reapplied_wrapper in reapplied_wrappers:
                     print(reapplied_wrapper)
-                counter = abjad.String('indicator').pluralize(count)
-                message = f'found {count} reapplied {counter};'
-                message += ' expecting 1.\n\n'
+                counter = abjad.String("indicator").pluralize(count)
+                message = f"found {count} reapplied {counter};"
+                message += " expecting 1.\n\n"
                 raise Exception(message)
             return reapplied_indicators[0]
 
@@ -471,17 +458,19 @@ class Command(object):
         for tweak in tweaks:
             if isinstance(tweak, abjad.LilyPondTweakManager):
                 continue
-            if (isinstance(tweak, tuple) and
-                len(tweak) == 2 and
-                isinstance(tweak[0], abjad.LilyPondTweakManager)):
+            if (
+                isinstance(tweak, tuple)
+                and len(tweak) == 2
+                and isinstance(tweak[0], abjad.LilyPondTweakManager)
+            ):
                 continue
             raise Exception(tweak)
 
     @staticmethod
     def _validate_tags(tags):
         assert isinstance(tags, list), repr(tags)
-        assert '' not in tags, repr(tags)
-        assert not any(':' in _ for _ in tags), repr(tags)
+        assert "" not in tags, repr(tags)
+        assert not any(":" in _ for _ in tags), repr(tags)
         return True
 
     ### PUBLIC PROPERTIES ###
@@ -577,10 +566,11 @@ class Command(object):
         tags = self.tags[:]
         if self.tag_measure_number:
             start_offset = abjad.inspect(leaf).timespan().start_offset
-            measure_number = self.runtime[
-                'offset_to_measure_number'].get(start_offset)
+            measure_number = self.runtime["offset_to_measure_number"].get(
+                start_offset
+            )
             if measure_number is not None:
-                tag = abjad.Tag(f'MEASURE_{measure_number}')
+                tag = abjad.Tag(f"MEASURE_{measure_number}")
                 tags.append(tag)
         if tags:
             words = [str(_) for _ in tags]
@@ -589,6 +579,7 @@ class Command(object):
             return tag
         # TODO: return empty tag (instead of none)
         return None
+
 
 class Suite(object):
     """
@@ -702,11 +693,11 @@ class Suite(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_commands',
-        '_offset_to_measure_number',
-        '_previous_segment_voice_metadata',
-        '_score_template',
-        )
+        "_commands",
+        "_offset_to_measure_number",
+        "_previous_segment_voice_metadata",
+        "_score_template",
+    )
 
     _publish_storage_format = True
 
@@ -714,17 +705,17 @@ class Suite(object):
 
     def __init__(
         self,
-        commands: typing.Sequence[typing.Union[Command, 'Suite']] = None,
+        commands: typing.Sequence[typing.Union[Command, "Suite"]] = None,
         **keywords,
-        ) -> None:
+    ) -> None:
         commands_: typing.List[typing.Union[Command, Suite]] = []
         for command in commands or []:
             if isinstance(command, (Command, Suite)):
                 command_ = abjad.new(command, **keywords)
                 commands_.append(command_)
                 continue
-            message = '\n  Must contain only commands, maps, suites.'
-            message += f'\n  Not {type(command).__name__}: {command!r}.'
+            message = "\n  Must contain only commands, maps, suites."
+            message += f"\n  Not {type(command).__name__}: {command!r}."
             raise Exception(message)
         self._commands = tuple(commands_)
 
@@ -741,7 +732,7 @@ class Suite(object):
         for command in self.commands:
             command(argument, runtime=runtime)
 
-    def __format__(self, format_specification=''):
+    def __format__(self, format_specification=""):
         """
         Formats object.
         """
@@ -768,27 +759,27 @@ class Suite(object):
             self,
             storage_format_args_values=self.commands,
             storage_format_kwargs_names=names,
-            )
+        )
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def commands(self) -> typing.Tuple[typing.Union[Command, 'Suite'], ...]:
+    def commands(self) -> typing.Tuple[typing.Union[Command, "Suite"], ...]:
         """
         Gets commands.
         """
         return self._commands
 
+
 ### FACTORY FUNCTIONS ###
 
-def chunk(
-    *commands: typing.Union[Command, Suite],
-    **keywords,
-    ) -> Suite:
+
+def chunk(*commands: typing.Union[Command, Suite], **keywords) -> Suite:
     """
     Chunks commands.
     """
     return suite(*commands, **keywords)
+
 
 def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
     """
@@ -804,10 +795,10 @@ def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
         return indicator_1.command == indicator_2.command
     return False
 
+
 def new(
-    *commands: typing.Union[Command, Suite],
-    **keywords,
-    ) -> typing.Union[Command, Suite]:
+    *commands: typing.Union[Command, Suite], **keywords
+) -> typing.Union[Command, Suite]:
     r"""
     Makes new ``commands`` with ``keywords``.
 
@@ -1198,7 +1189,9 @@ def new(
     else:
         return suite(*commands_)
 
+
 _command_typing = typing.Union[Command, Suite]
+
 
 def not_parts(command: _command_typing) -> _command_typing:
     """
@@ -1206,7 +1199,8 @@ def not_parts(command: _command_typing) -> _command_typing:
 
     Returns ``command``.
     """
-    return tag('-PARTS', command)
+    return tag("-PARTS", command)
+
 
 def not_score(command: _command_typing) -> _command_typing:
     """
@@ -1214,7 +1208,8 @@ def not_score(command: _command_typing) -> _command_typing:
 
     Returns ``command``.
     """
-    return tag('-SCORE', command)
+    return tag("-SCORE", command)
+
 
 def not_segment(command: _command_typing) -> _command_typing:
     """
@@ -1222,7 +1217,8 @@ def not_segment(command: _command_typing) -> _command_typing:
 
     Returns ``command``.
     """
-    return tag('-SEGMENT', command)
+    return tag("-SEGMENT", command)
+
 
 def only_parts(command: _command_typing) -> _command_typing:
     r"""
@@ -1367,7 +1363,8 @@ def only_parts(command: _command_typing) -> _command_typing:
 
     Returns ``command``.
     """
-    return tag('+PARTS', command)
+    return tag("+PARTS", command)
+
 
 def only_score(command: _command_typing) -> _command_typing:
     """
@@ -1375,7 +1372,8 @@ def only_score(command: _command_typing) -> _command_typing:
 
     Returns ``command``.
     """
-    return tag('+SCORE', command)
+    return tag("+SCORE", command)
+
 
 def only_segment(command: _command_typing) -> _command_typing:
     """
@@ -1383,12 +1381,10 @@ def only_segment(command: _command_typing) -> _command_typing:
 
     Returns ``command``.
     """
-    return tag('+SEGMENT', command)
+    return tag("+SEGMENT", command)
 
-def suite(
-    *commands: typing.Union[Command, Suite],
-    **keywords,
-    ) -> Suite:
+
+def suite(*commands: typing.Union[Command, Suite], **keywords) -> Suite:
     """
     Makes suite.
 
@@ -1414,11 +1410,12 @@ def suite(
     for command in commands_:
         if isinstance(command, (Command, Suite)):
             continue
-        message = '\n  Must contain only commands, maps, suites.'
-        message += f'\n  Not {type(command).__name__}:'
-        message += f'\n  {format(command)}'
+        message = "\n  Must contain only commands, maps, suites."
+        message += f"\n  Not {type(command).__name__}:"
+        message += f"\n  {format(command)}"
         raise Exception(message)
     return Suite(commands_, **keywords)
+
 
 def tag(
     tags: typing.Union[str, typing.List[str]],
@@ -1426,7 +1423,7 @@ def tag(
     *,
     deactivate: bool = None,
     tag_measure_number: bool = None,
-    ) -> typing.Union[Command, Suite]:
+) -> typing.Union[Command, Suite]:
     """
     Appends each tag in ``tags`` to ``command``.
 
@@ -1437,12 +1434,12 @@ def tag(
     if isinstance(tags, str):
         tags = [tags]
     if not isinstance(tags, list):
-        message = f'tags must be string or list of strings'
-        message += f' (not {tags!r}).'
+        message = f"tags must be string or list of strings"
+        message += f" (not {tags!r})."
         raise Exception(message)
     assert Command._validate_tags(tags), repr(tags)
     if not isinstance(command, (Command, Suite)):
-        raise Exception('can only tag command or suite.')
+        raise Exception("can only tag command or suite.")
     if isinstance(command, Suite):
         for command_ in command.commands:
             tag(
@@ -1450,7 +1447,7 @@ def tag(
                 command_,
                 deactivate=deactivate,
                 tag_measure_number=tag_measure_number,
-                )
+            )
     else:
         assert isinstance(command, Command), repr(command)
         assert command._tags is not None
@@ -1461,6 +1458,7 @@ def tag(
         command._deactivate = deactivate
         command._tag_measure_number = tag_measure_number
     return command
+
 
 def timeline(scopes) -> TimelineScope:
     """

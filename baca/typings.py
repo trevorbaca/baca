@@ -13,10 +13,7 @@ Indices = typing.Union[int, IntegerPair, IntegerList]
 
 Number = typing.Union[int, float]
 
-HorizontalAlignmentTyping = typing.Union[
-    Number,
-    abjad.HorizontalAlignment,
-    ]
+HorizontalAlignmentTyping = typing.Union[Number, abjad.HorizontalAlignment]
 
 NumberPair = typing.Tuple[Number, Number]
 
@@ -27,12 +24,9 @@ RhythmMakerTyping = typing.Union[
     rmakers.RhythmMaker,
     abjad.Selection,
     typing.Iterable[
-        typing.Tuple[
-            typing.Any,
-            typing.Union[bool, typing.List[int]],
-            ],
-        ],
-    ]
+        typing.Tuple[typing.Any, typing.Union[bool, typing.List[int]]],
+    ],
+]
 
 ScopeTyping = typing.Union[
     str,
@@ -55,7 +49,7 @@ ScopeTyping = typing.Union[
     typing.Tuple[typing.List[str], typing.List[object]],
     typing.Tuple[typing.List[str], typing.List[typing.Tuple[int, int]]],
     typing.Tuple[typing.List[str], typing.Tuple[int, int]],
-    ]
+]
 
 Selector = typing.Union[str, abjad.Expression]
 

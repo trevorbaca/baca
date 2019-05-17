@@ -9,6 +9,7 @@ from . import typings
 
 ### CLASSES ###
 
+
 class OverrideCommand(scoping.Command):
     r"""
     Override command.
@@ -238,15 +239,15 @@ class OverrideCommand(scoping.Command):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
-        '_after',
-        '_attribute',
-        '_blacklist',
-        '_context',
-        '_grob',
-        '_tags',
-        '_value',
-        '_whitelist',
-        )
+        "_after",
+        "_attribute",
+        "_blacklist",
+        "_context",
+        "_grob",
+        "_tags",
+        "_value",
+        "_whitelist",
+    )
 
     ### INITIALIZER ###
 
@@ -263,12 +264,12 @@ class OverrideCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.leaves()',
+        selector: typings.Selector = "baca.leaves()",
         tag_measure_number: bool = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         value: typing.Any = None,
         whitelist: typing.Tuple[type] = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             deactivate=deactivate,
@@ -279,7 +280,7 @@ class OverrideCommand(scoping.Command):
             selector=selector,
             tag_measure_number=tag_measure_number,
             tags=tags,
-            )
+        )
         if after is not None:
             after = bool(after)
         self._after = after
@@ -296,8 +297,8 @@ class OverrideCommand(scoping.Command):
         if grob is not None:
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
-        if attribute == 'color' and value not in abjad.ly.colors:
-            raise Exception(f'{repr(value)} is not a LilyPond color.')
+        if attribute == "color" and value not in abjad.ly.colors:
+            raise Exception(f"{repr(value)} is not a LilyPond color.")
         self._value = value
         if whitelist is not None:
             assert isinstance(whitelist, tuple), repr(whitelist)
@@ -320,14 +321,14 @@ class OverrideCommand(scoping.Command):
         if self.blacklist:
             for leaf in leaves:
                 if isinstance(leaf, self.blacklist):
-                    message = f'{type(leaf).__name__} is forbidden.'
+                    message = f"{type(leaf).__name__} is forbidden."
                     raise Exception(message)
         if self.whitelist:
             for leaf in leaves:
                 if not isinstance(leaf, self.whitelist):
-                    names = ','.join(_.__name__ for _ in self.whitelist)
+                    names = ",".join(_.__name__ for _ in self.whitelist)
                     violator = type(leaf).__name__
-                    message = f'only {names} (not {violator}) allowed.'
+                    message = f"only {names} (not {violator}) allowed."
                     raise Exception(message)
         lilypond_type = self.context
         if lilypond_type is not None:
@@ -335,56 +336,42 @@ class OverrideCommand(scoping.Command):
         if lilypond_type in dir(abjad):
             context = getattr(abjad, lilypond_type)
             assert issubclass(context, abjad.Context), repr(context)
-            context = abjad.inspect(leaves[0]).parentage().get(context)or context()
+            context = (
+                abjad.inspect(leaves[0]).parentage().get(context) or context()
+            )
             lilypond_type = context.lilypond_type
             assert isinstance(lilypond_type, str), repr(lilypond_type)
         grob = self.grob
         attribute = self.attribute
         value = self.value
-        if attribute == 'color' and value not in abjad.ly.normal_colors:
+        if attribute == "color" and value not in abjad.ly.normal_colors:
             value = f"#(x11-color '{value})"
         once = bool(len(leaves) == 1)
         string = abjad.LilyPondFormatManager.make_lilypond_override_string(
-            grob,
-            attribute,
-            value,
-            context=lilypond_type,
-            once=once,
-            )
-        format_slot = 'before'
+            grob, attribute, value, context=lilypond_type, once=once
+        )
+        format_slot = "before"
         if self.after is True:
-            format_slot = 'after'
+            format_slot = "after"
         literal = abjad.LilyPondLiteral(string, format_slot)
         tag = self.get_tag(leaves[0])
         if tag:
-            tag = tag.append('OverrideCommand(1)')
+            tag = tag.append("OverrideCommand(1)")
         else:
-            tag = abjad.Tag('OverrideCommand(1)')
-        abjad.attach(
-            literal,
-            leaves[0],
-            deactivate=self.deactivate,
-            tag=tag,
-            )
+            tag = abjad.Tag("OverrideCommand(1)")
+        abjad.attach(literal, leaves[0], deactivate=self.deactivate, tag=tag)
         if once:
             return
         string = abjad.LilyPondFormatManager.make_lilypond_revert_string(
-            grob,
-            attribute,
-            context=lilypond_type,
-            )
-        literal = abjad.LilyPondLiteral(string, 'after')
+            grob, attribute, context=lilypond_type
+        )
+        literal = abjad.LilyPondLiteral(string, "after")
         tag = self.get_tag(leaves[-1])
         if tag:
-            tag = tag.append('OverrideCommand(2)')
+            tag = tag.append("OverrideCommand(2)")
         else:
-            tag = abjad.Tag('OverrideCommand(2)')
-        abjad.attach(
-            literal,
-            leaves[-1],
-            deactivate=self.deactivate,
-            tag=tag,
-            )
+            tag = abjad.Tag("OverrideCommand(2)")
+        abjad.attach(literal, leaves[-1], deactivate=self.deactivate, tag=tag)
 
     ### PUBLIC PROPERTIES ###
 
@@ -393,7 +380,7 @@ class OverrideCommand(scoping.Command):
         """
         Is true if command positions LilyPond command after selection.
         """
-        return self._after 
+        return self._after
 
     @property
     def attribute(self) -> typing.Optional[str]:
@@ -437,80 +424,86 @@ class OverrideCommand(scoping.Command):
         """
         return self._whitelist
 
+
 ### FACTORY FUNCTIONS ###
+
 
 def accidental_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_accidental_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_accidental_extra_offset",
+) -> OverrideCommand:
     """
     Overrides accidental stencil.
     """
     return OverrideCommand(
-        attribute='extra_offset',
-        grob='accidental',
+        attribute="extra_offset",
+        grob="accidental",
         selector=selector,
         tags=[tag],
         value=pair,
-        )
+    )
+
 
 def accidental_stencil_false(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_accidental_stencil_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_accidental_stencil_false",
+) -> OverrideCommand:
     """
     Overrides accidental stencil.
     """
     return OverrideCommand(
-        attribute='stencil',
-        grob='accidental',
+        attribute="stencil",
+        grob="accidental",
         selector=selector,
         tags=[tag],
         value=False,
-        )
+    )
+
 
 def accidental_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_accidental_transparent',
-    ):
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_accidental_transparent",
+):
     """
     Overrides accidental transparency on.
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        grob='accidental',
+        grob="accidental",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def accidental_x_extent_false(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_accidental_x_extent_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_accidental_x_extent_false",
+) -> OverrideCommand:
     """
     Overrides accidental x-extent.
     """
     return OverrideCommand(
-        attribute='X_extent',
-        grob='accidental',
+        attribute="X_extent",
+        grob="accidental",
         selector=selector,
         tags=[tag],
         value=False,
-        )
+    )
+
 
 def bar_extent(
     pair: typings.NumberPair,
     *,
     after: bool = None,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_bar_extent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_bar_extent",
+) -> OverrideCommand:
     r"""
     Overrides bar line bar extent.
 
@@ -673,83 +666,76 @@ def bar_extent(
     """
     return OverrideCommand(
         after=after,
-        attribute='bar_extent',
-        context='Staff',
-        grob='bar_line',
+        attribute="bar_extent",
+        context="Staff",
+        grob="bar_line",
         selector=selector,
         tags=[tag],
         value=pair,
-        )
+    )
+
 
 def bar_extent_zero(
-    *,
-    tag: typing.Optional[str] = 'baca_bar_extent_zero',
-    ) -> scoping.Suite:
+    *, tag: typing.Optional[str] = "baca_bar_extent_zero"
+) -> scoping.Suite:
     """
     Makes bar-extent zero suite.
     """
     return scoping.suite(
-        bar_extent(
-            (0, 0),
-            after=True,
-            selector='baca.leaves()',
-            tag=tag,
-            ),
-        bar_extent(
-            (0, 0),
-            after=True,
-            selector='baca.leaf(-1)',
-            tag=tag,
-            ),
-        )
+        bar_extent((0, 0), after=True, selector="baca.leaves()", tag=tag),
+        bar_extent((0, 0), after=True, selector="baca.leaf(-1)", tag=tag),
+    )
+
 
 def bar_line_color(
     color: str,
     *,
     after: bool = None,
-    context: str = 'Score',
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_bar_line_color',
-    ) -> OverrideCommand:
+    context: str = "Score",
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_bar_line_color",
+) -> OverrideCommand:
     """
     Overrides bar line color.
     """
     return OverrideCommand(
         after=after,
-        attribute='color',
+        attribute="color",
         value=color,
         context=context,
-        grob='bar_line',
+        grob="bar_line",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def bar_line_extra_offset(
     pair: typings.NumberPair,
     *,
     after: bool = None,
-    context: str = 'Score',
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_bar_line_extra_offset',
-    ) -> OverrideCommand:
+    context: str = "Score",
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_bar_line_extra_offset",
+) -> OverrideCommand:
     """
     Overrides bar line extra offset.
     """
     return OverrideCommand(
         after=after,
-        attribute='extra_offset',
+        attribute="extra_offset",
         value=pair,
         context=context,
-        grob='bar_line',
+        grob="bar_line",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def bar_line_transparent(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_bar_line_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_bar_line_transparent",
+) -> OverrideCommand:
     r"""
     Overrides bar line transparency.
 
@@ -1068,41 +1054,43 @@ def bar_line_transparent(
 
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        context='Score',
-        grob='bar_line',
+        context="Score",
+        grob="bar_line",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def bar_line_x_extent(
     pair: typings.NumberPair,
     *,
     after: bool = None,
-    context: str = 'Score',
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_bar_line_x_extent',
-    ) -> OverrideCommand:
+    context: str = "Score",
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_bar_line_x_extent",
+) -> OverrideCommand:
     """
     Overrides bar line X extent.
     """
     return OverrideCommand(
         after=after,
-        attribute='X_extent',
+        attribute="X_extent",
         value=pair,
         context=context,
-        grob='bar_line',
+        grob="bar_line",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def beam_positions(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_beam_positions',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_beam_positions",
+) -> OverrideCommand:
     r"""
     Overrides beam positions.
 
@@ -1210,72 +1198,76 @@ def beam_positions(
 
     """
     if not isinstance(n, (int, float)):
-        message = f'beam position must be number (not {n}).'
+        message = f"beam position must be number (not {n})."
         raise Exception(message)
     return OverrideCommand(
-        attribute='positions',
+        attribute="positions",
         value=(n, n),
-        grob='beam',
+        grob="beam",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def beam_stencil_false(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_beam_stencil_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_beam_stencil_false",
+) -> OverrideCommand:
     """
     Overrides beam stencil.
     """
     return OverrideCommand(
-        attribute='stencil',
-        grob='beam',
+        attribute="stencil",
+        grob="beam",
         selector=selector,
         tags=[tag],
         value=False,
-        )
+    )
+
 
 def beam_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_beam_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_beam_transparent",
+) -> OverrideCommand:
     """
     Overrides beam transparency.
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        grob='beam',
+        grob="beam",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def clef_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_clef_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_clef_extra_offset",
+) -> OverrideCommand:
     """
     Overrides clef extra offset.
     """
     return OverrideCommand(
-        attribute='extra_offset',
-        context='Staff',
-        grob='clef',
+        attribute="extra_offset",
+        context="Staff",
+        grob="clef",
         selector=selector,
         tags=[tag],
         value=pair,
-        )
+    )
+
 
 def clef_shift(
     clef: typing.Union[str, abjad.Clef],
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_clef_shift',
-    ) -> scoping.Suite:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_clef_shift",
+) -> scoping.Suite:
     """
     Shifts clef to left by width of clef.
     """
@@ -1290,54 +1282,53 @@ def clef_shift(
     command = scoping.suite(
         clef_x_extent_false(tag=tag),
         clef_extra_offset((extra_offset_x, 0), tag=tag),
-        )
-    scoping.tag(
-        abjad.tags.SHIFTED_CLEF,
-        command,
-        tag_measure_number=True,
-        )
+    )
+    scoping.tag(abjad.tags.SHIFTED_CLEF, command, tag_measure_number=True)
     return command
+
 
 def clef_x_extent_false(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_clef_x_extent_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_clef_x_extent_false",
+) -> OverrideCommand:
     """
     Overrides clef x-extent.
     """
     return OverrideCommand(
-        attribute='X_extent',
-        context='Staff',
-        grob='clef',
+        attribute="X_extent",
+        context="Staff",
+        grob="clef",
         selector=selector,
         tags=[tag],
         value=False,
-        )
+    )
+
 
 def dls_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_dls_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_dls_padding",
+) -> OverrideCommand:
     """
     Overrides dynamic line spanner padding.
     """
     return OverrideCommand(
-        attribute='padding',
+        attribute="padding",
         value=n,
-        grob='dynamic_line_spanner',
+        grob="dynamic_line_spanner",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dls_staff_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_dls_staff_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_dls_staff_padding",
+) -> OverrideCommand:
     r"""
     Overrides dynamic line spanner staff padding
 
@@ -1503,18 +1494,19 @@ def dls_staff_padding(
 
     """
     return OverrideCommand(
-        attribute='staff_padding',
+        attribute="staff_padding",
         value=n,
-        grob='dynamic_line_spanner',
+        grob="dynamic_line_spanner",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dls_up(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_dls_up',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_dls_up",
+) -> OverrideCommand:
     r"""
     Overrides dynamic line spanner direction.
 
@@ -1680,68 +1672,72 @@ def dls_up(
 
     """
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         value=abjad.Up,
-        grob='dynamic_line_spanner',
+        grob="dynamic_line_spanner",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dots_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_dots_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_dots_extra_offset",
+) -> OverrideCommand:
     """
     Overrides dots extra offset.
     """
     return OverrideCommand(
-        attribute='extra_offset',
-        grob='dots',
+        attribute="extra_offset",
+        grob="dots",
         selector=selector,
         tags=[tag],
         value=pair,
-        )
+    )
+
 
 def dots_stencil_false(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_dots_stencil_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_dots_stencil_false",
+) -> OverrideCommand:
     """
     Overrides dots stencil.
     """
     return OverrideCommand(
-        attribute='stencil',
-        grob='dots',
+        attribute="stencil",
+        grob="dots",
         selector=selector,
         tags=[tag],
         value=False,
-        )
+    )
+
 
 def dots_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_dots_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_dots_transparent",
+) -> OverrideCommand:
     """
     Overrides dots transparency.
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        grob='dots',
+        grob="dots",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dynamic_text_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_text_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_dynamic_text_extra_offset",
+) -> OverrideCommand:
     r"""
     Overrides dynamic text extra offset.
 
@@ -1897,208 +1893,220 @@ def dynamic_text_extra_offset(
     """
     if not isinstance(pair, tuple):
         raise Exception(
-            f'dynamic text extra offset must be pair (not {pair}).'
-            )
+            f"dynamic text extra offset must be pair (not {pair})."
+        )
     if len(pair) != 2:
         raise Exception(
-            f'dynamic text extra offset must be pair (not {pair}).'
-            )
+            f"dynamic text extra offset must be pair (not {pair})."
+        )
     return OverrideCommand(
-        attribute='extra_offset',
+        attribute="extra_offset",
         value=pair,
-        grob='dynamic_text',
+        grob="dynamic_text",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dynamic_text_parent_alignment_x(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_text_parent_alignment_x',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_dynamic_text_parent_alignment_x",
+) -> OverrideCommand:
     """
     Overrides dynamic text parent alignment X to ``n``.
     """
     return OverrideCommand(
-        attribute='parent_alignment_X',
+        attribute="parent_alignment_X",
         value=n,
-        grob='dynamic_text',
+        grob="dynamic_text",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dynamic_text_self_alignment_x(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_text_self_alignment_x',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_dynamic_text_self_alignment_x",
+) -> OverrideCommand:
     """
     Overrides dynamic text self-alignment-X to ``n``.
     """
     return OverrideCommand(
-        attribute='self_alignment_X',
+        attribute="self_alignment_X",
         value=n,
-        grob='dynamic_text',
+        grob="dynamic_text",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dynamic_text_stencil_false(
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_text_stencil_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_dynamic_text_stencil_false",
+) -> OverrideCommand:
     """
     Overrides dynamic text stencil.
     """
     return OverrideCommand(
-        attribute='stencil',
+        attribute="stencil",
         value=False,
-        grob='dynamic_text',
+        grob="dynamic_text",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dynamic_text_transparent(
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_text_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_dynamic_text_transparent",
+) -> OverrideCommand:
     """
     Overrides dynamic text transparency.
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        grob='dynamic_text',
+        grob="dynamic_text",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dynamic_text_x_extent_zero(
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_text_x_extent_zero',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_dynamic_text_x_extent_zero",
+) -> OverrideCommand:
     """
     Overrides dynamic text X-extent.
     """
     return OverrideCommand(
-        attribute='X_extent',
+        attribute="X_extent",
         value=(0, 0),
-        grob='dynamic_text',
+        grob="dynamic_text",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dynamic_text_x_offset(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_text_x_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_dynamic_text_x_offset",
+) -> OverrideCommand:
     """
     Overrides dynamic text X-extent.
     """
     return OverrideCommand(
-        attribute='X_offset',
+        attribute="X_offset",
         value=n,
-        grob='dynamic_text',
+        grob="dynamic_text",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dynamic_text_y_offset(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_text_y_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_dynamic_text_y_offset",
+) -> OverrideCommand:
     """
     Overrides dynamic text Y-extent.
     """
     return OverrideCommand(
-        attribute='Y_offset',
+        attribute="Y_offset",
         value=n,
-        grob='dynamic_text',
+        grob="dynamic_text",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def flag_stencil_false(
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_flag_stencil_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_flag_stencil_false",
+) -> OverrideCommand:
     """
     Overrides flag stencil.
     """
     return OverrideCommand(
-        attribute='stencil',
-        grob='flag',
+        attribute="stencil",
+        grob="flag",
         selector=selector,
         tags=[tag],
         value=False,
-        )
+    )
+
 
 def flag_transparent(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_flag_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_flag_transparent",
+) -> OverrideCommand:
     """
     Overrides flag transparency.
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        grob='flag',
+        grob="flag",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def glissando_thickness(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_glissando_thickness',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_glissando_thickness",
+) -> OverrideCommand:
     """
     Overrides glissando thickness.
     """
     return OverrideCommand(
-        attribute='thickness',
+        attribute="thickness",
         value=str(n),
-        grob='glissando',
+        grob="glissando",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def hairpin_shorten_pair(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_hairpin_shorten_pair',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_hairpin_shorten_pair",
+) -> OverrideCommand:
     """
     Overrides hairpin shorten pair.
     """
     return OverrideCommand(
-        attribute='shorten_pair',
+        attribute="shorten_pair",
         value=pair,
-        grob='hairpin',
+        grob="hairpin",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def hairpin_start_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_hairpin_start_shift',
-    ) -> scoping.Suite:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_hairpin_start_shift",
+) -> scoping.Suite:
     """
     Shifts hairpin start dynamic to left by width of dynamic.
     """
@@ -2110,62 +2118,66 @@ def hairpin_start_shift(
         dynamic_text_extra_offset((extra_offset_x, 0), tag=tag),
         dynamic_text_x_extent_zero(tag=tag),
         hairpin_shorten_pair((hairpin_shorten_left, 0), tag=tag),
-        )
+    )
+
 
 def hairpin_stencil_false(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_hairpin_stencil_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_hairpin_stencil_false",
+) -> OverrideCommand:
     """
     Overrides hairpin stencil.
     """
     return OverrideCommand(
-        attribute='stencil',
+        attribute="stencil",
         value=False,
-        grob='hairpin',
+        grob="hairpin",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def hairpin_to_barline(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_hairpin_to_barline',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_hairpin_to_barline",
+) -> OverrideCommand:
     """
     Overrides hairpin to-barline to true.
     """
     return OverrideCommand(
-        attribute='to_barline',
+        attribute="to_barline",
         value=True,
-        grob='hairpin',
+        grob="hairpin",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def hairpin_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_hairpin_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_hairpin_transparent",
+) -> OverrideCommand:
     """
     Overrides hairpin transparency.
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        grob='hairpin',
+        grob="hairpin",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def mmrest_color(
-    color: str = 'red',
+    color: str = "red",
     *,
-    selector: typings.Selector = 'baca.mmrests()',
-    tag: typing.Optional[str] = 'baca_mmrest_text_color',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.mmrests()",
+    tag: typing.Optional[str] = "baca_mmrest_text_color",
+) -> OverrideCommand:
     r"""
     Overrides multimeasure rest color.
 
@@ -2292,37 +2304,39 @@ def mmrest_color(
 
     """
     return OverrideCommand(
-        attribute='color',
+        attribute="color",
         value=color,
-        grob='multi_measure_rest',
+        grob="multi_measure_rest",
         selector=selector,
         tags=[tag],
         whitelist=(abjad.MultimeasureRest,),
-        )
+    )
+
 
 def mmrest_transparent(
     *,
-    selector: typings.Selector = 'baca.mmrests()',
-    tag: typing.Optional[str] = 'baca_mmrest_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.mmrests()",
+    tag: typing.Optional[str] = "baca_mmrest_transparent",
+) -> OverrideCommand:
     r"""
     Overrides multimeasure rest transparent.
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        grob='multi_measure_rest',
+        grob="multi_measure_rest",
         selector=selector,
         tags=[tag],
         whitelist=(abjad.MultimeasureRest,),
-        )
+    )
+
 
 def mmrest_text_color(
-    color: str = 'red',
+    color: str = "red",
     *,
-    selector: typings.Selector = 'baca.mmrests()',
-    tag: typing.Optional[str] = 'baca_mmrest_text_color',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.mmrests()",
+    tag: typing.Optional[str] = "baca_mmrest_text_color",
+) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text color.
 
@@ -2484,20 +2498,21 @@ def mmrest_text_color(
 
     """
     return OverrideCommand(
-        attribute='color',
+        attribute="color",
         value=color,
-        grob='multi_measure_rest_text',
+        grob="multi_measure_rest_text",
         selector=selector,
         tags=[tag],
         whitelist=(abjad.MultimeasureRest,),
-        )
+    )
+
 
 def mmrest_text_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.mmrests()',
-    tag: typing.Optional[str] = 'baca_mmrest_text_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.mmrests()",
+    tag: typing.Optional[str] = "baca_mmrest_text_extra_offset",
+) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text extra offset.
 
@@ -2632,20 +2647,21 @@ def mmrest_text_extra_offset(
 
     """
     return OverrideCommand(
-        attribute='extra_offset',
+        attribute="extra_offset",
         value=pair,
-        grob='multi_measure_rest_text',
+        grob="multi_measure_rest_text",
         selector=selector,
         tags=[tag],
         whitelist=(abjad.MultimeasureRest,),
-        )
+    )
+
 
 def mmrest_text_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.mmrests()',
-    tag: typing.Optional[str] = 'baca_mmrest_text_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.mmrests()",
+    tag: typing.Optional[str] = "baca_mmrest_text_padding",
+) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text padding.
 
@@ -2780,19 +2796,20 @@ def mmrest_text_padding(
 
     """
     return OverrideCommand(
-        attribute='padding',
+        attribute="padding",
         value=n,
-        grob='multi_measure_rest_text',
+        grob="multi_measure_rest_text",
         selector=selector,
         tags=[tag],
         whitelist=(abjad.MultimeasureRest,),
-        )
+    )
+
 
 def mmrest_text_parent_center(
     *,
-    selector: typings.Selector = 'baca.mmrests()',
-    tag: typing.Optional[str] = 'baca_mmrest_text_parent_center',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.mmrests()",
+    tag: typing.Optional[str] = "baca_mmrest_text_parent_center",
+) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text parent alignment X to center.
 
@@ -2927,20 +2944,21 @@ def mmrest_text_parent_center(
 
     """
     return OverrideCommand(
-        attribute='parent_alignment_X',
+        attribute="parent_alignment_X",
         value=0,
-        grob='multi_measure_rest_text',
+        grob="multi_measure_rest_text",
         selector=selector,
         tags=[tag],
         whitelist=(abjad.MultimeasureRest,),
-        )
+    )
+
 
 def mmrest_text_staff_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.mmrests()',
-    tag: typing.Optional[str] = 'baca_mmrest_text_staff_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.mmrests()",
+    tag: typing.Optional[str] = "baca_mmrest_text_staff_padding",
+) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text staff padding.
 
@@ -3075,170 +3093,180 @@ def mmrest_text_staff_padding(
 
     """
     return OverrideCommand(
-        attribute='staff_padding',
+        attribute="staff_padding",
         value=n,
-        grob='multi_measure_rest_text',
+        grob="multi_measure_rest_text",
         selector=selector,
         tags=[tag],
         whitelist=(abjad.MultimeasureRest,),
-        )
+    )
+
 
 def mmrest_text_transparent(
     *,
-    selector: typings.Selector = 'baca.mmrests()',
-    tag: typing.Optional[str] = 'baca_script_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.mmrests()",
+    tag: typing.Optional[str] = "baca_script_transparent",
+) -> OverrideCommand:
     """
     Overrides script transparent.
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        grob='multi_measure_rest_text',
+        grob="multi_measure_rest_text",
         selector=selector,
         tags=[tag],
         whitelist=(abjad.MultimeasureRest,),
-        )
+    )
+
 
 def no_ledgers(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_no_ledgers',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_no_ledgers",
+) -> OverrideCommand:
     """
     Overrides note-head no-ledgers.
     """
     return OverrideCommand(
-        attribute='no_ledgers',
+        attribute="no_ledgers",
         value=True,
-        grob='note_head',
+        grob="note_head",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def note_column_shift(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_note_colun_shift',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_note_colun_shift",
+) -> OverrideCommand:
     """
     Overrides note column force hshift.
     """
     return OverrideCommand(
-        attribute='force_hshift',
+        attribute="force_hshift",
         value=n,
-        grob='note_column',
+        grob="note_column",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def note_head_color(
     color: str,
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_note_head_color',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_note_head_color",
+) -> OverrideCommand:
     """
     Overrides note-head color.
     """
     return OverrideCommand(
-        attribute='color',
-        grob='note_head',
+        attribute="color",
+        grob="note_head",
         selector=selector,
         tags=[tag],
         value=color,
-        )
+    )
+
 
 def note_head_duration_log(
     n: int,
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_note_head_color',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_note_head_color",
+) -> OverrideCommand:
     """
     Overrides note-head duration-log property.
     """
     return OverrideCommand(
-        attribute='duration_log',
-        grob='note_head',
+        attribute="duration_log",
+        grob="note_head",
         selector=selector,
         tags=[tag],
         value=n,
-        )
+    )
+
 
 def note_head_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_note_head_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_note_head_extra_offset",
+) -> OverrideCommand:
     """
     Overrides note-head color.
     """
     return OverrideCommand(
-        attribute='extra_offset',
-        grob='note_head',
+        attribute="extra_offset",
+        grob="note_head",
         selector=selector,
         tags=[tag],
         value=pair,
-        )
+    )
+
 
 def note_head_no_ledgers(
     value: bool,
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_note_head_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_note_head_extra_offset",
+) -> OverrideCommand:
     """
     Overrides note-head no-ledgers property.
     """
     return OverrideCommand(
-        attribute='no_ledgers',
-        grob='note_head',
+        attribute="no_ledgers",
+        grob="note_head",
         selector=selector,
         tags=[tag],
         value=value,
-        )
+    )
+
 
 def note_head_stencil_false(
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_note_head_stencil_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_note_head_stencil_false",
+) -> OverrideCommand:
     """
     Overrides note-head stencil.
     """
     return OverrideCommand(
-        attribute='stencil',
-        grob='note_head',
+        attribute="stencil",
+        grob="note_head",
         selector=selector,
         tags=[tag],
         value=False,
-        )
+    )
+
 
 def note_head_style(
     string: str,
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_note_head_stencil_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_note_head_stencil_false",
+) -> OverrideCommand:
     """
     Overrides note-head style property.
     """
     return OverrideCommand(
-        attribute='style',
-        grob='note_head',
+        attribute="style",
+        grob="note_head",
         selector=selector,
         tags=[tag],
         value=string,
-        )
+    )
+
 
 def note_head_style_cross(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_note_head_style_cross',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_note_head_style_cross",
+) -> OverrideCommand:
     r"""
     Overrides note-head style.
 
@@ -3374,18 +3402,19 @@ def note_head_style_cross(
 
     """
     return OverrideCommand(
-        attribute='style',
-        value='cross',
-        grob='note_head',
+        attribute="style",
+        value="cross",
+        grob="note_head",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def note_head_style_harmonic(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_note_head_style_harmonic',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_note_head_style_harmonic",
+) -> OverrideCommand:
     r"""
     Overrides note-head style for ``selector`` output.
 
@@ -3521,50 +3550,53 @@ def note_head_style_harmonic(
 
     """
     return OverrideCommand(
-        attribute='style',
-        value='harmonic',
-        grob='note_head',
+        attribute="style",
+        value="harmonic",
+        grob="note_head",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def note_head_style_harmonic_black(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_note_head_style_harmonic_black',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_note_head_style_harmonic_black",
+) -> OverrideCommand:
     r"""
     Overrides note-head style to harmonic-black.
     """
     return OverrideCommand(
-        attribute='style',
-        value='harmonic-black',
-        grob='note_head',
+        attribute="style",
+        value="harmonic-black",
+        grob="note_head",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def note_head_transparent(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_note_head_transparent',
-    ):
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_note_head_transparent",
+):
     """
     Overrides note-head transparency.
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        grob='note_head',
+        grob="note_head",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def note_head_x_extent_zero(
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_note_head_x_extent_zero',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_note_head_x_extent_zero",
+) -> OverrideCommand:
     """
     Overrides note-head X-extent.
 
@@ -3572,148 +3604,156 @@ def note_head_x_extent_zero(
 
     """
     return OverrideCommand(
-        attribute='X_extent',
-        grob='note_head',
+        attribute="X_extent",
+        grob="note_head",
         selector=selector,
         tags=[tag],
         value=(0, 0),
-        )
+    )
+
 
 def ottava_bracket_shorten_pair(
     pair: typings.NumberPair = (-0.8, -0.6),
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_ottava_bracket_shorten_pair',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_ottava_bracket_shorten_pair",
+) -> OverrideCommand:
     """
     Overrides ottava bracket shorten pair.
     """
     return OverrideCommand(
-        attribute='shorten_pair',
-        context='Staff',
+        attribute="shorten_pair",
+        context="Staff",
         value=pair,
-        grob='ottava_bracket',
+        grob="ottava_bracket",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def ottava_bracket_staff_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_ottava_bracket_staff_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_ottava_bracket_staff_padding",
+) -> OverrideCommand:
     """
     Overrides ottava bracket staff padding.
     """
     return OverrideCommand(
-        attribute='staff_padding',
-        context='Staff',
+        attribute="staff_padding",
+        context="Staff",
         value=n,
-        grob='ottava_bracket',
+        grob="ottava_bracket",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def rehearsal_mark_down(
     *,
-    context: str = 'Score',
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_rehearsal_mark_down',
-    ) -> OverrideCommand:
+    context: str = "Score",
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_rehearsal_mark_down",
+) -> OverrideCommand:
     """
     Overrides rehearsal mark direction.
     """
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         value=abjad.Down,
         context=context,
-        grob='rehearsal_mark',
+        grob="rehearsal_mark",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def rehearsal_mark_extra_offset(
     pair: typings.NumberPair,
     *,
-    context: str = 'Score',
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_rehearsal_mark_extra_offset',
-    ) -> OverrideCommand:
+    context: str = "Score",
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_rehearsal_mark_extra_offset",
+) -> OverrideCommand:
     """
     Overrides rehearsal mark extra offset.
     """
     return OverrideCommand(
-        attribute='extra_offset',
+        attribute="extra_offset",
         value=pair,
         context=context,
-        grob='rehearsal_mark',
+        grob="rehearsal_mark",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def rehearsal_mark_padding(
     n: typings.Number,
     *,
-    context: str = 'Score',
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_rehearsal_padding',
-    ) -> OverrideCommand:
+    context: str = "Score",
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_rehearsal_padding",
+) -> OverrideCommand:
     """
     Overrides rehearsal mark padding.
     """
     return OverrideCommand(
-        attribute='padding',
+        attribute="padding",
         value=n,
         context=context,
-        grob='rehearsal_mark',
+        grob="rehearsal_mark",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def rehearsal_mark_self_alignment_x(
     n: typings.HorizontalAlignmentTyping,
     *,
-    context: str = 'Score',
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_rehearsal_mark_self_alignment_x',
-    ) -> OverrideCommand:
+    context: str = "Score",
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_rehearsal_mark_self_alignment_x",
+) -> OverrideCommand:
     """
     Overrides rehearsal mark self-alignment-X.
     """
     return OverrideCommand(
-        attribute='self_alignment_X',
+        attribute="self_alignment_X",
         value=n,
         context=context,
-        grob='rehearsal_mark',
+        grob="rehearsal_mark",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def rehearsal_mark_y_offset(
     n: typings.Number,
     *,
-    context: str = 'Score',
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_rehearsal_mark_y_offset',
-    ) -> OverrideCommand:
+    context: str = "Score",
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_rehearsal_mark_y_offset",
+) -> OverrideCommand:
     """
     Overrides rehearsal mark Y offset.
     """
     return OverrideCommand(
-        attribute='Y_offset',
+        attribute="Y_offset",
         value=n,
         context=context,
-        grob='rehearsal_mark',
+        grob="rehearsal_mark",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def repeat_tie_down(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_repeat_tie_down',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_repeat_tie_down",
+) -> OverrideCommand:
     r"""
     Overrides repeat tie direction.
 
@@ -3864,67 +3904,71 @@ def repeat_tie_down(
 
     """
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         value=abjad.Down,
-        grob='repeat_tie',
+        grob="repeat_tie",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def repeat_tie_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_repeat_tie_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_repeat_tie_extra_offset",
+) -> OverrideCommand:
     """
     Overrides repeat tie extra-offset.
     """
     return OverrideCommand(
-        attribute='extra_offset',
-        grob='repeat_tie',
+        attribute="extra_offset",
+        grob="repeat_tie",
         selector=selector,
         tags=[tag],
         value=pair,
-        )
+    )
+
 
 def repeat_tie_stencil_false(
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_repeat_tie_stencil_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_repeat_tie_stencil_false",
+) -> OverrideCommand:
     """
     Overrides repeat tie stencil.
     """
     return OverrideCommand(
-        attribute='stencil',
-        grob='repeat_tie',
+        attribute="stencil",
+        grob="repeat_tie",
         selector=selector,
         tags=[tag],
         value=False,
-        )
+    )
+
 
 def repeat_tie_transparent(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_repeat_tie_transparent',
-    ):
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_repeat_tie_transparent",
+):
     """
     Overrides repeat tie transparency.
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        grob='repeat_tie',
+        grob="repeat_tie",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def repeat_tie_up(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_repeat_tie_up',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_repeat_tie_up",
+) -> OverrideCommand:
     r"""
     Overrides repeat tie direction.
 
@@ -4075,18 +4119,19 @@ def repeat_tie_up(
 
     """
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         value=abjad.Up,
-        grob='repeat_tie',
+        grob="repeat_tie",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def rest_down(
     *,
-    selector: typings.Selector = 'baca.rests()',
-    tag: typing.Optional[str] = 'baca_rest_down',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.rests()",
+    tag: typing.Optional[str] = "baca_rest_down",
+) -> OverrideCommand:
     r"""
     Overrides rest direction.
 
@@ -4224,44 +4269,42 @@ def rest_down(
 
     """
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         value=abjad.Down,
-        grob='rest',
+        grob="rest",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def rest_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.rest(0)',
-    tag: typing.Optional[str] = 'baca_rest_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.rest(0)",
+    tag: typing.Optional[str] = "baca_rest_extra_offset",
+) -> OverrideCommand:
     """
     Overrides rest extra offset.
     """
     if not isinstance(pair, tuple):
-        raise Exception(
-            f'rest extra offset must be pair (not {pair!r}).'
-            )
+        raise Exception(f"rest extra offset must be pair (not {pair!r}).")
     if len(pair) != 2:
-        raise Exception(
-            f'rest extra offset must be pair (not {pair!r}).'
-            )
+        raise Exception(f"rest extra offset must be pair (not {pair!r}).")
     return OverrideCommand(
-        attribute='extra_offset',
+        attribute="extra_offset",
         value=pair,
-        grob='rest',
+        grob="rest",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def rest_position(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.rests()',
-    tag: typing.Optional[str] = 'baca_rest_position',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.rests()",
+    tag: typing.Optional[str] = "baca_rest_position",
+) -> OverrideCommand:
     r"""
     Overrides rest position.
 
@@ -4399,18 +4442,19 @@ def rest_position(
 
     """
     return OverrideCommand(
-        attribute='staff_position',
+        attribute="staff_position",
         value=n,
-        grob='rest',
+        grob="rest",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def rest_transparent(
     *,
-    selector: typings.Selector = 'baca.rests()',
-    tag: typing.Optional[str] = 'baca_rest_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.rests()",
+    tag: typing.Optional[str] = "baca_rest_transparent",
+) -> OverrideCommand:
     r"""
     Overrides rest transparency.
 
@@ -4548,18 +4592,19 @@ def rest_transparent(
 
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        grob='rest',
+        grob="rest",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def rest_up(
     *,
-    selector: typings.Selector = 'baca.rests()',
-    tag: typing.Optional[str] = 'baca_rest_up',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.rests()",
+    tag: typing.Optional[str] = "baca_rest_up",
+) -> OverrideCommand:
     r"""
     Overrides rest direction.
 
@@ -4697,19 +4742,20 @@ def rest_up(
 
     """
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         value=abjad.Up,
-        grob='rest',
+        grob="rest",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def script_color(
-    color: str = 'red',
+    color: str = "red",
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_script_color',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_script_color",
+) -> OverrideCommand:
     r"""
     Overrides script color.
 
@@ -4868,18 +4914,19 @@ def script_color(
 
     """
     return OverrideCommand(
-        attribute='color',
+        attribute="color",
         value=color,
-        grob='script',
+        grob="script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def script_down(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_script_down',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_script_down",
+) -> OverrideCommand:
     r"""
     Overrides script direction.
 
@@ -5038,19 +5085,20 @@ def script_down(
 
     """
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         value=abjad.Down,
-        grob='script',
+        grob="script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def script_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_script_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_script_extra_offset",
+) -> OverrideCommand:
     r"""
     Overrides script extra offset.
 
@@ -5207,52 +5255,55 @@ def script_extra_offset(
 
     """
     return OverrideCommand(
-        attribute='extra_offset',
+        attribute="extra_offset",
         value=pair,
-        grob='script',
+        grob="script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def script_padding(
     number: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_script_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_script_padding",
+) -> OverrideCommand:
     """
     Overrides script padding.
     """
     return OverrideCommand(
-        attribute='padding',
+        attribute="padding",
         value=number,
-        grob='script',
+        grob="script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def script_staff_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_script_staff_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_script_staff_padding",
+) -> OverrideCommand:
     """
     Overrides script staff padding.
     """
     return OverrideCommand(
-        attribute='staff_padding',
+        attribute="staff_padding",
         value=n,
-        grob='script',
+        grob="script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def script_up(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_script_up',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_script_up",
+) -> OverrideCommand:
     r"""
     Overrides script direction.
 
@@ -5411,34 +5462,36 @@ def script_up(
 
     """
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         value=abjad.Up,
-        grob='script',
+        grob="script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def script_x_extent_zero(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_script_x_extent_zero',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_script_x_extent_zero",
+) -> OverrideCommand:
     """
     Overrides script X-extent.
     """
     return OverrideCommand(
-        attribute='X_extent',
+        attribute="X_extent",
         value=(0, 0),
-        grob='script',
+        grob="script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def slur_down(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_slur_down',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_slur_down",
+) -> OverrideCommand:
     r"""
     Overrides slur direction.
 
@@ -5593,18 +5646,19 @@ def slur_down(
 
     """
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         value=abjad.Down,
-        grob='slur',
+        grob="slur",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def slur_up(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_slur_up',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_slur_up",
+) -> OverrideCommand:
     r"""
     Overrides slur direction.
 
@@ -5771,60 +5825,63 @@ def slur_up(
 
     """
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         value=abjad.Up,
-        grob='slur',
+        grob="slur",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def span_bar_color(
     color: str,
     *,
     after: bool = None,
-    context: str = 'Score',
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_span_bar_color',
-    ) -> OverrideCommand:
+    context: str = "Score",
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_span_bar_color",
+) -> OverrideCommand:
     """
     Overrides span bar color.
     """
     return OverrideCommand(
         after=after,
-        attribute='color',
+        attribute="color",
         value=color,
         context=context,
-        grob='span_bar',
+        grob="span_bar",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def span_bar_extra_offset(
     pair: typings.NumberPair,
     *,
     after: bool = None,
-    context: str = 'Score',
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_span_bar_extra_offset',
-    ) -> OverrideCommand:
+    context: str = "Score",
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_span_bar_extra_offset",
+) -> OverrideCommand:
     """
     Overrides span bar extra offset.
     """
     return OverrideCommand(
         after=after,
-        attribute='extra_offset',
+        attribute="extra_offset",
         value=pair,
         context=context,
-        grob='span_bar',
+        grob="span_bar",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def span_bar_transparent(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_span_bar_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_span_bar_transparent",
+) -> OverrideCommand:
     r"""
     Overrides span bar transparency.
 
@@ -5894,21 +5951,22 @@ def span_bar_transparent(
 
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        context='Score',
-        grob='span_bar',
+        context="Score",
+        grob="span_bar",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def stem_color(
-    color: str = 'red',
+    color: str = "red",
     *,
     context: str = None,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_stem_color',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_stem_color",
+) -> OverrideCommand:
     r"""
     Overrides stem color.
 
@@ -6047,19 +6105,20 @@ def stem_color(
 
     """
     return OverrideCommand(
-        attribute='color',
+        attribute="color",
         value=color,
         context=context,
-        grob='stem',
+        grob="stem",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def stem_down(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] ='baca_stem_down',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_stem_down",
+) -> OverrideCommand:
     r"""
     Overrides stem direction.
 
@@ -6201,50 +6260,53 @@ def stem_down(
 
     """
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         value=abjad.Down,
-        grob='stem',
+        grob="stem",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def stem_stencil_false(
     *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_stem_stencil_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_stem_stencil_false",
+) -> OverrideCommand:
     """
     Overrides stem stencil.
     """
     return OverrideCommand(
-        attribute='stencil',
-        grob='stem',
+        attribute="stencil",
+        grob="stem",
         selector=selector,
         tags=[tag],
         value=False,
-        )
+    )
+
 
 def stem_transparent(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_stem_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_stem_transparent",
+) -> OverrideCommand:
     """
     Overrides stem transparency.
     """
     return OverrideCommand(
-        attribute='transparent',
+        attribute="transparent",
         value=True,
-        grob='stem',
+        grob="stem",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def stem_up(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_stem_up',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_stem_up",
+) -> OverrideCommand:
     r"""
     Overrides stem direction.
 
@@ -6386,18 +6448,19 @@ def stem_up(
 
     """
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         value=abjad.Up,
-        grob='stem',
+        grob="stem",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def strict_note_spacing_off(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_strict_note_spacing_off',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_strict_note_spacing_off",
+) -> OverrideCommand:
     r"""
     Overrides spacing spanner strict note spacing.
 
@@ -6468,21 +6531,22 @@ def strict_note_spacing_off(
 
     """
     return OverrideCommand(
-        attribute='strict_note_spacing',
+        attribute="strict_note_spacing",
         value=False,
-        context='Score',
-        grob='spacing_spanner',
+        context="Score",
+        grob="spacing_spanner",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def sustain_pedal_staff_padding(
     n: typings.Number,
     *,
-    context: str = 'Staff',
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_sustain_pedal_staff_padding',
-    ) -> OverrideCommand:
+    context: str = "Staff",
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_sustain_pedal_staff_padding",
+) -> OverrideCommand:
     r"""
     Overrides sustain pedal staff padding.
 
@@ -6641,21 +6705,22 @@ def sustain_pedal_staff_padding(
 
     """
     return OverrideCommand(
-        attribute='staff_padding',
+        attribute="staff_padding",
         value=n,
         context=context,
-        grob='sustain_pedal_line_spanner',
+        grob="sustain_pedal_line_spanner",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def text_script_color(
-    color: str = 'red',
+    color: str = "red",
     *,
     allow_mmrests: bool = False,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_script_color',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_script_color",
+) -> OverrideCommand:
     r"""
     Overrides text script color.
 
@@ -6836,20 +6901,21 @@ def text_script_color(
     else:
         blacklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
-        attribute='color',
+        attribute="color",
         blacklist=blacklist,
         value=color,
-        grob='text_script',
+        grob="text_script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def text_script_down(
     *,
     allow_mmrests: bool = False,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_script_down',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_script_down",
+) -> OverrideCommand:
     r"""
     Overrides text script direction.
 
@@ -7030,21 +7096,22 @@ def text_script_down(
     else:
         blacklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         blacklist=blacklist,
         value=abjad.Down,
-        grob='text_script',
+        grob="text_script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def text_script_extra_offset(
     pair: typings.NumberPair,
     *,
     allow_mmrests: bool = False,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_script_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_script_extra_offset",
+) -> OverrideCommand:
     r"""
     Overrides text script extra offset.
 
@@ -7078,21 +7145,22 @@ def text_script_extra_offset(
     else:
         blacklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
-        attribute='extra_offset',
+        attribute="extra_offset",
         blacklist=blacklist,
         value=pair,
-        grob='text_script',
+        grob="text_script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def text_script_font_size(
     n: typings.Number,
     *,
     allow_mmrests: bool = False,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_script_font_size',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_script_font_size",
+) -> OverrideCommand:
     """
     Overrides text script font size.
     """
@@ -7101,21 +7169,22 @@ def text_script_font_size(
     else:
         blacklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
-        attribute='font_size',
+        attribute="font_size",
         blacklist=blacklist,
         value=n,
-        grob='text_script',
+        grob="text_script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def text_script_padding(
     n: typings.Number,
     *,
     allow_mmrests: bool = False,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'text_script_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "text_script_padding",
+) -> OverrideCommand:
     r"""
     Overrides text script padding.
 
@@ -7296,21 +7365,22 @@ def text_script_padding(
     else:
         blacklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
-        attribute='padding',
+        attribute="padding",
         blacklist=blacklist,
         value=n,
-        grob='text_script',
+        grob="text_script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def text_script_parent_alignment_x(
     n: typings.Number,
     *,
     allow_mmrests: bool = False,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_script_parent_alignment_x',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_script_parent_alignment_x",
+) -> OverrideCommand:
     """
     Overrides text script parent-alignment-X.
     """
@@ -7319,21 +7389,22 @@ def text_script_parent_alignment_x(
     else:
         blacklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
-        attribute='parent_alignment_X',
+        attribute="parent_alignment_X",
         blacklist=blacklist,
-        grob='text_script',
+        grob="text_script",
         selector=selector,
         tags=[tag],
         value=n,
-        )
+    )
+
 
 def text_script_self_alignment_x(
     n: typings.Number,
     *,
     allow_mmrests: bool = False,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_script_self_alignment_x',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_script_self_alignment_x",
+) -> OverrideCommand:
     """
     Overrides text script self-alignment-X.
     """
@@ -7342,21 +7413,22 @@ def text_script_self_alignment_x(
     else:
         blacklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
-        attribute='self_alignment_X',
+        attribute="self_alignment_X",
         blacklist=blacklist,
-        grob='text_script',
+        grob="text_script",
         selector=selector,
         tags=[tag],
         value=n,
-        )
+    )
+
 
 def text_script_staff_padding(
     n: typings.Number,
     *,
     allow_mmrests: bool = False,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: str = 'baca_script_staff_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: str = "baca_script_staff_padding",
+) -> OverrideCommand:
     r"""
     Overrides text script staff padding.
 
@@ -7537,20 +7609,21 @@ def text_script_staff_padding(
     else:
         blacklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
-        attribute='staff_padding',
+        attribute="staff_padding",
         blacklist=blacklist,
         value=n,
-        grob='text_script',
+        grob="text_script",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def text_script_up(
     *,
     allow_mmrests: bool = False,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_script_up',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_script_up",
+) -> OverrideCommand:
     r"""
     Overrides text script direction.
 
@@ -7731,21 +7804,22 @@ def text_script_up(
     else:
         blacklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
-        attribute='direction',
+        attribute="direction",
         blacklist=blacklist,
-        grob='text_script',
+        grob="text_script",
         selector=selector,
         tags=[tag],
         value=abjad.Up,
-        )
+    )
+
 
 def text_script_x_offset(
     n: typings.Number,
     *,
     allow_mmrests: bool = False,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_script_x_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_script_x_offset",
+) -> OverrideCommand:
     """
     Overrides text script X-offset.
     """
@@ -7754,21 +7828,22 @@ def text_script_x_offset(
     else:
         blacklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
-        attribute='X_offset',
+        attribute="X_offset",
         blacklist=blacklist,
-        grob='text_script',
+        grob="text_script",
         selector=selector,
         tags=[tag],
         value=n,
-        )
+    )
+
 
 def text_script_y_offset(
     n: typings.Number,
     *,
     allow_mmrests: bool = False,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_script_y_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_script_y_offset",
+) -> OverrideCommand:
     """
     Overrides text script Y-offset.
     """
@@ -7777,54 +7852,57 @@ def text_script_y_offset(
     else:
         blacklist = (abjad.MultimeasureRest,)
     return OverrideCommand(
-        attribute='Y_offset',
+        attribute="Y_offset",
         blacklist=blacklist,
-        grob='text_script',
+        grob="text_script",
         selector=selector,
         tags=[tag],
         value=n,
-        )
+    )
+
 
 def text_spanner_left_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_spanner_left_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_spanner_left_padding",
+) -> OverrideCommand:
     """
     Overrides text spanner left padding.
     """
     return OverrideCommand(
-        attribute='bound_details__left__padding',
-        grob='text_spanner',
+        attribute="bound_details__left__padding",
+        grob="text_spanner",
         selector=selector,
         tags=[tag],
         value=n,
-        )
+    )
+
 
 def text_spanner_right_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_spanner_right_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_spanner_right_padding",
+) -> OverrideCommand:
     """
     Overrides text spanner right padding.
     """
     return OverrideCommand(
-        attribute='bound_details__right__padding',
-        grob='text_spanner',
+        attribute="bound_details__right__padding",
+        grob="text_spanner",
         selector=selector,
         tags=[tag],
         value=n,
-        )
+    )
+
 
 def text_spanner_staff_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: str = 'baca_text_spanner_staff_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: str = "baca_text_spanner_staff_padding",
+) -> OverrideCommand:
     r"""
     Overrides text spanner staff padding.
 
@@ -7991,67 +8069,71 @@ def text_spanner_staff_padding(
 
     """
     return OverrideCommand(
-        attribute='staff_padding',
+        attribute="staff_padding",
         value=n,
-        grob='text_spanner',
+        grob="text_spanner",
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def text_spanner_stencil_false(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_spanner_stencil_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_spanner_stencil_false",
+) -> OverrideCommand:
     """
     Overrides text spanner stencil.
     """
     return OverrideCommand(
-        attribute='stencil',
-        grob='text_spanner',
+        attribute="stencil",
+        grob="text_spanner",
         selector=selector,
         tags=[tag],
         value=False,
-        )
+    )
+
 
 def text_spanner_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_spanner_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_spanner_transparent",
+) -> OverrideCommand:
     """
     Overrides text spanner transparent.
     """
     return OverrideCommand(
-        attribute='transparent',
-        grob='text_spanner',
+        attribute="transparent",
+        grob="text_spanner",
         selector=selector,
         tags=[tag],
         value=True,
-        )
+    )
+
 
 def text_spanner_y_offset(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_spanner_y_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_spanner_y_offset",
+) -> OverrideCommand:
     """
     Overrides text spanner Y-offset.
     """
     return OverrideCommand(
-        attribute='Y_offset',
-        grob='text_spanner',
+        attribute="Y_offset",
+        grob="text_spanner",
         selector=selector,
         tags=[tag],
         value=n,
-        )
+    )
+
 
 def tie_down(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_tie_down',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_tie_down",
+) -> OverrideCommand:
     r"""
     Overrides tie direction.
 
@@ -8202,18 +8284,19 @@ def tie_down(
 
     """
     return OverrideCommand(
-        attribute='direction',
-        grob='tie',
+        attribute="direction",
+        grob="tie",
         selector=selector,
         tags=[tag],
         value=abjad.Down,
-        )
+    )
+
 
 def tie_up(
     *,
-    selector: typings.Selector = 'baca.pleaves()',
-    tag: typing.Optional[str] = 'baca_tie_up',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.pleaves()",
+    tag: typing.Optional[str] = "baca_tie_up",
+) -> OverrideCommand:
     r"""
     Overrides tie direction.
 
@@ -8364,19 +8447,20 @@ def tie_up(
 
     """
     return OverrideCommand(
-        attribute='direction',
-        grob='tie',
+        attribute="direction",
+        grob="tie",
         selector=selector,
         tags=[tag],
         value=abjad.Up,
-        )
+    )
+
 
 def time_signature_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.hleaf(0)',
-    tag: typing.Optional[str] = 'baca_time_signature_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.hleaf(0)",
+    tag: typing.Optional[str] = "baca_time_signature_extra_offset",
+) -> OverrideCommand:
     r"""
     Overrides time signature extra offset.
 
@@ -8447,36 +8531,38 @@ def time_signature_extra_offset(
     """
     assert isinstance(pair, tuple), repr(pair)
     return OverrideCommand(
-        attribute='extra_offset',
-        context='Score',
-        grob='time_signature',
+        attribute="extra_offset",
+        context="Score",
+        grob="time_signature",
         selector=selector,
         tags=[tag],
         value=pair,
-        )
+    )
+
 
 def time_signature_stencil_false(
     *,
-    selector: typings.Selector = 'baca.hleaves()',
-    tag: typing.Optional[str] = 'baca_time_signature_stencil_false',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.hleaves()",
+    tag: typing.Optional[str] = "baca_time_signature_stencil_false",
+) -> OverrideCommand:
     """
     Overrides time signature stencil property.
     """
     return OverrideCommand(
-        attribute='stencil',
-        context='Score',
-        grob='time_signature',
+        attribute="stencil",
+        context="Score",
+        grob="time_signature",
         selector=selector,
         tags=[tag],
         value=False,
-        )
+    )
+
 
 def time_signature_transparent(
     *,
-    selector: typings.Selector = 'baca.hleaves()',
-    tag: typing.Optional[str] = 'baca_time_signature_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.hleaves()",
+    tag: typing.Optional[str] = "baca_time_signature_transparent",
+) -> OverrideCommand:
     r"""
     Overrides time signature transparency.
 
@@ -8547,36 +8633,38 @@ def time_signature_transparent(
 
     """
     return OverrideCommand(
-        attribute='transparent',
-        context='Score',
-        grob='time_signature',
+        attribute="transparent",
+        context="Score",
+        grob="time_signature",
         selector=selector,
         tags=[tag],
         value=True,
-        )
+    )
+
 
 def trill_spanner_staff_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_trill_spanner_staff_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_trill_spanner_staff_padding",
+) -> OverrideCommand:
     """
     Overrides trill spanner staff padding.
     """
     return OverrideCommand(
-        attribute='staff_padding',
-        grob='trill_spanner',
+        attribute="staff_padding",
+        grob="trill_spanner",
         selector=selector,
         tags=[tag],
         value=n,
-        )
+    )
+
 
 def tuplet_bracket_down(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_tuplet_bracket_down',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_tuplet_bracket_down",
+) -> OverrideCommand:
     r"""
     Overrides tuplet bracket direction.
 
@@ -8715,19 +8803,20 @@ def tuplet_bracket_down(
 
     """
     return OverrideCommand(
-        attribute='direction',
-        grob='tuplet_bracket',
+        attribute="direction",
+        grob="tuplet_bracket",
         selector=selector,
         tags=[tag],
         value=abjad.Down,
-        )
+    )
+
 
 def tuplet_bracket_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_tuplet_bracket_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_tuplet_bracket_extra_offset",
+) -> OverrideCommand:
     r"""
     Overrides tuplet bracket extra offset.
 
@@ -8864,70 +8953,74 @@ def tuplet_bracket_extra_offset(
 
     """
     return OverrideCommand(
-        attribute='extra_offset',
-        grob='tuplet_bracket',
+        attribute="extra_offset",
+        grob="tuplet_bracket",
         selector=selector,
         tags=[tag],
         value=pair,
-        )
+    )
+
 
 def tuplet_bracket_outside_staff_priority(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_tuplet_bracket_outside_staff_priority',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_tuplet_bracket_outside_staff_priority",
+) -> OverrideCommand:
     """
     Overrides tuplet bracket outside-staff-priority.
     """
     return OverrideCommand(
-        attribute='outside_staff_priority',
-        grob='tuplet_bracket',
+        attribute="outside_staff_priority",
+        grob="tuplet_bracket",
         selector=selector,
         tags=[tag],
         value=n,
-        )
+    )
+
 
 def tuplet_bracket_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_tuplet_bracket_down',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_tuplet_bracket_down",
+) -> OverrideCommand:
     """
     Overrides tuplet bracket padding.
     """
     return OverrideCommand(
-        attribute='padding',
-        grob='tuplet_bracket',
+        attribute="padding",
+        grob="tuplet_bracket",
         selector=selector,
         tags=[tag],
         value=n,
-        )
+    )
+
 
 def tuplet_bracket_shorten_pair(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_tuplet_bracket_shorten_pair',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_tuplet_bracket_shorten_pair",
+) -> OverrideCommand:
     """
     Overrides tuplet bracket shorten pair.
     """
     return OverrideCommand(
-        attribute='shorten_pair',
-        grob='tuplet_bracket',
+        attribute="shorten_pair",
+        grob="tuplet_bracket",
         selector=selector,
         tags=[tag],
         value=pair,
-        )
+    )
+
 
 def tuplet_bracket_staff_padding(
     n: typings.Number,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_tuplet_bracket_staff_padding',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_tuplet_bracket_staff_padding",
+) -> OverrideCommand:
     r"""
     Overrides tuplet bracket staff padding.
 
@@ -9060,34 +9153,36 @@ def tuplet_bracket_staff_padding(
 
     """
     return OverrideCommand(
-        attribute='staff_padding',
-        grob='tuplet_bracket',
+        attribute="staff_padding",
+        grob="tuplet_bracket",
         selector=selector,
         tags=[tag],
         value=n,
-        )
+    )
+
 
 def tuplet_bracket_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_tuplet_bracket_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_tuplet_bracket_transparent",
+) -> OverrideCommand:
     """
     Overrides tuplet bracket transparency.
     """
     return OverrideCommand(
-        attribute='transparent',
-        grob='tuplet_bracket',
+        attribute="transparent",
+        grob="tuplet_bracket",
         selector=selector,
         tags=[tag],
         value=True,
-        )
+    )
+
 
 def tuplet_bracket_up(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_tuplet_bracket_up',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_tuplet_bracket_up",
+) -> OverrideCommand:
     r"""
     Overrides tuplet bracket direction.
 
@@ -9226,35 +9321,37 @@ def tuplet_bracket_up(
 
     """
     return OverrideCommand(
-        attribute='direction',
-        grob='tuplet_bracket',
+        attribute="direction",
+        grob="tuplet_bracket",
         selector=selector,
         tags=[tag],
         value=abjad.Up,
-        )
+    )
+
 
 def tuplet_number_denominator(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_tuplet_number_denominator',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_tuplet_number_denominator",
+) -> OverrideCommand:
     """
     Overrides tuplet number text.
     """
     return OverrideCommand(
-        attribute='text',
-        grob='tuplet_number',
+        attribute="text",
+        grob="tuplet_number",
         selector=selector,
         tags=[tag],
-        value='tuplet-number::calc-denominator-text',
-        )
+        value="tuplet-number::calc-denominator-text",
+    )
+
 
 def tuplet_number_extra_offset(
     pair: typings.NumberPair,
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_tuplet_number_extra_offset',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_tuplet_number_extra_offset",
+) -> OverrideCommand:
     r"""
     Overrides tuplet number extra offset.
 
@@ -9391,25 +9488,26 @@ def tuplet_number_extra_offset(
 
     """
     return OverrideCommand(
-        attribute='extra_offset',
-        grob='tuplet_number',
+        attribute="extra_offset",
+        grob="tuplet_number",
         selector=selector,
         tags=[tag],
         value=pair,
-        )
+    )
+
 
 def tuplet_number_transparent(
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_tuplet_number_transparent',
-    ) -> OverrideCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_tuplet_number_transparent",
+) -> OverrideCommand:
     """
     Overrides tuplet number transparent.
     """
     return OverrideCommand(
-        attribute='transparent',
-        grob='tuplet_number',
+        attribute="transparent",
+        grob="tuplet_number",
         selector=selector,
         tags=[tag],
         value=True,
-        )
+    )

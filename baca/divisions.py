@@ -10,6 +10,7 @@ from . import classes
 
 ### CLASSES ###
 
+
 class Division(abjad.NonreducedFraction):
     r"""
     Division.
@@ -202,10 +203,7 @@ class Division(abjad.NonreducedFraction):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_payload',
-        '_start_offset',
-        )
+    __slots__ = ("_payload", "_start_offset")
 
     _publish_storage_format = True
 
@@ -217,12 +215,7 @@ class Division(abjad.NonreducedFraction):
         """
         pass
 
-    def __new__(
-        class_,
-        argument=None,
-        payload=None,
-        start_offset=None,
-        ):
+    def __new__(class_, argument=None, payload=None, start_offset=None):
         argument = argument or (0, 1)
         if isinstance(argument, str):
             division = eval(argument)
@@ -233,9 +226,9 @@ class Division(abjad.NonreducedFraction):
                 start_offset = argument.start_offset
         if isinstance(argument, abjad.NonreducedFraction):
             if payload is None:
-                payload = getattr(argument, 'payload', None)
+                payload = getattr(argument, "payload", None)
             if start_offset is None:
-                start_offset = getattr(argument, 'start_offset', None)
+                start_offset = getattr(argument, "start_offset", None)
         self = abjad.NonreducedFraction.__new__(class_, argument)
         self._payload = payload
         if start_offset is not None:
@@ -358,7 +351,7 @@ class Division(abjad.NonreducedFraction):
                 division = division.with_denominator(argument.denominator)
             division = type(self)(division, start_offset=start_offset)
         else:
-            raise Exception(f'invalid start offsets: {start_offsets!r}.')
+            raise Exception(f"invalid start offsets: {start_offsets!r}.")
         return division
 
     def __copy__(self, *arguments):
@@ -498,7 +491,7 @@ class Division(abjad.NonreducedFraction):
         self_has_start_offset = bool(self.start_offset is not None)
         expr_has_start_offset = bool(argument.start_offset is not None)
         if not self_has_start_offset == expr_has_start_offset:
-            message = 'both divisions must have (or not have) start offsets.'
+            message = "both divisions must have (or not have) start offsets."
             raise Exception(message)
         if self.start_offset is argument.start_offset is None:
             difference = super().__sub__(argument)
@@ -508,8 +501,8 @@ class Division(abjad.NonreducedFraction):
         timespans = my_timespan - expr_timespan
         negate_result = False
         if len(timespans) == 0:
-            #message = 'subtraction destroys division.'
-            #raise Exception(message)
+            # message = 'subtraction destroys division.'
+            # raise Exception(message)
             timespans = expr_timespan - my_timespan
             negate_result = True
         assert 0 < len(timespans), repr(timespans)
@@ -524,7 +517,7 @@ class Division(abjad.NonreducedFraction):
                 division = -division
             return division
         else:
-            message = 'timespan subtraction creates more than one division.'
+            message = "timespan subtraction creates more than one division."
             raise Exception(message)
 
     ### PRIVATE METHODS ###
@@ -537,20 +530,16 @@ class Division(abjad.NonreducedFraction):
             client=self,
             repr_is_indented=False,
             storage_format_args_values=[self.pair],
-            storage_format_kwargs_names=[
-                'payload',
-                'start_offset',
-                ],
-            )
+            storage_format_kwargs_names=["payload", "start_offset"],
+        )
 
     def _to_timespan(self):
         if self.start_offset is None:
-            raise Exception(f'division must have start offset: {self!r}.')
+            raise Exception(f"division must have start offset: {self!r}.")
         stop_offset = self.start_offset + self
         return abjad.Timespan(
-            start_offset=self.start_offset,
-            stop_offset=stop_offset,
-            )
+            start_offset=self.start_offset, stop_offset=stop_offset
+        )
 
     ### PUBLIC PROPERTIES ###
 
@@ -897,6 +886,7 @@ class Division(abjad.NonreducedFraction):
                     lhs -= 1
             number += 1
 
+
 class DivisionMaker(object):
     r"""
     Division-maker.
@@ -1186,17 +1176,11 @@ class DivisionMaker(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_callbacks',
-        )
+    __slots__ = ("_callbacks",)
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        *,
-        callbacks=None,
-        ) -> None:
+    def __init__(self, *, callbacks=None) -> None:
         callbacks = callbacks or ()
         if callbacks:
             callbacks = tuple(callbacks)
@@ -1204,7 +1188,7 @@ class DivisionMaker(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, argument=None) -> typing.List['Division']:
+    def __call__(self, argument=None) -> typing.List["Division"]:
         """
         Makes divisions from ``argument``.
 
@@ -1238,7 +1222,7 @@ class DivisionMaker(object):
     @staticmethod
     def _is_flat_list(argument):
         if isinstance(argument, list):
-            if not(argument):
+            if not (argument):
                 return True
             elif not isinstance(argument[0], list):
                 return True
@@ -1256,7 +1240,7 @@ class DivisionMaker(object):
             if start_offset is not None:
                 result._start_offset = start_offset
                 start_offset += result.duration
-        elif hasattr(argument, 'pair'):
+        elif hasattr(argument, "pair"):
             result = Division(argument.pair)
             if start_offset is not None:
                 result._start_offset = start_offset
@@ -1270,9 +1254,8 @@ class DivisionMaker(object):
             result = []
             for element in argument:
                 new_element, start_offset = DivisionMaker._to_divisions(
-                    element,
-                    start_offset=start_offset,
-                    )
+                    element, start_offset=start_offset
+                )
                 result.append(new_element)
             result = type(argument)(result)
         else:
@@ -1316,25 +1299,20 @@ class DivisionMaker(object):
 
     ### PUBLIC METHODS ###
 
-    def append_callback(self, callback) -> 'DivisionMaker':
+    def append_callback(self, callback) -> "DivisionMaker":
         """
         Configures division-maker with arbitrary ``callback``.
         """
         return self._append_callback(callback)
 
-    def flatten(self, *, depth=1) -> 'DivisionMaker':
+    def flatten(self, *, depth=1) -> "DivisionMaker":
         """
         Flattens division lists.
         """
         callback = FlattenDivisionCallback(depth=depth)
         return self._append_callback(callback)
 
-    def fuse_by_counts(
-        self,
-        *,
-        cyclic=None,
-        counts=None,
-        ) -> 'DivisionMaker':
+    def fuse_by_counts(self, *, cyclic=None, counts=None) -> "DivisionMaker":
         r"""
         Fuses divisions (or division lists) by ``counts``.
 
@@ -1375,10 +1353,7 @@ class DivisionMaker(object):
                 >>
 
         """
-        callback = FuseByCountsDivisionCallback(
-            cyclic=cyclic,
-            counts=counts,
-            )
+        callback = FuseByCountsDivisionCallback(cyclic=cyclic, counts=counts)
         return self._append_callback(callback)
 
     def partition_by_counts(
@@ -1388,7 +1363,7 @@ class DivisionMaker(object):
         counts=None,
         fuse_assignable_total_duration=None,
         remainder_direction=None,
-        ) -> 'DivisionMaker':
+    ) -> "DivisionMaker":
         """
         Partitions divisions (or division lists) by ``counts``.
 
@@ -1558,7 +1533,7 @@ class DivisionMaker(object):
             fuse_assignable_total_duration=fuse_assignable_total_duration,
             append_remainder=append_remainder,
             remainder_direction=remainder_direction,
-            )
+        )
         return self._append_callback(callback)
 
     @staticmethod
@@ -1566,10 +1541,7 @@ class DivisionMaker(object):
         """
         Makes rhythm-maker-style LilyPond file for documentation examples.
         """
-        return abjad.LilyPondFile.rhythm(
-            music,
-            divisions=divisions,
-            )
+        return abjad.LilyPondFile.rhythm(music, divisions=divisions)
 
     def split_by_durations(
         self,
@@ -1580,7 +1552,7 @@ class DivisionMaker(object):
         pattern_rotation_index=None,
         remainder=None,
         remainder_fuse_threshold=None,
-        ) -> 'DivisionMaker':
+    ) -> "DivisionMaker":
         r"""
         Splits divisions by durations.
 
@@ -1700,14 +1672,10 @@ class DivisionMaker(object):
             pattern_rotation_index=pattern_rotation_index,
             remainder=remainder,
             remainder_fuse_threshold=remainder_fuse_threshold,
-            )
+        )
         return self._append_callback(callback)
 
-    def split_by_rounded_ratios(
-        self,
-        *,
-        ratios=None,
-        ) -> 'DivisionMaker':
+    def split_by_rounded_ratios(self, *, ratios=None) -> "DivisionMaker":
         r"""
         Splits divisions by rounded ratios.
 
@@ -1803,10 +1771,9 @@ class DivisionMaker(object):
 
         Returns new division-maker.
         """
-        callback = SplitByRoundedRatiosDivisionCallback(
-            ratios=ratios,
-            )
+        callback = SplitByRoundedRatiosDivisionCallback(ratios=ratios)
         return self._append_callback(callback)
+
 
 class DivisionSequence(abjad.Sequence):
     """
@@ -1821,8 +1788,7 @@ class DivisionSequence(abjad.Sequence):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        )
+    __slots__ = ()
 
     ### INITIALIZER ###
 
@@ -1841,12 +1807,8 @@ class DivisionSequence(abjad.Sequence):
 
     ### PUBLIC METHODS ###
 
-    @abjad.Signature(
-        is_operator=True,
-        method_name='r',
-        subscript='n',
-        )
-    def rotate(self, n=0) -> 'DivisionSequence':
+    @abjad.Signature(is_operator=True, method_name="r", subscript="n")
+    def rotate(self, n=0) -> "DivisionSequence":
         r"""
         Rotates division sequence by index ``n``.
 
@@ -1919,7 +1881,7 @@ class DivisionSequence(abjad.Sequence):
         if len(self):
             first_start_offset = self[0].start_offset
             n = n % len(self)
-            for item in self[-n:len(self)] + self[:-n]:
+            for item in self[-n : len(self)] + self[:-n]:
                 items.append(item)
         start_offset = first_start_offset
         for item in items:
@@ -1937,7 +1899,7 @@ class DivisionSequence(abjad.Sequence):
         pattern_rotation_index=None,
         remainder=None,
         remainder_fuse_threshold=None,
-        ) -> 'DivisionSequence':
+    ) -> "DivisionSequence":
         """
         Splits each division in division sequence by ``durations``.
         """
@@ -1950,16 +1912,13 @@ class DivisionSequence(abjad.Sequence):
             pattern_rotation_index=pattern_rotation_index,
             remainder=remainder,
             remainder_fuse_threshold=remainder_fuse_threshold,
-            )
+        )
         division_lists = callback(self)
         sequences = [type(self)(_) for _ in division_lists]
         return type(self)(sequences)
 
     @abjad.Signature()
-    def split_by_rounded_ratios(
-        self,
-        ratios,
-        ) -> 'DivisionSequence':
+    def split_by_rounded_ratios(self, ratios) -> "DivisionSequence":
         """
         Splits each division in division sequence by rounded ``ratios``.
         """
@@ -1969,6 +1928,7 @@ class DivisionSequence(abjad.Sequence):
         division_lists = callback(self)
         sequences = [type(self)(_) for _ in division_lists]
         return type(self)(sequences)
+
 
 class DivisionSequenceExpression(abjad.Expression):
     r"""Division expression.
@@ -2077,8 +2037,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
     ### CLASS VARIALBES ###
 
-    __slots__ = (
-        )
+    __slots__ = ()
 
     _publish_storage_format = True
 
@@ -2088,35 +2047,33 @@ class DivisionSequenceExpression(abjad.Expression):
         """
         Gets proxy method.
         """
-        proxy_method = self.__getattr__('__add__')
+        proxy_method = self.__getattr__("__add__")
         return proxy_method(i)
 
     def __getitem__(self, argument):
         """
         Gets proxy method.
         """
-        proxy_method = self.__getattr__('__getitem__')
+        proxy_method = self.__getattr__("__getitem__")
         return proxy_method(argument)
 
     def __radd__(self, i):
         """
         Gets proxy method.
         """
-        proxy_method = self.__getattr__('__radd__')
+        proxy_method = self.__getattr__("__radd__")
         return proxy_method(i)
 
     ### PUBLIC METHODS ###
 
-    def division_sequence(self) -> 'DivisionSequenceExpression':
+    def division_sequence(self) -> "DivisionSequenceExpression":
         """
         Makes divison sequence expression.
         """
         class_ = DivisionSequence
         callback = self._make_initializer_callback(
-            class_,
-            module_names=['baca'],
-            string_template='{}',
-            )
+            class_, module_names=["baca"], string_template="{}"
+        )
         expression = self.append_callback(callback)
         return abjad.new(expression, proxy_class=class_)
 
@@ -2128,18 +2085,18 @@ class DivisionSequenceExpression(abjad.Expression):
         pattern_rotation_index=None,
         remainder=None,
         remainder_fuse_threshold=None,
-        ) -> 'DivisionSequenceExpression':
+    ) -> "DivisionSequenceExpression":
         """
         Appends split-by-durations to expression.
         """
-        template = '{{}}.split_by_durations('
-        template += 'compound_meter_multiplier={compound_meter_multiplier}'
-        template += ', cyclic={cyclic}'
-        template += ', durations={durations}'
-        template += ', pattern_rotation_index={pattern_rotation_index}'
-        template += ', remainder={remainder!r}'
-        template += ', remainder_fuse_threshold={remainder_fuse_threshold}'
-        template += ')'
+        template = "{{}}.split_by_durations("
+        template += "compound_meter_multiplier={compound_meter_multiplier}"
+        template += ", cyclic={cyclic}"
+        template += ", durations={durations}"
+        template += ", pattern_rotation_index={pattern_rotation_index}"
+        template += ", remainder={remainder!r}"
+        template += ", remainder_fuse_threshold={remainder_fuse_threshold}"
+        template += ")"
         evaluation_template = template.format(
             compound_meter_multiplier=compound_meter_multiplier,
             cyclic=cyclic,
@@ -2147,20 +2104,17 @@ class DivisionSequenceExpression(abjad.Expression):
             pattern_rotation_index=pattern_rotation_index,
             remainder=remainder,
             remainder_fuse_threshold=remainder_fuse_threshold,
-            )
+        )
         callback = abjad.Expression._frame_to_callback(
             inspect.currentframe(),
             evaluation_template=evaluation_template,
-            module_names=['baca'],
-            )
+            module_names=["baca"],
+        )
         expression = self.append_callback(callback)
         assert isinstance(expression, DivisionSequenceExpression)
         return expression
 
-    def split_by_rounded_ratios(
-        self,
-        ratios,
-        ) -> 'DivisionSequenceExpression':
+    def split_by_rounded_ratios(self, ratios) -> "DivisionSequenceExpression":
         """
         Appends split-by-rounded-ratios to expression.
 
@@ -2172,15 +2126,16 @@ class DivisionSequenceExpression(abjad.Expression):
             >>> expression = expression.flatten(depth=-1)
 
         """
-        evaluation_template = f'{{}}.split_by_rounded_ratios(ratios={ratios})'
+        evaluation_template = f"{{}}.split_by_rounded_ratios(ratios={ratios})"
         callback = abjad.Expression._frame_to_callback(
             inspect.currentframe(),
             evaluation_template=evaluation_template,
-            module_names=['baca'],
-            )
+            module_names=["baca"],
+        )
         expression = self.append_callback(callback)
         assert isinstance(expression, DivisionSequenceExpression)
         return expression
+
 
 class FlattenDivisionCallback(object):
     """
@@ -2189,9 +2144,7 @@ class FlattenDivisionCallback(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_depth',
-        )
+    __slots__ = ("_depth",)
 
     ### INITIALIZER ###
 
@@ -2216,6 +2169,7 @@ class FlattenDivisionCallback(object):
         Gets depth of callback.
         """
         return self._depth
+
 
 class FuseByCountsDivisionCallback(object):
     r"""
@@ -2332,21 +2286,13 @@ class FuseByCountsDivisionCallback(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_cyclic',
-        '_counts',
-        '_secondary_division_maker',
-        )
+    __slots__ = ("_cyclic", "_counts", "_secondary_division_maker")
 
     ### INITIALIZER ###
 
     def __init__(
-        self,
-        *,
-        cyclic=None,
-        counts=None,
-        secondary_division_maker=None,
-        ) -> None:
+        self, *, cyclic=None, counts=None, secondary_division_maker=None
+    ) -> None:
         if cyclic is not None:
             cyclic = bool(cyclic)
         self._cyclic = cyclic
@@ -2742,17 +2688,14 @@ class FuseByCountsDivisionCallback(object):
             divisions = [sum(divisions)]
         elif self.counts:
             parts = classes.Sequence(divisions).partition_by_counts(
-                self.counts,
-                cyclic=self.cyclic,
-                overhang=True,
-                )
+                self.counts, cyclic=self.cyclic, overhang=True
+            )
             divisions = [sum(_) for _ in parts]
         divisions = [Division(_) for _ in divisions]
         if self.secondary_division_maker is None:
             divisions, start_offset = DivisionMaker._to_divisions(
-                divisions,
-                start_offset,
-                )
+                divisions, start_offset
+            )
             return divisions
         division_lists = []
         for division in divisions:
@@ -2760,13 +2703,11 @@ class FuseByCountsDivisionCallback(object):
                 division_list = self.secondary_division_maker([division])[0]
             else:
                 division_list = [division]
-            division_list = [
-                Division(_) for _ in division_list]
+            division_list = [Division(_) for _ in division_list]
             division_lists.append(division_list)
         division_lists, start_offset = DivisionMaker._to_divisions(
-            division_lists,
-            start_offset=start_offset,
-            )
+            division_lists, start_offset=start_offset
+        )
         return division_lists
 
     ### PRIVATE METHODS ###
@@ -2774,9 +2715,9 @@ class FuseByCountsDivisionCallback(object):
     def _coerce_divisions(self, divisions):
         divisions_ = []
         for division in divisions:
-            if hasattr(division, 'time_signature'):
+            if hasattr(division, "time_signature"):
                 argument = division.time_signature.pair
-            elif hasattr(division, 'duration'):
+            elif hasattr(division, "duration"):
                 argument = division.duration
             else:
                 argument = division
@@ -2787,9 +2728,11 @@ class FuseByCountsDivisionCallback(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def counts(self) -> typing.Optional[
+    def counts(
+        self
+    ) -> typing.Optional[
         typing.Union[abjad.mathtools.Infinity, typing.List[int]]
-        ]:
+    ]:
         """
         Gets counts.
 
@@ -2807,13 +2750,14 @@ class FuseByCountsDivisionCallback(object):
         return self._cyclic
 
     @property
-    def secondary_division_maker(self) -> typing.Optional['DivisionMaker']:
+    def secondary_division_maker(self) -> typing.Optional["DivisionMaker"]:
         """
         Gets secondary division-maker.
 
         Returns division-maker or none.
         """
         return self._secondary_division_maker
+
 
 class PartitionDivisionCallback(object):
     """
@@ -2917,11 +2861,11 @@ class PartitionDivisionCallback(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_counts',
-        '_fuse_assignable_total_duration',
-        '_append_remainder',
-        '_remainder_direction',
-        )
+        "_counts",
+        "_fuse_assignable_total_duration",
+        "_append_remainder",
+        "_remainder_direction",
+    )
 
     _publish_storage_format = True
 
@@ -2934,7 +2878,7 @@ class PartitionDivisionCallback(object):
         fuse_assignable_total_duration=None,
         append_remainder=None,
         remainder_direction=None,
-        ) -> None:
+    ) -> None:
         self._counts = counts
         self._fuse_assignable_total_duration = fuse_assignable_total_duration
         self._append_remainder = append_remainder
@@ -3009,22 +2953,21 @@ class PartitionDivisionCallback(object):
         if divisions and isinstance(divisions[0], list):
             start_offset = divisions[0][0].start_offset
             for division in divisions:
-                grouped_division = \
-                    self._beat_list_to_grouped_beat_list(division)
+                grouped_division = self._beat_list_to_grouped_beat_list(
+                    division
+                )
                 grouped_divisions.append(grouped_division)
             result = grouped_divisions
         else:
             start_offset = divisions[0].start_offset
-            grouped_division = \
-                self._beat_list_to_grouped_beat_list(divisions)
+            grouped_division = self._beat_list_to_grouped_beat_list(divisions)
             result = grouped_division
         result, start_offset = DivisionMaker._to_divisions(
-            result,
-            start_offset=start_offset,
-            )
+            result, start_offset=start_offset
+        )
         return result
 
-    def __format__(self, format_specification='') -> str:
+    def __format__(self, format_specification="") -> str:
         """
         Formats beat callback.
 
@@ -3055,7 +2998,7 @@ class PartitionDivisionCallback(object):
         assert isinstance(beat_list, (list, tuple)), repr(beat_list)
         beat_list_ = []
         for beat in beat_list:
-            if hasattr(beat, 'duration'):
+            if hasattr(beat, "duration"):
                 beat = Division(beat.duration)
             else:
                 beat = Division(beat)
@@ -3063,29 +3006,28 @@ class PartitionDivisionCallback(object):
         beat_list = beat_list_
         total_duration = sum(beat_list)
         total_duration = abjad.Duration(total_duration)
-        if (total_duration.is_assignable and
-            self.fuse_assignable_total_duration):
+        if (
+            total_duration.is_assignable
+            and self.fuse_assignable_total_duration
+        ):
             return [[Division(total_duration)]]
         if self.counts is None:
             beat_group = list(beat_list)
             grouped_beat_list = [beat_group]
             return grouped_beat_list
         grouped_beat_list = classes.Sequence(beat_list).partition_by_counts(
-            counts=self.counts,
-            cyclic=True,
-            overhang=False,
-            )
+            counts=self.counts, cyclic=True, overhang=False
+        )
         beats_included = sum([len(_) for _ in grouped_beat_list])
         if beats_included == len(beat_list):
             return grouped_beat_list
         remainder_length = len(beat_list) - beats_included
         if self.remainder_direction == abjad.Left:
             grouped_beat_list = classes.Sequence(
-                beat_list[remainder_length:]).partition_by_counts(
-                counts=self.counts,
-                cyclic=True,
-                overhang=False
-                )
+                beat_list[remainder_length:]
+            ).partition_by_counts(
+                counts=self.counts, cyclic=True, overhang=False
+            )
             grouped_beat_list = list(grouped_beat_list)
             remainder = beat_list[:remainder_length]
             if self.append_remainder:
@@ -3094,11 +3036,10 @@ class PartitionDivisionCallback(object):
                 grouped_beat_list.insert(0, remainder)
         else:
             grouped_beat_list = classes.Sequence(
-                beat_list[:-remainder_length]).partition_by_counts(
-                counts=self.counts,
-                cyclic=True,
-                overhang=False
-                )
+                beat_list[:-remainder_length]
+            ).partition_by_counts(
+                counts=self.counts, cyclic=True, overhang=False
+            )
             grouped_beat_list = list(grouped_beat_list)
             remainder = beat_list[-remainder_length:]
             if self.append_remainder:
@@ -3377,8 +3318,9 @@ class PartitionDivisionCallback(object):
         return self._fuse_assignable_total_duration
 
     @property
-    def remainder_direction(self) -> typing.Optional[
-        abjad.enums.HorizontalAlignment]:
+    def remainder_direction(
+        self
+    ) -> typing.Optional[abjad.enums.HorizontalAlignment]:
         """
         Gets remainder direction of beat callback.
 
@@ -3466,6 +3408,7 @@ class PartitionDivisionCallback(object):
 
         """
         return self._remainder_direction
+
 
 class SplitByDurationsDivisionCallback(object):
     r"""
@@ -3591,14 +3534,14 @@ class SplitByDurationsDivisionCallback(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_callbacks',
-        '_compound_meter_multiplier',
-        '_cyclic',
-        '_pattern',
-        '_pattern_rotation_index',
-        '_remainder',
-        '_remainder_fuse_threshold',
-        )
+        "_callbacks",
+        "_compound_meter_multiplier",
+        "_cyclic",
+        "_pattern",
+        "_pattern_rotation_index",
+        "_remainder",
+        "_remainder_fuse_threshold",
+    )
 
     ### INITIALIZER ###
 
@@ -3611,10 +3554,11 @@ class SplitByDurationsDivisionCallback(object):
         pattern_rotation_index=None,
         remainder=None,
         remainder_fuse_threshold=None,
-        ) -> None:
+    ) -> None:
         if compound_meter_multiplier is not None:
             compound_meter_multiplier = abjad.Multiplier(
-                compound_meter_multiplier)
+                compound_meter_multiplier
+            )
         self._compound_meter_multiplier = compound_meter_multiplier
         if cyclic is not None:
             cyclic = bool(cyclic)
@@ -3896,21 +3840,19 @@ class SplitByDurationsDivisionCallback(object):
             elif input_meter.is_compound:
                 multiplier = self.compound_meter_multiplier or 1
                 durations = [
-                    abjad.Duration(multiplier * _)
-                    for _ in self.durations
-                    ]
+                    abjad.Duration(multiplier * _) for _ in self.durations
+                ]
             division_list = list(durations)
             pattern_rotation_index = self.pattern_rotation_index or 0
             pattern_rotation_index *= i
             division_list = classes.Sequence(division_list).rotate(
                 n=pattern_rotation_index
-                )
+            )
             division_list = list(division_list)
             if self.cyclic:
-                division_list = classes.Sequence(division_list).repeat_to_weight(
-                    input_division,
-                    allow_total=abjad.Less,
-                    )
+                division_list = classes.Sequence(
+                    division_list
+                ).repeat_to_weight(input_division, allow_total=abjad.Less)
                 division_list = list(division_list)
             total_duration = abjad.Duration(sum(division_list))
             if total_duration == input_duration:
@@ -3943,9 +3885,8 @@ class SplitByDurationsDivisionCallback(object):
         for _ in division_lists:
             assert isinstance(_, list), repr(_)
         division_lists, start_offset = DivisionMaker._to_divisions(
-            division_lists,
-            start_offset
-            )
+            division_lists, start_offset
+        )
         return division_lists
 
     def __repr__(self) -> str:
@@ -3961,17 +3902,16 @@ class SplitByDurationsDivisionCallback(object):
         keyword_argument_names = agent.signature_keyword_names
         keyword_argument_names = list(keyword_argument_names)
         if bool(self.cyclic):
-            keyword_argument_names.remove('cyclic')
+            keyword_argument_names.remove("cyclic")
         if not self.durations:
-            keyword_argument_names.remove('durations')
+            keyword_argument_names.remove("durations")
         if self.remainder == abjad.Right:
-            keyword_argument_names.remove('remainder')
+            keyword_argument_names.remove("remainder")
         if self.pattern_rotation_index == 0:
-            keyword_argument_names.remove('pattern_rotation_index')
+            keyword_argument_names.remove("pattern_rotation_index")
         return abjad.StorageFormatSpecification(
-            self,
-            keyword_argument_names=keyword_argument_names,
-            )
+            self, keyword_argument_names=keyword_argument_names
+        )
 
     ### PUBLIC PROPERTIES ###
 
@@ -4827,10 +4767,8 @@ class SplitByDurationsDivisionCallback(object):
 
         Returns LilyPond file.
         """
-        return abjad.LilyPondFile.rhythm(
-            music,
-            divisions=divisions,
-            )
+        return abjad.LilyPondFile.rhythm(music, divisions=divisions)
+
 
 class SplitByRoundedRatiosDivisionCallback(object):
     """
@@ -4874,17 +4812,11 @@ class SplitByRoundedRatiosDivisionCallback(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_ratios',
-        )
+    __slots__ = ("_ratios",)
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        *,
-        ratios=None,
-        ) -> None:
+    def __init__(self, *, ratios=None) -> None:
         if ratios is not None:
             ratios = ratios or ()
             ratios = [abjad.Ratio(_) for _ in ratios]
@@ -4966,18 +4898,16 @@ class SplitByRoundedRatiosDivisionCallback(object):
         for i, division in enumerate(divisions):
             ratio = ratios[i]
             numerators = abjad.mathtools.partition_integer_by_ratio(
-                division.numerator,
-                ratio,
-                )
+                division.numerator, ratio
+            )
             division_list = [
                 Division((numerator, division.denominator))
                 for numerator in numerators
-                ]
+            ]
             division_lists.append(division_list)
         division_lists, start_offset = DivisionMaker._to_divisions(
-            division_lists,
-            start_offset=start_offset,
-            )
+            division_lists, start_offset=start_offset
+        )
         return division_lists
 
     ### PRIVATE METHODS ###
@@ -5068,6 +4998,7 @@ class SplitByRoundedRatiosDivisionCallback(object):
         """
         return self._ratios
 
+
 ### TYPINGS ###
 
 division_maker_type = (
@@ -5077,7 +5008,7 @@ division_maker_type = (
     PartitionDivisionCallback,
     SplitByDurationsDivisionCallback,
     SplitByRoundedRatiosDivisionCallback,
-    )
+)
 
 DivisionMakerTyping = typing.Union[
     DivisionMaker,
@@ -5086,9 +5017,10 @@ DivisionMakerTyping = typing.Union[
     PartitionDivisionCallback,
     SplitByDurationsDivisionCallback,
     SplitByRoundedRatiosDivisionCallback,
-    ]
+]
 
 ### FACTORY FUNCTIONS ###
+
 
 def compound_quarter_divisions() -> DivisionSequenceExpression:
     """
@@ -5099,13 +5031,14 @@ def compound_quarter_divisions() -> DivisionSequenceExpression:
         compound_meter_multiplier=abjad.Multiplier((3, 2)),
         cyclic=True,
         durations=[abjad.Duration(1, 4)],
-        )
+    )
     expression = expression.flatten(depth=-1)
     return expression
 
+
 def fuse_compound_quarter_divisions(
     counts: typing.List[int],
-    ) -> DivisionSequenceExpression:
+) -> DivisionSequenceExpression:
     r"""
     Fuses compound quarter divisions.
 
@@ -5156,21 +5089,20 @@ def fuse_compound_quarter_divisions(
         compound_meter_multiplier=abjad.Multiplier((3, 2)),
         cyclic=True,
         durations=[abjad.Duration(1, 4)],
-        )
+    )
     expression = expression.flatten(depth=-1)
     expression = expression.partition_by_counts(
-        counts=counts,
-        cyclic=True,
-        overhang=True,
-        )
+        counts=counts, cyclic=True, overhang=True
+    )
     expression = expression.map(classes.sequence_expression().sum())
     expression = expression.flatten(depth=-1)
     return expression
 
+
 def split_by_durations(
     durations: typing.Iterable,
     remainder: abjad.HorizontalAlignment = abjad.Right,
-    ) -> DivisionSequenceExpression:
+) -> DivisionSequenceExpression:
     r"""
     Splits divisions by durations.
 
@@ -5204,12 +5136,11 @@ def split_by_durations(
     expression = expression.sum()
     expression = expression.division_sequence()
     expression = expression.split_by_durations(
-        cyclic=True,
-        durations=durations,
-        remainder=remainder,
-        )
+        cyclic=True, durations=durations, remainder=remainder
+    )
     expression = expression.flatten(depth=-1)
     return expression
+
 
 def strict_quarter_divisions() -> DivisionSequenceExpression:
     """
@@ -5230,9 +5161,8 @@ def strict_quarter_divisions() -> DivisionSequenceExpression:
     expression = DivisionSequenceExpression()
     expression = expression.division_sequence()
     expression = expression.split_by_durations(
-        cyclic=True,
-        durations=[abjad.Duration(1, 4)]
-        )
+        cyclic=True, durations=[abjad.Duration(1, 4)]
+    )
     expression_ = expression.sequence()
     assert isinstance(expression_, DivisionSequenceExpression)
     expression = expression_.flatten(depth=-1)

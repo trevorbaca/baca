@@ -11,6 +11,7 @@ from . import typings
 
 ### CLASSES ###
 
+
 class AccidentalAdjustmentCommand(scoping.Command):
     r"""
     Accidental adjustment command.
@@ -142,11 +143,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_cautionary',
-        '_forced',
-        '_parenthesized',
-        )
+    __slots__ = ("_cautionary", "_forced", "_parenthesized")
 
     ### INITIALIZER ###
 
@@ -160,9 +157,9 @@ class AccidentalAdjustmentCommand(scoping.Command):
         measures: typings.Slice = None,
         parenthesized: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.pleaf(0)',
+        selector: typings.Selector = "baca.pleaf(0)",
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -171,7 +168,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
             scope=scope,
             selector=selector,
             tags=tags,
-            )
+        )
         if cautionary is not None:
             cautionary = bool(cautionary)
         self._cautionary = cautionary
@@ -194,8 +191,8 @@ class AccidentalAdjustmentCommand(scoping.Command):
             argument = self.selector(argument)
         if self.tag:
             if not self.tag.only_edition() and not self.tag.not_editions():
-                raise Exception(f'tag must have edition: {self.tag!r}.')
-            alternative_tag = self.tag.prepend('AccidentalAdjustmentCommand')
+                raise Exception(f"tag must have edition: {self.tag!r}.")
+            alternative_tag = self.tag.prepend("AccidentalAdjustmentCommand")
             primary_tag = alternative_tag.invert_edition_tags()
         for pleaf in classes.Selection(argument).pleaves():
             if isinstance(pleaf, abjad.Note):
@@ -224,7 +221,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
                         alternative,
                         str(alternative_tag),
                         str(primary_tag),
-                        )
+                    )
 
     ### PUBLIC PROPERTIES ###
 
@@ -248,6 +245,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
         Is true when command parenthesizes accidentals.
         """
         return self._parenthesized
+
 
 class ClusterCommand(scoping.Command):
     r"""
@@ -797,11 +795,7 @@ class ClusterCommand(scoping.Command):
 
     ### CLASS VARIABLES ##
 
-    __slots__ = (
-        '_hide_flat_markup',
-        '_start_pitch',
-        '_widths',
-        )
+    __slots__ = ("_hide_flat_markup", "_start_pitch", "_widths")
 
     ### INITIALIZER ###
 
@@ -813,10 +807,10 @@ class ClusterCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector='baca.plts()',
+        selector="baca.plts()",
         start_pitch=None,
         widths=None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -824,7 +818,7 @@ class ClusterCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         assert isinstance(hide_flat_markup, (bool, type(None)))
         self._hide_flat_markup = hide_flat_markup
         if start_pitch is not None:
@@ -869,8 +863,8 @@ class ClusterCommand(scoping.Command):
             start_pitch = plt.head.written_pitch
         pitches = self._make_pitches(start_pitch, width)
         key_cluster = abjad.KeyCluster(
-            include_black_keys=not self.hide_flat_markup,
-            )
+            include_black_keys=not self.hide_flat_markup
+        )
         for pleaf in plt:
             chord = abjad.Chord(pitches, pleaf.written_duration)
             indicators = abjad.detach(object, pleaf)
@@ -884,9 +878,9 @@ class ClusterCommand(scoping.Command):
     def _make_pitches(self, start_pitch, width):
         pitches = [start_pitch]
         for i in range(width - 1):
-            pitch = pitches[-1] + abjad.NamedInterval('M3')
-            pitch = abjad.NamedPitch(pitch, accidental='natural')
-            assert pitch.accidental == abjad.Accidental('natural')
+            pitch = pitches[-1] + abjad.NamedInterval("M3")
+            pitch = abjad.NamedPitch(pitch, accidental="natural")
+            assert pitch.accidental == abjad.Accidental("natural")
             pitches.append(pitch)
         return pitches
 
@@ -1947,6 +1941,7 @@ class ClusterCommand(scoping.Command):
         """
         return self._widths
 
+
 class ColorFingeringCommand(scoping.Command):
     r"""
     Color fingering command.
@@ -2096,10 +2091,7 @@ class ColorFingeringCommand(scoping.Command):
 
     ### CLASS VARIABLES ##
 
-    __slots__ = (
-        '_numbers',
-        '_tweaks',
-        )
+    __slots__ = ("_numbers", "_tweaks")
 
     ### INITIALIZER ###
 
@@ -2111,9 +2103,9 @@ class ColorFingeringCommand(scoping.Command):
         measures: typings.Slice = None,
         numbers=None,
         scope: scoping.ScopeTyping = None,
-        selector='baca.pheads()',
+        selector="baca.pheads()",
         tweaks: abjad.IndexedTweakManagers = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -2121,7 +2113,7 @@ class ColorFingeringCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         if numbers is not None:
             assert abjad.mathtools.all_are_nonnegative_integers(numbers)
             numbers = abjad.CyclicTuple(numbers)
@@ -2151,12 +2143,7 @@ class ColorFingeringCommand(scoping.Command):
             number = self.numbers[i]
             if number != 0:
                 fingering = abjad.ColorFingering(number)
-                self._apply_tweaks(
-                    fingering,
-                    self.tweaks,
-                    i=i,
-                    total=total,
-                    )
+                self._apply_tweaks(fingering, self.tweaks, i=i, total=total)
                 abjad.attach(fingering, phead)
 
     ### PUBLIC PROPERTIES ###
@@ -2182,6 +2169,7 @@ class ColorFingeringCommand(scoping.Command):
         Gets tweaks.
         """
         return self._tweaks
+
 
 class DiatonicClusterCommand(scoping.Command):
     r"""
@@ -2209,9 +2197,7 @@ class DiatonicClusterCommand(scoping.Command):
 
     ### CLASS ATTRIBUTES ###
 
-    __slots__ = (
-        '_widths',
-        )
+    __slots__ = ("_widths",)
 
     ### INITIALIZER ###
 
@@ -2223,8 +2209,8 @@ class DiatonicClusterCommand(scoping.Command):
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
         widths,
-        selector='baca.plts()',
-        ) -> None:
+        selector="baca.plts()",
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -2232,7 +2218,7 @@ class DiatonicClusterCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         assert abjad.mathtools.all_are_nonnegative_integers(widths)
         widths = abjad.CyclicTuple(widths)
         self._widths = widths
@@ -2295,6 +2281,7 @@ class DiatonicClusterCommand(scoping.Command):
         """
         return self._widths
 
+
 class Loop(abjad.CyclicTuple):
     """
     Loop.
@@ -2355,21 +2342,13 @@ class Loop(abjad.CyclicTuple):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_intervals',
-        '_items',
-        )
+    __slots__ = ("_intervals", "_items")
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        items=None,
-        *,
-        intervals=None,
-        ):
+    def __init__(self, items=None, *, intervals=None):
         if items is not None:
             assert isinstance(items, collections.abc.Iterable), repr(items)
             items = [abjad.NamedPitch(_) for _ in items]
@@ -2406,8 +2385,8 @@ class Loop(abjad.CyclicTuple):
             client=self,
             repr_is_indented=False,
             storage_format_args_values=[list(self.items)],
-            storage_format_kwargs_names=['intervals'],
-            )
+            storage_format_kwargs_names=["intervals"],
+        )
 
     ### PUBLIC PROPERTIES ###
 
@@ -2424,6 +2403,7 @@ class Loop(abjad.CyclicTuple):
         Gets items.
         """
         return self._items
+
 
 class MicrotoneDeviationCommand(scoping.Command):
     r"""
@@ -2581,9 +2561,7 @@ class MicrotoneDeviationCommand(scoping.Command):
 
     ### CLASS VARIABLES ##
 
-    __slots__ = (
-        '_deviations',
-        )
+    __slots__ = ("_deviations",)
 
     ### INITIALIZER ###
 
@@ -2595,8 +2573,8 @@ class MicrotoneDeviationCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector='baca.plts()',
-        ) -> None:
+        selector="baca.plts()",
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -2604,7 +2582,7 @@ class MicrotoneDeviationCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         if deviations is not None:
             assert isinstance(deviations, collections.abc.Iterable)
             assert all(isinstance(_, numbers.Number) for _ in deviations)
@@ -2627,7 +2605,7 @@ class MicrotoneDeviationCommand(scoping.Command):
         for i, plt in enumerate(classes.Selection(argument).plts()):
             deviation = self.deviations[i]
             self._adjust_pitch(plt, deviation)
-            
+
     ### PRIVATE METHODS ###
 
     def _adjust_pitch(self, plt, deviation):
@@ -2639,7 +2617,7 @@ class MicrotoneDeviationCommand(scoping.Command):
             accidental = pitch.accidental.semitones + deviation
             pitch = abjad.NamedPitch(pitch, accidental=accidental)
             pleaf.written_pitch = pitch
-            annotation = {'color microtone': True}
+            annotation = {"color microtone": True}
             abjad.attach(annotation, pleaf)
 
     ### PUBLIC PROPERTIES ###
@@ -2660,6 +2638,7 @@ class MicrotoneDeviationCommand(scoping.Command):
         Returns cyclic tuple or none.
         """
         return self._deviations
+
 
 class OctaveDisplacementCommand(scoping.Command):
     r"""
@@ -2819,9 +2798,7 @@ class OctaveDisplacementCommand(scoping.Command):
 
     ### CLASS VARIABLES ##
 
-    __slots__ = (
-        '_displacements',
-        )
+    __slots__ = ("_displacements",)
 
     ### INITIALIZER ###
 
@@ -2833,8 +2810,8 @@ class OctaveDisplacementCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector='baca.plts()',
-        ) -> None:
+        selector="baca.plts()",
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -2842,7 +2819,7 @@ class OctaveDisplacementCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         if displacements is not None:
             displacements = tuple(displacements)
             assert self._is_octave_displacement_vector(displacements)
@@ -2907,6 +2884,7 @@ class OctaveDisplacementCommand(scoping.Command):
         Returns cyclic tuple of integers, or none.
         """
         return self._displacements
+
 
 class PitchCommand(scoping.Command):
     r"""
@@ -3387,17 +3365,17 @@ class PitchCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_allow_octaves',
-        '_allow_out_of_range',
-        '_allow_repeats',
-        '_cyclic',
-        '_do_not_transpose',
-        '_ignore_incomplete',
-        '_mutated_score',
-        '_persist',
-        '_pitches',
-        '_state',
-        )
+        "_allow_octaves",
+        "_allow_out_of_range",
+        "_allow_repeats",
+        "_cyclic",
+        "_do_not_transpose",
+        "_ignore_incomplete",
+        "_mutated_score",
+        "_persist",
+        "_pitches",
+        "_state",
+    )
 
     ### INITIALIZER ###
 
@@ -3417,7 +3395,7 @@ class PitchCommand(scoping.Command):
         pitches: typing.Iterable = None,
         scope: scoping.ScopeTyping = None,
         selector: typings.Selector = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -3425,7 +3403,7 @@ class PitchCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         if allow_octaves is not None:
             allow_octaves = bool(allow_octaves)
         self._allow_octaves = allow_octaves
@@ -3501,7 +3479,7 @@ class PitchCommand(scoping.Command):
             pitches_consumed += 1
         self._state = abjad.OrderedDict()
         pitches_consumed += previous_pitches_consumed
-        self.state['pitches_consumed'] = pitches_consumed
+        self.state["pitches_consumed"] = pitches_consumed
 
     ### PRIVATE METHODS ###
 
@@ -3509,9 +3487,9 @@ class PitchCommand(scoping.Command):
         if self.cyclic:
             return
         if len(self.pitches) < len(plts):
-            message = f'only {len(self.pitches)} pitches'
-            message += f' for {len(plts)} logical ties:\n\n'
-            message += f'{self!r} and {plts!r}.'
+            message = f"only {len(self.pitches)} pitches"
+            message += f" for {len(plts)} logical ties:\n\n"
+            message += f"{self!r} and {plts!r}."
             raise Exception(message)
 
     @staticmethod
@@ -3520,9 +3498,9 @@ class PitchCommand(scoping.Command):
             pitches = PitchCommand._parse_string(pitches)
         items = []
         for item in pitches:
-            if isinstance(item, str) and '<' in item and '>' in item:
-                item = item.strip('<')
-                item = item.strip('>')
+            if isinstance(item, str) and "<" in item and ">" in item:
+                item = item.strip("<")
+                item = item.strip(">")
                 item = abjad.PitchSet(item, abjad.NamedPitch)
             elif isinstance(item, str):
                 item = abjad.NamedPitch(item)
@@ -3547,13 +3525,13 @@ class PitchCommand(scoping.Command):
     def _parse_string(string):
         items, current_chord = [], []
         for part in string.split():
-            if '<' in part:
+            if "<" in part:
                 assert not current_chord
                 current_chord.append(part)
-            elif '>' in part:
+            elif ">" in part:
                 assert current_chord
                 current_chord.append(part)
-                item = ' '.join(current_chord)
+                item = " ".join(current_chord)
                 items.append(item)
                 current_chord = []
             elif current_chord:
@@ -3564,24 +3542,24 @@ class PitchCommand(scoping.Command):
         return items
 
     def _previous_pitches_consumed(self):
-        dictionary = self.runtime.get('previous_segment_voice_metadata', None)
+        dictionary = self.runtime.get("previous_segment_voice_metadata", None)
         if not dictionary:
             return 0
         dictionary = dictionary.get(const.PITCH, None)
         if not dictionary:
             return 0
-        if dictionary.get('name') != self.persist:
+        if dictionary.get("name") != self.persist:
             return 0
-        pitches_consumed = dictionary.get('pitches_consumed', None)
+        pitches_consumed = dictionary.get("pitches_consumed", None)
         if not pitches_consumed:
             return 0
         assert 1 <= pitches_consumed
         if self.ignore_incomplete:
             return pitches_consumed
-        dictionary = self.runtime['previous_segment_voice_metadata']
+        dictionary = self.runtime["previous_segment_voice_metadata"]
         dictionary = dictionary.get(const.RHYTHM, None)
         if dictionary:
-            if dictionary.get('incomplete_final_note', False):
+            if dictionary.get("incomplete_final_note", False):
                 pitches_consumed -= 1
         return pitches_consumed
 
@@ -3677,7 +3655,7 @@ class PitchCommand(scoping.Command):
 
         """
         return const.PITCH
-        
+
     @property
     def persist(self) -> typing.Optional[str]:
         """
@@ -3716,6 +3694,7 @@ class PitchCommand(scoping.Command):
         Gets state dictionary.
         """
         return self._state
+
 
 class RegisterCommand(scoping.Command):
     r"""
@@ -4064,9 +4043,7 @@ class RegisterCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_registration',
-        )
+    __slots__ = ("_registration",)
 
     ### INITIALIZER ###
 
@@ -4078,8 +4055,8 @@ class RegisterCommand(scoping.Command):
         measures: typings.Slice = None,
         registration=None,
         scope: scoping.ScopeTyping = None,
-        selector='baca.plts()',
-        ) -> None:
+        selector="baca.plts()",
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -4087,7 +4064,7 @@ class RegisterCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         if registration is not None:
             prototype = pitchclasses.Registration
             assert isinstance(registration, prototype), repr(registration)
@@ -4155,6 +4132,7 @@ class RegisterCommand(scoping.Command):
         Returns registration or none.
         """
         return self._registration
+
 
 class RegisterInterpolationCommand(scoping.Command):
     r"""
@@ -5329,10 +5307,7 @@ class RegisterInterpolationCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_start_pitch',
-        '_stop_pitch',
-        )
+    __slots__ = ("_start_pitch", "_stop_pitch")
 
     _publish_storage_format = True
 
@@ -5345,10 +5320,10 @@ class RegisterInterpolationCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.plts()',
+        selector: typings.Selector = "baca.plts()",
         start_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
         stop_pitch: typing.Union[typings.Number, abjad.NumberedPitch] = 0,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -5356,7 +5331,7 @@ class RegisterInterpolationCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         start_pitch = abjad.NumberedPitch(start_pitch)
         self._start_pitch: abjad.NumberedPitch = start_pitch
         stop_pitch = abjad.NumberedPitch(stop_pitch)
@@ -5397,7 +5372,7 @@ class RegisterInterpolationCommand(scoping.Command):
         addendum = fraction * compass
         current_pitch = start_pitch + addendum
         current_pitch = int(current_pitch)
-        return pitchclasses.Registration([('[A0, C8]', current_pitch)])
+        return pitchclasses.Registration([("[A0, C8]", current_pitch)])
 
     ### PUBLIC PROPERTIES ###
 
@@ -5656,6 +5631,7 @@ class RegisterInterpolationCommand(scoping.Command):
         Gets stop pitch.
         """
         return self._stop_pitch
+
 
 class RegisterToOctaveCommand(scoping.Command):
     r"""
@@ -5955,10 +5931,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_anchor',
-        '_octave_number',
-        )
+    __slots__ = ("_anchor", "_octave_number")
 
     ### INITIALIZER ###
 
@@ -5971,8 +5944,8 @@ class RegisterToOctaveCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector='baca.plts()',
-        ) -> None:
+        selector="baca.plts()",
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -5980,7 +5953,7 @@ class RegisterToOctaveCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         if anchor is not None:
             prototype = (abjad.Center, abjad.Down, abjad.Up)
             assert anchor in prototype, repr(anchor)
@@ -6208,6 +6181,7 @@ class RegisterToOctaveCommand(scoping.Command):
         """
         return self._octave_number
 
+
 class StaffPositionCommand(scoping.Command):
     r"""
     Staff position command.
@@ -6256,12 +6230,7 @@ class StaffPositionCommand(scoping.Command):
 
     ### CLASS ATTRIBUTES ###
 
-    __slots__ = (
-        '_allow_out_of_range',
-        '_allow_repeats',
-        '_exact',
-        '_numbers',
-        )
+    __slots__ = ("_allow_out_of_range", "_allow_repeats", "_exact", "_numbers")
 
     ### INITIALIZER ###
 
@@ -6271,13 +6240,13 @@ class StaffPositionCommand(scoping.Command):
         numbers,
         allow_out_of_range: bool = None,
         allow_repeats: bool = None,
-        exact: bool = None, 
+        exact: bool = None,
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.plts()',
-        ) -> None:
+        selector: typings.Selector = "baca.plts()",
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -6285,7 +6254,7 @@ class StaffPositionCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         if exact is not None:
             exact = bool(exact)
         self._exact = exact
@@ -6315,9 +6284,8 @@ class StaffPositionCommand(scoping.Command):
         plt_count = 0
         for i, plt in enumerate(classes.Selection(argument).plts()):
             clef = abjad.inspect(plt.head).effective(
-                abjad.Clef,
-                default=abjad.Clef('treble'),
-                )
+                abjad.Clef, default=abjad.Clef("treble")
+            )
             number = self.numbers[i]
             position = abjad.StaffPosition(number)
             pitch = position.to_pitch(clef)
@@ -6331,8 +6299,8 @@ class StaffPositionCommand(scoping.Command):
                     abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
                     abjad.attach(abjad.tags.DO_NOT_TRANSPOSE, pleaf)
         if self.exact and plt_count != len(self.numbers):
-            message = f'PLT count ({plt_count}) does not match'
-            message += f' staff position count ({len(self.numbers)}).'
+            message = f"PLT count ({plt_count}) does not match"
+            message += f" staff position count ({len(self.numbers)})."
             raise Exception(message)
 
     ### PUBLIC PROPERTIES ###
@@ -6365,6 +6333,7 @@ class StaffPositionCommand(scoping.Command):
         Gets numbers.
         """
         return self._numbers
+
 
 class StaffPositionInterpolationCommand(scoping.Command):
     r"""
@@ -6516,10 +6485,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_start_pitch',
-        '_stop_pitch',
-        )
+    __slots__ = ("_start_pitch", "_stop_pitch")
 
     _publish_storage_format = True
 
@@ -6532,10 +6498,10 @@ class StaffPositionInterpolationCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.plts()',
-        start_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
-        stop_pitch: typing.Union[str, abjad.NamedPitch] = 'C4',
-        ) -> None:
+        selector: typings.Selector = "baca.plts()",
+        start_pitch: typing.Union[str, abjad.NamedPitch] = "C4",
+        stop_pitch: typing.Union[str, abjad.NamedPitch] = "C4",
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -6543,7 +6509,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         start_pitch = abjad.NamedPitch(start_pitch)
         self._start_pitch: abjad.NamedPitch = start_pitch
         stop_pitch = abjad.NamedPitch(stop_pitch)
@@ -6568,22 +6534,19 @@ class StaffPositionInterpolationCommand(scoping.Command):
         start_staff_position = self.start_pitch.to_staff_position(clef=clef)
         stop_pl = plts[-1].head
         clef = abjad.inspect(stop_pl).effective(
-            abjad.Clef,
-            default=abjad.Clef('treble'),
-            )
+            abjad.Clef, default=abjad.Clef("treble")
+        )
         stop_staff_position = self.stop_pitch.to_staff_position(clef=clef)
         unit_distance = abjad.Fraction(
-            stop_staff_position.number - start_staff_position.number,
-            count - 1,
-            )
+            stop_staff_position.number - start_staff_position.number, count - 1
+        )
         for i, plt in enumerate(plts):
             staff_position = unit_distance * i + start_staff_position.number
             staff_position = round(staff_position)
             staff_position = abjad.StaffPosition(staff_position)
             clef = abjad.inspect(plt.head).effective(
-                abjad.Clef,
-                default=abjad.Clef('treble'),
-                )
+                abjad.Clef, default=abjad.Clef("treble")
+            )
             pitch = staff_position.to_pitch(clef=clef)
             PitchCommand._set_lt_pitch(plt, pitch)
             for leaf in plt:
@@ -6607,13 +6570,15 @@ class StaffPositionInterpolationCommand(scoping.Command):
         """
         return self._stop_pitch
 
+
 ### FACTORY FUNCTIONS ###
+
 
 def bass_to_octave(
     n: int,
     *,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> RegisterToOctaveCommand:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
 
@@ -6859,16 +6824,15 @@ def bass_to_octave(
 
     """
     return RegisterToOctaveCommand(
-        anchor=abjad.Down,
-        octave_number=n,
-        selector=selector,
-        )
+        anchor=abjad.Down, octave_number=n, selector=selector
+    )
+
 
 def center_to_octave(
     n: int,
     *,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> RegisterToOctaveCommand:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
 
@@ -7114,71 +7078,64 @@ def center_to_octave(
 
     """
     return RegisterToOctaveCommand(
-        anchor=abjad.Center,
-        octave_number=n,
-        selector=selector,
-        )
+        anchor=abjad.Center, octave_number=n, selector=selector
+    )
+
 
 def clusters(
     widths: typing.List[int],
     *,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
     start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
-    ) -> ClusterCommand:
+) -> ClusterCommand:
     """
     Makes clusters with ``widths`` and ``start_pitch``.
     """
     return ClusterCommand(
-        selector=selector,
-        start_pitch=start_pitch,
-        widths=widths,
-        )
+        selector=selector, start_pitch=start_pitch, widths=widths
+    )
+
 
 def color_fingerings(
     numbers: typing.List[typings.Number],
     *tweaks: abjad.IndexedTweakManager,
-    selector: typings.Selector = 'baca.pheads(exclude=abjad.const.HIDDEN)',
-    ) -> ColorFingeringCommand:
+    selector: typings.Selector = "baca.pheads(exclude=abjad.const.HIDDEN)",
+) -> ColorFingeringCommand:
     """
     Adds color fingerings.
     """
     return ColorFingeringCommand(
-        numbers=numbers,
-        selector=selector,
-        tweaks=tweaks,
-        )
+        numbers=numbers, selector=selector, tweaks=tweaks
+    )
+
 
 def deviation(
     deviations: typing.List[typings.Number],
     *,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> MicrotoneDeviationCommand:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> MicrotoneDeviationCommand:
     """
     Sets microtone ``deviations``.
     """
-    return MicrotoneDeviationCommand(
-        deviations=deviations,
-        selector=selector,
-        )
+    return MicrotoneDeviationCommand(deviations=deviations, selector=selector)
+
 
 def diatonic_clusters(
     widths: typing.List[int],
     *,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> DiatonicClusterCommand:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> DiatonicClusterCommand:
     """
     Makes diatonic clusters with ``widths``.
     """
-    return DiatonicClusterCommand(
-        selector=selector,
-        widths=widths,
-        )
+    return DiatonicClusterCommand(selector=selector, widths=widths)
+
 
 def displacement(
     displacements: typing.List[int],
     *,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> OctaveDisplacementCommand:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> OctaveDisplacementCommand:
     r"""
     Octave-displaces ``selector`` output.
 
@@ -7369,14 +7326,13 @@ def displacement(
 
     """
     return OctaveDisplacementCommand(
-        displacements=displacements,
-        selector=selector,
-        )
+        displacements=displacements, selector=selector
+    )
+
 
 def force_accidental(
-    *,
-    selector: typings.Selector = 'baca.pleaf(0, exclude=abjad.const.HIDDEN)',
-    ) -> AccidentalAdjustmentCommand:
+    *, selector: typings.Selector = "baca.pleaf(0, exclude=abjad.const.HIDDEN)"
+) -> AccidentalAdjustmentCommand:
     r"""
     Forces accidental.
 
@@ -7503,45 +7459,43 @@ def force_accidental(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    return AccidentalAdjustmentCommand(
-        forced=True,
-        selector=selector,
-        )
+    return AccidentalAdjustmentCommand(forced=True, selector=selector)
+
 
 def interpolate_staff_positions(
     start_pitch: typing.Union[str, abjad.NamedPitch],
     stop_pitch: typing.Union[str, abjad.NamedPitch],
     *,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> StaffPositionInterpolationCommand:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> StaffPositionInterpolationCommand:
     """
     Interpolates from staff position of ``start_pitch`` to staff
     position of ``stop_pitch``.
     """
     return StaffPositionInterpolationCommand(
-        start_pitch=start_pitch,
-        stop_pitch=stop_pitch,
-        selector=selector,
-        )
+        start_pitch=start_pitch, stop_pitch=stop_pitch, selector=selector
+    )
+
 
 def loop(
     items: typing.Iterable,
     intervals: typing.Iterable,
     *,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> PitchCommand:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> PitchCommand:
     """
     Loops ``items`` at ``intervals``.
     """
     loop = Loop(items=items, intervals=intervals)
     return pitches(loop, selector=selector)
 
+
 def natural_clusters(
     widths: typing.Iterable[int],
     *,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
     start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
-    ) -> ClusterCommand:
+) -> ClusterCommand:
     """
     Makes natural clusters with ``widths`` and ``start_pitch``.
     """
@@ -7550,7 +7504,8 @@ def natural_clusters(
         selector=selector,
         start_pitch=start_pitch,
         widths=widths,
-        )
+    )
+
 
 def pitch(
     pitch,
@@ -7558,21 +7513,24 @@ def pitch(
     allow_out_of_range: bool = None,
     do_not_transpose: bool = None,
     persist: str = None,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> PitchCommand:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> PitchCommand:
     """
     Makes pitch command.
     """
     if isinstance(pitch, (list, tuple)) and len(pitch) == 1:
-        raise Exception(f'one-note chord {pitch!r}?')
+        raise Exception(f"one-note chord {pitch!r}?")
     if allow_out_of_range not in (None, True, False):
-        raise Exception('allow_out_of_range must be boolean'
-            f' (not {allow_out_of_range!r}).')
+        raise Exception(
+            "allow_out_of_range must be boolean"
+            f" (not {allow_out_of_range!r})."
+        )
     if do_not_transpose not in (None, True, False):
-        raise Exception('do_not_transpose must be boolean'
-            f' (not {do_not_transpose!r}).')
+        raise Exception(
+            "do_not_transpose must be boolean" f" (not {do_not_transpose!r})."
+        )
     if persist is not None and not isinstance(persist, str):
-        raise Exception(f'persist name must be string (not {persist!r}).')
+        raise Exception(f"persist name must be string (not {persist!r}).")
     return PitchCommand(
         allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
@@ -7581,7 +7539,8 @@ def pitch(
         persist=persist,
         pitches=[pitch],
         selector=selector,
-        )
+    )
+
 
 def pitches(
     pitches: typing.Iterable,
@@ -7592,26 +7551,30 @@ def pitches(
     exact: bool = None,
     ignore_incomplete: bool = None,
     persist: str = None,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> PitchCommand:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> PitchCommand:
     """
     Makes pitch command.
     """
     if do_not_transpose not in (None, True, False):
-        raise Exception('do_not_transpose must be boolean'
-            f' (not {do_not_transpose!r}).')
+        raise Exception(
+            "do_not_transpose must be boolean" f" (not {do_not_transpose!r})."
+        )
     if bool(exact):
         cyclic = False
     else:
         cyclic = True
     if ignore_incomplete not in (None, True, False):
-        raise Exception('ignore_incomplete must be boolean'
-            f' (not {ignore_incomplete!r}).')
+        raise Exception(
+            "ignore_incomplete must be boolean"
+            f" (not {ignore_incomplete!r})."
+        )
     if ignore_incomplete is True and not persist:
-        raise Exception(f'ignore_incomplete is ignored'
-            ' when persist is not set.')
+        raise Exception(
+            f"ignore_incomplete is ignored" " when persist is not set."
+        )
     if persist is not None and not isinstance(persist, str):
-        raise Exception(f'persist name must be string (not {persist!r}).')
+        raise Exception(f"persist name must be string (not {persist!r}).")
     return PitchCommand(
         allow_octaves=allow_octaves,
         allow_repeats=allow_repeats,
@@ -7621,14 +7584,15 @@ def pitches(
         persist=persist,
         pitches=pitches,
         selector=selector,
-        )
+    )
+
 
 def register(
     start: int,
     stop: int = None,
     *,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> typing.Union[RegisterCommand, RegisterInterpolationCommand]:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> typing.Union[RegisterCommand, RegisterInterpolationCommand]:
     r"""
     Octave-transposes ``selector`` output.
 
@@ -7900,20 +7864,19 @@ def register(
     """
     if stop is None:
         return RegisterCommand(
-            registration=pitchclasses.Registration([('[A0, C8]', start)]),
+            registration=pitchclasses.Registration([("[A0, C8]", start)]),
             selector=selector,
-            )
-    return RegisterInterpolationCommand(
-        selector=selector,
-        start_pitch=start,
-        stop_pitch=stop,
         )
+    return RegisterInterpolationCommand(
+        selector=selector, start_pitch=start, stop_pitch=stop
+    )
+
 
 def soprano_to_octave(
     n: int,
     *,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> RegisterToOctaveCommand:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
 
@@ -8159,17 +8122,16 @@ def soprano_to_octave(
 
     """
     return RegisterToOctaveCommand(
-        anchor=abjad.Up,
-        octave_number=n,
-        selector=selector,
-        )
+        anchor=abjad.Up, octave_number=n, selector=selector
+    )
+
 
 def staff_position(
     number: int,
     *,
     allow_out_of_range: bool = None,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> StaffPositionCommand:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> StaffPositionCommand:
     """
     Makes staff position command; allows repeats.
     """
@@ -8179,7 +8141,8 @@ def staff_position(
         allow_repeats=True,
         numbers=[number],
         selector=selector,
-        ) 
+    )
+
 
 def staff_positions(
     numbers,
@@ -8187,8 +8150,8 @@ def staff_positions(
     allow_out_of_range: bool = None,
     allow_repeats: bool = None,
     exact: bool = None,
-    selector: typings.Selector = 'baca.plts(exclude=abjad.const.HIDDEN)',
-    ) -> StaffPositionCommand:
+    selector: typings.Selector = "baca.plts(exclude=abjad.const.HIDDEN)",
+) -> StaffPositionCommand:
     """
     Makes staff position command; does not allow repeats.
     """
@@ -8200,4 +8163,4 @@ def staff_positions(
         exact=exact,
         numbers=numbers,
         selector=selector,
-        ) 
+    )

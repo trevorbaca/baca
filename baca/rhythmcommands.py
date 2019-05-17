@@ -13,10 +13,12 @@ from . import const
 from . import overrides
 from . import scoping
 from . import typings
+
 mask_typing = typing.Union[rmakers.SilenceMask, rmakers.SustainMask]
 
 
 ### CLASSES ###
+
 
 class RhythmCommand(scoping.Command):
     r"""
@@ -201,21 +203,21 @@ class RhythmCommand(scoping.Command):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
-        '_annotate_unpitched_music',
-        '_division_maker',
-        '_division_expression',
-        '_left_broken',
-        '_multimeasure_rests',
-        '_payload',
-        '_persist',
-        '_reference_meters',
-        '_rewrite_meter',
-        '_rewrite_rest_filled',
-        '_rhythm_maker',
-        '_right_broken',
-        '_split_at_measure_boundaries',
-        '_state',
-        )
+        "_annotate_unpitched_music",
+        "_division_maker",
+        "_division_expression",
+        "_left_broken",
+        "_multimeasure_rests",
+        "_payload",
+        "_persist",
+        "_reference_meters",
+        "_rewrite_meter",
+        "_rewrite_rest_filled",
+        "_rhythm_maker",
+        "_right_broken",
+        "_split_at_measure_boundaries",
+        "_state",
+    )
 
     _publish_storage_format = True
 
@@ -239,22 +241,21 @@ class RhythmCommand(scoping.Command):
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
         split_at_measure_boundaries: bool = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
-            self,
-            match=match,
-            measures=measures,
-            scope=scope,
-            )
+            self, match=match, measures=measures, scope=scope
+        )
         if annotate_unpitched_music is not None:
             annotate_unpitched_music = bool(annotate_unpitched_music)
         self._annotate_unpitched_music = annotate_unpitched_music
         if division_expression is not None and division_maker is not None:
-            message = 'can not set both division expression and division-maker'
-            message += f':\n{division_expression} {division_maker}.'
+            message = "can not set both division expression and division-maker"
+            message += f":\n{division_expression} {division_maker}."
             raise Exception(message)
         if division_maker is not None:
-            assert isinstance(division_maker, baca_divisions.division_maker_type), repr(division_maker)
+            assert isinstance(
+                division_maker, baca_divisions.division_maker_type
+            ), repr(division_maker)
         self._division_maker = division_maker
         if division_expression is not None:
             assert isinstance(division_expression, abjad.Expression)
@@ -295,7 +296,7 @@ class RhythmCommand(scoping.Command):
         runtime: abjad.OrderedDict = None,
         start_offset: abjad.Offset = None,
         time_signatures: typing.Iterable[abjad.TimeSignature] = None,
-        ) -> None:
+    ) -> None:
         """
         Calls command on ``start_offset`` and ``time_signatures``.
         """
@@ -306,24 +307,18 @@ class RhythmCommand(scoping.Command):
         final_leaf = abjad.inspect(music).leaf(-1)
         pitched_prototype = (abjad.Note, abjad.Chord)
         payload = abjad.AnnotatedTimespan(
-            start_offset=start_offset,
-            stop_offset=None,
-            annotation=music,
-            )
+            start_offset=start_offset, stop_offset=None, annotation=music
+        )
         self._payload = payload
 
     ### PRIVATE METHODS ###
 
     @staticmethod
     def _annotate_unpitched_music_(argument):
-        rest_prototype = (
-            abjad.MultimeasureRest,
-            abjad.Rest,
-            abjad.Skip,
-            )
+        rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
         for leaf in abjad.iterate(argument).leaves():
             if isinstance(leaf, abjad.Chord):
-                message = f'rhythm-makers make only notes and rests: {leaf!r}.'
+                message = f"rhythm-makers make only notes and rests: {leaf!r}."
                 raise Exception(message)
             elif isinstance(leaf, abjad.Note):
                 abjad.attach(abjad.tags.NOT_YET_PITCHED, leaf, tag=None)
@@ -333,19 +328,18 @@ class RhythmCommand(scoping.Command):
                 raise TypeError(leaf)
 
     def _apply_division_expression(
-        self,
-        divisions,
-        ) -> typing.Optional[abjad.Sequence]:
+        self, divisions
+    ) -> typing.Optional[abjad.Sequence]:
         if self.division_expression is not None:
             divisions_ = self.division_expression(divisions)
             if not isinstance(divisions_, abjad.Sequence):
-                message = 'division expression must return sequence:\n'
-                message += f'  Input divisions:\n'
-                message += f'    {divisions}\n'
-                message += f'  Division expression:\n'
-                message += f'    {self.division_expression}\n'
-                message += f'  Output divisions:\n'
-                message += f'    {divisions_}'
+                message = "division expression must return sequence:\n"
+                message += f"  Input divisions:\n"
+                message += f"    {divisions}\n"
+                message += f"  Division expression:\n"
+                message += f"    {self.division_expression}\n"
+                message += f"  Output divisions:\n"
+                message += f"    {divisions_}"
                 raise Exception(message)
             divisions = divisions_
         return divisions
@@ -358,16 +352,18 @@ class RhythmCommand(scoping.Command):
             return
         if not self._check_rhythm_maker_pattern_pairs(rhythm_maker):
             message = "\n  Input parameter 'rhythm_maker' accepts:"
-            message += '\n    rhythm-maker'
-            message += '\n    selection'
-            message += '\n    sequence of (rhythm-maker-or-selection, pattern) pairs'
-            message += '\n    none'
+            message += "\n    rhythm-maker"
+            message += "\n    selection"
+            message += (
+                "\n    sequence of (rhythm-maker-or-selection, pattern) pairs"
+            )
+            message += "\n    none"
             message += "\n  Input parameter 'rhythm_maker' received:"
-            message += f'\n    {format(rhythm_maker)}'
+            message += f"\n    {format(rhythm_maker)}"
             raise Exception(message)
 
     def _check_rhythm_maker_pattern_pairs(self, pairs):
-        if not isinstance(pairs, collections.abc.Sequence): 
+        if not isinstance(pairs, collections.abc.Sequence):
             return False
         prototype = (abjad.Selection, rmakers.RhythmMaker, type(self))
         for pair in pairs:
@@ -392,9 +388,8 @@ class RhythmCommand(scoping.Command):
         divisions_ = []
         for division, start_offset in zip(divisions, start_offsets):
             division_ = baca_divisions.Division(
-                division,
-                start_offset=start_offset,
-                )
+                division, start_offset=start_offset
+            )
             divisions_.append(division_)
         assert not any(_.start_offset is None for _ in divisions_)
         return divisions_
@@ -418,9 +413,8 @@ class RhythmCommand(scoping.Command):
             if division_maker is None:
                 division_maker = baca_divisions.DivisionMaker()
             divisions = self._durations_to_divisions(
-                time_signatures,
-                start_offset,
-                )
+                time_signatures, start_offset
+            )
             divisions = division_maker(divisions)
             divisions = classes.Sequence(divisions).flatten(depth=-1)
             divisions = self._apply_division_expression(divisions)
@@ -443,12 +437,12 @@ class RhythmCommand(scoping.Command):
                         labelled_divisions.append((division, rhythm_maker))
                         break
                 else:
-                    raise Exception(f'no rhythm-maker for division {i}.')
+                    raise Exception(f"no rhythm-maker for division {i}.")
             assert len(labelled_divisions) == len(divisions)
             labelled_divisions = classes.Sequence(labelled_divisions)
             labelled_divisions = labelled_divisions.group_by(
-                lambda pair: pair[1],
-                )
+                lambda pair: pair[1]
+            )
             selections = []
             previous_segment_stop_state = self._previous_segment_stop_state()
             maker_to_state = abjad.OrderedDict()
@@ -465,9 +459,8 @@ class RhythmCommand(scoping.Command):
                 else:
                     previous_state = previous_segment_stop_state
                 selections_ = rhythm_maker(
-                    divisions_,
-                    previous_state=previous_state,
-                    )
+                    divisions_, previous_state=previous_state
+                )
                 maker_to_state[rhythm_maker] = rhythm_maker.state
                 selections.extend(selections_)
             self._state = rhythm_maker.state
@@ -475,10 +468,8 @@ class RhythmCommand(scoping.Command):
         if self.split_at_measure_boundaries:
             specifier = rmakers.DurationSpecifier
             selections = specifier._split_at_measure_boundaries(
-                selections,
-                time_signatures,
-                repeat_ties=self.repeat_ties,
-                )
+                selections, time_signatures, repeat_ties=self.repeat_ties
+            )
         assert all(isinstance(_, abjad.Selection) for _ in selections)
         if self.rewrite_meter:
             selections = rmakers.DurationSpecifier._rewrite_meter_(
@@ -487,12 +478,11 @@ class RhythmCommand(scoping.Command):
                 reference_meters=self.reference_meters,
                 rewrite_tuplets=False,
                 repeat_ties=self.repeat_ties,
-                )
+            )
         if self.rewrite_rest_filled:
             selections = rmakers.DurationSpecifier._rewrite_rest_filled_(
-                selections,
-                multimeasure_rests=self.multimeasure_rests,
-                )
+                selections, multimeasure_rests=self.multimeasure_rests
+            )
         self._tag_broken_ties(selections)
         if self.annotate_unpitched_music or not literal_selections:
             self._annotate_unpitched_music_(selections)
@@ -500,28 +490,32 @@ class RhythmCommand(scoping.Command):
 
     def _previous_segment_stop_state(self):
         previous_segment_stop_state = None
-        dictionary = self.runtime.get('previous_segment_voice_metadata')
+        dictionary = self.runtime.get("previous_segment_voice_metadata")
         if dictionary:
             previous_segment_stop_state = dictionary.get(const.RHYTHM)
-            if (previous_segment_stop_state is not None and
-                previous_segment_stop_state.get('name') != self.persist):
+            if (
+                previous_segment_stop_state is not None
+                and previous_segment_stop_state.get("name") != self.persist
+            ):
                 previous_segment_stop_state = None
         return previous_segment_stop_state
 
     def _tag_broken_ties(self, selections):
         if not isinstance(self.rhythm_maker, rmakers.RhythmMaker):
             return
-        if (self.left_broken and
-            self.rhythm_maker.previous_state.get('incomplete_final_note')):
+        if self.left_broken and self.rhythm_maker.previous_state.get(
+            "incomplete_final_note"
+        ):
             if not self.repeat_ties:
-                raise Exception('left-broken ties must be repeat ties.')
+                raise Exception("left-broken ties must be repeat ties.")
             first_leaf = abjad.select(selections).leaf(0)
             if isinstance(first_leaf, abjad.Note):
                 abjad.attach(const.LEFT_BROKEN_REPEAT_TIE_TO, first_leaf)
-        if (self.right_broken and
-            self.rhythm_maker.state.get('incomplete_final_note')):
+        if self.right_broken and self.rhythm_maker.state.get(
+            "incomplete_final_note"
+        ):
             if self.repeat_ties:
-                raise Exception('right-broken ties must be conventional.')
+                raise Exception("right-broken ties must be conventional.")
             final_leaf = abjad.select(selections).leaf(-1)
             if isinstance(final_leaf, abjad.Note):
                 abjad.attach(abjad.tags.RIGHT_BROKEN_TIE_FROM, final_leaf)
@@ -713,7 +707,9 @@ class RhythmCommand(scoping.Command):
         return self._division_expression
 
     @property
-    def division_maker(self) -> typing.Optional[baca_divisions.DivisionMakerTyping]:
+    def division_maker(
+        self
+    ) -> typing.Optional[baca_divisions.DivisionMakerTyping]:
         """
         Gets division-maker.
         """
@@ -764,9 +760,9 @@ class RhythmCommand(scoping.Command):
         return self._persist
 
     @property
-    def reference_meters(self) -> typing.Optional[
-        typing.Iterable[abjad.Meter]
-        ]:
+    def reference_meters(
+        self
+    ) -> typing.Optional[typing.Iterable[abjad.Meter]]:
         """
         Gets reference meters.
 
@@ -779,7 +775,7 @@ class RhythmCommand(scoping.Command):
         """
         Is true when rhythm command uses repeat ties.
         """
-        tie_specifier = getattr(self.rhythm_maker, 'tie_specifier', None)
+        tie_specifier = getattr(self.rhythm_maker, "tie_specifier", None)
         if tie_specifier is None:
             return False
         return tie_specifier.repeat_ties
@@ -1205,6 +1201,7 @@ class RhythmCommand(scoping.Command):
         """
         return self._state
 
+
 class SkipRhythmMaker(rmakers.RhythmMaker):
     r"""
     Skip rhythm-maker.
@@ -1384,17 +1381,15 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
         self,
         divisions: typing.List[typings.IntegerPair],
         previous_state: abjad.OrderedDict = None,
-        ) -> typing.List[abjad.Selection]:
+    ) -> typing.List[abjad.Selection]:
         """
         Calls skip rhythm-maker on ``divisions``.
         """
         return rmakers.RhythmMaker.__call__(
-            self,
-            divisions,
-            previous_state=previous_state,
-            )
+            self, divisions, previous_state=previous_state
+        )
 
-    def __format__(self, format_specification='') -> str:
+    def __format__(self, format_specification="") -> str:
         """
         Formats skip rhythm-maker.
 
@@ -1419,10 +1414,8 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
             written_duration = abjad.Duration(1)
             multiplied_duration = division
             skip = self._make_skips(
-                written_duration,
-                [multiplied_duration],
-                tag=self.tag,
-                )
+                written_duration, [multiplied_duration], tag=self.tag
+            )
             result.append(skip)
         return result
 
@@ -1612,6 +1605,7 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
         """
         return super().tuplet_specifier
 
+
 class TieCorrectionCommand(scoping.Command):
     """
     Tie correction command.
@@ -1625,11 +1619,7 @@ class TieCorrectionCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_direction',
-        '_repeat',
-        '_untie',
-        )
+    __slots__ = ("_direction", "_repeat", "_untie")
 
     ### INITIALIZER ###
 
@@ -1642,16 +1632,17 @@ class TieCorrectionCommand(scoping.Command):
         measures: typings.Slice = None,
         repeat: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.pleaf(-1)',
+        selector: typings.Selector = "baca.pleaf(-1)",
         untie: bool = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
             match=match,
             measures=measures,
-            scope=scope, selector=selector,
-            )
+            scope=scope,
+            selector=selector,
+        )
         if direction is not None:
             assert direction in (abjad.Right, abjad.Left, None)
         self._direction = direction
@@ -1676,7 +1667,7 @@ class TieCorrectionCommand(scoping.Command):
         leaves = classes.Selection(argument).leaves()
         for leaf in leaves:
             if self.untie is True:
-                #self._sever_tie(leaf, self.direction, self.repeat)
+                # self._sever_tie(leaf, self.direction, self.repeat)
                 self._sever_tie(leaf, self.direction)
             else:
                 self._add_tie(leaf, self.direction, self.repeat)
@@ -1689,104 +1680,106 @@ class TieCorrectionCommand(scoping.Command):
         left_broken, right_broken = None, None
         if direction is None:
             direction = abjad.Right
-        #current_tie = abjad.inspect(current_leaf).spanner(abjad.Tie)
+        # current_tie = abjad.inspect(current_leaf).spanner(abjad.Tie)
         if direction == abjad.Right:
             next_leaf = abjad.inspect(current_leaf).leaf(1)
             if next_leaf is None:
                 right_broken = True
-#                if current_tie is not None:
-#                    new_leaves = list(current_tie.leaves)
-#                    new_tie = abjad.new(current_tie)
-#                else:
-#                    new_leaves = [current_leaf]
-#                    new_tie = abjad.Tie(repeat=repeat)
+            #                if current_tie is not None:
+            #                    new_leaves = list(current_tie.leaves)
+            #                    new_tie = abjad.new(current_tie)
+            #                else:
+            #                    new_leaves = [current_leaf]
+            #                    new_tie = abjad.Tie(repeat=repeat)
             else:
                 pass
-#                next_tie = abjad.inspect(next_leaf).spanner(abjad.Tie)
-#                if current_tie is not None and next_tie is not None:
-#                    if current_tie is next_tie:
-#                        return
-#                    else:
-#                        new_leaves = list(current_tie) + list(next_tie)
-#                        new_tie = abjad.new(current_tie)
-#                elif current_tie is not None and next_tie is None:
-#                    new_leaves = list(current_tie) + [next_leaf]
-#                    new_tie = abjad.new(current_tie)
-#                elif current_tie is None and next_tie is not None:
-#                    new_leaves = [current_leaf] + list(next_tie)
-#                    new_tie = abjad.Tie(repeat=repeat)
-#                else:
-#                    assert current_tie is None and next_tie is None
-#                    new_leaves = [current_leaf, next_leaf]
-#                    new_tie = abjad.Tie(repeat=repeat)
+        #                next_tie = abjad.inspect(next_leaf).spanner(abjad.Tie)
+        #                if current_tie is not None and next_tie is not None:
+        #                    if current_tie is next_tie:
+        #                        return
+        #                    else:
+        #                        new_leaves = list(current_tie) + list(next_tie)
+        #                        new_tie = abjad.new(current_tie)
+        #                elif current_tie is not None and next_tie is None:
+        #                    new_leaves = list(current_tie) + [next_leaf]
+        #                    new_tie = abjad.new(current_tie)
+        #                elif current_tie is None and next_tie is not None:
+        #                    new_leaves = [current_leaf] + list(next_tie)
+        #                    new_tie = abjad.Tie(repeat=repeat)
+        #                else:
+        #                    assert current_tie is None and next_tie is None
+        #                    new_leaves = [current_leaf, next_leaf]
+        #                    new_tie = abjad.Tie(repeat=repeat)
         else:
             assert direction == abjad.Left
             previous_leaf = abjad.inspect(current_leaf).leaf(-1)
             if previous_leaf is None:
                 left_broken = True
-#                if current_tie is not None:
-#                    new_leaves = list(current_tie.leaves)
-#                    new_tie = abjad.new(current_tie, repeat=repeat)
-#                else:
-#                    new_leaves = [current_leaf]
-#                    new_tie = abjad.Tie(repeat=repeat)
+            #                if current_tie is not None:
+            #                    new_leaves = list(current_tie.leaves)
+            #                    new_tie = abjad.new(current_tie, repeat=repeat)
+            #                else:
+            #                    new_leaves = [current_leaf]
+            #                    new_tie = abjad.Tie(repeat=repeat)
             else:
                 pass
-#                previous_tie = abjad.inspect(previous_leaf).spanner(
-#                    abjad.Tie)
-#                if previous_tie is not None and current_tie is not None:
-#                    if previous_tie is current_tie:
-#                        return
-#                    else:
-#                        new_leaves = list(previous_tie) + list(current_tie)
-#                        new_tie = abjad.new(previous_tie)
-#                elif previous_tie is not None and current_tie is None:
-#                    new_leaves = list(previous_tie) + [current_leaf]
-#                    new_tie = abjad.new(previous_tie)
-#                elif previous_tie is None and current_tie is not None:
-#                    new_leaves = [previous_leaf] + list(current_tie)
-#                    new_tie = abjad.Tie(repeat=repeat)
-#                else:
-#                    assert previous_tie is None and current_tie is None
-#                    new_leaves = [previous_leaf, current_leaf]
-#                    new_tie = abjad.Tie(repeat=repeat)
+        #                previous_tie = abjad.inspect(previous_leaf).spanner(
+        #                    abjad.Tie)
+        #                if previous_tie is not None and current_tie is not None:
+        #                    if previous_tie is current_tie:
+        #                        return
+        #                    else:
+        #                        new_leaves = list(previous_tie) + list(current_tie)
+        #                        new_tie = abjad.new(previous_tie)
+        #                elif previous_tie is not None and current_tie is None:
+        #                    new_leaves = list(previous_tie) + [current_leaf]
+        #                    new_tie = abjad.new(previous_tie)
+        #                elif previous_tie is None and current_tie is not None:
+        #                    new_leaves = [previous_leaf] + list(current_tie)
+        #                    new_tie = abjad.Tie(repeat=repeat)
+        #                else:
+        #                    assert previous_tie is None and current_tie is None
+        #                    new_leaves = [previous_leaf, current_leaf]
+        #                    new_tie = abjad.Tie(repeat=repeat)
 
-#        new_leaves = abjad.select(new_leaves)
-#        for leaf in new_leaves:
-#            abjad.detach(abjad.Tie, leaf)
-#        new_tie = abjad.new(
-#            new_tie,
-#            left_broken=left_broken,
-#            right_broken=right_broken,
-#            )
-#        abjad.attach(new_tie, new_leaves, tag='TieCorrectionCommand')
+        #        new_leaves = abjad.select(new_leaves)
+        #        for leaf in new_leaves:
+        #            abjad.detach(abjad.Tie, leaf)
+        #        new_tie = abjad.new(
+        #            new_tie,
+        #            left_broken=left_broken,
+        #            right_broken=right_broken,
+        #            )
+        #        abjad.attach(new_tie, new_leaves, tag='TieCorrectionCommand')
 
         if direction == abjad.Left:
             if repeat:
                 repeat_tie = abjad.RepeatTie(left_broken=left_broken)
-                abjad.attach(repeat_tie, current_leaf, tag='TieCorrectionCommand')
+                abjad.attach(
+                    repeat_tie, current_leaf, tag="TieCorrectionCommand"
+                )
             else:
                 tie = abjad.TieIndicator(right_broken=right_broken)
-                abjad.attach(tie, previous_leaf, tag='TieCorrectionCommand') 
+                abjad.attach(tie, previous_leaf, tag="TieCorrectionCommand")
         else:
             assert direction == abjad.Right
             if not repeat:
                 tie = abjad.TieIndicator(right_broken=right_broken)
-                abjad.attach(tie, current_leaf, tag='TieCorrectionCommand')
+                abjad.attach(tie, current_leaf, tag="TieCorrectionCommand")
             else:
                 repeat_tie = abjad.RepeatTie(left_broken=left_broken)
-                abjad.attach(repeat_tie, next_leaf, tag='TieCorrectionCommand')
+                abjad.attach(repeat_tie, next_leaf, tag="TieCorrectionCommand")
 
     @staticmethod
-    #def _sever_tie(current_leaf, direction, repeat):
+    # def _sever_tie(current_leaf, direction, repeat):
     def _sever_tie(current_leaf, direction):
-#        current_tie = abjad.inspect(current_leaf).spanner(abjad.Tie)
-#        if current_tie is None:
-#            return
-#        if direction is None:
-#            direction = abjad.Right
-#        leaf_index = current_tie.leaves.index(current_leaf)
-#        current_tie._fracture(leaf_index, direction=direction)
+        #        current_tie = abjad.inspect(current_leaf).spanner(abjad.Tie)
+        #        if current_tie is None:
+        #            return
+        #        if direction is None:
+        #            direction = abjad.Right
+        #        leaf_index = current_tie.leaves.index(current_leaf)
+        #        current_tie._fracture(leaf_index, direction=direction)
         if direction in (abjad.Right, None):
             abjad.detach(abjad.TieIndicator, current_leaf)
             next_leaf = abjad.inspect(current_leaf).leaf(1)
@@ -1798,7 +1791,7 @@ class TieCorrectionCommand(scoping.Command):
             previous_leaf = abjad.inspect(current_leaf).leaf(-1)
             if previous_leaf is not None:
                 abjad.detach(abjad.TieIndicator, previous_leaf)
-            
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -1824,12 +1817,13 @@ class TieCorrectionCommand(scoping.Command):
         """
         return self._untie
 
+
 ### FACTORY FUNCTIONS ###
 
+
 def beam_divisions(
-    *,
-    stemlets: typings.Number = None,
-    ) -> rmakers.BeamSpecifier:
+    *, stemlets: typings.Number = None
+) -> rmakers.BeamSpecifier:
     r"""
     Beams divisions.
 
@@ -1942,12 +1936,12 @@ def beam_divisions(
         beam_each_division=True,
         beam_rests=bool(stemlets),
         stemlet_length=stemlets,
-        )
+    )
+
 
 def beam_everything(
-    *,
-    stemlets: typings.Number = None,
-    ) -> rmakers.BeamSpecifier:
+    *, stemlets: typings.Number = None
+) -> rmakers.BeamSpecifier:
     r"""
     Beams everything.
 
@@ -2087,7 +2081,8 @@ def beam_everything(
         beam_each_division=True,
         beam_rests=True,
         stemlet_length=stemlets,
-        )
+    )
+
 
 def beam_runs() -> rmakers.BeamSpecifier:
     r"""
@@ -2176,10 +2171,9 @@ def beam_runs() -> rmakers.BeamSpecifier:
 
     """
     return rmakers.BeamSpecifier(
-        beam_divisions_together=True,
-        beam_each_division=True,
-        beam_rests=False,
-        )
+        beam_divisions_together=True, beam_each_division=True, beam_rests=False
+    )
+
 
 def flags() -> rmakers.BeamSpecifier:
     r"""
@@ -2244,15 +2238,13 @@ def flags() -> rmakers.BeamSpecifier:
 
     """
     return rmakers.BeamSpecifier(
-        beam_divisions_together=False,
-        beam_each_division=False,
-        )
+        beam_divisions_together=False, beam_each_division=False
+    )
+
 
 def make_even_divisions(
-    *,
-    measures: typings.Slice = None,
-    tag: str = 'baca_make_even_divisions',
-    ) -> RhythmCommand:
+    *, measures: typings.Slice = None, tag: str = "baca_make_even_divisions"
+) -> RhythmCommand:
     """
     Makes even divisions.
     """
@@ -2260,18 +2252,17 @@ def make_even_divisions(
         measures=measures,
         rhythm_maker=rmakers.EvenDivisionRhythmMaker(
             tag=tag,
-            tuplet_specifier=rmakers.TupletSpecifier(
-                extract_trivial=True,
-                ),
-            ),
-        )
+            tuplet_specifier=rmakers.TupletSpecifier(extract_trivial=True),
+        ),
+    )
+
 
 def make_fused_tuplet_monads(
     *,
     measures: typings.Slice = None,
-    tag: str  = 'baca_make_fused_tuplet_monads',
+    tag: str = "baca_make_fused_tuplet_monads",
     tuplet_ratio: typing.Tuple[int] = None,
-    ) -> RhythmCommand:
+) -> RhythmCommand:
     """
     Makes fused tuplet monads.
     """
@@ -2281,27 +2272,20 @@ def make_fused_tuplet_monads(
     else:
         tuplet_ratios.append(tuplet_ratio)
     return RhythmCommand(
-        division_expression=abjad.sequence()
-            .sum()
-            .sequence(),
+        division_expression=abjad.sequence().sum().sequence(),
         measures=measures,
         rhythm_maker=rmakers.TupletRhythmMaker(
             tag=tag,
-            tie_specifier=rmakers.TieSpecifier(
-                repeat_ties=True,
-                ),
+            tie_specifier=rmakers.TieSpecifier(repeat_ties=True),
             tuplet_ratios=tuplet_ratios,
             tuplet_specifier=rmakers.TupletSpecifier(
-                extract_trivial=True,
-                rewrite_rest_filled=True,
-                trivialize=True,
-                ),
+                extract_trivial=True, rewrite_rest_filled=True, trivialize=True
             ),
-        )
+        ),
+    )
 
-def make_monads(
-    fractions: str,
-    ) -> RhythmCommand:
+
+def make_monads(fractions: str,) -> RhythmCommand:
     r"""
     Makes monads.
 
@@ -2431,37 +2415,34 @@ def make_monads(
         components.extend(leaves)
     rhythm_maker = abjad.select(components)
     return RhythmCommand(
-        annotate_unpitched_music=True,
-        rhythm_maker=rhythm_maker,
-        )
+        annotate_unpitched_music=True, rhythm_maker=rhythm_maker
+    )
+
 
 def make_multimeasure_rests(
     *,
     measures: typings.Slice = None,
-    tag: str = 'baca_make_multimeasure_rests',
-    ) -> RhythmCommand:
+    tag: str = "baca_make_multimeasure_rests",
+) -> RhythmCommand:
     """
     Makes multimeasure rests.
     """
     mask = rmakers.SilenceMask(
-        pattern=abjad.index_all(),
-        use_multimeasure_rests=True,
-        )
+        pattern=abjad.index_all(), use_multimeasure_rests=True
+    )
     return RhythmCommand(
         measures=measures,
-        rhythm_maker=rmakers.NoteRhythmMaker(
-            division_masks=[mask],
-            tag=tag,
-            ),
-        )
+        rhythm_maker=rmakers.NoteRhythmMaker(division_masks=[mask], tag=tag),
+    )
+
 
 def make_notes(
     *,
     dmask: rmakers.MaskKeyword = None,
     measures: typings.Slice = None,
     repeat_ties: bool = False,
-    tag: str = 'baca_make_notes',
-    ) -> RhythmCommand:
+    tag: str = "baca_make_notes",
+) -> RhythmCommand:
     """
     Makes notes; rewrites meter.
     """
@@ -2472,34 +2453,33 @@ def make_notes(
         measures=measures,
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
-            division_masks=dmask,
-            tag=tag,
-            tie_specifier=tie_specifier,
-            )
-        )
+            division_masks=dmask, tag=tag, tie_specifier=tie_specifier
+        ),
+    )
+
 
 def make_repeat_tied_notes(
     *,
     dmask: rmakers.MaskKeyword = None,
     do_not_rewrite_meter: bool = None,
     measures: typings.Slice = None,
-    tag: str = 'baca_make_repeat_tied_notes',
-    ) -> RhythmCommand:
+    tag: str = "baca_make_repeat_tied_notes",
+) -> RhythmCommand:
     """
     Makes repeat-tied notes; rewrites meter.
     """
     return RhythmCommand(
         measures=measures,
-        rewrite_meter=not(do_not_rewrite_meter),
+        rewrite_meter=not (do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
             division_masks=dmask,
             tag=tag,
             tie_specifier=rmakers.TieSpecifier(
-                tie_across_divisions=True,
-                repeat_ties=True,
-                ),
+                tie_across_divisions=True, repeat_ties=True
             ),
-        )
+        ),
+    )
+
 
 def make_repeated_duration_notes(
     durations: typing.Iterable,
@@ -2508,8 +2488,8 @@ def make_repeated_duration_notes(
     dmask: rmakers.MaskKeyword = None,
     do_not_rewrite_meter: bool = None,
     measures: typings.Slice = None,
-    tag: str = 'baca_make_repeated_duration_notes',
-    ) -> RhythmCommand:
+    tag: str = "baca_make_repeated_duration_notes",
+) -> RhythmCommand:
     """
     Makes repeated-duration notes; rewrites meter.
     """
@@ -2518,50 +2498,45 @@ def make_repeated_duration_notes(
     elif isinstance(durations, tuple):
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
-    tie_specifier = rmakers.TieSpecifier(
-        repeat_ties=True,
-        )
+    tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
     division_expression = baca_divisions.split_by_durations(
         durations=durations
-        )
+    )
     return RhythmCommand(
         division_expression=division_expression,
         measures=measures,
-        rewrite_meter=not(do_not_rewrite_meter),
+        rewrite_meter=not (do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
             beam_specifier=beam_specifier,
             division_masks=dmask,
             tag=tag,
             tie_specifier=tie_specifier,
-            ),
-        )
+        ),
+    )
+
 
 def make_rests(
-    *,
-    measures: typings.Slice = None,
-    tag: str = 'baca_make_rests',
-    ) -> RhythmCommand:
+    *, measures: typings.Slice = None, tag: str = "baca_make_rests"
+) -> RhythmCommand:
     """
     Makes rests.
     """
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.NoteRhythmMaker(
-            division_masks=[rmakers.silence([0], 1)],
-            tag=tag,
-            ),
-        )
+            division_masks=[rmakers.silence([0], 1)], tag=tag
+        ),
+    )
+
 
 def make_rhythm(
     selection: typing.Union[str, abjad.Selection],
     *,
     measures: typings.Slice = None,
     repeat_tie_threshold: typing.Union[
-        bool,
-        typings.IntegerPair,
-        abjad.DurationInequality,
-        ] = None,
-    ) -> RhythmCommand:
+        bool, typings.IntegerPair, abjad.DurationInequality
+    ] = None,
+) -> RhythmCommand:
     r"""
     Sets rhythm to ``selection``.
 
@@ -2714,20 +2689,18 @@ def make_rhythm(
                 logical_tie,
                 repeat=repeat_tie_threshold,
                 # TODO: add tag
-                #tag='baca_make_rhythm',
-                )
+                # tag='baca_make_rhythm',
+            )
         temporary_container[:] = []
-    return RhythmCommand(
-        measures=measures,
-        rhythm_maker=argument,
-        )
+    return RhythmCommand(measures=measures, rhythm_maker=argument)
+
 
 def make_single_attack(
     duration,
     *,
     measures: typings.Slice = None,
-    tag: str = 'baca_make_single_attack',
-    ) -> RhythmCommand:
+    tag: str = "baca_make_single_attack",
+) -> RhythmCommand:
     """
     Makes single attacks with ``duration``.
     """
@@ -2740,32 +2713,24 @@ def make_single_attack(
             prefix_talea=[numerator],
             prefix_counts=[1],
             talea_denominator=denominator,
-            ),
+        ),
         tag=tag,
-        )
-    return RhythmCommand(
-        measures=measures,
-        rhythm_maker=rhythm_maker,
-        )
+    )
+    return RhythmCommand(measures=measures, rhythm_maker=rhythm_maker)
+
 
 def make_skips(
-    *,
-    measures: typings.Slice = None,
-    tag: str = 'baca_make_skips',
-    ) -> RhythmCommand:
+    *, measures: typings.Slice = None, tag: str = "baca_make_skips"
+) -> RhythmCommand:
     """
     Makes skips.
     """
-    return RhythmCommand(
-        measures=measures,
-        rhythm_maker=SkipRhythmMaker()
-        )
+    return RhythmCommand(measures=measures, rhythm_maker=SkipRhythmMaker())
+
 
 def make_tied_notes(
-    *,
-    measures: typings.Slice = None,
-    tag: str = 'baca_make_tied_notes',
-    ) -> RhythmCommand:
+    *, measures: typings.Slice = None, tag: str = "baca_make_tied_notes"
+) -> RhythmCommand:
     """
     Makes tied notes; rewrites meter.
     """
@@ -2774,36 +2739,33 @@ def make_tied_notes(
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
             tag=tag,
-            tie_specifier=rmakers.TieSpecifier(
-                tie_across_divisions=True,
-                ),
-            ),
-        )
+            tie_specifier=rmakers.TieSpecifier(tie_across_divisions=True),
+        ),
+    )
+
 
 def make_tied_repeated_durations(
     durations: typing.Iterable,
     *,
     measures: typings.Slice = None,
-    tag: str = 'baca_make_tied_reepated_durations',
-    ) -> RhythmCommand:
+    tag: str = "baca_make_tied_reepated_durations",
+) -> RhythmCommand:
     """
     Makes tied repeated durations; does not rewrite meter.
     """
     command = make_repeated_duration_notes(
-        durations,
-        measures=measures,
-        tag=tag,
-        )
+        durations, measures=measures, tag=tag
+    )
     return abjad.new(
         command,
         rewrite_meter=False,
         rhythm_maker__tie_specifier__tie_across_divisions=True,
-        )
+    )
+
 
 def repeat_tie_from(
-    *,
-    selector: typings.Selector = 'baca.pleaf(-1)',
-    ) -> TieCorrectionCommand:
+    *, selector: typings.Selector = "baca.pleaf(-1)"
+) -> TieCorrectionCommand:
     r"""
     Repeat-ties from leaf.
 
@@ -2933,15 +2895,12 @@ def repeat_tie_from(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    return TieCorrectionCommand(
-        repeat=True,
-        selector=selector,
-        )
+    return TieCorrectionCommand(repeat=True, selector=selector)
+
 
 def repeat_tie_to(
-    *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    ) -> TieCorrectionCommand:
+    *, selector: typings.Selector = "baca.pleaf(0)"
+) -> TieCorrectionCommand:
     r"""
     Repeat-ties to leaf.
 
@@ -3072,10 +3031,9 @@ def repeat_tie_to(
 
     """
     return TieCorrectionCommand(
-        direction=abjad.Left,
-        repeat=True,
-        selector=selector,
-        )
+        direction=abjad.Left, repeat=True, selector=selector
+    )
+
 
 def rhythm(
     rhythm_maker: typings.RhythmMakerTyping,
@@ -3092,7 +3050,7 @@ def rhythm(
     rewrite_rest_filled: bool = None,
     right_broken: bool = None,
     split_at_measure_boundaries: bool = None,
-    ) -> RhythmCommand:
+) -> RhythmCommand:
     """
     Makes rhythm command.
     """
@@ -3113,7 +3071,8 @@ def rhythm(
         rhythm_maker=rhythm_maker,
         right_broken=right_broken,
         split_at_measure_boundaries=split_at_measure_boundaries,
-        )
+    )
+
 
 def silence_first() -> rmakers.SilenceMask:
     """
@@ -3127,6 +3086,7 @@ def silence_first() -> rmakers.SilenceMask:
     """
     return rmakers.silence([0])
 
+
 def silence_last() -> rmakers.SilenceMask:
     """
     Makes silence mask.
@@ -3138,6 +3098,7 @@ def silence_last() -> rmakers.SilenceMask:
 
     """
     return rmakers.silence([-1])
+
 
 def sustain_first() -> rmakers.SustainMask:
     """
@@ -3151,6 +3112,7 @@ def sustain_first() -> rmakers.SustainMask:
     """
     return rmakers.sustain([0])
 
+
 def sustain_last() -> rmakers.SustainMask:
     """
     Makes sustain mask.
@@ -3163,28 +3125,27 @@ def sustain_last() -> rmakers.SustainMask:
     """
     return rmakers.sustain([-1])
 
+
 def tacet(
-    color: str = 'green',
+    color: str = "green",
     *,
     measures: typings.Slice = None,
-    selector: typings.Selector = 'baca.mmrests()',
-    ) -> overrides.OverrideCommand:
+    selector: typings.Selector = "baca.mmrests()",
+) -> overrides.OverrideCommand:
     """
     Colors multimeasure rests.
     """
     command = overrides.mmrest_color(
-        color,
-        selector=selector,
-        tag=f'{const.TACET}:baca_tacet',
-        )
+        color, selector=selector, tag=f"{const.TACET}:baca_tacet"
+    )
     command_ = scoping.new(command, measures=measures)
     assert isinstance(command_, overrides.OverrideCommand)
     return command_
 
+
 def tie_from(
-    *,
-    selector: typings.Selector = 'baca.pleaf(-1)',
-    ) -> TieCorrectionCommand:
+    *, selector: typings.Selector = "baca.pleaf(-1)"
+) -> TieCorrectionCommand:
     r"""
     Ties from leaf.
 
@@ -3308,15 +3269,12 @@ def tie_from(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    return TieCorrectionCommand(
-        repeat=False,
-        selector=selector,
-        )
+    return TieCorrectionCommand(repeat=False, selector=selector)
+
 
 def tie_to(
-    *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    ) -> TieCorrectionCommand:
+    *, selector: typings.Selector = "baca.pleaf(0)"
+) -> TieCorrectionCommand:
     r"""
     Ties to leaf.
 
@@ -3441,15 +3399,13 @@ def tie_to(
 
     """
     return TieCorrectionCommand(
-        direction=abjad.Left,
-        repeat=False,
-        selector=selector,
-        )
+        direction=abjad.Left, repeat=False, selector=selector
+    )
+
 
 def untie_to(
-    *,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    ) -> TieCorrectionCommand:
+    *, selector: typings.Selector = "baca.pleaf(0)"
+) -> TieCorrectionCommand:
     r"""
     Unties to leaf.
 
@@ -3575,7 +3531,5 @@ def untie_to(
 
     """
     return TieCorrectionCommand(
-        direction=abjad.Left,
-        selector=selector,
-        untie=True,
-        )
+        direction=abjad.Left, selector=selector, untie=True
+    )

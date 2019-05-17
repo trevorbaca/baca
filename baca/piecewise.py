@@ -12,6 +12,7 @@ from . import typings
 
 ### CLASSES ###
 
+
 class Bundle(object):
     """
     Bundle.
@@ -20,11 +21,11 @@ class Bundle(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_bookended_spanner_start',
-        '_indicator',
-        '_spanner_start',
-        '_spanner_stop',
-        )
+        "_bookended_spanner_start",
+        "_indicator",
+        "_spanner_start",
+        "_spanner_stop",
+    )
 
     _publish_storage_format = True
 
@@ -37,7 +38,7 @@ class Bundle(object):
         indicator: typing.Any = None,
         spanner_start: typing.Any = None,
         spanner_stop: typing.Any = None,
-        ) -> None:
+    ) -> None:
         self._bookended_spanner_start = bookended_spanner_start
         self._indicator = indicator
         self._spanner_start = spanner_start
@@ -146,16 +147,16 @@ class PiecewiseCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_autodetect_right_padding',
-        '_bookend',
-        '_bundles',
-        '_final_piece_spanner',
-        '_pieces',
-        '_remove_length_1_spanner_start',
-        '_right_broken',
-        '_selector',
-        '_tweaks',
-        )
+        "_autodetect_right_padding",
+        "_bookend",
+        "_bundles",
+        "_final_piece_spanner",
+        "_pieces",
+        "_remove_length_1_spanner_start",
+        "_right_broken",
+        "_selector",
+        "_tweaks",
+    )
 
     ### INITIALIZER ###
 
@@ -169,16 +170,17 @@ class PiecewiseCommand(scoping.Command):
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
-        pieces: typings.Selector = 'baca.leaves()',
+        pieces: typings.Selector = "baca.leaves()",
         remove_length_1_spanner_start: bool = None,
         right_broken: typing.Any = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.leaves()',
+        selector: typings.Selector = "baca.leaves()",
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
-        ) -> None:
+    ) -> None:
         # for selector evaluation
         import baca
+
         scoping.Command.__init__(
             self,
             map=map,
@@ -187,7 +189,7 @@ class PiecewiseCommand(scoping.Command):
             scope=scope,
             selector=selector,
             tags=tags,
-            )
+        )
         if autodetect_right_padding is not None:
             autodetect_right_padding = bool(autodetect_right_padding)
         self._autodetect_right_padding = autodetect_right_padding
@@ -199,13 +201,12 @@ class PiecewiseCommand(scoping.Command):
             bundles_ = abjad.CyclicTuple(bundles)
         self._bundles = bundles_
         if final_piece_spanner not in (None, False):
-            assert getattr(final_piece_spanner, 'spanner_start', False)
+            assert getattr(final_piece_spanner, "spanner_start", False)
         self._final_piece_spanner = final_piece_spanner
         if isinstance(pieces, str):
             pieces = eval(pieces)
         if pieces is not None:
-            assert isinstance(pieces, abjad.Expression), repr(
-                pieces)
+            assert isinstance(pieces, abjad.Expression), repr(pieces)
         self._pieces = pieces
         if remove_length_1_spanner_start is not None:
             remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
@@ -260,9 +261,10 @@ class PiecewiseCommand(scoping.Command):
                     i,
                     total_pieces,
                     tag=str(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS),
-                    )
-            if (bookend_pattern.matches_index(i, piece_count) and
-                1 < len(piece)):
+                )
+            if bookend_pattern.matches_index(i, piece_count) and 1 < len(
+                piece
+            ):
                 should_bookend = True
             else:
                 should_bookend = False
@@ -272,57 +274,43 @@ class PiecewiseCommand(scoping.Command):
                 should_bookend = False
             bundle = self.bundles[i]
             if is_final_piece and just_backstole_right_text:
-                bundle = abjad.new(
-                    bundle,
-                    spanner_start=None,
-                    )
+                bundle = abjad.new(bundle, spanner_start=None)
             next_bundle = self.bundles[i + 1]
             if should_bookend and bundle.bookended_spanner_start:
                 bundle = abjad.new(
-                    bundle,
-                    spanner_start=bundle.bookended_spanner_start,
-                    )
-            if (is_penultimate_piece and
-                (len(pieces[-1]) == 1 or self.final_piece_spanner is False) and
-                isinstance(next_bundle.spanner_start, abjad.StartTextSpan)):
+                    bundle, spanner_start=bundle.bookended_spanner_start
+                )
+            if (
+                is_penultimate_piece
+                and (len(pieces[-1]) == 1 or self.final_piece_spanner is False)
+                and isinstance(next_bundle.spanner_start, abjad.StartTextSpan)
+            ):
                 bundle = abjad.new(
-                    bundle,
-                    spanner_start=bundle.bookended_spanner_start,
-                    )
+                    bundle, spanner_start=bundle.bookended_spanner_start
+                )
                 just_backstole_right_text = True
-            if (len(piece) == 1 and
-                bundle.compound() and
-                self.remove_length_1_spanner_start):
-                bundle = abjad.new(
-                    bundle,
-                    spanner_start=None,
-                    )
+            if (
+                len(piece) == 1
+                and bundle.compound()
+                and self.remove_length_1_spanner_start
+            ):
+                bundle = abjad.new(bundle, spanner_start=None)
             if is_final_piece and bundle.spanner_start:
                 if isinstance(bundle.spanner_start, abjad.StartHairpin):
                     if self.final_piece_spanner:
                         bundle = abjad.new(
-                            bundle,
-                            spanner_start=self.final_piece_spanner,
-                            )
+                            bundle, spanner_start=self.final_piece_spanner
+                        )
                     elif self.final_piece_spanner is False:
-                        bundle = abjad.new(
-                            bundle,
-                            spanner_start=None,
-                            )
+                        bundle = abjad.new(bundle, spanner_start=None)
                 elif isinstance(bundle.spanner_start, abjad.StartTextSpan):
                     if self.final_piece_spanner is False:
-                        bundle = abjad.new(
-                            bundle,
-                            spanner_start=None,
-                            )
+                        bundle = abjad.new(bundle, spanner_start=None)
             if is_first_piece or previous_had_bookend:
-                bundle = abjad.new(
-                    bundle,
-                    spanner_stop=None,
-                    )
-            tag = 'PiecewiseCommand(1)'
+                bundle = abjad.new(bundle, spanner_stop=None)
+            tag = "PiecewiseCommand(1)"
             if is_final_piece and self.right_broken:
-                tag = f'{tag}:right_broken'
+                tag = f"{tag}:right_broken"
             autodetected_right_padding = None
             # solution is merely heuristic;
             # TextSpanner.bound-details.right.to-extent = ##t implementation
@@ -331,15 +319,17 @@ class PiecewiseCommand(scoping.Command):
                 if abjad.inspect(stop_leaf).annotation(const.PHANTOM) is True:
                     autodetected_right_padding = 2.5
                 # stop leaf multiplied whole note on fermata measure downbeat
-                elif (isinstance(stop_leaf, abjad.Note) and
-                    stop_leaf.written_duration == 1 and
-                    stop_leaf.multiplier == abjad.Multiplier(1, 4)):
+                elif (
+                    isinstance(stop_leaf, abjad.Note)
+                    and stop_leaf.written_duration == 1
+                    and stop_leaf.multiplier == abjad.Multiplier(1, 4)
+                ):
                     autodetected_right_padding = 3.25
                 # stop leaf on normal measure downbeat
                 else:
                     autodetected_right_padding = 2.75
                 # there's probably a third case for normal midmeasure leaf
-                #else:
+                # else:
                 #    autodetected_right_padding = 1.25
             self._attach_indicators(
                 bundle,
@@ -349,41 +339,35 @@ class PiecewiseCommand(scoping.Command):
                 autodetected_right_padding=autodetected_right_padding,
                 just_bookended_leaf=just_bookended_leaf,
                 tag=tag,
-                )
+            )
             if should_bookend:
                 if bundle.bookended_spanner_start is not None:
-                    next_bundle = abjad.new(
-                        next_bundle,
-                        spanner_start=None,
-                        )
+                    next_bundle = abjad.new(next_bundle, spanner_start=None)
                 if next_bundle.compound():
-                    next_bundle = abjad.new(
-                        next_bundle,
-                        spanner_start=None,
-                        )
+                    next_bundle = abjad.new(next_bundle, spanner_start=None)
                 self._attach_indicators(
                     next_bundle,
                     stop_leaf,
                     i,
                     total_pieces,
-                    tag='PiecewiseCommand(2)',
-                    )
+                    tag="PiecewiseCommand(2)",
+                )
                 just_bookended_leaf = stop_leaf
-            elif (is_final_piece and
-                start_leaf is not stop_leaf and
-                not just_backstole_right_text and
-                next_bundle.spanner_stop):
-                spanner_stop = abjad.new(
-                    next_bundle.spanner_stop,
-                    )
+            elif (
+                is_final_piece
+                and start_leaf is not stop_leaf
+                and not just_backstole_right_text
+                and next_bundle.spanner_stop
+            ):
+                spanner_stop = abjad.new(next_bundle.spanner_stop)
                 bundle = Bundle(spanner_stop=spanner_stop)
                 self._attach_indicators(
                     bundle,
                     stop_leaf,
                     i,
                     total_pieces,
-                    tag='PiecewiseCommand(3)',
-                    )
+                    tag="PiecewiseCommand(3)",
+                )
             previous_had_bookend = should_bookend
 
     ### PRIVATE METHODS ###
@@ -397,49 +381,40 @@ class PiecewiseCommand(scoping.Command):
         autodetected_right_padding=None,
         just_bookended_leaf=None,
         tag=None,
-        ):
+    ):
         # TODO: factor out late import
         from .segmentmaker import SegmentMaker
+
         assert isinstance(tag, str), repr(tag)
         for indicator in bundle:
             indicator = abjad.new(indicator)
-            if (not getattr(indicator, 'trend', False) and
-                leaf is just_bookended_leaf):
+            if (
+                not getattr(indicator, "trend", False)
+                and leaf is just_bookended_leaf
+            ):
                 continue
-            if (autodetected_right_padding is not None and
-                isinstance(indicator, abjad.StartTextSpan)):
+            if autodetected_right_padding is not None and isinstance(
+                indicator, abjad.StartTextSpan
+            ):
                 number = autodetected_right_padding
                 abjad.tweak(
-                    indicator,
-                    tag=self.tag.append(tag).append('autodetect'),
-                    ).bound_details__right__padding = number
-            if self.tweaks and hasattr(indicator, '_tweaks'):
+                    indicator, tag=self.tag.append(tag).append("autodetect")
+                ).bound_details__right__padding = number
+            if self.tweaks and hasattr(indicator, "_tweaks"):
                 self._apply_tweaks(
-                    indicator,
-                    self.tweaks,
-                    i=i,
-                    total=total_pieces,
-                    )
+                    indicator, self.tweaks, i=i, total=total_pieces
+                )
             reapplied = scoping.Command._remove_reapplied_wrappers(
-                leaf,
-                indicator,
-                )
+                leaf, indicator
+            )
             wrapper = abjad.attach(
-                indicator,
-                leaf,
-                tag=self.tag.append(tag),
-                wrapper=True,
-                )
-            if scoping.compare_persistent_indicators(
-                indicator,
-                reapplied,
-                ):
-                status = 'redundant'
+                indicator, leaf, tag=self.tag.append(tag), wrapper=True
+            )
+            if scoping.compare_persistent_indicators(indicator, reapplied):
+                status = "redundant"
                 SegmentMaker._treat_persistent_wrapper(
-                    self.runtime['manifests'],
-                    wrapper,
-                    status,
-                    )
+                    self.runtime["manifests"], wrapper, status
+                )
 
     ### PUBLIC PROPERTIES ###
 
@@ -516,7 +491,9 @@ class PiecewiseCommand(scoping.Command):
         """
         return self._tweaks
 
+
 ### FACTORY FUNCTIONS ###
+
 
 def bow_speed_spanner(
     items: typing.Union[str, typing.List],
@@ -528,12 +505,12 @@ def bow_speed_spanner(
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{const.BOW_SPEED}:baca_bow_speed_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.ltleaves().rleak()",
+    tag: typing.Optional[str] = f"{const.BOW_SPEED}:baca_bow_speed_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes bow speed spanner.
     """
@@ -544,7 +521,7 @@ def bow_speed_spanner(
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
         left_broken_text=left_broken_text,
-        lilypond_id='BowSpeed',
+        lilypond_id="BowSpeed",
         map=map,
         match=match,
         measures=measures,
@@ -552,37 +529,39 @@ def bow_speed_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )
+
 
 def circle_bow_spanner(
     qualifier: str = None,
     *tweaks: abjad.IndexedTweakManager,
-    left_broken_text: typing.Optional[str] =
-        r'\baca-left-broken-circle-bowing-markup',
+    left_broken_text: typing.Optional[
+        str
+    ] = r"\baca-left-broken-circle-bowing-markup",
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{const.CIRCLE_BOW}:baca_circle_bow_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.ltleaves().rleak()",
+    tag: typing.Optional[str] = f"{const.CIRCLE_BOW}:baca_circle_bow_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes circle bow spanner.
     """
     if qualifier is None:
-        string = r'\baca-circle-markup =|'
+        string = r"\baca-circle-markup =|"
     else:
         assert isinstance(qualifier, str), repr(qualifier)
-        string = rf'\baca-circle-{qualifier}-markup =|'
+        string = rf"\baca-circle-{qualifier}-markup =|"
     return text_spanner(
         string,
         *tweaks,
         autodetect_right_padding=True,
         bookend=False,
         left_broken_text=left_broken_text,
-        lilypond_id='CircleBow',
+        lilypond_id="CircleBow",
         map=map,
         match=match,
         measures=measures,
@@ -590,44 +569,45 @@ def circle_bow_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )
+
 
 def clb_spanner(
     string_number: int,
     *tweaks: abjad.IndexedTweakManager,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
-    left_broken_text: typing.Optional[str] = r'\baca-left-broken-clb-markup',
+    left_broken_text: typing.Optional[str] = r"\baca-left-broken-clb-markup",
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{const.CLB}:baca_clb_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.ltleaves().rleak()",
+    tag: typing.Optional[str] = f"{const.CLB}:baca_clb_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes clb spanner.
     """
     assert string_number in (1, 2, 3, 4), repr(string_number)
     if string_number == 1:
-        markup = r'\baca-damp-clb-one-markup'
+        markup = r"\baca-damp-clb-one-markup"
     elif string_number == 2:
-        markup = r'\baca-damp-clb-two-markup'
+        markup = r"\baca-damp-clb-two-markup"
     elif string_number == 3:
-        markup = r'\baca-damp-clb-three-markup'
+        markup = r"\baca-damp-clb-three-markup"
     elif string_number == 4:
-        markup = r'\baca-damp-clb-four-markup'
+        markup = r"\baca-damp-clb-four-markup"
     else:
         raise Exception(string_number)
     return text_spanner(
-        f'{markup} =|',
+        f"{markup} =|",
         *tweaks,
         autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         left_broken_text=left_broken_text,
-        lilypond_id='CLB',
+        lilypond_id="CLB",
         map=map,
         match=match,
         measures=measures,
@@ -635,32 +615,33 @@ def clb_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )
+
 
 def damp_spanner(
     *tweaks: abjad.IndexedTweakManager,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
-    left_broken_text: typing.Optional[str] = r'\baca-left-broken-damp-markup',
+    left_broken_text: typing.Optional[str] = r"\baca-left-broken-damp-markup",
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{const.DAMP}:baca_damp_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.ltleaves().rleak()",
+    tag: typing.Optional[str] = f"{const.DAMP}:baca_damp_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes damp spanner.
     """
     return text_spanner(
-        r'\baca-damp-markup =|',
+        r"\baca-damp-markup =|",
         *tweaks,
         autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         left_broken_text=left_broken_text,
-        lilypond_id='Damp',
+        lilypond_id="Damp",
         map=map,
         match=match,
         measures=measures,
@@ -668,7 +649,8 @@ def damp_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )
+
 
 def dynamic(
     dynamic: typing.Union[str, abjad.Dynamic],
@@ -676,10 +658,10 @@ def dynamic(
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    selector: typings.Selector = 'baca.phead(0)',
+    selector: typings.Selector = "baca.phead(0)",
     redundant: bool = None,
-    tag: typing.Optional[str] = 'baca_dynamic',
-    ) -> commands.IndicatorCommand:
+    tag: typing.Optional[str] = "baca_dynamic",
+) -> commands.IndicatorCommand:
     r"""
     Attaches dynamic.
 
@@ -1143,7 +1125,7 @@ def dynamic(
     prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
     assert isinstance(indicator, prototype), repr(indicator)
     return commands.IndicatorCommand(
-        context='Voice',
+        context="Voice",
         indicators=[indicator],
         map=map,
         match=match,
@@ -1152,7 +1134,8 @@ def dynamic(
         selector=selector,
         tags=[tag],
         tweaks=tweaks,
-        )
+    )
+
 
 def hairpin(
     dynamics: typing.Union[str, typing.List],
@@ -1163,12 +1146,12 @@ def hairpin(
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     remove_length_1_spanner_start: bool = None,
     right_broken: bool = None,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_hairpin',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_hairpin",
+) -> PiecewiseCommand:
     r"""
     Attaches hairpin.
 
@@ -3550,7 +3533,7 @@ def hairpin(
         remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
     right_broken_: typing.Any = False
     if bool(right_broken) is True:
-        right_broken_ = abjad.LilyPondLiteral(r'\!', format_slot='after')
+        right_broken_ = abjad.LilyPondLiteral(r"\!", format_slot="after")
     return PiecewiseCommand(
         bookend=bookend,
         bundles=bundles,
@@ -3563,31 +3546,33 @@ def hairpin(
         right_broken=right_broken_,
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def half_clt_spanner(
     *tweaks: abjad.IndexedTweakManager,
-    left_broken_text: typing.Optional[str] =
-        r'\baca-left-broken-half-clt-markup',
+    left_broken_text: typing.Optional[
+        str
+    ] = r"\baca-left-broken-half-clt-markup",
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{const.HALF_CLT}:baca_half_clt_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.ltleaves().rleak()",
+    tag: typing.Optional[str] = f"{const.HALF_CLT}:baca_half_clt_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes 1/2 clt spanner.
     """
     return text_spanner(
-        '½ clt =|',
+        "½ clt =|",
         *tweaks,
         autodetect_right_padding=True,
         bookend=False,
         left_broken_text=left_broken_text,
-        lilypond_id='HalfCLT',
+        lilypond_id="HalfCLT",
         map=map,
         match=match,
         measures=measures,
@@ -3595,11 +3580,12 @@ def half_clt_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )
 
-def make_dynamic(string: str) -> typing.Union[
-    abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin,
-    ]:
+
+def make_dynamic(
+    string: str
+) -> typing.Union[abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin]:
     r"""
     Makes dynamic.
 
@@ -3782,85 +3768,83 @@ def make_dynamic(string: str) -> typing.Union[
     """
     assert isinstance(string, str), repr(string)
     scheme_manifest = classes.SchemeManifest()
-    known_shapes = abjad.StartHairpin('<').known_shapes
+    known_shapes = abjad.StartHairpin("<").known_shapes
     indicator: typing.Union[
-        abjad.Dynamic,
-        abjad.StartHairpin,
-        abjad.StopHairpin,
-        ]
-    if '_' in string:
-        raise Exception(f'use hyphens instead of underscores ({string!r}).')
-    if string == 'niente':
-        indicator = abjad.Dynamic('niente', command=r'\!')
-    elif string.endswith('-ancora'):
-        dynamic = string.split('-')[0]
-        command = rf'\baca-{dynamic}-ancora'
+        abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin
+    ]
+    if "_" in string:
+        raise Exception(f"use hyphens instead of underscores ({string!r}).")
+    if string == "niente":
+        indicator = abjad.Dynamic("niente", command=r"\!")
+    elif string.endswith("-ancora"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-ancora"
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('-effort-sub'):
-        dynamic = string.split('-')[0]
-        command = rf'\baca-{dynamic}-effort-sub'
+    elif string.endswith("-effort-sub"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-effort-sub"
         indicator = abjad.Dynamic(dynamic, command=command)
     elif string.startswith('("') and string.endswith('")'):
         dynamic = string.strip('(")')
-        command = rf'\baca-effort-{dynamic}-parenthesized'
+        command = rf"\baca-effort-{dynamic}-parenthesized"
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.startswith('(') and string.endswith(')'):
-        dynamic = string.strip('()')
-        command = rf'\baca-{dynamic}-parenthesized'
+    elif string.startswith("(") and string.endswith(")"):
+        dynamic = string.strip("()")
+        command = rf"\baca-{dynamic}-parenthesized"
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('-poco-scratch'):
-        dynamic = string.split('-')[0]
-        command = rf'\baca-{dynamic}-poco-scratch'
+    elif string.endswith("-poco-scratch"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-poco-scratch"
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('-poss'):
-        dynamic = string.split('-')[0]
-        command = rf'\baca-{dynamic}-poss'
+    elif string.endswith("-poss"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-poss"
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('-scratch'):
-        dynamic = string.split('-')[0]
-        command = rf'\baca-{dynamic}-scratch'
+    elif string.endswith("-scratch"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-scratch"
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('-sempre') and not string.startswith('"'):
-        dynamic = string.split('-')[0]
-        command = rf'\baca-{dynamic}-sempre'
+    elif string.endswith("-sempre") and not string.startswith('"'):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-sempre"
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('-sempre') and string.startswith('"'):
-        dynamic = string.split('-')[0].strip('"')
-        command = rf'\baca-effort-{dynamic}-sempre'
+    elif string.endswith("-sempre") and string.startswith('"'):
+        dynamic = string.split("-")[0].strip('"')
+        command = rf"\baca-effort-{dynamic}-sempre"
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('-sub'):
-        dynamic = string.split('-')[0]
-        command = rf'\baca-{dynamic}-sub'
+    elif string.endswith("-sub"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-sub"
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif string.endswith('-whiteout'):
-        dynamic = string.split('-')[0]
-        command = rf'\baca-{dynamic}-whiteout'
+    elif string.endswith("-whiteout"):
+        dynamic = string.split("-")[0]
+        command = rf"\baca-{dynamic}-whiteout"
         indicator = abjad.Dynamic(dynamic, command=command)
-    elif 'baca-' + string in scheme_manifest.dynamics:
+    elif "baca-" + string in scheme_manifest.dynamics:
         name = scheme_manifest.dynamic_to_steady_state(string)
-        command = '\\baca-' + string
-        pieces = string.split('-')
-        if pieces[0] in ('sfz', 'sffz', 'sfffz'):
+        command = "\\baca-" + string
+        pieces = string.split("-")
+        if pieces[0] in ("sfz", "sffz", "sfffz"):
             sforzando = True
         else:
             sforzando = False
-        name_is_textual = not(sforzando)
+        name_is_textual = not (sforzando)
         indicator = abjad.Dynamic(
             name,
             command=command,
             name_is_textual=name_is_textual,
             sforzando=sforzando,
-            )
+        )
     elif string.startswith('"'):
         assert string.endswith('"')
         stripped_string = string.strip('"')
-        command = rf'\baca-effort-{stripped_string}'
-        indicator = abjad.Dynamic(f'{string}', command=command)
+        command = rf"\baca-effort-{stripped_string}"
+        indicator = abjad.Dynamic(f"{string}", command=command)
     elif string in known_shapes:
         indicator = abjad.StartHairpin(string)
-        if string.endswith('>o'):
+        if string.endswith(">o"):
             abjad.tweak(indicator).to_barline = True
-    elif string == '!':
+    elif string == "!":
         indicator = abjad.StopHairpin()
     else:
         failed = False
@@ -3869,9 +3853,10 @@ def make_dynamic(string: str) -> typing.Union[
         except:
             failed = True
         if failed:
-            message = f'the string {string!r} initializes no known dynamic.'
+            message = f"the string {string!r} initializes no known dynamic."
             raise Exception(message)
     return indicator
+
 
 def material_annotation_spanner(
     items: typing.Union[str, typing.List],
@@ -3880,17 +3865,18 @@ def material_annotation_spanner(
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
-    selector: typings.Selector = 'baca.leaves().rleak()',
-    tag: typing.Optional[str] = 
-        f'{const.MATERIAL}:baca_material_annotation_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.leaves().rleak()",
+    tag: typing.Optional[
+        str
+    ] = f"{const.MATERIAL}:baca_material_annotation_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes material annotation spanner.
     """
-    lilypond_id = lilypond_id or 'MA'
+    lilypond_id = lilypond_id or "MA"
     return text_spanner(
         items,
         *tweaks,
@@ -3904,12 +3890,12 @@ def material_annotation_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )
+
 
 def parse_hairpin_descriptor(
-    descriptor: str,
-    *tweaks: abjad.LilyPondTweakManager,
-    ) -> typing.List[Bundle]:
+    descriptor: str, *tweaks: abjad.LilyPondTweakManager
+) -> typing.List[Bundle]:
     r"""
     Parses hairpin descriptor.
 
@@ -4011,19 +3997,19 @@ def parse_hairpin_descriptor(
     assert isinstance(descriptor, str), repr(descriptor)
     indicators: typing.List[
         typing.Union[abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin]
-        ] = []
+    ] = []
     bundles: typing.List[Bundle] = []
     for string in descriptor.split():
         indicator = make_dynamic(string)
-        if tweaks and hasattr(indicator, '_tweaks'):
+        if tweaks and hasattr(indicator, "_tweaks"):
             PiecewiseCommand._apply_tweaks(indicator, tweaks)
         indicators.append(indicator)
     if len(indicators) == 1:
         if isinstance(indicators[0], abjad.StartHairpin):
-            bundle = Bundle(spanner_start=indicators[0]) 
+            bundle = Bundle(spanner_start=indicators[0])
         else:
             assert isinstance(indicators[0], abjad.Dynamic)
-            bundle = Bundle(indicator=indicators[0]) 
+            bundle = Bundle(indicator=indicators[0])
         bundles.append(bundle)
         return bundles
     if isinstance(indicators[0], abjad.StartHairpin):
@@ -4039,25 +4025,26 @@ def parse_hairpin_descriptor(
         bundles.append(bundle)
         return bundles
     for left, right in classes.Sequence(indicators).nwise():
-        if (isinstance(left, abjad.StartHairpin) and
-            isinstance(right, abjad.StartHairpin)):
-            raise Exception('consecutive start hairpin commands.')
-        elif (isinstance(left, abjad.Dynamic) and
-            isinstance(right, abjad.Dynamic)):
+        if isinstance(left, abjad.StartHairpin) and isinstance(
+            right, abjad.StartHairpin
+        ):
+            raise Exception("consecutive start hairpin commands.")
+        elif isinstance(left, abjad.Dynamic) and isinstance(
+            right, abjad.Dynamic
+        ):
             bundle = Bundle(indicator=left)
             bundles.append(bundle)
-        elif (isinstance(left, (abjad.Dynamic, abjad.StopHairpin)) and
-            isinstance(right, abjad.StartHairpin)):
-            bundle = Bundle(
-                indicator=left,
-                spanner_start=right,
-                )
+        elif isinstance(
+            left, (abjad.Dynamic, abjad.StopHairpin)
+        ) and isinstance(right, abjad.StartHairpin):
+            bundle = Bundle(indicator=left, spanner_start=right)
             bundles.append(bundle)
     prototype = (abjad.Dynamic, abjad.StopHairpin)
     if indicators and isinstance(indicators[-1], prototype):
         bundle = Bundle(indicator=indicators[-1])
         bundles.append(bundle)
     return bundles
+
 
 def pitch_annotation_spanner(
     items: typing.Union[str, typing.List],
@@ -4066,12 +4053,12 @@ def pitch_annotation_spanner(
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
-    selector: typings.Selector = 'baca.leaves().rleak()',
-    tag: typing.Optional[str] = f'{const.PITCH}:baca_pitch_annotation_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.leaves().rleak()",
+    tag: typing.Optional[str] = f"{const.PITCH}:baca_pitch_annotation_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes pitch annotation spanner.
     """
@@ -4080,7 +4067,7 @@ def pitch_annotation_spanner(
         *tweaks,
         autodetect_right_padding=True,
         bookend=False,
-        lilypond_id='PA',
+        lilypond_id="PA",
         map=map,
         match=match,
         measures=measures,
@@ -4088,7 +4075,8 @@ def pitch_annotation_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )
+
 
 def scp_spanner(
     items: typing.Union[str, typing.List],
@@ -4100,12 +4088,12 @@ def scp_spanner(
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{const.SCP}:baca_scp_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.ltleaves().rleak()",
+    tag: typing.Optional[str] = f"{const.SCP}:baca_scp_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes SCP spanner.
     """
@@ -4116,7 +4104,7 @@ def scp_spanner(
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
         left_broken_text=left_broken_text,
-        lilypond_id='SCP',
+        lilypond_id="SCP",
         map=map,
         match=match,
         measures=measures,
@@ -4124,23 +4112,24 @@ def scp_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )
+
 
 def spazzolato_spanner(
     *tweaks: abjad.IndexedTweakManager,
     # NOTE: autodetect default differs from text_spanner():
     autodetect_right_padding: bool = True,
-    items: typing.Union[str, typing.List] = r'\baca-spazzolato-markup =|',
-    left_broken_text: typing.Optional[str] = r'\baca-left-broken-spazz-markup',
+    items: typing.Union[str, typing.List] = r"\baca-spazzolato-markup =|",
+    left_broken_text: typing.Optional[str] = r"\baca-left-broken-spazz-markup",
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{const.SPAZZOLATO}:baca_spazzolato_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.ltleaves().rleak()",
+    tag: typing.Optional[str] = f"{const.SPAZZOLATO}:baca_spazzolato_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes spazzolato spanner.
     """
@@ -4150,7 +4139,7 @@ def spazzolato_spanner(
         autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         left_broken_text=left_broken_text,
-        lilypond_id='Spazzolato',
+        lilypond_id="Spazzolato",
         map=map,
         match=match,
         measures=measures,
@@ -4158,7 +4147,8 @@ def spazzolato_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )
+
 
 def string_number_spanner(
     items: typing.Union[str, typing.List],
@@ -4170,13 +4160,14 @@ def string_number_spanner(
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = 
-        f'{const.STRING_NUMBER}:baca_string_number_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.ltleaves().rleak()",
+    tag: typing.Optional[
+        str
+    ] = f"{const.STRING_NUMBER}:baca_string_number_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes string number spanner.
     """
@@ -4187,7 +4178,7 @@ def string_number_spanner(
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
         left_broken_text=left_broken_text,
-        lilypond_id='StringNumber',
+        lilypond_id="StringNumber",
         map=map,
         match=match,
         measures=measures,
@@ -4195,34 +4186,35 @@ def string_number_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )
+
 
 def tasto_spanner(
     *tweaks: abjad.IndexedTweakManager,
     autodetect_right_padding: bool = True,
     bookend: typing.Union[bool, int] = False,
     final_piece_spanner: bool = None,
-    left_broken_text: str = r'\baca-left-broken-t-markup',
+    left_broken_text: str = r"\baca-left-broken-t-markup",
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{const.SCP}:baca_tasto_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.ltleaves().rleak()",
+    tag: typing.Optional[str] = f"{const.SCP}:baca_tasto_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes tasto spanner.
     """
     return text_spanner(
-        'T =|',
+        "T =|",
         *tweaks,
         autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
         left_broken_text=left_broken_text,
-        lilypond_id='SCP',
+        lilypond_id="SCP",
         map=map,
         match=match,
         measures=measures,
@@ -4230,7 +4222,8 @@ def tasto_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )
+
 
 def text_spanner(
     items: typing.Union[str, typing.List],
@@ -4244,11 +4237,11 @@ def text_spanner(
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_text_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_text_spanner",
+) -> PiecewiseCommand:
     r"""
     Attaches text span indicators.
 
@@ -6708,22 +6701,22 @@ def text_spanner(
     if autodetect_right_padding is not None:
         autodetect_right_padding = bool(autodetect_right_padding)
     shape_to_style = {
-        '=>': 'dashed-line-with-arrow',
-        '=|': 'dashed-line-with-hook',
-        '||': 'invisible-line',
-        '->': 'solid-line-with-arrow',
-        '-|': 'solid-line-with-hook',
-        }
+        "=>": "dashed-line-with-arrow",
+        "=|": "dashed-line-with-hook",
+        "||": "invisible-line",
+        "->": "solid-line-with-arrow",
+        "-|": "solid-line-with-hook",
+    }
     if isinstance(items, str):
         items_: typing.List[typing.Union[str, abjad.Markup]] = []
         current_item: typing.List[str] = []
         for word in items.split():
             if word in shape_to_style:
                 if current_item:
-                    item_ = ' '.join(current_item)
+                    item_ = " ".join(current_item)
                     if boxed:
                         markup = abjad.Markup(item_, literal=True)
-                        markup = markup.box().override(('box-padding', 0.5))
+                        markup = markup.box().override(("box-padding", 0.5))
                         items_.append(markup)
                     else:
                         items_.append(item_)
@@ -6732,39 +6725,39 @@ def text_spanner(
             else:
                 current_item.append(word)
         if current_item:
-            item_ = ' '.join(current_item)
+            item_ = " ".join(current_item)
             if boxed:
                 markup = abjad.Markup(item_, literal=True)
-                markup = markup.box().override(('box-padding', 0.5))
+                markup = markup.box().override(("box-padding", 0.5))
                 items_.append(markup)
             else:
                 items_.append(item_)
         items = items_
     bundles = []
     if len(items) == 1:
-        message = f'lone item not yet implemented ({original_items!r}).'
+        message = f"lone item not yet implemented ({original_items!r})."
         raise NotImplementedError(message)
     if lilypond_id is None:
-        command = r'\stopTextSpan'
+        command = r"\stopTextSpan"
     elif lilypond_id == 1:
-        command = r'\stopTextSpanOne'
+        command = r"\stopTextSpanOne"
     elif lilypond_id == 2:
-        command = r'\stopTextSpanTwo'
+        command = r"\stopTextSpanTwo"
     elif lilypond_id == 3:
-        command = r'\stopTextSpanThree'
+        command = r"\stopTextSpanThree"
     elif isinstance(lilypond_id, str):
-        command = rf'\bacaStopTextSpan{lilypond_id}'
+        command = rf"\bacaStopTextSpan{lilypond_id}"
     else:
-        message = 'lilypond_id must be 1, 2, 3, str or none'
-        message += f' (not {lilypond_id}).'
+        message = "lilypond_id must be 1, 2, 3, str or none"
+        message += f" (not {lilypond_id})."
         raise ValueError(message)
     stop_text_span = abjad.StopTextSpan(command=command)
     cyclic_items = abjad.CyclicTuple(items)
     for i, item in enumerate(cyclic_items):
         if item in shape_to_style:
             continue
-        if isinstance(item, str) and item.startswith('\\'):
-            item_markup = rf'- \baca-text-spanner-left-markup {item}'
+        if isinstance(item, str) and item.startswith("\\"):
+            item_markup = rf"- \baca-text-spanner-left-markup {item}"
         elif isinstance(item, str):
             item_markup = rf'- \baca-text-spanner-left-text "{item}"'
         else:
@@ -6773,7 +6766,7 @@ def text_spanner(
             item_markup = item_markup.upright()
         prototype = (str, abjad.Markup)
         assert isinstance(item_markup, prototype)
-        style = 'invisible-line'
+        style = "invisible-line"
         if cyclic_items[i + 1] in shape_to_style:
             style = shape_to_style[cyclic_items[i + 1]]
             right_text = cyclic_items[i + 2]
@@ -6781,12 +6774,12 @@ def text_spanner(
             right_text = cyclic_items[i + 1]
         right_markup: typing.Union[str, abjad.Markup]
         if isinstance(right_text, str):
-            if 'hook' not in style:
-                if right_text.startswith('\\'):
-                    right_markup = rf'- \baca-text-spanner-right-markup'
-                    right_markup += rf' {right_text}'
+            if "hook" not in style:
+                if right_text.startswith("\\"):
+                    right_markup = rf"- \baca-text-spanner-right-markup"
+                    right_markup += rf" {right_text}"
                 else:
-                    right_markup = rf'- \baca-text-spanner-right-text'
+                    right_markup = rf"- \baca-text-spanner-right-text"
                     right_markup += rf' "{right_text}"'
             else:
                 right_markup = abjad.Markup(right_text, literal=True)
@@ -6796,23 +6789,20 @@ def text_spanner(
             assert isinstance(right_text, abjad.Markup)
             right_markup = right_text.upright()
         if lilypond_id is None:
-            command = r'\startTextSpan'
+            command = r"\startTextSpan"
         elif lilypond_id == 1:
-            command = r'\startTextSpanOne'
+            command = r"\startTextSpanOne"
         elif lilypond_id == 2:
-            command = r'\startTextSpanTwo'
+            command = r"\startTextSpanTwo"
         elif lilypond_id == 3:
-            command = r'\startTextSpanThree'
+            command = r"\startTextSpanThree"
         elif isinstance(lilypond_id, str):
-            command = rf'\bacaStartTextSpan{lilypond_id}'
+            command = rf"\bacaStartTextSpan{lilypond_id}"
         else:
             raise ValueError(lilypond_id)
         left_broken_markup = None
         if isinstance(left_broken_text, str):
-            left_broken_markup = abjad.Markup(
-                left_broken_text,
-                literal=True,
-                )
+            left_broken_markup = abjad.Markup(left_broken_text, literal=True)
         elif isinstance(left_broken_text, abjad.Markup):
             left_broken_markup = left_broken_text
         start_text_span = abjad.StartTextSpan(
@@ -6820,23 +6810,22 @@ def text_spanner(
             left_broken_text=left_broken_markup,
             left_text=item_markup,
             style=style,
-            )
+        )
         # kerns bookended hook
-        if 'hook' in style:
+        if "hook" in style:
             assert isinstance(right_markup, abjad.Markup)
             line = abjad.Markup.draw_line(0, -1)
             line = line.raise_(-1)
             hspace = abjad.Markup.hspace(0.75)
-            right_markup = right_markup.general_align('Y', 1)
+            right_markup = right_markup.general_align("Y", 1)
             right_markup = abjad.Markup.concat([line, hspace, right_markup])
         bookended_spanner_start = abjad.new(
-            start_text_span,
-            right_text=right_markup,
-            )
+            start_text_span, right_text=right_markup
+        )
         # TODO: find some way to make these tweaks explicit to composer
         manager = abjad.tweak(bookended_spanner_start)
         manager.bound_details__right__stencil_align_dir_y = abjad.Center
-        if 'hook' in style:
+        if "hook" in style:
             manager.bound_details__right__padding = 1.25
         else:
             manager.bound_details__right__padding = 0.5
@@ -6844,7 +6833,7 @@ def text_spanner(
             bookended_spanner_start=bookended_spanner_start,
             spanner_start=start_text_span,
             spanner_stop=stop_text_span,
-            )
+        )
         bundles.append(bundle)
     return PiecewiseCommand(
         autodetect_right_padding=autodetect_right_padding,
@@ -6859,7 +6848,8 @@ def text_spanner(
         selector=selector,
         tags=[tag],
         tweaks=tweaks,
-        )
+    )
+
 
 def vibrato_spanner(
     items: typing.Union[str, typing.List],
@@ -6871,12 +6861,12 @@ def vibrato_spanner(
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{const.VIBRATO}:baca_vibrato_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.ltleaves().rleak()",
+    tag: typing.Optional[str] = f"{const.VIBRATO}:baca_vibrato_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes vibrato spanner.
     """
@@ -6887,7 +6877,7 @@ def vibrato_spanner(
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
         left_broken_text=left_broken_text,
-        lilypond_id='Vibrato',
+        lilypond_id="Vibrato",
         map=map,
         match=match,
         measures=measures,
@@ -6895,34 +6885,35 @@ def vibrato_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )
+
 
 def xfb_spanner(
     *tweaks: abjad.IndexedTweakManager,
     autodetect_right_padding: bool = True,
     bookend: typing.Union[bool, int] = False,
     final_piece_spanner: bool = None,
-    left_broken_text: str = r'\baca-left-broken-xfb-markup',
+    left_broken_text: str = r"\baca-left-broken-xfb-markup",
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    pieces: typings.Selector = 'baca.group()',
+    pieces: typings.Selector = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: typings.Selector = 'baca.ltleaves().rleak()',
-    tag: typing.Optional[str] = f'{const.BOW_SPEED}:baca_xfb_spanner',
-    ) -> PiecewiseCommand:
+    selector: typings.Selector = "baca.ltleaves().rleak()",
+    tag: typing.Optional[str] = f"{const.BOW_SPEED}:baca_xfb_spanner",
+) -> PiecewiseCommand:
     r"""
     Makes XFB spanner.
     """
     return text_spanner(
-        'XFB =|',
+        "XFB =|",
         *tweaks,
         autodetect_right_padding=autodetect_right_padding,
         bookend=bookend,
         final_piece_spanner=final_piece_spanner,
         left_broken_text=left_broken_text,
-        lilypond_id='BowSpeed',
+        lilypond_id="BowSpeed",
         map=map,
         match=match,
         measures=measures,
@@ -6930,4 +6921,4 @@ def xfb_spanner(
         right_broken=right_broken,
         selector=selector,
         tag=tag,
-        )
+    )

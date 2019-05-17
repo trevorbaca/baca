@@ -8,10 +8,9 @@ class PersistentIndicatorTests(object):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = 'Classes'
+    __documentation_section__ = "Classes"
 
-    __slots__ = (
-        )
+    __slots__ = ()
 
     ### PUBLIC PROPERTIES ###
 

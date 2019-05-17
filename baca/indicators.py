@@ -5,6 +5,7 @@ import typing
 
 ### CLASSES ###
 
+
 class Accelerando(object):
     r"""
     Accelerando.
@@ -43,15 +44,11 @@ class Accelerando(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_hide',
-        '_markup',
-        '_tweaks',
-        )
+    __slots__ = ("_hide", "_markup", "_tweaks")
 
-    _context = 'Score'
+    _context = "Score"
 
-    _parameter = 'METRONOME_MARK'
+    _parameter = "METRONOME_MARK"
 
     _persistent = True
 
@@ -63,7 +60,7 @@ class Accelerando(object):
         hide: bool = None,
         markup: abjad.Markup = None,
         tweaks: abjad.LilyPondTweakManager = None,
-        ) -> None:
+    ) -> None:
         if hide is not None:
             hide = bool(hide)
         self._hide = hide
@@ -91,7 +88,7 @@ class Accelerando(object):
         try:
             result = hash(hash_values)
         except TypeError:
-            raise TypeError(f'unhashable type: {self}')
+            raise TypeError(f"unhashable type: {self}")
         return result
 
     def __repr__(self) -> str:
@@ -144,7 +141,7 @@ class Accelerando(object):
     ### PRIVATE METHODS ###
 
     def _default_markup(self):
-        contents = r'\large \upright accel.'
+        contents = r"\large \upright accel."
         return abjad.Markup(contents=contents)
 
     def _get_lilypond_format(self):
@@ -290,6 +287,7 @@ class Accelerando(object):
         """
         return self._tweaks
 
+
 class Markup(abjad.Markup):
     """
     Markup subclass.
@@ -319,7 +317,8 @@ class Markup(abjad.Markup):
 
         Sets box-padding to 0.5.
         """
-        return self.box().override(('box-padding', 0.5))
+        return self.box().override(("box-padding", 0.5))
+
 
 class Ritardando(object):
     r"""
@@ -395,15 +394,11 @@ class Ritardando(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_hide',
-        '_markup',
-        '_tweaks',
-        )
+    __slots__ = ("_hide", "_markup", "_tweaks")
 
-    _context = 'Score'
+    _context = "Score"
 
-    _parameter = 'METRONOME_MARK'
+    _parameter = "METRONOME_MARK"
 
     _persistent = True
 
@@ -415,7 +410,7 @@ class Ritardando(object):
         hide: bool = None,
         markup: abjad.Markup = None,
         tweaks: abjad.LilyPondTweakManager = None,
-        ) -> None:
+    ) -> None:
         if hide is not None:
             hide = bool(hide)
         self._hide = hide
@@ -443,7 +438,7 @@ class Ritardando(object):
         try:
             result = hash(hash_values)
         except TypeError:
-            raise TypeError(f'unhashable type: {self}')
+            raise TypeError(f"unhashable type: {self}")
         return result
 
     def __repr__(self) -> str:
@@ -496,7 +491,7 @@ class Ritardando(object):
     ### PRIVATE METHODS ###
 
     def _default_markup(self):
-        contents = r'\large \upright rit.'
+        contents = r"\large \upright rit."
         return abjad.Markup(contents=contents)
 
     def _get_lilypond_format(self):
@@ -668,6 +663,7 @@ class Ritardando(object):
         """
         return self._tweaks
 
+
 class StaffLines(object):
     """
     Staff lines.
@@ -675,12 +671,9 @@ class StaffLines(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_hide',
-        '_line_count',
-        )
+    __slots__ = ("_hide", "_line_count")
 
-    _context = 'Staff'
+    _context = "Staff"
 
     _persistent = True
 
@@ -688,14 +681,9 @@ class StaffLines(object):
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        *,
-        line_count=5,
-        hide=None,
-        ):
+    def __init__(self, *, line_count=5, hide=None):
         if not isinstance(line_count, int):
-            message = f'line count must be integer (not {line_count!r}).'
+            message = f"line count must be integer (not {line_count!r})."
             raise Exception(message)
         assert 0 <= line_count, repr(line_count)
         self._line_count = line_count
@@ -741,7 +729,7 @@ class StaffLines(object):
             return False
         return self.line_count == argument.line_count
 
-    def __format__(self, format_specification='') -> str:
+    def __format__(self, format_specification="") -> str:
         """
         Formats Abjad object.
         """
@@ -762,11 +750,11 @@ class StaffLines(object):
         else:
             lilypond_type = self.context
         strings = []
-        strings.append(r'\stopStaff')
-        string = rf'\once \override {lilypond_type}.StaffSymbol.line-count ='
-        string += f' {self.line_count}'
+        strings.append(r"\stopStaff")
+        string = rf"\once \override {lilypond_type}.StaffSymbol.line-count ="
+        string += f" {self.line_count}"
         strings.append(string)
-        strings.append(r'\startStaff')
+        strings.append(r"\startStaff")
         return strings
 
     def _get_lilypond_format_bundle(self, component=None):
@@ -838,6 +826,7 @@ class StaffLines(object):
         """
         return self._persistent
 
+
 class SpacingSection(object):
     r"""
     Spacing section.
@@ -864,20 +853,15 @@ class SpacingSection(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_duration',
-        )
+    __slots__ = ("_duration",)
 
-    _context = 'Score'
+    _context = "Score"
 
     _persistent = True
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        duration=None,
-        ):
+    def __init__(self, duration=None):
         if duration is not None:
             duration = abjad.NonreducedFraction(duration)
         self._duration = duration
@@ -954,25 +938,25 @@ class SpacingSection(object):
     def _get_lilypond_format_bundle(self, leaf=None):
         bundle = abjad.LilyPondFormatBundle()
         numerator, denominator = self.duration.pair
-        string = rf'\baca-new-spacing-section #{numerator} #{denominator}'
+        string = rf"\baca-new-spacing-section #{numerator} #{denominator}"
         bundle.before.commands.append(string)
         return bundle
 
     ### PUBLIC PROPERTIES ###
 
-#    @property
-#    def context(self):
-#        """
-#        Gets class constant ``'Score'``.
-#
-#        ..  container:: example
-#
-#            >>> baca.SpacingSection((2, 24)).context
-#            'Score'
-#
-#        Returns ``'Score'``.
-#        """
-#        return self._context
+    #    @property
+    #    def context(self):
+    #        """
+    #        Gets class constant ``'Score'``.
+    #
+    #        ..  container:: example
+    #
+    #            >>> baca.SpacingSection((2, 24)).context
+    #            'Score'
+    #
+    #        Returns ``'Score'``.
+    #        """
+    #        return self._context
 
     @property
     def duration(self):
@@ -988,19 +972,19 @@ class SpacingSection(object):
         """
         return self._duration
 
-#    @property
-#    def persistent(self):
-#        """
-#        Is true.
-#
-#        ..  container:: example
-#
-#            >>> baca.SpacingSection((2, 24)).persistent
-#            True
-#
-#        Class constant.
-#        """
-#        return self._persistent
+    #    @property
+    #    def persistent(self):
+    #        """
+    #        Is true.
+    #
+    #        ..  container:: example
+    #
+    #            >>> baca.SpacingSection((2, 24)).persistent
+    #            True
+    #
+    #        Class constant.
+    #        """
+    #        return self._persistent
 
     ### PUBLIC METHODS ###
 

@@ -10,6 +10,7 @@ from . import typings
 
 ### CLASSES ###
 
+
 class BreakMeasureMap(object):
     r"""
     Breaks measure map.
@@ -317,14 +318,14 @@ class BreakMeasureMap(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_bol_measure_numbers',
-        '_commands',
-        '_deactivate',
-        '_local_measure_numbers',
-        '_page_count',
-        '_partial_score',
-        '_tags',
-        )
+        "_bol_measure_numbers",
+        "_commands",
+        "_deactivate",
+        "_local_measure_numbers",
+        "_page_count",
+        "_partial_score",
+        "_tags",
+    )
 
     _publish_storage_format = True
 
@@ -339,7 +340,7 @@ class BreakMeasureMap(object):
         page_count: int = None,
         partial_score: int = None,
         tags: typing.List[str] = None,
-        ) -> None:
+    ) -> None:
         tags = scoping.Command._preprocess_tags(tags)
         assert scoping.Command._validate_tags(tags), repr(tags)
         if abjad.tags.BREAK not in tags:
@@ -362,10 +363,8 @@ class BreakMeasureMap(object):
                 commands_[measure_number] = []
                 for command in list_:
                     command_ = abjad.new(
-                        command,
-                        deactivate=self.deactivate,
-                        tags=self.tags,
-                        )
+                        command, deactivate=self.deactivate, tags=self.tags
+                    )
                     commands_[measure_number].append(command_)
             commands = commands_
         self._commands = commands
@@ -381,27 +380,27 @@ class BreakMeasureMap(object):
         skips = classes.Selection(context).skips()
         measure_count = self.partial_score or len(skips)
         final_measure_number = self.first_measure_number + measure_count - 1
-        literal = abjad.LilyPondLiteral(r'\autoPageBreaksOff', 'before')
+        literal = abjad.LilyPondLiteral(r"\autoPageBreaksOff", "before")
         abjad.attach(
             literal,
             skips[0],
             deactivate=self.deactivate,
-            tag=self.tag.prepend('BreakMeasureMap(1)'),
-            )
+            tag=self.tag.prepend("BreakMeasureMap(1)"),
+        )
         for skip in skips[:measure_count]:
             if not abjad.inspect(skip).has_indicator(LBSD):
-                literal = abjad.LilyPondLiteral(r'\noBreak', 'before')
+                literal = abjad.LilyPondLiteral(r"\noBreak", "before")
                 abjad.attach(
                     literal,
                     skip,
                     deactivate=self.deactivate,
-                    tag=self.tag.prepend('BreakMeasureMap(2)'),
-                    )
+                    tag=self.tag.prepend("BreakMeasureMap(2)"),
+                )
         assert self.commands is not None
         for measure_number, commands in self.commands.items():
             if final_measure_number < measure_number:
-                message = f'score ends at measure {final_measure_number}'
-                message += f' (not {measure_number}).'
+                message = f"score ends at measure {final_measure_number}"
+                message += f" (not {measure_number})."
                 raise Exception(message)
             for command in commands:
                 command(context)
@@ -426,7 +425,7 @@ class BreakMeasureMap(object):
 
         Populated during ``baca.breaks()`` initialization.
         """
-        return  self._bol_measure_numbers
+        return self._bol_measure_numbers
 
     @property
     def commands(self) -> typing.Optional[abjad.OrderedDict]:
@@ -491,6 +490,7 @@ class BreakMeasureMap(object):
         """
         assert scoping.Command._validate_tags(self._tags), repr(self._tags)
         return self._tags[:]
+
 
 class HorizontalSpacingSpecifier(object):
     r"""
@@ -1529,19 +1529,19 @@ class HorizontalSpacingSpecifier(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_breaks',
-        '_fermata_measure_numbers',
-        '_fermata_measure_duration',
-        '_fermata_start_offsets',
-        '_first_measure_number',
-        '_forbid_segment_maker_adjustments',
-        '_measure_count',
-        '_measures',
-        '_minimum_duration',
-        '_multiplier',
-        '_overriden_fermata_measures',
-        '_phantom',
-        )
+        "_breaks",
+        "_fermata_measure_numbers",
+        "_fermata_measure_duration",
+        "_fermata_start_offsets",
+        "_first_measure_number",
+        "_forbid_segment_maker_adjustments",
+        "_measure_count",
+        "_measures",
+        "_minimum_duration",
+        "_multiplier",
+        "_overriden_fermata_measures",
+        "_phantom",
+    )
 
     _magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
 
@@ -1561,12 +1561,14 @@ class HorizontalSpacingSpecifier(object):
         minimum_duration: typings.IntegerPair = None,
         multiplier: typings.IntegerPair = None,
         phantom: bool = None,
-        ) -> None:
+    ) -> None:
         if breaks is not None:
             assert isinstance(breaks, BreakMeasureMap), repr(breaks)
         self._breaks = breaks
         if fermata_measure_numbers is not None:
-            assert isinstance(fermata_measure_numbers, collections.abc.Iterable)
+            assert isinstance(
+                fermata_measure_numbers, collections.abc.Iterable
+            )
             assert all(isinstance(_, int) for _ in fermata_measure_numbers)
         self._fermata_measure_numbers = fermata_measure_numbers or []
         duration_ = None
@@ -1606,7 +1608,7 @@ class HorizontalSpacingSpecifier(object):
         Calls command on ``segment_maker``.
         """
         score = segment_maker.score
-        skips = classes.Selection(score['Global_Skips']).skips()
+        skips = classes.Selection(score["Global_Skips"]).skips()
         programmatic = True
         if self.measures and len(self.measures) == len(skips):
             programmatic = False
@@ -1616,7 +1618,7 @@ class HorizontalSpacingSpecifier(object):
             minimum_durations_by_measure = method(skips, leaves)
         else:
             minimum_durations_by_measure = []
-        string = '_fermata_start_offsets'
+        string = "_fermata_start_offsets"
         self._fermata_start_offsets = getattr(segment_maker, string, [])
         first_measure_number = self.first_measure_number or 1
         total = len(skips)
@@ -1627,7 +1629,7 @@ class HorizontalSpacingSpecifier(object):
                 measure_number,
                 skip,
                 minimum_durations_by_measure,
-                )
+            )
             if measure_index == total - 1:
                 duration = abjad.Duration(1, 4)
             spacing_section = indicators.SpacingSection(duration=duration)
@@ -1635,52 +1637,51 @@ class HorizontalSpacingSpecifier(object):
             abjad.attach(
                 spacing_section,
                 skip,
-                tag=tag.prepend('HorizontalSpacingSpecifier(1)'),
-                )
+                tag=tag.prepend("HorizontalSpacingSpecifier(1)"),
+            )
             string_ = self._make_annotation(duration, eol_adjusted, duration_)
             if measure_index < total - 1:
                 tag = abjad.Tag(abjad.const.SPACING)
-                string = r'- \baca-start-spm-left-only'
+                string = r"- \baca-start-spm-left-only"
                 string += f' "{string_}"'
                 start_text_span = abjad.StartTextSpan(
-                    command=r'\bacaStartTextSpanSPM',
-                    left_text=string,
-                    )
+                    command=r"\bacaStartTextSpanSPM", left_text=string
+                )
                 abjad.attach(
                     start_text_span,
                     skip,
-                    context='GlobalSkips',
+                    context="GlobalSkips",
                     deactivate=True,
                     tag=tag,
-                    )
+                )
             if 0 < measure_index:
                 tag = abjad.Tag(abjad.const.SPACING)
                 stop_text_span = abjad.StopTextSpan(
-                    command=r'\bacaStopTextSpanSPM',
-                    )
+                    command=r"\bacaStopTextSpanSPM"
+                )
                 abjad.attach(
                     stop_text_span,
                     skip,
-                    context='GlobalSkips',
+                    context="GlobalSkips",
                     deactivate=True,
                     tag=tag,
-                    )
+                )
 
     ### PRIVATE METHODS ###
 
     def _calculate_duration(
-        self,
-        measure_index,
-        measure_number,
-        skip,
-        minimum_durations_by_measure,
+        self, measure_index, measure_number, skip, minimum_durations_by_measure
+    ):
+        if (
+            self._is_fermata_measure(measure_number, skip)
+            and measure_number in self._overriden_fermata_measures
         ):
-        if (self._is_fermata_measure(measure_number, skip) and
-            measure_number in self._overriden_fermata_measures):
             duration = self.measures[measure_number]
             duration = abjad.NonreducedFraction(duration)
-        elif (self.fermata_measure_duration is not None and
-            self._is_fermata_measure(measure_number, skip)):
+        elif (
+            self.fermata_measure_duration is not None
+            and self._is_fermata_measure(measure_number, skip)
+        ):
             duration = self.fermata_measure_duration
         elif self.measures and measure_number in self.measures:
             duration = self.measures[measure_number]
@@ -1701,16 +1702,20 @@ class HorizontalSpacingSpecifier(object):
 
     def _coerce_measure_number(self, measure_number, force_local=False):
         if measure_number == 0:
-            raise Exception(f'zero-valued measure number not allowed.')
+            raise Exception(f"zero-valued measure number not allowed.")
         if force_local is True:
             measure_number = self.first_measure_number + measure_number - 1
         if measure_number < 0:
-            measure_number = self.final_measure_number - abs(measure_number) + 1
+            measure_number = (
+                self.final_measure_number - abs(measure_number) + 1
+            )
         if measure_number < self.first_measure_number:
             measure_number += self.first_measure_number - 1
         if self.final_measure_number < measure_number:
-            raise Exception(f'measure number {measure_number} greater than'
-                f' last measure number ({self.final_measure_number}).')
+            raise Exception(
+                f"measure number {measure_number} greater than"
+                f" last measure number ({self.final_measure_number})."
+            )
         return measure_number
 
     def _get_minimum_durations_by_measure(self, skips, leaves):
@@ -1752,8 +1757,10 @@ class HorizontalSpacingSpecifier(object):
         return minimum_durations_by_measure
 
     def _is_fermata_measure(self, measure_number, skip):
-        if (self.fermata_measure_numbers and
-            measure_number in self.fermata_measure_numbers):
+        if (
+            self.fermata_measure_numbers
+            and measure_number in self.fermata_measure_numbers
+        ):
             return True
         measure_timespan = abjad.inspect(skip).timespan()
         return measure_timespan.start_offset in self._fermata_start_offsets
@@ -1761,9 +1768,9 @@ class HorizontalSpacingSpecifier(object):
     def _make_annotation(self, duration, eol_adjusted, duration_):
         if eol_adjusted:
             multiplier = self._magic_lilypond_eol_adjustment
-            string = f'[[{duration_!s} * {multiplier!s}]]'
+            string = f"[[{duration_!s} * {multiplier!s}]]"
         else:
-            string = f'[{duration!s}]'
+            string = f"[{duration!s}]"
         return string
 
     ### PUBLIC PROPERTIES ###
@@ -1886,8 +1893,10 @@ class HorizontalSpacingSpecifier(object):
 
         Returns none when measure count is not defined.
         """
-        if (self.first_measure_number is not None and
-            self.measure_count is not None):
+        if (
+            self.first_measure_number is not None
+            and self.measure_count is not None
+        ):
             return self.first_measure_number + self.measure_count - 1
         else:
             return None
@@ -1990,7 +1999,7 @@ class HorizontalSpacingSpecifier(object):
         Is true when segment concludes with phantom measure.
         """
         return self._phantom
-    
+
     ### PUBLIC METHODS ###
 
     def override(
@@ -2000,7 +2009,7 @@ class HorizontalSpacingSpecifier(object):
         *,
         fermata: bool = None,
         force_local: bool = None,
-        ) -> None:
+    ) -> None:
         r"""
         Overrides ``measures`` with spacing ``pair``.
 
@@ -2202,35 +2211,31 @@ class HorizontalSpacingSpecifier(object):
         duration = abjad.NonreducedFraction(pair)
         if isinstance(measures, int):
             number = self._coerce_measure_number(
-                measures,
-                force_local=force_local,
-                )
+                measures, force_local=force_local
+            )
             self.measures[number] = duration
             measures_.append(number)
         elif isinstance(measures, tuple):
             assert len(measures) == 2, repr(measures)
             start_measure, stop_measure = measures
             start_measure = self._coerce_measure_number(
-                start_measure,
-                force_local=force_local,
-                )
+                start_measure, force_local=force_local
+            )
             stop_measure = self._coerce_measure_number(
-                stop_measure,
-                force_local=force_local,
-                )
+                stop_measure, force_local=force_local
+            )
             for number in range(start_measure, stop_measure + 1):
                 self.measures[number] = duration
                 measures_.append(number)
         elif isinstance(measures, list):
             for measure in measures:
                 number = self._coerce_measure_number(
-                    measure,
-                    force_local=force_local,
-                    )
+                    measure, force_local=force_local
+                )
                 self.measures[number] = duration
                 measures_.append(number)
         else:
-            message = f'measures must be int, pair or list (not {measures!r}).'
+            message = f"measures must be int, pair or list (not {measures!r})."
             raise TypeError(message)
         if fermata:
             self._overriden_fermata_measures.extend(measures_)
@@ -2243,22 +2248,14 @@ class LBSD(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_alignment_distances',
-        '_y_offset',
-        )
+    __slots__ = ("_alignment_distances", "_y_offset")
 
-    _override = r'\overrideProperty'
-    _override += ' Score.NonMusicalPaperColumn.line-break-system-details'
+    _override = r"\overrideProperty"
+    _override += " Score.NonMusicalPaperColumn.line-break-system-details"
 
     ### INITIALIZER ###
 
-    def __init__(
-        self,
-        *,
-        y_offset=None,
-        alignment_distances=None,
-        ):
+    def __init__(self, *, y_offset=None, alignment_distances=None):
         self._y_offset = y_offset
         if alignment_distances is not None:
             assert isinstance(alignment_distances, collections.abc.Iterable)
@@ -2269,9 +2266,9 @@ class LBSD(object):
 
     def _get_lilypond_format_bundle(self, component=None):
         bundle = abjad.LilyPondFormatBundle()
-        alignment_distances = ' '.join(
+        alignment_distances = " ".join(
             str(_) for _ in self.alignment_distances
-            )
+        )
         string = rf"\baca-lbsd #{self.y_offset} #'({alignment_distances})"
         bundle.before.commands.append(string)
         return bundle
@@ -2292,6 +2289,7 @@ class LBSD(object):
         """
         return self._y_offset
 
+
 class PageSpecifier(object):
     """
     Page specifier.
@@ -2299,10 +2297,7 @@ class PageSpecifier(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_number',
-        '_systems',
-        )
+    __slots__ = ("_number", "_systems")
 
     ### INITIALIZER ###
 
@@ -2310,8 +2305,8 @@ class PageSpecifier(object):
         self,
         *,
         number: int = None,
-        systems: typing.List[typing.Union[list, 'SystemSpecifier']] = None,
-        ) -> None:
+        systems: typing.List[typing.Union[list, "SystemSpecifier"]] = None,
+    ) -> None:
         if number is not None:
             assert isinstance(number, int), repr(number)
             assert 1 <= number, repr(number)
@@ -2324,7 +2319,7 @@ class PageSpecifier(object):
                 elif isinstance(system, list):
                     y_offset = system[1]
                 if y_offset in y_offsets:
-                    message = f'systems overlap at Y-offset {y_offset}.'
+                    message = f"systems overlap at Y-offset {y_offset}."
                     raise Exception(message)
                 else:
                     y_offsets.append(y_offset)
@@ -2340,13 +2335,14 @@ class PageSpecifier(object):
         return self._number
 
     @property
-    def systems(self) -> typing.Optional[
-        typing.List[typing.Union[list, 'SystemSpecifier']]
-        ]:
+    def systems(
+        self
+    ) -> typing.Optional[typing.List[typing.Union[list, "SystemSpecifier"]]]:
         """
         Gets systems.
         """
         return self._systems
+
 
 class SystemSpecifier(object):
     """
@@ -2355,11 +2351,7 @@ class SystemSpecifier(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_distances',
-        '_measure',
-        '_y_offset',
-        )
+    __slots__ = ("_distances", "_measure", "_y_offset")
 
     ### INITIALIZER ###
 
@@ -2369,10 +2361,12 @@ class SystemSpecifier(object):
         distances: typing.Iterable[typings.Number] = None,
         measure: int = None,
         y_offset: typings.Number = None,
-        ) -> None:
+    ) -> None:
         distances_: typing.Optional[typing.List[typings.Number]] = None
         if distances is not None:
-            assert isinstance(distances, collections.abc.Iterable), repr(distances)
+            assert isinstance(distances, collections.abc.Iterable), repr(
+                distances
+            )
             for distance in distances:
                 assert isinstance(distance, (int, float)), repr(distance)
             distances_ = list(distances)
@@ -2409,6 +2403,7 @@ class SystemSpecifier(object):
         """
         return self._y_offset
 
+
 class TimeSignatureMaker(object):
     """
     Time-signature-maker.
@@ -2432,11 +2427,11 @@ class TimeSignatureMaker(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_count',
-        '_fermata_measures',
-        '_rotation',
-        '_time_signatures',
-        )
+        "_count",
+        "_fermata_measures",
+        "_rotation",
+        "_time_signatures",
+    )
 
     ### INITIALIZER ###
 
@@ -2447,7 +2442,7 @@ class TimeSignatureMaker(object):
         count: int = None,
         fermata_measures: typing.List[int] = None,
         rotation: int = None,
-        ) -> None:
+    ) -> None:
         self._time_signatures = time_signatures
         if count is not None:
             assert isinstance(count, int), repr(count)
@@ -2514,7 +2509,7 @@ class TimeSignatureMaker(object):
         Does not account for stages.
         """
         if not self.count:
-            raise Exception('must specify count with run().')
+            raise Exception("must specify count with run().")
         result = []
         time_signatures = classes.Sequence(self.time_signatures)
         time_signatures = time_signatures.rotate(self.rotation)
@@ -2532,13 +2527,15 @@ class TimeSignatureMaker(object):
                 i += 1
         return result
 
+
 ### FACTORY FUNCTIONS ###
+
 
 def breaks(
     *page_specifiers: typing.Any,
     local_measure_numbers: bool = None,
     partial_score: typing.Optional[int] = None,
-    ) -> BreakMeasureMap:
+) -> BreakMeasureMap:
     r"""
     Makes breaks.
 
@@ -2614,12 +2611,10 @@ def breaks(
     page_count = len(page_specifiers)
     if not page_specifiers:
         return BreakMeasureMap(
-            commands=commands,
-            page_count=0,
-            partial_score=partial_score,
-            )
+            commands=commands, page_count=0, partial_score=partial_score
+        )
     first_system = page_specifiers[0].systems[0]
-    if hasattr(first_system, 'measure'):
+    if hasattr(first_system, "measure"):
         first_measure_number = first_system.measure
     else:
         first_measure_number = first_system[0]
@@ -2628,67 +2623,61 @@ def breaks(
         page_number = i + 1
         if page_specifier.number is not None:
             if page_specifier.number != page_number:
-                message = f'page number ({page_specifier.number})'
-                message += f' is not {page_number}.'
+                message = f"page number ({page_specifier.number})"
+                message += f" is not {page_number}."
                 raise Exception(message)
         for j, system in enumerate(page_specifier.systems):
-            if hasattr(system, 'measure'):
+            if hasattr(system, "measure"):
                 measure_number = system.measure
             else:
                 measure_number = system[0]
             bol_measure_numbers.append(measure_number)
             skip_index = measure_number - first_measure_number
-            if hasattr(system, 'y_offset'):
+            if hasattr(system, "y_offset"):
                 y_offset = system.y_offset
             else:
                 y_offset = system[1]
-            if hasattr(system, 'distances'):
+            if hasattr(system, "distances"):
                 alignment_distances = system.distances
             else:
                 alignment_distances = system[2]
-            selector = f'baca.skip({skip_index})'
+            selector = f"baca.skip({skip_index})"
             if j == 0:
-                break_ = abjad.LilyPondLiteral(r'\pageBreak')
+                break_ = abjad.LilyPondLiteral(r"\pageBreak")
             else:
-                break_ = abjad.LilyPondLiteral(r'\break')
+                break_ = abjad.LilyPondLiteral(r"\break")
             command = baca_commands.IndicatorCommand(
-                indicators=[break_],
-                selector=selector,
-                )
+                indicators=[break_], selector=selector
+            )
             alignment_distances = classes.Sequence(alignment_distances)
             alignment_distances = alignment_distances.flatten()
             lbsd = LBSD(
-                alignment_distances=alignment_distances,
-                y_offset=y_offset,
-                )
+                alignment_distances=alignment_distances, y_offset=y_offset
+            )
             lbsd_command = baca_commands.IndicatorCommand(
-                indicators=[lbsd],
-                selector=selector,
-                )
+                indicators=[lbsd], selector=selector
+            )
             commands[measure_number] = [command, lbsd_command]
     breaks = BreakMeasureMap(
         commands=commands,
         local_measure_numbers=local_measure_numbers,
         page_count=page_count,
         partial_score=partial_score,
-        )
+    )
     breaks._bol_measure_numbers.extend(bol_measure_numbers)
     return breaks
 
+
 def minimum_duration(
     duration: typing.Union[typings.IntegerPair, abjad.Duration],
-    ) -> HorizontalSpacingSpecifier:
+) -> HorizontalSpacingSpecifier:
     """
     Makes horizontal spacing specifier with ``duration`` minimum width.
     """
-    return HorizontalSpacingSpecifier(
-        minimum_duration=duration,
-        )
+    return HorizontalSpacingSpecifier(minimum_duration=duration)
 
-def page(
-    *systems: typing.Any,
-    number: int = None
-    ) -> PageSpecifier:
+
+def page(*systems: typing.Any, number: int = None) -> PageSpecifier:
     r"""
     Makes page specifier.
 
@@ -2715,12 +2704,13 @@ def page(
             systems_.append(system)
     return PageSpecifier(number=number, systems=systems_)
 
+
 def scorewide_spacing(
     path: typing.Union[str, abjad.Path, typing.Tuple[int, int, list]],
     fallback_duration: typings.IntegerPair,
     breaks: BreakMeasureMap = None,
     fermata_measure_duration: typings.IntegerPair = (1, 4),
-    ) -> HorizontalSpacingSpecifier:
+) -> HorizontalSpacingSpecifier:
     r"""
     Makes scorewide spacing.
 
@@ -2792,21 +2782,20 @@ def scorewide_spacing(
         first_measure_number=first_measure_number,
         measure_count=measure_count,
         measures=measures,
-        )
+    )
     specifier._forbid_segment_maker_adjustments = True
     return specifier
+
 
 def system(
     *distances: typing.Any,
     measure: int = None,
-    y_offset: typings.Number = None
-    ) -> SystemSpecifier:
+    y_offset: typings.Number = None,
+) -> SystemSpecifier:
     """
     Makes system specifier.
     """
     distances_ = classes.Sequence(distances).flatten()
     return SystemSpecifier(
-        distances=distances_,
-        measure=measure,
-        y_offset=y_offset,
-        )
+        distances=distances_, measure=measure, y_offset=y_offset
+    )

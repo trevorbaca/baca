@@ -12,6 +12,7 @@ from . import typings
 
 ### CLASSES ###
 
+
 class BCPCommand(scoping.Command):
     """
     Bow contact point command.
@@ -20,12 +21,12 @@ class BCPCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_bow_change_tweaks',
-        '_bow_contact_points',
-        '_final_spanner',
-        '_helper',
-        '_tweaks',
-        )
+        "_bow_change_tweaks",
+        "_bow_contact_points",
+        "_final_spanner",
+        "_helper",
+        "_tweaks",
+    )
 
     ### INITIALIZER ###
 
@@ -42,7 +43,7 @@ class BCPCommand(scoping.Command):
         selector: typings.Selector = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -51,7 +52,7 @@ class BCPCommand(scoping.Command):
             scope=scope,
             selector=selector,
             tags=tags,
-            )
+        )
         if bcps is None:
             self._validate_bcps(bcps)
         self._bow_contact_points = bcps
@@ -97,148 +98,149 @@ class BCPCommand(scoping.Command):
                         add_right_text_to_me = lt.head
                         break
                     nonrest_count += 1
-        if (self.final_spanner and
-            not self._is_rest(lts[-1]) and
-            len(lts[-1]) == 1):
+        if (
+            self.final_spanner
+            and not self._is_rest(lts[-1])
+            and len(lts[-1]) == 1
+        ):
             next_leaf_after_argument = abjad.inspect(lts[-1][-1]).leaf(1)
             if next_leaf_after_argument is None:
-                message = 'can not attach final spanner:'
-                message += ' argument includes end of score.'
+                message = "can not attach final spanner:"
+                message += " argument includes end of score."
                 raise Exception(message)
         previous_bcp = None
         i = 0
         for lt in lts:
-            stop_text_span = abjad.StopTextSpan(
-                command=self.stop_command,
-                )
-            if (not self.final_spanner and
-                lt is lts[-1] and
-                not self._is_rest(lt.head)
-                ):
+            stop_text_span = abjad.StopTextSpan(command=self.stop_command)
+            if (
+                not self.final_spanner
+                and lt is lts[-1]
+                and not self._is_rest(lt.head)
+            ):
                 abjad.attach(
                     stop_text_span,
                     lt.head,
-                    tag=self.tag.append('BCPCommand(1)'),
-                    )
+                    tag=self.tag.append("BCPCommand(1)"),
+                )
                 break
             previous_leaf = abjad.inspect(lt.head).leaf(-1)
             next_leaf = abjad.inspect(lt.head).leaf(1)
-            if (self._is_rest(lt.head) and
-                (self._is_rest(previous_leaf) or previous_leaf is None)):
+            if self._is_rest(lt.head) and (
+                self._is_rest(previous_leaf) or previous_leaf is None
+            ):
                 continue
-            if (isinstance(lt.head, abjad.Note) and
-                self._is_rest(previous_leaf) and
-                previous_bcp is not None):
+            if (
+                isinstance(lt.head, abjad.Note)
+                and self._is_rest(previous_leaf)
+                and previous_bcp is not None
+            ):
                 numerator, denominator = previous_bcp
             else:
                 bcp = bcps[i]
                 numerator, denominator = bcp
                 i += 1
                 next_bcp = bcps[i]
-            left_text = r'- \baca-bcp-spanner-left-text'
-            left_text += rf' #{numerator} #{denominator}'
+            left_text = r"- \baca-bcp-spanner-left-text"
+            left_text += rf" #{numerator} #{denominator}"
             if lt is lts[-1]:
                 if self.final_spanner:
-                    style = 'solid-line-with-arrow'
+                    style = "solid-line-with-arrow"
                 else:
-                    style = 'invisible-line'
+                    style = "invisible-line"
             elif not self._is_rest(lt.head):
-                style = 'solid-line-with-arrow'
+                style = "solid-line-with-arrow"
             else:
-                style = 'invisible-line'
+                style = "invisible-line"
             right_text = None
             if lt.head is add_right_text_to_me:
                 numerator, denominator = next_bcp
-                right_text = r'- \baca-bcp-spanner-right-text'
-                right_text += rf' #{numerator} #{denominator}'
+                right_text = r"- \baca-bcp-spanner-right-text"
+                right_text += rf" #{numerator} #{denominator}"
             start_text_span = abjad.StartTextSpan(
                 command=self.start_command,
                 left_text=left_text,
                 right_text=right_text,
                 style=style,
-                )
+            )
             if self.tweaks:
                 self._apply_tweaks(start_text_span, self.tweaks)
-            if (self._is_rest(lt.head) and
-                (self._is_rest(next_leaf) or next_leaf is None)):
+            if self._is_rest(lt.head) and (
+                self._is_rest(next_leaf) or next_leaf is None
+            ):
                 pass
             else:
                 abjad.attach(
                     start_text_span,
                     lt.head,
-                    tag=self.tag.append('BCPCommand(2)'),
-                    )
+                    tag=self.tag.append("BCPCommand(2)"),
+                )
             if 0 < i - 1:
                 abjad.attach(
                     stop_text_span,
                     lt.head,
-                    tag=self.tag.append('BCPCommand(3)'),
-                    )
+                    tag=self.tag.append("BCPCommand(3)"),
+                )
             if lt is lts[-1] and self.final_spanner:
                 abjad.attach(
                     stop_text_span,
                     next_leaf_after_argument,
-                    tag=self.tag.append('BCPCommand(4)'),
-                    )
+                    tag=self.tag.append("BCPCommand(4)"),
+                )
             bcp_fraction = abjad.Fraction(*bcp)
             next_bcp_fraction = abjad.Fraction(*bcps[i])
             if self._is_rest(lt.head):
                 pass
             elif self._is_rest(previous_leaf) or previous_bcp is None:
                 if bcp_fraction > next_bcp_fraction:
-                    articulation = abjad.Articulation('upbow')
+                    articulation = abjad.Articulation("upbow")
                     if self.bow_change_tweaks:
                         self._apply_tweaks(
-                            articulation,
-                            self.bow_change_tweaks,
-                            )
+                            articulation, self.bow_change_tweaks
+                        )
                     abjad.attach(
-                        #abjad.Articulation('upbow'),
+                        # abjad.Articulation('upbow'),
                         articulation,
                         lt.head,
-                        tag=self.tag.append('BCPCommand(5)'),
-                        )
+                        tag=self.tag.append("BCPCommand(5)"),
+                    )
                 elif bcp_fraction < next_bcp_fraction:
-                    articulation = abjad.Articulation('downbow')
+                    articulation = abjad.Articulation("downbow")
                     if self.bow_change_tweaks:
                         self._apply_tweaks(
-                            articulation,
-                            self.bow_change_tweaks,
-                            )
+                            articulation, self.bow_change_tweaks
+                        )
                     abjad.attach(
-                        #abjad.Articulation('downbow'),
+                        # abjad.Articulation('downbow'),
                         articulation,
                         lt.head,
-                        tag=self.tag.append('BCPCommand(6)'),
-                        )
+                        tag=self.tag.append("BCPCommand(6)"),
+                    )
             else:
                 previous_bcp_fraction = abjad.Fraction(*previous_bcp)
                 if previous_bcp_fraction < bcp_fraction > next_bcp_fraction:
-                    articulation = abjad.Articulation('upbow')
+                    articulation = abjad.Articulation("upbow")
                     if self.bow_change_tweaks:
                         self._apply_tweaks(
-                            articulation,
-                            self.bow_change_tweaks,
-                            )
+                            articulation, self.bow_change_tweaks
+                        )
                     abjad.attach(
-                        #abjad.Articulation('upbow'),
+                        # abjad.Articulation('upbow'),
                         articulation,
                         lt.head,
-                        tag=self.tag.append('BCPCommand(7)'),
-                        )
+                        tag=self.tag.append("BCPCommand(7)"),
+                    )
                 elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
-                    articulation = abjad.Articulation('downbow')
+                    articulation = abjad.Articulation("downbow")
                     if self.bow_change_tweaks:
                         self._apply_tweaks(
-                            articulation,
-                            self.bow_change_tweaks,
-                            )
+                            articulation, self.bow_change_tweaks
+                        )
                     abjad.attach(
-                        #abjad.Articulation('downbow'),
+                        # abjad.Articulation('downbow'),
                         articulation,
                         lt.head,
-                        tag=self.tag.append('BCPCommand(8)'),
-                        )
+                        tag=self.tag.append("BCPCommand(8)"),
+                    )
             previous_bcp = bcp
 
     ### PRIVATE METHODS ###
@@ -248,7 +250,7 @@ class BCPCommand(scoping.Command):
         prototype = (abjad.Rest, abjad.MultimeasureRest, abjad.Skip)
         if isinstance(argument, prototype):
             return True
-        annotation = abjad.inspect(argument).annotation('is_sounding')
+        annotation = abjad.inspect(argument).annotation("is_sounding")
         if annotation is False:
             return True
         return False
@@ -526,14 +528,14 @@ class BCPCommand(scoping.Command):
         r"""
         Gets ``'\bacaStartTextSpanBCP'``.
         """
-        return r'\bacaStartTextSpanBCP'
+        return r"\bacaStartTextSpanBCP"
 
     @property
     def stop_command(self) -> str:
         r"""
         Gets ``'\bacaStopTextSpanBCP'``.
         """
-        return r'\bacaStopTextSpanBCP'
+        return r"\bacaStopTextSpanBCP"
 
     @property
     def tag(self) -> abjad.Tag:
@@ -850,6 +852,7 @@ class BCPCommand(scoping.Command):
         """
         return self._tweaks
 
+
 class ColorCommand(scoping.Command):
     r"""
     Color command.
@@ -1100,8 +1103,7 @@ class ColorCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        )
+    __slots__ = ()
 
     ### INITIALIZER ###
 
@@ -1112,8 +1114,8 @@ class ColorCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.leaves()',
-        ) -> None:
+        selector: typings.Selector = "baca.leaves()",
+    ) -> None:
         assert selector is not None
         scoping.Command.__init__(
             self,
@@ -1122,7 +1124,7 @@ class ColorCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
 
     ### SPECIAL METHODS ###
 
@@ -1137,6 +1139,7 @@ class ColorCommand(scoping.Command):
         argument = self.selector(argument)
         self.selector.color(argument)
         return argument
+
 
 class ContainerCommand(scoping.Command):
     r"""
@@ -1275,9 +1278,7 @@ class ContainerCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_identifier',
-        )
+    __slots__ = ("_identifier",)
 
     ### INITIALIZER ###
 
@@ -1289,8 +1290,8 @@ class ContainerCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.leaves()',
-        ) -> None:
+        selector: typings.Selector = "baca.leaves()",
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -1298,10 +1299,10 @@ class ContainerCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         if identifier is not None:
             if not isinstance(identifier, str):
-                message = f'identifier must be string (not {identifier!r}).'
+                message = f"identifier must be string (not {identifier!r})."
                 raise Exception(message)
         self._identifier = identifier
         self._tags: typing.List[abjad.Tag] = []
@@ -1318,10 +1319,10 @@ class ContainerCommand(scoping.Command):
             argument = self.selector(argument)
         if not self.identifier:
             identifier = None
-        elif self.identifier.startswith('%*%'):
+        elif self.identifier.startswith("%*%"):
             identifier = self.identifier
         else:
-            identifier = f'%*% {self.identifier}'
+            identifier = f"%*% {self.identifier}"
         container = abjad.Container(identifier=identifier)
         components = classes.Selection(argument).leaves().top()
         abjad.mutate(components).wrap(container)
@@ -1340,6 +1341,7 @@ class ContainerCommand(scoping.Command):
         """
         return self._identifier
 
+
 class GlissandoCommand(scoping.Command):
     """
     Glissando command.
@@ -1354,17 +1356,17 @@ class GlissandoCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_allow_repeats',
-        '_allow_ties',
-        '_hide_middle_note_heads',
-        '_hide_middle_stems',
-        '_left_broken',
-        '_parenthesize_repeats',
-        '_right_broken',
-        '_right_broken_show_next',
-        '_tweaks',
-        '_zero_padding',
-        )
+        "_allow_repeats",
+        "_allow_ties",
+        "_hide_middle_note_heads",
+        "_hide_middle_stems",
+        "_left_broken",
+        "_parenthesize_repeats",
+        "_right_broken",
+        "_right_broken_show_next",
+        "_tweaks",
+        "_zero_padding",
+    )
 
     ### INITIALIZER ###
 
@@ -1382,11 +1384,11 @@ class GlissandoCommand(scoping.Command):
         right_broken: bool = None,
         right_broken_show_next: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.tleaves()',
+        selector: typings.Selector = "baca.tleaves()",
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
         zero_padding: bool = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -1395,7 +1397,7 @@ class GlissandoCommand(scoping.Command):
             scope=scope,
             selector=selector,
             tags=tags,
-            )
+        )
         self._allow_repeats = allow_repeats
         self._allow_ties = allow_ties
         self._hide_middle_note_heads = hide_middle_note_heads
@@ -1437,7 +1439,7 @@ class GlissandoCommand(scoping.Command):
             right_broken_show_next=self.right_broken_show_next,
             tag=str(self.tag),
             zero_padding=self.zero_padding,
-            )
+        )
 
     ### PUBLIC PROPERTIES ###
 
@@ -1511,6 +1513,7 @@ class GlissandoCommand(scoping.Command):
         """
         return self._zero_padding
 
+
 class GlobalFermataCommand(scoping.Command):
     """
     Global fermata command.
@@ -1524,16 +1527,14 @@ class GlobalFermataCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_description',
-        )
+    __slots__ = ("_description",)
 
     description_to_command = {
-        'short': 'shortfermata',
-        'fermata': 'fermata',
-        'long': 'longfermata',
-        'very_long': 'verylongfermata',
-        }
+        "short": "shortfermata",
+        "fermata": "fermata",
+        "long": "longfermata",
+        "very_long": "verylongfermata",
+    }
 
     ### INITIALIZER ###
 
@@ -1545,9 +1546,9 @@ class GlobalFermataCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.leaf(0)',
+        selector: typings.Selector = "baca.leaf(0)",
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -1556,7 +1557,7 @@ class GlobalFermataCommand(scoping.Command):
             scope=scope,
             selector=selector,
             tags=tags,
-            )
+        )
         if description is not None:
             assert description in GlobalFermataCommand.description_to_command
         self._description = description
@@ -1571,52 +1572,46 @@ class GlobalFermataCommand(scoping.Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        if isinstance(self.description, str) and self.description != 'fermata':
-            description = self.description.replace('_', '-')
-            command = f'{description}-fermata'
+        if isinstance(self.description, str) and self.description != "fermata":
+            description = self.description.replace("_", "-")
+            command = f"{description}-fermata"
         else:
-            command = 'fermata'
-        if self.description == 'short':
+            command = "fermata"
+        if self.description == "short":
             fermata_duration = 1
-        elif self.description == 'fermata':
+        elif self.description == "fermata":
             fermata_duration = 2
-        elif self.description == 'long':
+        elif self.description == "long":
             fermata_duration = 4
-        elif self.description == 'very_long':
+        elif self.description == "very_long":
             fermata_duration = 8
         else:
             raise Exception(self.description)
         for leaf in abjad.iterate(argument).leaves():
             assert isinstance(leaf, abjad.MultimeasureRest)
-            string = rf'\baca-{command}-markup'
+            string = rf"\baca-{command}-markup"
             markup = abjad.Markup(string, literal=True)
             markup = abjad.new(markup, direction=abjad.Up)
             abjad.attach(
-                markup,
-                leaf,
-                tag=self.tag.append('GlobalFermataCommand(1)'),
-                )
-            literal = abjad.LilyPondLiteral(r'\baca-fermata-measure')
+                markup, leaf, tag=self.tag.append("GlobalFermataCommand(1)")
+            )
+            literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
             abjad.attach(
-                literal,
-                leaf,
-                tag=self.tag.append('GlobalFermataCommand(2)'),
-                )
-            tag = abjad.Tag.from_words([
-                abjad.tags.FERMATA_MEASURE,
-                str(self.tag),
-                'GlobalFermataCommand(3)',
-                ])
+                literal, leaf, tag=self.tag.append("GlobalFermataCommand(2)")
+            )
+            tag = abjad.Tag.from_words(
+                [
+                    abjad.tags.FERMATA_MEASURE,
+                    str(self.tag),
+                    "GlobalFermataCommand(3)",
+                ]
+            )
             abjad.attach(
                 abjad.tags.FERMATA_MEASURE,
                 leaf,
                 tag=abjad.tags.FERMATA_MEASURE,
-                )
-            abjad.annotate(
-                leaf,
-                const.FERMATA_DURATION,
-                fermata_duration,
-                )
+            )
+            abjad.annotate(leaf, const.FERMATA_DURATION, fermata_duration)
 
     ### PUBLIC PROPERTIES ###
 
@@ -1626,6 +1621,7 @@ class GlobalFermataCommand(scoping.Command):
         Gets description.
         """
         return self._description
+
 
 class IndicatorCommand(scoping.Command):
     r"""
@@ -1872,13 +1868,13 @@ class IndicatorCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_context',
-        '_indicators',
-        '_predicate',
-        '_redundant',
-        '_tags',
-        '_tweaks',
-        )
+        "_context",
+        "_indicators",
+        "_predicate",
+        "_redundant",
+        "_tags",
+        "_tweaks",
+    )
 
     ### INITIALIZER ###
 
@@ -1894,10 +1890,10 @@ class IndicatorCommand(scoping.Command):
         predicate: typing.Callable = None,
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.pheads()',
+        selector: typings.Selector = "baca.pheads()",
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             deactivate=deactivate,
@@ -1907,7 +1903,7 @@ class IndicatorCommand(scoping.Command):
             scope=scope,
             selector=selector,
             tags=tags,
-            )
+        )
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context
@@ -1933,6 +1929,7 @@ class IndicatorCommand(scoping.Command):
         """
         # TODO: externalize late import
         from .segmentmaker import SegmentMaker
+
         if argument is None:
             return
         if self.indicators is None:
@@ -1956,19 +1953,14 @@ class IndicatorCommand(scoping.Command):
                     leaf,
                     context=self.context,
                     deactivate=self.deactivate,
-                    tag=self.tag.append('IndicatorCommand'),
+                    tag=self.tag.append("IndicatorCommand"),
                     wrapper=True,
-                    )
-                if scoping.compare_persistent_indicators(
-                    indicator,
-                    reapplied,
-                    ):
-                    status = 'redundant'
+                )
+                if scoping.compare_persistent_indicators(indicator, reapplied):
+                    status = "redundant"
                     SegmentMaker._treat_persistent_wrapper(
-                        self.runtime['manifests'],
-                        wrapper,
-                        status,
-                        )
+                        self.runtime["manifests"], wrapper, status
+                    )
 
     ### PRIVATE METHODS ###
 
@@ -2166,6 +2158,7 @@ class IndicatorCommand(scoping.Command):
         """
         return self._tweaks
 
+
 class InstrumentChangeCommand(IndicatorCommand):
     """
     Instrument change command.
@@ -2188,14 +2181,14 @@ class InstrumentChangeCommand(IndicatorCommand):
             staff = abjad.inspect(first_leaf).parentage().get(abjad.Staff)
             instrument = self.indicators[0]
             assert isinstance(instrument, abjad.Instrument), repr(instrument)
-            if not self.runtime['score_template'].allows_instrument(
-                staff.name,
-                instrument,
-                ):
-                message = f'{staff.name} does not allow instrument:\n'
-                message += f'  {instrument}'
+            if not self.runtime["score_template"].allows_instrument(
+                staff.name, instrument
+            ):
+                message = f"{staff.name} does not allow instrument:\n"
+                message += f"  {instrument}"
                 raise Exception(message)
         super()._call(argument)
+
 
 class LabelCommand(scoping.Command):
     r"""
@@ -2420,9 +2413,7 @@ class LabelCommand(scoping.Command):
 
     ### CLASS VARIABLES ##
 
-    __slots__ = (
-        '_expression',
-        )
+    __slots__ = ("_expression",)
 
     ### INITIALIZER ###
 
@@ -2434,16 +2425,16 @@ class LabelCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector='baca.leaves()',
-        ) -> None:
+        selector="baca.leaves()",
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
             match=match,
             measures=measures,
             scope=scope,
-            selector=selector
-            )
+            selector=selector,
+        )
         if expression is not None:
             assert isinstance(expression, abjad.Expression)
         self._expression = expression
@@ -2479,6 +2470,7 @@ class LabelCommand(scoping.Command):
         """
         return self._expression
 
+
 class MetronomeMarkCommand(scoping.Command):
     """
     Metronome mark command.
@@ -2492,11 +2484,7 @@ class MetronomeMarkCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_key',
-        '_redundant',
-        '_tags',
-        )
+    __slots__ = ("_key", "_redundant", "_tags")
 
     ### INITIALIZER ###
 
@@ -2505,17 +2493,16 @@ class MetronomeMarkCommand(scoping.Command):
         *,
         deactivate: bool = None,
         key: typing.Union[
-            str,
-            indicators.Accelerando,
-            indicators.Ritardando] = None,
+            str, indicators.Accelerando, indicators.Ritardando
+        ] = None,
         map: typings.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.leaf(0)',
+        selector: typings.Selector = "baca.leaf(0)",
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             deactivate=deactivate,
@@ -2525,7 +2512,7 @@ class MetronomeMarkCommand(scoping.Command):
             scope=scope,
             selector=selector,
             tags=tags,
-            )
+        )
         prototype = (str, indicators.Accelerando, indicators.Ritardando)
         if key is not None:
             assert isinstance(key, prototype), repr(key)
@@ -2541,17 +2528,18 @@ class MetronomeMarkCommand(scoping.Command):
         Applies command to result of selector called on ``argument``.
         """
         from .segmentmaker import SegmentMaker
+
         if argument is None:
             return
         if self.key is None:
             return
         if self.redundant is True:
             return
-        if isinstance(self.key, str) and self.runtime['manifests'] is not None:
-            metronome_marks = self.runtime['manifests']['abjad.MetronomeMark']
+        if isinstance(self.key, str) and self.runtime["manifests"] is not None:
+            metronome_marks = self.runtime["manifests"]["abjad.MetronomeMark"]
             indicator = metronome_marks.get(self.key)
             if indicator is None:
-                raise Exception(f'can not find metronome mark {self.key!r}.')
+                raise Exception(f"can not find metronome mark {self.key!r}.")
         else:
             indicator = self.key
         if self.selector is not None:
@@ -2566,19 +2554,20 @@ class MetronomeMarkCommand(scoping.Command):
             deactivate=self.deactivate,
             tag=self.tag,
             wrapper=True,
-            )
+        )
         if indicator == reapplied:
             SegmentMaker._treat_persistent_wrapper(
-                self.runtime['manifests'],
-                wrapper,
-                'redundant',
-                )
+                self.runtime["manifests"], wrapper, "redundant"
+            )
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def key(self) -> typing.Optional[typing.Union[str,
-    indicators.Accelerando, indicators.Ritardando]]:
+    def key(
+        self
+    ) -> typing.Optional[
+        typing.Union[str, indicators.Accelerando, indicators.Ritardando]
+    ]:
         """
         Gets metronome mark key.
         """
@@ -2591,6 +2580,7 @@ class MetronomeMarkCommand(scoping.Command):
         """
         return self._redundant
 
+
 class PartAssignmentCommand(scoping.Command):
     """
     Part assignment command.
@@ -2598,9 +2588,7 @@ class PartAssignmentCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        '_part_assignment',
-        )
+    __slots__ = ("_part_assignment",)
 
     ### INITIALIZER ###
 
@@ -2612,8 +2600,8 @@ class PartAssignmentCommand(scoping.Command):
         measures: typings.Slice = None,
         part_assignment: abjad.PartAssignment = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.leaves()',
-        ) -> None:
+        selector: typings.Selector = "baca.leaves()",
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -2621,11 +2609,11 @@ class PartAssignmentCommand(scoping.Command):
             measures=measures,
             scope=scope,
             selector=selector,
-            )
+        )
         if part_assignment is not None:
             if not isinstance(part_assignment, abjad.PartAssignment):
-                message = 'part_assignment must be part assignment'
-                message += f' (not {part_assignment!r}).'
+                message = "part_assignment must be part assignment"
+                message += f" (not {part_assignment!r})."
                 raise Exception(message)
         self._part_assignment = part_assignment
 
@@ -2644,15 +2632,14 @@ class PartAssignmentCommand(scoping.Command):
             return
         voice = abjad.inspect(first_leaf).parentage().get(abjad.Voice, -1)
         if voice is not None and self.part_assignment is not None:
-            if not self.runtime['score_template'].allows_part_assignment(
-                voice.name,
-                self.part_assignment,
-                ):
-                message = f'{voice.name} does not allow'
-                message += f' {self.part_assignment.section} part assignment:'
-                message += f'\n  {self.part_assignment}'
+            if not self.runtime["score_template"].allows_part_assignment(
+                voice.name, self.part_assignment
+            ):
+                message = f"{voice.name} does not allow"
+                message += f" {self.part_assignment.section} part assignment:"
+                message += f"\n  {self.part_assignment}"
                 raise Exception(message)
-        identifier = f'%*% {self.part_assignment!s}'
+        identifier = f"%*% {self.part_assignment!s}"
         container = abjad.Container(identifier=identifier)
         components = classes.Selection(argument).leaves().top()
         abjad.mutate(components).wrap(container)
@@ -2660,7 +2647,7 @@ class PartAssignmentCommand(scoping.Command):
     ### PRIVATE METHODS ###
 
     def _mutates_score(self):
-        #return True
+        # return True
         return False
 
     ### PUBLIC PROPERTIES ###
@@ -2671,6 +2658,7 @@ class PartAssignmentCommand(scoping.Command):
         Gets part assignment.
         """
         return self._part_assignment
+
 
 class TieCommand(scoping.Command):
     """
@@ -2686,12 +2674,12 @@ class TieCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_direction',
-        '_left_broken',
-        '_repeat',
-        '_right_broken',
-        '_tweaks',
-        )
+        "_direction",
+        "_left_broken",
+        "_repeat",
+        "_right_broken",
+        "_tweaks",
+    )
 
     ### INITIALIZER ###
 
@@ -2704,13 +2692,13 @@ class TieCommand(scoping.Command):
         measures: typings.Slice = None,
         repeat: typing.Union[
             bool, typings.IntegerPair, abjad.DurationInequality
-            ] = None,
+        ] = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.tleaves()',
+        selector: typings.Selector = "baca.tleaves()",
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             map=map,
@@ -2719,11 +2707,11 @@ class TieCommand(scoping.Command):
             scope=scope,
             selector=selector,
             tags=tags,
-            )
+        )
         if direction is not None:
             assert direction in (abjad.Right, abjad.Left, None)
         self._direction = direction
-        self._left_broken = left_broken 
+        self._left_broken = left_broken
         self._repeat = repeat
         self._right_broken = right_broken
         self._validate_indexed_tweaks(tweaks)
@@ -2740,8 +2728,8 @@ class TieCommand(scoping.Command):
         if self.selector is not None:
             argument = self.selector(argument)
         leaves = classes.Selection(argument).leaves(
-            do_not_iterate_grace_containers=True,
-            )
+            do_not_iterate_grace_containers=True
+        )
         assert isinstance(leaves, classes.Selection)
         if len(leaves) == 1:
             return
@@ -2751,13 +2739,13 @@ class TieCommand(scoping.Command):
             tweaks_.append(tweak)
         abjad.tie(
             leaves,
-            #*tweaks_,
+            # *tweaks_,
             direction=self.direction,
-            #left_broken=self.left_broken,
+            # left_broken=self.left_broken,
             repeat=self.repeat,
-            #right_broken=self.right_broken,
+            # right_broken=self.right_broken,
             tag=str(self.tag),
-            )
+        )
 
     ### PUBLIC PROPERTIES ###
 
@@ -2776,9 +2764,11 @@ class TieCommand(scoping.Command):
         return self._left_broken
 
     @property
-    def repeat(self) -> typing.Optional[
+    def repeat(
+        self
+    ) -> typing.Optional[
         typing.Union[bool, typings.IntegerPair, abjad.DurationInequality]
-        ]:
+    ]:
         """
         Gets repeat-tie threshold.
         """
@@ -2798,6 +2788,7 @@ class TieCommand(scoping.Command):
         """
         return self._tweaks
 
+
 class VoltaCommand(scoping.Command):
     """
     Volta command.
@@ -2811,8 +2802,7 @@ class VoltaCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = (
-        )
+    __slots__ = ()
 
     ### SPECIAL METHODS ###
 
@@ -2834,27 +2824,28 @@ class VoltaCommand(scoping.Command):
     def _mutates_score(self):
         return True
 
+
 ### FACTORY FUNCTIONS ###
 
+
 def allow_octaves(
-    *,
-    selector: typings.Selector = 'baca.leaves()',
-    ) -> IndicatorCommand:
+    *, selector: typings.Selector = "baca.leaves()"
+) -> IndicatorCommand:
     """
     Attaches ALLOW_OCTAVE tag.
     """
     return IndicatorCommand(
-        indicators=[abjad.tags.ALLOW_OCTAVE],
-        selector=selector,
-        )
+        indicators=[abjad.tags.ALLOW_OCTAVE], selector=selector
+    )
+
 
 def bar_extent_persistent(
     pair: typings.NumberPair = None,
     *,
     after: bool = None,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_bar_extent_persistent',
-    ) -> IndicatorCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_bar_extent_persistent",
+) -> IndicatorCommand:
     r"""
     Makes persistent bar-extent override.
 
@@ -3019,16 +3010,15 @@ def bar_extent_persistent(
     """
     override = abjad.PersistentOverride(
         after=after,
-        attribute='bar_extent',
-        context='Staff',
-        grob='bar_line',
+        attribute="bar_extent",
+        context="Staff",
+        grob="bar_line",
         value=pair,
-        )
+    )
     return IndicatorCommand(
-        indicators=[override],
-        selector=selector,
-        tags=[tag],
-        )
+        indicators=[override], selector=selector, tags=[tag]
+    )
+
 
 def bcps(
     bcps: typing.Iterable[typings.IntegerPair],
@@ -3036,9 +3026,9 @@ def bcps(
     bow_change_tweaks: abjad.IndexedTweakManagers = None,
     final_spanner: bool = None,
     helper: typing.Callable = None,
-    selector: typings.Selector = 'baca.leaves()',
-    tag: typing.Optional[str] = 'baca_bcps',
-    ) -> BCPCommand:
+    selector: typings.Selector = "baca.leaves()",
+    tag: typing.Optional[str] = "baca_bcps",
+) -> BCPCommand:
     r"""
     Makes bow contact point command.
 
@@ -3277,12 +3267,10 @@ def bcps(
         selector=selector,
         tags=[tag],
         tweaks=tweaks,
-        )
+    )
 
-def color(
-    *,
-    selector: typings.Selector = 'baca.leaves()',
-    ) -> ColorCommand:
+
+def color(*, selector: typings.Selector = "baca.leaves()") -> ColorCommand:
     r"""
     Colors leaves.
 
@@ -3425,15 +3413,12 @@ def color(
             >>
 
     """
-    return ColorCommand(
-        selector=selector,
-        )
+    return ColorCommand(selector=selector)
+
 
 def container(
-    identifier: str = None,
-    *,
-    selector: typings.Selector = 'baca.leaves()',
-    ) -> ContainerCommand:
+    identifier: str = None, *, selector: typings.Selector = "baca.leaves()"
+) -> ContainerCommand:
     r"""
     Makes container with ``identifier`` and extends container with
     ``selector`` output.
@@ -3565,18 +3550,16 @@ def container(
     """
     if identifier is not None:
         if not isinstance(identifier, str):
-            message = f'identifier must be string (not {identifier!r}).'
+            message = f"identifier must be string (not {identifier!r})."
             raise Exception(message)
-    return ContainerCommand(
-        identifier=identifier,
-        selector=selector,
-        )
+    return ContainerCommand(identifier=identifier, selector=selector)
+
 
 def cross_staff(
     *,
-    selector: typings.Selector = 'baca.phead(0)',
-    tag: typing.Optional[str] = 'baca_cross_staff',
-    ) -> IndicatorCommand:
+    selector: typings.Selector = "baca.phead(0)",
+    tag: typing.Optional[str] = "baca_cross_staff",
+) -> IndicatorCommand:
     r"""
     Attaches cross-staff command.
 
@@ -4205,16 +4188,17 @@ def cross_staff(
 
     """
     return IndicatorCommand(
-        indicators=[abjad.LilyPondLiteral(r'\crossStaff')],
+        indicators=[abjad.LilyPondLiteral(r"\crossStaff")],
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dynamic_down(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_down',
-    ) -> IndicatorCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_dynamic_down",
+) -> IndicatorCommand:
     r"""
     Attaches dynamic-down command.
 
@@ -4356,16 +4340,17 @@ def dynamic_down(
 
     """
     return IndicatorCommand(
-        indicators=[abjad.LilyPondLiteral(r'\dynamicDown')],
+        indicators=[abjad.LilyPondLiteral(r"\dynamicDown")],
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def dynamic_up(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_dynamic_down',
-    ) -> IndicatorCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_dynamic_down",
+) -> IndicatorCommand:
     r"""
     Attaches dynamic-up command.
 
@@ -4507,15 +4492,16 @@ def dynamic_up(
 
     """
     return IndicatorCommand(
-        indicators=[abjad.LilyPondLiteral(r'\dynamicUp')],
+        indicators=[abjad.LilyPondLiteral(r"\dynamicUp")],
         selector=selector,
         tags=[tag],
-        )
+    )
+
 
 def edition(
     not_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
     only_parts: typing.Union[str, abjad.Markup, IndicatorCommand],
-    ) -> scoping.Suite:
+) -> scoping.Suite:
     """
     Makes not-parts / only-parts markup suite.
     """
@@ -4527,17 +4513,15 @@ def edition(
         only_parts = markup(only_parts)
     assert isinstance(only_parts, IndicatorCommand)
     only_parts_ = scoping.only_parts(only_parts)
-    return scoping.suite(
-        not_parts_,
-        only_parts_,
-        )
+    return scoping.suite(not_parts_, only_parts_)
+
 
 def finger_pressure_transition(
     *,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = "baca.tleaves()",
     right_broken: bool = None,
-    tag: typing.Optional[str] = 'baca_finger_pressure_transition',
-    ) -> GlissandoCommand:
+    tag: typing.Optional[str] = "baca_finger_pressure_transition",
+) -> GlissandoCommand:
     r"""
     Makes finger pressure transition glissando.
 
@@ -4691,8 +4675,9 @@ def finger_pressure_transition(
             abjad.tweak(0.5).arrow_width,
             abjad.tweak(True).bound_details__right__arrow,
             abjad.tweak(3).thickness,
-            ),
-        )
+        ),
+    )
+
 
 def flat_glissando(
     pitch,
@@ -4702,14 +4687,15 @@ def flat_glissando(
     right_broken=None,
     right_broken_show_next=None,
     rleak=None,
-    selector='baca.pleaves()',
+    selector="baca.pleaves()",
     stop_pitch=None,
-    ):
+):
     """
     Makes flat glissando.
     """
     # for selector evaluation
     import baca
+
     if isinstance(selector, str):
         selector = eval(selector)
     if stop_pitch is not None:
@@ -4727,26 +4713,20 @@ def flat_glissando(
         right_broken=right_broken,
         right_broken_show_next=right_broken_show_next,
         selector=selector,
-        )
+    )
     commands.append(command)
-    command = rhythmcommands.untie_to(
-        selector=selector.leaves()[1:],
-        )
+    command = rhythmcommands.untie_to(selector=selector.leaves()[1:])
     commands.append(command)
     if pitch is not None and stop_pitch is None:
-        command = pitchcommands.pitch(
-            pitch,
-            selector=selector,
-            )
+        command = pitchcommands.pitch(pitch, selector=selector)
         commands.append(command)
     elif pitch is not None and stop_pitch is not None:
         command = pitchcommands.interpolate_staff_positions(
-            pitch,
-            stop_pitch,
-            selector=selector,
-            )
+            pitch, stop_pitch, selector=selector
+        )
         commands.append(command)
     return scoping.suite(*commands)
+
 
 def glissando(
     *tweaks: abjad.IndexedTweakManager,
@@ -4757,11 +4737,11 @@ def glissando(
     left_broken: bool = None,
     right_broken: bool = None,
     right_broken_show_next: bool = None,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = "baca.tleaves()",
     style: str = None,
-    tag: typing.Optional[str] = 'baca_glissando',
+    tag: typing.Optional[str] = "baca_glissando",
     zero_padding: bool = None,
-    ) -> GlissandoCommand:
+) -> GlissandoCommand:
     r"""
     Attaches glissando.
 
@@ -5501,46 +5481,45 @@ def glissando(
         tags=[tag],
         tweaks=tweaks,
         zero_padding=zero_padding,
-        )
+    )
+
 
 def global_fermata(
     description: str = None,
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_global_fermata',
-    ) -> GlobalFermataCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_global_fermata",
+) -> GlobalFermataCommand:
     """
     Attaches global fermata.
     """
     return GlobalFermataCommand(
-        description=description,
-        selector=selector,
-        tags=[tag],
-        )
+        description=description, selector=selector, tags=[tag]
+    )
+
 
 def instrument(
     instrument: abjad.Instrument,
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_instrument',
-    ) -> InstrumentChangeCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_instrument",
+) -> InstrumentChangeCommand:
     """
     Makes instrument change command.
     """
     if not isinstance(instrument, abjad.Instrument):
-        message = f'instrument must be instrument (not {instrument!r}).'
+        message = f"instrument must be instrument (not {instrument!r})."
         raise Exception(message)
     return InstrumentChangeCommand(
-        indicators=[instrument],
-        selector=selector,
-        tags=[tag],
-        )
+        indicators=[instrument], selector=selector, tags=[tag]
+    )
+
 
 def label(
     expression: abjad.Expression,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    ) -> LabelCommand:
+    selector: typings.Selector = "baca.leaves()",
+) -> LabelCommand:
     r"""
     Labels ``selector`` output with label ``expression``.
 
@@ -5690,6 +5669,7 @@ def label(
     """
     return LabelCommand(expression=expression, selector=selector)
 
+
 def markup(
     argument: typing.Union[str, abjad.Markup],
     *tweaks: abjad.LilyPondTweakManager,
@@ -5699,9 +5679,9 @@ def markup(
     map: typings.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    selector: typings.Selector = 'baca.pleaf(0)',
-    tag: typing.Optional[str] = 'baca_markup',
-    ) -> IndicatorCommand:
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_markup",
+) -> IndicatorCommand:
     r"""
     Makes markup and inserts into indicator command.
 
@@ -5999,32 +5979,28 @@ def markup(
 
     """
     if direction not in (abjad.Down, abjad.Up):
-        message = f'direction must be up or down (not {direction!r}).'
+        message = f"direction must be up or down (not {direction!r})."
         raise Exception(message)
     if isinstance(argument, str):
         if literal:
-            markup = abjad.Markup(
-                argument,
-                direction=direction,
-                literal=True,
-                )
+            markup = abjad.Markup(argument, direction=direction, literal=True)
         else:
             markup = abjad.Markup(argument, direction=direction)
     elif isinstance(argument, abjad.Markup):
         markup = abjad.new(argument, direction=direction)
     else:
-        message = 'MarkupLibary.__call__():\n'
+        message = "MarkupLibary.__call__():\n"
         message += "  Value of 'argument' must be str or markup.\n"
-        message += f'  Not {argument!r}.'
+        message += f"  Not {argument!r}."
         raise Exception(message)
     if boxed:
-        markup = markup.box().override(('box-padding', 0.5))
+        markup = markup.box().override(("box-padding", 0.5))
     prototype = (str, abjad.Expression)
     if selector is not None and not isinstance(selector, prototype):
-        message = f'selector must be string or expression'
-        message += f' (not {selector!r}).'
+        message = f"selector must be string or expression"
+        message += f" (not {selector!r})."
         raise Exception(message)
-    selector = selector or 'baca.phead(0)'
+    selector = selector or "baca.phead(0)"
     return IndicatorCommand(
         indicators=[markup],
         map=map,
@@ -6033,30 +6009,30 @@ def markup(
         selector=selector,
         tags=[tag],
         tweaks=tweaks,
-        )
+    )
+
 
 def metronome_mark(
     key: typing.Union[str, indicators.Accelerando, indicators.Ritardando],
     *,
     redundant: bool = None,
-    selector: typings.Selector = 'baca.leaf(0)',
-    ) -> typing.Optional[MetronomeMarkCommand]:
+    selector: typings.Selector = "baca.leaf(0)",
+) -> typing.Optional[MetronomeMarkCommand]:
     """
     Attaches metronome mark matching ``key`` metronome mark manifest.
     """
     if redundant is True:
         return None
     return MetronomeMarkCommand(
-        key=key,
-        redundant=redundant,
-        selector=selector,
-        )
+        key=key, redundant=redundant, selector=selector
+    )
+
 
 def parts(
     part_assignment: abjad.PartAssignment,
     *,
-    selector: typings.Selector = 'baca.leaves()',
-    ) -> PartAssignmentCommand:
+    selector: typings.Selector = "baca.leaves()",
+) -> PartAssignmentCommand:
     r"""
     Inserts ``selector`` output in container and sets part assignment.
 
@@ -6329,28 +6305,27 @@ def parts(
 
     """
     if not isinstance(part_assignment, abjad.PartAssignment):
-        message = 'part_assignment must be part assignment'
-        message += f' (not {part_assignment!r}).'
+        message = "part_assignment must be part assignment"
+        message += f" (not {part_assignment!r})."
         raise Exception(message)
     return PartAssignmentCommand(
-        part_assignment=part_assignment,
-        selector=selector,
-        )
+        part_assignment=part_assignment, selector=selector
+    )
+
 
 def one_voice(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_one_voice',
-    ) -> IndicatorCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_one_voice",
+) -> IndicatorCommand:
     r"""
     Makes LilyPond ``\oneVoice`` command.
     """
-    literal = abjad.LilyPondLiteral(r'\oneVoice')
+    literal = abjad.LilyPondLiteral(r"\oneVoice")
     return IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[tag],
-        )
+        indicators=[literal], selector=selector, tags=[tag]
+    )
+
 
 def previous_metadata(path: str) -> abjad.OrderedDict:
     """
@@ -6364,7 +6339,7 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     segments = segment.parent
     assert segments.is_segments(), repr(segments)
     paths = segments.list_paths()
-    paths = [_ for _ in paths if not _.name.startswith('.')]
+    paths = [_ for _ in paths if not _.name.startswith(".")]
     assert all(_.is_dir() for _ in paths), repr(paths)
     index = paths.index(segment)
     if index == 0:
@@ -6374,11 +6349,12 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     previous_metadata = previous_segment.get_metadata()
     return previous_metadata
 
+
 def repeat_tie(
     *,
-    selector: typings.Selector = 'baca.qrun(0)',
-    tag: typing.Optional[str] = 'baca_repeat_tie',
-    ) -> TieCommand:
+    selector: typings.Selector = "baca.qrun(0)",
+    tag: typing.Optional[str] = "baca_repeat_tie",
+) -> TieCommand:
     r"""
     Attaches repeat tie.
 
@@ -6451,37 +6427,32 @@ def repeat_tie(
             >>
 
     """
-    return TieCommand(
-        repeat=True,
-        selector=selector,
-        tags=[tag],
-        )
+    return TieCommand(repeat=True, selector=selector, tags=[tag])
+
 
 def repeat_tie_repeat_pitches(
-    *,
-    tag: typing.Optional[str] = 'baca_repeat_tie_repeat_pitches',
-    ) -> TieCommand:
+    *, tag: typing.Optional[str] = "baca_repeat_tie_repeat_pitches"
+) -> TieCommand:
     """
     Repeat-ties repeat pitches.
     """
     return TieCommand(
         map=classes.selector().ltqruns().nontrivial(),
         repeat=True,
-        selector='baca.qrun(0)',
+        selector="baca.qrun(0)",
         tags=[tag],
-        )
+    )
+
 
 def tie(
     *,
     map: typings.Selector = None,
     repeat: typing.Union[
-        bool,
-        typings.IntegerPair,
-        abjad.DurationInequality,
-        ] = None,
-    selector: typings.Selector = 'baca.qrun(0)',
-    tag: typing.Optional[str] = 'baca_tie',
-    ) -> TieCommand:
+        bool, typings.IntegerPair, abjad.DurationInequality
+    ] = None,
+    selector: typings.Selector = "baca.qrun(0)",
+    tag: typing.Optional[str] = "baca_tie",
+) -> TieCommand:
     r"""
     Attaches tie.
 
@@ -6622,90 +6593,77 @@ def tie(
             >>
 
     """
-    return TieCommand(
-        map=map,
-        repeat=repeat,
-        tags=[tag],
-        )
+    return TieCommand(map=map, repeat=repeat, tags=[tag])
+
 
 def tie_repeat_pitches(
-    *,
-    tag: typing.Optional[str] = 'baca_tie_repeat_pitches',
-    ) -> TieCommand:
+    *, tag: typing.Optional[str] = "baca_tie_repeat_pitches"
+) -> TieCommand:
     """
     Ties repeat pitches.
     """
     map = classes.selector().ltqruns().nontrivial()
-    command = tie(
-        map=map,
-        tag=tag,
-        )
+    command = tie(map=map, tag=tag)
     return command
+
 
 def voice_four(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_voice_four',
-    ) -> IndicatorCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_voice_four",
+) -> IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceFour`` command.
     """
-    literal = abjad.LilyPondLiteral(r'\voiceFour')
+    literal = abjad.LilyPondLiteral(r"\voiceFour")
     return IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[tag],
-        )
+        indicators=[literal], selector=selector, tags=[tag]
+    )
+
 
 def voice_one(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_voice_one',
-    ) -> IndicatorCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_voice_one",
+) -> IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceOne`` command.
     """
-    literal = abjad.LilyPondLiteral(r'\voiceOne')
+    literal = abjad.LilyPondLiteral(r"\voiceOne")
     return IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[tag],
-        )
+        indicators=[literal], selector=selector, tags=[tag]
+    )
+
 
 def voice_three(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_voice_three',
-    ) -> IndicatorCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_voice_three",
+) -> IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceThree`` command.
     """
-    literal = abjad.LilyPondLiteral(r'\voiceThree')
+    literal = abjad.LilyPondLiteral(r"\voiceThree")
     return IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[tag],
-        )
+        indicators=[literal], selector=selector, tags=[tag]
+    )
+
 
 def voice_two(
     *,
-    selector: typings.Selector = 'baca.leaf(0)',
-    tag: typing.Optional[str] = 'baca_voice_two',
-    ) -> IndicatorCommand:
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_voice_two",
+) -> IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceTwo`` command.
     """
-    literal = abjad.LilyPondLiteral(r'\voiceTwo')
+    literal = abjad.LilyPondLiteral(r"\voiceTwo")
     return IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[tag],
-        )
+        indicators=[literal], selector=selector, tags=[tag]
+    )
 
-def volta(
-    *,
-    selector: typings.Selector = 'baca.leaves()',
-    ) -> VoltaCommand:
+
+def volta(*, selector: typings.Selector = "baca.leaves()") -> VoltaCommand:
     r"""
     Makes volta container and extends container with ``selector`` output.
 

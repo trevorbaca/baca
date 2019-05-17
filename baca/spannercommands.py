@@ -8,6 +8,7 @@ from . import typings
 
 ### CLASSES ###
 
+
 class SpannerIndicatorCommand(scoping.Command):
     r"""
     Spanner indicator command.
@@ -218,14 +219,14 @@ class SpannerIndicatorCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        '_detach_first',
-        '_left_broken',
-        '_right_broken',
-        '_start_indicator',
-        '_stop_indicator',
-        '_tags',
-        '_tweaks',
-        )
+        "_detach_first",
+        "_left_broken",
+        "_right_broken",
+        "_start_indicator",
+        "_stop_indicator",
+        "_tags",
+        "_tweaks",
+    )
 
     ### INITIALIZER ###
 
@@ -240,12 +241,12 @@ class SpannerIndicatorCommand(scoping.Command):
         measures: typings.Slice = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = 'baca.leaves()',
+        selector: typings.Selector = "baca.leaves()",
         start_indicator: typing.Any = None,
         stop_indicator: typing.Any = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
-        ) -> None:
+    ) -> None:
         scoping.Command.__init__(
             self,
             deactivate=deactivate,
@@ -255,7 +256,7 @@ class SpannerIndicatorCommand(scoping.Command):
             scope=scope,
             selector=selector,
             tags=tags,
-            )
+        )
         if detach_first is not None:
             detach_first = bool(detach_first)
         self._detach_first = detach_first
@@ -289,17 +290,16 @@ class SpannerIndicatorCommand(scoping.Command):
                     abjad.detach(type(start_indicator), leaf)
             if self.left_broken:
                 start_indicator = abjad.new(
-                    start_indicator,
-                    left_broken=self.left_broken,
-                    )
+                    start_indicator, left_broken=self.left_broken
+                )
             self._apply_tweaks(start_indicator, self.tweaks)
             first_leaf = abjad.select(argument).leaf(0)
             self._attach_indicator(
                 start_indicator,
                 first_leaf,
                 deactivate=self.deactivate,
-                tag='SpannerIndicatorCommand(1)',
-                )
+                tag="SpannerIndicatorCommand(1)",
+            )
         if self.stop_indicator is not None:
             stop_indicator = self.stop_indicator
             if self.detach_first:
@@ -307,50 +307,36 @@ class SpannerIndicatorCommand(scoping.Command):
                     abjad.detach(type(stop_indicator), leaf)
             if self.right_broken:
                 stop_indicator = abjad.new(
-                    stop_indicator,
-                    right_broken=self.right_broken,
-                    )
+                    stop_indicator, right_broken=self.right_broken
+                )
             final_leaf = abjad.select(argument).leaf(-1)
             self._attach_indicator(
                 stop_indicator,
                 final_leaf,
                 deactivate=self.deactivate,
-                tag='SpannerIndicatorCommand(2)',
-                )
+                tag="SpannerIndicatorCommand(2)",
+            )
 
     ### PRIVATE METHODS ###
 
-    def _attach_indicator(
-        self,
-        indicator,
-        leaf,
-        deactivate=None,
-        tag=None,
-        ):
+    def _attach_indicator(self, indicator, leaf, deactivate=None, tag=None):
         # TODO: factor out late import
         from .segmentmaker import SegmentMaker
+
         assert isinstance(tag, str), repr(tag)
-        reapplied = scoping.Command._remove_reapplied_wrappers(
-            leaf,
-            indicator,
-            )
+        reapplied = scoping.Command._remove_reapplied_wrappers(leaf, indicator)
         wrapper = abjad.attach(
             indicator,
             leaf,
             deactivate=deactivate,
             tag=self.tag.append(tag),
             wrapper=True,
-            )
-        if scoping.compare_persistent_indicators(
-            indicator,
-            reapplied,
-            ):
-            status = 'redundant'
+        )
+        if scoping.compare_persistent_indicators(indicator, reapplied):
+            status = "redundant"
             SegmentMaker._treat_persistent_wrapper(
-                self.runtime['manifests'],
-                wrapper,
-                status,
-                )
+                self.runtime["manifests"], wrapper, status
+            )
 
     ### PUBLIC PROPERTIES ###
 
@@ -403,16 +389,18 @@ class SpannerIndicatorCommand(scoping.Command):
         """
         return self._tweaks
 
+
 ### FACTORY FUNCTIONS ###
+
 
 def beam(
     *tweaks: abjad.LilyPondTweakManager,
     direction: abjad.VerticalAlignment = None,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = "baca.tleaves()",
     start_beam: abjad.StartBeam = None,
     stop_beam: abjad.StopBeam = None,
-    tag: typing.Optional[str] = 'baca_beam',
-    ) -> SpannerIndicatorCommand:
+    tag: typing.Optional[str] = "baca_beam",
+) -> SpannerIndicatorCommand:
     r"""
     Attaches beam.
 
@@ -567,9 +555,7 @@ def beam(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    start_beam = start_beam or abjad.StartBeam(
-        direction=direction,
-        )
+    start_beam = start_beam or abjad.StartBeam(direction=direction)
     stop_beam = stop_beam or abjad.StopBeam()
     return SpannerIndicatorCommand(
         detach_first=True,
@@ -578,16 +564,17 @@ def beam(
         stop_indicator=stop_beam,
         tags=[tag],
         tweaks=tweaks,
-        )
+    )
+
 
 def ottava(
     start_ottava: abjad.Ottava = abjad.Ottava(n=1),
-    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot='after'),
+    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot="after"),
     *,
     right_broken: bool = None,
-    selector: typings.Selector = 'baca.tleaves()',
-    tag: typing.Optional[str] = 'baca_ottava',
-    ) -> SpannerIndicatorCommand:
+    selector: typings.Selector = "baca.tleaves()",
+    tag: typing.Optional[str] = "baca_ottava",
+) -> SpannerIndicatorCommand:
     r"""
     Attaches ottava indicators.
 
@@ -663,15 +650,16 @@ def ottava(
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
         tags=[tag],
-        )
+    )
+
 
 def ottava_bassa(
     start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
-    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot='after'),
+    stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot="after"),
     *,
-    selector: typings.Selector = 'baca.tleaves()',
-    tag: typing.Optional[str] = 'baca_ottava_bassa',
-    ) -> SpannerIndicatorCommand:
+    selector: typings.Selector = "baca.tleaves()",
+    tag: typing.Optional[str] = "baca_ottava_bassa",
+) -> SpannerIndicatorCommand:
     r"""
     Attaches ottava bassa indicators.
 
@@ -746,15 +734,16 @@ def ottava_bassa(
         start_indicator=start_ottava,
         stop_indicator=stop_ottava,
         tags=[tag],
-        )
+    )
+
 
 def slur(
     *tweaks: abjad.LilyPondTweakManager,
-    selector: typings.Selector = 'baca.tleaves()',
+    selector: typings.Selector = "baca.tleaves()",
     start_slur: abjad.StartSlur = None,
     stop_slur: abjad.StopSlur = None,
-    tag: typing.Optional[str] = 'baca_slur',
-    ) -> SpannerIndicatorCommand:
+    tag: typing.Optional[str] = "baca_slur",
+) -> SpannerIndicatorCommand:
     r"""
     Attaches slur.
 
@@ -906,15 +895,16 @@ def slur(
         stop_indicator=stop_slur,
         tags=[tag],
         tweaks=tweaks,
-        )
+    )
+
 
 def sustain_pedal(
     *,
-    selector: typings.Selector = 'baca.leaves()',
+    selector: typings.Selector = "baca.leaves()",
     start_piano_pedal: abjad.StartPianoPedal = None,
     stop_piano_pedal: abjad.StopPianoPedal = None,
-    tag: typing.Optional[str] = 'baca_sustain_pedal',
-    ) -> SpannerIndicatorCommand:
+    tag: typing.Optional[str] = "baca_sustain_pedal",
+) -> SpannerIndicatorCommand:
     r"""
     Attaches sustain pedal indicators.
 
@@ -1503,7 +1493,8 @@ def sustain_pedal(
         start_indicator=start_piano_pedal,
         stop_indicator=stop_piano_pedal,
         tags=[tag],
-        )
+    )
+
 
 def trill_spanner(
     argument: str = None,
@@ -1512,11 +1503,11 @@ def trill_spanner(
     left_broken: bool = None,
     map: typings.Selector = None,
     right_broken: bool = None,
-    selector: typings.Selector = 'baca.tleaves().rleak()',
+    selector: typings.Selector = "baca.tleaves().rleak()",
     start_trill_span: abjad.StartTrillSpan = None,
     stop_trill_span: abjad.StopTrillSpan = None,
-    tag: typing.Optional[str] = 'baca_trill_spanner',
-    ) -> SpannerIndicatorCommand:
+    tag: typing.Optional[str] = "baca_trill_spanner",
+) -> SpannerIndicatorCommand:
     r"""
     Attaches trill spanner indicators.
 
@@ -2086,8 +2077,8 @@ def trill_spanner(
     if argument is not None:
         prototype = (abjad.NamedPitch, abjad.NamedInterval, str)
         if not isinstance(argument, prototype):
-            message = f'trill spanner argument must be pitch, interval, str:'
-            message += f'\n   {argument}'
+            message = f"trill spanner argument must be pitch, interval, str:"
+            message += f"\n   {argument}"
             raise Exception(message)
     interval = pitch = None
     if argument is not None:
@@ -2101,12 +2092,10 @@ def trill_spanner(
     start_trill_span = start_trill_span or abjad.StartTrillSpan()
     if pitch is not None or interval is not None:
         start_trill_span = abjad.new(
-            start_trill_span,
-            interval=interval,
-            pitch=pitch,
-            )
+            start_trill_span, interval=interval, pitch=pitch
+        )
     if harmonic is True:
-        string = '#(lambda (grob) (grob-interpret-markup grob'
+        string = "#(lambda (grob) (grob-interpret-markup grob"
         string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'
         abjad.tweak(start_trill_span).TrillPitchHead.stencil = string
     stop_trill_span = stop_trill_span or abjad.StopTrillSpan()
@@ -2119,4 +2108,4 @@ def trill_spanner(
         stop_indicator=stop_trill_span,
         tags=[tag],
         tweaks=tweaks,
-        )
+    )
