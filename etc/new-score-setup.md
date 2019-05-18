@@ -12,11 +12,11 @@ Pull respositories
 
 2.  Test everything:
 
-    cdj; py.test -rf
+    (cdj .. !py.test -rf)
 
-    cdb; py.test -rf
+    (cdb .. ^^)
 
-    cdi; py.test -rf
+    (cdi .. ++)
         
 3.  Rebuild scores:
 

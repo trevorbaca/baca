@@ -1206,8 +1206,6 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
     r"""
     Skip rhythm-maker.
 
-    >>> import abjadext
-
     ..  container:: example
 
         Makes skips equal to the duration of input divisions.
@@ -1216,156 +1214,33 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
 
         >>> divisions = [(1, 4), (3, 16), (5, 8)]
         >>> selections = rhythm_maker(divisions)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     selections,
+        ...     divisions,
+        ...     )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff])
-            <BLANKLINE>
-            \context Staff = "Music_Staff" %! baca.SingleStaffScoreTemplate.__call__
-            {                              %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                \context Voice = "Music_Voice" %! baca.SingleStaffScoreTemplate.__call__
-                {                              %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                    % [Music_Voice measure 1] %! _comment_measure_numbers
-                    \override TextScript.font-size = #-2 %! baca_text_script_font_size:OverrideCommand(1)
-                    \override TextScript.staff-padding = #5 %! baca_script_staff_padding:OverrideCommand(1)
-                    \baca-unpitched-music-warning %! _color_unpitched_notes
-                    c'8.
-                    _ \markup {
-                        \fraction
-                            3
-                            16
-                        }
-            <BLANKLINE>
-                    \baca-unpitched-music-warning %! _color_unpitched_notes
-                    c'4
-                    _ \markup {
-                        \fraction
-                            4
-                            16
-                        }
-            <BLANKLINE>
-                    \baca-unpitched-music-warning %! _color_unpitched_notes
-                    c'16
-                    _ \markup {
-                        \fraction
-                            3
-                            16
-                        }
-                    ~
-            <BLANKLINE>
-                    % [Music_Voice measure 2] %! _comment_measure_numbers
-                    \baca-unpitched-music-warning %! _color_unpitched_notes
-                    c'8
-            <BLANKLINE>
-                    \baca-unpitched-music-warning %! _color_unpitched_notes
-                    c'4
-                    _ \markup {
-                        \fraction
-                            4
-                            16
-                        }
-            <BLANKLINE>
-                    \baca-unpitched-music-warning %! _color_unpitched_notes
-                    c'8
-                    _ \markup {
-                        \fraction
-                            2
-                            16
-                        }
-            <BLANKLINE>
-                    % [Music_Voice measure 3] %! _comment_measure_numbers
-                    r2
-                    _ \markup {
-                        \fraction
-                            8
-                            16
-                        }
-            <BLANKLINE>
-                    % [Music_Voice measure 4] %! _comment_measure_numbers
-                    \baca-unpitched-music-warning %! _color_unpitched_notes
-                    c'16
-                    _ \markup {
-                        \fraction
-                            1
-                            16
-                        }
-            <BLANKLINE>
-                    \baca-unpitched-music-warning %! _color_unpitched_notes
-                    c'4
-                    _ \markup {
-                        \fraction
-                            4
-                            16
-                        }
-            <BLANKLINE>
-                    \baca-unpitched-music-warning %! _color_unpitched_notes
-                    c'8.
-                    _ \markup {
-                        \fraction
-                            3
-                            16
-                        }
-            <BLANKLINE>
-                    % [Music_Voice measure 5] %! _comment_measure_numbers
-                    \baca-unpitched-music-warning %! _color_unpitched_notes
-                    c'4
-                    _ \markup {
-                        \fraction
-                            4
-                            16
-                        }
-            <BLANKLINE>
-                    \baca-unpitched-music-warning %! _color_unpitched_notes
-                    c'8.
-                    _ \markup {
-                        \fraction
-                            3
-                            16
-                        }
-                    [
-            <BLANKLINE>
-                    \baca-unpitched-music-warning %! _color_unpitched_notes
-                    c'16
-                    _ \markup {
-                        \fraction
-                            1
-                            16
-                        }
-                    ]
-                    \revert TextScript.font-size %! baca_text_script_font_size:OverrideCommand(2)
-                    \revert TextScript.staff-padding %! baca_script_staff_padding:OverrideCommand(2)
-            <BLANKLINE>
-                    << %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                        \context Voice = "Music_Voice" %! PHANTOM:_make_multimeasure_rest_container
-                        {                              %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                            % [Music_Voice measure 6] %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                            \baca-invisible-music %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                            c'1 * 1/4 %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                        } %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                        \context Voice = "Rest_Voice" %! PHANTOM:_make_multimeasure_rest_container
-                        {                             %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                            % [Rest_Voice measure 6] %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                            \once \override Score.TimeSignature.X-extent = ##f %! PHANTOM:_style_phantom_measures(6)
-                            \once \override MultiMeasureRest.transparent = ##t %! PHANTOM:_style_phantom_measures(7)
-                            \stopStaff                                          %! PHANTOM:_style_phantom_measures(8)
-                            \once \override Staff.StaffSymbol.transparent = ##t %! PHANTOM:_style_phantom_measures(8)
-                            \startStaff                                         %! PHANTOM:_style_phantom_measures(8)
-                            R1 * 1/4 %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                        } %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                    >> %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                } %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-            } %! baca.SingleStaffScoreTemplate.__call__
+            >>> abjad.f(lilypond_file[abjad.Score])
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 1/4
+                    s1 * 1/4
+                    \time 3/16
+                    s1 * 3/16
+                    \time 5/8
+                    s1 * 5/8
+                }
+                \new RhythmicStaff
+                {
+                    s1 * 1/4
+                    s1 * 3/16
+                    s1 * 5/8
+                }
+            >>
 
     Usage follows the two-step configure-once / call-repeatedly pattern shown
     here.
@@ -1443,163 +1318,40 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
             tuplets:
 
             >>> rhythm_maker = baca.SkipRhythmMaker(
-            ...     tuplet_specifier=abjadext.rmakers.TupletSpecifier(
+            ...     tuplet_specifier=rmakers.TupletSpecifier(
             ...         force_fraction=True,
             ...         ),
             ...     )
 
             >>> divisions = [(1, 4), (3, 16), (5, 8)]
             >>> selections = rhythm_maker(divisions)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     selections,
+            ...     divisions,
+            ...     )
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff])
-                <BLANKLINE>
-                \context Staff = "Music_Staff" %! baca.SingleStaffScoreTemplate.__call__
-                {                              %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                    \context Voice = "Music_Voice" %! baca.SingleStaffScoreTemplate.__call__
-                    {                              %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                        % [Music_Voice measure 1] %! _comment_measure_numbers
-                        \override TextScript.font-size = #-2 %! baca_text_script_font_size:OverrideCommand(1)
-                        \override TextScript.staff-padding = #5 %! baca_script_staff_padding:OverrideCommand(1)
-                        \baca-unpitched-music-warning %! _color_unpitched_notes
-                        c'8.
-                        _ \markup {
-                            \fraction
-                                3
-                                16
-                            }
-                <BLANKLINE>
-                        \baca-unpitched-music-warning %! _color_unpitched_notes
-                        c'4
-                        _ \markup {
-                            \fraction
-                                4
-                                16
-                            }
-                <BLANKLINE>
-                        \baca-unpitched-music-warning %! _color_unpitched_notes
-                        c'16
-                        _ \markup {
-                            \fraction
-                                3
-                                16
-                            }
-                        ~
-                <BLANKLINE>
-                        % [Music_Voice measure 2] %! _comment_measure_numbers
-                        \baca-unpitched-music-warning %! _color_unpitched_notes
-                        c'8
-                <BLANKLINE>
-                        \baca-unpitched-music-warning %! _color_unpitched_notes
-                        c'4
-                        _ \markup {
-                            \fraction
-                                4
-                                16
-                            }
-                <BLANKLINE>
-                        \baca-unpitched-music-warning %! _color_unpitched_notes
-                        c'8
-                        _ \markup {
-                            \fraction
-                                2
-                                16
-                            }
-                <BLANKLINE>
-                        % [Music_Voice measure 3] %! _comment_measure_numbers
-                        r2
-                        _ \markup {
-                            \fraction
-                                8
-                                16
-                            }
-                <BLANKLINE>
-                        % [Music_Voice measure 4] %! _comment_measure_numbers
-                        \baca-unpitched-music-warning %! _color_unpitched_notes
-                        c'16
-                        _ \markup {
-                            \fraction
-                                1
-                                16
-                            }
-                <BLANKLINE>
-                        \baca-unpitched-music-warning %! _color_unpitched_notes
-                        c'4
-                        _ \markup {
-                            \fraction
-                                4
-                                16
-                            }
-                <BLANKLINE>
-                        \baca-unpitched-music-warning %! _color_unpitched_notes
-                        c'8.
-                        _ \markup {
-                            \fraction
-                                3
-                                16
-                            }
-                <BLANKLINE>
-                        % [Music_Voice measure 5] %! _comment_measure_numbers
-                        \baca-unpitched-music-warning %! _color_unpitched_notes
-                        c'4
-                        _ \markup {
-                            \fraction
-                                4
-                                16
-                            }
-                <BLANKLINE>
-                        \baca-unpitched-music-warning %! _color_unpitched_notes
-                        c'8.
-                        _ \markup {
-                            \fraction
-                                3
-                                16
-                            }
-                        [
-                <BLANKLINE>
-                        \baca-unpitched-music-warning %! _color_unpitched_notes
-                        c'16
-                        _ \markup {
-                            \fraction
-                                1
-                                16
-                            }
-                        ]
-                        \revert TextScript.font-size %! baca_text_script_font_size:OverrideCommand(2)
-                        \revert TextScript.staff-padding %! baca_script_staff_padding:OverrideCommand(2)
-                <BLANKLINE>
-                        << %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                            \context Voice = "Music_Voice" %! PHANTOM:_make_multimeasure_rest_container
-                            {                              %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                % [Music_Voice measure 6] %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                                \baca-invisible-music %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                c'1 * 1/4 %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                            } %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                            \context Voice = "Rest_Voice" %! PHANTOM:_make_multimeasure_rest_container
-                            {                             %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                % [Rest_Voice measure 6] %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                                \once \override Score.TimeSignature.X-extent = ##f %! PHANTOM:_style_phantom_measures(6)
-                                \once \override MultiMeasureRest.transparent = ##t %! PHANTOM:_style_phantom_measures(7)
-                                \stopStaff                                          %! PHANTOM:_style_phantom_measures(8)
-                                \once \override Staff.StaffSymbol.transparent = ##t %! PHANTOM:_style_phantom_measures(8)
-                                \startStaff                                         %! PHANTOM:_style_phantom_measures(8)
-                                R1 * 1/4 %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                            } %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                        >> %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                    } %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                } %! baca.SingleStaffScoreTemplate.__call__
+                >>> abjad.f(lilypond_file[abjad.Score])
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 1/4
+                        s1 * 1/4
+                        \time 3/16
+                        s1 * 3/16
+                        \time 5/8
+                        s1 * 5/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        s1 * 1/4
+                        s1 * 3/16
+                        s1 * 5/8
+                    }
+                >>
 
         Returns tuplet specifier or none.
         """

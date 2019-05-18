@@ -2908,6 +2908,8 @@ class Constellation(object):
             ...     -21, -20, -19, -18, -15, -11,
             ...     ]
             >>> pitch_set = baca.Sequence(items=pitch_numbers)
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation = constellation_circuit[0]
             >>> pitch_set in constellation
             True
@@ -2928,6 +2930,8 @@ class Constellation(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation = constellation_circuit[0]
             >>> constellation[0]
             Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
@@ -2942,6 +2946,8 @@ class Constellation(object):
 
         ..  container::
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation = constellation_circuit[0]
             >>> len(constellation)
             180
@@ -2956,6 +2962,8 @@ class Constellation(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation = constellation_circuit[0]
             >>> constellation
             Constellation(180)
@@ -3061,6 +3069,8 @@ class Constellation(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation = constellation_circuit[0]
             >>> constellation.constellation_number
             1
@@ -3076,6 +3086,8 @@ class Constellation(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation = constellation_circuit[0]
             >>> abjad.show(constellation.generator_chord, strict=89) # doctest: +SKIP
 
@@ -3098,6 +3110,8 @@ class Constellation(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> for constellation in constellation_circuit:
             ...     constellation.partitioned_generator_pitch_numbers
             [[-12, -10, 4], [-2, 8, 11, 17], [19, 27, 30, 33, 37]]
@@ -3120,6 +3134,8 @@ class Constellation(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation = constellation_circuit[0]
             >>> constellation.pitch_range
             PitchRange('[A0, C8]')
@@ -3134,6 +3150,8 @@ class Constellation(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation = constellation_circuit[0]
             >>> abjad.show(constellation.pivot_chord, strict=89) # doctest: +SKIP
 
@@ -3211,6 +3229,8 @@ class Constellation(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation = constellation_circuit[0]
             >>> constellation.get_chord(1)
             Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
@@ -3227,6 +3247,8 @@ class Constellation(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation = constellation_circuit[0]
             >>> chord = constellation.get_chord(17)
             >>> constellation.get_number_of_chord(chord)
@@ -3344,6 +3366,8 @@ class ConstellationCircuit(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation_circuit[-1]
             Constellation(108)
 
@@ -3357,6 +3381,8 @@ class ConstellationCircuit(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> len(constellation_circuit)
             8
 
@@ -3369,6 +3395,8 @@ class ConstellationCircuit(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation_circuit
             ConstellationCircuit(8)
 
@@ -3432,6 +3460,8 @@ class ConstellationCircuit(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> for chord in constellation_circuit.generator_chords:
             ...     chord
             Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
@@ -3457,6 +3487,8 @@ class ConstellationCircuit(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation_circuit.pitch_range
             PitchRange('[A0, C8]')
 
@@ -3471,6 +3503,8 @@ class ConstellationCircuit(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> for chord in constellation_circuit.pivot_chords:
             ...     chord
             ...
@@ -3498,11 +3532,15 @@ class ConstellationCircuit(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation_circuit.get(8)
             Constellation(108)
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation_circuit.get(8, 108)
             Sequence([-12, 17, 23, 26, 27, 31, 34, 37, 40, 42, 44, 45])
 
@@ -3524,6 +3562,8 @@ class ConstellationCircuit(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords()
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -3580,6 +3620,8 @@ class ConstellationCircuit(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords_and_pivot_chords()
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -3654,6 +3696,8 @@ class ConstellationCircuit(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> lilypond_file = constellation_circuit.illustrate_generator_chords()
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -3710,6 +3754,8 @@ class ConstellationCircuit(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> lilypond_file = constellation_circuit.illustrate_generator_chords_and_pivot_chords()
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -3784,6 +3830,8 @@ class ConstellationCircuit(object):
 
         ..  container:: example
 
+            >>> class_ = baca.ConstellationCircuit
+            >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> lilypond_file = constellation_circuit.illustrate_pivot_chords()
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 

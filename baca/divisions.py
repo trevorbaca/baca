@@ -1566,6 +1566,7 @@ class DivisionMaker(object):
             ...     durations=[(1, 4)],
             ...     )
 
+            >>> input_divisions = [(7, 8), (7, 8), (7, 16)]
             >>> time_signatures = [(7, 8), (7, 8), (7, 16)]
             >>> division_lists = division_maker(time_signatures)
             >>> for division_list in division_lists:

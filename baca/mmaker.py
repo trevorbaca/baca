@@ -7640,7 +7640,7 @@ class MusicMaker(object):
             >>> contribution = music_maker('Voice_1', collections)
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.override(staff).stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -7711,7 +7711,7 @@ class MusicMaker(object):
             >>> contribution = music_maker('Voice_1', collections)
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.override(staff).stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -7788,7 +7788,7 @@ class MusicMaker(object):
             >>> contribution = music_maker('Voice_1', collections)
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.override(staff).stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -7865,7 +7865,7 @@ class MusicMaker(object):
             >>> contribution = music_maker('Voice_1', collections)
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.override(staff).stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -11879,7 +11879,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
-            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.override(staff).stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -11976,7 +11976,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
-            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.override(staff).stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -12070,7 +12070,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
-            >>> abjad.override(staff).stem.direction = Down
+            >>> abjad.override(staff).stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
