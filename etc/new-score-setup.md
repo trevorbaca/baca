@@ -14,15 +14,18 @@ Pull respositories
 
     (cdj .. !py.test -rf)
 
-    (cdb .. ^^)
+    (cdb .. !py.test -rf)
 
-    (cdi .. ++)
+    (cdi .. !py.test -rf)
         
 3.  Rebuild scores:
 
-    ss
-    >> gg ipn
-    >> gg ipn
+    (ss)
+
+    (>> gg ipn)
+
+    (>> gg ipn)
+
     ...
 
 4.  Rebuild docs:
@@ -50,17 +53,20 @@ Apply software updates
 
 6.  Test everything:
 
-    cdj; py.test -rf
+    (cdj .. !py.test -rf)
 
-    cdb; py.test -rf
+    (cdb .. !py.test -rf)
 
-    cdi; py.test -rf
+    (cdi .. !py.test -rf)
 
 7.  Rebuild scores:
 
-    ss
-    >> gg ipn
-    >> gg ipn
+    (ss)
+
+    (>> gg ipn)
+
+    (>> gg ipn)
+
     ...
 
 8.  Rebuild docs:
@@ -88,9 +94,11 @@ Package unpushed trevor/dev commits
 
     pip install --upgrade pip
 
-12. Update Sphinx:
+12. Update Sphinx and Sphinx's RTD theme:
 
     pip install --upgrade sphinx
+
+    pip install --upgrade sphinx-rtd-theme
 
 13. Update Abjad:
 
@@ -120,13 +128,16 @@ Package unpushed trevor/dev commits
 
     git pull
 
-    py.test -rf; apib.
+    py.test -rf; apib; git st
 
 16. Rebuild scores:
 
-    ss
-    >> gg ipn
-    >> gg ipn
+    (ss)
+
+    (>> gg ipn)
+
+    (>> gg ipn)
+
     ...
 
 17. Rebuild docs:
@@ -576,17 +587,20 @@ Make new score package
 
 44. Test everything:
 
-    cdj; py.test -rf
+    (cdj .. !py.test -rf)
 
-    cdb; py.test -rf
+    (cdb .. !py.test -rf)
 
-    cdi; py.test -rf
+    (cdi .. !py.test -rf)
 
 45. Rebuild scores:
 
-    ss
-    >> gg ipn
-    >> gg ipn
+    (ss)
+
+    (>> gg ipn)
+
+    (>> gg ipn)
+
     ...
 
 46. Rebuild docs:
