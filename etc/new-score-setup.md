@@ -377,59 +377,49 @@ Make new score package
 
 36. Set up stylesheets directory:
 
+    (yy)
+
     Leave IDE-generated nonfirst-segment.ily as is.
 
-    Get existing contexts.ily.
+    Remove IDE-generated contexts.ily and get existing contexts.ily.
 
-    (yy get [score] contexts.ily)
+        (yy rm contexts.ily remove)
+        
+        (yy get [score] contexts.ily)
 
-    Edit contexts.ily by hand.
+        Edit contexts.ily by hand.
 
-    Define global contexts.
-    
-    Define score contexts in score order.
+            Define global contexts.
+            
+            Define score contexts in score order.
 
-    (No method exists to check LilyPond stylesheet edits.)
+            (No method exists to check LilyPond stylesheet edits.)
 
-    (Eventually create much of contexts.ily from ScoreTemplate.py.)
+            (Eventually check against ScoreTemplate.py programmatically.)
 
     Remove IDE-generated stylesheet.ily and get existing stylesheet.
 
-    (yy rm stylesheet.ily)
+        (yy rm stylesheet.ily remove)
 
-    (yy get [score] stylesheet.ily).
+        (yy get [score] stylesheet.ily).
 
-    Edit stylesheet.ily by hand.
+        Edit stylesheet.ily by hand.
 
-    Remove IDE-generated parts.ily.
-
-    (yy rm parts.ily)
-
-    (Eventually teach IDE more about part production.)
-
-    (ci "Added stylesheets.")
+    (ci "Added contexts and stylesheets.")
 
 37. Get existing instruments:
 
-    (mm)
+    (mm get [score] instruments y)
 
-    (!trash __init__.py)
+    Check materials __init__.py.
 
-    ([source score] mm !cp __init__.py ~/Desktop)
-    
-    ([target score] mm !mv ~/Desktop/__init__.py .)
-
-    Edit materials __init__.py by hand.
-
-    (mm get [score] instruments)
+        from .instruments.definition import instruments
 
     Edit materials/instruments/definition.py by hand.
 
-    Define instruments in score order.
+        Define instruments in score order.
 
     (dpc)
-
-    Add instruments to materials/__init__.py by hand.
 
     (ci "Added instruments.")
 
