@@ -41,15 +41,15 @@ Pull respositories
 Apply software updates
 ----------------------
 
-5.  Update LilyPond, TeXShop, macOS:
-
-    lilypond.org > Unstable release.
-
-    TeXShop > Check for updates.
+5.  Update macOS, LilyPond, TeXShop:
 
     Apple menu > App Store ... > Updates.
 
-    Sanity-check LilyPond with \new Staff { c'4 }.
+    lilypond.org > Unstable release.
+
+        Sanity-check LilyPond with \new Staff { c'4 }.
+
+    TeXShop > Check for updates.
 
 6.  Test everything:
 
@@ -171,11 +171,11 @@ Make new score package
 
     metadata = abjad.OrderedDict(
         [
-            ('catalog_number', 'AWN-019'),
+            ('catalog_number', 'AWN-020'),
             ('composer', 'Bača'),
-            ('forces_tagline', 'for narrator \& string quartet'),
-            ('title', 'Stirrings Still'),
-            ('year', 2017),
+            ('forces_tagline', 'for narrator \& nine players'),
+            ('title', '(HARMONY)'),
+            ('year', 2019),
             ]
         )
 
@@ -189,7 +189,7 @@ Make new score package
 
     Name the repository.
 
-    Add description: "Stirrings Still (2018) for narrator and string quartet."
+    Add description: "(HARMONY) (2019) for narrator and nine players."
 
     Make repository public.
 
@@ -203,7 +203,7 @@ Make new score package
 
 22. Initialize IDE-created directory as GitHub repository:
 
-    cd ~/Scores/stirrings_still
+    cd ~/Scores/harmony
 
     git init
 
@@ -211,7 +211,7 @@ Make new score package
     
     git commit
 
-    git remote add origin https://github.com/trevorbaca/stirrings_still.git
+    git remote add origin https://github.com/trevorbaca/harmony.git
 
     git push -u origin master
 
@@ -241,13 +241,23 @@ Make new score package
 
         Edit README.md by hand.
 
-    Check IDE-generated wrapper files by hand:
+    Check IDE-generated wrapper files by hand.
 
         No requirements.txt file is necessary.
 
         No setup.cfg file is necessary.
 
         Check setup.py in comparison to existing score package.
+
+    Check package wellformedness.
+
+        (^^)
+
+        cd ~
+
+        bkr Scores/harmony
+
+        mypy --ignore-missing-imports Scores/harmony
 
     (ci "Configured wrapper directory.")
 
@@ -261,6 +271,16 @@ Make new score package
 
     oo __init__.py
 
+    Check package wellformedness.
+
+        (^^)
+
+        cd ~
+
+        bkr Scores/harmony
+
+        mypy --ignore-missing-imports Scores/harmony
+
     (ci "Configured package initializers.")
 
 25. Remove IDE-generated segment-maker:
@@ -273,7 +293,7 @@ Make new score package
 
     (ww)
 
-    (!mypy stirrings_still)
+    (!mypy harmony)
 
 27. Configure score for continuous integration:
 
@@ -315,11 +335,11 @@ Make new score package
 
 30. Add score to ~/.profile:
 
-    export STIRRINGS_STILL=$SCORES/stirrings_still
-    alias stix="clear; cd $STIRRINGS_STILL/stirrings_still"
+    export harmony=$SCORES/harmony
+    alias stix="clear; cd $harmony/harmony"
     alias sti="stix; start-abjad-ide sti"
 
-    export PYTHONPATH=$STIRRINGS_STILL:$PYTHONPATH
+    export PYTHONPATH=$harmony:$PYTHONPATH
 
     Quit and restart terminal.
 
@@ -331,7 +351,7 @@ Make new score package
 
     (ci)
     
-    "Taught Travis restart scripts about Stirrings Still."
+    "Taught Travis restart scripts about (HARMONY)."
 
 32. Add repository to clone scores script:
     
@@ -339,7 +359,7 @@ Make new score package
 
     cdm
 
-    ci "Taught score clone scripts about Stirrings Still."
+    ci "Taught score clone scripts about (HARMONY)."
 
 33. Add test submodule:
 
@@ -415,167 +435,355 @@ Make new score package
 
         from .instruments.definition import instruments
 
+    Check contents __init__.py.
+
+        from harmony.materials.instruments.definition import instruments
+
     Edit materials/instruments/definition.py by hand.
 
         Define instruments in score order.
 
     (dpc)
 
+    Check package wellformedness.
+
+        (^^)
+
+        cd ~
+
+        bkr Scores/harmony
+
+        mypy --ignore-missing-imports Scores/harmony
+
     (ci "Added instruments.")
 
-38. Remove IDE-generated ScoreTemplate.py:
+38. Get existing margin markups:
 
-    (oo rm ScoreTemplate.py)
+    (mm get [score] margin_markups y)
 
-    Remove IDE-generated SegmentMaker.py.
+    Check margin_markups __init__.py.
 
-    (oo rm SegmentMaker.py)
+        from .margin_markups.definition import margin_markups
+
+    Check contents __init__.py.
+
+        from harmony.materials.margin_markups.definition import margin_markups
+
+    Edit materials/margin_markups/definition.py by hand.
+
+        Define margin markups in score order.
+
+        (dpc)
+
+    Define LilyPond margin markups.
+
+        (yy markups.ily)
+
+        Define margin markups in score order.
+
+    Get existing margin_markup() function.
+
+        (oo get [score] margin_markup.py y)
+
+        Edit tools/margin_markup.py by hand.
+
+        Edit tools/__init__.py by hand.
+
+            from .margin_markup import margin_markup
+
+    Check package wellformedness.
+
+        (^^)
+
+        cd ~
+
+        bkr Scores/harmony
+
+        mypy --ignore-missing-imports Scores/harmony
+
+    (ci "Added margin markups.")
+
+39. Remove IDE-generated ScoreTemplate.py:
+
+        (oo rm ScoreTemplate.py)
+
+    (Check to make sure IDE-generated SegmentMaker.py already removed.)
 
     Get existing ScoreTemplate.py.
 
-    (oo get [score] ScoreTemplate.py)
+        (oo get [score] ScoreTemplate.py)
 
     Edit ScoreTemplate.py by hand.
 
-    Replace existing package name with new package name.
+        Replace existing package name with new package name.
 
-    Define instruments in score order.
+        Define parts in score order.
 
-    Make only one master score template per score.
+        Make only one master score template per score.
 
-    (^^)
+        (^^)
 
-    (!apis)
+        (!apis)
 
-    Visually inspect scores API.
+        Visually inspect scores API to make sure score template appears.
+
+    Check package wellformedness.
+
+        (^^)
+
+        cd ~
+
+        bkr Scores/harmony
+
+        mypy --ignore-missing-imports Scores/harmony
 
     (ci "Added score template.")
 
     (cdsx; git add .; git commit "Rebuilt API.")
 
-39. Get existing metronome marks:
+40. Get existing metronome marks:
 
-    (mm get [score] metronome_marks)
+        (mm get [score] metronome_marks)
 
     Edit metronome_marks/definition.py by hand.
 
-    Define metronome marks alphabetically by metronome mark name.
+        Define metronome marks alphabetically by metronome mark name.
 
-    Edit materials/__init__.py by hand.
+        Edit materials/__init__.py by hand.
 
-    (dpc)
+        (dpc)
+
+    Check contents __init__.py.
+
+        from harmony.materials.metronome_marks.definition import metronome_marks
+
+    Check package wellformedness.
+
+        (^^)
+
+        cd ~
+
+        bkr Scores/harmony
+
+        mypy --ignore-missing-imports Scores/harmony
 
     (ci "Added metronome marks.")
 
-40. Get existing time signatures (if time-signature-oriented):
+41. Get existing time signatures (if time-signature-oriented):
 
-    (mm get [score] time_signatures) 
+        (mm get [score] time_signatures) 
 
     Edit time_signatures/definition.py by hand.
 
-    Edit materials/__init__.py by hand.
+        Edit materials/__init__.py by hand.
 
-    (dpc)
+        (dpc)
+
+    Check contents __init__.py.
+
+        from harmony.materials.time_signatures.definition import time_signatures
+
+    Check package wellformedness.
+
+        (^^)
+
+        cd ~
+
+        bkr Scores/harmony
+
+        mypy --ignore-missing-imports Scores/harmony
 
     (ci "Added time signatures.")
 
-41. Define stub version of first segment:
+42. Define stub version of first segment:
 
-    (gg new A)
+    Make package:
 
-    (A rm definition.py get [score] definition.py)
+        (gg new A)
 
-    Edit A/definition.py by hand.
+        (A rm definition.py remove)
+        
+        (A get [score] definition.py)
 
-    Define figure infrastructure if figure-oriented.
+        Edit A/definition.py by hand.
 
-    Define segment-maker.
+            Define figure infrastructure if figure-oriented.
 
-    Define no music if time-signature-oriented.
+            Define segment-maker.
 
-    Define one figure if figure-oriented.
+            Define no music if time-signature-oriented.
+
+            Define one figure if figure-oriented.
+
+            Set start markup and margin markup for each part.
+
+    Define stub layout of first segment:
+
+        (A rm layout.py remove)
+
+        (A get [score] layout.py)
+
+        Edit A/layout.py by hand.
 
     Render PDF (ipn).
 
-    Check title typography.
+        Check (ipn) messaging for metadata handling.
 
-    Check instrument names.
+        Check (le) for LilyPond warnings.
+
+        Check title typography.
+
+        Check instrument names.
+        
+        Check short instrument names.
+
+        Check start instrument markup.
+
+        Check margin markup.
+
+    Check package wellformedness.
+
+        (^^)
+
+        cd ~
+
+        bkr Scores/harmony
+
+        mypy --ignore-missing-imports Scores/harmony
+
+    (ci "A.")
     
-    Check short instrument names.
+43. Define stub version of second segment:
 
-    Check (ipn) messaging for metadata handling.
+    Make package:
 
-    Check (le) for LilyPond warnings.
-    
-42. Define stub version of second segment:
+        (gg new B)
 
-    (gg new B)
+        (B rm definition.py get [score] definition.py)
 
-    (B rm definition.py get [score] definition.py)
+    Edit definition.py by hand:
 
-    Edit definition.py by hand.
+        Define segment-maker.
 
-    Define segment-maker.
+        Supply time signatures for two (or more) pages of music.
 
-    Supply time signatures for two (or more) pages of music.
-
-    This will allow stylesheet footer-checking when stub score is built.
+        This allows stylesheet footer-checking when stub score is built.
 
     Render PDF.
 
-    Footers will not appear in the output PDF.
+        Footers will not appear in the output PDF.
 
-    But footers will appear when stub score is built.
+        But footers will appear when stub score is built.
 
-    Check short instrument names.
+        Check short instrument names.
 
-    Check (ipn) messaging for metadata handling.
+        Check (ipn) messaging for metadata handling.
 
-    Check (lp) for LilyPond warnings.
+        Check (lp) for LilyPond warnings.
 
-    (ci "Segments A, B.")
+    Check package wellformedness.
 
-43. Build stub version of score if ensemble piece:
+        (^^)
 
-    (bb new ledger) 
+        cd ~
 
-    (ledger)
+        bkr Scores/harmony
+
+        mypy --ignore-missing-imports Scores/harmony
+
+    (ci "A, B.")
+
+44. Build stub version of score if ensemble piece:
+
+    (bb new score ledger-score ledger) 
+
+    ($89 / \\euro 89)
+    
+    (LED y)
+
+    (ledger-score)
 
     (lyc* mg)
 
-    Get existing front cover.
+    Make front cover:
 
-    (rm front-cover.tex get [score] front-cover.tex)
+        (rm front-cover.tex get [score] front-cover.tex)
 
-    Check front-cover.tex by hand.
+        (fcte)
 
-    (fci)
+        (fcti)
 
-    Check preface.tex by hand.
+    Make preface:
 
-    (pi)
+        (rm preface.tex get [score] preface.tex)
 
-    Check stylesheet.ily by hand.
+        (pfte)
 
-    Check music.ly by hand.
+        (pfti)
 
-    (mi)
+    Make layout.ly:
 
-    Check back-cover.tex by hand.
+        (rm layout.py remove)
 
-    (bci)
+        (get [score] layout.py)
 
-    Check score.tex by hand.
+        (lpe)
 
-    (si)
+        (llm)
 
-    Check footers on pages two and greater.
+    Make music.pdf:
+
+        Check stylesheet.ily by hand:
+
+            (sty)
+
+        Check music.ly by hand:
+
+            (mle)
+
+        Interpret music.ly:
+
+            (mli)
+
+    Make back-cover.pdf:
+
+        (rm back-cover.tex)
+
+        (get [score] back-cover.tex)
+
+        (bcte)
+
+        (bcti)
+
+    Make blank.pdf:
+
+        (get [score] blank.tex)
+        
+        (blank.tex)
+
+        (!xpdf blank.tex)
+
+    Make score.pdf and insert blank pages:
+
+        (ste)
+
+        (sti)
+
+        Check footers on pages two and greater.
+
+    Check package wellformedness.
+
+        (^^)
+
+        cd ~
+
+        bkr Scores/harmony
+
+        mypy --ignore-missing-imports Scores/harmony
     
-    TODO: Teach IDE more about builds.
-
     (cc ^^ ++ ci "Added ledger build.")
 
-44. Test everything:
+45. Test everything:
 
     (cdj .. !py.test -rf)
 
@@ -583,7 +791,7 @@ Make new score package
 
     (cdi .. !py.test -rf)
 
-45. Rebuild scores:
+46. Rebuild scores:
 
     (ss)
 
@@ -593,7 +801,7 @@ Make new score package
 
     ...
 
-46. Rebuild docs:
+47. Rebuild docs:
 
     apim
 
@@ -603,6 +811,6 @@ Make new score package
 
     apis
 
-47. Commit changes to this document:
+48. Commit changes to this document:
 
     (ci "Updated new score setup instructions.")
