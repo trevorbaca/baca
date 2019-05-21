@@ -2460,7 +2460,7 @@ def make_single_attack(
     numerator, denominator = duration.pair
     rhythm_maker = rmakers.IncisedRhythmMaker(
         incise_specifier=rmakers.InciseSpecifier(
-            fill_with_notes=False,
+            fill_with_rests=True,
             outer_divisions_only=True,
             prefix_talea=[numerator],
             prefix_counts=[1],
