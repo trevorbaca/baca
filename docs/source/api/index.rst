@@ -649,6 +649,7 @@ Override library.
    ~baca.overrides.dots_extra_offset
    ~baca.overrides.dots_stencil_false
    ~baca.overrides.dots_transparent
+   ~baca.overrides.dynamic_text_color
    ~baca.overrides.dynamic_text_extra_offset
    ~baca.overrides.dynamic_text_parent_alignment_x
    ~baca.overrides.dynamic_text_self_alignment_x

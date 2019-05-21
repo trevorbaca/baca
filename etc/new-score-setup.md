@@ -43,6 +43,8 @@ Apply software updates
 
 5.  Update macOS, LilyPond, TeXShop:
 
+    Apple menu > System Preferences ... > Software Update
+
     Apple menu > App Store ... > Updates.
 
     lilypond.org > Unstable release.

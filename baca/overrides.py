@@ -1732,6 +1732,24 @@ def dots_transparent(
     )
 
 
+def dynamic_text_color(
+    color: str = "red",
+    *,
+    selector: typings.Selector = "baca.pleaf(0)",
+    tag: typing.Optional[str] = "baca_dynamic_text_color",
+) -> OverrideCommand:
+    """
+    Overrides dynamic text color.
+    """
+    return OverrideCommand(
+        attribute="color",
+        value=color,
+        grob="dynamic_text",
+        selector=selector,
+        tags=[tag],
+    )
+
+
 def dynamic_text_extra_offset(
     pair: typings.NumberPair,
     *,

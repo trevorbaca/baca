@@ -167,6 +167,7 @@ overrides
    ~dots_extra_offset
    ~dots_stencil_false
    ~dots_transparent
+   ~dynamic_text_color
    ~dynamic_text_extra_offset
    ~dynamic_text_parent_alignment_x
    ~dynamic_text_self_alignment_x
@@ -318,6 +319,8 @@ overrides
 .. autofunction:: dots_stencil_false
 
 .. autofunction:: dots_transparent
+
+.. autofunction:: dynamic_text_color
 
 .. autofunction:: dynamic_text_extra_offset
 
