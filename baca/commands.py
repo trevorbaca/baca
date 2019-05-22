@@ -5509,6 +5509,152 @@ def instrument(
     )
 
 
+def invisible_music(
+    *,
+    selector: typings.Selector = "baca.leaf(0)",
+    tag: typing.Optional[str] = "baca_invisible_music",
+) -> IndicatorCommand:
+    r"""
+    Attaches ``\baca-invisible-music`` literal.
+
+    ..  container:: example
+
+        Attaches ``\baca-invisible-music`` literal to middle leaves:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'Music_Voice',
+        ...     baca.invisible_music(
+        ...         selector=baca.leaves()[1:-1],
+        ...         ),
+        ...     baca.make_notes(),
+        ...     baca.pitch('C5'),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                        % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
+                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
+                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
+                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
+                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+            <BLANKLINE>
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            c''2                                                                     %! baca_make_notes
+            <BLANKLINE>
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
+                            \baca-invisible-music                                                    %! baca_invisible_music:IndicatorCommand
+                            c''4.                                                                    %! baca_make_notes
+            <BLANKLINE>
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
+                            \baca-invisible-music                                                    %! baca_invisible_music:IndicatorCommand
+                            c''2                                                                     %! baca_make_notes
+            <BLANKLINE>
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
+                            c''4.                                                                    %! baca_make_notes
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice"                                       %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice measure 5]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice"                                        %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice measure 5]                                         %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+
+    """
+    return IndicatorCommand(
+        indicators=[abjad.LilyPondLiteral(r"\baca-invisible-music")],
+        selector=selector,
+        tags=[tag],
+    )
+
+
 def label(
     expression: abjad.Expression,
     *,

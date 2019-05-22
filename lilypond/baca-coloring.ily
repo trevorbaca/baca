@@ -82,6 +82,7 @@ baca-invisible-music = #(
     \once \override MultiMeasureRest.transparent = ##t
     \once \override NoteHead.no-ledgers = ##t
     \once \override NoteHead.transparent = ##t
+    \once \override Stem.transparent = ##t
     $music
     #}
     )

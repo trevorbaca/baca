@@ -186,6 +186,7 @@ Bača API
    ~baca.commands.glissando
    ~baca.commands.global_fermata
    ~baca.commands.instrument
+   ~baca.commands.invisible_music
    ~baca.commands.label
    ~baca.commands.markup
    ~baca.commands.metronome_mark

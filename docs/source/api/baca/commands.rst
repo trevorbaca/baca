@@ -1225,6 +1225,7 @@ commands
    ~glissando
    ~global_fermata
    ~instrument
+   ~invisible_music
    ~label
    ~markup
    ~metronome_mark
@@ -1268,6 +1269,8 @@ commands
 .. autofunction:: global_fermata
 
 .. autofunction:: instrument
+
+.. autofunction:: invisible_music
 
 .. autofunction:: label
 
