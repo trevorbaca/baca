@@ -833,7 +833,6 @@ class PersistentIndicatorTests(object):
                 <BLANKLINE>
                 >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
-        Returns none.
         """
         pass
 

@@ -4098,11 +4098,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                 >>                                                                                       %! baca.StringTrioScoreTemplate.__call__
 
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
         """
         return self._color_octaves
 

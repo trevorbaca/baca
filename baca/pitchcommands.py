@@ -830,11 +830,9 @@ class ClusterCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def _call(self, argument=None):
+    def _call(self, argument=None) -> None:
         """
         Calls command on ``argument``.
-
-        Returns none.
         """
         if argument is None:
             return
@@ -890,7 +888,7 @@ class ClusterCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def hide_flat_markup(self):
+    def hide_flat_markup(self) -> typing.Optional[bool]:
         r"""
         Is true when cluster hides flat markup.
 
@@ -1058,14 +1056,11 @@ class ClusterCommand(scoping.Command):
                 <BLANKLINE>
                 >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
-        Set to true, false or none.
-
-        Returns true, false or none.
         """
         return self._hide_flat_markup
 
     @property
-    def selector(self):
+    def selector(self) -> abjad.Expression:
         """
         Selects PLTs.
 
@@ -1074,12 +1069,11 @@ class ClusterCommand(scoping.Command):
             >>> baca.clusters([3, 4]).selector
             baca.plts(exclude='HIDDEN')
 
-        Returns selector.
         """
         return self._selector
 
     @property
-    def start_pitch(self):
+    def start_pitch(self) -> typing.Optional[abjad.NamedPitch]:
         r"""
         Gets start pitch.
 
@@ -1442,14 +1436,11 @@ class ClusterCommand(scoping.Command):
                 <BLANKLINE>
                 >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
-        Set to named pitch or none.
-
-        Returns named pitch or none.
         """
         return self._start_pitch
 
     @property
-    def widths(self):
+    def widths(self) -> typing.Optional[typing.Sequence[int]]:
         r"""
         Gets widths.
 
@@ -1934,10 +1925,6 @@ class ClusterCommand(scoping.Command):
         Inteprets positive integers as widths in thirds.
 
         Interprets zero to mean input note or chord is left unchanged.
-
-        Set to nonnegative integers or none.
-
-        Returns nonnegative integers or none.
         """
         return self._widths
 
@@ -2123,11 +2110,9 @@ class ColorFingeringCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def _call(self, argument=None):
+    def _call(self, argument=None) -> None:
         """
         Calls command on ``argument``.
-
-        Returns none.
         """
         if argument is None:
             return
@@ -2225,11 +2210,9 @@ class DiatonicClusterCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def _call(self, argument=None):
+    def _call(self, argument=None) -> None:
         """
         Calls command on ``argument``.
-
-        Returns none.
         """
         if argument is None:
             return
@@ -2245,8 +2228,8 @@ class DiatonicClusterCommand(scoping.Command):
             numbers = range(start, start + width)
             module = abjad.pitch.constants
             change = module._diatonic_pc_number_to_pitch_class_number
-            numbers = [(12 * (x // 7)) + change[x % 7] for x in numbers]
-            pitches = [abjad.NamedPitch(_) for _ in numbers]
+            numbers_ = [(12 * (x // 7)) + change[x % 7] for x in numbers]
+            pitches = [abjad.NamedPitch(_) for _ in numbers_]
             for pleaf in plt:
                 chord = abjad.Chord(pleaf)
                 chord.note_heads[:] = pitches
@@ -2269,15 +2252,9 @@ class DiatonicClusterCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def widths(self):
+    def widths(self) -> typing.Optional[typing.Sequence[int]]:
         """
         Gets widths.
-
-        Defaults to none.
-
-        Set to positive integers or none.
-
-        Returns positive integers or none.
         """
         return self._widths
 
@@ -2361,11 +2338,9 @@ class Loop(abjad.CyclicTuple):
 
     ### SPECIAL METHODS ###
 
-    def __getitem__(self, i):
+    def __getitem__(self, i) -> abjad.Pitch:
         """
         Gets pitch ``i`` cyclically with intervals.
-
-        Returns pitch.
         """
         if isinstance(i, slice):
             raise NotImplementedError
@@ -2374,8 +2349,8 @@ class Loop(abjad.CyclicTuple):
             transposition = 0
         else:
             transposition = sum(self.intervals[:iteration])
-        pitch = abjad.CyclicTuple(self)[i]
-        pitch = type(pitch)(pitch.number + transposition)
+        pitch_ = abjad.CyclicTuple(list(self))[i]
+        pitch = type(pitch_)(pitch_.number + transposition)
         return pitch
 
     ### PRIVATE METHODS ###
@@ -2590,11 +2565,9 @@ class MicrotoneDeviationCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def _call(self, argument=None):
+    def _call(self, argument=None) -> None:
         """
         Cyclically applies deviations to plts in ``argument``.
-
-        Returns none.
         """
         if argument is None:
             return
@@ -2623,7 +2596,7 @@ class MicrotoneDeviationCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def deviations(self):
+    def deviations(self) -> typing.Optional[abjad.CyclicTuple]:
         """
         Gets deviations.
 
@@ -2634,8 +2607,6 @@ class MicrotoneDeviationCommand(scoping.Command):
             CyclicTuple([0, -0.5, 0, 0.5])
 
         Set to iterable of items (each -0.5, 0 or 0.5).
-
-        Returns cyclic tuple or none.
         """
         return self._deviations
 
@@ -2828,11 +2799,9 @@ class OctaveDisplacementCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def _call(self, argument=None):
+    def _call(self, argument=None) -> None:
         """
         Calls command on ``argument``.
-
-        Returns none.
         """
         if argument is None:
             return
@@ -2865,7 +2834,7 @@ class OctaveDisplacementCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def displacements(self):
+    def displacements(self) -> typing.Optional[abjad.CyclicTuple]:
         """
         Gets displacements.
 
@@ -2877,11 +2846,6 @@ class OctaveDisplacementCommand(scoping.Command):
             >>> command.displacements
             CyclicTuple([0, 0, 0, 1, 1, 0, 0, 0, -1, 1, 1, 2, 2])
 
-        Defaults to none.
-
-        Set to integers or none.
-
-        Returns cyclic tuple of integers, or none.
         """
         return self._displacements
 
@@ -4072,11 +4036,9 @@ class RegisterCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def _call(self, argument=None):
+    def _call(self, argument=None) -> None:
         """
         Calls command on ``argument``.
-
-        Returns none.
         """
         if argument is None:
             return
@@ -4101,7 +4063,7 @@ class RegisterCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def registration(self):
+    def registration(self) -> typing.Optional[pitchclasses.Registration]:
         """
         Gets registration.
 
@@ -4127,9 +4089,6 @@ class RegisterCommand(scoping.Command):
                     ],
                 )
 
-        Set to registration or none.
-
-        Returns registration or none.
         """
         return self._registration
 
@@ -5964,11 +5923,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def _call(self, argument=None):
+    def _call(self, argument=None) -> None:
         """
         Calls command on ``argument``.
-
-        Returns none.
         """
         if argument is None:
             return
@@ -6026,7 +5983,7 @@ class RegisterToOctaveCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def anchor(self):
+    def anchor(self) -> typing.Optional[abjad.enums.VerticalAlignment]:
         """
         Gets anchor.
 
@@ -6084,14 +6041,11 @@ class RegisterToOctaveCommand(scoping.Command):
                 >>> abjad.f(chord, strict=89)
                 <c d' e''>1
 
-        Set to up, down, center or none.
-
-        Returns up, down, center or none.
         """
         return self._anchor
 
     @property
-    def octave_number(self):
+    def octave_number(self) -> int:
         r"""
         Gets octave number.
 
@@ -6177,7 +6131,6 @@ class RegisterToOctaveCommand(scoping.Command):
                 >>> abjad.f(chord, strict=89)
                 <c'' d''' e''''>1
 
-        Returns integer.
         """
         return self._octave_number
 

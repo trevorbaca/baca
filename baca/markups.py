@@ -230,7 +230,7 @@ def instrument(
     string: typing.Union[str, typing.List[str]],
     hcenter_in: typing.Optional[typings.Number] = 16,
     column: bool = True,
-):
+) -> abjad.Markup:
     r"""
     Makes instrument name markup.
 
@@ -272,8 +272,6 @@ def instrument(
                 }
 
     Centers markup horizontally in 16 spaces.
-
-    Returns markup.
     """
     return make_instrument_name_markup(
         string, column=column, hcenter_in=hcenter_in
@@ -730,7 +728,7 @@ def senza_vib():
 
 def short_instrument(
     string: str, hcenter_in: typings.Number = 10, column: bool = True
-):
+) -> abjad.Markup:
     r"""
     Makes short instrument name markup.
 
@@ -772,8 +770,6 @@ def short_instrument(
                 }
 
     Centers markup horizontally in 10 spaces.
-
-    Returns markup.
     """
     return make_instrument_name_markup(
         string, column=column, hcenter_in=hcenter_in

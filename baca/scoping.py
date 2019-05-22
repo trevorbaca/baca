@@ -203,7 +203,7 @@ class TimelineScope(object):
     @property
     def voice_name(self) -> str:
         """
-        Returns ``'Timeline_Scope'``.
+        String constant set to  ``'Timeline_Scope'``.
         """
         return "Timeline_Scope"
 
@@ -1196,8 +1196,6 @@ _command_typing = typing.Union[Command, Suite]
 def not_parts(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-PARTS``.
-
-    Returns ``command``.
     """
     return tag("-PARTS", command)
 
@@ -1205,8 +1203,6 @@ def not_parts(command: _command_typing) -> _command_typing:
 def not_score(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-SCORE``.
-
-    Returns ``command``.
     """
     return tag("-SCORE", command)
 
@@ -1214,8 +1210,6 @@ def not_score(command: _command_typing) -> _command_typing:
 def not_segment(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-SEGMENT``.
-
-    Returns ``command``.
     """
     return tag("-SEGMENT", command)
 
@@ -1361,7 +1355,6 @@ def only_parts(command: _command_typing) -> _command_typing:
             <BLANKLINE>
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
-    Returns ``command``.
     """
     return tag("+PARTS", command)
 
@@ -1369,8 +1362,6 @@ def only_parts(command: _command_typing) -> _command_typing:
 def only_score(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``+SCORE``.
-
-    Returns ``command``.
     """
     return tag("+SCORE", command)
 
@@ -1378,8 +1369,6 @@ def only_score(command: _command_typing) -> _command_typing:
 def only_segment(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``+SEGMENT``.
-
-    Returns ``command``.
     """
     return tag("+SEGMENT", command)
 
@@ -1429,7 +1418,7 @@ def tag(
 
     Sorts ``command`` tags.
 
-    Returns ``command`` for in-place definition file application.
+    Acts in place.
     """
     if isinstance(tags, str):
         tags = [tags]

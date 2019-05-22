@@ -2458,15 +2458,9 @@ class LabelCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def expression(self):
+    def expression(self) -> typing.Optional[abjad.Expression]:
         """
         Gets expression.
-
-        Defaults to none.
-
-        Set to label expression or none.
-
-        Returns label expression or none.
         """
         return self._expression
 
