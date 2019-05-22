@@ -1889,9 +1889,9 @@ class HorizontalSpacingSpecifier(object):
             >>> spacing.final_measure_number
             112
 
-        Returns none when first measure number is not defined.
+        Gives none when first measure number is not defined.
 
-        Returns none when measure count is not defined.
+        Gives none when measure count is not defined.
         """
         if (
             self.first_measure_number is not None

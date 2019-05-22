@@ -54,7 +54,9 @@ class ArpeggiationSpacingSpecifier(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, collections=None):
+    def __call__(
+        self, collections=None
+    ) -> typing.Union["PitchSegment", "CollectionList", None]:
         """
         Calls specifier on ``collections``.
 
@@ -70,10 +72,9 @@ class ArpeggiationSpacingSpecifier(object):
             >>> specifier() is None
             True
 
-        Returns collection list or none.
         """
         if collections is None:
-            return
+            return None
         if collections == []:
             return PitchSegment(item_class=abjad.NumberedPitch)
         if not isinstance(collections, CollectionList):
@@ -99,6 +100,7 @@ class ArpeggiationSpacingSpecifier(object):
                     pitches = class_._to_tightly_spaced_pitches_descending(
                         pitch_classes
                     )
+                collection_: CollectionTyping
                 if isinstance(pitch_class_collection, abjad.Set):
                     collection_ = PitchSet(items=pitches)
                 else:
@@ -141,7 +143,7 @@ class ArpeggiationSpacingSpecifier(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def direction(self):
+    def direction(self) -> typing.Optional[abjad.VerticalAlignment]:
         r"""
         Gets direction.
 
@@ -241,21 +243,13 @@ class ArpeggiationSpacingSpecifier(object):
                     }
                 >>
 
-
-        Set to up, down or none.
-
-        Returns up, down or none.
         """
         return self._direction
 
     @property
-    def pattern(self):
+    def pattern(self) -> typing.Optional[abjad.Pattern]:
         """
         Gets pattern.
-
-        Set to pattern or none.
-
-        Returns pattern or none.
         """
         return self._pattern
 
@@ -354,7 +348,9 @@ class ChordalSpacingSpecifier(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, collections=None):
+    def __call__(
+        self, collections=None
+    ) -> typing.Union["CollectionList", None]:
         """
         Calls specifier on ``collections``.
 
@@ -364,10 +360,9 @@ class ChordalSpacingSpecifier(object):
             >>> specifier() is None
             True
 
-        Returns pitch collection or none.
         """
         if collections is None:
-            return
+            return None
         if not isinstance(collections, CollectionList):
             collections = CollectionList(collections)
         pattern = self.pattern or abjad.index_all()
@@ -559,7 +554,7 @@ class ChordalSpacingSpecifier(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bass(self):
+    def bass(self) -> typing.Optional[abjad.PitchClass]:
         """
         Gets bass.
 
@@ -603,12 +598,11 @@ class ChordalSpacingSpecifier(object):
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<5, 6, 7, 9, 11>])
 
-        Returns pitch-class or none.
         """
         return self._bass
 
     @property
-    def direction(self):
+    def direction(self) -> typing.Optional[abjad.VerticalAlignment]:
         """
         Gets direction.
 
@@ -644,12 +638,11 @@ class ChordalSpacingSpecifier(object):
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<6, 7, 9, 11, 17>])
 
-        Returns up, down or none.
         """
         return self._direction
 
     @property
-    def minimum_semitones(self):
+    def minimum_semitones(self) -> typing.Optional[int]:
         """
         Gets minimum semitones.
 
@@ -731,25 +724,18 @@ class ChordalSpacingSpecifier(object):
             >>> specifier([[5, 6, 7, 9, 11]])
             CollectionList([<31, 23, 17, 9, 6>])
 
-        Set to positive integer or none.
-
-        Returns positive integer or none.
         """
         return self._minimum_semitones
 
     @property
-    def pattern(self):
+    def pattern(self) -> typing.Optional[abjad.Pattern]:
         """
         Gets pattern.
-
-        Set to pattern or none.
-
-        Returns pattern or none.
         """
         return self._pattern
 
     @property
-    def soprano(self):
+    def soprano(self) -> typing.Optional[abjad.PitchClass]:
         """
         Gets soprano.
 
@@ -799,7 +785,6 @@ class ChordalSpacingSpecifier(object):
             >>> specifier([[-6, -3, -5, -1, -7]])
             CollectionList([<19, 18, 17, 11, 9>])
 
-        Returns pitch-class or none.
         """
         return self._soprano
 
@@ -1014,7 +999,7 @@ class CollectionList(collections_module.abc.Sequence):
 
     ### SPECIAL METHODS ###
 
-    def __add__(self, argument):
+    def __add__(self, argument) -> "CollectionList":
         """
         Adds ``argument`` to collections.
 
@@ -1025,17 +1010,17 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections_1 + collections_2
                 CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
-        Returns new collection list.
         """
         if not isinstance(argument, collections_module.abc.Iterable):
             raise TypeError(f"must be collection list: {argument!r}.")
         argument_collections = [
             self._initialize_collection(_) for _ in argument
         ]
+        assert isinstance(self.collections, list)
         collections = self.collections + argument_collections
         return abjad.new(self, collections=collections)
 
-    def __eq__(self, argument):
+    def __eq__(self, argument) -> bool:
         """
         Is true when ``argument`` is a collection list with collections
         equal to those of this collection list.
@@ -1086,13 +1071,12 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections_1 == collections_2
             True
 
-        Returns true or false.
         """
         if not isinstance(argument, type(self)):
             return False
         return self.collections == argument.collections
 
-    def __format__(self, format_specification=""):
+    def __format__(self, format_specification="") -> str:
         """
         Gets storage format of collections.
 
@@ -1126,10 +1110,10 @@ class CollectionList(collections_module.abc.Sequence):
                     ],
                 )
 
-        Returns string.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
+    # QUESTION: how to hint return type?
     def __getitem__(self, argument):
         """
         Gets collection or collection slice identified by ``argument``.
@@ -1174,7 +1158,7 @@ class CollectionList(collections_module.abc.Sequence):
             return result
 
     # TODO: reimplement to show all four types of collection
-    def __illustrate__(self):
+    def __illustrate__(self) -> abjad.LilyPondFile:
         r"""
         Illustrates collections.
 
@@ -1239,12 +1223,11 @@ class CollectionList(collections_module.abc.Sequence):
                     }
                 >>
 
-        Returns LilyPond file.
         """
         tree = PitchTree(list(self))
         return tree.__illustrate__()
 
-    def __len__(self):
+    def __len__(self) -> int:
         """
         Gets length of collections.
 
@@ -1258,11 +1241,13 @@ class CollectionList(collections_module.abc.Sequence):
             >>> len(collections)
             2
 
-        Returns nonnegative integer.
         """
-        return len(self.collections)
+        if self.collections:
+            return len(self.collections)
+        else:
+            return 0
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Gets interpreter representation of collections.
 
@@ -1274,11 +1259,10 @@ class CollectionList(collections_module.abc.Sequence):
             ...     ])
             CollectionList([<12, 14, 18, 17>, <16, 20, 19>])
 
-        Returns string.
         """
         collections = self.collections or []
-        collections = ", ".join([str(_) for _ in collections])
-        string = f"{type(self).__name__}([{collections}])"
+        collections_ = ", ".join([str(_) for _ in collections])
+        string = f"{type(self).__name__}([{collections_}])"
         if self._expression:
             string = "*" + string
         return string
@@ -1422,7 +1406,7 @@ class CollectionList(collections_module.abc.Sequence):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def collections(self):
+    def collections(self) -> typing.Optional[list]:
         """
         Gets collections in list.
 
@@ -1436,25 +1420,21 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections.collections
             [PitchSegment([12, 14, 18, 17]), PitchSegment([16, 20, 19])]
 
-        Returns list.
         """
         if self._collections:
             return list(self._collections)
+        return None
 
     @property
-    def item_class(self):
+    def item_class(self) -> typing.Union[abjad.Pitch, abjad.PitchClass, None]:
         """
         Gets item class of collections in list.
-
-        Set to class modeling pitch or pitch-class.
-
-        Returns class or none.
         """
         return self._item_class
 
     ### PUBLIC METHODS ###
 
-    def accumulate(self, operands=None):
+    def accumulate(self, operands=None) -> "CollectionList":
         """
         Accumulates ``operands`` against collections to identity.
 
@@ -1520,15 +1500,14 @@ class CollectionList(collections_module.abc.Sequence):
             PitchClassSegment([1, 3, 7, 4])
             PitchClassSegment([5, 9, 6])
 
-        Returns new collection list.
         """
         sequence = classes.Sequence(items=self)
-        collections = []
+        collections: typing.List[CollectionTyping] = []
         for sequence_ in sequence.accumulate(operands=operands):
             collections.extend(sequence_)
         return abjad.new(self, collections=collections)
 
-    def arpeggiate_down(self, pattern=None):
+    def arpeggiate_down(self, pattern=None) -> "CollectionList":
         """
         Apreggiates collections down according to ``pattern``.
 
@@ -1554,7 +1533,6 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections.arpeggiate_down(pattern=[-1])
             CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 2, 1, 0>])
 
-        Returns new collection list.
         """
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
@@ -1572,7 +1550,7 @@ class CollectionList(collections_module.abc.Sequence):
             collections.append(collection)
         return abjad.new(self, collections=collections)
 
-    def arpeggiate_up(self, pattern=None):
+    def arpeggiate_up(self, pattern=None) -> "CollectionList":
         """
         Apreggiates collections up according to ``pattern``.
 
@@ -1598,7 +1576,6 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections.arpeggiate_up(pattern=[-1])
             CollectionList([<5, 12, 14, 18, 17>, <16, 17, 19>, <3, 14, 25, 36>])
 
-        Returns new collection list.
         """
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
@@ -1616,7 +1593,7 @@ class CollectionList(collections_module.abc.Sequence):
             collections.append(collection)
         return abjad.new(self, collections=collections)
 
-    def bass_to_octave(self, n=4, pattern=None):
+    def bass_to_octave(self, n=4, pattern=None) -> "CollectionList":
         """
         Octave-transposes collections to bass in octave ``n``.
 
@@ -1650,7 +1627,6 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections.bass_to_octave(n=3, pattern=[-1])
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-9, 2, 13, 24>])
 
-        Returns new collection list.
         """
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
@@ -1663,7 +1639,7 @@ class CollectionList(collections_module.abc.Sequence):
             collections.append(collection)
         return abjad.new(self, collections=collections)
 
-    def center_to_octave(self, n=4, pattern=None):
+    def center_to_octave(self, n=4, pattern=None) -> "CollectionList":
         """
         Octave-transposes collections to center in octave ``n``.
 
@@ -1697,7 +1673,6 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections.center_to_octave(n=3, pattern=[-1])
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-21, -10, 1, 12>])
 
-        Returns new collection list.
         """
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
@@ -1710,7 +1685,7 @@ class CollectionList(collections_module.abc.Sequence):
             collections.append(collection)
         return abjad.new(self, collections=collections)
 
-    def chords(self, pattern=None):
+    def chords(self, pattern=None) -> "CollectionList":
         """
         Turns collections into chords according to ``pattern``.
 
@@ -1761,7 +1736,6 @@ class CollectionList(collections_module.abc.Sequence):
             PitchSegment([12, 14, 18, 17])
             PitchSet([16, 19, 20])
 
-        Returns new collection list.
         """
         collections = []
         length = len(self)
@@ -1773,7 +1747,7 @@ class CollectionList(collections_module.abc.Sequence):
                 collections.append(collection)
         return abjad.new(self, collections=collections)
 
-    def cursor(self, cyclic=None, singletons=None):
+    def cursor(self, cyclic=None, singletons=None) -> classes.Cursor:
         """
         Wraps collections in cursor.
 
@@ -1812,13 +1786,12 @@ class CollectionList(collections_module.abc.Sequence):
             >>> cursor.next()
             [PitchSegment([16, 17])]
 
-        Returns cursor.
         """
         return classes.Cursor(
             cyclic=cyclic, singletons=singletons, source=self
         )
 
-    def flatten(self):
+    def flatten(self) -> "CollectionTyping":
         """
         Flattens collections.
 
@@ -1841,11 +1814,10 @@ class CollectionList(collections_module.abc.Sequence):
             >>> str(collections.flatten())
             "<f' c'' d'' fs'' f'' e'' f'' g''>"
 
-        Returns collection.
         """
         return self.join()[0]
 
-    def has_duplicate_pitch_classes(self, level=-1):
+    def has_duplicate_pitch_classes(self, level=-1) -> bool:
         """
         Is true when collections have duplicate pitch-classes at ``level``.
 
@@ -1863,31 +1835,29 @@ class CollectionList(collections_module.abc.Sequence):
             True
 
         Set ``level`` to 1 or -1.
-
-        Returns true or false.
         """
         pitch_class_class = self._get_pitch_class_class()
         if level == 1:
             for collection in self:
-                known_pitch_classes = []
+                known_pitch_classes: typing.List[abjad.PitchClass] = []
                 for item in collection:
                     pitch_class = pitch_class_class(item)
                     if pitch_class in known_pitch_classes:
                         return True
                     known_pitch_classes.append(pitch_class)
         elif level == -1:
-            known_pitch_classes = []
+            known_pitch_classes_: typing.List[abjad.PitchClass] = []
             for collection in self:
                 for item in collection:
                     pitch_class = pitch_class_class(item)
-                    if pitch_class in known_pitch_classes:
+                    if pitch_class in known_pitch_classes_:
                         return True
-                    known_pitch_classes.append(pitch_class)
+                    known_pitch_classes_.append(pitch_class)
         else:
             raise ValueError(f"level must be 1 or -1: {level!r}.")
         return False
 
-    def has_duplicates(self, level=-1):
+    def has_duplicates(self, level=-1) -> bool:
         """
         Is true when collections have duplicates at ``level``.
 
@@ -1935,11 +1905,9 @@ class CollectionList(collections_module.abc.Sequence):
             True
 
         Set ``level`` to 0, 1 or -1.
-
-        Returns true or false.
         """
         if level == 0:
-            known_items = []
+            known_items: list = []
             for collection in self:
                 if collection in known_items:
                     return True
@@ -1962,7 +1930,7 @@ class CollectionList(collections_module.abc.Sequence):
             raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
         return False
 
-    def has_repeat_pitch_classes(self, level=-1):
+    def has_repeat_pitch_classes(self, level=-1) -> bool:
         """
         Is true when collections have repeat pitch-classes as ``level``.
 
@@ -1977,8 +1945,6 @@ class CollectionList(collections_module.abc.Sequence):
             True
 
         Set ``level`` to 0 or -1.
-
-        Returns true or false.
         """
         pitch_class_class = self._get_pitch_class_class()
         if level == 1:
@@ -2001,7 +1967,7 @@ class CollectionList(collections_module.abc.Sequence):
             raise ValueError(f"level must be 0 or -1: {level!r}.")
         return False
 
-    def has_repeats(self, level=-1):
+    def has_repeats(self, level=-1) -> bool:
         """
         Is true when collections have repeats at ``level``.
 
@@ -2049,8 +2015,6 @@ class CollectionList(collections_module.abc.Sequence):
             True
 
         Set ``level`` to 0, 1 or -1.
-
-        Returns true or false.
         """
         if level == 0:
             previous_collection = None
@@ -2076,7 +2040,7 @@ class CollectionList(collections_module.abc.Sequence):
             raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
         return False
 
-    def helianthate(self, n=0, m=0):
+    def helianthate(self, n=0, m=0) -> "CollectionList":
         """
         Helianthates collections.
 
@@ -2105,13 +2069,12 @@ class CollectionList(collections_module.abc.Sequence):
             PitchSegment([2, 3, 1])
             PitchSegment([5, 4])
 
-        Returns new collection list.
         """
         collections = classes.Sequence(items=self)
         collections = collections.helianthate(n=n, m=m)
         return abjad.new(self, collections=collections)
 
-    def join(self):
+    def join(self) -> "CollectionList":
         """
         Joins collections.
 
@@ -2125,7 +2088,6 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections.join()
             CollectionList([<5, 12, 14, 18, 17, 16, 17, 19>])
 
-        Returns new collection list.
         """
         collections = []
         if self:
@@ -2135,7 +2097,9 @@ class CollectionList(collections_module.abc.Sequence):
             collections.append(collection)
         return abjad.new(self, collections=collections)
 
-    def partition(self, argument, cyclic=False, join=False, overhang=False):
+    def partition(
+        self, argument, cyclic=False, join=False, overhang=False
+    ) -> typing.Union["CollectionList", "PitchSegment", classes.Sequence]:
         """
         Partitions collections according to ``argument``.
 
@@ -2197,7 +2161,6 @@ class CollectionList(collections_module.abc.Sequence):
             PitchSegment([16, 17, 19, 5, 12, 14, 18, 17])
             PitchSegment([16, 17, 19, 16, 17, 19])
 
-        Returns sequence.
         """
         if isinstance(argument, abjad.Ratio):
             message = "implement ratio-partition at some point."
@@ -2214,7 +2177,7 @@ class CollectionList(collections_module.abc.Sequence):
             result = classes.Sequence(collection_lists)
         return result
 
-    def read(self, counts=None, check=None):
+    def read(self, counts=None, check=None) -> "CollectionList":
         """
         Reads collections by ``counts``.
 
@@ -2252,7 +2215,6 @@ class CollectionList(collections_module.abc.Sequence):
                 ...
             ValueError: call reads 30 items; not a multiple of 8 items.
 
-        Returns new collection list.
         """
         if counts in (None, []):
             return abjad.new(self)
@@ -2281,7 +2243,7 @@ class CollectionList(collections_module.abc.Sequence):
 
     # TODO: change indices to pattern
     # TODO: add level=-1 keyword
-    def remove(self, indices=None, period=None):
+    def remove(self, indices=None, period=None) -> "CollectionList":
         """
         Removes collections at ``indices``.
 
@@ -2291,13 +2253,12 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections.remove([0, -1])
             CollectionList([<2, 3>, <4>])
 
-        Returns new collection list.
         """
         sequence = classes.Sequence(items=self)
         collections = sequence.remove(indices=indices, period=period)
         return abjad.new(self, collections=collections)
 
-    def remove_duplicate_pitch_classes(self, level=-1):
+    def remove_duplicate_pitch_classes(self, level=-1) -> "CollectionList":
         """
         Removes duplicate pitch-classes at ``level``.
 
@@ -2312,14 +2273,13 @@ class CollectionList(collections_module.abc.Sequence):
             CollectionList([<4, 5, 7>, <18>])
 
         Set ``level`` to 1 or -1.
-
-        Returns new collection list.
         """
         pitch_class_class = self._get_pitch_class_class()
         collections_ = []
         if level == 1:
             for collection in self:
-                items, known_pitch_classes = [], []
+                items: typing.List[CollectionTyping] = []
+                known_pitch_classes: typing.List[CollectionTyping] = []
                 for item in collection:
                     pitch_class = pitch_class_class(item)
                     if pitch_class in known_pitch_classes:
@@ -2348,7 +2308,7 @@ class CollectionList(collections_module.abc.Sequence):
             raise ValueError(f"level must be 1 or -1: {level!r}.")
         return abjad.new(self, collections=collections_)
 
-    def remove_duplicates(self, level=-1):
+    def remove_duplicates(self, level=-1) -> "CollectionList":
         """
         Removes duplicates at ``level``.
 
@@ -2368,12 +2328,12 @@ class CollectionList(collections_module.abc.Sequence):
             CollectionList([<16, 17>, <13, 14>])
 
         Set ``level`` to 0, 1 or -1.
-
-        Returns new collection list.
         """
-        collections_ = []
+        collections_: typing.List[CollectionTyping] = []
         if level == 0:
-            collections_, known_items = [], []
+            collections_ = []
+            known_items: typing.List[CollectionTyping] = []
+            # collections_, known_items = [], []
             for collection in self:
                 if collection in known_items:
                     continue
@@ -2406,7 +2366,7 @@ class CollectionList(collections_module.abc.Sequence):
             raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
         return abjad.new(self, collections=collections_)
 
-    def remove_repeat_pitch_classes(self, level=-1):
+    def remove_repeat_pitch_classes(self, level=-1) -> "CollectionList":
         """
         Removes repeat pitch-classes at ``level``.
 
@@ -2421,8 +2381,6 @@ class CollectionList(collections_module.abc.Sequence):
             CollectionList([<4, 5>, <18>])
 
         Set ``level`` to 1 or -1.
-
-        Returns new collection list.
         """
         pitch_class_class = self._get_pitch_class_class()
         collections_ = []
@@ -2455,7 +2413,7 @@ class CollectionList(collections_module.abc.Sequence):
             raise ValueError(f"level must be 1 or -1: {level!r}.")
         return abjad.new(self, collections=collections_)
 
-    def remove_repeats(self, level=-1):
+    def remove_repeats(self, level=-1) -> "CollectionList":
         """
         Removes repeats at ``level``.
 
@@ -2473,8 +2431,6 @@ class CollectionList(collections_module.abc.Sequence):
             CollectionList([<4, 5>, <4, 5>, <7>])
 
         Set ``level`` to 0, 1 or -1.
-
-        Returns true or false.
         """
         collections_ = []
         if level == 0:
@@ -2511,7 +2467,7 @@ class CollectionList(collections_module.abc.Sequence):
             raise ValueError(f"level must be 0, 1 or -1: {level!r}.")
         return abjad.new(self, collections=collections_)
 
-    def repeat(self, n=1):
+    def repeat(self, n=1) -> "CollectionList":
         """
         Repeats collections.
 
@@ -2528,7 +2484,6 @@ class CollectionList(collections_module.abc.Sequence):
             PitchSegment([12, 14, 18, 17])
             PitchSegment([16, 19])
 
-        Returns new collection list.
         """
         collections = classes.Sequence(items=self)
         collections = collections.repeat(n=n)
@@ -2537,7 +2492,7 @@ class CollectionList(collections_module.abc.Sequence):
 
     # TODO: change indices to pattern
     # TODO: add level=-1 keyword
-    def retain(self, indices=None, period=None):
+    def retain(self, indices=None, period=None) -> "CollectionList":
         """
         Retains collections at ``indices``.
 
@@ -2555,13 +2510,12 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections.retain([0], period=2)
             CollectionList([<0, 1>, <4>, <7>])
 
-        Returns new collection list.
         """
         sequence = classes.Sequence(items=self)
         collections = sequence.retain(indices=indices, period=period)
         return abjad.new(self, collections=collections)
 
-    def soprano_to_octave(self, n=4, pattern=None):
+    def soprano_to_octave(self, n=4, pattern=None) -> "CollectionList":
         """
         Octave-transposes collections to soprano in octave ``n``.
 
@@ -2595,7 +2549,6 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections.soprano_to_octave(n=4, pattern=[-1])
             CollectionList([<5, 12, 14, 18, 29>, <4, 5, 7>, <-33, -22, -11, 0>])
 
-        Returns new collection list.
         """
         if isinstance(pattern, list):
             pattern = abjad.Pattern(indices=pattern)
@@ -2610,7 +2563,7 @@ class CollectionList(collections_module.abc.Sequence):
 
     def space_down(
         self, bass=None, pattern=None, semitones=None, soprano=None
-    ):
+    ) -> "CollectionList":
         """
         Spaces collections down.
 
@@ -2664,7 +2617,7 @@ class CollectionList(collections_module.abc.Sequence):
             collections.append(collection)
         return abjad.new(self, collections=collections)
 
-    def to_pitch_classes(self):
+    def to_pitch_classes(self) -> "CollectionList":
         """
         Changes to pitch-class collections.
 
@@ -2716,7 +2669,6 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections.to_pitch_classes()
                 CollectionList([PC<c d fs f>, PC<e af g>])
 
-        Returns new collection list.
         """
         item_class = self._to_pitch_class_item_class(self.item_class)
         collections_ = []
@@ -2725,7 +2677,7 @@ class CollectionList(collections_module.abc.Sequence):
             collections_.append(collection_)
         return abjad.new(self, collections=collections_, item_class=item_class)
 
-    def to_pitches(self):
+    def to_pitches(self) -> "CollectionList":
         """
         Changes to pitch collections.
 
@@ -2777,7 +2729,6 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections.to_pitches()
                 CollectionList([<c' d' fs' f'>, <e' af' g'>])
 
-        Returns new collection list.
         """
         item_class = self._to_pitch_item_class(self.item_class)
         collections_ = []
@@ -2786,7 +2737,7 @@ class CollectionList(collections_module.abc.Sequence):
             collections_.append(collection_)
         return abjad.new(self, collections=collections_, item_class=item_class)
 
-    def transpose(self, n=0):
+    def transpose(self, n=0) -> "CollectionList":
         """
         Transposes collections.
 
@@ -2838,7 +2789,6 @@ class CollectionList(collections_module.abc.Sequence):
                 >>> collections.transpose(-28)
                 CollectionList([PC<af bf d df>, PC<c ff ef>])
 
-        Returns new collection list.
         """
         collections_ = []
         for collection in self:
@@ -2897,7 +2847,7 @@ class Constellation(object):
 
     ### SPECIAL METHODS ###
 
-    def __contains__(self, pitch_set):
+    def __contains__(self, pitch_set) -> bool:
         """
         Is true when constellation contains ``pitch_set``.
 
@@ -2920,11 +2870,10 @@ class Constellation(object):
             >>> [-38] in constellation
             False
 
-        Returns true or false.
         """
         return pitch_set in self._pitch_number_lists
 
-    def __getitem__(self, argument):
+    def __getitem__(self, argument) -> list:
         """
         Gets item or slice identified by ``argument``.
 
@@ -2936,11 +2885,10 @@ class Constellation(object):
             >>> constellation[0]
             Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
 
-        Returns list.
         """
         return self._pitch_number_lists.__getitem__(argument)
 
-    def __len__(self):
+    def __len__(self) -> int:
         """
         Gets length of constellation.
 
@@ -2952,11 +2900,10 @@ class Constellation(object):
             >>> len(constellation)
             180
 
-        Returns nonnegative integer.
         """
         return len(self._pitch_number_lists)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Gets interpreter representation of constellation.
 
@@ -3063,7 +3010,7 @@ class Constellation(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def constellation_number(self):
+    def constellation_number(self) -> int:
         """
         Gets constellation number.
 
@@ -3075,7 +3022,6 @@ class Constellation(object):
             >>> constellation.constellation_number
             1
 
-        Returns positive integer.
         """
         return self._circuit._constellations.index(self) + 1
 
@@ -3104,7 +3050,7 @@ class Constellation(object):
         return generator_chord
 
     @property
-    def partitioned_generator_pitch_numbers(self):
+    def partitioned_generator_pitch_numbers(self) -> typing.List[list]:
         """
         Gets partitioned generator pitch numbers.
 
@@ -3123,7 +3069,6 @@ class Constellation(object):
             [[-10, -2, 5, 15, 25], [-1, 7, 18, 20], [0, 28, 33]]
             [[-12, 17, 27, 37], [-1, 7, 18, 21], [2, 10, 16, 20]]
 
-        Returns list of lists.
         """
         return self._partitioned_generator_pitch_numbers
 
@@ -3170,7 +3115,7 @@ class Constellation(object):
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def constellate(cells, range):
+    def constellate(cells, range) -> typing.List[classes.Sequence]:
         """
         Constellates ``cells``.
 
@@ -3205,7 +3150,7 @@ class Constellation(object):
             Sequence([7, 15, 17, 28, 32, 35])
             Sequence([19, 27, 28, 29, 32, 35])
 
-        Returns outer product of octave transpositions of ``cells`` in
+        Takes outer product of octave transpositions of ``cells`` in
         ``range``.
         """
         if not isinstance(range, abjad.PitchRange):
@@ -3223,7 +3168,7 @@ class Constellation(object):
             result[i] = cell.sort()
         return result
 
-    def get_chord(self, chord_number):
+    def get_chord(self, chord_number) -> classes.Sequence:
         """
         Gets chord with 1-indexed chord number.
 
@@ -3235,7 +3180,6 @@ class Constellation(object):
             >>> constellation.get_chord(1)
             Sequence([-38, -36, -34, -29, -28, -25, -21, -20, -19, -18, -15, -11])
 
-        Returns list of numbers.
         """
         assert 1 <= chord_number
         chord_index = chord_number - 1
@@ -3254,13 +3198,12 @@ class Constellation(object):
             >>> constellation.get_number_of_chord(chord)
             17
 
-        Returns positive integer.
         """
         chord = abjad.Chord(chord, (1, 4))
         pitch_numbers = [_.number for _ in chord.written_pitches]
-        pitch_numbers = classes.Sequence(items=pitch_numbers)
+        pitch_numbers_ = classes.Sequence(items=pitch_numbers)
         for i, pitch_number_list in enumerate(self):
-            if pitch_number_list == pitch_numbers:
+            if pitch_number_list == pitch_numbers_:
                 return i + 1
         raise ValueError(f"{chord} not in {self}")
 
@@ -3360,7 +3303,7 @@ class ConstellationCircuit(object):
 
     ### SPECIAL METHODS ###
 
-    def __getitem__(self, argument):
+    def __getitem__(self, argument) -> "Constellation":
         """
         Gets item or slice identified by ``argument``.
 
@@ -3371,7 +3314,6 @@ class ConstellationCircuit(object):
             >>> constellation_circuit[-1]
             Constellation(108)
 
-        Returns constellation.
         """
         return self._constellations.__getitem__(argument)
 
@@ -3389,7 +3331,7 @@ class ConstellationCircuit(object):
         """
         return len(self._constellations)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Gets interpreter representation of circuit.
 
@@ -3400,7 +3342,6 @@ class ConstellationCircuit(object):
             >>> constellation_circuit
             ConstellationCircuit(8)
 
-        Returns string.
         """
         return f"{type(self).__name__}({len(self)})"
 
@@ -3454,7 +3395,7 @@ class ConstellationCircuit(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def generator_chords(self):
+    def generator_chords(self) -> typing.List[abjad.Chord]:
         """
         Gets generator chords.
 
@@ -3473,15 +3414,14 @@ class ConstellationCircuit(object):
             Chord("<d bf b c' f' g' ef'' fs'' af'' cs''' e''' a'''>4")
             Chord("<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4")
 
-        Returns list of chords.
         """
         result = []
-        for constellation in self:
+        for constellation in self._constellations:
             result.append(constellation.generator_chord)
         return result
 
     @property
-    def pitch_range(self):
+    def pitch_range(self) -> abjad.PitchRange:
         """
         Gets pitch range.
 
@@ -3492,12 +3432,11 @@ class ConstellationCircuit(object):
             >>> constellation_circuit.pitch_range
             PitchRange('[A0, C8]')
 
-        Returns pitch range.
         """
         return self._pitch_range
 
     @property
-    def pivot_chords(self):
+    def pivot_chords(self) -> typing.List[abjad.Chord]:
         """
         Gets pivot chords.
 
@@ -3517,16 +3456,17 @@ class ConstellationCircuit(object):
             Chord("<c b d' g' bf' e'' f'' fs'' af'' a'' ef''' cs''''>4")
             Chord("<c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4")
 
-        Returns list of chords.
         """
         result = []
-        for constellation in self:
+        for constellation in self._constellations:
             result.append(constellation.pivot_chord)
         return result
 
     ### PUBLIC METHODS ###
 
-    def get(self, *arguments):
+    def get(
+        self, *arguments
+    ) -> typing.Union["Constellation", classes.Sequence]:
         """
         Gets constellation in circuit.
 
@@ -3544,7 +3484,6 @@ class ConstellationCircuit(object):
             >>> constellation_circuit.get(8, 108)
             Sequence([-12, 17, 23, 26, 27, 31, 34, 37, 40, 42, 44, 45])
 
-        Returns constellation or list.
         """
         if len(arguments) == 1:
             constellation_number = arguments[0]
@@ -3555,8 +3494,9 @@ class ConstellationCircuit(object):
             constellation_index = constellation_number - 1
             constellation = self._constellations[constellation_index]
             return constellation.get_chord(chord_number)
+        raise IndexError
 
-    def illustrate_colored_generator_chords(self):
+    def illustrate_colored_generator_chords(self) -> abjad.LilyPondFile:
         r"""
         Illustrates colored generator chords.
 
@@ -3610,11 +3550,12 @@ class ConstellationCircuit(object):
                     >>
                 >>
 
-        Returns LilyPond file.
         """
         return self._illustrate_chords(self._colored_generator_chords)
 
-    def illustrate_colored_generator_chords_and_pivot_chords(self):
+    def illustrate_colored_generator_chords_and_pivot_chords(
+        self
+    ) -> abjad.LilyPondFile:
         r"""
         Illustrates colored generator chords and pivot chords.
 
@@ -3684,13 +3625,12 @@ class ConstellationCircuit(object):
                     >>
                 >>
 
-        Returns LilyPond file.
         """
         chords = list(zip(self._colored_generator_chords, self.pivot_chords))
         chords = classes.Sequence(chords).flatten(depth=1)
         return self._illustrate_chords(chords)
 
-    def illustrate_generator_chords(self):
+    def illustrate_generator_chords(self) -> abjad.LilyPondFile:
         r"""
         Illustrates generator chords.
 
@@ -3744,11 +3684,12 @@ class ConstellationCircuit(object):
                     >>
                 >>
 
-        Returns LilyPond file.
         """
         return self._illustrate_chords(self.generator_chords)
 
-    def illustrate_generator_chords_and_pivot_chords(self):
+    def illustrate_generator_chords_and_pivot_chords(
+        self
+    ) -> abjad.LilyPondFile:
         r"""
         Illustrates generator chords and pivot chords.
 
@@ -3818,13 +3759,12 @@ class ConstellationCircuit(object):
                     >>
                 >>
 
-        Returns LilyPond file.
         """
         chords = list(zip(self.generator_chords, self.pivot_chords))
         chords = classes.Sequence(chords).flatten(depth=1)
         return self._illustrate_chords(chords)
 
-    def illustrate_pivot_chords(self):
+    def illustrate_pivot_chords(self) -> abjad.LilyPondFile:
         r"""
         Illustrates pivot chords.
 
@@ -3878,12 +3818,11 @@ class ConstellationCircuit(object):
                     >>
                 >>
 
-        Returns LilyPond file.
         """
         return self._illustrate_chords(self.pivot_chords)
 
     @classmethod
-    def make_constellation_circuit_1(class_):
+    def make_constellation_circuit_1(class_) -> "ConstellationCircuit":
         """
         Makes constellation circuit 1.
 
@@ -3900,123 +3839,8 @@ class ConstellationCircuit(object):
             Constellation(120)
             Constellation(108)
 
-        Returns constellation circuit.
         """
         return class_(class_.CC1, abjad.PitchRange("[A0, C8]"))
-
-
-class DesignMaker(object):
-    """
-    Design-maker.
-
-    ..  container:: example
-
-        Initializes design-maker:
-
-        >>> baca.DesignMaker()
-        DesignMaker()
-
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_result",)
-
-    ### INITIALIZER ###
-
-    def __init__(self):
-        self._result = []
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self):
-        """
-        Calls design-maker.
-
-        Returns pitch-class tree.
-        """
-        design = PitchTree(items=self._result)
-        self._check_duplicate_pitch_classes(design)
-        return design
-
-    def __repr__(self):
-        """
-        Gets interpreter representation.
-        """
-        return abjad.StorageFormatManager(self).get_repr_format()
-
-    ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _apply_operator(segment, operator):
-        assert isinstance(segment, PitchClassSegment)
-        assert isinstance(operator, str), repr(operator)
-        if operator.startswith("T"):
-            index = int(operator[1:])
-            segment = segment.transpose(index)
-        elif operator == "I":
-            segment = segment.invert()
-        elif operator.startswith("M"):
-            index = int(operator[1:])
-            segment = segment.multiply(index)
-        elif operator == "alpha":
-            segment = segment.alpha()
-        else:
-            raise Exception(f"unrecognized operator: {operator!r}.")
-        return segment
-
-    @staticmethod
-    def _check_duplicate_pitch_classes(design):
-        leaves = design.get_payload()
-        for leaf_1, leaf_2 in abjad.Sequence(leaves).nwise():
-            if leaf_1 == leaf_2:
-                raise Exception(f"duplicate {leaf_1!r}.")
-
-    ### PUBLIC METHODS ###
-
-    def partition(self, cursor, number, counts, operators=None):
-        """
-        Partitions next ``number`` cells in ``cursor`` by ``counts``.
-
-        Appies optional ``operators`` to resulting parts of partition.
-
-        Returns none.
-        """
-        cells = cursor.next(number)
-        list_ = []
-        for cell in cells:
-            list_.extend(cell)
-        segment = PitchClassSegment(items=list_)
-        operators = operators or []
-        for operator in operators:
-            segment = self._apply_operator(segment, operator)
-        sequence = abjad.sequence(segment)
-        parts = sequence.partition_by_counts(counts, overhang=True)
-        parts = [PitchClassSegment(_) for _ in parts]
-        self._result.extend(parts)
-
-    def partition_cyclic(self, cursor, number, counts, operators=None):
-        """
-        Partitions next `number` cells in `cursor` cyclically by `counts`.
-
-        Applies optional `operators` to parts in resulting partition.
-
-        Returns none.
-        """
-        cells = cursor.next(number)
-        list_ = []
-        for cell in cells:
-            list_.extend(cell)
-        segment = PitchClassSegment(items=list_)
-        operators = operators or []
-        for operator in operators:
-            segment = self._apply_operator(segment, operator)
-        sequence = abjad.sequence(segment)
-        parts = sequence.partition_by_counts(
-            counts, cyclic=True, overhang=True
-        )
-        parts = [PitchClassSegment(_) for _ in parts]
-        self._result.extend(parts)
 
 
 class HarmonicSeries(object):
@@ -6715,6 +6539,9 @@ class PitchSet(abjad.PitchSet):
         return PitchClassSet(items=self, item_class=item_class)
 
 
+CollectionTyping = typing.Union[PitchSet, PitchSegment]
+
+
 class PitchTree(classes.Tree):
     r"""
     Pitch tree.
@@ -9124,6 +8951,116 @@ class PitchTree(classes.Tree):
         """
         operator = abjad.Transposition(n=n)
         return self._apply_to_leaves_and_emit_new_tree(operator)
+
+
+class DesignMaker(object):
+    """
+    Design-maker.
+
+    ..  container:: example
+
+        Initializes design-maker:
+
+        >>> baca.DesignMaker()
+        DesignMaker()
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = ("_result",)
+
+    ### INITIALIZER ###
+
+    def __init__(self):
+        self._result = []
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self) -> PitchTree:
+        """
+        Calls design-maker.
+        """
+        design = PitchTree(items=self._result)
+        self._check_duplicate_pitch_classes(design)
+        return design
+
+    def __repr__(self):
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _apply_operator(segment, operator):
+        assert isinstance(segment, PitchClassSegment)
+        assert isinstance(operator, str), repr(operator)
+        if operator.startswith("T"):
+            index = int(operator[1:])
+            segment = segment.transpose(index)
+        elif operator == "I":
+            segment = segment.invert()
+        elif operator.startswith("M"):
+            index = int(operator[1:])
+            segment = segment.multiply(index)
+        elif operator == "alpha":
+            segment = segment.alpha()
+        else:
+            raise Exception(f"unrecognized operator: {operator!r}.")
+        return segment
+
+    @staticmethod
+    def _check_duplicate_pitch_classes(design):
+        leaves = design.get_payload()
+        for leaf_1, leaf_2 in abjad.Sequence(leaves).nwise():
+            if leaf_1 == leaf_2:
+                raise Exception(f"duplicate {leaf_1!r}.")
+
+    ### PUBLIC METHODS ###
+
+    def partition(self, cursor, number, counts, operators=None) -> None:
+        """
+        Partitions next ``number`` cells in ``cursor`` by ``counts``.
+
+        Appies optional ``operators`` to resulting parts of partition.
+        """
+        cells = cursor.next(number)
+        list_: typing.List[abjad.PitchClass] = []
+        for cell in cells:
+            list_.extend(cell)
+        segment = PitchClassSegment(items=list_)
+        operators = operators or []
+        for operator in operators:
+            segment = self._apply_operator(segment, operator)
+        sequence = abjad.sequence(segment)
+        parts = sequence.partition_by_counts(counts, overhang=True)
+        parts = [PitchClassSegment(_) for _ in parts]
+        self._result.extend(parts)
+
+    def partition_cyclic(self, cursor, number, counts, operators=None):
+        """
+        Partitions next `number` cells in `cursor` cyclically by `counts`.
+
+        Applies optional `operators` to parts in resulting partition.
+
+        Returns none.
+        """
+        cells = cursor.next(number)
+        list_ = []
+        for cell in cells:
+            list_.extend(cell)
+        segment = PitchClassSegment(items=list_)
+        operators = operators or []
+        for operator in operators:
+            segment = self._apply_operator(segment, operator)
+        sequence = abjad.sequence(segment)
+        parts = sequence.partition_by_counts(
+            counts, cyclic=True, overhang=True
+        )
+        parts = [PitchClassSegment(_) for _ in parts]
+        self._result.extend(parts)
 
 
 class Registration(object):
