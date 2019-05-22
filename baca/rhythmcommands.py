@@ -1927,19 +1927,19 @@ def beam_runs() -> rmakers.BeamSpecifier:
     )
 
 
-def flags() -> rmakers.BeamSpecifier:
+def do_not_beam() -> rmakers.BeamSpecifier:
     r"""
-    Flags music.
+    Does not beam music.
 
     ..  container:: example
 
-        Flags music:
+        Does not beam music:
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.flags(),
+        ...     baca.do_not_beam(),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],

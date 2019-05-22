@@ -275,7 +275,7 @@ rhythmcommands
    ~beam_divisions
    ~beam_everything
    ~beam_runs
-   ~flags
+   ~do_not_beam
    ~make_even_divisions
    ~make_fused_tuplet_monads
    ~make_monads
@@ -307,7 +307,7 @@ rhythmcommands
 
 .. autofunction:: beam_runs
 
-.. autofunction:: flags
+.. autofunction:: do_not_beam
 
 .. autofunction:: make_even_divisions
 
