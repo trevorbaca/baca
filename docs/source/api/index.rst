@@ -967,6 +967,7 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.rhythmcommands.DurationMultiplierCommand
    ~baca.rhythmcommands.RhythmCommand
    ~baca.rhythmcommands.TieCorrectionCommand
 
@@ -1000,6 +1001,7 @@ Rhythm library.
    ~baca.rhythmcommands.repeat_tie_from
    ~baca.rhythmcommands.repeat_tie_to
    ~baca.rhythmcommands.rhythm
+   ~baca.rhythmcommands.set_duration_multiplier
    ~baca.rhythmcommands.silence_first
    ~baca.rhythmcommands.silence_last
    ~baca.rhythmcommands.sustain_first

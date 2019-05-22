@@ -404,7 +404,7 @@ class SegmentMaker(abjad.SegmentMaker):
             do_not_force_nonnatural_accidentals
         )
         self._do_not_include_layout_ly = do_not_include_layout_ly
-        self._duration: typing.Optional[abjad.Duration] = None
+        self._duration: typing.Optional[abjad.DurationTyping] = None
         self._fermata_measure_empty_overrides = fermata_measure_empty_overrides
         self._fermata_measure_numbers: typing.List = []
         self._fermata_measure_staff_line_count = (
@@ -452,7 +452,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._segment_directory: typing.Optional[
             abjad.Path
         ] = segment_directory
-        self._segment_duration: typing.Optional[abjad.Duration] = None
+        self._segment_duration: typing.Optional[abjad.DurationTyping] = None
         self._skips_instead_of_rests = skips_instead_of_rests
         self._sounds_during_segment: abjad.OrderedDict = abjad.OrderedDict()
         self._spacing = spacing

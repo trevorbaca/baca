@@ -20,6 +20,83 @@ mask_typing = typing.Union[rmakers.SilenceMask, rmakers.SustainMask]
 ### CLASSES ###
 
 
+class DurationMultiplierCommand(scoping.Command):
+    """
+    Duration multiplier command.
+
+    ..  container:: example
+
+        >>> baca.DurationMultiplierCommand()
+        DurationMultiplierCommand(selector=baca.leaf(0))
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = ("_written_duration",)
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        *,
+        map: typings.Selector = None,
+        match: typings.Indices = None,
+        measures: typings.Slice = None,
+        scope: scoping.ScopeTyping = None,
+        selector: typings.Selector = "baca.leaf(0)",
+        written_duration: abjad.DurationTyping = None,
+    ) -> None:
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+        )
+        written_duration_ = None
+        if written_duration is not None:
+            written_duration_ = abjad.Duration(written_duration)
+        self._written_duration = written_duration_
+
+    ### SPECIAL METHODS ###
+
+    def _call(self, argument=None) -> None:
+        """
+        Applies command to result of selector called on ``argument``.
+        """
+        if argument is None:
+            return
+        if self.selector is not None:
+            argument = self.selector(argument)
+        leaves = classes.Selection(argument).leaves()
+        for leaf in leaves:
+            self._set_multiplied_duration(leaf, self.written_duration)
+
+    ### PRIVATE METHODS ###
+
+    @staticmethod
+    def _set_multiplied_duration(leaf, written_duration):
+        if written_duration is None:
+            return
+        old_duration = abjad.inspect(leaf).duration()
+        if written_duration == old_duration:
+            return
+        leaf.written_duration = written_duration
+        multiplier = old_duration / written_duration
+        leaf.multiplier = multiplier
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def written_duration(self) -> typing.Optional[abjad.Duration]:
+        """
+        Gets written duration.
+        """
+        return self._written_duration
+
+
 class RhythmCommand(scoping.Command):
     r"""
     Rhythm command.
@@ -1397,7 +1474,8 @@ class TieCorrectionCommand(scoping.Command):
         if direction is not None:
             assert direction in (abjad.Right, abjad.Left, None)
         self._direction = direction
-        self._map = map
+        # REMOVE: this is being done in scoping.Command.__init__:
+        ####self._map = map
         if repeat is not None:
             repeat = bool(repeat)
         self._repeat = repeat
@@ -1427,6 +1505,7 @@ class TieCorrectionCommand(scoping.Command):
     @staticmethod
     def _add_tie(current_leaf, direction, repeat):
         assert direction in (abjad.Left, abjad.Right, None), repr(direction)
+        tag_ = "TieCorrectionCommand"
         left_broken, right_broken = None, None
         if direction is None:
             direction = abjad.Right
@@ -1446,20 +1525,18 @@ class TieCorrectionCommand(scoping.Command):
         if direction == abjad.Left:
             if repeat:
                 repeat_tie = abjad.RepeatTie(left_broken=left_broken)
-                abjad.attach(
-                    repeat_tie, current_leaf, tag="TieCorrectionCommand"
-                )
+                abjad.attach(repeat_tie, current_leaf, tag=tag_)
             else:
                 tie = abjad.TieIndicator(right_broken=right_broken)
-                abjad.attach(tie, previous_leaf, tag="TieCorrectionCommand")
+                abjad.attach(tie, previous_leaf, tag=tag_)
         else:
             assert direction == abjad.Right
             if not repeat:
                 tie = abjad.TieIndicator(right_broken=right_broken)
-                abjad.attach(tie, current_leaf, tag="TieCorrectionCommand")
+                abjad.attach(tie, current_leaf, tag=tag_)
             else:
                 repeat_tie = abjad.RepeatTie(left_broken=left_broken)
-                abjad.attach(repeat_tie, next_leaf, tag="TieCorrectionCommand")
+                abjad.attach(repeat_tie, next_leaf, tag=tag_)
 
     @staticmethod
     def _sever_tie(current_leaf, direction):
@@ -2754,6 +2831,468 @@ def rhythm(
         rhythm_maker=rhythm_maker,
         right_broken=right_broken,
         split_at_measure_boundaries=split_at_measure_boundaries,
+    )
+
+
+def set_duration_multiplier(
+    *,
+    selector: typings.Selector = "baca.leaf(0)",
+    written_duration: abjad.DurationTyping = None,
+) -> DurationMultiplierCommand:
+    r"""
+    Sets duration multiplier.
+
+    ..  container:: example
+
+        Does nothing when ``written_duration`` is none:
+
+        >>> maker = baca.SegmentMaker(
+        ...     do_not_color_unpitched_music=True,
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'Music_Voice',
+        ...     baca.make_repeated_duration_notes([(1, 8)]),
+        ...     baca.set_duration_multiplier(
+        ...         selector=baca.leaves(),
+        ...         written_duration=None,
+        ...         ),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                        % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
+                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
+                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
+                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
+                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+            <BLANKLINE>
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'8                                                                      %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice"                                       %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice measure 5]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice"                                        %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice measure 5]                                         %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+
+    ..  container:: example
+
+        Sets duration multiplier to achieve ``written_duration`` equal to 3/32:
+
+        >>> maker = baca.SegmentMaker(
+        ...     do_not_color_unpitched_music=True,
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'Music_Voice',
+        ...     baca.make_repeated_duration_notes([(1, 8)]),
+        ...     baca.set_duration_multiplier(
+        ...         selector=baca.leaves(),
+        ...         written_duration=(3, 32),
+        ...         ),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                        % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
+                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
+                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
+                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
+                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+            <BLANKLINE>
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice"                                       %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice measure 5]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice"                                        %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice measure 5]                                         %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+
+    ..  container:: example
+
+        Sets duration multiplier automatically to achieve ``written_duration``
+        equal to 1:
+
+        >>> maker = baca.SegmentMaker(
+        ...     do_not_color_unpitched_music=True,
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'Music_Voice',
+        ...     baca.make_repeated_duration_notes([(1, 8)]),
+        ...     baca.set_duration_multiplier(
+        ...         selector=baca.leaves(),
+        ...         written_duration=(1,),
+        ...         ),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                        % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
+                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
+                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
+                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
+                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+            <BLANKLINE>
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice"                                       %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice measure 5]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice"                                        %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice measure 5]                                         %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+
+    """
+    return DurationMultiplierCommand(
+        selector=selector, written_duration=written_duration
     )
 
 

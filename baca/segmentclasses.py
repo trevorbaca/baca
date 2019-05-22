@@ -1554,11 +1554,11 @@ class HorizontalSpacingSpecifier(object):
         *,
         breaks: BreakMeasureMap = None,
         fermata_measure_numbers: typing.List[int] = None,
-        fermata_measure_duration: typings.IntegerPair = (1, 4),
+        fermata_measure_duration: abjad.DurationTyping = (1, 4),
         first_measure_number: int = None,
         measure_count: int = None,
         measures: abjad.OrderedDict = None,
-        minimum_duration: typings.IntegerPair = None,
+        minimum_duration: abjad.DurationTyping = None,
         multiplier: typings.IntegerPair = None,
         phantom: bool = None,
     ) -> None:
@@ -2669,7 +2669,7 @@ def breaks(
 
 
 def minimum_duration(
-    duration: typing.Union[typings.IntegerPair, abjad.Duration],
+    duration: abjad.DurationTyping,
 ) -> HorizontalSpacingSpecifier:
     """
     Makes horizontal spacing specifier with ``duration`` minimum width.
@@ -2707,9 +2707,9 @@ def page(*systems: typing.Any, number: int = None) -> PageSpecifier:
 
 def scorewide_spacing(
     path: typing.Union[str, abjad.Path, typing.Tuple[int, int, list]],
-    fallback_duration: typings.IntegerPair,
+    fallback_duration: abjad.DurationTyping,
     breaks: BreakMeasureMap = None,
-    fermata_measure_duration: typings.IntegerPair = (1, 4),
+    fermata_measure_duration: abjad.DurationTyping = (1, 4),
 ) -> HorizontalSpacingSpecifier:
     r"""
     Makes scorewide spacing.
