@@ -1386,6 +1386,12 @@ class SegmentMaker(abjad.SegmentMaker):
                     string = format(metronome_mark.custom_markup)
                     assert string.startswith("\\")
                     left_text += f" {string}"
+                # mixed number
+                elif metronome_mark.decimal is True:
+                    arguments = metronome_mark._get_markup_arguments()
+                    log, dots, stem, base, n, d = arguments
+                    left_text = r"- \baca-metronome-mark-spanner-left-text-mixed-number"
+                    left_text += f' {log} {dots} {stem} "{base}" "{n}" "{d}"'
                 else:
                     arguments = metronome_mark._get_markup_arguments()
                     log, dots, stem, value = arguments
@@ -1472,6 +1478,10 @@ class SegmentMaker(abjad.SegmentMaker):
                     "baca-bracketed-metric-modulation",
                     "baca-colored-bracketed-metric-modulation",
                 )
+                string = string.replace(
+                    "baca-bracketed-mixed-number-metric-modulation",
+                    "baca-colored-bracketed-mixed-number-metric-modulation",
+                )
                 left_text_with_color = f"{string} #'{color}"
             else:
                 color = abjad.SchemeColor(color)
@@ -1524,33 +1534,72 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @staticmethod
     def _bracket_metric_modulation(metronome_mark, metric_modulation):
-        arguments = metronome_mark._get_markup_arguments()
-        mm_length, mm_dots, mm_stem, mm_value = arguments
-        arguments = metric_modulation._get_markup_arguments()
-        if metric_modulation._note_to_note():
-            command = r"- \baca-bracketed-metric-modulation"
-            lhs_length, lhs_dots, rhs_length, rhs_dots = arguments
-            command += f' #{mm_length} #{mm_dots} #{mm_stem} #"{mm_value}"'
-            command += f" #{lhs_length} #{lhs_dots}"
-            command += f" #{rhs_length} #{rhs_dots}"
-        elif metric_modulation._lhs_tuplet():
-            command = r"- \baca-bracketed-metric-modulation-tuplet-lhs"
-            tuplet_length, tuplet_dots, tuplet_n, tuplet_d = arguments[:4]
-            note_length, note_dots = arguments[4:]
-            command += f' #{mm_length} #{mm_dots} #{mm_stem} #"{mm_value}"'
-            command += f" #{tuplet_length} #{tuplet_dots}"
-            command += f" #{tuplet_n} #{tuplet_d}"
-            command += f" #{note_length} #{note_dots}"
-        elif metric_modulation._rhs_tuplet():
-            command = r"- \baca-bracketed-metric-modulation-tuplet-rhs"
-            note_length, note_dots = arguments[:2]
-            tuplet_length, tuplet_dots, tuplet_n, tuplet_d = arguments[2:]
-            command += f' #{mm_length} #{mm_dots} #{mm_stem} #"{mm_value}"'
-            command += f" #{note_length} #{note_dots}"
-            command += f" #{tuplet_length} #{tuplet_dots}"
-            command += f" #{tuplet_n} #{tuplet_d}"
+        if metronome_mark.decimal is not True:
+            # TODO: refactor _get_markup_arguments() to return dict
+            arguments = metronome_mark._get_markup_arguments()
+            mm_length, mm_dots, mm_stem, mm_value = arguments
+            arguments = metric_modulation._get_markup_arguments()
+            if metric_modulation._note_to_note():
+                command = r"- \baca-bracketed-metric-modulation"
+                lhs_length, lhs_dots, rhs_length, rhs_dots = arguments
+                command += f' #{mm_length} #{mm_dots} #{mm_stem} #"{mm_value}"'
+                command += f" #{lhs_length} #{lhs_dots}"
+                command += f" #{rhs_length} #{rhs_dots}"
+            elif metric_modulation._lhs_tuplet():
+                command = r"- \baca-bracketed-metric-modulation-tuplet-lhs"
+                tuplet_length, tuplet_dots, tuplet_n, tuplet_d = arguments[:4]
+                note_length, note_dots = arguments[4:]
+                command += f' #{mm_length} #{mm_dots} #{mm_stem} #"{mm_value}"'
+                command += f" #{tuplet_length} #{tuplet_dots}"
+                command += f" #{tuplet_n} #{tuplet_d}"
+                command += f" #{note_length} #{note_dots}"
+            elif metric_modulation._rhs_tuplet():
+                command = r"- \baca-bracketed-metric-modulation-tuplet-rhs"
+                note_length, note_dots = arguments[:2]
+                tuplet_length, tuplet_dots, tuplet_n, tuplet_d = arguments[2:]
+                command += f' #{mm_length} #{mm_dots} #{mm_stem} #"{mm_value}"'
+                command += f" #{note_length} #{note_dots}"
+                command += f" #{tuplet_length} #{tuplet_dots}"
+                command += f" #{tuplet_n} #{tuplet_d}"
+            else:
+                raise Exception(
+                    "implement tied note values in metric modulation."
+                )
         else:
-            raise Exception("implement tied note values in metric modulation.")
+            arguments = metronome_mark._get_markup_arguments()
+            mm_length, mm_dots, mm_stem, mm_base, mm_n, mm_d = arguments
+            # TODO: refactor _get_markup_arguments() to return dict
+            arguments = metric_modulation._get_markup_arguments()
+            if metric_modulation._note_to_note():
+                command = r"- \baca-bracketed-mixed-number-metric-modulation"
+                lhs_length, lhs_dots, rhs_length, rhs_dots = arguments
+                command += f" #{mm_length} #{mm_dots} #{mm_stem}"
+                command += f' #"{mm_base}" #"{mm_n}" #"{mm_d}"'
+                command += f" #{lhs_length} #{lhs_dots}"
+                command += f" #{rhs_length} #{rhs_dots}"
+            elif metric_modulation._lhs_tuplet():
+                command = r"- \baca-bracketed-mixed-number-metric-modulation-tuplet-lhs"
+                tuplet_length, tuplet_dots, tuplet_n, tuplet_d = arguments[:4]
+                note_length, note_dots = arguments[4:]
+                command += f" #{mm_length} #{mm_dots} #{mm_stem}"
+                command += f' #"{mm_base}" #"{mm_n}" #"{mm_d}"'
+                command += f" #{tuplet_length} #{tuplet_dots}"
+                command += f" #{tuplet_n} #{tuplet_d}"
+                command += f" #{note_length} #{note_dots}"
+            elif metric_modulation._rhs_tuplet():
+                command = r"- \baca-bracketed-mixed-number-metric-modulation-tuplet-rhs"
+                note_length, note_dots = arguments[:2]
+                tuplet_length, tuplet_dots, tuplet_n, tuplet_d = arguments[2:]
+                command += f" #{mm_length} #{mm_dots} #{mm_stem}"
+                command += f' #"{mm_base}" #"{mm_n}" #"{mm_d}"'
+                command += f" #{note_length} #{note_dots}"
+                command += f" #{tuplet_length} #{tuplet_dots}"
+                command += f" #{tuplet_n} #{tuplet_d}"
+            else:
+                raise Exception(
+                    "implement tied note values in metric modulation."
+                )
+
         scale = metric_modulation.scale
         command += f" #'({scale[0]} . {scale[1]})"
         return command
