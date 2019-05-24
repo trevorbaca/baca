@@ -705,10 +705,10 @@ class Suite(object):
 
     def __init__(
         self,
-        commands: typing.Sequence[typing.Union[Command, "Suite"]] = None,
+        commands: typing.Sequence["CommandTyping"] = None,
         **keywords,
     ) -> None:
-        commands_: typing.List[typing.Union[Command, Suite]] = []
+        commands_: typing.List[CommandTyping] = []
         for command in commands or []:
             if isinstance(command, (Command, Suite)):
                 command_ = abjad.new(command, **keywords)
@@ -764,17 +764,20 @@ class Suite(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def commands(self) -> typing.Tuple[typing.Union[Command, "Suite"], ...]:
+    def commands(self) -> typing.Tuple["CommandTyping", ...]:
         """
         Gets commands.
         """
         return self._commands
 
 
+CommandTyping = typing.Union[Command, Suite]
+
+
 ### FACTORY FUNCTIONS ###
 
 
-def chunk(*commands: typing.Union[Command, Suite], **keywords) -> Suite:
+def chunk(*commands: CommandTyping, **keywords) -> Suite:
     """
     Chunks commands.
     """
@@ -796,9 +799,7 @@ def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
     return False
 
 
-def new(
-    *commands: typing.Union[Command, Suite], **keywords
-) -> typing.Union[Command, Suite]:
+def new(*commands: CommandTyping, **keywords) -> CommandTyping:
     r"""
     Makes new ``commands`` with ``keywords``.
 
@@ -1179,7 +1180,7 @@ def new(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    commands_: typing.List[typing.Union[Command, Suite]] = []
+    commands_: typing.List[CommandTyping] = []
     for command in commands:
         assert isinstance(command, (Command, Suite)), repr(command)
         command_ = abjad.new(command, **keywords)
@@ -1373,7 +1374,7 @@ def only_segment(command: _command_typing) -> _command_typing:
     return tag("+SEGMENT", command)
 
 
-def suite(*commands: typing.Union[Command, Suite], **keywords) -> Suite:
+def suite(*commands: CommandTyping, **keywords) -> Suite:
     """
     Makes suite.
 
@@ -1408,11 +1409,11 @@ def suite(*commands: typing.Union[Command, Suite], **keywords) -> Suite:
 
 def tag(
     tags: typing.Union[str, typing.List[str]],
-    command: typing.Union[Command, Suite],
+    command: CommandTyping,
     *,
     deactivate: bool = None,
     tag_measure_number: bool = None,
-) -> typing.Union[Command, Suite]:
+) -> CommandTyping:
     """
     Appends each tag in ``tags`` to ``command``.
 
