@@ -1901,8 +1901,8 @@ class SegmentMaker(abjad.SegmentMaker):
             raise Exception(f"{voice} leaf {i} ({leaf!s}) missing clef.")
 
     def _check_range(self):
-        markup = abjad.Markup("*", direction=abjad.Up)
-        abjad.tweak(markup).color = "red"
+        #markup = abjad.Markup("*", direction=abjad.Up)
+        #abjad.tweak(markup).color = "red"
         tag = abjad.tags.ALLOW_OUT_OF_RANGE
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for pleaf in abjad.iterate(voice).leaves(pitched=True):
@@ -1915,7 +1915,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     if abjad.inspect(pleaf).has_indicator(tag):
                         continue
                     if not self.do_not_color_out_of_range_pitches:
-                        abjad.attach(markup, pleaf, tag="_check_range")
+                        #abjad.attach(markup, pleaf, tag="_check_range")
                         string = r"\baca-out-of-range-warning"
                         literal = abjad.LilyPondLiteral(string)
                         abjad.attach(literal, pleaf, tag="_check_range")
@@ -2153,12 +2153,9 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.do_not_color_repeat_pitch_classes:
             return
         lts = self._find_repeat_pitch_classes(self.score)
-        markup = abjad.Markup("@", direction=abjad.Up)
-        abjad.tweak(markup).color = "red"
         tag = "_color_repeat_pitch_classes_"
         for lt in lts:
             for leaf in lt:
-                abjad.attach(markup, leaf, tag=tag)
                 string = r"\baca-repeat-pitch-class-warning"
                 literal = abjad.LilyPondLiteral(string)
                 abjad.attach(literal, leaf, tag=tag)
@@ -4317,8 +4314,6 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 2]                                        %! _comment_measure_numbers
                                         \baca-out-of-range-warning                                       %! _check_range
                                         c16
-                                        - \tweak color #red                                              %! _check_range
-                                        ^ \markup { * }                                                  %! _check_range
                 <BLANKLINE>
                                         d'16
                 <BLANKLINE>
@@ -4544,13 +4539,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
                                         a'16
-                                        - \tweak color #red                                              %! _color_repeat_pitch_classes_
-                                        ^ \markup { @ }                                                  %! _color_repeat_pitch_classes_
                 <BLANKLINE>
                                         \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
                                         a'16
-                                        - \tweak color #red                                              %! _color_repeat_pitch_classes_
-                                        ^ \markup { @ }                                                  %! _color_repeat_pitch_classes_
                 <BLANKLINE>
                                         c'16
                 <BLANKLINE>
@@ -4582,13 +4573,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
                                         c''16
-                                        - \tweak color #red                                              %! _color_repeat_pitch_classes_
-                                        ^ \markup { @ }                                                  %! _color_repeat_pitch_classes_
                 <BLANKLINE>
                                         \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
                                         c'16
-                                        - \tweak color #red                                              %! _color_repeat_pitch_classes_
-                                        ^ \markup { @ }                                                  %! _color_repeat_pitch_classes_
                 <BLANKLINE>
                                         f'16
                 <BLANKLINE>
