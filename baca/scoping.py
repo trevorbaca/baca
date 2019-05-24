@@ -704,9 +704,7 @@ class Suite(object):
     ### INITIALIZER ###
 
     def __init__(
-        self,
-        commands: typing.Sequence["CommandTyping"] = None,
-        **keywords,
+        self, commands: typing.Sequence["CommandTyping"] = None, **keywords
     ) -> None:
         commands_: typing.List[CommandTyping] = []
         for command in commands or []:
