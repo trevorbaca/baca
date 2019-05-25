@@ -1901,8 +1901,6 @@ class SegmentMaker(abjad.SegmentMaker):
             raise Exception(f"{voice} leaf {i} ({leaf!s}) missing clef.")
 
     def _check_range(self):
-        #markup = abjad.Markup("*", direction=abjad.Up)
-        #abjad.tweak(markup).color = "red"
         tag = abjad.tags.ALLOW_OUT_OF_RANGE
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for pleaf in abjad.iterate(voice).leaves(pitched=True):
@@ -1915,7 +1913,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     if abjad.inspect(pleaf).has_indicator(tag):
                         continue
                     if not self.do_not_color_out_of_range_pitches:
-                        #abjad.attach(markup, pleaf, tag="_check_range")
                         string = r"\baca-out-of-range-warning"
                         literal = abjad.LilyPondLiteral(string)
                         abjad.attach(literal, pleaf, tag="_check_range")
