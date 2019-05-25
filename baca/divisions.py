@@ -5028,6 +5028,7 @@ def compound_quarter_divisions() -> DivisionSequenceExpression:
     Makes compound quarter divisions.
     """
     expression = DivisionSequenceExpression()
+    expression = expression.division_sequence()
     expression = expression.split_by_durations(
         compound_meter_multiplier=abjad.Multiplier((3, 2)),
         cyclic=True,
