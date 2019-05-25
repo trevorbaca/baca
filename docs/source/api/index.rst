@@ -245,6 +245,7 @@ Division library.
    ~baca.divisions.compound_quarter_divisions
    ~baca.divisions.fuse_compound_quarter_divisions
    ~baca.divisions.split_by_durations
+   ~baca.divisions.split_by_rounded_ratios
    ~baca.divisions.strict_quarter_divisions
 
 .. raw:: html

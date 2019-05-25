@@ -5144,6 +5144,17 @@ def split_by_durations(
     return expression
 
 
+def split_by_rounded_ratios(ratios) -> DivisionSequenceExpression:
+    """
+    Splits divisions by rounded ratios.
+    """
+    expression = DivisionSequenceExpression()
+    expression = expression.division_sequence()
+    expression = expression.split_by_rounded_ratios(ratios)
+    expression = expression.flatten(depth=-1)
+    return expression
+
+
 def strict_quarter_divisions() -> DivisionSequenceExpression:
     """
     Makes strict quarter divisions.

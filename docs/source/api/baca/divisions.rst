@@ -1076,6 +1076,7 @@ divisions
    ~compound_quarter_divisions
    ~fuse_compound_quarter_divisions
    ~split_by_durations
+   ~split_by_rounded_ratios
    ~strict_quarter_divisions
 
 .. autofunction:: compound_quarter_divisions
@@ -1083,5 +1084,7 @@ divisions
 .. autofunction:: fuse_compound_quarter_divisions
 
 .. autofunction:: split_by_durations
+
+.. autofunction:: split_by_rounded_ratios
 
 .. autofunction:: strict_quarter_divisions
