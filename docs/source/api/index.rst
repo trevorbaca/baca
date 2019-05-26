@@ -225,9 +225,7 @@ Division library.
    ~baca.divisions.Division
    ~baca.divisions.DivisionSequence
    ~baca.divisions.DivisionSequenceExpression
-   ~baca.divisions.FuseByCountsDivisionCallback
    ~baca.divisions.SplitByDurationsDivisionCallback
-   ~baca.divisions.SplitByRoundedRatiosDivisionCallback
 
 .. raw:: html
 

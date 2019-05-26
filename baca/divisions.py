@@ -1750,6 +1750,37 @@ class DivisionSequence(abjad.Sequence):
             items_.append(item)
         super().__init__(items=items_)
 
+    ### PRIVATE METHODS ###
+
+    def _get_ratios(self, ratios):
+        if not ratios:
+            ratios = (abjad.Ratio([1]),)
+        ratios = abjad.CyclicTuple(ratios)
+        return ratios
+
+    def _split_by_rounded_ratios(self, *, divisions=None, ratios=None):
+        divisions = divisions or []
+        if not divisions:
+            return []
+        divisions, start_offset = _to_divisions(divisions)
+        start_offset = divisions[0].start_offset
+        division_lists = []
+        ratios = self._get_ratios(ratios)
+        for i, division in enumerate(divisions):
+            ratio = ratios[i]
+            numerators = abjad.mathtools.partition_integer_by_ratio(
+                division.numerator, ratio
+            )
+            division_list = [
+                Division((numerator, division.denominator))
+                for numerator in numerators
+            ]
+            division_lists.append(division_list)
+        division_lists, start_offset = _to_divisions(
+            division_lists, start_offset=start_offset
+        )
+        return division_lists
+
     ### PUBLIC METHODS ###
 
     @abjad.Signature(is_operator=True, method_name="r", subscript="n")
@@ -1877,8 +1908,9 @@ class DivisionSequence(abjad.Sequence):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        callback = SplitByRoundedRatiosDivisionCallback(ratios=ratios)
-        division_lists = callback(self)
+        division_lists = self._split_by_rounded_ratios(
+            divisions=self, ratios=ratios
+        )
         sequences = [type(self)(_) for _ in division_lists]
         return type(self)(sequences)
 
@@ -2090,91 +2122,6 @@ class DivisionSequenceExpression(abjad.Expression):
         return expression
 
 
-class FuseByCountsDivisionCallback(object):
-    r"""
-    Fuse-by-counts division callback.
-
-    Object model of a partially evaluated function that accepts a (possibly
-    empty) list of divisions as input and returns a (possibly empty) nested
-    list of divisions as output.
-
-    Follows the two-step configure-once / call-repeatly pattern shown here.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_cyclic", "_counts")
-
-    ### INITIALIZER ###
-
-    def __init__(self, *, cyclic=None, counts=None) -> None:
-        if cyclic is not None:
-            cyclic = bool(cyclic)
-        self._cyclic = cyclic
-        counts = counts or ()
-        if counts == abjad.Infinity:
-            self._counts = counts
-        else:
-            assert abjad.mathtools.all_are_positive_integers(counts)
-            self._counts = counts
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self, divisions=None):
-        r"""
-        Calls fuse-by-counts division callback.
-
-        Returns list of division lists.
-        """
-        divisions = divisions or ()
-        start_offset = None
-        if divisions:
-            start_offset = divisions[0].start_offset
-        if not divisions:
-            pass
-        elif self.counts == abjad.Infinity:
-            divisions = [sum(divisions)]
-        elif self.counts:
-            parts = classes.Sequence(divisions).partition_by_counts(
-                self.counts, cyclic=self.cyclic, overhang=True
-            )
-            divisions = [sum(_) for _ in parts]
-        divisions = [Division(_) for _ in divisions]
-        division_lists = []
-        for division in divisions:
-            division_list = [division]
-            division_list = [Division(_) for _ in division_list]
-            division_lists.append(division_list)
-        division_lists, start_offset = _to_divisions(
-            division_lists, start_offset=start_offset
-        )
-        return division_lists
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def counts(
-        self
-    ) -> typing.Optional[
-        typing.Union[abjad.mathtools.Infinity, typing.List[int]]
-    ]:
-        """
-        Gets counts.
-
-        Set to (possibly empty) list or tuple of positive integers.
-
-        Or set to infinity.
-        """
-        return self._counts
-
-    @property
-    def cyclic(self) -> typing.Optional[bool]:
-        """
-        Is true when callback treats measure counts cyclically.
-        """
-        return self._cyclic
-
-
 class SplitByDurationsDivisionCallback(object):
     r"""
     Split-by-durations division callback.
@@ -2320,8 +2267,6 @@ class SplitByDurationsDivisionCallback(object):
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
-    ### PRIVATE METHODS ###
-
     def _get_storage_format_specification(self):
         agent = abjad.StorageFormatManager(self)
         keyword_argument_names = agent.signature_keyword_names
@@ -2391,83 +2336,6 @@ class SplitByDurationsDivisionCallback(object):
         Gets remainder fuse threshold of division-maker.
         """
         return self._remainder_fuse_threshold
-
-
-class SplitByRoundedRatiosDivisionCallback(object):
-    """
-    Split-by-rounded-ratios division callback.
-
-    Object model of a partially evaluated function that accepts a (possibly
-    empty) list of divisions as input and returns a (possibly empty) nested
-    list of divisions as output. Output structured one output list per input
-    division.
-
-    Follows the two-step configure-once / call-repeatedly pattern shown here.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_ratios",)
-
-    ### INITIALIZER ###
-
-    def __init__(self, *, ratios=None) -> None:
-        if ratios is not None:
-            ratios = ratios or ()
-            ratios = [abjad.Ratio(_) for _ in ratios]
-            ratios = tuple(ratios)
-        self._ratios = ratios
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self, divisions=None):
-        """
-        Calls rounded ratio division-maker on ``divisions``.
-
-        Returns possibly empty list of division lists.
-        """
-        divisions = divisions or []
-        if not divisions:
-            return []
-        divisions, start_offset = _to_divisions(divisions)
-        start_offset = divisions[0].start_offset
-        division_lists = []
-        ratios = self._get_ratios()
-        for i, division in enumerate(divisions):
-            ratio = ratios[i]
-            numerators = abjad.mathtools.partition_integer_by_ratio(
-                division.numerator, ratio
-            )
-            division_list = [
-                Division((numerator, division.denominator))
-                for numerator in numerators
-            ]
-            division_lists.append(division_list)
-        division_lists, start_offset = _to_divisions(
-            division_lists, start_offset=start_offset
-        )
-        return division_lists
-
-    ### PRIVATE METHODS ###
-
-    def _get_ratios(self):
-        if self.ratios:
-            ratios = self.ratios
-        else:
-            ratios = (abjad.Ratio([1]),)
-        ratios = abjad.CyclicTuple(ratios)
-        return ratios
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def ratios(self):
-        """
-        Gets ratios of rounded ratio division-maker.
-
-        Set to ratios or none.
-        """
-        return self._ratios
 
 
 ### FACTORY FUNCTIONS ###

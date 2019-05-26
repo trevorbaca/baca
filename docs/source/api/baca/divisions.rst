@@ -25,9 +25,7 @@ divisions
    ~Division
    ~DivisionSequence
    ~DivisionSequenceExpression
-   ~FuseByCountsDivisionCallback
    ~SplitByDurationsDivisionCallback
-   ~SplitByRoundedRatiosDivisionCallback
 
 .. autoclass:: Division
 
@@ -785,42 +783,6 @@ divisions
 
       .. autoattribute:: DivisionSequenceExpression.template
 
-.. autoclass:: FuseByCountsDivisionCallback
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      counts
-      cyclic
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: FuseByCountsDivisionCallback.__call__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: FuseByCountsDivisionCallback.counts
-
-   .. autoattribute:: FuseByCountsDivisionCallback.cyclic
-
 .. autoclass:: SplitByDurationsDivisionCallback
 
    .. raw:: html
@@ -871,39 +833,6 @@ divisions
    .. autoattribute:: SplitByDurationsDivisionCallback.remainder
 
    .. autoattribute:: SplitByDurationsDivisionCallback.remainder_fuse_threshold
-
-.. autoclass:: SplitByRoundedRatiosDivisionCallback
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      ratios
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: SplitByRoundedRatiosDivisionCallback.__call__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: SplitByRoundedRatiosDivisionCallback.ratios
 
 .. raw:: html
 
