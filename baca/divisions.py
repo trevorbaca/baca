@@ -924,69 +924,6 @@ class Division(abjad.NonreducedFraction):
             number += 1
 
 
-class DivisionMaker(object):
-    """
-    Division-maker.
-
-    ..  note:: Deprecated.
-
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_callbacks",)
-
-    ### INITIALIZER ###
-
-    def __init__(self, *, callbacks=None) -> None:
-        callbacks = callbacks or ()
-        if callbacks:
-            callbacks = tuple(callbacks)
-        self._callbacks = callbacks
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self, argument=None) -> typing.List["Division"]:
-        """
-        Makes divisions from ``argument``.
-
-        Pass in ``argument`` as either a list of divisions or as a list of
-        division lists.
-
-        Returns either a list of divisions or a list of division lists.
-        """
-        argument = argument or []
-        argument, start_offset = _to_divisions(argument)
-        for callback in self.callbacks:
-            argument = callback(argument)
-        result, start_offset = _to_divisions(argument)
-        return result
-
-    def __repr__(self) -> str:
-        """
-        Gets interpreter representation.
-        """
-        return abjad.StorageFormatManager(self).get_repr_format()
-
-    ### PRIVATE METHODS ###
-
-    def _append_callback(self, callback):
-        callbacks = self.callbacks or ()
-        callbacks = callbacks + (callback,)
-        result = abjad.new(self)
-        result._callbacks = callbacks
-        return result
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def callbacks(self):
-        """
-        Gets callbacks.
-        """
-        return self._callbacks
-
-
 class DivisionSequence(abjad.Sequence):
     r"""
     Division sequence.
@@ -2161,22 +2098,16 @@ class FuseByCountsDivisionCallback(object):
     empty) list of divisions as input and returns a (possibly empty) nested
     list of divisions as output.
 
-    Treats input as time signatures. Glues input together into hypermeasures
-    according to optional measure counts. Postprocesses resulting
-    hypermeasures with optional secondary division-maker.
-
     Follows the two-step configure-once / call-repeatly pattern shown here.
     """
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_cyclic", "_counts", "_secondary_division_maker")
+    __slots__ = ("_cyclic", "_counts")
 
     ### INITIALIZER ###
 
-    def __init__(
-        self, *, cyclic=None, counts=None, secondary_division_maker=None
-    ) -> None:
+    def __init__(self, *, cyclic=None, counts=None) -> None:
         if cyclic is not None:
             cyclic = bool(cyclic)
         self._cyclic = cyclic
@@ -2186,10 +2117,6 @@ class FuseByCountsDivisionCallback(object):
         else:
             assert abjad.mathtools.all_are_positive_integers(counts)
             self._counts = counts
-        if secondary_division_maker is not None:
-            prototype = (SplitByDurationsDivisionCallback,)
-            assert isinstance(secondary_division_maker, prototype)
-        self._secondary_division_maker = secondary_division_maker
 
     ### SPECIAL METHODS ###
 
@@ -2213,15 +2140,9 @@ class FuseByCountsDivisionCallback(object):
             )
             divisions = [sum(_) for _ in parts]
         divisions = [Division(_) for _ in divisions]
-        if self.secondary_division_maker is None:
-            divisions, start_offset = _to_divisions(divisions, start_offset)
-            return divisions
         division_lists = []
         for division in divisions:
-            if self.secondary_division_maker is not None:
-                division_list = self.secondary_division_maker([division])[0]
-            else:
-                division_list = [division]
+            division_list = [division]
             division_list = [Division(_) for _ in division_list]
             division_lists.append(division_list)
         division_lists, start_offset = _to_divisions(
@@ -2252,15 +2173,6 @@ class FuseByCountsDivisionCallback(object):
         Is true when callback treats measure counts cyclically.
         """
         return self._cyclic
-
-    @property
-    def secondary_division_maker(self) -> typing.Optional["DivisionMaker"]:
-        """
-        Gets secondary division-maker.
-
-        Returns division-maker or none.
-        """
-        return self._secondary_division_maker
 
 
 class SplitByDurationsDivisionCallback(object):
@@ -2557,22 +2469,6 @@ class SplitByRoundedRatiosDivisionCallback(object):
         """
         return self._ratios
 
-
-### TYPINGS ###
-
-division_maker_type = (
-    DivisionMaker,
-    FuseByCountsDivisionCallback,
-    SplitByDurationsDivisionCallback,
-    SplitByRoundedRatiosDivisionCallback,
-)
-
-DivisionMakerTyping = typing.Union[
-    DivisionMaker,
-    FuseByCountsDivisionCallback,
-    SplitByDurationsDivisionCallback,
-    SplitByRoundedRatiosDivisionCallback,
-]
 
 ### FACTORY FUNCTIONS ###
 

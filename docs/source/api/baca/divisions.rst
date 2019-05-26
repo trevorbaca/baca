@@ -23,7 +23,6 @@ divisions
    :nosignatures:
 
    ~Division
-   ~DivisionMaker
    ~DivisionSequence
    ~DivisionSequenceExpression
    ~FuseByCountsDivisionCallback
@@ -305,42 +304,6 @@ divisions
    .. autoattribute:: Division.start_offset
 
    .. autoattribute:: Division.stop_offset
-
-.. autoclass:: DivisionMaker
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      __repr__
-      callbacks
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: DivisionMaker.__call__
-
-   .. automethod:: DivisionMaker.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: DivisionMaker.callbacks
 
 .. autoclass:: DivisionSequence
 
@@ -837,7 +800,6 @@ divisions
       __call__
       counts
       cyclic
-      secondary_division_maker
 
    .. raw:: html
 
@@ -858,8 +820,6 @@ divisions
    .. autoattribute:: FuseByCountsDivisionCallback.counts
 
    .. autoattribute:: FuseByCountsDivisionCallback.cyclic
-
-   .. autoattribute:: FuseByCountsDivisionCallback.secondary_division_maker
 
 .. autoclass:: SplitByDurationsDivisionCallback
 

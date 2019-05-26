@@ -223,7 +223,6 @@ Division library.
    :nosignatures:
 
    ~baca.divisions.Division
-   ~baca.divisions.DivisionMaker
    ~baca.divisions.DivisionSequence
    ~baca.divisions.DivisionSequenceExpression
    ~baca.divisions.FuseByCountsDivisionCallback
