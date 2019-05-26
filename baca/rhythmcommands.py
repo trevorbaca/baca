@@ -281,7 +281,6 @@ class RhythmCommand(scoping.Command):
 
     __slots__ = (
         "_annotate_unpitched_music",
-        "_division_maker",
         "_division_expression",
         "_left_broken",
         "_multimeasure_rests",
@@ -304,7 +303,6 @@ class RhythmCommand(scoping.Command):
         self,
         *,
         annotate_unpitched_music: bool = None,
-        division_maker: baca_divisions.DivisionMakerTyping = None,
         division_expression: abjad.Expression = None,
         left_broken: bool = None,
         match: typings.Indices = None,
@@ -325,15 +323,6 @@ class RhythmCommand(scoping.Command):
         if annotate_unpitched_music is not None:
             annotate_unpitched_music = bool(annotate_unpitched_music)
         self._annotate_unpitched_music = annotate_unpitched_music
-        if division_expression is not None and division_maker is not None:
-            message = "can not set both division expression and division-maker"
-            message += f":\n{division_expression} {division_maker}."
-            raise Exception(message)
-        if division_maker is not None:
-            assert isinstance(
-                division_maker, baca_divisions.division_maker_type
-            ), repr(division_maker)
-        self._division_maker = division_maker
         if division_expression is not None:
             assert isinstance(division_expression, abjad.Expression)
         self._division_expression = division_expression
@@ -486,13 +475,10 @@ class RhythmCommand(scoping.Command):
             else:
                 pairs = list(rhythm_maker)
             assert self._check_rhythm_maker_pattern_pairs(pairs)
-            division_maker = self.division_maker
-            if division_maker is None:
-                division_maker = baca_divisions.DivisionMaker()
             divisions = self._durations_to_divisions(
                 time_signatures, start_offset
             )
-            divisions = division_maker(divisions)
+            divisions = self._to_divisions(divisions)
             divisions = classes.Sequence(divisions).flatten(depth=-1)
             divisions = self._apply_division_expression(divisions)
             division_count = len(divisions)
@@ -596,6 +582,41 @@ class RhythmCommand(scoping.Command):
             final_leaf = abjad.select(selections).leaf(-1)
             if isinstance(final_leaf, abjad.Note):
                 abjad.attach(abjad.tags.RIGHT_BROKEN_TIE_FROM, final_leaf)
+
+    # TODO: probably can remove:
+    def _to_divisions(self, argument, start_offset=None):
+        assert start_offset is None, repr(start_offset)
+        if isinstance(argument, baca_divisions.Division):
+            result = baca_divisions.Division(argument)
+            if start_offset is not None:
+                result._start_offset = start_offset
+                start_offset += result.duration
+        elif isinstance(argument, abjad.NonreducedFraction):
+            result = baca_divisions.Division(argument.pair)
+            if start_offset is not None:
+                result._start_offset = start_offset
+                start_offset += result.duration
+        elif hasattr(argument, "pair"):
+            result = baca_divisions.Division(argument.pair)
+            if start_offset is not None:
+                result._start_offset = start_offset
+                start_offset += result.duration
+        elif isinstance(argument, tuple):
+            result = baca_divisions.Division(argument)
+            if start_offset is not None:
+                result._start_offset = start_offset
+                start_offset += result.duration
+        elif isinstance(argument, (list, abjad.Sequence)):
+            result = []
+            for element in argument:
+                new_element = self._to_divisions(
+                    element, start_offset=start_offset
+                )
+                result.append(new_element)
+            result = type(argument)(result)
+        else:
+            raise TypeError(repr(argument))
+        return result
 
     ### PUBLIC PROPERTIES ###
 
@@ -782,15 +803,6 @@ class RhythmCommand(scoping.Command):
 
         """
         return self._division_expression
-
-    @property
-    def division_maker(
-        self
-    ) -> typing.Optional[baca_divisions.DivisionMakerTyping]:
-        """
-        Gets division-maker.
-        """
-        return self._division_maker
 
     @property
     def left_broken(self) -> typing.Optional[bool]:
@@ -2799,7 +2811,6 @@ def rhythm(
     rhythm_maker: typings.RhythmMakerTyping,
     *,
     annotate_unpitched_music: bool = None,
-    division_maker: baca_divisions.DivisionMakerTyping = None,
     division_expression: abjad.Expression = None,
     left_broken: bool = None,
     measures: typings.Slice = None,
@@ -2819,7 +2830,6 @@ def rhythm(
         rhythm_maker = abjad.select(components)
     return RhythmCommand(
         annotate_unpitched_music=annotate_unpitched_music,
-        division_maker=division_maker,
         division_expression=division_expression,
         left_broken=left_broken,
         measures=measures,

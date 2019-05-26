@@ -133,7 +133,6 @@ rhythmcommands
 
       annotate_unpitched_music
       division_expression
-      division_maker
       left_broken
       multimeasure_rests
       parameter
@@ -192,8 +191,6 @@ rhythmcommands
       .. autoattribute:: RhythmCommand.deactivate
 
    .. autoattribute:: RhythmCommand.division_expression
-
-   .. autoattribute:: RhythmCommand.division_maker
 
    .. autoattribute:: RhythmCommand.left_broken
 
