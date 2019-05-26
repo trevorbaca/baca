@@ -25,7 +25,6 @@ divisions
    ~Division
    ~DivisionSequence
    ~DivisionSequenceExpression
-   ~SplitByDurationsDivisionCallback
 
 .. autoclass:: Division
 
@@ -782,57 +781,6 @@ divisions
    .. container:: inherited
 
       .. autoattribute:: DivisionSequenceExpression.template
-
-.. autoclass:: SplitByDurationsDivisionCallback
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      __repr__
-      compound_meter_multiplier
-      cyclic
-      durations
-      pattern_rotation_index
-      remainder
-      remainder_fuse_threshold
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: SplitByDurationsDivisionCallback.__call__
-
-   .. automethod:: SplitByDurationsDivisionCallback.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: SplitByDurationsDivisionCallback.compound_meter_multiplier
-
-   .. autoattribute:: SplitByDurationsDivisionCallback.cyclic
-
-   .. autoattribute:: SplitByDurationsDivisionCallback.durations
-
-   .. autoattribute:: SplitByDurationsDivisionCallback.pattern_rotation_index
-
-   .. autoattribute:: SplitByDurationsDivisionCallback.remainder
-
-   .. autoattribute:: SplitByDurationsDivisionCallback.remainder_fuse_threshold
 
 .. raw:: html
 

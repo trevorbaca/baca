@@ -538,8 +538,6 @@ class Division(abjad.NonreducedFraction):
         timespans = my_timespan - expr_timespan
         negate_result = False
         if len(timespans) == 0:
-            # message = 'subtraction destroys division.'
-            # raise Exception(message)
             timespans = expr_timespan - my_timespan
             negate_result = True
         assert 0 < len(timespans), repr(timespans)
@@ -1758,6 +1756,86 @@ class DivisionSequence(abjad.Sequence):
         ratios = abjad.CyclicTuple(ratios)
         return ratios
 
+    def _split_by_durations(
+        self,
+        divisions,
+        self_durations,
+        *,
+        self_cyclic=None,
+        self_compound_meter_multiplier=None,
+        self_pattern_rotation_index=None,
+        self_remainder_direction=None,
+        self_remainder_fuse_threshold=None,
+    ):
+        divisions = divisions or []
+        if not divisions:
+            return divisions
+        divisions, start_offset = _to_divisions(divisions)
+        start_offset = divisions[0].start_offset
+        division_lists = []
+        for i, division in enumerate(divisions):
+            input_division = Division(division)
+            input_duration = abjad.Duration(input_division)
+            input_meter = abjad.Meter(input_division)
+            assert 0 < input_division, repr(input_division)
+            if not self_durations:
+                division_list = [input_division]
+                division_lists.append(division_list)
+                continue
+            if input_meter.is_simple or not self_durations:
+                durations = self_durations[:]
+            elif input_meter.is_compound:
+                multiplier = self_compound_meter_multiplier or 1
+                durations = [
+                    abjad.Duration(multiplier * _) for _ in self_durations
+                ]
+            division_list = list(durations)
+            pattern_rotation_index = self_pattern_rotation_index or 0
+            pattern_rotation_index *= i
+            division_list = classes.Sequence(division_list).rotate(
+                n=pattern_rotation_index
+            )
+            division_list = list(division_list)
+            if self_cyclic:
+                division_list = classes.Sequence(
+                    division_list
+                ).repeat_to_weight(input_division, allow_total=abjad.Less)
+                division_list = list(division_list)
+            total_duration = abjad.Duration(sum(division_list))
+            if total_duration == input_duration:
+                division_lists.append(division_list)
+                continue
+            remainder = input_division - total_duration
+            remainder = Division(remainder)
+            if self_remainder_direction == abjad.Left:
+                if self_remainder_fuse_threshold is None:
+                    division_list.insert(0, remainder)
+                elif remainder <= self_remainder_fuse_threshold:
+                    fused_value = division_list[0] + remainder
+                    fused_value = Division(fused_value)
+                    division_list[0] = fused_value
+                else:
+                    division_list.insert(0, remainder)
+            else:
+                if self_remainder_fuse_threshold is None:
+                    division_list.append(remainder)
+                elif remainder <= self_remainder_fuse_threshold:
+                    fused_value = division_list[-1] + remainder
+                    fused_value = Division(fused_value)
+                    division_list[-1] = fused_value
+                else:
+                    division_list.append(remainder)
+            total_duration = abjad.Duration(sum(division_list))
+            pair = total_duration, input_duration
+            assert total_duration == input_duration, pair
+            division_lists.append(division_list)
+        for _ in division_lists:
+            assert isinstance(_, list), repr(_)
+        division_lists, start_offset = _to_divisions(
+            division_lists, start_offset
+        )
+        return division_lists
+
     def _split_by_rounded_ratios(self, *, divisions=None, ratios=None):
         divisions = divisions or []
         if not divisions:
@@ -1889,15 +1967,22 @@ class DivisionSequence(abjad.Sequence):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        callback = SplitByDurationsDivisionCallback(
-            compound_meter_multiplier=compound_meter_multiplier,
-            cyclic=cyclic,
-            durations=durations,
-            pattern_rotation_index=pattern_rotation_index,
-            remainder=remainder,
-            remainder_fuse_threshold=remainder_fuse_threshold,
+        durations = [abjad.Duration(_) for _ in durations]
+        if compound_meter_multiplier is not None:
+            compound_meter_multiplier = abjad.Multiplier(
+                compound_meter_multiplier
+            )
+        if remainder_fuse_threshold is not None:
+            remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
+        division_lists = self._split_by_durations(
+            self,
+            durations,
+            self_compound_meter_multiplier=compound_meter_multiplier,
+            self_cyclic=cyclic,
+            self_pattern_rotation_index=pattern_rotation_index,
+            self_remainder_direction=remainder,
+            self_remainder_fuse_threshold=remainder_fuse_threshold,
         )
-        division_lists = callback(self)
         sequences = [type(self)(_) for _ in division_lists]
         return type(self)(sequences)
 
@@ -2120,222 +2205,6 @@ class DivisionSequenceExpression(abjad.Expression):
         expression = self.append_callback(callback)
         assert isinstance(expression, DivisionSequenceExpression)
         return expression
-
-
-class SplitByDurationsDivisionCallback(object):
-    r"""
-    Split-by-durations division callback.
-
-    Object model of a partially evaluated function that accepts a (possibly
-    empty) list of divisions as input and returns a (possibly empty) nested
-    list of divisions as output. Output structured one output list per input
-    division.
-
-    Follows the two-step configure-once / call-repeatedly pattern shown here.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        "_callbacks",
-        "_compound_meter_multiplier",
-        "_cyclic",
-        "_pattern",
-        "_pattern_rotation_index",
-        "_remainder",
-        "_remainder_fuse_threshold",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        compound_meter_multiplier=None,
-        cyclic=None,
-        durations=None,
-        pattern_rotation_index=None,
-        remainder=None,
-        remainder_fuse_threshold=None,
-    ) -> None:
-        if compound_meter_multiplier is not None:
-            compound_meter_multiplier = abjad.Multiplier(
-                compound_meter_multiplier
-            )
-        self._compound_meter_multiplier = compound_meter_multiplier
-        if cyclic is not None:
-            cyclic = bool(cyclic)
-        self._cyclic = cyclic
-        durations = durations or ()
-        pattern_ = []
-        for division in durations:
-            division = Division(division)
-            pattern_.append(division)
-        durations = tuple(pattern_)
-        self._pattern = durations
-        if remainder is not None:
-            assert remainder in (abjad.Left, abjad.Right), repr(remainder)
-        self._remainder = remainder
-        if pattern_rotation_index is not None:
-            assert isinstance(pattern_rotation_index, int)
-        self._pattern_rotation_index = pattern_rotation_index
-        if remainder_fuse_threshold is not None:
-            remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
-        self._remainder_fuse_threshold = remainder_fuse_threshold
-        self._callbacks = ()
-
-    ### SPECIAL METHODS ###
-
-    def __call__(self, divisions=None):
-        r"""
-        Calls division-maker on ``divisions``.
-
-        Returns possibly empty list of division lists.
-        """
-        divisions = divisions or []
-        if not divisions:
-            return divisions
-        divisions, start_offset = _to_divisions(divisions)
-        start_offset = divisions[0].start_offset
-        division_lists = []
-        for i, division in enumerate(divisions):
-            input_division = Division(division)
-            input_duration = abjad.Duration(input_division)
-            input_meter = abjad.Meter(input_division)
-            assert 0 < input_division, repr(input_division)
-            if not self.durations:
-                division_list = [input_division]
-                division_lists.append(division_list)
-                continue
-            if input_meter.is_simple or not self.durations:
-                durations = self.durations[:]
-            elif input_meter.is_compound:
-                multiplier = self.compound_meter_multiplier or 1
-                durations = [
-                    abjad.Duration(multiplier * _) for _ in self.durations
-                ]
-            division_list = list(durations)
-            pattern_rotation_index = self.pattern_rotation_index or 0
-            pattern_rotation_index *= i
-            division_list = classes.Sequence(division_list).rotate(
-                n=pattern_rotation_index
-            )
-            division_list = list(division_list)
-            if self.cyclic:
-                division_list = classes.Sequence(
-                    division_list
-                ).repeat_to_weight(input_division, allow_total=abjad.Less)
-                division_list = list(division_list)
-            total_duration = abjad.Duration(sum(division_list))
-            if total_duration == input_duration:
-                division_lists.append(division_list)
-                continue
-            remainder = input_division - total_duration
-            remainder = Division(remainder)
-            if self.remainder == abjad.Left:
-                if self.remainder_fuse_threshold is None:
-                    division_list.insert(0, remainder)
-                elif remainder <= self.remainder_fuse_threshold:
-                    fused_value = division_list[0] + remainder
-                    fused_value = Division(fused_value)
-                    division_list[0] = fused_value
-                else:
-                    division_list.insert(0, remainder)
-            else:
-                if self.remainder_fuse_threshold is None:
-                    division_list.append(remainder)
-                elif remainder <= self.remainder_fuse_threshold:
-                    fused_value = division_list[-1] + remainder
-                    fused_value = Division(fused_value)
-                    division_list[-1] = fused_value
-                else:
-                    division_list.append(remainder)
-            total_duration = abjad.Duration(sum(division_list))
-            pair = total_duration, input_duration
-            assert total_duration == input_duration, pair
-            division_lists.append(division_list)
-        for _ in division_lists:
-            assert isinstance(_, list), repr(_)
-        division_lists, start_offset = _to_divisions(
-            division_lists, start_offset
-        )
-        return division_lists
-
-    def __repr__(self) -> str:
-        """
-        Gets interpreter representation.
-        """
-        return abjad.StorageFormatManager(self).get_repr_format()
-
-    def _get_storage_format_specification(self):
-        agent = abjad.StorageFormatManager(self)
-        keyword_argument_names = agent.signature_keyword_names
-        keyword_argument_names = list(keyword_argument_names)
-        if bool(self.cyclic):
-            keyword_argument_names.remove("cyclic")
-        if not self.durations:
-            keyword_argument_names.remove("durations")
-        if self.remainder == abjad.Right:
-            keyword_argument_names.remove("remainder")
-        if self.pattern_rotation_index == 0:
-            keyword_argument_names.remove("pattern_rotation_index")
-        return abjad.StorageFormatSpecification(
-            self, keyword_argument_names=keyword_argument_names
-        )
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def compound_meter_multiplier(self) -> typing.Optional[abjad.Multiplier]:
-        r"""
-        Gets compound meter multiplier of callback.
-        """
-        return self._compound_meter_multiplier
-
-    @property
-    def cyclic(self) -> typing.Optional[bool]:
-        r"""
-        Is true when division-maker reads durations cyclically for each
-        input division.
-
-        Is false when division-maker reads durations only once per input
-        division.
-        """
-        return self._cyclic
-
-    @property
-    def durations(self) -> typing.Optional[typing.List[abjad.Duration]]:
-        r"""
-        Gets durations of division-maker.
-
-        Defaults to none.
-
-        Set to durations or none.
-
-        Returns durations or none.
-        """
-        return self._pattern
-
-    @property
-    def pattern_rotation_index(self) -> typing.Optional[int]:
-        r"""
-        Gets durations rotation index of division-maker.
-        """
-        return self._pattern_rotation_index
-
-    @property
-    def remainder(self) -> typing.Optional[abjad.enums.VerticalAlignment]:
-        r"""
-        Gets direction to which any remainder will be positioned.
-        """
-        return self._remainder
-
-    @property
-    def remainder_fuse_threshold(self) -> typing.Optional[abjad.Duration]:
-        r"""
-        Gets remainder fuse threshold of division-maker.
-        """
-        return self._remainder_fuse_threshold
 
 
 ### FACTORY FUNCTIONS ###
