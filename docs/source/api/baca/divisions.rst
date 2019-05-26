@@ -26,7 +26,6 @@ divisions
    ~DivisionMaker
    ~DivisionSequence
    ~DivisionSequenceExpression
-   ~FlattenDivisionCallback
    ~FuseByCountsDivisionCallback
    ~SplitByDurationsDivisionCallback
    ~SplitByRoundedRatiosDivisionCallback
@@ -321,13 +320,7 @@ divisions
 
       __call__
       __repr__
-      append_callback
       callbacks
-      flatten
-      fuse_by_counts
-      show
-      split_by_durations
-      split_by_rounded_ratios
 
    .. raw:: html
 
@@ -339,32 +332,6 @@ divisions
    .. automethod:: DivisionMaker.__call__
 
    .. automethod:: DivisionMaker.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Methods
-      :class: class-header
-
-   .. automethod:: DivisionMaker.append_callback
-
-   .. automethod:: DivisionMaker.flatten
-
-   .. automethod:: DivisionMaker.fuse_by_counts
-
-   .. automethod:: DivisionMaker.split_by_durations
-
-   .. automethod:: DivisionMaker.split_by_rounded_ratios
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Class & static methods
-      :class: class-header
-
-   .. automethod:: DivisionMaker.show
 
    .. raw:: html
 
@@ -855,39 +822,6 @@ divisions
 
       .. autoattribute:: DivisionSequenceExpression.template
 
-.. autoclass:: FlattenDivisionCallback
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      depth
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: FlattenDivisionCallback.__call__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: FlattenDivisionCallback.depth
-
 .. autoclass:: FuseByCountsDivisionCallback
 
    .. raw:: html
@@ -947,7 +881,6 @@ divisions
       pattern_rotation_index
       remainder
       remainder_fuse_threshold
-      show
 
    .. raw:: html
 
@@ -959,15 +892,6 @@ divisions
    .. automethod:: SplitByDurationsDivisionCallback.__call__
 
    .. automethod:: SplitByDurationsDivisionCallback.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Class & static methods
-      :class: class-header
-
-   .. automethod:: SplitByDurationsDivisionCallback.show
 
    .. raw:: html
 
