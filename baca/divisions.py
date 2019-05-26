@@ -1545,10 +1545,10 @@ class DivisionMaker(object):
 
     def split_by_durations(
         self,
+        durations,
         *,
         compound_meter_multiplier=None,
         cyclic=None,
-        durations=None,
         pattern_rotation_index=None,
         remainder=None,
         remainder_fuse_threshold=None,
@@ -1894,9 +1894,10 @@ class DivisionSequence(abjad.Sequence):
     @abjad.Signature()
     def split_by_durations(
         self,
+        durations,
+        *,
         compound_meter_multiplier=None,
         cyclic=None,
-        durations=None,
         pattern_rotation_index=None,
         remainder=None,
         remainder_fuse_threshold=None,
@@ -1932,7 +1933,7 @@ class DivisionSequence(abjad.Sequence):
 
 
 class DivisionSequenceExpression(abjad.Expression):
-    r"""Division expression.
+    r"""Division sequence expression.
 
     ..  note:: Reimplement as signatured-decorated DivisionSequence method.
 
@@ -2080,9 +2081,10 @@ class DivisionSequenceExpression(abjad.Expression):
 
     def split_by_durations(
         self,
+        durations,
+        *,
         compound_meter_multiplier=None,
         cyclic=None,
-        durations=None,
         pattern_rotation_index=None,
         remainder=None,
         remainder_fuse_threshold=None,
@@ -5103,7 +5105,13 @@ def fuse_compound_quarter_divisions(
 
 def split_by_durations(
     durations: typing.Iterable,
+    *,
+    compound_meter_multiplier=None,
+    do_not_sum=None,
+    cyclic=True,
+    pattern_rotation_index=None,
     remainder: abjad.HorizontalAlignment = abjad.Right,
+    remainder_fuse_threshold=None,
 ) -> DivisionSequenceExpression:
     r"""
     Splits divisions by durations.
@@ -5134,11 +5142,19 @@ def split_by_durations(
     """
     expression = DivisionSequenceExpression()
     expression = expression.division_sequence()
-    expression = expression.flatten(depth=-1)
-    expression = expression.sum()
-    expression = expression.division_sequence()
+    if do_not_sum:
+        pass
+    else:
+        expression = expression.flatten(depth=-1)
+        expression = expression.sum()
+        expression = expression.division_sequence()
     expression = expression.split_by_durations(
-        cyclic=True, durations=durations, remainder=remainder
+        compound_meter_multiplier=compound_meter_multiplier,
+        cyclic=cyclic,
+        durations=durations,
+        pattern_rotation_index=pattern_rotation_index,
+        remainder=remainder,
+        remainder_fuse_threshold=remainder_fuse_threshold,
     )
     expression = expression.flatten(depth=-1)
     return expression
