@@ -28,7 +28,6 @@ divisions
    ~DivisionSequenceExpression
    ~FlattenDivisionCallback
    ~FuseByCountsDivisionCallback
-   ~PartitionDivisionCallback
    ~SplitByDurationsDivisionCallback
    ~SplitByRoundedRatiosDivisionCallback
 
@@ -326,7 +325,6 @@ divisions
       callbacks
       flatten
       fuse_by_counts
-      partition_by_counts
       show
       split_by_durations
       split_by_rounded_ratios
@@ -354,8 +352,6 @@ divisions
    .. automethod:: DivisionMaker.flatten
 
    .. automethod:: DivisionMaker.fuse_by_counts
-
-   .. automethod:: DivisionMaker.partition_by_counts
 
    .. automethod:: DivisionMaker.split_by_durations
 
@@ -930,54 +926,6 @@ divisions
    .. autoattribute:: FuseByCountsDivisionCallback.cyclic
 
    .. autoattribute:: FuseByCountsDivisionCallback.secondary_division_maker
-
-.. autoclass:: PartitionDivisionCallback
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      __format__
-      __repr__
-      append_remainder
-      counts
-      fuse_assignable_total_duration
-      remainder_direction
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: PartitionDivisionCallback.__call__
-
-   .. automethod:: PartitionDivisionCallback.__format__
-
-   .. automethod:: PartitionDivisionCallback.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: PartitionDivisionCallback.append_remainder
-
-   .. autoattribute:: PartitionDivisionCallback.counts
-
-   .. autoattribute:: PartitionDivisionCallback.fuse_assignable_total_duration
-
-   .. autoattribute:: PartitionDivisionCallback.remainder_direction
 
 .. autoclass:: SplitByDurationsDivisionCallback
 
