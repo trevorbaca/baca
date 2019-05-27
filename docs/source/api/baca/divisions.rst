@@ -315,7 +315,6 @@ divisions
       :nosignatures:
 
       rotate
-      show
       split_by_durations
       split_by_rounded_ratios
 
@@ -522,15 +521,6 @@ divisions
    .. container:: inherited
 
       .. automethod:: DivisionSequence.zip
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Class & static methods
-      :class: class-header
-
-   .. automethod:: DivisionSequence.show
 
    .. raw:: html
 

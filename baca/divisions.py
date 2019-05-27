@@ -935,8 +935,7 @@ class DivisionSequence(abjad.Sequence):
 
         Makes quarter-valued divisions with remainder at right:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -954,7 +953,7 @@ class DivisionSequence(abjad.Sequence):
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> divisions = sequence.flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music, input_divisions)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, input_divisions)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -990,8 +989,7 @@ class DivisionSequence(abjad.Sequence):
 
         Makes quarter-valued divisions with remainder at left:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -1009,7 +1007,7 @@ class DivisionSequence(abjad.Sequence):
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> divisions = sequence.flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music, input_divisions)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, input_divisions)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1045,8 +1043,7 @@ class DivisionSequence(abjad.Sequence):
 
         Splits every division by ``1/4`` with remainder at right:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -1063,7 +1060,7 @@ class DivisionSequence(abjad.Sequence):
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> divisions = sequence.flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music, input_divisions)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, input_divisions)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1098,8 +1095,7 @@ class DivisionSequence(abjad.Sequence):
 
         Fuses divisions:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.sum()
         >>> expression = expression.division_sequence()
 
@@ -1111,7 +1107,7 @@ class DivisionSequence(abjad.Sequence):
 
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music, divisions)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, divisions)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1132,8 +1128,7 @@ class DivisionSequence(abjad.Sequence):
 
         Fuses divisions and then splits by ``1/4`` with remainder on right:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.sum()
         >>> expression = expression.division_sequence()
         >>> expression = expression.split_by_durations(
@@ -1152,7 +1147,7 @@ class DivisionSequence(abjad.Sequence):
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> divisions = sequence.flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1182,8 +1177,7 @@ class DivisionSequence(abjad.Sequence):
 
         Fuses divisions together two at a time:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.partition_by_counts(
         ...     counts=[2],
         ...     cyclic=True,
@@ -1198,7 +1192,7 @@ class DivisionSequence(abjad.Sequence):
 
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> music = rhythm_maker(sequence)
-        >>> lilypond_file = baca.DivisionSequence.show(music)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1223,8 +1217,7 @@ class DivisionSequence(abjad.Sequence):
 
         Splits every division by ``3/8``:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     [(3, 8)],
         ...     cyclic=True,
@@ -1241,7 +1234,7 @@ class DivisionSequence(abjad.Sequence):
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> divisions = sequence.flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music, input_divisions)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, input_divisions)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1272,8 +1265,7 @@ class DivisionSequence(abjad.Sequence):
         Splits every division by ``3/8`` and then fuses flattened divisions
         into differently sized groups:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     [(3, 8)],
         ...     cyclic=True,
@@ -1289,7 +1281,7 @@ class DivisionSequence(abjad.Sequence):
 
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> music = rhythm_maker(sequence)
-        >>> lilypond_file = baca.DivisionSequence.show(music)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1315,8 +1307,7 @@ class DivisionSequence(abjad.Sequence):
         Splits every division by ``3/8`` and then fuses flattened divisions
         into differently sized groups. Works with start offset:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     [(3, 8)],
         ...     cyclic=True,
@@ -1337,7 +1328,7 @@ class DivisionSequence(abjad.Sequence):
 
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> music = rhythm_maker(sequence)
-        >>> lilypond_file = baca.DivisionSequence.show(music)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1362,8 +1353,7 @@ class DivisionSequence(abjad.Sequence):
 
         Makes divisions with ``2:1`` ratios:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_rounded_ratios(
         ...     ratios=[abjad.Ratio([2, 1])],
         ...     )
@@ -1378,7 +1368,7 @@ class DivisionSequence(abjad.Sequence):
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> divisions = sequence.flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music, input_divisions)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, input_divisions)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1406,8 +1396,7 @@ class DivisionSequence(abjad.Sequence):
 
         Makes divisions with alternating ``2:1`` and ``1:1:1`` ratios:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_rounded_ratios(
         ...     ratios=[
         ...         abjad.Ratio([2, 1]),
@@ -1425,7 +1414,7 @@ class DivisionSequence(abjad.Sequence):
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> divisions = sequence.flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music, input_divisions)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, input_divisions)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1454,8 +1443,7 @@ class DivisionSequence(abjad.Sequence):
 
         Compound meter multiplier equal to ``3/2``:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     [(1, 4)],
         ...     compound_meter_multiplier=abjad.Multiplier(3, 2),
@@ -1473,7 +1461,7 @@ class DivisionSequence(abjad.Sequence):
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> divisions = sequence.flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music, time_signatures)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1503,8 +1491,7 @@ class DivisionSequence(abjad.Sequence):
         Rotates durations one element to the left on each new input
         division:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     [(1, 16), (1, 8), (1, 4)],
         ...     cyclic=True,
@@ -1523,7 +1510,7 @@ class DivisionSequence(abjad.Sequence):
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> divisions = sequence.flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music, time_signatures)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1559,8 +1546,7 @@ class DivisionSequence(abjad.Sequence):
         Rotates durations one element to the right on each new input
         division:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     [(1, 16), (1, 8), (1, 4)],
         ...     cyclic=True,
@@ -1579,7 +1565,7 @@ class DivisionSequence(abjad.Sequence):
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> divisions = sequence.flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music, time_signatures)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1614,8 +1600,7 @@ class DivisionSequence(abjad.Sequence):
 
         Remainder less than or equal to ``1/8`` fused to the right:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -1632,7 +1617,7 @@ class DivisionSequence(abjad.Sequence):
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> divisions = sequence.flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music, time_signatures)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1656,8 +1641,7 @@ class DivisionSequence(abjad.Sequence):
 
         Remainder less than or equal to ``1/8`` fused to the left:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -1675,7 +1659,7 @@ class DivisionSequence(abjad.Sequence):
         >>> rhythm_maker = rmakers.NoteRhythmMaker()
         >>> divisions = sequence.flatten(depth=-1)
         >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = baca.DivisionSequence.show(music, time_signatures)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1699,8 +1683,7 @@ class DivisionSequence(abjad.Sequence):
 
         Works with start offset:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_rounded_ratios(
         ...     ratios=[abjad.Ratio([1, 1])],
         ...     )
@@ -1893,8 +1876,7 @@ class DivisionSequence(abjad.Sequence):
 
             ..  container:: example expression
 
-                >>> expression = baca.DivisionSequenceExpression(name='J')
-                >>> expression = expression.division_sequence()
+                >>> expression = baca.division_sequence(name='J')
                 >>> expression = expression.rotate(n=-1)
 
                 >>> for division in expression(sequence):
@@ -1943,13 +1925,6 @@ class DivisionSequence(abjad.Sequence):
             item._start_offset = start_offset
             start_offset += duration
         return type(self)(items=items)
-
-    @staticmethod
-    def show(music, divisions=None) -> abjad.LilyPondFile:
-        """
-        Makes rhythm-maker-style LilyPond file for documentation examples.
-        """
-        return abjad.LilyPondFile.rhythm(music, divisions=divisions)
 
     @abjad.Signature()
     def split_by_durations(
@@ -2009,8 +1984,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
         Inherits from sequence expression and coerces input:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression[-3:]
 
         >>> expression([1, 2, 3, 4, 5])
@@ -2020,8 +1994,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
         Splits into quarter notes:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     cyclic=True,
         ...     durations=[(1, 4)],
@@ -2038,8 +2011,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
         Splits into quarter notes and flattens result:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     cyclic=True,
         ...     durations=[(1, 4)],
@@ -2064,8 +2036,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
         Splits into quarter notes with compound meter multiplier:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     compound_meter_multiplier=(3, 2),
         ...     cyclic=True,
@@ -2084,15 +2055,14 @@ class DivisionSequenceExpression(abjad.Expression):
         Splits into quarter notes with compound meter multiplier and gets
         first division of part:
 
-        >>> expression = baca.DivisionSequenceExpression()
-        >>> expression = expression.division_sequence()
+        >>> expression = baca.division_sequence()
         >>> expression = expression.split_by_durations(
         ...     compound_meter_multiplier=(3, 2),
         ...     cyclic=True,
         ...     durations=[(1, 4)],
         ...     )
-        >>> expression_2 = baca.DivisionSequenceExpression()
-        >>> expression_2 = expression_2.division_sequence()[0]
+        >>> expression_2 = baca.division_sequence()
+        >>> expression_2 = expression_2[0]
         >>> expression = expression.map(expression_2)
 
         >>> divisions = [(4, 4), (6, 4)]
@@ -2190,8 +2160,7 @@ class DivisionSequenceExpression(abjad.Expression):
 
         ..  container:: example
 
-            >>> expression = baca.DivisionSequenceExpression()
-            >>> expression = expression.division_sequence()
+            >>> expression = baca.division_sequence()
             >>> expression = expression.split_by_rounded_ratios([(2, 1)])
             >>> expression = expression.flatten(depth=-1)
 
@@ -2381,3 +2350,21 @@ def strict_quarter_divisions() -> DivisionSequenceExpression:
     assert isinstance(expression_, DivisionSequenceExpression)
     expression = expression_.flatten(depth=-1)
     return expression
+
+
+### EXPRESSION CONSTRUCTORS ###
+
+
+def _division_sequence(items=None, **keywords):
+    if items:
+        return DivisionSequence(items=items, **keywords)
+    name = keywords.pop("name", None)
+    expression = classes.Expression(name=name)
+    callback = expression._make_initializer_callback(
+        DivisionSequence,
+        module_names=["baca"],
+        string_template="{}",
+        **keywords,
+    )
+    expression = expression.append_callback(callback)
+    return abjad.new(expression, proxy_class=DivisionSequence)

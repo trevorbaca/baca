@@ -1179,13 +1179,11 @@ class Expression(abjad.Expression):
     ### PRIVATE METHODS ###
 
     def _evaluate_accumulate(self, *arguments):
-        import baca
-
         assert len(arguments) == 1, repr(arguments)
         globals_ = self._make_globals()
         assert "__argument_0" not in globals_
         __argument_0 = arguments[0]
-        assert isinstance(__argument_0, baca.Sequence), repr(__argument_0)
+        assert isinstance(__argument_0, Sequence), repr(__argument_0)
         class_ = type(__argument_0)
         operands = self.map_operand
         globals_["__argument_0"] = __argument_0
@@ -1200,8 +1198,49 @@ class Expression(abjad.Expression):
 
     ### PUBLIC METHODS ###
 
-    def pitch_class_segment(self, **keywords):
-        r"""Makes pitch-class segment subclass expression.
+    def division_sequence(self, **keywords) -> "Expression":
+        """
+        Makes division sequence subclass expression.
+
+        ..  container:: example
+
+            Makes quarter-valued divisions with remainder at left:
+
+            >>> divisions = baca.DivisionSequence([(7, 8), (7, 8), (7, 16)])
+
+            ..  container:: example expression
+
+                >>> expression = baca.Expression(name='J')
+                >>> expression = expression.division_sequence()
+                >>> expression = expression.split_by_durations(
+                ...     [(1, 4)],
+                ...     remainder=abjad.Left,
+                ... )
+
+                >>> sequence = expression(divisions)
+                >>> for sequence_ in sequence:
+                ...     sequence_
+                DivisionSequence([Division((5, 8)), Division((1, 4))])
+                DivisionSequence([Division((5, 8)), Division((1, 4))])
+                DivisionSequence([Division((3, 16)), Division((1, 4))])
+
+                >>> expression.get_string()
+                'split_by_durations(J, [(1, 4)], remainder=abjad.Left)'
+
+        """
+        from .divisions import DivisionSequence
+
+        class_ = DivisionSequence
+        callback = self._make_initializer_callback(
+            class_, module_names=["baca"], string_template="{}", **keywords
+        )
+        expression = self.append_callback(callback)
+        return abjad.new(expression, proxy_class=class_)
+
+
+    def pitch_class_segment(self, **keywords) -> "Expression":
+        r"""
+        Makes pitch-class segment subclass expression.
 
         ..  container:: example
 
@@ -1255,26 +1294,26 @@ class Expression(abjad.Expression):
                         }
                     }
 
-        Returns expression.
         """
-        import baca
+        from .pitchclasses import PitchClassSegment
 
-        class_ = baca.PitchClassSegment
+        class_ = PitchClassSegment
         callback = self._make_initializer_callback(
             class_, module_names=["baca"], string_template="{}", **keywords
         )
         expression = self.append_callback(callback)
         return abjad.new(expression, proxy_class=class_)
 
-    def pitch_class_segments(self):
+    def pitch_class_segments(self) -> "Expression":
         """
         Maps pitch-class segment subclass initializer to expression.
         """
         initializer = Expression().pitch_class_segment()
         return self.map(initializer)
 
-    def select(self, **keywords):
-        r"""Makes select expression.
+    def select(self, **keywords) -> "Expression":
+        r"""
+        Makes select expression.
 
         ..  container:: example
 
@@ -1319,11 +1358,8 @@ class Expression(abjad.Expression):
                 Rest('r8')
                 Note("gf'8")
 
-        Returns expression.
         """
-        import baca
-
-        class_ = baca.Selection
+        class_ = Selection
         callback = self._make_initializer_callback(
             class_, module_names=["baca"], **keywords
         )
