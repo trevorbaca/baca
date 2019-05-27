@@ -1975,216 +1975,14 @@ class DivisionSequence(abjad.Sequence):
         return type(self)(sequences)
 
 
-class DivisionSequenceExpression(abjad.Expression):
-    r"""Division sequence expression.
-
-    ..  note:: Reimplement as signatured-decorated DivisionSequence method.
-
-    ..  container:: example
-
-        Inherits from sequence expression and coerces input:
-
-        >>> expression = baca.division_sequence()
-        >>> expression = expression[-3:]
-
-        >>> expression([1, 2, 3, 4, 5])
-        DivisionSequence([Division((3, 1)), Division((4, 1)), Division((5, 1))])
-
-    ..  container:: example
-
-        Splits into quarter notes:
-
-        >>> expression = baca.division_sequence()
-        >>> expression = expression.split_by_durations(
-        ...     cyclic=True,
-        ...     durations=[(1, 4)],
-        ...     )
-
-        >>> divisions = [(4, 4), (6, 4)]
-        >>> for item in expression(divisions):
-        ...     item
-        ...
-        DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
-        DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
-
-    ..  container:: example
-
-        Splits into quarter notes and flattens result:
-
-        >>> expression = baca.division_sequence()
-        >>> expression = expression.split_by_durations(
-        ...     cyclic=True,
-        ...     durations=[(1, 4)],
-        ...     )
-        >>> expression = expression.flatten(depth=-1)
-
-        >>> divisions = [(4, 4), (6, 4)]
-        >>> for item in expression(divisions):
-        ...     item
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-
-    ..  container:: example
-
-        Splits into quarter notes with compound meter multiplier:
-
-        >>> expression = baca.division_sequence()
-        >>> expression = expression.split_by_durations(
-        ...     compound_meter_multiplier=(3, 2),
-        ...     cyclic=True,
-        ...     durations=[(1, 4)],
-        ...     )
-
-        >>> divisions = [(4, 4), (6, 4)]
-        >>> for item in expression(divisions):
-        ...     item
-        ...
-        DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4)), Division((1, 4))])
-        DivisionSequence([Division((3, 8)), Division((3, 8)), Division((3, 8)), Division((3, 8))])
-
-    ..  container:: example
-
-        Splits into quarter notes with compound meter multiplier and gets
-        first division of part:
-
-        >>> expression = baca.division_sequence()
-        >>> expression = expression.split_by_durations(
-        ...     compound_meter_multiplier=(3, 2),
-        ...     cyclic=True,
-        ...     durations=[(1, 4)],
-        ...     )
-        >>> expression_2 = baca.division_sequence()
-        >>> expression_2 = expression_2[0]
-        >>> expression = expression.map(expression_2)
-
-        >>> divisions = [(4, 4), (6, 4)]
-        >>> expression(divisions)
-        DivisionSequence([Division((1, 4)), Division((3, 8))])
-
-    Initializer returns division sequence expression.
-
-    Call returns division sequence.
-    """
-
-    ### CLASS VARIALBES ###
-
-    __slots__ = ()
-
-    _publish_storage_format = True
-
-    ### SPECIAL METHODS ###
-
-    def __add__(self, i):
-        """
-        Gets proxy method.
-        """
-        proxy_method = self.__getattr__("__add__")
-        return proxy_method(i)
-
-    def __getitem__(self, argument):
-        """
-        Gets proxy method.
-        """
-        proxy_method = self.__getattr__("__getitem__")
-        return proxy_method(argument)
-
-    def __radd__(self, i):
-        """
-        Gets proxy method.
-        """
-        proxy_method = self.__getattr__("__radd__")
-        return proxy_method(i)
-
-    ### PUBLIC METHODS ###
-
-    def division_sequence(self) -> "DivisionSequenceExpression":
-        """
-        Makes divison sequence expression.
-        """
-        class_ = DivisionSequence
-        callback = self._make_initializer_callback(
-            class_, module_names=["baca"], string_template="{}"
-        )
-        expression = self.append_callback(callback)
-        return abjad.new(expression, proxy_class=class_)
-
-    def split_by_durations(
-        self,
-        durations,
-        *,
-        compound_meter_multiplier=None,
-        cyclic=None,
-        pattern_rotation_index=None,
-        remainder=None,
-        remainder_fuse_threshold=None,
-    ) -> "DivisionSequenceExpression":
-        """
-        Appends split-by-durations to expression.
-        """
-        template = "{{}}.split_by_durations("
-        template += "compound_meter_multiplier={compound_meter_multiplier}"
-        template += ", cyclic={cyclic}"
-        template += ", durations={durations}"
-        template += ", pattern_rotation_index={pattern_rotation_index}"
-        template += ", remainder={remainder!r}"
-        template += ", remainder_fuse_threshold={remainder_fuse_threshold}"
-        template += ")"
-        evaluation_template = template.format(
-            compound_meter_multiplier=compound_meter_multiplier,
-            cyclic=cyclic,
-            durations=durations,
-            pattern_rotation_index=pattern_rotation_index,
-            remainder=remainder,
-            remainder_fuse_threshold=remainder_fuse_threshold,
-        )
-        callback = abjad.Expression._frame_to_callback(
-            inspect.currentframe(),
-            evaluation_template=evaluation_template,
-            module_names=["baca"],
-        )
-        expression = self.append_callback(callback)
-        assert isinstance(expression, DivisionSequenceExpression)
-        return expression
-
-    def split_by_rounded_ratios(self, ratios) -> "DivisionSequenceExpression":
-        """
-        Appends split-by-rounded-ratios to expression.
-
-        ..  container:: example
-
-            >>> expression = baca.division_sequence()
-            >>> expression = expression.split_by_rounded_ratios([(2, 1)])
-            >>> expression = expression.flatten(depth=-1)
-
-        """
-        evaluation_template = f"{{}}.split_by_rounded_ratios(ratios={ratios})"
-        callback = abjad.Expression._frame_to_callback(
-            inspect.currentframe(),
-            evaluation_template=evaluation_template,
-            module_names=["baca"],
-        )
-        expression = self.append_callback(callback)
-        assert isinstance(expression, DivisionSequenceExpression)
-        return expression
-
-
 ### FACTORY FUNCTIONS ###
 
 
-def compound_quarter_divisions() -> DivisionSequenceExpression:
+def compound_quarter_divisions() -> classes.Expression:
     """
     Makes compound quarter divisions.
     """
-    expression = DivisionSequenceExpression()
-    expression = expression.division_sequence()
+    expression = _division_sequence()
     expression = expression.split_by_durations(
         compound_meter_multiplier=abjad.Multiplier((3, 2)),
         cyclic=True,
@@ -2194,9 +1992,45 @@ def compound_quarter_divisions() -> DivisionSequenceExpression:
     return expression
 
 
+def fuse_by_counts(
+    counts: typing.Sequence[int], *, cyclic: bool = None
+) -> classes.Expression:
+    """
+    Fuses divisions by counts.
+
+    ..  container:: example
+
+        Fuses divisions once by counts:
+
+        >>> expression = baca.fuse_by_counts([1, 2])
+        >>> divisions = [(2, 8), (2, 8), (2, 8), (2, 8), (2, 8), (2, 8)]
+        >>> expression(divisions)
+        DivisionSequence([Division((2, 8)), Division((4, 8)), Division((6, 8))])
+
+    ..  container:: example
+
+        Fuses divisions cyclically by counts:
+
+        >>> expression = baca.fuse_by_counts([1, 2], cyclic=True)
+        >>> divisions = [(2, 8), (2, 8), (2, 8), (2, 8), (2, 8), (2, 8)]
+        >>> expression(divisions)
+        DivisionSequence([Division((2, 8)), Division((4, 8)), Division((2, 8)), Division((4, 8))])
+
+    """
+    from .classes import _sequence
+
+    expression = _division_sequence()
+    expression = expression.partition_by_counts(
+        counts, cyclic=cyclic, overhang=True
+    )
+    expression = expression.map(_sequence().sum())
+    expression = expression.flatten(depth=-1)
+    return expression
+
+
 def fuse_compound_quarter_divisions(
     counts: typing.List[int],
-) -> DivisionSequenceExpression:
+) -> classes.Expression:
     r"""
     Fuses compound quarter divisions.
 
@@ -2241,8 +2075,7 @@ def fuse_compound_quarter_divisions(
     """
     if not all(isinstance(_, int) for _ in counts):
         raise Exception(counts)
-    expression = DivisionSequenceExpression()
-    expression = expression.division_sequence()
+    expression = _division_sequence()
     expression = expression.split_by_durations(
         compound_meter_multiplier=abjad.Multiplier((3, 2)),
         cyclic=True,
@@ -2266,7 +2099,7 @@ def split_by_durations(
     pattern_rotation_index=None,
     remainder: abjad.HorizontalAlignment = abjad.Right,
     remainder_fuse_threshold=None,
-) -> DivisionSequenceExpression:
+) -> classes.Expression:
     r"""
     Splits divisions by durations.
 
@@ -2294,12 +2127,13 @@ def split_by_durations(
         Division((2, 8))
 
     """
-    expression = DivisionSequenceExpression()
-    expression = expression.division_sequence()
+    expression = _division_sequence()
+    # TODO: rename do_not_join
     if do_not_sum:
         pass
     else:
         expression = expression.flatten(depth=-1)
+        # TODO: replace following two lines with expression.join()
         expression = expression.sum()
         expression = expression.division_sequence()
     expression = expression.split_by_durations(
@@ -2314,18 +2148,17 @@ def split_by_durations(
     return expression
 
 
-def split_by_rounded_ratios(ratios) -> DivisionSequenceExpression:
+def split_by_rounded_ratios(ratios) -> classes.Expression:
     """
     Splits divisions by rounded ratios.
     """
-    expression = DivisionSequenceExpression()
-    expression = expression.division_sequence()
+    expression = _division_sequence()
     expression = expression.split_by_rounded_ratios(ratios)
     expression = expression.flatten(depth=-1)
     return expression
 
 
-def strict_quarter_divisions() -> DivisionSequenceExpression:
+def strict_quarter_divisions() -> classes.Expression:
     """
     Makes strict quarter divisions.
 
@@ -2341,13 +2174,12 @@ def strict_quarter_divisions() -> DivisionSequenceExpression:
         Division((1, 4))
 
     """
-    expression = DivisionSequenceExpression()
-    expression = expression.division_sequence()
+    expression = _division_sequence()
     expression = expression.split_by_durations(
         cyclic=True, durations=[abjad.Duration(1, 4)]
     )
     expression_ = expression.sequence()
-    assert isinstance(expression_, DivisionSequenceExpression)
+    assert isinstance(expression_, classes.Expression)
     expression = expression_.flatten(depth=-1)
     return expression
 

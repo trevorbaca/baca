@@ -224,7 +224,6 @@ Division library.
 
    ~baca.divisions.Division
    ~baca.divisions.DivisionSequence
-   ~baca.divisions.DivisionSequenceExpression
 
 .. raw:: html
 
@@ -237,6 +236,7 @@ Division library.
    :nosignatures:
 
    ~baca.divisions.compound_quarter_divisions
+   ~baca.divisions.fuse_by_counts
    ~baca.divisions.fuse_compound_quarter_divisions
    ~baca.divisions.split_by_durations
    ~baca.divisions.split_by_rounded_ratios

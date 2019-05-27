@@ -1237,7 +1237,6 @@ class Expression(abjad.Expression):
         expression = self.append_callback(callback)
         return abjad.new(expression, proxy_class=class_)
 
-
     def pitch_class_segment(self, **keywords) -> "Expression":
         r"""
         Makes pitch-class segment subclass expression.
