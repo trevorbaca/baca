@@ -1198,7 +1198,7 @@ class Expression(abjad.Expression):
 
     ### PUBLIC METHODS ###
 
-    def division_sequence(self, **keywords) -> "Expression":
+    def divisions(self, **keywords) -> "Expression":
         """
         Makes division sequence subclass expression.
 
@@ -1211,7 +1211,7 @@ class Expression(abjad.Expression):
             ..  container:: example expression
 
                 >>> expression = baca.Expression(name='J')
-                >>> expression = expression.division_sequence()
+                >>> expression = expression.divisions()
                 >>> expression = expression.split_each_by_durations(
                 ...     [(1, 4)],
                 ...     remainder=abjad.Left,
@@ -1228,7 +1228,7 @@ class Expression(abjad.Expression):
                 'split_each_by_durations(J, [(1, 4)], remainder=abjad.Left)'
 
         """
-        from .divisions import DivisionSequence
+        from .divisionclasses import DivisionSequence
 
         class_ = DivisionSequence
         callback = self._make_initializer_callback(

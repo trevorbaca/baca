@@ -898,7 +898,7 @@ class DivisionSequence(abjad.Sequence):
 
         Makes quarter-valued divisions with remainder at right:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_durations(
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -952,7 +952,7 @@ class DivisionSequence(abjad.Sequence):
 
         Makes quarter-valued divisions with remainder at left:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_durations(
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -1006,7 +1006,7 @@ class DivisionSequence(abjad.Sequence):
 
         Splits every division by ``1/4`` with remainder at right:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_durations(
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -1058,9 +1058,9 @@ class DivisionSequence(abjad.Sequence):
 
         Fuses divisions:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.sum()
-        >>> expression = expression.division_sequence()
+        >>> expression = expression.divisions()
 
         >>> input_divisions = [(7, 8), (3, 8), (5, 8)]
         >>> sequence = expression(input_divisions)
@@ -1091,9 +1091,9 @@ class DivisionSequence(abjad.Sequence):
 
         Fuses divisions and then splits by ``1/4`` with remainder on right:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.sum()
-        >>> expression = expression.division_sequence()
+        >>> expression = expression.divisions()
         >>> expression = expression.split_each_by_durations(
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -1140,7 +1140,7 @@ class DivisionSequence(abjad.Sequence):
 
         Fuses divisions together two at a time:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.partition_by_counts(
         ...     counts=[2],
         ...     cyclic=True,
@@ -1180,7 +1180,7 @@ class DivisionSequence(abjad.Sequence):
 
         Splits every division by ``3/8``:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_durations(
         ...     [(3, 8)],
         ...     cyclic=True,
@@ -1228,7 +1228,7 @@ class DivisionSequence(abjad.Sequence):
         Splits every division by ``3/8`` and then fuses flattened divisions
         into differently sized groups:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_durations(
         ...     [(3, 8)],
         ...     cyclic=True,
@@ -1270,7 +1270,7 @@ class DivisionSequence(abjad.Sequence):
         Splits every division by ``3/8`` and then fuses flattened divisions
         into differently sized groups. Works with start offset:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_durations(
         ...     [(3, 8)],
         ...     cyclic=True,
@@ -1316,7 +1316,7 @@ class DivisionSequence(abjad.Sequence):
 
         Makes divisions with ``2:1`` ratios:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_rounded_ratios(
         ...     ratios=[abjad.Ratio([2, 1])],
         ...     )
@@ -1359,7 +1359,7 @@ class DivisionSequence(abjad.Sequence):
 
         Makes divisions with alternating ``2:1`` and ``1:1:1`` ratios:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_rounded_ratios(
         ...     ratios=[
         ...         abjad.Ratio([2, 1]),
@@ -1406,7 +1406,7 @@ class DivisionSequence(abjad.Sequence):
 
         Compound meter multiplier equal to ``3/2``:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_durations(
         ...     [(1, 4)],
         ...     compound_meter_multiplier=abjad.Multiplier(3, 2),
@@ -1454,7 +1454,7 @@ class DivisionSequence(abjad.Sequence):
         Rotates durations one element to the left on each new input
         division:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_durations(
         ...     [(1, 16), (1, 8), (1, 4)],
         ...     cyclic=True,
@@ -1509,7 +1509,7 @@ class DivisionSequence(abjad.Sequence):
         Rotates durations one element to the right on each new input
         division:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_durations(
         ...     [(1, 16), (1, 8), (1, 4)],
         ...     cyclic=True,
@@ -1563,7 +1563,7 @@ class DivisionSequence(abjad.Sequence):
 
         Remainder less than or equal to ``1/8`` fused to the right:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_durations(
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -1604,7 +1604,7 @@ class DivisionSequence(abjad.Sequence):
 
         Remainder less than or equal to ``1/8`` fused to the left:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_durations(
         ...     [(1, 4)],
         ...     cyclic=True,
@@ -1646,7 +1646,7 @@ class DivisionSequence(abjad.Sequence):
 
         Works with start offset:
 
-        >>> expression = baca.division_sequence()
+        >>> expression = baca.divisions()
         >>> expression = expression.split_each_by_rounded_ratios(
         ...     ratios=[abjad.Ratio([1, 1])],
         ...     )
@@ -1872,7 +1872,7 @@ class DivisionSequence(abjad.Sequence):
 
             ..  container:: example expression
 
-                >>> expression = baca.division_sequence(name='J')
+                >>> expression = baca.divisions(name='J')
                 >>> expression = expression.rotate(n=-1)
 
                 >>> for division in expression(sequence):
@@ -2005,11 +2005,11 @@ def fuse_divisions(
         DivisionSequence([Division((2, 8)), Division((4, 8)), Division((2, 8)), Division((4, 8))])
 
     """
-    expression = _division_sequence()
+    expression = _divisions()
     expression = expression.partition_by_counts(
         counts, cyclic=cyclic, overhang=True
     )
-    expression = expression.map(_division_sequence().sum())
+    expression = expression.map(_divisions().sum())
     expression = expression.flatten(depth=-1)
     return expression
 
@@ -2113,7 +2113,7 @@ def fuse_compound_quarter_divisions(
     expression = expression.partition_by_counts(
         counts=counts, cyclic=cyclic, overhang=True
     )
-    expression = expression.map(_division_sequence().sum())
+    expression = expression.map(_divisions().sum())
     expression = expression.flatten(depth=-1)
     return expression
 
@@ -2153,7 +2153,7 @@ def quarter_split_each(
         Division((3, 8))
 
     """
-    expression = _division_sequence()
+    expression = _divisions()
     expression = expression.split_each_by_durations(
         [(1, 4)], compound_meter_multiplier=compound, cyclic=True
     )
@@ -2222,7 +2222,7 @@ def split_expanse(
         Division((5, 8))
 
     """
-    expression = _division_sequence()
+    expression = _divisions()
     if do_not_join:
         pass
     else:
@@ -2246,7 +2246,7 @@ def split_each_by_rounded_ratios(
     """
     Splits each division by rounded ratios.
     """
-    expression = _division_sequence()
+    expression = _divisions()
     expression = expression.split_each_by_rounded_ratios(ratios)
     expression = expression.flatten(depth=-1)
     return expression
@@ -2255,7 +2255,7 @@ def split_each_by_rounded_ratios(
 ### EXPRESSION CONSTRUCTORS ###
 
 
-def _division_sequence(items=None, **keywords):
+def _divisions(items=None, **keywords):
     if items:
         return DivisionSequence(items=items, **keywords)
     name = keywords.pop("name", None)

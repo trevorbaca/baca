@@ -24,7 +24,7 @@ baca
 
    classes
    commands
-   divisions
+   divisionclasses
    indicatorcommands
    indicators
    markups
@@ -47,7 +47,7 @@ baca
 
    classes
    commands
-   divisions
+   divisionclasses
    indicatorcommands
    indicators
    markups

@@ -1,7 +1,7 @@
 import abjad
 from .classes import *
 from .commands import *
-from .divisions import *
+from .divisionclasses import *
 from .indicatorcommands import *
 from .indicators import *
 from .mmaker import *
@@ -23,7 +23,7 @@ from . import markups
 # expression constructors
 from .classes import _select as select
 from .classes import _sequence as sequence
-from .divisions import _division_sequence as division_sequence
+from .divisionclasses import _divisions as divisions
 from .pitchclasses import _pitch_class_segment as pitch_class_segment
 from .pitchclasses import _pitch_class_set as pitch_class_set
 from .pitchclasses import _pitch_set as pitch_set

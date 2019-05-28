@@ -8,7 +8,7 @@ import math
 import typing
 from abjadext import rmakers
 from . import classes
-from . import divisions as baca_divisions
+from . import divisionclasses
 from . import const
 from . import overrides
 from . import scoping
@@ -445,7 +445,7 @@ class RhythmCommand(scoping.Command):
 
     @staticmethod
     def _durations_to_divisions(durations, start_offset):
-        divisions = [baca_divisions.Division(_) for _ in durations]
+        divisions = [divisionclasses.Division(_) for _ in durations]
         durations = [_.duration for _ in divisions]
         start_offset = abjad.Offset(start_offset)
         durations.insert(0, start_offset)
@@ -453,7 +453,7 @@ class RhythmCommand(scoping.Command):
         assert len(divisions) == len(start_offsets)
         divisions_ = []
         for division, start_offset in zip(divisions, start_offsets):
-            division_ = baca_divisions.Division(
+            division_ = divisionclasses.Division(
                 division, start_offset=start_offset
             )
             divisions_.append(division_)
@@ -2236,7 +2236,7 @@ def make_repeated_duration_notes(
         durations = [abjad.Duration(durations)]
     tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
     return RhythmCommand(
-        divisions=baca_divisions.split_expanse(durations, cyclic=True),
+        divisions=divisionclasses.split_expanse(durations, cyclic=True),
         measures=measures,
         rewrite_meter=not (do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(

@@ -168,7 +168,7 @@ classes
    .. autosummary::
       :nosignatures:
 
-      division_sequence
+      divisions
       pitch_class_segment
       pitch_class_segments
       select
@@ -243,7 +243,7 @@ classes
 
       .. automethod:: Expression.color
 
-   .. automethod:: Expression.division_sequence
+   .. automethod:: Expression.divisions
 
    .. container:: inherited
 

@@ -207,7 +207,7 @@ Bača API
 
    <hr/>
 
-.. rubric:: :ref:`baca.divisions <baca--divisions>`
+.. rubric:: :ref:`baca.divisionclasses <baca--divisionclasses>`
    :class: section-header
 
 Division library.
@@ -222,8 +222,8 @@ Division library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.divisions.Division
-   ~baca.divisions.DivisionSequence
+   ~baca.divisionclasses.Division
+   ~baca.divisionclasses.DivisionSequence
 
 .. raw:: html
 
@@ -235,11 +235,11 @@ Division library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.divisions.fuse_compound_quarter_divisions
-   ~baca.divisions.fuse_divisions
-   ~baca.divisions.quarter_split_each
-   ~baca.divisions.split_each_by_rounded_ratios
-   ~baca.divisions.split_expanse
+   ~baca.divisionclasses.fuse_compound_quarter_divisions
+   ~baca.divisionclasses.fuse_divisions
+   ~baca.divisionclasses.quarter_split_each
+   ~baca.divisionclasses.split_each_by_rounded_ratios
+   ~baca.divisionclasses.split_expanse
 
 .. raw:: html
 
