@@ -1212,7 +1212,7 @@ class Expression(abjad.Expression):
 
                 >>> expression = baca.Expression(name='J')
                 >>> expression = expression.division_sequence()
-                >>> expression = expression.split_by_durations(
+                >>> expression = expression.split_each_by_durations(
                 ...     [(1, 4)],
                 ...     remainder=abjad.Left,
                 ... )
@@ -1225,7 +1225,7 @@ class Expression(abjad.Expression):
                 DivisionSequence([Division((3, 16)), Division((1, 4))])
 
                 >>> expression.get_string()
-                'split_by_durations(J, [(1, 4)], remainder=abjad.Left)'
+                'split_each_by_durations(J, [(1, 4)], remainder=abjad.Left)'
 
         """
         from .divisions import DivisionSequence

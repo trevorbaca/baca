@@ -2236,7 +2236,7 @@ def make_repeated_duration_notes(
         durations = [abjad.Duration(durations)]
     tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
     return RhythmCommand(
-        divisions=baca_divisions.split_by_durations(durations),
+        divisions=baca_divisions.split_expanse(durations, cyclic=True),
         measures=measures,
         rewrite_meter=not (do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(

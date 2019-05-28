@@ -314,8 +314,8 @@ divisions
       :nosignatures:
 
       rotate
-      split_by_durations
-      split_by_rounded_ratios
+      split_each_by_durations
+      split_each_by_rounded_ratios
 
    .. raw:: html
 
@@ -497,9 +497,9 @@ divisions
 
       .. automethod:: DivisionSequence.split
 
-   .. automethod:: DivisionSequence.split_by_durations
+   .. automethod:: DivisionSequence.split_each_by_durations
 
-   .. automethod:: DivisionSequence.split_by_rounded_ratios
+   .. automethod:: DivisionSequence.split_each_by_rounded_ratios
 
    .. container:: inherited
 
@@ -542,18 +542,18 @@ divisions
 .. autosummary::
    :nosignatures:
 
-   ~fuse_by_counts
    ~fuse_compound_quarter_divisions
-   ~quarter_divisions
-   ~split_by_durations
-   ~split_by_rounded_ratios
-
-.. autofunction:: fuse_by_counts
+   ~fuse_divisions
+   ~quarter_split_each
+   ~split_each_by_rounded_ratios
+   ~split_expanse
 
 .. autofunction:: fuse_compound_quarter_divisions
 
-.. autofunction:: quarter_divisions
+.. autofunction:: fuse_divisions
 
-.. autofunction:: split_by_durations
+.. autofunction:: quarter_split_each
 
-.. autofunction:: split_by_rounded_ratios
+.. autofunction:: split_each_by_rounded_ratios
+
+.. autofunction:: split_expanse

@@ -235,11 +235,11 @@ Division library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.divisions.fuse_by_counts
    ~baca.divisions.fuse_compound_quarter_divisions
-   ~baca.divisions.quarter_divisions
-   ~baca.divisions.split_by_durations
-   ~baca.divisions.split_by_rounded_ratios
+   ~baca.divisions.fuse_divisions
+   ~baca.divisions.quarter_split_each
+   ~baca.divisions.split_each_by_rounded_ratios
+   ~baca.divisions.split_expanse
 
 .. raw:: html
 
