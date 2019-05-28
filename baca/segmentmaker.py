@@ -2150,6 +2150,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.do_not_color_repeat_pitch_classes:
             return
         lts = self._find_repeat_pitch_classes(self.score)
+        #print('FOO', lts)
         tag = "_color_repeat_pitch_classes_"
         for lt in lts:
             for leaf in lt:
@@ -2276,13 +2277,13 @@ class SegmentMaker(abjad.SegmentMaker):
                     written_pitches = lt.head.written_pitches
                 else:
                     written_pitches = []
-                pcs = [_.pitch_class for _ in written_pitches]
+                pcs = pitchclasses.PitchClassSet(written_pitches)
                 inspection = abjad.inspect(lt.head)
                 if inspection.has_indicator(
                     abjad.tags.NOT_YET_PITCHED
                 ) or inspection.has_indicator(abjad.tags.ALLOW_REPEAT_PITCH):
                     pass
-                elif set(pcs) & set(previous_pcs):
+                elif pcs & previous_pcs:
                     if previous_lt not in violators:
                         violators.append(previous_lt)
                     if lt not in violators:
