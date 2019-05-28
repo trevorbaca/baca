@@ -542,21 +542,18 @@ divisions
 .. autosummary::
    :nosignatures:
 
-   ~compound_quarter_divisions
    ~fuse_by_counts
    ~fuse_compound_quarter_divisions
+   ~quarter_divisions
    ~split_by_durations
    ~split_by_rounded_ratios
-   ~strict_quarter_divisions
-
-.. autofunction:: compound_quarter_divisions
 
 .. autofunction:: fuse_by_counts
 
 .. autofunction:: fuse_compound_quarter_divisions
 
+.. autofunction:: quarter_divisions
+
 .. autofunction:: split_by_durations
 
 .. autofunction:: split_by_rounded_ratios
-
-.. autofunction:: strict_quarter_divisions

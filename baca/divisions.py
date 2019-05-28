@@ -11,40 +11,6 @@ from . import classes
 ### FUNCTIONS ###
 
 
-def _to_divisions(argument, start_offset=None):
-    if isinstance(argument, Division):
-        result = Division(argument)
-        if start_offset is not None:
-            result._start_offset = start_offset
-            start_offset += result.duration
-    elif isinstance(argument, abjad.NonreducedFraction):
-        result = Division(argument.pair)
-        if start_offset is not None:
-            result._start_offset = start_offset
-            start_offset += result.duration
-    elif hasattr(argument, "pair"):
-        result = Division(argument.pair)
-        if start_offset is not None:
-            result._start_offset = start_offset
-            start_offset += result.duration
-    elif isinstance(argument, tuple):
-        result = Division(argument)
-        if start_offset is not None:
-            result._start_offset = start_offset
-            start_offset += result.duration
-    elif isinstance(argument, (list, abjad.Sequence)):
-        result = []
-        for element in argument:
-            new_element, start_offset = _to_divisions(
-                element, start_offset=start_offset
-            )
-            result.append(new_element)
-        result = type(argument)(result)
-    else:
-        raise TypeError(repr(argument))
-    return result, start_offset
-
-
 ### CLASSES ###
 
 
@@ -1753,7 +1719,7 @@ class DivisionSequence(abjad.Sequence):
         divisions = divisions or []
         if not divisions:
             return divisions
-        divisions, start_offset = _to_divisions(divisions)
+        divisions, start_offset = self._to_divisions(divisions)
         start_offset = divisions[0].start_offset
         division_lists = []
         for i, division in enumerate(divisions):
@@ -1814,7 +1780,7 @@ class DivisionSequence(abjad.Sequence):
             division_lists.append(division_list)
         for _ in division_lists:
             assert isinstance(_, list), repr(_)
-        division_lists, start_offset = _to_divisions(
+        division_lists, start_offset = self._to_divisions(
             division_lists, start_offset
         )
         return division_lists
@@ -1823,7 +1789,7 @@ class DivisionSequence(abjad.Sequence):
         divisions = divisions or []
         if not divisions:
             return []
-        divisions, start_offset = _to_divisions(divisions)
+        divisions, start_offset = self._to_divisions(divisions)
         start_offset = divisions[0].start_offset
         division_lists = []
         ratios = self._get_ratios(ratios)
@@ -1837,10 +1803,43 @@ class DivisionSequence(abjad.Sequence):
                 for numerator in numerators
             ]
             division_lists.append(division_list)
-        division_lists, start_offset = _to_divisions(
+        division_lists, start_offset = self._to_divisions(
             division_lists, start_offset=start_offset
         )
         return division_lists
+
+    def _to_divisions(self, argument, start_offset=None):
+        if isinstance(argument, Division):
+            result = Division(argument)
+            if start_offset is not None:
+                result._start_offset = start_offset
+                start_offset += result.duration
+        elif isinstance(argument, abjad.NonreducedFraction):
+            result = Division(argument.pair)
+            if start_offset is not None:
+                result._start_offset = start_offset
+                start_offset += result.duration
+        elif hasattr(argument, "pair"):
+            result = Division(argument.pair)
+            if start_offset is not None:
+                result._start_offset = start_offset
+                start_offset += result.duration
+        elif isinstance(argument, tuple):
+            result = Division(argument)
+            if start_offset is not None:
+                result._start_offset = start_offset
+                start_offset += result.duration
+        elif isinstance(argument, (list, abjad.Sequence)):
+            result = []
+            for element in argument:
+                new_element, start_offset = self._to_divisions(
+                    element, start_offset=start_offset
+                )
+                result.append(new_element)
+            result = type(argument)(result)
+        else:
+            raise TypeError(repr(argument))
+        return result, start_offset
 
     ### PUBLIC METHODS ###
 
@@ -1947,6 +1946,12 @@ class DivisionSequence(abjad.Sequence):
             compound_meter_multiplier = abjad.Multiplier(
                 compound_meter_multiplier
             )
+        if cyclic is not None:
+            cyclic = bool(cyclic)
+        if pattern_rotation_index is not None:
+            assert isinstance(pattern_rotation_index, int)
+        if remainder is not None:
+            assert remainder in (abjad.Left, abjad.Right), repr(remainder)
         if remainder_fuse_threshold is not None:
             remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
         division_lists = self._split_by_durations(
@@ -1978,20 +1983,6 @@ class DivisionSequence(abjad.Sequence):
 ### FACTORY FUNCTIONS ###
 
 
-def compound_quarter_divisions() -> classes.Expression:
-    """
-    Makes compound quarter divisions.
-    """
-    expression = _division_sequence()
-    expression = expression.split_by_durations(
-        compound_meter_multiplier=abjad.Multiplier((3, 2)),
-        cyclic=True,
-        durations=[abjad.Duration(1, 4)],
-    )
-    expression = expression.flatten(depth=-1)
-    return expression
-
-
 def fuse_by_counts(
     counts: typing.Sequence[int], *, cyclic: bool = None
 ) -> classes.Expression:
@@ -2017,19 +2008,17 @@ def fuse_by_counts(
         DivisionSequence([Division((2, 8)), Division((4, 8)), Division((2, 8)), Division((4, 8))])
 
     """
-    from .classes import _sequence
-
     expression = _division_sequence()
     expression = expression.partition_by_counts(
         counts, cyclic=cyclic, overhang=True
     )
-    expression = expression.map(_sequence().sum())
+    expression = expression.map(_division_sequence().sum())
     expression = expression.flatten(depth=-1)
     return expression
 
 
 def fuse_compound_quarter_divisions(
-    counts: typing.List[int],
+    counts: typing.List[int], *, cyclic: bool = True
 ) -> classes.Expression:
     r"""
     Fuses compound quarter divisions.
@@ -2075,30 +2064,67 @@ def fuse_compound_quarter_divisions(
     """
     if not all(isinstance(_, int) for _ in counts):
         raise Exception(counts)
+    expression = quarter_divisions(compound=(3, 2))
+    expression = expression.partition_by_counts(
+        counts=counts, cyclic=cyclic, overhang=True
+    )
+    expression = expression.map(_division_sequence().sum())
+    expression = expression.flatten(depth=-1)
+    return expression
+
+
+def quarter_divisions(
+    *, compound: abjad.DurationTyping = None
+) -> classes.Expression:
+    """
+    Makes quarter divisions.
+
+    ..  container:: example
+
+        >>> expression = baca.quarter_divisions()
+        >>> for item in expression([(2, 4), (6, 4)]):
+        ...     item
+        ...
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+        Division((1, 4))
+
+    ..  container:: example
+
+        >>> expression = baca.quarter_divisions(compound=(3, 2))
+        >>> for item in expression([(2, 4), (6, 4)]):
+        ...     item
+        ...
+        Division((1, 4))
+        Division((1, 4))
+        Division((3, 8))
+        Division((3, 8))
+        Division((3, 8))
+        Division((3, 8))
+
+    """
     expression = _division_sequence()
     expression = expression.split_by_durations(
-        compound_meter_multiplier=abjad.Multiplier((3, 2)),
-        cyclic=True,
-        durations=[abjad.Duration(1, 4)],
+        [(1, 4)], compound_meter_multiplier=compound, cyclic=True
     )
-    expression = expression.flatten(depth=-1)
-    expression = expression.partition_by_counts(
-        counts=counts, cyclic=True, overhang=True
-    )
-    expression = expression.map(classes.sequence_expression().sum())
     expression = expression.flatten(depth=-1)
     return expression
 
 
 def split_by_durations(
-    durations: typing.Iterable,
+    durations: typing.Sequence[abjad.DurationTyping],
     *,
-    compound_meter_multiplier=None,
-    do_not_sum=None,
-    cyclic=True,
-    pattern_rotation_index=None,
+    compound_meter_multiplier: abjad.DurationTyping = None,
+    do_not_sum: bool = None,
+    cyclic: bool = True,
+    pattern_rotation_index: int = None,
     remainder: abjad.HorizontalAlignment = abjad.Right,
-    remainder_fuse_threshold=None,
+    remainder_fuse_threshold: abjad.DurationTyping = None,
 ) -> classes.Expression:
     r"""
     Splits divisions by durations.
@@ -2137,9 +2163,9 @@ def split_by_durations(
         expression = expression.sum()
         expression = expression.division_sequence()
     expression = expression.split_by_durations(
+        durations,
         compound_meter_multiplier=compound_meter_multiplier,
         cyclic=cyclic,
-        durations=durations,
         pattern_rotation_index=pattern_rotation_index,
         remainder=remainder,
         remainder_fuse_threshold=remainder_fuse_threshold,
@@ -2148,39 +2174,15 @@ def split_by_durations(
     return expression
 
 
-def split_by_rounded_ratios(ratios) -> classes.Expression:
+def split_by_rounded_ratios(
+    ratios: typing.Sequence[abjad.IntegerPair]
+) -> classes.Expression:
     """
     Splits divisions by rounded ratios.
     """
     expression = _division_sequence()
     expression = expression.split_by_rounded_ratios(ratios)
     expression = expression.flatten(depth=-1)
-    return expression
-
-
-def strict_quarter_divisions() -> classes.Expression:
-    """
-    Makes strict quarter divisions.
-
-    ..  container:: example
-
-        >>> expression = baca.strict_quarter_divisions()
-        >>> for item in expression([(2, 4), (2, 4)]):
-        ...     item
-        ...
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-
-    """
-    expression = _division_sequence()
-    expression = expression.split_by_durations(
-        cyclic=True, durations=[abjad.Duration(1, 4)]
-    )
-    expression_ = expression.sequence()
-    assert isinstance(expression_, classes.Expression)
-    expression = expression_.flatten(depth=-1)
     return expression
 
 
