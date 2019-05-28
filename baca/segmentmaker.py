@@ -2150,7 +2150,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.do_not_color_repeat_pitch_classes:
             return
         lts = self._find_repeat_pitch_classes(self.score)
-        #print('FOO', lts)
         tag = "_color_repeat_pitch_classes_"
         for lt in lts:
             for leaf in lt:
