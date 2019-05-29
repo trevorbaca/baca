@@ -1696,15 +1696,8 @@ class DivisionSequence(abjad.Sequence):
 
     ### PRIVATE METHODS ###
 
-    def _get_ratios(self, ratios):
-        if not ratios:
-            ratios = (abjad.Ratio([1]),)
-        ratios = abjad.CyclicTuple(ratios)
-        return ratios
-
     def _split_each_by_durations(
         self,
-        divisions,
         self_durations,
         *,
         self_cyclic=None,
@@ -1713,10 +1706,7 @@ class DivisionSequence(abjad.Sequence):
         self_remainder_direction=None,
         self_remainder_fuse_threshold=None,
     ):
-        divisions = divisions or []
-        if not divisions:
-            return divisions
-        divisions, start_offset = self._to_divisions(divisions)
+        divisions, start_offset = self._to_divisions(self)
         start_offset = divisions[0].start_offset
         division_lists = []
         for i, division in enumerate(divisions):
@@ -1780,16 +1770,18 @@ class DivisionSequence(abjad.Sequence):
         division_lists, start_offset = self._to_divisions(
             division_lists, start_offset
         )
+        assert isinstance(division_lists, DivisionSequence), repr(
+            division_lists
+        )
         return division_lists
 
-    def _split_each_by_rounded_ratios(self, *, divisions=None, ratios=None):
-        divisions = divisions or []
-        if not divisions:
-            return []
-        divisions, start_offset = self._to_divisions(divisions)
+    def _split_each_by_rounded_ratios(self, ratios):
+        divisions, start_offset = self._to_divisions(self)
         start_offset = divisions[0].start_offset
         division_lists = []
-        ratios = self._get_ratios(ratios)
+        if not ratios:
+            ratios = (abjad.Ratio([1]),)
+        ratios = abjad.CyclicTuple(ratios)
         for i, division in enumerate(divisions):
             ratio = ratios[i]
             numerators = abjad.mathtools.partition_integer_by_ratio(
@@ -1806,36 +1798,22 @@ class DivisionSequence(abjad.Sequence):
         return division_lists
 
     def _to_divisions(self, argument, start_offset=None):
-        if isinstance(argument, Division):
-            result = Division(argument)
+        if isinstance(argument, abjad.Fraction):
+            result = Division(argument, start_offset=start_offset)
             if start_offset is not None:
-                result._start_offset = start_offset
-                start_offset += result.duration
-        elif isinstance(argument, abjad.NonreducedFraction):
-            result = Division(argument.pair)
-            if start_offset is not None:
-                result._start_offset = start_offset
-                start_offset += result.duration
-        elif hasattr(argument, "pair"):
-            result = Division(argument.pair)
-            if start_offset is not None:
-                result._start_offset = start_offset
-                start_offset += result.duration
-        elif isinstance(argument, tuple):
-            result = Division(argument)
-            if start_offset is not None:
-                result._start_offset = start_offset
                 start_offset += result.duration
         elif isinstance(argument, (list, abjad.Sequence)):
             result = []
-            for element in argument:
-                new_element, start_offset = self._to_divisions(
-                    element, start_offset=start_offset
+            for item in argument:
+                new_item, start_offset = self._to_divisions(
+                    item, start_offset=start_offset
                 )
-                result.append(new_element)
-            result = type(argument)(result)
+                result.append(new_item)
+            result = DivisionSequence(result)
         else:
             raise TypeError(repr(argument))
+        if not isinstance(result, (Division, DivisionSequence)):
+            raise Exception(result)
         return result, start_offset
 
     ### PUBLIC METHODS ###
@@ -1951,8 +1929,7 @@ class DivisionSequence(abjad.Sequence):
             assert remainder in (abjad.Left, abjad.Right), repr(remainder)
         if remainder_fuse_threshold is not None:
             remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
-        division_lists = self._split_each_by_durations(
-            self,
+        sequence = self._split_each_by_durations(
             durations,
             self_compound_meter_multiplier=compound_meter_multiplier,
             self_cyclic=cyclic,
@@ -1960,8 +1937,10 @@ class DivisionSequence(abjad.Sequence):
             self_remainder_direction=remainder,
             self_remainder_fuse_threshold=remainder_fuse_threshold,
         )
-        sequences = [type(self)(_) for _ in division_lists]
-        return type(self)(sequences)
+        assert isinstance(sequence, DivisionSequence), repr(sequence)
+        for item in sequence:
+            assert isinstance(item, DivisionSequence), repr(item)
+        return sequence
 
     @abjad.Signature()
     def split_each_by_rounded_ratios(self, ratios) -> "DivisionSequence":
@@ -1970,11 +1949,11 @@ class DivisionSequence(abjad.Sequence):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        division_lists = self._split_each_by_rounded_ratios(
-            divisions=self, ratios=ratios
-        )
-        sequences = [type(self)(_) for _ in division_lists]
-        return type(self)(sequences)
+        sequence = self._split_each_by_rounded_ratios(ratios)
+        assert isinstance(sequence, DivisionSequence), repr(sequence)
+        for item in sequence:
+            assert isinstance(item, DivisionSequence), repr(item)
+        return sequence
 
 
 ### FACTORY FUNCTIONS ###
