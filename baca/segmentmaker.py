@@ -7228,9 +7228,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
         :param environment: stylesheet path control parameter. Leave set to
             none to render segments in real score.
-            Set to ``'docs'`` for API examples.
-            Set to ``'external'`` to debug API examples in a separate file.
-            Set to ``'layout'`` when making layout.ly file.
+            Set to ``"docs"`` for API examples.
+            Set to ``"external"`` to debug API examples in a separate file.
+            Set to ``"layout"`` when making layout.ly file.
 
         :param metadata: metadata found in current segment directory.
 

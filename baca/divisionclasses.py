@@ -1599,20 +1599,27 @@ class DivisionSequence(abjad.Sequence):
         items = list(items)
         if start_offset is None and items:
             start_offset = getattr(items[0], "start_offset", None)
+        if start_offset is not None:
+            start_offset = abjad.Offset(start_offset)
         items_ = []
         for item in items:
             try:
-                # item = Division(item, start_offset=start_offset)
                 item = Division(item)
             except (TypeError, ValueError):
-                # item = DivisionSequence(item, start_offset=start_offset)
                 item = DivisionSequence(item)
-            if item.stop_offset is not None:
-                start_offset = item.stop_offset
             items_.append(item)
         super().__init__(items=items_)
+        self._set_start_offsets(start_offset)
 
     ### PRIVATE METHODS ###
+
+    def _set_start_offsets(self, start_offset):
+        if start_offset is None:
+            return
+        for division in abjad.sequence(self).flatten(depth=-1):
+            assert isinstance(division, Division), repr(division)
+            division._start_offset = start_offset
+            start_offset = division.stop_offset
 
     def _split_each_by_durations(
         self,
@@ -1686,51 +1693,31 @@ class DivisionSequence(abjad.Sequence):
             sequences.append(sequence)
         for _ in sequences:
             assert isinstance(_, DivisionSequence), repr(_)
-        sequence, start_offset = self._to_divisions(sequences, start_offset)
-        # sequence = DivisionSequence(sequences, start_offset=start_offset)
+        sequence = DivisionSequence(sequences)
+        sequence._set_start_offsets(start_offset)
         assert isinstance(sequence, DivisionSequence), repr(sequence)
         return sequence
 
     def _split_each_by_rounded_ratios(self, ratios):
-        divisions, start_offset = self._to_divisions(self)
-        start_offset = divisions[0].start_offset
-        division_lists = []
+        start_offset = self[0].start_offset
+        sequences = []
         if not ratios:
             ratios = (abjad.Ratio([1]),)
         ratios = abjad.CyclicTuple(ratios)
-        for i, division in enumerate(divisions):
+        for i, division in enumerate(self):
             ratio = ratios[i]
             numerators = abjad.mathtools.partition_integer_by_ratio(
                 division.numerator, ratio
             )
-            division_list = [
+            divisions = [
                 Division((numerator, division.denominator))
                 for numerator in numerators
             ]
-            division_lists.append(division_list)
-        division_lists, start_offset = self._to_divisions(
-            division_lists, start_offset=start_offset
-        )
-        return division_lists
-
-    def _to_divisions(self, argument, start_offset=None):
-        if isinstance(argument, abjad.Fraction):
-            result = Division(argument, start_offset=start_offset)
-            if start_offset is not None:
-                start_offset += result.duration
-        elif isinstance(argument, (list, abjad.Sequence)):
-            result = []
-            for item in argument:
-                new_item, start_offset = self._to_divisions(
-                    item, start_offset=start_offset
-                )
-                result.append(new_item)
-            result = DivisionSequence(result)
-        else:
-            raise TypeError(repr(argument))
-        if not isinstance(result, (Division, DivisionSequence)):
-            raise Exception(result)
-        return result, start_offset
+            sequence = DivisionSequence(divisions)
+            sequences.append(sequence)
+        sequence = DivisionSequence(sequences)
+        sequence._set_start_offsets(start_offset)
+        return sequence
 
     ### PUBLIC PROPERTIES ###
 
@@ -1748,9 +1735,9 @@ class DivisionSequence(abjad.Sequence):
             >>> for item in sequence:
             ...     item
             ...
-            Division((2, 8))
-            Division((2, 8))
-            Division((2, 8))
+            Division((2, 8), start_offset=Offset(1, 1))
+            Division((2, 8), start_offset=Offset(5, 4))
+            Division((2, 8), start_offset=Offset(3, 2))
 
         """
         if 0 < len(self):
@@ -1768,8 +1755,8 @@ class DivisionSequence(abjad.Sequence):
             ...     [(2, 8), (2, 8), (2, 8)],
             ...     start_offset=(1, 1),
             ...     )
-            >>> sequence.stop_offset is None
-            True
+            >>> sequence.stop_offset
+            Offset(7, 4)
 
         """
         if 0 < len(self):

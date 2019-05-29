@@ -443,6 +443,7 @@ class RhythmCommand(scoping.Command):
                 return False
         return True
 
+    # TODO: simplify with DivisionSequence
     @staticmethod
     def _durations_to_divisions(durations, start_offset):
         divisions = [divisionclasses.Division(_) for _ in durations]
