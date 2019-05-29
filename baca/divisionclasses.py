@@ -19,17 +19,7 @@ class Division(abjad.NonreducedFraction):
 
     ..  container:: example
 
-        Division with duration, start offset and payload:
-
-        >>> division = baca.Division(
-        ...     (3, 8),
-        ...     payload=rmakers.NoteRhythmMaker(),
-        ...     start_offset=abjad.Offset((5, 4)),
-        ...     )
-
-    ..  container:: example
-
-        Division with duration and start offset:
+        Initializes from duration and start offset:
 
         >>> division = baca.Division(
         ...     (3, 8),
@@ -44,7 +34,7 @@ class Division(abjad.NonreducedFraction):
 
     ..  container:: example
 
-        Division with duration:
+        Initializes from duration:
 
         >>> division = baca.Division((3, 8))
 
@@ -59,7 +49,6 @@ class Division(abjad.NonreducedFraction):
 
         >>> division = baca.Division(
         ...     (3, 8),
-        ...     payload=rmakers.NoteRhythmMaker(),
         ...     start_offset=abjad.Offset((5, 4)),
         ...     )
         >>> new_division = baca.Division(division)
@@ -73,7 +62,6 @@ class Division(abjad.NonreducedFraction):
         >>> fraction = abjad.NonreducedFraction((6, 4))
         >>> division = baca.Division(
         ...     fraction,
-        ...     payload=rmakers.NoteRhythmMaker(),
         ...     start_offset=abjad.Offset((5, 4)),
         ...     )
         >>> new_division = baca.Division(division)
@@ -93,7 +81,7 @@ class Division(abjad.NonreducedFraction):
 
     ..  container:: example
 
-        Makes divisions from durations:
+        Initializes divisions from durations:
 
         >>> durations = 10 * [abjad.Duration(1, 8)]
         >>> start_offsets = abjad.mathtools.cumulative_sums(durations)[:-1]
@@ -104,7 +92,8 @@ class Division(abjad.NonreducedFraction):
         ...         start_offset=start_offset,
         ...         )
         ...     divisions.append(division)
-        >>> divisions = abjad.Sequence(divisions)
+        ...
+        >>> divisions = baca.DivisionSequence(divisions)
 
         >>> for division in divisions:
         ...     print(division)
@@ -141,7 +130,7 @@ class Division(abjad.NonreducedFraction):
 
     ..  container:: example
 
-        Makes divisions from durations:
+        Initializes divisions from durations:
 
         >>> durations = 10 * [abjad.Duration(1, 8)]
         >>> start_offsets = abjad.mathtools.cumulative_sums(durations)[:-1]
@@ -152,7 +141,8 @@ class Division(abjad.NonreducedFraction):
         ...         start_offset=start_offset,
         ...         )
         ...     divisions.append(division)
-        >>> divisions = abjad.Sequence(divisions)
+        ...
+        >>> divisions = baca.DivisionSequence(divisions)
 
         >>> for division in divisions:
         ...     print(division)
@@ -203,7 +193,7 @@ class Division(abjad.NonreducedFraction):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_payload", "_start_offset")
+    __slots__ = ("_start_offset",)
 
     _publish_storage_format = True
 
@@ -215,22 +205,17 @@ class Division(abjad.NonreducedFraction):
         """
         pass
 
-    def __new__(class_, argument=None, payload=None, start_offset=None):
+    def __new__(class_, argument=None, start_offset=None):
         argument = argument or (0, 1)
         if isinstance(argument, str):
             division = eval(argument)
             argument = division
-            if payload is None:
-                payload = argument.payload
             if start_offset is None:
                 start_offset = argument.start_offset
         if isinstance(argument, abjad.NonreducedFraction):
-            if payload is None:
-                payload = getattr(argument, "payload", None)
             if start_offset is None:
                 start_offset = getattr(argument, "start_offset", None)
         self = abjad.NonreducedFraction.__new__(class_, argument)
-        self._payload = payload
         if start_offset is not None:
             start_offset = abjad.Offset(start_offset)
         self._start_offset = start_offset
@@ -377,7 +362,7 @@ class Division(abjad.NonreducedFraction):
 
         Returns tuple.
         """
-        return (self.pair, self.payload, self.start_offset)
+        return (self.pair, self.start_offset)
 
     def __str__(self):
         """
@@ -528,7 +513,7 @@ class Division(abjad.NonreducedFraction):
             client=self,
             repr_is_indented=False,
             storage_format_args_values=[self.pair],
-            storage_format_kwargs_names=["payload", "start_offset"],
+            storage_format_kwargs_names=["start_offset"],
         )
 
     def _to_timespan(self):
@@ -542,108 +527,49 @@ class Division(abjad.NonreducedFraction):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def duration(self):
+    def duration(self) -> abjad.Duration:
         """
-        Gets duration of division.
+        Gets duration.
 
         ..  container:: example
 
-            Gets duration:
-
-            >>> division = baca.Division((3, 8))
-
-            >>> division.duration
-            Duration(3, 8)
-
-        ..  container:: example
-
-            Gets duration:
-
-            >>> division = baca.Division((6, 4))
-
-            >>> division.duration
+            >>> baca.Division((6, 4)).duration
             Duration(3, 2)
 
-        Returns duration.
         """
         return abjad.Duration(self)
 
     @property
-    def payload(self):
+    def start_offset(self) -> typing.Optional[abjad.Offset]:
         """
-        Gets payload of division.
+        Gets start offset.
 
         ..  container:: example
 
-            Division with payload:
-
-            >>> division = baca.Division(
-            ...     (3, 8),
-            ...     payload=rmakers.NoteRhythmMaker(),
-            ...     start_offset=abjad.Offset((5, 4)),
-            ...     )
-
-            >>> division.payload
-            NoteRhythmMaker()
-
-        ..  container:: example
-
-            Division without duration:
-
-            >>> division = baca.Division(
-            ...     (3, 8),
-            ...     start_offset=abjad.Offset((5, 4)),
-            ...     )
-
-            >>> division.payload is None
+            >>> baca.Division((3, 8)).start_offset is None
             True
 
-        Set to object or none.
-
-        Defaults to none.
-
-        Returns object or none.
-        """
-        return self._payload
-
-    @property
-    def start_offset(self):
-        """
-        Gets start offset of division.
-
         ..  container:: example
-
-            Division with start offset:
 
             >>> division = baca.Division(
             ...     (3, 8),
             ...     start_offset=abjad.Offset((5, 4)),
             ...     )
-
             >>> division.start_offset
             Offset(5, 4)
 
-        ..  container:: example
-
-            Division without start offset:
-
-            >>> division = baca.Division((3, 8))
-
-            >>> division.start_offset is None
-            True
-
-        Set to offset or none.
-
-        Defaults to none.
-
-        Returns offset or none.
         """
         return self._start_offset
 
     @property
-    def stop_offset(self):
+    def stop_offset(self) -> typing.Optional[abjad.Offset]:
         """
-        Gets stop offset of division.
+        Gets stop offset.
+
+        ..  container:: example
+
+            >>> baca.Division((3, 8)).stop_offset is None
+            True
 
         ..  container:: example
 
@@ -653,31 +579,18 @@ class Division(abjad.NonreducedFraction):
             ...     (3, 8),
             ...     start_offset=abjad.Offset((5, 4)),
             ...     )
-
             >>> division.stop_offset
             Offset(13, 8)
 
-        ..  container:: example
-
-            Division without start offset:
-
-            >>> division = baca.Division((3, 8))
-
-            >>> division.stop_offset is None
-            True
-
-            Returns none when start offset is none.
-
-        Returns offset or none.
         """
         if self.start_offset is None:
-            return
+            return None
         return self.start_offset + self.duration
 
     ### PUBLIC METHODS ###
 
     @staticmethod
-    def yield_durations(unique=False):
+    def yield_durations(unique=False) -> typing.Generator:
         """
         Yields all positive durations.
 
@@ -732,7 +645,6 @@ class Division(abjad.NonreducedFraction):
             Duration(3, 4)
             Duration(2, 5)
 
-        Returns generator.
         """
         generator = Division.yield_nonreduced_fractions()
         while True:
@@ -839,7 +751,7 @@ class Division(abjad.NonreducedFraction):
                 pairs.append(pair)
 
     @staticmethod
-    def yield_nonreduced_fractions():
+    def yield_nonreduced_fractions() -> typing.Generator:
         """
         Yields positive nonreduced fractions in Cantor diagonalized order.
 
@@ -866,7 +778,6 @@ class Division(abjad.NonreducedFraction):
             (5, 1)
             (6, 1)
 
-        Returns generator.
         """
         number = 2
         while True:
@@ -1681,16 +1592,23 @@ class DivisionSequence(abjad.Sequence):
 
     ### INITIALIZER ###
 
-    def __init__(self, items=None) -> None:
+    def __init__(self, items=None, *, start_offset=None) -> None:
         items = items or []
         if not isinstance(items, collections.abc.Iterable):
             items = [items]
+        items = list(items)
+        if start_offset is None and items:
+            start_offset = getattr(items[0], "start_offset", None)
         items_ = []
         for item in items:
             try:
+                # item = Division(item, start_offset=start_offset)
                 item = Division(item)
             except (TypeError, ValueError):
-                pass
+                # item = DivisionSequence(item, start_offset=start_offset)
+                item = DivisionSequence(item)
+            if item.stop_offset is not None:
+                start_offset = item.stop_offset
             items_.append(item)
         super().__init__(items=items_)
 
@@ -1706,17 +1624,16 @@ class DivisionSequence(abjad.Sequence):
         self_remainder_direction=None,
         self_remainder_fuse_threshold=None,
     ):
-        divisions, start_offset = self._to_divisions(self)
-        start_offset = divisions[0].start_offset
-        division_lists = []
-        for i, division in enumerate(divisions):
+        start_offset = self[0].start_offset
+        sequences = []
+        for i, division in enumerate(self):
             input_division = Division(division)
-            input_duration = abjad.Duration(input_division)
-            input_meter = abjad.Meter(input_division)
+            input_duration = abjad.Duration(division)
+            input_meter = abjad.Meter(division)
             assert 0 < input_division, repr(input_division)
             if not self_durations:
-                division_list = [input_division]
-                division_lists.append(division_list)
+                sequence = DivisionSequence([input_division])
+                sequences.append(sequence)
                 continue
             if input_meter.is_simple or not self_durations:
                 durations = self_durations[:]
@@ -1739,7 +1656,8 @@ class DivisionSequence(abjad.Sequence):
                 division_list = list(division_list)
             total_duration = abjad.Duration(sum(division_list))
             if total_duration == input_duration:
-                division_lists.append(division_list)
+                sequence = DivisionSequence(division_list)
+                sequences.append(sequence)
                 continue
             remainder = input_division - total_duration
             remainder = Division(remainder)
@@ -1764,16 +1682,14 @@ class DivisionSequence(abjad.Sequence):
             total_duration = abjad.Duration(sum(division_list))
             pair = total_duration, input_duration
             assert total_duration == input_duration, pair
-            division_lists.append(division_list)
-        for _ in division_lists:
-            assert isinstance(_, list), repr(_)
-        division_lists, start_offset = self._to_divisions(
-            division_lists, start_offset
-        )
-        assert isinstance(division_lists, DivisionSequence), repr(
-            division_lists
-        )
-        return division_lists
+            sequence = DivisionSequence(division_list)
+            sequences.append(sequence)
+        for _ in sequences:
+            assert isinstance(_, DivisionSequence), repr(_)
+        sequence, start_offset = self._to_divisions(sequences, start_offset)
+        # sequence = DivisionSequence(sequences, start_offset=start_offset)
+        assert isinstance(sequence, DivisionSequence), repr(sequence)
+        return sequence
 
     def _split_each_by_rounded_ratios(self, ratios):
         divisions, start_offset = self._to_divisions(self)
@@ -1815,6 +1731,50 @@ class DivisionSequence(abjad.Sequence):
         if not isinstance(result, (Division, DivisionSequence)):
             raise Exception(result)
         return result, start_offset
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def start_offset(self) -> typing.Optional[abjad.Offset]:
+        """
+        Gets start offset.
+
+        ..  container:: example
+
+            >>> sequence = baca.DivisionSequence(
+            ...     [(2, 8), (2, 8), (2, 8)],
+            ...     start_offset=(1, 1),
+            ...     )
+            >>> for item in sequence:
+            ...     item
+            ...
+            Division((2, 8))
+            Division((2, 8))
+            Division((2, 8))
+
+        """
+        if 0 < len(self):
+            return self[0].start_offset
+        return None
+
+    @property
+    def stop_offset(self) -> typing.Optional[abjad.Offset]:
+        """
+        Gets stop offset.
+
+        ..  container:: example
+
+            >>> sequence = baca.DivisionSequence(
+            ...     [(2, 8), (2, 8), (2, 8)],
+            ...     start_offset=(1, 1),
+            ...     )
+            >>> sequence.stop_offset is None
+            True
+
+        """
+        if 0 < len(self):
+            return self[-1].stop_offset
+        return None
 
     ### PUBLIC METHODS ###
 

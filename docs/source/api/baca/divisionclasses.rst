@@ -44,7 +44,6 @@ divisionclasses
       __str__
       __sub__
       duration
-      payload
       start_offset
       stop_offset
       yield_durations
@@ -291,8 +290,6 @@ divisionclasses
 
       .. autoattribute:: Division.pair
 
-   .. autoattribute:: Division.payload
-
    .. container:: inherited
 
       .. autoattribute:: Division.real
@@ -316,6 +313,8 @@ divisionclasses
       rotate
       split_each_by_durations
       split_each_by_rounded_ratios
+      start_offset
+      stop_offset
 
    .. raw:: html
 
@@ -531,6 +530,10 @@ divisionclasses
    .. container:: inherited
 
       .. autoattribute:: DivisionSequence.items
+
+   .. autoattribute:: DivisionSequence.start_offset
+
+   .. autoattribute:: DivisionSequence.stop_offset
 
 .. raw:: html
 
