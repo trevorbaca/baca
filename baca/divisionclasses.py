@@ -694,37 +694,6 @@ class DivisionSequence(abjad.Sequence):
 
     ..  container:: example expression
 
-        Fuses divisions:
-
-        >>> expression = baca.divisions().join()
-
-        >>> input_divisions = [(7, 8), (3, 8), (5, 8)]
-        >>> sequence = expression(input_divisions)
-        >>> divisions = sequence.flatten(depth=-1)
-        >>> divisions
-        DivisionSequence([Division((15, 8))])
-
-        >>> rhythm_maker = rmakers.NoteRhythmMaker()
-        >>> music = rhythm_maker(divisions)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(music, divisions)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 15/8
-                    s1 * 15/8
-                }
-                \new RhythmicStaff
-                {
-                    c'1...
-                }
-            >>
-
         Fuses divisions and then splits by ``1/4`` with remainder on right:
 
         >>> expression = baca.divisions().join()
@@ -767,46 +736,6 @@ class DivisionSequence(abjad.Sequence):
                     c'4
                     c'4
                     c'8
-                }
-            >>
-
-    ..  container:: example expression
-
-        Fuses divisions together two at a time:
-
-        >>> expression = baca.divisions()
-        >>> expression = expression.partition_by_counts(
-        ...     counts=[2],
-        ...     cyclic=True,
-        ...     overhang=True,
-        ...     )
-        >>> expression = expression.map(baca.divisions().sum())
-
-        >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-        >>> sequence = expression(input_divisions)
-        >>> sequence
-        DivisionSequence([Division((4, 8)), Division((8, 8)), Division((2, 4))])
-
-        >>> rhythm_maker = rmakers.NoteRhythmMaker()
-        >>> music = rhythm_maker(sequence)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 2/1
-                    s1 * 2
-                }
-                \new RhythmicStaff
-                {
-                    c'2
-                    c'1
-                    c'2
                 }
             >>
 
@@ -855,51 +784,6 @@ class DivisionSequence(abjad.Sequence):
                     c'8
                     c'4.
                     c'4.
-                    c'4
-                }
-            >>
-
-        Splits each division by ``3/8`` and then fuses flattened divisions
-        into differently sized groups:
-
-        >>> expression = baca.divisions()
-        >>> expression = expression.split_each_by_durations(
-        ...     [(3, 8)],
-        ...     cyclic=True,
-        ...     )
-        >>> expression = expression.flatten(depth=-1)
-        >>> expression = expression.partition_by_counts(counts=[2, 3, 1])
-        >>> expression = expression.map(baca.divisions().sum())
-
-        >>> divisions = [(7, 8), (3, 8), (5, 8)]
-        >>> divisions = [baca.Division(_) for _ in divisions]
-        >>> divisions[0]._start_offset = abjad.Offset(1, 4)
-        >>> sequence = expression(divisions)
-        >>> for division in sequence:
-        ...     division
-        Division((6, 8), start_offset=Offset(1, 4))
-        Division((7, 8), start_offset=Offset(1, 1))
-        Division((2, 8), start_offset=Offset(15, 8))
-
-        >>> rhythm_maker = rmakers.NoteRhythmMaker()
-        >>> music = rhythm_maker(sequence)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 15/8
-                    s1 * 15/8
-                }
-                \new RhythmicStaff
-                {
-                    c'2.
-                    c'2..
                     c'4
                 }
             >>
@@ -993,6 +877,169 @@ class DivisionSequence(abjad.Sequence):
         )
 
     ### PUBLIC METHODS ###
+
+    @abjad.Signature()
+    def fuse(
+        self, counts: typing.List[int] = None, *, cyclic: bool = None
+    ) -> "DivisionSequence":
+        r"""
+        Fuses divisions by ``counts``.
+
+        ..  container:: example expression
+
+            Fuses divisions:
+
+            >>> expression = baca.divisions().fuse()
+
+            >>> input_divisions = [(7, 8), (3, 8), (5, 8)]
+            >>> sequence = expression(input_divisions)
+            >>> divisions = sequence.flatten(depth=-1)
+            >>> divisions
+            DivisionSequence([Division((15, 8))])
+
+            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, divisions)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/8
+                        s1 * 15/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'1...
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Fuses first two divisions and then remaining divisions:
+
+            >>> expression = baca.divisions().fuse([2])
+
+            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+            >>> sequence = expression(input_divisions)
+            >>> sequence
+            DivisionSequence([Division((4, 8)), Division((12, 8))])
+            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> music = rhythm_maker(sequence)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/1
+                        s1 * 2
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'2
+                        c'1.
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Fuses divisions together two at a time:
+
+            >>> expression = baca.divisions().fuse([2], cyclic=True)
+
+            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+            >>> sequence = expression(input_divisions)
+            >>> sequence
+            DivisionSequence([Division((4, 8)), Division((8, 8)), Division((2, 4))])
+
+            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> music = rhythm_maker(sequence)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/1
+                        s1 * 2
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'2
+                        c'1
+                        c'2
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Splits each division by ``3/8``;  then flattens; then fuses into
+            differently sized groups:
+
+            >>> expression = baca.divisions()
+            >>> expression = expression.split_each_by_durations(
+            ...     [(3, 8)],
+            ...     cyclic=True,
+            ...     )
+            >>> expression = expression.flatten(depth=-1)
+            >>> expression = expression.fuse([2, 3, 1])
+
+            >>> divisions = [(7, 8), (3, 8), (5, 8)]
+            >>> divisions = [baca.Division(_) for _ in divisions]
+            >>> divisions[0]._start_offset = abjad.Offset(1, 4)
+            >>> sequence = expression(divisions)
+            >>> for division in sequence:
+            ...     division
+            Division((6, 8), start_offset=Offset(1, 4))
+            Division((7, 8), start_offset=Offset(1, 1))
+            Division((2, 8), start_offset=Offset(15, 8))
+
+            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> music = rhythm_maker(sequence)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/8
+                        s1 * 15/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'2.
+                        c'2..
+                        c'4
+                    }
+                >>
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        counts = counts or []
+        sequence = self.partition_by_counts(
+            counts, cyclic=cyclic, overhang=True
+        )
+        sequence = sequence.map(_divisions().sum())
+        sequence = sequence.flatten(depth=-1)
+        return sequence
 
     @abjad.Signature(is_operator=True, method_name="r", subscript="n")
     def rotate(self, n=0) -> "DivisionSequence":
@@ -1287,17 +1334,17 @@ class DivisionSequence(abjad.Sequence):
             >>> divisions
             [Division((7, 4), start_offset=Offset(1, 4)), Division((6, 4))]
 
-            >>> division_lists = expression(divisions)
-            >>> len(division_lists)
+            >>> sequence = expression(divisions)
+            >>> len(sequence)
             2
 
-            >>> for division in division_lists[0]:
+            >>> for division in sequence[0]:
             ...     division
             ...
             Division((4, 4), start_offset=Offset(1, 4))
             Division((3, 4), start_offset=Offset(5, 4))
 
-            >>> for division in division_lists[1]:
+            >>> for division in sequence[1]:
             ...     division
             ...
             Division((3, 4), start_offset=Offset(2, 1))
@@ -1601,144 +1648,6 @@ class DivisionSequence(abjad.Sequence):
 ### FACTORY FUNCTIONS ###
 
 
-def fuse_divisions(
-    counts: typing.Sequence[int], *, cyclic: bool = None
-) -> classes.Expression:
-    """
-    Fuses divisions by counts.
-
-    ..  container:: example
-
-        Fuses divisions once by counts:
-
-        >>> expression = baca.fuse_divisions([1, 2])
-        >>> divisions = [(2, 8), (2, 8), (2, 8), (2, 8), (2, 8), (2, 8)]
-        >>> expression(divisions)
-        DivisionSequence([Division((2, 8)), Division((4, 8)), Division((6, 8))])
-
-    ..  container:: example
-
-        Fuses divisions cyclically by counts:
-
-        >>> expression = baca.fuse_divisions([1, 2], cyclic=True)
-        >>> divisions = [(2, 8), (2, 8), (2, 8), (2, 8), (2, 8), (2, 8)]
-        >>> expression(divisions)
-        DivisionSequence([Division((2, 8)), Division((4, 8)), Division((2, 8)), Division((4, 8))])
-
-    """
-    expression = _divisions()
-    expression = expression.partition_by_counts(
-        counts, cyclic=cyclic, overhang=True
-    )
-    expression = expression.map(_divisions().sum())
-    expression = expression.flatten(depth=-1)
-    return expression
-
-
-def fuse_compound_quarter_divisions(
-    counts: typing.List[int], *, cyclic: bool = None
-) -> classes.Expression:
-    r"""
-    Fuses compound quarter divisions.
-
-    ..  container:: example
-
-        Acyclic:
-
-        >>> expression = baca.fuse_compound_quarter_divisions(
-        ...     [1],
-        ...     cyclic=False,
-        ...     )
-
-        >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
-        ...     item
-        ...
-        Division((1, 4))
-        Division((2, 4))
-
-        >>> for item in expression([(3, 8), (3, 8), (3, 8)]):
-        ...     item
-        ...
-        Division((1, 4))
-        Division((7, 8))
-
-        Cyclic:
-
-        >>> expression = baca.fuse_compound_quarter_divisions(
-        ...     [1],
-        ...     cyclic=True,
-        ...     )
-
-        >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
-        ...     item
-        ...
-        Division((1, 4))
-        Division((1, 4))
-        Division((1, 4))
-
-        >>> for item in expression([(3, 8), (3, 8), (3, 8)]):
-        ...     item
-        ...
-        Division((1, 4))
-        Division((1, 8))
-        Division((1, 4))
-        Division((1, 8))
-        Division((1, 4))
-        Division((1, 8))
-
-    ..  container:: example
-
-        Cyclic:
-
-        >>> expression = baca.fuse_compound_quarter_divisions(
-        ...     [2],
-        ...     cyclic=True,
-        ...     )
-
-        >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
-        ...     item
-        ...
-        Division((2, 4))
-        Division((1, 4))
-
-        >>> for item in expression([(3, 8), (3, 8), (3, 8)]):
-        ...     item
-        ...
-        Division((3, 8))
-        Division((3, 8))
-        Division((3, 8))
-
-        Acyclic:
-
-        >>> expression = baca.fuse_compound_quarter_divisions(
-        ...     [2],
-        ...     cyclic=False,
-        ...     )
-
-        >>> for item in expression([(2, 8), (2, 8), (2, 8)]):
-        ...     item
-        ...
-        Division((2, 4))
-        Division((1, 4))
-
-        >>> for item in expression([(3, 8), (3, 8), (3, 8)]):
-        ...     item
-        ...
-        Division((3, 8))
-        Division((6, 8))
-
-    """
-    if not all(isinstance(_, int) for _ in counts):
-        raise Exception(counts)
-    expression = quarter_split_each(compound=(3, 2))
-    expression = expression.partition_by_counts(
-        counts=counts, cyclic=cyclic, overhang=True
-    )
-    expression = expression.map(_divisions().sum())
-    expression = expression.flatten(depth=-1)
-    return expression
-
-
 def quarter_split_each(
     *, compound: abjad.DurationTyping = None
 ) -> classes.Expression:
@@ -1857,18 +1766,6 @@ def split_expanse(
         remainder=remainder,
         remainder_fuse_threshold=remainder_fuse_threshold,
     )
-    expression = expression.flatten(depth=-1)
-    return expression
-
-
-def split_each_by_rounded_ratios(
-    ratios: typing.Sequence[abjad.IntegerPair]
-) -> classes.Expression:
-    """
-    Splits each division by rounded ratios.
-    """
-    expression = _divisions()
-    expression = expression.split_each_by_rounded_ratios(ratios)
     expression = expression.flatten(depth=-1)
     return expression
 

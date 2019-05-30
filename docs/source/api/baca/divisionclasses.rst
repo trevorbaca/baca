@@ -313,6 +313,7 @@ divisionclasses
    .. autosummary::
       :nosignatures:
 
+      fuse
       rotate
       split_each_by_durations
       split_each_by_rounded_ratios
@@ -389,6 +390,8 @@ divisionclasses
    .. container:: inherited
 
       .. automethod:: DivisionSequence.flatten
+
+   .. automethod:: DivisionSequence.fuse
 
    .. container:: inherited
 
@@ -551,18 +554,9 @@ divisionclasses
 .. autosummary::
    :nosignatures:
 
-   ~fuse_compound_quarter_divisions
-   ~fuse_divisions
    ~quarter_split_each
-   ~split_each_by_rounded_ratios
    ~split_expanse
 
-.. autofunction:: fuse_compound_quarter_divisions
-
-.. autofunction:: fuse_divisions
-
 .. autofunction:: quarter_split_each
-
-.. autofunction:: split_each_by_rounded_ratios
 
 .. autofunction:: split_expanse

@@ -235,10 +235,7 @@ Division library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.divisionclasses.fuse_compound_quarter_divisions
-   ~baca.divisionclasses.fuse_divisions
    ~baca.divisionclasses.quarter_split_each
-   ~baca.divisionclasses.split_each_by_rounded_ratios
    ~baca.divisionclasses.split_expanse
 
 .. raw:: html

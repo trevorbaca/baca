@@ -395,7 +395,7 @@ class RhythmCommand(scoping.Command):
 
     def _apply_division_expression(
         self, divisions
-    ) -> typing.Optional[abjad.Sequence]:
+    ) -> typing.Optional[divisionclasses.DivisionSequence]:
         if self.divisions is not None:
             divisions_ = self.divisions(divisions)
             if not isinstance(divisions_, abjad.Sequence):
@@ -408,6 +408,7 @@ class RhythmCommand(scoping.Command):
                 message += f"    {divisions_}"
                 raise Exception(message)
             divisions = divisions_
+        divisions = divisionclasses.DivisionSequence(divisions)
         return divisions
 
     def _check_rhythm_maker_input(self, rhythm_maker):
@@ -481,6 +482,10 @@ class RhythmCommand(scoping.Command):
             )
             divisions = classes.Sequence(divisions).flatten(depth=-1)
             divisions = self._apply_division_expression(divisions)
+            assert isinstance(
+                divisions, divisionclasses.DivisionSequence
+            ), repr(divisions)
+            divisions = divisions.flatten(depth=-1)
             division_count = len(divisions)
             start_offset = divisions[0].start_offset
             labelled_divisions = []
