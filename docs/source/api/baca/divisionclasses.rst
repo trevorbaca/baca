@@ -44,10 +44,11 @@ divisionclasses
       __str__
       __sub__
       duration
+      find_equivalent_durations
       start_offset
       stop_offset
+      timespan
       yield_durations
-      yield_equivalent_durations
       yield_nonreduced_fractions
 
    .. raw:: html
@@ -216,6 +217,8 @@ divisionclasses
 
       .. automethod:: Division.conjugate
 
+   .. automethod:: Division.find_equivalent_durations
+
    .. container:: inherited
 
       .. automethod:: Division.limit_denominator
@@ -243,8 +246,6 @@ divisionclasses
    .. container:: inherited
 
       .. automethod:: Division.with_multiple_of_denominator
-
-   .. automethod:: Division.yield_equivalent_durations
 
    .. raw:: html
 
@@ -298,6 +299,8 @@ divisionclasses
 
    .. autoattribute:: Division.stop_offset
 
+   .. autoattribute:: Division.timespan
+
 .. autoclass:: DivisionSequence
 
    .. raw:: html
@@ -315,6 +318,7 @@ divisionclasses
       split_each_by_rounded_ratios
       start_offset
       stop_offset
+      timespan
 
    .. raw:: html
 
@@ -534,6 +538,8 @@ divisionclasses
    .. autoattribute:: DivisionSequence.start_offset
 
    .. autoattribute:: DivisionSequence.stop_offset
+
+   .. autoattribute:: DivisionSequence.timespan
 
 .. raw:: html
 
