@@ -931,103 +931,6 @@ class DivisionSequence(abjad.Sequence):
             items_.append(item)
         super().__init__(items=items_)
 
-    ### PRIVATE METHODS ###
-
-    def _split_each_by_durations(
-        self,
-        self_durations,
-        *,
-        self_cyclic=None,
-        self_compound_meter_multiplier=None,
-        self_rotate_each_division=None,
-        self_remainder_direction=None,
-        self_remainder_fuse_threshold=None,
-    ):
-        start_offset = self[0].start_offset
-        sequences = []
-        for i, division in enumerate(self):
-            input_division = Division(division)
-            input_duration = abjad.Duration(division)
-            input_meter = abjad.Meter(division)
-            assert 0 < input_division, repr(input_division)
-            if not self_durations:
-                sequence = DivisionSequence([input_division])
-                sequences.append(sequence)
-                continue
-            if input_meter.is_simple or not self_durations:
-                durations = self_durations[:]
-            elif input_meter.is_compound:
-                multiplier = self_compound_meter_multiplier or 1
-                durations = [
-                    abjad.Duration(multiplier * _) for _ in self_durations
-                ]
-            division_list = list(durations)
-            rotate_each_division = self_rotate_each_division or 0
-            rotate_each_division *= i
-            division_list = classes.Sequence(division_list).rotate(
-                n=rotate_each_division
-            )
-            division_list = list(division_list)
-            if self_cyclic:
-                division_list = classes.Sequence(
-                    division_list
-                ).repeat_to_weight(input_division, allow_total=abjad.Less)
-                division_list = list(division_list)
-            total_duration = abjad.Duration(sum(division_list))
-            if total_duration == input_duration:
-                sequence = DivisionSequence(division_list)
-                sequences.append(sequence)
-                continue
-            remainder = input_division - total_duration
-            remainder = Division(remainder)
-            if self_remainder_direction == abjad.Left:
-                if self_remainder_fuse_threshold is None:
-                    division_list.insert(0, remainder)
-                elif remainder <= self_remainder_fuse_threshold:
-                    fused_value = division_list[0] + remainder
-                    fused_value = Division(fused_value)
-                    division_list[0] = fused_value
-                else:
-                    division_list.insert(0, remainder)
-            else:
-                if self_remainder_fuse_threshold is None:
-                    division_list.append(remainder)
-                elif remainder <= self_remainder_fuse_threshold:
-                    fused_value = division_list[-1] + remainder
-                    fused_value = Division(fused_value)
-                    division_list[-1] = fused_value
-                else:
-                    division_list.append(remainder)
-            total_duration = abjad.Duration(sum(division_list))
-            pair = total_duration, input_duration
-            assert total_duration == input_duration, pair
-            sequence = DivisionSequence(division_list)
-            sequences.append(sequence)
-        for _ in sequences:
-            assert isinstance(_, DivisionSequence), repr(_)
-        sequence = DivisionSequence(sequences, start_offset=start_offset)
-        return sequence
-
-    def _split_each_by_rounded_ratios(self, ratios):
-        start_offset = self[0].start_offset
-        sequences = []
-        if not ratios:
-            ratios = (abjad.Ratio([1]),)
-        ratios = abjad.CyclicTuple(ratios)
-        for i, division in enumerate(self):
-            ratio = ratios[i]
-            numerators = abjad.mathtools.partition_integer_by_ratio(
-                division.numerator, ratio
-            )
-            divisions = [
-                Division((numerator, division.denominator))
-                for numerator in numerators
-            ]
-            sequence = DivisionSequence(divisions)
-            sequences.append(sequence)
-        sequence = DivisionSequence(sequences, start_offset=start_offset)
-        return sequence
-
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -1166,13 +1069,13 @@ class DivisionSequence(abjad.Sequence):
     @abjad.Signature()
     def split_each_by_durations(
         self,
-        durations,
+        durations: typing.List[abjad.DurationTyping],
         *,
-        compound_meter_multiplier=None,
-        cyclic=None,
-        rotate_each_division=None,
-        remainder=None,
-        remainder_fuse_threshold=None,
+        compound_meter_multiplier: abjad.DurationTyping = None,
+        cyclic: bool = None,
+        rotate_each_division: int = None,
+        remainder: abjad.HorizontalAlignment = None,
+        remainder_fuse_threshold: abjad.DurationTyping = None,
     ) -> "DivisionSequence":
         r"""
         Splits each division by ``durations``.
@@ -1518,17 +1421,67 @@ class DivisionSequence(abjad.Sequence):
             assert remainder in (abjad.Left, abjad.Right), repr(remainder)
         if remainder_fuse_threshold is not None:
             remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
-        sequence = self._split_each_by_durations(
-            durations,
-            self_compound_meter_multiplier=compound_meter_multiplier,
-            self_cyclic=cyclic,
-            self_rotate_each_division=rotate_each_division,
-            self_remainder_direction=remainder,
-            self_remainder_fuse_threshold=remainder_fuse_threshold,
-        )
-        assert isinstance(sequence, DivisionSequence), repr(sequence)
-        for item in sequence:
-            assert isinstance(item, DivisionSequence), repr(item)
+        start_offset = self[0].start_offset
+        sequences = []
+        rotate_each_division = rotate_each_division or 0
+        for i, division in enumerate(self):
+            input_division = Division(division)
+            input_duration = abjad.Duration(division)
+            input_meter = abjad.Meter(division)
+            assert 0 < input_division, repr(input_division)
+            if not durations:
+                sequence = DivisionSequence([input_division])
+                sequences.append(sequence)
+                continue
+            if input_meter.is_simple or not durations:
+                durations_ = durations[:]
+            elif input_meter.is_compound:
+                multiplier = compound_meter_multiplier or 1
+                durations_ = [
+                    abjad.Duration(multiplier * _) for _ in durations
+                ]
+            else:
+                raise Exception
+            n = i * rotate_each_division
+            divisions_ = classes.Sequence(durations_).rotate(n=n)
+            if cyclic:
+                divisions_ = divisions_.repeat_to_weight(
+                    input_division, allow_total=abjad.Less
+                )
+            divisions = list(divisions_)
+            total_duration = abjad.Duration(sum(divisions))
+            if total_duration == input_duration:
+                sequence = DivisionSequence(divisions)
+                sequences.append(sequence)
+                continue
+            remaining_division = input_division - total_duration
+            remaining_division = Division(remaining_division)
+            if remainder == abjad.Left:
+                if remainder_fuse_threshold is None:
+                    divisions.insert(0, remaining_division)
+                elif remaining_division <= remainder_fuse_threshold:
+                    fused_value = divisions[0] + remaining_division
+                    fused_value = Division(fused_value)
+                    divisions[0] = fused_value
+                else:
+                    divisions.insert(0, remaining_division)
+            else:
+                if remainder_fuse_threshold is None:
+                    divisions.append(remaining_division)
+                elif remaining_division <= remainder_fuse_threshold:
+                    fused_value = divisions[-1] + remaining_division
+                    fused_value = Division(fused_value)
+                    divisions[-1] = fused_value
+                else:
+                    divisions.append(remaining_division)
+            total_duration = abjad.Duration(sum(divisions))
+            pair = total_duration, input_duration
+            assert total_duration == input_duration, pair
+            sequence = DivisionSequence(divisions)
+            sequences.append(sequence)
+        for _ in sequences:
+            assert isinstance(_, DivisionSequence), repr(_)
+        sequence = DivisionSequence(sequences, start_offset=start_offset)
         return sequence
 
     @abjad.Signature()
@@ -1625,10 +1578,23 @@ class DivisionSequence(abjad.Sequence):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        sequence = self._split_each_by_rounded_ratios(ratios)
-        assert isinstance(sequence, DivisionSequence), repr(sequence)
-        for item in sequence:
-            assert isinstance(item, DivisionSequence), repr(item)
+        start_offset = self[0].start_offset
+        sequences = []
+        if not ratios:
+            ratios = (abjad.Ratio([1]),)
+        ratios = abjad.CyclicTuple(ratios)
+        for i, division in enumerate(self):
+            ratio = ratios[i]
+            numerators = abjad.mathtools.partition_integer_by_ratio(
+                division.numerator, ratio
+            )
+            divisions = [
+                Division((numerator, division.denominator))
+                for numerator in numerators
+            ]
+            sequence = DivisionSequence(divisions)
+            sequences.append(sequence)
+        sequence = DivisionSequence(sequences, start_offset=start_offset)
         return sequence
 
 
