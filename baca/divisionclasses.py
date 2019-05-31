@@ -915,6 +915,78 @@ class DivisionSequence(abjad.Sequence):
         return sequence
 
     @abjad.Signature()
+    def quarters(
+        self,
+        *,
+        # TODO: probably add back in?
+        ###compound: abjad.DurationTyping = None,
+        remainder: abjad.VerticalAlignment = None,
+    ) -> "DivisionSequence":
+        r"""
+        Splits division list into quarters.
+
+        ..  container:: example expression
+
+            >>> expression = baca.divisions().quarters()
+            >>> for item in expression([(2, 4), (6, 4)]):
+            ...     item
+            ...
+            DivisionSequence([Division((1, 4))])
+            DivisionSequence([Division((1, 4))])
+            DivisionSequence([Division((1, 4))])
+            DivisionSequence([Division((1, 4))])
+            DivisionSequence([Division((1, 4))])
+            DivisionSequence([Division((1, 4))])
+            DivisionSequence([Division((1, 4))])
+            DivisionSequence([Division((1, 4))])
+
+        ..  container:: example expression
+
+            Maps to each division: splits by ``1/4`` with remainder on right:
+
+            >>> expression = baca.divisions().map(baca.divisions().quarters())
+
+            >>> divisions = [(7, 8), (3, 8), (5, 8)]
+            >>> input_divisions = baca.divisions(divisions, start_offset=0)
+            >>> sequence = expression(input_divisions)
+
+            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> divisions = sequence.flatten(depth=-1)
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/8
+                        s1 * 15/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                        c'4
+                        c'8
+                        c'4
+                        c'4
+                        c'8
+                    }
+                >>
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        sequence = self.split([(1, 4)], cyclic=True, remainder=remainder)
+        return sequence
+
+    @abjad.Signature()
     def quarters_each(
         self,
         *,

@@ -315,6 +315,7 @@ divisionclasses
 
       duration
       fuse
+      quarters
       quarters_each
       ratios_each
       rotate
@@ -451,6 +452,8 @@ divisionclasses
    .. container:: inherited
 
       .. automethod:: DivisionSequence.permute
+
+   .. automethod:: DivisionSequence.quarters
 
    .. automethod:: DivisionSequence.quarters_each
 
