@@ -918,8 +918,7 @@ class DivisionSequence(abjad.Sequence):
     def quarters(
         self,
         *,
-        # TODO: probably add back in?
-        ###compound: abjad.DurationTyping = None,
+        compound: abjad.DurationTyping = None,
         remainder: abjad.VerticalAlignment = None,
     ) -> "DivisionSequence":
         r"""
@@ -939,6 +938,17 @@ class DivisionSequence(abjad.Sequence):
             DivisionSequence([Division((1, 4))])
             DivisionSequence([Division((1, 4))])
             DivisionSequence([Division((1, 4))])
+
+        ..  container:: example expression
+
+            >>> expression = baca.divisions().quarters(compound=(3, 2))
+            >>> for item in expression([(6, 4)]):
+            ...     item
+            ...
+            DivisionSequence([Division((3, 8))])
+            DivisionSequence([Division((3, 8))])
+            DivisionSequence([Division((3, 8))])
+            DivisionSequence([Division((3, 8))])
 
         ..  container:: example expression
 
@@ -983,54 +993,9 @@ class DivisionSequence(abjad.Sequence):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        sequence = self.split([(1, 4)], cyclic=True, remainder=remainder)
-        return sequence
-
-    @abjad.Signature()
-    def quarters_each(
-        self,
-        *,
-        compound: abjad.DurationTyping = None,
-        remainder: abjad.VerticalAlignment = None,
-    ) -> "DivisionSequence":
-        r"""
-        Splits each division into quarters.
-
-        ..  container:: example
-
-            >>> expression = baca.divisions().quarters_each()
-            >>> for item in expression([(2, 4), (6, 4)]):
-            ...     item
-            ...
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-            Division((1, 4))
-
-        ..  container:: example
-
-            >>> expression = baca.divisions().quarters_each(compound=(3, 2))
-            >>> for item in expression([(2, 4), (6, 4)]):
-            ...     item
-            ...
-            Division((1, 4))
-            Division((1, 4))
-            Division((3, 8))
-            Division((3, 8))
-            Division((3, 8))
-            Division((3, 8))
-
-        """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
-        sequence = self.split_each(
-            [(1, 4)], compound=compound, cyclic=True, remainder=remainder
+        sequence = self.split(
+            [(1, 4)], cyclic=True, compound=compound, remainder=remainder
         )
-        sequence = sequence.flatten(depth=-1)
         return sequence
 
     @abjad.Signature(is_operator=True, method_name="r", subscript="n")
@@ -1110,8 +1075,7 @@ class DivisionSequence(abjad.Sequence):
         self,
         durations: typing.List[abjad.DurationTyping],
         *,
-        # TODO: maybe add back in?
-        ###compound: abjad.DurationTyping = None,
+        compound: abjad.DurationTyping = None,
         cyclic: bool = None,
         rotate_indexed: int = None,
         remainder: abjad.HorizontalAlignment = None,
@@ -1381,8 +1345,13 @@ class DivisionSequence(abjad.Sequence):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         durations = [abjad.Duration(_) for _ in durations]
-        ###if compound is not None:
-        ###    compound = abjad.Multiplier(compound)
+        if compound is not None:
+            compound = abjad.Multiplier(compound)
+        if compound is not None:
+            divisions = self.flatten(depth=-1)
+            meters = [abjad.Meter(_) for _ in divisions]
+            if all(_.is_compound for _ in meters):
+                durations = [compound * _ for _ in durations]
         if cyclic is not None:
             cyclic = bool(cyclic)
         if rotate_indexed is not None:

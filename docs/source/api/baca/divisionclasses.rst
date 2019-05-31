@@ -316,7 +316,6 @@ divisionclasses
       duration
       fuse
       quarters
-      quarters_each
       ratios_each
       rotate
       split
@@ -454,8 +453,6 @@ divisionclasses
       .. automethod:: DivisionSequence.permute
 
    .. automethod:: DivisionSequence.quarters
-
-   .. automethod:: DivisionSequence.quarters_each
 
    .. automethod:: DivisionSequence.ratios_each
 
