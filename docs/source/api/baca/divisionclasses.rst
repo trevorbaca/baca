@@ -313,10 +313,12 @@ divisionclasses
    .. autosummary::
       :nosignatures:
 
+      duration
       fuse
       quarters_each
       ratios_each
       rotate
+      split
       split_each
       start_offset
       stop_offset
@@ -504,9 +506,7 @@ divisionclasses
 
       .. automethod:: DivisionSequence.sort
 
-   .. container:: inherited
-
-      .. automethod:: DivisionSequence.split
+   .. automethod:: DivisionSequence.split
 
    .. automethod:: DivisionSequence.split_each
 
@@ -536,6 +536,8 @@ divisionclasses
 
    .. rubric:: Read-only properties
       :class: class-header
+
+   .. autoattribute:: DivisionSequence.duration
 
    .. container:: inherited
 
