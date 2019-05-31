@@ -314,9 +314,10 @@ divisionclasses
       :nosignatures:
 
       fuse
+      quarters_each
+      ratios_each
       rotate
-      split_each_by_durations
-      split_each_by_rounded_ratios
+      split_each
       start_offset
       stop_offset
       timespan
@@ -449,6 +450,10 @@ divisionclasses
 
       .. automethod:: DivisionSequence.permute
 
+   .. automethod:: DivisionSequence.quarters_each
+
+   .. automethod:: DivisionSequence.ratios_each
+
    .. container:: inherited
 
       .. automethod:: DivisionSequence.remove
@@ -503,9 +508,7 @@ divisionclasses
 
       .. automethod:: DivisionSequence.split
 
-   .. automethod:: DivisionSequence.split_each_by_durations
-
-   .. automethod:: DivisionSequence.split_each_by_rounded_ratios
+   .. automethod:: DivisionSequence.split_each
 
    .. container:: inherited
 
@@ -543,20 +546,3 @@ divisionclasses
    .. autoattribute:: DivisionSequence.stop_offset
 
    .. autoattribute:: DivisionSequence.timespan
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: section-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~quarter_split_each
-   ~split_expanse
-
-.. autofunction:: quarter_split_each
-
-.. autofunction:: split_expanse

@@ -2241,8 +2241,10 @@ def make_repeated_duration_notes(
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
     tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
+    divisions = divisionclasses._divisions().flatten(depth=-1).fuse()
+    divisions = divisions.split_each(durations, cyclic=True)
     return RhythmCommand(
-        divisions=divisionclasses.split_expanse(durations, cyclic=True),
+        divisions=divisions,
         measures=measures,
         rewrite_meter=not (do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(

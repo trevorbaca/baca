@@ -229,19 +229,6 @@ Division library.
 
    <hr/>
 
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.divisionclasses.quarter_split_each
-   ~baca.divisionclasses.split_expanse
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: :ref:`baca.indicatorcommands <baca--indicatorcommands>`
    :class: section-header
 
