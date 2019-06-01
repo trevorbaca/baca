@@ -1202,30 +1202,23 @@ class Expression(abjad.Expression):
         """
         Makes division sequence subclass expression.
 
-        ..  container:: example
+        ..  container:: example expression
 
-            Makes quarter-valued divisions with remainder at left:
+            Maps quarters to each division:
 
-            >>> divisions = baca.DivisionSequence([(7, 8), (7, 8), (7, 16)])
+            >>> expression = baca.divisions(name="J")
+            >>> expression = expression.map(baca.divisions().quarters())
 
-            ..  container:: example expression
+            >>> divisions = baca.divisions([(7, 8), (7, 8), (7, 16)])
+            >>> sequence = expression(divisions)
+            >>> for sequence_ in sequence:
+            ...     sequence_.flatten(depth=-1)
+            DivisionSequence([Division((2, 8)), Division((2, 8)), Division((2, 8)), Division((1, 8))])
+            DivisionSequence([Division((2, 8)), Division((2, 8)), Division((2, 8)), Division((1, 8))])
+            DivisionSequence([Division((4, 16)), Division((3, 16))])
 
-                >>> expression = baca.Expression(name='J')
-                >>> expression = expression.divisions()
-                >>> expression = expression.split_each(
-                ...     [(1, 4)],
-                ...     remainder=abjad.Left,
-                ... )
-
-                >>> sequence = expression(divisions)
-                >>> for sequence_ in sequence:
-                ...     sequence_
-                DivisionSequence([Division((5, 8)), Division((1, 4))])
-                DivisionSequence([Division((5, 8)), Division((1, 4))])
-                DivisionSequence([Division((3, 16)), Division((1, 4))])
-
-                >>> expression.get_string()
-                'split_each(J, [(1, 4)], remainder=abjad.Left)'
+            >>> expression.get_string()
+            'quarters(X) /@ J'
 
         """
         from .divisionclasses import DivisionSequence
