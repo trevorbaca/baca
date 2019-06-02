@@ -528,6 +528,10 @@ divisionclasses
 
    .. container:: inherited
 
+      .. automethod:: DivisionSequence.zebra
+
+   .. container:: inherited
+
       .. automethod:: DivisionSequence.zip
 
    .. raw:: html

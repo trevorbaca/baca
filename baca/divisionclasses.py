@@ -1077,6 +1077,7 @@ class DivisionSequence(abjad.Sequence):
         rotate_indexed: int = None,
         remainder: abjad.HorizontalAlignment = None,
         remainder_fuse_threshold: abjad.DurationTyping = None,
+        _map_index=None,
     ) -> "DivisionSequence":
         r"""
         Splits division list by ``durations``.
@@ -1573,92 +1574,27 @@ class DivisionSequence(abjad.Sequence):
                     }
                 >>
 
-        """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
-        durations = [abjad.Duration(_) for _ in durations]
-        if compound is not None:
-            compound = abjad.Multiplier(compound)
-        if compound is not None:
-            divisions = self.flatten(depth=-1)
-            meters = [abjad.Meter(_) for _ in divisions]
-            if all(_.is_compound for _ in meters):
-                durations = [compound * _ for _ in durations]
-        if cyclic is not None:
-            cyclic = bool(cyclic)
-        if rotate_indexed is not None:
-            assert isinstance(rotate_indexed, int)
-        if remainder is not None:
-            assert remainder in (abjad.Left, abjad.Right), repr(remainder)
-        if remainder_fuse_threshold is not None:
-            remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
-        start_offset = self.start_offset
-        sequence = abjad.Sequence.split(
-            self, durations, cyclic=cyclic, overhang=True
-        )
-        without_overhang = abjad.Sequence.split(
-            self, durations, cyclic=cyclic, overhang=False
-        )
-        if sequence != without_overhang:
-            items = list(sequence)
-            remaining_item = items.pop()
-            if remainder == abjad.Left:
-                if remainder_fuse_threshold is None:
-                    items.insert(0, remaining_item)
-                elif remaining_item.duration <= remainder_fuse_threshold:
-                    fused_value = DivisionSequence([remaining_item, items[0]])
-                    fused_value = fused_value.flatten(depth=-1)
-                    fused_value = fused_value.fuse()
-                    items[0] = fused_value
-                else:
-                    items.insert(0, remaining_item)
-            else:
-                if remainder_fuse_threshold is None:
-                    items.append(remaining_item)
-                elif remaining_item.duration <= remainder_fuse_threshold:
-                    fused_value = DivisionSequence([items[-1], remaining_item])
-                    fused_value = fused_value.flatten(depth=-1)
-                    fused_value = fused_value.fuse()
-                    items[-1] = fused_value
-                else:
-                    items.append(remaining_item)
-            sequence = DivisionSequence(items, start_offset=start_offset)
-        return sequence
-
-    @abjad.Signature()
-    def split_each(
-        self,
-        durations: typing.List[abjad.DurationTyping],
-        *,
-        compound: abjad.DurationTyping = None,
-        cyclic: bool = None,
-        rotate_indexed: int = None,
-        remainder: abjad.HorizontalAlignment = None,
-        remainder_fuse_threshold: abjad.DurationTyping = None,
-    ) -> "DivisionSequence":
-        r"""
-        Splits each division by ``durations``.
-
         ..  container:: example expression
 
             Splits each division by durations and rotates durations one to the
             left at each new division:
 
-            >>> expression = baca.divisions()
-            >>> expression = expression.split_each(
+            >>> split = baca.divisions().split(
             ...     [(1, 16), (1, 8), (1, 4)],
             ...     cyclic=True,
             ...     rotate_indexed=-1,
             ...     )
+            >>> split = split.flatten(depth=-1)
+            >>> expression = baca.divisions().map(split)
 
             >>> time_signatures = [(7, 16), (7, 16), (7, 16)]
             >>> sequence = expression([(7, 16), (7, 16), (7, 16)])
             >>> for sequence_ in sequence:
             ...     sequence_
             ...
-            DivisionSequence([Division((1, 16)), Division((1, 8)), Division((1, 4))])
-            DivisionSequence([Division((1, 8)), Division((1, 4)), Division((1, 16))])
-            DivisionSequence([Division((1, 4)), Division((1, 16)), Division((1, 8))])
+            DivisionSequence([Division((1, 16)), Division((2, 16)), Division((4, 16))])
+            DivisionSequence([Division((2, 16)), Division((4, 16)), Division((1, 16))])
+            DivisionSequence([Division((4, 16)), Division((1, 16)), Division((2, 16))])
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
             >>> divisions = sequence.flatten(depth=-1)
@@ -1700,17 +1636,88 @@ class DivisionSequence(abjad.Sequence):
         durations = [abjad.Duration(_) for _ in durations]
         if compound is not None:
             compound = abjad.Multiplier(compound)
+        if compound is not None:
+            divisions = self.flatten(depth=-1)
+            meters = [abjad.Meter(_) for _ in divisions]
+            if all(_.is_compound for _ in meters):
+                durations = [compound * _ for _ in durations]
         if cyclic is not None:
             cyclic = bool(cyclic)
         if rotate_indexed is not None:
             assert isinstance(rotate_indexed, int)
+        rotate_indexed = rotate_indexed or 0
+        if remainder is not None:
+            assert remainder in (abjad.Left, abjad.Right), repr(remainder)
+        if remainder_fuse_threshold is not None:
+            remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
+        if _map_index is not None:
+            assert isinstance(_map_index, int), repr(_map_index)
+            n = rotate_indexed * _map_index
+            durations_ = abjad.sequence(durations).rotate(n=n)
+            durations = list(durations_)
+        start_offset = self.start_offset
+        sequence = abjad.Sequence.split(
+            self, durations, cyclic=cyclic, overhang=True
+        )
+        without_overhang = abjad.Sequence.split(
+            self, durations, cyclic=cyclic, overhang=False
+        )
+        if sequence != without_overhang:
+            items = list(sequence)
+            remaining_item = items.pop()
+            if remainder == abjad.Left:
+                if remainder_fuse_threshold is None:
+                    items.insert(0, remaining_item)
+                elif remaining_item.duration <= remainder_fuse_threshold:
+                    fused_value = DivisionSequence([remaining_item, items[0]])
+                    fused_value = fused_value.flatten(depth=-1)
+                    fused_value = fused_value.fuse()
+                    items[0] = fused_value
+                else:
+                    items.insert(0, remaining_item)
+            else:
+                if remainder_fuse_threshold is None:
+                    items.append(remaining_item)
+                elif remaining_item.duration <= remainder_fuse_threshold:
+                    fused_value = DivisionSequence([items[-1], remaining_item])
+                    fused_value = fused_value.flatten(depth=-1)
+                    fused_value = fused_value.fuse()
+                    items[-1] = fused_value
+                else:
+                    items.append(remaining_item)
+            sequence = DivisionSequence(items, start_offset=start_offset)
+        return sequence
+
+    @abjad.Signature()
+    def split_each(
+        self,
+        durations: typing.List[abjad.DurationTyping],
+        *,
+        ###compound: abjad.DurationTyping = None,
+        cyclic: bool = None,
+        ###rotate_indexed: int = None,
+        remainder: abjad.HorizontalAlignment = None,
+        remainder_fuse_threshold: abjad.DurationTyping = None,
+    ) -> "DivisionSequence":
+        r"""
+        Splits each division by ``durations``.
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        durations = [abjad.Duration(_) for _ in durations]
+        ###if compound is not None:
+        ###    compound = abjad.Multiplier(compound)
+        if cyclic is not None:
+            cyclic = bool(cyclic)
+        ###if rotate_indexed is not None:
+        ###    assert isinstance(rotate_indexed, int)
         if remainder is not None:
             assert remainder in (abjad.Left, abjad.Right), repr(remainder)
         if remainder_fuse_threshold is not None:
             remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
         start_offset = self[0].start_offset
         sequences = []
-        rotate_indexed = rotate_indexed or 0
+        ###rotate_indexed = rotate_indexed or 0
         for i, division in enumerate(self):
             input_division = Division(division)
             input_duration = abjad.Duration(division)
@@ -1723,14 +1730,16 @@ class DivisionSequence(abjad.Sequence):
             if input_meter.is_simple or not durations:
                 durations_ = durations[:]
             elif input_meter.is_compound:
-                multiplier = compound or 1
+                # multiplier = compound or 1
+                multiplier = 1
                 durations_ = [
                     abjad.Duration(multiplier * _) for _ in durations
                 ]
             else:
                 raise Exception
-            n = i * rotate_indexed
-            divisions_ = classes.Sequence(durations_).rotate(n=n)
+            ###n = i * rotate_indexed
+            ###divisions_ = classes.Sequence(durations_).rotate(n=n)
+            divisions_ = abjad.sequence(durations_)
             if cyclic:
                 divisions_ = divisions_.repeat_to_weight(
                     input_division, allow_total=abjad.Less

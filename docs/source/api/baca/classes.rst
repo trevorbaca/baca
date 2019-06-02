@@ -1129,6 +1129,10 @@ classes
 
    .. container:: inherited
 
+      .. automethod:: Sequence.zebra
+
+   .. container:: inherited
+
       .. automethod:: Sequence.zip
 
    .. raw:: html
