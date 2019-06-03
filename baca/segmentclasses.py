@@ -1559,7 +1559,7 @@ class HorizontalSpacingSpecifier(object):
         measure_count: int = None,
         measures: abjad.OrderedDict = None,
         minimum_duration: abjad.DurationTyping = None,
-        multiplier: typings.IntegerPair = None,
+        multiplier: abjad.IntegerPair = None,
         phantom: bool = None,
     ) -> None:
         if breaks is not None:
@@ -2005,7 +2005,7 @@ class HorizontalSpacingSpecifier(object):
     def override(
         self,
         measures: typing.Union[int, tuple, list],
-        pair: typing.Union[typings.IntegerPair, str],
+        pair: typing.Union[abjad.IntegerPair, str],
         *,
         fermata: bool = None,
         force_local: bool = None,
@@ -2358,11 +2358,11 @@ class SystemSpecifier(object):
     def __init__(
         self,
         *,
-        distances: typing.Iterable[typings.Number] = None,
+        distances: typing.Iterable[abjad.Number] = None,
         measure: int = None,
-        y_offset: typings.Number = None,
+        y_offset: abjad.Number = None,
     ) -> None:
-        distances_: typing.Optional[typing.List[typings.Number]] = None
+        distances_: typing.Optional[typing.List[abjad.Number]] = None
         if distances is not None:
             assert isinstance(distances, collections.abc.Iterable), repr(
                 distances
@@ -2383,7 +2383,7 @@ class SystemSpecifier(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def distances(self) -> typing.Optional[typing.List[typings.Number]]:
+    def distances(self) -> typing.Optional[typing.List[abjad.Number]]:
         """
         Gets distances.
         """
@@ -2397,7 +2397,7 @@ class SystemSpecifier(object):
         return self._measure
 
     @property
-    def y_offset(self) -> typing.Optional[typings.Number]:
+    def y_offset(self) -> typing.Optional[abjad.Number]:
         """
         Gets Y-offset.
         """
@@ -2788,9 +2788,7 @@ def scorewide_spacing(
 
 
 def system(
-    *distances: typing.Any,
-    measure: int = None,
-    y_offset: typings.Number = None,
+    *distances: typing.Any, measure: int = None, y_offset: abjad.Number = None
 ) -> SystemSpecifier:
     """
     Makes system specifier.

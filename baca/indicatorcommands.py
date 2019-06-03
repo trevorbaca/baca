@@ -12,7 +12,7 @@ from . import typings
 
 def accent(
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_accent",
 ) -> commands.IndicatorCommand:
     r"""
@@ -162,7 +162,7 @@ def accent(
 def alternate_bow_strokes(
     *,
     downbow_first: bool = True,
-    selector: typings.Selector = "baca.pheads(exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.pheads(exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_alternate_bow_strokes",
 ) -> commands.IndicatorCommand:
     r"""
@@ -398,7 +398,7 @@ def alternate_bow_strokes(
 
 def arpeggio(
     *,
-    selector: typings.Selector = "baca.chead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.chead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_arpeggio",
 ) -> commands.IndicatorCommand:
     r"""
@@ -554,7 +554,7 @@ def arpeggio(
 def articulation(
     articulation: str,
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_articulation",
 ) -> commands.IndicatorCommand:
     """
@@ -569,7 +569,7 @@ def articulation(
 def articulations(
     articulations: typing.List,
     *,
-    selector: typings.Selector = "baca.pheads(exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.pheads(exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_articulations",
 ) -> commands.IndicatorCommand:
     """
@@ -582,7 +582,7 @@ def articulations(
 
 def breathe(
     *tweaks: abjad.LilyPondTweakManager,
-    selector: typings.Selector = "baca.pleaf(-1, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.pleaf(-1, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_breathe",
 ) -> commands.IndicatorCommand:
     """
@@ -598,7 +598,7 @@ def breathe(
 def clef(
     clef: str = "treble",
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     redundant: bool = None,
     tag: typing.Optional[str] = "baca_clef",
 ) -> commands.IndicatorCommand:
@@ -748,7 +748,7 @@ def clef(
 
 def double_staccato(
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_double_staccato",
 ) -> commands.IndicatorCommand:
     r"""
@@ -899,7 +899,7 @@ def double_staccato(
 
 def down_arpeggio(
     *,
-    selector: typings.Selector = "baca.chead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.chead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_down_arpeggio",
 ) -> commands.IndicatorCommand:
     r"""
@@ -1058,7 +1058,7 @@ def down_arpeggio(
 def down_bow(
     *tweaks: abjad.LilyPondTweakManager,
     full: bool = None,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_down_bow",
 ) -> commands.IndicatorCommand:
     r"""
@@ -1211,7 +1211,7 @@ def down_bow(
 
 def espressivo(
     *tweaks: abjad.LilyPondTweakManager,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_espressivo",
 ) -> commands.IndicatorCommand:
     r"""
@@ -1363,7 +1363,7 @@ def espressivo(
 
 def fermata(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_fermata",
 ) -> commands.IndicatorCommand:
     r"""
@@ -1507,7 +1507,7 @@ def fermata(
 
 def flageolet(
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_flageolet",
 ) -> commands.IndicatorCommand:
     r"""
@@ -1658,7 +1658,7 @@ def flageolet(
 
 def hide_black_note_heads(
     *,
-    selector: typings.Selector = "baca.leaves(exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.leaves(exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "hide_black_note_heads",
 ) -> commands.IndicatorCommand:
     r"""
@@ -1800,7 +1800,7 @@ def hide_black_note_heads(
 
 def laissez_vibrer(
     *,
-    selector: typings.Selector = "baca.ptail(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.ptail(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_laissez_vibrer",
 ) -> commands.IndicatorCommand:
     r"""
@@ -1953,7 +1953,7 @@ def literal(
     string: typing.Union[str, typing.List[str]],
     *,
     format_slot: str = "before",
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_literal",
 ) -> commands.IndicatorCommand:
     """
@@ -1967,7 +1967,7 @@ def literal(
 
 def long_fermata(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_long_fermata",
 ) -> commands.IndicatorCommand:
     r"""
@@ -2111,7 +2111,7 @@ def long_fermata(
 
 def marcato(
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_marcato",
 ) -> commands.IndicatorCommand:
     r"""
@@ -2265,7 +2265,7 @@ def margin_markup(
     *,
     alert: commands.IndicatorCommand = None,
     context: str = "Staff",
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_margin_markup",
 ) -> typing.Union[commands.IndicatorCommand, scoping.Suite]:
     r"""
@@ -2418,7 +2418,7 @@ def margin_markup(
 def mark(
     argument: str,
     *tweaks: abjad.LilyPondTweakManager,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_mark",
 ) -> commands.IndicatorCommand:
     """
@@ -2436,7 +2436,7 @@ def mark(
 
 def parenthesize(
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_parenthesize",
 ) -> commands.IndicatorCommand:
     r"""
@@ -2516,7 +2516,7 @@ def parenthesize(
 
 def quadruple_staccato(
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_quadruple_staccato",
 ) -> commands.IndicatorCommand:
     """
@@ -2532,7 +2532,7 @@ def quadruple_staccato(
 def rehearsal_mark(
     argument: typing.Union[int, str],
     *tweaks: abjad.LilyPondTweakManager,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_rehearsal_mark",
 ) -> commands.IndicatorCommand:
     """
@@ -2548,7 +2548,7 @@ def rehearsal_mark(
 
 def short_fermata(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "short_fermata",
 ) -> commands.IndicatorCommand:
     r"""
@@ -2694,7 +2694,7 @@ def short_fermata(
 
 def staccatissimo(
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_staccatissimo",
 ) -> commands.IndicatorCommand:
     r"""
@@ -2845,7 +2845,7 @@ def staccatissimo(
 
 def staccato(
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_staccato",
 ) -> commands.IndicatorCommand:
     r"""
@@ -2997,7 +2997,7 @@ def staccato(
 def staff_lines(
     n: int,
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_staff_lines",
 ) -> commands.IndicatorCommand:
     r"""
@@ -3701,9 +3701,9 @@ def start_markup(
     argument: typing.Union[str, typing.List[str]],
     *,
     context: str = "Staff",
-    hcenter_in: typings.Number = None,
+    hcenter_in: abjad.Number = None,
     literal: bool = None,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_start_markup",
 ) -> commands.IndicatorCommand:
     """
@@ -3737,7 +3737,7 @@ def start_markup(
 
 def stem_tremolo(
     *,
-    selector: typings.Selector = "baca.pleaf(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.pleaf(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_stem_tremolo",
     tremolo_flags: int = 32,
 ) -> commands.IndicatorCommand:
@@ -3890,7 +3890,7 @@ def stem_tremolo(
 
 def stop_on_string(
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_stop_on_string",
 ) -> commands.IndicatorCommand:
     r"""
@@ -3969,7 +3969,7 @@ def stop_on_string(
 
 def stop_trill(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_stop_trill",
 ) -> commands.IndicatorCommand:
     r"""
@@ -3993,7 +3993,7 @@ def stop_trill(
 
 def stopped(
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_stoppped",
 ) -> commands.IndicatorCommand:
     r"""
@@ -4073,7 +4073,7 @@ def stopped(
 
 def tenuto(
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_tenuto",
 ) -> commands.IndicatorCommand:
     r"""
@@ -4224,7 +4224,7 @@ def tenuto(
 
 def triple_staccato(
     *,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_triple_staccato",
 ) -> commands.IndicatorCommand:
     """
@@ -4239,7 +4239,7 @@ def triple_staccato(
 
 def up_arpeggio(
     *,
-    selector: typings.Selector = "baca.chead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.chead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_up_arpeggio",
 ) -> commands.IndicatorCommand:
     r"""
@@ -4400,7 +4400,7 @@ def up_arpeggio(
 def up_bow(
     *tweaks: abjad.LilyPondTweakManager,
     full: bool = None,
-    selector: typings.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_up_bow",
 ) -> commands.IndicatorCommand:
     r"""
@@ -4553,7 +4553,7 @@ def up_bow(
 
 def very_long_fermata(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_very_long_fermata",
 ) -> commands.IndicatorCommand:
     r"""

@@ -228,7 +228,7 @@ def hair():
 
 def instrument(
     string: typing.Union[str, typing.List[str]],
-    hcenter_in: typing.Optional[typings.Number] = 16,
+    hcenter_in: typing.Optional[abjad.Number] = 16,
     column: bool = True,
 ) -> abjad.Markup:
     r"""
@@ -727,7 +727,7 @@ def senza_vib():
 
 
 def short_instrument(
-    string: str, hcenter_in: typings.Number = 10, column: bool = True
+    string: str, hcenter_in: abjad.Number = 10, column: bool = True
 ) -> abjad.Markup:
     r"""
     Makes short instrument name markup.

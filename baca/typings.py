@@ -7,15 +7,11 @@ from abjadext import rmakers
 
 IntegerList = typing.List[int]
 
-IntegerPair = typing.Tuple[int, int]
+Indices = typing.Union[int, abjad.IntegerPair, IntegerList]
 
-Indices = typing.Union[int, IntegerPair, IntegerList]
-
-Number = typing.Union[int, float]
-
-HorizontalAlignmentTyping = typing.Union[Number, abjad.HorizontalAlignment]
-
-NumberPair = typing.Tuple[Number, Number]
+HorizontalAlignmentTyping = typing.Union[
+    abjad.Number, abjad.HorizontalAlignment
+]
 
 Pair = typing.Tuple[typing.Any, typing.Any]
 
@@ -51,8 +47,4 @@ ScopeTyping = typing.Union[
     typing.Tuple[typing.List[str], typing.Tuple[int, int]],
 ]
 
-Selector = typing.Union[str, abjad.Expression]
-
-Slice = typing.Union[int, IntegerPair]
-
-Strings = typing.Union[str, typing.Sequence[str]]
+Slice = typing.Union[int, abjad.IntegerPair]

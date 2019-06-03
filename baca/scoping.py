@@ -76,7 +76,7 @@ class Scope(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def measures(self) -> typings.IntegerPair:
+    def measures(self) -> abjad.IntegerPair:
         """
         Gets measures.
         """
@@ -241,11 +241,11 @@ class Command(object):
         self,
         *,
         deactivate: bool = None,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: ScopeTyping = None,
-        selector: typings.Selector = None,
+        selector: abjad.Selector = None,
         tag_measure_number: bool = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
     ) -> None:

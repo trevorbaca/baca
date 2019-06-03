@@ -1871,7 +1871,7 @@ class Selection(abjad.Selection):
     ### PUBLIC METHODS ###
 
     def chead(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Note, abjad.Expression]:
         r"""
         Selects chord head ``n``.
@@ -1962,7 +1962,7 @@ class Selection(abjad.Selection):
         return self.cheads(exclude=exclude)[n]
 
     def cheads(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects chord heads.
@@ -2072,7 +2072,7 @@ class Selection(abjad.Selection):
         )
 
     def clparts(
-        self, counts: typing.Sequence[int], *, exclude: typings.Strings = None
+        self, counts: typing.Sequence[int], *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves cyclically partitioned by ``counts`` (with overhang).
@@ -2196,10 +2196,7 @@ class Selection(abjad.Selection):
         )
 
     def cmgroups(
-        self,
-        counts: typing.List[int] = [1],
-        *,
-        exclude: typings.Strings = None,
+        self, counts: typing.List[int] = [1], *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped leaves (cyclically).
@@ -2524,7 +2521,7 @@ class Selection(abjad.Selection):
         )
 
     def grace(
-        self, n: int = 0, *, exclude: typings.Strings = None
+        self, n: int = 0, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects grace ``n``.
@@ -2612,7 +2609,7 @@ class Selection(abjad.Selection):
         return self.graces(exclude=exclude)[n]
 
     def graces(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects graces.
@@ -2713,7 +2710,7 @@ class Selection(abjad.Selection):
         return self.leaves(exclude=exclude, grace_notes=True)
 
     def hleaf(
-        self, n: int = 0, *, exclude: typings.Strings = None
+        self, n: int = 0, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects haupt leaf ``n``.
@@ -2801,7 +2798,7 @@ class Selection(abjad.Selection):
         return self.hleaves(exclude=exclude)[n]
 
     def hleaves(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects haupt leaves.
@@ -2902,7 +2899,7 @@ class Selection(abjad.Selection):
         return self.leaves(exclude=exclude, grace_notes=False)
 
     def lleaf(
-        self, n: int = 0, *, exclude: typings.Strings = None
+        self, n: int = 0, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects leaf ``n`` from leaves leaked to the left.
@@ -3060,7 +3057,7 @@ class Selection(abjad.Selection):
         return self.with_previous_leaf()
 
     def lleaves(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves, leaked to the left.
@@ -3171,7 +3168,7 @@ class Selection(abjad.Selection):
         return self.leaves(exclude=exclude).with_previous_leaf()
 
     def lparts(
-        self, counts: typing.Sequence[int], *, exclude: typings.Strings = None
+        self, counts: typing.Sequence[int], *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves partitioned by ``counts``.
@@ -3278,7 +3275,7 @@ class Selection(abjad.Selection):
         )
 
     def lt(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie ``n``.
@@ -3370,7 +3367,7 @@ class Selection(abjad.Selection):
         return self.lts(exclude=exclude)[n]
 
     def ltleaf(
-        self, n: int = 0, *, exclude: typings.Strings = None
+        self, n: int = 0, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects left-trimmed leaf ``n``.
@@ -3460,7 +3457,7 @@ class Selection(abjad.Selection):
         return self.ltleaves(exclude=exclude)[n]
 
     def ltleaves(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects left-trimmed leaves.
@@ -3602,7 +3599,7 @@ class Selection(abjad.Selection):
         )
 
     def ltqrun(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie equipitch run ``n``.
@@ -3694,7 +3691,7 @@ class Selection(abjad.Selection):
         return self.ltqruns(exclude=exclude)[n]
 
     def ltqruns(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie equipitch runs.
@@ -3816,7 +3813,7 @@ class Selection(abjad.Selection):
         return result
 
     def ltrun(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie run ``n``.
@@ -3911,7 +3908,7 @@ class Selection(abjad.Selection):
         return self.ltruns(exclude=exclude)[n]
 
     def ltruns(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical tie runs.
@@ -4024,7 +4021,7 @@ class Selection(abjad.Selection):
         return result.map(Selection)
 
     def lts(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical ties.
@@ -4165,7 +4162,7 @@ class Selection(abjad.Selection):
         self,
         counts: typing.Sequence[int] = [1],
         *,
-        exclude: typings.Strings = None,
+        exclude: abjad.Strings = None,
     ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped leaves.
@@ -4239,7 +4236,7 @@ class Selection(abjad.Selection):
         return result_
 
     def mleaves(
-        self, count: int, *, exclude: typings.Strings = None
+        self, count: int, *, exclude: abjad.Strings = None
     ) -> typing.Union["Selection", abjad.Expression]:
         r"""
         Selects all leaves in ``count`` measures.
@@ -4399,7 +4396,7 @@ class Selection(abjad.Selection):
         return result
 
     def mmrest(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Note, abjad.Expression]:
         r"""
         Selects multimeasure rest ``n``.
@@ -4451,7 +4448,7 @@ class Selection(abjad.Selection):
         return self.mmrests(exclude=exclude)[n]
 
     def mmrests(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects multimeasure rests.
@@ -4513,7 +4510,7 @@ class Selection(abjad.Selection):
         )
 
     def ntrun(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects nontrivial run ``n``.
@@ -4608,7 +4605,7 @@ class Selection(abjad.Selection):
         return self.ntruns(exclude=exclude)[n]
 
     def ntruns(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects nontrivial runs.
@@ -4722,7 +4719,7 @@ class Selection(abjad.Selection):
         self,
         counts: typing.Sequence[int] = [1],
         *,
-        exclude: typings.Strings = None,
+        exclude: abjad.Strings = None,
     ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped leaves (with overhang).
@@ -4807,7 +4804,7 @@ class Selection(abjad.Selection):
         self,
         counts: typing.Sequence[int] = [1],
         *,
-        exclude: typings.Strings = None,
+        exclude: abjad.Strings = None,
     ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped plts (with overhang).
@@ -4822,7 +4819,7 @@ class Selection(abjad.Selection):
         return result_
 
     def phead(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
         r"""
         Selects pitched head ``n``.
@@ -4913,7 +4910,7 @@ class Selection(abjad.Selection):
         return self.pheads(exclude=exclude)[n]
 
     def pheads(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched heads.
@@ -5039,7 +5036,7 @@ class Selection(abjad.Selection):
         return self.plts(exclude=exclude).map(_select()[0])
 
     def pleaf(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
         r"""
         Selects pitched leaf ``n``.
@@ -5130,7 +5127,7 @@ class Selection(abjad.Selection):
         return self.pleaves(exclude=exclude)[n]
 
     def pleaves(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched leaves.
@@ -5265,7 +5262,7 @@ class Selection(abjad.Selection):
         return super().leaves(exclude=exclude, grace_notes=False, pitched=True)
 
     def plt(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched logical tie ``n``.
@@ -5357,7 +5354,7 @@ class Selection(abjad.Selection):
         return self.plts(exclude=exclude)[n]
 
     def plts(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched logical ties.
@@ -5488,7 +5485,7 @@ class Selection(abjad.Selection):
         )
 
     def ptail(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
         r"""
         Selects pitched tail ``n``.
@@ -5579,7 +5576,7 @@ class Selection(abjad.Selection):
         return self.ptails(exclude=exclude)[n]
 
     def ptails(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched tails.
@@ -5705,7 +5702,7 @@ class Selection(abjad.Selection):
         return self.plts(exclude=exclude).map(_select()[-1])
 
     def ptlt(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched trivial logical tie ``n``.
@@ -5796,7 +5793,7 @@ class Selection(abjad.Selection):
         return self.ptlts(exclude=exclude)[n]
 
     def ptlts(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched trivial logical ties.
@@ -5915,7 +5912,7 @@ class Selection(abjad.Selection):
         )
 
     def qrun(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects equipitch run ``n``.
@@ -6007,7 +6004,7 @@ class Selection(abjad.Selection):
         return self.qruns(exclude=exclude)[n]
 
     def qruns(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects equipitch runs.
@@ -6129,7 +6126,7 @@ class Selection(abjad.Selection):
         return result
 
     def rleaf(
-        self, n: int = 0, *, exclude: typings.Strings = None
+        self, n: int = 0, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects leaf ``n`` from leaves leaked to the right.
@@ -6287,7 +6284,7 @@ class Selection(abjad.Selection):
         return self.with_next_leaf()
 
     def rleaves(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves, leaked to the right.
@@ -6398,7 +6395,7 @@ class Selection(abjad.Selection):
         return self.leaves(exclude=exclude).with_next_leaf()
 
     def rmleaves(
-        self, count: int, *, exclude: typings.Strings = None
+        self, count: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects all leaves in ``count`` measures, leaked one leaf to the right.
@@ -6476,7 +6473,7 @@ class Selection(abjad.Selection):
         return self.mleaves(count, exclude=exclude).rleak()
 
     def rrun(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects run ``n`` (leaked to the right).
@@ -6572,7 +6569,7 @@ class Selection(abjad.Selection):
         return self.rruns(exclude=exclude)[n]
 
     def rruns(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects runs (leaked to the right).
@@ -6686,7 +6683,7 @@ class Selection(abjad.Selection):
         return result.map(Selection)
 
     def skip(
-        self, n: int, *, exclude: typings.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Skip, abjad.Expression]:
         r"""
         Selects skip ``n``.
@@ -6749,7 +6746,7 @@ class Selection(abjad.Selection):
         return self.skips(exclude=exclude)[n]
 
     def skips(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects skips.
@@ -6819,7 +6816,7 @@ class Selection(abjad.Selection):
         return self.components(abjad.Skip, exclude=exclude)
 
     def tleaf(
-        self, n: int = 0, exclude: typings.Strings = None
+        self, n: int = 0, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects trimmed leaf ``n``.
@@ -6910,7 +6907,7 @@ class Selection(abjad.Selection):
         return self.tleaves(exclude=exclude)[n]
 
     def tleaves(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects trimmed leaves.
@@ -7051,7 +7048,7 @@ class Selection(abjad.Selection):
         return super().leaves(exclude=exclude, grace_notes=False, trim=True)
 
     def wleaf(
-        self, n: int = 0, *, exclude: typings.Strings = None
+        self, n: int = 0, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects leaf ``n`` from leaves leaked wide.
@@ -7220,7 +7217,7 @@ class Selection(abjad.Selection):
         return self.wleaves(exclude=exclude)[n]
 
     def wleaves(
-        self, *, exclude: typings.Strings = None
+        self, *, exclude: abjad.Strings = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects leaves, leaked "wide" (to both the left and right).

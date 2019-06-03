@@ -32,15 +32,15 @@ class BCPCommand(scoping.Command):
 
     def __init__(
         self,
-        bcps: typing.Iterable[typings.IntegerPair] = None,
+        bcps: typing.Iterable[abjad.IntegerPair] = None,
         bow_change_tweaks: abjad.IndexedTweakManagers = None,
         final_spanner: bool = None,
         helper: typing.Callable = None,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = None,
+        selector: abjad.Selector = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
@@ -266,7 +266,7 @@ class BCPCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bcps(self) -> typing.Optional[typing.Iterable[typings.IntegerPair]]:
+    def bcps(self) -> typing.Optional[typing.Iterable[abjad.IntegerPair]]:
         r"""
         Gets bow contact points.
 
@@ -1110,11 +1110,11 @@ class ColorCommand(scoping.Command):
     def __init__(
         self,
         *,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = "baca.leaves()",
+        selector: abjad.Selector = "baca.leaves()",
     ) -> None:
         assert selector is not None
         scoping.Command.__init__(
@@ -1286,11 +1286,11 @@ class ContainerCommand(scoping.Command):
         self,
         *,
         identifier: str = None,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = "baca.leaves()",
+        selector: abjad.Selector = "baca.leaves()",
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -1377,14 +1377,14 @@ class GlissandoCommand(scoping.Command):
         hide_middle_note_heads: bool = None,
         hide_middle_stems: bool = None,
         left_broken: bool = None,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         parenthesize_repeats: bool = None,
         right_broken: bool = None,
         right_broken_show_next: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = "baca.tleaves()",
+        selector: abjad.Selector = "baca.tleaves()",
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
         zero_padding: bool = None,
@@ -1542,11 +1542,11 @@ class GlobalFermataCommand(scoping.Command):
         self,
         *,
         description: str = None,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = "baca.leaf(0)",
+        selector: abjad.Selector = "baca.leaf(0)",
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1884,13 +1884,13 @@ class IndicatorCommand(scoping.Command):
         context: str = None,
         deactivate: bool = None,
         indicators: typing.List[typing.Any] = None,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         predicate: typing.Callable = None,
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = "baca.pheads()",
+        selector: abjad.Selector = "baca.pheads()",
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
@@ -2421,7 +2421,7 @@ class LabelCommand(scoping.Command):
         self,
         *,
         expression=None,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
@@ -2489,12 +2489,12 @@ class MetronomeMarkCommand(scoping.Command):
         key: typing.Union[
             str, indicators.Accelerando, indicators.Ritardando
         ] = None,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = "baca.leaf(0)",
+        selector: abjad.Selector = "baca.leaf(0)",
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
     ) -> None:
         scoping.Command.__init__(
@@ -2589,12 +2589,12 @@ class PartAssignmentCommand(scoping.Command):
     def __init__(
         self,
         *,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         part_assignment: abjad.PartAssignment = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = "baca.leaves()",
+        selector: abjad.Selector = "baca.leaves()",
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -2681,15 +2681,15 @@ class TieCommand(scoping.Command):
         self,
         direction: abjad.VerticalAlignment = None,
         left_broken: bool = None,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         repeat: typing.Union[
-            bool, typings.IntegerPair, abjad.DurationInequality
+            bool, abjad.IntegerPair, abjad.DurationInequality
         ] = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = "baca.tleaves()",
+        selector: abjad.Selector = "baca.tleaves()",
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
@@ -2761,7 +2761,7 @@ class TieCommand(scoping.Command):
     def repeat(
         self
     ) -> typing.Optional[
-        typing.Union[bool, typings.IntegerPair, abjad.DurationInequality]
+        typing.Union[bool, abjad.IntegerPair, abjad.DurationInequality]
     ]:
         """
         Gets repeat-tie threshold.
@@ -2823,7 +2823,7 @@ class VoltaCommand(scoping.Command):
 
 
 def allow_octaves(
-    *, selector: typings.Selector = "baca.leaves()"
+    *, selector: abjad.Selector = "baca.leaves()"
 ) -> IndicatorCommand:
     """
     Attaches ALLOW_OCTAVE tag.
@@ -2834,10 +2834,10 @@ def allow_octaves(
 
 
 def bar_extent_persistent(
-    pair: typings.NumberPair = None,
+    pair: abjad.NumberPair = None,
     *,
     after: bool = None,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_bar_extent_persistent",
 ) -> IndicatorCommand:
     r"""
@@ -3015,12 +3015,12 @@ def bar_extent_persistent(
 
 
 def bcps(
-    bcps: typing.Iterable[typings.IntegerPair],
+    bcps: typing.Iterable[abjad.IntegerPair],
     *tweaks: abjad.IndexedTweakManager,
     bow_change_tweaks: abjad.IndexedTweakManagers = None,
     final_spanner: bool = None,
     helper: typing.Callable = None,
-    selector: typings.Selector = "baca.leaves()",
+    selector: abjad.Selector = "baca.leaves()",
     tag: typing.Optional[str] = "baca_bcps",
 ) -> BCPCommand:
     r"""
@@ -3264,7 +3264,7 @@ def bcps(
     )
 
 
-def color(*, selector: typings.Selector = "baca.leaves()") -> ColorCommand:
+def color(*, selector: abjad.Selector = "baca.leaves()") -> ColorCommand:
     r"""
     Colors leaves.
 
@@ -3411,7 +3411,7 @@ def color(*, selector: typings.Selector = "baca.leaves()") -> ColorCommand:
 
 
 def container(
-    identifier: str = None, *, selector: typings.Selector = "baca.leaves()"
+    identifier: str = None, *, selector: abjad.Selector = "baca.leaves()"
 ) -> ContainerCommand:
     r"""
     Makes container with ``identifier`` and extends container with
@@ -3551,7 +3551,7 @@ def container(
 
 def cross_staff(
     *,
-    selector: typings.Selector = "baca.phead(0)",
+    selector: abjad.Selector = "baca.phead(0)",
     tag: typing.Optional[str] = "baca_cross_staff",
 ) -> IndicatorCommand:
     r"""
@@ -4190,7 +4190,7 @@ def cross_staff(
 
 def dynamic_down(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_dynamic_down",
 ) -> IndicatorCommand:
     r"""
@@ -4342,7 +4342,7 @@ def dynamic_down(
 
 def dynamic_up(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_dynamic_down",
 ) -> IndicatorCommand:
     r"""
@@ -4512,7 +4512,7 @@ def edition(
 
 def finger_pressure_transition(
     *,
-    selector: typings.Selector = "baca.tleaves()",
+    selector: abjad.Selector = "baca.tleaves()",
     right_broken: bool = None,
     tag: typing.Optional[str] = "baca_finger_pressure_transition",
 ) -> GlissandoCommand:
@@ -4731,7 +4731,7 @@ def glissando(
     left_broken: bool = None,
     right_broken: bool = None,
     right_broken_show_next: bool = None,
-    selector: typings.Selector = "baca.tleaves()",
+    selector: abjad.Selector = "baca.tleaves()",
     style: str = None,
     tag: typing.Optional[str] = "baca_glissando",
     zero_padding: bool = None,
@@ -5481,7 +5481,7 @@ def glissando(
 def global_fermata(
     description: str = None,
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_global_fermata",
 ) -> GlobalFermataCommand:
     """
@@ -5495,7 +5495,7 @@ def global_fermata(
 def instrument(
     instrument: abjad.Instrument,
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_instrument",
 ) -> InstrumentChangeCommand:
     """
@@ -5511,7 +5511,7 @@ def instrument(
 
 def invisible_music(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_invisible_music",
 ) -> IndicatorCommand:
     r"""
@@ -5656,9 +5656,7 @@ def invisible_music(
 
 
 def label(
-    expression: abjad.Expression,
-    *,
-    selector: typings.Selector = "baca.leaves()",
+    expression: abjad.Expression, *, selector: abjad.Selector = "baca.leaves()"
 ) -> LabelCommand:
     r"""
     Labels ``selector`` output with label ``expression``.
@@ -5816,10 +5814,10 @@ def markup(
     boxed: bool = None,
     direction: abjad.VerticalAlignment = abjad.Up,
     literal: bool = False,
-    map: typings.Selector = None,
+    map: abjad.Selector = None,
     match: typings.Indices = None,
     measures: typings.Slice = None,
-    selector: typings.Selector = "baca.pleaf(0)",
+    selector: abjad.Selector = "baca.pleaf(0)",
     tag: typing.Optional[str] = "baca_markup",
 ) -> IndicatorCommand:
     r"""
@@ -6156,7 +6154,7 @@ def metronome_mark(
     key: typing.Union[str, indicators.Accelerando, indicators.Ritardando],
     *,
     redundant: bool = None,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
 ) -> typing.Optional[MetronomeMarkCommand]:
     """
     Attaches metronome mark matching ``key`` metronome mark manifest.
@@ -6171,7 +6169,7 @@ def metronome_mark(
 def parts(
     part_assignment: abjad.PartAssignment,
     *,
-    selector: typings.Selector = "baca.leaves()",
+    selector: abjad.Selector = "baca.leaves()",
 ) -> PartAssignmentCommand:
     r"""
     Inserts ``selector`` output in container and sets part assignment.
@@ -6455,7 +6453,7 @@ def parts(
 
 def one_voice(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_one_voice",
 ) -> IndicatorCommand:
     r"""
@@ -6492,7 +6490,7 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
 
 def repeat_tie(
     *,
-    selector: typings.Selector = "baca.qrun(0)",
+    selector: abjad.Selector = "baca.qrun(0)",
     tag: typing.Optional[str] = "baca_repeat_tie",
 ) -> TieCommand:
     r"""
@@ -6586,11 +6584,11 @@ def repeat_tie_repeat_pitches(
 
 def tie(
     *,
-    map: typings.Selector = None,
+    map: abjad.Selector = None,
     repeat: typing.Union[
-        bool, typings.IntegerPair, abjad.DurationInequality
+        bool, abjad.IntegerPair, abjad.DurationInequality
     ] = None,
-    selector: typings.Selector = "baca.qrun(0)",
+    selector: abjad.Selector = "baca.qrun(0)",
     tag: typing.Optional[str] = "baca_tie",
 ) -> TieCommand:
     r"""
@@ -6749,7 +6747,7 @@ def tie_repeat_pitches(
 
 def voice_four(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_voice_four",
 ) -> IndicatorCommand:
     r"""
@@ -6763,7 +6761,7 @@ def voice_four(
 
 def voice_one(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_voice_one",
 ) -> IndicatorCommand:
     r"""
@@ -6777,7 +6775,7 @@ def voice_one(
 
 def voice_three(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_voice_three",
 ) -> IndicatorCommand:
     r"""
@@ -6791,7 +6789,7 @@ def voice_three(
 
 def voice_two(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca_voice_two",
 ) -> IndicatorCommand:
     r"""
@@ -6803,7 +6801,7 @@ def voice_two(
     )
 
 
-def volta(*, selector: typings.Selector = "baca.leaves()") -> VoltaCommand:
+def volta(*, selector: abjad.Selector = "baca.leaves()") -> VoltaCommand:
     r"""
     Makes volta container and extends container with ``selector`` output.
 

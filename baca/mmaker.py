@@ -13541,8 +13541,8 @@ class RestAffixSpecifier(object):
 
 def anchor(
     remote_voice_name: str,
-    remote_selector: typings.Selector = None,
-    local_selector: typings.Selector = None,
+    remote_selector: abjad.Selector = None,
+    local_selector: abjad.Selector = None,
 ) -> AnchorSpecifier:
     """
     Anchors music in this figure (filtered by ``local_selector``) to
@@ -13564,8 +13564,8 @@ def anchor(
 
 def anchor_after(
     remote_voice_name: str,
-    remote_selector: typings.Selector = None,
-    local_selector: typings.Selector = None,
+    remote_selector: abjad.Selector = None,
+    local_selector: abjad.Selector = None,
 ) -> AnchorSpecifier:
     """
     Anchors music in this figure (filtered by ``local_selector``) to
@@ -13711,7 +13711,7 @@ def imbricate(
     by_pitch_class: bool = None,
     extend_beam: bool = None,
     hocket: bool = None,
-    selector: typings.Selector = None,
+    selector: abjad.Selector = None,
     truncate_ties: bool = None,
 ):
     r"""

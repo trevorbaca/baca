@@ -17,6 +17,7 @@ from .segmentclasses import *
 from .segmentmaker import *
 from .spannercommands import *
 from .templates import *
+from .typings import *
 from . import const
 from . import markups
 

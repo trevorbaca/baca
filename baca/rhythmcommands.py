@@ -40,11 +40,11 @@ class DurationMultiplierCommand(scoping.Command):
     def __init__(
         self,
         *,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = "baca.leaf(0)",
+        selector: abjad.Selector = "baca.leaf(0)",
         written_duration: abjad.DurationTyping = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1313,7 +1313,7 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
 
     def __call__(
         self,
-        divisions: typing.List[typings.IntegerPair],
+        divisions: typing.List[abjad.IntegerPair],
         previous_state: abjad.OrderedDict = None,
     ) -> typing.List[abjad.Selection]:
         """
@@ -1437,12 +1437,12 @@ class TieCorrectionCommand(scoping.Command):
         self,
         *,
         direction: abjad.HorizontalAlignment = None,
-        map: typings.Selector = None,
+        map: abjad.Selector = None,
         match: typings.Indices = None,
         measures: typings.Slice = None,
         repeat: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: typings.Selector = "baca.pleaf(-1)",
+        selector: abjad.Selector = "baca.pleaf(-1)",
         untie: bool = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1563,9 +1563,7 @@ class TieCorrectionCommand(scoping.Command):
 ### FACTORY FUNCTIONS ###
 
 
-def beam_divisions(
-    *, stemlets: typings.Number = None
-) -> rmakers.BeamSpecifier:
+def beam_divisions(*, stemlets: abjad.Number = None) -> rmakers.BeamSpecifier:
     r"""
     Beams divisions.
 
@@ -1681,9 +1679,7 @@ def beam_divisions(
     )
 
 
-def beam_everything(
-    *, stemlets: typings.Number = None
-) -> rmakers.BeamSpecifier:
+def beam_everything(*, stemlets: abjad.Number = None) -> rmakers.BeamSpecifier:
     r"""
     Beams everything.
 
@@ -2180,7 +2176,7 @@ def make_multimeasure_rests(
 
 def make_notes(
     *,
-    dmask: rmakers.MaskKeyword = None,
+    dmask: rmakers.MasksTyping = None,
     measures: typings.Slice = None,
     repeat_ties: bool = False,
     tag: str = "baca_make_notes",
@@ -2202,7 +2198,7 @@ def make_notes(
 
 def make_repeat_tied_notes(
     *,
-    dmask: rmakers.MaskKeyword = None,
+    dmask: rmakers.MasksTyping = None,
     do_not_rewrite_meter: bool = None,
     measures: typings.Slice = None,
     tag: str = "baca_make_repeat_tied_notes",
@@ -2227,7 +2223,7 @@ def make_repeated_duration_notes(
     durations: typing.Sequence[abjad.DurationTyping],
     *,
     beam_specifier: rmakers.BeamSpecifier = None,
-    dmask: rmakers.MaskKeyword = None,
+    dmask: rmakers.MasksTyping = None,
     do_not_rewrite_meter: bool = None,
     measures: typings.Slice = None,
     tag: str = "baca_make_repeated_duration_notes",
@@ -2275,7 +2271,7 @@ def make_rhythm(
     *,
     measures: typings.Slice = None,
     repeat_tie_threshold: typing.Union[
-        bool, typings.IntegerPair, abjad.DurationInequality
+        bool, abjad.IntegerPair, abjad.DurationInequality
     ] = None,
 ) -> RhythmCommand:
     r"""
@@ -2505,7 +2501,7 @@ def make_tied_repeated_durations(
 
 
 def repeat_tie_from(
-    *, selector: typings.Selector = "baca.pleaf(-1)"
+    *, selector: abjad.Selector = "baca.pleaf(-1)"
 ) -> TieCorrectionCommand:
     r"""
     Repeat-ties from leaf.
@@ -2640,7 +2636,7 @@ def repeat_tie_from(
 
 
 def repeat_tie_to(
-    *, selector: typings.Selector = "baca.pleaf(0)"
+    *, selector: abjad.Selector = "baca.pleaf(0)"
 ) -> TieCorrectionCommand:
     r"""
     Repeat-ties to leaf.
@@ -2815,7 +2811,7 @@ def rhythm(
 
 def set_duration_multiplier(
     *,
-    selector: typings.Selector = "baca.leaf(0)",
+    selector: abjad.Selector = "baca.leaf(0)",
     written_duration: abjad.DurationTyping = None,
 ) -> DurationMultiplierCommand:
     r"""
@@ -3331,7 +3327,7 @@ def tacet(
     color: str = "green",
     *,
     measures: typings.Slice = None,
-    selector: typings.Selector = "baca.mmrests()",
+    selector: abjad.Selector = "baca.mmrests()",
 ) -> overrides.OverrideCommand:
     """
     Colors multimeasure rests.
@@ -3345,7 +3341,7 @@ def tacet(
 
 
 def tie_from(
-    *, selector: typings.Selector = "baca.pleaf(-1)"
+    *, selector: abjad.Selector = "baca.pleaf(-1)"
 ) -> TieCorrectionCommand:
     r"""
     Ties from leaf.
@@ -3474,7 +3470,7 @@ def tie_from(
 
 
 def tie_to(
-    *, selector: typings.Selector = "baca.pleaf(0)"
+    *, selector: abjad.Selector = "baca.pleaf(0)"
 ) -> TieCorrectionCommand:
     r"""
     Ties to leaf.
@@ -3605,7 +3601,7 @@ def tie_to(
 
 
 def untie_to(
-    *, selector: typings.Selector = "baca.pleaf(0)"
+    *, selector: abjad.Selector = "baca.pleaf(0)"
 ) -> TieCorrectionCommand:
     r"""
     Unties to leaf.

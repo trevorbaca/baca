@@ -329,7 +329,7 @@ class SegmentMaker(abjad.SegmentMaker):
         fermata_measure_staff_line_count: int = None,
         final_bar_line: typing.Union[bool, str] = None,
         final_markup: tuple = None,
-        final_markup_extra_offset: typings.NumberPair = None,
+        final_markup_extra_offset: abjad.NumberPair = None,
         final_segment: bool = None,
         first_measure_number: int = None,
         first_segment: bool = None,
@@ -360,7 +360,7 @@ class SegmentMaker(abjad.SegmentMaker):
             typing.Union[
                 abjad.NonreducedFraction,
                 abjad.TimeSignature,
-                typings.IntegerPair,
+                abjad.IntegerPair,
             ]
         ] = None,
         transpose_score: bool = None,
@@ -3656,7 +3656,7 @@ class SegmentMaker(abjad.SegmentMaker):
             voice_names = scopes[0]
         assert isinstance(voice_names, list), repr(voice_names)
         assert all(isinstance(_, str) for _ in voice_names)
-        token_type = typing.Union[int, typings.IntegerPair]
+        token_type = typing.Union[int, abjad.IntegerPair]
         measure_tokens: typing.List[token_type] = []
         if isinstance(scopes[1], int):
             measure_tokens.append(scopes[1])
@@ -6212,7 +6212,7 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._final_markup
 
     @property
-    def final_markup_extra_offset(self) -> typing.Optional[typings.NumberPair]:
+    def final_markup_extra_offset(self) -> typing.Optional[abjad.NumberPair]:
         """
         Gets final markup extra offset.
         """
