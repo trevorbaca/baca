@@ -600,17 +600,14 @@ class DivisionSequence(abjad.Sequence):
 
     ..  container:: example
 
-        >>> baca.DivisionSequence([(3, 8), (3, 8), (2, 8)])
+        >>> baca.divisions([(3, 8), (3, 8), (2, 8)])
         DivisionSequence([Division((3, 8)), Division((3, 8)), Division((2, 8))])
 
     ..  container:: example
 
         Partitions by ratio of lengths:
 
-        >>> divisions = baca.DivisionSequence(
-        ...     10 * [(1, 8)], start_offset=(0, 1)
-        ... )
-
+        >>> divisions = baca.divisions(10 * [(1, 8)], start_offset=0)
         >>> for division in divisions:
         ...     print(division)
         ...
@@ -683,8 +680,8 @@ class DivisionSequence(abjad.Sequence):
             >>> baca.DivisionSequence().duration
             Duration(0, 1)
 
-            >>> baca.DivisionSequence([(2, 8), (2, 8), (2, 8)]).duration
-            Duration(3, 4)
+            >>> baca.divisions([(2, 8), (2, 8)], start_offset=0).duration
+            Duration(1, 2)
 
         """
         duration = sum(self.flatten(depth=-1))
@@ -697,12 +694,8 @@ class DivisionSequence(abjad.Sequence):
 
         ..  container:: example
 
-            >>> sequence = baca.DivisionSequence(
-            ...     [(2, 8), (2, 8), (2, 8)],
-            ...     start_offset=(1, 1),
-            ...     )
-            >>> sequence.start_offset
-            Offset(1, 1)
+            >>> baca.divisions([(2, 8), (2, 8)], start_offset=0).start_offset
+            Offset(0, 1)
 
         """
         if 0 < len(self):
@@ -716,12 +709,8 @@ class DivisionSequence(abjad.Sequence):
 
         ..  container:: example
 
-            >>> sequence = baca.DivisionSequence(
-            ...     [(2, 8), (2, 8), (2, 8)],
-            ...     start_offset=(1, 1),
-            ...     )
-            >>> sequence.stop_offset
-            Offset(7, 4)
+            >>> baca.divisions([(2, 8), (2, 8)], start_offset=0).stop_offset
+            Offset(1, 2)
 
         """
         if 0 < len(self):
@@ -735,12 +724,8 @@ class DivisionSequence(abjad.Sequence):
 
         ..  container:: example
 
-            >>> sequence = baca.DivisionSequence(
-            ...     [(2, 8), (2, 8), (2, 8)],
-            ...     start_offset=(1, 1),
-            ...     )
-            >>> sequence.timespan
-            Timespan(start_offset=Offset(1, 1), stop_offset=Offset(7, 4))
+            >>> baca.divisions([(2, 8), (2, 8)], start_offset=0).timespan
+            Timespan(start_offset=Offset(0, 1), stop_offset=Offset(1, 2))
 
         """
         if self.start_offset is None:
@@ -764,11 +749,12 @@ class DivisionSequence(abjad.Sequence):
 
             >>> expression = baca.divisions().fuse()
 
-            >>> input_divisions = [(7, 8), (3, 8), (5, 8)]
-            >>> sequence = expression(input_divisions)
-            >>> divisions = sequence.flatten(depth=-1)
+            >>> divisions = [(7, 8), (3, 8), (5, 8)]
+            >>> divisions = baca.divisions(divisions, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> divisions = divisions.flatten(depth=-1)
             >>> divisions
-            DivisionSequence([Division((15, 8))])
+            DivisionSequence([Division((15, 8), start_offset=Offset(0, 1))])
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
             >>> music = rhythm_maker(divisions)
@@ -797,12 +783,16 @@ class DivisionSequence(abjad.Sequence):
 
             >>> expression = baca.divisions().fuse([2])
 
-            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-            >>> sequence = expression(input_divisions)
-            >>> sequence
-            DivisionSequence([Division((4, 8)), Division((12, 8))])
+            >>> divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+            >>> divisions = baca.divisions(divisions, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for division in divisions:
+            ...     division
+            Division((4, 8), start_offset=Offset(0, 1))
+            Division((12, 8), start_offset=Offset(1, 2))
+
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> music = rhythm_maker(sequence)
+            >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -829,13 +819,17 @@ class DivisionSequence(abjad.Sequence):
 
             >>> expression = baca.divisions().fuse([2], cyclic=True)
 
-            >>> input_divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
-            >>> sequence = expression(input_divisions)
-            >>> sequence
-            DivisionSequence([Division((4, 8)), Division((8, 8)), Division((2, 4))])
+            >>> divisions = [(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)]
+            >>> divisions = baca.divisions(divisions, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for division in divisions:
+            ...     division
+            Division((4, 8), start_offset=Offset(0, 1))
+            Division((8, 8), start_offset=Offset(1, 2))
+            Division((2, 4), start_offset=Offset(3, 2))
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> music = rhythm_maker(sequence)
+            >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -868,17 +862,16 @@ class DivisionSequence(abjad.Sequence):
             >>> expression = expression.fuse([2, 3, 1])
 
             >>> divisions = [(7, 8), (3, 8), (5, 8)]
-            >>> divisions = [baca.Division(_) for _ in divisions]
-            >>> divisions[0]._start_offset = abjad.Offset(1, 4)
-            >>> sequence = expression(divisions)
-            >>> for division in sequence:
+            >>> divisions = baca.divisions(divisions, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for division in divisions:
             ...     division
-            Division((6, 8), start_offset=Offset(1, 4))
-            Division((7, 8), start_offset=Offset(1, 1))
-            Division((2, 8), start_offset=Offset(15, 8))
+            Division((6, 8), start_offset=Offset(0, 1))
+            Division((7, 8), start_offset=Offset(3, 4))
+            Division((2, 8), start_offset=Offset(13, 8))
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> music = rhythm_maker(sequence)
+            >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -954,12 +947,27 @@ class DivisionSequence(abjad.Sequence):
             >>> expression = baca.divisions().map(baca.divisions().quarters())
 
             >>> divisions = [(7, 8), (3, 8), (5, 8)]
-            >>> input_divisions = baca.divisions(divisions, start_offset=0)
-            >>> sequence = expression(input_divisions)
+            >>> divisions = baca.divisions(divisions, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for sequence in divisions:
+            ...     print("sequence:")
+            ...     for division in sequence:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                DivisionSequence([Division((2, 8), start_offset=Offset(0, 1))])
+                DivisionSequence([Division((2, 8), start_offset=Offset(1, 4))])
+                DivisionSequence([Division((2, 8), start_offset=Offset(1, 2))])
+                DivisionSequence([Division((1, 8), start_offset=Offset(3, 4))])
+            sequence:
+                DivisionSequence([Division((2, 8), start_offset=Offset(7, 8))])
+                DivisionSequence([Division((1, 8), start_offset=Offset(9, 8))])
+            sequence:
+                DivisionSequence([Division((2, 8), start_offset=Offset(5, 4))])
+                DivisionSequence([Division((2, 8), start_offset=Offset(3, 2))])
+                DivisionSequence([Division((1, 8), start_offset=Offset(7, 4))])
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1006,16 +1014,10 @@ class DivisionSequence(abjad.Sequence):
 
             ..  container:: example
 
-                >>> sequence = baca.DivisionSequence([
-                ...     baca.Division((10, 16), start_offset=(0, 1)),
-                ...     baca.Division((12, 16), start_offset=(5, 8)),
-                ...     baca.Division((12, 16), start_offset=(11, 8)),
-                ...     baca.Division((12, 16), start_offset=(17, 8)),
-                ...     baca.Division((8, 16), start_offset=(23, 8)),
-                ...     baca.Division((15, 16), start_offset=(27, 8)),
-                ...     ])
+                >>> divisions = [(_, 16) for _ in [10, 12, 12, 12, 8, 15]]
+                >>> divisions = baca.divisions(divisions, start_offset=0)
 
-                >>> for division in sequence.rotate(n=-1):
+                >>> for division in divisions.rotate(n=-1):
                 ...     division
                 ...
                 Division((12, 16), start_offset=Offset(0, 1))
@@ -1030,7 +1032,7 @@ class DivisionSequence(abjad.Sequence):
                 >>> expression = baca.divisions(name='J')
                 >>> expression = expression.rotate(n=-1)
 
-                >>> for division in expression(sequence):
+                >>> for division in expression(divisions):
                 ...     division
                 ...
                 Division((12, 16), start_offset=Offset(0, 1))
@@ -1086,10 +1088,9 @@ class DivisionSequence(abjad.Sequence):
 
             Splits every five sixteenths:
 
-            >>> divisions = 10 * [(1, 8)]
-            >>> sequence = baca.DivisionSequence(divisions, start_offset=0)
+            >>> divisions = baca.divisions(10 * [(1, 8)], start_offset=0)
 
-            >>> for division in sequence:
+            >>> for division in divisions:
             ...     print(division)
             ...
             Division((1, 8), start_offset=Offset(0, 1))
@@ -1105,8 +1106,8 @@ class DivisionSequence(abjad.Sequence):
 
             Splits division sequence every five sixteenths:
 
-            >>> sequence = sequence.split([(5, 16)], cyclic=True)
-            >>> for i, sequence_ in enumerate(sequence):
+            >>> divisions = divisions.split([(5, 16)], cyclic=True)
+            >>> for i, sequence_ in enumerate(divisions):
             ...     print(f"sequence {i}")
             ...     for division in sequence_:
             ...         print('\t' + str(division))
@@ -1130,12 +1131,12 @@ class DivisionSequence(abjad.Sequence):
 
             Gets start offset of last sequence:
 
-            >>> sequence[-1].start_offset
+            >>> divisions[-1].start_offset
             Offset(15, 16)
 
             Gets start offset of first division in last sequence:
 
-            >>> sequence[-1][0].start_offset
+            >>> divisions[-1][0].start_offset
             Offset(15, 16)
 
         ..  container:: example expression
@@ -1146,9 +1147,9 @@ class DivisionSequence(abjad.Sequence):
             >>> expression = expression.split([(1, 4)], cyclic=True)
 
             >>> divisions = [(7, 8), (3, 8), (5, 8)]
-            >>> input_divisions = baca.divisions(divisions, start_offset=0)
-            >>> sequence = expression(input_divisions)
-            >>> for item in sequence:
+            >>> divisions = baca.divisions(divisions, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
             ...     item
             DivisionSequence([Division((2, 8), start_offset=Offset(0, 1))])
             DivisionSequence([Division((2, 8), start_offset=Offset(1, 4))])
@@ -1160,8 +1161,7 @@ class DivisionSequence(abjad.Sequence):
             DivisionSequence([Division((1, 8), start_offset=Offset(7, 4))])
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1196,9 +1196,9 @@ class DivisionSequence(abjad.Sequence):
             ... )
 
             >>> divisions = [(7, 8), (3, 8), (5, 8)]
-            >>> input_divisions = baca.divisions(divisions, start_offset=0)
-            >>> sequence = expression(input_divisions)
-            >>> for item in sequence:
+            >>> divisions = baca.divisions(divisions, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
             ...     item
             DivisionSequence([Division((2, 8), start_offset=Offset(0, 1))])
             DivisionSequence([Division((2, 8), start_offset=Offset(1, 4))])
@@ -1209,8 +1209,7 @@ class DivisionSequence(abjad.Sequence):
             DivisionSequence([Division((3, 8), start_offset=Offset(3, 2))])
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1246,9 +1245,9 @@ class DivisionSequence(abjad.Sequence):
             ... )
 
             >>> divisions = [(7, 8), (3, 8), (5, 8)]
-            >>> input_divisions = baca.divisions(divisions, start_offset=0)
-            >>> sequence = expression(input_divisions)
-            >>> for item in sequence:
+            >>> divisions = baca.divisions(divisions, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
             ...     item
             DivisionSequence([Division((1, 8), start_offset=Offset(0, 1))])
             DivisionSequence([Division((2, 8), start_offset=Offset(1, 8))])
@@ -1260,8 +1259,7 @@ class DivisionSequence(abjad.Sequence):
             DivisionSequence([Division((2, 8), start_offset=Offset(13, 8))])
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1299,9 +1297,9 @@ class DivisionSequence(abjad.Sequence):
             ... )
 
             >>> divisions = [(7, 8), (3, 8), (5, 8)]
-            >>> input_divisions = baca.divisions(divisions, start_offset=0)
-            >>> sequence = expression(input_divisions)
-            >>> for item in sequence:
+            >>> divisions = baca.divisions(divisions, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
             ...     item
             DivisionSequence([Division((3, 8), start_offset=Offset(0, 1))])
             DivisionSequence([Division((2, 8), start_offset=Offset(3, 8))])
@@ -1312,8 +1310,7 @@ class DivisionSequence(abjad.Sequence):
             DivisionSequence([Division((2, 8), start_offset=Offset(13, 8))])
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -1348,19 +1345,32 @@ class DivisionSequence(abjad.Sequence):
             >>> quarters = baca.divisions().quarters().flatten(depth=-1)
             >>> expression = expression.map(quarters)
 
-            >>> input_divisions = [(7, 8), (7, 8), (7, 16)]
             >>> time_signatures = [(7, 8), (7, 8), (7, 16)]
-            >>> sequence = expression(time_signatures)
-            >>> for sequence_ in sequence:
-            ...     sequence_
-            DivisionSequence([Division((2, 8)), Division((2, 8)), Division((2, 8)), Division((1, 8))])
-            DivisionSequence([Division((2, 8)), Division((2, 8)), Division((2, 8)), Division((1, 8))])
-            DivisionSequence([Division((4, 16)), Division((3, 16))])
+            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                Division((2, 8), start_offset=Offset(0, 1))
+                Division((2, 8), start_offset=Offset(1, 4))
+                Division((2, 8), start_offset=Offset(1, 2))
+                Division((1, 8), start_offset=Offset(3, 4))
+            sequence:
+                Division((2, 8), start_offset=Offset(7, 8))
+                Division((2, 8), start_offset=Offset(9, 8))
+                Division((2, 8), start_offset=Offset(11, 8))
+                Division((1, 8), start_offset=Offset(13, 8))
+            sequence:
+                Division((4, 16), start_offset=Offset(7, 4))
+                Division((3, 16), start_offset=Offset(2, 1))
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, input_divisions)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -1401,17 +1411,31 @@ class DivisionSequence(abjad.Sequence):
             >>> expression = expression.map(quarters)
 
             >>> time_signatures = [(7, 8), (7, 8), (7, 16)]
-            >>> sequence = expression(time_signatures)
-            >>> for sequence_ in sequence:
-            ...     sequence_
-            DivisionSequence([Division((1, 8)), Division((2, 8)), Division((2, 8)), Division((2, 8))])
-            DivisionSequence([Division((1, 8)), Division((2, 8)), Division((2, 8)), Division((2, 8))])
-            DivisionSequence([Division((3, 16)), Division((4, 16))])
+            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                Division((1, 8), start_offset=Offset(0, 1))
+                Division((2, 8), start_offset=Offset(1, 8))
+                Division((2, 8), start_offset=Offset(3, 8))
+                Division((2, 8), start_offset=Offset(5, 8))
+            sequence:
+                Division((1, 8), start_offset=Offset(7, 8))
+                Division((2, 8), start_offset=Offset(1, 1))
+                Division((2, 8), start_offset=Offset(5, 4))
+                Division((2, 8), start_offset=Offset(3, 2))
+            sequence:
+                Division((3, 16), start_offset=Offset(7, 4))
+                Division((4, 16), start_offset=Offset(31, 16))
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, input_divisions)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ...     )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -1457,16 +1481,21 @@ class DivisionSequence(abjad.Sequence):
             >>> expression = baca.divisions().map(quarters)
 
             >>> time_signatures = [(5, 8)]
-            >>> sequence = expression(time_signatures)
-            >>> for sequence_ in sequence:
-            ...     sequence_
-            ...
-            DivisionSequence([Division((2, 8)), Division((3, 8))])
+            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                Division((2, 8), start_offset=Offset(0, 1))
+                Division((3, 8), start_offset=Offset(1, 4))
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ...     )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -1501,16 +1530,21 @@ class DivisionSequence(abjad.Sequence):
             >>> expression = baca.divisions().map(quarters)
 
             >>> time_signatures = [(5, 8)]
-            >>> sequence = expression(time_signatures)
-            >>> for sequence_ in sequence:
-            ...     sequence_
-            ...
-            DivisionSequence([Division((3, 8)), Division((2, 8))])
+            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                Division((3, 8), start_offset=Offset(0, 1))
+                Division((2, 8), start_offset=Offset(3, 8))
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ...     )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -1539,17 +1573,26 @@ class DivisionSequence(abjad.Sequence):
             >>> expression = baca.divisions().map(quarters)
 
             >>> time_signatures = [(3, 4), (6, 8)]
-            >>> sequence = expression(time_signatures)
-            >>> for sequence_ in sequence:
-            ...     sequence_
+            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
             ...
-            DivisionSequence([Division((1, 4)), Division((1, 4)), Division((1, 4))])
-            DivisionSequence([Division((3, 8)), Division((3, 8))])
+            sequence:
+                Division((1, 4), start_offset=Offset(0, 1))
+                Division((1, 4), start_offset=Offset(1, 4))
+                Division((1, 4), start_offset=Offset(1, 2))
+            sequence:
+                Division((3, 8), start_offset=Offset(3, 4))
+                Division((3, 8), start_offset=Offset(9, 8))
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ...     )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -1588,18 +1631,30 @@ class DivisionSequence(abjad.Sequence):
             >>> expression = baca.divisions().map(split)
 
             >>> time_signatures = [(7, 16), (7, 16), (7, 16)]
-            >>> sequence = expression([(7, 16), (7, 16), (7, 16)])
-            >>> for sequence_ in sequence:
-            ...     sequence_
-            ...
-            DivisionSequence([Division((1, 16)), Division((2, 16)), Division((4, 16))])
-            DivisionSequence([Division((2, 16)), Division((4, 16)), Division((1, 16))])
-            DivisionSequence([Division((4, 16)), Division((1, 16)), Division((2, 16))])
+            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                Division((1, 16), start_offset=Offset(0, 1))
+                Division((2, 16), start_offset=Offset(1, 16))
+                Division((4, 16), start_offset=Offset(3, 16))
+            sequence:
+                Division((2, 16), start_offset=Offset(7, 16))
+                Division((4, 16), start_offset=Offset(9, 16))
+                Division((1, 16), start_offset=Offset(13, 16))
+            sequence:
+                Division((4, 16), start_offset=Offset(7, 8))
+                Division((1, 16), start_offset=Offset(9, 8))
+                Division((2, 16), start_offset=Offset(19, 16))
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -1700,17 +1755,25 @@ class DivisionSequence(abjad.Sequence):
             >>> expression = baca.divisions()
             >>> expression = expression.ratios_each([(2, 1)])
 
-            >>> input_divisions = [(5, 8), (6, 8)]
-            >>> sequence = expression(input_divisions)
-            >>> for sequence_ in sequence:
-            ...     sequence_
-            DivisionSequence([Division((3, 8)), Division((2, 8))])
-            DivisionSequence([Division((4, 8)), Division((2, 8))])
+            >>> time_signatures = [(5, 8), (6, 8)]
+            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                Division((3, 8), start_offset=Offset(0, 1))
+                Division((2, 8), start_offset=Offset(3, 8))
+            sequence:
+                Division((4, 8), start_offset=Offset(5, 8))
+                Division((2, 8), start_offset=Offset(9, 8))
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, input_divisions)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -1744,17 +1807,26 @@ class DivisionSequence(abjad.Sequence):
             ...     [(2, 1), (1, 1, 1)]
             ... )
 
-            >>> input_divisions = [(5, 8), (6, 8)]
-            >>> sequence = expression(input_divisions)
-            >>> for sequence_ in sequence:
-            ...     sequence_
-            DivisionSequence([Division((3, 8)), Division((2, 8))])
-            DivisionSequence([Division((2, 8)), Division((2, 8)), Division((2, 8))])
+            >>> time_signatures = [(5, 8), (6, 8)]
+            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                Division((3, 8), start_offset=Offset(0, 1))
+                Division((2, 8), start_offset=Offset(3, 8))
+            sequence:
+                Division((2, 8), start_offset=Offset(5, 8))
+                Division((2, 8), start_offset=Offset(7, 8))
+                Division((2, 8), start_offset=Offset(9, 8))
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
-            >>> divisions = sequence.flatten(depth=-1)
-            >>> music = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, input_divisions)
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ...     )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -1778,37 +1850,6 @@ class DivisionSequence(abjad.Sequence):
                         c'4
                     }
                 >>
-
-        ..  container:: example expression
-
-            Works with start offset:
-
-            >>> expression = baca.divisions()
-            >>> expression = expression.ratios_each(
-            ...     ratios=[abjad.Ratio([1, 1])],
-            ...     )
-
-            >>> divisions = [(7, 4), (6, 4)]
-            >>> divisions = [baca.Division(_) for _ in divisions]
-            >>> divisions[0]._start_offset = abjad.Offset(1, 4)
-            >>> divisions
-            [Division((7, 4), start_offset=Offset(1, 4)), Division((6, 4))]
-
-            >>> sequence = expression(divisions)
-            >>> len(sequence)
-            2
-
-            >>> for division in sequence[0]:
-            ...     division
-            ...
-            Division((4, 4), start_offset=Offset(1, 4))
-            Division((3, 4), start_offset=Offset(5, 4))
-
-            >>> for division in sequence[1]:
-            ...     division
-            ...
-            Division((3, 4), start_offset=Offset(2, 1))
-            Division((3, 4), start_offset=Offset(11, 4))
 
         """
         if self._expression:
