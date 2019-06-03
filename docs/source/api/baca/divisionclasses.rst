@@ -317,6 +317,7 @@ divisionclasses
       fuse
       quarters
       ratios
+      reverse
       rotate
       split
       start_offset
@@ -491,9 +492,7 @@ divisionclasses
 
       .. automethod:: DivisionSequence.retain_pattern
 
-   .. container:: inherited
-
-      .. automethod:: DivisionSequence.reverse
+   .. automethod:: DivisionSequence.reverse
 
    .. automethod:: DivisionSequence.rotate
 

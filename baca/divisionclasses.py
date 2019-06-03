@@ -1003,6 +1003,70 @@ class DivisionSequence(abjad.Sequence):
         )
         return sequence
 
+    @abjad.Signature(
+        is_operator=True, method_name_callback="_make_reverse_method_name"
+    )
+    def reverse(self, recurse=False) -> "DivisionSequence":
+        r"""
+        Reverses divisions.
+
+        ..  container:: example
+
+            ..  container:: example
+
+                >>> divisions = [(_, 16) for _ in [10, 12, 12, 12, 8, 15]]
+                >>> divisions = baca.divisions(divisions, start_offset=0)
+
+                >>> for division in divisions.reverse():
+                ...     division
+                ...
+                Division((15, 16), start_offset=Offset(0, 1))
+                Division((8, 16), start_offset=Offset(15, 16))
+                Division((12, 16), start_offset=Offset(23, 16))
+                Division((12, 16), start_offset=Offset(35, 16))
+                Division((12, 16), start_offset=Offset(47, 16))
+                Division((10, 16), start_offset=Offset(59, 16))
+
+            ..  container:: example expression
+
+                >>> expression = baca.divisions(name='J')
+                >>> expression = expression.reverse()
+
+                >>> for division in expression(divisions):
+                ...     division
+                ...
+                Division((15, 16), start_offset=Offset(0, 1))
+                Division((8, 16), start_offset=Offset(15, 16))
+                Division((12, 16), start_offset=Offset(23, 16))
+                Division((12, 16), start_offset=Offset(35, 16))
+                Division((12, 16), start_offset=Offset(47, 16))
+                Division((10, 16), start_offset=Offset(59, 16))
+
+                >>> expression.get_string()
+                'R(J)'
+
+                >>> markup = expression.get_markup()
+                >>> abjad.show(markup) # doctest: +SKIP
+
+                ..  docs::
+
+                    >>> abjad.f(markup)
+                    \markup {
+                        \concat
+                            {
+                                R
+                                \bold
+                                    J
+                            }
+                        }
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        start_offset = self.start_offset
+        items = abjad.Sequence(self).reverse(recurse=recurse)
+        return type(self)(items=items, start_offset=start_offset)
+
     @abjad.Signature(is_operator=True, method_name="r", subscript="n")
     def rotate(self, n=0) -> "DivisionSequence":
         r"""
