@@ -1744,16 +1744,22 @@ class DivisionSequence(abjad.Sequence):
         return sequence
 
     @abjad.Signature()
-    def ratios_each(self, ratios) -> "DivisionSequence":
+    def ratios(
+        self,
+        ratios: typing.Sequence[abjad.RatioTyping],
+        *,
+        rounded: bool = None,
+        _map_index=None,
+    ) -> "DivisionSequence":
         r"""
-        Splits each division by rounded ``ratios``.
+        Splits divisions by ``ratios``.
 
         ..  container:: example expression
 
-            Splits each division by ``2:1`` rounded ratio:
+            Splits divisions by exact ``2:1`` ratio:
 
             >>> expression = baca.divisions()
-            >>> expression = expression.ratios_each([(2, 1)])
+            >>> expression = expression.ratios([(2, 1)])
 
             >>> time_signatures = [(5, 8), (6, 8)]
             >>> divisions = baca.divisions(time_signatures, start_offset=0)
@@ -1763,11 +1769,172 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                Division((3, 8), start_offset=Offset(0, 1))
-                Division((2, 8), start_offset=Offset(3, 8))
+                Division((5, 8), start_offset=Offset(0, 1))
+                Division((7, 24), start_offset=Offset(5, 8))
             sequence:
-                Division((4, 8), start_offset=Offset(5, 8))
-                Division((2, 8), start_offset=Offset(9, 8))
+                Division((11, 24), start_offset=Offset(11, 12))
+
+            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ... )
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/8
+                        s1 * 5/8
+                        \time 6/8
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'2
+                        ~
+                        c'8
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 2/3 {
+                            c'4..
+                        }
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 2/3 {
+                            c'2
+                            ~
+                            c'8.
+                        }
+                    }
+                >>
+
+            Splits divisions by rounded ``2:1`` ratio:
+
+            >>> expression = baca.divisions()
+            >>> expression = expression.ratios([(2, 1)], rounded=True)
+
+            >>> time_signatures = [(5, 8), (6, 8)]
+            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                Division((5, 8), start_offset=Offset(0, 1))
+                Division((2, 8), start_offset=Offset(5, 8))
+            sequence:
+                Division((4, 8), start_offset=Offset(7, 8))
+
+            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ... )
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/8
+                        s1 * 5/8
+                        \time 6/8
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'2
+                        ~
+                        c'8
+                        c'4
+                        c'2
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Splits each division by exact ``2:1`` ratio:
+
+            >>> split = baca.divisions().ratios([(2, 1)])
+            >>> expression = baca.divisions().map(split)
+
+            >>> time_signatures = [(5, 8), (6, 8)]
+            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                DivisionSequence([Division((5, 12), start_offset=Offset(0, 1))])
+                DivisionSequence([Division((5, 24), start_offset=Offset(5, 12))])
+            sequence:
+                DivisionSequence([Division((4, 8), start_offset=Offset(5, 8))])
+                DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
+
+            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ... )
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/8
+                        s1 * 5/8
+                        \time 6/8
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 2/3 {
+                            c'2
+                            ~
+                            c'8
+                        }
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 2/3 {
+                            c'4
+                            ~
+                            c'16
+                        }
+                        c'2
+                        c'4
+                    }
+                >>
+
+            Splits each division by rounded ``2:1`` ratio:
+
+            >>> split = baca.divisions().ratios([(2, 1)], rounded=True)
+            >>> expression = baca.divisions().map(split)
+
+            >>> time_signatures = [(5, 8), (6, 8)]
+            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                DivisionSequence([Division((3, 8), start_offset=Offset(0, 1))])
+                DivisionSequence([Division((2, 8), start_offset=Offset(3, 8))])
+            sequence:
+                DivisionSequence([Division((4, 8), start_offset=Offset(5, 8))])
+                DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1799,13 +1966,11 @@ class DivisionSequence(abjad.Sequence):
 
         ..  container:: example expression
 
-            Splits divisions with alternating ``2:1`` and ``1:1:1`` rounded
+            Splits divisions with alternating exact ``2:1`` and ``1:1:1``
             ratios:
 
-            >>> expression = baca.divisions()
-            >>> expression = expression.ratios_each(
-            ...     [(2, 1), (1, 1, 1)]
-            ... )
+            >>> split = baca.divisions().ratios([(2, 1), (1, 1, 1)])
+            >>> expression = baca.divisions().map(split)
 
             >>> time_signatures = [(5, 8), (6, 8)]
             >>> divisions = baca.divisions(time_signatures, start_offset=0)
@@ -1815,12 +1980,74 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                Division((3, 8), start_offset=Offset(0, 1))
-                Division((2, 8), start_offset=Offset(3, 8))
+                DivisionSequence([Division((5, 12), start_offset=Offset(0, 1))])
+                DivisionSequence([Division((5, 24), start_offset=Offset(5, 12))])
             sequence:
-                Division((2, 8), start_offset=Offset(5, 8))
-                Division((2, 8), start_offset=Offset(7, 8))
-                Division((2, 8), start_offset=Offset(9, 8))
+                DivisionSequence([Division((2, 8), start_offset=Offset(5, 8))])
+                DivisionSequence([Division((2, 8), start_offset=Offset(7, 8))])
+                DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
+
+            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ...     )
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/8
+                        s1 * 5/8
+                        \time 6/8
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 2/3 {
+                            c'2
+                            ~
+                            c'8
+                        }
+                        \tweak edge-height #'(0.7 . 0)
+                        \times 2/3 {
+                            c'4
+                            ~
+                            c'16
+                        }
+                        c'4
+                        c'4
+                        c'4
+                    }
+                >>
+
+            Splits divisions with alternating rounded ``2:1`` and ``1:1:1``
+            ratios:
+
+            >>> split = baca.divisions().ratios(
+            ...     [(2, 1), (1, 1, 1)], rounded=True
+            ... )
+            >>> expression = baca.divisions().map(split)
+
+            >>> time_signatures = [(5, 8), (6, 8)]
+            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                DivisionSequence([Division((3, 8), start_offset=Offset(0, 1))])
+                DivisionSequence([Division((2, 8), start_offset=Offset(3, 8))])
+            sequence:
+                DivisionSequence([Division((2, 8), start_offset=Offset(5, 8))])
+                DivisionSequence([Division((2, 8), start_offset=Offset(7, 8))])
+                DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
 
             >>> rhythm_maker = rmakers.NoteRhythmMaker()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1854,23 +2081,31 @@ class DivisionSequence(abjad.Sequence):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
+        ratios_ = abjad.CyclicTuple([abjad.Ratio(_) for _ in ratios])
+        if rounded is not None:
+            rounded = bool(rounded)
+        _map_index = _map_index or 0
         start_offset = self[0].start_offset
-        sequences = []
-        if not ratios:
-            ratios = (abjad.Ratio([1]),)
-        ratios = abjad.CyclicTuple(ratios)
-        for i, division in enumerate(self):
-            ratio = ratios[i]
+        weight = sum(self)
+        assert isinstance(weight, abjad.NonreducedFraction)
+        numerator, denominator = weight.pair
+        ratio = ratios_[_map_index]
+        if rounded is True:
             numerators = abjad.mathtools.partition_integer_by_ratio(
-                division.numerator, ratio
+                numerator, ratio
             )
             divisions = [
-                Division((numerator, division.denominator))
-                for numerator in numerators
+                Division((numerator, denominator)) for numerator in numerators
             ]
-            sequence = DivisionSequence(divisions)
-            sequences.append(sequence)
-        sequence = DivisionSequence(sequences, start_offset=start_offset)
+        else:
+            divisions = []
+            ratio_weight = sum(ratio)
+            for number in ratio:
+                multiplier = abjad.Fraction(number, ratio_weight)
+                division = multiplier * weight
+                divisions.append(division)
+        sequence = self.split(divisions)
+        sequence = DivisionSequence(sequence, start_offset=start_offset)
         return sequence
 
 

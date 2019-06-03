@@ -316,7 +316,7 @@ divisionclasses
       duration
       fuse
       quarters
-      ratios_each
+      ratios
       rotate
       split
       start_offset
@@ -453,7 +453,7 @@ divisionclasses
 
    .. automethod:: DivisionSequence.quarters
 
-   .. automethod:: DivisionSequence.ratios_each
+   .. automethod:: DivisionSequence.ratios
 
    .. container:: inherited
 
