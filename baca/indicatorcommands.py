@@ -162,6 +162,7 @@ def accent(
 def alternate_bow_strokes(
     *,
     downbow_first: bool = True,
+    full: bool = None,
     selector: abjad.Selector = "baca.pheads(exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca_alternate_bow_strokes",
 ) -> commands.IndicatorCommand:
@@ -316,16 +317,13 @@ def alternate_bow_strokes(
 
     ..  container:: example
 
-        Attaches alternate bow strokes to pitched heads in tuplet 1:
+        Attaches alternate full bow strokes to pitched heads:
 
         >>> music_maker = baca.MusicMaker()
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.new(
-        ...         baca.alternate_bow_strokes(),
-        ...         map=baca.tuplet(1),
-        ...         ),
+        ...     baca.alternate_bow_strokes(full=True),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(6),
         ...     counts=[1, 1, 5, -1],
@@ -348,10 +346,13 @@ def alternate_bow_strokes(
                             \override TupletBracket.staff-padding = #6                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
+                            - \baca-full-downbow                                                     %! baca_alternate_bow_strokes:IndicatorCommand
                             [
                             d'16
+                            - \baca-full-upbow                                                       %! baca_alternate_bow_strokes:IndicatorCommand
                             ]
                             bf'4
+                            - \baca-full-downbow                                                     %! baca_alternate_bow_strokes:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -359,25 +360,26 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-upbow                                                       %! baca_alternate_bow_strokes:IndicatorCommand
                             [
                             e''16
-                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-downbow                                                     %! baca_alternate_bow_strokes:IndicatorCommand
                             ]
                             ef''4
-                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-upbow                                                       %! baca_alternate_bow_strokes:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-downbow                                                     %! baca_alternate_bow_strokes:IndicatorCommand
                             [
                             g''16
-                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-upbow                                                       %! baca_alternate_bow_strokes:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
+                            - \baca-full-downbow                                                     %! baca_alternate_bow_strokes:IndicatorCommand
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -387,9 +389,15 @@ def alternate_bow_strokes(
 
     """
     if downbow_first:
-        strings = ["downbow", "upbow"]
+        if full:
+            strings = ["baca-full-downbow", "baca-full-upbow"]
+        else:
+            strings = ["downbow", "upbow"]
     else:
-        strings = ["upbow", "downbow"]
+        if full:
+            strings = ["baca-full-upbow", "baca-full-downbow"]
+        else:
+            strings = ["upbow", "downbow"]
     indicators = [abjad.Articulation(_) for _ in strings]
     return commands.IndicatorCommand(
         indicators=indicators, selector=selector, tags=[tag]
