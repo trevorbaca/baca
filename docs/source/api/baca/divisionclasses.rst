@@ -319,7 +319,6 @@ divisionclasses
       ratios_each
       rotate
       split
-      split_each
       start_offset
       stop_offset
       timespan
@@ -507,8 +506,6 @@ divisionclasses
       .. automethod:: DivisionSequence.sort
 
    .. automethod:: DivisionSequence.split
-
-   .. automethod:: DivisionSequence.split_each
 
    .. container:: inherited
 
