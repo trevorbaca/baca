@@ -2440,7 +2440,7 @@ class TimeSignatureMaker(object):
         time_signatures,
         *,
         count: int = None,
-        fermata_measures: typing.List[int] = None,
+        fermata_measures: abjad.IntegerSequence = None,
         rotation: int = None,
     ) -> None:
         self._time_signatures = time_signatures
@@ -2448,7 +2448,8 @@ class TimeSignatureMaker(object):
             assert isinstance(count, int), repr(count)
         self._count = count
         if fermata_measures is not None:
-            assert isinstance(count, int), repr(count)
+            assert all(isinstance(_, int) for _ in fermata_measures)
+            fermata_measures = list(fermata_measures)
         self._fermata_measures = fermata_measures
         self._rotation = rotation
 
