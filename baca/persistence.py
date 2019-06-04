@@ -228,10 +228,10 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \clef "treble"                                                           %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
+                                \clef "treble"                                                           %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
+                                \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
@@ -368,10 +368,10 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \clef "alto"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
+                                \clef "alto"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
+                                \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
@@ -640,18 +640,18 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \clef "treble"                                                           %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
+                                \clef "treble"                                                           %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
                                 \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
+                                \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                                 \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                                \clef "treble"                                                           %! REDUNDANT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
+                                \clef "treble"                                                           %! REDUNDANT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! REDUNDANT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! REDUNDANT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
+                                \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! REDUNDANT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
@@ -789,10 +789,10 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \clef "treble"                                                           %! REDUNDANT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
+                                \clef "treble"                                                           %! REDUNDANT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
                                 \once \override Staff.Clef.color = #(x11-color 'DeepPink1)               %! REDUNDANT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override Staff.Clef.color = ##f                                         %! REDUNDANT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                                \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
+                                \set Staff.forceClef = ##t                                               %! REDUNDANT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                                 \override Staff.Clef.color = #(x11-color 'DeepPink4)                     %! REDUNDANT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
@@ -912,7 +912,7 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
-                                \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1035,7 +1035,7 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
-                                \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1270,12 +1270,12 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
-                                \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                                 - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
-                                \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -1395,7 +1395,7 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                                 - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
-                                \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1504,12 +1504,12 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
-                                \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
-                                \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -1629,7 +1629,7 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
-                                \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -1741,12 +1741,12 @@ class PersistentIndicatorTests(object):
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
-                                \mf                                                                      %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \mf                                                                      %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
-                                \baca-effort-mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:baca_dynamic:IndicatorCommand
+                                \baca-effort-mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -4315,14 +4315,14 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                                 ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -4427,14 +4427,14 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                             %%% ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -4535,14 +4535,14 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                                 ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -4673,16 +4673,16 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { III+IV }                                                       %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { III+IV }                                                       %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \set Staff.instrumentName =                                              %! _clone_segment_initial_short_instrument_name
                                 \markup { III+IV }                                                       %! _clone_segment_initial_short_instrument_name
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                                 ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -4788,16 +4788,16 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { III+IV }                                                       %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { III+IV }                                                       %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \set Staff.instrumentName =                                              %! _clone_segment_initial_short_instrument_name
                                 \markup { III+IV }                                                       %! _clone_segment_initial_short_instrument_name
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                             %%% ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -4899,16 +4899,16 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { III+IV }                                                       %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { III+IV }                                                       %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \set Staff.instrumentName =                                              %! _clone_segment_initial_short_instrument_name
                                 \markup { III+IV }                                                       %! _clone_segment_initial_short_instrument_name
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                                 ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -5408,24 +5408,24 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2                                                                      %! baca_make_notes
                                 ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2                                                                      %! baca_make_notes
                                 ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
@@ -5535,24 +5535,24 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2                                                                      %! baca_make_notes
                             %%% ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2                                                                      %! baca_make_notes
                             %%% ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
@@ -5658,24 +5658,24 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2                                                                      %! baca_make_notes
                                 ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2                                                                      %! baca_make_notes
                                 ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
@@ -5812,16 +5812,16 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \set Staff.instrumentName =                                              %! _clone_segment_initial_short_instrument_name
                                 \markup { I+II }                                                         %! _clone_segment_initial_short_instrument_name
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                                 ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -5927,16 +5927,16 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \set Staff.instrumentName =                                              %! _clone_segment_initial_short_instrument_name
                                 \markup { I+II }                                                         %! _clone_segment_initial_short_instrument_name
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                             %%% ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -6038,16 +6038,16 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \set Staff.instrumentName =                                              %! _clone_segment_initial_short_instrument_name
                                 \markup { I+II }                                                         %! _clone_segment_initial_short_instrument_name
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                                 ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'4.                                                                     %! baca_make_notes
@@ -6189,21 +6189,21 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:-PARTS:IndicatorCommand
-                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:-PARTS:IndicatorCommand
-                            %@% \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:-PARTS:IndicatorCommand
-                            %@% \markup { III+IV }                                                       %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:-PARTS:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:-PARTS:IndicatorCommand
+                                \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:-PARTS:IndicatorCommand
+                            %@% \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:-PARTS:IndicatorCommand
+                            %@% \markup { III+IV }                                                       %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:-PARTS:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                             %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                                 c'2                                                                      %! baca_make_notes
                                 ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             %@% ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:-PARTS:IndicatorCommand
-                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:-PARTS:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:-PARTS:IndicatorCommand
+                                \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:-PARTS:IndicatorCommand
                             %@% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:-PARTS:IndicatorCommand
-                                \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:-PARTS:IndicatorCommand
+                                \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:-PARTS:IndicatorCommand
+                                \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:-PARTS:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 c'2                                                                      %! baca_make_notes
@@ -7025,10 +7025,10 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
-                                \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca.bar_extent_persistent:IndicatorCommand
+                                \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                                 b'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
@@ -7311,15 +7311,15 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
-                                \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca.bar_extent_persistent:IndicatorCommand
+                                \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                                 b'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:baca.bar_extent_persistent:IndicatorCommand
                                 b'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
@@ -7443,7 +7443,7 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:baca.bar_extent_persistent:IndicatorCommand
                                 \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
@@ -7562,9 +7562,9 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                                \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
@@ -7687,9 +7687,9 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                                \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
@@ -7926,16 +7926,16 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                                \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                                \stopStaff                                                               %! REDUNDANT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! REDUNDANT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \startStaff                                                              %! REDUNDANT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                                \stopStaff                                                               %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \startStaff                                                              %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! REDUNDANT_STAFF_LINES_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>
@@ -8055,9 +8055,9 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \stopStaff                                                               %! REDUNDANT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \once \override Staff.StaffSymbol.line-count = 5                         %! REDUNDANT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                                \startStaff                                                              %! REDUNDANT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                                \stopStaff                                                               %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \once \override Staff.StaffSymbol.line-count = 5                         %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                                \startStaff                                                              %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! REDUNDANT_STAFF_LINES_COLOR:_attach_color_literal(2)
                                 c'4.                                                                     %! baca_make_notes
                 <BLANKLINE>

@@ -13,7 +13,7 @@ from . import typings
 def accent(
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_accent",
+    tag: typing.Optional[str] = "baca.accent",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches accent.
@@ -46,10 +46,10 @@ def accent(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             d'16
                             ]
@@ -76,7 +76,7 @@ def accent(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -113,7 +113,7 @@ def accent(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -127,27 +127,27 @@ def accent(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -164,7 +164,7 @@ def alternate_bow_strokes(
     downbow_first: bool = True,
     full: bool = None,
     selector: abjad.Selector = "baca.pheads(exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_alternate_bow_strokes",
+    tag: typing.Optional[str] = "baca.alternate_bow_strokes",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches alternate bow strokes.
@@ -199,16 +199,16 @@ def alternate_bow_strokes(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \downbow                                                               %! baca.alternate_bow_strokes:IndicatorCommand
                             [
                             d'16
-                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \upbow                                                                 %! baca.alternate_bow_strokes:IndicatorCommand
                             ]
                             bf'4
-                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \downbow                                                               %! baca.alternate_bow_strokes:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -216,28 +216,28 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \upbow                                                                 %! baca.alternate_bow_strokes:IndicatorCommand
                             [
                             e''16
-                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \downbow                                                               %! baca.alternate_bow_strokes:IndicatorCommand
                             ]
                             ef''4
-                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \upbow                                                                 %! baca.alternate_bow_strokes:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \downbow                                                               %! baca.alternate_bow_strokes:IndicatorCommand
                             [
                             g''16
-                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \upbow                                                                 %! baca.alternate_bow_strokes:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \downbow                                                               %! baca.alternate_bow_strokes:IndicatorCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -271,16 +271,16 @@ def alternate_bow_strokes(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #6                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #6                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \upbow                                                                 %! baca.alternate_bow_strokes:IndicatorCommand
                             [
                             d'16
-                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \downbow                                                               %! baca.alternate_bow_strokes:IndicatorCommand
                             ]
                             bf'4
-                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \upbow                                                                 %! baca.alternate_bow_strokes:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -288,28 +288,28 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \downbow                                                               %! baca.alternate_bow_strokes:IndicatorCommand
                             [
                             e''16
-                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \upbow                                                                 %! baca.alternate_bow_strokes:IndicatorCommand
                             ]
                             ef''4
-                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \downbow                                                               %! baca.alternate_bow_strokes:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \upbow                                                                 %! baca.alternate_bow_strokes:IndicatorCommand
                             [
                             g''16
-                            - \downbow                                                               %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \downbow                                                               %! baca.alternate_bow_strokes:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \upbow                                                                 %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \upbow                                                                 %! baca.alternate_bow_strokes:IndicatorCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -343,16 +343,16 @@ def alternate_bow_strokes(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #6                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #6                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \baca-full-downbow                                                     %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-downbow                                                     %! baca.alternate_bow_strokes:IndicatorCommand
                             [
                             d'16
-                            - \baca-full-upbow                                                       %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-upbow                                                       %! baca.alternate_bow_strokes:IndicatorCommand
                             ]
                             bf'4
-                            - \baca-full-downbow                                                     %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-downbow                                                     %! baca.alternate_bow_strokes:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -360,28 +360,28 @@ def alternate_bow_strokes(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \baca-full-upbow                                                       %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-upbow                                                       %! baca.alternate_bow_strokes:IndicatorCommand
                             [
                             e''16
-                            - \baca-full-downbow                                                     %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-downbow                                                     %! baca.alternate_bow_strokes:IndicatorCommand
                             ]
                             ef''4
-                            - \baca-full-upbow                                                       %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-upbow                                                       %! baca.alternate_bow_strokes:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \baca-full-downbow                                                     %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-downbow                                                     %! baca.alternate_bow_strokes:IndicatorCommand
                             [
                             g''16
-                            - \baca-full-upbow                                                       %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-upbow                                                       %! baca.alternate_bow_strokes:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \baca-full-downbow                                                     %! baca_alternate_bow_strokes:IndicatorCommand
+                            - \baca-full-downbow                                                     %! baca.alternate_bow_strokes:IndicatorCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -407,7 +407,7 @@ def alternate_bow_strokes(
 def arpeggio(
     *,
     selector: abjad.Selector = "baca.chead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_arpeggio",
+    tag: typing.Optional[str] = "baca.arpeggio",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches arpeggio.
@@ -438,7 +438,7 @@ def arpeggio(
                     {
                         \scaleDurations #'(1 . 1) {
                             <c' d' bf'>8
-                            - \arpeggio                                                              %! baca_arpeggio:IndicatorCommand
+                            - \arpeggio                                                              %! baca.arpeggio:IndicatorCommand
                             ~
                             [
                             <c' d' bf'>32
@@ -523,7 +523,7 @@ def arpeggio(
                         }
                         \scaleDurations #'(1 . 1) {
                             <ef'' e'' fs'''>8
-                            - \arpeggio                                                              %! baca_arpeggio:IndicatorCommand
+                            - \arpeggio                                                              %! baca.arpeggio:IndicatorCommand
                             ~
                             [
                             <ef'' e'' fs'''>32
@@ -532,7 +532,7 @@ def arpeggio(
                         }
                         \scaleDurations #'(1 . 1) {
                             <g' af''>8
-                            - \arpeggio                                                              %! baca_arpeggio:IndicatorCommand
+                            - \arpeggio                                                              %! baca.arpeggio:IndicatorCommand
                             ~
                             [
                             <g' af''>32
@@ -563,7 +563,7 @@ def articulation(
     articulation: str,
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_articulation",
+    tag: typing.Optional[str] = "baca.articulation",
 ) -> commands.IndicatorCommand:
     """
     Attaches articulation.
@@ -578,7 +578,7 @@ def articulations(
     articulations: typing.List,
     *,
     selector: abjad.Selector = "baca.pheads(exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_articulations",
+    tag: typing.Optional[str] = "baca.articulations",
 ) -> commands.IndicatorCommand:
     """
     Attaches articulations.
@@ -591,7 +591,7 @@ def articulations(
 def breathe(
     *tweaks: abjad.LilyPondTweakManager,
     selector: abjad.Selector = "baca.pleaf(-1, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_breathe",
+    tag: typing.Optional[str] = "baca.breathe",
 ) -> commands.IndicatorCommand:
     """
     Attaches breathe command.
@@ -608,7 +608,7 @@ def clef(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
     redundant: bool = None,
-    tag: typing.Optional[str] = "baca_clef",
+    tag: typing.Optional[str] = "baca.clef",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches clef.
@@ -641,8 +641,8 @@ def clef(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #7                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \clef "alto"                                                             %! baca_clef:IndicatorCommand
+                            \override TupletBracket.staff-padding = #7                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \clef "alto"                                                             %! baca.clef:IndicatorCommand
                             r8
                             c'16
                             [
@@ -671,7 +671,7 @@ def clef(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -708,7 +708,7 @@ def clef(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #7                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #7                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -721,7 +721,7 @@ def clef(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \clef "alto"                                                             %! baca_clef:IndicatorCommand
+                            \clef "alto"                                                             %! baca.clef:IndicatorCommand
                             fs''16
                             [
                             e''16
@@ -738,7 +738,7 @@ def clef(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -757,7 +757,7 @@ def clef(
 def double_staccato(
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_double_staccato",
+    tag: typing.Optional[str] = "baca.double_staccato",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches double-staccato.
@@ -790,10 +790,10 @@ def double_staccato(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \baca-staccati #2                                                      %! baca_double_staccato:IndicatorCommand
+                            - \baca-staccati #2                                                      %! baca.double_staccato:IndicatorCommand
                             [
                             d'16
                             ]
@@ -820,7 +820,7 @@ def double_staccato(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -857,7 +857,7 @@ def double_staccato(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -871,27 +871,27 @@ def double_staccato(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \baca-staccati #2                                                      %! baca_double_staccato:IndicatorCommand
+                            - \baca-staccati #2                                                      %! baca.double_staccato:IndicatorCommand
                             [
                             e''16
-                            - \baca-staccati #2                                                      %! baca_double_staccato:IndicatorCommand
+                            - \baca-staccati #2                                                      %! baca.double_staccato:IndicatorCommand
                             ]
                             ef''4
-                            - \baca-staccati #2                                                      %! baca_double_staccato:IndicatorCommand
+                            - \baca-staccati #2                                                      %! baca.double_staccato:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \baca-staccati #2                                                      %! baca_double_staccato:IndicatorCommand
+                            - \baca-staccati #2                                                      %! baca.double_staccato:IndicatorCommand
                             [
                             g''16
-                            - \baca-staccati #2                                                      %! baca_double_staccato:IndicatorCommand
+                            - \baca-staccati #2                                                      %! baca.double_staccato:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -908,7 +908,7 @@ def double_staccato(
 def down_arpeggio(
     *,
     selector: abjad.Selector = "baca.chead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_down_arpeggio",
+    tag: typing.Optional[str] = "baca.down_arpeggio",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches down-arpeggio.
@@ -938,9 +938,9 @@ def down_arpeggio(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowDown                                                       %! baca_down_arpeggio:IndicatorCommand
+                            \arpeggioArrowDown                                                       %! baca.down_arpeggio:IndicatorCommand
                             <c' d' bf'>8
-                            \arpeggio                                                                %! baca_down_arpeggio:IndicatorCommand
+                            \arpeggio                                                                %! baca.down_arpeggio:IndicatorCommand
                             ~
                             [
                             <c' d' bf'>32
@@ -1024,9 +1024,9 @@ def down_arpeggio(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowDown                                                       %! baca_down_arpeggio:IndicatorCommand
+                            \arpeggioArrowDown                                                       %! baca.down_arpeggio:IndicatorCommand
                             <ef'' e'' fs'''>8
-                            \arpeggio                                                                %! baca_down_arpeggio:IndicatorCommand
+                            \arpeggio                                                                %! baca.down_arpeggio:IndicatorCommand
                             ~
                             [
                             <ef'' e'' fs'''>32
@@ -1034,9 +1034,9 @@ def down_arpeggio(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowDown                                                       %! baca_down_arpeggio:IndicatorCommand
+                            \arpeggioArrowDown                                                       %! baca.down_arpeggio:IndicatorCommand
                             <g' af''>8
-                            \arpeggio                                                                %! baca_down_arpeggio:IndicatorCommand
+                            \arpeggio                                                                %! baca.down_arpeggio:IndicatorCommand
                             ~
                             [
                             <g' af''>32
@@ -1067,7 +1067,7 @@ def down_bow(
     *tweaks: abjad.LilyPondTweakManager,
     full: bool = None,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_down_bow",
+    tag: typing.Optional[str] = "baca.down_bow",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches down-bow.
@@ -1100,10 +1100,10 @@ def down_bow(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \downbow                                                               %! baca_down_bow:IndicatorCommand
+                            - \downbow                                                               %! baca.down_bow:IndicatorCommand
                             [
                             d'16
                             ]
@@ -1130,7 +1130,7 @@ def down_bow(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1167,7 +1167,7 @@ def down_bow(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1181,27 +1181,27 @@ def down_bow(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \baca-full-downbow                                                               %! baca_down_bow:IndicatorCommand
+                            - \baca-full-downbow                                                     %! baca.down_bow:IndicatorCommand
                             [
                             e''16
-                            - \baca-full-downbow                                                               %! baca_down_bow:IndicatorCommand
+                            - \baca-full-downbow                                                     %! baca.down_bow:IndicatorCommand
                             ]
                             ef''4
-                            - \baca-full-downbow                                                               %! baca_down_bow:IndicatorCommand
+                            - \baca-full-downbow                                                     %! baca.down_bow:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \baca-full-downbow                                                               %! baca_down_bow:IndicatorCommand
+                            - \baca-full-downbow                                                     %! baca.down_bow:IndicatorCommand
                             [
                             g''16
-                            - \baca-full-downbow                                                               %! baca_down_bow:IndicatorCommand
+                            - \baca-full-downbow                                                     %! baca.down_bow:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1220,7 +1220,7 @@ def down_bow(
 def espressivo(
     *tweaks: abjad.LilyPondTweakManager,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_espressivo",
+    tag: typing.Optional[str] = "baca.espressivo",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches espressivo.
@@ -1253,10 +1253,10 @@ def espressivo(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \espressivo                                                            %! baca_espressivo:IndicatorCommand
+                            - \espressivo                                                            %! baca.espressivo:IndicatorCommand
                             [
                             d'16
                             ]
@@ -1283,7 +1283,7 @@ def espressivo(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1320,7 +1320,7 @@ def espressivo(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1334,27 +1334,27 @@ def espressivo(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \espressivo                                                            %! baca_espressivo:IndicatorCommand
+                            - \espressivo                                                            %! baca.espressivo:IndicatorCommand
                             [
                             e''16
-                            - \espressivo                                                            %! baca_espressivo:IndicatorCommand
+                            - \espressivo                                                            %! baca.espressivo:IndicatorCommand
                             ]
                             ef''4
-                            - \espressivo                                                            %! baca_espressivo:IndicatorCommand
+                            - \espressivo                                                            %! baca.espressivo:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \espressivo                                                            %! baca_espressivo:IndicatorCommand
+                            - \espressivo                                                            %! baca.espressivo:IndicatorCommand
                             [
                             g''16
-                            - \espressivo                                                            %! baca_espressivo:IndicatorCommand
+                            - \espressivo                                                            %! baca.espressivo:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1372,7 +1372,7 @@ def espressivo(
 def fermata(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_fermata",
+    tag: typing.Optional[str] = "baca.fermata",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches fermata.
@@ -1405,9 +1405,9 @@ def fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            - \fermata                                                               %! baca_fermata:IndicatorCommand
+                            - \fermata                                                               %! baca.fermata:IndicatorCommand
                             c'16
                             [
                             d'16
@@ -1435,7 +1435,7 @@ def fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1469,7 +1469,7 @@ def fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1483,7 +1483,7 @@ def fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \fermata                                                               %! baca_fermata:IndicatorCommand
+                            - \fermata                                                               %! baca.fermata:IndicatorCommand
                             [
                             e''16
                             ]
@@ -1499,7 +1499,7 @@ def fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1516,7 +1516,7 @@ def fermata(
 def flageolet(
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_flageolet",
+    tag: typing.Optional[str] = "baca.flageolet",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches flageolet.
@@ -1549,10 +1549,10 @@ def flageolet(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \flageolet                                                             %! baca_flageolet:IndicatorCommand
+                            - \flageolet                                                             %! baca.flageolet:IndicatorCommand
                             [
                             d'16
                             ]
@@ -1579,7 +1579,7 @@ def flageolet(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1616,7 +1616,7 @@ def flageolet(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1630,27 +1630,27 @@ def flageolet(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \flageolet                                                             %! baca_flageolet:IndicatorCommand
+                            - \flageolet                                                             %! baca.flageolet:IndicatorCommand
                             [
                             e''16
-                            - \flageolet                                                             %! baca_flageolet:IndicatorCommand
+                            - \flageolet                                                             %! baca.flageolet:IndicatorCommand
                             ]
                             ef''4
-                            - \flageolet                                                             %! baca_flageolet:IndicatorCommand
+                            - \flageolet                                                             %! baca.flageolet:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \flageolet                                                             %! baca_flageolet:IndicatorCommand
+                            - \flageolet                                                             %! baca.flageolet:IndicatorCommand
                             [
                             g''16
-                            - \flageolet                                                             %! baca_flageolet:IndicatorCommand
+                            - \flageolet                                                             %! baca.flageolet:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1667,7 +1667,7 @@ def flageolet(
 def hide_black_note_heads(
     *,
     selector: abjad.Selector = "baca.leaves(exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "hide_black_note_heads",
+    tag: typing.Optional[str] = "hide.black_note_heads",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches note-head stencil false to black note-heads.
@@ -1748,7 +1748,7 @@ def hide_black_note_heads(
                             c'2                                                                      %! baca_make_notes
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            \once \override NoteHead.transparent = ##t                               %! hide_black_note_heads:IndicatorCommand
+                            \once \override NoteHead.transparent = ##t                               %! hide.black_note_heads:IndicatorCommand
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'4.                                                                     %! baca_make_notes
             <BLANKLINE>
@@ -1757,7 +1757,7 @@ def hide_black_note_heads(
                             c'2                                                                      %! baca_make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            \once \override NoteHead.transparent = ##t                               %! hide_black_note_heads:IndicatorCommand
+                            \once \override NoteHead.transparent = ##t                               %! hide.black_note_heads:IndicatorCommand
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                             c'4.                                                                     %! baca_make_notes
             <BLANKLINE>
@@ -1809,7 +1809,7 @@ def hide_black_note_heads(
 def laissez_vibrer(
     *,
     selector: abjad.Selector = "baca.ptail(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_laissez_vibrer",
+    tag: typing.Optional[str] = "baca.laissez_vibrer",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches laissez vibrer.
@@ -1842,10 +1842,10 @@ def laissez_vibrer(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \laissezVibrer                                                         %! baca_laissez_vibrer:IndicatorCommand
+                            - \laissezVibrer                                                         %! baca.laissez_vibrer:IndicatorCommand
                             [
                             d'16
                             ]
@@ -1872,7 +1872,7 @@ def laissez_vibrer(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1909,7 +1909,7 @@ def laissez_vibrer(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1923,27 +1923,27 @@ def laissez_vibrer(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \laissezVibrer                                                         %! baca_laissez_vibrer:IndicatorCommand
+                            - \laissezVibrer                                                         %! baca.laissez_vibrer:IndicatorCommand
                             [
                             e''16
-                            - \laissezVibrer                                                         %! baca_laissez_vibrer:IndicatorCommand
+                            - \laissezVibrer                                                         %! baca.laissez_vibrer:IndicatorCommand
                             ]
                             ef''4
                             ~
                             ef''16
-                            - \laissezVibrer                                                         %! baca_laissez_vibrer:IndicatorCommand
+                            - \laissezVibrer                                                         %! baca.laissez_vibrer:IndicatorCommand
                             r16
                             af''16
-                            - \laissezVibrer                                                         %! baca_laissez_vibrer:IndicatorCommand
+                            - \laissezVibrer                                                         %! baca.laissez_vibrer:IndicatorCommand
                             [
                             g''16
-                            - \laissezVibrer                                                         %! baca_laissez_vibrer:IndicatorCommand
+                            - \laissezVibrer                                                         %! baca.laissez_vibrer:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1962,7 +1962,7 @@ def literal(
     *,
     format_slot: str = "before",
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_literal",
+    tag: typing.Optional[str] = "baca.literal",
 ) -> commands.IndicatorCommand:
     """
     Attaches LilyPond literal.
@@ -1976,7 +1976,7 @@ def literal(
 def long_fermata(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_long_fermata",
+    tag: typing.Optional[str] = "baca.long_fermata",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches long fermata.
@@ -2009,9 +2009,9 @@ def long_fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            - \longfermata                                                           %! baca_long_fermata:IndicatorCommand
+                            - \longfermata                                                           %! baca.long_fermata:IndicatorCommand
                             c'16
                             [
                             d'16
@@ -2039,7 +2039,7 @@ def long_fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2073,7 +2073,7 @@ def long_fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -2087,7 +2087,7 @@ def long_fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \longfermata                                                           %! baca_long_fermata:IndicatorCommand
+                            - \longfermata                                                           %! baca.long_fermata:IndicatorCommand
                             [
                             e''16
                             ]
@@ -2103,7 +2103,7 @@ def long_fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2120,7 +2120,7 @@ def long_fermata(
 def marcato(
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_marcato",
+    tag: typing.Optional[str] = "baca.marcato",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches marcato.
@@ -2153,10 +2153,10 @@ def marcato(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \marcato                                                               %! baca.marcato:IndicatorCommand
                             [
                             d'16
                             ]
@@ -2183,7 +2183,7 @@ def marcato(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2220,7 +2220,7 @@ def marcato(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -2234,27 +2234,27 @@ def marcato(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \marcato                                                               %! baca.marcato:IndicatorCommand
                             [
                             e''16
-                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \marcato                                                               %! baca.marcato:IndicatorCommand
                             ]
                             ef''4
-                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \marcato                                                               %! baca.marcato:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \marcato                                                               %! baca.marcato:IndicatorCommand
                             [
                             g''16
-                            - \marcato                                                               %! baca_marcato:IndicatorCommand
+                            - \marcato                                                               %! baca.marcato:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2274,7 +2274,7 @@ def margin_markup(
     alert: commands.IndicatorCommand = None,
     context: str = "Staff",
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_margin_markup",
+    tag: typing.Optional[str] = "baca.margin_markup",
 ) -> typing.Union[commands.IndicatorCommand, scoping.Suite]:
     r"""
     Attaches margin markup.
@@ -2352,14 +2352,14 @@ def margin_markup(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
-                            \markup { Fl. }                                                          %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca_margin_markup:IndicatorCommand
+                            \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                            \markup { Fl. }                                                          %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                             e'2                                                                      %! baca_make_notes
                             ^ \baca-explicit-indicator-markup "[MarginMarkup]"                       %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                            \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
-                            \markup { Fl. }                                                          %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca_margin_markup:IndicatorCommand
+                            \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                            \markup { Fl. }                                                          %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             f'4.                                                                     %! baca_make_notes
@@ -2427,7 +2427,7 @@ def mark(
     argument: str,
     *tweaks: abjad.LilyPondTweakManager,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_mark",
+    tag: typing.Optional[str] = "baca.mark",
 ) -> commands.IndicatorCommand:
     """
     Attaches mark.
@@ -2445,7 +2445,7 @@ def mark(
 def parenthesize(
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_parenthesize",
+    tag: typing.Optional[str] = "baca.parenthesize",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches LilyPond ``\parenthesize`` command.
@@ -2478,9 +2478,9 @@ def parenthesize(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \parenthesize                                                            %! baca_parenthesize:IndicatorCommand
+                            \parenthesize                                                            %! baca.parenthesize:IndicatorCommand
                             c'16
                             [
                             d'16
@@ -2508,7 +2508,7 @@ def parenthesize(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2525,7 +2525,7 @@ def parenthesize(
 def quadruple_staccato(
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_quadruple_staccato",
+    tag: typing.Optional[str] = "baca.quadruple_staccato",
 ) -> commands.IndicatorCommand:
     """
     Attaches quadruple-staccato.
@@ -2541,7 +2541,7 @@ def rehearsal_mark(
     argument: typing.Union[int, str],
     *tweaks: abjad.LilyPondTweakManager,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_rehearsal_mark",
+    tag: typing.Optional[str] = "baca.rehearsal_mark",
 ) -> commands.IndicatorCommand:
     """
     Attaches rehearsal mark.
@@ -2557,7 +2557,7 @@ def rehearsal_mark(
 def short_fermata(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "short_fermata",
+    tag: typing.Optional[str] = "short.fermata",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches short fermata.
@@ -2590,9 +2590,9 @@ def short_fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            - \shortfermata                                                          %! short_fermata:IndicatorCommand
+                            - \shortfermata                                                          %! short.fermata:IndicatorCommand
                             c'16
                             [
                             d'16
@@ -2620,7 +2620,7 @@ def short_fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2656,7 +2656,7 @@ def short_fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -2670,7 +2670,7 @@ def short_fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \shortfermata                                                          %! short_fermata:IndicatorCommand
+                            - \shortfermata                                                          %! short.fermata:IndicatorCommand
                             [
                             e''16
                             ]
@@ -2686,7 +2686,7 @@ def short_fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2703,7 +2703,7 @@ def short_fermata(
 def staccatissimo(
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_staccatissimo",
+    tag: typing.Optional[str] = "baca.staccatissimo",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches staccatissimo.
@@ -2736,10 +2736,10 @@ def staccatissimo(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \staccatissimo                                                         %! baca_staccatissimo:IndicatorCommand
+                            - \staccatissimo                                                         %! baca.staccatissimo:IndicatorCommand
                             [
                             d'16
                             ]
@@ -2766,7 +2766,7 @@ def staccatissimo(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2803,7 +2803,7 @@ def staccatissimo(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -2817,27 +2817,27 @@ def staccatissimo(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \staccatissimo                                                         %! baca_staccatissimo:IndicatorCommand
+                            - \staccatissimo                                                         %! baca.staccatissimo:IndicatorCommand
                             [
                             e''16
-                            - \staccatissimo                                                         %! baca_staccatissimo:IndicatorCommand
+                            - \staccatissimo                                                         %! baca.staccatissimo:IndicatorCommand
                             ]
                             ef''4
-                            - \staccatissimo                                                         %! baca_staccatissimo:IndicatorCommand
+                            - \staccatissimo                                                         %! baca.staccatissimo:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \staccatissimo                                                         %! baca_staccatissimo:IndicatorCommand
+                            - \staccatissimo                                                         %! baca.staccatissimo:IndicatorCommand
                             [
                             g''16
-                            - \staccatissimo                                                         %! baca_staccatissimo:IndicatorCommand
+                            - \staccatissimo                                                         %! baca.staccatissimo:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2854,7 +2854,7 @@ def staccatissimo(
 def staccato(
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_staccato",
+    tag: typing.Optional[str] = "baca.staccato",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches staccato.
@@ -2887,10 +2887,10 @@ def staccato(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \staccato                                                              %! baca_staccato:IndicatorCommand
+                            - \staccato                                                              %! baca.staccato:IndicatorCommand
                             [
                             d'16
                             ]
@@ -2917,7 +2917,7 @@ def staccato(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -2954,7 +2954,7 @@ def staccato(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -2968,27 +2968,27 @@ def staccato(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \staccato                                                              %! baca_staccato:IndicatorCommand
+                            - \staccato                                                              %! baca.staccato:IndicatorCommand
                             [
                             e''16
-                            - \staccato                                                              %! baca_staccato:IndicatorCommand
+                            - \staccato                                                              %! baca.staccato:IndicatorCommand
                             ]
                             ef''4
-                            - \staccato                                                              %! baca_staccato:IndicatorCommand
+                            - \staccato                                                              %! baca.staccato:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \staccato                                                              %! baca_staccato:IndicatorCommand
+                            - \staccato                                                              %! baca.staccato:IndicatorCommand
                             [
                             g''16
-                            - \staccato                                                              %! baca_staccato:IndicatorCommand
+                            - \staccato                                                              %! baca.staccato:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -3006,7 +3006,7 @@ def staff_lines(
     n: int,
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_staff_lines",
+    tag: typing.Optional[str] = "baca.staff_lines",
 ) -> commands.IndicatorCommand:
     r"""
     Makes staff line command.
@@ -3091,13 +3091,13 @@ def staff_lines(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             a4.                                                                      %! baca_make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
@@ -3227,13 +3227,13 @@ def staff_lines(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             b,4.                                                                     %! baca_make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
@@ -3364,13 +3364,13 @@ def staff_lines(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             a4.                                                                      %! baca_make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
@@ -3499,13 +3499,13 @@ def staff_lines(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             b,4.                                                                     %! baca_make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
@@ -3640,14 +3640,14 @@ def staff_lines(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca_clef:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca_clef:IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                             g'4.                                                                     %! baca_make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
@@ -3712,7 +3712,7 @@ def start_markup(
     hcenter_in: abjad.Number = None,
     literal: bool = None,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_start_markup",
+    tag: typing.Optional[str] = "baca.start_markup",
 ) -> commands.IndicatorCommand:
     """
     Attaches start markup.
@@ -3746,7 +3746,7 @@ def start_markup(
 def stem_tremolo(
     *,
     selector: abjad.Selector = "baca.pleaf(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_stem_tremolo",
+    tag: typing.Optional[str] = "baca.stem_tremolo",
     tremolo_flags: int = 32,
 ) -> commands.IndicatorCommand:
     r"""
@@ -3780,10 +3780,10 @@ def stem_tremolo(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
+                            :32                                                                      %! baca.stem_tremolo:IndicatorCommand
                             [
                             d'16
                             ]
@@ -3810,7 +3810,7 @@ def stem_tremolo(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -3847,7 +3847,7 @@ def stem_tremolo(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -3861,28 +3861,28 @@ def stem_tremolo(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
+                            :32                                                                      %! baca.stem_tremolo:IndicatorCommand
                             [
                             e''16
-                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
+                            :32                                                                      %! baca.stem_tremolo:IndicatorCommand
                             ]
                             ef''4
-                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
+                            :32                                                                      %! baca.stem_tremolo:IndicatorCommand
                             ~
                             ef''16
-                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
+                            :32                                                                      %! baca.stem_tremolo:IndicatorCommand
                             r16
                             af''16
-                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
+                            :32                                                                      %! baca.stem_tremolo:IndicatorCommand
                             [
                             g''16
-                            :32                                                                      %! baca_stem_tremolo:IndicatorCommand
+                            :32                                                                      %! baca.stem_tremolo:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -3899,7 +3899,7 @@ def stem_tremolo(
 def stop_on_string(
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_stop_on_string",
+    tag: typing.Optional[str] = "baca.stop_on_string",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches stop-on-string.
@@ -3932,7 +3932,7 @@ def stop_on_string(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -3960,9 +3960,9 @@ def stop_on_string(
                         }
                         \times 4/5 {
                             a'16
-                            - \baca-stop-on-string                                                   %! baca_stop_on_string:IndicatorCommand
+                            - \baca-stop-on-string                                                   %! baca.stop_on_string:IndicatorCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -3978,7 +3978,7 @@ def stop_on_string(
 def stop_trill(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_stop_trill",
+    tag: typing.Optional[str] = "baca.stop_trill",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches stop trill to closing-slot.
@@ -4002,7 +4002,7 @@ def stop_trill(
 def stopped(
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_stoppped",
+    tag: typing.Optional[str] = "baca.stoppped",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches stopped +-sign.
@@ -4035,10 +4035,10 @@ def stopped(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \stopped                                                               %! baca_stoppped:IndicatorCommand
+                            - \stopped                                                               %! baca.stoppped:IndicatorCommand
                             [
                             d'16
                             ]
@@ -4065,7 +4065,7 @@ def stopped(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4082,7 +4082,7 @@ def stopped(
 def tenuto(
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_tenuto",
+    tag: typing.Optional[str] = "baca.tenuto",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches tenuto.
@@ -4115,10 +4115,10 @@ def tenuto(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \tenuto                                                                %! baca_tenuto:IndicatorCommand
+                            - \tenuto                                                                %! baca.tenuto:IndicatorCommand
                             [
                             d'16
                             ]
@@ -4145,7 +4145,7 @@ def tenuto(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4182,7 +4182,7 @@ def tenuto(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4196,27 +4196,27 @@ def tenuto(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \tenuto                                                                %! baca_tenuto:IndicatorCommand
+                            - \tenuto                                                                %! baca.tenuto:IndicatorCommand
                             [
                             e''16
-                            - \tenuto                                                                %! baca_tenuto:IndicatorCommand
+                            - \tenuto                                                                %! baca.tenuto:IndicatorCommand
                             ]
                             ef''4
-                            - \tenuto                                                                %! baca_tenuto:IndicatorCommand
+                            - \tenuto                                                                %! baca.tenuto:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \tenuto                                                                %! baca_tenuto:IndicatorCommand
+                            - \tenuto                                                                %! baca.tenuto:IndicatorCommand
                             [
                             g''16
-                            - \tenuto                                                                %! baca_tenuto:IndicatorCommand
+                            - \tenuto                                                                %! baca.tenuto:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4233,7 +4233,7 @@ def tenuto(
 def triple_staccato(
     *,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_triple_staccato",
+    tag: typing.Optional[str] = "baca.triple_staccato",
 ) -> commands.IndicatorCommand:
     """
     Attaches triple-staccato.
@@ -4248,7 +4248,7 @@ def triple_staccato(
 def up_arpeggio(
     *,
     selector: abjad.Selector = "baca.chead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_up_arpeggio",
+    tag: typing.Optional[str] = "baca.up_arpeggio",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches up-arpeggio.
@@ -4280,9 +4280,9 @@ def up_arpeggio(
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowUp                                                         %! baca_up_arpeggio:IndicatorCommand
+                            \arpeggioArrowUp                                                         %! baca.up_arpeggio:IndicatorCommand
                             <c' d' bf'>8
-                            \arpeggio                                                                %! baca_up_arpeggio:IndicatorCommand
+                            \arpeggio                                                                %! baca.up_arpeggio:IndicatorCommand
                             ~
                             [
                             <c' d' bf'>32
@@ -4366,9 +4366,9 @@ def up_arpeggio(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowUp                                                         %! baca_up_arpeggio:IndicatorCommand
+                            \arpeggioArrowUp                                                         %! baca.up_arpeggio:IndicatorCommand
                             <ef'' e'' fs'''>8
-                            \arpeggio                                                                %! baca_up_arpeggio:IndicatorCommand
+                            \arpeggio                                                                %! baca.up_arpeggio:IndicatorCommand
                             ~
                             [
                             <ef'' e'' fs'''>32
@@ -4376,9 +4376,9 @@ def up_arpeggio(
                             r16.
                         }
                         \scaleDurations #'(1 . 1) {
-                            \arpeggioArrowUp                                                         %! baca_up_arpeggio:IndicatorCommand
+                            \arpeggioArrowUp                                                         %! baca.up_arpeggio:IndicatorCommand
                             <g' af''>8
-                            \arpeggio                                                                %! baca_up_arpeggio:IndicatorCommand
+                            \arpeggio                                                                %! baca.up_arpeggio:IndicatorCommand
                             ~
                             [
                             <g' af''>32
@@ -4409,7 +4409,7 @@ def up_bow(
     *tweaks: abjad.LilyPondTweakManager,
     full: bool = None,
     selector: abjad.Selector = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca_up_bow",
+    tag: typing.Optional[str] = "baca.up_bow",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches up-bow.
@@ -4442,10 +4442,10 @@ def up_bow(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \upbow                                                                 %! baca_up_bow:IndicatorCommand
+                            - \upbow                                                                 %! baca.up_bow:IndicatorCommand
                             [
                             d'16
                             ]
@@ -4472,7 +4472,7 @@ def up_bow(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4509,7 +4509,7 @@ def up_bow(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4523,27 +4523,27 @@ def up_bow(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \baca-full-upbow                                                                 %! baca_up_bow:IndicatorCommand
+                            - \baca-full-upbow                                                       %! baca.up_bow:IndicatorCommand
                             [
                             e''16
-                            - \baca-full-upbow                                                                 %! baca_up_bow:IndicatorCommand
+                            - \baca-full-upbow                                                       %! baca.up_bow:IndicatorCommand
                             ]
                             ef''4
-                            - \baca-full-upbow                                                                 %! baca_up_bow:IndicatorCommand
+                            - \baca-full-upbow                                                       %! baca.up_bow:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \baca-full-upbow                                                                 %! baca_up_bow:IndicatorCommand
+                            - \baca-full-upbow                                                       %! baca.up_bow:IndicatorCommand
                             [
                             g''16
-                            - \baca-full-upbow                                                                 %! baca_up_bow:IndicatorCommand
+                            - \baca-full-upbow                                                       %! baca.up_bow:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4562,7 +4562,7 @@ def up_bow(
 def very_long_fermata(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_very_long_fermata",
+    tag: typing.Optional[str] = "baca.very_long_fermata",
 ) -> commands.IndicatorCommand:
     r"""
     Attaches very long fermata.
@@ -4595,9 +4595,9 @@ def very_long_fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            - \verylongfermata                                                       %! baca_very_long_fermata:IndicatorCommand
+                            - \verylongfermata                                                       %! baca.very_long_fermata:IndicatorCommand
                             c'16
                             [
                             d'16
@@ -4625,7 +4625,7 @@ def very_long_fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4661,7 +4661,7 @@ def very_long_fermata(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4675,7 +4675,7 @@ def very_long_fermata(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \verylongfermata                                                       %! baca_very_long_fermata:IndicatorCommand
+                            - \verylongfermata                                                       %! baca.very_long_fermata:IndicatorCommand
                             [
                             e''16
                             ]
@@ -4691,7 +4691,7 @@ def very_long_fermata(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }

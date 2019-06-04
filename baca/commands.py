@@ -360,109 +360,109 @@ class BCPCommand(scoping.Command):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \override Script.staff-padding = #5.5                                    %! baca_script_staff_padding:OverrideCommand(1)
+                                \override Script.staff-padding = #5.5                                    %! baca.script_staff_padding:OverrideCommand(1)
                                 \override TextSpanner.staff-padding = #2.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(6)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(6)
                                 [                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 [                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-right-text #1 #5                                     %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-right-text #1 #5                                     %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(1)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(1)
                                 ]                                                                        %! baca_make_even_divisions
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(6)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(6)
                                 [                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 [                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-right-text #3 #5                                     %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-right-text #3 #5                                     %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(1)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(1)
                                 ]                                                                        %! baca_make_even_divisions
-                                \revert Script.staff-padding                                             %! baca_script_staff_padding:OverrideCommand(2)
+                                \revert Script.staff-padding                                             %! baca.script_staff_padding:OverrideCommand(2)
                                 \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
@@ -643,138 +643,138 @@ class BCPCommand(scoping.Command):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \override Script.staff-padding = #5                                      %! baca_script_staff_padding:OverrideCommand(1)
+                                \override Script.staff-padding = #5                                      %! baca.script_staff_padding:OverrideCommand(1)
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(6)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(6)
                                 [                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 [                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 [                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 [                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-right-text #2 #5                                     %! baca_bcps:BCPCommand(2)
-                                - \tweak color #red                                                      %! baca_bcps:BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-right-text #2 #5                                     %! baca.bcps:BCPCommand(2)
+                                - \tweak color #red                                                      %! baca.bcps:BCPCommand(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(1)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(1)
                                 ]                                                                        %! baca_make_even_divisions
-                                \revert Script.staff-padding                                             %! baca_script_staff_padding:OverrideCommand(2)
+                                \revert Script.staff-padding                                             %! baca.script_staff_padding:OverrideCommand(2)
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -826,7 +826,7 @@ class BCPCommand(scoping.Command):
                     ],
                 selector=baca.leaves(),
                 tags=[
-                    abjad.Tag('baca_bcps'),
+                    abjad.Tag('baca.bcps'),
                     ],
                 tweaks=(
                     LilyPondTweakManager(('color', 'red')),
@@ -842,7 +842,7 @@ class BCPCommand(scoping.Command):
                     ],
                 selector=baca.leaves(),
                 tags=[
-                    abjad.Tag('baca_bcps'),
+                    abjad.Tag('baca.bcps'),
                     ],
                 tweaks=(
                     LilyPondTweakManager(('color', 'red')),
@@ -2838,7 +2838,7 @@ def bar_extent_persistent(
     *,
     after: bool = None,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_bar_extent_persistent",
+    tag: typing.Optional[str] = "baca.bar_extent_persistent",
 ) -> IndicatorCommand:
     r"""
     Makes persistent bar-extent override.
@@ -2923,10 +2923,10 @@ def bar_extent_persistent(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca_bar_extent_persistent:IndicatorCommand
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca_staff_lines:IndicatorCommand
+                            \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca.bar_extent_persistent:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
                             b'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
@@ -3021,7 +3021,7 @@ def bcps(
     final_spanner: bool = None,
     helper: typing.Callable = None,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_bcps",
+    tag: typing.Optional[str] = "baca.bcps",
 ) -> BCPCommand:
     r"""
     Makes bow contact point command.
@@ -3109,111 +3109,111 @@ def bcps(
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \override Script.staff-padding = #5.5                                    %! baca_script_staff_padding:OverrideCommand(1)
+                                \override Script.staff-padding = #5.5                                    %! baca.script_staff_padding:OverrideCommand(1)
                                 \override TextSpanner.staff-padding = #2.5                               %! baca_text_spanner_staff_padding:OverrideCommand(1)
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(6)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(6)
                                 [                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 [                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #5 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #5 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 [                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #5 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #5 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 ]                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                                 f'8                                                                      %! baca_make_even_divisions
-                                - \upbow                                                                 %! baca_bcps:BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps:BCPCommand(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
                                 [                                                                        %! baca_make_even_divisions
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca_make_even_divisions
-                                - \downbow                                                               %! baca_bcps:BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca_bcps:BCPCommand(2)
-                                - \baca-bcp-spanner-right-text #4 #5                                     %! baca_bcps:BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca_bcps:BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps:BCPCommand(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps:BCPCommand(2)
+                                - \baca-bcp-spanner-right-text #4 #5                                     %! baca.bcps:BCPCommand(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps:BCPCommand(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca_make_even_divisions
-                                \bacaStopTextSpanBCP                                                     %! baca_bcps:BCPCommand(1)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps:BCPCommand(1)
                                 ]                                                                        %! baca_make_even_divisions
-                                \revert Script.staff-padding                                             %! baca_script_staff_padding:OverrideCommand(2)
+                                \revert Script.staff-padding                                             %! baca.script_staff_padding:OverrideCommand(2)
                                 \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
@@ -3297,7 +3297,7 @@ def color(*, selector: abjad.Selector = "baca.leaves()") -> ColorCommand:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             \abjad-color-music #'red
                             r8
                             \abjad-color-music #'blue
@@ -3335,7 +3335,7 @@ def color(*, selector: abjad.Selector = "baca.leaves()") -> ColorCommand:
                             a'16
                             \abjad-color-music #'red
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -3370,7 +3370,7 @@ def color(*, selector: abjad.Selector = "baca.leaves()") -> ColorCommand:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             d'16
@@ -3400,7 +3400,7 @@ def color(*, selector: abjad.Selector = "baca.leaves()") -> ColorCommand:
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -3552,7 +3552,7 @@ def container(
 def cross_staff(
     *,
     selector: abjad.Selector = "baca.phead(0)",
-    tag: typing.Optional[str] = "baca_cross_staff",
+    tag: typing.Optional[str] = "baca.cross_staff",
 ) -> IndicatorCommand:
     r"""
     Attaches cross-staff command.
@@ -3664,7 +3664,7 @@ def cross_staff(
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         % [Violin_Music_Voice measure 1]                             %! _comment_measure_numbers
-                                        \override Stem.direction = #up                               %! baca_stem_up:OverrideCommand(1)
+                                        \override Stem.direction = #up                               %! baca.stem_up:OverrideCommand(1)
                                         \clef "treble"                                               %! DEFAULT_CLEF:_set_status_tag:abjad.ScoreTemplate.attach_defaults
                                         \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                     %@% \override ViolinMusicStaff.Clef.color = ##f                  %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -3680,7 +3680,7 @@ def cross_staff(
                                         d''8
             <BLANKLINE>
                                         e''8
-                                        \revert Stem.direction                                       %! baca_stem_up:OverrideCommand(2)
+                                        \revert Stem.direction                                       %! baca.stem_up:OverrideCommand(2)
             <BLANKLINE>
                                     }
             <BLANKLINE>
@@ -3739,9 +3739,9 @@ def cross_staff(
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         % [Viola_Music_Voice measure 1]                              %! _comment_measure_numbers
-                                        \override Stem.direction = #up                               %! baca_stem_up:OverrideCommand(1)
+                                        \override Stem.direction = #up                               %! baca.stem_up:OverrideCommand(1)
                                         \clef "alto"                                                 %! DEFAULT_CLEF:_set_status_tag:abjad.ScoreTemplate.attach_defaults
-                                        \crossStaff                                                  %! baca_cross_staff:IndicatorCommand
+                                        \crossStaff                                                  %! baca.cross_staff:IndicatorCommand
                                         \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                     %@% \override ViolaMusicStaff.Clef.color = ##f                   %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                         \set ViolaMusicStaff.forceClef = ##t                         %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
@@ -3756,7 +3756,7 @@ def cross_staff(
                                         f'8
             <BLANKLINE>
                                         g'8
-                                        \revert Stem.direction                                       %! baca_stem_up:OverrideCommand(2)
+                                        \revert Stem.direction                                       %! baca.stem_up:OverrideCommand(2)
             <BLANKLINE>
                                     }
             <BLANKLINE>
@@ -3975,7 +3975,7 @@ def cross_staff(
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         % [Violin_Music_Voice measure 1]                             %! _comment_measure_numbers
-                                        \override Stem.direction = #up                               %! baca_stem_up:OverrideCommand(1)
+                                        \override Stem.direction = #up                               %! baca.stem_up:OverrideCommand(1)
                                         \clef "treble"                                               %! DEFAULT_CLEF:_set_status_tag:abjad.ScoreTemplate.attach_defaults
                                         \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                     %@% \override ViolinMusicStaff.Clef.color = ##f                  %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -3991,7 +3991,7 @@ def cross_staff(
                                         d''8
             <BLANKLINE>
                                         e''8
-                                        \revert Stem.direction                                       %! baca_stem_up:OverrideCommand(2)
+                                        \revert Stem.direction                                       %! baca.stem_up:OverrideCommand(2)
             <BLANKLINE>
                                     }
             <BLANKLINE>
@@ -4050,7 +4050,7 @@ def cross_staff(
                                     \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         % [Viola_Music_Voice measure 1]                              %! _comment_measure_numbers
-                                        \override Stem.direction = #up                               %! baca_stem_up:OverrideCommand(1)
+                                        \override Stem.direction = #up                               %! baca.stem_up:OverrideCommand(1)
                                         \clef "alto"                                                 %! DEFAULT_CLEF:_set_status_tag:abjad.ScoreTemplate.attach_defaults
                                         \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                     %@% \override ViolaMusicStaff.Clef.color = ##f                   %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
@@ -4063,12 +4063,12 @@ def cross_staff(
             <BLANKLINE>
                                         e'8
             <BLANKLINE>
-                                        \crossStaff                                                  %! baca_cross_staff:IndicatorCommand
+                                        \crossStaff                                                  %! baca.cross_staff:IndicatorCommand
                                         f'8
             <BLANKLINE>
-                                        \crossStaff                                                  %! baca_cross_staff:IndicatorCommand
+                                        \crossStaff                                                  %! baca.cross_staff:IndicatorCommand
                                         g'8
-                                        \revert Stem.direction                                       %! baca_stem_up:OverrideCommand(2)
+                                        \revert Stem.direction                                       %! baca.stem_up:OverrideCommand(2)
             <BLANKLINE>
                                     }
             <BLANKLINE>
@@ -4191,7 +4191,7 @@ def cross_staff(
 def dynamic_down(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_dynamic_down",
+    tag: typing.Optional[str] = "baca.dynamic_down",
 ) -> IndicatorCommand:
     r"""
     Attaches dynamic-down command.
@@ -4226,11 +4226,11 @@ def dynamic_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \dynamicDown                                                             %! baca_dynamic_down:IndicatorCommand
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \dynamicDown                                                             %! baca.dynamic_down:IndicatorCommand
                             r8
                             c'16
-                            \p                                                                       %! baca_dynamic:IndicatorCommand
+                            \p                                                                       %! baca.dynamic:IndicatorCommand
                             [
                             d'16
                             ]
@@ -4242,7 +4242,7 @@ def dynamic_down(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \f                                                                       %! baca_dynamic:IndicatorCommand
+                            \f                                                                       %! baca.dynamic:IndicatorCommand
                             [
                             e''16
                             ]
@@ -4258,7 +4258,7 @@ def dynamic_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4294,10 +4294,10 @@ def dynamic_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! baca_dynamic:IndicatorCommand
+                            \p                                                                       %! baca.dynamic:IndicatorCommand
                             [
                             d'16
                             ]
@@ -4308,9 +4308,9 @@ def dynamic_down(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \dynamicDown                                                             %! baca_dynamic_down:IndicatorCommand
+                            \dynamicDown                                                             %! baca.dynamic_down:IndicatorCommand
                             fs''16
-                            \f                                                                       %! baca_dynamic:IndicatorCommand
+                            \f                                                                       %! baca.dynamic:IndicatorCommand
                             [
                             e''16
                             ]
@@ -4326,7 +4326,7 @@ def dynamic_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4343,7 +4343,7 @@ def dynamic_down(
 def dynamic_up(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_dynamic_down",
+    tag: typing.Optional[str] = "baca.dynamic_down",
 ) -> IndicatorCommand:
     r"""
     Attaches dynamic-up command.
@@ -4378,11 +4378,11 @@ def dynamic_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \dynamicUp                                                               %! baca_dynamic_down:IndicatorCommand
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \dynamicUp                                                               %! baca.dynamic_down:IndicatorCommand
                             r8
                             c'16
-                            \p                                                                       %! baca_dynamic:IndicatorCommand
+                            \p                                                                       %! baca.dynamic:IndicatorCommand
                             [
                             d'16
                             ]
@@ -4394,7 +4394,7 @@ def dynamic_up(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \f                                                                       %! baca_dynamic:IndicatorCommand
+                            \f                                                                       %! baca.dynamic:IndicatorCommand
                             [
                             e''16
                             ]
@@ -4410,7 +4410,7 @@ def dynamic_up(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4446,10 +4446,10 @@ def dynamic_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! baca_dynamic:IndicatorCommand
+                            \p                                                                       %! baca.dynamic:IndicatorCommand
                             [
                             d'16
                             ]
@@ -4460,9 +4460,9 @@ def dynamic_up(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \dynamicUp                                                               %! baca_dynamic_down:IndicatorCommand
+                            \dynamicUp                                                               %! baca.dynamic_down:IndicatorCommand
                             fs''16
-                            \f                                                                       %! baca_dynamic:IndicatorCommand
+                            \f                                                                       %! baca.dynamic:IndicatorCommand
                             [
                             e''16
                             ]
@@ -4478,7 +4478,7 @@ def dynamic_up(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4514,7 +4514,7 @@ def finger_pressure_transition(
     *,
     selector: abjad.Selector = "baca.tleaves()",
     right_broken: bool = None,
-    tag: typing.Optional[str] = "baca_finger_pressure_transition",
+    tag: typing.Optional[str] = "baca.finger_pressure_transition",
 ) -> GlissandoCommand:
     r"""
     Makes finger pressure transition glissando.
@@ -4601,25 +4601,25 @@ def finger_pressure_transition(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \once \override NoteHead.style = #'harmonic                              %! baca_note_head_style_harmonic:OverrideCommand(1)
+                            \once \override NoteHead.style = #'harmonic                              %! baca.note_head_style_harmonic:OverrideCommand(1)
                             c''2                                                                     %! baca_make_notes
-                            - \tweak arrow-length #2                                                 %! baca_finger_pressure_transition
-                            - \tweak arrow-width #0.5                                                %! baca_finger_pressure_transition
-                            - \tweak bound-details.right.arrow ##t                                   %! baca_finger_pressure_transition
-                            - \tweak thickness #3                                                    %! baca_finger_pressure_transition
-                            \glissando                                                               %! baca_finger_pressure_transition
+                            - \tweak arrow-length #2                                                 %! baca.finger_pressure_transition
+                            - \tweak arrow-width #0.5                                                %! baca.finger_pressure_transition
+                            - \tweak bound-details.right.arrow ##t                                   %! baca.finger_pressure_transition
+                            - \tweak thickness #3                                                    %! baca.finger_pressure_transition
+                            \glissando                                                               %! baca.finger_pressure_transition
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             c''4.                                                                    %! baca_make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            \once \override NoteHead.style = #'harmonic                              %! baca_note_head_style_harmonic:OverrideCommand(1)
+                            \once \override NoteHead.style = #'harmonic                              %! baca.note_head_style_harmonic:OverrideCommand(1)
                             c''2                                                                     %! baca_make_notes
-                            - \tweak arrow-length #2                                                 %! baca_finger_pressure_transition
-                            - \tweak arrow-width #0.5                                                %! baca_finger_pressure_transition
-                            - \tweak bound-details.right.arrow ##t                                   %! baca_finger_pressure_transition
-                            - \tweak thickness #3                                                    %! baca_finger_pressure_transition
-                            \glissando                                                               %! baca_finger_pressure_transition
+                            - \tweak arrow-length #2                                                 %! baca.finger_pressure_transition
+                            - \tweak arrow-width #0.5                                                %! baca.finger_pressure_transition
+                            - \tweak bound-details.right.arrow ##t                                   %! baca.finger_pressure_transition
+                            - \tweak thickness #3                                                    %! baca.finger_pressure_transition
+                            \glissando                                                               %! baca.finger_pressure_transition
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             c''4.                                                                    %! baca_make_notes
@@ -4733,7 +4733,7 @@ def glissando(
     right_broken_show_next: bool = None,
     selector: abjad.Selector = "baca.tleaves()",
     style: str = None,
-    tag: typing.Optional[str] = "baca_glissando",
+    tag: typing.Optional[str] = "baca.glissando",
     zero_padding: bool = None,
 ) -> GlissandoCommand:
     r"""
@@ -4816,52 +4816,52 @@ def glissando(
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
@@ -4978,7 +4978,7 @@ def glissando(
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
             <BLANKLINE>
@@ -5012,7 +5012,7 @@ def glissando(
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
@@ -5082,7 +5082,7 @@ def glissando(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -5097,24 +5097,24 @@ def glissando(
                         \times 9/10 {
                             fs''16
                             [
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
                             e''16
                             ]
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
                             ef''4
                             ~
                             ef''16
                             r16
                             af''16
                             [
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
                             g''16
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5199,65 +5199,65 @@ def glissando(
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
@@ -5376,54 +5376,54 @@ def glissando(
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             e'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             f''8                                                                     %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             f'8                                                                      %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             e''8                                                                     %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             g'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             f''8                                                                     %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
-                            \glissando                                                               %! baca_glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
-                            - \tweak color #red                                                      %! baca_glissando
-                            \glissando                                                               %! baca_glissando
+                            - \tweak color #red                                                      %! baca.glissando
+                            \glissando                                                               %! baca.glissando
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
@@ -5482,7 +5482,7 @@ def global_fermata(
     description: str = None,
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_global_fermata",
+    tag: typing.Optional[str] = "baca.global_fermata",
 ) -> GlobalFermataCommand:
     """
     Attaches global fermata.
@@ -5496,7 +5496,7 @@ def instrument(
     instrument: abjad.Instrument,
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_instrument",
+    tag: typing.Optional[str] = "baca.instrument",
 ) -> InstrumentChangeCommand:
     """
     Makes instrument change command.
@@ -5512,7 +5512,7 @@ def instrument(
 def invisible_music(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_invisible_music",
+    tag: typing.Optional[str] = "baca.invisible_music",
 ) -> IndicatorCommand:
     r"""
     Attaches ``\baca-invisible-music`` literal.
@@ -5603,11 +5603,11 @@ def invisible_music(
                             c''2                                                                     %! baca_make_notes
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            \baca-invisible-music                                                    %! baca_invisible_music:IndicatorCommand
+                            \baca-invisible-music                                                    %! baca.invisible_music:IndicatorCommand
                             c''4.                                                                    %! baca_make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            \baca-invisible-music                                                    %! baca_invisible_music:IndicatorCommand
+                            \baca-invisible-music                                                    %! baca.invisible_music:IndicatorCommand
                             c''2                                                                     %! baca_make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
@@ -5689,7 +5689,7 @@ def label(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             ^ \markup { C4 }
@@ -5727,7 +5727,7 @@ def label(
                             a'16
                             ^ \markup { A4 }
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5764,7 +5764,7 @@ def label(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -5798,7 +5798,7 @@ def label(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5818,7 +5818,7 @@ def markup(
     match: typings.Indices = None,
     measures: typings.Slice = None,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_markup",
+    tag: typing.Optional[str] = "baca.markup",
 ) -> IndicatorCommand:
     r"""
     Makes markup and inserts into indicator command.
@@ -5852,11 +5852,11 @@ def markup(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.outside-staff-priority = #1000                   %! baca_tuplet_bracket_outside_staff_priority:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.outside-staff-priority = #1000                   %! baca.tuplet_bracket_outside_staff_priority:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! baca_markup:IndicatorCommand
+                            ^ \markup { "più mosso" }                                                %! baca.markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -5883,8 +5883,8 @@ def markup(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.outside-staff-priority                             %! baca_tuplet_bracket_outside_staff_priority:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.outside-staff-priority                             %! baca.tuplet_bracket_outside_staff_priority:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5922,8 +5922,8 @@ def markup(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.outside-staff-priority = #1000                   %! baca_tuplet_bracket_outside_staff_priority:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.outside-staff-priority = #1000                   %! baca.tuplet_bracket_outside_staff_priority:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -5937,7 +5937,7 @@ def markup(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { "più mosso" }                                                %! baca_markup:IndicatorCommand
+                            ^ \markup { "più mosso" }                                                %! baca.markup:IndicatorCommand
                             [
                             e''16
                             ]
@@ -5953,8 +5953,8 @@ def markup(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.outside-staff-priority                             %! baca_tuplet_bracket_outside_staff_priority:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.outside-staff-priority                             %! baca.tuplet_bracket_outside_staff_priority:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5992,8 +5992,8 @@ def markup(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.outside-staff-priority = #1000                   %! baca_tuplet_bracket_outside_staff_priority:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.outside-staff-priority = #1000                   %! baca.tuplet_bracket_outside_staff_priority:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -6007,28 +6007,28 @@ def markup(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { * }                                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { * }                                                          %! baca.markup:IndicatorCommand
                             [
                             e''16
-                            ^ \markup { * }                                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { * }                                                          %! baca.markup:IndicatorCommand
                             ]
                             ef''4
-                            ^ \markup { * }                                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { * }                                                          %! baca.markup:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            ^ \markup { * }                                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { * }                                                          %! baca.markup:IndicatorCommand
                             [
                             g''16
-                            ^ \markup { * }                                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { * }                                                          %! baca.markup:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.outside-staff-priority                             %! baca_tuplet_bracket_outside_staff_priority:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.outside-staff-priority                             %! baca.tuplet_bracket_outside_staff_priority:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6066,11 +6066,11 @@ def markup(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.outside-staff-priority = #1000                   %! baca_tuplet_bracket_outside_staff_priority:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.outside-staff-priority = #1000                   %! baca.tuplet_bracket_outside_staff_priority:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { \baca-triple-diamond-markup }                                %! baca_markup:IndicatorCommand
+                            ^ \markup { \baca-triple-diamond-markup }                                %! baca.markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -6097,8 +6097,8 @@ def markup(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.outside-staff-priority                             %! baca_tuplet_bracket_outside_staff_priority:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.outside-staff-priority                             %! baca.tuplet_bracket_outside_staff_priority:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6454,7 +6454,7 @@ def parts(
 def one_voice(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_one_voice",
+    tag: typing.Optional[str] = "baca.one_voice",
 ) -> IndicatorCommand:
     r"""
     Makes LilyPond ``\oneVoice`` command.
@@ -6491,7 +6491,7 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
 def repeat_tie(
     *,
     selector: abjad.Selector = "baca.qrun(0)",
-    tag: typing.Optional[str] = "baca_repeat_tie",
+    tag: typing.Optional[str] = "baca.repeat_tie",
 ) -> TieCommand:
     r"""
     Attaches repeat tie.
@@ -6527,16 +6527,16 @@ def repeat_tie(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
                             c'16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             ]
                             bf'4
                             bf'16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -6546,9 +6546,9 @@ def repeat_tie(
                             e''16
                             ]
                             e''4
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             e''16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             r16
                             fs''16
                             [
@@ -6558,7 +6558,7 @@ def repeat_tie(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6569,7 +6569,7 @@ def repeat_tie(
 
 
 def repeat_tie_repeat_pitches(
-    *, tag: typing.Optional[str] = "baca_repeat_tie_repeat_pitches"
+    *, tag: typing.Optional[str] = "baca.repeat_tie_repeat_pitches"
 ) -> TieCommand:
     """
     Repeat-ties repeat pitches.
@@ -6589,7 +6589,7 @@ def tie(
         bool, abjad.IntegerPair, abjad.DurationInequality
     ] = None,
     selector: abjad.Selector = "baca.qrun(0)",
-    tag: typing.Optional[str] = "baca_tie",
+    tag: typing.Optional[str] = "baca.tie",
 ) -> TieCommand:
     r"""
     Attaches tie.
@@ -6625,15 +6625,15 @@ def tie(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             c'16
                             ]
                             bf'4
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             bf'16
                             r16
                         }
@@ -6643,9 +6643,9 @@ def tie(
                             [
                             e''16
                             ]
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             e''4
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             e''16
                             r16
                             fs''16
@@ -6656,7 +6656,7 @@ def tie(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6693,16 +6693,16 @@ def tie(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             c'16
                             ]
                             bf'4
                             bf'16
-                            \repeatTie                                                               %! baca_tie
+                            \repeatTie                                                               %! baca.tie
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -6711,10 +6711,10 @@ def tie(
                             [
                             e''16
                             ]
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             e''4
                             e''16
-                            \repeatTie                                                               %! baca_tie
+                            \repeatTie                                                               %! baca.tie
                             r16
                             fs''16
                             [
@@ -6724,7 +6724,7 @@ def tie(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6735,7 +6735,7 @@ def tie(
 
 
 def tie_repeat_pitches(
-    *, tag: typing.Optional[str] = "baca_tie_repeat_pitches"
+    *, tag: typing.Optional[str] = "baca.tie_repeat_pitches"
 ) -> TieCommand:
     """
     Ties repeat pitches.
@@ -6748,7 +6748,7 @@ def tie_repeat_pitches(
 def voice_four(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_voice_four",
+    tag: typing.Optional[str] = "baca.voice_four",
 ) -> IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceFour`` command.
@@ -6762,7 +6762,7 @@ def voice_four(
 def voice_one(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_voice_one",
+    tag: typing.Optional[str] = "baca.voice_one",
 ) -> IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceOne`` command.
@@ -6776,7 +6776,7 @@ def voice_one(
 def voice_three(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_voice_three",
+    tag: typing.Optional[str] = "baca.voice_three",
 ) -> IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceThree`` command.
@@ -6790,7 +6790,7 @@ def voice_three(
 def voice_two(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_voice_two",
+    tag: typing.Optional[str] = "baca.voice_two",
 ) -> IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceTwo`` command.

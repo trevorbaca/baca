@@ -40,8 +40,8 @@ class OverrideCommand(scoping.Command):
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \override Beam.positions = #'(6 . 6)                                     %! baca_beam_positions:OverrideCommand(1)
-                            \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
+                            \override Beam.positions = #'(6 . 6)                                     %! baca.beam_positions:OverrideCommand(1)
+                            \override Stem.direction = #up                                           %! baca.stem_up:OverrideCommand(1)
                             c'16
                             [
                             d'16
@@ -59,8 +59,8 @@ class OverrideCommand(scoping.Command):
                         }
                         \scaleDurations #'(1 . 1) {
                             a'16
-                            \revert Beam.positions                                                   %! baca_beam_positions:OverrideCommand(2)
-                            \revert Stem.direction                                                   %! baca_stem_up:OverrideCommand(2)
+                            \revert Beam.positions                                                   %! baca.beam_positions:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_up:OverrideCommand(2)
                         }
                     }
                 }
@@ -150,8 +150,8 @@ class OverrideCommand(scoping.Command):
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \override Beam.positions = #'(6 . 6)                                     %! baca_beam_positions:OverrideCommand(1)
-                            \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
+                            \override Beam.positions = #'(6 . 6)                                     %! baca.beam_positions:OverrideCommand(1)
+                            \override Stem.direction = #up                                           %! baca.stem_up:OverrideCommand(1)
                             e'8
                             [
             <BLANKLINE>
@@ -160,7 +160,7 @@ class OverrideCommand(scoping.Command):
                             f'8
                             ]
             <BLANKLINE>
-                            \override Rest.direction = #up                                           %! baca_rest_up:OverrideCommand(1)
+                            \override Rest.direction = #up                                           %! baca.rest_up:OverrideCommand(1)
                             r8
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
@@ -185,15 +185,15 @@ class OverrideCommand(scoping.Command):
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             r8
-                            \revert Rest.direction                                                   %! baca_rest_up:OverrideCommand(2)
+                            \revert Rest.direction                                                   %! baca.rest_up:OverrideCommand(2)
             <BLANKLINE>
                             e''8
                             [
             <BLANKLINE>
                             g'8
                             ]
-                            \revert Beam.positions                                                   %! baca_beam_positions:OverrideCommand(2)
-                            \revert Stem.direction                                                   %! baca_stem_up:OverrideCommand(2)
+                            \revert Beam.positions                                                   %! baca.beam_positions:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_up:OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -432,7 +432,7 @@ def accidental_extra_offset(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_accidental_extra_offset",
+    tag: typing.Optional[str] = "baca.accidental_extra_offset",
 ) -> OverrideCommand:
     """
     Overrides accidental stencil.
@@ -449,7 +449,7 @@ def accidental_extra_offset(
 def accidental_stencil_false(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_accidental_stencil_false",
+    tag: typing.Optional[str] = "baca.accidental_stencil_false",
 ) -> OverrideCommand:
     """
     Overrides accidental stencil.
@@ -466,7 +466,7 @@ def accidental_stencil_false(
 def accidental_transparent(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_accidental_transparent",
+    tag: typing.Optional[str] = "baca.accidental_transparent",
 ):
     """
     Overrides accidental transparency on.
@@ -483,7 +483,7 @@ def accidental_transparent(
 def accidental_x_extent_false(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_accidental_x_extent_false",
+    tag: typing.Optional[str] = "baca.accidental_x_extent_false",
 ) -> OverrideCommand:
     """
     Overrides accidental x-extent.
@@ -502,7 +502,7 @@ def bar_extent(
     *,
     after: bool = None,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_bar_extent",
+    tag: typing.Optional[str] = "baca.bar_extent",
 ) -> OverrideCommand:
     r"""
     Overrides bar line bar extent.
@@ -598,7 +598,7 @@ def bar_extent(
                             ]                                                                        %! baca_make_even_divisions
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            \override Staff.BarLine.bar-extent = #'(-4 . 4)                          %! baca_bar_extent:OverrideCommand(1)
+                            \override Staff.BarLine.bar-extent = #'(-4 . 4)                          %! baca.bar_extent:OverrideCommand(1)
                             g'8                                                                      %! baca_make_even_divisions
                             [                                                                        %! baca_make_even_divisions
             <BLANKLINE>
@@ -606,7 +606,7 @@ def bar_extent(
             <BLANKLINE>
                             e'8                                                                      %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \revert Staff.BarLine.bar-extent                                         %! baca_bar_extent:OverrideCommand(2)
+                            \revert Staff.BarLine.bar-extent                                         %! baca.bar_extent:OverrideCommand(2)
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             d''8                                                                     %! baca_make_even_divisions
@@ -627,7 +627,7 @@ def bar_extent(
             <BLANKLINE>
                             d''8                                                                     %! baca_make_even_divisions
                             ]                                                                        %! baca_make_even_divisions
-                            \once \override Staff.BarLine.bar-extent = #'(-4 . 4)                    %! baca_bar_extent:OverrideCommand(1)
+                            \once \override Staff.BarLine.bar-extent = #'(-4 . 4)                    %! baca.bar_extent:OverrideCommand(1)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -676,7 +676,7 @@ def bar_extent(
 
 
 def bar_extent_zero(
-    *, tag: typing.Optional[str] = "baca_bar_extent_zero"
+    *, tag: typing.Optional[str] = "baca.bar_extent_zero"
 ) -> scoping.Suite:
     """
     Makes bar-extent zero suite.
@@ -693,7 +693,7 @@ def bar_line_color(
     after: bool = None,
     context: str = "Score",
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_bar_line_color",
+    tag: typing.Optional[str] = "baca.bar_line_color",
 ) -> OverrideCommand:
     """
     Overrides bar line color.
@@ -715,7 +715,7 @@ def bar_line_extra_offset(
     after: bool = None,
     context: str = "Score",
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_bar_line_extra_offset",
+    tag: typing.Optional[str] = "baca.bar_line_extra_offset",
 ) -> OverrideCommand:
     """
     Overrides bar line extra offset.
@@ -734,7 +734,7 @@ def bar_line_extra_offset(
 def bar_line_transparent(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_bar_line_transparent",
+    tag: typing.Optional[str] = "baca.bar_line_transparent",
 ) -> OverrideCommand:
     r"""
     Overrides bar line transparency.
@@ -821,7 +821,7 @@ def bar_line_transparent(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \once \override Score.BarLine.transparent = ##t                          %! baca_bar_line_transparent:OverrideCommand(1)
+                            \once \override Score.BarLine.transparent = ##t                          %! baca.bar_line_transparent:OverrideCommand(1)
                             e'8
                             [
             <BLANKLINE>
@@ -988,7 +988,7 @@ def bar_line_transparent(
                             r8
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            \override Score.BarLine.transparent = ##t                                %! baca_bar_line_transparent:OverrideCommand(1)
+                            \override Score.BarLine.transparent = ##t                                %! baca.bar_line_transparent:OverrideCommand(1)
                             e''8
                             [
             <BLANKLINE>
@@ -996,7 +996,7 @@ def bar_line_transparent(
             <BLANKLINE>
                             f''8
                             ]
-                            \revert Score.BarLine.transparent                                        %! baca_bar_line_transparent:OverrideCommand(2)
+                            \revert Score.BarLine.transparent                                        %! baca.bar_line_transparent:OverrideCommand(2)
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             r8
@@ -1069,7 +1069,7 @@ def bar_line_x_extent(
     after: bool = None,
     context: str = "Score",
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_bar_line_x_extent",
+    tag: typing.Optional[str] = "baca.bar_line_x_extent",
 ) -> OverrideCommand:
     """
     Overrides bar line X extent.
@@ -1089,7 +1089,7 @@ def beam_positions(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_beam_positions",
+    tag: typing.Optional[str] = "baca.beam_positions",
 ) -> OverrideCommand:
     r"""
     Overrides beam positions.
@@ -1119,7 +1119,7 @@ def beam_positions(
                     \voiceOne
                     {
                         \times 4/5 {
-                            \override Beam.positions = #'(6 . 6)                                     %! baca_beam_positions:OverrideCommand(1)
+                            \override Beam.positions = #'(6 . 6)                                     %! baca.beam_positions:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -1139,7 +1139,7 @@ def beam_positions(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Beam.positions                                                   %! baca_beam_positions:OverrideCommand(2)
+                            \revert Beam.positions                                                   %! baca.beam_positions:OverrideCommand(2)
                         }
                     }
                 }
@@ -1178,7 +1178,7 @@ def beam_positions(
                             ]
                         }
                         \times 4/5 {
-                            \override Beam.positions = #'(6 . 6)                                     %! baca_beam_positions:OverrideCommand(1)
+                            \override Beam.positions = #'(6 . 6)                                     %! baca.beam_positions:OverrideCommand(1)
                             fs''16
                             [
                             e''16
@@ -1186,7 +1186,7 @@ def beam_positions(
                             af''16
                             g''16
                             ]
-                            \revert Beam.positions                                                   %! baca_beam_positions:OverrideCommand(2)
+                            \revert Beam.positions                                                   %! baca.beam_positions:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
@@ -1212,7 +1212,7 @@ def beam_positions(
 def beam_stencil_false(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_beam_stencil_false",
+    tag: typing.Optional[str] = "baca.beam_stencil_false",
 ) -> OverrideCommand:
     """
     Overrides beam stencil.
@@ -1229,7 +1229,7 @@ def beam_stencil_false(
 def beam_transparent(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_beam_transparent",
+    tag: typing.Optional[str] = "baca.beam_transparent",
 ) -> OverrideCommand:
     """
     Overrides beam transparency.
@@ -1247,7 +1247,7 @@ def clef_extra_offset(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_clef_extra_offset",
+    tag: typing.Optional[str] = "baca.clef_extra_offset",
 ) -> OverrideCommand:
     """
     Overrides clef extra offset.
@@ -1266,7 +1266,7 @@ def clef_shift(
     clef: typing.Union[str, abjad.Clef],
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_clef_shift",
+    tag: typing.Optional[str] = "baca.clef_shift",
 ) -> scoping.Suite:
     """
     Shifts clef to left by width of clef.
@@ -1290,7 +1290,7 @@ def clef_shift(
 def clef_x_extent_false(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_clef_x_extent_false",
+    tag: typing.Optional[str] = "baca.clef_x_extent_false",
 ) -> OverrideCommand:
     """
     Overrides clef x-extent.
@@ -1309,7 +1309,7 @@ def dls_padding(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_dls_padding",
+    tag: typing.Optional[str] = "baca.dls_padding",
 ) -> OverrideCommand:
     """
     Overrides dynamic line spanner padding.
@@ -1327,7 +1327,7 @@ def dls_staff_padding(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_dls_staff_padding",
+    tag: typing.Optional[str] = "baca.dls_staff_padding",
 ) -> OverrideCommand:
     r"""
     Overrides dynamic line spanner staff padding
@@ -1368,26 +1368,26 @@ def dls_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override DynamicLineSpanner.staff-padding = #4                          %! baca_dls_staff_padding:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #4                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! baca.hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca.hairpin:PiecewiseCommand(1)
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! baca.hairpin:PiecewiseCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! baca.hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca.hairpin:PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -1398,15 +1398,15 @@ def dls_staff_padding(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! baca.hairpin:PiecewiseCommand(2)
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! baca.hairpin:PiecewiseCommand(1)
                             r4
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1448,26 +1448,26 @@ def dls_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! baca.hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca.hairpin:PiecewiseCommand(1)
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! baca.hairpin:PiecewiseCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override DynamicLineSpanner.staff-padding = #4                          %! baca_dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #4                          %! baca.dls_staff_padding:OverrideCommand(1)
                             fs''16
-                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! baca.hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca.hairpin:PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -1478,15 +1478,15 @@ def dls_staff_padding(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! baca.hairpin:PiecewiseCommand(2)
                             ]
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca_dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! baca.hairpin:PiecewiseCommand(1)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1505,7 +1505,7 @@ def dls_staff_padding(
 def dls_up(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_dls_up",
+    tag: typing.Optional[str] = "baca.dls_up",
 ) -> OverrideCommand:
     r"""
     Overrides dynamic line spanner direction.
@@ -1546,26 +1546,26 @@ def dls_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override DynamicLineSpanner.direction = #up                             %! baca_dls_up:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.direction = #up                             %! baca.dls_up:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! baca.hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca.hairpin:PiecewiseCommand(1)
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! baca.hairpin:PiecewiseCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! baca.hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca.hairpin:PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -1576,15 +1576,15 @@ def dls_up(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! baca.hairpin:PiecewiseCommand(2)
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! baca.hairpin:PiecewiseCommand(1)
                             r4
-                            \revert DynamicLineSpanner.direction                                     %! baca_dls_up:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.direction                                     %! baca.dls_up:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1626,26 +1626,26 @@ def dls_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! baca.hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca.hairpin:PiecewiseCommand(1)
                             [
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! baca.hairpin:PiecewiseCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override DynamicLineSpanner.direction = #up                             %! baca_dls_up:OverrideCommand(1)
+                            \override DynamicLineSpanner.direction = #up                             %! baca.dls_up:OverrideCommand(1)
                             fs''16
-                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
-                            \<                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! baca.hairpin:PiecewiseCommand(1)
+                            \<                                                                       %! baca.hairpin:PiecewiseCommand(1)
                             [
                             e''16
                             ]
@@ -1656,15 +1656,15 @@ def dls_up(
                             af''16
                             [
                             g''16
-                            \f                                                                       %! baca_hairpin:PiecewiseCommand(2)
+                            \f                                                                       %! baca.hairpin:PiecewiseCommand(2)
                             ]
-                            \revert DynamicLineSpanner.direction                                     %! baca_dls_up:OverrideCommand(2)
+                            \revert DynamicLineSpanner.direction                                     %! baca.dls_up:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            \p                                                                       %! baca_hairpin:PiecewiseCommand(1)
+                            \p                                                                       %! baca.hairpin:PiecewiseCommand(1)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1684,7 +1684,7 @@ def dots_extra_offset(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_dots_extra_offset",
+    tag: typing.Optional[str] = "baca.dots_extra_offset",
 ) -> OverrideCommand:
     """
     Overrides dots extra offset.
@@ -1701,7 +1701,7 @@ def dots_extra_offset(
 def dots_stencil_false(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_dots_stencil_false",
+    tag: typing.Optional[str] = "baca.dots_stencil_false",
 ) -> OverrideCommand:
     """
     Overrides dots stencil.
@@ -1718,7 +1718,7 @@ def dots_stencil_false(
 def dots_transparent(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_dots_transparent",
+    tag: typing.Optional[str] = "baca.dots_transparent",
 ) -> OverrideCommand:
     """
     Overrides dots transparency.
@@ -1736,7 +1736,7 @@ def dynamic_text_color(
     color: str = "red",
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_dynamic_text_color",
+    tag: typing.Optional[str] = "baca.dynamic_text_color",
 ) -> OverrideCommand:
     """
     Overrides dynamic text color.
@@ -1754,7 +1754,7 @@ def dynamic_text_extra_offset(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_dynamic_text_extra_offset",
+    tag: typing.Optional[str] = "baca.dynamic_text_extra_offset",
 ) -> OverrideCommand:
     r"""
     Overrides dynamic text extra offset.
@@ -1789,11 +1789,11 @@ def dynamic_text_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \once \override DynamicText.extra-offset = #'(-3 . 0)                    %! baca_dynamic_text_extra_offset:OverrideCommand(1)
+                            \once \override DynamicText.extra-offset = #'(-3 . 0)                    %! baca.dynamic_text_extra_offset:OverrideCommand(1)
                             c'16
-                            \p                                                                       %! baca_dynamic:IndicatorCommand
+                            \p                                                                       %! baca.dynamic:IndicatorCommand
                             [
                             d'16
                             ]
@@ -1805,7 +1805,7 @@ def dynamic_text_extra_offset(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \f                                                                       %! baca_dynamic:IndicatorCommand
+                            \f                                                                       %! baca.dynamic:IndicatorCommand
                             [
                             e''16
                             ]
@@ -1821,7 +1821,7 @@ def dynamic_text_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1861,10 +1861,10 @@ def dynamic_text_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            \p                                                                       %! baca_dynamic:IndicatorCommand
+                            \p                                                                       %! baca.dynamic:IndicatorCommand
                             [
                             d'16
                             ]
@@ -1875,9 +1875,9 @@ def dynamic_text_extra_offset(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override DynamicText.extra-offset = #'(-3 . 0)                    %! baca_dynamic_text_extra_offset:OverrideCommand(1)
+                            \once \override DynamicText.extra-offset = #'(-3 . 0)                    %! baca.dynamic_text_extra_offset:OverrideCommand(1)
                             fs''16
-                            \f                                                                       %! baca_dynamic:IndicatorCommand
+                            \f                                                                       %! baca.dynamic:IndicatorCommand
                             [
                             e''16
                             ]
@@ -1893,7 +1893,7 @@ def dynamic_text_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1930,7 +1930,7 @@ def dynamic_text_parent_alignment_x(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_dynamic_text_parent_alignment_x",
+    tag: typing.Optional[str] = "baca.dynamic_text_parent_alignment_x",
 ) -> OverrideCommand:
     """
     Overrides dynamic text parent alignment X to ``n``.
@@ -1948,7 +1948,7 @@ def dynamic_text_self_alignment_x(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_dynamic_text_self_alignment_x",
+    tag: typing.Optional[str] = "baca.dynamic_text_self_alignment_x",
 ) -> OverrideCommand:
     """
     Overrides dynamic text self-alignment-X to ``n``.
@@ -1965,7 +1965,7 @@ def dynamic_text_self_alignment_x(
 def dynamic_text_stencil_false(
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_dynamic_text_stencil_false",
+    tag: typing.Optional[str] = "baca.dynamic_text_stencil_false",
 ) -> OverrideCommand:
     """
     Overrides dynamic text stencil.
@@ -1982,7 +1982,7 @@ def dynamic_text_stencil_false(
 def dynamic_text_transparent(
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_dynamic_text_transparent",
+    tag: typing.Optional[str] = "baca.dynamic_text_transparent",
 ) -> OverrideCommand:
     """
     Overrides dynamic text transparency.
@@ -1999,7 +1999,7 @@ def dynamic_text_transparent(
 def dynamic_text_x_extent_zero(
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_dynamic_text_x_extent_zero",
+    tag: typing.Optional[str] = "baca.dynamic_text_x_extent_zero",
 ) -> OverrideCommand:
     """
     Overrides dynamic text X-extent.
@@ -2017,7 +2017,7 @@ def dynamic_text_x_offset(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_dynamic_text_x_offset",
+    tag: typing.Optional[str] = "baca.dynamic_text_x_offset",
 ) -> OverrideCommand:
     """
     Overrides dynamic text X-extent.
@@ -2035,7 +2035,7 @@ def dynamic_text_y_offset(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_dynamic_text_y_offset",
+    tag: typing.Optional[str] = "baca.dynamic_text_y_offset",
 ) -> OverrideCommand:
     """
     Overrides dynamic text Y-extent.
@@ -2052,7 +2052,7 @@ def dynamic_text_y_offset(
 def flag_stencil_false(
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_flag_stencil_false",
+    tag: typing.Optional[str] = "baca.flag_stencil_false",
 ) -> OverrideCommand:
     """
     Overrides flag stencil.
@@ -2069,7 +2069,7 @@ def flag_stencil_false(
 def flag_transparent(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_flag_transparent",
+    tag: typing.Optional[str] = "baca.flag_transparent",
 ) -> OverrideCommand:
     """
     Overrides flag transparency.
@@ -2087,7 +2087,7 @@ def glissando_thickness(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_glissando_thickness",
+    tag: typing.Optional[str] = "baca.glissando_thickness",
 ) -> OverrideCommand:
     """
     Overrides glissando thickness.
@@ -2105,7 +2105,7 @@ def hairpin_shorten_pair(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_hairpin_shorten_pair",
+    tag: typing.Optional[str] = "baca.hairpin_shorten_pair",
 ) -> OverrideCommand:
     """
     Overrides hairpin shorten pair.
@@ -2123,7 +2123,7 @@ def hairpin_start_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_hairpin_start_shift",
+    tag: typing.Optional[str] = "baca.hairpin_start_shift",
 ) -> scoping.Suite:
     """
     Shifts hairpin start dynamic to left by width of dynamic.
@@ -2142,7 +2142,7 @@ def hairpin_start_shift(
 def hairpin_stencil_false(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_hairpin_stencil_false",
+    tag: typing.Optional[str] = "baca.hairpin_stencil_false",
 ) -> OverrideCommand:
     """
     Overrides hairpin stencil.
@@ -2159,7 +2159,7 @@ def hairpin_stencil_false(
 def hairpin_to_barline(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_hairpin_to_barline",
+    tag: typing.Optional[str] = "baca.hairpin_to_barline",
 ) -> OverrideCommand:
     """
     Overrides hairpin to-barline to true.
@@ -2176,7 +2176,7 @@ def hairpin_to_barline(
 def hairpin_transparent(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_hairpin_transparent",
+    tag: typing.Optional[str] = "baca.hairpin_transparent",
 ) -> OverrideCommand:
     """
     Overrides hairpin transparency.
@@ -2194,7 +2194,7 @@ def mmrest_color(
     color: str = "red",
     *,
     selector: abjad.Selector = "baca.mmrests()",
-    tag: typing.Optional[str] = "baca_mmrest_text_color",
+    tag: typing.Optional[str] = "baca.mmrest_text_color",
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest color.
@@ -2273,7 +2273,7 @@ def mmrest_color(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)              %! baca_mmrest_text_color:OverrideCommand(1)
+                            \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)              %! baca.mmrest_text_color:OverrideCommand(1)
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
@@ -2284,7 +2284,7 @@ def mmrest_color(
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            \revert MultiMeasureRest.color                                           %! baca_mmrest_text_color:OverrideCommand(2)
+                            \revert MultiMeasureRest.color                                           %! baca.mmrest_text_color:OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -2334,7 +2334,7 @@ def mmrest_color(
 def mmrest_transparent(
     *,
     selector: abjad.Selector = "baca.mmrests()",
-    tag: typing.Optional[str] = "baca_mmrest_transparent",
+    tag: typing.Optional[str] = "baca.mmrest_transparent",
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest transparent.
@@ -2353,7 +2353,7 @@ def mmrest_text_color(
     color: str = "red",
     *,
     selector: abjad.Selector = "baca.mmrests()",
-    tag: typing.Optional[str] = "baca_mmrest_text_color",
+    tag: typing.Optional[str] = "baca.mmrest_text_color",
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text color.
@@ -2434,24 +2434,24 @@ def mmrest_text_color(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \override MultiMeasureRestText.color = #red                              %! baca_mmrest_text_color:OverrideCommand(1)
+                            \override MultiMeasureRestText.color = #red                              %! baca.mmrest_text_color:OverrideCommand(1)
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            ^ \markup {                                                              %! baca_markup:IndicatorCommand
-                                \override                                                            %! baca_markup:IndicatorCommand
-                                    #'(box-padding . 0.5)                                            %! baca_markup:IndicatorCommand
-                                    \box                                                             %! baca_markup:IndicatorCommand
-                                        still                                                        %! baca_markup:IndicatorCommand
-                                }                                                                    %! baca_markup:IndicatorCommand
+                            ^ \markup {                                                              %! baca.markup:IndicatorCommand
+                                \override                                                            %! baca.markup:IndicatorCommand
+                                    #'(box-padding . 0.5)                                            %! baca.markup:IndicatorCommand
+                                    \box                                                             %! baca.markup:IndicatorCommand
+                                        still                                                        %! baca.markup:IndicatorCommand
+                                }                                                                    %! baca.markup:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            \revert MultiMeasureRestText.color                                       %! baca_mmrest_text_color:OverrideCommand(2)
+                            \revert MultiMeasureRestText.color                                       %! baca.mmrest_text_color:OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -2529,7 +2529,7 @@ def mmrest_text_extra_offset(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.mmrests()",
-    tag: typing.Optional[str] = "baca_mmrest_text_extra_offset",
+    tag: typing.Optional[str] = "baca.mmrest_text_extra_offset",
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text extra offset.
@@ -2610,24 +2610,24 @@ def mmrest_text_extra_offset(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \override MultiMeasureRestText.extra-offset = #'(0 . 2)                  %! baca_mmrest_text_extra_offset:OverrideCommand(1)
+                            \override MultiMeasureRestText.extra-offset = #'(0 . 2)                  %! baca.mmrest_text_extra_offset:OverrideCommand(1)
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            ^ \markup {                                                              %! baca_markup:IndicatorCommand
-                                \override                                                            %! baca_markup:IndicatorCommand
-                                    #'(box-padding . 0.5)                                            %! baca_markup:IndicatorCommand
-                                    \box                                                             %! baca_markup:IndicatorCommand
-                                        still                                                        %! baca_markup:IndicatorCommand
-                                }                                                                    %! baca_markup:IndicatorCommand
+                            ^ \markup {                                                              %! baca.markup:IndicatorCommand
+                                \override                                                            %! baca.markup:IndicatorCommand
+                                    #'(box-padding . 0.5)                                            %! baca.markup:IndicatorCommand
+                                    \box                                                             %! baca.markup:IndicatorCommand
+                                        still                                                        %! baca.markup:IndicatorCommand
+                                }                                                                    %! baca.markup:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            \revert MultiMeasureRestText.extra-offset                                %! baca_mmrest_text_extra_offset:OverrideCommand(2)
+                            \revert MultiMeasureRestText.extra-offset                                %! baca.mmrest_text_extra_offset:OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -2678,7 +2678,7 @@ def mmrest_text_padding(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.mmrests()",
-    tag: typing.Optional[str] = "baca_mmrest_text_padding",
+    tag: typing.Optional[str] = "baca.mmrest_text_padding",
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text padding.
@@ -2759,24 +2759,24 @@ def mmrest_text_padding(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \override MultiMeasureRestText.padding = #2                              %! baca_mmrest_text_padding:OverrideCommand(1)
+                            \override MultiMeasureRestText.padding = #2                              %! baca.mmrest_text_padding:OverrideCommand(1)
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            ^ \markup {                                                              %! baca_markup:IndicatorCommand
-                                \override                                                            %! baca_markup:IndicatorCommand
-                                    #'(box-padding . 0.5)                                            %! baca_markup:IndicatorCommand
-                                    \box                                                             %! baca_markup:IndicatorCommand
-                                        still                                                        %! baca_markup:IndicatorCommand
-                                }                                                                    %! baca_markup:IndicatorCommand
+                            ^ \markup {                                                              %! baca.markup:IndicatorCommand
+                                \override                                                            %! baca.markup:IndicatorCommand
+                                    #'(box-padding . 0.5)                                            %! baca.markup:IndicatorCommand
+                                    \box                                                             %! baca.markup:IndicatorCommand
+                                        still                                                        %! baca.markup:IndicatorCommand
+                                }                                                                    %! baca.markup:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            \revert MultiMeasureRestText.padding                                     %! baca_mmrest_text_padding:OverrideCommand(2)
+                            \revert MultiMeasureRestText.padding                                     %! baca.mmrest_text_padding:OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -2826,7 +2826,7 @@ def mmrest_text_padding(
 def mmrest_text_parent_center(
     *,
     selector: abjad.Selector = "baca.mmrests()",
-    tag: typing.Optional[str] = "baca_mmrest_text_parent_center",
+    tag: typing.Optional[str] = "baca.mmrest_text_parent_center",
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text parent alignment X to center.
@@ -2907,24 +2907,24 @@ def mmrest_text_parent_center(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \override MultiMeasureRestText.parent-alignment-X = #0                   %! baca_mmrest_text_parent_center:OverrideCommand(1)
+                            \override MultiMeasureRestText.parent-alignment-X = #0                   %! baca.mmrest_text_parent_center:OverrideCommand(1)
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            ^ \markup {                                                              %! baca_markup:IndicatorCommand
-                                \override                                                            %! baca_markup:IndicatorCommand
-                                    #'(box-padding . 0.5)                                            %! baca_markup:IndicatorCommand
-                                    \box                                                             %! baca_markup:IndicatorCommand
-                                        still                                                        %! baca_markup:IndicatorCommand
-                                }                                                                    %! baca_markup:IndicatorCommand
+                            ^ \markup {                                                              %! baca.markup:IndicatorCommand
+                                \override                                                            %! baca.markup:IndicatorCommand
+                                    #'(box-padding . 0.5)                                            %! baca.markup:IndicatorCommand
+                                    \box                                                             %! baca.markup:IndicatorCommand
+                                        still                                                        %! baca.markup:IndicatorCommand
+                                }                                                                    %! baca.markup:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            \revert MultiMeasureRestText.parent-alignment-X                          %! baca_mmrest_text_parent_center:OverrideCommand(2)
+                            \revert MultiMeasureRestText.parent-alignment-X                          %! baca.mmrest_text_parent_center:OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -2975,7 +2975,7 @@ def mmrest_text_staff_padding(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.mmrests()",
-    tag: typing.Optional[str] = "baca_mmrest_text_staff_padding",
+    tag: typing.Optional[str] = "baca.mmrest_text_staff_padding",
 ) -> OverrideCommand:
     r"""
     Overrides multimeasure rest text staff padding.
@@ -3056,24 +3056,24 @@ def mmrest_text_staff_padding(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \override MultiMeasureRestText.staff-padding = #2                        %! baca_mmrest_text_staff_padding:OverrideCommand(1)
+                            \override MultiMeasureRestText.staff-padding = #2                        %! baca.mmrest_text_staff_padding:OverrideCommand(1)
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            ^ \markup {                                                              %! baca_markup:IndicatorCommand
-                                \override                                                            %! baca_markup:IndicatorCommand
-                                    #'(box-padding . 0.5)                                            %! baca_markup:IndicatorCommand
-                                    \box                                                             %! baca_markup:IndicatorCommand
-                                        still                                                        %! baca_markup:IndicatorCommand
-                                }                                                                    %! baca_markup:IndicatorCommand
+                            ^ \markup {                                                              %! baca.markup:IndicatorCommand
+                                \override                                                            %! baca.markup:IndicatorCommand
+                                    #'(box-padding . 0.5)                                            %! baca.markup:IndicatorCommand
+                                    \box                                                             %! baca.markup:IndicatorCommand
+                                        still                                                        %! baca.markup:IndicatorCommand
+                                }                                                                    %! baca.markup:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             R1 * 1/2                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            \revert MultiMeasureRestText.staff-padding                               %! baca_mmrest_text_staff_padding:OverrideCommand(2)
+                            \revert MultiMeasureRestText.staff-padding                               %! baca.mmrest_text_staff_padding:OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3123,7 +3123,7 @@ def mmrest_text_staff_padding(
 def mmrest_text_transparent(
     *,
     selector: abjad.Selector = "baca.mmrests()",
-    tag: typing.Optional[str] = "baca_script_transparent",
+    tag: typing.Optional[str] = "baca.script_transparent",
 ) -> OverrideCommand:
     """
     Overrides script transparent.
@@ -3141,7 +3141,7 @@ def mmrest_text_transparent(
 def no_ledgers(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_no_ledgers",
+    tag: typing.Optional[str] = "baca.no_ledgers",
 ) -> OverrideCommand:
     """
     Overrides note-head no-ledgers.
@@ -3159,7 +3159,7 @@ def note_column_shift(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_note_colun_shift",
+    tag: typing.Optional[str] = "baca.note_colun_shift",
 ) -> OverrideCommand:
     """
     Overrides note column force hshift.
@@ -3177,7 +3177,7 @@ def note_head_color(
     color: str,
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_note_head_color",
+    tag: typing.Optional[str] = "baca.note_head_color",
 ) -> OverrideCommand:
     """
     Overrides note-head color.
@@ -3195,7 +3195,7 @@ def note_head_duration_log(
     n: int,
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_note_head_color",
+    tag: typing.Optional[str] = "baca.note_head_color",
 ) -> OverrideCommand:
     """
     Overrides note-head duration-log property.
@@ -3213,7 +3213,7 @@ def note_head_extra_offset(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_note_head_extra_offset",
+    tag: typing.Optional[str] = "baca.note_head_extra_offset",
 ) -> OverrideCommand:
     """
     Overrides note-head color.
@@ -3231,7 +3231,7 @@ def note_head_no_ledgers(
     value: bool,
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_note_head_extra_offset",
+    tag: typing.Optional[str] = "baca.note_head_extra_offset",
 ) -> OverrideCommand:
     """
     Overrides note-head no-ledgers property.
@@ -3248,7 +3248,7 @@ def note_head_no_ledgers(
 def note_head_stencil_false(
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_note_head_stencil_false",
+    tag: typing.Optional[str] = "baca.note_head_stencil_false",
 ) -> OverrideCommand:
     """
     Overrides note-head stencil.
@@ -3266,7 +3266,7 @@ def note_head_style(
     string: str,
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_note_head_stencil_false",
+    tag: typing.Optional[str] = "baca.note_head_stencil_false",
 ) -> OverrideCommand:
     """
     Overrides note-head style property.
@@ -3283,7 +3283,7 @@ def note_head_style(
 def note_head_style_cross(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_note_head_style_cross",
+    tag: typing.Optional[str] = "baca.note_head_style_cross",
 ) -> OverrideCommand:
     r"""
     Overrides note-head style.
@@ -3316,9 +3316,9 @@ def note_head_style_cross(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override NoteHead.style = #'cross                                       %! baca_note_head_style_cross:OverrideCommand(1)
+                            \override NoteHead.style = #'cross                                       %! baca.note_head_style_cross:OverrideCommand(1)
                             c'16
                             [
                             d'16
@@ -3345,9 +3345,9 @@ def note_head_style_cross(
                         }
                         \times 4/5 {
                             a'16
-                            \revert NoteHead.style                                                   %! baca_note_head_style_cross:OverrideCommand(2)
+                            \revert NoteHead.style                                                   %! baca.note_head_style_cross:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -3381,7 +3381,7 @@ def note_head_style_cross(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -3394,7 +3394,7 @@ def note_head_style_cross(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override NoteHead.style = #'cross                                       %! baca_note_head_style_cross:OverrideCommand(1)
+                            \override NoteHead.style = #'cross                                       %! baca.note_head_style_cross:OverrideCommand(1)
                             fs''16
                             [
                             e''16
@@ -3407,12 +3407,12 @@ def note_head_style_cross(
                             [
                             g''16
                             ]
-                            \revert NoteHead.style                                                   %! baca_note_head_style_cross:OverrideCommand(2)
+                            \revert NoteHead.style                                                   %! baca.note_head_style_cross:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -3431,7 +3431,7 @@ def note_head_style_cross(
 def note_head_style_harmonic(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_note_head_style_harmonic",
+    tag: typing.Optional[str] = "baca.note_head_style_harmonic",
 ) -> OverrideCommand:
     r"""
     Overrides note-head style for ``selector`` output.
@@ -3464,9 +3464,9 @@ def note_head_style_harmonic(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override NoteHead.style = #'harmonic                                    %! baca_note_head_style_harmonic:OverrideCommand(1)
+                            \override NoteHead.style = #'harmonic                                    %! baca.note_head_style_harmonic:OverrideCommand(1)
                             c'16
                             [
                             d'16
@@ -3493,9 +3493,9 @@ def note_head_style_harmonic(
                         }
                         \times 4/5 {
                             a'16
-                            \revert NoteHead.style                                                   %! baca_note_head_style_harmonic:OverrideCommand(2)
+                            \revert NoteHead.style                                                   %! baca.note_head_style_harmonic:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -3529,7 +3529,7 @@ def note_head_style_harmonic(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -3542,7 +3542,7 @@ def note_head_style_harmonic(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override NoteHead.style = #'harmonic                                    %! baca_note_head_style_harmonic:OverrideCommand(1)
+                            \override NoteHead.style = #'harmonic                                    %! baca.note_head_style_harmonic:OverrideCommand(1)
                             fs''16
                             [
                             e''16
@@ -3555,12 +3555,12 @@ def note_head_style_harmonic(
                             [
                             g''16
                             ]
-                            \revert NoteHead.style                                                   %! baca_note_head_style_harmonic:OverrideCommand(2)
+                            \revert NoteHead.style                                                   %! baca.note_head_style_harmonic:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -3579,7 +3579,7 @@ def note_head_style_harmonic(
 def note_head_style_harmonic_black(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_note_head_style_harmonic_black",
+    tag: typing.Optional[str] = "baca.note_head_style_harmonic_black",
 ) -> OverrideCommand:
     r"""
     Overrides note-head style to harmonic-black.
@@ -3596,7 +3596,7 @@ def note_head_style_harmonic_black(
 def note_head_transparent(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_note_head_transparent",
+    tag: typing.Optional[str] = "baca.note_head_transparent",
 ):
     """
     Overrides note-head transparency.
@@ -3613,7 +3613,7 @@ def note_head_transparent(
 def note_head_x_extent_zero(
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_note_head_x_extent_zero",
+    tag: typing.Optional[str] = "baca.note_head_x_extent_zero",
 ) -> OverrideCommand:
     """
     Overrides note-head X-extent.
@@ -3634,7 +3634,7 @@ def ottava_bracket_shorten_pair(
     pair: abjad.NumberPair = (-0.8, -0.6),
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_ottava_bracket_shorten_pair",
+    tag: typing.Optional[str] = "baca.ottava_bracket_shorten_pair",
 ) -> OverrideCommand:
     """
     Overrides ottava bracket shorten pair.
@@ -3653,7 +3653,7 @@ def ottava_bracket_staff_padding(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_ottava_bracket_staff_padding",
+    tag: typing.Optional[str] = "baca.ottava_bracket_staff_padding",
 ) -> OverrideCommand:
     """
     Overrides ottava bracket staff padding.
@@ -3672,7 +3672,7 @@ def rehearsal_mark_down(
     *,
     context: str = "Score",
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_rehearsal_mark_down",
+    tag: typing.Optional[str] = "baca.rehearsal_mark_down",
 ) -> OverrideCommand:
     """
     Overrides rehearsal mark direction.
@@ -3692,7 +3692,7 @@ def rehearsal_mark_extra_offset(
     *,
     context: str = "Score",
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_rehearsal_mark_extra_offset",
+    tag: typing.Optional[str] = "baca.rehearsal_mark_extra_offset",
 ) -> OverrideCommand:
     """
     Overrides rehearsal mark extra offset.
@@ -3712,7 +3712,7 @@ def rehearsal_mark_padding(
     *,
     context: str = "Score",
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_rehearsal_padding",
+    tag: typing.Optional[str] = "baca.rehearsal_padding",
 ) -> OverrideCommand:
     """
     Overrides rehearsal mark padding.
@@ -3732,7 +3732,7 @@ def rehearsal_mark_self_alignment_x(
     *,
     context: str = "Score",
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_rehearsal_mark_self_alignment_x",
+    tag: typing.Optional[str] = "baca.rehearsal_mark_self_alignment_x",
 ) -> OverrideCommand:
     """
     Overrides rehearsal mark self-alignment-X.
@@ -3752,7 +3752,7 @@ def rehearsal_mark_y_offset(
     *,
     context: str = "Score",
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_rehearsal_mark_y_offset",
+    tag: typing.Optional[str] = "baca.rehearsal_mark_y_offset",
 ) -> OverrideCommand:
     """
     Overrides rehearsal mark Y offset.
@@ -3770,7 +3770,7 @@ def rehearsal_mark_y_offset(
 def repeat_tie_down(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_repeat_tie_down",
+    tag: typing.Optional[str] = "baca.repeat_tie_down",
 ) -> OverrideCommand:
     r"""
     Overrides repeat tie direction.
@@ -3808,18 +3808,18 @@ def repeat_tie_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override RepeatTie.direction = #down                                    %! baca_repeat_tie_down:OverrideCommand(1)
-                            \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
+                            \override RepeatTie.direction = #down                                    %! baca.repeat_tie_down:OverrideCommand(1)
+                            \override Stem.direction = #up                                           %! baca.stem_up:OverrideCommand(1)
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3827,20 +3827,20 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             ]
                             b'4
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             r16
                         }
                         \times 4/5 {
                             b'16
-                            \revert RepeatTie.direction                                              %! baca_repeat_tie_down:OverrideCommand(2)
-                            \revert Stem.direction                                                   %! baca_stem_up:OverrideCommand(2)
+                            \revert RepeatTie.direction                                              %! baca.repeat_tie_down:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_up:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -3882,39 +3882,39 @@ def repeat_tie_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
+                            \override Stem.direction = #up                                           %! baca.stem_up:OverrideCommand(1)
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
-                            \override RepeatTie.direction = #down                                    %! baca_repeat_tie_down:OverrideCommand(1)
+                            \override RepeatTie.direction = #down                                    %! baca.repeat_tie_down:OverrideCommand(1)
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             ]
                             b'4
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie
-                            \revert RepeatTie.direction                                              %! baca_repeat_tie_down:OverrideCommand(2)
+                            \repeatTie                                                               %! baca.repeat_tie
+                            \revert RepeatTie.direction                                              %! baca.repeat_tie_down:OverrideCommand(2)
                             r16
                         }
                         \times 4/5 {
                             b'16
-                            \revert Stem.direction                                                   %! baca_stem_up:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_up:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -3934,7 +3934,7 @@ def repeat_tie_extra_offset(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_repeat_tie_extra_offset",
+    tag: typing.Optional[str] = "baca.repeat_tie_extra_offset",
 ) -> OverrideCommand:
     """
     Overrides repeat tie extra-offset.
@@ -3951,7 +3951,7 @@ def repeat_tie_extra_offset(
 def repeat_tie_stencil_false(
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_repeat_tie_stencil_false",
+    tag: typing.Optional[str] = "baca.repeat_tie_stencil_false",
 ) -> OverrideCommand:
     """
     Overrides repeat tie stencil.
@@ -3968,7 +3968,7 @@ def repeat_tie_stencil_false(
 def repeat_tie_transparent(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_repeat_tie_transparent",
+    tag: typing.Optional[str] = "baca.repeat_tie_transparent",
 ):
     """
     Overrides repeat tie transparency.
@@ -3985,7 +3985,7 @@ def repeat_tie_transparent(
 def repeat_tie_up(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_repeat_tie_up",
+    tag: typing.Optional[str] = "baca.repeat_tie_up",
 ) -> OverrideCommand:
     r"""
     Overrides repeat tie direction.
@@ -4023,18 +4023,18 @@ def repeat_tie_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override RepeatTie.direction = #up                                      %! baca_repeat_tie_up:OverrideCommand(1)
-                            \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
+                            \override RepeatTie.direction = #up                                      %! baca.repeat_tie_up:OverrideCommand(1)
+                            \override Stem.direction = #down                                         %! baca.stem_down:OverrideCommand(1)
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -4042,20 +4042,20 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             ]
                             b'4
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             r16
                         }
                         \times 4/5 {
                             b'16
-                            \revert RepeatTie.direction                                              %! baca_repeat_tie_up:OverrideCommand(2)
-                            \revert Stem.direction                                                   %! baca_stem_down:OverrideCommand(2)
+                            \revert RepeatTie.direction                                              %! baca.repeat_tie_up:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_down:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4097,39 +4097,39 @@ def repeat_tie_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
+                            \override Stem.direction = #down                                         %! baca.stem_down:OverrideCommand(1)
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             ]
                             c''4
                             c''16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
-                            \override RepeatTie.direction = #up                                      %! baca_repeat_tie_up:OverrideCommand(1)
+                            \override RepeatTie.direction = #up                                      %! baca.repeat_tie_up:OverrideCommand(1)
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             ]
                             b'4
-                            \repeatTie                                                               %! baca_repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie
                             b'16
-                            \repeatTie                                                               %! baca_repeat_tie
-                            \revert RepeatTie.direction                                              %! baca_repeat_tie_up:OverrideCommand(2)
+                            \repeatTie                                                               %! baca.repeat_tie
+                            \revert RepeatTie.direction                                              %! baca.repeat_tie_up:OverrideCommand(2)
                             r16
                         }
                         \times 4/5 {
                             b'16
-                            \revert Stem.direction                                                   %! baca_stem_down:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_down:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4148,7 +4148,7 @@ def repeat_tie_up(
 def rest_down(
     *,
     selector: abjad.Selector = "baca.rests()",
-    tag: typing.Optional[str] = "baca_rest_down",
+    tag: typing.Optional[str] = "baca.rest_down",
 ) -> OverrideCommand:
     r"""
     Overrides rest direction.
@@ -4181,8 +4181,8 @@ def rest_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Rest.direction = #down                                         %! baca_rest_down:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override Rest.direction = #down                                         %! baca.rest_down:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4211,8 +4211,8 @@ def rest_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Rest.direction                                                   %! baca_rest_down:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert Rest.direction                                                   %! baca.rest_down:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4249,7 +4249,7 @@ def rest_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4269,7 +4269,7 @@ def rest_down(
                             ef''4
                             ~
                             ef''16
-                            \once \override Rest.direction = #down                                   %! baca_rest_down:OverrideCommand(1)
+                            \once \override Rest.direction = #down                                   %! baca.rest_down:OverrideCommand(1)
                             r16
                             af''16
                             [
@@ -4279,7 +4279,7 @@ def rest_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4299,7 +4299,7 @@ def rest_extra_offset(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.rest(0)",
-    tag: typing.Optional[str] = "baca_rest_extra_offset",
+    tag: typing.Optional[str] = "baca.rest_extra_offset",
 ) -> OverrideCommand:
     """
     Overrides rest extra offset.
@@ -4321,7 +4321,7 @@ def rest_position(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.rests()",
-    tag: typing.Optional[str] = "baca_rest_position",
+    tag: typing.Optional[str] = "baca.rest_position",
 ) -> OverrideCommand:
     r"""
     Overrides rest position.
@@ -4354,8 +4354,8 @@ def rest_position(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Rest.staff-position = #-6                                      %! baca_rest_position:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override Rest.staff-position = #-6                                      %! baca.rest_position:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4384,8 +4384,8 @@ def rest_position(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Rest.staff-position                                              %! baca_rest_position:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert Rest.staff-position                                              %! baca.rest_position:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4422,7 +4422,7 @@ def rest_position(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4442,7 +4442,7 @@ def rest_position(
                             ef''4
                             ~
                             ef''16
-                            \once \override Rest.staff-position = #-6                                %! baca_rest_position:OverrideCommand(1)
+                            \once \override Rest.staff-position = #-6                                %! baca.rest_position:OverrideCommand(1)
                             r16
                             af''16
                             [
@@ -4452,7 +4452,7 @@ def rest_position(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4471,7 +4471,7 @@ def rest_position(
 def rest_transparent(
     *,
     selector: abjad.Selector = "baca.rests()",
-    tag: typing.Optional[str] = "baca_rest_transparent",
+    tag: typing.Optional[str] = "baca.rest_transparent",
 ) -> OverrideCommand:
     r"""
     Overrides rest transparency.
@@ -4504,8 +4504,8 @@ def rest_transparent(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Rest.transparent = ##t                                         %! baca_rest_transparent:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override Rest.transparent = ##t                                         %! baca.rest_transparent:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4534,8 +4534,8 @@ def rest_transparent(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Rest.transparent                                                 %! baca_rest_transparent:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert Rest.transparent                                                 %! baca.rest_transparent:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4572,7 +4572,7 @@ def rest_transparent(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4592,7 +4592,7 @@ def rest_transparent(
                             ef''4
                             ~
                             ef''16
-                            \once \override Rest.transparent = ##t                                   %! baca_rest_transparent:OverrideCommand(1)
+                            \once \override Rest.transparent = ##t                                   %! baca.rest_transparent:OverrideCommand(1)
                             r16
                             af''16
                             [
@@ -4602,7 +4602,7 @@ def rest_transparent(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4621,7 +4621,7 @@ def rest_transparent(
 def rest_up(
     *,
     selector: abjad.Selector = "baca.rests()",
-    tag: typing.Optional[str] = "baca_rest_up",
+    tag: typing.Optional[str] = "baca.rest_up",
 ) -> OverrideCommand:
     r"""
     Overrides rest direction.
@@ -4654,8 +4654,8 @@ def rest_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Rest.direction = #up                                           %! baca_rest_up:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override Rest.direction = #up                                           %! baca.rest_up:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4684,8 +4684,8 @@ def rest_up(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Rest.direction                                                   %! baca_rest_up:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert Rest.direction                                                   %! baca.rest_up:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4722,7 +4722,7 @@ def rest_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -4742,7 +4742,7 @@ def rest_up(
                             ef''4
                             ~
                             ef''16
-                            \once \override Rest.direction = #up                                     %! baca_rest_up:OverrideCommand(1)
+                            \once \override Rest.direction = #up                                     %! baca.rest_up:OverrideCommand(1)
                             r16
                             af''16
                             [
@@ -4752,7 +4752,7 @@ def rest_up(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4772,7 +4772,7 @@ def script_color(
     color: str = "red",
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_script_color",
+    tag: typing.Optional[str] = "baca.script_color",
 ) -> OverrideCommand:
     r"""
     Overrides script color.
@@ -4806,17 +4806,17 @@ def script_color(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Script.color = #red                                            %! baca_script_color:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override Script.color = #red                                            %! baca.script_color:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -4824,29 +4824,29 @@ def script_color(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             r4
-                            \revert Script.color                                                     %! baca_script_color:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert Script.color                                                     %! baca.script_color:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4884,47 +4884,47 @@ def script_color(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             bf'16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Script.color = #red                                            %! baca_script_color:OverrideCommand(1)
+                            \override Script.color = #red                                            %! baca.script_color:OverrideCommand(1)
                             fs''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
-                            \revert Script.color                                                     %! baca_script_color:OverrideCommand(2)
+                            \revert Script.color                                                     %! baca.script_color:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -4943,7 +4943,7 @@ def script_color(
 def script_down(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_script_down",
+    tag: typing.Optional[str] = "baca.script_down",
 ) -> OverrideCommand:
     r"""
     Overrides script direction.
@@ -4977,17 +4977,17 @@ def script_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Script.direction = #down                                       %! baca_script_down:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override Script.direction = #down                                       %! baca.script_down:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -4995,29 +4995,29 @@ def script_down(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             r4
-                            \revert Script.direction                                                 %! baca_script_down:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert Script.direction                                                 %! baca.script_down:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5055,47 +5055,47 @@ def script_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             bf'16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Script.direction = #down                                       %! baca_script_down:OverrideCommand(1)
+                            \override Script.direction = #down                                       %! baca.script_down:OverrideCommand(1)
                             fs''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
-                            \revert Script.direction                                                 %! baca_script_down:OverrideCommand(2)
+                            \revert Script.direction                                                 %! baca.script_down:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5115,7 +5115,7 @@ def script_extra_offset(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_script_extra_offset",
+    tag: typing.Optional[str] = "baca.script_extra_offset",
 ) -> OverrideCommand:
     r"""
     Overrides script extra offset.
@@ -5149,17 +5149,17 @@ def script_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \once \override Script.extra-offset = #'(-1.5 . 0)                       %! baca_script_extra_offset:OverrideCommand(1)
+                            \once \override Script.extra-offset = #'(-1.5 . 0)                       %! baca.script_extra_offset:OverrideCommand(1)
                             c'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -5167,28 +5167,28 @@ def script_extra_offset(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5226,46 +5226,46 @@ def script_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             bf'16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override Script.extra-offset = #'(-1.5 . 0)                       %! baca_script_extra_offset:OverrideCommand(1)
+                            \once \override Script.extra-offset = #'(-1.5 . 0)                       %! baca.script_extra_offset:OverrideCommand(1)
                             fs''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5285,7 +5285,7 @@ def script_padding(
     number: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_script_padding",
+    tag: typing.Optional[str] = "baca.script_padding",
 ) -> OverrideCommand:
     """
     Overrides script padding.
@@ -5303,7 +5303,7 @@ def script_staff_padding(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_script_staff_padding",
+    tag: typing.Optional[str] = "baca.script_staff_padding",
 ) -> OverrideCommand:
     """
     Overrides script staff padding.
@@ -5320,7 +5320,7 @@ def script_staff_padding(
 def script_up(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_script_up",
+    tag: typing.Optional[str] = "baca.script_up",
 ) -> OverrideCommand:
     r"""
     Overrides script direction.
@@ -5354,17 +5354,17 @@ def script_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Script.direction = #up                                         %! baca_script_up:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override Script.direction = #up                                         %! baca.script_up:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             bf'16
                             r16
@@ -5372,29 +5372,29 @@ def script_up(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             r4
-                            \revert Script.direction                                                 %! baca_script_up:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert Script.direction                                                 %! baca.script_up:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5432,47 +5432,47 @@ def script_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             d'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             bf'4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             bf'16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Script.direction = #up                                         %! baca_script_up:OverrideCommand(1)
+                            \override Script.direction = #up                                         %! baca.script_up:OverrideCommand(1)
                             fs''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             e''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
                             ef''4
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ~
                             ef''16
                             r16
                             af''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             [
                             g''16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             ]
-                            \revert Script.direction                                                 %! baca_script_up:OverrideCommand(2)
+                            \revert Script.direction                                                 %! baca.script_up:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            - \accent                                                                %! baca_accent:IndicatorCommand
+                            - \accent                                                                %! baca.accent:IndicatorCommand
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5491,7 +5491,7 @@ def script_up(
 def script_x_extent_zero(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_script_x_extent_zero",
+    tag: typing.Optional[str] = "baca.script_x_extent_zero",
 ) -> OverrideCommand:
     """
     Overrides script X-extent.
@@ -5508,7 +5508,7 @@ def script_x_extent_zero(
 def slur_down(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_slur_down",
+    tag: typing.Optional[str] = "baca.slur_down",
 ) -> OverrideCommand:
     r"""
     Overrides slur direction.
@@ -5545,25 +5545,25 @@ def slur_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Slur.direction = #down                                         %! baca_slur_down:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override Slur.direction = #down                                         %! baca.slur_down:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
+                            (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
+                            )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
                             [
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
+                            (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -5573,14 +5573,14 @@ def slur_down(
                             af''16
                             [
                             g''16
-                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
+                            )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
                             ]
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Slur.direction                                                   %! baca_slur_down:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert Slur.direction                                                   %! baca.slur_down:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5621,25 +5621,25 @@ def slur_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
+                            (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
+                            )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Slur.direction = #down                                         %! baca_slur_down:OverrideCommand(1)
+                            \override Slur.direction = #down                                         %! baca.slur_down:OverrideCommand(1)
                             fs''16
                             [
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
+                            (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -5649,14 +5649,14 @@ def slur_down(
                             af''16
                             [
                             g''16
-                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
+                            )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
                             ]
-                            \revert Slur.direction                                                   %! baca_slur_down:OverrideCommand(2)
+                            \revert Slur.direction                                                   %! baca.slur_down:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5675,7 +5675,7 @@ def slur_down(
 def slur_up(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_slur_up",
+    tag: typing.Optional[str] = "baca.slur_up",
 ) -> OverrideCommand:
     r"""
     Overrides slur direction.
@@ -5714,27 +5714,27 @@ def slur_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Slur.direction = #up                                           %! baca_slur_up:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \override TupletBracket.direction = #down                                %! baca_tuplet_bracket_down:OverrideCommand(1)
+                            \override Slur.direction = #up                                           %! baca.slur_up:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.direction = #down                                %! baca.tuplet_bracket_down:OverrideCommand(1)
                             r8
-                            \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
+                            \override Stem.direction = #down                                         %! baca.stem_down:OverrideCommand(1)
                             c'16
                             [
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
+                            (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
+                            )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
                             [
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
+                            (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -5744,16 +5744,16 @@ def slur_up(
                             af''16
                             [
                             g''16
-                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
+                            )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
                             ]
                         }
                         \times 4/5 {
                             a'16
-                            \revert Stem.direction                                                   %! baca_stem_down:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_down:OverrideCommand(2)
                             r4
-                            \revert Slur.direction                                                   %! baca_slur_up:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
-                            \revert TupletBracket.direction                                          %! baca_tuplet_bracket_down:OverrideCommand(2)
+                            \revert Slur.direction                                                   %! baca.slur_up:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.direction                                          %! baca.tuplet_bracket_down:OverrideCommand(2)
                         }
                     }
                 }
@@ -5796,27 +5796,27 @@ def slur_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \override TupletBracket.direction = #down                                %! baca_tuplet_bracket_down:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.direction = #down                                %! baca.tuplet_bracket_down:OverrideCommand(1)
                             r8
-                            \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
+                            \override Stem.direction = #down                                         %! baca.stem_down:OverrideCommand(1)
                             c'16
                             [
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
+                            (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
                             d'16
                             ]
                             bf'4
                             ~
                             bf'16
-                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
+                            )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Slur.direction = #up                                           %! baca_slur_up:OverrideCommand(1)
+                            \override Slur.direction = #up                                           %! baca.slur_up:OverrideCommand(1)
                             fs''16
                             [
-                            (                                                                        %! baca_slur:SpannerIndicatorCommand(1)
+                            (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -5826,16 +5826,16 @@ def slur_up(
                             af''16
                             [
                             g''16
-                            )                                                                        %! baca_slur:SpannerIndicatorCommand(2)
+                            )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
                             ]
-                            \revert Slur.direction                                                   %! baca_slur_up:OverrideCommand(2)
+                            \revert Slur.direction                                                   %! baca.slur_up:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            \revert Stem.direction                                                   %! baca_stem_down:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_down:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
-                            \revert TupletBracket.direction                                          %! baca_tuplet_bracket_down:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.direction                                          %! baca.tuplet_bracket_down:OverrideCommand(2)
                         }
                     }
                 }
@@ -5857,7 +5857,7 @@ def span_bar_color(
     after: bool = None,
     context: str = "Score",
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_span_bar_color",
+    tag: typing.Optional[str] = "baca.span_bar_color",
 ) -> OverrideCommand:
     """
     Overrides span bar color.
@@ -5879,7 +5879,7 @@ def span_bar_extra_offset(
     after: bool = None,
     context: str = "Score",
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_span_bar_extra_offset",
+    tag: typing.Optional[str] = "baca.span_bar_extra_offset",
 ) -> OverrideCommand:
     """
     Overrides span bar extra offset.
@@ -5898,7 +5898,7 @@ def span_bar_extra_offset(
 def span_bar_transparent(
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_span_bar_transparent",
+    tag: typing.Optional[str] = "baca.span_bar_transparent",
 ) -> OverrideCommand:
     r"""
     Overrides span bar transparency.
@@ -5931,8 +5931,8 @@ def span_bar_transparent(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override Score.SpanBar.transparent = ##t                          %! baca_span_bar_transparent:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \once \override Score.SpanBar.transparent = ##t                          %! baca.span_bar_transparent:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -5961,7 +5961,7 @@ def span_bar_transparent(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -5983,7 +5983,7 @@ def stem_color(
     *,
     context: str = None,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_stem_color",
+    tag: typing.Optional[str] = "baca.stem_color",
 ) -> OverrideCommand:
     r"""
     Overrides stem color.
@@ -6016,9 +6016,9 @@ def stem_color(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override Stem.color = #red                                              %! baca_stem_color:OverrideCommand(1)
+                            \override Stem.color = #red                                              %! baca.stem_color:OverrideCommand(1)
                             c'16
                             [
                             d'16
@@ -6045,9 +6045,9 @@ def stem_color(
                         }
                         \times 4/5 {
                             a'16
-                            \revert Stem.color                                                       %! baca_stem_color:OverrideCommand(2)
+                            \revert Stem.color                                                       %! baca.stem_color:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6084,7 +6084,7 @@ def stem_color(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -6097,7 +6097,7 @@ def stem_color(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Stem.color = #red                                              %! baca_stem_color:OverrideCommand(1)
+                            \override Stem.color = #red                                              %! baca.stem_color:OverrideCommand(1)
                             fs''16
                             [
                             e''16
@@ -6110,12 +6110,12 @@ def stem_color(
                             [
                             g''16
                             ]
-                            \revert Stem.color                                                       %! baca_stem_color:OverrideCommand(2)
+                            \revert Stem.color                                                       %! baca.stem_color:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6135,7 +6135,7 @@ def stem_color(
 def stem_down(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_stem_down",
+    tag: typing.Optional[str] = "baca.stem_down",
 ) -> OverrideCommand:
     r"""
     Overrides stem direction.
@@ -6168,9 +6168,9 @@ def stem_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
+                            \override Stem.direction = #down                                         %! baca.stem_down:OverrideCommand(1)
                             c'16
                             [
                             d'16
@@ -6197,9 +6197,9 @@ def stem_down(
                         }
                         \times 4/5 {
                             a'16
-                            \revert Stem.direction                                                   %! baca_stem_down:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_down:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6237,9 +6237,9 @@ def stem_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
+                            \override Stem.direction = #up                                           %! baca.stem_up:OverrideCommand(1)
                             c'16
                             [
                             d'16
@@ -6251,7 +6251,7 @@ def stem_down(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
+                            \override Stem.direction = #down                                         %! baca.stem_down:OverrideCommand(1)
                             fs''16
                             [
                             e''16
@@ -6264,13 +6264,13 @@ def stem_down(
                             [
                             g''16
                             ]
-                            \revert Stem.direction                                                   %! baca_stem_down:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_down:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            \revert Stem.direction                                                   %! baca_stem_up:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_up:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6289,7 +6289,7 @@ def stem_down(
 def stem_stencil_false(
     *,
     selector: abjad.Selector = "baca.pleaf(0)",
-    tag: typing.Optional[str] = "baca_stem_stencil_false",
+    tag: typing.Optional[str] = "baca.stem_stencil_false",
 ) -> OverrideCommand:
     """
     Overrides stem stencil.
@@ -6306,7 +6306,7 @@ def stem_stencil_false(
 def stem_transparent(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_stem_transparent",
+    tag: typing.Optional[str] = "baca.stem_transparent",
 ) -> OverrideCommand:
     """
     Overrides stem transparency.
@@ -6323,7 +6323,7 @@ def stem_transparent(
 def stem_up(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_stem_up",
+    tag: typing.Optional[str] = "baca.stem_up",
 ) -> OverrideCommand:
     r"""
     Overrides stem direction.
@@ -6356,9 +6356,9 @@ def stem_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
+                            \override Stem.direction = #up                                           %! baca.stem_up:OverrideCommand(1)
                             c'16
                             [
                             d'16
@@ -6385,9 +6385,9 @@ def stem_up(
                         }
                         \times 4/5 {
                             a'16
-                            \revert Stem.direction                                                   %! baca_stem_up:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_up:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6425,9 +6425,9 @@ def stem_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
+                            \override Stem.direction = #down                                         %! baca.stem_down:OverrideCommand(1)
                             c'16
                             [
                             d'16
@@ -6439,7 +6439,7 @@ def stem_up(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
+                            \override Stem.direction = #up                                           %! baca.stem_up:OverrideCommand(1)
                             fs''16
                             [
                             e''16
@@ -6452,13 +6452,13 @@ def stem_up(
                             [
                             g''16
                             ]
-                            \revert Stem.direction                                                   %! baca_stem_up:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_up:OverrideCommand(2)
                         }
                         \times 4/5 {
                             bf'16
-                            \revert Stem.direction                                                   %! baca_stem_down:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_down:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6477,7 +6477,7 @@ def stem_up(
 def strict_note_spacing_off(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_strict_note_spacing_off",
+    tag: typing.Optional[str] = "baca.strict_note_spacing_off",
 ) -> OverrideCommand:
     r"""
     Overrides spacing spanner strict note spacing.
@@ -6510,8 +6510,8 @@ def strict_note_spacing_off(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Score.SpacingSpanner.strict-note-spacing = ##f                 %! baca_strict_note_spacing_off:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override Score.SpacingSpanner.strict-note-spacing = ##f                 %! baca.strict_note_spacing_off:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -6540,8 +6540,8 @@ def strict_note_spacing_off(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Score.SpacingSpanner.strict-note-spacing                         %! baca_strict_note_spacing_off:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert Score.SpacingSpanner.strict-note-spacing                         %! baca.strict_note_spacing_off:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6563,7 +6563,7 @@ def sustain_pedal_staff_padding(
     *,
     context: str = "Staff",
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_sustain_pedal_staff_padding",
+    tag: typing.Optional[str] = "baca.sustain_pedal_staff_padding",
 ) -> OverrideCommand:
     r"""
     Overrides sustain pedal staff padding.
@@ -6600,10 +6600,10 @@ def sustain_pedal_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca.sustain_pedal_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
+                            \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
                             c'16
                             [
                             d'16
@@ -6616,9 +6616,9 @@ def sustain_pedal_staff_padding(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
+                            \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             [
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
+                            \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -6632,12 +6632,12 @@ def sustain_pedal_staff_padding(
                         }
                         \times 4/5 {
                             a'16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
+                            \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
+                            \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
                             r4
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
-                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
+                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6678,9 +6678,9 @@ def sustain_pedal_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
+                            \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
                             c'16
                             [
                             d'16
@@ -6689,14 +6689,14 @@ def sustain_pedal_staff_padding(
                             ~
                             bf'16
                             r16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
+                            \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca_sustain_pedal_staff_padding:OverrideCommand(1)
+                            \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca.sustain_pedal_staff_padding:OverrideCommand(1)
                             fs''16
                             [
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
+                            \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
                             e''16
                             ]
                             ef''4
@@ -6706,16 +6706,16 @@ def sustain_pedal_staff_padding(
                             af''16
                             [
                             g''16
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
+                            \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             ]
-                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca_sustain_pedal_staff_padding:OverrideCommand(2)
+                            \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
-                            \sustainOn                                                               %! baca_sustain_pedal:SpannerIndicatorCommand(1)
+                            \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
                             r4
-                            \sustainOff                                                              %! baca_sustain_pedal:SpannerIndicatorCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6737,7 +6737,7 @@ def text_script_color(
     *,
     allow_mmrests: bool = False,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_script_color",
+    tag: typing.Optional[str] = "baca.text_script_color",
 ) -> OverrideCommand:
     r"""
     Overrides text script color.
@@ -6775,11 +6775,11 @@ def text_script_color(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.color = #red                                        %! baca_text_script_color:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TextScript.color = #red                                        %! baca.text_script_color:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! baca_markup:IndicatorCommand
+                            ^ \markup { "più mosso" }                                                %! baca.markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -6791,7 +6791,7 @@ def text_script_color(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { "lo stesso tempo" }                                          %! baca.markup:IndicatorCommand
                             [
                             e''16
                             ]
@@ -6807,8 +6807,8 @@ def text_script_color(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TextScript.color                                                 %! baca_text_script_color:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TextScript.color                                                 %! baca.text_script_color:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6850,10 +6850,10 @@ def text_script_color(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! baca_markup:IndicatorCommand
+                            ^ \markup { "più mosso" }                                                %! baca.markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -6864,9 +6864,9 @@ def text_script_color(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.color = #red                                        %! baca_text_script_color:OverrideCommand(1)
+                            \override TextScript.color = #red                                        %! baca.text_script_color:OverrideCommand(1)
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { "lo stesso tempo" }                                          %! baca.markup:IndicatorCommand
                             [
                             e''16
                             ]
@@ -6878,12 +6878,12 @@ def text_script_color(
                             [
                             g''16
                             ]
-                            \revert TextScript.color                                                 %! baca_text_script_color:OverrideCommand(2)
+                            \revert TextScript.color                                                 %! baca.text_script_color:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -6932,7 +6932,7 @@ def text_script_down(
     *,
     allow_mmrests: bool = False,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_script_down",
+    tag: typing.Optional[str] = "baca.text_script_down",
 ) -> OverrideCommand:
     r"""
     Overrides text script direction.
@@ -6970,11 +6970,11 @@ def text_script_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.direction = #down                                   %! baca_text_script_down:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TextScript.direction = #down                                   %! baca.text_script_down:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! baca_markup:IndicatorCommand
+                            ^ \markup { "più mosso" }                                                %! baca.markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -6986,7 +6986,7 @@ def text_script_down(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { "lo stesso tempo" }                                          %! baca.markup:IndicatorCommand
                             [
                             e''16
                             ]
@@ -7002,8 +7002,8 @@ def text_script_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TextScript.direction                                             %! baca_text_script_down:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TextScript.direction                                             %! baca.text_script_down:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7045,10 +7045,10 @@ def text_script_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! baca_markup:IndicatorCommand
+                            ^ \markup { "più mosso" }                                                %! baca.markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -7059,9 +7059,9 @@ def text_script_down(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.direction = #down                                   %! baca_text_script_down:OverrideCommand(1)
+                            \override TextScript.direction = #down                                   %! baca.text_script_down:OverrideCommand(1)
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { "lo stesso tempo" }                                          %! baca.markup:IndicatorCommand
                             [
                             e''16
                             ]
@@ -7073,12 +7073,12 @@ def text_script_down(
                             [
                             g''16
                             ]
-                            \revert TextScript.direction                                             %! baca_text_script_down:OverrideCommand(2)
+                            \revert TextScript.direction                                             %! baca.text_script_down:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7128,7 +7128,7 @@ def text_script_extra_offset(
     *,
     allow_mmrests: bool = False,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_script_extra_offset",
+    tag: typing.Optional[str] = "baca.text_script_extra_offset",
 ) -> OverrideCommand:
     r"""
     Overrides text script extra offset.
@@ -7177,7 +7177,7 @@ def text_script_font_size(
     *,
     allow_mmrests: bool = False,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_script_font_size",
+    tag: typing.Optional[str] = "baca.text_script_font_size",
 ) -> OverrideCommand:
     """
     Overrides text script font size.
@@ -7201,7 +7201,7 @@ def text_script_padding(
     *,
     allow_mmrests: bool = False,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "text_script_padding",
+    tag: typing.Optional[str] = "text.script_padding",
 ) -> OverrideCommand:
     r"""
     Overrides text script padding.
@@ -7239,11 +7239,11 @@ def text_script_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.padding = #4                                        %! text_script_padding:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TextScript.padding = #4                                        %! text.script_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! baca_markup:IndicatorCommand
+                            ^ \markup { "più mosso" }                                                %! baca.markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -7255,7 +7255,7 @@ def text_script_padding(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { "lo stesso tempo" }                                          %! baca.markup:IndicatorCommand
                             [
                             e''16
                             ]
@@ -7271,8 +7271,8 @@ def text_script_padding(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TextScript.padding                                               %! text_script_padding:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TextScript.padding                                               %! text.script_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7314,10 +7314,10 @@ def text_script_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! baca_markup:IndicatorCommand
+                            ^ \markup { "più mosso" }                                                %! baca.markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -7328,9 +7328,9 @@ def text_script_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.padding = #4                                        %! text_script_padding:OverrideCommand(1)
+                            \override TextScript.padding = #4                                        %! text.script_padding:OverrideCommand(1)
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { "lo stesso tempo" }                                          %! baca.markup:IndicatorCommand
                             [
                             e''16
                             ]
@@ -7342,12 +7342,12 @@ def text_script_padding(
                             [
                             g''16
                             ]
-                            \revert TextScript.padding                                               %! text_script_padding:OverrideCommand(2)
+                            \revert TextScript.padding                                               %! text.script_padding:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7397,7 +7397,7 @@ def text_script_parent_alignment_x(
     *,
     allow_mmrests: bool = False,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_script_parent_alignment_x",
+    tag: typing.Optional[str] = "baca.text_script_parent_alignment_x",
 ) -> OverrideCommand:
     """
     Overrides text script parent-alignment-X.
@@ -7421,7 +7421,7 @@ def text_script_self_alignment_x(
     *,
     allow_mmrests: bool = False,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_script_self_alignment_x",
+    tag: typing.Optional[str] = "baca.text_script_self_alignment_x",
 ) -> OverrideCommand:
     """
     Overrides text script self-alignment-X.
@@ -7484,10 +7484,10 @@ def text_script_staff_padding(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override TextScript.staff-padding = #4                                  %! baca_script_staff_padding:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! baca_markup:IndicatorCommand
+                            ^ \markup { "più mosso" }                                                %! baca.markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -7499,7 +7499,7 @@ def text_script_staff_padding(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { "lo stesso tempo" }                                          %! baca.markup:IndicatorCommand
                             [
                             e''16
                             ]
@@ -7516,7 +7516,7 @@ def text_script_staff_padding(
                             a'16
                             r4
                             \revert TextScript.staff-padding                                         %! baca_script_staff_padding:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7558,10 +7558,10 @@ def text_script_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! baca_markup:IndicatorCommand
+                            ^ \markup { "più mosso" }                                                %! baca.markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -7574,7 +7574,7 @@ def text_script_staff_padding(
                         \times 9/10 {
                             \override TextScript.staff-padding = #4                                  %! baca_script_staff_padding:OverrideCommand(1)
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { "lo stesso tempo" }                                          %! baca.markup:IndicatorCommand
                             [
                             e''16
                             ]
@@ -7591,7 +7591,7 @@ def text_script_staff_padding(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7640,7 +7640,7 @@ def text_script_up(
     *,
     allow_mmrests: bool = False,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_script_up",
+    tag: typing.Optional[str] = "baca.text_script_up",
 ) -> OverrideCommand:
     r"""
     Overrides text script direction.
@@ -7678,11 +7678,11 @@ def text_script_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.direction = #up                                     %! baca_text_script_up:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TextScript.direction = #up                                     %! baca.text_script_up:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! baca_markup:IndicatorCommand
+                            ^ \markup { "più mosso" }                                                %! baca.markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -7694,7 +7694,7 @@ def text_script_up(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { "lo stesso tempo" }                                          %! baca.markup:IndicatorCommand
                             [
                             e''16
                             ]
@@ -7710,8 +7710,8 @@ def text_script_up(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TextScript.direction                                             %! baca_text_script_up:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TextScript.direction                                             %! baca.text_script_up:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7753,10 +7753,10 @@ def text_script_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
-                            ^ \markup { "più mosso" }                                                %! baca_markup:IndicatorCommand
+                            ^ \markup { "più mosso" }                                                %! baca.markup:IndicatorCommand
                             [
                             d'16
                             ]
@@ -7767,9 +7767,9 @@ def text_script_up(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.direction = #up                                     %! baca_text_script_up:OverrideCommand(1)
+                            \override TextScript.direction = #up                                     %! baca.text_script_up:OverrideCommand(1)
                             fs''16
-                            ^ \markup { "lo stesso tempo" }                                          %! baca_markup:IndicatorCommand
+                            ^ \markup { "lo stesso tempo" }                                          %! baca.markup:IndicatorCommand
                             [
                             e''16
                             ]
@@ -7781,12 +7781,12 @@ def text_script_up(
                             [
                             g''16
                             ]
-                            \revert TextScript.direction                                             %! baca_text_script_up:OverrideCommand(2)
+                            \revert TextScript.direction                                             %! baca.text_script_up:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7836,7 +7836,7 @@ def text_script_x_offset(
     *,
     allow_mmrests: bool = False,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_script_x_offset",
+    tag: typing.Optional[str] = "baca.text_script_x_offset",
 ) -> OverrideCommand:
     """
     Overrides text script X-offset.
@@ -7860,7 +7860,7 @@ def text_script_y_offset(
     *,
     allow_mmrests: bool = False,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_script_y_offset",
+    tag: typing.Optional[str] = "baca.text_script_y_offset",
 ) -> OverrideCommand:
     """
     Overrides text script Y-offset.
@@ -7883,7 +7883,7 @@ def text_spanner_left_padding(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_spanner_left_padding",
+    tag: typing.Optional[str] = "baca.text_spanner_left_padding",
 ) -> OverrideCommand:
     """
     Overrides text spanner left padding.
@@ -7901,7 +7901,7 @@ def text_spanner_right_padding(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_spanner_right_padding",
+    tag: typing.Optional[str] = "baca.text_spanner_right_padding",
 ) -> OverrideCommand:
     """
     Overrides text spanner right padding.
@@ -7959,16 +7959,16 @@ def text_spanner_staff_padding(
                         \times 9/10 {
                             \override TextSpanner.staff-padding = #6                                 %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             \override TextScript.staff-padding = #6                                  %! baca_script_staff_padding:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
-                            - \abjad-dashed-line-with-arrow                                          %! baca_text_spanner:PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "pont."                                   %! baca_text_spanner:PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "ord."                                   %! baca_text_spanner:PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
-                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-dashed-line-with-arrow                                          %! baca.text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "pont."                                   %! baca.text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "ord."                                   %! baca.text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca.text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca.text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca.text_spanner:PiecewiseCommand(1)
                             d'16
                             ]
                             bf'4
@@ -7993,11 +7993,11 @@ def text_spanner_staff_padding(
                         }
                         \times 4/5 {
                             a'16
-                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca.text_spanner:PiecewiseCommand(2)
                             r4
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
                             \revert TextScript.staff-padding                                         %! baca_script_staff_padding:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -8040,7 +8040,7 @@ def text_spanner_staff_padding(
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
                             \override TextScript.staff-padding = #6                                  %! baca_script_staff_padding:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -8056,12 +8056,12 @@ def text_spanner_staff_padding(
                             \override TextSpanner.staff-padding = #6                                 %! baca_text_spanner_staff_padding:OverrideCommand(1)
                             fs''16
                             [
-                            - \abjad-dashed-line-with-arrow                                          %! baca_text_spanner:PiecewiseCommand(1)
-                            - \baca-text-spanner-left-text "pont."                                   %! baca_text_spanner:PiecewiseCommand(1)
-                            - \baca-text-spanner-right-text "ord."                                   %! baca_text_spanner:PiecewiseCommand(1)
-                            - \tweak bound-details.right.padding #0.5                                %! baca_text_spanner:PiecewiseCommand(1)
-                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca_text_spanner:PiecewiseCommand(1)
-                            \startTextSpan                                                           %! baca_text_spanner:PiecewiseCommand(1)
+                            - \abjad-dashed-line-with-arrow                                          %! baca.text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-left-text "pont."                                   %! baca.text_spanner:PiecewiseCommand(1)
+                            - \baca-text-spanner-right-text "ord."                                   %! baca.text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.padding #0.5                                %! baca.text_spanner:PiecewiseCommand(1)
+                            - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca.text_spanner:PiecewiseCommand(1)
+                            \startTextSpan                                                           %! baca.text_spanner:PiecewiseCommand(1)
                             e''16
                             ]
                             ef''4
@@ -8071,7 +8071,7 @@ def text_spanner_staff_padding(
                             af''16
                             [
                             g''16
-                            \stopTextSpan                                                            %! baca_text_spanner:PiecewiseCommand(2)
+                            \stopTextSpan                                                            %! baca.text_spanner:PiecewiseCommand(2)
                             ]
                             \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
                         }
@@ -8079,7 +8079,7 @@ def text_spanner_staff_padding(
                             a'16
                             r4
                             \revert TextScript.staff-padding                                         %! baca_script_staff_padding:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -8098,7 +8098,7 @@ def text_spanner_staff_padding(
 def text_spanner_stencil_false(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_spanner_stencil_false",
+    tag: typing.Optional[str] = "baca.text_spanner_stencil_false",
 ) -> OverrideCommand:
     """
     Overrides text spanner stencil.
@@ -8115,7 +8115,7 @@ def text_spanner_stencil_false(
 def text_spanner_transparent(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_spanner_transparent",
+    tag: typing.Optional[str] = "baca.text_spanner_transparent",
 ) -> OverrideCommand:
     """
     Overrides text spanner transparent.
@@ -8133,7 +8133,7 @@ def text_spanner_y_offset(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_text_spanner_y_offset",
+    tag: typing.Optional[str] = "baca.text_spanner_y_offset",
 ) -> OverrideCommand:
     """
     Overrides text spanner Y-offset.
@@ -8150,7 +8150,7 @@ def text_spanner_y_offset(
 def tie_down(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_tie_down",
+    tag: typing.Optional[str] = "baca.tie_down",
 ) -> OverrideCommand:
     r"""
     Overrides tie direction.
@@ -8188,17 +8188,17 @@ def tie_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
-                            \override Tie.direction = #down                                          %! baca_tie_down:OverrideCommand(1)
+                            \override Stem.direction = #up                                           %! baca.stem_up:OverrideCommand(1)
+                            \override Tie.direction = #down                                          %! baca.tie_down:OverrideCommand(1)
                             b'16
                             [
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             c''16
                             r16
                         }
@@ -8206,21 +8206,21 @@ def tie_down(
                         \times 7/8 {
                             b'16
                             [
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'16
                             ]
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'4
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'16
                             r16
                         }
                         \times 4/5 {
                             b'16
-                            \revert Stem.direction                                                   %! baca_stem_up:OverrideCommand(2)
-                            \revert Tie.direction                                                    %! baca_tie_down:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_up:OverrideCommand(2)
+                            \revert Tie.direction                                                    %! baca.tie_down:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -8262,39 +8262,39 @@ def tie_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override Stem.direction = #up                                           %! baca_stem_up:OverrideCommand(1)
+                            \override Stem.direction = #up                                           %! baca.stem_up:OverrideCommand(1)
                             b'16
                             [
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             c''16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
-                            \override Tie.direction = #down                                          %! baca_tie_down:OverrideCommand(1)
+                            \override Tie.direction = #down                                          %! baca.tie_down:OverrideCommand(1)
                             b'16
                             [
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'16
                             ]
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'4
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'16
-                            \revert Tie.direction                                                    %! baca_tie_down:OverrideCommand(2)
+                            \revert Tie.direction                                                    %! baca.tie_down:OverrideCommand(2)
                             r16
                         }
                         \times 4/5 {
                             b'16
-                            \revert Stem.direction                                                   %! baca_stem_up:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_up:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -8313,7 +8313,7 @@ def tie_down(
 def tie_up(
     *,
     selector: abjad.Selector = "baca.pleaves()",
-    tag: typing.Optional[str] = "baca_tie_up",
+    tag: typing.Optional[str] = "baca.tie_up",
 ) -> OverrideCommand:
     r"""
     Overrides tie direction.
@@ -8351,17 +8351,17 @@ def tie_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
-                            \override Tie.direction = #up                                            %! baca_tie_up:OverrideCommand(1)
+                            \override Stem.direction = #down                                         %! baca.stem_down:OverrideCommand(1)
+                            \override Tie.direction = #up                                            %! baca.tie_up:OverrideCommand(1)
                             b'16
                             [
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             c''16
                             r16
                         }
@@ -8369,21 +8369,21 @@ def tie_up(
                         \times 7/8 {
                             b'16
                             [
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'16
                             ]
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'4
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'16
                             r16
                         }
                         \times 4/5 {
                             b'16
-                            \revert Stem.direction                                                   %! baca_stem_down:OverrideCommand(2)
-                            \revert Tie.direction                                                    %! baca_tie_up:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_down:OverrideCommand(2)
+                            \revert Tie.direction                                                    %! baca.tie_up:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -8425,39 +8425,39 @@ def tie_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
-                            \override Stem.direction = #down                                         %! baca_stem_down:OverrideCommand(1)
+                            \override Stem.direction = #down                                         %! baca.stem_down:OverrideCommand(1)
                             b'16
                             [
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             c''16
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 7/8 {
-                            \override Tie.direction = #up                                            %! baca_tie_up:OverrideCommand(1)
+                            \override Tie.direction = #up                                            %! baca.tie_up:OverrideCommand(1)
                             b'16
                             [
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'16
                             ]
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'4
-                            ~                                                                        %! baca_tie
+                            ~                                                                        %! baca.tie
                             b'16
-                            \revert Tie.direction                                                    %! baca_tie_up:OverrideCommand(2)
+                            \revert Tie.direction                                                    %! baca.tie_up:OverrideCommand(2)
                             r16
                         }
                         \times 4/5 {
                             b'16
-                            \revert Stem.direction                                                   %! baca_stem_down:OverrideCommand(2)
+                            \revert Stem.direction                                                   %! baca.stem_down:OverrideCommand(2)
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -8477,7 +8477,7 @@ def time_signature_extra_offset(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.hleaf(0)",
-    tag: typing.Optional[str] = "baca_time_signature_extra_offset",
+    tag: typing.Optional[str] = "baca.time_signature_extra_offset",
 ) -> OverrideCommand:
     r"""
     Overrides time signature extra offset.
@@ -8510,8 +8510,8 @@ def time_signature_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)            %! baca_time_signature_extra_offset:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)            %! baca.time_signature_extra_offset:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -8540,7 +8540,7 @@ def time_signature_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -8561,7 +8561,7 @@ def time_signature_extra_offset(
 def time_signature_stencil_false(
     *,
     selector: abjad.Selector = "baca.hleaves()",
-    tag: typing.Optional[str] = "baca_time_signature_stencil_false",
+    tag: typing.Optional[str] = "baca.time_signature_stencil_false",
 ) -> OverrideCommand:
     """
     Overrides time signature stencil property.
@@ -8579,7 +8579,7 @@ def time_signature_stencil_false(
 def time_signature_transparent(
     *,
     selector: abjad.Selector = "baca.hleaves()",
-    tag: typing.Optional[str] = "baca_time_signature_transparent",
+    tag: typing.Optional[str] = "baca.time_signature_transparent",
 ) -> OverrideCommand:
     r"""
     Overrides time signature transparency.
@@ -8612,8 +8612,8 @@ def time_signature_transparent(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override Score.TimeSignature.transparent = ##t                          %! baca_time_signature_transparent:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override Score.TimeSignature.transparent = ##t                          %! baca.time_signature_transparent:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -8642,8 +8642,8 @@ def time_signature_transparent(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert Score.TimeSignature.transparent                                  %! baca_time_signature_transparent:OverrideCommand(2)
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert Score.TimeSignature.transparent                                  %! baca.time_signature_transparent:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -8664,7 +8664,7 @@ def trill_spanner_staff_padding(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_trill_spanner_staff_padding",
+    tag: typing.Optional[str] = "baca.trill_spanner_staff_padding",
 ) -> OverrideCommand:
     """
     Overrides trill spanner staff padding.
@@ -8681,7 +8681,7 @@ def trill_spanner_staff_padding(
 def tuplet_bracket_down(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_tuplet_bracket_down",
+    tag: typing.Optional[str] = "baca.tuplet_bracket_down",
 ) -> OverrideCommand:
     r"""
     Overrides tuplet bracket direction.
@@ -8714,8 +8714,8 @@ def tuplet_bracket_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \override TupletBracket.direction = #down                                %! baca_tuplet_bracket_down:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.direction = #down                                %! baca.tuplet_bracket_down:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -8744,8 +8744,8 @@ def tuplet_bracket_down(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
-                            \revert TupletBracket.direction                                          %! baca_tuplet_bracket_down:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.direction                                          %! baca.tuplet_bracket_down:OverrideCommand(2)
                         }
                     }
                 }
@@ -8782,7 +8782,7 @@ def tuplet_bracket_down(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -8795,7 +8795,7 @@ def tuplet_bracket_down(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.direction = #down                                %! baca_tuplet_bracket_down:OverrideCommand(1)
+                            \override TupletBracket.direction = #down                                %! baca.tuplet_bracket_down:OverrideCommand(1)
                             fs''16
                             [
                             e''16
@@ -8808,12 +8808,12 @@ def tuplet_bracket_down(
                             [
                             g''16
                             ]
-                            \revert TupletBracket.direction                                          %! baca_tuplet_bracket_down:OverrideCommand(2)
+                            \revert TupletBracket.direction                                          %! baca.tuplet_bracket_down:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -8833,7 +8833,7 @@ def tuplet_bracket_extra_offset(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_tuplet_bracket_extra_offset",
+    tag: typing.Optional[str] = "baca.tuplet_bracket_extra_offset",
 ) -> OverrideCommand:
     r"""
     Overrides tuplet bracket extra offset.
@@ -8866,8 +8866,8 @@ def tuplet_bracket_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override TupletBracket.extra-offset = #'(-1 . 0)                  %! baca_tuplet_bracket_extra_offset:OverrideCommand(1)
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \once \override TupletBracket.extra-offset = #'(-1 . 0)                  %! baca.tuplet_bracket_extra_offset:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -8896,7 +8896,7 @@ def tuplet_bracket_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -8933,7 +8933,7 @@ def tuplet_bracket_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -8946,7 +8946,7 @@ def tuplet_bracket_extra_offset(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override TupletBracket.extra-offset = #'(-1 . 0)                  %! baca_tuplet_bracket_extra_offset:OverrideCommand(1)
+                            \once \override TupletBracket.extra-offset = #'(-1 . 0)                  %! baca.tuplet_bracket_extra_offset:OverrideCommand(1)
                             fs''16
                             [
                             e''16
@@ -8963,7 +8963,7 @@ def tuplet_bracket_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -8983,7 +8983,7 @@ def tuplet_bracket_outside_staff_priority(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_tuplet_bracket_outside_staff_priority",
+    tag: typing.Optional[str] = "baca.tuplet_bracket_outside_staff_priority",
 ) -> OverrideCommand:
     """
     Overrides tuplet bracket outside-staff-priority.
@@ -9001,7 +9001,7 @@ def tuplet_bracket_padding(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_tuplet_bracket_down",
+    tag: typing.Optional[str] = "baca.tuplet_bracket_down",
 ) -> OverrideCommand:
     """
     Overrides tuplet bracket padding.
@@ -9019,7 +9019,7 @@ def tuplet_bracket_shorten_pair(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_tuplet_bracket_shorten_pair",
+    tag: typing.Optional[str] = "baca.tuplet_bracket_shorten_pair",
 ) -> OverrideCommand:
     """
     Overrides tuplet bracket shorten pair.
@@ -9037,7 +9037,7 @@ def tuplet_bracket_staff_padding(
     n: abjad.Number,
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_tuplet_bracket_staff_padding",
+    tag: typing.Optional[str] = "baca.tuplet_bracket_staff_padding",
 ) -> OverrideCommand:
     r"""
     Overrides tuplet bracket staff padding.
@@ -9069,7 +9069,7 @@ def tuplet_bracket_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -9098,7 +9098,7 @@ def tuplet_bracket_staff_padding(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -9146,7 +9146,7 @@ def tuplet_bracket_staff_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             fs''16
                             [
                             e''16
@@ -9159,7 +9159,7 @@ def tuplet_bracket_staff_padding(
                             [
                             g''16
                             ]
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
@@ -9182,7 +9182,7 @@ def tuplet_bracket_staff_padding(
 def tuplet_bracket_transparent(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_tuplet_bracket_transparent",
+    tag: typing.Optional[str] = "baca.tuplet_bracket_transparent",
 ) -> OverrideCommand:
     """
     Overrides tuplet bracket transparency.
@@ -9199,7 +9199,7 @@ def tuplet_bracket_transparent(
 def tuplet_bracket_up(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_tuplet_bracket_up",
+    tag: typing.Optional[str] = "baca.tuplet_bracket_up",
 ) -> OverrideCommand:
     r"""
     Overrides tuplet bracket direction.
@@ -9232,8 +9232,8 @@ def tuplet_bracket_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \override TupletBracket.direction = #up                                  %! baca_tuplet_bracket_up:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.direction = #up                                  %! baca.tuplet_bracket_up:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -9262,8 +9262,8 @@ def tuplet_bracket_up(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
-                            \revert TupletBracket.direction                                          %! baca_tuplet_bracket_up:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.direction                                          %! baca.tuplet_bracket_up:OverrideCommand(2)
                         }
                     }
                 }
@@ -9300,7 +9300,7 @@ def tuplet_bracket_up(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -9313,7 +9313,7 @@ def tuplet_bracket_up(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.direction = #up                                  %! baca_tuplet_bracket_up:OverrideCommand(1)
+                            \override TupletBracket.direction = #up                                  %! baca.tuplet_bracket_up:OverrideCommand(1)
                             fs''16
                             [
                             e''16
@@ -9326,12 +9326,12 @@ def tuplet_bracket_up(
                             [
                             g''16
                             ]
-                            \revert TupletBracket.direction                                          %! baca_tuplet_bracket_up:OverrideCommand(2)
+                            \revert TupletBracket.direction                                          %! baca.tuplet_bracket_up:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -9350,7 +9350,7 @@ def tuplet_bracket_up(
 def tuplet_number_denominator(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_tuplet_number_denominator",
+    tag: typing.Optional[str] = "baca.tuplet_number_denominator",
 ) -> OverrideCommand:
     """
     Overrides tuplet number text.
@@ -9368,7 +9368,7 @@ def tuplet_number_extra_offset(
     pair: abjad.NumberPair,
     *,
     selector: abjad.Selector = "baca.leaf(0)",
-    tag: typing.Optional[str] = "baca_tuplet_number_extra_offset",
+    tag: typing.Optional[str] = "baca.tuplet_number_extra_offset",
 ) -> OverrideCommand:
     r"""
     Overrides tuplet number extra offset.
@@ -9401,8 +9401,8 @@ def tuplet_number_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
-                            \once \override TupletNumber.extra-offset = #'(-1 . 0)                   %! baca_tuplet_number_extra_offset:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \once \override TupletNumber.extra-offset = #'(-1 . 0)                   %! baca.tuplet_number_extra_offset:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -9431,7 +9431,7 @@ def tuplet_number_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -9468,7 +9468,7 @@ def tuplet_number_extra_offset(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -9481,7 +9481,7 @@ def tuplet_number_extra_offset(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \once \override TupletNumber.extra-offset = #'(-1 . 0)                   %! baca_tuplet_number_extra_offset:OverrideCommand(1)
+                            \once \override TupletNumber.extra-offset = #'(-1 . 0)                   %! baca.tuplet_number_extra_offset:OverrideCommand(1)
                             fs''16
                             [
                             e''16
@@ -9498,7 +9498,7 @@ def tuplet_number_extra_offset(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -9517,7 +9517,7 @@ def tuplet_number_extra_offset(
 def tuplet_number_transparent(
     *,
     selector: abjad.Selector = "baca.leaves()",
-    tag: typing.Optional[str] = "baca_tuplet_number_transparent",
+    tag: typing.Optional[str] = "baca.tuplet_number_transparent",
 ) -> OverrideCommand:
     """
     Overrides tuplet number transparent.

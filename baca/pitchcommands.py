@@ -6322,7 +6322,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \clef "treble"                                                           %! baca_clef:IndicatorCommand
+                            \clef "treble"                                                           %! baca.clef:IndicatorCommand
                             ef'16
                             [
                             e'16
@@ -6387,15 +6387,15 @@ class StaffPositionInterpolationCommand(scoping.Command):
                     \voiceOne
                     {
                         \scaleDurations #'(1 . 1) {
-                            \override Glissando.thickness = #'3                                      %! baca_glissando_thickness:OverrideCommand(1)
-                            \clef "treble"                                                           %! baca_clef:IndicatorCommand
+                            \override Glissando.thickness = #'3                                      %! baca.glissando_thickness:OverrideCommand(1)
+                            \clef "treble"                                                           %! baca.clef:IndicatorCommand
                             ef'16
                             [
-                            \glissando                                                               %! baca_glissando
-                            \hide NoteHead                                                           %! baca_glissando
-                            \override Accidental.stencil = ##f                                       %! baca_glissando
-                            \override NoteColumn.glissando-skip = ##t                                %! baca_glissando
-                            \override NoteHead.no-ledgers = ##t                                      %! baca_glissando
+                            \glissando                                                               %! baca.glissando
+                            \hide NoteHead                                                           %! baca.glissando
+                            \override Accidental.stencil = ##f                                       %! baca.glissando
+                            \override NoteColumn.glissando-skip = ##t                                %! baca.glissando
+                            \override NoteHead.no-ledgers = ##t                                      %! baca.glissando
                             e'16
                             f'16
                             f'16
@@ -6422,13 +6422,13 @@ class StaffPositionInterpolationCommand(scoping.Command):
                             e''16
                             e''16
                             f''16
-                            \revert Accidental.stencil                                               %! baca_glissando
-                            \revert NoteColumn.glissando-skip                                        %! baca_glissando
-                            \revert NoteHead.no-ledgers                                              %! baca_glissando
-                            \undo \hide NoteHead                                                     %! baca_glissando
+                            \revert Accidental.stencil                                               %! baca.glissando
+                            \revert NoteColumn.glissando-skip                                        %! baca.glissando
+                            \revert NoteHead.no-ledgers                                              %! baca.glissando
+                            \undo \hide NoteHead                                                     %! baca.glissando
                             fs''16
                             ]
-                            \revert Glissando.thickness                                              %! baca_glissando_thickness:OverrideCommand(2)
+                            \revert Glissando.thickness                                              %! baca.glissando_thickness:OverrideCommand(2)
                         }
                     }
                 }
@@ -7120,7 +7120,7 @@ def displacement(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -7153,7 +7153,7 @@ def displacement(
                             ef16
                             r16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7238,7 +7238,7 @@ def displacement(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -7271,7 +7271,7 @@ def displacement(
                             ef''16
                             r16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7577,7 +7577,7 @@ def register(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -7606,7 +7606,7 @@ def register(
                         \times 4/5 {
                             a16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7639,7 +7639,7 @@ def register(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -7675,7 +7675,7 @@ def register(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7709,7 +7709,7 @@ def register(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -7738,7 +7738,7 @@ def register(
                         \times 4/5 {
                             a''16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -7772,7 +7772,7 @@ def register(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -7808,7 +7808,7 @@ def register(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }

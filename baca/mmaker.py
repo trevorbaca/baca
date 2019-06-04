@@ -1667,7 +1667,7 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 d'16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 s16
                                 s16
                                 s16
@@ -1678,11 +1678,11 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 g''16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 a'16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 s16
                             }
                             \scaleDurations #'(1 . 1) {
@@ -1771,7 +1771,7 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 1
                                 e''16
-                                - \accent                                                            %! baca_accent:IndicatorCommand
+                                - \accent                                                            %! baca.accent:IndicatorCommand
                             }
                             \scaleDurations #'(1 . 1) {
                                 s16
@@ -1785,11 +1785,11 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 bf'16
-                                - \accent                                                            %! baca_accent:IndicatorCommand
+                                - \accent                                                            %! baca.accent:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 fs''16
-                                - \accent                                                            %! baca_accent:IndicatorCommand
+                                - \accent                                                            %! baca.accent:IndicatorCommand
                                 s16
                                 s16
                                 ]
@@ -1864,7 +1864,7 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 d'16
-                                - \accent                                                            %! baca_accent:IndicatorCommand
+                                - \accent                                                            %! baca.accent:IndicatorCommand
                                 s16
                                 s16
                                 s16
@@ -1876,11 +1876,11 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 g''16
-                                - \accent                                                            %! baca_accent:IndicatorCommand
+                                - \accent                                                            %! baca.accent:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 a'16
-                                - \accent                                                            %! baca_accent:IndicatorCommand
+                                - \accent                                                            %! baca.accent:IndicatorCommand
                                 s16
                             }
                             \tweak text #tuplet-number::calc-fraction-text
@@ -1890,11 +1890,11 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 fs''16
-                                - \accent                                                            %! baca_accent:IndicatorCommand
+                                - \accent                                                            %! baca.accent:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 e''16
-                                - \accent                                                            %! baca_accent:IndicatorCommand
+                                - \accent                                                            %! baca.accent:IndicatorCommand
                                 s16
                                 ]
                             }
@@ -1911,70 +1911,70 @@ class ImbricationCommand(scoping.Command):
                                 \set stemLeftBeamCount = 0
                                 \set stemRightBeamCount = 2
                                 c'16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 [
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 d'16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 bf'16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 fs''16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 1
                                 e''16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/5 {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 ef''16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 af''16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 g''16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 a'16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 1
                                 c'16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                             }
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 6/5 {
                                 \set stemLeftBeamCount = 1
                                 \set stemRightBeamCount = 2
                                 d'16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 bf'16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 fs''16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 2
                                 e''16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 \set stemLeftBeamCount = 2
                                 \set stemRightBeamCount = 0
                                 ef''16
-                                - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 ]
                             }
                         }
@@ -2102,21 +2102,21 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     bf'8.
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     fs''8.
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     e''8.
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     ef''8.
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     s8.
                                     s8.
                                 }
@@ -2206,7 +2206,7 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     [
                                     s16
                                     s16
@@ -2225,11 +2225,11 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     s16
                                 }
                                 \scaleDurations #'(1 . 1) {
@@ -2427,12 +2427,12 @@ class ImbricationCommand(scoping.Command):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \staccato                                                      %! baca_staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
-                                        - \staccato                                                      %! baca_staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2468,12 +2468,12 @@ class ImbricationCommand(scoping.Command):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         cs''!16
-                                        - \staccato                                                      %! baca_staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         a'16
-                                        - \staccato                                                      %! baca_staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
                 <BLANKLINE>
                                         s16
                                         ]
@@ -3112,7 +3112,7 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     s16
                                     s16
                                     s16
@@ -3123,11 +3123,11 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     s16
                                     ]
                                 }
@@ -3143,46 +3143,46 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     [
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     c'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     ]
                                 }
                             }
@@ -3319,7 +3319,7 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     s16
                                     s16
                                     s16
@@ -3330,11 +3330,11 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     s16
                                 }
                                 \scaleDurations #'(1 . 1) {
@@ -3343,11 +3343,11 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     e''16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     s16
                                     ]
                                 }
@@ -3363,53 +3363,53 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     [
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     c'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     s16
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     ef''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     ]
                                 }
                             }
@@ -3511,22 +3511,22 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     s16
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
-                                    - \accent                                                            %! baca_accent:IndicatorCommand
+                                    - \accent                                                            %! baca.accent:IndicatorCommand
                                     s16
                                     s16
                                     s16
@@ -3544,82 +3544,82 @@ class ImbricationCommand(scoping.Command):
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     [
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     a'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     a'16
-                                    - \staccato                                                          %! baca_staccato:IndicatorCommand
+                                    - \staccato                                                          %! baca.staccato:IndicatorCommand
                                     ]
                                 }
                             }
@@ -7364,8 +7364,8 @@ class MusicMaker(object):
                             {
                                 \scaleDurations #'(1 . 1) {
                                     c'16
-                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(1)
-                                    \<                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \p                                                                   %! baca.hairpin:PiecewiseCommand(1)
+                                    \<                                                                   %! baca.hairpin:PiecewiseCommand(1)
                                     [
                                     d'16
                                     bf'16
@@ -7385,7 +7385,7 @@ class MusicMaker(object):
                                     cs''16
                                     a'16
                                     af'16
-                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    \f                                                                   %! baca.hairpin:PiecewiseCommand(2)
                                     ]
                                 }
                             }
@@ -7439,20 +7439,20 @@ class MusicMaker(object):
                             {
                                 \scaleDurations #'(1 . 1) {
                                     c'16
-                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(1)
-                                    \<                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \p                                                                   %! baca.hairpin:PiecewiseCommand(1)
+                                    \<                                                                   %! baca.hairpin:PiecewiseCommand(1)
                                     [
                                     d'16
                                     bf'16
                                     fs''16
-                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    \f                                                                   %! baca.hairpin:PiecewiseCommand(2)
                                     ]
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     r16
                                     ef''16
-                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(1)
-                                    \<                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \p                                                                   %! baca.hairpin:PiecewiseCommand(1)
+                                    \<                                                                   %! baca.hairpin:PiecewiseCommand(1)
                                     [
                                     b''16
                                     ]
@@ -7463,7 +7463,7 @@ class MusicMaker(object):
                                     cs''16
                                     a'16
                                     af'16
-                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    \f                                                                   %! baca.hairpin:PiecewiseCommand(2)
                                     ]
                                 }
                             }
@@ -7514,13 +7514,13 @@ class MusicMaker(object):
                             {
                                 \scaleDurations #'(1 . 1) {
                                     c'16
-                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(1)
-                                    \<                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \p                                                                   %! baca.hairpin:PiecewiseCommand(1)
+                                    \<                                                                   %! baca.hairpin:PiecewiseCommand(1)
                                     [
                                     d'16
                                     bf'16
                                     fs''16
-                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    \f                                                                   %! baca.hairpin:PiecewiseCommand(2)
                                     ]
                                 }
                                 \scaleDurations #'(1 . 1) {
@@ -7532,13 +7532,13 @@ class MusicMaker(object):
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     g''16
-                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(1)
-                                    \>                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \f                                                                   %! baca.hairpin:PiecewiseCommand(1)
+                                    \>                                                                   %! baca.hairpin:PiecewiseCommand(1)
                                     [
                                     cs''16
                                     a'16
                                     af'16
-                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    \p                                                                   %! baca.hairpin:PiecewiseCommand(2)
                                     ]
                                 }
                             }
@@ -7589,34 +7589,34 @@ class MusicMaker(object):
                             {
                                 \scaleDurations #'(1 . 1) {
                                     c'16
-                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(1)
-                                    \<                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \p                                                                   %! baca.hairpin:PiecewiseCommand(1)
+                                    \<                                                                   %! baca.hairpin:PiecewiseCommand(1)
                                     [
                                     d'16
                                     bf'16
                                     fs''16
-                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    \f                                                                   %! baca.hairpin:PiecewiseCommand(2)
                                     ]
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     e''16
-                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(1)
-                                    \<                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \p                                                                   %! baca.hairpin:PiecewiseCommand(1)
+                                    \<                                                                   %! baca.hairpin:PiecewiseCommand(1)
                                     [
                                     ef''16
                                     b''16
-                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    \f                                                                   %! baca.hairpin:PiecewiseCommand(2)
                                     ]
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     g''16
-                                    \f                                                                   %! baca_hairpin:PiecewiseCommand(1)
-                                    \>                                                                   %! baca_hairpin:PiecewiseCommand(1)
+                                    \f                                                                   %! baca.hairpin:PiecewiseCommand(1)
+                                    \>                                                                   %! baca.hairpin:PiecewiseCommand(1)
                                     [
                                     cs''16
                                     a'16
                                     af'16
-                                    \p                                                                   %! baca_hairpin:PiecewiseCommand(2)
+                                    \p                                                                   %! baca.hairpin:PiecewiseCommand(2)
                                     ]
                                 }
                             }
@@ -7665,7 +7665,7 @@ class MusicMaker(object):
                                 \scaleDurations #'(1 . 1) {
                                     c'16
                                     [
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
+                                    (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
                                     d'16
                                     bf'16
                                     fs''16
@@ -7684,7 +7684,7 @@ class MusicMaker(object):
                                     cs''16
                                     a'16
                                     af'16
-                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
+                                    )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
                                     ]
                                 }
                             }
@@ -7736,30 +7736,30 @@ class MusicMaker(object):
                                 \scaleDurations #'(1 . 1) {
                                     c'16
                                     [
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
+                                    (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
                                     d'16
                                     bf'16
                                     fs''16
-                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
+                                    )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
                                     ]
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     e''16
                                     [
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
+                                    (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
                                     ef''16
                                     b''16
-                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
+                                    )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
                                     ]
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     g''16
                                     [
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
+                                    (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
                                     cs''16
                                     a'16
                                     af'16
-                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
+                                    )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
                                     ]
                                 }
                             }
@@ -7813,9 +7813,9 @@ class MusicMaker(object):
                                 \scaleDurations #'(1 . 1) {
                                     c'16
                                     [
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
+                                    (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
                                     d'16
-                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
+                                    )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
                                     bf'16
                                     fs''16
                                     ]
@@ -7823,18 +7823,18 @@ class MusicMaker(object):
                                 \scaleDurations #'(1 . 1) {
                                     e''16
                                     [
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
+                                    (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
                                     ef''16
-                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
+                                    )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
                                     b''16
                                     ]
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     g''16
                                     [
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
+                                    (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
                                     cs''16
-                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
+                                    )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
                                     a'16
                                     af'16
                                     ]
@@ -7892,18 +7892,18 @@ class MusicMaker(object):
                                     [
                                     d'16
                                     bf'16
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
+                                    (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
                                     fs''16
-                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
+                                    )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
                                     ]
                                 }
                                 \scaleDurations #'(1 . 1) {
                                     e''16
                                     [
                                     ef''16
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
+                                    (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
                                     b''16
-                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
+                                    )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
                                     ]
                                 }
                                 \scaleDurations #'(1 . 1) {
@@ -7911,9 +7911,9 @@ class MusicMaker(object):
                                     [
                                     cs''16
                                     a'16
-                                    (                                                                    %! baca_slur:SpannerIndicatorCommand(1)
+                                    (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
                                     af'16
-                                    )                                                                    %! baca_slur:SpannerIndicatorCommand(2)
+                                    )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
                                     ]
                                 }
                             }
@@ -13751,7 +13751,7 @@ def imbricate(
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                                 r8
                                 c'16
                                 [
@@ -13780,7 +13780,7 @@ def imbricate(
                             \times 4/5 {
                                 a'16
                                 r4
-                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                             }
                         }
                     }
@@ -13875,7 +13875,7 @@ def nest(time_treatments: typing.Iterable = None,) -> NestingCommand:
                             \times 13/11 {
                                 \tweak text #tuplet-number::calc-fraction-text
                                 \times 9/10 {
-                                    \override TupletBracket.staff-padding = #5                       %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                    \override TupletBracket.staff-padding = #5                       %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                                     r8
                                     c'16
                                     [
@@ -13904,7 +13904,7 @@ def nest(time_treatments: typing.Iterable = None,) -> NestingCommand:
                                 \times 4/5 {
                                     a'16
                                     r4
-                                    \revert TupletBracket.staff-padding                              %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                                    \revert TupletBracket.staff-padding                              %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                                 }
                             }
                         }
@@ -13953,7 +13953,7 @@ def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 7/8 {
-                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                                 c'16
                                 [
                                 d'16
@@ -13981,7 +13981,7 @@ def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
                             \times 2/3 {
                                 a'16
                                 r8
-                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                             }
                         }
                     }
@@ -14029,7 +14029,7 @@ def rests_around(
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                                 r8
                                 c'16
                                 [
@@ -14058,7 +14058,7 @@ def rests_around(
                             \times 2/3 {
                                 a'16
                                 r8
-                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                             }
                         }
                     }
@@ -14104,7 +14104,7 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                                 r8
                                 c'16
                                 [
@@ -14132,7 +14132,7 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
                             }
                             \scaleDurations #'(1 . 1) {
                                 a'16
-                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                             }
                         }
                     }
@@ -14196,7 +14196,7 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 7/8 {
-                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                                 c'16
                                 [
                                 d'16
@@ -14224,7 +14224,7 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
                             \times 2/3 {
                                 a'16
                                 s8
-                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                             }
                         }
                     }
@@ -14272,7 +14272,7 @@ def skips_around(
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                                 s8
                                 c'16
                                 [
@@ -14301,7 +14301,7 @@ def skips_around(
                             \times 2/3 {
                                 a'16
                                 s8
-                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                             }
                         }
                     }
@@ -14349,7 +14349,7 @@ def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
                         {
                             \tweak text #tuplet-number::calc-fraction-text
                             \times 9/10 {
-                                \override TupletBracket.staff-padding = #5                           %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                                 s8
                                 c'16
                                 [
@@ -14377,7 +14377,7 @@ def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
                             }
                             \scaleDurations #'(1 . 1) {
                                 a'16
-                                \revert TupletBracket.staff-padding                                  %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                             }
                         }
                     }

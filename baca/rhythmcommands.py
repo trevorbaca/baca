@@ -1071,7 +1071,7 @@ class RhythmCommand(scoping.Command):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \override TextScript.font-size = #-2                                     %! baca_text_script_font_size:OverrideCommand(1)
+                                \override TextScript.font-size = #-2                                     %! baca.text_script_font_size:OverrideCommand(1)
                                 \override TextScript.staff-padding = #5                                  %! baca_script_staff_padding:OverrideCommand(1)
                                 \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8.
@@ -1177,7 +1177,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                                 ]
-                                \revert TextScript.font-size                                             %! baca_text_script_font_size:OverrideCommand(2)
+                                \revert TextScript.font-size                                             %! baca.text_script_font_size:OverrideCommand(2)
                                 \revert TextScript.staff-padding                                         %! baca_script_staff_padding:OverrideCommand(2)
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
@@ -1852,7 +1852,7 @@ def beam_runs() -> rmakers.BeamSpecifier:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             \set stemLeftBeamCount = 0
                             \set stemRightBeamCount = 2
@@ -1899,7 +1899,7 @@ def beam_runs() -> rmakers.BeamSpecifier:
                             a'16
                             ]
                             r8
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
@@ -1943,7 +1943,7 @@ def do_not_beam() -> rmakers.BeamSpecifier:
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca_tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             d'16
@@ -1966,7 +1966,7 @@ def do_not_beam() -> rmakers.BeamSpecifier:
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca_tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
                 }
