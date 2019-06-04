@@ -1456,8 +1456,6 @@ class TieCorrectionCommand(scoping.Command):
         if direction is not None:
             assert direction in (abjad.Right, abjad.Left, None)
         self._direction = direction
-        # REMOVE: this is being done in scoping.Command.__init__:
-        ####self._map = map
         if repeat is not None:
             repeat = bool(repeat)
         self._repeat = repeat
@@ -2786,6 +2784,7 @@ def rhythm(
     rewrite_rest_filled: bool = None,
     right_broken: bool = None,
     split_at_measure_boundaries: bool = None,
+    tag: str = None,
 ) -> RhythmCommand:
     """
     Makes rhythm command.
@@ -2793,6 +2792,10 @@ def rhythm(
     if isinstance(rhythm_maker, str):
         components = abjad.parse(rhythm_maker)
         rhythm_maker = abjad.select(components)
+    if tag is not None:
+        if not isinstance(rhythm_maker, rmakers.RhythmMaker):
+            raise Exception("can only tag rhythm-makers.")
+        rhythm_maker = abjad.new(rhythm_maker, tag=tag)
     return RhythmCommand(
         annotate_unpitched_music=annotate_unpitched_music,
         divisions=divisions,
