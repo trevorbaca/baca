@@ -7284,7 +7284,8 @@ def displacement(
 
 
 def force_accidental(
-    *, selector: abjad.SelectorTyping = "baca.pleaf(0, exclude=abjad.const.HIDDEN)"
+    *,
+    selector: abjad.SelectorTyping = "baca.pleaf(0, exclude=abjad.const.HIDDEN)",
 ) -> AccidentalAdjustmentCommand:
     r"""
     Forces accidental.

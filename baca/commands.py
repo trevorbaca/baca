@@ -5656,7 +5656,9 @@ def invisible_music(
 
 
 def label(
-    expression: abjad.Expression, *, selector: abjad.SelectorTyping = "baca.leaves()"
+    expression: abjad.Expression,
+    *,
+    selector: abjad.SelectorTyping = "baca.leaves()",
 ) -> LabelCommand:
     r"""
     Labels ``selector`` output with label ``expression``.
