@@ -40,11 +40,11 @@ class DurationMultiplierCommand(scoping.Command):
     def __init__(
         self,
         *,
-        map: abjad.Selector = None,
+        map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
-        measures: typings.Slice = None,
+        measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Selector = "baca.leaf(0)",
+        selector: abjad.SelectorTyping = "baca.leaf(0)",
         written_duration: abjad.DurationTyping = None,
     ) -> None:
         scoping.Command.__init__(
@@ -306,7 +306,7 @@ class RhythmCommand(scoping.Command):
         divisions: abjad.Expression = None,
         left_broken: bool = None,
         match: typings.Indices = None,
-        measures: typings.Slice = None,
+        measures: typings.SliceTyping = None,
         multimeasure_rests: bool = None,
         persist: str = None,
         reference_meters: typing.Iterable[abjad.Meter] = None,
@@ -1437,12 +1437,12 @@ class TieCorrectionCommand(scoping.Command):
         self,
         *,
         direction: abjad.HorizontalAlignment = None,
-        map: abjad.Selector = None,
+        map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
-        measures: typings.Slice = None,
+        measures: typings.SliceTyping = None,
         repeat: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Selector = "baca.pleaf(-1)",
+        selector: abjad.SelectorTyping = "baca.pleaf(-1)",
         untie: bool = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1979,7 +1979,9 @@ def do_not_beam() -> rmakers.BeamSpecifier:
 
 
 def make_even_divisions(
-    *, measures: typings.Slice = None, tag: str = "baca_make_even_divisions"
+    *,
+    measures: typings.SliceTyping = None,
+    tag: str = "baca_make_even_divisions",
 ) -> RhythmCommand:
     """
     Makes even divisions.
@@ -1995,7 +1997,7 @@ def make_even_divisions(
 
 def make_fused_tuplet_monads(
     *,
-    measures: typings.Slice = None,
+    measures: typings.SliceTyping = None,
     tag: str = "baca_make_fused_tuplet_monads",
     tuplet_ratio: typing.Tuple[int] = None,
 ) -> RhythmCommand:
@@ -2157,7 +2159,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
 
 def make_multimeasure_rests(
     *,
-    measures: typings.Slice = None,
+    measures: typings.SliceTyping = None,
     tag: str = "baca_make_multimeasure_rests",
 ) -> RhythmCommand:
     """
@@ -2175,7 +2177,7 @@ def make_multimeasure_rests(
 def make_notes(
     *,
     dmask: rmakers.MasksTyping = None,
-    measures: typings.Slice = None,
+    measures: typings.SliceTyping = None,
     repeat_ties: bool = False,
     tag: str = "baca_make_notes",
 ) -> RhythmCommand:
@@ -2198,7 +2200,7 @@ def make_repeat_tied_notes(
     *,
     dmask: rmakers.MasksTyping = None,
     do_not_rewrite_meter: bool = None,
-    measures: typings.Slice = None,
+    measures: typings.SliceTyping = None,
     tag: str = "baca_make_repeat_tied_notes",
 ) -> RhythmCommand:
     """
@@ -2223,7 +2225,7 @@ def make_repeated_duration_notes(
     beam_specifier: rmakers.BeamSpecifier = None,
     dmask: rmakers.MasksTyping = None,
     do_not_rewrite_meter: bool = None,
-    measures: typings.Slice = None,
+    measures: typings.SliceTyping = None,
     tag: str = "baca_make_repeated_duration_notes",
 ) -> RhythmCommand:
     """
@@ -2251,7 +2253,7 @@ def make_repeated_duration_notes(
 
 
 def make_rests(
-    *, measures: typings.Slice = None, tag: str = "baca_make_rests"
+    *, measures: typings.SliceTyping = None, tag: str = "baca_make_rests"
 ) -> RhythmCommand:
     """
     Makes rests.
@@ -2267,7 +2269,7 @@ def make_rests(
 def make_rhythm(
     selection: typing.Union[str, abjad.Selection],
     *,
-    measures: typings.Slice = None,
+    measures: typings.SliceTyping = None,
     repeat_tie_threshold: typing.Union[
         bool, abjad.IntegerPair, abjad.DurationInequality
     ] = None,
@@ -2433,7 +2435,7 @@ def make_rhythm(
 def make_single_attack(
     duration,
     *,
-    measures: typings.Slice = None,
+    measures: typings.SliceTyping = None,
     tag: str = "baca_make_single_attack",
 ) -> RhythmCommand:
     """
@@ -2455,7 +2457,7 @@ def make_single_attack(
 
 
 def make_skips(
-    *, measures: typings.Slice = None, tag: str = "baca_make_skips"
+    *, measures: typings.SliceTyping = None, tag: str = "baca_make_skips"
 ) -> RhythmCommand:
     """
     Makes skips.
@@ -2464,7 +2466,7 @@ def make_skips(
 
 
 def make_tied_notes(
-    *, measures: typings.Slice = None, tag: str = "baca_make_tied_notes"
+    *, measures: typings.SliceTyping = None, tag: str = "baca_make_tied_notes"
 ) -> RhythmCommand:
     """
     Makes tied notes; rewrites meter.
@@ -2482,7 +2484,7 @@ def make_tied_notes(
 def make_tied_repeated_durations(
     durations: typing.Sequence[abjad.DurationTyping],
     *,
-    measures: typings.Slice = None,
+    measures: typings.SliceTyping = None,
     tag: str = "baca_make_tied_reepated_durations",
 ) -> RhythmCommand:
     """
@@ -2499,7 +2501,7 @@ def make_tied_repeated_durations(
 
 
 def repeat_tie_from(
-    *, selector: abjad.Selector = "baca.pleaf(-1)"
+    *, selector: abjad.SelectorTyping = "baca.pleaf(-1)"
 ) -> TieCorrectionCommand:
     r"""
     Repeat-ties from leaf.
@@ -2634,7 +2636,7 @@ def repeat_tie_from(
 
 
 def repeat_tie_to(
-    *, selector: abjad.Selector = "baca.pleaf(0)"
+    *, selector: abjad.SelectorTyping = "baca.pleaf(0)"
 ) -> TieCorrectionCommand:
     r"""
     Repeat-ties to leaf.
@@ -2776,7 +2778,7 @@ def rhythm(
     annotate_unpitched_music: bool = None,
     divisions: abjad.Expression = None,
     left_broken: bool = None,
-    measures: typings.Slice = None,
+    measures: typings.SliceTyping = None,
     multimeasure_rests: bool = None,
     persist: str = None,
     reference_meters: typing.Iterable[abjad.Meter] = None,
@@ -2814,7 +2816,7 @@ def rhythm(
 
 def set_duration_multiplier(
     *,
-    selector: abjad.Selector = "baca.leaf(0)",
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     written_duration: abjad.DurationTyping = None,
 ) -> DurationMultiplierCommand:
     r"""
@@ -3329,8 +3331,8 @@ def sustain_last() -> rmakers.SustainMask:
 def tacet(
     color: str = "green",
     *,
-    measures: typings.Slice = None,
-    selector: abjad.Selector = "baca.mmrests()",
+    measures: typings.SliceTyping = None,
+    selector: abjad.SelectorTyping = "baca.mmrests()",
 ) -> overrides.OverrideCommand:
     """
     Colors multimeasure rests.
@@ -3344,7 +3346,7 @@ def tacet(
 
 
 def tie_from(
-    *, selector: abjad.Selector = "baca.pleaf(-1)"
+    *, selector: abjad.SelectorTyping = "baca.pleaf(-1)"
 ) -> TieCorrectionCommand:
     r"""
     Ties from leaf.
@@ -3473,7 +3475,7 @@ def tie_from(
 
 
 def tie_to(
-    *, selector: abjad.Selector = "baca.pleaf(0)"
+    *, selector: abjad.SelectorTyping = "baca.pleaf(0)"
 ) -> TieCorrectionCommand:
     r"""
     Ties to leaf.
@@ -3604,7 +3606,7 @@ def tie_to(
 
 
 def untie_to(
-    *, selector: abjad.Selector = "baca.pleaf(0)"
+    *, selector: abjad.SelectorTyping = "baca.pleaf(0)"
 ) -> TieCorrectionCommand:
     r"""
     Unties to leaf.

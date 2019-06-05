@@ -48,4 +48,4 @@ ScopeTyping = typing.Union[
     typing.Tuple[typing.List[str], typing.Tuple[int, int]],
 ]
 
-Slice = typing.Union[int, abjad.IntegerPair]
+SliceTyping = typing.Union[int, abjad.IntegerPair]

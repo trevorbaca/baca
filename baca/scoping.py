@@ -38,7 +38,10 @@ class Scope(object):
     ### INITIALIZER ###
 
     def __init__(
-        self, *, measures: typings.Slice = (1, -1), voice_name: str = None
+        self,
+        *,
+        measures: typings.SliceTyping = (1, -1),
+        voice_name: str = None,
     ) -> None:
         if isinstance(measures, int):
             measures = (measures, measures)
@@ -241,11 +244,11 @@ class Command(object):
         self,
         *,
         deactivate: bool = None,
-        map: abjad.Selector = None,
+        map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
-        measures: typings.Slice = None,
+        measures: typings.SliceTyping = None,
         scope: ScopeTyping = None,
-        selector: abjad.Selector = None,
+        selector: abjad.SelectorTyping = None,
         tag_measure_number: bool = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
     ) -> None:
@@ -255,7 +258,7 @@ class Command(object):
         self._deactivate = deactivate
         self._map = map
         self._match = match
-        self._measures: typing.Optional[typings.Slice] = measures
+        self._measures: typing.Optional[typings.SliceTyping] = measures
         self._runtime = abjad.OrderedDict()
         self._scope = scope
         if isinstance(selector, str):
@@ -497,7 +500,7 @@ class Command(object):
         return self._match
 
     @property
-    def measures(self) -> typing.Optional[typings.Slice]:
+    def measures(self) -> typing.Optional[typings.SliceTyping]:
         """
         Gets measures.
         """
