@@ -40,6 +40,7 @@ ScopeTyping = typing.Union[
     typing.Tuple[str, typing.List[object]],
     typing.Tuple[str, typing.List[typing.Tuple[int, int]]],
     typing.Tuple[str, typing.Tuple[int, int]],
+    typing.Tuple[str, typing.Union[int, typing.Tuple[int, int]]],
     typing.Tuple[typing.List[str], int],
     typing.Tuple[typing.List[str], typing.List[int]],
     typing.Tuple[typing.List[str], typing.List[object]],
