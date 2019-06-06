@@ -1304,7 +1304,8 @@ class HorizontalSpacingSpecifier(object):
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.AccelerandoRhythmMaker(
         ...             beam_specifier=rmakers.BeamSpecifier(
-        ...             use_feather_beams=True,
+        ...                 beam_each_division=True,
+        ...                 use_feather_beams=True,
         ...                 ),
         ...             interpolation_specifiers=rmakers.InterpolationSpecifier(
         ...                 start_duration=abjad.Duration(1, 8),

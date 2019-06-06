@@ -113,6 +113,9 @@ class RhythmCommand(scoping.Command):
 
         >>> command = baca.RhythmCommand(
         ...     rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+        ...         beam_specifier=rmakers.BeamSpecifier(
+        ...             beam_each_division=True,
+        ...         ),
         ...         tuplet_specifier=rmakers.TupletSpecifier(
         ...             extract_trivial=True,
         ...             ),
@@ -615,6 +618,9 @@ class RhythmCommand(scoping.Command):
             >>> command = baca.RhythmCommand(
             ...     divisions=abjad.sequence().sum().sequence(),
             ...     rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+            ...         beam_specifier=rmakers.BeamSpecifier(
+            ...             beam_each_division=True,
+            ...         ),
             ...         tuplet_specifier=rmakers.TupletSpecifier(
             ...             extract_trivial=True,
             ...             ),
@@ -982,9 +988,15 @@ class RhythmCommand(scoping.Command):
             ...     )
 
             >>> rhythm_maker_1 = rmakers.NoteRhythmMaker(
+            ...         beam_specifier=rmakers.BeamSpecifier(
+            ...             beam_each_division=True,
+            ...         ),
             ...     division_masks=[rmakers.silence([0], 1)],
             ...     )
             >>> rhythm_maker_2 = rmakers.TaleaRhythmMaker(
+            ...         beam_specifier=rmakers.BeamSpecifier(
+            ...             beam_each_division=True,
+            ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[3, 4],
             ...         denominator=16,
@@ -1989,6 +2001,7 @@ def make_even_divisions(
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+            beam_specifier=rmakers.BeamSpecifier(beam_each_division=True),
             tag=tag,
             tuplet_specifier=rmakers.TupletSpecifier(extract_trivial=True),
         ),
@@ -2013,6 +2026,7 @@ def make_fused_tuplet_monads(
         divisions=abjad.sequence().sum().sequence(),
         measures=measures,
         rhythm_maker=rmakers.TupletRhythmMaker(
+            beam_specifier=rmakers.BeamSpecifier(beam_each_division=True),
             tag=tag,
             tie_specifier=rmakers.TieSpecifier(repeat_ties=True),
             tuplet_ratios=tuplet_ratios,
@@ -2191,7 +2205,10 @@ def make_notes(
         measures=measures,
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
-            division_masks=dmask, tag=tag, tie_specifier=tie_specifier
+            beam_specifier=rmakers.BeamSpecifier(beam_each_division=True),
+            division_masks=dmask,
+            tag=tag,
+            tie_specifier=tie_specifier,
         ),
     )
 
@@ -2210,6 +2227,7 @@ def make_repeat_tied_notes(
         measures=measures,
         rewrite_meter=not (do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
+            beam_specifier=rmakers.BeamSpecifier(beam_each_division=True),
             division_masks=dmask,
             tag=tag,
             tie_specifier=rmakers.TieSpecifier(
@@ -2444,6 +2462,7 @@ def make_single_attack(
     duration = abjad.Duration(duration)
     numerator, denominator = duration.pair
     rhythm_maker = rmakers.IncisedRhythmMaker(
+        beam_specifier=rmakers.BeamSpecifier(beam_each_division=True),
         incise_specifier=rmakers.InciseSpecifier(
             fill_with_rests=True,
             outer_divisions_only=True,
@@ -2475,6 +2494,7 @@ def make_tied_notes(
         measures=measures,
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
+            beam_specifier=rmakers.BeamSpecifier(beam_each_division=True),
             tag=tag,
             tie_specifier=rmakers.TieSpecifier(tie_across_divisions=True),
         ),
