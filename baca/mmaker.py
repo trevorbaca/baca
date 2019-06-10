@@ -5972,7 +5972,6 @@ class MusicMaker(object):
         is_foreshadow=None,
         is_incomplete=None,
         is_recollection=None,
-        logical_tie_masks=None,
         denominator=None,
         state_manifest=None,
         talea_denominator=None,
@@ -6554,7 +6553,6 @@ class MusicMaker(object):
                 specifiers,
                 counts=counts,
                 division_masks=division_masks,
-                logical_tie_masks=logical_tie_masks,
                 talea_denominator=talea_denominator,
                 thread=thread,
                 time_treatments=time_treatments,
@@ -6753,7 +6751,6 @@ class MusicMaker(object):
         specifiers,
         counts=None,
         division_masks=None,
-        logical_tie_masks=None,
         talea_denominator=None,
         thread=None,
         time_treatments=None,
@@ -6784,7 +6781,6 @@ class MusicMaker(object):
                 collections=collections,
                 selections=selections,
                 division_masks=division_masks,
-                logical_tie_masks=logical_tie_masks,
                 rest_affix_specifier=rest_affix_specifier,
                 talea_counts=counts,
                 talea_denominator=talea_denominator,
@@ -9385,7 +9381,6 @@ class PitchFirstRhythmCommand(scoping.Command):
         collections,
         selections,
         division_masks=None,
-        logical_tie_masks=None,
         rest_affix_specifier=None,
         talea_counts=None,
         talea_denominator=None,
@@ -9397,7 +9392,6 @@ class PitchFirstRhythmCommand(scoping.Command):
         assert len(selections) == len(collections)
         rhythm_maker = self._get_rhythm_maker(
             division_masks=division_masks,
-            logical_tie_masks=logical_tie_masks,
             talea_counts=talea_counts,
             talea_denominator=talea_denominator,
             time_treatments=time_treatments,
@@ -9462,7 +9456,6 @@ class PitchFirstRhythmCommand(scoping.Command):
     def _get_rhythm_maker(
         self,
         division_masks=None,
-        logical_tie_masks=None,
         talea_counts=None,
         talea_denominator=None,
         time_treatments=None,
@@ -9476,8 +9469,6 @@ class PitchFirstRhythmCommand(scoping.Command):
         keywords = {}
         if division_masks is not None:
             keywords["division_masks"] = division_masks
-        if logical_tie_masks is not None:
-            keywords["logical_tie_masks"] = logical_tie_masks
         if talea_counts is not None:
             keywords["talea__counts"] = talea_counts
         if talea_denominator is not None:
@@ -9667,6 +9658,119 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 }
             >>
 
+    ..  container:: example
+
+        Silences every third logical tie:
+
+        >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+        ...     rmakers.SilenceMask(
+        ...         selector=baca.lts()[abjad.index([2], 3)],
+        ...     ),
+        ...     beam_specifier=rmakers.BeamSpecifier(
+        ...         beam_each_division=True,
+        ...     ),
+        ...     talea=rmakers.Talea(
+        ...         counts=[1, 1, 2],
+        ...         denominator=16,
+        ...         ),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selections, state = rhythm_maker(collections)
+        >>> lilypond_file = rhythm_maker.show(selections)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 3/4
+                    s1 * 3/4
+                }
+                \new Staff
+                {
+                    \scaleDurations #'(1 . 1) {
+                        c'16
+                        [
+                        d'16
+                        ]
+                        r8
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        r8
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        r8
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        Silences first and last logical ties:
+
+        >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+        ...     rmakers.SilenceMask(selector=baca.lt(0)),
+        ...     rmakers.SilenceMask(selector=baca.lt(-1)),
+        ...     beam_specifier=rmakers.BeamSpecifier(
+        ...         beam_each_division=True,
+        ...     ),
+        ...     talea=rmakers.Talea(
+        ...         counts=[1, 1, 2],
+        ...         denominator=16,
+        ...         ),
+        ...     )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selections, state = rhythm_maker(collections)
+        >>> lilypond_file = rhythm_maker.show(selections)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 3/4
+                    s1 * 3/4
+                }
+                \new Staff
+                {
+                    \scaleDurations #'(1 . 1) {
+                        r16
+                        d'16
+                        [
+                        bf'8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        fs''16
+                        [
+                        e''16
+                        ef''8
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        r8
+                    }
+                }
+            >>
+
     """
 
     ### CLASS VARIABLES ###
@@ -9685,12 +9789,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
     def __init__(
         self,
-        *,
+        *specifiers,
         acciaccatura_specifiers=None,
         beam_specifier=None,
         division_masks=None,
         duration_specifier=None,
-        logical_tie_masks=None,
         talea=None,
         tie_specifier=None,
         time_treatments=None,
@@ -9698,10 +9801,10 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
     ):
         rmakers.RhythmMaker.__init__(
             self,
+            *specifiers,
             beam_specifier=beam_specifier,
             duration_specifier=duration_specifier,
             division_masks=division_masks,
-            logical_tie_masks=logical_tie_masks,
             tie_specifier=tie_specifier,
             tuplet_specifier=tuplet_specifier,
         )
@@ -9873,6 +9976,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             total_collections=total_collections,
         )
         selections = self._apply_tuplet_specifier(selections, divisions=None)
+        selections = self._apply_specifier_stack(selections, divisions=None)
         selections = self._apply_specifiers(selections)
         # self._check_wellformedness(selections)
         state = self._make_state()
@@ -11256,140 +11360,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Returns duration specifier or none.
         """
         return rmakers.RhythmMaker.duration_specifier.fget(self)
-
-    @property
-    def logical_tie_masks(self):
-        r"""
-        Gets logical tie masks.
-
-        ..  container:: example
-
-            Silences every third logical tie:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...     ),
-            ...     logical_tie_masks=[
-            ...         rmakers.silence([2], 3),
-            ...         ],
-            ...     talea=rmakers.Talea(
-            ...         counts=[1, 1, 2],
-            ...         denominator=16,
-            ...         ),
-            ...     )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
-                    \new Staff
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'16
-                            ]
-                            r8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
-                            [
-                            e''16
-                            ]
-                            r8
-                            af''16
-                            [
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            r8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Silences first and last logical ties:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...     ),
-            ...     logical_tie_masks=[
-            ...         rmakers.silence([0]),
-            ...         rmakers.silence([-1]),
-            ...         ],
-            ...     talea=rmakers.Talea(
-            ...         counts=[1, 1, 2],
-            ...         denominator=16,
-            ...         ),
-            ...     )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
-                    \new Staff
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            r16
-                            d'16
-                            [
-                            bf'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            r8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Defaults to none:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
-            >>> rhythm_maker.logical_tie_masks is None
-            True
-
-        Set to patterns or none.
-
-        Returns tuple patterns or none.
-        """
-        return rmakers.RhythmMaker.logical_tie_masks.fget(self)
 
     @property
     def talea(self):
