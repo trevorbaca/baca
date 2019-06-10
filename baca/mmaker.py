@@ -6735,8 +6735,11 @@ class MusicMaker(object):
 
     def _call_remaining_commands(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
+        prototype = (
+            rmakers.BeamSpecifier, rmakers.SilenceMask, rmakers.SustainMask
+        )
         for specifier in specifiers:
-            if not isinstance(specifier, rmakers.BeamSpecifier):
+            if not isinstance(specifier, prototype):
                 assert isinstance(specifier, scoping.Command), format(
                     specifier
                 )

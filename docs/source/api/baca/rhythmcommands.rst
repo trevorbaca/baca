@@ -500,10 +500,6 @@ rhythmcommands
 
    .. container:: inherited
 
-      .. automethod:: SkipRhythmMaker.__illustrate__
-
-   .. container:: inherited
-
       .. automethod:: SkipRhythmMaker.__repr__
 
    .. raw:: html
@@ -532,6 +528,10 @@ rhythmcommands
    .. container:: inherited
 
       .. autoattribute:: SkipRhythmMaker.previous_state
+
+   .. container:: inherited
+
+      .. autoattribute:: SkipRhythmMaker.specifiers
 
    .. container:: inherited
 

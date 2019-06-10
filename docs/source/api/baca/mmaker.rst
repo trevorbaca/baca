@@ -920,10 +920,6 @@ mmaker
 
    .. container:: inherited
 
-      .. automethod:: PitchFirstRhythmMaker.__illustrate__
-
-   .. container:: inherited
-
       .. automethod:: PitchFirstRhythmMaker.__repr__
 
    .. raw:: html
@@ -955,6 +951,10 @@ mmaker
    .. container:: inherited
 
       .. autoattribute:: PitchFirstRhythmMaker.previous_state
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmMaker.specifiers
 
    .. container:: inherited
 
