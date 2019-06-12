@@ -523,10 +523,6 @@ rhythmcommands
 
    .. container:: inherited
 
-      .. autoattribute:: SkipRhythmMaker.logical_tie_masks
-
-   .. container:: inherited
-
       .. autoattribute:: SkipRhythmMaker.previous_state
 
    .. container:: inherited

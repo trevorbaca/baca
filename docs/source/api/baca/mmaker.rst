@@ -890,7 +890,6 @@ mmaker
       beam_specifier
       division_masks
       duration_specifier
-      logical_tie_masks
       show
       talea
       tie_specifier
@@ -945,8 +944,6 @@ mmaker
    .. autoattribute:: PitchFirstRhythmMaker.division_masks
 
    .. autoattribute:: PitchFirstRhythmMaker.duration_specifier
-
-   .. autoattribute:: PitchFirstRhythmMaker.logical_tie_masks
 
    .. container:: inherited
 

@@ -994,6 +994,9 @@ class RhythmCommand(scoping.Command):
             ...     division_masks=[rmakers.silence([0], 1)],
             ...     )
             >>> rhythm_maker_2 = rmakers.TaleaRhythmMaker(
+            ...             rmakers.TupletSpecifier(
+            ...                 extract_trivial=True,
+            ...             ),
             ...         beam_specifier=rmakers.BeamSpecifier(
             ...             beam_each_division=True,
             ...         ),
