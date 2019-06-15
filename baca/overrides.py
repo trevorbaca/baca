@@ -86,7 +86,7 @@ class OverrideCommand(scoping.Command):
         ...             rmakers.TupletSpecifier(
         ...                 extract_trivial=True,
         ...             ),
-        ...             beam_specifier=rmakers.BeamSpecifier(
+        ...             rmakers.BeamSpecifier(
         ...                 beam_each_division=True,
         ...             ),
         ...             talea=rmakers.Talea(
@@ -762,7 +762,7 @@ def bar_line_transparent(
         ...             rmakers.TupletSpecifier(
         ...                 extract_trivial=True,
         ...             ),
-        ...             beam_specifier=rmakers.BeamSpecifier(
+        ...             rmakers.BeamSpecifier(
         ...                 beam_each_division=True,
         ...             ),
         ...             talea=rmakers.Talea(
@@ -924,7 +924,7 @@ def bar_line_transparent(
         ...             rmakers.TupletSpecifier(
         ...                 extract_trivial=True,
         ...             ),
-        ...             beam_specifier=rmakers.BeamSpecifier(
+        ...             rmakers.BeamSpecifier(
         ...                 beam_each_division=True,
         ...             ),
         ...             talea=rmakers.Talea(

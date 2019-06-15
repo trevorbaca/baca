@@ -1303,7 +1303,10 @@ class HorizontalSpacingSpecifier(object):
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.AccelerandoRhythmMaker(
-        ...             beam_specifier=rmakers.BeamSpecifier(
+        ...             rmakers.TupletSpecifier(
+        ...                 duration_bracket=True,
+        ...                 ),
+        ...             rmakers.BeamSpecifier(
         ...                 beam_each_division=True,
         ...                 use_feather_beams=True,
         ...                 ),
@@ -1311,9 +1314,6 @@ class HorizontalSpacingSpecifier(object):
         ...                 start_duration=abjad.Duration(1, 8),
         ...                 stop_duration=abjad.Duration(1, 20),
         ...                 written_duration=abjad.Duration(1, 16),
-        ...                 ),
-        ...             tuplet_specifier=rmakers.TupletSpecifier(
-        ...                 duration_bracket=True,
         ...                 ),
         ...             ),
         ...         ),
