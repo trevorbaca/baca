@@ -28,12 +28,12 @@ class AcciaccaturaSpecifier(object):
         Default acciaccatura specifier:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+        ...     rmakers.BeamSpecifier(
+        ...         beam_each_division=True,
+        ...         ),
         ...     acciaccatura_specifiers=[
         ...         baca.AcciaccaturaSpecifier()
         ...         ],
-        ...     beam_specifier=rmakers.BeamSpecifier(
-        ...         beam_each_division=True,
-        ...         ),
         ...     talea=rmakers.Talea(
         ...         counts=[1],
         ...         denominator=8,
@@ -204,12 +204,12 @@ class AcciaccaturaSpecifier(object):
             Sixteenth-note acciaccaturas by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...         ),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
@@ -307,14 +307,14 @@ class AcciaccaturaSpecifier(object):
             Eighth-note acciaccaturas:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...         ),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             durations=[(1, 8)],
             ...             ),
             ...         ],
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
@@ -425,12 +425,12 @@ class AcciaccaturaSpecifier(object):
             As many acciaccaturas as possible per collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...         ),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
@@ -529,6 +529,9 @@ class AcciaccaturaSpecifier(object):
             At most two acciaccaturas at the beginning of every collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...         ),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -538,9 +541,6 @@ class AcciaccaturaSpecifier(object):
             ...                 ),
             ...             ),
             ...         ],
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
@@ -644,6 +644,9 @@ class AcciaccaturaSpecifier(object):
             At most two acciaccaturas at the end of every collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...         ),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -653,9 +656,6 @@ class AcciaccaturaSpecifier(object):
             ...                 ),
             ...             ),
             ...         ],
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
@@ -760,6 +760,9 @@ class AcciaccaturaSpecifier(object):
             then at most two acciaccaturas at the end of every collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...         ),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -770,9 +773,6 @@ class AcciaccaturaSpecifier(object):
             ...                 ),
             ...             ),
             ...         ],
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
@@ -882,6 +882,9 @@ class AcciaccaturaSpecifier(object):
             As many acciaccaturas as possible in the middle of every collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...         ),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -889,9 +892,6 @@ class AcciaccaturaSpecifier(object):
             ...                 ),
             ...             ),
             ...         ],
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
@@ -1008,12 +1008,12 @@ class AcciaccaturaSpecifier(object):
             Applies to all collections by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...         ),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
@@ -1111,14 +1111,14 @@ class AcciaccaturaSpecifier(object):
             Applies to last collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...         ),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             pattern=abjad.index_last(1),
             ...             ),
             ...         ],
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
@@ -1210,14 +1210,14 @@ class AcciaccaturaSpecifier(object):
             Applies to every other collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...         ),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             pattern=abjad.index([1], 2),
             ...             ),
             ...         ],
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
@@ -1846,7 +1846,7 @@ class ImbricationCommand(scoping.Command):
         ...     baca.staccato(selector=baca.pheads()),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             beam_specifier=rmakers.BeamSpecifier(
+        ...             rmakers.BeamSpecifier(
         ...                 beam_each_division=True,
         ...             ),
         ...             talea=rmakers.Talea(
@@ -2086,7 +2086,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -4265,7 +4265,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -5591,9 +5591,7 @@ class MusicAccumulator(object):
             rmakers.BeamSpecifier(beam_divisions_together=True),
             PitchFirstRhythmCommand(
                 rhythm_maker=PitchFirstRhythmMaker(
-                    beam_specifier=rmakers.BeamSpecifier(
-                        beam_each_division=True
-                    ),
+                    rmakers.BeamSpecifier(beam_each_division=True),
                     talea=rmakers.Talea(counts=[1], denominator=16),
                 )
             ),
@@ -6932,7 +6930,7 @@ class MusicMaker(object):
     def _make_default_rhythm_command():
         return PitchFirstRhythmCommand(
             rhythm_maker=PitchFirstRhythmMaker(
-                beam_specifier=rmakers.BeamSpecifier(beam_each_division=True)
+                rmakers.BeamSpecifier(beam_each_division=True)
             )
         )
 
@@ -8309,7 +8307,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -8321,7 +8319,7 @@ class MusicMaker(object):
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.index_first(1),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -8383,7 +8381,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -8395,7 +8393,7 @@ class MusicMaker(object):
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -8457,7 +8455,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -8470,7 +8468,7 @@ class MusicMaker(object):
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -8533,7 +8531,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -8545,7 +8543,7 @@ class MusicMaker(object):
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -8609,7 +8607,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -8621,7 +8619,7 @@ class MusicMaker(object):
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -9529,7 +9527,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Sixteenths and eighths:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     beam_specifier=rmakers.BeamSpecifier(
+        ...     rmakers.BeamSpecifier(
         ...         beam_each_division=True,
         ...     ),
         ...     talea=rmakers.Talea(
@@ -9666,7 +9664,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         ...     rmakers.SilenceMask(
         ...         selector=baca.lts()[abjad.index([2], 3)],
         ...     ),
-        ...     beam_specifier=rmakers.BeamSpecifier(
+        ...     rmakers.BeamSpecifier(
         ...         beam_each_division=True,
         ...     ),
         ...     talea=rmakers.Talea(
@@ -9723,7 +9721,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     rmakers.SilenceMask(selector=baca.lt(0)),
         ...     rmakers.SilenceMask(selector=baca.lt(-1)),
-        ...     beam_specifier=rmakers.BeamSpecifier(
+        ...     rmakers.BeamSpecifier(
         ...         beam_each_division=True,
         ...     ),
         ...     talea=rmakers.Talea(
@@ -9844,7 +9842,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Without state manifest:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...     ),
             ...     talea=rmakers.Talea(
@@ -9905,7 +9903,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             With state manifest:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...     ),
             ...     talea=rmakers.Talea(
@@ -10406,12 +10404,12 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Graced quarters:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...     ),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...     ),
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=4,
@@ -10509,14 +10507,14 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Graced rests:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...     ),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier()
             ...             ),
             ...         ],
-            ...     beam_specifier=rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...     ),
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=4,
@@ -10647,7 +10645,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Beams each division by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...     ),
             ...     talea=rmakers.Talea(
@@ -10710,7 +10708,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Beams divisions together:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
             ...         ),
             ...     talea=rmakers.Talea(
@@ -10789,7 +10787,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Beams nothing:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=False,
             ...         ),
             ...     talea=rmakers.Talea(
@@ -10842,7 +10840,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Does not beam rests:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...     ),
             ...     talea=rmakers.Talea(
@@ -10905,7 +10903,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Does beam rests:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         beam_rests=True,
             ...     ),
@@ -10969,7 +10967,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Beams rests with stemlets:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         beam_rests=True,
             ...         stemlet_length=0.75,
@@ -11033,17 +11031,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     }
                 >>
 
-        ..  container:: example
-
-            Defaults to none:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
-            >>> rhythm_maker.beam_specifier is None
-            True
-
-        Set to beam specifier or none.
-
-        Returns beam specifier or none.
         """
         return rmakers.RhythmMaker.beam_specifier.fget(self)
 
@@ -11057,7 +11044,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             No division masks:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...     ),
             ...     talea=rmakers.Talea(
@@ -11110,7 +11097,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Silences every other division:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...     ),
             ...     division_masks=[
@@ -11158,7 +11145,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Sustains every other division:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...     ),
             ...     division_masks=[
@@ -11226,7 +11213,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             durations by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...     ),
             ...     talea=rmakers.Talea(
@@ -11288,7 +11275,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             durations:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...     ),
             ...     duration_specifier=rmakers.DurationSpecifier(
@@ -11371,7 +11358,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             With rests:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         beam_rests=True,
             ...         stemlet_length=1.5,
@@ -11433,7 +11420,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             With very large nonassignable counts:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     talea=rmakers.Talea(
@@ -11497,15 +11484,15 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Ties across divisions with matching pitches:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.TieSpecifier(
+            ...         tie_across_divisions=True,
+            ...         ),
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
-            ...         ),
-            ...     tie_specifier=rmakers.TieSpecifier(
-            ...         tie_across_divisions=True,
             ...         ),
             ...     )
 
@@ -11554,15 +11541,15 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Ties consecutive notes with matching pitches:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.TieSpecifier(
+            ...         tie_consecutive_notes=True,
+            ...         ),
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
-            ...         ),
-            ...     tie_specifier=rmakers.TieSpecifier(
-            ...         tie_consecutive_notes=True,
             ...         ),
             ...     )
 
@@ -11633,7 +11620,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             One extra count per division:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     time_treatments=[1],
@@ -11690,7 +11677,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             One missing count per division:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     time_treatments=[-1],
@@ -11746,7 +11733,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Accelerandi:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     time_treatments=['accel'],
@@ -11807,7 +11794,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Ritardandi:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     time_treatments=['rit'],
@@ -11868,7 +11855,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Accelerandi followed by ritardandi:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     time_treatments=['accel', 'rit'],
@@ -11927,7 +11914,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Mixed accelerandi, ritardandi and prolation:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     time_treatments=['accel', -2, 'rit'],
@@ -11988,7 +11975,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Specified by tuplet multiplier:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     time_treatments=[abjad.Ratio((3, 2))],
@@ -12085,7 +12072,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Segment durations equal to a quarter:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     time_treatments=[abjad.Duration(1, 4)],
@@ -12182,7 +12169,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             quarter:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     time_treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
@@ -12313,7 +12300,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Does not simplify redudant tuplets by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     talea=rmakers.Talea(
@@ -12382,7 +12369,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Trivializes tuplets:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     beam_specifier=rmakers.BeamSpecifier(
+            ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     talea=rmakers.Talea(

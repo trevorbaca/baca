@@ -869,7 +869,7 @@ class ColorCommand(scoping.Command):
         ...     baca.color(),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             beam_specifier=rmakers.BeamSpecifier(
+        ...             rmakers.BeamSpecifier(
         ...                 beam_each_division=True,
         ...             ),
         ...             talea=rmakers.Talea(
@@ -1640,7 +1640,7 @@ class IndicatorCommand(scoping.Command):
         ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             beam_specifier=rmakers.BeamSpecifier(
+        ...             rmakers.BeamSpecifier(
         ...                 beam_each_division=True,
         ...             ),
         ...             talea=rmakers.Talea(
@@ -2003,7 +2003,7 @@ class IndicatorCommand(scoping.Command):
             ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
@@ -2084,7 +2084,7 @@ class IndicatorCommand(scoping.Command):
             ...         ),
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             beam_specifier=rmakers.BeamSpecifier(
+            ...             rmakers.BeamSpecifier(
             ...                 beam_each_division=True,
             ...             ),
             ...             talea=rmakers.Talea(
