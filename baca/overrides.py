@@ -593,46 +593,46 @@ def bar_extent(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            e'8                                                                      %! baca_make_even_divisions
-                            [                                                                        %! baca_make_even_divisions
+                            e'8                                                                      %! baca.make_even_divisions
+                            [                                                                        %! baca.make_even_divisions
             <BLANKLINE>
-                            d''8                                                                     %! baca_make_even_divisions
+                            d''8                                                                     %! baca.make_even_divisions
             <BLANKLINE>
-                            f'8                                                                      %! baca_make_even_divisions
+                            f'8                                                                      %! baca.make_even_divisions
             <BLANKLINE>
-                            e''8                                                                     %! baca_make_even_divisions
-                            ]                                                                        %! baca_make_even_divisions
+                            e''8                                                                     %! baca.make_even_divisions
+                            ]                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             \override Staff.BarLine.bar-extent = #'(-4 . 4)                          %! baca.bar_extent:OverrideCommand(1)
-                            g'8                                                                      %! baca_make_even_divisions
-                            [                                                                        %! baca_make_even_divisions
+                            g'8                                                                      %! baca.make_even_divisions
+                            [                                                                        %! baca.make_even_divisions
             <BLANKLINE>
-                            f''8                                                                     %! baca_make_even_divisions
+                            f''8                                                                     %! baca.make_even_divisions
             <BLANKLINE>
-                            e'8                                                                      %! baca_make_even_divisions
-                            ]                                                                        %! baca_make_even_divisions
+                            e'8                                                                      %! baca.make_even_divisions
+                            ]                                                                        %! baca.make_even_divisions
                             \revert Staff.BarLine.bar-extent                                         %! baca.bar_extent:OverrideCommand(2)
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            d''8                                                                     %! baca_make_even_divisions
-                            [                                                                        %! baca_make_even_divisions
+                            d''8                                                                     %! baca.make_even_divisions
+                            [                                                                        %! baca.make_even_divisions
             <BLANKLINE>
-                            f'8                                                                      %! baca_make_even_divisions
+                            f'8                                                                      %! baca.make_even_divisions
             <BLANKLINE>
-                            e''8                                                                     %! baca_make_even_divisions
+                            e''8                                                                     %! baca.make_even_divisions
             <BLANKLINE>
-                            g'8                                                                      %! baca_make_even_divisions
-                            ]                                                                        %! baca_make_even_divisions
+                            g'8                                                                      %! baca.make_even_divisions
+                            ]                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            f''8                                                                     %! baca_make_even_divisions
-                            [                                                                        %! baca_make_even_divisions
+                            f''8                                                                     %! baca.make_even_divisions
+                            [                                                                        %! baca.make_even_divisions
             <BLANKLINE>
-                            e'8                                                                      %! baca_make_even_divisions
+                            e'8                                                                      %! baca.make_even_divisions
             <BLANKLINE>
-                            d''8                                                                     %! baca_make_even_divisions
-                            ]                                                                        %! baca_make_even_divisions
+                            d''8                                                                     %! baca.make_even_divisions
+                            ]                                                                        %! baca.make_even_divisions
                             \once \override Staff.BarLine.bar-extent = #'(-4 . 4)                    %! baca.bar_extent:OverrideCommand(1)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
@@ -7463,7 +7463,7 @@ def text_script_staff_padding(
     *,
     allow_mmrests: bool = False,
     selector: abjad.SelectorTyping = "baca.leaves()",
-    tag: str = "baca_script_staff_padding",
+    tag: str = "baca.text_script_staff_padding",
 ) -> OverrideCommand:
     r"""
     Overrides text script staff padding.
@@ -7501,7 +7501,7 @@ def text_script_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.staff-padding = #4                                  %! baca_script_staff_padding:OverrideCommand(1)
+                            \override TextScript.staff-padding = #4                                  %! baca.text_script_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
@@ -7533,7 +7533,7 @@ def text_script_staff_padding(
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TextScript.staff-padding                                         %! baca_script_staff_padding:OverrideCommand(2)
+                            \revert TextScript.staff-padding                                         %! baca.text_script_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -7590,7 +7590,7 @@ def text_script_staff_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.staff-padding = #4                                  %! baca_script_staff_padding:OverrideCommand(1)
+                            \override TextScript.staff-padding = #4                                  %! baca.text_script_staff_padding:OverrideCommand(1)
                             fs''16
                             ^ \markup { "lo stesso tempo" }                                          %! baca.markup:IndicatorCommand
                             [
@@ -7604,7 +7604,7 @@ def text_script_staff_padding(
                             [
                             g''16
                             ]
-                            \revert TextScript.staff-padding                                         %! baca_script_staff_padding:OverrideCommand(2)
+                            \revert TextScript.staff-padding                                         %! baca.text_script_staff_padding:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
@@ -7937,7 +7937,7 @@ def text_spanner_staff_padding(
     n: abjad.Number,
     *,
     selector: abjad.SelectorTyping = "baca.leaves()",
-    tag: str = "baca_text_spanner_staff_padding",
+    tag: str = "baca.text_spanner_staff_padding",
 ) -> OverrideCommand:
     r"""
     Overrides text spanner staff padding.
@@ -7975,8 +7975,8 @@ def text_spanner_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextSpanner.staff-padding = #6                                 %! baca_text_spanner_staff_padding:OverrideCommand(1)
-                            \override TextScript.staff-padding = #6                                  %! baca_script_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #6                                 %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextScript.staff-padding = #6                                  %! baca.text_script_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
@@ -8013,8 +8013,8 @@ def text_spanner_staff_padding(
                             a'16
                             \stopTextSpan                                                            %! baca.text_spanner:PiecewiseCommand(2)
                             r4
-                            \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
-                            \revert TextScript.staff-padding                                         %! baca_script_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextScript.staff-padding                                         %! baca.text_script_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }
@@ -8057,7 +8057,7 @@ def text_spanner_staff_padding(
                     {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextScript.staff-padding = #6                                  %! baca_script_staff_padding:OverrideCommand(1)
+                            \override TextScript.staff-padding = #6                                  %! baca.text_script_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
@@ -8071,7 +8071,7 @@ def text_spanner_staff_padding(
                         }
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TextSpanner.staff-padding = #6                                 %! baca_text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #6                                 %! baca.text_spanner_staff_padding:OverrideCommand(1)
                             fs''16
                             [
                             - \abjad-dashed-line-with-arrow                                          %! baca.text_spanner:PiecewiseCommand(1)
@@ -8091,12 +8091,12 @@ def text_spanner_staff_padding(
                             g''16
                             \stopTextSpan                                                            %! baca.text_spanner:PiecewiseCommand(2)
                             ]
-                            \revert TextSpanner.staff-padding                                        %! baca_text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
                         }
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TextScript.staff-padding                                         %! baca_script_staff_padding:OverrideCommand(2)
+                            \revert TextScript.staff-padding                                         %! baca.text_script_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
                     }

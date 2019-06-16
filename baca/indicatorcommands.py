@@ -1745,21 +1745,21 @@ def hide_black_note_heads(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                            c'2                                                                      %! baca_make_notes
+                            c'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             \once \override NoteHead.transparent = ##t                               %! hide.black_note_heads:IndicatorCommand
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                            c'4.                                                                     %! baca_make_notes
+                            c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                            c'2                                                                      %! baca_make_notes
+                            c'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             \once \override NoteHead.transparent = ##t                               %! hide.black_note_heads:IndicatorCommand
                             \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                            c'4.                                                                     %! baca_make_notes
+                            c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -2355,20 +2355,20 @@ def margin_markup(
                             \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                             \markup { Fl. }                                                          %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
-                            e'2                                                                      %! baca_make_notes
+                            e'2                                                                      %! baca.make_notes
                             ^ \baca-explicit-indicator-markup "[MarginMarkup]"                       %! EXPLICIT_MARGIN_MARKUP_ALERT:_attach_latent_indicator_alert
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:_attach_color_literal(2)
                             \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                             \markup { Fl. }                                                          %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:_treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            f'4.                                                                     %! baca_make_notes
+                            f'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            e'2                                                                      %! baca_make_notes
+                            e'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            f'4.                                                                     %! baca_make_notes
+                            f'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3099,20 +3099,20 @@ def staff_lines(
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                             \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
-                            a4.                                                                      %! baca_make_notes
+                            a4.                                                                      %! baca.make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            b4.                                                                      %! baca_make_notes
+                            b4.                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            c'4.                                                                     %! baca_make_notes
+                            c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            d'4.                                                                     %! baca_make_notes
+                            d'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 5]                                                %! _comment_measure_numbers
-                            e'4.                                                                     %! baca_make_notes
+                            e'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3235,20 +3235,20 @@ def staff_lines(
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                             \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
-                            b,4.                                                                     %! baca_make_notes
+                            b,4.                                                                     %! baca.make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            c4.                                                                      %! baca_make_notes
+                            c4.                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            d4.                                                                      %! baca_make_notes
+                            d4.                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            e4.                                                                      %! baca_make_notes
+                            e4.                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 5]                                                %! _comment_measure_numbers
-                            f4.                                                                      %! baca_make_notes
+                            f4.                                                                      %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3372,20 +3372,20 @@ def staff_lines(
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                             \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
-                            a4.                                                                      %! baca_make_notes
+                            a4.                                                                      %! baca.make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            b4.                                                                      %! baca_make_notes
+                            b4.                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            c'4.                                                                     %! baca_make_notes
+                            c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            d'4.                                                                     %! baca_make_notes
+                            d'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 5]                                                %! _comment_measure_numbers
-                            e'4.                                                                     %! baca_make_notes
+                            e'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3507,20 +3507,20 @@ def staff_lines(
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                             \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:_attach_color_literal(2)
-                            b,4.                                                                     %! baca_make_notes
+                            b,4.                                                                     %! baca.make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            c4.                                                                      %! baca_make_notes
+                            c4.                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            d4.                                                                      %! baca_make_notes
+                            d4.                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            e4.                                                                      %! baca_make_notes
+                            e4.                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 5]                                                %! _comment_measure_numbers
-                            f4.                                                                      %! baca_make_notes
+                            f4.                                                                      %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3648,20 +3648,20 @@ def staff_lines(
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                             \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):baca.clef:IndicatorCommand
-                            g'4.                                                                     %! baca_make_notes
+                            g'4.                                                                     %! baca.make_notes
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            a'4.                                                                     %! baca_make_notes
+                            a'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            b'4.                                                                     %! baca_make_notes
+                            b'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            c''4.                                                                    %! baca_make_notes
+                            c''4.                                                                    %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 5]                                                %! _comment_measure_numbers
-                            d''4.                                                                    %! baca_make_notes
+                            d''4.                                                                    %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>

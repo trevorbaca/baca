@@ -936,7 +936,7 @@ class RhythmCommand(scoping.Command):
                                 \repeatTie
                 <BLANKLINE>
                                 \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'4                                                                      %! baca_make_repeat_tied_notes
+                                c'4                                                                      %! baca.make_repeat_tied_notes
                                 \repeatTie
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
@@ -1099,7 +1099,7 @@ class RhythmCommand(scoping.Command):
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \override TextScript.font-size = #-2                                     %! baca.text_script_font_size:OverrideCommand(1)
-                                \override TextScript.staff-padding = #5                                  %! baca_script_staff_padding:OverrideCommand(1)
+                                \override TextScript.staff-padding = #5                                  %! baca.text_script_staff_padding:OverrideCommand(1)
                                 \baca-unpitched-music-warning                                            %! _color_unpitched_notes
                                 c'8.
                                 _ \markup {
@@ -1205,7 +1205,7 @@ class RhythmCommand(scoping.Command):
                                     }
                                 ]
                                 \revert TextScript.font-size                                             %! baca.text_script_font_size:OverrideCommand(2)
-                                \revert TextScript.staff-padding                                         %! baca_script_staff_padding:OverrideCommand(2)
+                                \revert TextScript.staff-padding                                         %! baca.text_script_staff_padding:OverrideCommand(2)
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -2008,7 +2008,7 @@ def do_not_beam() -> rmakers.BeamSpecifier:
 def make_even_divisions(
     *,
     measures: typings.SliceTyping = None,
-    tag: str = "baca_make_even_divisions",
+    tag: str = "baca.make_even_divisions",
 ) -> RhythmCommand:
     """
     Makes even divisions.
@@ -2026,7 +2026,7 @@ def make_even_divisions(
 def make_fused_tuplet_monads(
     *,
     measures: typings.SliceTyping = None,
-    tag: str = "baca_make_fused_tuplet_monads",
+    tag: str = "baca.make_fused_tuplet_monads",
     tuplet_ratio: typing.Tuple[int] = None,
 ) -> RhythmCommand:
     """
@@ -2189,7 +2189,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
 def make_multimeasure_rests(
     *,
     measures: typings.SliceTyping = None,
-    tag: str = "baca_make_multimeasure_rests",
+    tag: str = "baca.make_multimeasure_rests",
 ) -> RhythmCommand:
     """
     Makes multimeasure rests.
@@ -2208,7 +2208,7 @@ def make_notes(
     dmask: rmakers.MasksTyping = None,
     measures: typings.SliceTyping = None,
     repeat_ties: bool = False,
-    tag: str = "baca_make_notes",
+    tag: str = "baca.make_notes",
 ) -> RhythmCommand:
     """
     Makes notes; rewrites meter.
@@ -2234,7 +2234,7 @@ def make_repeat_tied_notes(
     dmask: rmakers.MasksTyping = None,
     do_not_rewrite_meter: bool = None,
     measures: typings.SliceTyping = None,
-    tag: str = "baca_make_repeat_tied_notes",
+    tag: str = "baca.make_repeat_tied_notes",
 ) -> RhythmCommand:
     """
     Makes repeat-tied notes; rewrites meter.
@@ -2258,7 +2258,7 @@ def make_repeated_duration_notes(
     dmask: rmakers.MasksTyping = None,
     do_not_rewrite_meter: bool = None,
     measures: typings.SliceTyping = None,
-    tag: str = "baca_make_repeated_duration_notes",
+    tag: str = "baca.make_repeated_duration_notes",
 ) -> RhythmCommand:
     """
     Makes repeated-duration notes; rewrites meter.
@@ -2286,7 +2286,7 @@ def make_repeated_duration_notes(
 
 
 def make_rests(
-    *, measures: typings.SliceTyping = None, tag: str = "baca_make_rests"
+    *, measures: typings.SliceTyping = None, tag: str = "baca.make_rests"
 ) -> RhythmCommand:
     """
     Makes rests.
@@ -2469,7 +2469,7 @@ def make_single_attack(
     duration,
     *,
     measures: typings.SliceTyping = None,
-    tag: str = "baca_make_single_attack",
+    tag: str = "baca.make_single_attack",
 ) -> RhythmCommand:
     """
     Makes single attacks with ``duration``.
@@ -2492,7 +2492,7 @@ def make_single_attack(
 
 
 def make_skips(
-    *, measures: typings.SliceTyping = None, tag: str = "baca_make_skips"
+    *, measures: typings.SliceTyping = None, tag: str = "baca.make_skips"
 ) -> RhythmCommand:
     """
     Makes skips.
@@ -2501,7 +2501,7 @@ def make_skips(
 
 
 def make_tied_notes(
-    *, measures: typings.SliceTyping = None, tag: str = "baca_make_tied_notes"
+    *, measures: typings.SliceTyping = None, tag: str = "baca.make_tied_notes"
 ) -> RhythmCommand:
     """
     Makes tied notes; rewrites meter.
@@ -2521,7 +2521,7 @@ def make_tied_repeated_durations(
     durations: typing.Sequence[abjad.DurationTyping],
     *,
     measures: typings.SliceTyping = None,
-    tag: str = "baca_make_tied_reepated_durations",
+    tag: str = "baca.make_tied_repeated_durations",
 ) -> RhythmCommand:
     """
     Makes tied repeated durations; does not rewrite meter.
@@ -2630,17 +2630,17 @@ def repeat_tie_from(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            c'2                                                                      %! baca_make_notes
+                            c'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            c'4.                                                                     %! baca_make_notes
+                            c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            c'2                                                                      %! baca_make_notes
+                            c'2                                                                      %! baca.make_notes
                             \repeatTie                                                               %! TieCorrectionCommand
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            c'4.                                                                     %! baca_make_notes
+                            c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -2765,17 +2765,17 @@ def repeat_tie_to(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            c'2                                                                      %! baca_make_notes
+                            c'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            c'4.                                                                     %! baca_make_notes
+                            c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            c'2                                                                      %! baca_make_notes
+                            c'2                                                                      %! baca.make_notes
                             \repeatTie                                                               %! TieCorrectionCommand
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            c'4.                                                                     %! baca_make_notes
+                            c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -2951,36 +2951,36 @@ def set_duration_multiplier(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'8                                                                      %! baca_make_repeated_duration_notes
+                            c'8                                                                      %! baca.make_repeated_duration_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3100,36 +3100,36 @@ def set_duration_multiplier(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'16. * 4/3                                                              %! baca_make_repeated_duration_notes
+                            c'16. * 4/3                                                              %! baca.make_repeated_duration_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3250,36 +3250,36 @@ def set_duration_multiplier(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
-                            c'1 * 1/8                                                                %! baca_make_repeated_duration_notes
+                            c'1 * 1/8                                                                %! baca.make_repeated_duration_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3469,17 +3469,17 @@ def tie_from(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            c'2                                                                      %! baca_make_notes
+                            c'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            c'4.                                                                     %! baca_make_notes
+                            c'4.                                                                     %! baca.make_notes
                             ~                                                                        %! TieCorrectionCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            c'2                                                                      %! baca_make_notes
+                            c'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            c'4.                                                                     %! baca_make_notes
+                            c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3598,17 +3598,17 @@ def tie_to(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            c'2                                                                      %! baca_make_notes
+                            c'2                                                                      %! baca.make_notes
                             ~                                                                        %! TieCorrectionCommand
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            c'4.                                                                     %! baca_make_notes
+                            c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            c'2                                                                      %! baca_make_notes
+                            c'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            c'4.                                                                     %! baca_make_notes
+                            c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3729,18 +3729,18 @@ def untie_to(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            c'2                                                                      %! baca_make_tied_notes
+                            c'2                                                                      %! baca.make_tied_notes
                             ~
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            c'4.                                                                     %! baca_make_tied_notes
+                            c'4.                                                                     %! baca.make_tied_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            c'2                                                                      %! baca_make_tied_notes
+                            c'2                                                                      %! baca.make_tied_notes
                             ~
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            c'4.                                                                     %! baca_make_tied_notes
+                            c'4.                                                                     %! baca.make_tied_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
