@@ -28,9 +28,7 @@ class AcciaccaturaSpecifier(object):
         Default acciaccatura specifier:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     rmakers.BeamSpecifier(
-        ...         beam_each_division=True,
-        ...         ),
+        ...     rmakers.BeamSpecifier(beam_each_division=True),
         ...     acciaccatura_specifiers=[
         ...         baca.AcciaccaturaSpecifier()
         ...         ],
@@ -204,9 +202,7 @@ class AcciaccaturaSpecifier(object):
             Sixteenth-note acciaccaturas by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_each_division=True),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
@@ -307,9 +303,7 @@ class AcciaccaturaSpecifier(object):
             Eighth-note acciaccaturas:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_each_division=True),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             durations=[(1, 8)],
@@ -425,9 +419,7 @@ class AcciaccaturaSpecifier(object):
             As many acciaccaturas as possible per collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_each_division=True),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
@@ -529,9 +521,7 @@ class AcciaccaturaSpecifier(object):
             At most two acciaccaturas at the beginning of every collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_each_division=True),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -644,9 +634,7 @@ class AcciaccaturaSpecifier(object):
             At most two acciaccaturas at the end of every collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_each_division=True),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -760,9 +748,7 @@ class AcciaccaturaSpecifier(object):
             then at most two acciaccaturas at the end of every collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_each_division=True),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -882,9 +868,7 @@ class AcciaccaturaSpecifier(object):
             As many acciaccaturas as possible in the middle of every collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_each_division=True),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -1008,9 +992,7 @@ class AcciaccaturaSpecifier(object):
             Applies to all collections by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_each_division=True),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
@@ -1111,9 +1093,7 @@ class AcciaccaturaSpecifier(object):
             Applies to last collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_each_division=True),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             pattern=abjad.index_last(1),
@@ -1210,9 +1190,7 @@ class AcciaccaturaSpecifier(object):
             Applies to every other collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_each_division=True),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             pattern=abjad.index([1], 2),
@@ -1501,9 +1479,7 @@ class ImbricationCommand(scoping.Command):
         Defaults:
 
         >>> music_maker = baca.MusicMaker(
-        ...     rmakers.BeamSpecifier(
-        ...         beam_divisions_together=True,
-        ...         ),
+        ...     rmakers.BeamSpecifier(beam_divisions_together=True),
         ...     )
 
         >>> collections = [
@@ -1517,9 +1493,7 @@ class ImbricationCommand(scoping.Command):
         ...     baca.ImbricationCommand(
         ...         'Voice_1',
         ...         [2, 19, 9, 18, 16],
-        ...         rmakers.BeamSpecifier(
-        ...             beam_divisions_together=True,
-        ...             ),
+        ...         rmakers.BeamSpecifier(beam_divisions_together=True),
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
@@ -1648,9 +1622,7 @@ class ImbricationCommand(scoping.Command):
         Multiple imbricated voices:
 
         >>> music_maker = baca.MusicMaker(
-        ...     rmakers.BeamSpecifier(
-        ...         beam_divisions_together=True,
-        ...         ),
+        ...     rmakers.BeamSpecifier(beam_divisions_together=True),
         ...     )
 
         >>> collections = [
@@ -1846,9 +1818,7 @@ class ImbricationCommand(scoping.Command):
         ...     baca.staccato(selector=baca.pheads()),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             rmakers.BeamSpecifier(
-        ...                 beam_each_division=True,
-        ...             ),
+        ...         rmakers.BeamSpecifier(beam_each_division=True),
         ...             talea=rmakers.Talea(
         ...                 counts=[1],
         ...                 denominator=16,
@@ -2086,9 +2056,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(
-            ...                 beam_each_division=True,
-            ...             ),
+            ...             rmakers.BeamSpecifier(beam_each_division=True),
             ...             talea=rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
@@ -2332,9 +2300,7 @@ class ImbricationCommand(scoping.Command):
             Extends beam across figures:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_divisions_together=True),
             ...     )
 
             >>> voice_1_selections = []
@@ -2663,9 +2629,7 @@ class ImbricationCommand(scoping.Command):
             Works with chords:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_divisions_together=True),
             ...     )
 
             >>> collections = [
@@ -2679,9 +2643,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.BeamSpecifier(
-            ...             beam_divisions_together=True,
-            ...             ),
+            ...         rmakers.BeamSpecifier(beam_divisions_together=True),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -2794,9 +2756,7 @@ class ImbricationCommand(scoping.Command):
             Works with rests:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_divisions_together=True),
             ...     )
 
             >>> collections = [
@@ -2810,9 +2770,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.BeamSpecifier(
-            ...             beam_divisions_together=True,
-            ...             ),
+            ...         rmakers.BeamSpecifier(beam_divisions_together=True),
             ...         ),
             ...     baca.rests_around([2], [2]),
             ...     )
@@ -3690,9 +3648,7 @@ class ImbricationCommand(scoping.Command):
             Beams nothing:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_divisions_together=True),
             ...     )
 
             >>> collections = [
@@ -3706,9 +3662,6 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.BeamSpecifier(
-            ...             beam_each_division=False,
-            ...             ),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -3823,9 +3776,7 @@ class ImbricationCommand(scoping.Command):
             Beams divisions together but excludes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_divisions_together=True),
             ...     )
 
             >>> collections = [
@@ -3839,9 +3790,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.BeamSpecifier(
-            ...             beam_divisions_together=True,
-            ...             ),
+            ...         rmakers.BeamSpecifier(beam_divisions_together=True),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -3970,9 +3919,7 @@ class ImbricationCommand(scoping.Command):
             Beams divisions together and includes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(beam_divisions_together=True),
             ...     )
 
             >>> collections = [
@@ -4249,6 +4196,397 @@ class ImbricationCommand(scoping.Command):
                     >>
                 >>
 
+        ..  container:: example
+
+            Beams each division by default:
+
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...     ),
+            ...     talea=rmakers.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Score]
+            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
+                {
+                    \override TupletBracket.staff-padding = #1.5
+                }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/16
+                        s1 * 15/16
+                    }
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            a'8
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Beams divisions together:
+
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_divisions_together=True,
+            ...         ),
+            ...     talea=rmakers.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Score]
+            >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
+                {
+                    \override Beam.positions = #'(-5.5 . -5.5)
+                }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/16
+                        s1 * 15/16
+                    }
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            \set stemLeftBeamCount = 0
+                            \set stemRightBeamCount = 2
+                            c'16
+                            [
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            d'16
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
+                            bf'8
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            fs''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            e''16
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
+                            ef''8
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            af''16
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            g''16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 1
+                            a'8
+                            ]
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Beams nothing:
+
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=False,
+            ...         ),
+            ...     talea=rmakers.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> selections, state = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/16
+                        s1 * 15/16
+                    }
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            c'16
+                            d'16
+                            bf'8
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            fs''16
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            a'8
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Does not beam rests:
+
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...     ),
+            ...     talea=rmakers.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
+
+            >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
+            >>> selections, state = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Score]
+            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
+                {
+                    \override TupletBracket.staff-padding = #1.5
+                }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/16
+                        s1 * 15/16
+                    }
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            r16
+                            d'16
+                            [
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            ]
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            a'8
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Does beam rests:
+
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...         beam_rests=True,
+            ...     ),
+            ...     talea=rmakers.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
+
+            >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
+            >>> selections, state = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Score]
+            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
+                {
+                    \override TupletBracket.staff-padding = #1.5
+                }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/16
+                        s1 * 15/16
+                    }
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            r16
+                            [
+                            d'16
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            r16
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            a'8
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Beams rests with stemlets:
+
+            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.BeamSpecifier(
+            ...         beam_each_division=True,
+            ...         beam_rests=True,
+            ...         stemlet_length=0.75,
+            ...     ),
+            ...     talea=rmakers.Talea(
+            ...         counts=[1, 1, 2],
+            ...         denominator=16,
+            ...         ),
+            ...     time_treatments=[1],
+            ...     )
+
+            >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
+            >>> selections, state = rhythm_maker(collections)
+            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> staff = lilypond_file[abjad.Score]
+            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
+                {
+                    \override TupletBracket.staff-padding = #1.5
+                }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/16
+                        s1 * 15/16
+                    }
+                    \new Staff
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 5/4 {
+                            \override Staff.Stem.stemlet-length = 0.75
+                            r16
+                            [
+                            d'16
+                            \revert Staff.Stem.stemlet-length
+                            bf'8
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 7/6 {
+                            \override Staff.Stem.stemlet-length = 0.75
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            \revert Staff.Stem.stemlet-length
+                            r16
+                            ]
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 3/2 {
+                            a'8
+                        }
+                    }
+                >>
+
         Returns specifiers or none.
         """
         return list(self._specifiers)
@@ -4265,9 +4603,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(
-            ...                 beam_each_division=True,
-            ...             ),
+            ...             rmakers.BeamSpecifier(beam_each_division=True),
             ...             talea=rmakers.Talea(
             ...                 counts=[5],
             ...                 denominator=32,
@@ -9789,7 +10125,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         self,
         *specifiers,
         acciaccatura_specifiers=None,
-        beam_specifier=None,
         division_masks=None,
         duration_specifier=None,
         talea=None,
@@ -9800,7 +10135,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         rmakers.RhythmMaker.__init__(
             self,
             *specifiers,
-            beam_specifier=beam_specifier,
             duration_specifier=duration_specifier,
             division_masks=division_masks,
             tie_specifier=tie_specifier,
@@ -10236,8 +10570,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 affix_skips_instead_of_rests=affix_skips_instead_of_rests,
             )
             selections.append(selection)
-        beam_specifier = self._get_beam_specifier()
-        beam_specifier(selections)
         selections = self._apply_division_masks(selections)
         return selections
 
@@ -10634,405 +10966,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Returns acciaccatura specifiers or none.
         """
         return self._acciaccatura_specifiers
-
-    @property
-    def beam_specifier(self):
-        r"""
-        Gets beam specifier.
-
-        ..  container:: example
-
-            Beams each division by default:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...     ),
-            ...     talea=rmakers.Talea(
-            ...         counts=[1, 1, 2],
-            ...         denominator=16,
-            ...         ),
-            ...     time_treatments=[1],
-            ...     )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                \with
-                {
-                    \override TupletBracket.staff-padding = #1.5
-                }
-                <<
-                    \new GlobalContext
-                    {
-                        \time 15/16
-                        s1 * 15/16
-                    }
-                    \new Staff
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            a'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Beams divisions together:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_divisions_together=True,
-            ...         ),
-            ...     talea=rmakers.Talea(
-            ...         counts=[1, 1, 2],
-            ...         denominator=16,
-            ...         ),
-            ...     time_treatments=[1],
-            ...     )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                \with
-                {
-                    \override Beam.positions = #'(-5.5 . -5.5)
-                }
-                <<
-                    \new GlobalContext
-                    {
-                        \time 15/16
-                        s1 * 15/16
-                    }
-                    \new Staff
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            \set stemLeftBeamCount = 0
-                            \set stemRightBeamCount = 2
-                            c'16
-                            [
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
-                            d'16
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
-                            bf'8
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
-                            fs''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
-                            e''16
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
-                            ef''8
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
-                            af''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
-                            g''16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 1
-                            a'8
-                            ]
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Beams nothing:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=False,
-            ...         ),
-            ...     talea=rmakers.Talea(
-            ...         counts=[1, 1, 2],
-            ...         denominator=16,
-            ...         ),
-            ...     time_treatments=[1],
-            ...     )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        \time 15/16
-                        s1 * 15/16
-                    }
-                    \new Staff
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            c'16
-                            d'16
-                            bf'8
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            fs''16
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            a'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Does not beam rests:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...     ),
-            ...     talea=rmakers.Talea(
-            ...         counts=[1, 1, 2],
-            ...         denominator=16,
-            ...         ),
-            ...     time_treatments=[1],
-            ...     )
-
-            >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-            >>> selections, state = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                \with
-                {
-                    \override TupletBracket.staff-padding = #1.5
-                }
-                <<
-                    \new GlobalContext
-                    {
-                        \time 15/16
-                        s1 * 15/16
-                    }
-                    \new Staff
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            r16
-                            d'16
-                            [
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            ]
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            a'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Does beam rests:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         beam_rests=True,
-            ...     ),
-            ...     talea=rmakers.Talea(
-            ...         counts=[1, 1, 2],
-            ...         denominator=16,
-            ...         ),
-            ...     time_treatments=[1],
-            ...     )
-
-            >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-            >>> selections, state = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                \with
-                {
-                    \override TupletBracket.staff-padding = #1.5
-                }
-                <<
-                    \new GlobalContext
-                    {
-                        \time 15/16
-                        s1 * 15/16
-                    }
-                    \new Staff
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            r16
-                            [
-                            d'16
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            r16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            a'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Beams rests with stemlets:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         beam_rests=True,
-            ...         stemlet_length=0.75,
-            ...     ),
-            ...     talea=rmakers.Talea(
-            ...         counts=[1, 1, 2],
-            ...         denominator=16,
-            ...         ),
-            ...     time_treatments=[1],
-            ...     )
-
-            >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-            >>> selections, state = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                \with
-                {
-                    \override TupletBracket.staff-padding = #1.5
-                }
-                <<
-                    \new GlobalContext
-                    {
-                        \time 15/16
-                        s1 * 15/16
-                    }
-                    \new Staff
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 5/4 {
-                            \override Staff.Stem.stemlet-length = 0.75
-                            r16
-                            [
-                            d'16
-                            \revert Staff.Stem.stemlet-length
-                            bf'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/6 {
-                            \override Staff.Stem.stemlet-length = 0.75
-                            fs''16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            \revert Staff.Stem.stemlet-length
-                            r16
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/2 {
-                            a'8
-                        }
-                    }
-                >>
-
-        """
-        return rmakers.RhythmMaker.beam_specifier.fget(self)
 
     @property
     def division_masks(self):
