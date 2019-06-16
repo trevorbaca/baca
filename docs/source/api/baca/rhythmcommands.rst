@@ -511,10 +511,6 @@ rhythmcommands
 
    .. container:: inherited
 
-      .. autoattribute:: SkipRhythmMaker.beam_specifier
-
-   .. container:: inherited
-
       .. autoattribute:: SkipRhythmMaker.division_masks
 
    .. container:: inherited

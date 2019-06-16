@@ -887,7 +887,6 @@ mmaker
 
       __call__
       acciaccatura_specifiers
-      beam_specifier
       division_masks
       duration_specifier
       show
@@ -938,8 +937,6 @@ mmaker
       :class: class-header
 
    .. autoattribute:: PitchFirstRhythmMaker.acciaccatura_specifiers
-
-   .. autoattribute:: PitchFirstRhythmMaker.beam_specifier
 
    .. autoattribute:: PitchFirstRhythmMaker.division_masks
 

@@ -11353,15 +11353,15 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             With very large nonassignable counts:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.TieSpecifier(
+            ...         repeat_ties=True,
+            ...         ),
             ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
             ...         ),
             ...     talea=rmakers.Talea(
             ...         counts=[29],
             ...         denominator=64,
-            ...         ),
-            ...     tie_specifier=rmakers.TieSpecifier(
-            ...         repeat_ties=True,
             ...         ),
             ...     )
 
