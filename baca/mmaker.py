@@ -10128,7 +10128,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         division_masks=None,
         duration_specifier=None,
         talea=None,
-        tie_specifier=None,
         time_treatments=None,
         tuplet_specifier=None,
     ):
@@ -10137,7 +10136,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             *specifiers,
             duration_specifier=duration_specifier,
             division_masks=division_masks,
-            tie_specifier=tie_specifier,
             tuplet_specifier=tuplet_specifier,
         )
         if acciaccatura_specifiers is not None:
@@ -11407,141 +11405,141 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         """
         return self._talea
 
-    @property
-    def tie_specifier(self):
-        r"""
-        Gets tie specifier.
-
-        ..  container:: example
-
-            Ties across divisions with matching pitches:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.TieSpecifier(
-            ...         tie_across_divisions=True,
-            ...         ),
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
-            ...     talea=rmakers.Talea(
-            ...         counts=[1, 1, 2],
-            ...         denominator=16,
-            ...         ),
-            ...     )
-
-            >>> collections = [[0, 2, 10], [10, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
-                    \new Staff
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ~
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            bf'16
-                            [
-                            e''16
-                            ef''8
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Ties consecutive notes with matching pitches:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.TieSpecifier(
-            ...         tie_consecutive_notes=True,
-            ...         ),
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
-            ...     talea=rmakers.Talea(
-            ...         counts=[1, 1, 2],
-            ...         denominator=16,
-            ...         ),
-            ...     )
-
-            >>> collections = [[0, 2, 10], [10, 16, 16, 19, 19], [19]]
-            >>> selections, state = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
-                    \new Staff
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'16
-                            bf'8
-                            ~
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            bf'16
-                            [
-                            e''16
-                            ~
-                            e''8
-                            g''16
-                            ~
-                            g''16
-                            ~
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            g''8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Defaults to none:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
-            >>> rhythm_maker.tie_specifier is None
-            True
-
-        Set to tie specifier or none.
-
-        Returns tie specifier or none.
-        """
-        return rmakers.RhythmMaker.tie_specifier.fget(self)
+    #    @property
+    #    def tie_specifier(self):
+    #        r"""
+    #        Gets tie specifier.
+    #
+    #        ..  container:: example
+    #
+    #            Ties across divisions with matching pitches:
+    #
+    #            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+    #            ...     rmakers.TieSpecifier(
+    #            ...         tie_across_divisions=True,
+    #            ...         ),
+    #            ...     rmakers.BeamSpecifier(
+    #            ...         beam_each_division=True,
+    #            ...         ),
+    #            ...     talea=rmakers.Talea(
+    #            ...         counts=[1, 1, 2],
+    #            ...         denominator=16,
+    #            ...         ),
+    #            ...     )
+    #
+    #            >>> collections = [[0, 2, 10], [10, 16, 15, 20, 19], [9]]
+    #            >>> selections, state = rhythm_maker(collections)
+    #            >>> lilypond_file = rhythm_maker.show(selections)
+    #            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+    #
+    #            ..  docs::
+    #
+    #                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+    #                \new Score
+    #                <<
+    #                    \new GlobalContext
+    #                    {
+    #                        \time 3/4
+    #                        s1 * 3/4
+    #                    }
+    #                    \new Staff
+    #                    {
+    #                        \scaleDurations #'(1 . 1) {
+    #                            c'16
+    #                            [
+    #                            d'16
+    #                            bf'8
+    #                            ~
+    #                            ]
+    #                        }
+    #                        \scaleDurations #'(1 . 1) {
+    #                            bf'16
+    #                            [
+    #                            e''16
+    #                            ef''8
+    #                            af''16
+    #                            g''16
+    #                            ]
+    #                        }
+    #                        \scaleDurations #'(1 . 1) {
+    #                            a'8
+    #                        }
+    #                    }
+    #                >>
+    #
+    #        ..  container:: example
+    #
+    #            Ties consecutive notes with matching pitches:
+    #
+    #            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+    #            ...     rmakers.TieSpecifier(
+    #            ...         tie_consecutive_notes=True,
+    #            ...         ),
+    #            ...     rmakers.BeamSpecifier(
+    #            ...         beam_each_division=True,
+    #            ...         ),
+    #            ...     talea=rmakers.Talea(
+    #            ...         counts=[1, 1, 2],
+    #            ...         denominator=16,
+    #            ...         ),
+    #            ...     )
+    #
+    #            >>> collections = [[0, 2, 10], [10, 16, 16, 19, 19], [19]]
+    #            >>> selections, state = rhythm_maker(collections)
+    #            >>> lilypond_file = rhythm_maker.show(selections)
+    #            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+    #
+    #            ..  docs::
+    #
+    #                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+    #                \new Score
+    #                <<
+    #                    \new GlobalContext
+    #                    {
+    #                        \time 3/4
+    #                        s1 * 3/4
+    #                    }
+    #                    \new Staff
+    #                    {
+    #                        \scaleDurations #'(1 . 1) {
+    #                            c'16
+    #                            [
+    #                            d'16
+    #                            bf'8
+    #                            ~
+    #                            ]
+    #                        }
+    #                        \scaleDurations #'(1 . 1) {
+    #                            bf'16
+    #                            [
+    #                            e''16
+    #                            ~
+    #                            e''8
+    #                            g''16
+    #                            ~
+    #                            g''16
+    #                            ~
+    #                            ]
+    #                        }
+    #                        \scaleDurations #'(1 . 1) {
+    #                            g''8
+    #                        }
+    #                    }
+    #                >>
+    #
+    #        ..  container:: example
+    #
+    #            Defaults to none:
+    #
+    #            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
+    #            >>> rhythm_maker.tie_specifier is None
+    #            True
+    #
+    #        Set to tie specifier or none.
+    #
+    #        Returns tie specifier or none.
+    #        """
+    #        return rmakers.RhythmMaker.tie_specifier.fget(self)
 
     @property
     def time_treatments(self):
