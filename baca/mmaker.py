@@ -10306,8 +10306,8 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             collection_index=collection_index,
             total_collections=total_collections,
         )
-        selections = self._apply_specifier_stack(selections, divisions=None)
-        selections = self._apply_specifiers(selections)
+        # TODO: set tag here:
+        selections = self._apply_specifiers(selections, divisions=None)
         # self._check_wellformedness(selections)
         state = self._make_state()
         return selections, state
