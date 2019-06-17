@@ -477,7 +477,6 @@ rhythmcommands
 
       __call__
       __format__
-      tuplet_specifier
 
    .. raw:: html
 
@@ -532,5 +531,3 @@ rhythmcommands
    .. container:: inherited
 
       .. autoattribute:: SkipRhythmMaker.tag
-
-   .. autoattribute:: SkipRhythmMaker.tuplet_specifier

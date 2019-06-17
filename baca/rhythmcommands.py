@@ -1391,57 +1391,6 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
             skips.append(skip)
         return abjad.select(skips)
 
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def tuplet_specifier(self) -> typing.Optional[rmakers.TupletSpecifier]:
-        r"""
-        Gets tuplet specifier.
-
-        ..  container:: example
-
-            No effect because ``SkipRhythmMaker`` makes skips instead of
-            tuplets:
-
-            >>> rhythm_maker = baca.SkipRhythmMaker(
-            ...     rmakers.TupletSpecifier(
-            ...         force_fraction=True,
-            ...     ),
-            ... )
-
-            >>> divisions = [(1, 4), (3, 16), (5, 8)]
-            >>> selections = rhythm_maker(divisions)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     selections,
-            ...     divisions,
-            ...     )
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score])
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        \time 1/4
-                        s1 * 1/4
-                        \time 3/16
-                        s1 * 3/16
-                        \time 5/8
-                        s1 * 5/8
-                    }
-                    \new RhythmicStaff
-                    {
-                        s1 * 1/4
-                        s1 * 3/16
-                        s1 * 5/8
-                    }
-                >>
-
-        """
-        return super().tuplet_specifier
-
 
 class TieCorrectionCommand(scoping.Command):
     """

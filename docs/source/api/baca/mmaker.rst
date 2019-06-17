@@ -892,7 +892,6 @@ mmaker
       show
       talea
       time_treatments
-      tuplet_specifier
 
    .. raw:: html
 
@@ -960,5 +959,3 @@ mmaker
    .. autoattribute:: PitchFirstRhythmMaker.talea
 
    .. autoattribute:: PitchFirstRhythmMaker.time_treatments
-
-   .. autoattribute:: PitchFirstRhythmMaker.tuplet_specifier

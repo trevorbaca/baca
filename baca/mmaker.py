@@ -9811,16 +9811,19 @@ class PitchFirstRhythmCommand(scoping.Command):
             keywords["time_treatments"] = time_treatments
         if keywords:
             rhythm_maker = abjad.new(rhythm_maker, **keywords)
-        if tuplet_denominator is not None or tuplet_force_fraction is not None:
-            specifier = rhythm_maker.tuplet_specifier
-            if specifier is None:
-                specifier = rmakers.TupletSpecifier()
-            specifier = abjad.new(
-                specifier,
-                denominator=tuplet_denominator,
-                force_fraction=tuplet_force_fraction,
+        specifiers = []
+        if tuplet_denominator is not None:
+            specifier = rmakers.TupletSpecifier(denominator=tuplet_denominator)
+            specifiers.append(specifier)
+        if tuplet_force_fraction is not None:
+            specifier = rmakers.TupletSpecifier(
+                force_fraction=tuplet_force_fraction
             )
-            rhythm_maker = abjad.new(rhythm_maker, tuplet_specifier=specifier)
+            specifiers.append(specifier)
+        if specifiers:
+            specifiers_ = rhythm_maker.specifiers[:]
+            specifiers_.extend(specifiers)
+            rhythm_maker = abjad.new(rhythm_maker, *specifiers_)
         return rhythm_maker
 
     ### PUBLIC PROPERTIES ###
@@ -10129,14 +10132,12 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         duration_specifier=None,
         talea=None,
         time_treatments=None,
-        tuplet_specifier=None,
     ):
         rmakers.RhythmMaker.__init__(
             self,
             *specifiers,
             duration_specifier=duration_specifier,
             division_masks=division_masks,
-            tuplet_specifier=tuplet_specifier,
         )
         if acciaccatura_specifiers is not None:
             prototype = AcciaccaturaSpecifier
@@ -10305,7 +10306,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             collection_index=collection_index,
             total_collections=total_collections,
         )
-        selections = self._apply_tuplet_specifier(selections, divisions=None)
         selections = self._apply_specifier_stack(selections, divisions=None)
         selections = self._apply_specifiers(selections)
         # self._check_wellformedness(selections)
@@ -12220,168 +12220,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Returns tuple of time treatments or none.
         """
         return self._time_treatments
-
-    @property
-    def tuplet_specifier(self):
-        r"""
-        Gets tuplet specifier.
-
-        ..  container:: example
-
-            Does not simplify redudant tuplets by default:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...         ),
-            ...     talea=rmakers.Talea(
-            ...         counts=[3],
-            ...         denominator=16,
-            ...         ),
-            ...     time_treatments=[-2],
-            ...     )
-
-            >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
-            >>> selections, state = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                \with
-                {
-                    \override TupletBracket.staff-padding = #1.5
-                }
-                <<
-                    \new GlobalContext
-                    {
-                        \time 11/8
-                        s1 * 11/8
-                    }
-                    \new Staff
-                    {
-                        \times 2/3 {
-                            c'8.
-                            [
-                            d'8.
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/9 {
-                            bf'8.
-                            [
-                            fs''8.
-                            e''8.
-                            ]
-                        }
-                        \times 2/3 {
-                            ef''8.
-                            [
-                            af''8.
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/9 {
-                            g''8.
-                            [
-                            a'8.
-                            ]
-                            r8.
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Trivializes tuplets:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.TupletSpecifier(
-            ...         trivialize=True,
-            ...     ),
-            ...     rmakers.BeamSpecifier(
-            ...         beam_each_division=True,
-            ...     ),
-            ...     talea=rmakers.Talea(
-            ...         counts=[3],
-            ...         denominator=16,
-            ...     ),
-            ...     time_treatments=[-2],
-            ... )
-
-            >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
-            >>> selections, state = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
-            >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                \with
-                {
-                    \override TupletBracket.staff-padding = #1.5
-                }
-                <<
-                    \new GlobalContext
-                    {
-                        \time 11/8
-                        s1 * 11/8
-                    }
-                    \new Staff
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 1/1 {
-                            c'8
-                            [
-                            d'8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/9 {
-                            bf'8.
-                            [
-                            fs''8.
-                            e''8.
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 1/1 {
-                            ef''8
-                            [
-                            af''8
-                            ]
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/9 {
-                            g''8.
-                            [
-                            a'8.
-                            ]
-                            r8.
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Defaults to none:
-
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker()
-            >>> rhythm_maker.tuplet_specifier is None
-            True
-
-        Set to tuplet specifier or none.
-
-        Returns tuplet specifier or none.
-        """
-        return rmakers.RhythmMaker.tuplet_specifier.fget(self)
 
     ### PUBLIC METHODS ###
 
