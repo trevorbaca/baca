@@ -12003,18 +12003,18 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Segment durations equal to a quarter:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.TupletSpecifier(
+            ...         denominator=abjad.Duration(1, 16),
+            ...     ),
             ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
-            ...         ),
+            ...     ),
             ...     time_treatments=[abjad.Duration(1, 4)],
             ...     talea=rmakers.Talea(
             ...         counts=[1],
             ...         denominator=8,
-            ...         ),
-            ...     tuplet_specifier=rmakers.TupletSpecifier(
-            ...         denominator=abjad.Duration(1, 16),
-            ...         ),
-            ...     )
+            ...     ),
+            ... )
 
             >>> collections = [
             ...     [0],
@@ -12100,18 +12100,18 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             quarter:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.TupletSpecifier(
+            ...         denominator=abjad.Duration(1, 16),
+            ...     ),
             ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
-            ...         ),
+            ...     ),
             ...     time_treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
             ...     talea=rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=8,
-            ...         ),
-            ...     tuplet_specifier=rmakers.TupletSpecifier(
-            ...         denominator=abjad.Duration(1, 16),
-            ...         ),
-            ...     )
+            ...     ),
+            ... )
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
@@ -12300,18 +12300,18 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Trivializes tuplets:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
+            ...     rmakers.TupletSpecifier(
+            ...         trivialize=True,
+            ...     ),
             ...     rmakers.BeamSpecifier(
             ...         beam_each_division=True,
-            ...         ),
+            ...     ),
             ...     talea=rmakers.Talea(
             ...         counts=[3],
             ...         denominator=16,
-            ...         ),
+            ...     ),
             ...     time_treatments=[-2],
-            ...     tuplet_specifier=rmakers.TupletSpecifier(
-            ...         trivialize=True,
-            ...         ),
-            ...     )
+            ... )
 
             >>> collections = [[0, 2], [10, 18, 16], [15, 20], [19, 9, None]]
             >>> selections, state = rhythm_maker(collections)

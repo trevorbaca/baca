@@ -113,14 +113,14 @@ class RhythmCommand(scoping.Command):
 
         >>> command = baca.RhythmCommand(
         ...     rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+        ...         rmakers.TupletSpecifier(
+        ...             extract_trivial=True,
+        ...             ),
         ...         rmakers.BeamSpecifier(
         ...             beam_each_division=True,
         ...         ),
-        ...         tuplet_specifier=rmakers.TupletSpecifier(
-        ...             extract_trivial=True,
-        ...             ),
-        ...         ),
-        ...     )
+        ...     ),
+        ... )
 
         >>> maker(
         ...     'Music_Voice',
@@ -618,14 +618,14 @@ class RhythmCommand(scoping.Command):
             >>> command = baca.RhythmCommand(
             ...     divisions=abjad.sequence().sum().sequence(),
             ...     rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+            ...         rmakers.TupletSpecifier(
+            ...             extract_trivial=True,
+            ...             ),
             ...         rmakers.BeamSpecifier(
             ...             beam_each_division=True,
             ...         ),
-            ...         tuplet_specifier=rmakers.TupletSpecifier(
-            ...             extract_trivial=True,
-            ...             ),
-            ...         ),
-            ...     )
+            ...     ),
+            ... )
 
             >>> maker(
             ...     'Music_Voice',
@@ -1404,10 +1404,10 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
             tuplets:
 
             >>> rhythm_maker = baca.SkipRhythmMaker(
-            ...     tuplet_specifier=rmakers.TupletSpecifier(
+            ...     rmakers.TupletSpecifier(
             ...         force_fraction=True,
-            ...         ),
-            ...     )
+            ...     ),
+            ... )
 
             >>> divisions = [(1, 4), (3, 16), (5, 8)]
             >>> selections = rhythm_maker(divisions)
@@ -2016,9 +2016,9 @@ def make_even_divisions(
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+            rmakers.TupletSpecifier(extract_trivial=True),
             rmakers.BeamSpecifier(beam_each_division=True),
             tag=tag,
-            tuplet_specifier=rmakers.TupletSpecifier(extract_trivial=True),
         ),
     )
 
@@ -2041,13 +2041,13 @@ def make_fused_tuplet_monads(
         divisions=abjad.sequence().sum().sequence(),
         measures=measures,
         rhythm_maker=rmakers.TupletRhythmMaker(
+            rmakers.TupletSpecifier(
+                extract_trivial=True, rewrite_rest_filled=True, trivialize=True
+            ),
             rmakers.TieSpecifier(repeat_ties=True),
             rmakers.BeamSpecifier(beam_each_division=True),
             tag=tag,
             tuplet_ratios=tuplet_ratios,
-            tuplet_specifier=rmakers.TupletSpecifier(
-                extract_trivial=True, rewrite_rest_filled=True, trivialize=True
-            ),
         ),
     )
 
