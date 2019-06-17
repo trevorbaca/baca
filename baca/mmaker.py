@@ -7206,8 +7206,8 @@ class MusicMaker(object):
         return anchor_specifier, specifiers_
 
     def _get_storage_format_specification(self):
-        agent = abjad.StorageFormatManager(self)
-        keyword_argument_names = agent.signature_keyword_names
+        manager = abjad.StorageFormatManager(self)
+        keyword_argument_names = manager.signature_keyword_names
         positional_argument_values = self.specifiers
         return abjad.StorageFormatSpecification(
             self,

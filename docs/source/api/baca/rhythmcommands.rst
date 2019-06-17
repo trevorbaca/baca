@@ -533,8 +533,4 @@ rhythmcommands
 
       .. autoattribute:: SkipRhythmMaker.tag
 
-   .. container:: inherited
-
-      .. autoattribute:: SkipRhythmMaker.tie_specifier
-
    .. autoattribute:: SkipRhythmMaker.tuplet_specifier

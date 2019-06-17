@@ -754,8 +754,8 @@ class Suite(object):
     ### PRIVATE METHODS ###
 
     def _get_format_specification(self):
-        agent = abjad.StorageFormatManager(self)
-        names = list(agent.signature_keyword_names)
+        manager = abjad.StorageFormatManager(self)
+        names = list(manager.signature_keyword_names)
         return abjad.FormatSpecification(
             self,
             storage_format_args_values=self.commands,

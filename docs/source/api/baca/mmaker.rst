@@ -891,7 +891,6 @@ mmaker
       duration_specifier
       show
       talea
-      tie_specifier
       time_treatments
       tuplet_specifier
 
@@ -959,8 +958,6 @@ mmaker
       .. autoattribute:: PitchFirstRhythmMaker.tag
 
    .. autoattribute:: PitchFirstRhythmMaker.talea
-
-   .. autoattribute:: PitchFirstRhythmMaker.tie_specifier
 
    .. autoattribute:: PitchFirstRhythmMaker.time_treatments
 
