@@ -141,10 +141,10 @@ rhythmcommands
       reference_meters
       repeat_ties
       rewrite_meter
-      rewrite_rest_filled
+      rewrite_rest_filled_divisions
       rhythm_maker
       right_broken
-      split_at_measure_boundaries
+      split_measures
       state
 
    .. raw:: html
@@ -220,7 +220,7 @@ rhythmcommands
 
    .. autoattribute:: RhythmCommand.rewrite_meter
 
-   .. autoattribute:: RhythmCommand.rewrite_rest_filled
+   .. autoattribute:: RhythmCommand.rewrite_rest_filled_divisions
 
    .. autoattribute:: RhythmCommand.rhythm_maker
 
@@ -238,7 +238,7 @@ rhythmcommands
 
       .. autoattribute:: RhythmCommand.selector
 
-   .. autoattribute:: RhythmCommand.split_at_measure_boundaries
+   .. autoattribute:: RhythmCommand.split_measures
 
    .. autoattribute:: RhythmCommand.state
 

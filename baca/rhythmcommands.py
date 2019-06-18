@@ -294,7 +294,7 @@ class RhythmCommand(scoping.Command):
         "_rewrite_rest_filled_divisions",
         "_rhythm_maker",
         "_right_broken",
-        "_split_at_measure_boundaries",
+        "_split_measures",
         "_state",
     )
 
@@ -318,7 +318,7 @@ class RhythmCommand(scoping.Command):
         rhythm_maker: typings.RhythmMakerTyping = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
-        split_at_measure_boundaries: bool = None,
+        split_measures: bool = None,
     ) -> None:
         scoping.Command.__init__(
             self, match=match, measures=measures, scope=scope
@@ -353,9 +353,9 @@ class RhythmCommand(scoping.Command):
         if right_broken is not None:
             right_broken = bool(right_broken)
         self._right_broken = right_broken
-        if split_at_measure_boundaries is not None:
-            split_at_measure_boundaries = bool(split_at_measure_boundaries)
-        self._split_at_measure_boundaries = split_at_measure_boundaries
+        if split_measures is not None:
+            split_measures = bool(split_measures)
+        self._split_measures = split_measures
         self._state: typing.Optional[abjad.OrderedDict] = None
 
     ### SPECIAL METHODS ###
@@ -536,20 +536,16 @@ class RhythmCommand(scoping.Command):
                 selections.extend(selections_)
             self._state = rhythm_maker.state
         assert all(isinstance(_, abjad.Selection) for _ in selections)
-        if self.split_at_measure_boundaries:
-            specifier = rmakers.DurationSpecifier
-            selections = specifier._split_at_measure_boundaries(
-                selections, time_signatures, repeat_ties=self.repeat_ties
-            )
+        if self.split_measures:
+            command = rmakers.SplitCommand(repeat_ties=self.repeat_ties)
+            selections = command(selections, time_signatures)
         assert all(isinstance(_, abjad.Selection) for _ in selections)
         if self.rewrite_meter:
-            selections = rmakers.DurationSpecifier._rewrite_meter_(
-                selections,
-                time_signatures,
+            command = rmakers.RewriteMeterCommand(
                 reference_meters=self.reference_meters,
-                rewrite_tuplets=False,
                 repeat_ties=self.repeat_ties,
             )
+            selections = command(selections, time_signatures)
         if self.rewrite_rest_filled_divisions:
             selections = RhythmCommand._rewrite_rest_filled_divisions_(
                 selections, multimeasure_rests=self.multimeasure_rests
@@ -1295,11 +1291,11 @@ class RhythmCommand(scoping.Command):
         return self._right_broken
 
     @property
-    def split_at_measure_boundaries(self) -> typing.Optional[bool]:
+    def split_measures(self) -> typing.Optional[bool]:
         """
         Is true when command splits at measure boundaries.
         """
-        return self._split_at_measure_boundaries
+        return self._split_measures
 
     @property
     def state(self) -> typing.Optional[abjad.OrderedDict]:
@@ -2802,7 +2798,7 @@ def rhythm(
     rewrite_meter: bool = None,
     rewrite_rest_filled_divisions: bool = None,
     right_broken: bool = None,
-    split_at_measure_boundaries: bool = None,
+    split_measures: bool = None,
     tag: str = None,
 ) -> RhythmCommand:
     """
@@ -2827,7 +2823,7 @@ def rhythm(
         rewrite_rest_filled_divisions=rewrite_rest_filled_divisions,
         rhythm_maker=rhythm_maker,
         right_broken=right_broken,
-        split_at_measure_boundaries=split_at_measure_boundaries,
+        split_measures=split_measures,
     )
 
 
