@@ -291,7 +291,7 @@ class RhythmCommand(scoping.Command):
         "_persist",
         "_reference_meters",
         "_rewrite_meter",
-        "_rewrite_rest_filled",
+        "_rewrite_rest_filled_divisions",
         "_rhythm_maker",
         "_right_broken",
         "_split_at_measure_boundaries",
@@ -314,7 +314,7 @@ class RhythmCommand(scoping.Command):
         persist: str = None,
         reference_meters: typing.Iterable[abjad.Meter] = None,
         rewrite_meter: bool = None,
-        rewrite_rest_filled: bool = None,
+        rewrite_rest_filled_divisions: bool = None,
         rhythm_maker: typings.RhythmMakerTyping = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
@@ -345,9 +345,9 @@ class RhythmCommand(scoping.Command):
         if rewrite_meter is not None:
             rewrite_meter = bool(rewrite_meter)
         self._rewrite_meter = rewrite_meter
-        if rewrite_rest_filled is not None:
-            rewrite_rest_filled = bool(rewrite_rest_filled)
-        self._rewrite_rest_filled = rewrite_rest_filled
+        if rewrite_rest_filled_divisions is not None:
+            rewrite_rest_filled_divisions = bool(rewrite_rest_filled_divisions)
+        self._rewrite_rest_filled_divisions = rewrite_rest_filled_divisions
         self._check_rhythm_maker_input(rhythm_maker)
         self._rhythm_maker = rhythm_maker
         if right_broken is not None:
@@ -550,8 +550,8 @@ class RhythmCommand(scoping.Command):
                 rewrite_tuplets=False,
                 repeat_ties=self.repeat_ties,
             )
-        if self.rewrite_rest_filled:
-            selections = rmakers.DurationSpecifier._rewrite_rest_filled_(
+        if self.rewrite_rest_filled_divisions:
+            selections = RhythmCommand._rewrite_rest_filled_divisions_(
                 selections, multimeasure_rests=self.multimeasure_rests
             )
         self._tag_broken_ties(selections)
@@ -570,6 +570,29 @@ class RhythmCommand(scoping.Command):
             ):
                 previous_segment_stop_state = None
         return previous_segment_stop_state
+
+    @staticmethod
+    def _rewrite_rest_filled_divisions_(
+        selections,
+        multimeasure_rests=None,
+        tag="baca.RhythmCommand._rewrite_rest_filled_divisions_",
+    ):
+        selections_ = []
+        maker = abjad.LeafMaker(tag=tag)
+        prototype = (abjad.MultimeasureRest, abjad.Rest)
+        for selection in selections:
+            if not all(isinstance(_, prototype) for _ in selection):
+                selections_.append(selection)
+            else:
+                duration = abjad.inspect(selection).duration()
+                if multimeasure_rests:
+                    rest = abjad.MultimeasureRest(1, tag=tag)
+                    rest.multiplier = duration
+                    rests = abjad.select(rest)
+                else:
+                    rests = maker([None], [duration])
+                selections_.append(rests)
+        return selections_
 
     def _tag_broken_ties(self, selections):
         if not isinstance(self.rhythm_maker, rmakers.RhythmMaker):
@@ -977,11 +1000,11 @@ class RhythmCommand(scoping.Command):
         return self._rewrite_meter
 
     @property
-    def rewrite_rest_filled(self) -> typing.Optional[bool]:
+    def rewrite_rest_filled_divisions(self) -> typing.Optional[bool]:
         """
         Is true when command rewrites rest-filled divisions.
         """
-        return self._rewrite_rest_filled
+        return self._rewrite_rest_filled_divisions
 
     @property
     def rhythm_maker(self) -> typing.Optional[typings.RhythmMakerTyping]:
@@ -2777,7 +2800,7 @@ def rhythm(
     persist: str = None,
     reference_meters: typing.Iterable[abjad.Meter] = None,
     rewrite_meter: bool = None,
-    rewrite_rest_filled: bool = None,
+    rewrite_rest_filled_divisions: bool = None,
     right_broken: bool = None,
     split_at_measure_boundaries: bool = None,
     tag: str = None,
@@ -2801,7 +2824,7 @@ def rhythm(
         persist=persist,
         reference_meters=reference_meters,
         rewrite_meter=rewrite_meter,
-        rewrite_rest_filled=rewrite_rest_filled,
+        rewrite_rest_filled_divisions=rewrite_rest_filled_divisions,
         rhythm_maker=rhythm_maker,
         right_broken=right_broken,
         split_at_measure_boundaries=split_at_measure_boundaries,
