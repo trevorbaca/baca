@@ -8080,13 +8080,10 @@ class MusicMaker(object):
 
         ..  container:: example
 
-            Slur specifier selects leaves in each tuplet:
+            Maps slur to leaves in each tuplet:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.new(
-            ...         baca.slur(),
-            ...         map=baca.tuplets(),
-            ...         ),
+            ...     baca.slur(map=baca.tuplets()),
             ...     )
 
             >>> collections = [
@@ -8160,10 +8157,7 @@ class MusicMaker(object):
             >>> getter = baca.pleaves()[:2]
             >>> selector = baca.tuplets().map(getter)
             >>> music_maker = baca.MusicMaker(
-            ...     baca.new(
-            ...         baca.slur(),
-            ...         map=selector,
-            ...         ),
+            ...     baca.slur(map=selector),
             ...     )
 
             >>> collections = [
@@ -8237,10 +8231,7 @@ class MusicMaker(object):
             >>> getter = baca.pleaves()[-2:]
             >>> selector = baca.tuplets().map(getter)
             >>> music_maker = baca.MusicMaker(
-            ...     baca.new(
-            ...         baca.slur(),
-            ...         map=selector,
-            ...         ),
+            ...     baca.slur(map=selector),
             ...     )
 
             >>> collections = [

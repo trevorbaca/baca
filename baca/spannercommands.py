@@ -739,6 +739,7 @@ def ottava_bassa(
 
 def slur(
     *tweaks: abjad.LilyPondTweakManager,
+    map: abjad.SelectorTyping = None,
     selector: abjad.SelectorTyping = "baca.tleaves()",
     start_slur: abjad.StartSlur = None,
     stop_slur: abjad.StopSlur = None,
@@ -823,10 +824,7 @@ def slur(
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.new(
-        ...         baca.slur(),
-        ...         map=baca.tuplet(1),
-        ...         ),
+        ...     baca.slur(map=baca.tuplet(1)),
         ...     baca.slur_down(),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -890,6 +888,7 @@ def slur(
     start_slur = start_slur or abjad.StartSlur()
     stop_slur = stop_slur or abjad.StopSlur()
     return SpannerIndicatorCommand(
+        map=map,
         selector=selector,
         start_indicator=start_slur,
         stop_indicator=stop_slur,

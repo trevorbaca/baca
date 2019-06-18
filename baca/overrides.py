@@ -5536,13 +5536,11 @@ def slur_down(
         Overrides slur direction on leaves:
 
         >>> music_maker = baca.MusicMaker()
+        >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.new(
-        ...         baca.slur(),
-        ...         map=baca.tuplets().map(baca.tleaves()).nontrivial(),
-        ...         ),
+        ...     baca.slur(map=selector),
         ...     baca.slur_down(),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -5609,13 +5607,11 @@ def slur_down(
         Overrides slur direction leaves in tuplet 1:
 
         >>> music_maker = baca.MusicMaker()
+        >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.new(
-        ...         baca.slur(),
-        ...         map=baca.tuplets().map(baca.tleaves()).nontrivial(),
-        ...         ),
+        ...     baca.slur(map=selector),
         ...     baca.new(
         ...         baca.slur_down(),
         ...         map=baca.tuplet(1),
@@ -5703,13 +5699,11 @@ def slur_up(
         Up-overrides slur direction on leaves:
 
         >>> music_maker = baca.MusicMaker()
+        >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.new(
-        ...         baca.slur(),
-        ...         map=baca.tuplets().map(baca.tleaves()).nontrivial(),
-        ...         ),
+        ...     baca.slur(map=selector),
         ...     baca.slur_up(),
         ...     baca.stem_down(),
         ...     baca.rests_around([2], [4]),
@@ -5782,13 +5776,11 @@ def slur_up(
         Up-overrides slur direction for leaves in tuplet 1:
 
         >>> music_maker = baca.MusicMaker()
+        >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     baca.new(
-        ...         baca.slur(),
-        ...         map=baca.tuplets().map(baca.tleaves()).nontrivial(),
-        ...         ),
+        ...     baca.slur(map=selector),
         ...     baca.new(
         ...         baca.slur_up(),
         ...         map=baca.tuplet(1),
