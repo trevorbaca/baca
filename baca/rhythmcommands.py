@@ -71,6 +71,7 @@ class DurationMultiplierCommand(scoping.Command):
         if self.selector is not None:
             argument = self.selector(argument)
         leaves = classes.Selection(argument).leaves()
+        assert isinstance(leaves, classes.Selection)
         for leaf in leaves:
             self._set_multiplied_duration(leaf, self.written_duration)
 
@@ -1471,6 +1472,7 @@ class TieCorrectionCommand(scoping.Command):
         if self.selector is not None:
             argument = self.selector(argument)
         leaves = classes.Selection(argument).leaves()
+        assert isinstance(leaves, classes.Selection)
         for leaf in leaves:
             if self.untie is True:
                 self._sever_tie(leaf, self.direction)

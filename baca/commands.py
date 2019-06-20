@@ -83,6 +83,7 @@ class BCPCommand(scoping.Command):
             bcps_ = self.helper(bcps_, argument)
         bcps = abjad.CyclicTuple(bcps_)
         lts = classes.Selection(argument).lts()
+        assert isinstance(lts, classes.Selection)
         total = len(lts)
         add_right_text_to_me = None
         if not self.final_spanner:

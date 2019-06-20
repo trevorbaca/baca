@@ -194,7 +194,9 @@ class AccidentalAdjustmentCommand(scoping.Command):
                 raise Exception(f"tag must have edition: {self.tag!r}.")
             alternative_tag = self.tag.prepend("AccidentalAdjustmentCommand")
             primary_tag = alternative_tag.invert_edition_tags()
-        for pleaf in classes.Selection(argument).pleaves():
+        pleaves = classes.Selection(argument).pleaves()
+        assert isinstance(pleaves, classes.Selection)
+        for pleaf in pleaves:
             if isinstance(pleaf, abjad.Note):
                 note_heads = [pleaf.note_head]
             else:
@@ -2818,7 +2820,9 @@ class OctaveDisplacementCommand(scoping.Command):
                     pitch += interval
                     pleaf.written_pitch = pitch
                 elif isinstance(pleaf, abjad.Chord):
-                    pitches = [_ + interval for _ in pleaf.written_pitches]
+                    pitches = abjad.PitchSegment(
+                        [_ + interval for _ in pleaf.written_pitches]
+                    )
                     pleaf.written_pitches = pitches
                 else:
                     raise TypeError(pleaf)
@@ -4046,7 +4050,9 @@ class RegisterCommand(scoping.Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        for plt in classes.Selection(argument).plts():
+        plts = classes.Selection(argument).plts()
+        assert isinstance(plts, classes.Selection)
+        for plt in plts:
             for pleaf in plt:
                 if isinstance(pleaf, abjad.Note):
                     pitch = pleaf.written_pitch
@@ -5937,7 +5943,9 @@ class RegisterToOctaveCommand(scoping.Command):
         current_octave_number = self._get_anchor_octave_number(argument)
         octave_adjustment = target_octave_number - current_octave_number
         transposition = abjad.Transposition(n=12 * octave_adjustment)
-        for pleaf in classes.Selection(argument).pleaves():
+        pleaves = classes.Selection(argument).pleaves()
+        assert isinstance(pleaves, classes.Selection)
+        for pleaf in pleaves:
             self._set_pitch(pleaf, transposition)
 
     ### PRIVATE METHODS ###
