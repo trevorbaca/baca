@@ -2176,7 +2176,7 @@ def make_multimeasure_rests(
 
 
 def make_notes(
-    *,
+    *specifiers,
     dmask: rmakers.MasksTyping = None,
     measures: typings.SliceTyping = None,
     repeat_ties: bool = False,
@@ -2185,15 +2185,15 @@ def make_notes(
     """
     Makes notes; rewrites meter.
     """
-    specifiers = []
+    specifiers_ = list(specifiers)
     if repeat_ties:
         specifier = rmakers.TieSpecifier(repeat_ties=True)
-        specifiers.append(specifier)
+        specifiers_.append(specifier)
     return RhythmCommand(
         measures=measures,
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
-            *specifiers,
+            *specifiers_,
             rmakers.BeamSpecifier(beam_each_division=True),
             division_masks=dmask,
             tag=tag,
@@ -2202,7 +2202,7 @@ def make_notes(
 
 
 def make_repeat_tied_notes(
-    *,
+    *specifiers: rmakers.SpecifierTyping,
     dmask: rmakers.MasksTyping = None,
     do_not_rewrite_meter: bool = None,
     measures: typings.SliceTyping = None,
@@ -2215,6 +2215,7 @@ def make_repeat_tied_notes(
         measures=measures,
         rewrite_meter=not (do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
+            *specifiers,
             rmakers.TieSpecifier(tie_across_divisions=True, repeat_ties=True),
             rmakers.BeamSpecifier(beam_each_division=True),
             division_masks=dmask,
