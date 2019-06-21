@@ -2166,12 +2166,14 @@ def make_multimeasure_rests(
     """
     Makes multimeasure rests.
     """
-    mask = rmakers.SilenceMask(
-        pattern=abjad.index_all(), use_multimeasure_rests=True
-    )
     return RhythmCommand(
         measures=measures,
-        rhythm_maker=rmakers.NoteRhythmMaker(division_masks=[mask], tag=tag),
+        rhythm_maker=rmakers.NoteRhythmMaker(
+            rmakers.SilenceMask(
+                selector=classes._select().lts(), use_multimeasure_rests=True
+            ),
+            tag=tag,
+        ),
     )
 
 
@@ -3292,58 +3294,6 @@ def set_duration_multiplier(
     return DurationMultiplierCommand(
         selector=selector, written_duration=written_duration
     )
-
-
-def silence_first() -> rmakers.SilenceMask:
-    """
-    Makes silence mask.
-    
-    ..  container::
-
-        >>> abjad.f(baca.silence_first())
-        abjadext.rmakers.silence([0])
-
-    """
-    return rmakers.silence([0])
-
-
-def silence_last() -> rmakers.SilenceMask:
-    """
-    Makes silence mask.
-
-    ..  container::
-
-        >>> abjad.f(baca.silence_last())
-        abjadext.rmakers.silence([-1])
-
-    """
-    return rmakers.silence([-1])
-
-
-def sustain_first() -> rmakers.SustainMask:
-    """
-    Makes sustain mask.
-    
-    ..  container::
-
-        >>> abjad.f(baca.sustain_first())
-        abjadext.rmakers.sustain([0])
-
-    """
-    return rmakers.sustain([0])
-
-
-def sustain_last() -> rmakers.SustainMask:
-    """
-    Makes sustain mask.
-
-    ..  container::
-
-        >>> abjad.f(baca.sustain_last())
-        abjadext.rmakers.sustain([-1])
-
-    """
-    return rmakers.sustain([-1])
 
 
 def tacet(

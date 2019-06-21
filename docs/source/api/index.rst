@@ -981,10 +981,6 @@ Rhythm library.
    ~baca.rhythmcommands.repeat_tie_to
    ~baca.rhythmcommands.rhythm
    ~baca.rhythmcommands.set_duration_multiplier
-   ~baca.rhythmcommands.silence_first
-   ~baca.rhythmcommands.silence_last
-   ~baca.rhythmcommands.sustain_first
-   ~baca.rhythmcommands.sustain_last
    ~baca.rhythmcommands.tacet
    ~baca.rhythmcommands.tie_from
    ~baca.rhythmcommands.tie_to

@@ -384,10 +384,6 @@ rhythmcommands
    ~repeat_tie_to
    ~rhythm
    ~set_duration_multiplier
-   ~silence_first
-   ~silence_last
-   ~sustain_first
-   ~sustain_last
    ~tacet
    ~tie_from
    ~tie_to
@@ -434,14 +430,6 @@ rhythmcommands
 .. autofunction:: rhythm
 
 .. autofunction:: set_duration_multiplier
-
-.. autofunction:: silence_first
-
-.. autofunction:: silence_last
-
-.. autofunction:: sustain_first
-
-.. autofunction:: sustain_last
 
 .. autofunction:: tacet
 
