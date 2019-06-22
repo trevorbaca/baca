@@ -2213,10 +2213,16 @@ def make_repeat_tied_notes(
     """
     Makes repeat-tied notes; rewrites meter.
     """
+    nonfirst_lts = classes._select().ptlts()[1:]
+    first_note = classes._select().note(0)
     return RhythmCommand(
         measures=measures,
         rewrite_meter=not (do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
+            #            rmakers.TieSpecifier(
+            #                attach_repeat_ties=True, selector=nonfirst_lts.map(first_note)
+            #            ),
+            #            rmakers.TieSpecifier(repeat_ties=True),
             *specifiers,
             rmakers.TieSpecifier(tie_across_divisions=True, repeat_ties=True),
             rmakers.BeamSpecifier(beam_each_division=True),
@@ -2481,11 +2487,16 @@ def make_tied_notes(
     """
     Makes tied notes; rewrites meter.
     """
+    nonlast_lts = classes._select().lts()[:-1]
+    last_note = classes._select().note(-1)
     return RhythmCommand(
         measures=measures,
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
             rmakers.TieSpecifier(tie_across_divisions=True),
+            #            rmakers.TieSpecifier(
+            #                attach_ties=True, selector=nonlast_lts.map(last_note)
+            #            ),
             rmakers.BeamSpecifier(beam_each_division=True),
             tag=tag,
         ),
@@ -2511,6 +2522,14 @@ def make_tied_repeated_durations(
         repeat_ties=True, tie_across_divisions=True
     )
     specifiers.append(tie_specifier)
+    #    tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
+    #    specifiers.append(tie_specifier)
+    #    nonfirst_lts = classes._select().lts()[1:]
+    #    first_note = classes._select().note(0)
+    #    tie_specifier = rmakers.TieSpecifier(
+    #        attach_repeat_ties=True, selector=nonfirst_lts.map(first_note)
+    #    )
+    #    specifiers.append(tie_specifier)
     divisions = divisionclasses._divisions().fuse()
     divisions = divisions.split(durations, cyclic=True)
     return RhythmCommand(
