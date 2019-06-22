@@ -537,7 +537,9 @@ class RhythmCommand(scoping.Command):
                 selections.extend(selections_)
             self._state = rhythm_maker.state
         assert all(isinstance(_, abjad.Selection) for _ in selections)
-        temporary_container = abjad.Container(selections)
+        # temporary_container = abjad.Container(selections)
+        music_voice = abjad.Voice(selections, name="MusicVoice")
+        staff = abjad.Staff([music_voice], is_simultaneous=True)
         if self.split_measures:
             command = rmakers.SplitCommand(repeat_ties=self.repeat_ties)
             selections = command(selections, time_signatures)
@@ -548,7 +550,8 @@ class RhythmCommand(scoping.Command):
                 repeat_ties=self.repeat_ties,
             )
             selections = command(selections, time_signatures)
-        temporary_container[:] = []
+        ###temporary_container[:] = []
+        music_voice[:] = []
         if self.rewrite_rest_filled_divisions:
             selections = RhythmCommand._rewrite_rest_filled_divisions_(
                 selections, multimeasure_rests=self.multimeasure_rests
