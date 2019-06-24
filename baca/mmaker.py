@@ -10311,7 +10311,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             time_signature_voice.append(skip)
             abjad.attach(time_signature, skip, context="Staff")
         selections = self._apply_division_masks(staff)
-        selections = self._apply_specifiers(music_voice, divisions, selections)
+        selections = self._apply_specifiers(staff, divisions, selections)
         assert music_voice.name == "MusicVoice"
         music_voice[:] = []
         # self._check_wellformedness(selections)

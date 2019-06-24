@@ -537,20 +537,27 @@ class RhythmCommand(scoping.Command):
                 selections.extend(selections_)
             self._state = rhythm_maker.state
         assert all(isinstance(_, abjad.Selection) for _ in selections)
-        # temporary_container = abjad.Container(selections)
+        time_signature_voice = abjad.Voice(name="TimeSignatureVoice")
         music_voice = abjad.Voice(selections, name="MusicVoice")
-        staff = abjad.Staff([music_voice], is_simultaneous=True)
+        staff = abjad.Staff(
+            [time_signature_voice, music_voice], is_simultaneous=True
+        )
+        for time_signature in time_signatures:
+            duration = time_signature.pair
+            skip = abjad.Skip(1, multiplier=duration)
+            time_signature_voice.append(skip)
+            abjad.attach(time_signature, skip, context="Staff")
         if self.split_measures:
             command = rmakers.SplitCommand(repeat_ties=self.repeat_ties)
-            selections = command(selections, time_signatures)
+            # selections = command(selections, time_signatures)
+            selections = command(staff, time_signatures=time_signatures)
         assert all(isinstance(_, abjad.Selection) for _ in selections)
         if self.rewrite_meter:
             command = rmakers.RewriteMeterCommand(
                 reference_meters=self.reference_meters,
                 repeat_ties=self.repeat_ties,
             )
-            selections = command(selections, time_signatures)
-        ###temporary_container[:] = []
+            selections = command(staff, time_signatures=time_signatures)
         music_voice[:] = []
         if self.rewrite_rest_filled_divisions:
             selections = RhythmCommand._rewrite_rest_filled_divisions_(
