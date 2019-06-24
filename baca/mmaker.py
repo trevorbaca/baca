@@ -10303,9 +10303,14 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             total_collections=total_collections,
         )
         music_voice.extend(selections)
-        selections = self._apply_division_masks(None, None, selections)
         durations = [abjad.inspect(_).duration() for _ in selections]
         divisions = [abjad.NonreducedFraction(_) for _ in durations]
+        for duration in durations:
+            time_signature = abjad.TimeSignature(duration)
+            skip = abjad.Skip(1, multiplier=duration)
+            time_signature_voice.append(skip)
+            abjad.attach(time_signature, skip, context="Staff")
+        selections = self._apply_division_masks(staff)
         selections = self._apply_specifiers(music_voice, divisions, selections)
         assert music_voice.name == "MusicVoice"
         music_voice[:] = []
