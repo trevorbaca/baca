@@ -292,7 +292,6 @@ class RhythmCommand(scoping.Command):
         "_persist",
         "_reference_meters",
         "_rewrite_meter",
-        "_rewrite_rest_filled_divisions",
         "_rhythm_maker",
         "_right_broken",
         "_split_measures",
@@ -315,7 +314,6 @@ class RhythmCommand(scoping.Command):
         persist: str = None,
         reference_meters: typing.Iterable[abjad.Meter] = None,
         rewrite_meter: bool = None,
-        rewrite_rest_filled_divisions: bool = None,
         rhythm_maker: typings.RhythmMakerTyping = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
@@ -346,9 +344,6 @@ class RhythmCommand(scoping.Command):
         if rewrite_meter is not None:
             rewrite_meter = bool(rewrite_meter)
         self._rewrite_meter = rewrite_meter
-        if rewrite_rest_filled_divisions is not None:
-            rewrite_rest_filled_divisions = bool(rewrite_rest_filled_divisions)
-        self._rewrite_rest_filled_divisions = rewrite_rest_filled_divisions
         self._check_rhythm_maker_input(rhythm_maker)
         self._rhythm_maker = rhythm_maker
         if right_broken is not None:
@@ -478,9 +473,6 @@ class RhythmCommand(scoping.Command):
             literal_selections = True
             assert not self.split_measures, repr(self.split_measures)
             assert not self.rewrite_meter, repr(self.rewrite_meter)
-            assert not self.rewrite_rest_filled_divisions, repr(
-                self.rewrite_rest_filled_divisions
-            )
         else:
             if isinstance(rhythm_maker, rmakers.RhythmMaker):
                 pairs = [(rhythm_maker, abjad.index([0], 1))]
@@ -549,29 +541,20 @@ class RhythmCommand(scoping.Command):
             staff["MusicVoice"][:] = selections
             if self.split_measures:
                 command = rmakers.SplitCommand(repeat_ties=self.repeat_ties)
-                selections = command(staff)
-                # command(staff)
+                command(staff)
             assert all(isinstance(_, abjad.Selection) for _ in selections)
             if self.rewrite_meter:
                 command = rmakers.RewriteMeterCommand(
                     reference_meters=self.reference_meters,
                     repeat_ties=self.repeat_ties,
                 )
-                selections = command(staff)
-                # command(staff)
-            #            if not division_change:
-            #                selections = rmakers.RhythmMaker._select_by_measure(staff)
-            #            else:
-            #                selection = staff["MusicVoice"][:]
-            #                selections = selection.partition_by_durations(divisions)
-            #                selections = list(selections)
+                command(staff)
+            self._tag_broken_ties(staff["MusicVoice"])
+            selections = [staff["MusicVoice"][:]]
             staff["MusicVoice"][:] = []
-            if self.rewrite_rest_filled_divisions:
-                selections = RhythmCommand._rewrite_rest_filled_divisions_(
-                    selections, multimeasure_rests=self.multimeasure_rests
-                )
-            self._tag_broken_ties(selections)
-        assert all(isinstance(_, abjad.Selection) for _ in selections)
+        assert all(isinstance(_, abjad.Selection) for _ in selections), repr(
+            selections
+        )
         if self.annotate_unpitched_music or not literal_selections:
             self._annotate_unpitched_music_(selections)
         return selections, start_offset
@@ -588,36 +571,13 @@ class RhythmCommand(scoping.Command):
                 previous_segment_stop_state = None
         return previous_segment_stop_state
 
-    @staticmethod
-    def _rewrite_rest_filled_divisions_(
-        selections,
-        multimeasure_rests=None,
-        tag="baca.RhythmCommand._rewrite_rest_filled_divisions_",
-    ):
-        selections_ = []
-        maker = abjad.LeafMaker(tag=tag)
-        prototype = (abjad.MultimeasureRest, abjad.Rest)
-        for selection in selections:
-            if not all(isinstance(_, prototype) for _ in selection):
-                selections_.append(selection)
-            else:
-                duration = abjad.inspect(selection).duration()
-                if multimeasure_rests:
-                    rest = abjad.MultimeasureRest(1, tag=tag)
-                    rest.multiplier = duration
-                    rests = abjad.select(rest)
-                else:
-                    rests = maker([None], [duration])
-                selections_.append(rests)
-        return selections_
-
-    def _tag_broken_ties(self, selections):
+    def _tag_broken_ties(self, staff):
         if self.left_broken and self.rhythm_maker.previous_state.get(
             "incomplete_final_note"
         ):
             if not self.repeat_ties:
                 raise Exception("left-broken ties must be repeat ties.")
-            first_leaf = abjad.select(selections).leaf(0)
+            first_leaf = abjad.select(staff).leaf(0)
             if isinstance(first_leaf, abjad.Note):
                 abjad.attach(const.LEFT_BROKEN_REPEAT_TIE_TO, first_leaf)
         if self.right_broken and self.rhythm_maker.state.get(
@@ -625,7 +585,7 @@ class RhythmCommand(scoping.Command):
         ):
             if self.repeat_ties:
                 raise Exception("right-broken ties must be conventional.")
-            final_leaf = abjad.select(selections).leaf(-1)
+            final_leaf = abjad.select(staff).leaf(-1)
             if isinstance(final_leaf, abjad.Note):
                 abjad.attach(abjad.tags.RIGHT_BROKEN_TIE_FROM, final_leaf)
 
@@ -1013,13 +973,6 @@ class RhythmCommand(scoping.Command):
 
         """
         return self._rewrite_meter
-
-    @property
-    def rewrite_rest_filled_divisions(self) -> typing.Optional[bool]:
-        """
-        Is true when command rewrites rest-filled divisions.
-        """
-        return self._rewrite_rest_filled_divisions
 
     @property
     def rhythm_maker(self) -> typing.Optional[typings.RhythmMakerTyping]:
@@ -2838,7 +2791,6 @@ def rhythm(
     persist: str = None,
     reference_meters: typing.Iterable[abjad.Meter] = None,
     rewrite_meter: bool = None,
-    rewrite_rest_filled_divisions: bool = None,
     right_broken: bool = None,
     split_measures: bool = None,
     tag: str = None,
@@ -2862,7 +2814,6 @@ def rhythm(
         persist=persist,
         reference_meters=reference_meters,
         rewrite_meter=rewrite_meter,
-        rewrite_rest_filled_divisions=rewrite_rest_filled_divisions,
         rhythm_maker=rhythm_maker,
         right_broken=right_broken,
         split_measures=split_measures,

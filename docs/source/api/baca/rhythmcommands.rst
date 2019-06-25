@@ -141,7 +141,6 @@ rhythmcommands
       reference_meters
       repeat_ties
       rewrite_meter
-      rewrite_rest_filled_divisions
       rhythm_maker
       right_broken
       split_measures
@@ -219,8 +218,6 @@ rhythmcommands
    .. autoattribute:: RhythmCommand.repeat_ties
 
    .. autoattribute:: RhythmCommand.rewrite_meter
-
-   .. autoattribute:: RhythmCommand.rewrite_rest_filled_divisions
 
    .. autoattribute:: RhythmCommand.rhythm_maker
 
