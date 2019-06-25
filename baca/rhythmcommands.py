@@ -373,9 +373,9 @@ class RhythmCommand(scoping.Command):
         self._runtime = runtime or abjad.OrderedDict()
         music, start_offset = self._make_rhythm(start_offset, time_signatures)
         assert isinstance(music, (tuple, list, abjad.Voice))
-        first_leaf = abjad.inspect(music).leaf(0)
-        final_leaf = abjad.inspect(music).leaf(-1)
-        pitched_prototype = (abjad.Note, abjad.Chord)
+        #        first_leaf = abjad.inspect(music).leaf(0)
+        #        final_leaf = abjad.inspect(music).leaf(-1)
+        #        pitched_prototype = (abjad.Note, abjad.Chord)
         payload = abjad.AnnotatedTimespan(
             start_offset=start_offset, stop_offset=None, annotation=music
         )
@@ -469,12 +469,18 @@ class RhythmCommand(scoping.Command):
     def _make_rhythm(self, start_offset, time_signatures):
         rhythm_maker = self.rhythm_maker
         literal_selections = False
+        division_change = False
         if rhythm_maker is None:
             mask = rmakers.silence([0], 1, use_multimeasure_rests=True)
             rhythm_maker = rmakers.NoteRhythmMaker(division_masks=[mask])
         if isinstance(rhythm_maker, abjad.Selection):
             selections = [rhythm_maker]
             literal_selections = True
+            assert not self.split_measures, repr(self.split_measures)
+            assert not self.rewrite_meter, repr(self.rewrite_meter)
+            assert not self.rewrite_rest_filled_divisions, repr(
+                self.rewrite_rest_filled_divisions
+            )
         else:
             if isinstance(rhythm_maker, rmakers.RhythmMaker):
                 pairs = [(rhythm_maker, abjad.index([0], 1))]
@@ -491,6 +497,9 @@ class RhythmCommand(scoping.Command):
             ), repr(divisions)
             divisions = divisions.flatten(depth=-1)
             division_count = len(divisions)
+            time_signatures_ = [abjad.TimeSignature(_) for _ in divisions]
+            if time_signatures_ != time_signatures:
+                division_change = True
             start_offset = divisions[0].start_offset
             labelled_divisions = []
             for i, division in enumerate(divisions):
@@ -536,27 +545,33 @@ class RhythmCommand(scoping.Command):
                 maker_to_state[rhythm_maker] = rhythm_maker.state
                 selections.extend(selections_)
             self._state = rhythm_maker.state
+            staff = rmakers.RhythmMaker._make_staff(time_signatures)
+            staff["MusicVoice"][:] = selections
+            if self.split_measures:
+                command = rmakers.SplitCommand(repeat_ties=self.repeat_ties)
+                selections = command(staff)
+                # command(staff)
+            assert all(isinstance(_, abjad.Selection) for _ in selections)
+            if self.rewrite_meter:
+                command = rmakers.RewriteMeterCommand(
+                    reference_meters=self.reference_meters,
+                    repeat_ties=self.repeat_ties,
+                )
+                selections = command(staff)
+                # command(staff)
+            #            if not division_change:
+            #                selections = rmakers.RhythmMaker._select_by_measure(staff)
+            #            else:
+            #                selection = staff["MusicVoice"][:]
+            #                selections = selection.partition_by_durations(divisions)
+            #                selections = list(selections)
+            staff["MusicVoice"][:] = []
+            if self.rewrite_rest_filled_divisions:
+                selections = RhythmCommand._rewrite_rest_filled_divisions_(
+                    selections, multimeasure_rests=self.multimeasure_rests
+                )
+            self._tag_broken_ties(selections)
         assert all(isinstance(_, abjad.Selection) for _ in selections)
-        staff = rmakers.RhythmMaker._make_staff(time_signatures)
-        staff["MusicVoice"][:] = selections
-        if self.split_measures:
-            command = rmakers.SplitCommand(repeat_ties=self.repeat_ties)
-            selections = command(staff, time_signatures=time_signatures)
-            #command(staff, time_signatures=time_signatures)
-        assert all(isinstance(_, abjad.Selection) for _ in selections)
-        if self.rewrite_meter:
-            command = rmakers.RewriteMeterCommand(
-                reference_meters=self.reference_meters,
-                repeat_ties=self.repeat_ties,
-            )
-            selections = command(staff, time_signatures=time_signatures)
-            #command(staff, time_signatures=time_signatures)
-        staff["MusicVoice"][:] = []
-        if self.rewrite_rest_filled_divisions:
-            selections = RhythmCommand._rewrite_rest_filled_divisions_(
-                selections, multimeasure_rests=self.multimeasure_rests
-            )
-        self._tag_broken_ties(selections)
         if self.annotate_unpitched_music or not literal_selections:
             self._annotate_unpitched_music_(selections)
         return selections, start_offset
@@ -597,8 +612,6 @@ class RhythmCommand(scoping.Command):
         return selections_
 
     def _tag_broken_ties(self, selections):
-        if not isinstance(self.rhythm_maker, rmakers.RhythmMaker):
-            return
         if self.left_broken and self.rhythm_maker.previous_state.get(
             "incomplete_final_note"
         ):
