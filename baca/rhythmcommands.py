@@ -537,20 +537,12 @@ class RhythmCommand(scoping.Command):
                 selections.extend(selections_)
             self._state = rhythm_maker.state
         assert all(isinstance(_, abjad.Selection) for _ in selections)
-        time_signature_voice = abjad.Voice(name="TimeSignatureVoice")
-        music_voice = abjad.Voice(selections, name="MusicVoice")
-        staff = abjad.Staff(
-            [time_signature_voice, music_voice], is_simultaneous=True
-        )
-        for time_signature in time_signatures:
-            duration = time_signature.pair
-            skip = abjad.Skip(1, multiplier=duration)
-            time_signature_voice.append(skip)
-            abjad.attach(time_signature, skip, context="Staff")
+        staff = rmakers.RhythmMaker._make_staff(time_signatures)
+        staff["MusicVoice"][:] = selections
         if self.split_measures:
             command = rmakers.SplitCommand(repeat_ties=self.repeat_ties)
-            # selections = command(selections, time_signatures)
             selections = command(staff, time_signatures=time_signatures)
+            #command(staff, time_signatures=time_signatures)
         assert all(isinstance(_, abjad.Selection) for _ in selections)
         if self.rewrite_meter:
             command = rmakers.RewriteMeterCommand(
@@ -558,7 +550,8 @@ class RhythmCommand(scoping.Command):
                 repeat_ties=self.repeat_ties,
             )
             selections = command(staff, time_signatures=time_signatures)
-        music_voice[:] = []
+            #command(staff, time_signatures=time_signatures)
+        staff["MusicVoice"][:] = []
         if self.rewrite_rest_filled_divisions:
             selections = RhythmCommand._rewrite_rest_filled_divisions_(
                 selections, multimeasure_rests=self.multimeasure_rests

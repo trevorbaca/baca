@@ -10291,30 +10291,23 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         """
         self._state = state or abjad.OrderedDict()
         self._apply_state(state=state)
-        music_voice = abjad.Voice(name="MusicVoice")
-        time_signature_voice = abjad.Voice(name="TimeSignatureVoice")
-        staff = abjad.Staff(
-            [time_signature_voice, music_voice], is_simultaneous=True
-        )
         selections = self._make_music(
             collections,
             rest_affix_specifier=rest_affix_specifier,
             collection_index=collection_index,
             total_collections=total_collections,
         )
-        music_voice.extend(selections)
         durations = [abjad.inspect(_).duration() for _ in selections]
-        divisions = [abjad.NonreducedFraction(_) for _ in durations]
-        for duration in durations:
-            time_signature = abjad.TimeSignature(duration)
-            skip = abjad.Skip(1, multiplier=duration)
-            time_signature_voice.append(skip)
-            abjad.attach(time_signature, skip, context="Staff")
-        selections = self._apply_division_masks(staff)
-        selections = self._apply_specifiers(staff, divisions, selections)
-        assert music_voice.name == "MusicVoice"
-        music_voice[:] = []
+        time_signatures = [abjad.TimeSignature(_) for _ in durations]
+        staff = self._make_staff(time_signatures)
+        staff["MusicVoice"].extend(selections)
+        self._apply_division_masks(staff)
+        self._apply_specifiers(staff)
         # self._check_wellformedness(selections)
+        selections = self._select_by_measure(staff)
+        staff["MusicVoice"][:] = []
+        self._validate_selections(selections)
+        self._validate_tuplets(selections)
         state = self._make_state()
         return selections, state
 
