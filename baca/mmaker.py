@@ -4062,7 +4062,6 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     rmakers.BeamSpecifier(
             ...         beam_divisions_together=True,
-            ...         beam_each_division=True,
             ...         ),
             ...     )
 

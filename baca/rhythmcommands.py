@@ -1639,7 +1639,6 @@ def beam_divisions(*, stemlets: abjad.Number = None) -> rmakers.BeamSpecifier:
 
     """
     return rmakers.BeamSpecifier(
-        ###beam_each_division=True,
         beam_rests=bool(stemlets),
         selector=classes._select().tuplets(),
         stemlet_length=stemlets,
@@ -1782,10 +1781,7 @@ def beam_everything(*, stemlets: abjad.Number = None) -> rmakers.BeamSpecifier:
 
     """
     return rmakers.BeamSpecifier(
-        beam_divisions_together=True,
-        beam_each_division=True,
-        beam_rests=True,
-        stemlet_length=stemlets,
+        beam_divisions_together=True, beam_rests=True, stemlet_length=stemlets
     )
 
 
@@ -1876,7 +1872,7 @@ def beam_runs() -> rmakers.BeamSpecifier:
 
     """
     return rmakers.BeamSpecifier(
-        beam_divisions_together=True, beam_each_division=True, beam_rests=False
+        beam_divisions_together=True, beam_rests=False
     )
 
 
