@@ -2177,8 +2177,19 @@ def make_repeat_tied_notes(
     """
     Makes repeat-tied notes; rewrites meter.
     """
-    nonfirst_lts = classes._select().ptlts()[1:]
-    first_note = classes._select().note(0)
+    #    specifier: rmakers.SpecifierTyping
+    #    specifiers_ = list(specifiers)
+    #    specifier = rmakers.BeamSpecifier(selector=classes._select().plts())
+    #    specifiers_.append(specifier)
+    #    specifier = rmakers.TieSpecifier(
+    #        attach_repeat_ties=True, selector=classes._select().pheads()[1:]
+    #    )
+    #    specifiers_.append(specifier)
+    #    if not do_not_rewrite_meter:
+    #        specifier = rmakers.RewriteMeterCommand()
+    #        specifiers_.append(specifier)
+    #    specifier = rmakers.TieSpecifier(repeat_ties=True)
+    #    specifiers_.append(specifier)
     return RhythmCommand(
         measures=measures,
         rewrite_meter=not (do_not_rewrite_meter),
@@ -2186,6 +2197,7 @@ def make_repeat_tied_notes(
             *specifiers,
             rmakers.BeamSpecifier(selector=classes._select().plts()),
             rmakers.TieSpecifier(tie_across_divisions=True, repeat_ties=True),
+            ###rmakers.TieSpecifier(repeat_ties=True),
             division_masks=dmask,
             tag=tag,
         ),
