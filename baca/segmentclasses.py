@@ -1307,7 +1307,7 @@ class HorizontalSpacingSpecifier(object):
         ...                 duration_bracket=True,
         ...                 ),
         ...             rmakers.BeamSpecifier(
-        ...                 beam_each_division=True,
+        ...                 selector=baca.tuplets(),
         ...                 use_feather_beams=True,
         ...                 ),
         ...             interpolation_specifiers=rmakers.InterpolationSpecifier(

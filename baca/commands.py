@@ -871,7 +871,7 @@ class ColorCommand(scoping.Command):
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
         ...             rmakers.BeamSpecifier(
-        ...                 beam_each_division=True,
+        ...                 selector=baca.tuplets(),
         ...             ),
         ...             talea=rmakers.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -1642,7 +1642,7 @@ class IndicatorCommand(scoping.Command):
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
         ...             rmakers.BeamSpecifier(
-        ...                 beam_each_division=True,
+        ...                 selector=baca.tuplets(),
         ...             ),
         ...             talea=rmakers.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -2005,7 +2005,7 @@ class IndicatorCommand(scoping.Command):
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.BeamSpecifier(
-            ...                 beam_each_division=True,
+            ...                 selector=baca.tuplets(),
             ...             ),
             ...             talea=rmakers.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -2086,7 +2086,7 @@ class IndicatorCommand(scoping.Command):
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.BeamSpecifier(
-            ...                 beam_each_division=True,
+            ...                 selector=baca.tuplets(),
             ...             ),
             ...             talea=rmakers.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
@@ -6834,11 +6834,11 @@ def volta(*, selector: abjad.SelectorTyping = "baca.leaves()") -> VoltaCommand:
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+        ...             rmakers.BeamSpecifier(
+        ...                 selector=baca.tuplets(),
+        ...             ),
         ...             rmakers.TupletSpecifier(
         ...                 extract_trivial=True,
-        ...             ),
-        ...             rmakers.BeamSpecifier(
-        ...                 beam_each_division=True,
         ...             ),
         ...             talea=rmakers.Talea(
         ...                 counts=[1, 1, 1, -1],
@@ -7004,11 +7004,11 @@ def volta(*, selector: abjad.SelectorTyping = "baca.leaves()") -> VoltaCommand:
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+        ...             rmakers.BeamSpecifier(
+        ...                 selector=baca.tuplets(),
+        ...             ),
         ...             rmakers.TupletSpecifier(
         ...                 extract_trivial=True,
-        ...             ),
-        ...             rmakers.BeamSpecifier(
-        ...                 beam_each_division=True,
         ...             ),
         ...             talea=rmakers.Talea(
         ...                 counts=[1, 1, 1, -1],

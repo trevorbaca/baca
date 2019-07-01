@@ -114,12 +114,12 @@ class RhythmCommand(scoping.Command):
 
         >>> command = baca.RhythmCommand(
         ...     rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+        ...         rmakers.BeamSpecifier(
+        ...             selector=baca.tuplets(),
+        ...         ),
         ...         rmakers.TupletSpecifier(
         ...             extract_trivial=True,
         ...             ),
-        ...         rmakers.BeamSpecifier(
-        ...             beam_each_division=True,
-        ...         ),
         ...     ),
         ... )
 
@@ -285,7 +285,7 @@ class RhythmCommand(scoping.Command):
 
     __slots__ = (
         "_annotate_unpitched_music",
-        "_division_expression",
+        "_divisions",
         "_left_broken",
         "_multimeasure_rests",
         "_payload",
@@ -327,7 +327,7 @@ class RhythmCommand(scoping.Command):
         self._annotate_unpitched_music = annotate_unpitched_music
         if divisions is not None:
             assert isinstance(divisions, abjad.Expression)
-        self._division_expression = divisions
+        self._divisions = divisions
         if left_broken is not None:
             left_broken = bool(left_broken)
         self._left_broken = left_broken
@@ -616,12 +616,12 @@ class RhythmCommand(scoping.Command):
             >>> command = baca.RhythmCommand(
             ...     divisions=abjad.sequence().sum().sequence(),
             ...     rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+            ...         rmakers.BeamSpecifier(
+            ...             selector=baca.tuplets(),
+            ...         ),
             ...         rmakers.TupletSpecifier(
             ...             extract_trivial=True,
             ...             ),
-            ...         rmakers.BeamSpecifier(
-            ...             beam_each_division=True,
-            ...         ),
             ...     ),
             ... )
 
@@ -776,7 +776,7 @@ class RhythmCommand(scoping.Command):
                 >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
         """
-        return self._division_expression
+        return self._divisions
 
     @property
     def left_broken(self) -> typing.Optional[bool]:
@@ -991,18 +991,18 @@ class RhythmCommand(scoping.Command):
             ...     )
 
             >>> rhythm_maker_1 = rmakers.NoteRhythmMaker(
-            ...         rmakers.BeamSpecifier(
-            ...             beam_each_division=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(
+            ...         selector=baca.plts(),
+            ...     ),
             ...     division_masks=[rmakers.silence([0], 1)],
             ...     )
             >>> rhythm_maker_2 = rmakers.TaleaRhythmMaker(
-            ...         rmakers.TupletSpecifier(
-            ...             extract_trivial=True,
-            ...         ),
-            ...         rmakers.BeamSpecifier(
-            ...             beam_each_division=True,
-            ...         ),
+            ...     rmakers.BeamSpecifier(
+            ...         selector=baca.tuplets(),
+            ...     ),
+            ...     rmakers.TupletSpecifier(
+            ...         extract_trivial=True,
+            ...     ),
             ...     talea=rmakers.Talea(
             ...         counts=[3, 4],
             ...         denominator=16,
@@ -1639,8 +1639,9 @@ def beam_divisions(*, stemlets: abjad.Number = None) -> rmakers.BeamSpecifier:
 
     """
     return rmakers.BeamSpecifier(
-        beam_each_division=True,
+        ###beam_each_division=True,
         beam_rests=bool(stemlets),
+        selector=classes._select().tuplets(),
         stemlet_length=stemlets,
     )
 
@@ -1941,9 +1942,7 @@ def do_not_beam() -> rmakers.BeamSpecifier:
             >>
 
     """
-    return rmakers.BeamSpecifier(
-        beam_divisions_together=False, beam_each_division=False
-    )
+    return rmakers.BeamSpecifier(beam_divisions_together=False)
 
 
 def make_even_divisions(
@@ -1957,8 +1956,8 @@ def make_even_divisions(
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+            rmakers.BeamSpecifier(selector=classes._select().tuplets()),
             rmakers.TupletSpecifier(extract_trivial=True),
-            rmakers.BeamSpecifier(beam_each_division=True),
             tag=tag,
         ),
     )
@@ -1982,11 +1981,11 @@ def make_fused_tuplet_monads(
         divisions=abjad.sequence().sum().sequence(),
         measures=measures,
         rhythm_maker=rmakers.TupletRhythmMaker(
+            rmakers.BeamSpecifier(selector=classes._select().tuplets()),
             rmakers.TupletSpecifier(
                 extract_trivial=True, rewrite_rest_filled=True, trivialize=True
             ),
             rmakers.TieSpecifier(repeat_ties=True),
-            rmakers.BeamSpecifier(beam_each_division=True),
             tag=tag,
             tuplet_ratios=tuplet_ratios,
         ),
@@ -2165,7 +2164,7 @@ def make_notes(
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
             *specifiers_,
-            rmakers.BeamSpecifier(beam_each_division=True),
+            rmakers.BeamSpecifier(selector=classes._select().plts()),
             division_masks=dmask,
             tag=tag,
         ),
@@ -2188,13 +2187,9 @@ def make_repeat_tied_notes(
         measures=measures,
         rewrite_meter=not (do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
-            #            rmakers.TieSpecifier(
-            #                attach_repeat_ties=True, selector=nonfirst_lts.map(first_note)
-            #            ),
-            #            rmakers.TieSpecifier(repeat_ties=True),
             *specifiers,
+            rmakers.BeamSpecifier(selector=classes._select().plts()),
             rmakers.TieSpecifier(tie_across_divisions=True, repeat_ties=True),
-            rmakers.BeamSpecifier(beam_each_division=True),
             division_masks=dmask,
             tag=tag,
         ),
@@ -2427,8 +2422,8 @@ def make_single_attack(
     duration = abjad.Duration(duration)
     numerator, denominator = duration.pair
     rhythm_maker = rmakers.IncisedRhythmMaker(
+        rmakers.BeamSpecifier(selector=classes._select().tuplets()),
         rmakers.TupletSpecifier(extract_trivial=True),
-        rmakers.BeamSpecifier(beam_each_division=True),
         incise_specifier=rmakers.InciseSpecifier(
             fill_with_rests=True,
             outer_divisions_only=True,
@@ -2462,11 +2457,8 @@ def make_tied_notes(
         measures=measures,
         rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
+            rmakers.BeamSpecifier(selector=classes._select().plts()),
             rmakers.TieSpecifier(tie_across_divisions=True),
-            #            rmakers.TieSpecifier(
-            #                attach_ties=True, selector=nonlast_lts.map(last_note)
-            #            ),
-            rmakers.BeamSpecifier(beam_each_division=True),
             tag=tag,
         ),
     )

@@ -938,6 +938,10 @@ mmaker
 
    .. autoattribute:: PitchFirstRhythmMaker.division_masks
 
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmMaker.divisions
+
    .. autoattribute:: PitchFirstRhythmMaker.duration_specifier
 
    .. container:: inherited

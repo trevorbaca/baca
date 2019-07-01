@@ -499,6 +499,10 @@ rhythmcommands
 
    .. container:: inherited
 
+      .. autoattribute:: SkipRhythmMaker.divisions
+
+   .. container:: inherited
+
       .. autoattribute:: SkipRhythmMaker.duration_specifier
 
    .. container:: inherited
