@@ -2482,17 +2482,11 @@ def make_tied_repeated_durations(
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
     tie_specifier = rmakers.TieSpecifier(
-        repeat_ties=True, tie_across_divisions=True
+        attach_repeat_ties=True, selector=classes._select().pheads()[1:]
     )
     specifiers.append(tie_specifier)
-    #    tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
-    #    specifiers.append(tie_specifier)
-    #    nonfirst_lts = classes._select().lts()[1:]
-    #    first_note = classes._select().note(0)
-    #    tie_specifier = rmakers.TieSpecifier(
-    #        attach_repeat_ties=True, selector=nonfirst_lts.map(first_note)
-    #    )
-    #    specifiers.append(tie_specifier)
+    tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
+    specifiers.append(tie_specifier)
     divisions = divisionclasses._divisions().fuse()
     divisions = divisions.split(durations, cyclic=True)
     return RhythmCommand(
