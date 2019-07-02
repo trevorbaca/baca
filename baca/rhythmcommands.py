@@ -2193,9 +2193,7 @@ def make_repeat_tied_notes(
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.NoteRhythmMaker(
-            *specifiers_,
-            division_masks=dmask,
-            tag=tag,
+            *specifiers_, division_masks=dmask, tag=tag
         ),
     )
 
@@ -2455,14 +2453,14 @@ def make_tied_notes(
     """
     Makes tied notes; rewrites meter.
     """
-    nonlast_lts = classes._select().lts()[:-1]
-    last_note = classes._select().note(-1)
     return RhythmCommand(
         measures=measures,
-        rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
             rmakers.BeamSpecifier(selector=classes._select().plts()),
-            rmakers.TieSpecifier(tie_across_divisions=True),
+            rmakers.TieSpecifier(
+                attach_ties=True, selector=classes._select().ptails()[:-1]
+            ),
+            rmakers.RewriteMeterCommand(),
             tag=tag,
         ),
     )
