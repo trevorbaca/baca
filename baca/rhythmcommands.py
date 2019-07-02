@@ -1396,13 +1396,14 @@ class TieCorrectionCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_direction", "_repeat", "_untie")
+    __slots__ = ("_allow_rest", "_direction", "_repeat", "_untie")
 
     ### INITIALIZER ###
 
     def __init__(
         self,
         *,
+        allow_rest: bool = None,
         direction: abjad.HorizontalAlignment = None,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
@@ -1420,6 +1421,9 @@ class TieCorrectionCommand(scoping.Command):
             scope=scope,
             selector=selector,
         )
+        if allow_rest is not None:
+            allow_rest = bool(allow_rest)
+        self._allow_rest = allow_rest
         if direction is not None:
             assert direction in (abjad.Right, abjad.Left, None)
         self._direction = direction
@@ -1450,8 +1454,7 @@ class TieCorrectionCommand(scoping.Command):
 
     ### PRIVATE METHODS ###
 
-    @staticmethod
-    def _add_tie(current_leaf, direction, repeat):
+    def _add_tie(self, current_leaf, direction, repeat):
         assert direction in (abjad.Left, abjad.Right, None), repr(direction)
         tag_ = "TieCorrectionCommand"
         left_broken, right_broken = None, None
@@ -1473,18 +1476,32 @@ class TieCorrectionCommand(scoping.Command):
         if direction == abjad.Left:
             if repeat:
                 repeat_tie = abjad.RepeatTie(left_broken=left_broken)
-                abjad.attach(repeat_tie, current_leaf, tag=tag_)
+                abjad.attach(
+                    repeat_tie,
+                    current_leaf,
+                    do_not_test=self.allow_rest,
+                    tag=tag_,
+                )
             else:
                 tie = abjad.TieIndicator(right_broken=right_broken)
-                abjad.attach(tie, previous_leaf, tag=tag_)
+                abjad.attach(
+                    tie, previous_leaf, do_not_test=self.allow_rest, tag=tag_
+                )
         else:
             assert direction == abjad.Right
             if not repeat:
                 tie = abjad.TieIndicator(right_broken=right_broken)
-                abjad.attach(tie, current_leaf, tag=tag_)
+                abjad.attach(
+                    tie, current_leaf, do_not_test=self.allow_rest, tag=tag_
+                )
             else:
                 repeat_tie = abjad.RepeatTie(left_broken=left_broken)
-                abjad.attach(repeat_tie, next_leaf, tag=tag_)
+                abjad.attach(
+                    repeat_tie,
+                    next_leaf,
+                    do_not_test=self.allow_rest,
+                    tag=tag_,
+                )
 
     @staticmethod
     def _sever_tie(current_leaf, direction):
@@ -1501,6 +1518,13 @@ class TieCorrectionCommand(scoping.Command):
                 abjad.detach(abjad.TieIndicator, previous_leaf)
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def allow_rest(self) -> typing.Optional[bool]:
+        """
+        Is true when tie is allowed to connect to rest.
+        """
+        return self._allow_rest
 
     @property
     def direction(self) -> typing.Optional[abjad.HorizontalAlignment]:
@@ -2497,7 +2521,9 @@ def make_tied_repeated_durations(
 
 
 def repeat_tie_from(
-    *, selector: abjad.SelectorTyping = "baca.pleaf(-1)"
+    *,
+    allow_rest: bool = None,
+    selector: abjad.SelectorTyping = "baca.pleaf(-1)",
 ) -> TieCorrectionCommand:
     r"""
     Repeat-ties from leaf.
@@ -2628,11 +2654,15 @@ def repeat_tie_from(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    return TieCorrectionCommand(repeat=True, selector=selector)
+    return TieCorrectionCommand(
+        allow_rest=allow_rest, repeat=True, selector=selector
+    )
 
 
 def repeat_tie_to(
-    *, selector: abjad.SelectorTyping = "baca.pleaf(0)"
+    *,
+    allow_rest: bool = None,
+    selector: abjad.SelectorTyping = "baca.pleaf(0)",
 ) -> TieCorrectionCommand:
     r"""
     Repeat-ties to leaf.
@@ -2764,7 +2794,10 @@ def repeat_tie_to(
 
     """
     return TieCorrectionCommand(
-        direction=abjad.Left, repeat=True, selector=selector
+        allow_rest=allow_rest,
+        direction=abjad.Left,
+        repeat=True,
+        selector=selector,
     )
 
 
@@ -3288,7 +3321,9 @@ def tacet(
 
 
 def tie_from(
-    *, selector: abjad.SelectorTyping = "baca.pleaf(-1)"
+    *,
+    allow_rest: bool = None,
+    selector: abjad.SelectorTyping = "baca.pleaf(-1)",
 ) -> TieCorrectionCommand:
     r"""
     Ties from leaf.
@@ -3413,11 +3448,15 @@ def tie_from(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    return TieCorrectionCommand(repeat=False, selector=selector)
+    return TieCorrectionCommand(
+        allow_rest=allow_rest, repeat=False, selector=selector
+    )
 
 
 def tie_to(
-    *, selector: abjad.SelectorTyping = "baca.pleaf(0)"
+    *,
+    allow_rest: bool = None,
+    selector: abjad.SelectorTyping = "baca.pleaf(0)",
 ) -> TieCorrectionCommand:
     r"""
     Ties to leaf.
@@ -3543,7 +3582,10 @@ def tie_to(
 
     """
     return TieCorrectionCommand(
-        direction=abjad.Left, repeat=False, selector=selector
+        allow_rest=allow_rest,
+        direction=abjad.Left,
+        repeat=False,
+        selector=selector,
     )
 
 

@@ -263,6 +263,7 @@ rhythmcommands
    .. autosummary::
       :nosignatures:
 
+      allow_rest
       direction
       repeat
       untie
@@ -303,6 +304,8 @@ rhythmcommands
 
    .. rubric:: Read-only properties
       :class: class-header
+
+   .. autoattribute:: TieCorrectionCommand.allow_rest
 
    .. container:: inherited
 
