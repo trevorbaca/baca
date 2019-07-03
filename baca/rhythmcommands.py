@@ -2224,8 +2224,7 @@ def make_repeat_tied_notes(
 
 def make_repeated_duration_notes(
     durations: typing.Sequence[abjad.DurationTyping],
-    *,
-    beam_specifier: rmakers.BeamSpecifier = None,
+    *specifiers: rmakers.SpecifierTyping,
     dmask: rmakers.MasksTyping = None,
     do_not_rewrite_meter: bool = None,
     measures: typings.SliceTyping = None,
@@ -2239,19 +2238,17 @@ def make_repeated_duration_notes(
     elif isinstance(durations, tuple):
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
-    specifiers: typing.List[rmakers.SpecifierTyping] = []
-    tie_specifier = rmakers.TieSpecifier(repeat_ties=True)
-    specifiers.append(tie_specifier)
     divisions = divisionclasses._divisions().fuse()
     divisions = divisions.split(durations, cyclic=True)
-    if beam_specifier is not None:
-        specifiers.append(beam_specifier)
     return RhythmCommand(
         divisions=divisions,
         measures=measures,
         rewrite_meter=not (do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
-            *specifiers, division_masks=dmask, tag=tag
+            *specifiers,
+            rmakers.TieSpecifier(repeat_ties=True),
+            division_masks=dmask,
+            tag=tag,
         ),
     )
 

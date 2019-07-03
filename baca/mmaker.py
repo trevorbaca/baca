@@ -10316,7 +10316,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         # self._check_wellformedness(selections)
         selections = self._select_by_measure(staff)
         staff["MusicVoice"][:] = []
-        self._validate_selections(selections)
         self._validate_tuplets(selections)
         state = self._make_state()
         return selections, state
