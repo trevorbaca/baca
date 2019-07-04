@@ -499,10 +499,6 @@ rhythmcommands
 
    .. container:: inherited
 
-      .. autoattribute:: SkipRhythmMaker.division_masks
-
-   .. container:: inherited
-
       .. autoattribute:: SkipRhythmMaker.divisions
 
    .. container:: inherited

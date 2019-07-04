@@ -1375,17 +1375,12 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
     def __init__(
         self,
         *specifiers: rmakers.SpecifierTyping,
-        division_masks: rmakers.MasksTyping = None,
         divisions: abjad.Expression = None,
         tag: str = None,
         use_multimeasure_rests: bool = None,
     ) -> None:
         rmakers.RhythmMaker.__init__(
-            self,
-            *specifiers,
-            division_masks=division_masks,
-            divisions=divisions,
-            tag=tag,
+            self, *specifiers, divisions=divisions, tag=tag
         )
         if use_multimeasure_rests is not None:
             use_multimeasure_rests = bool(use_multimeasure_rests)

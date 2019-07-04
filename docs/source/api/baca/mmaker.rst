@@ -887,7 +887,6 @@ mmaker
 
       __call__
       acciaccatura_specifiers
-      division_masks
       duration_specifier
       show
       talea
@@ -935,8 +934,6 @@ mmaker
       :class: class-header
 
    .. autoattribute:: PitchFirstRhythmMaker.acciaccatura_specifiers
-
-   .. autoattribute:: PitchFirstRhythmMaker.division_masks
 
    .. container:: inherited
 

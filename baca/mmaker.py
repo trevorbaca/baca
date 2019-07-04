@@ -10450,7 +10450,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         time_signatures = [abjad.TimeSignature(_) for _ in durations]
         staff = self._make_staff(time_signatures)
         staff["MusicVoice"].extend(selections)
-        self._apply_division_masks(staff)
         self._apply_specifiers(staff)
         # self._check_wellformedness(selections)
         selections = self._select_by_measure(staff)
@@ -11106,13 +11105,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Returns acciaccatura specifiers or none.
         """
         return self._acciaccatura_specifiers
-
-    @property
-    def division_masks(self):
-        r"""
-        Gets division masks.
-        """
-        return rmakers.RhythmMaker.division_masks.fget(self)
 
     @property
     def duration_specifier(self):
