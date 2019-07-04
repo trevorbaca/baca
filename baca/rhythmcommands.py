@@ -2328,7 +2328,7 @@ def make_rests(
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.NoteRhythmMaker(
-            rmakers.SilenceMask(selector=classes._select().lts())
+            rmakers.SilenceMask(selector=classes._select().lts()), tag=tag
         ),
     )
 
