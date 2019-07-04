@@ -269,13 +269,13 @@ class SingleStaffScoreTemplate(ScoreTemplate):
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -425,7 +425,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override ViolinMusicStaff.Clef.color = ##f                          %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                 \set ViolinMusicStaff.forceClef = ##t                                %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
-                                R1 * 1/2                                                             %! _call_rhythm_commands
+                                R1 * 4/8                                                             %! _call_rhythm_commands
                                 ^ \baca-default-indicator-markup "(Violin)"                          %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)         %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
@@ -433,7 +433,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 % [Violin_Music_Voice measure 3]                                     %! _comment_measure_numbers
-                                R1 * 1/2                                                             %! _call_rhythm_commands
+                                R1 * 4/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 % [Violin_Music_Voice measure 4]                                     %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
@@ -480,7 +480,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                 \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
-                                R1 * 1/2                                                             %! _call_rhythm_commands
+                                R1 * 4/8                                                             %! _call_rhythm_commands
                                 ^ \baca-default-indicator-markup "(Viola)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
@@ -488,7 +488,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 % [Viola_Music_Voice measure 3]                                      %! _comment_measure_numbers
-                                R1 * 1/2                                                             %! _call_rhythm_commands
+                                R1 * 4/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 % [Viola_Music_Voice measure 4]                                      %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
@@ -535,7 +535,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                             %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                 \set CelloMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
-                                R1 * 1/2                                                             %! _call_rhythm_commands
+                                R1 * 4/8                                                             %! _call_rhythm_commands
                                 ^ \baca-default-indicator-markup "(Cello)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
@@ -543,7 +543,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
                                 R1 * 3/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 3]                                      %! _comment_measure_numbers
-                                R1 * 1/2                                                             %! _call_rhythm_commands
+                                R1 * 4/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 4]                                      %! _comment_measure_numbers
                                 R1 * 3/8                                                             %! _call_rhythm_commands
@@ -758,13 +758,13 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                         {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice_One measure 1]                                            %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice_One measure 2]                                            %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice_One measure 3]                                            %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice_One measure 4]                                            %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -801,13 +801,13 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
                         {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice_Two measure 1]                                            %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice_Two measure 2]                                            %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice_Two measure 3]                                            %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice_Two measure 4]                                            %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -965,7 +965,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet)   %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                         %@% \override ViolinMusicStaff.Clef.color = ##f                              %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                             \set ViolinMusicStaff.forceClef = ##t                                    %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
                             ^ \baca-default-indicator-markup "(Violin)"                              %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)             %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
@@ -973,7 +973,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Violin_Music_Voice measure 3]                                         %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Violin_Music_Voice measure 4]                                         %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands

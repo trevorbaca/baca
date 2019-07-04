@@ -10440,22 +10440,23 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         """
         self._state = state or abjad.OrderedDict()
         self._apply_state(state=state)
-        selections = self._make_music(
+        tuplets = self._make_music(
             collections,
             rest_affix_specifier=rest_affix_specifier,
             collection_index=collection_index,
             total_collections=total_collections,
         )
-        durations = [abjad.inspect(_).duration() for _ in selections]
+        durations = [abjad.inspect(_).duration() for _ in tuplets]
         time_signatures = [abjad.TimeSignature(_) for _ in durations]
         staff = self._make_staff(time_signatures)
-        staff["MusicVoice"].extend(selections)
+        staff["MusicVoice"].extend(tuplets)
         self._apply_specifiers(staff)
         # self._check_wellformedness(selections)
         selections = self._select_by_measure(staff)
         staff["MusicVoice"][:] = []
         self._validate_tuplets(selections)
         state = self._make_state()
+        # TODO: harmonize return type with rmakers.RhythmMaker.__call__()
         return selections, state
 
     ### PRIVATE METHODS ###
@@ -10670,9 +10671,9 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         rest_affix_specifier=None,
         collection_index=None,
         total_collections=None,
-    ):
+    ) -> typing.List[abjad.Tuplet]:
         segment_count = len(collections)
-        selections = []
+        tuplets = []
         if collection_index is None:
             for i, segment in enumerate(collections):
                 if rest_affix_specifier is not None:
@@ -10684,14 +10685,14 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 else:
                     rest_prefix, rest_suffix = None, None
                     affix_skips_instead_of_rests = None
-                selection = self._make_selection(
+                tuplet = self._make_tuplet(
                     segment,
                     segment_count,
                     rest_prefix=rest_prefix,
                     rest_suffix=rest_suffix,
                     affix_skips_instead_of_rests=affix_skips_instead_of_rests,
                 )
-                selections.append(selection)
+                tuplets.append(tuplet)
         else:
             assert len(collections) == 1, repr(collections)
             segment = collections[0]
@@ -10706,17 +10707,25 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             else:
                 rest_prefix, rest_suffix = None, None
                 affix_skips_instead_of_rests = None
-            selection = self._make_selection(
+            tuplet = self._make_tuplet(
                 segment,
                 segment_count,
                 rest_prefix=rest_prefix,
                 rest_suffix=rest_suffix,
                 affix_skips_instead_of_rests=affix_skips_instead_of_rests,
             )
-            selections.append(selection)
-        return selections
+            tuplets.append(tuplet)
+        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
+        return tuplets
 
-    def _make_selection(
+    def _make_state(self):
+        state = abjad.OrderedDict()
+        for name in sorted(self._state_variables):
+            value = getattr(self, name)
+            state[name] = value
+        return state
+
+    def _make_tuplet(
         self,
         segment,
         segment_count,
@@ -10729,8 +10738,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             collection_index, segment_count
         )
         self._next_segment += 1
-        if not segment:
-            return abjad.Selection()
         talea = self._get_talea()
         leaves = []
         specifier = self._get_duration_specifier()
@@ -10824,15 +10831,8 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                 abjad.attach(grace_container, logical_tie.head, tag="PFRM_1")
         if tuplet.trivial():
             tuplet.hide = True
-        selection = abjad.select([tuplet])
-        return selection
-
-    def _make_state(self):
-        state = abjad.OrderedDict()
-        for name in sorted(self._state_variables):
-            value = getattr(self, name)
-            state[name] = value
-        return state
+        assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
+        return tuplet
 
     @staticmethod
     def _make_tuplet_with_extra_count(

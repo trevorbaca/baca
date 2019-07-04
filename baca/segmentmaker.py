@@ -4009,12 +4009,12 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                 %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                     \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
-                                    R1 * 3/8                                                             %! _call_rhythm_commands
+                                    R1 * 6/16                                                            %! _call_rhythm_commands
                                     ^ \baca-default-indicator-markup "(Viola)"                           %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                     \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
                                     % [Viola_Music_Voice measure 2]                                      %! _comment_measure_numbers
-                                    R1 * 3/8                                                             %! _call_rhythm_commands
+                                    R1 * 6/16                                                            %! _call_rhythm_commands
                 <BLANKLINE>
                                     <<                                                                   %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -6412,13 +6412,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                R1 * 1/2                                                                 %! _call_rhythm_commands
+                                R1 * 4/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                                R1 * 1/2                                                                 %! _call_rhythm_commands
+                                R1 * 4/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -6659,13 +6659,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                R1 * 1/2                                                                 %! _call_rhythm_commands
+                                R1 * 4/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                                R1 * 1/2                                                                 %! _call_rhythm_commands
+                                R1 * 4/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -6772,13 +6772,13 @@ class SegmentMaker(abjad.SegmentMaker):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                s1 * 1/2                                                                 %! _call_rhythm_commands
+                                s1 * 4/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                                 s1 * 3/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                                s1 * 1/2                                                                 %! _call_rhythm_commands
+                                s1 * 4/8                                                                 %! _call_rhythm_commands
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                                 s1 * 3/8                                                                 %! _call_rhythm_commands

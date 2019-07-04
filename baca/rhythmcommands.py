@@ -1417,36 +1417,20 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
 
     ### PRIVATE METHODS ###
 
-    def _make_music(self, divisions):
-        result = []
+    def _make_music(self, divisions) -> typing.List[abjad.Selection]:
+        selections = []
+        component: typing.Union[abjad.MultimeasureRest, abjad.Skip]
         for division in divisions:
-            prototype = abjad.NonreducedFraction
-            assert isinstance(division, prototype), repr(division)
-            written_duration = abjad.Duration(1)
-            multiplied_duration = division
-            skip = self._make_skips(
-                written_duration, [multiplied_duration], tag=self.tag
-            )
-            result.append(skip)
-        return result
-
-    def _make_skips(self, written_duration, multiplied_durations, tag=None):
-        skips = []
-        written_duration = abjad.Duration(written_duration)
-        for multiplied_duration in multiplied_durations:
-            multiplied_duration = abjad.Duration(multiplied_duration)
-            multiplier = multiplied_duration / written_duration
-            multiplier = abjad.NonreducedFraction(multiplier)
+            assert isinstance(division, abjad.NonreducedFraction)
             if self.use_multimeasure_rests is True:
-                skip = abjad.MultimeasureRest(
-                    written_duration, multiplier=multiplier, tag=tag
+                component = abjad.MultimeasureRest(
+                    1, multiplier=division, tag=self.tag
                 )
             else:
-                skip = abjad.Skip(
-                    written_duration, multiplier=multiplier, tag=tag
-                )
-            skips.append(skip)
-        return abjad.select(skips)
+                component = abjad.Skip(1, multiplier=division, tag=self.tag)
+            selection = abjad.select(component)
+            selections.append(selection)
+        return selections
 
     ### PUBLIC PROPERTIES ###
 

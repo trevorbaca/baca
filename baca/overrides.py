@@ -2292,13 +2292,13 @@ def mmrest_color(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)              %! baca.mmrest_text_color:OverrideCommand(1)
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -2453,7 +2453,7 @@ def mmrest_text_color(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override MultiMeasureRestText.color = #red                              %! baca.mmrest_text_color:OverrideCommand(1)
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -2465,7 +2465,7 @@ def mmrest_text_color(
                                 }                                                                    %! baca.markup:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -2629,7 +2629,7 @@ def mmrest_text_extra_offset(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override MultiMeasureRestText.extra-offset = #'(0 . 2)                  %! baca.mmrest_text_extra_offset:OverrideCommand(1)
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -2641,7 +2641,7 @@ def mmrest_text_extra_offset(
                                 }                                                                    %! baca.markup:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -2778,7 +2778,7 @@ def mmrest_text_padding(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override MultiMeasureRestText.padding = #2                              %! baca.mmrest_text_padding:OverrideCommand(1)
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -2790,7 +2790,7 @@ def mmrest_text_padding(
                                 }                                                                    %! baca.markup:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -2926,7 +2926,7 @@ def mmrest_text_parent_center(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override MultiMeasureRestText.parent-alignment-X = #0                   %! baca.mmrest_text_parent_center:OverrideCommand(1)
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -2938,7 +2938,7 @@ def mmrest_text_parent_center(
                                 }                                                                    %! baca.markup:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -3075,7 +3075,7 @@ def mmrest_text_staff_padding(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override MultiMeasureRestText.staff-padding = #2                        %! baca.mmrest_text_staff_padding:OverrideCommand(1)
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
@@ -3087,7 +3087,7 @@ def mmrest_text_staff_padding(
                                 }                                                                    %! baca.markup:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            R1 * 1/2                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             R1 * 3/8                                                                 %! _call_rhythm_commands
