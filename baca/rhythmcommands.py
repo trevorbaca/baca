@@ -1441,8 +1441,8 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
         for multiplied_duration in multiplied_durations:
             multiplied_duration = abjad.Duration(multiplied_duration)
             multiplier = multiplied_duration / written_duration
+            multiplier = abjad.NonreducedFraction(multiplier)
             if self.use_multimeasure_rests is True:
-                multiplier = abjad.NonreducedFraction(multiplier)
                 skip = abjad.MultimeasureRest(
                     written_duration, multiplier=multiplier, tag=tag
                 )
