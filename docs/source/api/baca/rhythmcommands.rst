@@ -465,6 +465,7 @@ rhythmcommands
 
       __call__
       __format__
+      use_multimeasure_rests
 
    .. raw:: html
 
@@ -523,3 +524,5 @@ rhythmcommands
    .. container:: inherited
 
       .. autoattribute:: SkipRhythmMaker.tag
+
+   .. autoattribute:: SkipRhythmMaker.use_multimeasure_rests

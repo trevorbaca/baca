@@ -1774,9 +1774,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 if self.skips_instead_of_rests:
                     maker = rhythmcommands.SkipRhythmMaker(tag=tag)
                 else:
-                    mask = rmakers.silence([0], 1, use_multimeasure_rests=True)
-                    maker = rmakers.NoteRhythmMaker(
-                        division_masks=[mask], tag=tag
+                    maker = rhythmcommands.SkipRhythmMaker(
+                        tag=tag, use_multimeasure_rests=True
                     )
                 selections = maker(self.time_signatures)
                 voice.extend(selections)

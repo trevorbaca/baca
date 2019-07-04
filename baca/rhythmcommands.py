@@ -466,8 +466,7 @@ class RhythmCommand(scoping.Command):
         literal_selections = False
         division_change = False
         if rhythm_maker is None:
-            mask = rmakers.silence([0], 1, use_multimeasure_rests=True)
-            rhythm_maker = rmakers.NoteRhythmMaker(division_masks=[mask])
+            rhythm_maker = SkipRhythmMaker(use_multimeasure_rests=True)
         if isinstance(rhythm_maker, abjad.Selection):
             selections = [rhythm_maker]
             literal_selections = True
@@ -991,11 +990,11 @@ class RhythmCommand(scoping.Command):
             ...     )
 
             >>> rhythm_maker_1 = rmakers.NoteRhythmMaker(
+            ...     rmakers.SilenceMask(selector=baca.lts()),
             ...     rmakers.BeamSpecifier(
             ...         selector=baca.plts(),
             ...     ),
-            ...     division_masks=[rmakers.silence([0], 1)],
-            ...     )
+            ... )
             >>> rhythm_maker_2 = rmakers.TaleaRhythmMaker(
             ...     rmakers.BeamSpecifier(
             ...         selector=baca.tuplets(),
@@ -1285,11 +1284,11 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
 
     ..  container:: example
 
-        Makes skips equal to the duration of input divisions.
+        Makes skips.
 
         >>> rhythm_maker = baca.SkipRhythmMaker()
 
-        >>> divisions = [(1, 4), (3, 16), (5, 8)]
+        >>> divisions = [(1, 4), (3, 16), (5, 8), (1, 3)]
         >>> selections = rhythm_maker(divisions)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     selections,
@@ -1310,12 +1309,56 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
                     s1 * 3/16
                     \time 5/8
                     s1 * 5/8
+                    #(ly:expect-warning "strange time signature found")
+                    \time 1/3
+                    s1 * 1/3
                 }
                 \new RhythmicStaff
                 {
                     s1 * 1/4
                     s1 * 3/16
                     s1 * 5/8
+                    s1 * 1/3
+                }
+            >>
+
+    ..  container:: example
+
+        Makes multimeasure rests.
+
+        >>> rhythm_maker = baca.SkipRhythmMaker(use_multimeasure_rests=True)
+
+        >>> divisions = [(1, 4), (3, 16), (5, 8), (1, 3)]
+        >>> selections = rhythm_maker(divisions)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     selections,
+        ...     divisions,
+        ...     )
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score])
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 1/4
+                    s1 * 1/4
+                    \time 3/16
+                    s1 * 3/16
+                    \time 5/8
+                    s1 * 5/8
+                    #(ly:expect-warning "strange time signature found")
+                    \time 1/3
+                    s1 * 1/3
+                }
+                \new RhythmicStaff
+                {
+                    R1 * 1/4
+                    R1 * 3/16
+                    R1 * 5/8
+                    R1 * 1/3
                 }
             >>
 
@@ -1325,7 +1368,28 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ()
+    __slots__ = ("_use_multimeasure_rests",)
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        *specifiers: rmakers.SpecifierTyping,
+        division_masks: rmakers.MasksTyping = None,
+        divisions: abjad.Expression = None,
+        tag: str = None,
+        use_multimeasure_rests: bool = None,
+    ) -> None:
+        rmakers.RhythmMaker.__init__(
+            self,
+            *specifiers,
+            division_masks=division_masks,
+            divisions=divisions,
+            tag=tag,
+        )
+        if use_multimeasure_rests is not None:
+            use_multimeasure_rests = bool(use_multimeasure_rests)
+        self._use_multimeasure_rests = use_multimeasure_rests
 
     ### SPECIAL METHODS ###
 
@@ -1371,16 +1435,32 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
             result.append(skip)
         return result
 
-    @staticmethod
-    def _make_skips(written_duration, multiplied_durations, tag=None):
+    def _make_skips(self, written_duration, multiplied_durations, tag=None):
         skips = []
         written_duration = abjad.Duration(written_duration)
         for multiplied_duration in multiplied_durations:
             multiplied_duration = abjad.Duration(multiplied_duration)
             multiplier = multiplied_duration / written_duration
-            skip = abjad.Skip(written_duration, multiplier=multiplier, tag=tag)
+            if self.use_multimeasure_rests is True:
+                multiplier = abjad.NonreducedFraction(multiplier)
+                skip = abjad.MultimeasureRest(
+                    written_duration, multiplier=multiplier, tag=tag
+                )
+            else:
+                skip = abjad.Skip(
+                    written_duration, multiplier=multiplier, tag=tag
+                )
             skips.append(skip)
         return abjad.select(skips)
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def use_multimeasure_rests(self) -> typing.Optional[bool]:
+        r"""
+        Is true when rhythm-maker makes multimeasure rests instead of skips.
+        """
+        return self._use_multimeasure_rests
 
 
 class TieCorrectionCommand(scoping.Command):
@@ -2156,18 +2236,12 @@ def make_multimeasure_rests(
     """
     return RhythmCommand(
         measures=measures,
-        rhythm_maker=rmakers.NoteRhythmMaker(
-            rmakers.SilenceMask(
-                selector=classes._select().lts(), use_multimeasure_rests=True
-            ),
-            tag=tag,
-        ),
+        rhythm_maker=SkipRhythmMaker(tag=tag, use_multimeasure_rests=True),
     )
 
 
 def make_notes(
     *specifiers,
-    dmask: rmakers.MasksTyping = None,
     measures: typings.SliceTyping = None,
     repeat_ties: bool = False,
     tag: str = "baca.make_notes",
@@ -2185,7 +2259,6 @@ def make_notes(
         rhythm_maker=rmakers.NoteRhythmMaker(
             *specifiers_,
             rmakers.BeamSpecifier(selector=classes._select().plts()),
-            division_masks=dmask,
             tag=tag,
         ),
     )
@@ -2193,7 +2266,6 @@ def make_notes(
 
 def make_repeat_tied_notes(
     *specifiers: rmakers.SpecifierTyping,
-    dmask: rmakers.MasksTyping = None,
     do_not_rewrite_meter: bool = None,
     measures: typings.SliceTyping = None,
     tag: str = "baca.make_repeat_tied_notes",
@@ -2216,16 +2288,13 @@ def make_repeat_tied_notes(
     specifiers_.append(specifier)
     return RhythmCommand(
         measures=measures,
-        rhythm_maker=rmakers.NoteRhythmMaker(
-            *specifiers_, division_masks=dmask, tag=tag
-        ),
+        rhythm_maker=rmakers.NoteRhythmMaker(*specifiers_, tag=tag),
     )
 
 
 def make_repeated_duration_notes(
     durations: typing.Sequence[abjad.DurationTyping],
     *specifiers: rmakers.SpecifierTyping,
-    dmask: rmakers.MasksTyping = None,
     do_not_rewrite_meter: bool = None,
     measures: typings.SliceTyping = None,
     tag: str = "baca.make_repeated_duration_notes",
@@ -2245,10 +2314,7 @@ def make_repeated_duration_notes(
         measures=measures,
         rewrite_meter=not (do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
-            *specifiers,
-            rmakers.TieSpecifier(repeat_ties=True),
-            division_masks=dmask,
-            tag=tag,
+            *specifiers, rmakers.TieSpecifier(repeat_ties=True), tag=tag
         ),
     )
 
@@ -2262,7 +2328,7 @@ def make_rests(
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.NoteRhythmMaker(
-            division_masks=[rmakers.silence([0], 1)], tag=tag
+            rmakers.SilenceMask(selector=classes._select().lts())
         ),
     )
 
