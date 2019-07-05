@@ -2845,8 +2845,10 @@ def rhythm(
     Makes rhythm command.
     """
     if isinstance(rhythm_maker, str):
-        components = abjad.parse(rhythm_maker)
-        rhythm_maker = abjad.select(components)
+        string = f"{{ {rhythm_maker} }}"
+        container = abjad.parse(string)
+        selection = abjad.mutate(container).eject_contents()
+        rhythm_maker = selection
     if tag is not None:
         if not isinstance(rhythm_maker, rmakers.RhythmMaker):
             raise Exception("can only tag rhythm-makers.")
