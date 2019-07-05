@@ -139,7 +139,6 @@ rhythmcommands
       persist
       reference_meters
       repeat_ties
-      rewrite_meter
       rhythm_maker
       right_broken
       state
@@ -212,8 +211,6 @@ rhythmcommands
    .. autoattribute:: RhythmCommand.reference_meters
 
    .. autoattribute:: RhythmCommand.repeat_ties
-
-   .. autoattribute:: RhythmCommand.rewrite_meter
 
    .. autoattribute:: RhythmCommand.rhythm_maker
 

@@ -290,7 +290,6 @@ class RhythmCommand(scoping.Command):
         "_payload",
         "_persist",
         "_reference_meters",
-        "_rewrite_meter",
         "_rhythm_maker",
         "_right_broken",
         "_state",
@@ -310,7 +309,6 @@ class RhythmCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         persist: str = None,
         reference_meters: typing.Iterable[abjad.Meter] = None,
-        rewrite_meter: bool = None,
         rhythm_maker: typings.RhythmMakerTyping = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
@@ -334,9 +332,6 @@ class RhythmCommand(scoping.Command):
             assert isinstance(reference_meters, collections.abc.Iterable)
             assert all(isinstance(_, abjad.Meter) for _ in reference_meters)
         self._reference_meters = reference_meters
-        if rewrite_meter is not None:
-            rewrite_meter = bool(rewrite_meter)
-        self._rewrite_meter = rewrite_meter
         self._check_rhythm_maker_input(rhythm_maker)
         self._rhythm_maker = rhythm_maker
         if right_broken is not None:
@@ -457,7 +452,6 @@ class RhythmCommand(scoping.Command):
         if isinstance(rhythm_maker, abjad.Selection):
             selections = [rhythm_maker]
             literal_selections = True
-            assert not self.rewrite_meter, repr(self.rewrite_meter)
         else:
             if isinstance(rhythm_maker, rmakers.RhythmMaker):
                 pairs = [(rhythm_maker, abjad.index([0], 1))]
@@ -522,17 +516,11 @@ class RhythmCommand(scoping.Command):
                 maker_to_state[rhythm_maker] = rhythm_maker.state
                 selections.extend(selections_)
             self._state = rhythm_maker.state
-            staff = rmakers.RhythmMaker._make_staff(time_signatures)
-            staff["MusicVoice"][:] = selections
-            if self.rewrite_meter:
-                command = rmakers.RewriteMeterCommand(
-                    reference_meters=self.reference_meters,
-                    repeat_ties=self.repeat_ties,
-                )
-                command(staff)
-            self._tag_broken_ties(staff["MusicVoice"])
-            selections = [staff["MusicVoice"][:]]
-            staff["MusicVoice"][:] = []
+        #            staff = rmakers.RhythmMaker._make_staff(time_signatures)
+        #            staff["MusicVoice"][:] = selections
+        #            self._tag_broken_ties(staff["MusicVoice"])
+        #            selections = [staff["MusicVoice"][:]]
+        #            staff["MusicVoice"][:] = []
         assert all(isinstance(_, abjad.Selection) for _ in selections), repr(
             selections
         )
@@ -807,8 +795,7 @@ class RhythmCommand(scoping.Command):
         return self._reference_meters
 
     # TODO: remove in favor of dedicated TieSpecifier objects passed to
-    #       every command that should accept a TieSpecifier;
-    #       commands include rewrite_meter.
+    #       every command that should accept a TieSpecifier
     @property
     def repeat_ties(
         self
@@ -827,125 +814,6 @@ class RhythmCommand(scoping.Command):
         if tie_specifier is None:
             return False
         return tie_specifier.repeat_ties
-
-    @property
-    def rewrite_meter(self) -> typing.Optional[bool]:
-        r"""
-        Is true when command rewrites meter.
-
-        ..  container:: example
-
-            REGRESSION. All notes below are tagged unpitched (and colored
-            gold), even tied notes resulting from meter rewriting:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_duration((1, 12)),
-            ...     time_signatures=[(10, 8)],
-            ...     )
-
-            >>> maker(
-            ...     'Music_Voice',
-            ...     baca.make_repeat_tied_notes(),
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
-                <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
-                <BLANKLINE>
-                            % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 10/8                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 5/4                                                                     %! _make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
-                            \bar "|"                                                                     %! _attach_final_bar_line
-                <BLANKLINE>
-                            % [Global_Skips measure 2]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                            \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
-                            \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
-                            s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
-                            \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
-                            \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
-                <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
-                <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
-                <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                                % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'4.
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'4
-                                \repeatTie
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'4.
-                                \repeatTie
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'4                                                                      %! baca.make_repeat_tied_notes
-                                \repeatTie
-                <BLANKLINE>
-                                <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                    \context Voice = "Music_Voice"                                       %! PHANTOM:_make_multimeasure_rest_container
-                                    {                                                                    %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                        % [Music_Voice measure 2]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                                        \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                        c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                    }                                                                    %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                    \context Voice = "Rest_Voice"                                        %! PHANTOM:_make_multimeasure_rest_container
-                                    {                                                                    %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                        % [Rest_Voice measure 2]                                         %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                                        \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
-                                        \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
-                                        \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
-                                        \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
-                                        \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
-                                        R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                    }                                                                    %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
-
-        """
-        return self._rewrite_meter
 
     @property
     def rhythm_maker(self) -> typing.Optional[typings.RhythmMakerTyping]:
@@ -2217,8 +2085,120 @@ def make_repeat_tied_notes(
     measures: typings.SliceTyping = None,
     tag: str = "baca.make_repeat_tied_notes",
 ) -> RhythmCommand:
-    """
+    r"""
     Makes repeat-tied notes; rewrites meter.
+
+    ..  container:: example
+
+        REGRESSION. All notes below are tagged unpitched (and colored
+        gold), even tied notes resulting from meter rewriting:
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     spacing=baca.minimum_duration((1, 12)),
+        ...     time_signatures=[(10, 8)],
+        ...     )
+
+        >>> maker(
+        ...     'Music_Voice',
+        ...     baca.make_repeat_tied_notes(),
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
+            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 10/8                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 5/4                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
+                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
+                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
+                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
+                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+            <BLANKLINE>
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
+                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
+                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            \baca-unpitched-music-warning                                            %! _color_unpitched_notes
+                            c'4.
+            <BLANKLINE>
+                            \baca-unpitched-music-warning                                            %! _color_unpitched_notes
+                            c'4
+                            \repeatTie
+            <BLANKLINE>
+                            \baca-unpitched-music-warning                                            %! _color_unpitched_notes
+                            c'4.
+                            \repeatTie
+            <BLANKLINE>
+                            \baca-unpitched-music-warning                                            %! _color_unpitched_notes
+                            c'4                                                                      %! baca.make_repeat_tied_notes
+                            \repeatTie
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice"                                       %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice measure 2]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice"                                        %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice measure 2]                                         %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+            <BLANKLINE>
+            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+
     """
     specifier: rmakers.SpecifierTyping
     specifiers_ = list(specifiers)
@@ -2256,12 +2236,17 @@ def make_repeated_duration_notes(
         durations = [abjad.Duration(durations)]
     divisions = divisionclasses._divisions().fuse()
     divisions = divisions.split(durations, cyclic=True)
+    rewrite_specifiers: typing.List[rmakers.SpecifierTyping] = []
+    if not do_not_rewrite_meter:
+        rewrite_specifiers.append(rmakers.RewriteMeterCommand())
     return RhythmCommand(
         divisions=divisions,
         measures=measures,
-        rewrite_meter=not (do_not_rewrite_meter),
         rhythm_maker=rmakers.NoteRhythmMaker(
-            *specifiers, rmakers.TieSpecifier(repeat_ties=True), tag=tag
+            *specifiers,
+            *rewrite_specifiers,
+            rmakers.TieSpecifier(repeat_ties=True),
+            tag=tag,
         ),
     )
 
@@ -2820,7 +2805,6 @@ def rhythm(
     measures: typings.SliceTyping = None,
     persist: str = None,
     reference_meters: typing.Iterable[abjad.Meter] = None,
-    ###rewrite_meter: bool = None,
     right_broken: bool = None,
     tag: str = None,
 ) -> RhythmCommand:
@@ -2845,7 +2829,6 @@ def rhythm(
         measures=measures,
         persist=persist,
         reference_meters=reference_meters,
-        ###rewrite_meter=rewrite_meter,
         rhythm_maker=rhythm_maker,
         right_broken=right_broken,
     )
