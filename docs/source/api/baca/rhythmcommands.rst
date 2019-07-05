@@ -142,7 +142,6 @@ rhythmcommands
       rewrite_meter
       rhythm_maker
       right_broken
-      split_measures
       state
 
    .. raw:: html
@@ -231,8 +230,6 @@ rhythmcommands
    .. container:: inherited
 
       .. autoattribute:: RhythmCommand.selector
-
-   .. autoattribute:: RhythmCommand.split_measures
 
    .. autoattribute:: RhythmCommand.state
 

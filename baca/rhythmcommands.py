@@ -293,7 +293,6 @@ class RhythmCommand(scoping.Command):
         "_rewrite_meter",
         "_rhythm_maker",
         "_right_broken",
-        "_split_measures",
         "_state",
     )
 
@@ -315,7 +314,6 @@ class RhythmCommand(scoping.Command):
         rhythm_maker: typings.RhythmMakerTyping = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
-        split_measures: bool = None,
     ) -> None:
         scoping.Command.__init__(
             self, match=match, measures=measures, scope=scope
@@ -344,9 +342,6 @@ class RhythmCommand(scoping.Command):
         if right_broken is not None:
             right_broken = bool(right_broken)
         self._right_broken = right_broken
-        if split_measures is not None:
-            split_measures = bool(split_measures)
-        self._split_measures = split_measures
         self._state: typing.Optional[abjad.OrderedDict] = None
 
     ### SPECIAL METHODS ###
@@ -462,7 +457,6 @@ class RhythmCommand(scoping.Command):
         if isinstance(rhythm_maker, abjad.Selection):
             selections = [rhythm_maker]
             literal_selections = True
-            assert not self.split_measures, repr(self.split_measures)
             assert not self.rewrite_meter, repr(self.rewrite_meter)
         else:
             if isinstance(rhythm_maker, rmakers.RhythmMaker):
@@ -530,10 +524,6 @@ class RhythmCommand(scoping.Command):
             self._state = rhythm_maker.state
             staff = rmakers.RhythmMaker._make_staff(time_signatures)
             staff["MusicVoice"][:] = selections
-            if self.split_measures:
-                command = rmakers.SplitCommand(repeat_ties=self.repeat_ties)
-                command(staff)
-            assert all(isinstance(_, abjad.Selection) for _ in selections)
             if self.rewrite_meter:
                 command = rmakers.RewriteMeterCommand(
                     reference_meters=self.reference_meters,
@@ -1244,13 +1234,6 @@ class RhythmCommand(scoping.Command):
         Talea rhythm-maker knows how to tag incomplete last notes.
         """
         return self._right_broken
-
-    @property
-    def split_measures(self) -> typing.Optional[bool]:
-        """
-        Is true when command splits at measure boundaries.
-        """
-        return self._split_measures
 
     @property
     def state(self) -> typing.Optional[abjad.OrderedDict]:
@@ -2839,7 +2822,6 @@ def rhythm(
     reference_meters: typing.Iterable[abjad.Meter] = None,
     rewrite_meter: bool = None,
     right_broken: bool = None,
-    ###split_measures: bool = None,
     tag: str = None,
 ) -> RhythmCommand:
     """
@@ -2866,7 +2848,6 @@ def rhythm(
         rewrite_meter=rewrite_meter,
         rhythm_maker=rhythm_maker,
         right_broken=right_broken,
-        ###split_measures=split_measures,
     )
 
 
