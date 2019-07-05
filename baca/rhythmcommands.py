@@ -2212,16 +2212,17 @@ def make_notes(
     """
     Makes notes; rewrites meter.
     """
-    specifiers_ = list(specifiers)
     if repeat_ties:
-        specifier = rmakers.TieSpecifier(repeat_ties=True)
-        specifiers_.append(specifier)
+        repeat_tie_specifier = [rmakers.TieSpecifier(repeat_ties=True)]
+    else:
+        repeat_tie_specifier = []
     return RhythmCommand(
         measures=measures,
-        rewrite_meter=True,
         rhythm_maker=rmakers.NoteRhythmMaker(
-            *specifiers_,
+            *specifiers,
             rmakers.BeamSpecifier(selector=classes._select().plts()),
+            rmakers.RewriteMeterCommand(),
+            *repeat_tie_specifier,
             tag=tag,
         ),
     )
@@ -2838,18 +2839,20 @@ def rhythm(
     reference_meters: typing.Iterable[abjad.Meter] = None,
     rewrite_meter: bool = None,
     right_broken: bool = None,
-    split_measures: bool = None,
+    ###split_measures: bool = None,
     tag: str = None,
 ) -> RhythmCommand:
     """
     Makes rhythm command.
     """
+    # TODO: implement a way to tag parsed strings:
     if isinstance(rhythm_maker, str):
         string = f"{{ {rhythm_maker} }}"
         container = abjad.parse(string)
         selection = abjad.mutate(container).eject_contents()
         rhythm_maker = selection
     if tag is not None:
+        # TODO: implement a way to tag already-initialized components:
         if not isinstance(rhythm_maker, rmakers.RhythmMaker):
             raise Exception("can only tag rhythm-makers.")
         rhythm_maker = abjad.new(rhythm_maker, tag=tag)
@@ -2863,7 +2866,7 @@ def rhythm(
         rewrite_meter=rewrite_meter,
         rhythm_maker=rhythm_maker,
         right_broken=right_broken,
-        split_measures=split_measures,
+        ###split_measures=split_measures,
     )
 
 
