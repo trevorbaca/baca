@@ -10446,11 +10446,12 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             collection_index=collection_index,
             total_collections=total_collections,
         )
+        divisions_consumed = len(tuplets)
         durations = [abjad.inspect(_).duration() for _ in tuplets]
         time_signatures = [abjad.TimeSignature(_) for _ in durations]
         staff = self._make_staff(time_signatures)
         staff["MusicVoice"].extend(tuplets)
-        self._apply_specifiers(staff)
+        self._apply_specifiers(staff, divisions_consumed)
         # self._check_wellformedness(selections)
         selections = self._select_by_measure(staff)
         staff["MusicVoice"][:] = []

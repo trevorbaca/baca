@@ -2820,7 +2820,7 @@ def rhythm(
     measures: typings.SliceTyping = None,
     persist: str = None,
     reference_meters: typing.Iterable[abjad.Meter] = None,
-    rewrite_meter: bool = None,
+    ###rewrite_meter: bool = None,
     right_broken: bool = None,
     tag: str = None,
 ) -> RhythmCommand:
@@ -2845,7 +2845,7 @@ def rhythm(
         measures=measures,
         persist=persist,
         reference_meters=reference_meters,
-        rewrite_meter=rewrite_meter,
+        ###rewrite_meter=rewrite_meter,
         rhythm_maker=rhythm_maker,
         right_broken=right_broken,
     )
