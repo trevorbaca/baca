@@ -363,9 +363,6 @@ class RhythmCommand(scoping.Command):
         self._runtime = runtime or abjad.OrderedDict()
         music, start_offset = self._make_rhythm(start_offset, time_signatures)
         assert isinstance(music, (tuple, list, abjad.Voice))
-        #        first_leaf = abjad.inspect(music).leaf(0)
-        #        final_leaf = abjad.inspect(music).leaf(-1)
-        #        pitched_prototype = (abjad.Note, abjad.Chord)
         payload = abjad.AnnotatedTimespan(
             start_offset=start_offset, stop_offset=None, annotation=music
         )
