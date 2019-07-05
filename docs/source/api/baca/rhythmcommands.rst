@@ -134,7 +134,6 @@ rhythmcommands
       annotate_unpitched_music
       divisions
       left_broken
-      multimeasure_rests
       parameter
       payload
       persist
@@ -204,8 +203,6 @@ rhythmcommands
    .. container:: inherited
 
       .. autoattribute:: RhythmCommand.measures
-
-   .. autoattribute:: RhythmCommand.multimeasure_rests
 
    .. autoattribute:: RhythmCommand.parameter
 

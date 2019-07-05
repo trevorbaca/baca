@@ -287,7 +287,6 @@ class RhythmCommand(scoping.Command):
         "_annotate_unpitched_music",
         "_divisions",
         "_left_broken",
-        "_multimeasure_rests",
         "_payload",
         "_persist",
         "_reference_meters",
@@ -310,7 +309,6 @@ class RhythmCommand(scoping.Command):
         left_broken: bool = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        multimeasure_rests: bool = None,
         persist: str = None,
         reference_meters: typing.Iterable[abjad.Meter] = None,
         rewrite_meter: bool = None,
@@ -331,9 +329,6 @@ class RhythmCommand(scoping.Command):
         if left_broken is not None:
             left_broken = bool(left_broken)
         self._left_broken = left_broken
-        if multimeasure_rests is not None:
-            multimeasure_rests = bool(multimeasure_rests)
-        self._multimeasure_rests = multimeasure_rests
         if persist is not None:
             assert isinstance(persist, str), repr(persist)
         self._persist = persist
@@ -785,14 +780,6 @@ class RhythmCommand(scoping.Command):
         Talea rhythm-maker knows how to tag incomplete last notes.
         """
         return self._left_broken
-
-    @property
-    def multimeasure_rests(self) -> typing.Optional[bool]:
-        """
-        Is true when command spells each rest-filled division as a
-        single multimeasure rest.
-        """
-        return self._multimeasure_rests
 
     @property
     def parameter(self) -> str:
@@ -2850,7 +2837,6 @@ def rhythm(
     divisions: abjad.Expression = None,
     left_broken: bool = None,
     measures: typings.SliceTyping = None,
-    multimeasure_rests: bool = None,
     persist: str = None,
     reference_meters: typing.Iterable[abjad.Meter] = None,
     rewrite_meter: bool = None,
@@ -2873,7 +2859,6 @@ def rhythm(
         divisions=divisions,
         left_broken=left_broken,
         measures=measures,
-        multimeasure_rests=multimeasure_rests,
         persist=persist,
         reference_meters=reference_meters,
         rewrite_meter=rewrite_meter,
