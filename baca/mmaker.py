@@ -6022,7 +6022,7 @@ class MusicAccumulator(object):
             selection = self.assemble(voice_name)
             if selection:
                 segment_maker(
-                    (voice_name, 1), rhythmcommands.make_rhythm(selection)
+                    (voice_name, 1), rhythmcommands.rhythm(selection)
                 )
 
     @staticmethod

@@ -973,7 +973,6 @@ Rhythm library.
    ~baca.rhythmcommands.make_repeat_tied_notes
    ~baca.rhythmcommands.make_repeated_duration_notes
    ~baca.rhythmcommands.make_rests
-   ~baca.rhythmcommands.make_rhythm
    ~baca.rhythmcommands.make_single_attack
    ~baca.rhythmcommands.make_skips
    ~baca.rhythmcommands.make_tied_notes

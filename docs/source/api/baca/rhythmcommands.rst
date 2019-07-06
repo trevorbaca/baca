@@ -162,7 +162,6 @@ rhythmcommands
       divisions
       left_broken
       parameter
-      payload
       persist
       reference_meters
       repeat_ties
@@ -230,8 +229,6 @@ rhythmcommands
       .. autoattribute:: RhythmCommand.measures
 
    .. autoattribute:: RhythmCommand.parameter
-
-   .. autoattribute:: RhythmCommand.payload
 
    .. autoattribute:: RhythmCommand.persist
 
@@ -393,7 +390,6 @@ rhythmcommands
    ~make_repeat_tied_notes
    ~make_repeated_duration_notes
    ~make_rests
-   ~make_rhythm
    ~make_single_attack
    ~make_skips
    ~make_tied_notes
@@ -430,8 +426,6 @@ rhythmcommands
 .. autofunction:: make_repeated_duration_notes
 
 .. autofunction:: make_rests
-
-.. autofunction:: make_rhythm
 
 .. autofunction:: make_single_attack
 

@@ -110,7 +110,8 @@ class DurationMultiplierCommand(scoping.Command):
 
     def _call(self, argument=None) -> None:
         """
-        Applies command to result of selector called on ``argument``.
+        Applies ``DurationMultiplierCommand`` to result of selector called on
+        ``argument``.
         """
         if argument is None:
             return
@@ -333,7 +334,6 @@ class RhythmCommand(scoping.Command):
         "_annotate_unpitched_music",
         "_divisions",
         "_left_broken",
-        "_payload",
         "_persist",
         "_reference_meters",
         "_rhythm_maker",
@@ -392,17 +392,19 @@ class RhythmCommand(scoping.Command):
         runtime: abjad.OrderedDict = None,
         start_offset: abjad.Offset = None,
         time_signatures: typing.Iterable[abjad.TimeSignature] = None,
-    ) -> None:
+    ) -> abjad.AnnotatedTimespan:
         """
-        Calls command on ``start_offset`` and ``time_signatures``.
+        Calls ``RhythmCommand`` on ``start_offset`` and ``time_signatures``.
         """
         self._runtime = runtime or abjad.OrderedDict()
-        music, start_offset = self._make_rhythm(start_offset, time_signatures)
-        assert isinstance(music, (tuple, list, abjad.Voice))
-        payload = abjad.AnnotatedTimespan(
-            start_offset=start_offset, stop_offset=None, annotation=music
+        selection, start_offset = self._make_rhythm(
+            start_offset, time_signatures
         )
-        self._payload = payload
+        assert isinstance(selection, abjad.Selection), repr(selection)
+        timespan = abjad.AnnotatedTimespan(
+            start_offset=start_offset, annotation=selection
+        )
+        return timespan
 
     ### PRIVATE METHODS ###
 
@@ -475,85 +477,73 @@ class RhythmCommand(scoping.Command):
 
     def _make_rhythm(self, start_offset, time_signatures):
         rhythm_maker = self.rhythm_maker
-        literal_selections = False
-        division_change = False
-        if rhythm_maker is None:
-            rhythm_maker = SkipRhythmMaker(use_multimeasure_rests=True)
+        assert rhythm_maker is not None
         if isinstance(rhythm_maker, abjad.Selection):
-            selections = [rhythm_maker]
-            literal_selections = True
+            selection = rhythm_maker
+            if self.annotate_unpitched_music:
+                self._annotate_unpitched_music_(selection)
+            return selection, start_offset
+        if isinstance(rhythm_maker, rmakers.RhythmMaker):
+            assignment = DivisionAssignment(abjad.index([0], 1), rhythm_maker)
+            assignments = [assignment]
         else:
-            if isinstance(rhythm_maker, rmakers.RhythmMaker):
-                assignment = DivisionAssignment(
-                    abjad.index([0], 1), rhythm_maker
-                )
-                assignments = [assignment]
-            else:
-                assignments = list(rhythm_maker)
-            assert all(isinstance(_, DivisionAssignment) for _ in assignments)
-            divisions = self._durations_to_divisions(
-                time_signatures, start_offset
-            )
-            divisions = classes.Sequence(divisions).flatten(depth=-1)
-            divisions = self._apply_division_expression(divisions)
-            assert isinstance(
-                divisions, divisionclasses.DivisionSequence
-            ), repr(divisions)
-            divisions = divisions.flatten(depth=-1)
-            division_count = len(divisions)
-            time_signatures_ = [abjad.TimeSignature(_) for _ in divisions]
-            if time_signatures_ != time_signatures:
-                division_change = True
-            start_offset = divisions[0].start_offset
-            labelled_divisions = []
-            for i, division in enumerate(divisions):
-                for assignment in assignments:
-                    if assignment.pattern is True:
-                        raise Exception("use abjad.index([0], 1) instead.")
-                    if isinstance(assignment.pattern, list):
-                        raise Exception("use pattern instead.")
-                    elif isinstance(assignment.pattern, tuple):
-                        raise Exception("use slice-pattern instead.")
-                    if assignment.pattern.matches_index(i, division_count):
-                        # TODO: use class insted of tuple:
-                        pair = (division, assignment.rhythm_maker)
-                        labelled_divisions.append(pair)
-                        break
-                else:
-                    raise Exception(f"no rhythm-maker for division {i}.")
-            assert len(labelled_divisions) == len(divisions)
-            labelled_divisions = classes.Sequence(labelled_divisions)
-            labelled_divisions = labelled_divisions.group_by(
-                lambda pair: pair[1]
-            )
-            selections = []
-            previous_segment_stop_state = self._previous_segment_stop_state()
-            maker_to_state = abjad.OrderedDict()
-            for subsequence in labelled_divisions:
-                # TODO: use class insted of tuple:
-                divisions_ = [pair[0] for pair in subsequence]
-                rhythm_maker = subsequence[0][1]
-                if isinstance(rhythm_maker, type(self)):
-                    rhythm_maker = rhythm_maker.rhythm_maker
-                    assert isinstance(rhythm_maker, rmakers.RhythmMaker)
-                # TODO: eventually allow previous segment stop state
-                #       and local stop state to work together
-                if previous_segment_stop_state is None:
-                    previous_state = maker_to_state.get(rhythm_maker, None)
-                else:
-                    previous_state = previous_segment_stop_state
-                selections_ = rhythm_maker(
-                    divisions_, previous_state=previous_state
-                )
-                maker_to_state[rhythm_maker] = rhythm_maker.state
-                selections.extend(selections_)
-            self._state = rhythm_maker.state
-        assert all(isinstance(_, abjad.Selection) for _ in selections), repr(
-            selections
+            assignments = list(rhythm_maker)
+        assert all(isinstance(_, DivisionAssignment) for _ in assignments)
+        divisions = self._durations_to_divisions(time_signatures, start_offset)
+        divisions = classes.Sequence(divisions).flatten(depth=-1)
+        divisions = self._apply_division_expression(divisions)
+        assert isinstance(divisions, divisionclasses.DivisionSequence), repr(
+            divisions
         )
-        if self.annotate_unpitched_music or not literal_selections:
-            self._annotate_unpitched_music_(selections)
-        return selections, start_offset
+        divisions = divisions.flatten(depth=-1)
+        division_count = len(divisions)
+        time_signatures_ = [abjad.TimeSignature(_) for _ in divisions]
+        start_offset = divisions[0].start_offset
+        labelled_divisions = []
+        for i, division in enumerate(divisions):
+            for assignment in assignments:
+                if assignment.pattern is True:
+                    raise Exception("use abjad.index([0], 1) instead.")
+                if isinstance(assignment.pattern, list):
+                    raise Exception("use pattern instead.")
+                elif isinstance(assignment.pattern, tuple):
+                    raise Exception("use slice-pattern instead.")
+                if assignment.pattern.matches_index(i, division_count):
+                    # TODO: use class insted of tuple:
+                    pair = (division, assignment.rhythm_maker)
+                    labelled_divisions.append(pair)
+                    break
+            else:
+                raise Exception(f"no rhythm-maker for division {i}.")
+        assert len(labelled_divisions) == len(divisions)
+        labelled_divisions = classes.Sequence(labelled_divisions)
+        labelled_divisions = labelled_divisions.group_by(lambda pair: pair[1])
+        components = []
+        previous_segment_stop_state = self._previous_segment_stop_state()
+        maker_to_state = abjad.OrderedDict()
+        for subsequence in labelled_divisions:
+            # TODO: use class insted of tuple:
+            divisions_ = [pair[0] for pair in subsequence]
+            rhythm_maker = subsequence[0][1]
+            if isinstance(rhythm_maker, type(self)):
+                rhythm_maker = rhythm_maker.rhythm_maker
+                assert isinstance(rhythm_maker, rmakers.RhythmMaker)
+            # TODO: eventually allow previous segment stop state
+            #       and local stop state to work together
+            if previous_segment_stop_state is None:
+                previous_state = maker_to_state.get(rhythm_maker, None)
+            else:
+                previous_state = previous_segment_stop_state
+            list_ = rhythm_maker(divisions_, previous_state=previous_state)
+            assert isinstance(list_, list), repr(list_)
+            assert len(list_) == 1, repr(list_)
+            assert isinstance(list_[0], abjad.Selection), repr(list_)
+            components.extend(list_[0])
+            maker_to_state[rhythm_maker] = rhythm_maker.state
+        self._state = rhythm_maker.state
+        selection = abjad.select(components)
+        self._annotate_unpitched_music_(selection)
+        return selection, start_offset
 
     def _previous_segment_stop_state(self):
         previous_segment_stop_state = None
@@ -795,13 +785,6 @@ class RhythmCommand(scoping.Command):
 
         """
         return const.RHYTHM
-
-    @property
-    def payload(self) -> abjad.AnnotatedTimespan:
-        """
-        Gets payload.
-        """
-        return self._payload
 
     @property
     def persist(self) -> typing.Optional[str]:
@@ -1364,7 +1347,8 @@ class TieCorrectionCommand(scoping.Command):
 
     def _call(self, argument=None) -> None:
         """
-        Applies command to result of selector called on ``argument``.
+        Applies ``TieCorrectionCommand`` to result of selector called on
+        ``argument``.
         """
         if argument is None:
             return
@@ -2295,172 +2279,6 @@ def make_rests(
             rmakers.SilenceMask(selector=classes._select().lts()), tag=tag
         ),
     )
-
-
-def make_rhythm(
-    selection: typing.Union[str, abjad.Selection],
-    *,
-    measures: typings.SliceTyping = None,
-    repeat_tie_threshold: typing.Union[
-        bool, abjad.IntegerPair, abjad.DurationInequality
-    ] = None,
-) -> RhythmCommand:
-    r"""
-    Sets rhythm to ``selection``.
-
-    ..  container:: example
-
-        With ``repeat_tie_threshold``:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.minimum_duration((1, 12)),
-        ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'Music_Voice',
-        ...     baca.make_rhythm(
-        ...         "d'4. ~ d'2 ~ d'4. ~ d'2",
-        ...         repeat_tie_threshold=(4, 8),
-        ...         ),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
-            <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
-            <BLANKLINE>
-                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                        s1 * 3/8                                                                     %! _make_global_skips(1)
-            <BLANKLINE>
-                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                        s1 * 1/2                                                                     %! _make_global_skips(1)
-            <BLANKLINE>
-                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                        s1 * 3/8                                                                     %! _make_global_skips(1)
-            <BLANKLINE>
-                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                        s1 * 1/2                                                                     %! _make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
-                        \bar "|"                                                                     %! _attach_final_bar_line
-            <BLANKLINE>
-                        % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
-                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
-                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
-                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
-                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
-            <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
-            <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
-            <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            d'4.
-                            ~
-            <BLANKLINE>
-                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            d'2
-            <BLANKLINE>
-                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            d'4.
-                            \repeatTie
-                            ~
-            <BLANKLINE>
-                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            d'2
-            <BLANKLINE>
-                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                \context Voice = "Music_Voice"                                       %! PHANTOM:_make_multimeasure_rest_container
-                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                    % [Music_Voice measure 5]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                \context Voice = "Rest_Voice"                                        %! PHANTOM:_make_multimeasure_rest_container
-                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                    % [Rest_Voice measure 5]                                         %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
-                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
-                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
-                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
-                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
-                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
-
-    """
-    if isinstance(selection, str):
-        container = abjad.Container(selection)
-        argument = abjad.mutate(container).eject_contents()
-    else:
-        assert isinstance(selection, abjad.Selection), repr(selection)
-        argument = selection
-    if repeat_tie_threshold is not None:
-        temporary_container = abjad.Container([argument])
-        for logical_tie in abjad.select(temporary_container).logical_ties():
-            if logical_tie.is_trivial:
-                continue
-            for leaf in logical_tie.leaves:
-                abjad.detach(abjad.TieIndicator, leaf)
-                abjad.detach(abjad.RepeatTie, leaf)
-            abjad.tie(
-                logical_tie,
-                repeat=repeat_tie_threshold,
-                # TODO: add tag
-                # tag='baca_make_rhythm',
-            )
-        temporary_container[:] = []
-    return RhythmCommand(measures=measures, rhythm_maker=argument)
 
 
 def make_single_attack(
