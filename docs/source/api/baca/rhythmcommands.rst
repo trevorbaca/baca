@@ -22,9 +22,36 @@ rhythmcommands
 .. autosummary::
    :nosignatures:
 
+   ~DivisionAssignment
    ~DurationMultiplierCommand
    ~RhythmCommand
    ~TieCorrectionCommand
+
+.. autoclass:: DivisionAssignment
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      pattern
+      rhythm_maker
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: DivisionAssignment.pattern
+
+   .. autoattribute:: DivisionAssignment.rhythm_maker
 
 .. autoclass:: DurationMultiplierCommand
 

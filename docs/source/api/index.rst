@@ -946,6 +946,7 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.rhythmcommands.DivisionAssignment
    ~baca.rhythmcommands.DurationMultiplierCommand
    ~baca.rhythmcommands.RhythmCommand
    ~baca.rhythmcommands.TieCorrectionCommand

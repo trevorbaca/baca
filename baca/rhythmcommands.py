@@ -14,10 +14,56 @@ from . import overrides
 from . import scoping
 from . import typings
 
-mask_typing = typing.Union[rmakers.SilenceMask, rmakers.SustainMask]
 
+RhythmMakerTyping = typing.Union[
+    str,
+    rmakers.RhythmMaker,
+    abjad.Selection,
+    typing.Sequence["DivisionAssignment"],
+]
 
 ### CLASSES ###
+
+
+class DivisionAssignment(object):
+    """
+    Division assignment.
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = ("_pattern", "_rhythm_maker")
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        pattern: abjad.Pattern,
+        rhythm_maker: typing.Union[rmakers.RhythmMaker, "RhythmCommand"],
+    ) -> None:
+        assert isinstance(pattern, abjad.Pattern), repr(pattern)
+        self._pattern = pattern
+        prototype = (rmakers.RhythmMaker, RhythmCommand)
+        assert isinstance(rhythm_maker, prototype), repr(rhythm_maker)
+        self._rhythm_maker = rhythm_maker
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def pattern(self) -> abjad.Pattern:
+        """
+        Gets pattern.
+        """
+        return self._pattern
+
+    @property
+    def rhythm_maker(
+        self
+    ) -> typing.Union[rmakers.RhythmMaker, "RhythmCommand"]:
+        """
+        Gets rhythm-maker.
+        """
+        return self._rhythm_maker
 
 
 class DurationMultiplierCommand(scoping.Command):
@@ -309,7 +355,7 @@ class RhythmCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         persist: str = None,
         reference_meters: typing.Iterable[abjad.Meter] = None,
-        rhythm_maker: typings.RhythmMakerTyping = None,
+        rhythm_maker: RhythmMakerTyping = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
     ) -> None:
@@ -398,32 +444,16 @@ class RhythmCommand(scoping.Command):
         prototype = (abjad.Selection, rmakers.RhythmMaker)
         if isinstance(rhythm_maker, prototype):
             return
-        if not self._check_rhythm_maker_pattern_pairs(rhythm_maker):
-            message = "\n  Input parameter 'rhythm_maker' accepts:"
-            message += "\n    rhythm-maker"
-            message += "\n    selection"
-            message += (
-                "\n    sequence of (rhythm-maker-or-selection, pattern) pairs"
-            )
-            message += "\n    none"
-            message += "\n  Input parameter 'rhythm_maker' received:"
-            message += f"\n    {format(rhythm_maker)}"
-            raise Exception(message)
-
-    def _check_rhythm_maker_pattern_pairs(self, pairs):
-        if not isinstance(pairs, collections.abc.Sequence):
-            return False
-        prototype = (abjad.Selection, rmakers.RhythmMaker, type(self))
-        for pair in pairs:
-            if not isinstance(pair, tuple) or len(pair) != 2:
-                return False
-            if not isinstance(pair[0], prototype):
-                return False
-            if pair[1] is True:
-                return True
-            if not isinstance(pair[1], (list, tuple, abjad.Pattern)):
-                return False
-        return True
+        if all(isinstance(_, DivisionAssignment) for _ in rhythm_maker):
+            return
+        message = '\n  Input parameter "rhythm_maker" accepts:'
+        message += "\n    rhythm-maker"
+        message += "\n    selection"
+        message += "\n    sequence of division assignment objects"
+        message += "\n    none"
+        message += '\n  Input parameter "rhythm_maker" received:'
+        message += f"\n    {format(rhythm_maker)}"
+        raise Exception(message)
 
     # TODO: simplify with DivisionSequence
     @staticmethod
@@ -454,10 +484,13 @@ class RhythmCommand(scoping.Command):
             literal_selections = True
         else:
             if isinstance(rhythm_maker, rmakers.RhythmMaker):
-                pairs = [(rhythm_maker, abjad.index([0], 1))]
+                assignment = DivisionAssignment(
+                    abjad.index([0], 1), rhythm_maker
+                )
+                assignments = [assignment]
             else:
-                pairs = list(rhythm_maker)
-            assert self._check_rhythm_maker_pattern_pairs(pairs)
+                assignments = list(rhythm_maker)
+            assert all(isinstance(_, DivisionAssignment) for _ in assignments)
             divisions = self._durations_to_divisions(
                 time_signatures, start_offset
             )
@@ -474,19 +507,17 @@ class RhythmCommand(scoping.Command):
             start_offset = divisions[0].start_offset
             labelled_divisions = []
             for i, division in enumerate(divisions):
-                for pair in pairs:
-                    rhythm_maker, pattern = pair
-                    if pattern is True:
-                        pattern = abjad.index([0], 1)
-                    if isinstance(pattern, list):
-                        indices = pattern
-                        pattern = abjad.index(indices)
-                    elif isinstance(pattern, tuple):
-                        triple = slice(*pattern).indices(division_count)
-                        indices = list(range(*triple))
-                        pattern = abjad.index(indices)
-                    if pattern.matches_index(i, division_count):
-                        labelled_divisions.append((division, rhythm_maker))
+                for assignment in assignments:
+                    if assignment.pattern is True:
+                        raise Exception("use abjad.index([0], 1) instead.")
+                    if isinstance(assignment.pattern, list):
+                        raise Exception("use pattern instead.")
+                    elif isinstance(assignment.pattern, tuple):
+                        raise Exception("use slice-pattern instead.")
+                    if assignment.pattern.matches_index(i, division_count):
+                        # TODO: use class insted of tuple:
+                        pair = (division, assignment.rhythm_maker)
+                        labelled_divisions.append(pair)
                         break
                 else:
                     raise Exception(f"no rhythm-maker for division {i}.")
@@ -499,6 +530,7 @@ class RhythmCommand(scoping.Command):
             previous_segment_stop_state = self._previous_segment_stop_state()
             maker_to_state = abjad.OrderedDict()
             for subsequence in labelled_divisions:
+                # TODO: use class insted of tuple:
                 divisions_ = [pair[0] for pair in subsequence]
                 rhythm_maker = subsequence[0][1]
                 if isinstance(rhythm_maker, type(self)):
@@ -516,11 +548,6 @@ class RhythmCommand(scoping.Command):
                 maker_to_state[rhythm_maker] = rhythm_maker.state
                 selections.extend(selections_)
             self._state = rhythm_maker.state
-        #            staff = rmakers.RhythmMaker._make_staff(time_signatures)
-        #            staff["MusicVoice"][:] = selections
-        #            self._tag_broken_ties(staff["MusicVoice"])
-        #            selections = [staff["MusicVoice"][:]]
-        #            staff["MusicVoice"][:] = []
         assert all(isinstance(_, abjad.Selection) for _ in selections), repr(
             selections
         )
@@ -816,7 +843,7 @@ class RhythmCommand(scoping.Command):
         return tie_specifier.repeat_ties
 
     @property
-    def rhythm_maker(self) -> typing.Optional[typings.RhythmMakerTyping]:
+    def rhythm_maker(self) -> typing.Optional[RhythmMakerTyping]:
         r"""
         Gets rhythm-maker-or-selection or (rhythm-maker-or-selection, pattern)
         pairs.
@@ -851,10 +878,14 @@ class RhythmCommand(scoping.Command):
             ...     )
             >>> command = baca.RhythmCommand(
             ...     rhythm_maker=[
-            ...         (rhythm_maker_1, [2]),
-            ...         (rhythm_maker_2, True),
-            ...         ],
-            ...     )
+            ...         baca.DivisionAssignment(
+            ...             abjad.index([2]), rhythm_maker_1
+            ...         ),
+            ...         baca.DivisionAssignment(
+            ...             abjad.index([0], 1), rhythm_maker_2
+            ...         ),
+            ...     ],
+            ... )
 
             >>> label = abjad.label().with_durations(
             ...     direction=abjad.Down,
@@ -1083,12 +1114,12 @@ class RhythmCommand(scoping.Command):
             Traceback (most recent call last):
                 ...
             Exception:
-              Input parameter 'rhythm_maker' accepts:
+              Input parameter "rhythm_maker" accepts:
                 rhythm-maker
                 selection
-                sequence of (rhythm-maker-or-selection, pattern) pairs
+                sequence of division assignment objects
                 none
-              Input parameter 'rhythm_maker' received:
+              Input parameter "rhythm_maker" received:
                 text
 
         """
@@ -1277,6 +1308,7 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
         return self._use_multimeasure_rests
 
 
+# TODO: replace with just baca.tie(), baca.repeat_tie() functions
 class TieCorrectionCommand(scoping.Command):
     """
     Tie correction command.
@@ -2797,7 +2829,7 @@ def repeat_tie_to(
 
 
 def rhythm(
-    rhythm_maker: typings.RhythmMakerTyping,
+    rhythm_maker: RhythmMakerTyping,
     *,
     annotate_unpitched_music: bool = None,
     divisions: abjad.Expression = None,

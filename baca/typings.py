@@ -15,15 +15,6 @@ HorizontalAlignmentTyping = typing.Union[
 
 Pair = typing.Tuple[typing.Any, typing.Any]
 
-RhythmMakerTyping = typing.Union[
-    str,
-    rmakers.RhythmMaker,
-    abjad.Selection,
-    typing.Iterable[
-        typing.Tuple[typing.Any, typing.Union[bool, typing.List[int]]],
-    ],
-]
-
 ScopeTyping = typing.Union[
     str,
     typing.List[str],
