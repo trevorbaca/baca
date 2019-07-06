@@ -534,11 +534,9 @@ class RhythmCommand(scoping.Command):
                 previous_state = maker_to_state.get(rhythm_maker, None)
             else:
                 previous_state = previous_segment_stop_state
-            list_ = rhythm_maker(divisions_, previous_state=previous_state)
-            assert isinstance(list_, list), repr(list_)
-            assert len(list_) == 1, repr(list_)
-            assert isinstance(list_[0], abjad.Selection), repr(list_)
-            components.extend(list_[0])
+            selection = rhythm_maker(divisions_, previous_state=previous_state)
+            assert isinstance(selection, abjad.Selection), repr(selection)
+            components.extend(selection)
             maker_to_state[rhythm_maker] = rhythm_maker.state
         self._state = rhythm_maker.state
         selection = abjad.select(components)
@@ -1241,7 +1239,7 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
         self,
         divisions: typing.Sequence[abjad.IntegerPair],
         previous_state: abjad.OrderedDict = None,
-    ) -> typing.List[abjad.Selection]:
+    ) -> abjad.Selection:
         """
         Calls skip rhythm-maker on ``divisions``.
         """
@@ -1267,8 +1265,8 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
     ### PRIVATE METHODS ###
 
     def _make_music(self, divisions) -> typing.List[abjad.Selection]:
-        selections = []
         component: typing.Union[abjad.MultimeasureRest, abjad.Skip]
+        components = []
         for division in divisions:
             assert isinstance(division, abjad.NonreducedFraction)
             if self.use_multimeasure_rests is True:
@@ -1277,9 +1275,9 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
                 )
             else:
                 component = abjad.Skip(1, multiplier=division, tag=self.tag)
-            selection = abjad.select(component)
-            selections.append(selection)
-        return selections
+            components.append(component)
+        selection = abjad.select(components)
+        return [selection]
 
     ### PUBLIC PROPERTIES ###
 

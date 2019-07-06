@@ -1774,10 +1774,8 @@ class SegmentMaker(abjad.SegmentMaker):
             )
             commands = self._voice_to_rhythm_commands(voice)
             if not commands:
-                list_ = silence_maker(self.time_signatures)
-                assert isinstance(list_, list), repr(list_)
-                assert len(list_) == 1, repr(list_)
-                selection = list_[0]
+                selection = silence_maker(self.time_signatures)
+                assert isinstance(selection, abjad.Selection), repr(selection)
                 voice.extend(selection)
                 if not self.remove_phantom_measure:
                     container = self._make_multimeasure_rest_container(
