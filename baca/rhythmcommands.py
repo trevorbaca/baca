@@ -2240,12 +2240,12 @@ def make_repeated_duration_notes(
     if not do_not_rewrite_meter:
         rewrite_specifiers.append(rmakers.RewriteMeterCommand())
     return RhythmCommand(
-        divisions=divisions,
         measures=measures,
         rhythm_maker=rmakers.NoteRhythmMaker(
             *specifiers,
             *rewrite_specifiers,
             rmakers.TieSpecifier(repeat_ties=True),
+            divisions=divisions,
             tag=tag,
         ),
     )
