@@ -47,6 +47,20 @@ class DivisionAssignment(object):
         assert isinstance(rhythm_maker, prototype), repr(rhythm_maker)
         self._rhythm_maker = rhythm_maker
 
+    ### SPECIAL METHODS ###
+
+    def __format__(self, format_specification="") -> str:
+        """
+        Gets storage format.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
     ### PUBLIC PROPERTIES ###
 
     @property
@@ -55,6 +69,61 @@ class DivisionAssignment(object):
         Gets pattern.
         """
         return self._pattern
+
+    @property
+    def rhythm_maker(
+        self
+    ) -> typing.Union[rmakers.RhythmMaker, "RhythmCommand"]:
+        """
+        Gets rhythm-maker.
+        """
+        return self._rhythm_maker
+
+
+class DivisionMatch(object):
+    """
+    Division match.
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = ("_division", "_rhythm_maker")
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        division: divisionclasses.Division,
+        rhythm_maker: typing.Union[rmakers.RhythmMaker, "RhythmCommand"],
+    ) -> None:
+        assert isinstance(division, divisionclasses.Division), repr(division)
+        self._division = division
+        prototype = (rmakers.RhythmMaker, RhythmCommand)
+        assert isinstance(rhythm_maker, prototype), repr(rhythm_maker)
+        self._rhythm_maker = rhythm_maker
+
+    ### SPECIAL METHODS ###
+
+    def __format__(self, format_specification="") -> str:
+        """
+        Gets storage format.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def division(self) -> divisionclasses.Division:
+        """
+        Gets division.
+        """
+        return self._division
 
     @property
     def rhythm_maker(
@@ -333,6 +402,7 @@ class RhythmCommand(scoping.Command):
     __slots__ = (
         "_annotate_unpitched_music",
         "_divisions",
+        "_do_not_check_total_duration",
         "_left_broken",
         "_persist",
         "_reference_meters",
@@ -347,15 +417,16 @@ class RhythmCommand(scoping.Command):
 
     def __init__(
         self,
+        rhythm_maker: RhythmMakerTyping = rmakers.NoteRhythmMaker(),
         *,
         annotate_unpitched_music: bool = None,
         divisions: abjad.Expression = None,
+        do_not_check_total_duration: bool = None,
         left_broken: bool = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         persist: str = None,
         reference_meters: typing.Iterable[abjad.Meter] = None,
-        rhythm_maker: RhythmMakerTyping = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
     ) -> None:
@@ -368,6 +439,9 @@ class RhythmCommand(scoping.Command):
         if divisions is not None:
             assert isinstance(divisions, abjad.Expression)
         self._divisions = divisions
+        if do_not_check_total_duration is not None:
+            do_not_check_total_duration = bool(do_not_check_total_duration)
+        self._do_not_check_total_duration = do_not_check_total_duration
         if left_broken is not None:
             left_broken = bool(left_broken)
         self._left_broken = left_broken
@@ -397,10 +471,14 @@ class RhythmCommand(scoping.Command):
         Calls ``RhythmCommand`` on ``start_offset`` and ``time_signatures``.
         """
         self._runtime = runtime or abjad.OrderedDict()
-        selection, start_offset = self._make_rhythm(
+        start_offset, selection = self._make_rhythm(
             start_offset, time_signatures
         )
         assert isinstance(selection, abjad.Selection), repr(selection)
+        if self.annotate_unpitched_music or not isinstance(
+            self.rhythm_maker, abjad.Selection
+        ):
+            self._annotate_unpitched_music_(selection)
         timespan = abjad.AnnotatedTimespan(
             start_offset=start_offset, annotation=selection
         )
@@ -424,20 +502,21 @@ class RhythmCommand(scoping.Command):
 
     def _apply_division_expression(
         self, divisions
-    ) -> typing.Optional[divisionclasses.DivisionSequence]:
+    ) -> divisionclasses.DivisionSequence:
         if self.divisions is not None:
-            divisions_ = self.divisions(divisions)
-            if not isinstance(divisions_, abjad.Sequence):
+            result = self.divisions(divisions)
+            if not isinstance(result, abjad.Sequence):
                 message = "division expression must return sequence:\n"
                 message += f"  Input divisions:\n"
                 message += f"    {divisions}\n"
                 message += f"  Division expression:\n"
                 message += f"    {self.divisions}\n"
-                message += f"  Output divisions:\n"
-                message += f"    {divisions_}"
+                message += f"  Result:\n"
+                message += f"    {result}"
                 raise Exception(message)
-            divisions = divisions_
+            divisions = result
         divisions = divisionclasses.DivisionSequence(divisions)
+        divisions = divisions.flatten(depth=-1)
         return divisions
 
     def _check_rhythm_maker_input(self, rhythm_maker):
@@ -457,91 +536,87 @@ class RhythmCommand(scoping.Command):
         message += f"\n    {format(rhythm_maker)}"
         raise Exception(message)
 
-    # TODO: simplify with DivisionSequence
-    @staticmethod
-    def _durations_to_divisions(durations, start_offset):
-        divisions = [divisionclasses.Division(_) for _ in durations]
-        durations = [_.duration for _ in divisions]
-        start_offset = abjad.Offset(start_offset)
-        durations.insert(0, start_offset)
-        start_offsets = abjad.mathtools.cumulative_sums(durations)[1:-1]
-        assert len(divisions) == len(start_offsets)
-        divisions_ = []
-        for division, start_offset in zip(divisions, start_offsets):
-            division_ = divisionclasses.Division(
-                division, start_offset=start_offset
-            )
-            divisions_.append(division_)
-        assert not any(_.start_offset is None for _ in divisions_)
-        return divisions_
-
-    def _make_rhythm(self, start_offset, time_signatures):
+    def _make_rhythm(
+        self, start_offset, time_signatures
+    ) -> typing.Tuple[abjad.Offset, abjad.Selection]:
         rhythm_maker = self.rhythm_maker
-        assert rhythm_maker is not None
         if isinstance(rhythm_maker, abjad.Selection):
             selection = rhythm_maker
-            if self.annotate_unpitched_music:
-                self._annotate_unpitched_music_(selection)
-            return selection, start_offset
+            total_duration = sum([_.duration for _ in time_signatures])
+            selection_duration = abjad.inspect(selection).duration()
+            if (
+                not self.do_not_check_total_duration
+                and selection_duration != total_duration
+            ):
+                message = f"selection duration ({selection_duration}) does not"
+                message += f" equal total duration ({total_duration})."
+                raise Exception(message)
+            return start_offset, selection
+        assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
+        pairs = [_.pair for _ in time_signatures]
+        divisions = divisionclasses._divisions(
+            pairs, start_offset=start_offset
+        )
+        original_timespan = divisions.timespan
+        divisions = self._apply_division_expression(divisions)
+        transformed_timespan = divisions.timespan
+        # TODO: activate:
+        #        if transformed_timespan != original_timespan:
+        #            message = "original timespan ...\n"
+        #            message += f"    {original_timespan}\n"
+        #            message += "... does not equal ...\n"
+        #            message += f"    {transformed_timespan}\n"
+        #            message += "... transformed timespan."
+        #            raise Exception(message)
+        division_count = len(divisions)
+        start_offset = divisions[0].start_offset
+        assignments: typing.List[DivisionAssignment] = []
         if isinstance(rhythm_maker, rmakers.RhythmMaker):
             assignment = DivisionAssignment(abjad.index([0], 1), rhythm_maker)
-            assignments = [assignment]
+            assignments.append(assignment)
+        elif isinstance(rhythm_maker, DivisionAssignment):
+            assignments.append(rhythm_maker)
         else:
-            assignments = list(rhythm_maker)
+            for item in rhythm_maker:
+                assert isinstance(item, DivisionAssignment)
+                assignments.append(item)
         assert all(isinstance(_, DivisionAssignment) for _ in assignments)
-        divisions = self._durations_to_divisions(time_signatures, start_offset)
-        divisions = classes.Sequence(divisions).flatten(depth=-1)
-        divisions = self._apply_division_expression(divisions)
-        assert isinstance(divisions, divisionclasses.DivisionSequence), repr(
-            divisions
-        )
-        divisions = divisions.flatten(depth=-1)
-        division_count = len(divisions)
-        time_signatures_ = [abjad.TimeSignature(_) for _ in divisions]
-        start_offset = divisions[0].start_offset
-        labelled_divisions = []
+        matches = []
         for i, division in enumerate(divisions):
             for assignment in assignments:
-                if assignment.pattern is True:
-                    raise Exception("use abjad.index([0], 1) instead.")
-                if isinstance(assignment.pattern, list):
-                    raise Exception("use pattern instead.")
-                elif isinstance(assignment.pattern, tuple):
-                    raise Exception("use slice-pattern instead.")
                 if assignment.pattern.matches_index(i, division_count):
-                    # TODO: use class insted of tuple:
-                    pair = (division, assignment.rhythm_maker)
-                    labelled_divisions.append(pair)
+                    match = DivisionMatch(division, assignment.rhythm_maker)
+                    matches.append(match)
                     break
             else:
-                raise Exception(f"no rhythm-maker for division {i}.")
-        assert len(labelled_divisions) == len(divisions)
-        labelled_divisions = classes.Sequence(labelled_divisions)
-        labelled_divisions = labelled_divisions.group_by(lambda pair: pair[1])
-        components = []
+                raise Exception(f"no rhythm-maker match for division {i}.")
+        assert len(divisions) == len(matches)
+        groups = abjad.sequence(matches).group_by(
+            lambda match: match.rhythm_maker
+        )
+        components: typing.List[abjad.Component] = []
         previous_segment_stop_state = self._previous_segment_stop_state()
         maker_to_state = abjad.OrderedDict()
-        for subsequence in labelled_divisions:
-            # TODO: use class insted of tuple:
-            divisions_ = [pair[0] for pair in subsequence]
-            rhythm_maker = subsequence[0][1]
+        for group in groups:
+            rhythm_maker = group[0].rhythm_maker
             if isinstance(rhythm_maker, type(self)):
                 rhythm_maker = rhythm_maker.rhythm_maker
-                assert isinstance(rhythm_maker, rmakers.RhythmMaker)
+            assert isinstance(rhythm_maker, rmakers.RhythmMaker)
+            divisions = [match.division for match in group]
             # TODO: eventually allow previous segment stop state
             #       and local stop state to work together
             if previous_segment_stop_state is None:
                 previous_state = maker_to_state.get(rhythm_maker, None)
             else:
                 previous_state = previous_segment_stop_state
-            selection = rhythm_maker(divisions_, previous_state=previous_state)
+            selection = rhythm_maker(divisions, previous_state=previous_state)
             assert isinstance(selection, abjad.Selection), repr(selection)
             components.extend(selection)
             maker_to_state[rhythm_maker] = rhythm_maker.state
+        assert isinstance(rhythm_maker, rmakers.RhythmMaker)
         self._state = rhythm_maker.state
         selection = abjad.select(components)
-        self._annotate_unpitched_music_(selection)
-        return selection, start_offset
+        return start_offset, selection
 
     def _previous_segment_stop_state(self):
         previous_segment_stop_state = None
@@ -763,6 +838,13 @@ class RhythmCommand(scoping.Command):
         return self._divisions
 
     @property
+    def do_not_check_total_duration(self) -> typing.Optional[bool]:
+        """
+        Is true when command does not check total duration.
+        """
+        return self._do_not_check_total_duration
+
+    @property
     def left_broken(self) -> typing.Optional[bool]:
         """
         Is true when rhythm is left-broken.
@@ -824,7 +906,7 @@ class RhythmCommand(scoping.Command):
         return tie_specifier.repeat_ties
 
     @property
-    def rhythm_maker(self) -> typing.Optional[RhythmMakerTyping]:
+    def rhythm_maker(self) -> RhythmMakerTyping:
         r"""
         Gets rhythm-maker-or-selection or (rhythm-maker-or-selection, pattern)
         pairs.
@@ -2649,6 +2731,7 @@ def rhythm(
     *,
     annotate_unpitched_music: bool = None,
     divisions: abjad.Expression = None,
+    do_not_check_total_duration: bool = None,
     left_broken: bool = None,
     measures: typings.SliceTyping = None,
     persist: str = None,
@@ -2671,13 +2754,14 @@ def rhythm(
             raise Exception("can only tag rhythm-makers.")
         rhythm_maker = abjad.new(rhythm_maker, tag=tag)
     return RhythmCommand(
+        rhythm_maker,
         annotate_unpitched_music=annotate_unpitched_music,
+        do_not_check_total_duration=do_not_check_total_duration,
         divisions=divisions,
         left_broken=left_broken,
         measures=measures,
         persist=persist,
         reference_meters=reference_meters,
-        rhythm_maker=rhythm_maker,
         right_broken=right_broken,
     )
 

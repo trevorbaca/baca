@@ -947,6 +947,7 @@ Rhythm library.
    :nosignatures:
 
    ~baca.rhythmcommands.DivisionAssignment
+   ~baca.rhythmcommands.DivisionMatch
    ~baca.rhythmcommands.DurationMultiplierCommand
    ~baca.rhythmcommands.RhythmCommand
    ~baca.rhythmcommands.TieCorrectionCommand

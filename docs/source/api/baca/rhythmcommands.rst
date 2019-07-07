@@ -23,6 +23,7 @@ rhythmcommands
    :nosignatures:
 
    ~DivisionAssignment
+   ~DivisionMatch
    ~DurationMultiplierCommand
    ~RhythmCommand
    ~TieCorrectionCommand
@@ -39,8 +40,21 @@ rhythmcommands
    .. autosummary::
       :nosignatures:
 
+      __format__
+      __repr__
       pattern
       rhythm_maker
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: DivisionAssignment.__format__
+
+   .. automethod:: DivisionAssignment.__repr__
 
    .. raw:: html
 
@@ -52,6 +66,45 @@ rhythmcommands
    .. autoattribute:: DivisionAssignment.pattern
 
    .. autoattribute:: DivisionAssignment.rhythm_maker
+
+.. autoclass:: DivisionMatch
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __format__
+      __repr__
+      division
+      rhythm_maker
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: DivisionMatch.__format__
+
+   .. automethod:: DivisionMatch.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: DivisionMatch.division
+
+   .. autoattribute:: DivisionMatch.rhythm_maker
 
 .. autoclass:: DurationMultiplierCommand
 
@@ -160,6 +213,7 @@ rhythmcommands
 
       annotate_unpitched_music
       divisions
+      do_not_check_total_duration
       left_broken
       parameter
       persist
@@ -213,6 +267,8 @@ rhythmcommands
       .. autoattribute:: RhythmCommand.deactivate
 
    .. autoattribute:: RhythmCommand.divisions
+
+   .. autoattribute:: RhythmCommand.do_not_check_total_duration
 
    .. autoattribute:: RhythmCommand.left_broken
 

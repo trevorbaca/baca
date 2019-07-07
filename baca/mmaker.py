@@ -6012,25 +6012,25 @@ class MusicAccumulator(object):
         assert isinstance(selection, abjad.Selection), repr(selection)
         return selection
 
-    def populate_segment_maker(self, segment_maker):
+    def populate_segment_maker(self, segment_maker) -> None:
         """
         Populates ``segment_maker``.
-
-        Returns none.
         """
         for voice_name in sorted(self._floating_selections):
             selection = self.assemble(voice_name)
-            if selection:
-                segment_maker(
-                    (voice_name, 1), rhythmcommands.rhythm(selection)
-                )
+            if not selection:
+                continue
+            segment_maker(
+                (voice_name, 1),
+                rhythmcommands.rhythm(
+                    selection, do_not_check_total_duration=True
+                ),
+            )
 
     @staticmethod
-    def show(contribution, time_signatures):
+    def show(contribution, time_signatures) -> abjad.LilyPondFile:
         """
         Makes rhythm-maker-style LilyPond file for documentation examples.
-
-        Returns LilyPond file.
         """
         return abjad.LilyPondFile.rhythm(
             contribution, divisions=time_signatures, pitched_staff=True
