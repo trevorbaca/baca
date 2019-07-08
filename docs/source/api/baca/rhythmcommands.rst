@@ -44,6 +44,7 @@ rhythmcommands
       __format__
       __repr__
       pattern
+      remember_state_across_gaps
       rhythm_maker
 
    .. raw:: html
@@ -65,6 +66,8 @@ rhythmcommands
       :class: class-header
 
    .. autoattribute:: DivisionAssignment.pattern
+
+   .. autoattribute:: DivisionAssignment.remember_state_across_gaps
 
    .. autoattribute:: DivisionAssignment.rhythm_maker
 
@@ -118,8 +121,8 @@ rhythmcommands
 
       __format__
       __repr__
+      assignment
       division
-      rhythm_maker
 
    .. raw:: html
 
@@ -139,9 +142,9 @@ rhythmcommands
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: DivisionMatch.division
+   .. autoattribute:: DivisionMatch.assignment
 
-   .. autoattribute:: DivisionMatch.rhythm_maker
+   .. autoattribute:: DivisionMatch.division
 
 .. autoclass:: DurationMultiplierCommand
 
