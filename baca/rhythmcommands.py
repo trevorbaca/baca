@@ -468,7 +468,6 @@ class RhythmCommand(scoping.Command):
         "_do_not_check_total_duration",
         "_left_broken",
         "_persist",
-        "_reference_meters",
         "_rhythm_maker",
         "_right_broken",
         "_state",
@@ -489,7 +488,6 @@ class RhythmCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         persist: str = None,
-        reference_meters: typing.Iterable[abjad.Meter] = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
     ) -> None:
@@ -511,10 +509,6 @@ class RhythmCommand(scoping.Command):
         if persist is not None:
             assert isinstance(persist, str), repr(persist)
         self._persist = persist
-        if reference_meters is not None:
-            assert isinstance(reference_meters, collections.abc.Iterable)
-            assert all(isinstance(_, abjad.Meter) for _ in reference_meters)
-        self._reference_meters = reference_meters
         self._check_rhythm_maker_input(rhythm_maker)
         self._rhythm_maker = rhythm_maker
         if right_broken is not None:
@@ -952,17 +946,6 @@ class RhythmCommand(scoping.Command):
         Gets persist name.
         """
         return self._persist
-
-    @property
-    def reference_meters(
-        self
-    ) -> typing.Optional[typing.Iterable[abjad.Meter]]:
-        """
-        Gets reference meters.
-
-        Only used to rewrite meters.
-        """
-        return self._reference_meters
 
     # TODO: remove in favor of dedicated TieSpecifier objects passed to
     #       every command that should accept a TieSpecifier
@@ -2837,13 +2820,10 @@ def repeat_tie_to(
 def rhythm(
     rhythm_maker: RhythmMakerTyping,
     *,
-    ###annotate_unpitched_music: bool = None,
     divisions: abjad.Expression = None,
-    ###do_not_check_total_duration: bool = None,
     left_broken: bool = None,
     measures: typings.SliceTyping = None,
     persist: str = None,
-    reference_meters: typing.Iterable[abjad.Meter] = None,
     right_broken: bool = None,
     tag: str = None,
 ) -> RhythmCommand:
@@ -2863,14 +2843,11 @@ def rhythm(
             raise Exception("implement tag against division assignment(s).")
     return RhythmCommand(
         rhythm_maker,
-        ###annotate_unpitched_music=annotate_unpitched_music,
         annotate_unpitched_music=True,
-        ###do_not_check_total_duration=do_not_check_total_duration,
         divisions=divisions,
         left_broken=left_broken,
         measures=measures,
         persist=persist,
-        reference_meters=reference_meters,
         right_broken=right_broken,
     )
 

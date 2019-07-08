@@ -257,7 +257,6 @@ rhythmcommands
       left_broken
       parameter
       persist
-      reference_meters
       repeat_ties
       rhythm_maker
       right_broken
@@ -327,8 +326,6 @@ rhythmcommands
    .. autoattribute:: RhythmCommand.parameter
 
    .. autoattribute:: RhythmCommand.persist
-
-   .. autoattribute:: RhythmCommand.reference_meters
 
    .. autoattribute:: RhythmCommand.repeat_ties
 
