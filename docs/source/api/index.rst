@@ -979,10 +979,12 @@ Rhythm library.
    ~baca.rhythmcommands.make_skips
    ~baca.rhythmcommands.make_tied_notes
    ~baca.rhythmcommands.make_tied_repeated_durations
+   ~baca.rhythmcommands.music
    ~baca.rhythmcommands.repeat_tie_from
    ~baca.rhythmcommands.repeat_tie_to
    ~baca.rhythmcommands.rhythm
    ~baca.rhythmcommands.set_duration_multiplier
+   ~baca.rhythmcommands.skeleton
    ~baca.rhythmcommands.tacet
    ~baca.rhythmcommands.tie_from
    ~baca.rhythmcommands.tie_to

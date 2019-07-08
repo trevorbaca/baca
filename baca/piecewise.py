@@ -3038,7 +3038,7 @@ def hairpin(
         ...         selector=baca.leaves()[2:],
         ...         ),
         ...     baca.pitches('C4 D4'),
-        ...     baca.rhythm('{ c2 r4. c2 r4. }'),
+        ...     baca.skeleton('{ c2 r4. c2 r4. }'),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -5853,7 +5853,7 @@ def text_spanner(
         ...         final_piece_spanner=False,
         ...         pieces=baca.plts(),
         ...     ),
-        ...     baca.rhythm('{ c2 c4. c2 c4. }'),
+        ...     baca.skeleton('{ c2 c4. c2 c4. }'),
         ...     baca.pitches('C4 D4 E4 F4'),
         ...     baca.text_spanner_staff_padding(4.5),
         ...     )
@@ -6546,7 +6546,7 @@ def text_spanner(
         ...         final_piece_spanner=False,
         ...         pieces=baca.plts(),
         ...     ),
-        ...     baca.rhythm('{ c2 c4. c2 c4 ~ c8 }'),
+        ...     baca.skeleton('{ c2 c4. c2 c4 ~ c8 }'),
         ...     baca.pitches('C4 D4 E4 F4'),
         ...     baca.text_spanner_staff_padding(4.5),
         ...     )

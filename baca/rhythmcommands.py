@@ -16,7 +16,7 @@ from . import typings
 
 
 RhythmMakerTyping = typing.Union[
-    str, rmakers.RhythmMaker, abjad.Selection, "DivisionAssignments"
+    rmakers.RhythmMaker, "DivisionAssignment", "DivisionAssignments"
 ]
 
 ### CLASSES ###
@@ -2526,6 +2526,33 @@ def make_tied_repeated_durations(
     )
 
 
+def music(
+    argument: typing.Union[str, abjad.Selection],
+    *,
+    do_not_check_total_duration: bool = None,
+    tag: str = None,
+) -> RhythmCommand:
+    """
+    Makes rhythm command from string or selection ``argument``.
+    """
+    if isinstance(argument, str):
+        string = f"{{ {argument} }}"
+        container = abjad.parse(string)
+        selection = abjad.mutate(container).eject_contents()
+    elif isinstance(argument, abjad.Selection):
+        selection = argument
+    else:
+        message = "baca.music() accepts string or selection,"
+        message += " not {repr(argument)}."
+        raise TypeError(message)
+    # TODO: impelement tag against selections
+    if tag is not None:
+        raise Exception("implement tag against selections.")
+    return RhythmCommand(
+        selection, do_not_check_total_duration=do_not_check_total_duration
+    )
+
+
 def repeat_tie_from(
     *,
     allow_rest: bool = None,
@@ -2810,9 +2837,9 @@ def repeat_tie_to(
 def rhythm(
     rhythm_maker: RhythmMakerTyping,
     *,
-    annotate_unpitched_music: bool = None,
+    ###annotate_unpitched_music: bool = None,
     divisions: abjad.Expression = None,
-    do_not_check_total_duration: bool = None,
+    ###do_not_check_total_duration: bool = None,
     left_broken: bool = None,
     measures: typings.SliceTyping = None,
     persist: str = None,
@@ -2821,29 +2848,59 @@ def rhythm(
     tag: str = None,
 ) -> RhythmCommand:
     """
-    Makes rhythm command.
+    Makes rhythm command from ``rhythm_maker``.
     """
-    # TODO: implement a way to tag parsed strings:
-    if isinstance(rhythm_maker, str):
-        string = f"{{ {rhythm_maker} }}"
-        container = abjad.parse(string)
-        selection = abjad.mutate(container).eject_contents()
-        rhythm_maker = selection
+    prototype = (rmakers.RhythmMaker, DivisionAssignment, DivisionAssignments)
+    if not isinstance(rhythm_maker, prototype):
+        message = "baca.rhythm() accepts rhythm-maker and division"
+        message += f" assignment(s), not {repr(rhythm_maker)}."
+        raise TypeError(message)
     if tag is not None:
-        # TODO: implement a way to tag already-initialized components:
-        if not isinstance(rhythm_maker, rmakers.RhythmMaker):
-            raise Exception("can only tag rhythm-makers.")
-        rhythm_maker = abjad.new(rhythm_maker, tag=tag)
+        if isinstance(rhythm_maker, rmakers.RhythmMaker):
+            rhythm_maker = abjad.new(rhythm_maker, tag=tag)
+        # TODO:
+        else:
+            raise Exception("implement tag against division assignment(s).")
     return RhythmCommand(
         rhythm_maker,
-        annotate_unpitched_music=annotate_unpitched_music,
-        do_not_check_total_duration=do_not_check_total_duration,
+        ###annotate_unpitched_music=annotate_unpitched_music,
+        annotate_unpitched_music=True,
+        ###do_not_check_total_duration=do_not_check_total_duration,
         divisions=divisions,
         left_broken=left_broken,
         measures=measures,
         persist=persist,
         reference_meters=reference_meters,
         right_broken=right_broken,
+    )
+
+
+def skeleton(
+    argument: typing.Union[str, abjad.Selection],
+    *,
+    do_not_check_total_duration: bool = None,
+    tag: str = None,
+) -> RhythmCommand:
+    """
+    Makes rhythm command from ``string`` and annotates music as unpitched.
+    """
+    if isinstance(argument, str):
+        string = f"{{ {argument} }}"
+        container = abjad.parse(string)
+        selection = abjad.mutate(container).eject_contents()
+    elif isinstance(argument, abjad.Selection):
+        selection = argument
+    else:
+        message = "baca.skeleton() accepts string or selection,"
+        message += " not {repr(argument)}."
+        raise TypeError(message)
+    # TODO: implement tag against selections
+    if tag is not None:
+        raise Exception("implement tag against selections.")
+    return RhythmCommand(
+        selection,
+        annotate_unpitched_music=True,
+        do_not_check_total_duration=do_not_check_total_duration,
     )
 
 

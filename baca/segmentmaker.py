@@ -3855,7 +3855,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     ('Violin_Music_Voice', 1),
-            ...     baca.rhythm(contribution['Violin_Music_Voice']),
+            ...     baca.music(contribution['Violin_Music_Voice']),
             ...     )
 
             >>> contribution = music_maker(
@@ -3865,7 +3865,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     ('Cello_Music_Voice', 1),
-            ...     baca.rhythm(contribution['Cello_Music_Voice']),
+            ...     baca.music(contribution['Cello_Music_Voice']),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -4230,7 +4230,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker(
             ...     ('Music_Voice', 1),
             ...     baca.instrument(abjad.Violin()),
-            ...     baca.rhythm(figures, do_not_check_total_duration=True),
+            ...     baca.music(figures, do_not_check_total_duration=True),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -4448,7 +4448,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     ('Music_Voice', 1),
-            ...     baca.rhythm(figures, do_not_check_total_duration=True),
+            ...     baca.music(figures, do_not_check_total_duration=True),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -4992,7 +4992,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     'Music_Voice',
-            ...     baca.rhythm(figures),
+            ...     baca.music(figures),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -5217,7 +5217,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             >>> maker(
             ...     'Music_Voice',
-            ...     baca.rhythm(figures),
+            ...     baca.music(figures),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')

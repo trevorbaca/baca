@@ -490,10 +490,12 @@ rhythmcommands
    ~make_skips
    ~make_tied_notes
    ~make_tied_repeated_durations
+   ~music
    ~repeat_tie_from
    ~repeat_tie_to
    ~rhythm
    ~set_duration_multiplier
+   ~skeleton
    ~tacet
    ~tie_from
    ~tie_to
@@ -531,6 +533,8 @@ rhythmcommands
 
 .. autofunction:: make_tied_repeated_durations
 
+.. autofunction:: music
+
 .. autofunction:: repeat_tie_from
 
 .. autofunction:: repeat_tie_to
@@ -538,6 +542,8 @@ rhythmcommands
 .. autofunction:: rhythm
 
 .. autofunction:: set_duration_multiplier
+
+.. autofunction:: skeleton
 
 .. autofunction:: tacet
 

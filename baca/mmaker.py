@@ -6022,7 +6022,7 @@ class MusicAccumulator(object):
                 continue
             segment_maker(
                 (voice_name, 1),
-                rhythmcommands.rhythm(
+                rhythmcommands.music(
                     selection, do_not_check_total_duration=True
                 ),
             )
