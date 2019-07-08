@@ -628,14 +628,13 @@ class RhythmCommand(scoping.Command):
         original_timespan = divisions.timespan
         divisions = self._apply_division_expression(divisions)
         transformed_timespan = divisions.timespan
-        # TODO: activate:
-        #        if transformed_timespan != original_timespan:
-        #            message = "original timespan ...\n"
-        #            message += f"    {original_timespan}\n"
-        #            message += "... does not equal ...\n"
-        #            message += f"    {transformed_timespan}\n"
-        #            message += "... transformed timespan."
-        #            raise Exception(message)
+        if transformed_timespan != original_timespan:
+            message = "original timespan ...\n"
+            message += f"    {original_timespan}\n"
+            message += "... does not equal ...\n"
+            message += f"    {transformed_timespan}\n"
+            message += "... transformed timespan."
+            raise Exception(message)
         division_count = len(divisions)
         start_offset = divisions[0].start_offset
         assignments: typing.List[DivisionAssignment] = []
