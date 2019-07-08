@@ -736,9 +736,15 @@ class DivisionSequence(abjad.Sequence):
 
     ### PUBLIC METHODS ###
 
+    # TODO: remove ``counts`` in favor of partition-then-``indices`` recipe
+    # TODO: generalize ``indices`` to pattern
     @abjad.Signature()
     def fuse(
-        self, counts: typing.List[int] = None, *, cyclic: bool = None
+        self,
+        counts: typing.List[int] = None,
+        *,
+        cyclic: bool = None,
+        indices: typing.Sequence[int] = None,
     ) -> "DivisionSequence":
         r"""
         Fuses divisions by ``counts``.
@@ -893,14 +899,110 @@ class DivisionSequence(abjad.Sequence):
                     }
                 >>
 
+        ..  container:: example expression
+
+            Splits into sixteenths; partitions; then fuses every other part:
+
+            >>> split = baca.divisions().split([(1, 16)], cyclic=True)
+            >>> expression = baca.divisions().fuse()
+            >>> expression = expression.map(split)
+            >>> expression = expression.flatten(depth=-1)
+            >>> expression = expression.partition_by_ratio_of_lengths(
+            ...     (1, 1, 1, 1, 1, 1),
+            ... )
+            >>> expression = expression.fuse(indices=[1, 3, 5])
+            >>> expression = expression.flatten(depth=-1)
+
+            >>> divisions = [(7, 8), (3, 8), (5, 8)]
+            >>> divisions = baca.divisions(divisions, start_offset=0)
+            >>> divisions = expression(divisions)
+            >>> for division in divisions:
+            ...     division
+            Division((1, 16), start_offset=Offset(0, 1))
+            Division((1, 16), start_offset=Offset(1, 16))
+            Division((1, 16), start_offset=Offset(1, 8))
+            Division((1, 16), start_offset=Offset(3, 16))
+            Division((1, 16), start_offset=Offset(1, 4))
+            Division((5, 16), start_offset=Offset(5, 16))
+            Division((1, 16), start_offset=Offset(5, 8))
+            Division((1, 16), start_offset=Offset(11, 16))
+            Division((1, 16), start_offset=Offset(3, 4))
+            Division((1, 16), start_offset=Offset(13, 16))
+            Division((1, 16), start_offset=Offset(7, 8))
+            Division((5, 16), start_offset=Offset(15, 16))
+            Division((1, 16), start_offset=Offset(5, 4))
+            Division((1, 16), start_offset=Offset(21, 16))
+            Division((1, 16), start_offset=Offset(11, 8))
+            Division((1, 16), start_offset=Offset(23, 16))
+            Division((1, 16), start_offset=Offset(3, 2))
+            Division((5, 16), start_offset=Offset(25, 16))
+
+            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/8
+                        s1 * 15/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'4
+                        ~
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'4
+                        ~
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'4
+                        ~
+                        c'16
+                    }
+                >>
+
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        counts = counts or []
-        sequence = self.partition_by_counts(
-            counts, cyclic=cyclic, overhang=True
-        )
-        sequence = sequence.map(_divisions().sum())
+        if indices is not None:
+            assert all(isinstance(_, int) for _ in indices), repr(indices)
+        if indices and counts:
+            raise Exception("do not set indices and counts together.")
+        if not indices:
+            counts = counts or []
+            sequence = self.partition_by_counts(
+                counts, cyclic=cyclic, overhang=True
+            )
+        else:
+            sequence = self
+        items_ = []
+        for i, item in enumerate(sequence):
+            if indices and i not in indices:
+                item_ = item
+            else:
+                item_ = _divisions(item).sum()
+            items_.append(item_)
+        sequence = _divisions(items_)
         sequence = sequence.flatten(depth=-1)
         return sequence
 
@@ -1140,10 +1242,10 @@ class DivisionSequence(abjad.Sequence):
         *,
         compound: abjad.DurationTyping = None,
         cyclic: bool = None,
-        rotate_indexed: int = None,
         remainder: abjad.HorizontalAlignment = None,
         remainder_fuse_threshold: abjad.DurationTyping = None,
-        _map_index=None,
+        rotate_indexed: int = None,
+        _map_index: int = None,
     ) -> "DivisionSequence":
         r"""
         Splits division list by ``durations``.
@@ -1813,7 +1915,7 @@ class DivisionSequence(abjad.Sequence):
         ratios: typing.Sequence[abjad.RatioTyping],
         *,
         rounded: bool = None,
-        _map_index=None,
+        _map_index: int = None,
     ) -> "DivisionSequence":
         r"""
         Splits divisions by ``ratios``.

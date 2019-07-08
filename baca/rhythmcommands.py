@@ -41,10 +41,11 @@ class DivisionAssignment(object):
         pattern: abjad.Pattern,
         rhythm_maker: typing.Union[rmakers.RhythmMaker, "RhythmCommand"],
     ) -> None:
-        assert isinstance(pattern, abjad.Pattern), repr(pattern)
+        prototype = (abjad.DurationInequality, abjad.Pattern)
+        assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
-        prototype = (rmakers.RhythmMaker, RhythmCommand)
-        assert isinstance(rhythm_maker, prototype), repr(rhythm_maker)
+        r_prototype = (rmakers.RhythmMaker, RhythmCommand)
+        assert isinstance(rhythm_maker, r_prototype), repr(rhythm_maker)
         self._rhythm_maker = rhythm_maker
 
     ### SPECIAL METHODS ###
@@ -64,7 +65,7 @@ class DivisionAssignment(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def pattern(self) -> abjad.Pattern:
+    def pattern(self) -> typing.Union[abjad.DurationInequality, abjad.Pattern]:
         """
         Gets pattern.
         """
@@ -584,7 +585,15 @@ class RhythmCommand(scoping.Command):
         matches = []
         for i, division in enumerate(divisions):
             for assignment in assignments:
-                if assignment.pattern.matches_index(i, division_count):
+                if isinstance(
+                    assignment.pattern, abjad.Pattern
+                ) and assignment.pattern.matches_index(i, division_count):
+                    match = DivisionMatch(division, assignment.rhythm_maker)
+                    matches.append(match)
+                    break
+                elif isinstance(
+                    assignment.pattern, abjad.DurationInequality
+                ) and assignment.pattern(division):
                     match = DivisionMatch(division, assignment.rhythm_maker)
                     matches.append(match)
                     break
