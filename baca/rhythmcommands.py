@@ -16,10 +16,7 @@ from . import typings
 
 
 RhythmMakerTyping = typing.Union[
-    str,
-    rmakers.RhythmMaker,
-    abjad.Selection,
-    typing.Sequence["DivisionAssignment"],
+    str, rmakers.RhythmMaker, abjad.Selection, "DivisionAssignments"
 ]
 
 ### CLASSES ###
@@ -40,7 +37,7 @@ class DivisionAssignment(object):
 
     def __init__(
         self,
-        pattern: abjad.Pattern,
+        pattern: typing.Union[abjad.DurationInequality, abjad.Pattern],
         rhythm_maker: typing.Union[rmakers.RhythmMaker, "RhythmCommand"],
         *,
         remember_state_across_gaps: bool = None,
