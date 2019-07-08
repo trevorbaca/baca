@@ -23,6 +23,7 @@ rhythmcommands
    :nosignatures:
 
    ~DivisionAssignment
+   ~DivisionAssignments
    ~DivisionMatch
    ~DurationMultiplierCommand
    ~RhythmCommand
@@ -66,6 +67,42 @@ rhythmcommands
    .. autoattribute:: DivisionAssignment.pattern
 
    .. autoattribute:: DivisionAssignment.rhythm_maker
+
+.. autoclass:: DivisionAssignments
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __format__
+      __repr__
+      assignments
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: DivisionAssignments.__format__
+
+   .. automethod:: DivisionAssignments.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: DivisionAssignments.assignments
 
 .. autoclass:: DivisionMatch
 

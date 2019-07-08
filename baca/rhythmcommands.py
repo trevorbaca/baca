@@ -34,6 +34,8 @@ class DivisionAssignment(object):
 
     __slots__ = ("_pattern", "_rhythm_maker")
 
+    _publish_storage_format = True
+
     ### INITIALIZER ###
 
     def __init__(
@@ -79,6 +81,60 @@ class DivisionAssignment(object):
         Gets rhythm-maker.
         """
         return self._rhythm_maker
+
+
+class DivisionAssignments(object):
+    """
+    Division assignments.
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = ("_assignments",)
+
+    _positional_arguments_name = "assignments"
+
+    _publish_storage_format = True
+
+    ### INITIALIZER ###
+
+    def __init__(self, *assignments: DivisionAssignment) -> None:
+        assignments = assignments or ()
+        for assignment in assignments:
+            assert isinstance(assignment, DivisionAssignment), repr(assignment)
+        assignments_ = tuple(assignments)
+        self._assignments = assignments_
+
+    ### SPECIAL METHODS ###
+
+    def __format__(self, format_specification="") -> str:
+        """
+        Gets storage format.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
+    ### PRIVATE METHODS ###
+
+    def _get_format_specification(self):
+        # specifiers = self.specifiers or []
+        return abjad.FormatSpecification(
+            self, storage_format_args_values=self.assignments
+        )
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def assignments(self) -> typing.List[DivisionAssignment]:
+        """
+        Gets specifiers.
+        """
+        return list(self._assignments)
 
 
 class DivisionMatch(object):
@@ -526,6 +582,8 @@ class RhythmCommand(scoping.Command):
         prototype = (abjad.Selection, rmakers.RhythmMaker)
         if isinstance(rhythm_maker, prototype):
             return
+        if isinstance(rhythm_maker, DivisionAssignments):
+            return
         if all(isinstance(_, DivisionAssignment) for _ in rhythm_maker):
             return
         message = '\n  Input parameter "rhythm_maker" accepts:'
@@ -577,10 +635,16 @@ class RhythmCommand(scoping.Command):
             assignments.append(assignment)
         elif isinstance(rhythm_maker, DivisionAssignment):
             assignments.append(rhythm_maker)
-        else:
+        elif isinstance(rhythm_maker, list):
             for item in rhythm_maker:
                 assert isinstance(item, DivisionAssignment)
                 assignments.append(item)
+        elif isinstance(rhythm_maker, DivisionAssignments):
+            for item in rhythm_maker.assignments:
+                assert isinstance(item, DivisionAssignment)
+                assignments.append(item)
+        else:
+            raise TypeError(rhythm_maker)
         assert all(isinstance(_, DivisionAssignment) for _ in assignments)
         matches = []
         for i, division in enumerate(divisions):
