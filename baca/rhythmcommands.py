@@ -16,186 +16,12 @@ from . import typings
 
 
 RhythmMakerTyping = typing.Union[
-    rmakers.RhythmMaker, "DivisionAssignment", "DivisionAssignments"
+    rmakers.RhythmMaker,
+    rmakers.DivisionAssignment,
+    rmakers.DivisionAssignments,
 ]
 
 ### CLASSES ###
-
-
-class DivisionAssignment(object):
-    """
-    Division assignment.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_pattern", "_remember_state_across_gaps", "_rhythm_maker")
-
-    _publish_storage_format = True
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        pattern: typing.Union[abjad.DurationInequality, abjad.Pattern],
-        rhythm_maker: typing.Union[rmakers.RhythmMaker, "RhythmCommand"],
-        *,
-        remember_state_across_gaps: bool = None,
-    ) -> None:
-        prototype = (abjad.DurationInequality, abjad.Pattern)
-        assert isinstance(pattern, prototype), repr(pattern)
-        self._pattern = pattern
-        r_prototype = (rmakers.RhythmMaker, RhythmCommand)
-        assert isinstance(rhythm_maker, r_prototype), repr(rhythm_maker)
-        self._rhythm_maker = rhythm_maker
-        if remember_state_across_gaps is None:
-            remember_state_across_gaps = bool(remember_state_across_gaps)
-        self._remember_state_across_gaps = remember_state_across_gaps
-
-    ### SPECIAL METHODS ###
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Gets storage format.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
-    def __repr__(self) -> str:
-        """
-        Gets interpreter representation.
-        """
-        return abjad.StorageFormatManager(self).get_repr_format()
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def pattern(self) -> typing.Union[abjad.DurationInequality, abjad.Pattern]:
-        """
-        Gets pattern.
-        """
-        return self._pattern
-
-    @property
-    def remember_state_across_gaps(self) -> typing.Optional[bool]:
-        """
-        Is true when assignment remembers rhythm-maker state across gaps.
-        """
-        return self._remember_state_across_gaps
-
-    @property
-    def rhythm_maker(
-        self
-    ) -> typing.Union[rmakers.RhythmMaker, "RhythmCommand"]:
-        """
-        Gets rhythm-maker.
-        """
-        return self._rhythm_maker
-
-
-class DivisionAssignments(object):
-    """
-    Division assignments.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_assignments",)
-
-    _positional_arguments_name = "assignments"
-
-    _publish_storage_format = True
-
-    ### INITIALIZER ###
-
-    def __init__(self, *assignments: DivisionAssignment) -> None:
-        assignments = assignments or ()
-        for assignment in assignments:
-            assert isinstance(assignment, DivisionAssignment), repr(assignment)
-        assignments_ = tuple(assignments)
-        self._assignments = assignments_
-
-    ### SPECIAL METHODS ###
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Gets storage format.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
-    def __repr__(self) -> str:
-        """
-        Gets interpreter representation.
-        """
-        return abjad.StorageFormatManager(self).get_repr_format()
-
-    ### PRIVATE METHODS ###
-
-    def _get_format_specification(self):
-        # specifiers = self.specifiers or []
-        return abjad.FormatSpecification(
-            self, storage_format_args_values=self.assignments
-        )
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def assignments(self) -> typing.List[DivisionAssignment]:
-        """
-        Gets specifiers.
-        """
-        return list(self._assignments)
-
-
-class DivisionMatch(object):
-    """
-    Division match.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_assignment", "_division")
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        division: divisionclasses.Division,
-        assignment: DivisionAssignment,
-    ) -> None:
-        assert isinstance(division, divisionclasses.Division), repr(division)
-        self._division = division
-        assert isinstance(assignment, DivisionAssignment), repr(assignment)
-        self._assignment = assignment
-
-    ### SPECIAL METHODS ###
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Gets storage format.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
-    def __repr__(self) -> str:
-        """
-        Gets interpreter representation.
-        """
-        return abjad.StorageFormatManager(self).get_repr_format()
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def assignment(self) -> DivisionAssignment:
-        """
-        Gets assignment.
-        """
-        return self._assignment
-
-    @property
-    def division(self) -> divisionclasses.Division:
-        """
-        Gets division.
-        """
-        return self._division
 
 
 class DurationMultiplierCommand(scoping.Command):
@@ -564,12 +390,13 @@ class RhythmCommand(scoping.Command):
     def _check_rhythm_maker_input(self, rhythm_maker):
         if rhythm_maker is None:
             return
-        prototype = (abjad.Selection, rmakers.RhythmMaker)
+        prototype = (
+            abjad.Selection,
+            rmakers.RhythmMaker,
+            rmakers.DivisionAssignment,
+            rmakers.DivisionAssignments,
+        )
         if isinstance(rhythm_maker, prototype):
-            return
-        if isinstance(rhythm_maker, DivisionAssignments):
-            return
-        if all(isinstance(_, DivisionAssignment) for _ in rhythm_maker):
             return
         message = '\n  Input parameter "rhythm_maker" accepts:'
         message += "\n    rhythm-maker"
@@ -606,34 +433,38 @@ class RhythmCommand(scoping.Command):
             message += "... transformed duration."
             raise Exception(message)
         division_count = len(divisions)
-        assignments: typing.List[DivisionAssignment] = []
+        assignments: typing.List[rmakers.DivisionAssignment] = []
         if isinstance(rhythm_maker, rmakers.RhythmMaker):
-            assignment = DivisionAssignment(abjad.index([0], 1), rhythm_maker)
+            assignment = rmakers.DivisionAssignment(
+                abjad.index([0], 1), rhythm_maker
+            )
             assignments.append(assignment)
-        elif isinstance(rhythm_maker, DivisionAssignment):
+        elif isinstance(rhythm_maker, rmakers.DivisionAssignment):
             assignments.append(rhythm_maker)
-        elif isinstance(rhythm_maker, DivisionAssignments):
+        elif isinstance(rhythm_maker, rmakers.DivisionAssignments):
             for item in rhythm_maker.assignments:
-                assert isinstance(item, DivisionAssignment)
+                assert isinstance(item, rmakers.DivisionAssignment)
                 assignments.append(item)
         else:
             message = "must be rhythm-maker or division assignment(s)"
             message += f" (not {rhythm_maker})."
             raise TypeError(message)
-        assert all(isinstance(_, DivisionAssignment) for _ in assignments)
+        assert all(
+            isinstance(_, rmakers.DivisionAssignment) for _ in assignments
+        )
         matches = []
         for i, division in enumerate(divisions):
             for assignment in assignments:
                 if isinstance(
                     assignment.pattern, abjad.Pattern
                 ) and assignment.pattern.matches_index(i, division_count):
-                    match = DivisionMatch(division, assignment)
+                    match = rmakers.DivisionMatch(division, assignment)
                     matches.append(match)
                     break
                 elif isinstance(
                     assignment.pattern, abjad.DurationInequality
                 ) and assignment.pattern(division):
-                    match = DivisionMatch(division, assignment)
+                    match = rmakers.DivisionMatch(division, assignment)
                     matches.append(match)
                     break
             else:
@@ -898,27 +729,6 @@ class RhythmCommand(scoping.Command):
         """
         return self._persist
 
-    # TODO: remove in favor of dedicated TieSpecifier objects passed to
-    #       every command that should accept a TieSpecifier
-    @property
-    def repeat_ties(
-        self
-    ) -> typing.Union[bool, abjad.DurationInequality, None]:
-        """
-        Is true when rhythm command uses repeat ties.
-        """
-        tie_specifier = getattr(self.rhythm_maker, "tie_specifier", None)
-        if tie_specifier is not None:
-            return tie_specifier.repeat_ties
-        assert isinstance(self.rhythm_maker, rmakers.RhythmMaker)
-        for specifier in self.rhythm_maker.specifiers or []:
-            if isinstance(specifier, rmakers.TieSpecifier):
-                tie_specifier = specifier
-                break
-        if tie_specifier is None:
-            return False
-        return tie_specifier.repeat_ties
-
     @property
     def rhythm_maker(self) -> RhythmMakerTyping:
         r"""
@@ -953,11 +763,11 @@ class RhythmCommand(scoping.Command):
             ...         ),
             ...     )
             >>> command = baca.RhythmCommand(
-            ...     rhythm_maker=baca.DivisionAssignments(
-            ...         baca.DivisionAssignment(
+            ...     rhythm_maker=rmakers.DivisionAssignments(
+            ...         rmakers.DivisionAssignment(
             ...             abjad.index([2]), note_rhythm_maker,
             ...         ),
-            ...         baca.DivisionAssignment(
+            ...         rmakers.DivisionAssignment(
             ...             abjad.index([0], 1),
             ...             talea_rhythm_maker,
             ...             remember_state_across_gaps=True,
@@ -2478,6 +2288,7 @@ def music(
     )
 
 
+# TODO: replace with baca.repeat_tie()
 def repeat_tie_from(
     *,
     allow_rest: bool = None,
@@ -2617,6 +2428,7 @@ def repeat_tie_from(
     )
 
 
+# TODO: replace with baca.repeat_tie()
 def repeat_tie_to(
     *,
     allow_rest: bool = None,
@@ -2770,7 +2582,11 @@ def rhythm(
     """
     Makes rhythm command from ``rhythm_maker``.
     """
-    prototype = (rmakers.RhythmMaker, DivisionAssignment, DivisionAssignments)
+    prototype = (
+        rmakers.RhythmMaker,
+        rmakers.DivisionAssignment,
+        rmakers.DivisionAssignments,
+    )
     if not isinstance(rhythm_maker, prototype):
         message = "baca.rhythm() accepts rhythm-maker and division"
         message += f" assignment(s), not {repr(rhythm_maker)}."
@@ -3298,6 +3114,7 @@ def tacet(
     return command_
 
 
+# TODO: replace with baca.tie()
 def tie_from(
     *,
     allow_rest: bool = None,
@@ -3431,6 +3248,7 @@ def tie_from(
     )
 
 
+# TODO: replace with baca.tie()
 def tie_to(
     *,
     allow_rest: bool = None,

@@ -22,129 +22,9 @@ rhythmcommands
 .. autosummary::
    :nosignatures:
 
-   ~DivisionAssignment
-   ~DivisionAssignments
-   ~DivisionMatch
    ~DurationMultiplierCommand
    ~RhythmCommand
    ~TieCorrectionCommand
-
-.. autoclass:: DivisionAssignment
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __format__
-      __repr__
-      pattern
-      remember_state_across_gaps
-      rhythm_maker
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: DivisionAssignment.__format__
-
-   .. automethod:: DivisionAssignment.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: DivisionAssignment.pattern
-
-   .. autoattribute:: DivisionAssignment.remember_state_across_gaps
-
-   .. autoattribute:: DivisionAssignment.rhythm_maker
-
-.. autoclass:: DivisionAssignments
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __format__
-      __repr__
-      assignments
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: DivisionAssignments.__format__
-
-   .. automethod:: DivisionAssignments.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: DivisionAssignments.assignments
-
-.. autoclass:: DivisionMatch
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __format__
-      __repr__
-      assignment
-      division
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: DivisionMatch.__format__
-
-   .. automethod:: DivisionMatch.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: DivisionMatch.assignment
-
-   .. autoattribute:: DivisionMatch.division
 
 .. autoclass:: DurationMultiplierCommand
 
@@ -256,7 +136,6 @@ rhythmcommands
       do_not_check_total_duration
       parameter
       persist
-      repeat_ties
       rhythm_maker
       state
 
@@ -322,8 +201,6 @@ rhythmcommands
    .. autoattribute:: RhythmCommand.parameter
 
    .. autoattribute:: RhythmCommand.persist
-
-   .. autoattribute:: RhythmCommand.repeat_ties
 
    .. autoattribute:: RhythmCommand.rhythm_maker
 
