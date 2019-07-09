@@ -518,28 +518,23 @@ class RhythmCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def _call(
+    def _make_selection(
         self,
         runtime: abjad.OrderedDict = None,
-        start_offset: abjad.Offset = None,
         time_signatures: typing.Iterable[abjad.TimeSignature] = None,
-    ) -> abjad.AnnotatedTimespan:
+    ) -> abjad.Selection:
         """
         Calls ``RhythmCommand`` on ``start_offset`` and ``time_signatures``.
         """
+        # runtime apparently needed for previous_segment_stop_state
         self._runtime = runtime or abjad.OrderedDict()
-        start_offset, selection = self._make_rhythm(
-            start_offset, time_signatures
-        )
+        selection = self._make_rhythm(time_signatures)
         assert isinstance(selection, abjad.Selection), repr(selection)
         if self.annotate_unpitched_music or not isinstance(
             self.rhythm_maker, abjad.Selection
         ):
             self._annotate_unpitched_music_(selection)
-        timespan = abjad.AnnotatedTimespan(
-            start_offset=start_offset, annotation=selection
-        )
-        return timespan
+        return selection
 
     ### PRIVATE METHODS ###
 
@@ -595,9 +590,7 @@ class RhythmCommand(scoping.Command):
         message += f"\n    {format(rhythm_maker)}"
         raise Exception(message)
 
-    def _make_rhythm(
-        self, start_offset, time_signatures
-    ) -> typing.Tuple[abjad.Offset, abjad.Selection]:
+    def _make_rhythm(self, time_signatures) -> abjad.Selection:
         rhythm_maker = self.rhythm_maker
         if isinstance(rhythm_maker, abjad.Selection):
             selection = rhythm_maker
@@ -610,24 +603,19 @@ class RhythmCommand(scoping.Command):
                 message = f"selection duration ({selection_duration}) does not"
                 message += f" equal total duration ({total_duration})."
                 raise Exception(message)
-            return start_offset, selection
+            return selection
         assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-        pairs = [_.pair for _ in time_signatures]
-        divisions = divisionclasses._divisions(
-            pairs, start_offset=start_offset
-        )
-        original_timespan = divisions.timespan
-        divisions = self._apply_division_expression(divisions)
-        transformed_timespan = divisions.timespan
-        if transformed_timespan != original_timespan:
-            message = "original timespan ...\n"
-            message += f"    {original_timespan}\n"
+        original_duration = sum(_.duration for _ in time_signatures)
+        divisions = self._apply_division_expression(time_signatures)
+        transformed_duration = sum(_.duration for _ in divisions)
+        if transformed_duration != original_duration:
+            message = "original duration ...\n"
+            message += f"    {original_duration}\n"
             message += "... does not equal ...\n"
-            message += f"    {transformed_timespan}\n"
-            message += "... transformed timespan."
+            message += f"    {transformed_duration}\n"
+            message += "... transformed duration."
             raise Exception(message)
         division_count = len(divisions)
-        start_offset = divisions[0].start_offset
         assignments: typing.List[DivisionAssignment] = []
         if isinstance(rhythm_maker, rmakers.RhythmMaker):
             assignment = DivisionAssignment(abjad.index([0], 1), rhythm_maker)
@@ -690,7 +678,7 @@ class RhythmCommand(scoping.Command):
         assert isinstance(rhythm_maker, rmakers.RhythmMaker)
         self._state = rhythm_maker.state
         selection = abjad.select(components)
-        return start_offset, selection
+        return selection
 
     def _previous_segment_stop_state(self):
         previous_segment_stop_state = None

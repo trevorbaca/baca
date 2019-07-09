@@ -1792,14 +1792,14 @@ class SegmentMaker(abjad.SegmentMaker):
                 start_offset, time_signatures = result
                 runtime = self._bundle_manifests(voice.name)
                 try:
-                    timespan = command._call(
-                        runtime, start_offset, time_signatures
+                    selection = command._make_selection(
+                        runtime, time_signatures
                     )
                 except:
                     print(f"Interpreting ...\n\n{format(command)}\n")
                     raise
-                assert isinstance(timespan, abjad.AnnotatedTimespan), repr(
-                    timespan
+                timespan = abjad.AnnotatedTimespan(
+                    start_offset=start_offset, annotation=selection
                 )
                 timespans.append(timespan)
                 if command.persist and command.state:
