@@ -660,7 +660,7 @@ class RhythmCommand(scoping.Command):
             if isinstance(rhythm_maker, type(self)):
                 rhythm_maker = rhythm_maker.rhythm_maker
             assert isinstance(rhythm_maker, rmakers.RhythmMaker)
-            divisions = [match.division for match in group]
+            divisions_ = [match.division for match in group]
             # TODO: eventually allow previous segment stop state
             #       and local stop state to work together
             previous_state = previous_segment_stop_state
@@ -671,7 +671,7 @@ class RhythmCommand(scoping.Command):
                 previous_state = maker_to_previous_state.get(
                     rhythm_maker, None
                 )
-            selection = rhythm_maker(divisions, previous_state=previous_state)
+            selection = rhythm_maker(divisions_, previous_state=previous_state)
             assert isinstance(selection, abjad.Selection), repr(selection)
             components.extend(selection)
             maker_to_previous_state[rhythm_maker] = rhythm_maker.state
