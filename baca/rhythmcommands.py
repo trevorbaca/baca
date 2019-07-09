@@ -466,10 +466,8 @@ class RhythmCommand(scoping.Command):
         "_annotate_unpitched_music",
         "_divisions",
         "_do_not_check_total_duration",
-        "_left_broken",
         "_persist",
         "_rhythm_maker",
-        "_right_broken",
         "_state",
     )
 
@@ -484,11 +482,9 @@ class RhythmCommand(scoping.Command):
         annotate_unpitched_music: bool = None,
         divisions: abjad.Expression = None,
         do_not_check_total_duration: bool = None,
-        left_broken: bool = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         persist: str = None,
-        right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
     ) -> None:
         scoping.Command.__init__(
@@ -503,17 +499,11 @@ class RhythmCommand(scoping.Command):
         if do_not_check_total_duration is not None:
             do_not_check_total_duration = bool(do_not_check_total_duration)
         self._do_not_check_total_duration = do_not_check_total_duration
-        if left_broken is not None:
-            left_broken = bool(left_broken)
-        self._left_broken = left_broken
         if persist is not None:
             assert isinstance(persist, str), repr(persist)
         self._persist = persist
         self._check_rhythm_maker_input(rhythm_maker)
         self._rhythm_maker = rhythm_maker
-        if right_broken is not None:
-            right_broken = bool(right_broken)
-        self._right_broken = right_broken
         self._state: typing.Optional[abjad.OrderedDict] = None
 
     ### SPECIAL METHODS ###
@@ -691,24 +681,6 @@ class RhythmCommand(scoping.Command):
             ):
                 previous_segment_stop_state = None
         return previous_segment_stop_state
-
-    def _tag_broken_ties(self, staff):
-        if self.left_broken and self.rhythm_maker.previous_state.get(
-            "incomplete_final_note"
-        ):
-            if not self.repeat_ties:
-                raise Exception("left-broken ties must be repeat ties.")
-            first_leaf = abjad.select(staff).leaf(0)
-            if isinstance(first_leaf, abjad.Note):
-                abjad.attach(const.LEFT_BROKEN_REPEAT_TIE_TO, first_leaf)
-        if self.right_broken and self.rhythm_maker.state.get(
-            "incomplete_final_note"
-        ):
-            if self.repeat_ties:
-                raise Exception("right-broken ties must be conventional.")
-            final_leaf = abjad.select(staff).leaf(-1)
-            if isinstance(final_leaf, abjad.Note):
-                abjad.attach(abjad.tags.RIGHT_BROKEN_TIE_FROM, final_leaf)
 
     ### PUBLIC PROPERTIES ###
 
@@ -905,15 +877,6 @@ class RhythmCommand(scoping.Command):
         Is true when command does not check total duration.
         """
         return self._do_not_check_total_duration
-
-    @property
-    def left_broken(self) -> typing.Optional[bool]:
-        """
-        Is true when rhythm is left-broken.
-
-        Talea rhythm-maker knows how to tag incomplete last notes.
-        """
-        return self._left_broken
 
     @property
     def parameter(self) -> str:
@@ -1239,15 +1202,6 @@ class RhythmCommand(scoping.Command):
 
         """
         return self._rhythm_maker
-
-    @property
-    def right_broken(self) -> typing.Optional[bool]:
-        """
-        Is true when rhythm is right-broken.
-
-        Talea rhythm-maker knows how to tag incomplete last notes.
-        """
-        return self._right_broken
 
     @property
     def state(self) -> typing.Optional[abjad.OrderedDict]:
@@ -2809,10 +2763,8 @@ def rhythm(
     rhythm_maker: RhythmMakerTyping,
     *,
     divisions: abjad.Expression = None,
-    left_broken: bool = None,
     measures: typings.SliceTyping = None,
     persist: str = None,
-    right_broken: bool = None,
     tag: str = None,
 ) -> RhythmCommand:
     """
@@ -2833,10 +2785,8 @@ def rhythm(
         rhythm_maker,
         annotate_unpitched_music=True,
         divisions=divisions,
-        left_broken=left_broken,
         measures=measures,
         persist=persist,
-        right_broken=right_broken,
     )
 
 

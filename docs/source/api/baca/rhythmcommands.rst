@@ -254,12 +254,10 @@ rhythmcommands
       annotate_unpitched_music
       divisions
       do_not_check_total_duration
-      left_broken
       parameter
       persist
       repeat_ties
       rhythm_maker
-      right_broken
       state
 
    .. raw:: html
@@ -309,8 +307,6 @@ rhythmcommands
 
    .. autoattribute:: RhythmCommand.do_not_check_total_duration
 
-   .. autoattribute:: RhythmCommand.left_broken
-
    .. container:: inherited
 
       .. autoattribute:: RhythmCommand.map
@@ -330,8 +326,6 @@ rhythmcommands
    .. autoattribute:: RhythmCommand.repeat_ties
 
    .. autoattribute:: RhythmCommand.rhythm_maker
-
-   .. autoattribute:: RhythmCommand.right_broken
 
    .. container:: inherited
 
