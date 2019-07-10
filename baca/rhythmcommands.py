@@ -16,9 +16,7 @@ from . import typings
 
 
 RhythmMakerTyping = typing.Union[
-    rmakers.RhythmMaker,
-    rmakers.DivisionAssignment,
-    rmakers.DivisionAssignments,
+    rmakers.RhythmMaker, rmakers.MakerAssignment, rmakers.MakerAssignments
 ]
 
 ### CLASSES ###
@@ -393,8 +391,8 @@ class RhythmCommand(scoping.Command):
         prototype = (
             abjad.Selection,
             rmakers.RhythmMaker,
-            rmakers.DivisionAssignment,
-            rmakers.DivisionAssignments,
+            rmakers.MakerAssignment,
+            rmakers.MakerAssignments,
         )
         if isinstance(rhythm_maker, prototype):
             return
@@ -433,38 +431,36 @@ class RhythmCommand(scoping.Command):
             message += "... transformed duration."
             raise Exception(message)
         division_count = len(divisions)
-        assignments: typing.List[rmakers.DivisionAssignment] = []
+        assignments: typing.List[rmakers.MakerAssignment] = []
         if isinstance(rhythm_maker, rmakers.RhythmMaker):
-            assignment = rmakers.DivisionAssignment(
+            assignment = rmakers.MakerAssignment(
                 abjad.index([0], 1), rhythm_maker
             )
             assignments.append(assignment)
-        elif isinstance(rhythm_maker, rmakers.DivisionAssignment):
+        elif isinstance(rhythm_maker, rmakers.MakerAssignment):
             assignments.append(rhythm_maker)
-        elif isinstance(rhythm_maker, rmakers.DivisionAssignments):
+        elif isinstance(rhythm_maker, rmakers.MakerAssignments):
             for item in rhythm_maker.assignments:
-                assert isinstance(item, rmakers.DivisionAssignment)
+                assert isinstance(item, rmakers.MakerAssignment)
                 assignments.append(item)
         else:
             message = "must be rhythm-maker or division assignment(s)"
             message += f" (not {rhythm_maker})."
             raise TypeError(message)
-        assert all(
-            isinstance(_, rmakers.DivisionAssignment) for _ in assignments
-        )
+        assert all(isinstance(_, rmakers.MakerAssignment) for _ in assignments)
         matches = []
         for i, division in enumerate(divisions):
             for assignment in assignments:
                 if isinstance(
                     assignment.pattern, abjad.Pattern
                 ) and assignment.pattern.matches_index(i, division_count):
-                    match = rmakers.DivisionMatch(division, assignment)
+                    match = rmakers.MakerMatch(division, assignment)
                     matches.append(match)
                     break
                 elif isinstance(
                     assignment.pattern, abjad.DurationInequality
                 ) and assignment.pattern(division):
-                    match = rmakers.DivisionMatch(division, assignment)
+                    match = rmakers.MakerMatch(division, assignment)
                     matches.append(match)
                     break
             else:
@@ -763,11 +759,11 @@ class RhythmCommand(scoping.Command):
             ...         ),
             ...     )
             >>> command = baca.RhythmCommand(
-            ...     rhythm_maker=rmakers.DivisionAssignments(
-            ...         rmakers.DivisionAssignment(
+            ...     rhythm_maker=rmakers.MakerAssignments(
+            ...         rmakers.MakerAssignment(
             ...             abjad.index([2]), note_rhythm_maker,
             ...         ),
-            ...         rmakers.DivisionAssignment(
+            ...         rmakers.MakerAssignment(
             ...             abjad.index([0], 1),
             ...             talea_rhythm_maker,
             ...             remember_state_across_gaps=True,
@@ -2584,8 +2580,8 @@ def rhythm(
     """
     prototype = (
         rmakers.RhythmMaker,
-        rmakers.DivisionAssignment,
-        rmakers.DivisionAssignments,
+        rmakers.MakerAssignment,
+        rmakers.MakerAssignments,
     )
     if not isinstance(rhythm_maker, prototype):
         message = "baca.rhythm() accepts rhythm-maker and division"
