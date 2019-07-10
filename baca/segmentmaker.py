@@ -1793,7 +1793,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 runtime = self._bundle_manifests(voice.name)
                 try:
                     selection = command._make_selection(
-                        runtime, time_signatures
+                        time_signatures, runtime
                     )
                 except:
                     print(f"Interpreting ...\n\n{format(command)}\n")

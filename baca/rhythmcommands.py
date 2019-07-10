@@ -330,26 +330,6 @@ class RhythmCommand(scoping.Command):
         self._rhythm_maker = rhythm_maker
         self._state: typing.Optional[abjad.OrderedDict] = None
 
-    ### SPECIAL METHODS ###
-
-    def _make_selection(
-        self,
-        runtime: abjad.OrderedDict = None,
-        time_signatures: typing.Iterable[abjad.TimeSignature] = None,
-    ) -> abjad.Selection:
-        """
-        Calls ``RhythmCommand`` on ``start_offset`` and ``time_signatures``.
-        """
-        # runtime apparently needed for previous_segment_stop_state
-        self._runtime = runtime or abjad.OrderedDict()
-        selection = self._make_rhythm(time_signatures)
-        assert isinstance(selection, abjad.Selection), repr(selection)
-        if self.annotate_unpitched_music or not isinstance(
-            self.rhythm_maker, abjad.Selection
-        ):
-            self._annotate_unpitched_music_(selection)
-        return selection
-
     ### PRIVATE METHODS ###
 
     @staticmethod
@@ -365,25 +345,6 @@ class RhythmCommand(scoping.Command):
                 pass
             else:
                 raise TypeError(leaf)
-
-    def _apply_division_expression(
-        self, divisions
-    ) -> divisionclasses.DivisionSequence:
-        if self.divisions is not None:
-            result = self.divisions(divisions)
-            if not isinstance(result, abjad.Sequence):
-                message = "division expression must return sequence:\n"
-                message += f"  Input divisions:\n"
-                message += f"    {divisions}\n"
-                message += f"  Division expression:\n"
-                message += f"    {self.divisions}\n"
-                message += f"  Result:\n"
-                message += f"    {result}"
-                raise Exception(message)
-            divisions = result
-        divisions = divisionclasses.DivisionSequence(divisions)
-        divisions = divisions.flatten(depth=-1)
-        return divisions
 
     def _check_rhythm_maker_input(self, rhythm_maker):
         if rhythm_maker is None:
@@ -405,7 +366,14 @@ class RhythmCommand(scoping.Command):
         message += f"\n    {format(rhythm_maker)}"
         raise Exception(message)
 
-    def _make_rhythm(self, time_signatures) -> abjad.Selection:
+    def _make_selection(
+        self,
+        time_signatures: typing.Iterable[abjad.TimeSignature],
+        runtime: abjad.OrderedDict = None,
+    ) -> abjad.Selection:
+        """
+        Calls ``RhythmCommand`` on ``time_signatures``.
+        """
         rhythm_maker = self.rhythm_maker
         if isinstance(rhythm_maker, abjad.Selection):
             selection = rhythm_maker
@@ -418,88 +386,28 @@ class RhythmCommand(scoping.Command):
                 message = f"selection duration ({selection_duration}) does not"
                 message += f" equal total duration ({total_duration})."
                 raise Exception(message)
-            return selection
-        assert all(isinstance(_, abjad.TimeSignature) for _ in time_signatures)
-        original_duration = sum(_.duration for _ in time_signatures)
-        divisions = self._apply_division_expression(time_signatures)
-        transformed_duration = sum(_.duration for _ in divisions)
-        if transformed_duration != original_duration:
-            message = "original duration ...\n"
-            message += f"    {original_duration}\n"
-            message += "... does not equal ...\n"
-            message += f"    {transformed_duration}\n"
-            message += "... transformed duration."
-            raise Exception(message)
-        division_count = len(divisions)
-        assignments: typing.List[rmakers.MakerAssignment] = []
-        if isinstance(rhythm_maker, rmakers.RhythmMaker):
-            assignment = rmakers.MakerAssignment(
-                abjad.index([0], 1), rhythm_maker
-            )
-            assignments.append(assignment)
-        elif isinstance(rhythm_maker, rmakers.MakerAssignment):
-            assignments.append(rhythm_maker)
-        elif isinstance(rhythm_maker, rmakers.MakerAssignments):
-            for item in rhythm_maker.assignments:
-                assert isinstance(item, rmakers.MakerAssignment)
-                assignments.append(item)
         else:
-            message = "must be rhythm-maker or division assignment(s)"
-            message += f" (not {rhythm_maker})."
-            raise TypeError(message)
-        assert all(isinstance(_, rmakers.MakerAssignment) for _ in assignments)
-        matches = []
-        for i, division in enumerate(divisions):
-            for assignment in assignments:
-                if isinstance(
-                    assignment.pattern, abjad.Pattern
-                ) and assignment.pattern.matches_index(i, division_count):
-                    match = rmakers.MakerMatch(division, assignment)
-                    matches.append(match)
-                    break
-                elif isinstance(
-                    assignment.pattern, abjad.DurationInequality
-                ) and assignment.pattern(division):
-                    match = rmakers.MakerMatch(division, assignment)
-                    matches.append(match)
-                    break
-            else:
-                raise Exception(f"no rhythm-maker match for division {i}.")
-        assert len(divisions) == len(matches)
-        groups = abjad.sequence(matches).group_by(
-            lambda match: match.assignment.rhythm_maker
-        )
-        components: typing.List[abjad.Component] = []
-        previous_segment_stop_state = self._previous_segment_stop_state()
-        maker_to_previous_state = abjad.OrderedDict()
-        for group in groups:
-            rhythm_maker = group[0].assignment.rhythm_maker
-            if isinstance(rhythm_maker, type(self)):
-                rhythm_maker = rhythm_maker.rhythm_maker
-            assert isinstance(rhythm_maker, rmakers.RhythmMaker)
-            divisions_ = [match.division for match in group]
-            # TODO: eventually allow previous segment stop state
-            #       and local stop state to work together
-            previous_state = previous_segment_stop_state
-            if (
-                previous_state is None
-                and group[0].assignment.remember_state_across_gaps
-            ):
-                previous_state = maker_to_previous_state.get(
-                    rhythm_maker, None
-                )
-            selection = rhythm_maker(divisions_, previous_state=previous_state)
-            assert isinstance(selection, abjad.Selection), repr(selection)
-            components.extend(selection)
-            maker_to_previous_state[rhythm_maker] = rhythm_maker.state
-        assert isinstance(rhythm_maker, rmakers.RhythmMaker)
-        self._state = rhythm_maker.state
-        selection = abjad.select(components)
+            rcommand = rmakers.RhythmCommand(
+                self.rhythm_maker, divisions=self.divisions
+            )
+            previous_segment_stop_state = self._previous_segment_stop_state(
+                runtime
+            )
+            selection = rcommand(
+                time_signatures,
+                previous_segment_stop_state=previous_segment_stop_state,
+            )
+            self._state = rcommand.state
+        assert isinstance(selection, abjad.Selection), repr(selection)
+        if self.annotate_unpitched_music or not isinstance(
+            self.rhythm_maker, abjad.Selection
+        ):
+            self._annotate_unpitched_music_(selection)
         return selection
 
-    def _previous_segment_stop_state(self):
+    def _previous_segment_stop_state(self, runtime):
         previous_segment_stop_state = None
-        dictionary = self.runtime.get("previous_segment_voice_metadata")
+        dictionary = runtime.get("previous_segment_voice_metadata")
         if dictionary:
             previous_segment_stop_state = dictionary.get(const.RHYTHM)
             if (
