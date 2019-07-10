@@ -16,7 +16,10 @@ from . import typings
 
 
 RhythmMakerTyping = typing.Union[
-    rmakers.RhythmMaker, rmakers.MakerAssignment, rmakers.MakerAssignments
+    rmakers.RhythmCommand,
+    rmakers.RhythmMaker,
+    rmakers.MakerAssignment,
+    rmakers.MakerAssignments,
 ]
 
 ### CLASSES ###
@@ -351,6 +354,7 @@ class RhythmCommand(scoping.Command):
             return
         prototype = (
             abjad.Selection,
+            rmakers.RhythmCommand,
             rmakers.RhythmMaker,
             rmakers.MakerAssignment,
             rmakers.MakerAssignments,
@@ -387,9 +391,12 @@ class RhythmCommand(scoping.Command):
                 message += f" equal total duration ({total_duration})."
                 raise Exception(message)
         else:
-            rcommand = rmakers.RhythmCommand(
-                self.rhythm_maker, divisions=self.divisions
-            )
+            if isinstance(self.rhythm_maker, rmakers.RhythmCommand):
+                rcommand = self.rhythm_maker
+            else:
+                rcommand = rmakers.RhythmCommand(
+                    self.rhythm_maker, divisions=self.divisions
+                )
             previous_segment_stop_state = self._previous_segment_stop_state(
                 runtime
             )
@@ -2487,13 +2494,15 @@ def rhythm(
     Makes rhythm command from ``rhythm_maker``.
     """
     prototype = (
+        rmakers.RhythmCommand,
         rmakers.RhythmMaker,
         rmakers.MakerAssignment,
         rmakers.MakerAssignments,
     )
     if not isinstance(rhythm_maker, prototype):
         message = "baca.rhythm() accepts rhythm-maker and division"
-        message += f" assignment(s), not {repr(rhythm_maker)}."
+        message += " assignment(s):\n"
+        message += f" {repr(rhythm_maker)}."
         raise TypeError(message)
     if tag is not None:
         if isinstance(rhythm_maker, rmakers.RhythmMaker):
