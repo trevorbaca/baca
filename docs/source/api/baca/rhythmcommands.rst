@@ -132,7 +132,6 @@ rhythmcommands
       :nosignatures:
 
       annotate_unpitched_music
-      divisions
       do_not_check_total_duration
       parameter
       persist
@@ -181,8 +180,6 @@ rhythmcommands
    .. container:: inherited
 
       .. autoattribute:: RhythmCommand.deactivate
-
-   .. autoattribute:: RhythmCommand.divisions
 
    .. autoattribute:: RhythmCommand.do_not_check_total_duration
 

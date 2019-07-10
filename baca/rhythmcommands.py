@@ -291,7 +291,6 @@ class RhythmCommand(scoping.Command):
 
     __slots__ = (
         "_annotate_unpitched_music",
-        "_divisions",
         "_do_not_check_total_duration",
         "_persist",
         "_rhythm_maker",
@@ -307,7 +306,6 @@ class RhythmCommand(scoping.Command):
         rhythm_maker: RhythmMakerTyping = rmakers.NoteRhythmMaker(),
         *,
         annotate_unpitched_music: bool = None,
-        divisions: abjad.Expression = None,
         do_not_check_total_duration: bool = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
@@ -320,9 +318,6 @@ class RhythmCommand(scoping.Command):
         if annotate_unpitched_music is not None:
             annotate_unpitched_music = bool(annotate_unpitched_music)
         self._annotate_unpitched_music = annotate_unpitched_music
-        if divisions is not None:
-            assert isinstance(divisions, abjad.Expression)
-        self._divisions = divisions
         if do_not_check_total_duration is not None:
             do_not_check_total_duration = bool(do_not_check_total_duration)
         self._do_not_check_total_duration = do_not_check_total_duration
@@ -394,9 +389,7 @@ class RhythmCommand(scoping.Command):
             if isinstance(self.rhythm_maker, rmakers.RhythmCommand):
                 rcommand = self.rhythm_maker
             else:
-                rcommand = rmakers.RhythmCommand(
-                    self.rhythm_maker, divisions=self.divisions
-                )
+                rcommand = rmakers.RhythmCommand(self.rhythm_maker)
             previous_segment_stop_state = self._previous_segment_stop_state(
                 runtime
             )
@@ -432,186 +425,6 @@ class RhythmCommand(scoping.Command):
         Is true when command annotates unpitched music.
         """
         return self._annotate_unpitched_music
-
-    @property
-    def divisions(self) -> typing.Optional[abjad.Expression]:
-        r"""
-        Gets division expression.
-
-        ..  container:: example
-
-            Sums divisions:
-
-            >>> maker = baca.SegmentMaker(
-            ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.minimum_duration((1, 12)),
-            ...     time_signatures=[(3, 8), (4, 8), (3, 8), (4, 8)],
-            ...     )
-
-            >>> command = baca.RhythmCommand(
-            ...     divisions=abjad.sequence().sum().sequence(),
-            ...     rhythm_maker=rmakers.EvenDivisionRhythmMaker(
-            ...         rmakers.BeamSpecifier(
-            ...             selector=baca.tuplets(),
-            ...         ),
-            ...         rmakers.TupletSpecifier(
-            ...             extract_trivial=True,
-            ...             ),
-            ...     ),
-            ... )
-
-            >>> maker(
-            ...     'Music_Voice',
-            ...     command,
-            ...     )
-
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
-                <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
-                <BLANKLINE>
-                            % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 3/8                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 1/2                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 3/8                                                                     %! _make_global_skips(1)
-                <BLANKLINE>
-                            % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
-                            \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                            \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                            s1 * 1/2                                                                     %! _make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! _attach_final_bar_line
-                            \bar "|"                                                                     %! _attach_final_bar_line
-                <BLANKLINE>
-                            % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                            \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
-                            \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
-                            s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
-                            \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
-                            \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
-                <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
-                <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
-                <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                                % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                                [
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                <BLANKLINE>
-                                % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                <BLANKLINE>
-                                % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                <BLANKLINE>
-                                % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! _color_unpitched_notes
-                                c'8
-                                ]
-                <BLANKLINE>
-                                <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                    \context Voice = "Music_Voice"                                       %! PHANTOM:_make_multimeasure_rest_container
-                                    {                                                                    %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                        % [Music_Voice measure 5]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                                        \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                        c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                    }                                                                    %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                    \context Voice = "Rest_Voice"                                        %! PHANTOM:_make_multimeasure_rest_container
-                                    {                                                                    %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                        % [Rest_Voice measure 5]                                         %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                                        \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
-                                        \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
-                                        \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
-                                        \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
-                                        \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
-                                        R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                    }                                                                    %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                                >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
-                <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
-                <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
-
-        """
-        return self._divisions
 
     @property
     def do_not_check_total_duration(self) -> typing.Optional[bool]:
@@ -1715,16 +1528,16 @@ def make_fused_tuplet_monads(
     else:
         tuplet_ratios.append(tuplet_ratio)
     return RhythmCommand(
-        divisions=abjad.sequence().sum().sequence(),
         measures=measures,
-        rhythm_maker=rmakers.TupletRhythmMaker(
+        rhythm_maker=rmakers.RhythmCommand(
+            rmakers.TupletRhythmMaker(tag=tag, tuplet_ratios=tuplet_ratios),
             rmakers.BeamSpecifier(selector=classes._select().tuplets()),
             rmakers.TupletSpecifier(
                 extract_trivial=True, rewrite_rest_filled=True, trivialize=True
             ),
             rmakers.TieSpecifier(repeat_ties=True),
+            divisions=abjad.sequence().sum().sequence(),
             tag=tag,
-            tuplet_ratios=tuplet_ratios,
         ),
     )
 
@@ -2166,9 +1979,13 @@ def make_tied_repeated_durations(
     divisions = divisionclasses._divisions().fuse()
     divisions = divisions.split(durations, cyclic=True)
     return RhythmCommand(
-        divisions=divisions,
         measures=measures,
-        rhythm_maker=rmakers.NoteRhythmMaker(*specifiers, tag=tag),
+        rhythm_maker=rmakers.RhythmCommand(
+            rmakers.NoteRhythmMaker(tag=tag),
+            *specifiers,
+            divisions=divisions,
+            tag=tag,
+        ),
     )
 
 
@@ -2485,7 +2302,6 @@ def repeat_tie_to(
 def rhythm(
     rhythm_maker: RhythmMakerTyping,
     *,
-    divisions: abjad.Expression = None,
     measures: typings.SliceTyping = None,
     persist: str = None,
     tag: str = None,
@@ -2513,7 +2329,6 @@ def rhythm(
     return RhythmCommand(
         rhythm_maker,
         annotate_unpitched_music=True,
-        divisions=divisions,
         measures=measures,
         persist=persist,
     )
