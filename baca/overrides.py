@@ -3802,7 +3802,7 @@ def repeat_tie_down(
         ...     'Voice_1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
         ...     baca.new(
-        ...         baca.repeat_tie(),
+        ...         baca.repeat_tie(selector=baca.pleaves()[1:]),
         ...         map=baca.qruns(),
         ...         ),
         ...     baca.repeat_tie_down(),
@@ -3833,11 +3833,12 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             ]
                             c''4
+                            ~
                             c''16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3845,12 +3846,13 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             ]
                             b'4
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
+                            ~
                             b'16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             r16
                         }
                         \times 4/5 {
@@ -3873,7 +3875,7 @@ def repeat_tie_down(
         ...     'Voice_1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
         ...     baca.new(
-        ...         baca.repeat_tie(),
+        ...         baca.repeat_tie(selector=baca.pleaves()[1:]),
         ...         map=baca.qruns(),
         ...         ),
         ...     baca.new(
@@ -3906,11 +3908,12 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             ]
                             c''4
+                            ~
                             c''16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -3919,12 +3922,13 @@ def repeat_tie_down(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             ]
                             b'4
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
+                            ~
                             b'16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             \revert RepeatTie.direction                                              %! baca.repeat_tie_down:OverrideCommand(2)
                             r16
                         }
@@ -4017,7 +4021,7 @@ def repeat_tie_up(
         ...     'Voice_1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
         ...     baca.new(
-        ...         baca.repeat_tie(),
+        ...         baca.repeat_tie(selector=baca.pleaves()[1:]),
         ...         map=baca.qruns(),
         ...         ),
         ...     baca.repeat_tie_up(),
@@ -4048,11 +4052,12 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             ]
                             c''4
+                            ~
                             c''16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -4060,12 +4065,13 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             ]
                             b'4
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
+                            ~
                             b'16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             r16
                         }
                         \times 4/5 {
@@ -4088,7 +4094,7 @@ def repeat_tie_up(
         ...     'Voice_1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
         ...     baca.new(
-        ...         baca.repeat_tie(),
+        ...         baca.repeat_tie(selector=baca.pleaves()[1:]),
         ...         map=baca.qruns(),
         ...         ),
         ...     baca.new(
@@ -4121,11 +4127,12 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             ]
                             c''4
+                            ~
                             c''16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             r16
                         }
                         \tweak text #tuplet-number::calc-fraction-text
@@ -4134,12 +4141,13 @@ def repeat_tie_up(
                             b'16
                             [
                             b'16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             ]
                             b'4
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
+                            ~
                             b'16
-                            \repeatTie                                                               %! baca.repeat_tie
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
                             \revert RepeatTie.direction                                              %! baca.repeat_tie_up:OverrideCommand(2)
                             r16
                         }
@@ -8175,10 +8183,7 @@ def tie_down(
         ...     [[11, 11, 12], [11, 11, 11], [11]],
         ...     baca.rests_around([2], [4]),
         ...     baca.stem_up(),
-        ...     baca.new(
-        ...         baca.tie(),
-        ...         map=baca.qruns(),
-        ...         ),
+        ...     baca.tie(selector=baca.pleaf(0)),
         ...     baca.tie_down(),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -8204,11 +8209,11 @@ def tie_down(
                             \override Tie.direction = #down                                          %! baca.tie_down:OverrideCommand(1)
                             b'16
                             [
-                            ~                                                                        %! baca.tie
+                            ~                                                                        %! baca.tie:IndicatorCommand
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! baca.tie
+                            ~
                             c''16
                             r16
                         }
@@ -8216,12 +8221,10 @@ def tie_down(
                         \times 7/8 {
                             b'16
                             [
-                            ~                                                                        %! baca.tie
                             b'16
                             ]
-                            ~                                                                        %! baca.tie
                             b'4
-                            ~                                                                        %! baca.tie
+                            ~
                             b'16
                             r16
                         }
@@ -8229,80 +8232,6 @@ def tie_down(
                             b'16
                             \revert Stem.direction                                                   %! baca.stem_up:OverrideCommand(2)
                             \revert Tie.direction                                                    %! baca.tie_down:OverrideCommand(2)
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Overrides tie direction on pitched leaves in tuplet 1:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[11, 11, 12], [11, 11, 11], [11]],
-        ...     baca.rests_around([2], [4]),
-        ...     baca.stem_up(),
-        ...     baca.new(
-        ...         baca.tie(),
-        ...         map=baca.qruns(),
-        ...         ),
-        ...     baca.new(
-        ...         baca.tie_down(),
-        ...         map=baca.tuplet(1),
-        ...         ),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice_1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            \override Stem.direction = #up                                           %! baca.stem_up:OverrideCommand(1)
-                            b'16
-                            [
-                            ~                                                                        %! baca.tie
-                            b'16
-                            ]
-                            c''4
-                            ~                                                                        %! baca.tie
-                            c''16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/8 {
-                            \override Tie.direction = #down                                          %! baca.tie_down:OverrideCommand(1)
-                            b'16
-                            [
-                            ~                                                                        %! baca.tie
-                            b'16
-                            ]
-                            ~                                                                        %! baca.tie
-                            b'4
-                            ~                                                                        %! baca.tie
-                            b'16
-                            \revert Tie.direction                                                    %! baca.tie_down:OverrideCommand(2)
-                            r16
-                        }
-                        \times 4/5 {
-                            b'16
-                            \revert Stem.direction                                                   %! baca.stem_up:OverrideCommand(2)
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }
@@ -8338,10 +8267,6 @@ def tie_up(
         ...     [[11, 11, 12], [11, 11, 11], [11]],
         ...     baca.rests_around([2], [4]),
         ...     baca.stem_down(),
-        ...     baca.new(
-        ...         baca.tie(),
-        ...         map=baca.qruns(),
-        ...         ),
         ...     baca.tie_up(),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
@@ -8367,11 +8292,10 @@ def tie_up(
                             \override Tie.direction = #up                                            %! baca.tie_up:OverrideCommand(1)
                             b'16
                             [
-                            ~                                                                        %! baca.tie
                             b'16
                             ]
                             c''4
-                            ~                                                                        %! baca.tie
+                            ~
                             c''16
                             r16
                         }
@@ -8379,12 +8303,10 @@ def tie_up(
                         \times 7/8 {
                             b'16
                             [
-                            ~                                                                        %! baca.tie
                             b'16
                             ]
-                            ~                                                                        %! baca.tie
                             b'4
-                            ~                                                                        %! baca.tie
+                            ~
                             b'16
                             r16
                         }
@@ -8392,80 +8314,6 @@ def tie_up(
                             b'16
                             \revert Stem.direction                                                   %! baca.stem_down:OverrideCommand(2)
                             \revert Tie.direction                                                    %! baca.tie_up:OverrideCommand(2)
-                            r4
-                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Overrides tie direction on pitched leaves in tuplet 1:
-
-        >>> music_maker = baca.MusicMaker()
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[11, 11, 12], [11, 11, 11], [11]],
-        ...     baca.rests_around([2], [4]),
-        ...     baca.stem_down(),
-        ...     baca.new(
-        ...         baca.tie(),
-        ...         map=baca.qruns(),
-        ...         ),
-        ...     baca.new(
-        ...         baca.tie_up(),
-        ...         map=baca.tuplet(1),
-        ...         ),
-        ...     baca.tuplet_bracket_staff_padding(5),
-        ...     counts=[1, 1, 5, -1],
-        ...     time_treatments=[-1],
-        ...     )
-        >>> lilypond_file = music_maker.show(contribution)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice_1"
-                {
-                    \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            \override Stem.direction = #down                                         %! baca.stem_down:OverrideCommand(1)
-                            b'16
-                            [
-                            ~                                                                        %! baca.tie
-                            b'16
-                            ]
-                            c''4
-                            ~                                                                        %! baca.tie
-                            c''16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/8 {
-                            \override Tie.direction = #up                                            %! baca.tie_up:OverrideCommand(1)
-                            b'16
-                            [
-                            ~                                                                        %! baca.tie
-                            b'16
-                            ]
-                            ~                                                                        %! baca.tie
-                            b'4
-                            ~                                                                        %! baca.tie
-                            b'16
-                            \revert Tie.direction                                                    %! baca.tie_up:OverrideCommand(2)
-                            r16
-                        }
-                        \times 4/5 {
-                            b'16
-                            \revert Stem.direction                                                   %! baca.stem_down:OverrideCommand(2)
                             r4
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                         }

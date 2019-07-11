@@ -2554,6 +2554,87 @@ def rehearsal_mark(
     )
 
 
+def repeat_tie(
+    *,
+    selector: abjad.SelectorTyping = "baca.phead(1, exclude=abjad.const.HIDDEN)",
+    tag: typing.Optional[str] = "baca.repeat_tie",
+) -> commands.IndicatorCommand:
+    r"""
+    Attaches tie.
+
+    ..  container:: example
+
+        Attaches repeat-tie to pitched head 1:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.chunk(
+        ...         baca.pitch(0, selector=baca.plt(1)),
+        ...         baca.repeat_tie(),
+        ...     ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice_1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                            r8
+                            c'16
+                            [
+                            c'16
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        }
+                    }
+                }
+            >>
+
+    """
+    return commands.IndicatorCommand(
+        indicators=[abjad.RepeatTie()], selector=selector, tags=[tag]
+    )
+
+
 def short_fermata(
     *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
@@ -4076,6 +4157,87 @@ def stopped(
         indicators=[abjad.Articulation("stopped")],
         selector=selector,
         tags=[tag],
+    )
+
+
+def tie(
+    *,
+    selector: abjad.SelectorTyping = "baca.ptail(0, exclude=abjad.const.HIDDEN)",
+    tag: typing.Optional[str] = "baca.tie",
+) -> commands.IndicatorCommand:
+    r"""
+    Attaches tie.
+
+    ..  container:: example
+
+        Attaches tie to pitched tail 0:
+
+        >>> music_maker = baca.MusicMaker()
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.chunk(
+        ...         baca.pitch(2, selector=baca.plt(0)),
+        ...         baca.tie(),
+        ...     ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
+            \new Staff
+            <<
+                \context Voice = "Voice_1"
+                {
+                    \voiceOne
+                    {
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                            r8
+                            d'16
+                            [
+                            ~                                                                        %! baca.tie:IndicatorCommand
+                            d'16
+                            ]
+                            bf'4
+                            ~
+                            bf'16
+                            r16
+                        }
+                        \tweak text #tuplet-number::calc-fraction-text
+                        \times 9/10 {
+                            fs''16
+                            [
+                            e''16
+                            ]
+                            ef''4
+                            ~
+                            ef''16
+                            r16
+                            af''16
+                            [
+                            g''16
+                            ]
+                        }
+                        \times 4/5 {
+                            a'16
+                            r4
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        }
+                    }
+                }
+            >>
+
+    """
+    return commands.IndicatorCommand(
+        indicators=[abjad.TieIndicator()], selector=selector, tags=[tag]
     )
 
 

@@ -193,10 +193,6 @@ Bača API
    ~baca.commands.one_voice
    ~baca.commands.parts
    ~baca.commands.previous_metadata
-   ~baca.commands.repeat_tie
-   ~baca.commands.repeat_tie_repeat_pitches
-   ~baca.commands.tie
-   ~baca.commands.tie_repeat_pitches
    ~baca.commands.voice_four
    ~baca.commands.voice_one
    ~baca.commands.voice_three
@@ -265,6 +261,7 @@ Division library.
    ~baca.indicatorcommands.parenthesize
    ~baca.indicatorcommands.quadruple_staccato
    ~baca.indicatorcommands.rehearsal_mark
+   ~baca.indicatorcommands.repeat_tie
    ~baca.indicatorcommands.short_fermata
    ~baca.indicatorcommands.staccatissimo
    ~baca.indicatorcommands.staccato
@@ -275,6 +272,7 @@ Division library.
    ~baca.indicatorcommands.stop_trill
    ~baca.indicatorcommands.stopped
    ~baca.indicatorcommands.tenuto
+   ~baca.indicatorcommands.tie
    ~baca.indicatorcommands.triple_staccato
    ~baca.indicatorcommands.up_arpeggio
    ~baca.indicatorcommands.up_bow

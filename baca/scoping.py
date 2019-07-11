@@ -414,6 +414,7 @@ class Command(object):
             "OTTAVA",
             "PEDAL",
             "PERSISTENT_OVERRIDE",
+            "REPEAT_TIE",
             "SLUR",
             "STAFF_LINES",
             "TRILL",

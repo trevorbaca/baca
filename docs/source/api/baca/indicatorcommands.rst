@@ -45,6 +45,7 @@ indicatorcommands
    ~parenthesize
    ~quadruple_staccato
    ~rehearsal_mark
+   ~repeat_tie
    ~short_fermata
    ~staccatissimo
    ~staccato
@@ -55,6 +56,7 @@ indicatorcommands
    ~stop_trill
    ~stopped
    ~tenuto
+   ~tie
    ~triple_staccato
    ~up_arpeggio
    ~up_bow
@@ -106,6 +108,8 @@ indicatorcommands
 
 .. autofunction:: rehearsal_mark
 
+.. autofunction:: repeat_tie
+
 .. autofunction:: short_fermata
 
 .. autofunction:: staccatissimo
@@ -125,6 +129,8 @@ indicatorcommands
 .. autofunction:: stopped
 
 .. autofunction:: tenuto
+
+.. autofunction:: tie
 
 .. autofunction:: triple_staccato
 

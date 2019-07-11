@@ -1232,10 +1232,6 @@ commands
    ~one_voice
    ~parts
    ~previous_metadata
-   ~repeat_tie
-   ~repeat_tie_repeat_pitches
-   ~tie
-   ~tie_repeat_pitches
    ~voice_four
    ~voice_one
    ~voice_three
@@ -1283,14 +1279,6 @@ commands
 .. autofunction:: parts
 
 .. autofunction:: previous_metadata
-
-.. autofunction:: repeat_tie
-
-.. autofunction:: repeat_tie_repeat_pitches
-
-.. autofunction:: tie
-
-.. autofunction:: tie_repeat_pitches
 
 .. autofunction:: voice_four
 

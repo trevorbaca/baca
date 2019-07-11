@@ -7106,9 +7106,10 @@ class MusicMaker(object):
             rmakers.SilenceMask,
             rmakers.SustainMask,
         )
+        command_prototype = (scoping.Command, scoping.Suite)
         for specifier in specifiers:
             if not isinstance(specifier, prototype):
-                assert isinstance(specifier, scoping.Command), format(
+                assert isinstance(specifier, command_prototype), format(
                     specifier
                 )
             specifier(selections)
