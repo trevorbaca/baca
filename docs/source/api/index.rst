@@ -152,6 +152,7 @@ Bača API
    ~baca.commands.BCPCommand
    ~baca.commands.ColorCommand
    ~baca.commands.ContainerCommand
+   ~baca.commands.DetachCommand
    ~baca.commands.GlissandoCommand
    ~baca.commands.GlobalFermataCommand
    ~baca.commands.IndicatorCommand
@@ -193,6 +194,7 @@ Bača API
    ~baca.commands.one_voice
    ~baca.commands.parts
    ~baca.commands.previous_metadata
+   ~baca.commands.untie
    ~baca.commands.voice_four
    ~baca.commands.voice_one
    ~baca.commands.voice_three

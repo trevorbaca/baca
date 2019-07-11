@@ -1346,6 +1346,69 @@ class ContainerCommand(scoping.Command):
         return self._identifier
 
 
+class DetachCommand(scoping.Command):
+    """
+    Detach command.
+
+    ..  container:: example
+
+        >>> arguments = [abjad.RepeatTie, abjad.TieIndicator]
+        >>> baca.DetachCommand(arguments, baca.leaves())
+        DetachCommand([RepeatTie, TieIndicator], baca.leaves())
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = ("_arguments",)
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        arguments: typing.Iterable[typing.Any],
+        selector: abjad.SelectorTyping,
+        map: abjad.SelectorTyping = None,
+        match: typings.Indices = None,
+        measures: typings.SliceTyping = None,
+        scope: scoping.ScopeTyping = None,
+    ) -> None:
+        scoping.Command.__init__(
+            self,
+            map=map,
+            match=match,
+            measures=measures,
+            scope=scope,
+            selector=selector,
+        )
+        self._arguments = arguments
+
+    ### SPECIAL METHODS ###
+
+    def _call(self, argument=None) -> None:
+        """
+        Applies command to result of selector called on ``argument``.
+        """
+        if argument is None:
+            return
+        assert self.selector is not None
+        argument = self.selector(argument)
+        leaves = classes.Selection(argument).leaves()
+        assert isinstance(leaves, abjad.Selection)
+        for leaf in leaves:
+            for argument in self.arguments:
+                abjad.detach(argument, leaf)
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def arguments(self) -> typing.Iterable[typing.Any]:
+        """
+        Gets arguments.
+        """
+        return self._arguments
+
+
 class GlissandoCommand(scoping.Command):
     """
     Glissando command.
@@ -4722,7 +4785,7 @@ def flat_glissando(
         selector=selector,
     )
     commands.append(command)
-    command = rhythmcommands.untie_to(selector=selector.leaves()[1:])
+    command = untie(selector.leaves())
     commands.append(command)
     if pitch is not None and stop_pitch is None:
         command = pitchcommands.pitch(pitch, selector=selector)
@@ -6501,6 +6564,15 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     previous_segment = paths[previous_index]
     previous_metadata = previous_segment.get_metadata()
     return previous_metadata
+
+
+def untie(selector: abjad.SelectorTyping) -> DetachCommand:
+    r"""
+    Makes (repeat-)tie detach command.
+    """
+    return DetachCommand(
+        [abjad.TieIndicator, abjad.RepeatTie], selector=selector
+    )
 
 
 def voice_four(

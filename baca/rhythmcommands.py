@@ -3130,7 +3130,7 @@ def untie_to(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.make_tied_notes(),
-        ...     baca.untie_to(selector=baca.leaf(2)),
+        ...     baca.untie(baca.leaf(1)),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')

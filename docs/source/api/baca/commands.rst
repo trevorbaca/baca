@@ -25,6 +25,7 @@ commands
    ~BCPCommand
    ~ColorCommand
    ~ContainerCommand
+   ~DetachCommand
    ~GlissandoCommand
    ~GlobalFermataCommand
    ~IndicatorCommand
@@ -316,6 +317,99 @@ commands
    .. container:: inherited
 
       .. autoattribute:: ContainerCommand.tags
+
+.. autoclass:: DetachCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      arguments
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: DetachCommand.__call__
+
+   .. container:: inherited
+
+      .. automethod:: DetachCommand.__format__
+
+   .. container:: inherited
+
+      .. automethod:: DetachCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: DetachCommand.get_tag
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: DetachCommand.arguments
+
+   .. container:: inherited
+
+      .. autoattribute:: DetachCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: DetachCommand.map
+
+   .. container:: inherited
+
+      .. autoattribute:: DetachCommand.match
+
+   .. container:: inherited
+
+      .. autoattribute:: DetachCommand.measures
+
+   .. container:: inherited
+
+      .. autoattribute:: DetachCommand.runtime
+
+   .. container:: inherited
+
+      .. autoattribute:: DetachCommand.scope
+
+   .. container:: inherited
+
+      .. autoattribute:: DetachCommand.selector
+
+   .. container:: inherited
+
+      .. autoattribute:: DetachCommand.tag
+
+   .. container:: inherited
+
+      .. autoattribute:: DetachCommand.tag_measure_number
+
+   .. container:: inherited
+
+      .. autoattribute:: DetachCommand.tags
 
 .. autoclass:: GlissandoCommand
 
@@ -1232,6 +1326,7 @@ commands
    ~one_voice
    ~parts
    ~previous_metadata
+   ~untie
    ~voice_four
    ~voice_one
    ~voice_three
@@ -1279,6 +1374,8 @@ commands
 .. autofunction:: parts
 
 .. autofunction:: previous_metadata
+
+.. autofunction:: untie
 
 .. autofunction:: voice_four
 
