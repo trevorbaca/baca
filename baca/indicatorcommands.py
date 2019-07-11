@@ -2555,8 +2555,8 @@ def rehearsal_mark(
 
 
 def repeat_tie(
+    selector: abjad.SelectorTyping,
     *,
-    selector: abjad.SelectorTyping = "baca.phead(1, exclude=abjad.const.HIDDEN)",
     tag: typing.Optional[str] = "baca.repeat_tie",
 ) -> commands.IndicatorCommand:
     r"""
@@ -2572,7 +2572,7 @@ def repeat_tie(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.chunk(
         ...         baca.pitch(0, selector=baca.plt(1)),
-        ...         baca.repeat_tie(),
+        ...         baca.repeat_tie(baca.phead(1)),
         ...     ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
@@ -4161,9 +4161,7 @@ def stopped(
 
 
 def tie(
-    *,
-    selector: abjad.SelectorTyping = "baca.ptail(0, exclude=abjad.const.HIDDEN)",
-    tag: typing.Optional[str] = "baca.tie",
+    selector: abjad.SelectorTyping, *, tag: typing.Optional[str] = "baca.tie"
 ) -> commands.IndicatorCommand:
     r"""
     Attaches tie.
@@ -4178,7 +4176,7 @@ def tie(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.chunk(
         ...         baca.pitch(2, selector=baca.plt(0)),
-        ...         baca.tie(),
+        ...         baca.tie(baca.ptail(0)),
         ...     ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),

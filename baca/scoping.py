@@ -417,6 +417,7 @@ class Command(object):
             "REPEAT_TIE",
             "SLUR",
             "STAFF_LINES",
+            "TIE_INDICATOR",
             "TRILL",
         ), repr(stem)
         reapplied_wrappers = []

@@ -2177,7 +2177,7 @@ def repeat_tie_to(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.make_notes(),
-        ...     baca.repeat_tie_to(selector=baca.leaf(2)),
+        ...     baca.repeat_tie(baca.leaf(2)),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -2251,7 +2251,7 @@ def repeat_tie_to(
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! _comment_measure_numbers
                             c'2                                                                      %! baca.make_notes
-                            \repeatTie                                                               %! TieCorrectionCommand
+                            \repeatTie                                                               %! baca.repeat_tie:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! _comment_measure_numbers
                             c'4.                                                                     %! baca.make_notes
@@ -2996,7 +2996,7 @@ def tie_to(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.make_notes(),
-        ...     baca.tie_to(selector=baca.leaf(1)),
+        ...     baca.tie(baca.leaf(0)),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -3059,7 +3059,7 @@ def tie_to(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             c'2                                                                      %! baca.make_notes
-                            ~                                                                        %! TieCorrectionCommand
+                            ~                                                                        %! baca.tie:IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! _comment_measure_numbers
                             c'4.                                                                     %! baca.make_notes
