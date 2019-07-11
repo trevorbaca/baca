@@ -364,7 +364,6 @@ rhythmcommands
    ~tacet
    ~tie_from
    ~tie_to
-   ~untie_to
 
 .. autofunction:: beam_divisions
 
@@ -415,8 +414,6 @@ rhythmcommands
 .. autofunction:: tie_from
 
 .. autofunction:: tie_to
-
-.. autofunction:: untie_to
 
 .. raw:: html
 

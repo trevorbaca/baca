@@ -985,7 +985,6 @@ Rhythm library.
    ~baca.rhythmcommands.tacet
    ~baca.rhythmcommands.tie_from
    ~baca.rhythmcommands.tie_to
-   ~baca.rhythmcommands.untie_to
 
 .. raw:: html
 
