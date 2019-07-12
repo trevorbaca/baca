@@ -948,7 +948,6 @@ Rhythm library.
 
    ~baca.rhythmcommands.DurationMultiplierCommand
    ~baca.rhythmcommands.RhythmCommand
-   ~baca.rhythmcommands.TieCorrectionCommand
 
 .. raw:: html
 

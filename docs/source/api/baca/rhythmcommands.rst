@@ -24,7 +24,6 @@ rhythmcommands
 
    ~DurationMultiplierCommand
    ~RhythmCommand
-   ~TieCorrectionCommand
 
 .. autoclass:: DurationMultiplierCommand
 
@@ -226,108 +225,6 @@ rhythmcommands
    .. container:: inherited
 
       .. autoattribute:: RhythmCommand.tags
-
-.. autoclass:: TieCorrectionCommand
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      allow_rest
-      direction
-      repeat
-      untie
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: TieCorrectionCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: TieCorrectionCommand.__format__
-
-   .. container:: inherited
-
-      .. automethod:: TieCorrectionCommand.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: TieCorrectionCommand.get_tag
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: TieCorrectionCommand.allow_rest
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.deactivate
-
-   .. autoattribute:: TieCorrectionCommand.direction
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.match
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.measures
-
-   .. autoattribute:: TieCorrectionCommand.repeat
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.scope
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.selector
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.tag
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.tag_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCorrectionCommand.tags
-
-   .. autoattribute:: TieCorrectionCommand.untie
 
 .. raw:: html
 
