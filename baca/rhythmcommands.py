@@ -1894,7 +1894,7 @@ def skeleton(
     argument: typing.Union[str, abjad.Selection],
     *,
     do_not_check_total_duration: bool = None,
-    tag: str = "baca.skeleton",
+    tag: typing.Optional[str] = "baca.skeleton",
 ) -> RhythmCommand:
     """
     Makes rhythm command from ``string`` and annotates music as unpitched.
