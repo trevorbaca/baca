@@ -36,29 +36,29 @@ class SpannerIndicatorCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c'16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
-                            bf'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
+                            bf'16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
                             (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
-                            e''16
-                            ef''16
-                            af''16
-                            g''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -603,43 +603,43 @@ def ottava(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             \ottava 1                                                                %! baca.ottava:SpannerIndicatorCommand(1)
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             \ottava 0                                                                %! baca.ottava:SpannerIndicatorCommand(2)
-                            r4
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -688,43 +688,43 @@ def ottava_bassa(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             \ottava -1                                                               %! baca.ottava_bassa:SpannerIndicatorCommand(1)
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             \ottava 0                                                                %! baca.ottava_bassa:SpannerIndicatorCommand(2)
-                            r4
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -774,45 +774,45 @@ def slur(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override Slur.direction = #down                                         %! baca.slur_down:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
                             (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
-                            r4
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert Slur.direction                                                   %! baca.slur_down:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -842,45 +842,45 @@ def slur(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override Slur.direction = #down                                         %! baca.slur_down:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
                             (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert Slur.direction                                                   %! baca.slur_down:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -933,45 +933,45 @@ def sustain_pedal(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca.sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1004,45 +1004,45 @@ def sustain_pedal(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca.sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1075,45 +1075,45 @@ def sustain_pedal(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca.sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1146,45 +1146,45 @@ def sustain_pedal(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca.sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
-                            r4
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1217,45 +1217,45 @@ def sustain_pedal(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca.sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
-                            r4
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1288,49 +1288,49 @@ def sustain_pedal(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca.sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                            r4
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1363,49 +1363,49 @@ def sustain_pedal(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca.sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             ]
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1438,49 +1438,49 @@ def sustain_pedal(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override Staff.SustainPedalLineSpanner.staff-padding = #4               %! baca.sustain_pedal_staff_padding:OverrideCommand(1)
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             [
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             \sustainOn                                                               %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                            r4
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \sustainOff                                                              %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                             \revert Staff.SustainPedalLineSpanner.staff-padding                      %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1535,43 +1535,43 @@ def trill_spanner(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1604,59 +1604,59 @@ def trill_spanner(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ]
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ~
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            bf'16
-                            r16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ]
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ~
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            ef''16
-                            r16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
-                            af''16
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ]
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                        }
-                        \times 4/5 {
-                            a'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            r4
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1689,47 +1689,47 @@ def trill_spanner(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
-                            af''16
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
                             \startTrillSpan                                                          %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1762,44 +1762,44 @@ def trill_spanner(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
                             \startTrillSpan ef'                                                      %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1832,77 +1832,77 @@ def trill_spanner(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
                             - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \startTrillSpan d'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ]
                             - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \startTrillSpan d'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ~
                             - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \startTrillSpan d'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            bf'16
-                            r16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            fs''16
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
                             - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \startTrillSpan d'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ]
                             - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \startTrillSpan d'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ~
                             - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \startTrillSpan d'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            ef''16
-                            r16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            af''16
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
                             - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \startTrillSpan d'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ]
                             - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \startTrillSpan d'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                        }
-                        \times 4/5 {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            a'16
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             - \tweak TrillPitchHead.stencil #(lambda (grob) (grob-interpret-markup grob #{ \markup \musicglyph #"noteheads.s0harmonic" #})) %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \startTrillSpan d'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            r4
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1935,68 +1935,68 @@ def trill_spanner(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
                             \startTrillSpan d'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ]
                             \startTrillSpan e'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ~
                             \startTrillSpan c''                                                      %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            bf'16
-                            r16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            fs''16
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
                             \startTrillSpan gs''                                                     %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ]
                             \startTrillSpan fs''                                                     %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ~
                             \startTrillSpan f''                                                      %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            ef''16
-                            r16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            af''16
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
                             \startTrillSpan bf''                                                     %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             ]
                             \startTrillSpan a''                                                      %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                        }
-                        \times 4/5 {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            a'16
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             \startTrillSpan b'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            r4
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -2030,45 +2030,45 @@ def trill_spanner(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             \pitchedTrill                                                            %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
                             - \tweak color #red                                                      %! baca.trill_spanner:SpannerIndicatorCommand(1)
                             \startTrillSpan d'                                                       %! baca.trill_spanner:SpannerIndicatorCommand(1)
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \stopTrillSpan                                                           %! baca.trill_spanner:SpannerIndicatorCommand(2)
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 

@@ -272,8 +272,8 @@ class ClusterCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -324,8 +324,8 @@ class ClusterCommand(scoping.Command):
                                         }
                                 }
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -408,8 +408,8 @@ class ClusterCommand(scoping.Command):
                                         }
                                 }
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -426,8 +426,8 @@ class ClusterCommand(scoping.Command):
                                             \flat
                                         }
                                 }
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -455,15 +455,15 @@ class ClusterCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c'16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
-                            bf'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
+                            bf'16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -546,11 +546,11 @@ class ClusterCommand(scoping.Command):
                                         }
                                 }
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -575,24 +575,24 @@ class ClusterCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c'16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
-                            bf'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
+                            bf'16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
-                            ef''16
-                            af''16
-                            g''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \once \override Accidental.stencil = ##f
                             \once \override AccidentalCautionary.stencil = ##f
                             \once \override Arpeggio.X-offset = #-2
@@ -609,8 +609,8 @@ class ClusterCommand(scoping.Command):
                                             \flat
                                         }
                                 }
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -3693,29 +3693,29 @@ class RegisterCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            bf''16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            bf''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            c'''16
-                            d'''16
+                            c'''16                                                                   %! baca.MusicMaker.__call__
+                            d'''16                                                                   %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            bf''16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            bf''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            c'''16
-                            d'''16
+                            c'''16                                                                   %! baca.MusicMaker.__call__
+                            d'''16                                                                   %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            bf''16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            bf''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            c'''16
-                            d'''16
+                            c'''16                                                                   %! baca.MusicMaker.__call__
+                            d'''16                                                                   %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -3745,29 +3745,29 @@ class RegisterCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            bf'16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            bf'16                                                                    %! baca.MusicMaker.__call__
                             [
-                            c'16
-                            d'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            bf'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            bf'16                                                                    %! baca.MusicMaker.__call__
                             [
-                            c''16
-                            d''16
+                            c''16                                                                    %! baca.MusicMaker.__call__
+                            d''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            bf'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            bf'16                                                                    %! baca.MusicMaker.__call__
                             [
-                            c''16
-                            d''16
+                            c''16                                                                    %! baca.MusicMaker.__call__
+                            d''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -3798,29 +3798,29 @@ class RegisterCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            bf'16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            bf'16                                                                    %! baca.MusicMaker.__call__
                             [
-                            c''16
-                            d''16
+                            c''16                                                                    %! baca.MusicMaker.__call__
+                            d''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            bf'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            bf'16                                                                    %! baca.MusicMaker.__call__
                             [
-                            c''16
-                            d''16
+                            c''16                                                                    %! baca.MusicMaker.__call__
+                            d''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            bf'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            bf'16                                                                    %! baca.MusicMaker.__call__
                             [
-                            c'16
-                            d'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -3999,11 +3999,11 @@ class RegisterCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <bf c' d'>16
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -4132,40 +4132,40 @@ class RegisterInterpolationCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            fs'16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            fs'16                                                                    %! baca.MusicMaker.__call__
                             [
-                            e'16
-                            ef'16
-                            f'16
-                            a'16
-                            bf'16
-                            c''16
-                            b'16
-                            af'16
-                            g''16
-                            cs''16
-                            d''16
+                            e'16                                                                     %! baca.MusicMaker.__call__
+                            ef'16                                                                    %! baca.MusicMaker.__call__
+                            f'16                                                                     %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            c''16                                                                    %! baca.MusicMaker.__call__
+                            b'16                                                                     %! baca.MusicMaker.__call__
+                            af'16                                                                    %! baca.MusicMaker.__call__
+                            g''16                                                                    %! baca.MusicMaker.__call__
+                            cs''16                                                                   %! baca.MusicMaker.__call__
+                            d''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
-                            ef''16
-                            f''16
-                            a''16
-                            bf''16
-                            c'''16
-                            b''16
-                            af''16
-                            g'''16
-                            cs'''16
-                            d'''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            f''16                                                                    %! baca.MusicMaker.__call__
+                            a''16                                                                    %! baca.MusicMaker.__call__
+                            bf''16                                                                   %! baca.MusicMaker.__call__
+                            c'''16                                                                   %! baca.MusicMaker.__call__
+                            b''16                                                                    %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
+                            g'''16                                                                   %! baca.MusicMaker.__call__
+                            cs'''16                                                                  %! baca.MusicMaker.__call__
+                            d'''16                                                                   %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -4195,26 +4195,26 @@ class RegisterInterpolationCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <e' fs'>16
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <f' ef''>16
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <a' bf'>16
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <c'' b''>16
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <g'' af''>16
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <cs''' d'''>16
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -5370,52 +5370,52 @@ class RegisterInterpolationCommand(scoping.Command):
                     \context Voice = "Voice_1"
                     {
                         \voiceOne
-                        {
-                            \scaleDurations #'(1 . 1) {
+                        {                                                                                %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                fs'16
+                                fs'16                                                                    %! baca.MusicMaker.__call__
                                 [
                                 \abjad-color-music #'green
-                                e'16
+                                e'16                                                                     %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                ef''16
+                                ef''16                                                                   %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                f''16
+                                f''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                a'16
+                                a'16                                                                     %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                bf'16
+                                bf'16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                c''16
+                                c''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                b''16
+                                b''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                af''16
+                                af''16                                                                   %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                g''16
+                                g''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                cs'''16
+                                cs'''16                                                                  %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                d'''16
+                                d'''16                                                                   %! baca.MusicMaker.__call__
                                 ]
-                            }
-                            \scaleDurations #'(1 . 1) {
-                                fs'16
+                            }                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                                fs'16                                                                    %! baca.MusicMaker.__call__
                                 [
-                                e'16
-                                ef'16
-                                f'16
-                                a'16
-                                bf'16
-                                c'16
-                                b'16
-                                af'16
-                                g'16
-                                cs'16
-                                d'16
+                                e'16                                                                     %! baca.MusicMaker.__call__
+                                ef'16                                                                    %! baca.MusicMaker.__call__
+                                f'16                                                                     %! baca.MusicMaker.__call__
+                                a'16                                                                     %! baca.MusicMaker.__call__
+                                bf'16                                                                    %! baca.MusicMaker.__call__
+                                c'16                                                                     %! baca.MusicMaker.__call__
+                                b'16                                                                     %! baca.MusicMaker.__call__
+                                af'16                                                                    %! baca.MusicMaker.__call__
+                                g'16                                                                     %! baca.MusicMaker.__call__
+                                cs'16                                                                    %! baca.MusicMaker.__call__
+                                d'16                                                                     %! baca.MusicMaker.__call__
                                 ]
-                            }
-                        }
+                            }                                                                            %! baca.MusicMaker.__call__
+                        }                                                                                %! baca.MusicMaker.__call__
                     }
                 >>
 
@@ -5443,52 +5443,52 @@ class RegisterInterpolationCommand(scoping.Command):
                     \context Voice = "Voice_1"
                     {
                         \voiceOne
-                        {
-                            \scaleDurations #'(1 . 1) {
-                                fs'16
+                        {                                                                                %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                                fs'16                                                                    %! baca.MusicMaker.__call__
                                 [
-                                e'16
-                                ef'16
-                                f'16
-                                a'16
-                                bf'16
-                                c'16
-                                b'16
-                                af'16
-                                g'16
-                                cs'16
-                                d'16
+                                e'16                                                                     %! baca.MusicMaker.__call__
+                                ef'16                                                                    %! baca.MusicMaker.__call__
+                                f'16                                                                     %! baca.MusicMaker.__call__
+                                a'16                                                                     %! baca.MusicMaker.__call__
+                                bf'16                                                                    %! baca.MusicMaker.__call__
+                                c'16                                                                     %! baca.MusicMaker.__call__
+                                b'16                                                                     %! baca.MusicMaker.__call__
+                                af'16                                                                    %! baca.MusicMaker.__call__
+                                g'16                                                                     %! baca.MusicMaker.__call__
+                                cs'16                                                                    %! baca.MusicMaker.__call__
+                                d'16                                                                     %! baca.MusicMaker.__call__
                                 ]
-                            }
-                            \scaleDurations #'(1 . 1) {
+                            }                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                fs'16
+                                fs'16                                                                    %! baca.MusicMaker.__call__
                                 [
                                 \abjad-color-music #'green
-                                e'16
+                                e'16                                                                     %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                ef''16
+                                ef''16                                                                   %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                f''16
+                                f''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                a'16
+                                a'16                                                                     %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                bf'16
+                                bf'16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                c''16
+                                c''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                b''16
+                                b''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                af''16
+                                af''16                                                                   %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                g''16
+                                g''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                cs'''16
+                                cs'''16                                                                  %! baca.MusicMaker.__call__
                                 \abjad-color-music #'green
-                                d'''16
+                                d'''16                                                                   %! baca.MusicMaker.__call__
                                 ]
-                            }
-                        }
+                            }                                                                            %! baca.MusicMaker.__call__
+                        }                                                                                %! baca.MusicMaker.__call__
                     }
                 >>
 
@@ -5519,64 +5519,64 @@ class RegisterInterpolationCommand(scoping.Command):
                     \context Voice = "Voice_1"
                     {
                         \voiceOne
-                        {
-                            \scaleDurations #'(1 . 1) {
+                        {                                                                                %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                                 \abjad-color-music #'red
-                                fs'16
+                                fs'16                                                                    %! baca.MusicMaker.__call__
                                 [
                                 \abjad-color-music #'red
-                                e'16
+                                e'16                                                                     %! baca.MusicMaker.__call__
                                 \abjad-color-music #'red
-                                ef''16
+                                ef''16                                                                   %! baca.MusicMaker.__call__
                                 \abjad-color-music #'red
-                                f''16
+                                f''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'red
-                                a'16
+                                a'16                                                                     %! baca.MusicMaker.__call__
                                 \abjad-color-music #'red
-                                bf'16
+                                bf'16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'red
-                                c''16
+                                c''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'red
-                                b''16
+                                b''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'red
-                                af''16
+                                af''16                                                                   %! baca.MusicMaker.__call__
                                 \abjad-color-music #'red
-                                g''16
+                                g''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'red
-                                cs'''16
+                                cs'''16                                                                  %! baca.MusicMaker.__call__
                                 \abjad-color-music #'red
-                                d'''16
+                                d'''16                                                                   %! baca.MusicMaker.__call__
                                 ]
-                            }
-                            \scaleDurations #'(1 . 1) {
+                            }                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                                 \abjad-color-music #'blue
-                                fs'16
+                                fs'16                                                                    %! baca.MusicMaker.__call__
                                 [
                                 \abjad-color-music #'blue
-                                e'16
+                                e'16                                                                     %! baca.MusicMaker.__call__
                                 \abjad-color-music #'blue
-                                ef''16
+                                ef''16                                                                   %! baca.MusicMaker.__call__
                                 \abjad-color-music #'blue
-                                f''16
+                                f''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'blue
-                                a'16
+                                a'16                                                                     %! baca.MusicMaker.__call__
                                 \abjad-color-music #'blue
-                                bf'16
+                                bf'16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'blue
-                                c''16
+                                c''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'blue
-                                b''16
+                                b''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'blue
-                                af''16
+                                af''16                                                                   %! baca.MusicMaker.__call__
                                 \abjad-color-music #'blue
-                                g''16
+                                g''16                                                                    %! baca.MusicMaker.__call__
                                 \abjad-color-music #'blue
-                                cs'''16
+                                cs'''16                                                                  %! baca.MusicMaker.__call__
                                 \abjad-color-music #'blue
-                                d'''16
+                                d'''16                                                                   %! baca.MusicMaker.__call__
                                 ]
-                            }
-                        }
+                            }                                                                            %! baca.MusicMaker.__call__
+                        }                                                                                %! baca.MusicMaker.__call__
                     }
                 >>
 
@@ -5627,11 +5627,11 @@ class RegisterToOctaveCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <c' d'' e'''>16
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -5654,11 +5654,11 @@ class RegisterToOctaveCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <c d' e''>16
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -5681,11 +5681,11 @@ class RegisterToOctaveCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <c, d e'>16
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -5714,15 +5714,15 @@ class RegisterToOctaveCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c'16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d''16
-                            e'''16
+                            d''16                                                                    %! baca.MusicMaker.__call__
+                            e'''16                                                                   %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -5745,15 +5745,15 @@ class RegisterToOctaveCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            c16                                                                      %! baca.MusicMaker.__call__
                             [
-                            d'16
-                            e''16
+                            d'16                                                                     %! baca.MusicMaker.__call__
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -5776,15 +5776,15 @@ class RegisterToOctaveCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c,16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            c,16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d16
-                            e'16
+                            d16                                                                      %! baca.MusicMaker.__call__
+                            e'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -5813,15 +5813,15 @@ class RegisterToOctaveCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            bf'16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            bf'16                                                                    %! baca.MusicMaker.__call__
                             [
-                            c''16
-                            d''16
+                            c''16                                                                    %! baca.MusicMaker.__call__
+                            d''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -5844,15 +5844,15 @@ class RegisterToOctaveCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            bf16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            bf16                                                                     %! baca.MusicMaker.__call__
                             [
-                            c'16
-                            d'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -5875,15 +5875,15 @@ class RegisterToOctaveCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            bf16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            bf16                                                                     %! baca.MusicMaker.__call__
                             [
-                            c'16
-                            d'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -6328,41 +6328,41 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \clef "treble"                                                           %! baca.clef:IndicatorCommand
-                            ef'16
+                            ef'16                                                                    %! baca.MusicMaker.__call__
                             [
-                            e'16
-                            f'16
-                            f'16
-                            f'16
-                            g'16
-                            g'16
-                            g'16
-                            a'16
-                            a'16
-                            a'16
-                            b'16
+                            e'16                                                                     %! baca.MusicMaker.__call__
+                            f'16                                                                     %! baca.MusicMaker.__call__
+                            f'16                                                                     %! baca.MusicMaker.__call__
+                            f'16                                                                     %! baca.MusicMaker.__call__
+                            g'16                                                                     %! baca.MusicMaker.__call__
+                            g'16                                                                     %! baca.MusicMaker.__call__
+                            g'16                                                                     %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            b'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            b'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            b'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            c''16
-                            c''16
-                            c''16
-                            d''16
-                            d''16
-                            d''16
-                            e''16
-                            e''16
-                            e''16
-                            f''16
-                            fs''16
+                            c''16                                                                    %! baca.MusicMaker.__call__
+                            c''16                                                                    %! baca.MusicMaker.__call__
+                            c''16                                                                    %! baca.MusicMaker.__call__
+                            d''16                                                                    %! baca.MusicMaker.__call__
+                            d''16                                                                    %! baca.MusicMaker.__call__
+                            d''16                                                                    %! baca.MusicMaker.__call__
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            f''16                                                                    %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -6393,52 +6393,52 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \override Glissando.thickness = #'3                                      %! baca.glissando_thickness:OverrideCommand(1)
                             \clef "treble"                                                           %! baca.clef:IndicatorCommand
-                            ef'16
+                            ef'16                                                                    %! baca.MusicMaker.__call__
                             [
                             \glissando                                                               %! baca.glissando
                             \hide NoteHead                                                           %! baca.glissando
                             \override Accidental.stencil = ##f                                       %! baca.glissando
                             \override NoteColumn.glissando-skip = ##t                                %! baca.glissando
                             \override NoteHead.no-ledgers = ##t                                      %! baca.glissando
-                            e'16
-                            f'16
-                            f'16
-                            f'16
-                            g'16
-                            g'16
-                            g'16
-                            a'16
-                            a'16
-                            a'16
-                            b'16
+                            e'16                                                                     %! baca.MusicMaker.__call__
+                            f'16                                                                     %! baca.MusicMaker.__call__
+                            f'16                                                                     %! baca.MusicMaker.__call__
+                            f'16                                                                     %! baca.MusicMaker.__call__
+                            g'16                                                                     %! baca.MusicMaker.__call__
+                            g'16                                                                     %! baca.MusicMaker.__call__
+                            g'16                                                                     %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            b'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            b'16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            b'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            c''16
-                            c''16
-                            c''16
-                            d''16
-                            d''16
-                            d''16
-                            e''16
-                            e''16
-                            e''16
-                            f''16
+                            c''16                                                                    %! baca.MusicMaker.__call__
+                            c''16                                                                    %! baca.MusicMaker.__call__
+                            c''16                                                                    %! baca.MusicMaker.__call__
+                            d''16                                                                    %! baca.MusicMaker.__call__
+                            d''16                                                                    %! baca.MusicMaker.__call__
+                            d''16                                                                    %! baca.MusicMaker.__call__
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            f''16                                                                    %! baca.MusicMaker.__call__
                             \revert Accidental.stencil                                               %! baca.glissando
                             \revert NoteColumn.glissando-skip                                        %! baca.glissando
                             \revert NoteHead.no-ledgers                                              %! baca.glissando
                             \undo \hide NoteHead                                                     %! baca.glissando
-                            fs''16
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             ]
                             \revert Glissando.thickness                                              %! baca.glissando_thickness:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -6568,8 +6568,8 @@ def bass_to_octave(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
                             <c d bf>8
                             ~
@@ -6577,19 +6577,19 @@ def bass_to_octave(
                             \abjad-color-music #'green
                             <c d bf>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
-                            f'8
+                            f'8                                                                      %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'green
-                            f'32
+                            f'32                                                                     %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
                             <ef' e' fs''>8
                             ~
@@ -6597,9 +6597,9 @@ def bass_to_octave(
                             \abjad-color-music #'green
                             <ef' e' fs''>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
                             <g af'>8
                             ~
@@ -6607,19 +6607,19 @@ def bass_to_octave(
                             \abjad-color-music #'green
                             <g af'>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
-                            a8
+                            a8                                                                       %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'green
-                            a32
+                            a32                                                                      %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                    }
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -6651,8 +6651,8 @@ def bass_to_octave(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'red
                             <c d bf>8
                             ~
@@ -6660,19 +6660,19 @@ def bass_to_octave(
                             \abjad-color-music #'red
                             <c d bf>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'blue
-                            f8
+                            f8                                                                       %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'blue
-                            f32
+                            f32                                                                      %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'red
                             <ef e fs'>8
                             ~
@@ -6680,9 +6680,9 @@ def bass_to_octave(
                             \abjad-color-music #'red
                             <ef e fs'>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'blue
                             <g af'>8
                             ~
@@ -6690,19 +6690,19 @@ def bass_to_octave(
                             \abjad-color-music #'blue
                             <g af'>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'red
-                            a8
+                            a8                                                                       %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'red
-                            a32
+                            a32                                                                      %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                    }
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -6734,32 +6734,32 @@ def bass_to_octave(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <c' d' bf'>8
                             ~
                             [
                             <c' d' bf'>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            f''8
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            f''8                                                                     %! baca.MusicMaker.__call__
                             ~
                             [
-                            f''32
+                            f''32                                                                    %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <ef'' e'' fs'''>8
                             ~
                             [
                             <ef'' e'' fs'''>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'red
                             <g af'>8
                             ~
@@ -6767,19 +6767,19 @@ def bass_to_octave(
                             \abjad-color-music #'red
                             <g af'>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'blue
-                            a8
+                            a8                                                                       %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'blue
-                            a32
+                            a32                                                                      %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                    }
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -6822,8 +6822,8 @@ def center_to_octave(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
                             <c, d, bf,>8
                             ~
@@ -6831,19 +6831,19 @@ def center_to_octave(
                             \abjad-color-music #'green
                             <c, d, bf,>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
-                            f8
+                            f8                                                                       %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'green
-                            f32
+                            f32                                                                      %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
                             <ef e fs'>8
                             ~
@@ -6851,9 +6851,9 @@ def center_to_octave(
                             \abjad-color-music #'green
                             <ef e fs'>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
                             <g, af>8
                             ~
@@ -6861,19 +6861,19 @@ def center_to_octave(
                             \abjad-color-music #'green
                             <g, af>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
-                            a,8
+                            a,8                                                                      %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'green
-                            a,32
+                            a,32                                                                     %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                    }
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -6905,8 +6905,8 @@ def center_to_octave(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'red
                             <c d bf>8
                             ~
@@ -6914,19 +6914,19 @@ def center_to_octave(
                             \abjad-color-music #'red
                             <c d bf>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'blue
-                            f8
+                            f8                                                                       %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'blue
-                            f32
+                            f32                                                                      %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'red
                             <ef e fs'>8
                             ~
@@ -6934,9 +6934,9 @@ def center_to_octave(
                             \abjad-color-music #'red
                             <ef e fs'>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'blue
                             <g, af>8
                             ~
@@ -6944,19 +6944,19 @@ def center_to_octave(
                             \abjad-color-music #'blue
                             <g, af>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'red
-                            a8
+                            a8                                                                       %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'red
-                            a32
+                            a32                                                                      %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                    }
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -6988,32 +6988,32 @@ def center_to_octave(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <c' d' bf'>8
                             ~
                             [
                             <c' d' bf'>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            f''8
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            f''8                                                                     %! baca.MusicMaker.__call__
                             ~
                             [
-                            f''32
+                            f''32                                                                    %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <ef'' e'' fs'''>8
                             ~
                             [
                             <ef'' e'' fs'''>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'red
                             <g, af>8
                             ~
@@ -7021,19 +7021,19 @@ def center_to_octave(
                             \abjad-color-music #'red
                             <g, af>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'blue
-                            a8
+                            a8                                                                       %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'blue
-                            a32
+                            a32                                                                      %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                    }
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -7125,45 +7125,45 @@ def displacement(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            ef4
+                            ef4                                                                      %! baca.MusicMaker.__call__
                             ~
-                            ef16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/8 {
-                            c16
+                            ef16                                                                     %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 7/8 {                                                                 %! baca.MusicMaker.__call__
+                            c16                                                                      %! baca.MusicMaker.__call__
                             [
-                            d''16
+                            d''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 11/12 {
-                            c'16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 11/12 {                                                               %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            ef4
+                            ef4                                                                      %! baca.MusicMaker.__call__
                             ~
-                            ef16
-                            r16
-                            r4
+                            ef16                                                                     %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -7190,28 +7190,28 @@ def displacement(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            r8
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            r8                                                                       %! baca.MusicMaker.__call__
                             <c' d' ef'>4
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <c' d' ef'>4
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <c d ef>4
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <c d ef>4
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <c'' d'' ef''>4
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <c'' d'' ef''>4
-                            r4
-                        }
-                    }
+                            r4                                                                       %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -7243,45 +7243,45 @@ def displacement(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            ef'4
+                            ef'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            ef'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 7/8 {
-                            c'16
+                            ef'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 7/8 {                                                                 %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            ef4
+                            ef4                                                                      %! baca.MusicMaker.__call__
                             ~
-                            ef16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 11/12 {
-                            c16
+                            ef16                                                                     %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 11/12 {                                                               %! baca.MusicMaker.__call__
+                            c16                                                                      %! baca.MusicMaker.__call__
                             [
-                            d''16
+                            d''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            r4
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -7583,41 +7583,41 @@ def register(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf4
+                            bf4                                                                      %! baca.MusicMaker.__call__
                             ~
-                            bf16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs16
+                            bf16                                                                     %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs16                                                                     %! baca.MusicMaker.__call__
                             [
-                            e'16
+                            e'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            ef'4
+                            ef'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            ef'16
-                            r16
-                            af16
+                            ef'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af16                                                                     %! baca.MusicMaker.__call__
                             [
-                            g16
+                            g16                                                                      %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a16                                                                      %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -7645,48 +7645,48 @@ def register(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
-                            fs16
+                            fs16                                                                     %! baca.MusicMaker.__call__
                             [
                             \abjad-color-music #'green
-                            e'16
+                            e'16                                                                     %! baca.MusicMaker.__call__
                             ]
                             \abjad-color-music #'green
-                            ef'4
+                            ef'4                                                                     %! baca.MusicMaker.__call__
                             ~
                             \abjad-color-music #'green
-                            ef'16
+                            ef'16                                                                    %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
-                            r16
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
-                            af16
+                            af16                                                                     %! baca.MusicMaker.__call__
                             [
                             \abjad-color-music #'green
-                            g16
+                            g16                                                                      %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -7715,41 +7715,41 @@ def register(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs'16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs'16                                                                    %! baca.MusicMaker.__call__
                             [
-                            e'16
+                            e'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a''16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a''16                                                                    %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -7778,48 +7778,48 @@ def register(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
-                            fs16
+                            fs16                                                                     %! baca.MusicMaker.__call__
                             [
                             \abjad-color-music #'green
-                            e'16
+                            e'16                                                                     %! baca.MusicMaker.__call__
                             ]
                             \abjad-color-music #'green
-                            ef'4
+                            ef'4                                                                     %! baca.MusicMaker.__call__
                             ~
                             \abjad-color-music #'green
-                            ef'16
+                            ef'16                                                                    %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
-                            r16
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
-                            af'16
+                            af'16                                                                    %! baca.MusicMaker.__call__
                             [
                             \abjad-color-music #'green
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -7867,8 +7867,8 @@ def soprano_to_octave(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
                             <c,, d,, bf,,>8
                             ~
@@ -7876,19 +7876,19 @@ def soprano_to_octave(
                             \abjad-color-music #'green
                             <c,, d,, bf,,>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
-                            f,8
+                            f,8                                                                      %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'green
-                            f,32
+                            f,32                                                                     %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
                             <ef, e, fs>8
                             ~
@@ -7896,9 +7896,9 @@ def soprano_to_octave(
                             \abjad-color-music #'green
                             <ef, e, fs>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
                             <g,, af,>8
                             ~
@@ -7906,19 +7906,19 @@ def soprano_to_octave(
                             \abjad-color-music #'green
                             <g,, af,>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'green
-                            a,,8
+                            a,,8                                                                     %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'green
-                            a,,32
+                            a,,32                                                                    %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                    }
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -7950,8 +7950,8 @@ def soprano_to_octave(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'red
                             <c d bf>8
                             ~
@@ -7959,19 +7959,19 @@ def soprano_to_octave(
                             \abjad-color-music #'red
                             <c d bf>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'blue
-                            f8
+                            f8                                                                       %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'blue
-                            f32
+                            f32                                                                      %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'red
                             <ef, e, fs>8
                             ~
@@ -7979,9 +7979,9 @@ def soprano_to_octave(
                             \abjad-color-music #'red
                             <ef, e, fs>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'blue
                             <g, af>8
                             ~
@@ -7989,19 +7989,19 @@ def soprano_to_octave(
                             \abjad-color-music #'blue
                             <g, af>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'red
-                            a8
+                            a8                                                                       %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'red
-                            a32
+                            a32                                                                      %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                    }
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -8033,32 +8033,32 @@ def soprano_to_octave(
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <c' d' bf'>8
                             ~
                             [
                             <c' d' bf'>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            f''8
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            f''8                                                                     %! baca.MusicMaker.__call__
                             ~
                             [
-                            f''32
+                            f''32                                                                    %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             <ef'' e'' fs'''>8
                             ~
                             [
                             <ef'' e'' fs'''>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'red
                             <g, af>8
                             ~
@@ -8066,19 +8066,19 @@ def soprano_to_octave(
                             \abjad-color-music #'red
                             <g, af>32
                             ]
-                            r16.
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \abjad-color-music #'blue
-                            a8
+                            a8                                                                       %! baca.MusicMaker.__call__
                             ~
                             [
                             \abjad-color-music #'blue
-                            a32
+                            a32                                                                      %! baca.MusicMaker.__call__
                             ]
-                            r16.
-                        }
-                    }
+                            r16.                                                                     %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 

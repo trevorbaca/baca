@@ -940,29 +940,29 @@ def beam_divisions(*, stemlets: abjad.Number = None) -> rmakers.BeamSpecifier:
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            r8
-                            c'16
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
-                            d'16
-                            bf'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
+                            bf'16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
-                            ef''16
-                            af''16
-                            g''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
-                            r8
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r8                                                                       %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -988,37 +988,37 @@ def beam_divisions(*, stemlets: abjad.Number = None) -> rmakers.BeamSpecifier:
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \override Staff.Stem.stemlet-length = 2
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             [
-                            c'16
-                            d'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             \revert Staff.Stem.stemlet-length
-                            bf'16
+                            bf'16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \override Staff.Stem.stemlet-length = 2
-                            fs''16
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
-                            e''16
-                            ef''16
-                            af''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             \revert Staff.Stem.stemlet-length
-                            g''16
+                            g''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                        }
-                        \scaleDurations #'(1 . 1) {
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \override Staff.Stem.stemlet-length = 2
-                            a'16
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             [
                             \revert Staff.Stem.stemlet-length
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1056,45 +1056,45 @@ def beam_everything(*, stemlets: abjad.Number = None) -> rmakers.BeamSpecifier:
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            r8
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            r8                                                                       %! baca.MusicMaker.__call__
                             [
                             \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 2
-                            d'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
-                            bf'16
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
-                            fs''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            e''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            ef''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            af''16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 1
-                            g''16
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
-                            a'16
-                            r8
+                            fs''16                                                                   %! baca.MusicMaker.__call__
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            af''16                                                                   %! baca.MusicMaker.__call__
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            g''16                                                                    %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r8                                                                       %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1120,47 +1120,47 @@ def beam_everything(*, stemlets: abjad.Number = None) -> rmakers.BeamSpecifier:
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \scaleDurations #'(1 . 1) {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \override Staff.Stem.stemlet-length = 2
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             [
                             \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 2
-                            d'16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 1
-                            bf'16
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \set stemLeftBeamCount = 1
-                            \set stemRightBeamCount = 2
-                            fs''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            e''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            ef''16
-                            \set stemLeftBeamCount = 2
-                            \set stemRightBeamCount = 2
-                            af''16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 1
-                            g''16
-                        }
-                        \scaleDurations #'(1 . 1) {
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
                             \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
-                            a'16
+                            fs''16                                                                   %! baca.MusicMaker.__call__
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 2
+                            af''16                                                                   %! baca.MusicMaker.__call__
+                            \set stemLeftBeamCount = 2
+                            \set stemRightBeamCount = 1
+                            g''16                                                                    %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
+                            \set stemLeftBeamCount = 1
+                            \set stemRightBeamCount = 2
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             \revert Staff.Stem.stemlet-length
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             ]
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1199,59 +1199,59 @@ def beam_runs() -> rmakers.BeamSpecifier:
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             \set stemLeftBeamCount = 0
                             \set stemRightBeamCount = 2
-                            c'16
+                            c'16                                                                     %! baca.MusicMaker.__call__
                             [
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 0
-                            d'16
+                            d'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            bf'4
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 2
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
-                            fs''16
+                            fs''16                                                                   %! baca.MusicMaker.__call__
                             [
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 0
-                            e''16
+                            e''16                                                                    %! baca.MusicMaker.__call__
                             ]
-                            ef''4
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 2
-                            ef''16
-                            r16
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
                             \set stemLeftBeamCount = 0
                             \set stemRightBeamCount = 2
-                            af''16
+                            af''16                                                                   %! baca.MusicMaker.__call__
                             [
                             \set stemLeftBeamCount = 2
                             \set stemRightBeamCount = 1
-                            g''16
-                        }
-                        \times 2/3 {
+                            g''16                                                                    %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 2/3 {                                                                 %! baca.MusicMaker.__call__
                             \set stemLeftBeamCount = 1
                             \set stemRightBeamCount = 2
-                            a'16
+                            a'16                                                                     %! baca.MusicMaker.__call__
                             ]
-                            r8
+                            r8                                                                       %! baca.MusicMaker.__call__
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
@@ -1290,35 +1290,35 @@ def do_not_beam() -> rmakers.BeamSpecifier:
                 \context Voice = "Voice_1"
                 {
                     \voiceOne
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
+                    {                                                                                %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
                             \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8
-                            c'16
-                            d'16
-                            bf'4
+                            r8                                                                       %! baca.MusicMaker.__call__
+                            c'16                                                                     %! baca.MusicMaker.__call__
+                            d'16                                                                     %! baca.MusicMaker.__call__
+                            bf'4                                                                     %! baca.MusicMaker.__call__
                             ~
-                            bf'16
-                            r16
-                        }
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 9/10 {
-                            fs''16
-                            e''16
-                            ef''4
+                            bf'16                                                                    %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
+                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
+                            fs''16                                                                   %! baca.MusicMaker.__call__
+                            e''16                                                                    %! baca.MusicMaker.__call__
+                            ef''4                                                                    %! baca.MusicMaker.__call__
                             ~
-                            ef''16
-                            r16
-                            af''16
-                            g''16
-                        }
-                        \times 4/5 {
-                            a'16
-                            r4
+                            ef''16                                                                   %! baca.MusicMaker.__call__
+                            r16                                                                      %! baca.MusicMaker.__call__
+                            af''16                                                                   %! baca.MusicMaker.__call__
+                            g''16                                                                    %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
+                            a'16                                                                     %! baca.MusicMaker.__call__
+                            r4                                                                       %! baca.MusicMaker.__call__
                             \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }
-                    }
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }                                                                                %! baca.MusicMaker.__call__
                 }
             >>
 
