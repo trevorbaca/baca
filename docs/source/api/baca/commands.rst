@@ -638,6 +638,7 @@ commands
       :nosignatures:
 
       context
+      do_not_test
       indicators
       predicate
       redundant
@@ -685,6 +686,8 @@ commands
    .. container:: inherited
 
       .. autoattribute:: IndicatorCommand.deactivate
+
+   .. autoattribute:: IndicatorCommand.do_not_test
 
    .. autoattribute:: IndicatorCommand.indicators
 
@@ -776,6 +779,10 @@ commands
    .. container:: inherited
 
       .. autoattribute:: InstrumentChangeCommand.deactivate
+
+   .. container:: inherited
+
+      .. autoattribute:: InstrumentChangeCommand.do_not_test
 
    .. container:: inherited
 

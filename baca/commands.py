@@ -1939,6 +1939,7 @@ class IndicatorCommand(scoping.Command):
 
     __slots__ = (
         "_context",
+        "_do_not_test",
         "_indicators",
         "_predicate",
         "_redundant",
@@ -1953,6 +1954,7 @@ class IndicatorCommand(scoping.Command):
         *,
         context: str = None,
         deactivate: bool = None,
+        do_not_test: bool = None,
         indicators: typing.List[typing.Any] = None,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
@@ -1977,6 +1979,9 @@ class IndicatorCommand(scoping.Command):
         if context is not None:
             assert isinstance(context, str), repr(context)
         self._context = context
+        if do_not_test is not None:
+            do_not_test = bool(do_not_test)
+        self._do_not_test = do_not_test
         indicators_ = None
         if indicators is not None:
             if isinstance(indicators, collections.abc.Iterable):
@@ -2023,6 +2028,7 @@ class IndicatorCommand(scoping.Command):
                     leaf,
                     context=self.context,
                     deactivate=self.deactivate,
+                    do_not_test=self.do_not_test,
                     tag=self.tag.append("IndicatorCommand"),
                     wrapper=True,
                 )
@@ -2053,6 +2059,13 @@ class IndicatorCommand(scoping.Command):
         Gets context name.
         """
         return self._context
+
+    @property
+    def do_not_test(self) -> typing.Optional[bool]:
+        """
+        Is true when attach does not test.
+        """
+        return self._do_not_test
 
     @property
     def indicators(self) -> typing.Optional[abjad.CyclicTuple]:

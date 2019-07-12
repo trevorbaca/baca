@@ -2557,10 +2557,11 @@ def rehearsal_mark(
 def repeat_tie(
     selector: abjad.SelectorTyping,
     *,
+    allow_rest: bool = None,
     tag: typing.Optional[str] = "baca.repeat_tie",
 ) -> commands.IndicatorCommand:
     r"""
-    Attaches tie.
+    Attaches repeat-tie.
 
     ..  container:: example
 
@@ -2630,8 +2631,13 @@ def repeat_tie(
             >>
 
     """
+    if allow_rest is not None:
+        allow_rest = bool(allow_rest)
     return commands.IndicatorCommand(
-        indicators=[abjad.RepeatTie()], selector=selector, tags=[tag]
+        do_not_test=allow_rest,
+        indicators=[abjad.RepeatTie()],
+        selector=selector,
+        tags=[tag],
     )
 
 

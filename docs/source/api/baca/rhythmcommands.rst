@@ -356,14 +356,10 @@ rhythmcommands
    ~make_tied_notes
    ~make_tied_repeated_durations
    ~music
-   ~repeat_tie_from
-   ~repeat_tie_to
    ~rhythm
    ~set_duration_multiplier
    ~skeleton
    ~tacet
-   ~tie_from
-   ~tie_to
 
 .. autofunction:: beam_divisions
 
@@ -399,10 +395,6 @@ rhythmcommands
 
 .. autofunction:: music
 
-.. autofunction:: repeat_tie_from
-
-.. autofunction:: repeat_tie_to
-
 .. autofunction:: rhythm
 
 .. autofunction:: set_duration_multiplier
@@ -410,10 +402,6 @@ rhythmcommands
 .. autofunction:: skeleton
 
 .. autofunction:: tacet
-
-.. autofunction:: tie_from
-
-.. autofunction:: tie_to
 
 .. raw:: html
 
