@@ -980,6 +980,7 @@ Rhythm library.
    ~baca.rhythmcommands.set_duration_multiplier
    ~baca.rhythmcommands.skeleton
    ~baca.rhythmcommands.tacet
+   ~baca.rhythmcommands.tag_selection
 
 .. raw:: html
 

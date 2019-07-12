@@ -3871,35 +3871,35 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \context ViolinMusicVoice = "Violin_Music_Voice"                         %! baca.StringTrioScoreTemplate.__call__
                                 {                                                                        %! baca.StringTrioScoreTemplate.__call__
                 <BLANKLINE>
-                                    {
+                                    {                                                                    %! baca.music
                 <BLANKLINE>
-                                        \scaleDurations #'(1 . 1) {
+                                        \scaleDurations #'(1 . 1) {                                      %! baca.music
                 <BLANKLINE>
                                             % [Violin_Music_Voice measure 1]                             %! _comment_measure_numbers
                                             \clef "treble"                                               %! DEFAULT_CLEF:_set_status_tag:abjad.ScoreTemplate.attach_defaults
                                             \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                         %@% \override ViolinMusicStaff.Clef.color = ##f                  %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                             \set ViolinMusicStaff.forceClef = ##t                        %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
-                                            d'16
+                                            d'16                                                         %! baca.music
                                             ^ \baca-default-indicator-markup "(Violin)"                  %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                             \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
-                                            e'16
+                                            e'16                                                         %! baca.music
                 <BLANKLINE>
                                             \baca-octave-warning                                         %! _color_octaves_
-                                            f'16
+                                            f'16                                                         %! baca.music
                                             - \tweak color #red                                          %! _color_octaves_
                                             ^ \markup { OCTAVE }                                         %! _color_octaves_
                 <BLANKLINE>
-                                            g'16
+                                            g'16                                                         %! baca.music
                 <BLANKLINE>
-                                            a'16
+                                            a'16                                                         %! baca.music
                 <BLANKLINE>
-                                            b'16
+                                            b'16                                                         %! baca.music
                 <BLANKLINE>
-                                        }
+                                        }                                                                %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
                                     <<                                                                   %! _make_multimeasure_rest_container
                 <BLANKLINE>
@@ -4008,35 +4008,35 @@ class SegmentMaker(abjad.SegmentMaker):
                                 \context CelloMusicVoice = "Cello_Music_Voice"                           %! baca.StringTrioScoreTemplate.__call__
                                 {                                                                        %! baca.StringTrioScoreTemplate.__call__
                 <BLANKLINE>
-                                    {
+                                    {                                                                    %! baca.music
                 <BLANKLINE>
-                                        \scaleDurations #'(1 . 1) {
+                                        \scaleDurations #'(1 . 1) {                                      %! baca.music
                 <BLANKLINE>
                                             % [Cello_Music_Voice measure 1]                              %! _comment_measure_numbers
                                             \clef "bass"                                                 %! DEFAULT_CLEF:_set_status_tag:abjad.ScoreTemplate.attach_defaults
                                             \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                         %@% \override CelloMusicStaff.Clef.color = ##f                   %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                             \set CelloMusicStaff.forceClef = ##t                         %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
-                                            a16
+                                            a16                                                          %! baca.music
                                             ^ \baca-default-indicator-markup "(Cello)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                             \override CelloMusicStaff.Clef.color = #(x11-color 'violet)  %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
                 <BLANKLINE>
-                                            g16
+                                            g16                                                          %! baca.music
                 <BLANKLINE>
                                             \baca-octave-warning                                         %! _color_octaves_
-                                            f16
+                                            f16                                                          %! baca.music
                                             - \tweak color #red                                          %! _color_octaves_
                                             ^ \markup { OCTAVE }                                         %! _color_octaves_
                 <BLANKLINE>
-                                            e16
+                                            e16                                                          %! baca.music
                 <BLANKLINE>
-                                            d16
+                                            d16                                                          %! baca.music
                 <BLANKLINE>
-                                            c16
+                                            c16                                                          %! baca.music
                 <BLANKLINE>
-                                        }
+                                        }                                                                %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
                                     <<                                                                   %! _make_multimeasure_rest_container
                 <BLANKLINE>
@@ -4246,73 +4246,73 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 1]                                        %! _comment_measure_numbers
-                                        e'16
+                                        e'16                                                             %! baca.music
                                         ^ \baca-explicit-indicator-markup "(Violin)"                     %! EXPLICIT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 2]                                        %! _comment_measure_numbers
                                         \baca-out-of-range-warning                                       %! _check_range
-                                        c16
+                                        c16                                                              %! baca.music
                 <BLANKLINE>
-                                        d'16
+                                        d'16                                                             %! baca.music
                 <BLANKLINE>
-                                        ef'!16
+                                        ef'!16                                                           %! baca.music
                 <BLANKLINE>
-                                        f'16
+                                        f'16                                                             %! baca.music
                 <BLANKLINE>
-                                        af'!16
+                                        af'!16                                                           %! baca.music
                 <BLANKLINE>
-                                        a'16
+                                        a'16                                                             %! baca.music
                 <BLANKLINE>
-                                        c'16
+                                        c'16                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 3]                                        %! _comment_measure_numbers
-                                        b'16
+                                        b'16                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 4]                                        %! _comment_measure_numbers
-                                        bf'!16
+                                        bf'!16                                                           %! baca.music
                 <BLANKLINE>
-                                        g'16
+                                        g'16                                                             %! baca.music
                 <BLANKLINE>
-                                        a'16
+                                        a'16                                                             %! baca.music
                 <BLANKLINE>
-                                        bf'!16
+                                        bf'!16                                                           %! baca.music
                 <BLANKLINE>
-                                        c'16
+                                        c'16                                                             %! baca.music
                 <BLANKLINE>
-                                        f'16
+                                        f'16                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -4464,75 +4464,75 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 1]                                        %! _comment_measure_numbers
-                                        e'16
+                                        e'16                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 2]                                        %! _comment_measure_numbers
-                                        fs'!16
+                                        fs'!16                                                           %! baca.music
                 <BLANKLINE>
-                                        d'16
+                                        d'16                                                             %! baca.music
                 <BLANKLINE>
-                                        ef'!16
+                                        ef'!16                                                           %! baca.music
                 <BLANKLINE>
-                                        f'16
-                <BLANKLINE>
-                                        \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
-                                        a'16
+                                        f'16                                                             %! baca.music
                 <BLANKLINE>
                                         \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
-                                        a'16
+                                        a'16                                                             %! baca.music
                 <BLANKLINE>
-                                        c'16
+                                        \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
+                                        a'16                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                        c'16                                                             %! baca.music
                 <BLANKLINE>
-                                }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                {
+                                }                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                {                                                                        %! baca.music
+                <BLANKLINE>
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 3]                                        %! _comment_measure_numbers
-                                        b'16
+                                        b'16                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 4]                                        %! _comment_measure_numbers
-                                        bf'!16
+                                        bf'!16                                                           %! baca.music
                 <BLANKLINE>
-                                        g'16
+                                        g'16                                                             %! baca.music
                 <BLANKLINE>
-                                        a'16
-                <BLANKLINE>
-                                        \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
-                                        c''16
+                                        a'16                                                             %! baca.music
                 <BLANKLINE>
                                         \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
-                                        c'16
+                                        c''16                                                            %! baca.music
                 <BLANKLINE>
-                                        f'16
+                                        \baca-repeat-pitch-class-warning                                 %! _color_repeat_pitch_classes_
+                                        c'16                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                        f'16                                                             %! baca.music
                 <BLANKLINE>
-                                }
+                                    }                                                                    %! baca.music
+                <BLANKLINE>
+                                }                                                                        %! baca.music
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -5005,83 +5005,83 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 1]                                        %! _comment_measure_numbers
-                                        e'8.
+                                        e'8.                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 2]                                        %! _comment_measure_numbers
                                         \acciaccatura {
                 <BLANKLINE>
-                                            fs'16
+                                            fs'16                                                        %! baca.music
                                             [                                                            %! AcciaccaturaSpecifier
                 <BLANKLINE>
-                                            d'16
+                                            d'16                                                         %! baca.music
                 <BLANKLINE>
-                                            ef'16
+                                            ef'16                                                        %! baca.music
                 <BLANKLINE>
-                                            f'16
+                                            f'16                                                         %! baca.music
                 <BLANKLINE>
-                                            a'16
+                                            a'16                                                         %! baca.music
                 <BLANKLINE>
-                                            af'16
+                                            af'16                                                        %! baca.music
                                             ]                                                            %! AcciaccaturaSpecifier
                 <BLANKLINE>
-                                        }
+                                        }                                                                %! baca.music
                 <BLANKLINE>
-                                        c'8.
+                                        c'8.                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 3]                                        %! _comment_measure_numbers
-                                        b'8.
+                                        b'8.                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 4]                                        %! _comment_measure_numbers
                                         \acciaccatura {
                 <BLANKLINE>
-                                            bf'16
+                                            bf'16                                                        %! baca.music
                                             [                                                            %! AcciaccaturaSpecifier
                 <BLANKLINE>
-                                            g'16
+                                            g'16                                                         %! baca.music
                 <BLANKLINE>
-                                            a'16
+                                            a'16                                                         %! baca.music
                 <BLANKLINE>
-                                            af'16
+                                            af'16                                                        %! baca.music
                 <BLANKLINE>
-                                            c'16
+                                            c'16                                                         %! baca.music
                                             ]                                                            %! AcciaccaturaSpecifier
                 <BLANKLINE>
-                                        }
+                                        }                                                                %! baca.music
                 <BLANKLINE>
-                                        f'8.
+                                        f'8.                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>
@@ -5230,98 +5230,98 @@ class SegmentMaker(abjad.SegmentMaker):
                             \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 1]                                        %! _comment_measure_numbers
                                         \baca-unregistered-pitch-warning                                 %! _color_unregistered_pitches
-                                        e'8.
+                                        e'8.                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 2]                                        %! _comment_measure_numbers
                                         \acciaccatura {
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
-                                            fs'16
+                                            fs'16                                                        %! baca.music
                                             [                                                            %! AcciaccaturaSpecifier
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
-                                            d'16
+                                            d'16                                                         %! baca.music
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
-                                            ef'16
+                                            ef'16                                                        %! baca.music
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
-                                            f'16
+                                            f'16                                                         %! baca.music
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
-                                            a'16
+                                            a'16                                                         %! baca.music
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
-                                            af'16
+                                            af'16                                                        %! baca.music
                                             ]                                                            %! AcciaccaturaSpecifier
                 <BLANKLINE>
-                                        }
+                                        }                                                                %! baca.music
                 <BLANKLINE>
                                         \baca-unregistered-pitch-warning                                 %! _color_unregistered_pitches
-                                        c'8.
+                                        c'8.                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 3]                                        %! _comment_measure_numbers
                                         \baca-unregistered-pitch-warning                                 %! _color_unregistered_pitches
-                                        b'8.
+                                        b'8.                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
-                                {
+                                {                                                                        %! baca.music
                 <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {
+                                    \scaleDurations #'(1 . 1) {                                          %! baca.music
                 <BLANKLINE>
                                         % [Music_Voice measure 4]                                        %! _comment_measure_numbers
                                         \acciaccatura {
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
-                                            bf'16
+                                            bf'16                                                        %! baca.music
                                             [                                                            %! AcciaccaturaSpecifier
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
-                                            g'16
+                                            g'16                                                         %! baca.music
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
-                                            a'16
+                                            a'16                                                         %! baca.music
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
-                                            af'16
+                                            af'16                                                        %! baca.music
                 <BLANKLINE>
                                             \baca-unregistered-pitch-warning                             %! _color_unregistered_pitches
-                                            c'16
+                                            c'16                                                         %! baca.music
                                             ]                                                            %! AcciaccaturaSpecifier
                 <BLANKLINE>
-                                        }
+                                        }                                                                %! baca.music
                 <BLANKLINE>
                                         \baca-unregistered-pitch-warning                                 %! _color_unregistered_pitches
-                                        f'8.
+                                        f'8.                                                             %! baca.music
                 <BLANKLINE>
-                                    }
+                                    }                                                                    %! baca.music
                 <BLANKLINE>
-                                }
+                                }                                                                        %! baca.music
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
                 <BLANKLINE>

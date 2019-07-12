@@ -3104,11 +3104,11 @@ def hairpin(
                         \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
-                            {
+                            {                                                                        %! baca.skeleton
             <BLANKLINE>
                                 % [Music_Voice measure 1]                                            %! _comment_measure_numbers
                                 \override DynamicLineSpanner.staff-padding = #4                      %! baca.dls_staff_padding:OverrideCommand(1)
-                                c'2
+                                c'2                                                                  %! baca.skeleton
                                 - \tweak color #(x11-color 'blue)                                    %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 - \tweak to-barline ##t                                              %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:PiecewiseCommand(1)
                                 \p                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:PiecewiseCommand(1)
@@ -3118,13 +3118,13 @@ def hairpin(
                                 \<                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:PiecewiseCommand(1)
             <BLANKLINE>
                                 % [Music_Voice measure 2]                                            %! _comment_measure_numbers
-                                r4.
+                                r4.                                                                  %! baca.skeleton
                                 - \tweak color #(x11-color 'blue)                                    %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 - \tweak to-barline ##t                                              %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:PiecewiseCommand(2)
                                 \!                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:PiecewiseCommand(2)
             <BLANKLINE>
                                 % [Music_Voice measure 3]                                            %! _comment_measure_numbers
-                                d'2
+                                d'2                                                                  %! baca.skeleton
                                 - \tweak color #(x11-color 'blue)                                    %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 - \tweak to-barline ##t                                              %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:PiecewiseCommand(1)
                                 \f                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:PiecewiseCommand(1)
@@ -3134,13 +3134,13 @@ def hairpin(
                                 \<                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:PiecewiseCommand(1)
             <BLANKLINE>
                                 % [Music_Voice measure 4]                                            %! _comment_measure_numbers
-                                r4.
+                                r4.                                                                  %! baca.skeleton
                                 - \tweak color #(x11-color 'blue)                                    %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 - \tweak to-barline ##t                                              %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:PiecewiseCommand(2)
                                 \!                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:PiecewiseCommand(2)
                                 \revert DynamicLineSpanner.staff-padding                             %! baca.dls_staff_padding:OverrideCommand(2)
             <BLANKLINE>
-                            }
+                            }                                                                        %! baca.skeleton
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -5921,18 +5921,18 @@ def text_spanner(
                         \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
-                            {
+                            {                                                                        %! baca.skeleton
             <BLANKLINE>
                                 % [Music_Voice measure 1]                                            %! _comment_measure_numbers
                                 \override TextSpanner.staff-padding = #4.5                           %! baca.text_spanner_staff_padding:OverrideCommand(1)
-                                c'2
+                                c'2                                                                  %! baca.skeleton
                                 - \abjad-solid-line-with-arrow                                       %! baca.text_spanner:PiecewiseCommand(1)
                                 - \baca-text-spanner-left-text "P"                                   %! baca.text_spanner:PiecewiseCommand(1)
                                 - \tweak color #red                                                  %! baca.text_spanner:PiecewiseCommand(1)
                                 \startTextSpan                                                       %! baca.text_spanner:PiecewiseCommand(1)
             <BLANKLINE>
                                 % [Music_Voice measure 2]                                            %! _comment_measure_numbers
-                                d'4.
+                                d'4.                                                                 %! baca.skeleton
                                 \stopTextSpan                                                        %! baca.text_spanner:PiecewiseCommand(1)
                                 - \abjad-solid-line-with-arrow                                       %! baca.text_spanner:PiecewiseCommand(1)
                                 - \baca-text-spanner-left-text "T"                                   %! baca.text_spanner:PiecewiseCommand(1)
@@ -5940,7 +5940,7 @@ def text_spanner(
                                 \startTextSpan                                                       %! baca.text_spanner:PiecewiseCommand(1)
             <BLANKLINE>
                                 % [Music_Voice measure 3]                                            %! _comment_measure_numbers
-                                e'2
+                                e'2                                                                  %! baca.skeleton
                                 \stopTextSpan                                                        %! baca.text_spanner:PiecewiseCommand(1)
                                 - \abjad-solid-line-with-arrow                                       %! baca.text_spanner:PiecewiseCommand(1)
                                 - \baca-text-spanner-left-text "P"                                   %! baca.text_spanner:PiecewiseCommand(1)
@@ -5951,11 +5951,11 @@ def text_spanner(
                                 \startTextSpan                                                       %! baca.text_spanner:PiecewiseCommand(1)
             <BLANKLINE>
                                 % [Music_Voice measure 4]                                            %! _comment_measure_numbers
-                                f'4.
+                                f'4.                                                                 %! baca.skeleton
                                 \stopTextSpan                                                        %! baca.text_spanner:PiecewiseCommand(1)
                                 \revert TextSpanner.staff-padding                                    %! baca.text_spanner_staff_padding:OverrideCommand(2)
             <BLANKLINE>
-                            }
+                            }                                                                        %! baca.skeleton
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -6614,24 +6614,24 @@ def text_spanner(
                         \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
-                            {
+                            {                                                                        %! baca.skeleton
             <BLANKLINE>
                                 % [Music_Voice measure 1]                                            %! _comment_measure_numbers
                                 \override TextSpanner.staff-padding = #4.5                           %! baca.text_spanner_staff_padding:OverrideCommand(1)
-                                c'2
+                                c'2                                                                  %! baca.skeleton
                                 - \abjad-solid-line-with-arrow                                       %! baca.text_spanner:PiecewiseCommand(1)
                                 - \baca-text-spanner-left-text "P"                                   %! baca.text_spanner:PiecewiseCommand(1)
                                 \startTextSpan                                                       %! baca.text_spanner:PiecewiseCommand(1)
             <BLANKLINE>
                                 % [Music_Voice measure 2]                                            %! _comment_measure_numbers
-                                d'4.
+                                d'4.                                                                 %! baca.skeleton
                                 \stopTextSpan                                                        %! baca.text_spanner:PiecewiseCommand(1)
                                 - \abjad-solid-line-with-arrow                                       %! baca.text_spanner:PiecewiseCommand(1)
                                 - \baca-text-spanner-left-text "T"                                   %! baca.text_spanner:PiecewiseCommand(1)
                                 \startTextSpan                                                       %! baca.text_spanner:PiecewiseCommand(1)
             <BLANKLINE>
                                 % [Music_Voice measure 3]                                            %! _comment_measure_numbers
-                                e'2
+                                e'2                                                                  %! baca.skeleton
                                 \stopTextSpan                                                        %! baca.text_spanner:PiecewiseCommand(1)
                                 - \abjad-solid-line-with-arrow                                       %! baca.text_spanner:PiecewiseCommand(1)
                                 - \baca-text-spanner-left-text "P"                                   %! baca.text_spanner:PiecewiseCommand(1)
@@ -6641,14 +6641,14 @@ def text_spanner(
                                 \startTextSpan                                                       %! baca.text_spanner:PiecewiseCommand(1)
             <BLANKLINE>
                                 % [Music_Voice measure 4]                                            %! _comment_measure_numbers
-                                f'4
+                                f'4                                                                  %! baca.skeleton
                                 \stopTextSpan                                                        %! baca.text_spanner:PiecewiseCommand(1)
                                 ~
             <BLANKLINE>
-                                f'8
+                                f'8                                                                  %! baca.skeleton
                                 \revert TextSpanner.staff-padding                                    %! baca.text_spanner_staff_padding:OverrideCommand(2)
             <BLANKLINE>
-                            }
+                            }                                                                        %! baca.skeleton
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>

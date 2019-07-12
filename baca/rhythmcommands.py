@@ -1824,7 +1824,7 @@ def music(
     argument: typing.Union[str, abjad.Selection],
     *,
     do_not_check_total_duration: bool = None,
-    tag: str = None,
+    tag: typing.Optional[str] = "baca.music",
 ) -> RhythmCommand:
     """
     Makes rhythm command from string or selection ``argument``.
@@ -1839,43 +1839,51 @@ def music(
         message = "baca.music() accepts string or selection,"
         message += " not {repr(argument)}."
         raise TypeError(message)
-    # TODO: impelement tag against selections
     if tag is not None:
-        raise Exception("implement tag against selections.")
+        tag_selection(selection, tag)
     return RhythmCommand(
         selection, do_not_check_total_duration=do_not_check_total_duration
     )
 
 
 def rhythm(
-    rhythm_maker: RhythmMakerTyping,
+    argument: RhythmMakerTyping,
     *,
     measures: typings.SliceTyping = None,
     persist: str = None,
     tag: str = None,
 ) -> RhythmCommand:
     """
-    Makes rhythm command from ``rhythm_maker``.
+    Makes rhythm command from ``argument``.
     """
     prototype = (
-        rmakers.RhythmCommand,
-        rmakers.RhythmMaker,
         rmakers.MakerAssignment,
         rmakers.MakerAssignments,
+        rmakers.RhythmCommand,
+        rmakers.RhythmMaker,
     )
-    if not isinstance(rhythm_maker, prototype):
+    if not isinstance(argument, prototype):
         message = "baca.rhythm() accepts rhythm-maker and division"
         message += " assignment(s):\n"
-        message += f" {repr(rhythm_maker)}."
+        message += f" {repr(argument)}."
         raise TypeError(message)
     if tag is not None:
-        if isinstance(rhythm_maker, rmakers.RhythmMaker):
-            rhythm_maker = abjad.new(rhythm_maker, tag=tag)
-        # TODO:
+        if isinstance(argument, rmakers.MakerAssignment):
+            argument = abjad.new(argument, rhythm_maker__tag=tag)
+        elif isinstance(argument, rmakers.MakerAssignments):
+            assignments_ = []
+            for assignment in argument.assignments:
+                assignment_ = abjad.new(assignment, rhythm_maker__tag=tag)
+                assignments_.append(assignment_)
+            argument = abjad.new(argument, assignments=assignments_)
+        elif isinstance(argument, rmakers.RhythmCommand):
+            argument = abjad.new(argument, tag=tag)
+        elif isinstance(argument, rmakers.RhythmMaker):
+            argument = abjad.new(argument, tag=tag)
         else:
-            raise Exception("implement tag against division assignment(s).")
+            raise TypeError(argument)
     return RhythmCommand(
-        rhythm_maker,
+        argument,
         annotate_unpitched_music=True,
         measures=measures,
         persist=persist,
@@ -1886,7 +1894,7 @@ def skeleton(
     argument: typing.Union[str, abjad.Selection],
     *,
     do_not_check_total_duration: bool = None,
-    tag: str = None,
+    tag: str = "baca.skeleton",
 ) -> RhythmCommand:
     """
     Makes rhythm command from ``string`` and annotates music as unpitched.
@@ -1901,9 +1909,8 @@ def skeleton(
         message = "baca.skeleton() accepts string or selection,"
         message += " not {repr(argument)}."
         raise TypeError(message)
-    # TODO: implement tag against selections
     if tag is not None:
-        raise Exception("implement tag against selections.")
+        tag_selection(selection, tag)
     return RhythmCommand(
         selection,
         annotate_unpitched_music=True,
@@ -2388,3 +2395,13 @@ def tacet(
     command_ = scoping.new(command, measures=measures)
     assert isinstance(command_, overrides.OverrideCommand)
     return command_
+
+
+def tag_selection(selection: abjad.Selection, tag: str) -> None:
+    """
+    Tags selection.
+    """
+    assert isinstance(tag, str), repr(tag)
+    # TODO: tag attachments
+    for component in abjad.iterate(selection).components():
+        component._tag = tag

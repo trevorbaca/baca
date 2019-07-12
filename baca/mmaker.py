@@ -6023,7 +6023,7 @@ class MusicAccumulator(object):
             segment_maker(
                 (voice_name, 1),
                 rhythmcommands.music(
-                    selection, do_not_check_total_duration=True
+                    selection, do_not_check_total_duration=True, tag=None
                 ),
             )
 
@@ -6058,6 +6058,7 @@ class MusicContribution(object):
         "_hide_time_signature",
         "_selections",
         "_state_manifest",
+        "_tag",
         "_time_signature",
     )
 
@@ -6343,6 +6344,8 @@ class MusicMaker(object):
         is_recollection=None,
         denominator=None,
         state_manifest=None,
+        # tag: str = "baca.MusicMaker.__call__",
+        tag=None,
         talea_denominator=None,
         thread=None,
         time_treatments=None,
@@ -6894,32 +6897,32 @@ class MusicMaker(object):
 
         Returns selection, time signature, state manifest.
         """
-        specifiers = classes.Sequence(specifiers)
-        specifiers = specifiers.flatten()
+        specifiers_ = classes.Sequence(specifiers)
+        specifiers_ = specifiers_.flatten()
         if self._is_pitch_input(collections):
             color_unregistered_pitches = False
         self._validate_voice_name(voice_name)
         self._apply_state_manifest(state_manifest)
-        specifiers = list(self.specifiers or []) + list(specifiers)
+        specifiers_list = list(self.specifiers or []) + list(specifiers_)
         if all(isinstance(_, abjad.Rest) for _ in collections):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
-            specifiers = [
+            specifiers_list = [
                 _
-                for _ in specifiers
+                for _ in specifiers_list
                 if not isinstance(_, PitchFirstRhythmCommand)
             ]
         else:
             collections = self._coerce_collections(collections)
-            collections, specifiers = self._apply_pitch_specifiers(
-                collections, specifiers
+            collections, specifiers_list = self._apply_pitch_specifiers(
+                collections, specifiers_list
             )
-            collections, specifiers = self._apply_spacing_specifiers(
-                collections, specifiers
+            collections, specifiers_list = self._apply_spacing_specifiers(
+                collections, specifiers_list
             )
-            selections, specifiers = self._call_rhythm_commands(
+            selections, specifiers_list = self._call_rhythm_commands(
                 collections,
-                specifiers,
+                specifiers_list,
                 counts=counts,
                 talea_denominator=talea_denominator,
                 thread=thread,
@@ -6927,21 +6930,27 @@ class MusicMaker(object):
                 tuplet_denominator=tuplet_denominator,
                 tuplet_force_fraction=tuplet_force_fraction,
             )
-        anchor, specifiers = self._get_anchor_specifier(specifiers)
+        anchor, specifiers_list = self._get_anchor_specifier(specifiers_list)
         container = abjad.Container(selections)
         self._color_unregistered_pitches_(
             container, color_unregistered_pitches=color_unregistered_pitches
         )
-        specifiers = self._call_tie_commands(selections, specifiers)
-        specifiers = self._call_cluster_commands(selections, specifiers)
-        specifiers = self._call_nesting_commands(selections, specifiers)
-        specifiers = self._call_register_commands(selections, specifiers)
-        imbricated_selections, specifiers = self._call_imbrication_commands(
-            container, specifiers
+        specifiers_list = self._call_tie_commands(selections, specifiers_list)
+        specifiers_list = self._call_cluster_commands(
+            selections, specifiers_list
         )
-        result = self._call_color_commands(selections, specifiers)
-        specifiers, color_selector, color_selector_result = result
-        self._call_remaining_commands(selections, specifiers)
+        specifiers_list = self._call_nesting_commands(
+            selections, specifiers_list
+        )
+        specifiers_list = self._call_register_commands(
+            selections, specifiers_list
+        )
+        imbricated_selections, specifiers_list = self._call_imbrication_commands(
+            container, specifiers_list
+        )
+        result = self._call_color_commands(selections, specifiers_list)
+        specifiers_list, color_selector, color_selector_result = result
+        self._call_remaining_commands(selections, specifiers_list)
         self._label_figure_name_(container, figure_name, figure_index)
         self._annotate_collection_list(container, collections)
         self._annotate_deployment(
@@ -6957,17 +6966,19 @@ class MusicMaker(object):
         time_signature = self._make_time_signature(
             selection, denominator=denominator
         )
-        selections = {voice_name: selection}
-        selections.update(imbricated_selections)
-        for value in selections.values():
+        voice_to_selection = {voice_name: selection}
+        voice_to_selection.update(imbricated_selections)
+        for value in voice_to_selection.values():
             assert isinstance(value, abjad.Selection), repr(value)
+            if tag is not None:
+                rhythmcommands.tag_selection(value, tag)
         return MusicContribution(
             anchor=anchor,
             color_selector=color_selector,
             color_selector_result=color_selector_result,
             figure_name=figure_name,
             hide_time_signature=hide_time_signature,
-            selections=selections,
+            selections=voice_to_selection,
             state_manifest=state_manifest,
             time_signature=time_signature,
         )

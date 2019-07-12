@@ -257,6 +257,7 @@ rhythmcommands
    ~set_duration_multiplier
    ~skeleton
    ~tacet
+   ~tag_selection
 
 .. autofunction:: beam_divisions
 
@@ -299,6 +300,8 @@ rhythmcommands
 .. autofunction:: skeleton
 
 .. autofunction:: tacet
+
+.. autofunction:: tag_selection
 
 .. raw:: html
 
