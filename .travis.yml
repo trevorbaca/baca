@@ -46,9 +46,10 @@ before_install:
     - export MYPYPATH=$MYPYPATH:$TONALITY
 
     # install uqbar:
-    - UQBAR=/tmp/uqbar
-    - pip install --no-deps --target $UQBAR uqbar
-    - export MYPYPATH=$MYPYPATH:$UQBAR
+    # no longer necessary because mypy runs with --ignore-missing-imports?
+    ###- UQBAR=/tmp/uqbar
+    ###- pip install --no-deps --target $UQBAR uqbar
+    ###- export MYPYPATH=$MYPYPATH:$UQBAR
 
     # log setup:
     - echo $MYPYPATH
