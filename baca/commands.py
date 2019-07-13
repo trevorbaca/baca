@@ -88,6 +88,7 @@ class BCPCommand(scoping.Command):
         add_right_text_to_me = None
         if not self.final_spanner:
             rest_count, nonrest_count = 0, 0
+            lt: abjad.LogicalTie
             for lt in reversed(lts):
                 if self._is_rest(lt.head):
                     rest_count += 1
