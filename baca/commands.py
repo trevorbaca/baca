@@ -5905,7 +5905,7 @@ def markup(
     *tweaks: abjad.LilyPondTweakManager,
     boxed: bool = None,
     # typehinting is weird for some reason
-    direction = abjad.Up,
+    direction=abjad.Up,
     literal: bool = False,
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
