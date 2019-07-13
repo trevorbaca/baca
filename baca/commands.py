@@ -5904,7 +5904,8 @@ def markup(
     argument: typing.Union[str, abjad.Markup],
     *tweaks: abjad.LilyPondTweakManager,
     boxed: bool = None,
-    direction: abjad.VerticalAlignment = abjad.Up,
+    # typehinting is weird for some reason
+    direction = abjad.Up,
     literal: bool = False,
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
