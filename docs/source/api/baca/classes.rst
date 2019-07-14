@@ -656,6 +656,10 @@ classes
 
    .. container:: inherited
 
+      .. automethod:: Selection.exclude
+
+   .. container:: inherited
+
       .. automethod:: Selection.filter
 
    .. container:: inherited
@@ -677,6 +681,10 @@ classes
    .. container:: inherited
 
       .. automethod:: Selection.flatten
+
+   .. container:: inherited
+
+      .. automethod:: Selection.get
 
    .. automethod:: Selection.grace
 

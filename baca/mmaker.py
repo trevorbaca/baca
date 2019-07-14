@@ -10013,7 +10013,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     rmakers.SilenceMask(
-        ...         selector=baca.lts()[abjad.index([2], 3)],
+        ...         selector=baca.lts().get([2], 3),
         ...     ),
         ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
         ...     talea=rmakers.Talea(
@@ -10173,7 +10173,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     rmakers.SilenceMask(
-        ...         selector=baca.tuplets()[abjad.index([1], 2)]
+        ...         selector=baca.tuplets().get([1], 2)
         ...     ),
         ...     rmakers.TupletSpecifier(rewrite_rest_filled=True),
         ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
@@ -10220,7 +10220,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         Sustains every other division:
 
-        >>> tuplets = selector=baca.tuplets()[abjad.index([1], 2)]
+        >>> tuplets = selector=baca.tuplets().get([1], 2)
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     rmakers.TieSpecifier(
         ...         attach_ties=True,
