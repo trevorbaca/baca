@@ -7113,8 +7113,8 @@ class MusicMaker(object):
         assert self._all_are_selections(selections), repr(selections)
         prototype = (
             rmakers.BeamSpecifier,
-            rmakers.SilenceMask,
-            rmakers.SustainMask,
+            rmakers.RestCommand,
+            rmakers.NoteCommand,
         )
         command_prototype = (scoping.Command, scoping.Suite)
         for specifier in specifiers:
@@ -9814,7 +9814,7 @@ class PitchFirstRhythmCommand(scoping.Command):
         rhythm_maker = self.rhythm_maker
         if rhythm_maker is None:
             rhythm_maker = rmakers.NoteRhythmMaker(
-                rmakers.SilenceMask(selector=classes._select().lts())
+                rmakers.rest(classes._select().lts())
             )
         keywords = {}
         if talea_counts is not None:
@@ -10012,9 +10012,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Silences every third logical tie:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     rmakers.SilenceMask(
-        ...         selector=baca.lts().get([2], 3),
-        ...     ),
+        ...     rmakers.rest(baca.lts().get([2], 3)),
         ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
@@ -10068,8 +10066,8 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Silences first and last logical ties:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     rmakers.SilenceMask(selector=baca.lt(0)),
-        ...     rmakers.SilenceMask(selector=baca.lt(-1)),
+        ...     rmakers.rest(baca.lt(0)),
+        ...     rmakers.rest(baca.lt(-1)),
         ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
@@ -10118,7 +10116,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
     ..  container:: example
 
-        No division masks:
+        No rest commands:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
@@ -10172,9 +10170,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Silences every other division:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     rmakers.SilenceMask(
-        ...         selector=baca.tuplets().get([1], 2)
-        ...     ),
+        ...     rmakers.rest(baca.tuplets().get([1], 2)),
         ...     rmakers.TupletSpecifier(rewrite_rest_filled=True),
         ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
         ...     talea=rmakers.Talea(
