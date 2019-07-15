@@ -10156,7 +10156,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     rmakers.rest(baca.tuplets().get([1], 2)),
-        ...     rmakers.rewrite_rest_filled_tuplet(),
+        ...     rmakers.rewrite_rest_filled(),
         ...     rmakers.beam(),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
@@ -10204,7 +10204,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         >>> tuplets = selector=baca.tuplets().get([1], 2)
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     rmakers.tie(tuplets.map(baca.leaves()[:-1])),
-        ...     rmakers.rewrite_sustained_tuplet(),
+        ...     rmakers.rewrite_sustained(),
         ...     rmakers.beam(),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],

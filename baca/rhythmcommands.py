@@ -1349,7 +1349,7 @@ def make_fused_tuplet_monads(
         rhythm_maker=rmakers.RhythmCommand(
             rmakers.TupletRhythmMaker(tag=tag, tuplet_ratios=tuplet_ratios),
             rmakers.beam(),
-            rmakers.rewrite_rest_filled_tuplet(),
+            rmakers.rewrite_rest_filled(),
             rmakers.trivialize(),
             rmakers.extract_trivial(),
             rmakers.to_repeat_tie(),
