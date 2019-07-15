@@ -160,7 +160,6 @@ Bača API
    ~baca.commands.LabelCommand
    ~baca.commands.MetronomeMarkCommand
    ~baca.commands.PartAssignmentCommand
-   ~baca.commands.TieCommand
    ~baca.commands.VoltaCommand
 
 .. raw:: html

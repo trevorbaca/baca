@@ -871,9 +871,7 @@ class ColorCommand(scoping.Command):
         ...     baca.color(),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             rmakers.BeamCommand(
-        ...                 selector=baca.tuplets(),
-        ...             ),
+        ...             rmakers.beam(),
         ...             talea=rmakers.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
         ...                 denominator=32,
@@ -1705,9 +1703,7 @@ class IndicatorCommand(scoping.Command):
         ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             rmakers.BeamCommand(
-        ...                 selector=baca.tuplets(),
-        ...             ),
+        ...             rmakers.beam(),
         ...             talea=rmakers.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
         ...                 denominator=32,
@@ -2081,9 +2077,7 @@ class IndicatorCommand(scoping.Command):
             ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamCommand(
-            ...                 selector=baca.tuplets(),
-            ...             ),
+            ...             rmakers.beam(),
             ...             talea=rmakers.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
@@ -2162,9 +2156,7 @@ class IndicatorCommand(scoping.Command):
             ...         ),
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamCommand(
-            ...                 selector=baca.tuplets(),
-            ...             ),
+            ...             rmakers.beam(),
             ...             talea=rmakers.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
@@ -2742,135 +2734,6 @@ class PartAssignmentCommand(scoping.Command):
         Gets part assignment.
         """
         return self._part_assignment
-
-
-class TieCommand(scoping.Command):
-    """
-    Tie command.
-
-    ..  container:: example
-
-        >>> baca.TieCommand()
-        TieCommand(selector=baca.tleaves(), tags=[])
-
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        "_direction",
-        "_left_broken",
-        "_repeat",
-        "_right_broken",
-        "_tweaks",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        direction: abjad.VerticalAlignment = None,
-        left_broken: bool = None,
-        map: abjad.SelectorTyping = None,
-        match: typings.Indices = None,
-        measures: typings.SliceTyping = None,
-        repeat: typing.Union[
-            bool, abjad.IntegerPair, abjad.DurationInequality
-        ] = None,
-        right_broken: bool = None,
-        scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = "baca.tleaves()",
-        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
-        tweaks: abjad.IndexedTweakManagers = None,
-    ) -> None:
-        scoping.Command.__init__(
-            self,
-            map=map,
-            match=match,
-            measures=measures,
-            scope=scope,
-            selector=selector,
-            tags=tags,
-        )
-        if direction is not None:
-            assert direction in (abjad.Right, abjad.Left, None)
-        self._direction = direction
-        self._left_broken = left_broken
-        self._repeat = repeat
-        self._right_broken = right_broken
-        self._validate_indexed_tweaks(tweaks)
-        self._tweaks = tweaks
-
-    ### SPECIAL METHODS ###
-
-    def _call(self, argument=None) -> None:
-        """
-        Applies command to result of selector called on ``argument``.
-        """
-        if argument is None:
-            return
-        if self.selector is not None:
-            argument = self.selector(argument)
-        leaves = classes.Selection(argument).leaves(
-            do_not_iterate_grace_containers=True
-        )
-        assert isinstance(leaves, classes.Selection)
-        if len(leaves) == 1:
-            return
-        tweaks_: typing.List[abjad.LilyPondTweakManager] = []
-        for tweak in self.tweaks or []:
-            assert isinstance(tweak, abjad.LilyPondTweakManager)
-            tweaks_.append(tweak)
-        abjad.tie(
-            leaves,
-            # *tweaks_,
-            direction=self.direction,
-            # left_broken=self.left_broken,
-            repeat=self.repeat,
-            # right_broken=self.right_broken,
-            tag=str(self.tag),
-        )
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def direction(self) -> typing.Optional[abjad.VerticalAlignment]:
-        """
-        Gets tie direction.
-        """
-        return self._direction
-
-    @property
-    def left_broken(self) -> typing.Optional[bool]:
-        """
-        Is true when tie is left-broken.
-        """
-        return self._left_broken
-
-    @property
-    def repeat(
-        self
-    ) -> typing.Optional[
-        typing.Union[bool, abjad.IntegerPair, abjad.DurationInequality]
-    ]:
-        """
-        Gets repeat-tie threshold.
-        """
-        return self._repeat
-
-    @property
-    def right_broken(self) -> typing.Optional[bool]:
-        """
-        Is true when tie is right-broken.
-        """
-        return self._right_broken
-
-    @property
-    def tweaks(self) -> typing.Optional[abjad.IndexedTweakManagers]:
-        """
-        Gets tweaks.
-        """
-        return self._tweaks
 
 
 class VoltaCommand(scoping.Command):
@@ -6664,12 +6527,8 @@ def volta(*, selector: abjad.SelectorTyping = "baca.leaves()") -> VoltaCommand:
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.TaleaRhythmMaker(
-        ...             rmakers.BeamCommand(
-        ...                 selector=baca.tuplets(),
-        ...             ),
-        ...             rmakers.TupletCommand(
-        ...                 extract_trivial=True,
-        ...             ),
+        ...             rmakers.beam(),
+        ...             rmakers.extract_trivial(),
         ...             talea=rmakers.Talea(
         ...                 counts=[1, 1, 1, -1],
         ...                 denominator=8,
@@ -6834,12 +6693,8 @@ def volta(*, selector: abjad.SelectorTyping = "baca.leaves()") -> VoltaCommand:
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.TaleaRhythmMaker(
-        ...             rmakers.BeamCommand(
-        ...                 selector=baca.tuplets(),
-        ...             ),
-        ...             rmakers.TupletCommand(
-        ...                 extract_trivial=True,
-        ...             ),
+        ...             rmakers.beam(),
+        ...             rmakers.extract_trivial(),
         ...             talea=rmakers.Talea(
         ...                 counts=[1, 1, 1, -1],
         ...                 denominator=8,

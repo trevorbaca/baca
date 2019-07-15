@@ -33,7 +33,6 @@ commands
    ~LabelCommand
    ~MetronomeMarkCommand
    ~PartAssignmentCommand
-   ~TieCommand
    ~VoltaCommand
 
 .. autoclass:: BCPCommand
@@ -1117,111 +1116,6 @@ commands
    .. container:: inherited
 
       .. autoattribute:: PartAssignmentCommand.tags
-
-.. autoclass:: TieCommand
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      direction
-      left_broken
-      repeat
-      right_broken
-      tweaks
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: TieCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: TieCommand.__format__
-
-   .. container:: inherited
-
-      .. automethod:: TieCommand.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: TieCommand.get_tag
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCommand.deactivate
-
-   .. autoattribute:: TieCommand.direction
-
-   .. autoattribute:: TieCommand.left_broken
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCommand.match
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCommand.measures
-
-   .. autoattribute:: TieCommand.repeat
-
-   .. autoattribute:: TieCommand.right_broken
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCommand.scope
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCommand.selector
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCommand.tag
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCommand.tag_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: TieCommand.tags
-
-   .. autoattribute:: TieCommand.tweaks
 
 .. autoclass:: VoltaCommand
 
