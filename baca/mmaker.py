@@ -28,7 +28,7 @@ class AcciaccaturaSpecifier(object):
         Default acciaccatura specifier:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+        ...     rmakers.BeamCommand(selector=baca.tuplets()),
         ...     acciaccatura_specifiers=[
         ...         baca.AcciaccaturaSpecifier()
         ...         ],
@@ -202,7 +202,7 @@ class AcciaccaturaSpecifier(object):
             Sixteenth-note acciaccaturas by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
@@ -303,7 +303,7 @@ class AcciaccaturaSpecifier(object):
             Eighth-note acciaccaturas:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             durations=[(1, 8)],
@@ -419,7 +419,7 @@ class AcciaccaturaSpecifier(object):
             As many acciaccaturas as possible per collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
@@ -521,7 +521,7 @@ class AcciaccaturaSpecifier(object):
             At most two acciaccaturas at the beginning of every collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -634,7 +634,7 @@ class AcciaccaturaSpecifier(object):
             At most two acciaccaturas at the end of every collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -748,7 +748,7 @@ class AcciaccaturaSpecifier(object):
             then at most two acciaccaturas at the end of every collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -868,7 +868,7 @@ class AcciaccaturaSpecifier(object):
             As many acciaccaturas as possible in the middle of every collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier(
@@ -992,7 +992,7 @@ class AcciaccaturaSpecifier(object):
             Applies to all collections by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
@@ -1093,7 +1093,7 @@ class AcciaccaturaSpecifier(object):
             Applies to last collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             pattern=abjad.index_last(1),
@@ -1190,7 +1190,7 @@ class AcciaccaturaSpecifier(object):
             Applies to every other collection:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             pattern=abjad.index([1], 2),
@@ -1479,7 +1479,7 @@ class ImbricationCommand(scoping.Command):
         Defaults:
 
         >>> music_maker = baca.MusicMaker(
-        ...     rmakers.BeamSpecifier(
+        ...     rmakers.BeamCommand(
         ...         beam_divisions_together=True,
         ...         selector=baca.tuplets(),
         ...     ),
@@ -1496,7 +1496,7 @@ class ImbricationCommand(scoping.Command):
         ...     baca.ImbricationCommand(
         ...         'Voice_1',
         ...         [2, 19, 9, 18, 16],
-        ...         rmakers.BeamSpecifier(
+        ...         rmakers.BeamCommand(
         ...             beam_divisions_together=True,
         ...             selector=baca.tuplets(),
         ...         ),
@@ -1628,7 +1628,7 @@ class ImbricationCommand(scoping.Command):
         Multiple imbricated voices:
 
         >>> music_maker = baca.MusicMaker(
-        ...     rmakers.BeamSpecifier(
+        ...     rmakers.BeamCommand(
         ...         beam_divisions_together=True,
         ...         selector=baca.tuplets(),
         ...     ),
@@ -1820,7 +1820,7 @@ class ImbricationCommand(scoping.Command):
         Hides tuplet brackets above imbricated voice:
 
         >>> music_maker = baca.MusicMaker(
-        ...     rmakers.BeamSpecifier(
+        ...     rmakers.BeamCommand(
         ...         beam_divisions_together=True,
         ...         beam_rests=True,
         ...         selector=baca.tuplets(),
@@ -1828,7 +1828,7 @@ class ImbricationCommand(scoping.Command):
         ...     baca.staccato(selector=baca.pheads()),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...         rmakers.BeamSpecifier(selector=baca.tuplets()),
+        ...         rmakers.BeamCommand(selector=baca.tuplets()),
         ...             talea=rmakers.Talea(
         ...                 counts=[1],
         ...                 denominator=16,
@@ -2066,7 +2066,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...             rmakers.BeamCommand(selector=baca.tuplets()),
             ...             talea=rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
@@ -2310,7 +2310,7 @@ class ImbricationCommand(scoping.Command):
             Extends beam across figures:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...     ),
@@ -2642,7 +2642,7 @@ class ImbricationCommand(scoping.Command):
             Works with chords:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...     ),
@@ -2659,7 +2659,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.BeamSpecifier(
+            ...         rmakers.BeamCommand(
             ...             beam_divisions_together=True,
             ...             selector=baca.tuplets(),
             ...         ),
@@ -2775,7 +2775,7 @@ class ImbricationCommand(scoping.Command):
             Works with rests:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...     ),
@@ -2792,7 +2792,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.BeamSpecifier(
+            ...         rmakers.BeamCommand(
             ...             beam_divisions_together=True,
             ...             selector=baca.tuplets(),
             ...         ),
@@ -3024,7 +3024,7 @@ class ImbricationCommand(scoping.Command):
                 continue
             if isinstance(specifier, ImbricationCommand):
                 continue
-            if isinstance(specifier, rmakers.BeamSpecifier):
+            if isinstance(specifier, rmakers.BeamCommand):
                 specifier._detach_all_beams(selections)
             if isinstance(specifier, NestingCommand):
                 nested_selections = specifier(selections)
@@ -3086,7 +3086,7 @@ class ImbricationCommand(scoping.Command):
             Allows unused pitches:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         selector=baca.tuplets(),
@@ -3218,7 +3218,7 @@ class ImbricationCommand(scoping.Command):
             Raises exception on unused pitches:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         selector=baca.tuplets(),
@@ -3294,7 +3294,7 @@ class ImbricationCommand(scoping.Command):
             Hockets voices:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         selector=baca.tuplets(),
@@ -3475,7 +3475,7 @@ class ImbricationCommand(scoping.Command):
             Selects last nine notes:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         beam_rests=True,
             ...         selector=baca.tuplets(),
@@ -3677,7 +3677,7 @@ class ImbricationCommand(scoping.Command):
             Beams nothing:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...     ),
@@ -3808,7 +3808,7 @@ class ImbricationCommand(scoping.Command):
             Beams divisions together but excludes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...     ),
@@ -3825,7 +3825,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.BeamSpecifier(
+            ...         rmakers.BeamCommand(
             ...             beam_divisions_together=True,
             ...             selector=baca.tuplets(),
             ...         ),
@@ -3957,7 +3957,7 @@ class ImbricationCommand(scoping.Command):
             Beams divisions together and includes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...     ),
@@ -4101,7 +4101,7 @@ class ImbricationCommand(scoping.Command):
             Beams each division and includes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...     ),
@@ -4118,7 +4118,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.BeamSpecifier(
+            ...         rmakers.BeamCommand(
             ...             beam_rests=True,
             ...             selector=baca.tuplets(),
             ...             ),
@@ -4242,7 +4242,7 @@ class ImbricationCommand(scoping.Command):
             Beams each division by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     talea=rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -4303,7 +4303,7 @@ class ImbricationCommand(scoping.Command):
             Beams divisions together:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...         ),
@@ -4433,7 +4433,7 @@ class ImbricationCommand(scoping.Command):
             Does not beam rests:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     talea=rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -4494,7 +4494,7 @@ class ImbricationCommand(scoping.Command):
             Does beam rests:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_rests=True,
             ...         selector=baca.tuplets(),
             ...     ),
@@ -4558,7 +4558,7 @@ class ImbricationCommand(scoping.Command):
             Beams rests with stemlets:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_rests=True,
             ...         selector=baca.tuplets(),
             ...         stemlet_length=0.75,
@@ -4638,7 +4638,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...             rmakers.BeamCommand(selector=baca.tuplets()),
             ...             talea=rmakers.Talea(
             ...                 counts=[5],
             ...                 denominator=32,
@@ -5961,9 +5961,7 @@ class MusicAccumulator(object):
         return MusicMaker(
             PitchFirstRhythmCommand(
                 rhythm_maker=PitchFirstRhythmMaker(
-                    rmakers.BeamSpecifier(
-                        selector=classes._select().tuplets()
-                    ),
+                    rmakers.BeamCommand(selector=classes._select().tuplets()),
                     talea=rmakers.Talea(counts=[1], denominator=16),
                 )
             ),
@@ -7112,7 +7110,7 @@ class MusicMaker(object):
     def _call_remaining_commands(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
         prototype = (
-            rmakers.BeamSpecifier,
+            rmakers.BeamCommand,
             rmakers.RestCommand,
             rmakers.NoteCommand,
         )
@@ -7309,7 +7307,7 @@ class MusicMaker(object):
     def _make_default_rhythm_command():
         return PitchFirstRhythmCommand(
             rhythm_maker=PitchFirstRhythmMaker(
-                rmakers.BeamSpecifier(selector=classes._select().tuplets())
+                rmakers.BeamCommand(selector=classes._select().tuplets())
             )
         )
 
@@ -8346,7 +8344,7 @@ class MusicMaker(object):
             Beam specifier beams divisions together:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...         ),
@@ -8433,7 +8431,7 @@ class MusicMaker(object):
             Beam specifier beams nothing:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier()
+            ...     rmakers.BeamCommand()
             ...     )
 
             >>> collections = [
@@ -8490,7 +8488,7 @@ class MusicMaker(object):
             ...     baca.NestingCommand(
             ...         time_treatments=['+1/16'],
             ...         ),
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...         ),
@@ -8586,7 +8584,7 @@ class MusicMaker(object):
             ...             ),
             ...         time_treatments=['+1/16', None],
             ...         ),
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...         ),
@@ -8678,7 +8676,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...             rmakers.BeamCommand(selector=baca.tuplets()),
             ...             talea=rmakers.Talea(
             ...                 counts=[1],
             ...                 denominator=8,
@@ -8688,7 +8686,7 @@ class MusicMaker(object):
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.index_first(1),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...             rmakers.BeamCommand(selector=baca.tuplets()),
             ...             talea=rmakers.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
@@ -8748,7 +8746,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...             rmakers.BeamCommand(selector=baca.tuplets()),
             ...             talea=rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
@@ -8758,7 +8756,7 @@ class MusicMaker(object):
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...             rmakers.BeamCommand(selector=baca.tuplets()),
             ...             talea=rmakers.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
@@ -8818,7 +8816,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...             rmakers.BeamCommand(selector=baca.tuplets()),
             ...             talea=rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
@@ -8829,7 +8827,7 @@ class MusicMaker(object):
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...             rmakers.BeamCommand(selector=baca.tuplets()),
             ...             talea=rmakers.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
@@ -8890,7 +8888,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...             rmakers.BeamCommand(selector=baca.tuplets()),
             ...             talea=rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
@@ -8900,7 +8898,7 @@ class MusicMaker(object):
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...             rmakers.BeamCommand(selector=baca.tuplets()),
             ...             talea=rmakers.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
@@ -8962,7 +8960,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...             rmakers.BeamCommand(selector=baca.tuplets()),
             ...             talea=rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
@@ -8972,7 +8970,7 @@ class MusicMaker(object):
             ...     baca.PitchFirstRhythmCommand(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...             rmakers.BeamCommand(selector=baca.tuplets()),
             ...             talea=rmakers.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
@@ -9199,7 +9197,7 @@ class NestingCommand(scoping.Command):
         ...     baca.NestingCommand(
         ...         time_treatments=['+1/16'],
         ...         ),
-        ...     rmakers.BeamSpecifier(
+        ...     rmakers.BeamCommand(
         ...         beam_divisions_together=True,
         ...         selector=baca.tuplets(),
         ...         ),
@@ -9284,7 +9282,7 @@ class NestingCommand(scoping.Command):
         extend beam:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...         ),
@@ -9519,7 +9517,7 @@ class NestingCommand(scoping.Command):
             ...         prefix=[2],
             ...         suffix=[3],
             ...         ),
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_divisions_together=True,
             ...         selector=baca.tuplets(),
             ...         ),
@@ -9880,7 +9878,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Sixteenths and eighths:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+        ...     rmakers.BeamCommand(selector=baca.tuplets()),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
         ...         denominator=16,
@@ -10013,7 +10011,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     rmakers.rest(baca.lts().get([2], 3)),
-        ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+        ...     rmakers.BeamCommand(selector=baca.tuplets()),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
         ...         denominator=16,
@@ -10068,7 +10066,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     rmakers.rest(baca.lt(0)),
         ...     rmakers.rest(baca.lt(-1)),
-        ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+        ...     rmakers.BeamCommand(selector=baca.tuplets()),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
         ...         denominator=16,
@@ -10119,7 +10117,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         No rest commands:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+        ...     rmakers.BeamCommand(selector=baca.tuplets()),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
         ...         denominator=16,
@@ -10172,7 +10170,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     rmakers.rest(baca.tuplets().get([1], 2)),
         ...     rmakers.TupletSpecifier(rewrite_rest_filled=True),
-        ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+        ...     rmakers.BeamCommand(selector=baca.tuplets()),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
         ...         denominator=16,
@@ -10218,12 +10216,12 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         >>> tuplets = selector=baca.tuplets().get([1], 2)
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     rmakers.TieSpecifier(
+        ...     rmakers.TieCommand(
         ...         attach_ties=True,
         ...         selector=tuplets.map(baca.leaves()[:-1])
         ...     ),
         ...     rmakers.TupletSpecifier(rewrite_sustained=True),
-        ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+        ...     rmakers.BeamCommand(selector=baca.tuplets()),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
         ...         denominator=16,
@@ -10326,7 +10324,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Without state manifest:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     talea=rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -10385,7 +10383,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             With state manifest:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     talea=rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -10887,7 +10885,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Graced quarters:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier()
             ...         ],
@@ -10988,7 +10986,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Graced rests:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     acciaccatura_specifiers=[
             ...         baca.AcciaccaturaSpecifier(
             ...             lmr_specifier=baca.LMRSpecifier()
@@ -11125,7 +11123,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             durations by default:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     talea=rmakers.Talea(
             ...         counts=[4, 4, 5],
             ...         denominator=32,
@@ -11185,7 +11183,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             durations:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     duration_specifier=rmakers.DurationSpecifier(
             ...         increase_monotonic=True,
             ...         ),
@@ -11266,7 +11264,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             With rests:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(
+            ...     rmakers.BeamCommand(
             ...         beam_rests=True,
             ...         selector=baca.tuplets(),
             ...         stemlet_length=1.5,
@@ -11328,8 +11326,8 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             With very large nonassignable counts:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
-            ...     rmakers.TieSpecifier(
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
+            ...     rmakers.TieCommand(
             ...         repeat_ties=True,
             ...         ),
             ...     talea=rmakers.Talea(
@@ -11390,7 +11388,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             One extra count per division:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     time_treatments=[1],
             ...     talea=rmakers.Talea(
             ...         counts=[1, 1, 2],
@@ -11445,7 +11443,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             One missing count per division:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     time_treatments=[-1],
             ...     talea=rmakers.Talea(
             ...         counts=[1, 1, 2],
@@ -11499,7 +11497,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Accelerandi:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     time_treatments=['accel'],
             ...     talea=rmakers.Talea(
             ...         counts=[1],
@@ -11558,7 +11556,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Ritardandi:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     time_treatments=['rit'],
             ...     talea=rmakers.Talea(
             ...         counts=[1],
@@ -11617,7 +11615,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Accelerandi followed by ritardandi:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     time_treatments=['accel', 'rit'],
             ...     talea=rmakers.Talea(
             ...         counts=[1],
@@ -11674,7 +11672,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Mixed accelerandi, ritardandi and prolation:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     time_treatments=['accel', -2, 'rit'],
             ...     talea=rmakers.Talea(
             ...         counts=[1],
@@ -11733,7 +11731,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Specified by tuplet multiplier:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     time_treatments=[abjad.Ratio((3, 2))],
             ...     talea=rmakers.Talea(
             ...         counts=[1],
@@ -11831,7 +11829,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     rmakers.TupletSpecifier(
             ...         denominator=abjad.Duration(1, 16),
             ...     ),
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     time_treatments=[abjad.Duration(1, 4)],
             ...     talea=rmakers.Talea(
             ...         counts=[1],
@@ -11926,7 +11924,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     rmakers.TupletSpecifier(
             ...         denominator=abjad.Duration(1, 16),
             ...     ),
-            ...     rmakers.BeamSpecifier(selector=baca.tuplets()),
+            ...     rmakers.BeamCommand(selector=baca.tuplets()),
             ...     time_treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
             ...     talea=rmakers.Talea(
             ...         counts=[1, 1, 2],
@@ -13329,7 +13327,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     baca.imbricate(
         ...         'Voice_2',
         ...         [baca.coat(0), baca.coat(2), 10, 0, 2],
-        ...         rmakers.BeamSpecifier(
+        ...         rmakers.BeamCommand(
         ...             beam_divisions_together=True,
         ...             selector=baca.tuplets(),
         ...             ),

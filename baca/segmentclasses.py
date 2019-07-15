@@ -1306,7 +1306,7 @@ class HorizontalSpacingSpecifier(object):
         ...             rmakers.TupletSpecifier(
         ...                 duration_bracket=True,
         ...                 ),
-        ...             rmakers.BeamSpecifier(
+        ...             rmakers.BeamCommand(
         ...                 selector=baca.tuplets(),
         ...                 use_feather_beams=True,
         ...                 ),

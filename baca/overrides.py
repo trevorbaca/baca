@@ -83,7 +83,7 @@ class OverrideCommand(scoping.Command):
         ...     baca.stem_up(),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.TaleaRhythmMaker(
-        ...             rmakers.BeamSpecifier(
+        ...             rmakers.BeamCommand(
         ...                 selector=baca.tuplets(),
         ...             ),
         ...             rmakers.TupletSpecifier(
@@ -759,7 +759,7 @@ def bar_line_transparent(
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.TaleaRhythmMaker(
-        ...             rmakers.BeamSpecifier(
+        ...             rmakers.BeamCommand(
         ...                 selector=baca.tuplets(),
         ...             ),
         ...             rmakers.TupletSpecifier(
@@ -921,7 +921,7 @@ def bar_line_transparent(
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.TaleaRhythmMaker(
-        ...             rmakers.BeamSpecifier(
+        ...             rmakers.BeamCommand(
         ...                 selector=baca.tuplets(),
         ...             ),
         ...             rmakers.TupletSpecifier(
