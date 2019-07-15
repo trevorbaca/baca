@@ -9825,10 +9825,10 @@ class PitchFirstRhythmCommand(scoping.Command):
             rhythm_maker = abjad.new(rhythm_maker, **keywords)
         specifiers = []
         if tuplet_denominator is not None:
-            specifier = rmakers.TupletSpecifier(denominator=tuplet_denominator)
+            specifier = rmakers.TupletCommand(denominator=tuplet_denominator)
             specifiers.append(specifier)
         if tuplet_force_fraction is not None:
-            specifier = rmakers.TupletSpecifier(
+            specifier = rmakers.TupletCommand(
                 force_fraction=tuplet_force_fraction
             )
             specifiers.append(specifier)
@@ -10169,7 +10169,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
         ...     rmakers.rest(baca.tuplets().get([1], 2)),
-        ...     rmakers.TupletSpecifier(rewrite_rest_filled=True),
+        ...     rmakers.TupletCommand(rewrite_rest_filled=True),
         ...     rmakers.BeamCommand(selector=baca.tuplets()),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
@@ -10220,7 +10220,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         ...         attach_ties=True,
         ...         selector=tuplets.map(baca.leaves()[:-1])
         ...     ),
-        ...     rmakers.TupletSpecifier(rewrite_sustained=True),
+        ...     rmakers.TupletCommand(rewrite_sustained=True),
         ...     rmakers.BeamCommand(selector=baca.tuplets()),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
@@ -11826,7 +11826,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Segment durations equal to a quarter:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.TupletSpecifier(
+            ...     rmakers.TupletCommand(
             ...         denominator=abjad.Duration(1, 16),
             ...     ),
             ...     rmakers.BeamCommand(selector=baca.tuplets()),
@@ -11921,7 +11921,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             quarter:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.TupletSpecifier(
+            ...     rmakers.TupletCommand(
             ...         denominator=abjad.Duration(1, 16),
             ...     ),
             ...     rmakers.BeamCommand(selector=baca.tuplets()),

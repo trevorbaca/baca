@@ -123,7 +123,7 @@ class RhythmCommand(scoping.Command):
         ...         rmakers.BeamCommand(
         ...             selector=baca.tuplets(),
         ...         ),
-        ...         rmakers.TupletSpecifier(
+        ...         rmakers.TupletCommand(
         ...             extract_trivial=True,
         ...             ),
         ...     ),
@@ -478,7 +478,7 @@ class RhythmCommand(scoping.Command):
             ...     rmakers.BeamCommand(
             ...         selector=baca.tuplets(),
             ...     ),
-            ...     rmakers.TupletSpecifier(
+            ...     rmakers.TupletCommand(
             ...         extract_trivial=True,
             ...     ),
             ...     talea=rmakers.Talea(
@@ -1336,7 +1336,7 @@ def make_even_divisions(
         measures=measures,
         rhythm_maker=rmakers.EvenDivisionRhythmMaker(
             rmakers.BeamCommand(selector=classes._select().tuplets()),
-            rmakers.TupletSpecifier(extract_trivial=True),
+            rmakers.TupletCommand(extract_trivial=True),
             tag=tag,
         ),
     )
@@ -1361,7 +1361,7 @@ def make_fused_tuplet_monads(
         rhythm_maker=rmakers.RhythmCommand(
             rmakers.TupletRhythmMaker(tag=tag, tuplet_ratios=tuplet_ratios),
             rmakers.BeamCommand(selector=classes._select().tuplets()),
-            rmakers.TupletSpecifier(
+            rmakers.TupletCommand(
                 extract_trivial=True, rewrite_rest_filled=True, trivialize=True
             ),
             rmakers.TieCommand(repeat_ties=True),
@@ -1743,7 +1743,7 @@ def make_single_attack(
     numerator, denominator = duration.pair
     rhythm_maker = rmakers.IncisedRhythmMaker(
         rmakers.BeamCommand(selector=classes._select().tuplets()),
-        rmakers.TupletSpecifier(extract_trivial=True),
+        rmakers.TupletCommand(extract_trivial=True),
         incise_specifier=rmakers.InciseSpecifier(
             fill_with_rests=True,
             outer_divisions_only=True,

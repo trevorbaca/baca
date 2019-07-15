@@ -1303,7 +1303,7 @@ class HorizontalSpacingSpecifier(object):
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.AccelerandoRhythmMaker(
-        ...             rmakers.TupletSpecifier(
+        ...             rmakers.TupletCommand(
         ...                 duration_bracket=True,
         ...                 ),
         ...             rmakers.BeamCommand(

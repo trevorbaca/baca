@@ -6667,7 +6667,7 @@ def volta(*, selector: abjad.SelectorTyping = "baca.leaves()") -> VoltaCommand:
         ...             rmakers.BeamCommand(
         ...                 selector=baca.tuplets(),
         ...             ),
-        ...             rmakers.TupletSpecifier(
+        ...             rmakers.TupletCommand(
         ...                 extract_trivial=True,
         ...             ),
         ...             talea=rmakers.Talea(
@@ -6837,7 +6837,7 @@ def volta(*, selector: abjad.SelectorTyping = "baca.leaves()") -> VoltaCommand:
         ...             rmakers.BeamCommand(
         ...                 selector=baca.tuplets(),
         ...             ),
-        ...             rmakers.TupletSpecifier(
+        ...             rmakers.TupletCommand(
         ...                 extract_trivial=True,
         ...             ),
         ...             talea=rmakers.Talea(

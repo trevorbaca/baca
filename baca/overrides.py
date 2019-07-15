@@ -86,7 +86,7 @@ class OverrideCommand(scoping.Command):
         ...             rmakers.BeamCommand(
         ...                 selector=baca.tuplets(),
         ...             ),
-        ...             rmakers.TupletSpecifier(
+        ...             rmakers.TupletCommand(
         ...                 extract_trivial=True,
         ...             ),
         ...             talea=rmakers.Talea(
@@ -762,7 +762,7 @@ def bar_line_transparent(
         ...             rmakers.BeamCommand(
         ...                 selector=baca.tuplets(),
         ...             ),
-        ...             rmakers.TupletSpecifier(
+        ...             rmakers.TupletCommand(
         ...                 extract_trivial=True,
         ...             ),
         ...             talea=rmakers.Talea(
@@ -924,7 +924,7 @@ def bar_line_transparent(
         ...             rmakers.BeamCommand(
         ...                 selector=baca.tuplets(),
         ...             ),
-        ...             rmakers.TupletSpecifier(
+        ...             rmakers.TupletCommand(
         ...                 extract_trivial=True,
         ...             ),
         ...             talea=rmakers.Talea(
