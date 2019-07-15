@@ -1539,7 +1539,7 @@ def make_notes(
         rhythm_maker=rmakers.NoteRhythmMaker(
             *specifiers,
             rmakers.BeamSpecifier(selector=classes._select().plts()),
-            rmakers.RewriteMeterCommand(),
+            rmakers.rewrite_meter(),
             *repeat_tie_specifier,
             tag=tag,
         ),
@@ -1676,8 +1676,8 @@ def make_repeat_tied_notes(
     )
     specifiers_.append(specifier)
     if not do_not_rewrite_meter:
-        specifier = rmakers.RewriteMeterCommand()
-        specifiers_.append(specifier)
+        command = rmakers.rewrite_meter()
+        specifiers_.append(command)
     specifier = rmakers.TieSpecifier(repeat_ties=True)
     specifiers_.append(specifier)
     return RhythmCommand(
@@ -1705,7 +1705,7 @@ def make_repeated_duration_notes(
     divisions = divisions.split(durations, cyclic=True)
     rewrite_specifiers: typing.List[rmakers.SpecifierTyping] = []
     if not do_not_rewrite_meter:
-        rewrite_specifiers.append(rmakers.RewriteMeterCommand())
+        rewrite_specifiers.append(rmakers.rewrite_meter())
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.NoteRhythmMaker(
@@ -1780,7 +1780,7 @@ def make_tied_notes(
             rmakers.TieSpecifier(
                 attach_ties=True, selector=classes._select().ptails()[:-1]
             ),
-            rmakers.RewriteMeterCommand(),
+            rmakers.rewrite_meter(),
             tag=tag,
         ),
     )
