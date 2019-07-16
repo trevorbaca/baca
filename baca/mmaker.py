@@ -9814,7 +9814,7 @@ class PitchFirstRhythmCommand(scoping.Command):
             rhythm_maker = abjad.new(rhythm_maker, **keywords)
         specifiers = []
         if tuplet_denominator is not None:
-            specifier = rmakers.TupletCommand(denominator=tuplet_denominator)
+            specifier = rmakers.denominator(tuplet_denominator)
             specifiers.append(specifier)
         if tuplet_force_fraction is True:
             specifier = rmakers.force_fraction()
@@ -11807,9 +11807,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Segment durations equal to a quarter:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.TupletCommand(
-            ...         denominator=abjad.Duration(1, 16),
-            ...     ),
+            ...     rmakers.denominator((1, 16)),
             ...     rmakers.beam(),
             ...     time_treatments=[abjad.Duration(1, 4)],
             ...     talea=rmakers.Talea(
@@ -11902,9 +11900,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             quarter:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.TupletCommand(
-            ...         denominator=abjad.Duration(1, 16),
-            ...     ),
+            ...     rmakers.denominator((1, 16)),
             ...     rmakers.beam(),
             ...     time_treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
             ...     talea=rmakers.Talea(
