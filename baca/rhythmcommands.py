@@ -1777,7 +1777,7 @@ def make_tied_repeated_durations(
     """
     Makes tied repeated durations; does not rewrite meter.
     """
-    specifiers = []
+    specifiers: typing.List[rmakers.Command] = []
     if isinstance(durations, abjad.Duration):
         durations = [durations]
     elif isinstance(durations, tuple):
