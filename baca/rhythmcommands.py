@@ -833,7 +833,7 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
 
     def __init__(
         self,
-        *specifiers: rmakers.SpecifierTyping,
+        *specifiers: rmakers.Command,
         divisions: abjad.Expression = None,
         tag: str = None,
         use_multimeasure_rests: bool = None,
@@ -1533,7 +1533,7 @@ def make_notes(
 
 
 def make_repeat_tied_notes(
-    *specifiers: rmakers.SpecifierTyping,
+    *specifiers: rmakers.Command,
     do_not_rewrite_meter: bool = None,
     measures: typings.SliceTyping = None,
     tag: str = "baca.make_repeat_tied_notes",
@@ -1653,7 +1653,7 @@ def make_repeat_tied_notes(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    specifier: rmakers.SpecifierTyping
+    specifier: rmakers.Command
     specifiers_ = list(specifiers)
     specifier = rmakers.beam(classes._select().plts())
     specifiers_.append(specifier)
@@ -1672,7 +1672,7 @@ def make_repeat_tied_notes(
 
 def make_repeated_duration_notes(
     durations: typing.Sequence[abjad.DurationTyping],
-    *specifiers: rmakers.SpecifierTyping,
+    *specifiers: rmakers.Command,
     do_not_rewrite_meter: bool = None,
     measures: typings.SliceTyping = None,
     tag: str = "baca.make_repeated_duration_notes",
@@ -1687,7 +1687,7 @@ def make_repeated_duration_notes(
         durations = [abjad.Duration(durations)]
     divisions = divisionclasses._divisions().fuse()
     divisions = divisions.split(durations, cyclic=True)
-    rewrite_specifiers: typing.List[rmakers.SpecifierTyping] = []
+    rewrite_specifiers: typing.List[rmakers.Command] = []
     if not do_not_rewrite_meter:
         rewrite_specifiers.append(rmakers.rewrite_meter())
     return RhythmCommand(
