@@ -120,7 +120,7 @@ class RhythmCommand(scoping.Command):
 
         >>> command = baca.RhythmCommand(
         ...     rhythm_maker=rmakers.EvenDivisionRhythmMaker(
-        ...         rmakers.beam(),
+        ...         rmakers.simple_beam(),
         ...         rmakers.extract_trivial(),
         ...     ),
         ... )
@@ -469,7 +469,7 @@ class RhythmCommand(scoping.Command):
             ...     rmakers.beam(baca.plts()),
             ... )
             >>> talea_rhythm_maker = rmakers.TaleaRhythmMaker(
-            ...     rmakers.beam(),
+            ...     rmakers.simple_beam(),
             ...     rmakers.extract_trivial(),
             ...     talea=rmakers.Talea(
             ...         counts=[3, 4],
@@ -1325,7 +1325,7 @@ def make_even_divisions(
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.EvenDivisionRhythmMaker(
-            rmakers.beam(), rmakers.extract_trivial(), tag=tag
+            rmakers.simple_beam(), rmakers.extract_trivial(), tag=tag
         ),
     )
 
@@ -1348,7 +1348,7 @@ def make_fused_tuplet_monads(
         measures=measures,
         rhythm_maker=rmakers.RhythmCommand(
             rmakers.TupletRhythmMaker(tag=tag, tuplet_ratios=tuplet_ratios),
-            rmakers.beam(),
+            rmakers.simple_beam(),
             rmakers.rewrite_rest_filled(),
             rmakers.trivialize(),
             rmakers.extract_trivial(),
