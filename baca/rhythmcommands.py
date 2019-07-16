@@ -1783,6 +1783,7 @@ def make_tied_repeated_durations(
     elif isinstance(durations, tuple):
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
+    tie_specifier: rmakers.Command
     tie_specifier = rmakers.repeat_tie(classes._select().pheads()[1:])
     specifiers.append(tie_specifier)
     tie_specifier = rmakers.force_repeat_ties()
