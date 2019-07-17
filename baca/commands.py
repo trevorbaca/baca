@@ -1351,9 +1351,9 @@ class DetachCommand(scoping.Command):
 
     ..  container:: example
 
-        >>> arguments = [abjad.RepeatTie, abjad.TieIndicator]
+        >>> arguments = [abjad.RepeatTie, abjad.Tie]
         >>> baca.DetachCommand(arguments, baca.leaves())
-        DetachCommand([RepeatTie, TieIndicator], baca.leaves())
+        DetachCommand([RepeatTie, Tie], baca.leaves())
 
     """
 
@@ -6448,9 +6448,7 @@ def untie(selector: abjad.SelectorTyping) -> DetachCommand:
     r"""
     Makes (repeat-)tie detach command.
     """
-    return DetachCommand(
-        [abjad.TieIndicator, abjad.RepeatTie], selector=selector
-    )
+    return DetachCommand([abjad.Tie, abjad.RepeatTie], selector=selector)
 
 
 def voice_four(

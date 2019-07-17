@@ -4241,7 +4241,7 @@ def tie(
 
     """
     return commands.IndicatorCommand(
-        indicators=[abjad.TieIndicator()], selector=selector, tags=[tag]
+        indicators=[abjad.Tie()], selector=selector, tags=[tag]
     )
 
 

@@ -2954,7 +2954,7 @@ class ImbricationCommand(scoping.Command):
                         duration = leaf.written_duration
                         skip = abjad.Skip(duration)
                         abjad.mutate(leaf).replace([skip])
-                    abjad.detach(abjad.TieIndicator, head)
+                    abjad.detach(abjad.Tie, head)
                     next_leaf = abjad.inspect(tail).leaf(1)
                     if next_leaf is not None:
                         abjad.detach(abjad.RepeatTie, next_leaf)

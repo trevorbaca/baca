@@ -2012,7 +2012,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 if isinstance(indicator, abjad.StopTrillSpan):
                     continue
-                if isinstance(indicator, abjad.TieIndicator):
+                if isinstance(indicator, abjad.Tie):
                     continue
                 prototype, manifest = None, None
                 if isinstance(indicator, abjad.Instrument):
@@ -3474,7 +3474,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.StopSlur,
             abjad.StopTextSpan,
             abjad.StopTrillSpan,
-            abjad.TieIndicator,
+            abjad.Tie,
         )
         if isinstance(indicator, prototype):
             return
