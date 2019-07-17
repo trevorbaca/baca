@@ -1636,13 +1636,13 @@ class ImbricationCommand(scoping.Command):
         ...     baca.ImbricationCommand(
         ...         'Voice_1',
         ...         [2, 19, 9],
-        ...         baca.beam_everything(),
+        ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.staccato(selector=baca.pheads()),
         ...         ),
         ...     baca.ImbricationCommand(
         ...         'Voice_3',
         ...         [16, 10, 18],
-        ...         baca.beam_everything(),
+        ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.accent(selector=baca.pheads()),
         ...         ),
         ...     )
@@ -1837,7 +1837,7 @@ class ImbricationCommand(scoping.Command):
         ...         'Voice_1',
         ...         [2, 19, 9, 18, 16],
         ...         baca.accent(selector=baca.pheads()),
-        ...         baca.beam_everything(),
+        ...         rmakers.beam_groups(beam_rests=True),
         ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
@@ -2076,7 +2076,7 @@ class ImbricationCommand(scoping.Command):
             ...         'Voice_1',
             ...         segment,
             ...         baca.accent(selector=baca.pheads()),
-            ...         baca.beam_everything(),
+            ...         rmakers.beam_groups(beam_rests=True),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -2183,7 +2183,7 @@ class ImbricationCommand(scoping.Command):
             ...         'Voice_1',
             ...         segment,
             ...         baca.accent(selector=baca.pheads()),
-            ...         baca.beam_everything(),
+            ...         rmakers.beam_groups(beam_rests=True),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -2310,7 +2310,7 @@ class ImbricationCommand(scoping.Command):
             ...         'Voice_1',
             ...         [2, 10],
             ...         baca.staccato(selector=baca.pheads()),
-            ...         baca.beam_everything(),
+            ...         rmakers.beam_groups(beam_rests=True),
             ...         extend_beam=True,
             ...         ),
             ...     )
@@ -2325,7 +2325,7 @@ class ImbricationCommand(scoping.Command):
             ...         'Voice_1',
             ...         [13, 9],
             ...         baca.staccato(selector=baca.pheads()),
-            ...         baca.beam_everything(),
+            ...         rmakers.beam_groups(beam_rests=True),
             ...         ),
             ...     )
             >>> dictionary = contribution.selections
@@ -3079,7 +3079,7 @@ class ImbricationCommand(scoping.Command):
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=baca.pheads()),
-            ...         baca.beam_everything(),
+            ...         rmakers.beam_groups(beam_rests=True),
             ...         allow_unused_pitches=True,
             ...         ),
             ...     )
@@ -3207,7 +3207,7 @@ class ImbricationCommand(scoping.Command):
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=baca.pheads()),
-            ...         baca.beam_everything(),
+            ...         rmakers.beam_groups(beam_rests=True),
             ...         ),
             ...     )
             Traceback (most recent call last):
@@ -3280,7 +3280,7 @@ class ImbricationCommand(scoping.Command):
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=baca.pheads()),
-            ...         baca.beam_everything(),
+            ...         rmakers.beam_groups(beam_rests=True),
             ...         hocket=True,
             ...         ),
             ...     )
@@ -3456,7 +3456,7 @@ class ImbricationCommand(scoping.Command):
             ...         'Voice_1',
             ...         [2, 18, 16, 15],
             ...         baca.accent(selector=baca.pheads()),
-            ...         baca.beam_everything(),
+            ...         rmakers.beam_groups(beam_rests=True),
             ...         selector=baca.plts()[-9:],
             ...         ),
             ...     )
@@ -3924,7 +3924,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         baca.beam_everything(),
+            ...         rmakers.beam_groups(beam_rests=True),
             ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -4247,7 +4247,7 @@ class ImbricationCommand(scoping.Command):
             Beams divisions together:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.beam_groups(),
+            ...     rmakers.beam_groups(abjad.select().tuplets()),
             ...     talea=rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -4591,7 +4591,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 10, 18, 19, 9],
-            ...         baca.beam_everything(),
+            ...         rmakers.beam_groups(beam_rests=True),
             ...         truncate_ties=True,
             ...         ),
             ...     )

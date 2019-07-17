@@ -3796,7 +3796,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> contribution = music_maker(
             ...     'Violin_Music_Voice',
             ...     [[2, 4, 5, 7, 9, 11]],
-            ...     baca.do_not_beam(),
+            ...     rmakers.unbeam(),
             ...     )
             >>> maker(
             ...     ('Violin_Music_Voice', 1),
@@ -3806,7 +3806,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> contribution = music_maker(
             ...     'Cello_Music_Voice',
             ...     [[-3, -5, -7, -8, -10, -12]],
-            ...     baca.do_not_beam(),
+            ...     rmakers.unbeam(),
             ...     )
             >>> maker(
             ...     ('Cello_Music_Voice', 1),
@@ -4155,7 +4155,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     contribution = music_maker(
             ...         'Voice_1',
             ...         collections,
-            ...         baca.do_not_beam(),
+            ...         rmakers.unbeam(),
             ...         )
             ...     figures.append(contribution['Voice_1'])
             ...     time_signatures.append(contribution.time_signature)
@@ -4373,7 +4373,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     contribution = music_maker(
             ...         'Voice_1',
             ...         collections,
-            ...         baca.do_not_beam(),
+            ...         rmakers.unbeam(),
             ...         )
             ...     figures.append(contribution['Voice_1'])
             ...     time_signatures.append(contribution.time_signature)

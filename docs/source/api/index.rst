@@ -958,10 +958,6 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.rhythmcommands.beam_divisions
-   ~baca.rhythmcommands.beam_everything
-   ~baca.rhythmcommands.beam_runs
-   ~baca.rhythmcommands.do_not_beam
    ~baca.rhythmcommands.make_even_divisions
    ~baca.rhythmcommands.make_fused_tuplet_monads
    ~baca.rhythmcommands.make_monads
