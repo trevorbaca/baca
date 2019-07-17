@@ -1479,7 +1479,7 @@ class ImbricationCommand(scoping.Command):
         Defaults:
 
         >>> music_maker = baca.MusicMaker(
-        ...     rmakers.beam_divisions_together(),
+        ...     rmakers.beam_groups(),
         ... )
 
         >>> collections = [
@@ -1493,7 +1493,7 @@ class ImbricationCommand(scoping.Command):
         ...     baca.ImbricationCommand(
         ...         'Voice_1',
         ...         [2, 19, 9, 18, 16],
-        ...         rmakers.beam_divisions_together(),
+        ...         rmakers.beam_groups(),
         ...     ),
         ... )
         >>> lilypond_file = music_maker.show(contribution)
@@ -1622,7 +1622,7 @@ class ImbricationCommand(scoping.Command):
         Multiple imbricated voices:
 
         >>> music_maker = baca.MusicMaker(
-        ...     rmakers.beam_divisions_together(),
+        ...     rmakers.beam_groups(),
         ... )
 
         >>> collections = [
@@ -1811,7 +1811,7 @@ class ImbricationCommand(scoping.Command):
         Hides tuplet brackets above imbricated voice:
 
         >>> music_maker = baca.MusicMaker(
-        ...     rmakers.beam_divisions_together(beam_rests=True),
+        ...     rmakers.beam_groups(beam_rests=True),
         ...     baca.staccato(selector=baca.pheads()),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
@@ -2297,7 +2297,7 @@ class ImbricationCommand(scoping.Command):
             Extends beam across figures:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ... )
 
             >>> voice_1_selections = []
@@ -2626,7 +2626,7 @@ class ImbricationCommand(scoping.Command):
             Works with chords:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ... )
 
             >>> collections = [
@@ -2640,7 +2640,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.beam_divisions_together(),
+            ...         rmakers.beam_groups(),
             ...     ),
             ... )
             >>> lilypond_file = music_maker.show(contribution)
@@ -2753,7 +2753,7 @@ class ImbricationCommand(scoping.Command):
             Works with rests:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ... )
 
             >>> collections = [
@@ -2767,7 +2767,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.beam_divisions_together(),
+            ...         rmakers.beam_groups(),
             ...     ),
             ...     baca.rests_around([2], [2]),
             ...     )
@@ -2999,7 +2999,7 @@ class ImbricationCommand(scoping.Command):
             prototype = (
                 rmakers.SimpleBeamCommand,
                 rmakers.FeatherBeamCommand,
-                rmakers.BeamDivisionsTogetherCommand,
+                rmakers.BeamGroupsCommand,
                 rmakers.UnbeamCommand,
             )
             if isinstance(specifier, prototype):
@@ -3064,7 +3064,7 @@ class ImbricationCommand(scoping.Command):
             Allows unused pitches:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(beam_rests=True),
+            ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.staccato(selector=baca.pheads()),
             ...     )
 
@@ -3192,7 +3192,7 @@ class ImbricationCommand(scoping.Command):
             Raises exception on unused pitches:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(beam_rests=True),
+            ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.staccato(selector=baca.pheads()),
             ...     )
 
@@ -3264,7 +3264,7 @@ class ImbricationCommand(scoping.Command):
             Hockets voices:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(beam_rests=True),
+            ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.staccato(selector=baca.pheads()),
             ...     )
 
@@ -3441,7 +3441,7 @@ class ImbricationCommand(scoping.Command):
             Selects last nine notes:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(beam_rests=True),
+            ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.staccato(selector=baca.pheads()),
             ... )
 
@@ -3639,7 +3639,7 @@ class ImbricationCommand(scoping.Command):
             Beams nothing:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ... )
 
             >>> collections = [
@@ -3767,7 +3767,7 @@ class ImbricationCommand(scoping.Command):
             Beams divisions together but excludes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ... )
 
             >>> collections = [
@@ -3781,7 +3781,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         rmakers.beam_divisions_together(),
+            ...         rmakers.beam_groups(),
             ...     ),
             ... )
             >>> lilypond_file = music_maker.show(contribution)
@@ -3910,7 +3910,7 @@ class ImbricationCommand(scoping.Command):
             Beams divisions together and includes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ... )
 
             >>> collections = [
@@ -4051,7 +4051,7 @@ class ImbricationCommand(scoping.Command):
             Beams each division and includes skips:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ... )
 
             >>> collections = [
@@ -4247,7 +4247,7 @@ class ImbricationCommand(scoping.Command):
             Beams divisions together:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ...     talea=rmakers.Talea(
             ...         counts=[1, 1, 2],
             ...         denominator=16,
@@ -7047,7 +7047,7 @@ class MusicMaker(object):
     def _call_remaining_commands(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
         prototype = (
-            rmakers.BeamDivisionsTogetherCommand,
+            rmakers.BeamGroupsCommand,
             rmakers.FeatherBeamCommand,
             rmakers.SimpleBeamCommand,
             rmakers.UnbeamCommand,
@@ -8282,7 +8282,7 @@ class MusicMaker(object):
             Beam specifier beams divisions together:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ...     )
 
             >>> collections = [
@@ -8421,7 +8421,7 @@ class MusicMaker(object):
             ...     baca.NestingCommand(
             ...         time_treatments=['+1/16'],
             ...         ),
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ...     )
 
             >>> collections = [
@@ -8514,7 +8514,7 @@ class MusicMaker(object):
             ...             ),
             ...         time_treatments=['+1/16', None],
             ...         ),
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ...     )
 
             >>> collections = [
@@ -9124,7 +9124,7 @@ class NestingCommand(scoping.Command):
         ...     baca.NestingCommand(
         ...         time_treatments=['+1/16'],
         ...         ),
-        ...     rmakers.beam_divisions_together(),
+        ...     rmakers.beam_groups(),
         ...     )
 
         >>> collections = [
@@ -9206,7 +9206,7 @@ class NestingCommand(scoping.Command):
         extend beam:
 
             >>> music_maker = baca.MusicMaker(
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ...     )
 
         >>> containers, time_signatures = [], []
@@ -9438,7 +9438,7 @@ class NestingCommand(scoping.Command):
             ...         prefix=[2],
             ...         suffix=[3],
             ...         ),
-            ...     rmakers.beam_divisions_together(),
+            ...     rmakers.beam_groups(),
             ...     )
 
             >>> collections = [
@@ -13233,7 +13233,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     baca.imbricate(
         ...         'Voice_2',
         ...         [baca.coat(0), baca.coat(2), 10, 0, 2],
-        ...         rmakers.beam_divisions_together(),
+        ...         rmakers.beam_groups(),
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     time_treatments=[-1],

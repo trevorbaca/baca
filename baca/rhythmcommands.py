@@ -1022,7 +1022,7 @@ def beam_divisions(
 
 def beam_everything(
     *, stemlets: abjad.Number = None
-) -> rmakers.BeamDivisionsTogetherCommand:
+) -> rmakers.BeamGroupsCommand:
     r"""
     Beams everything.
 
@@ -1157,12 +1157,10 @@ def beam_everything(
             >>
 
     """
-    return rmakers.beam_divisions_together(
-        None, beam_rests=True, stemlet_length=stemlets
-    )
+    return rmakers.beam_groups(None, beam_rests=True, stemlet_length=stemlets)
 
 
-def beam_runs() -> rmakers.BeamDivisionsTogetherCommand:
+def beam_runs() -> rmakers.BeamGroupsCommand:
     r"""
     Beams PLT runs.
 
@@ -1248,7 +1246,7 @@ def beam_runs() -> rmakers.BeamDivisionsTogetherCommand:
             >>
 
     """
-    return rmakers.beam_divisions_together(None)
+    return rmakers.beam_groups(None)
 
 
 def do_not_beam() -> rmakers.UnbeamCommand:
