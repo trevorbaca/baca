@@ -10371,7 +10371,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         staff["MusicVoice"].extend(tuplets)
         self._apply_specifiers(staff, divisions_consumed)
         # self._check_wellformedness(selections)
-        selections = self._select_by_measure(staff)
+        selections = abjad.select(staff["MusicVoice"][:]).group_by_measure()
         staff["MusicVoice"][:] = []
         self._validate_tuplets(selections)
         state = self._make_state()
