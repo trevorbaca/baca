@@ -120,7 +120,7 @@ class RhythmCommand(scoping.Command):
 
         >>> command = baca.RhythmCommand(
         ...     rhythm_maker=rmakers.EvenDivisionRhythmMaker(
-        ...         rmakers.simple_beam(),
+        ...         rmakers.beam(),
         ...         rmakers.extract_trivial(),
         ...     ),
         ... )
@@ -466,10 +466,10 @@ class RhythmCommand(scoping.Command):
 
             >>> note_rhythm_maker = rmakers.NoteRhythmMaker(
             ...     rmakers.rest(baca.lts()),
-            ...     rmakers.simple_beam(baca.plts()),
+            ...     rmakers.beam(baca.plts()),
             ... )
             >>> talea_rhythm_maker = rmakers.TaleaRhythmMaker(
-            ...     rmakers.simple_beam(),
+            ...     rmakers.beam(),
             ...     rmakers.extract_trivial(),
             ...     talea=rmakers.Talea(
             ...         counts=[3, 4],
@@ -915,7 +915,7 @@ def make_even_divisions(
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.EvenDivisionRhythmMaker(
-            rmakers.simple_beam(), rmakers.extract_trivial(), tag=tag
+            rmakers.beam(), rmakers.extract_trivial(), tag=tag
         ),
     )
 
@@ -938,7 +938,7 @@ def make_fused_tuplet_monads(
         measures=measures,
         rhythm_maker=rmakers.RhythmCommand(
             rmakers.TupletRhythmMaker(tag=tag, tuplet_ratios=tuplet_ratios),
-            rmakers.simple_beam(),
+            rmakers.beam(),
             rmakers.rewrite_rest_filled(),
             rmakers.trivialize(),
             rmakers.extract_trivial(),
@@ -1114,7 +1114,7 @@ def make_notes(
         measures=measures,
         rhythm_maker=rmakers.NoteRhythmMaker(
             *specifiers,
-            rmakers.simple_beam(classes._select().plts()),
+            rmakers.beam(classes._select().plts()),
             rmakers.rewrite_meter(),
             *repeat_tie_specifier,
             tag=tag,
@@ -1245,7 +1245,7 @@ def make_repeat_tied_notes(
     """
     specifier: rmakers.Command
     specifiers_ = list(specifiers)
-    specifier = rmakers.simple_beam(classes._select().plts())
+    specifier = rmakers.beam(classes._select().plts())
     specifiers_.append(specifier)
     specifier = rmakers.repeat_tie(classes._select().pheads()[1:])
     specifiers_.append(specifier)
@@ -1318,7 +1318,7 @@ def make_single_attack(
     duration = abjad.Duration(duration)
     numerator, denominator = duration.pair
     rhythm_maker = rmakers.IncisedRhythmMaker(
-        rmakers.simple_beam(),
+        rmakers.beam(),
         rmakers.extract_trivial(),
         incise_specifier=rmakers.InciseSpecifier(
             fill_with_rests=True,
@@ -1350,7 +1350,7 @@ def make_tied_notes(
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.NoteRhythmMaker(
-            rmakers.simple_beam(classes._select().plts()),
+            rmakers.beam(classes._select().plts()),
             rmakers.tie(classes._select().ptails()[:-1]),
             rmakers.rewrite_meter(),
             tag=tag,
