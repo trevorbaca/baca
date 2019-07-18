@@ -10487,10 +10487,9 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         assert len(leaf_selection) == len(multipliers)
         for multiplier, leaf in zip(multipliers, leaf_selection):
             leaf.multiplier = multiplier
-        rhythm_maker_class = rmakers.AccelerandoRhythmMaker
-        if rhythm_maker_class._is_accelerando(leaf_selection):
+        if rmakers.FeatherBeamCommand._is_accelerando(leaf_selection):
             abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Right
-        elif rhythm_maker_class._is_ritardando(leaf_selection):
+        elif rmakers.FeatherBeamCommand._is_ritardando(leaf_selection):
             abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Left
         duration = abjad.inspect(tuplet).duration()
         duration = abjad.Duration(duration)
