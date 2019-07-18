@@ -351,6 +351,10 @@ rhythmcommands
 
    .. container:: inherited
 
+      .. autoattribute:: SkipRhythmMaker.commands
+
+   .. container:: inherited
+
       .. autoattribute:: SkipRhythmMaker.divisions
 
    .. container:: inherited
@@ -360,10 +364,6 @@ rhythmcommands
    .. container:: inherited
 
       .. autoattribute:: SkipRhythmMaker.previous_state
-
-   .. container:: inherited
-
-      .. autoattribute:: SkipRhythmMaker.specifiers
 
    .. container:: inherited
 

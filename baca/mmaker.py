@@ -10192,14 +10192,14 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
     def __init__(
         self,
-        *specifiers,
+        *commands,
         acciaccatura_specifiers=None,
         duration_specifier=None,
         talea=None,
         time_treatments=None,
     ):
         rmakers.RhythmMaker.__init__(
-            self, *specifiers, duration_specifier=duration_specifier
+            self, *commands, duration_specifier=duration_specifier
         )
         if acciaccatura_specifiers is not None:
             prototype = AcciaccaturaSpecifier

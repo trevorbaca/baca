@@ -937,6 +937,10 @@ mmaker
 
    .. container:: inherited
 
+      .. autoattribute:: PitchFirstRhythmMaker.commands
+
+   .. container:: inherited
+
       .. autoattribute:: PitchFirstRhythmMaker.divisions
 
    .. autoattribute:: PitchFirstRhythmMaker.duration_specifier
@@ -944,10 +948,6 @@ mmaker
    .. container:: inherited
 
       .. autoattribute:: PitchFirstRhythmMaker.previous_state
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmMaker.specifiers
 
    .. container:: inherited
 
