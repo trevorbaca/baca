@@ -465,7 +465,7 @@ class RhythmCommand(scoping.Command):
             ...     )
 
             >>> note_rhythm_maker = rmakers.NoteRhythmMaker(
-            ...     rmakers.rest(baca.lts()),
+            ...     rmakers.force_rest(baca.lts()),
             ...     rmakers.beam(baca.plts()),
             ... )
             >>> talea_rhythm_maker = rmakers.TaleaRhythmMaker(
@@ -1301,7 +1301,7 @@ def make_rests(
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.NoteRhythmMaker(
-            rmakers.rest(classes._select().lts()), tag=tag
+            rmakers.force_rest(classes._select().lts()), tag=tag
         ),
     )
 
@@ -1320,7 +1320,7 @@ def make_single_attack(
     rhythm_maker = rmakers.IncisedRhythmMaker(
         rmakers.beam(),
         rmakers.extract_trivial(),
-        incise_specifier=rmakers.InciseSpecifier(
+        incise_specifier=rmakers.Incise(
             fill_with_rests=True,
             outer_divisions_only=True,
             prefix_talea=[numerator],

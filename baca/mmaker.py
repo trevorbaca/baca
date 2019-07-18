@@ -7051,8 +7051,8 @@ class MusicMaker(object):
             rmakers.FeatherBeamCommand,
             rmakers.BeamCommand,
             rmakers.UnbeamCommand,
-            rmakers.RestCommand,
-            rmakers.NoteCommand,
+            rmakers.ForceRestCommand,
+            rmakers.ForceNoteCommand,
         )
         command_prototype = (rmakers.Command, scoping.Command, scoping.Suite)
         for specifier in specifiers:
@@ -9730,7 +9730,7 @@ class PitchFirstRhythmCommand(scoping.Command):
         rhythm_maker = self.rhythm_maker
         if rhythm_maker is None:
             rhythm_maker = rmakers.NoteRhythmMaker(
-                rmakers.rest(classes._select().lts())
+                rmakers.force_rest(classes._select().lts())
             )
         keywords = {}
         if talea_counts is not None:
@@ -9741,17 +9741,17 @@ class PitchFirstRhythmCommand(scoping.Command):
             keywords["time_treatments"] = time_treatments
         if keywords:
             rhythm_maker = abjad.new(rhythm_maker, **keywords)
-        specifiers = []
+        commands = []
         if tuplet_denominator is not None:
-            specifier = rmakers.denominator(tuplet_denominator)
-            specifiers.append(specifier)
+            command = rmakers.denominator(tuplet_denominator)
+            commands.append(command)
         if tuplet_force_fraction is True:
-            specifier = rmakers.force_fraction()
-            specifiers.append(specifier)
-        if specifiers:
-            specifiers_ = rhythm_maker.specifiers[:]
-            specifiers_.extend(specifiers)
-            rhythm_maker = abjad.new(rhythm_maker, *specifiers_)
+            command = rmakers.force_fraction()
+            commands.append(command)
+        if commands:
+            commands_ = rhythm_maker.commands[:]
+            commands_.extend(commands)
+            rhythm_maker = abjad.new(rhythm_maker, *commands_)
         return rhythm_maker
 
     ### PUBLIC PROPERTIES ###
@@ -9926,7 +9926,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Silences every third logical tie:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     rmakers.rest(baca.lts().get([2], 3)),
+        ...     rmakers.force_rest(baca.lts().get([2], 3)),
         ...     rmakers.beam(),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
@@ -9980,8 +9980,8 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Silences first and last logical ties:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     rmakers.rest(baca.lt(0)),
-        ...     rmakers.rest(baca.lt(-1)),
+        ...     rmakers.force_rest(baca.lt(0)),
+        ...     rmakers.force_rest(baca.lt(-1)),
         ...     rmakers.beam(),
         ...     talea=rmakers.Talea(
         ...         counts=[1, 1, 2],
@@ -10084,7 +10084,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         Silences every other division:
 
         >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-        ...     rmakers.rest(baca.tuplets().get([1], 2)),
+        ...     rmakers.force_rest(baca.tuplets().get([1], 2)),
         ...     rmakers.rewrite_rest_filled(),
         ...     rmakers.beam(),
         ...     talea=rmakers.Talea(
@@ -11097,7 +11097,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     rmakers.beam(),
-            ...     duration_specifier=rmakers.DurationSpecifier(
+            ...     duration_specifier=rmakers.Duration(
             ...         increase_monotonic=True,
             ...         ),
             ...     talea=rmakers.Talea(
