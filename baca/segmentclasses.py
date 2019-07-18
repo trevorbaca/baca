@@ -1305,7 +1305,7 @@ class HorizontalSpacingSpecifier(object):
         ...         rhythm_maker=rmakers.AccelerandoRhythmMaker(
         ...             rmakers.duration_bracket(),
         ...             rmakers.feather_beam(baca.tuplets()),
-        ...             interpolation_specifiers=rmakers.Interpolation(
+        ...             interpolations=rmakers.Interpolation(
         ...                 start_duration=abjad.Duration(1, 8),
         ...                 stop_duration=abjad.Duration(1, 20),
         ...                 written_duration=abjad.Duration(1, 16),
