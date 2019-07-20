@@ -834,12 +834,12 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
     def __init__(
         self,
         *specifiers: rmakers.Command,
-        divisions: abjad.Expression = None,
+        preprocessor: abjad.Expression = None,
         tag: str = None,
         use_multimeasure_rests: bool = None,
     ) -> None:
         rmakers.RhythmMaker.__init__(
-            self, *specifiers, divisions=divisions, tag=tag
+            self, *specifiers, preprocessor=preprocessor, tag=tag
         )
         if use_multimeasure_rests is not None:
             use_multimeasure_rests = bool(use_multimeasure_rests)
@@ -1286,7 +1286,7 @@ def make_repeated_duration_notes(
             *specifiers,
             *rewrite_specifiers,
             rmakers.force_repeat_ties(),
-            divisions=divisions,
+            preprocessor=divisions,
             tag=tag,
         ),
     )
@@ -1385,7 +1385,7 @@ def make_tied_repeated_durations(
         rhythm_maker=rmakers.RhythmCommand(
             rmakers.NoteRhythmMaker(tag=tag),
             *specifiers,
-            divisions=divisions,
+            preprocessor=divisions,
             tag=tag,
         ),
     )

@@ -941,7 +941,7 @@ mmaker
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmMaker.divisions
+      .. autoattribute:: PitchFirstRhythmMaker.preprocessor
 
    .. container:: inherited
 

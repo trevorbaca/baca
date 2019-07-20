@@ -355,7 +355,7 @@ rhythmcommands
 
    .. container:: inherited
 
-      .. autoattribute:: SkipRhythmMaker.divisions
+      .. autoattribute:: SkipRhythmMaker.preprocessor
 
    .. container:: inherited
 
