@@ -943,7 +943,7 @@ def make_fused_tuplet_monads(
             rmakers.trivialize(),
             rmakers.extract_trivial(),
             rmakers.force_repeat_ties(),
-            divisions=abjad.sequence().sum().sequence(),
+            preprocessor=abjad.sequence().sum().sequence(),
             tag=tag,
         ),
     )
