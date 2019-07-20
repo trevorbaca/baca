@@ -1320,7 +1320,7 @@ def make_single_attack(
     rhythm_maker = rmakers.IncisedRhythmMaker(
         rmakers.beam(),
         rmakers.extract_trivial(),
-        incise_specifier=rmakers.Incise(
+        incise=rmakers.Incise(
             fill_with_rests=True,
             outer_divisions_only=True,
             prefix_talea=[numerator],
