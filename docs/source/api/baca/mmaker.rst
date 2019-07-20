@@ -887,8 +887,8 @@ mmaker
 
       __call__
       acciaccatura_specifiers
-      duration_specifier
       show
+      spelling
       talea
       time_treatments
 
@@ -943,11 +943,11 @@ mmaker
 
       .. autoattribute:: PitchFirstRhythmMaker.divisions
 
-   .. autoattribute:: PitchFirstRhythmMaker.duration_specifier
-
    .. container:: inherited
 
       .. autoattribute:: PitchFirstRhythmMaker.previous_state
+
+   .. autoattribute:: PitchFirstRhythmMaker.spelling
 
    .. container:: inherited
 

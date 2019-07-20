@@ -10194,13 +10194,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         self,
         *commands,
         acciaccatura_specifiers=None,
-        duration_specifier=None,
+        spelling=None,
         talea=None,
         time_treatments=None,
     ):
-        rmakers.RhythmMaker.__init__(
-            self, *commands, duration_specifier=duration_specifier
-        )
+        rmakers.RhythmMaker.__init__(self, *commands, spelling=spelling)
         if acciaccatura_specifiers is not None:
             prototype = AcciaccaturaSpecifier
             for acciaccatura_specifier in acciaccatura_specifiers:
@@ -10658,7 +10656,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         self._next_segment += 1
         talea = self._get_talea()
         leaves = []
-        specifier = self._get_duration_specifier()
+        specifier = self._get_spelling_specifier()
         increase_durations = specifier.increase_monotonic
         current_selection = self._next_segment - 1
         time_treatment = self._get_time_treatments()[current_selection]
@@ -11025,7 +11023,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         return self._acciaccatura_specifiers
 
     @property
-    def duration_specifier(self):
+    def spelling(self):
         r"""
         Gets duration specifier.
 
@@ -11096,9 +11094,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     rmakers.beam(),
-            ...     duration_specifier=rmakers.Duration(
-            ...         increase_monotonic=True,
-            ...         ),
+            ...     spelling=rmakers.Spelling(increase_monotonic=True),
             ...     talea=rmakers.Talea(
             ...         counts=[4, 4, 5],
             ...         denominator=32,
@@ -11157,14 +11153,14 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             Defaults to none:
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker()
-            >>> rhythm_maker.duration_specifier is None
+            >>> rhythm_maker.spelling is None
             True
 
         Set to duration specifier or none.
 
         Returns duration specifier or none.
         """
-        return rmakers.RhythmMaker.duration_specifier.fget(self)
+        return rmakers.RhythmMaker.spelling.fget(self)
 
     @property
     def talea(self):

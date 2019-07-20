@@ -359,11 +359,11 @@ rhythmcommands
 
    .. container:: inherited
 
-      .. autoattribute:: SkipRhythmMaker.duration_specifier
+      .. autoattribute:: SkipRhythmMaker.previous_state
 
    .. container:: inherited
 
-      .. autoattribute:: SkipRhythmMaker.previous_state
+      .. autoattribute:: SkipRhythmMaker.spelling
 
    .. container:: inherited
 
