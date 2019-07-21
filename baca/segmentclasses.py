@@ -1302,10 +1302,10 @@ class HorizontalSpacingSpecifier(object):
         ...     'Music_Voice',
         ...     baca.pitches('E4 F4'),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.AccelerandoRhythmMaker(
+        ...         rhythm_maker=rmakers.accelerando(
         ...             rmakers.duration_bracket(),
         ...             rmakers.feather_beam(baca.tuplets()),
-        ...             interpolations=rmakers.Interpolation(
+        ...             interpolations=rmakers.interpolate(
         ...                 start_duration=abjad.Duration(1, 8),
         ...                 stop_duration=abjad.Duration(1, 20),
         ...                 written_duration=abjad.Duration(1, 16),

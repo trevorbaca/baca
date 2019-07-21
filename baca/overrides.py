@@ -82,7 +82,7 @@ class OverrideCommand(scoping.Command):
         ...     baca.rest_up(),
         ...     baca.stem_up(),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+        ...         rhythm_maker=rmakers.talea(
         ...             rmakers.beam(),
         ...             rmakers.extract_trivial(),
         ...             talea=rmakers.Talea(
@@ -754,7 +754,7 @@ def bar_line_transparent(
         ...     'Music_Voice',
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+        ...         rhythm_maker=rmakers.talea(
         ...             rmakers.beam(),
         ...             rmakers.extract_trivial(),
         ...             talea=rmakers.Talea(
@@ -912,7 +912,7 @@ def bar_line_transparent(
         ...     'Music_Voice',
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+        ...         rhythm_maker=rmakers.talea(
         ...             rmakers.beam(),
         ...             rmakers.extract_trivial(),
         ...             talea=rmakers.Talea(

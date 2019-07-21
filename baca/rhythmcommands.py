@@ -119,7 +119,7 @@ class RhythmCommand(scoping.Command):
         ...     )
 
         >>> command = baca.RhythmCommand(
-        ...     rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+        ...     rhythm_maker=rmakers.even_division(
         ...         rmakers.beam(),
         ...         rmakers.extract_trivial(),
         ...     ),
@@ -299,7 +299,7 @@ class RhythmCommand(scoping.Command):
 
     def __init__(
         self,
-        rhythm_maker: RhythmMakerTyping = rmakers.NoteRhythmMaker(),
+        rhythm_maker: RhythmMakerTyping = rmakers.note(),
         *,
         annotate_unpitched_music: bool = None,
         do_not_check_total_duration: bool = None,
@@ -464,11 +464,11 @@ class RhythmCommand(scoping.Command):
             ...     time_signatures=5 * [(4, 8)],
             ...     )
 
-            >>> note_rhythm_maker = rmakers.NoteRhythmMaker(
+            >>> note_rhythm_maker = rmakers.note(
             ...     rmakers.force_rest(baca.lts()),
             ...     rmakers.beam(baca.plts()),
             ... )
-            >>> talea_rhythm_maker = rmakers.TaleaRhythmMaker(
+            >>> talea_rhythm_maker = rmakers.talea(
             ...     rmakers.beam(),
             ...     rmakers.extract_trivial(),
             ...     talea=rmakers.Talea(
@@ -914,7 +914,7 @@ def make_even_divisions(
     """
     return RhythmCommand(
         measures=measures,
-        rhythm_maker=rmakers.EvenDivisionRhythmMaker(
+        rhythm_maker=rmakers.even_division(
             rmakers.beam(), rmakers.extract_trivial(), tag=tag
         ),
     )
@@ -1112,8 +1112,9 @@ def make_notes(
         repeat_tie_specifier = []
     return RhythmCommand(
         measures=measures,
-        rhythm_maker=rmakers.NoteRhythmMaker(
+        rhythm_maker=rmakers.note(
             *specifiers,
+            # TODO: can this beam specifier be removed?
             rmakers.beam(classes._select().plts()),
             rmakers.rewrite_meter(),
             *repeat_tie_specifier,
@@ -1255,8 +1256,7 @@ def make_repeat_tied_notes(
     specifier = rmakers.force_repeat_tie()
     specifiers_.append(specifier)
     return RhythmCommand(
-        measures=measures,
-        rhythm_maker=rmakers.NoteRhythmMaker(*specifiers_, tag=tag),
+        measures=measures, rhythm_maker=rmakers.note(*specifiers_, tag=tag)
     )
 
 
@@ -1282,7 +1282,7 @@ def make_repeated_duration_notes(
         rewrite_specifiers.append(rmakers.rewrite_meter())
     return RhythmCommand(
         measures=measures,
-        rhythm_maker=rmakers.NoteRhythmMaker(
+        rhythm_maker=rmakers.note(
             *specifiers,
             *rewrite_specifiers,
             rmakers.force_repeat_tie(),
@@ -1300,7 +1300,7 @@ def make_rests(
     """
     return RhythmCommand(
         measures=measures,
-        rhythm_maker=rmakers.NoteRhythmMaker(
+        rhythm_maker=rmakers.note(
             rmakers.force_rest(classes._select().lts()), tag=tag
         ),
     )
@@ -1349,7 +1349,7 @@ def make_tied_notes(
     """
     return RhythmCommand(
         measures=measures,
-        rhythm_maker=rmakers.NoteRhythmMaker(
+        rhythm_maker=rmakers.note(
             rmakers.beam(classes._select().plts()),
             rmakers.tie(classes._select().ptails()[:-1]),
             rmakers.rewrite_meter(),
@@ -1383,10 +1383,7 @@ def make_tied_repeated_durations(
     return RhythmCommand(
         measures=measures,
         rhythm_maker=rmakers.RhythmCommand(
-            rmakers.NoteRhythmMaker(tag=tag),
-            *specifiers,
-            preprocessor=divisions,
-            tag=tag,
+            rmakers.note(tag=tag), *specifiers, preprocessor=divisions, tag=tag
         ),
     )
 

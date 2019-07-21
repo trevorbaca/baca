@@ -9729,7 +9729,7 @@ class PitchFirstRhythmCommand(scoping.Command):
     ):
         rhythm_maker = self.rhythm_maker
         if rhythm_maker is None:
-            rhythm_maker = rmakers.NoteRhythmMaker(
+            rhythm_maker = rmakers.note(
                 rmakers.force_rest(classes._select().lts())
             )
         keywords = {}

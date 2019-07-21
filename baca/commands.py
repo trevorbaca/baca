@@ -6524,7 +6524,7 @@ def volta(*, selector: abjad.SelectorTyping = "baca.leaves()") -> VoltaCommand:
         ...     'Music_Voice',
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+        ...         rhythm_maker=rmakers.talea(
         ...             rmakers.beam(),
         ...             rmakers.extract_trivial(),
         ...             talea=rmakers.Talea(
@@ -6690,7 +6690,7 @@ def volta(*, selector: abjad.SelectorTyping = "baca.leaves()") -> VoltaCommand:
         ...     ('Music_Voice', (1, 3)),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.TaleaRhythmMaker(
+        ...         rhythm_maker=rmakers.talea(
         ...             rmakers.beam(),
         ...             rmakers.extract_trivial(),
         ...             talea=rmakers.Talea(

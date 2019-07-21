@@ -762,7 +762,7 @@ class DivisionSequence(abjad.Sequence):
             >>> divisions
             DivisionSequence([Division((15, 8), start_offset=Offset(0, 1))])
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, divisions)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -797,7 +797,7 @@ class DivisionSequence(abjad.Sequence):
             Division((4, 8), start_offset=Offset(0, 1))
             Division((12, 8), start_offset=Offset(1, 2))
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -834,7 +834,7 @@ class DivisionSequence(abjad.Sequence):
             Division((8, 8), start_offset=Offset(1, 2))
             Division((2, 4), start_offset=Offset(3, 2))
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -876,7 +876,7 @@ class DivisionSequence(abjad.Sequence):
             Division((7, 8), start_offset=Offset(3, 4))
             Division((2, 8), start_offset=Offset(13, 8))
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -937,7 +937,7 @@ class DivisionSequence(abjad.Sequence):
             Division((1, 16), start_offset=Offset(3, 2))
             Division((5, 16), start_offset=Offset(25, 16))
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1068,7 +1068,7 @@ class DivisionSequence(abjad.Sequence):
                 DivisionSequence([Division((2, 8), start_offset=Offset(3, 2))])
                 DivisionSequence([Division((1, 8), start_offset=Offset(7, 4))])
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1326,7 +1326,7 @@ class DivisionSequence(abjad.Sequence):
             DivisionSequence([Division((2, 8), start_offset=Offset(3, 2))])
             DivisionSequence([Division((1, 8), start_offset=Offset(7, 4))])
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1374,7 +1374,7 @@ class DivisionSequence(abjad.Sequence):
             DivisionSequence([Division((2, 8), start_offset=Offset(5, 4))])
             DivisionSequence([Division((3, 8), start_offset=Offset(3, 2))])
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1424,7 +1424,7 @@ class DivisionSequence(abjad.Sequence):
             DivisionSequence([Division((2, 8), start_offset=Offset(11, 8))])
             DivisionSequence([Division((2, 8), start_offset=Offset(13, 8))])
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1475,7 +1475,7 @@ class DivisionSequence(abjad.Sequence):
             DivisionSequence([Division((2, 8), start_offset=Offset(11, 8))])
             DivisionSequence([Division((2, 8), start_offset=Offset(13, 8))])
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1532,7 +1532,7 @@ class DivisionSequence(abjad.Sequence):
                 Division((4, 16), start_offset=Offset(7, 4))
                 Division((3, 16), start_offset=Offset(2, 1))
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
@@ -1597,7 +1597,7 @@ class DivisionSequence(abjad.Sequence):
                 Division((3, 16), start_offset=Offset(7, 4))
                 Division((4, 16), start_offset=Offset(31, 16))
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
@@ -1657,7 +1657,7 @@ class DivisionSequence(abjad.Sequence):
                 Division((2, 8), start_offset=Offset(0, 1))
                 Division((3, 8), start_offset=Offset(1, 4))
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
@@ -1706,7 +1706,7 @@ class DivisionSequence(abjad.Sequence):
                 Division((3, 8), start_offset=Offset(0, 1))
                 Division((2, 8), start_offset=Offset(3, 8))
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
@@ -1754,7 +1754,7 @@ class DivisionSequence(abjad.Sequence):
                 Division((3, 8), start_offset=Offset(3, 4))
                 Division((3, 8), start_offset=Offset(9, 8))
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
@@ -1816,7 +1816,7 @@ class DivisionSequence(abjad.Sequence):
                 Division((1, 16), start_offset=Offset(9, 8))
                 Division((2, 16), start_offset=Offset(19, 16))
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
@@ -1940,7 +1940,7 @@ class DivisionSequence(abjad.Sequence):
             sequence:
                 Division((11, 24), start_offset=Offset(11, 12))
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
@@ -1995,7 +1995,7 @@ class DivisionSequence(abjad.Sequence):
             sequence:
                 Division((4, 8), start_offset=Offset(7, 8))
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
@@ -2045,7 +2045,7 @@ class DivisionSequence(abjad.Sequence):
                 DivisionSequence([Division((4, 8), start_offset=Offset(5, 8))])
                 DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
@@ -2102,7 +2102,7 @@ class DivisionSequence(abjad.Sequence):
                 DivisionSequence([Division((4, 8), start_offset=Offset(5, 8))])
                 DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
@@ -2153,7 +2153,7 @@ class DivisionSequence(abjad.Sequence):
                 DivisionSequence([Division((2, 8), start_offset=Offset(7, 8))])
                 DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
@@ -2215,7 +2215,7 @@ class DivisionSequence(abjad.Sequence):
                 DivisionSequence([Division((2, 8), start_offset=Offset(7, 8))])
                 DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
 
-            >>> rhythm_maker = rmakers.NoteRhythmMaker()
+            >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
