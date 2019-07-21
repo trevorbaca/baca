@@ -83,15 +83,13 @@ class OverrideCommand(scoping.Command):
         ...     baca.stem_up(),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.talea(
+        ...             [1, 1, 1, -1],
+        ...             8,
         ...             rmakers.beam(),
         ...             rmakers.extract_trivial(),
-        ...             talea=rmakers.Talea(
-        ...                 counts=[1, 1, 1, -1],
-        ...                 denominator=8,
-        ...                 ),
-        ...             ),
         ...         ),
         ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -755,16 +753,14 @@ def bar_line_transparent(
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.talea(
+        ...             [1, 1, 1, -1],
+        ...             8,
         ...             rmakers.beam(),
         ...             rmakers.extract_trivial(),
-        ...             talea=rmakers.Talea(
-        ...                 counts=[1, 1, 1, -1],
-        ...                 denominator=8,
-        ...                 ),
-        ...             ),
         ...         ),
+        ...     ),
         ...     baca.bar_line_transparent(),
-        ...     )
+        ... )
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -913,14 +909,12 @@ def bar_line_transparent(
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.talea(
+        ...             [1, 1, 1, -1],
+        ...             8,
         ...             rmakers.beam(),
         ...             rmakers.extract_trivial(),
-        ...             talea=rmakers.Talea(
-        ...                 counts=[1, 1, 1, -1],
-        ...                 denominator=8,
-        ...                 ),
-        ...             ),
         ...         ),
+        ...     ),
         ...     baca.bar_line_transparent(selector=baca.group_by_measure()[1]),
         ...     )
 

@@ -469,13 +469,11 @@ class RhythmCommand(scoping.Command):
             ...     rmakers.beam(baca.plts()),
             ... )
             >>> talea_rhythm_maker = rmakers.talea(
+            ...     [3, 4],
+            ...     16,
             ...     rmakers.beam(),
             ...     rmakers.extract_trivial(),
-            ...     talea=rmakers.Talea(
-            ...         counts=[3, 4],
-            ...         denominator=16,
-            ...         ),
-            ...     )
+            ... )
             >>> command = baca.RhythmCommand(
             ...     rhythm_maker=rmakers.MakerAssignments(
             ...         rmakers.MakerAssignment(

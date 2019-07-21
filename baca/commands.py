@@ -6525,12 +6525,10 @@ def volta(*, selector: abjad.SelectorTyping = "baca.leaves()") -> VoltaCommand:
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.talea(
+        ...             [1, 1, 1, -1],
+        ...             8,
         ...             rmakers.beam(),
         ...             rmakers.extract_trivial(),
-        ...             talea=rmakers.Talea(
-        ...                 counts=[1, 1, 1, -1],
-        ...                 denominator=8,
-        ...                 ),
         ...             ),
         ...         ),
         ...     )
@@ -6691,15 +6689,13 @@ def volta(*, selector: abjad.SelectorTyping = "baca.leaves()") -> VoltaCommand:
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.RhythmCommand(
         ...         rhythm_maker=rmakers.talea(
+        ...             [1, 1, 1, -1],
+        ...             8,
         ...             rmakers.beam(),
         ...             rmakers.extract_trivial(),
-        ...             talea=rmakers.Talea(
-        ...                 counts=[1, 1, 1, -1],
-        ...                 denominator=8,
-        ...                 ),
-        ...             ),
         ...         ),
         ...     )
+        ... )
 
         >>> maker(
         ...     ('Global_Skips', (2, 3)),
