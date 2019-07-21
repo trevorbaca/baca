@@ -10366,11 +10366,12 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         durations = [abjad.inspect(_).duration() for _ in tuplets]
         time_signatures = [abjad.TimeSignature(_) for _ in durations]
         staff = self._make_staff(time_signatures)
-        staff["MusicVoice"].extend(tuplets)
-        self._apply_specifiers(staff, divisions_consumed)
+        voice = staff["MusicVoice"]
+        voice.extend(tuplets)
+        self._apply_specifiers(voice, divisions_consumed)
         # self._check_wellformedness(selections)
-        selections = abjad.select(staff["MusicVoice"][:]).group_by_measure()
-        staff["MusicVoice"][:] = []
+        selections = abjad.select(voice[:]).group_by_measure()
+        voice[:] = []
         self._validate_tuplets(selections)
         state = self._make_state()
         # TODO: harmonize return type with rmakers.RhythmMaker.__call__()
