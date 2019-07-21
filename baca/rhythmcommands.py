@@ -942,7 +942,7 @@ def make_fused_tuplet_monads(
             rmakers.rewrite_rest_filled(),
             rmakers.trivialize(),
             rmakers.extract_trivial(),
-            rmakers.force_repeat_ties(),
+            rmakers.force_repeat_tie(),
             preprocessor=abjad.sequence().sum().sequence(),
             tag=tag,
         ),
@@ -1107,7 +1107,7 @@ def make_notes(
     Makes notes; rewrites meter.
     """
     if repeat_ties:
-        repeat_tie_specifier = [rmakers.force_repeat_ties()]
+        repeat_tie_specifier = [rmakers.force_repeat_tie()]
     else:
         repeat_tie_specifier = []
     return RhythmCommand(
@@ -1252,7 +1252,7 @@ def make_repeat_tied_notes(
     if not do_not_rewrite_meter:
         command = rmakers.rewrite_meter()
         specifiers_.append(command)
-    specifier = rmakers.force_repeat_ties()
+    specifier = rmakers.force_repeat_tie()
     specifiers_.append(specifier)
     return RhythmCommand(
         measures=measures,
@@ -1285,7 +1285,7 @@ def make_repeated_duration_notes(
         rhythm_maker=rmakers.NoteRhythmMaker(
             *specifiers,
             *rewrite_specifiers,
-            rmakers.force_repeat_ties(),
+            rmakers.force_repeat_tie(),
             preprocessor=divisions,
             tag=tag,
         ),
@@ -1376,7 +1376,7 @@ def make_tied_repeated_durations(
     tie_specifier: rmakers.Command
     tie_specifier = rmakers.repeat_tie(classes._select().pheads()[1:])
     specifiers.append(tie_specifier)
-    tie_specifier = rmakers.force_repeat_ties()
+    tie_specifier = rmakers.force_repeat_tie()
     specifiers.append(tie_specifier)
     divisions = divisionclasses._divisions().fuse()
     divisions = divisions.split(durations, cyclic=True)

@@ -11235,7 +11235,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> rhythm_maker = baca.PitchFirstRhythmMaker(
             ...     rmakers.beam(),
-            ...     rmakers.force_repeat_ties(),
+            ...     rmakers.force_repeat_tie(),
             ...     talea=rmakers.Talea(
             ...         counts=[29],
             ...         denominator=64,
