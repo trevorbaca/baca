@@ -1301,18 +1301,12 @@ class HorizontalSpacingSpecifier(object):
         >>> maker(
         ...     'Music_Voice',
         ...     baca.pitches('E4 F4'),
-        ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.accelerando(
-        ...             rmakers.duration_bracket(),
-        ...             rmakers.feather_beam(baca.tuplets()),
-        ...             interpolations=rmakers.interpolate(
-        ...                 start_duration=abjad.Duration(1, 8),
-        ...                 stop_duration=abjad.Duration(1, 20),
-        ...                 written_duration=abjad.Duration(1, 16),
-        ...                 ),
-        ...             ),
-        ...         ),
-        ...     )
+        ...     baca.rhythm(
+        ...         rmakers.accelerando([(1, 8), (1, 20), (1, 16)]),
+        ...         rmakers.feather_beam(),
+        ...         rmakers.duration_bracket(),
+        ...     ),
+        ... )
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
