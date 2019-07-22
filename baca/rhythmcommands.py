@@ -1411,8 +1411,10 @@ def music(
 
 
 def rhythm(
-    argument: RhythmMakerTyping,
-    *,
+    #    argument: RhythmMakerTyping,
+    #    *,
+    *arguments,
+    preprocessor: abjad.Expression = None,
     measures: typings.SliceTyping = None,
     persist: str = None,
     tag: str = None,
@@ -1420,6 +1422,9 @@ def rhythm(
     """
     Makes rhythm command from ``argument``.
     """
+
+    argument = rmakers.rhythm(*arguments, preprocessor=preprocessor)
+
     prototype = (
         rmakers.MakerAssignment,
         rmakers.MakerAssignments,
@@ -1431,6 +1436,7 @@ def rhythm(
         message += " assignment(s):\n"
         message += f" {repr(argument)}."
         raise TypeError(message)
+
     if tag is not None:
         if isinstance(argument, rmakers.MakerAssignment):
             argument = abjad.new(argument, rhythm_maker__tag=tag)
