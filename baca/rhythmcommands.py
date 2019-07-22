@@ -832,12 +832,13 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
     def __init__(
         self,
         *specifiers: rmakers.Command,
-        preprocessor: abjad.Expression = None,
         tag: str = None,
         use_multimeasure_rests: bool = None,
     ) -> None:
         rmakers.RhythmMaker.__init__(
-            self, *specifiers, preprocessor=preprocessor, tag=tag
+            self,
+            *specifiers,
+            tag=tag,
         )
         if use_multimeasure_rests is not None:
             use_multimeasure_rests = bool(use_multimeasure_rests)
@@ -1279,14 +1280,15 @@ def make_repeated_duration_notes(
     if not do_not_rewrite_meter:
         rewrite_specifiers.append(rmakers.rewrite_meter())
     return RhythmCommand(
-        measures=measures,
-        rhythm_maker=rmakers.note(
+        rmakers.rhythm(
+            rmakers.note(),
             *specifiers,
             *rewrite_specifiers,
             rmakers.force_repeat_tie(),
             preprocessor=divisions,
             tag=tag,
         ),
+        measures=measures,
     )
 
 

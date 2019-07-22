@@ -941,10 +941,6 @@ mmaker
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmMaker.preprocessor
-
-   .. container:: inherited
-
       .. autoattribute:: PitchFirstRhythmMaker.previous_state
 
    .. autoattribute:: PitchFirstRhythmMaker.spelling
