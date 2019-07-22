@@ -385,7 +385,7 @@ class RhythmCommand(scoping.Command):
             if isinstance(self.rhythm_maker, rmakers.RhythmCommand):
                 rcommand = self.rhythm_maker
             else:
-                rcommand = rmakers.RhythmCommand(self.rhythm_maker)
+                rcommand = rmakers.rhythm(self.rhythm_maker)
             previous_segment_stop_state = self._previous_segment_stop_state(
                 runtime
             )
@@ -931,8 +931,8 @@ def make_fused_tuplet_monads(
         tuplet_ratios.append(tuplet_ratio)
     return RhythmCommand(
         measures=measures,
-        rhythm_maker=rmakers.RhythmCommand(
-            rmakers.TupletRhythmMaker(tag=tag, tuplet_ratios=tuplet_ratios),
+        rhythm_maker=rmakers.rhythm(
+            rmakers.TupletRhythmMaker(tuplet_ratios=tuplet_ratios),
             rmakers.beam(),
             rmakers.rewrite_rest_filled(),
             rmakers.trivialize(),
@@ -1378,8 +1378,8 @@ def make_tied_repeated_durations(
     divisions = divisions.split(durations, cyclic=True)
     return RhythmCommand(
         measures=measures,
-        rhythm_maker=rmakers.RhythmCommand(
-            rmakers.note(tag=tag), *specifiers, preprocessor=divisions, tag=tag
+        rhythm_maker=rmakers.rhythm(
+            rmakers.note(), *specifiers, preprocessor=divisions, tag=tag
         ),
     )
 
