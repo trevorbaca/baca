@@ -911,6 +911,7 @@ mmaker
    ~coat
    ~imbricate
    ~nest
+   ~pitch_first
    ~rests_after
    ~rests_around
    ~rests_before
@@ -931,6 +932,8 @@ mmaker
 .. autofunction:: imbricate
 
 .. autofunction:: nest
+
+.. autofunction:: pitch_first
 
 .. autofunction:: rests_after
 

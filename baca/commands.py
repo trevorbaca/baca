@@ -869,12 +869,7 @@ class ColorCommand(scoping.Command):
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.PitchFirstAssignment(
-        ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             rmakers.Talea(
-        ...                 counts=[5, 4, 4, 5, 4, 4, 4],
-        ...                 denominator=32,
-        ...                 ),
-        ...             ),
+        ...         baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
         ...         ),
         ...     rmakers.beam(),
         ...     baca.color(),
@@ -1701,16 +1696,11 @@ class IndicatorCommand(scoping.Command):
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.PitchFirstAssignment(
-        ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             rmakers.Talea(
-        ...                 counts=[5, 4, 4, 5, 4, 4, 4],
-        ...                 denominator=32,
-        ...                 ),
-        ...             ),
-        ...         ),
+        ...         baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
-        ...     )
+        ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker('Voice_1', collections)
@@ -2075,16 +2065,11 @@ class IndicatorCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstAssignment(
-            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.Talea(
-            ...                 counts=[5, 4, 4, 5, 4, 4, 4],
-            ...                 denominator=32,
-            ...                 ),
-            ...             ),
-            ...         ),
+            ...         baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
+            ...     ),
             ...     rmakers.beam(),
             ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
-            ...     )
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice_1', collections)
@@ -2148,22 +2133,17 @@ class IndicatorCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstAssignment(
-            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.Talea(
-            ...                 counts=[5, 4, 4, 5, 4, 4, 4],
-            ...                 denominator=32,
-            ...                 ),
-            ...             ),
-            ...         ),
+            ...         baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
+            ...     ),
             ...     rmakers.beam(),
             ...     baca.IndicatorCommand(
             ...         indicators=[
             ...             abjad.Fermata(), None, None,
             ...             abjad.Fermata(), None, None,
             ...             abjad.Fermata(), None,
-            ...             ],
-            ...         ),
-            ...     )
+            ...         ],
+            ...     ),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice_1', collections)

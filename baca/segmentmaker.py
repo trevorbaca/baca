@@ -4904,11 +4904,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstAssignment(
-            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.Talea(
-            ...                 counts=[3],
-            ...                 denominator=16,
-            ...                 ),
+            ...         baca.pitch_first(
+            ...             [3],
+            ...             16,
             ...             acciaccatura_specifiers=[
             ...                 baca.AcciaccaturaSpecifier(),
             ...                 ],
@@ -5130,11 +5128,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.PitchFirstAssignment(
-                ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-                ...             rmakers.Talea(
-                ...                 counts=[3],
-                ...                 denominator=16,
-                ...                 ),
+                ...         baca.pitch_first(
+                ...             [3],
+                ...             16,
                 ...             acciaccatura_specifiers=[
                 ...                 baca.AcciaccaturaSpecifier(),
                 ...                 ],
