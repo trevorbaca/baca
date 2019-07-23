@@ -32,6 +32,7 @@ mmaker
    ~MusicMaker
    ~NestingCommand
    ~PitchFirstAssignment
+   ~PitchFirstCommand
    ~PitchFirstRhythmMaker
    ~PitchSpecifier
    ~RestAffixSpecifier
@@ -625,6 +626,10 @@ mmaker
       :nosignatures:
 
       __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
       pattern
       rhythm_maker
 
@@ -637,24 +642,13 @@ mmaker
 
    .. automethod:: PitchFirstAssignment.__call__
 
-   .. container:: inherited
+   .. automethod:: PitchFirstAssignment.__eq__
 
-      .. automethod:: PitchFirstAssignment.__format__
+   .. automethod:: PitchFirstAssignment.__format__
 
-   .. container:: inherited
+   .. automethod:: PitchFirstAssignment.__hash__
 
-      .. automethod:: PitchFirstAssignment.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: PitchFirstAssignment.get_tag
+   .. automethod:: PitchFirstAssignment.__repr__
 
    .. raw:: html
 
@@ -663,49 +657,60 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstAssignment.deactivate
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstAssignment.map
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstAssignment.match
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstAssignment.measures
-
    .. autoattribute:: PitchFirstAssignment.pattern
 
    .. autoattribute:: PitchFirstAssignment.rhythm_maker
 
-   .. container:: inherited
+.. autoclass:: PitchFirstCommand
 
-      .. autoattribute:: PitchFirstAssignment.runtime
+   .. raw:: html
 
-   .. container:: inherited
+      <hr/>
 
-      .. autoattribute:: PitchFirstAssignment.scope
+   .. rubric:: Attributes Summary
+      :class: class-header
 
-   .. container:: inherited
+   .. autosummary::
+      :nosignatures:
 
-      .. autoattribute:: PitchFirstAssignment.selector
+      __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
+      commands
+      rhythm_maker
+      tag
 
-   .. container:: inherited
+   .. raw:: html
 
-      .. autoattribute:: PitchFirstAssignment.tag
+      <hr/>
 
-   .. container:: inherited
+   .. rubric:: Special methods
+      :class: class-header
 
-      .. autoattribute:: PitchFirstAssignment.tag_measure_number
+   .. automethod:: PitchFirstCommand.__call__
 
-   .. container:: inherited
+   .. automethod:: PitchFirstCommand.__eq__
 
-      .. autoattribute:: PitchFirstAssignment.tags
+   .. automethod:: PitchFirstCommand.__format__
+
+   .. automethod:: PitchFirstCommand.__hash__
+
+   .. automethod:: PitchFirstCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: PitchFirstCommand.commands
+
+   .. autoattribute:: PitchFirstCommand.rhythm_maker
+
+   .. autoattribute:: PitchFirstCommand.tag
 
 .. autoclass:: PitchFirstRhythmMaker
 

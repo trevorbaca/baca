@@ -520,22 +520,24 @@ class AcciaccaturaSpecifier(object):
 
             At most two acciaccaturas at the beginning of every collection:
 
-            >>> rhythm_maker = baca.PitchFirstRhythmMaker(
-            ...     rmakers.Talea(
-            ...         counts=[1],
-            ...         denominator=8,
+            >>> rhythm_maker = baca.PitchFirstCommand(
+            ...     baca.PitchFirstRhythmMaker(
+            ...         rmakers.Talea(
+            ...             counts=[1],
+            ...             denominator=8,
             ...         ),
-            ...     rmakers.beam(),
-            ...     acciaccatura_specifiers=[
-            ...         baca.AcciaccaturaSpecifier(
-            ...             lmr_specifier=baca.LMRSpecifier(
-            ...                 left_length=3,
-            ...                 right_counts=[1],
-            ...                 right_cyclic=True,
-            ...                 ),
+            ...         acciaccatura_specifiers=[
+            ...             baca.AcciaccaturaSpecifier(
+            ...                 lmr_specifier=baca.LMRSpecifier(
+            ...                     left_length=3,
+            ...                     right_counts=[1],
+            ...                     right_cyclic=True,
+            ...                     ),
             ...             ),
             ...         ],
-            ...     )
+            ...     ),
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [
             ...     [0],
@@ -546,7 +548,7 @@ class AcciaccaturaSpecifier(object):
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
             >>> selections = rhythm_maker(collections)
-            >>> lilypond_file = rhythm_maker.show(selections)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
@@ -9631,9 +9633,9 @@ class NestingCommand(scoping.Command):
         return self._time_treatments
 
 
-class PitchFirstAssignment(scoping.Command):
+class PitchFirstAssignment(object):
     """
-    Pitch-first rhythm command.
+    Pitch-first assignment.
 
     ..  container:: example
 
@@ -9733,6 +9735,38 @@ class PitchFirstAssignment(scoping.Command):
             selections[index] = stage_selection
         return selections
 
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when initialization values of command equal
+        initialization values of ``argument``.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __format__(self, format_specification="") -> str:
+        """
+        Formats command.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __hash__(self) -> int:
+        """
+        Hashes command.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f"unhashable type: {self}")
+        return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation of command.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
+    ### PRIVATE METHODS ###
+
     def _get_rhythm_maker(
         self,
         talea_counts=None,
@@ -9742,6 +9776,8 @@ class PitchFirstAssignment(scoping.Command):
         tuplet_force_fraction=None,
     ):
         rhythm_maker = self.rhythm_maker
+        if isinstance(rhythm_maker, PitchFirstCommand):
+            rhythm_maker = rhythm_maker.rhythm_maker
         if rhythm_maker is None:
             rhythm_maker = rmakers.note(
                 rmakers.force_rest(classes._select().lts())
@@ -9769,6 +9805,8 @@ class PitchFirstAssignment(scoping.Command):
             rhythm_maker = abjad.new(
                 rhythm_maker, rhythm_maker.talea, *commands_
             )
+        if isinstance(self.rhythm_maker, PitchFirstCommand):
+            rhythm_maker = abjad.new(self.rhythm_maker, rhythm_maker)
         return rhythm_maker
 
     ### PUBLIC PROPERTIES ###
@@ -9798,6 +9836,142 @@ class PitchFirstAssignment(scoping.Command):
         Returns rhythm-maker or music.
         """
         return self._rhythm_maker
+
+
+class PitchFirstCommand(object):
+    """
+    Pitch-first command.
+
+    ..  container:: example
+
+        >>> baca.PitchFirstCommand(
+        ...     baca.PitchFirstRhythmMaker(
+        ...         rmakers.Talea(counts=[1], denominator=16)
+        ...     ),
+        ... )
+        PitchFirstCommand(PitchFirstRhythmMaker())
+
+    """
+
+    ### CLASS ATTRIBUTES ###
+
+    __slots__ = ("_commands", "_rhythm_maker", "_tag")
+
+    # to make sure abjad.new() copies commands
+    _positional_arguments_name = "commands"
+
+    _publish_storage_format = True
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self, rhythm_maker: rmakers.RhythmMaker, *commands, tag: str = None
+    ) -> None:
+        assert isinstance(rhythm_maker, rmakers.RhythmMaker)
+        self._rhythm_maker = rhythm_maker
+        commands = commands or ()
+        commands_ = tuple(commands)
+        self._commands = commands_
+        if tag is not None:
+            assert isinstance(tag, str), repr(tag)
+        self._tag = tag
+
+    ### SPECIAL METHODS ###
+
+    def __call__(
+        self,
+        collections,
+        collection_index=None,
+        rest_affix_specifier=None,
+        state=None,
+        total_collections=None,
+    ) -> abjad.Selection:
+        """
+        Calls pitch-first command.
+        """
+        tuplets = self.rhythm_maker(
+            collections,
+            collection_index=collection_index,
+            rest_affix_specifier=rest_affix_specifier,
+            state=state,
+            total_collections=total_collections,
+        )
+        divisions_consumed = len(tuplets)
+        durations = [abjad.inspect(_).duration() for _ in tuplets]
+        time_signatures = [abjad.TimeSignature(_) for _ in durations]
+        staff = rmakers.RhythmMaker._make_staff(time_signatures)
+        voice = staff["MusicVoice"]
+        voice.extend(tuplets)
+        self._call_commands(voice, divisions_consumed, self.rhythm_maker)
+        selections = abjad.select(voice[:]).group_by_measure()
+        voice[:] = []
+        return selections
+
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when initialization values of command equal
+        initialization values of ``argument``.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __format__(self, format_specification="") -> str:
+        """
+        Formats command.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __hash__(self) -> int:
+        """
+        Hashes command.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f"unhashable type: {self}")
+        return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation of command.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
+    ### PRIVATE METHODS ###
+
+    def _call_commands(self, voice, divisions_consumed, rhythm_maker):
+        for command in self.commands or []:
+            if isinstance(command, rmakers.CacheStateCommand):
+                rhythm_maker._cache_state(voice, divisions_consumed)
+                rhythm_maker._already_cached_state = True
+                continue
+            elif isinstance(command, rmakers.ForceRestCommand):
+                command(voice, tag=self.tag)
+            else:
+                command(voice, tag=self.tag)
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def commands(self):
+        """
+        Gets commands.
+        """
+        return self._commands
+
+    @property
+    def rhythm_maker(self) -> rmakers.RhythmMaker:
+        """
+        Gets rhythm-maker.
+        """
+        return self._rhythm_maker
+
+    @property
+    def tag(self) -> typing.Optional[str]:
+        """
+        Gets tag.
+        """
+        return self._tag
 
 
 class PitchFirstRhythmMaker(rmakers.RhythmMaker):
@@ -10363,6 +10537,9 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             collection_index=collection_index,
             total_collections=total_collections,
         )
+        selections = [abjad.select(_) for _ in tuplets]
+        ###return selections
+        ###raise Exception(selections, "SSS")
         divisions_consumed = len(tuplets)
         durations = [abjad.inspect(_).duration() for _ in tuplets]
         time_signatures = [abjad.TimeSignature(_) for _ in durations]
