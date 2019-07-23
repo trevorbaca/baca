@@ -1811,18 +1811,18 @@ class ImbricationCommand(scoping.Command):
         Hides tuplet brackets above imbricated voice:
 
         >>> music_maker = baca.MusicMaker(
-        ...     rmakers.beam_groups(beam_rests=True),
-        ...     baca.staccato(selector=baca.pheads()),
-        ...     baca.PitchFirstRhythmCommand(
+        ...     baca.PitchFirstAssignment(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
         ...             rmakers.Talea(
         ...                 counts=[1],
         ...                 denominator=16,
         ...             ),
-        ...             rmakers.beam(),
         ...             time_treatments=[1],
         ...         ),
         ...     ),
+        ...     rmakers.beam(),
+        ...     rmakers.beam_groups(beam_rests=True),
+        ...     baca.staccato(selector=baca.pheads()),
         ... )
 
         >>> collections = [
@@ -2051,15 +2051,15 @@ class ImbricationCommand(scoping.Command):
             Works with pitch-classes:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
             ...                 ),
-            ...             rmakers.beam(),
             ...             ),
             ...         ),
+            ...     rmakers.beam(),
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -2990,7 +2990,7 @@ class ImbricationCommand(scoping.Command):
         specifiers = self.specifiers or []
         selections = container[:]
         for specifier in specifiers:
-            if isinstance(specifier, PitchFirstRhythmCommand):
+            if isinstance(specifier, PitchFirstAssignment):
                 continue
             if isinstance(specifier, rhythmcommands.RhythmCommand):
                 continue
@@ -4573,15 +4573,15 @@ class ImbricationCommand(scoping.Command):
             Truncates ties:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[5],
             ...                 denominator=32,
             ...                 ),
-            ...             rmakers.beam(),
             ...             ),
             ...         ),
+            ...     rmakers.beam(),
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -5896,11 +5896,12 @@ class MusicAccumulator(object):
     @staticmethod
     def _make_default_figure_maker():
         return MusicMaker(
-            PitchFirstRhythmCommand(
+            PitchFirstAssignment(
                 rhythm_maker=PitchFirstRhythmMaker(
-                    rmakers.Talea(counts=[1], denominator=16), rmakers.beam()
+                    rmakers.Talea(counts=[1], denominator=16)
                 )
             ),
+            rmakers.beam(),
             color_unregistered_pitches=True,
             denominator=16,
         )
@@ -6829,7 +6830,7 @@ class MusicMaker(object):
             specifiers_list = [
                 _
                 for _ in specifiers_list
-                if not isinstance(_, PitchFirstRhythmCommand)
+                if not isinstance(_, PitchFirstAssignment)
             ]
         else:
             collections = self._coerce_collections(collections)
@@ -7052,7 +7053,7 @@ class MusicMaker(object):
         selections = len(collections) * [None]
         rhythm_commands, rest_affix_specifiers, specifiers_ = [], [], []
         for specifier in specifiers:
-            if isinstance(specifier, PitchFirstRhythmCommand):
+            if isinstance(specifier, PitchFirstAssignment):
                 rhythm_commands.append(specifier)
             elif isinstance(specifier, RestAffixSpecifier):
                 rest_affix_specifiers.append(specifier)
@@ -7221,7 +7222,9 @@ class MusicMaker(object):
 
     @staticmethod
     def _make_default_rhythm_command():
-        return PitchFirstRhythmCommand(
+        # TODO: remove rmakers.beam() command here;
+        #       possibly eliminate this method altoegether
+        return PitchFirstAssignment(
             rhythm_maker=PitchFirstRhythmMaker(
                 rmakers.Talea(counts=[1], denominator=16), rmakers.beam()
             )
@@ -8572,25 +8575,24 @@ class MusicMaker(object):
             Sixteenths followed by eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[1],
             ...                 denominator=8,
             ...                 ),
-            ...             rmakers.beam(),
             ...             ),
             ...         ),
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         pattern=abjad.index_first(1),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),
-            ...             rmakers.beam(),
             ...             ),
             ...         ),
+            ...     rmakers.beam(),
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -8642,25 +8644,24 @@ class MusicMaker(object):
             Sixteenths surrounding dotted eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
             ...                 ),
-            ...             rmakers.beam(),
             ...             ),
             ...         ),
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),
-            ...             rmakers.beam(),
             ...             ),
             ...         ),
+            ...     rmakers.beam(),
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -8712,26 +8713,25 @@ class MusicMaker(object):
             Sixteenths surrounding argumented dotted eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
             ...                 ),
-            ...             rmakers.beam(),
             ...             time_treatments=[1],
             ...             ),
             ...         ),
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),
-            ...             rmakers.beam(),
             ...             ),
             ...         ),
+            ...     rmakers.beam(),
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -8784,26 +8784,25 @@ class MusicMaker(object):
             Augmented sixteenths surrounding dotted eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
             ...                 ),
-            ...             rmakers.beam(),
             ...             ),
             ...         ),
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),
-            ...             rmakers.beam(),
             ...             time_treatments=[1],
             ...             ),
             ...         ),
+            ...     rmakers.beam(),
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -8856,26 +8855,25 @@ class MusicMaker(object):
             Diminished sixteenths surrounding dotted eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
             ...                 ),
-            ...             rmakers.beam(),
             ...             ),
             ...         ),
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[1],
             ...                 denominator=16,
             ...                 ),
-            ...             rmakers.beam(),
             ...             time_treatments=[-1],
             ...             ),
             ...         ),
+            ...     rmakers.beam(),
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -9588,14 +9586,14 @@ class NestingCommand(scoping.Command):
         return self._time_treatments
 
 
-class PitchFirstRhythmCommand(scoping.Command):
+class PitchFirstAssignment(scoping.Command):
     """
     Pitch-first rhythm command.
 
     ..  container:: example
 
-        >>> baca.PitchFirstRhythmCommand()
-        PitchFirstRhythmCommand()
+        >>> baca.PitchFirstAssignment()
+        PitchFirstAssignment()
 
     """
 
@@ -10153,7 +10151,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
     ### CLASS VARIABLES ###
 
-    __documentation_section__ = None
+    __documentation_section__ = "Classes"
 
     __slots__ = (
         "_acciaccatura_specifiers",
@@ -11097,7 +11095,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         Returns duration specifier or none.
         """
-        return rmakers.RhythmMaker.spelling.fget(self)
+        return super().spelling
 
     @property
     def talea(self) -> rmakers.Talea:

@@ -31,7 +31,7 @@ mmaker
    ~MusicContribution
    ~MusicMaker
    ~NestingCommand
-   ~PitchFirstRhythmCommand
+   ~PitchFirstAssignment
    ~PitchFirstRhythmMaker
    ~PitchSpecifier
    ~RestAffixSpecifier
@@ -612,7 +612,7 @@ mmaker
 
    .. autoattribute:: NestingCommand.time_treatments
 
-.. autoclass:: PitchFirstRhythmCommand
+.. autoclass:: PitchFirstAssignment
 
    .. raw:: html
 
@@ -635,15 +635,15 @@ mmaker
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PitchFirstRhythmCommand.__call__
+   .. automethod:: PitchFirstAssignment.__call__
 
    .. container:: inherited
 
-      .. automethod:: PitchFirstRhythmCommand.__format__
+      .. automethod:: PitchFirstAssignment.__format__
 
    .. container:: inherited
 
-      .. automethod:: PitchFirstRhythmCommand.__repr__
+      .. automethod:: PitchFirstAssignment.__repr__
 
    .. raw:: html
 
@@ -654,7 +654,7 @@ mmaker
 
    .. container:: inherited
 
-      .. automethod:: PitchFirstRhythmCommand.get_tag
+      .. automethod:: PitchFirstAssignment.get_tag
 
    .. raw:: html
 
@@ -665,47 +665,47 @@ mmaker
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmCommand.deactivate
+      .. autoattribute:: PitchFirstAssignment.deactivate
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmCommand.map
+      .. autoattribute:: PitchFirstAssignment.map
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmCommand.match
+      .. autoattribute:: PitchFirstAssignment.match
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmCommand.measures
+      .. autoattribute:: PitchFirstAssignment.measures
 
-   .. autoattribute:: PitchFirstRhythmCommand.pattern
+   .. autoattribute:: PitchFirstAssignment.pattern
 
-   .. autoattribute:: PitchFirstRhythmCommand.rhythm_maker
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmCommand.runtime
+   .. autoattribute:: PitchFirstAssignment.rhythm_maker
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmCommand.scope
+      .. autoattribute:: PitchFirstAssignment.runtime
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmCommand.selector
+      .. autoattribute:: PitchFirstAssignment.scope
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmCommand.tag
+      .. autoattribute:: PitchFirstAssignment.selector
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmCommand.tag_measure_number
+      .. autoattribute:: PitchFirstAssignment.tag
 
    .. container:: inherited
 
-      .. autoattribute:: PitchFirstRhythmCommand.tags
+      .. autoattribute:: PitchFirstAssignment.tag_measure_number
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstAssignment.tags
 
 .. autoclass:: PitchFirstRhythmMaker
 

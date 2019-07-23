@@ -4896,7 +4896,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Ignores unregistered pitches:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[3],
@@ -5122,7 +5122,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Colors unregistered pitches:
 
                 >>> music_maker = baca.MusicMaker(
-                ...     baca.PitchFirstRhythmCommand(
+                ...     baca.PitchFirstAssignment(
                 ...         rhythm_maker=baca.PitchFirstRhythmMaker(
                 ...             rmakers.Talea(
                 ...                 counts=[3],

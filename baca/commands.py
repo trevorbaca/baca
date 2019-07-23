@@ -868,16 +868,16 @@ class ColorCommand(scoping.Command):
         Colors leaves by default:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.color(),
-        ...     baca.PitchFirstRhythmCommand(
+        ...     baca.PitchFirstAssignment(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
         ...             rmakers.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
         ...                 denominator=32,
         ...                 ),
-        ...             rmakers.beam(),
         ...             ),
         ...         ),
+        ...     rmakers.beam(),
+        ...     baca.color(),
         ...     )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -1700,16 +1700,16 @@ class IndicatorCommand(scoping.Command):
         With music-maker:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
-        ...     baca.PitchFirstRhythmCommand(
+        ...     baca.PitchFirstAssignment(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
         ...             rmakers.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
         ...                 denominator=32,
         ...                 ),
-        ...             rmakers.beam(),
         ...             ),
         ...         ),
+        ...     rmakers.beam(),
+        ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
         ...     )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -2074,16 +2074,16 @@ class IndicatorCommand(scoping.Command):
             Attaches fermata to head of every pitched logical tie:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
-            ...     baca.PitchFirstRhythmCommand(
+            ...     baca.PitchFirstAssignment(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
             ...             rmakers.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
             ...                 ),
-            ...             rmakers.beam(),
             ...             ),
             ...         ),
+            ...     rmakers.beam(),
+            ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -2147,21 +2147,21 @@ class IndicatorCommand(scoping.Command):
             Patterns fermatas:
 
             >>> music_maker = baca.MusicMaker(
+            ...     baca.PitchFirstAssignment(
+            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
+            ...             rmakers.Talea(
+            ...                 counts=[5, 4, 4, 5, 4, 4, 4],
+            ...                 denominator=32,
+            ...                 ),
+            ...             ),
+            ...         ),
+            ...     rmakers.beam(),
             ...     baca.IndicatorCommand(
             ...         indicators=[
             ...             abjad.Fermata(), None, None,
             ...             abjad.Fermata(), None, None,
             ...             abjad.Fermata(), None,
             ...             ],
-            ...         ),
-            ...     baca.PitchFirstRhythmCommand(
-            ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.Talea(
-            ...                 counts=[5, 4, 4, 5, 4, 4, 4],
-            ...                 denominator=32,
-            ...                 ),
-            ...             rmakers.beam(),
-            ...             ),
             ...         ),
             ...     )
 
