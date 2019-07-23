@@ -149,7 +149,9 @@ class ArpeggiationSpacingSpecifier(object):
 
         ..  container:: example
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
@@ -197,7 +199,9 @@ class ArpeggiationSpacingSpecifier(object):
 
         ..  container:: example
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(

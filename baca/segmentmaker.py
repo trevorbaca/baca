@@ -3792,7 +3792,10 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(6, 16), (6, 16)],
             ...     )
 
-            >>> music_maker = baca.MusicMaker()
+        
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
             >>> contribution = music_maker(
             ...     'Violin_Music_Voice',
             ...     [[2, 4, 5, 7, 9, 11]],
@@ -4142,7 +4145,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Colors out-of-range pitches:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collection_lists = [
             ...     [[4]],
@@ -4360,7 +4365,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Colors repeat pitch-classes:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collection_lists = [
             ...     [[4]],

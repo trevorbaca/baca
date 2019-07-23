@@ -257,7 +257,10 @@ class ClusterCommand(scoping.Command):
 
         With music-maker:
 
-        >>> music_maker = baca.MusicMaker(baca.clusters([3, 4]))
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ...     baca.clusters([3, 4]),
+        ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker('Voice_1', collections)
@@ -436,6 +439,7 @@ class ClusterCommand(scoping.Command):
         In tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
         ...     baca.clusters(
         ...         [3, 4],
         ...         selector=baca.tuplets()[1:2].plts().group(),
@@ -559,6 +563,7 @@ class ClusterCommand(scoping.Command):
         PLT -1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
         ...     baca.clusters([3, 4], selector=baca.plt(-1)),
         ...     )
 
@@ -3672,7 +3677,9 @@ class RegisterCommand(scoping.Command):
 
         With music-maker:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
@@ -3723,7 +3730,9 @@ class RegisterCommand(scoping.Command):
 
         Tuplet 0 only:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
@@ -3775,7 +3784,9 @@ class RegisterCommand(scoping.Command):
 
         Tuplet -1 only:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
 
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -3980,7 +3991,9 @@ class RegisterCommand(scoping.Command):
 
         Works with chords:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [{10, 12, 14}],
@@ -4113,7 +4126,9 @@ class RegisterInterpolationCommand(scoping.Command):
 
         With music-maker:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> contribution = music_maker(
@@ -4173,7 +4188,9 @@ class RegisterInterpolationCommand(scoping.Command):
 
         With chords:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
 
         >>> collections = [
         ...     [6, 4], [3, 5], [9, 10], [0, 11], [8, 7], [1, 2],
@@ -5350,7 +5367,9 @@ class RegisterInterpolationCommand(scoping.Command):
 
             Selects tuplet 0:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
             >>> contribution = music_maker(
@@ -5423,7 +5442,9 @@ class RegisterInterpolationCommand(scoping.Command):
 
             Selects tuplet -1:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
             >>> contribution = music_maker(
@@ -5496,7 +5517,9 @@ class RegisterInterpolationCommand(scoping.Command):
 
             Maps to tuplets:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
             >>> contribution = music_maker(
@@ -5606,7 +5629,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
         Chords:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
 
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -5693,7 +5718,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
         Disjunct notes:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
 
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -5792,7 +5819,9 @@ class RegisterToOctaveCommand(scoping.Command):
 
         Conjunct notes:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
 
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -6308,7 +6337,9 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     ..  container:: example
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> contribution = music_maker(
@@ -6368,7 +6399,9 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     ..  container:: example
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> contribution = music_maker(
@@ -6548,7 +6581,9 @@ def bass_to_octave(
         Octave-transposes music such that the lowest note in the entire
         selection appears in octave 3:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
@@ -6628,7 +6663,9 @@ def bass_to_octave(
         Octave-transposes music such that the lowest pitch in each pitched
         logical tie appears in octave 3:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
@@ -6711,7 +6748,9 @@ def bass_to_octave(
         Octave-transposes music such that the lowest pitch in each of the
         last two pitched logical ties appears in octave 3:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
@@ -6802,7 +6841,9 @@ def center_to_octave(
         Octave-transposes music such that the centroid of all PLTs appears
         in octave 3:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
@@ -6882,7 +6923,9 @@ def center_to_octave(
         Octave-transposes music such that the centroid of each pitched
         logical tie appears in octave 3:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
@@ -6965,7 +7008,9 @@ def center_to_octave(
         Octave-transposes music such that the centroid of each of the last
         two pitched logical ties appears in octave 3:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
@@ -7104,7 +7149,9 @@ def displacement(
 
         Octave-displaces PLTs:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     3 * [[0, 2, 3]],
@@ -7171,7 +7218,9 @@ def displacement(
 
         Octave-displaces chords:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     6 * [{0, 2, 3}],
@@ -7219,7 +7268,9 @@ def displacement(
 
         Octave-displaces last six pitched logical ties:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     3 * [[0, 2, 3]],
@@ -7562,7 +7613,9 @@ def register(
 
         Octave-transposes all PLTs to the octave rooted at -6:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -7623,7 +7676,9 @@ def register(
 
         Octave-transposes PLTs in tuplet 1 to the octave rooted at -6:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -7694,7 +7749,9 @@ def register(
 
         Octave-transposes all PLTs to an octave interpolated from -6 to 18:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -7756,7 +7813,9 @@ def register(
         Octave-transposes PLTs in tuplet 1 to an octave interpolated from
         -6 to 18:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -7847,7 +7906,9 @@ def soprano_to_octave(
         Octave-transposes music such that the highest note in the
         collection of all PLTs appears in octave 3:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
@@ -7927,7 +7988,9 @@ def soprano_to_octave(
         Octave-transposes music that such that the highest note in each
         pitched logical tie appears in octave 3:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
@@ -8010,7 +8073,9 @@ def soprano_to_octave(
         Octave-transposes music that such that the highest note in each
         of the last two PLTs appears in octave 3:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],

@@ -2164,7 +2164,9 @@ class ImbricationCommand(scoping.Command):
 
             Skips wrapped pitches:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
@@ -6151,7 +6153,9 @@ class MusicMaker(object):
 
         Default music-maker:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker('Voice_1', collections)
@@ -6280,7 +6284,9 @@ class MusicMaker(object):
 
             Default music-maker:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice_1', collections)
@@ -6330,7 +6336,9 @@ class MusicMaker(object):
 
             Calltime counts:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
@@ -6384,7 +6392,9 @@ class MusicMaker(object):
 
             Calltime denominator:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
@@ -6438,7 +6448,9 @@ class MusicMaker(object):
 
             Calltime time treatments:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
@@ -6494,7 +6506,9 @@ class MusicMaker(object):
 
             Rest input:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
@@ -6536,7 +6550,9 @@ class MusicMaker(object):
 
             The following negative-valued talea count patterns work:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> contribution = music_maker(
             ...     'Voice_1',
@@ -6770,7 +6786,9 @@ class MusicMaker(object):
 
             Works with chords:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [
             ...     {0, 2, 10},
@@ -7223,10 +7241,12 @@ class MusicMaker(object):
     @staticmethod
     def _make_default_rhythm_command():
         # TODO: remove rmakers.beam() command here;
-        #       possibly eliminate this method altoegether
+        #       possibly eliminate this method altogether
         return PitchFirstAssignment(
             rhythm_maker=PitchFirstRhythmMaker(
-                rmakers.Talea(counts=[1], denominator=16), rmakers.beam()
+                rmakers.Talea(counts=[1], denominator=16),
+                rmakers.beam(),
+                ###rmakers.Talea(counts=[1], denominator=16)
             )
         )
 
@@ -7293,7 +7313,9 @@ class MusicMaker(object):
 
             No denominator by default:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [
             ...     [0, 2, 10, 18],
@@ -7353,6 +7375,7 @@ class MusicMaker(object):
             Denominator supplied at configuration time:
 
             >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
             ...     denominator=16,
             ...     )
 
@@ -7417,7 +7440,9 @@ class MusicMaker(object):
 
             Denominator supplied at call time:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [
             ...     [0, 2, 10, 18],
@@ -7486,6 +7511,7 @@ class MusicMaker(object):
             configuration time:
 
             >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
             ...     denominator=16,
             ...     )
 
@@ -7567,7 +7593,10 @@ class MusicMaker(object):
 
             Register specifier transposes to octave rooted on F#3:
 
-            >>> music_maker = baca.MusicMaker(baca.register(-6))
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ...     baca.register(-6),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice_1', collections)
@@ -7617,7 +7646,10 @@ class MusicMaker(object):
 
             Ocatve-transposes to a target interpolated from C4 up to C5:
 
-            >>> music_maker = baca.MusicMaker(baca.register(0, 12))
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ...     baca.register(0, 12),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice_1', collections)
@@ -7668,6 +7700,7 @@ class MusicMaker(object):
             Hairpin specifier selects all leaves:
 
             >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
             ...     baca.hairpin('p < f'),
             ...     )
 
@@ -7736,7 +7769,9 @@ class MusicMaker(object):
 
             Maps hairpin to each run:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
@@ -7814,7 +7849,9 @@ class MusicMaker(object):
 
             Hairpin specifiers select notes of first and last tuplet:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
@@ -7889,7 +7926,9 @@ class MusicMaker(object):
 
             Hairpin specifiers treat first two tuplets and then the rest:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
@@ -7968,6 +8007,7 @@ class MusicMaker(object):
             Spanner specifier selects all leaves by default:
 
             >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
             ...     baca.slur(),
             ...     )
 
@@ -8036,6 +8076,7 @@ class MusicMaker(object):
             Maps slur to leaves in each tuplet:
 
             >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
             ...     baca.slur(map=baca.tuplets()),
             ...     )
 
@@ -8110,6 +8151,7 @@ class MusicMaker(object):
             >>> getter = baca.pleaves()[:2]
             >>> selector = baca.tuplets().map(getter)
             >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
             ...     baca.slur(map=selector),
             ...     )
 
@@ -8184,6 +8226,7 @@ class MusicMaker(object):
             >>> getter = baca.pleaves()[-2:]
             >>> selector = baca.tuplets().map(getter)
             >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
             ...     baca.slur(map=selector),
             ...     )
 
@@ -8937,7 +8980,9 @@ class MusicMaker(object):
 
             Does not thread rhythm-maker over collections:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
@@ -9655,7 +9700,6 @@ class PitchFirstAssignment(scoping.Command):
             stage_selections = []
             total_collections = len(collections_)
             for collection_index, collection_ in enumerate(collections_):
-                ###stage_selections_, stage_manifest = rhythm_maker(
                 stage_selections_ = rhythm_maker(
                     [collection_],
                     rest_affix_specifier=rest_affix_specifier,
@@ -11893,6 +11937,7 @@ class PitchSpecifier(object):
         ...         expressions=[expression],
         ...         to_pitch_classes=True,
         ...         ),
+        ...     rmakers.beam(),
         ...     )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -12115,6 +12160,7 @@ class PitchSpecifier(object):
             ...         expressions=[transposition],
             ...         to_pitch_classes=True,
             ...         ),
+            ...     rmakers.beam(),
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -12231,7 +12277,9 @@ class PitchSpecifier(object):
 
             Example figure:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice_1', collections)
@@ -12285,6 +12333,7 @@ class PitchSpecifier(object):
             ...     baca.PitchSpecifier(
             ...         to_pitch_classes=True,
             ...         ),
+            ...     rmakers.beam(),
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -12381,7 +12430,9 @@ class RestAffixSpecifier(object):
 
         Works together with negative-valued talea:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker(
@@ -12567,7 +12618,9 @@ class RestAffixSpecifier(object):
 
             With time treatments:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
@@ -12678,7 +12731,9 @@ class RestAffixSpecifier(object):
 
             Treats entire figure when pattern is none:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
@@ -12741,7 +12796,9 @@ class RestAffixSpecifier(object):
 
             Treats entire figure (of only one segment) when pattern is none:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[18, 16, 15, 20, 19]]
             >>> contribution = music_maker(
@@ -12792,7 +12849,9 @@ class RestAffixSpecifier(object):
 
             Treats first segment and last segment in figure:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
@@ -12858,7 +12917,9 @@ class RestAffixSpecifier(object):
 
             Treats every segment in figure:
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
@@ -12937,7 +12998,9 @@ class RestAffixSpecifier(object):
 
         ..  container:: example
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
@@ -13016,7 +13079,9 @@ class RestAffixSpecifier(object):
 
         ..  container:: example
 
-            >>> music_maker = baca.MusicMaker()
+            >>> music_maker = baca.MusicMaker(
+            ...     rmakers.beam(),
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
@@ -13142,7 +13207,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
         Coats pitches:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     3 * [[0, 2, 10]],
@@ -13259,7 +13326,9 @@ def imbricate(
 
         Imbricates segment:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -13381,7 +13450,9 @@ def nest(time_treatments: typing.Iterable = None,) -> NestingCommand:
 
     ..  container:: example
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -13462,7 +13533,9 @@ def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
 
     ..  container:: example
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -13538,7 +13611,9 @@ def rests_around(
 
     ..  container:: example
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -13613,7 +13688,9 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
 
     ..  container:: example
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -13705,7 +13782,9 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
 
     ..  container:: example
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -13781,7 +13860,9 @@ def skips_around(
 
     ..  container:: example
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -13858,7 +13939,9 @@ def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
 
     ..  container:: example
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],

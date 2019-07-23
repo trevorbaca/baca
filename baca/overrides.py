@@ -21,6 +21,7 @@ class OverrideCommand(scoping.Command):
         With music-maker:
 
         >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
         ...     baca.beam_positions(6),
         ...     baca.stem_up(),
         ...     )
@@ -1089,7 +1090,9 @@ def beam_positions(
 
         Overrides beam positions on all leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -1140,7 +1143,9 @@ def beam_positions(
 
         Overrides beam positions on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -1327,7 +1332,9 @@ def dls_staff_padding(
 
         Overrides dynamic line spanner staff padding on all leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -1407,7 +1414,9 @@ def dls_staff_padding(
 
         Overrides dynamic line spanner staff padding on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -1505,7 +1514,9 @@ def dls_up(
 
         Up-overrides dynamic line spanner direction on all leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -1585,7 +1596,9 @@ def dls_up(
 
         Up-overrides dynamic line spanner direction on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -1754,7 +1767,9 @@ def dynamic_text_extra_offset(
 
         Overrides dynamic text extra offset on pitched leaf 0:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -1822,7 +1837,9 @@ def dynamic_text_extra_offset(
 
         Overrides dynamic text extra offset on leaf 0 in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -3283,7 +3300,9 @@ def note_head_style_cross(
 
         Overrides note-head style on all pitched leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -3348,7 +3367,9 @@ def note_head_style_cross(
 
         Overrides note-head style on pitched leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -3431,7 +3452,9 @@ def note_head_style_harmonic(
 
         Overrides note-head style on all PLTs:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -3496,7 +3519,9 @@ def note_head_style_harmonic(
 
         Overrides note-head style on PLTs in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -3770,7 +3795,9 @@ def repeat_tie_down(
 
         Overrides repeat tie direction on pitched leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
@@ -3843,7 +3870,9 @@ def repeat_tie_down(
 
         Overrides repeat tie direction on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
@@ -3989,7 +4018,9 @@ def repeat_tie_up(
 
         Overrides repeat tie direction on all leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
@@ -4062,7 +4093,9 @@ def repeat_tie_up(
 
         Overrides repeat tie direction on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
@@ -4156,7 +4189,9 @@ def rest_down(
 
         Down-overrides direction of rests:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -4221,7 +4256,9 @@ def rest_down(
 
         Down-overrides direction of rests in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -4329,7 +4366,9 @@ def rest_position(
 
         Overrides rest position:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -4394,7 +4433,9 @@ def rest_position(
 
         Overrides rest position in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -4479,7 +4520,9 @@ def rest_transparent(
 
         Makes rests transparent:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -4544,7 +4587,9 @@ def rest_transparent(
 
         Makes rests in tuplet 1 transparent:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -4629,7 +4674,9 @@ def rest_up(
 
         Up-overrides rest direction:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -4694,7 +4741,9 @@ def rest_up(
 
         Up-overrides direction of rests in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -4780,7 +4829,9 @@ def script_color(
 
         Overrides script color on all leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -4855,7 +4906,9 @@ def script_color(
 
         Overrides script color on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -4951,7 +5004,9 @@ def script_down(
 
         Down-overrides script direction on all leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5026,7 +5081,9 @@ def script_down(
 
         Down-overrides script direction all leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5123,7 +5180,9 @@ def script_extra_offset(
 
         Overrides script extra offset on leaf 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5197,7 +5256,9 @@ def script_extra_offset(
 
         Overrides script extra offset on leaf 0 in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5328,7 +5389,9 @@ def script_up(
 
         Up-overrides script direction on all leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5403,7 +5466,9 @@ def script_up(
 
         Up-overrides script direction on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5516,7 +5581,9 @@ def slur_down(
 
         Overrides slur direction on leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -5587,7 +5654,9 @@ def slur_down(
 
         Overrides slur direction leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -5679,7 +5748,9 @@ def slur_up(
 
         Up-overrides slur direction on leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -5756,7 +5827,9 @@ def slur_up(
 
         Up-overrides slur direction for leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -5898,7 +5971,9 @@ def span_bar_transparent(
 
         Makes span bar before leaf 0 transparent:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -5983,7 +6058,9 @@ def stem_color(
 
         Overrides stem color on pitched leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -6048,7 +6125,9 @@ def stem_color(
 
         Overrides stem color on pitched leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -6135,7 +6214,9 @@ def stem_down(
 
         Down-overrides stem direction pitched leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -6200,7 +6281,9 @@ def stem_down(
 
         Down-overrides stem direction for leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -6323,7 +6406,9 @@ def stem_up(
 
         Up-overrides stem direction on pitched leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_2',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -6388,7 +6473,9 @@ def stem_up(
 
         Up-overrides stem direction on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_2',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [10]],
@@ -6477,7 +6564,9 @@ def strict_note_spacing_off(
 
         Turns strict note spacing off on leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -6563,7 +6652,9 @@ def sustain_pedal_staff_padding(
 
         Overrides sustain pedal staff padding on leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -6638,7 +6729,9 @@ def sustain_pedal_staff_padding(
 
         Overrides sustain pedal staff padding on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -6737,7 +6830,9 @@ def text_script_color(
 
         Overrides text script color on all leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -6809,7 +6904,9 @@ def text_script_color(
 
         Overrides text script color on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -6932,7 +7029,9 @@ def text_script_down(
 
         Down-overrides text script direction on leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -7004,7 +7103,9 @@ def text_script_down(
 
         Down-overrides text script direction on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -7201,23 +7302,25 @@ def text_script_padding(
 
         Overrides text script padding on leaves:
 
-            >>> music_maker = baca.MusicMaker()
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-            ...     baca.markup('più mosso'),
-            ...     baca.markup(
-            ...         'lo stesso tempo',
-            ...         selector=baca.tuplets()[1:2].phead(0),
-            ...         ),
-            ...     baca.rests_around([2], [4]),
-            ...     baca.text_script_padding(4),
-            ...     baca.tuplet_bracket_staff_padding(5),
-            ...     counts=[1, 1, 5, -1],
-            ...     time_treatments=[-1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
+        ...     baca.markup('più mosso'),
+        ...     baca.markup(
+        ...         'lo stesso tempo',
+        ...         selector=baca.tuplets()[1:2].phead(0),
+        ...         ),
+        ...     baca.rests_around([2], [4]),
+        ...     baca.text_script_padding(4),
+        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     counts=[1, 1, 5, -1],
+        ...     time_treatments=[-1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -7273,7 +7376,9 @@ def text_script_padding(
 
         Overrides text script padding on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -7445,7 +7550,9 @@ def text_script_staff_padding(
 
         Overrides text script staff padding on leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -7517,7 +7624,9 @@ def text_script_staff_padding(
 
         Overrides text script staff padding on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -7640,7 +7749,9 @@ def text_script_up(
 
         Up-overrides text script direction on leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -7712,7 +7823,9 @@ def text_script_up(
 
         Up-overrides text script direction on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -7919,7 +8032,9 @@ def text_spanner_staff_padding(
 
         Overrides text spanner staff padding on all trimmed leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -7998,7 +8113,9 @@ def text_spanner_staff_padding(
 
         Overrides text spanner staff padding on trimmed leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -8150,7 +8267,9 @@ def tie_down(
 
         Overrides tie direction on pitched leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
@@ -8234,7 +8353,9 @@ def tie_up(
 
         Overrides tie direction on pitched leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[11, 11, 12], [11, 11, 11], [11]],
@@ -8317,7 +8438,9 @@ def time_signature_extra_offset(
 
         Overrides time signature extra offset on leaf 0:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -8419,7 +8542,9 @@ def time_signature_transparent(
 
         Makes all time signatures transparent:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -8521,7 +8646,9 @@ def tuplet_bracket_down(
 
         Overrides tuplet bracket direction on leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -8586,7 +8713,9 @@ def tuplet_bracket_down(
 
         Overrides tuplet bracket direction on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -8673,7 +8802,9 @@ def tuplet_bracket_extra_offset(
 
         Overrides tuplet bracket extra offset on leaf 0:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -8737,7 +8868,9 @@ def tuplet_bracket_extra_offset(
 
         Overrides tuplet bracket extra offset on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -8877,7 +9010,9 @@ def tuplet_bracket_staff_padding(
 
         Overrides tuplet bracket staff padding on leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -8939,7 +9074,9 @@ def tuplet_bracket_staff_padding(
 
         Overrides tuplet bracket staff padding on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -9039,7 +9176,9 @@ def tuplet_bracket_up(
 
         Override tuplet bracket direction on leaves:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -9104,7 +9243,9 @@ def tuplet_bracket_up(
 
         Override tuplet bracket direction on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -9208,7 +9349,9 @@ def tuplet_number_extra_offset(
 
         Overrides tuplet number extra offset on leaf 0:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
@@ -9272,7 +9415,9 @@ def tuplet_number_extra_offset(
 
         Overrides tuplet number extra offset on leaves in tuplet 1:
 
-        >>> music_maker = baca.MusicMaker()
+        >>> music_maker = baca.MusicMaker(
+        ...     rmakers.beam(),
+        ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
