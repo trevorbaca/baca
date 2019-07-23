@@ -46,7 +46,7 @@ class AcciaccaturaSpecifier(object):
         ...     [2, 10, 18, 16, 15],
         ...     [20, 19, 9, 0, 2, 10],
         ...     ]
-        >>> selections, state_manifest = rhythm_maker(collections)
+        >>> selections = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> score = lilypond_file[abjad.Score]
         >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -220,7 +220,7 @@ class AcciaccaturaSpecifier(object):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -323,7 +323,7 @@ class AcciaccaturaSpecifier(object):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -437,7 +437,7 @@ class AcciaccaturaSpecifier(object):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -545,7 +545,7 @@ class AcciaccaturaSpecifier(object):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -658,7 +658,7 @@ class AcciaccaturaSpecifier(object):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -773,7 +773,7 @@ class AcciaccaturaSpecifier(object):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -890,7 +890,7 @@ class AcciaccaturaSpecifier(object):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -1010,7 +1010,7 @@ class AcciaccaturaSpecifier(object):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -1113,7 +1113,7 @@ class AcciaccaturaSpecifier(object):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -1210,7 +1210,7 @@ class AcciaccaturaSpecifier(object):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state_manifest = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -4195,7 +4195,7 @@ class ImbricationCommand(scoping.Command):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -4256,7 +4256,7 @@ class ImbricationCommand(scoping.Command):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
@@ -4332,7 +4332,7 @@ class ImbricationCommand(scoping.Command):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -4383,7 +4383,7 @@ class ImbricationCommand(scoping.Command):
             ...     )
 
             >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -4444,7 +4444,7 @@ class ImbricationCommand(scoping.Command):
             ...     )
 
             >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -4508,7 +4508,7 @@ class ImbricationCommand(scoping.Command):
             ...     )
 
             >>> collections = [[None, 2, 10], [18, 16, 15, 20, None], [9]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).tuplet_bracket.staff_padding = 1.5
@@ -9679,14 +9679,15 @@ class PitchFirstRhythmCommand(scoping.Command):
             collections_.append(collection_)
             indices.append(index)
         if thread:
-            stage_selections, state_manifest = rhythm_maker(
+            stage_selections = rhythm_maker(
                 collections_, rest_affix_specifier=rest_affix_specifier
             )
         else:
             stage_selections = []
             total_collections = len(collections_)
             for collection_index, collection_ in enumerate(collections_):
-                stage_selections_, stage_manifest = rhythm_maker(
+                ###stage_selections_, stage_manifest = rhythm_maker(
+                stage_selections_ = rhythm_maker(
                     [collection_],
                     rest_affix_specifier=rest_affix_specifier,
                     collection_index=collection_index,
@@ -9802,7 +9803,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         ...     )
 
         >>> collections = [[0, 2, 10, 8]]
-        >>> selections, state = rhythm_maker(collections)
+        >>> selections = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -9830,7 +9831,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>
 
         >>> collections = [[18, 16, 15, 20, 19]]
-        >>> selections, state = rhythm_maker(collections)
+        >>> selections = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -9859,7 +9860,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>
 
         >>> collections = [[9]]
-        >>> selections, state = rhythm_maker(collections)
+        >>> selections = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -9882,7 +9883,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             >>
 
         >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
-        >>> selections, state = rhythm_maker(collections)
+        >>> selections = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -9935,7 +9936,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selections, state = rhythm_maker(collections)
+        >>> selections = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -9990,7 +9991,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         ...     )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selections, state = rhythm_maker(collections)
+        >>> selections = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -10041,7 +10042,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         ...     )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selections, state = rhythm_maker(collections)
+        >>> selections = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -10094,7 +10095,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         ...     )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selections, state = rhythm_maker(collections)
+        >>> selections = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -10142,7 +10143,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         ...     )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selections, state = rhythm_maker(collections)
+        >>> selections = rhythm_maker(collections)
         >>> lilypond_file = rhythm_maker.show(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -10226,7 +10227,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         rest_affix_specifier=None,
         state=None,
         total_collections=None,
-    ):
+    ) -> abjad.Selection:
         r"""
         Calls rhythm-maker on ``collections``.
 
@@ -10243,7 +10244,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -10281,14 +10282,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     }
                 >>
 
-            >>> abjad.f(rhythm_maker._make_state())
-            abjad.OrderedDict(
-                [
-                    ('_next_attack', 9),
-                    ('_next_segment', 3),
-                    ]
-                )
-
         ..  container:: example
 
             With state manifest:
@@ -10303,7 +10296,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> state = {'_next_attack': 2}
-            >>> selections, state = rhythm_maker(
+            >>> selections = rhythm_maker(
             ...     collections,
             ...     state=state,
             ...     )
@@ -10344,15 +10337,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
                     }
                 >>
 
-            >>> abjad.f(rhythm_maker._make_state())
-            abjad.OrderedDict(
-                [
-                    ('_next_attack', 11),
-                    ('_next_segment', 3),
-                    ]
-                )
-
-        Returns selections together with state manifest.
         """
         self._state = state or abjad.OrderedDict()
         self._apply_state(state=state)
@@ -10373,9 +10357,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         selections = abjad.select(voice[:]).group_by_measure()
         voice[:] = []
         self._validate_tuplets(selections)
-        state = self._make_state()
-        # TODO: harmonize return type with rmakers.RhythmMaker.__call__()
-        return selections, state
+        return selections
 
     ### PRIVATE METHODS ###
 
@@ -10635,13 +10617,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         return tuplets
 
-    def _make_state(self):
-        state = abjad.OrderedDict()
-        for name in sorted(self._state_variables):
-            value = getattr(self, name)
-            state[name] = value
-        return state
-
     def _make_tuplet(
         self,
         segment,
@@ -10814,7 +10789,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -10918,7 +10893,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     [2, 10, 18, 16, 15, None],
             ...     [20, 19, 9, 0, 2, 10, None],
             ...     ]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
@@ -11042,7 +11017,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11103,7 +11078,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11184,7 +11159,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11243,7 +11218,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11303,7 +11278,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11358,7 +11333,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11419,7 +11394,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
 
             ..  docs::
 
@@ -11478,7 +11453,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
 
             ..  docs::
 
@@ -11535,7 +11510,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     [10, 18, 16, 15, 20],
             ...     [19, 9, 0, 2, 10, 18],
             ...     ]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
 
             ..  docs::
 
@@ -11594,7 +11569,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     [10, 18, 16, 15, 20],
             ...     [19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
 
             ..  docs::
 
@@ -11653,7 +11628,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -11749,7 +11724,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -11842,7 +11817,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             ...     [10, 18, 16, 15, 20],
             ...     [19, 9, 0, 2, 10],
             ...     ]
-            >>> selections, state = rhythm_maker(collections)
+            >>> selections = rhythm_maker(collections)
             >>> lilypond_file = rhythm_maker.show(selections)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
