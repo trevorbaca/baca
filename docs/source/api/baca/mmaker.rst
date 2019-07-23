@@ -32,6 +32,7 @@ mmaker
    ~MusicMaker
    ~NestingCommand
    ~PitchFirstRhythmCommand
+   ~PitchFirstRhythmMaker
    ~PitchSpecifier
    ~RestAffixSpecifier
 
@@ -413,7 +414,6 @@ mmaker
       hide_time_signature
       print_color_selector_result
       selections
-      state_manifest
       time_signature
 
    .. raw:: html
@@ -456,8 +456,6 @@ mmaker
    .. autoattribute:: MusicContribution.hide_time_signature
 
    .. autoattribute:: MusicContribution.selections
-
-   .. autoattribute:: MusicContribution.state_manifest
 
    .. autoattribute:: MusicContribution.time_signature
 
@@ -709,6 +707,90 @@ mmaker
 
       .. autoattribute:: PitchFirstRhythmCommand.tags
 
+.. autoclass:: PitchFirstRhythmMaker
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+      acciaccatura_specifiers
+      show
+      spelling
+      talea
+      time_treatments
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: PitchFirstRhythmMaker.__call__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__eq__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__format__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: PitchFirstRhythmMaker.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Class & static methods
+      :class: class-header
+
+   .. automethod:: PitchFirstRhythmMaker.show
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: PitchFirstRhythmMaker.acciaccatura_specifiers
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmMaker.commands
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmMaker.previous_state
+
+   .. autoattribute:: PitchFirstRhythmMaker.spelling
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmMaker.state
+
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstRhythmMaker.tag
+
+   .. autoattribute:: PitchFirstRhythmMaker.talea
+
+   .. autoattribute:: PitchFirstRhythmMaker.time_treatments
+
 .. autoclass:: PitchSpecifier
 
    .. raw:: html
@@ -860,99 +942,3 @@ mmaker
 .. autofunction:: skips_around
 
 .. autofunction:: skips_before
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Rhythm-makers
-   :class: section-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~PitchFirstRhythmMaker
-
-.. autoclass:: PitchFirstRhythmMaker
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      acciaccatura_specifiers
-      show
-      spelling
-      talea
-      time_treatments
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: PitchFirstRhythmMaker.__call__
-
-   .. container:: inherited
-
-      .. automethod:: PitchFirstRhythmMaker.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: PitchFirstRhythmMaker.__format__
-
-   .. container:: inherited
-
-      .. automethod:: PitchFirstRhythmMaker.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: PitchFirstRhythmMaker.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Class & static methods
-      :class: class-header
-
-   .. automethod:: PitchFirstRhythmMaker.show
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: PitchFirstRhythmMaker.acciaccatura_specifiers
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmMaker.commands
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmMaker.previous_state
-
-   .. autoattribute:: PitchFirstRhythmMaker.spelling
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmMaker.state
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmMaker.tag
-
-   .. autoattribute:: PitchFirstRhythmMaker.talea
-
-   .. autoattribute:: PitchFirstRhythmMaker.time_treatments

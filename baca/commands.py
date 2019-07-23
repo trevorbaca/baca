@@ -871,11 +871,11 @@ class ColorCommand(scoping.Command):
         ...     baca.color(),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             rmakers.beam(),
-        ...             talea=rmakers.Talea(
+        ...             rmakers.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
         ...                 denominator=32,
         ...                 ),
+        ...             rmakers.beam(),
         ...             ),
         ...         ),
         ...     )
@@ -1703,11 +1703,11 @@ class IndicatorCommand(scoping.Command):
         ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
         ...     baca.PitchFirstRhythmCommand(
         ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-        ...             rmakers.beam(),
-        ...             talea=rmakers.Talea(
+        ...             rmakers.Talea(
         ...                 counts=[5, 4, 4, 5, 4, 4, 4],
         ...                 denominator=32,
         ...                 ),
+        ...             rmakers.beam(),
         ...             ),
         ...         ),
         ...     )
@@ -2077,11 +2077,11 @@ class IndicatorCommand(scoping.Command):
             ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.beam(),
-            ...             talea=rmakers.Talea(
+            ...             rmakers.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
             ...                 ),
+            ...             rmakers.beam(),
             ...             ),
             ...         ),
             ...     )
@@ -2156,11 +2156,11 @@ class IndicatorCommand(scoping.Command):
             ...         ),
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             rmakers.beam(),
-            ...             talea=rmakers.Talea(
+            ...             rmakers.Talea(
             ...                 counts=[5, 4, 4, 5, 4, 4, 4],
             ...                 denominator=32,
             ...                 ),
+            ...             rmakers.beam(),
             ...             ),
             ...         ),
             ...     )

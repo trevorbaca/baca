@@ -4898,13 +4898,13 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> music_maker = baca.MusicMaker(
             ...     baca.PitchFirstRhythmCommand(
             ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-            ...             acciaccatura_specifiers=[
-            ...                 baca.AcciaccaturaSpecifier(),
-            ...                 ],
-            ...             talea=rmakers.Talea(
+            ...             rmakers.Talea(
             ...                 counts=[3],
             ...                 denominator=16,
             ...                 ),
+            ...             acciaccatura_specifiers=[
+            ...                 baca.AcciaccaturaSpecifier(),
+            ...                 ],
             ...             ),
             ...         ),
             ...     color_unregistered_pitches=True,
@@ -5124,13 +5124,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 >>> music_maker = baca.MusicMaker(
                 ...     baca.PitchFirstRhythmCommand(
                 ...         rhythm_maker=baca.PitchFirstRhythmMaker(
-                ...             acciaccatura_specifiers=[
-                ...                 baca.AcciaccaturaSpecifier(),
-                ...                 ],
-                ...             talea=rmakers.Talea(
+                ...             rmakers.Talea(
                 ...                 counts=[3],
                 ...                 denominator=16,
                 ...                 ),
+                ...             acciaccatura_specifiers=[
+                ...                 baca.AcciaccaturaSpecifier(),
+                ...                 ],
                 ...             ),
                 ...         ),
                 ...     color_unregistered_pitches=True,

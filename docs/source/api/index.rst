@@ -534,6 +534,7 @@ indicators.Markup library.
    ~baca.mmaker.MusicMaker
    ~baca.mmaker.NestingCommand
    ~baca.mmaker.PitchFirstRhythmCommand
+   ~baca.mmaker.PitchFirstRhythmMaker
    ~baca.mmaker.PitchSpecifier
    ~baca.mmaker.RestAffixSpecifier
 
@@ -561,18 +562,6 @@ indicators.Markup library.
    ~baca.mmaker.skips_after
    ~baca.mmaker.skips_around
    ~baca.mmaker.skips_before
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Rhythm-makers
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.mmaker.PitchFirstRhythmMaker
 
 .. raw:: html
 
