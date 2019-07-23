@@ -5992,7 +5992,6 @@ class MusicContribution(object):
         "_figure_name",
         "_hide_time_signature",
         "_selections",
-        "_state_manifest",
         "_tag",
         "_time_signature",
     )
@@ -6008,7 +6007,6 @@ class MusicContribution(object):
         figure_name=None,
         hide_time_signature=None,
         selections=None,
-        state_manifest=None,
         time_signature=None,
     ):
         if anchor is not None and not isinstance(anchor, AnchorSpecifier):
@@ -6021,7 +6019,6 @@ class MusicContribution(object):
             hide_time_signature = bool(hide_time_signature)
         self._hide_time_signature = hide_time_signature
         self._selections = selections
-        self._state_manifest = state_manifest
         self._time_signature = time_signature
 
     ### SPECIAL METHODS ###
@@ -6119,15 +6116,6 @@ class MusicContribution(object):
             for value in self._selections.values():
                 assert isinstance(value, abjad.Selection), repr(value)
         return self._selections
-
-    @property
-    def state_manifest(self):
-        """
-        Gets state manifest.
-
-        Returns state manifest or none.
-        """
-        return self._state_manifest
 
     @property
     def time_signature(self):
@@ -6278,7 +6266,6 @@ class MusicMaker(object):
         is_incomplete=None,
         is_recollection=None,
         denominator=None,
-        state_manifest=None,
         tag: str = "baca.MusicMaker.__call__",
         talea_denominator=None,
         thread=None,
@@ -6836,7 +6823,6 @@ class MusicMaker(object):
         if self._is_pitch_input(collections):
             color_unregistered_pitches = False
         self._validate_voice_name(voice_name)
-        self._apply_state_manifest(state_manifest)
         specifiers_list = list(self.specifiers or []) + list(specifiers_)
         if all(isinstance(_, abjad.Rest) for _ in collections):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
@@ -6895,7 +6881,6 @@ class MusicMaker(object):
         self._annotate_repeat_pitches(container)
         self._extend_beam_(container, extend_beam)
         self._check_wellformedness(container)
-        state_manifest = self._make_state_manifest()
         selection = abjad.select([container])
         time_signature = self._make_time_signature(
             selection, denominator=denominator
@@ -6913,7 +6898,6 @@ class MusicMaker(object):
             figure_name=figure_name,
             hide_time_signature=hide_time_signature,
             selections=voice_to_selection,
-            state_manifest=state_manifest,
             time_signature=time_signature,
         )
 
@@ -6978,13 +6962,6 @@ class MusicMaker(object):
             else:
                 specifiers_.append(specifier)
         return collections, specifiers_
-
-    def _apply_state_manifest(self, state_manifest=None):
-        state_manifest = state_manifest or {}
-        assert isinstance(state_manifest, dict), repr(state_manifest)
-        for key in state_manifest:
-            value = state_manifest[key]
-            setattr(self, key, value)
 
     def _call_cluster_commands(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
@@ -7248,13 +7225,6 @@ class MusicMaker(object):
         return PitchFirstRhythmCommand(
             rhythm_maker=PitchFirstRhythmMaker(rmakers.beam())
         )
-
-    def _make_state_manifest(self):
-        state_manifest = {}
-        for name in self._state_variables:
-            value = getattr(self, name)
-            state_manifest[name] = value
-        return state_manifest
 
     def _make_time_signature(self, selection, denominator=None):
         if denominator is None:
