@@ -81,14 +81,11 @@ class OverrideCommand(scoping.Command):
         ...     baca.beam_positions(6),
         ...     baca.rest_up(),
         ...     baca.stem_up(),
-        ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.talea(
-        ...             [1, 1, 1, -1],
-        ...             8,
-        ...             rmakers.beam(),
-        ...             rmakers.extract_trivial(),
-        ...         ),
-        ...     )
+        ...     baca.rhythm(
+        ...         rmakers.talea([1, 1, 1, -1], 8),
+        ...         rmakers.beam(),
+        ...         rmakers.extract_trivial(),
+        ...     ),
         ... )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -751,13 +748,10 @@ def bar_line_transparent(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.talea(
-        ...             [1, 1, 1, -1],
-        ...             8,
-        ...             rmakers.beam(),
-        ...             rmakers.extract_trivial(),
-        ...         ),
+        ...     baca.rhythm(
+        ...         rmakers.talea([1, 1, 1, -1], 8),
+        ...         rmakers.beam(),
+        ...         rmakers.extract_trivial(),
         ...     ),
         ...     baca.bar_line_transparent(),
         ... )
@@ -907,13 +901,10 @@ def bar_line_transparent(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     baca.RhythmCommand(
-        ...         rhythm_maker=rmakers.talea(
-        ...             [1, 1, 1, -1],
-        ...             8,
-        ...             rmakers.beam(),
-        ...             rmakers.extract_trivial(),
-        ...         ),
+        ...     baca.rhythm(
+        ...         rmakers.talea([1, 1, 1, -1], 8),
+        ...         rmakers.beam(),
+        ...         rmakers.extract_trivial(),
         ...     ),
         ...     baca.bar_line_transparent(selector=baca.group_by_measure()[1]),
         ...     )

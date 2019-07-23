@@ -118,12 +118,10 @@ class RhythmCommand(scoping.Command):
         ...     time_signatures=[(3, 8), (4, 8), (3,8), (4, 8)],
         ...     )
 
-        >>> command = baca.RhythmCommand(
-        ...     rhythm_maker=rmakers.even_division(
-        ...         [8],
-        ...         rmakers.beam(),
-        ...         rmakers.extract_trivial(),
-        ...     ),
+        >>> command = baca.rhythm(
+        ...     rmakers.even_division([8]),
+        ...     rmakers.beam(),
+        ...     rmakers.extract_trivial(),
         ... )
 
         >>> maker(
@@ -465,24 +463,24 @@ class RhythmCommand(scoping.Command):
             ...     time_signatures=5 * [(4, 8)],
             ...     )
 
-            >>> note_rhythm_maker = rmakers.note(
+            >>> note_command = rmakers.rhythm(
+            ...     rmakers.note(),
             ...     rmakers.force_rest(baca.lts()),
             ...     rmakers.beam(baca.plts()),
             ... )
-            >>> talea_rhythm_maker = rmakers.talea(
-            ...     [3, 4],
-            ...     16,
+            >>> talea_command = rmakers.rhythm(
+            ...     rmakers.talea([3, 4], 16),
             ...     rmakers.beam(),
             ...     rmakers.extract_trivial(),
             ... )
-            >>> command = baca.RhythmCommand(
-            ...     rhythm_maker=rmakers.MakerAssignments(
+            >>> command = baca.rhythm(
+            ...     rmakers.MakerAssignments(
             ...         rmakers.MakerAssignment(
-            ...             abjad.index([2]), note_rhythm_maker,
+            ...             abjad.index([2]), note_command,
             ...         ),
             ...         rmakers.MakerAssignment(
             ...             abjad.index([0], 1),
-            ...             talea_rhythm_maker,
+            ...             talea_command,
             ...             remember_state_across_gaps=True,
             ...         ),
             ...     ),
@@ -709,17 +707,13 @@ class RhythmCommand(scoping.Command):
 
             Raises exception on invalid input:
 
-            >>> command = baca.RhythmCommand(
-            ...     rhythm_maker='text',
-            ...     )
+            >>> command = baca.rhythm("text")
             Traceback (most recent call last):
                 ...
             Exception:
               Input parameter "rhythm_maker" accepts:
+                maker assignment(s)
                 rhythm-maker
-                selection
-                sequence of division assignment objects
-                none
               Input parameter "rhythm_maker" received:
                 text
 
