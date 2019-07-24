@@ -6253,6 +6253,7 @@ class MusicMaker(object):
         is_incomplete=None,
         is_recollection=None,
         denominator=None,
+        ordered_commands=None,
         tag: str = "baca.MusicMaker.__call__",
         talea_denominator=None,
         thread=None,
@@ -6859,13 +6860,16 @@ class MusicMaker(object):
                 tuplet_denominator=tuplet_denominator,
                 tuplet_force_fraction=tuplet_force_fraction,
             )
-        for command in self.ordered_commands or []:
+        self._color_unregistered_pitches_(
+            selections, color_unregistered_pitches=color_unregistered_pitches
+        )
+        ordered_commands__ = self.ordered_commands or ()
+        ordered_commands_ = list(ordered_commands__)
+        ordered_commands_.extend(ordered_commands or [])
+        for command in ordered_commands_:
             command(selections)
         anchor, specifiers_list = self._get_anchor_specifier(specifiers_list)
         container = abjad.Container(selections)
-        self._color_unregistered_pitches_(
-            container, color_unregistered_pitches=color_unregistered_pitches
-        )
         specifiers_list = self._call_tie_commands(selections, specifiers_list)
         specifiers_list = self._call_cluster_commands(
             selections, specifiers_list
