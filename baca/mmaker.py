@@ -5644,7 +5644,6 @@ class MusicAccumulator(object):
         self._voice_names = voice_names
         self._current_offset = abjad.Offset(0)
         self._figure_index = 0
-        self._music_maker = self._make_default_music_maker()
         self._figure_names: typing.List[str] = []
         self._floating_selections = self._make_voice_dictionary()
         self._score_stop_offset = abjad.Offset(0)
@@ -5652,7 +5651,30 @@ class MusicAccumulator(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, music_contribution=None):
+    def __call__(
+        self,
+        voice_name,
+        collections,
+        music_maker,
+        *specifiers,
+        allow_repeats=None,
+        color_unregistered_pitches=None,
+        counts=None,
+        denominator=None,
+        exhaustive=None,
+        extend_beam=None,
+        figure_name=None,
+        hide_time_signature=None,
+        imbrication_map=None,
+        is_foreshadow=None,
+        is_incomplete=None,
+        is_recollection=None,
+        talea_denominator=None,
+        thread=None,
+        time_treatments=None,
+        tuplet_denominator=None,
+        tuplet_force_fraction=None,
+    ):
         r"""
         Calls music-accumulator on ``music_contribution``.
 
@@ -5660,29 +5682,77 @@ class MusicAccumulator(object):
 
         ..  container:: example exception
 
-            >>> score_template = baca.StringTrioScoreTemplate()
-            >>> accumulator = baca.MusicAccumulator(score_template=score_template)
-            >>> accumulator(
-            ...     accumulator.music_maker(
-            ...         'Violin_Music_Voice',
-            ...         [[0, 1, 2, 3]],
-            ...         figure_name='D',
-            ...         ),
+            >>> accumulator = baca.MusicAccumulator(
+            ...     score_template=baca.StringTrioScoreTemplate()
             ...     )
+            >>> music_maker = MusicMaker(
+            ...     pitch_first([1], 16),
+            ...     rmakers.beam(),
+            ...     color_unregistered_pitches=True,
+            ...     denominator=16,
+            ... )
+            >>> accumulator(
+            ...     'Violin_Music_Voice',
+            ...     [[0, 1, 2, 3]],
+            ...     music_maker,
+            ...     figure_name='D',
+            ... )
 
             >>> accumulator(
-            ...     accumulator.music_maker(
-            ...         'Violin_Music_Voice',
-            ...         [[4, 5, 6, 7]],
-            ...         figure_name='D',
-            ...         ),
-            ...     )
+            ...     'Violin_Music_Voice',
+            ...     [[4, 5, 6, 7]],
+            ...     music_maker,
+            ...     figure_name='D',
+            ... )
             Traceback (most recent call last):
                 ...
             Exception: duplicate figure name: 'D'.
 
         Returns none.
         """
+        assert isinstance(music_maker, MusicMaker), repr(music_maker)
+        keywords = {
+            "allow_repeats": allow_repeats,
+            "color_unregistered_pitches": color_unregistered_pitches,
+            "counts": counts,
+            "denominator": denominator,
+            "exhaustive": exhaustive,
+            "extend_beam": extend_beam,
+            "figure_name": figure_name,
+            "hide_time_signature": hide_time_signature,
+            "imbrication_map": imbrication_map,
+            "is_foreshadow": is_foreshadow,
+            "is_incomplete": is_incomplete,
+            "is_recollection": is_recollection,
+            "talea_denominator": talea_denominator,
+            "thread": thread,
+            "time_treatments": time_treatments,
+            "tuplet_denominator": tuplet_denominator,
+            "tuplet_force_fraction": tuplet_force_fraction,
+        }
+        keywords["figure_index"] = self._figure_index
+        voice_name = self.score_template.voice_abbreviations.get(
+            voice_name, voice_name
+        )
+        for specifier in specifiers:
+            if isinstance(specifier, ImbricationCommand):
+                voice_name_ = self.score_template.voice_abbreviations.get(
+                    specifier.voice_name, specifier.voice_name
+                )
+                specifier._voice_name = voice_name_
+            elif isinstance(specifier, AnchorSpecifier):
+                voice_name_ = self.score_template.voice_abbreviations.get(
+                    specifier.remote_voice_name, specifier.remote_voice_name
+                )
+                specifier._remote_voice_name = voice_name_
+            else:
+                assert not hasattr(specifier, "voice_name"), repr(specifier)
+                assert not hasattr(specifier, "remote_voice_name"), repr(
+                    specifier
+                )
+        music_contribution = music_maker(
+            voice_name, collections, *specifiers, **keywords
+        )
         self._cache_figure_name(music_contribution)
         self._cache_floating_selection(music_contribution)
         self._cache_time_signature(music_contribution)
@@ -5854,26 +5924,10 @@ class MusicAccumulator(object):
         fused_selection = abjad.select(fused_selection)
         return fused_selection
 
-    @staticmethod
-    def _make_default_music_maker():
-        return MusicMaker(
-            pitch_first([1], 16),
-            rmakers.beam(),
-            color_unregistered_pitches=True,
-            denominator=16,
-        )
-
     def _make_voice_dictionary(self):
         return dict([(_, []) for _ in self._voice_names])
 
     ### PUBLIC PROPERTIES ###
-
-    @property
-    def music_maker(self) -> "MusicMaker":
-        """
-        Gets default music-maker.
-        """
-        return self._music_maker
 
     @property
     def score_template(self) -> abjad.ScoreTemplate:

@@ -345,7 +345,6 @@ mmaker
 
       __call__
       assemble
-      music_maker
       populate_segment_maker
       score_template
       show
@@ -386,8 +385,6 @@ mmaker
 
    .. rubric:: Read-only properties
       :class: class-header
-
-   .. autoattribute:: MusicAccumulator.music_maker
 
    .. autoattribute:: MusicAccumulator.score_template
 

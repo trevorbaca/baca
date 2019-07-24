@@ -3497,38 +3497,41 @@ def cross_staff(
 
         >>> score_template = baca.StringTrioScoreTemplate()
         >>> accumulator = baca.MusicAccumulator(score_template=score_template)
+        >>> music_maker = MusicMaker(
+        ...     pitch_first([1], 16),
+        ...     rmakers.beam(),
+        ...     color_unregistered_pitches=True,
+        ...     denominator=16,
+        ... )
         >>> accumulator(
-        ...     accumulator.music_maker(
-        ...         'Violin_Music_Voice',
-        ...         [[9, 11, 12, 14, 16]],
-        ...         rmakers.unbeam(),
-        ...         baca.stem_up(),
-        ...         denominator=8,
-        ...         figure_name='vn.1',
-        ...         talea_denominator=8,
-        ...         ),
-        ...     )
+        ...     'Violin_Music_Voice',
+        ...     [[9, 11, 12, 14, 16]],
+        ...     music_maker,
+        ...     rmakers.unbeam(),
+        ...     baca.stem_up(),
+        ...     denominator=8,
+        ...     figure_name='vn.1',
+        ...     talea_denominator=8,
+        ... )
         >>> accumulator(
-        ...     accumulator.music_maker(
-        ...         'Viola_Music_Voice',
-        ...         [[0, 2, 4, 5, 7]],
-        ...         baca.anchor('Violin_Music_Voice'),
-        ...         baca.cross_staff(),
-        ...         rmakers.unbeam(),
-        ...         baca.stem_up(),
-        ...         figure_name='va.1',
-        ...         talea_denominator=8,
-        ...         ),
-        ...     )
+        ...     'Viola_Music_Voice',
+        ...     [[0, 2, 4, 5, 7]],
+        ...     music_maker,
+        ...     baca.anchor('Violin_Music_Voice'),
+        ...     baca.cross_staff(),
+        ...     rmakers.unbeam(),
+        ...     baca.stem_up(),
+        ...     figure_name='va.1',
+        ...     talea_denominator=8,
+        ... )
         >>> accumulator(
-        ...     accumulator.music_maker(
-        ...         'Violin_Music_Voice',
-        ...         [[15]],
-        ...         rmakers.unbeam(),
-        ...         figure_name='vn.2',
-        ...         talea_denominator=8,
-        ...         ),
-        ...     )
+        ...     'Violin_Music_Voice',
+        ...     [[15]],
+        ...     music_maker,
+        ...     rmakers.unbeam(),
+        ...     figure_name='vn.2',
+        ...     talea_denominator=8,
+        ... )
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
@@ -3808,38 +3811,41 @@ def cross_staff(
 
         >>> score_template = baca.StringTrioScoreTemplate()
         >>> accumulator = baca.MusicAccumulator(score_template=score_template)
+        >>> music_maker = MusicMaker(
+        ...     pitch_first([1], 16),
+        ...     rmakers.beam(),
+        ...     color_unregistered_pitches=True,
+        ...     denominator=16,
+        ... )
         >>> accumulator(
-        ...     accumulator.music_maker(
-        ...         'Violin_Music_Voice',
-        ...         [[9, 11, 12, 14, 16]],
-        ...         rmakers.unbeam(),
-        ...         baca.stem_up(),
-        ...         denominator=8,
-        ...         figure_name='vn.1',
-        ...         talea_denominator=8,
-        ...         ),
-        ...     )
+        ...     'Violin_Music_Voice',
+        ...     [[9, 11, 12, 14, 16]],
+        ...     music_maker,
+        ...     rmakers.unbeam(),
+        ...     baca.stem_up(),
+        ...     denominator=8,
+        ...     figure_name='vn.1',
+        ...     talea_denominator=8,
+        ... )
         >>> accumulator(
-        ...     accumulator.music_maker(
-        ...         'Viola_Music_Voice',
-        ...         [[0, 2, 4, 5, 7]],
-        ...         baca.anchor('Violin_Music_Voice'),
-        ...         baca.cross_staff(selector=baca.pleaves()[-2:]),
-        ...         rmakers.unbeam(),
-        ...         baca.stem_up(),
-        ...         figure_name='va.1',
-        ...         talea_denominator=8,
-        ...         ),
-        ...     )
+        ...     'Viola_Music_Voice',
+        ...     [[0, 2, 4, 5, 7]],
+        ...     music_maker,
+        ...     baca.anchor('Violin_Music_Voice'),
+        ...     baca.cross_staff(selector=baca.pleaves()[-2:]),
+        ...     rmakers.unbeam(),
+        ...     baca.stem_up(),
+        ...     figure_name='va.1',
+        ...     talea_denominator=8,
+        ... )
         >>> accumulator(
-        ...     accumulator.music_maker(
-        ...         'Violin_Music_Voice',
-        ...         [[15]],
-        ...         rmakers.unbeam(),
-        ...         figure_name='vn.2',
-        ...         talea_denominator=8,
-        ...         ),
-        ...     )
+        ...     'Violin_Music_Voice',
+        ...     [[15]],
+        ...     music_maker,
+        ...     rmakers.unbeam(),
+        ...     figure_name='vn.2',
+        ...     talea_denominator=8,
+        ... )
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
