@@ -5644,7 +5644,7 @@ class MusicAccumulator(object):
         self._voice_names = voice_names
         self._current_offset = abjad.Offset(0)
         self._figure_index = 0
-        self._music_maker = self._make_default_figure_maker()
+        self._music_maker = self._make_default_music_maker()
         self._figure_names: typing.List[str] = []
         self._floating_selections = self._make_voice_dictionary()
         self._score_stop_offset = abjad.Offset(0)
@@ -5654,7 +5654,7 @@ class MusicAccumulator(object):
 
     def __call__(self, music_contribution=None):
         r"""
-        Calls figure-accumulator on ``music_contribution``.
+        Calls music-accumulator on ``music_contribution``.
 
         Raises exception on duplicate figure name.
 
@@ -5855,9 +5855,9 @@ class MusicAccumulator(object):
         return fused_selection
 
     @staticmethod
-    def _make_default_figure_maker():
+    def _make_default_music_maker():
         return MusicMaker(
-            PitchFirstAssignment(pitch_first([1], 16)),
+            pitch_first([1], 16),
             rmakers.beam(),
             color_unregistered_pitches=True,
             denominator=16,
