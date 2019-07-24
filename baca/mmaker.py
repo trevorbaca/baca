@@ -9792,9 +9792,9 @@ class PitchFirstCommand(object):
     ### INITIALIZER ###
 
     def __init__(
-        self, rhythm_maker: rmakers.RhythmMaker, *commands, tag: str = None
+        self, rhythm_maker: "PitchFirstRhythmMaker", *commands, tag: str = None
     ) -> None:
-        assert isinstance(rhythm_maker, rmakers.RhythmMaker)
+        assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
         self._rhythm_maker = rhythm_maker
         commands = commands or ()
         commands_ = tuple(commands)
@@ -9887,7 +9887,7 @@ class PitchFirstCommand(object):
         return self._commands
 
     @property
-    def rhythm_maker(self) -> rmakers.RhythmMaker:
+    def rhythm_maker(self):
         """
         Gets rhythm-maker.
         """
@@ -9901,7 +9901,7 @@ class PitchFirstCommand(object):
         return self._tag
 
 
-class PitchFirstRhythmMaker(rmakers.RhythmMaker):
+class PitchFirstRhythmMaker(object):
     r"""
     Pitch-first rhythm-maker.
 
@@ -10284,6 +10284,8 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         "_acciaccatura_specifiers",
         "_next_attack",
         "_next_segment",
+        "_spelling",
+        "_state",
         "_talea",
         "_time_treatments",
     )
@@ -10299,7 +10301,6 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         spelling=None,
         time_treatments=None,
     ):
-        rmakers.RhythmMaker.__init__(self, spelling=spelling)
         if acciaccatura_specifiers is not None:
             prototype = AcciaccaturaSpecifier
             for acciaccatura_specifier in acciaccatura_specifiers:
@@ -10307,6 +10308,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         self._acciaccatura_specifiers = acciaccatura_specifiers
         self._next_attack = 0
         self._next_segment = 0
+        self._spelling = spelling
         self._state = abjad.OrderedDict()
         if not isinstance(talea, rmakers.Talea):
             raise TypeError(f"must be talea: {talea!r}.")
@@ -10445,15 +10447,43 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
         divisions_consumed = len(tuplets)
         durations = [abjad.inspect(_).duration() for _ in tuplets]
         time_signatures = [abjad.TimeSignature(_) for _ in durations]
-        staff = self._make_staff(time_signatures)
+        staff = rmakers.RhythmMaker._make_staff(time_signatures)
         voice = staff["MusicVoice"]
         voice.extend(tuplets)
-        self._call_commands(voice, divisions_consumed)
         # self._check_wellformedness(selections)
         selections = abjad.select(voice[:]).group_by_measure()
         voice[:] = []
-        self._validate_tuplets(selections)
         return selections
+
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when all initialization values of rhythm-maker equal
+        initialization values of ``argument``.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __hash__(self) -> int:
+        """
+        Hashes rhythm-maker.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f"unhashable type: {self}")
+        return result
+
+    def __format__(self, format_specification="") -> str:
+        """
+        Formats rhythm-maker.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
 
@@ -10520,6 +10550,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
             pattern = acciaccatura_specifier._get_pattern()
             if pattern.matches_index(collection_index, total_collections):
                 return acciaccatura_specifier
+
+    def _get_spelling_specifier(self):
+        if self.spelling is not None:
+            return self.spelling
+        return rmakers.Spelling()
 
     def _get_talea(self):
         if self.talea is not None:
@@ -11213,7 +11248,7 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
 
         Returns duration specifier or none.
         """
-        return super().spelling
+        return self._spelling
 
     @property
     def talea(self) -> rmakers.Talea:

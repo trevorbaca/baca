@@ -722,6 +722,10 @@ mmaker
       :nosignatures:
 
       __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
       acciaccatura_specifiers
       show
       spelling
@@ -737,21 +741,13 @@ mmaker
 
    .. automethod:: PitchFirstRhythmMaker.__call__
 
-   .. container:: inherited
+   .. automethod:: PitchFirstRhythmMaker.__eq__
 
-      .. automethod:: PitchFirstRhythmMaker.__eq__
+   .. automethod:: PitchFirstRhythmMaker.__format__
 
-   .. container:: inherited
+   .. automethod:: PitchFirstRhythmMaker.__hash__
 
-      .. automethod:: PitchFirstRhythmMaker.__format__
-
-   .. container:: inherited
-
-      .. automethod:: PitchFirstRhythmMaker.__hash__
-
-   .. container:: inherited
-
-      .. automethod:: PitchFirstRhythmMaker.__repr__
+   .. automethod:: PitchFirstRhythmMaker.__repr__
 
    .. raw:: html
 
@@ -771,19 +767,7 @@ mmaker
 
    .. autoattribute:: PitchFirstRhythmMaker.acciaccatura_specifiers
 
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmMaker.previous_state
-
    .. autoattribute:: PitchFirstRhythmMaker.spelling
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmMaker.state
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmMaker.tag
 
    .. autoattribute:: PitchFirstRhythmMaker.talea
 
