@@ -23,6 +23,7 @@ def accent(
         Attaches accent to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -89,6 +90,7 @@ def accent(
         Attaches accent to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -180,6 +182,7 @@ def alternate_bow_strokes(
         Attaches alternate bow strokes to pitched heads (down-bow first):
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -254,6 +257,7 @@ def alternate_bow_strokes(
         Attaches alternate bow strokes to pitched heads (up-bow first):
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -328,6 +332,7 @@ def alternate_bow_strokes(
         Attaches alternate full bow strokes to pitched heads:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -427,6 +432,7 @@ def arpeggio(
         Attaches arpeggio to chord head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -498,6 +504,7 @@ def arpeggio(
         Attaches arpeggio to last two chord heads:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -632,6 +639,7 @@ def clef(
         Attaches clef to leaf 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -698,6 +706,7 @@ def clef(
         Attaches clef to leaf 0 in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -785,6 +794,7 @@ def double_staccato(
         Attaches double-staccato to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -851,6 +861,7 @@ def double_staccato(
         Attaches double-staccato to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -940,6 +951,7 @@ def down_arpeggio(
         Attaches down-arpeggio to chord head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1012,6 +1024,7 @@ def down_arpeggio(
         Attaches down-arpeggio to last two chord heads:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1103,6 +1116,7 @@ def down_bow(
         Attaches down-bow to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1169,6 +1183,7 @@ def down_bow(
         Attaches full down-bow to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1260,6 +1275,7 @@ def espressivo(
         Attaches espressivo to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1326,6 +1342,7 @@ def espressivo(
         Attaches espressivo to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1416,6 +1433,7 @@ def fermata(
         Attaches fermata to first leaf:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1482,6 +1500,7 @@ def fermata(
         Attaches fermata to first leaf in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1564,6 +1583,7 @@ def flageolet(
         Attaches flageolet to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1630,6 +1650,7 @@ def flageolet(
         Attaches flageolet to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1861,6 +1882,7 @@ def laissez_vibrer(
         Attaches laissez vibrer to PLT tail 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1927,6 +1949,7 @@ def laissez_vibrer(
         Attaches laissez vibrer to pitched tails in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -2032,6 +2055,7 @@ def long_fermata(
         Attaches long fermata to first leaf:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -2098,6 +2122,7 @@ def long_fermata(
         Attaches long fermata to first leaf in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -2180,6 +2205,7 @@ def marcato(
         Attaches marcato to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -2246,6 +2272,7 @@ def marcato(
         Attaches marcato to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -2509,6 +2536,7 @@ def parenthesize(
         Attaches parenthesize command to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -2624,6 +2652,7 @@ def repeat_tie(
         Attaches repeat-tie to pitched head 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -2712,6 +2741,7 @@ def short_fermata(
         Attaches short fermata to first leaf:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -2778,6 +2808,7 @@ def short_fermata(
         Attaches short fermata to first leaf in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -2862,6 +2893,7 @@ def staccatissimo(
         Attaches staccatissimo to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -2928,6 +2960,7 @@ def staccatissimo(
         Attaches staccatissimo to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -3017,6 +3050,7 @@ def staccato(
         Attaches staccato to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -3083,6 +3117,7 @@ def staccato(
         Attaches staccato to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -3914,6 +3949,7 @@ def stem_tremolo(
         Attaches stem tremolo to pitched leaf 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -3980,6 +4016,7 @@ def stem_tremolo(
         Attaches stem tremolo to pitched leaves in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4070,6 +4107,7 @@ def stop_on_string(
         Attaches stop-on-string to pitched head -1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4175,6 +4213,7 @@ def stopped(
         Attaches stopped +-sign to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4255,6 +4294,7 @@ def tie(
         Attaches tie to pitched tail 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4338,6 +4378,7 @@ def tenuto(
         Attaches tenuto to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4404,6 +4445,7 @@ def tenuto(
         Attaches tenuto to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4508,6 +4550,7 @@ def up_arpeggio(
         Attaches up-arpeggios to chord head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4582,6 +4625,7 @@ def up_arpeggio(
         Attaches up-arpeggios to last two chord heads:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4673,6 +4717,7 @@ def up_bow(
         Attaches up-bow to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4739,6 +4784,7 @@ def up_bow(
         Attaches full up-bow to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4830,6 +4876,7 @@ def very_long_fermata(
         Attaches very long fermata to first leaf:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4896,6 +4943,7 @@ def very_long_fermata(
         Attaches very long fermata to first leaf in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(

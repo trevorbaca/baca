@@ -18,6 +18,7 @@ class SpannerIndicatorCommand(scoping.Command):
         With music-maker:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ...     baca.slur(
         ...         selector=baca.tuplet(1),
@@ -584,6 +585,7 @@ def ottava(
         Attaches ottava indicators to trimmed leaves:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -671,6 +673,7 @@ def ottava_bassa(
         Attaches ottava bassa indicators to trimmed leaves:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -758,6 +761,7 @@ def slur(
         Attaches slur to trimmed leaves:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -828,6 +832,7 @@ def slur(
         Attaches slur to trimmed leaves in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -921,6 +926,7 @@ def sustain_pedal(
         Pedals leaves:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -991,6 +997,7 @@ def sustain_pedal(
         Pedals leaves in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1064,6 +1071,7 @@ def sustain_pedal(
         Pedals leaves in tuplet 1 (leaked to the left):
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1137,6 +1145,7 @@ def sustain_pedal(
         Pedals leaves in tuplet 1 (leaked to the right):
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1210,6 +1219,7 @@ def sustain_pedal(
         Pedals leaves in tuplet 1 (leaked wide):
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1283,6 +1293,7 @@ def sustain_pedal(
         Pedals leaves in tuplets:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1360,6 +1371,7 @@ def sustain_pedal(
         Pedals leaves in tuplets (leaked to the left):
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1437,6 +1449,7 @@ def sustain_pedal(
         Pedals leaves in tuplets (leaked to the right):
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1540,6 +1553,7 @@ def trill_spanner(
         Attaches trill spanner to trimmed leaves (leaked to the right):
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1608,6 +1622,7 @@ def trill_spanner(
         every equipitch run:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1695,6 +1710,7 @@ def trill_spanner(
         run:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1770,6 +1786,7 @@ def trill_spanner(
         equipitch run 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1842,6 +1859,7 @@ def trill_spanner(
         every equipitch run:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -1947,6 +1965,7 @@ def trill_spanner(
         (leaked to the right) in every equipitch run:
  
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -2042,6 +2061,7 @@ def trill_spanner(
         Tweaks trill spanner:
  
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(

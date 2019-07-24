@@ -868,9 +868,7 @@ class ColorCommand(scoping.Command):
         Colors leaves by default:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.PitchFirstAssignment(
-        ...         baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
-        ...         ),
+        ...     baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
         ...     rmakers.beam(),
         ...     baca.color(),
         ...     )
@@ -1695,9 +1693,7 @@ class IndicatorCommand(scoping.Command):
         With music-maker:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.PitchFirstAssignment(
-        ...         baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
-        ...     ),
+        ...     baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
         ...     rmakers.beam(),
         ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
         ... )
@@ -2064,9 +2060,7 @@ class IndicatorCommand(scoping.Command):
             Attaches fermata to head of every pitched logical tie:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstAssignment(
-            ...         baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
-            ...     ),
+            ...     baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
             ...     rmakers.beam(),
             ...     baca.IndicatorCommand(indicators=[abjad.Fermata()]),
             ... )
@@ -2132,9 +2126,7 @@ class IndicatorCommand(scoping.Command):
             Patterns fermatas:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstAssignment(
-            ...         baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
-            ...     ),
+            ...     baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
             ...     rmakers.beam(),
             ...     baca.IndicatorCommand(
             ...         indicators=[
@@ -2423,6 +2415,7 @@ class LabelCommand(scoping.Command):
         Labels pitch names in tuplet 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
 
@@ -3208,6 +3201,7 @@ def color(*, selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
         Colors all leaves:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -3283,6 +3277,7 @@ def color(*, selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
         Colors leaves in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4140,6 +4135,7 @@ def dynamic_down(
         Attaches dynamic-down command to leaf 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4210,6 +4206,7 @@ def dynamic_down(
         Attaches dynamic-down command to leaf 0 in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4296,6 +4293,7 @@ def dynamic_up(
         Attaches dynamic-up command to leaf 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -4366,6 +4364,7 @@ def dynamic_up(
         Attaches dynamic-up command to leaf 0 in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -5003,6 +5002,7 @@ def glissando(
         With music-maker:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -5617,6 +5617,7 @@ def label(
         Labels pitch names:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -5691,6 +5692,7 @@ def label(
         Labels pitch names in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -5784,6 +5786,7 @@ def markup(
         Attaches markup to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -5853,6 +5856,7 @@ def markup(
         Attaches markup to pitched head 0 in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -5925,6 +5929,7 @@ def markup(
         Attaches markup to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(
@@ -6001,6 +6006,7 @@ def markup(
         Set the ``literal=True`` to pass predefined markup commands:
 
         >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
         ... )
         >>> contribution = music_maker(

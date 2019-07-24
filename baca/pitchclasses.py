@@ -150,6 +150,7 @@ class ArpeggiationSpacingSpecifier(object):
         ..  container:: example
 
             >>> music_maker = baca.MusicMaker(
+            ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
             ... )
 
@@ -200,6 +201,7 @@ class ArpeggiationSpacingSpecifier(object):
         ..  container:: example
 
             >>> music_maker = baca.MusicMaker(
+            ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
             ... )
 

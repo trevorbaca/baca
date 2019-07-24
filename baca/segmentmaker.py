@@ -3794,6 +3794,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
         
             >>> music_maker = baca.MusicMaker(
+            ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
             ... )
             >>> contribution = music_maker(
@@ -4146,6 +4147,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Colors out-of-range pitches:
 
             >>> music_maker = baca.MusicMaker(
+            ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
             ... )
 
@@ -4366,6 +4368,7 @@ class SegmentMaker(abjad.SegmentMaker):
             Colors repeat pitch-classes:
 
             >>> music_maker = baca.MusicMaker(
+            ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
             ... )
 
