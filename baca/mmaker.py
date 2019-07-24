@@ -6220,6 +6220,7 @@ class MusicMaker(object):
         "_color_unregistered_pitches",
         "_denominator",
         "_next_figure",
+        "_ordered_commands",
         "_specifiers",
         "_thread",
         "_voice_names",
@@ -6242,6 +6243,7 @@ class MusicMaker(object):
         allow_repeats=None,
         color_unregistered_pitches=None,
         denominator=None,
+        ordered_commands: typing.Sequence = None,
         thread=None,
         voice_names=None,
     ):
@@ -6265,6 +6267,9 @@ class MusicMaker(object):
             assert abjad.mathtools.is_positive_integer(denominator)
         self._denominator = denominator
         self._next_figure = 0
+        if ordered_commands is not None:
+            ordered_commands = list(ordered_commands)
+        self._ordered_commands = ordered_commands
         self._specifiers = specifiers_list
         if thread is not None:
             thread = bool(thread)
@@ -6900,6 +6905,8 @@ class MusicMaker(object):
                 tuplet_denominator=tuplet_denominator,
                 tuplet_force_fraction=tuplet_force_fraction,
             )
+        for command in self.ordered_commands or []:
+            command(selections)
         anchor, specifiers_list = self._get_anchor_specifier(specifiers_list)
         container = abjad.Container(selections)
         self._color_unregistered_pitches_(
@@ -7611,6 +7618,15 @@ class MusicMaker(object):
         Returns positive integer or none.
         """
         return self._denominator
+
+    @property
+    def ordered_commands(self) -> typing.Optional[typing.Sequence]:
+        """
+        Gets ordered commands.
+        """
+        if self._ordered_commands is not None:
+            return list(self._ordered_commands)
+        return None
 
     @property
     def specifiers(self):
@@ -9632,7 +9648,7 @@ class PitchFirstAssignment(object):
     ..  container:: example
 
         >>> baca.PitchFirstAssignment(baca.pitch_first([1], 16))
-        PitchFirstAssignment(PitchFirstRhythmMaker())
+        PitchFirstAssignment(PitchFirstRhythmMaker(Talea(counts=[1], denominator=16)))
 
     """
 
@@ -9794,12 +9810,8 @@ class PitchFirstAssignment(object):
             command = rmakers.force_fraction()
             commands.append(command)
         if commands:
-            commands_ = rhythm_maker.commands[:]
-            commands_.extend(commands)
             assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
-            rhythm_maker = abjad.new(
-                rhythm_maker, rhythm_maker.talea, *commands_
-            )
+            rhythm_maker = PitchFirstCommand(rhythm_maker, *commands)
         if isinstance(self.rhythm_maker, PitchFirstCommand):
             rhythm_maker = abjad.new(self.rhythm_maker, rhythm_maker)
         return rhythm_maker
@@ -9828,7 +9840,7 @@ class PitchFirstCommand(object):
     ..  container:: example
 
         >>> baca.PitchFirstCommand(baca.pitch_first([1], 16))
-        PitchFirstCommand(PitchFirstRhythmMaker())
+        PitchFirstCommand(PitchFirstRhythmMaker(Talea(counts=[1], denominator=16)))
 
     """
 
@@ -10347,12 +10359,11 @@ class PitchFirstRhythmMaker(rmakers.RhythmMaker):
     def __init__(
         self,
         talea: rmakers.Talea,
-        *commands,
         acciaccatura_specifiers=None,
         spelling=None,
         time_treatments=None,
     ):
-        rmakers.RhythmMaker.__init__(self, *commands, spelling=spelling)
+        rmakers.RhythmMaker.__init__(self, spelling=spelling)
         if acciaccatura_specifiers is not None:
             prototype = AcciaccaturaSpecifier
             for acciaccatura_specifier in acciaccatura_specifiers:
@@ -13445,8 +13456,8 @@ def imbricate(
         >>> music_maker = baca.MusicMaker(
         ...     baca.PitchFirstRhythmMaker(
         ...         rmakers.Talea(counts=[1], denominator=16),
-        ...         rmakers.beam(),
         ...     ),
+        ...     ordered_commands=[rmakers.beam()],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',

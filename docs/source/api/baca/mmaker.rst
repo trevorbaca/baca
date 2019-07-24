@@ -473,6 +473,7 @@ mmaker
       allow_repeats
       color_unregistered_pitches
       denominator
+      ordered_commands
       show
       specifiers
       thread
@@ -508,6 +509,8 @@ mmaker
    .. autoattribute:: MusicMaker.color_unregistered_pitches
 
    .. autoattribute:: MusicMaker.denominator
+
+   .. autoattribute:: MusicMaker.ordered_commands
 
    .. autoattribute:: MusicMaker.specifiers
 
@@ -770,10 +773,6 @@ mmaker
       :class: class-header
 
    .. autoattribute:: PitchFirstRhythmMaker.acciaccatura_specifiers
-
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstRhythmMaker.commands
 
    .. container:: inherited
 

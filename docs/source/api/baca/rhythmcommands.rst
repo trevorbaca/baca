@@ -351,10 +351,6 @@ rhythmcommands
 
    .. container:: inherited
 
-      .. autoattribute:: SkipRhythmMaker.commands
-
-   .. container:: inherited
-
       .. autoattribute:: SkipRhythmMaker.previous_state
 
    .. container:: inherited
