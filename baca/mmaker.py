@@ -7113,7 +7113,7 @@ class MusicMaker(object):
             else:
                 specifiers_.append(specifier)
         if not rhythm_commands:
-            rhythm_commands.append(self._make_default_rhythm_command())
+            raise Exception("must provide rhythm command.")
         if not rest_affix_specifiers:
             rest_affix_specifier = None
         elif len(rest_affix_specifiers) == 1:
@@ -7272,18 +7272,6 @@ class MusicMaker(object):
             leaves[0],
             deactivate=True,
             tag=abjad.const.FIGURE_NAME,
-        )
-
-    @staticmethod
-    def _make_default_rhythm_command():
-        # TODO: remove rmakers.beam() command here;
-        #       possibly eliminate this method altogether
-        return PitchFirstAssignment(
-            PitchFirstRhythmMaker(
-                rmakers.Talea(counts=[1], denominator=16),
-                rmakers.beam(),
-                ###rmakers.Talea(counts=[1], denominator=16)
-            )
         )
 
     def _make_time_signature(self, selection, denominator=None):
