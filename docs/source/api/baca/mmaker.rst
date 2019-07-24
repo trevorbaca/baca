@@ -477,7 +477,6 @@ mmaker
       show
       specifiers
       thread
-      voice_names
 
    .. raw:: html
 
@@ -515,8 +514,6 @@ mmaker
    .. autoattribute:: MusicMaker.specifiers
 
    .. autoattribute:: MusicMaker.thread
-
-   .. autoattribute:: MusicMaker.voice_names
 
 .. autoclass:: NestingCommand
 

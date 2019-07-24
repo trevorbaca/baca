@@ -1805,7 +1805,6 @@ class ImbricationCommand(scoping.Command):
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16, time_treatments=[1]),
-        ...     rmakers.beam(),
         ...     rmakers.beam_groups(beam_rests=True),
         ...     baca.staccato(selector=baca.pheads()),
         ... )
@@ -6245,7 +6244,6 @@ class MusicMaker(object):
         denominator=None,
         ordered_commands: typing.Sequence = None,
         thread=None,
-        voice_names=None,
     ):
         prototype = (
             PitchFirstRhythmMaker,
@@ -6274,9 +6272,6 @@ class MusicMaker(object):
         if thread is not None:
             thread = bool(thread)
         self._thread = thread
-        if voice_names is not None:
-            assert all([isinstance(_, str) for _ in voice_names])
-        self._voice_names = voice_names
 
     ### SPECIAL METHODS ###
 
@@ -6875,7 +6870,6 @@ class MusicMaker(object):
         specifiers_ = specifiers_.flatten()
         if self._is_pitch_input(collections):
             color_unregistered_pitches = False
-        self._validate_voice_name(voice_name)
         specifiers_list = list(self.specifiers or []) + list(specifiers_)
         if all(isinstance(_, abjad.Rest) for _ in collections):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
@@ -7300,12 +7294,6 @@ class MusicMaker(object):
             return abjad.NumberedPitch
         else:
             raise TypeError(item_class)
-
-    def _validate_voice_name(self, voice_name):
-        if not isinstance(voice_name, str):
-            raise TypeError(f"voice name must be string: {voice_name!r}.")
-        if self.voice_names and voice_name not in self.voice_names:
-            raise ValueError(f"unknown voice name: {voice_name!r}.")
 
     ### PUBLIC PROPERTIES ###
 
@@ -9097,22 +9085,6 @@ class MusicMaker(object):
         Returns true, false or none.
         """
         return self._thread
-
-    @property
-    def voice_names(self):
-        """
-        Gets voice names.
-
-        Used to check call-time voice names.
-
-        Defaults to none.
-
-        Set to list of strings or none.
-
-        Returns list or strings or none.
-        """
-        if self._voice_names:
-            return list(self._voice_names)
 
     ### PUBLIC METHODS ###
 
