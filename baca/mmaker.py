@@ -5689,6 +5689,8 @@ class MusicAccumulator(object):
         Returns none.
         """
         assert isinstance(music_maker, MusicMaker), repr(music_maker)
+        # HERE
+        ###music_maker = abjad.new(music_maker, music_maker.maker)
         keywords["figure_index"] = self._figure_index
         voice_name = self.score_template.voice_abbreviations.get(
             voice_name, voice_name
@@ -6178,6 +6180,7 @@ class MusicMaker(object):
         "_allow_repeats",
         "_color_unregistered_pitches",
         "_denominator",
+        "_maker",
         "_next_figure",
         "_ordered_commands",
         "_specifiers",
@@ -6236,6 +6239,7 @@ class MusicMaker(object):
             PitchFirstCommand,
         )
         assert isinstance(maker, prototype), repr(maker)
+        self._maker = maker
         specifiers_ = classes.Sequence(specifiers)
         specifiers_ = specifiers_.flatten()
         specifiers_list = list(specifiers_)
@@ -6258,18 +6262,18 @@ class MusicMaker(object):
             thread = bool(thread)
         self._thread = thread
 
-        self._counts = (None,)
-        self._exhaustive = (None,)
-        self._extend_beam = (None,)
-        self._figure_index = (None,)
-        self._figure_name = (None,)
-        self._hide_time_signature = (None,)
-        self._imbrication_map = (None,)
+        self._counts = counts
+        self._exhaustive = exhaustive
+        self._extend_beam = extend_beam
+        self._figure_index = figure_index
+        self._figure_name = figure_name
+        self._hide_time_signature = hide_time_signature
+        self._imbrication_map = imbrication_map
         self._tag = tag
-        self._talea_denominator = (None,)
-        self._time_treatments = (None,)
-        self._tuplet_denominator = (None,)
-        self._tuplet_force_fraction = (None,)
+        self._talea_denominator = talea_denominator
+        self._time_treatments = time_treatments
+        self._tuplet_denominator = tuplet_denominator
+        self._tuplet_force_fraction = tuplet_force_fraction
 
     ### SPECIAL METHODS ###
 
@@ -6862,6 +6866,32 @@ class MusicMaker(object):
 
         Returns selection, time signature, state manifest.
         """
+
+        if counts is None:
+            counts = self.counts
+        if exhaustive is None:
+            exhaustive = self.exhaustive
+        if extend_beam is None:
+            extend_beam = self.extend_beam
+        if figure_index is None:
+            figure_index = self.figure_index
+        if figure_name is None:
+            figure_name = self.figure_name
+        if hide_time_signature is None:
+            hide_time_signature = self.hide_time_signature
+        if imbrication_map is None:
+            imbrication_map = self.imbrication_map
+        if tag is None:
+            tag = self.tag
+        if talea_denominator is None:
+            talea_denominator = self.talea_denominator
+        if time_treatments is None:
+            time_treatments = self.time_treatments
+        if tuplet_denominator is None:
+            tuplet_denominator = self.tuplet_denominator
+        if tuplet_force_fraction is None:
+            tuplet_force_fraction = self.tuplet_force_fraction
+
         specifiers_ = classes.Sequence(specifiers)
         specifiers_ = specifiers_.flatten()
         if self._is_pitch_input(collections):
@@ -7095,6 +7125,8 @@ class MusicMaker(object):
                 rest_affix_specifiers.append(specifier)
             else:
                 specifiers_.append(specifier)
+        assert self.maker is not None, repr(self.maker)
+        ###rhythm_command = self.maker
         if not rhythm_commands:
             raise Exception("must provide rhythm command.")
         if not rest_affix_specifiers:
@@ -7104,6 +7136,9 @@ class MusicMaker(object):
         else:
             message = f"max 1 rest affix specifier: {rest_affix_specifiers!r}."
             raise Exception(message)
+        #        assert len(rhythm_commands) == 1, repr((
+        #            rhythm_commands, "FFF", self.maker
+        #        ))
         thread = thread or self.thread
         for rhythm_command in rhythm_commands:
             assert isinstance(rhythm_command, PitchFirstAssignment)
@@ -7588,6 +7623,10 @@ class MusicMaker(object):
         Returns positive integer or none.
         """
         return self._denominator
+
+    @property
+    def maker(self):
+        return self._maker
 
     @property
     def ordered_commands(self) -> typing.Optional[typing.Sequence]:
@@ -9068,6 +9107,54 @@ class MusicMaker(object):
         """
         return self._thread
 
+    @property
+    def counts(self):
+        return self._counts
+
+    @property
+    def exhaustive(self):
+        return self._exhaustive
+
+    @property
+    def extend_beam(self):
+        return self._extend_beam
+
+    @property
+    def figure_index(self):
+        return self._figure_index
+
+    @property
+    def figure_name(self):
+        return self._figure_name
+
+    @property
+    def hide_time_signature(self):
+        return self._hide_time_signature
+
+    @property
+    def imbrication_map(self):
+        return self._imbrication_map
+
+    @property
+    def tag(self):
+        return self._tag
+
+    @property
+    def talea_denominator(self):
+        return self._talea_denominator
+
+    @property
+    def time_treatments(self):
+        return self._time_treatments
+
+    @property
+    def tuplet_denominator(self):
+        return self._tuplet_denominator
+
+    @property
+    def tuplet_force_fraction(self):
+        return self._tuplet_force_fraction
+
     ### PUBLIC METHODS ###
 
     @staticmethod
@@ -9595,7 +9682,7 @@ class NestingCommand(scoping.Command):
         return self._time_treatments
 
 
-class PitchFirstAssignment(object):
+class PitchFirstAssignment(rmakers.MakerAssignment):
     """
     Pitch-first assignment.
 
@@ -9793,14 +9880,19 @@ class PitchFirstCommand(object):
 
     ..  container:: example
 
-        >>> baca.PitchFirstCommand(baca.pitch_first([1], 16))
-        PitchFirstCommand(PitchFirstRhythmMaker(Talea(counts=[1], denominator=16)))
+        >>> command = baca.PitchFirstCommand(baca.pitch_first([1], 16))
+        >>> abjad.f(command)
+        baca.PitchFirstCommand(
+            abjadext.RhythmCommand.MakerAssignments(
+                PitchFirstAssignment(PitchFirstRhythmMaker(Talea(counts=[1], denominator=16)))
+                )
+            )
 
     """
 
     ### CLASS ATTRIBUTES ###
 
-    __slots__ = ("_commands", "_rhythm_maker", "_tag")
+    __slots__ = ("_commands", "_assignments", "_tag")
 
     # to make sure abjad.new() copies commands
     _positional_arguments_name = "commands"
@@ -9810,10 +9902,25 @@ class PitchFirstCommand(object):
     ### INITIALIZER ###
 
     def __init__(
-        self, rhythm_maker: "PitchFirstRhythmMaker", *commands, tag: str = None
+        self,
+        assignments: typing.Union[
+            "PitchFirstAssignment",
+            "PitchFirstRhythmMaker",
+            rmakers.MakerAssignments,
+        ],
+        *commands,
+        tag: str = None,
     ) -> None:
-        assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
-        self._rhythm_maker = rhythm_maker
+        if isinstance(assignments, PitchFirstRhythmMaker):
+            assignment = PitchFirstAssignment(assignments)
+            assignments = rmakers.MakerAssignments(assignment)
+        elif isinstance(assignments, PitchFirstAssignment):
+            assignments = rmakers.MakerAssignments(assignments)
+        if not isinstance(assignments, rmakers.MakerAssignments):
+            message = "must be maker assignments:\n"
+            message += f"   {repr(assignments)}"
+            raise Exception(message)
+        self._assignments = assignments
         commands = commands or ()
         commands_ = tuple(commands)
         self._commands = commands_
@@ -9834,7 +9941,13 @@ class PitchFirstCommand(object):
         """
         Calls pitch-first command.
         """
-        tuplets = self.rhythm_maker(
+        # temporary:
+        assert len(self.assignments.assignments) == 1, repr(self)
+        rhythm_maker = self.assignments.assignments[0].rhythm_maker
+        assert isinstance(rhythm_maker, PitchFirstRhythmMaker), repr(
+            rhythm_maker
+        )
+        tuplets = rhythm_maker(
             collections,
             collection_index=collection_index,
             rest_affix_specifier=rest_affix_specifier,
@@ -9847,7 +9960,8 @@ class PitchFirstCommand(object):
         staff = rmakers.RhythmMaker._make_staff(time_signatures)
         voice = staff["MusicVoice"]
         voice.extend(tuplets)
-        self._call_commands(voice, divisions_consumed, self.rhythm_maker)
+        ###self._call_commands(voice, divisions_consumed, self.rhythm_maker)
+        self._call_commands(voice, divisions_consumed, rhythm_maker)
         selections = abjad.select(voice[:]).group_by_measure()
         voice[:] = []
         return selections
@@ -9898,18 +10012,18 @@ class PitchFirstCommand(object):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def assignments(self):
+        """
+        Gets assignments.
+        """
+        return self._assignments
+
+    @property
     def commands(self):
         """
         Gets commands.
         """
         return self._commands
-
-    @property
-    def rhythm_maker(self):
-        """
-        Gets rhythm-maker.
-        """
-        return self._rhythm_maker
 
     @property
     def tag(self) -> typing.Optional[str]:

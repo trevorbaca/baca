@@ -472,11 +472,24 @@ mmaker
       __call__
       allow_repeats
       color_unregistered_pitches
+      counts
       denominator
+      exhaustive
+      extend_beam
+      figure_index
+      figure_name
+      hide_time_signature
+      imbrication_map
+      maker
       ordered_commands
       show
       specifiers
+      tag
+      talea_denominator
       thread
+      time_treatments
+      tuplet_denominator
+      tuplet_force_fraction
 
    .. raw:: html
 
@@ -507,13 +520,39 @@ mmaker
 
    .. autoattribute:: MusicMaker.color_unregistered_pitches
 
+   .. autoattribute:: MusicMaker.counts
+
    .. autoattribute:: MusicMaker.denominator
+
+   .. autoattribute:: MusicMaker.exhaustive
+
+   .. autoattribute:: MusicMaker.extend_beam
+
+   .. autoattribute:: MusicMaker.figure_index
+
+   .. autoattribute:: MusicMaker.figure_name
+
+   .. autoattribute:: MusicMaker.hide_time_signature
+
+   .. autoattribute:: MusicMaker.imbrication_map
+
+   .. autoattribute:: MusicMaker.maker
 
    .. autoattribute:: MusicMaker.ordered_commands
 
    .. autoattribute:: MusicMaker.specifiers
 
+   .. autoattribute:: MusicMaker.tag
+
+   .. autoattribute:: MusicMaker.talea_denominator
+
    .. autoattribute:: MusicMaker.thread
+
+   .. autoattribute:: MusicMaker.time_treatments
+
+   .. autoattribute:: MusicMaker.tuplet_denominator
+
+   .. autoattribute:: MusicMaker.tuplet_force_fraction
 
 .. autoclass:: NestingCommand
 
@@ -656,6 +695,10 @@ mmaker
 
    .. autoattribute:: PitchFirstAssignment.pattern
 
+   .. container:: inherited
+
+      .. autoattribute:: PitchFirstAssignment.remember_state_across_gaps
+
    .. autoattribute:: PitchFirstAssignment.rhythm_maker
 
 .. autoclass:: PitchFirstCommand
@@ -675,8 +718,8 @@ mmaker
       __format__
       __hash__
       __repr__
+      assignments
       commands
-      rhythm_maker
       tag
 
    .. raw:: html
@@ -703,9 +746,9 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PitchFirstCommand.commands
+   .. autoattribute:: PitchFirstCommand.assignments
 
-   .. autoattribute:: PitchFirstCommand.rhythm_maker
+   .. autoattribute:: PitchFirstCommand.commands
 
    .. autoattribute:: PitchFirstCommand.tag
 
