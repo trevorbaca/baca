@@ -9860,7 +9860,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def pattern(self) -> typing.Optional[abjad.Pattern]:
+    def pattern(self) -> typing.Optional[typing.Callable]:
         """
         Gets pattern.
         """
