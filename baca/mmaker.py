@@ -5700,12 +5700,12 @@ class MusicAccumulator(object):
                 message += f"   {repr(music_maker)}"
                 message += f"   {repr(specifier)}"
                 raise Exception(message)
-        music_maker = abjad.new(music_maker)
-        keywords["figure_index"] = self._figure_index
         voice_name = self.score_template.voice_abbreviations.get(
             voice_name, voice_name
         )
-        for specifier in specifiers:
+        first_specifiers = music_maker.specifiers or []
+        all_specifiers = first_specifiers + specifiers
+        for specifier in all_specifiers:
             if isinstance(specifier, ImbricationCommand):
                 voice_name_ = self.score_template.voice_abbreviations.get(
                     specifier.voice_name, specifier.voice_name
@@ -5721,9 +5721,9 @@ class MusicAccumulator(object):
                 assert not hasattr(specifier, "remote_voice_name"), repr(
                     specifier
                 )
-        music_contribution = music_maker(
-            voice_name, collections, *specifiers, **keywords
-        )
+        keywords["figure_index"] = self._figure_index
+        music_maker = abjad.new(music_maker, *all_specifiers, **keywords)
+        music_contribution = music_maker(voice_name, collections)
         self._cache_figure_name(music_contribution)
         self._cache_floating_selection(music_contribution)
         self._cache_time_signature(music_contribution)
