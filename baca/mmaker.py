@@ -5650,11 +5650,9 @@ class MusicAccumulator(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(
-        self, voice_name, collections, music_maker, *specifiers, **keywords
-    ):
+    def __call__(self, voice_name, collections, *specifiers, **keywords):
         r"""
-        Calls music-accumulator on ``music_contribution``.
+        Calls music-accumulator.
 
         Raises exception on duplicate figure name.
 
@@ -5688,7 +5686,14 @@ class MusicAccumulator(object):
 
         Returns none.
         """
-        assert isinstance(music_maker, MusicMaker), repr(music_maker)
+        specifiers = specifiers or ()
+        specifiers = list(specifiers)
+        if specifiers and isinstance(specifiers[0], MusicMaker):
+            music_maker = specifiers[0]
+            specifiers.pop(0)
+        else:
+            music_maker = MusicMaker()
+        assert isinstance(music_maker, MusicMaker)
         # HERE
         ###music_maker = abjad.new(music_maker, music_maker.maker)
         keywords["figure_index"] = self._figure_index
@@ -6212,7 +6217,7 @@ class MusicMaker(object):
             "PitchFirstRhythmMaker",
             "PitchFirstAssignment",
             "PitchFirstCommand",
-        ],
+        ] = None,
         *specifiers,
         allow_repeats=None,
         color_unregistered_pitches=None,
@@ -6233,17 +6238,22 @@ class MusicMaker(object):
         tuplet_denominator=None,
         tuplet_force_fraction=None,
     ):
-        prototype = (
-            PitchFirstRhythmMaker,
-            PitchFirstAssignment,
-            PitchFirstCommand,
-        )
-        assert isinstance(maker, prototype), repr(maker)
+        if maker is not None:
+            prototype = (
+                PitchFirstRhythmMaker,
+                PitchFirstAssignment,
+                PitchFirstCommand,
+            )
+            if not isinstance(maker, prototype):
+                message = "must be pitch-first command (maker, assignment):\n"
+                message += f" {repr(maker)}"
+                raise Exception(message)
         self._maker = maker
         specifiers_ = classes.Sequence(specifiers)
         specifiers_ = specifiers_.flatten()
         specifiers_list = list(specifiers_)
-        specifiers_list.insert(0, maker)
+        if maker is not None:
+            specifiers_list.insert(0, maker)
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
         self._allow_repeats = allow_repeats
@@ -6301,11 +6311,9 @@ class MusicMaker(object):
         tuplet_force_fraction=None,
     ):
         r"""
-        Calls music-maker on ``collections`` with keywords.
+        Calls music-maker on ``collections``.
 
         ..  container:: example
-
-            Default music-maker:
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
@@ -6534,14 +6542,13 @@ class MusicMaker(object):
             Rest input:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
+            ...     None,
             ...     rmakers.beam(),
             ... )
 
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
             ...     'Voice_1',
-            ...     [abjad.Rest((3, 8)), abjad.Rest((3, 8))],
+            ...     "r4. r4.",
             ...     baca.nest('+1/8'),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
@@ -6866,7 +6873,6 @@ class MusicMaker(object):
 
         Returns selection, time signature, state manifest.
         """
-
         if counts is None:
             counts = self.counts
         if exhaustive is None:
@@ -6891,22 +6897,17 @@ class MusicMaker(object):
             tuplet_denominator = self.tuplet_denominator
         if tuplet_force_fraction is None:
             tuplet_force_fraction = self.tuplet_force_fraction
-
-        specifiers_ = classes.Sequence(specifiers)
-        specifiers_ = specifiers_.flatten()
         if self._is_pitch_input(collections):
             color_unregistered_pitches = False
+        specifiers_ = classes.Sequence(specifiers)
+        specifiers_ = specifiers_.flatten()
         specifiers_list = list(self.specifiers or []) + list(specifiers_)
-        if all(isinstance(_, abjad.Rest) for _ in collections):
+        if isinstance(collections, str):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
-            specifiers_list = [
-                _
-                for _ in specifiers_list
-                if not isinstance(
-                    _, (PitchFirstAssignment, PitchFirstRhythmMaker)
-                )
-            ]
+        elif all(isinstance(_, abjad.Rest) for _ in collections):
+            tuplet = abjad.Tuplet((1, 1), collections, hide=True)
+            selections = [abjad.select(tuplet)]
         else:
             collections = self._coerce_collections(collections)
             collections, specifiers_list = self._apply_pitch_specifiers(
@@ -6950,14 +6951,13 @@ class MusicMaker(object):
         )
         result = self._call_color_commands(selections, specifiers_list)
         specifiers_list, color_selector, color_selector_result = result
+
+        if any(_ is None for _ in specifiers_list):
+            raise Exception("SSS", specifiers_list)
+
         self._call_remaining_commands(selections, specifiers_list)
         self._label_figure_name_(container, figure_name, figure_index)
         self._annotate_collection_list(container, collections)
-        #        self._annotate_deployment(
-        #            container,
-        #            is_foreshadow=is_foreshadow,
-        #            is_recollection=is_recollection,
-        #        )
         self._annotate_repeat_pitches(container)
         self._extend_beam_(container, extend_beam)
         self._check_wellformedness(container)
@@ -7097,9 +7097,10 @@ class MusicMaker(object):
         command_prototype = (rmakers.Command, scoping.Command, scoping.Suite)
         for specifier in specifiers:
             if not isinstance(specifier, prototype):
-                assert isinstance(specifier, command_prototype), format(
-                    specifier
-                )
+                if not isinstance(specifier, command_prototype):
+                    message = "must be command-type:\n"
+                    message += f" {repr(specifier)}"
+                    raise Exception(message)
             specifier(selections)
 
     def _call_rhythm_commands(
@@ -9707,7 +9708,8 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
         self._rhythm_maker = rhythm_maker
         if pattern is not None:
-            assert isinstance(pattern, abjad.Pattern), repr(pattern)
+            prototype = (abjad.DurationInequality, abjad.Pattern)
+            assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
 
     ### SPECIAL METHODS ###
@@ -9860,7 +9862,10 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def pattern(self) -> typing.Optional[typing.Callable]:
+    def pattern(self) -> typing.Union[
+        abjad.DurationInequality,
+        abjad.Pattern,
+        None]:
         """
         Gets pattern.
         """
