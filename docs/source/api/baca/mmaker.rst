@@ -470,6 +470,10 @@ mmaker
       :nosignatures:
 
       __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
       allow_repeats
       color_unregistered_pitches
       counts
@@ -480,7 +484,6 @@ mmaker
       figure_name
       hide_time_signature
       imbrication_map
-      maker
       ordered_commands
       show
       specifiers
@@ -499,6 +502,14 @@ mmaker
       :class: class-header
 
    .. automethod:: MusicMaker.__call__
+
+   .. automethod:: MusicMaker.__eq__
+
+   .. automethod:: MusicMaker.__format__
+
+   .. automethod:: MusicMaker.__hash__
+
+   .. automethod:: MusicMaker.__repr__
 
    .. raw:: html
 
@@ -535,8 +546,6 @@ mmaker
    .. autoattribute:: MusicMaker.hide_time_signature
 
    .. autoattribute:: MusicMaker.imbrication_map
-
-   .. autoattribute:: MusicMaker.maker
 
    .. autoattribute:: MusicMaker.ordered_commands
 

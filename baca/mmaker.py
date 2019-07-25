@@ -5700,7 +5700,13 @@ class MusicAccumulator(object):
                 message += f"   {repr(music_maker)}"
                 message += f"   {repr(specifier)}"
                 raise Exception(message)
-        ###music_maker = abjad.new(music_maker)
+        ###new_music_maker = abjad.new(music_maker)
+        #        if new_music_maker != music_maker:
+        #            message = "original music-maker:\n"
+        #            message += f"   {repr(music_maker)}\n"
+        #            message += "new music-maker:\n"
+        #            message += f"   {repr(new_music_maker)}"
+        #            raise Exception(message)
         keywords["figure_index"] = self._figure_index
         voice_name = self.score_template.voice_abbreviations.get(
             voice_name, voice_name
@@ -5722,7 +5728,11 @@ class MusicAccumulator(object):
                     specifier
                 )
         music_contribution = music_maker(
-            voice_name, collections, *specifiers, **keywords
+            ###music_contribution = new_music_maker(
+            voice_name,
+            collections,
+            *specifiers,
+            **keywords,
         )
         self._cache_figure_name(music_contribution)
         self._cache_floating_selection(music_contribution)
@@ -6411,7 +6421,6 @@ class MusicMaker(object):
         Rest input:
 
         >>> music_maker = baca.MusicMaker(
-        ...     None,
         ...     rmakers.beam(),
         ... )
 
@@ -6767,6 +6776,9 @@ class MusicMaker(object):
         "_tuplet_force_fraction",
     )
 
+    # to make sure abjad.new() copies specifiers
+    _positional_arguments_name = "specifiers"
+
     _publish_storage_format = True
 
     _state_variables = ("_next_figure",)
@@ -6775,11 +6787,6 @@ class MusicMaker(object):
 
     def __init__(
         self,
-        maker: typing.Union[
-            "PitchFirstRhythmMaker",
-            "PitchFirstAssignment",
-            "PitchFirstCommand",
-        ] = None,
         *specifiers,
         allow_repeats=None,
         color_unregistered_pitches=None,
@@ -6800,22 +6807,10 @@ class MusicMaker(object):
         tuplet_denominator=None,
         tuplet_force_fraction=None,
     ):
-        if maker is not None:
-            prototype = (
-                PitchFirstRhythmMaker,
-                PitchFirstAssignment,
-                PitchFirstCommand,
-            )
-            if not isinstance(maker, prototype):
-                message = "must be pitch-first command (maker, assignment):\n"
-                message += f" {repr(maker)}"
-                raise Exception(message)
-        self._maker = maker
         specifiers_ = classes.Sequence(specifiers)
         specifiers_ = specifiers_.flatten()
         specifiers_list = list(specifiers_)
-        if maker is not None:
-            specifiers_list.insert(0, maker)
+        self._specifiers = specifiers_list
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
         self._allow_repeats = allow_repeats
@@ -6829,7 +6824,6 @@ class MusicMaker(object):
         if ordered_commands is not None:
             ordered_commands = list(ordered_commands)
         self._ordered_commands = ordered_commands
-        self._specifiers = specifiers_list
         if thread is not None:
             thread = bool(thread)
         self._thread = thread
@@ -6906,6 +6900,10 @@ class MusicMaker(object):
         specifiers_ = classes.Sequence(specifiers)
         specifiers_ = specifiers_.flatten()
         specifiers_list = list(self.specifiers or []) + list(specifiers_)
+        if any(_ is None for _ in specifiers_list):
+            message = "specifiers must not be none:\n"
+            message += f"   {repr(specifiers_list)}"
+            raise Exception(message)
         if isinstance(collections, str):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
@@ -6955,10 +6953,6 @@ class MusicMaker(object):
         )
         result = self._call_color_commands(selections, specifiers_list)
         specifiers_list, color_selector, color_selector_result = result
-
-        if any(_ is None for _ in specifiers_list):
-            raise Exception("SSS", specifiers_list)
-
         self._call_remaining_commands(selections, specifiers_list)
         self._label_figure_name_(container, figure_name, figure_index)
         self._annotate_collection_list(container, collections)
@@ -6984,6 +6978,36 @@ class MusicMaker(object):
             selections=voice_to_selection,
             time_signature=time_signature,
         )
+
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when initialization values of music-maker equal
+        initialization values of ``argument``.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __format__(self, format_specification="") -> str:
+        """
+        Formats music-maker.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __hash__(self) -> int:
+        """
+        Hashes music-maker.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f"unhashable type: {self}")
+        return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation of music-maker.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
 
@@ -7130,8 +7154,6 @@ class MusicMaker(object):
                 rest_affix_specifiers.append(specifier)
             else:
                 specifiers_.append(specifier)
-        assert self.maker is not None, repr(self.maker)
-        ###rhythm_command = self.maker
         if not rhythm_commands:
             raise Exception("must provide rhythm command.")
         if not rest_affix_specifiers:
@@ -7141,9 +7163,13 @@ class MusicMaker(object):
         else:
             message = f"max 1 rest affix specifier: {rest_affix_specifiers!r}."
             raise Exception(message)
-        #        assert len(rhythm_commands) == 1, repr((
-        #            rhythm_commands, "FFF", self.maker
-        #        ))
+        # TODO: activate:
+        #        if 1 < len(rhythm_commands):
+        #            assert len(rhythm_commands) == 2, repr(rhythm_commands)
+        #            message = "must combine assignments:\n"
+        #            message += f"   {repr(rhythm_commands[0])}\n"
+        #            message += f"   {repr(rhythm_commands[1])}\n"
+        #            raise Exception(message)
         thread = thread or self.thread
         for rhythm_command in rhythm_commands:
             assert isinstance(rhythm_command, PitchFirstAssignment)
@@ -7628,10 +7654,6 @@ class MusicMaker(object):
         Returns positive integer or none.
         """
         return self._denominator
-
-    @property
-    def maker(self):
-        return self._maker
 
     @property
     def ordered_commands(self) -> typing.Optional[typing.Sequence]:
