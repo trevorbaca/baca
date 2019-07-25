@@ -6177,6 +6177,563 @@ class MusicMaker(object):
                 >>
             >>
 
+    ..  container:: example
+
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker('Voice_1', collections)
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    s1 * 9/16
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                c'16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                d'16                                                                 %! baca.MusicMaker.__call__
+                                bf'16                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                fs''16                                                               %! baca.MusicMaker.__call__
+                                [
+                                e''16                                                                %! baca.MusicMaker.__call__
+                                ef''16                                                               %! baca.MusicMaker.__call__
+                                af''16                                                               %! baca.MusicMaker.__call__
+                                g''16                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        Calltime counts:
+
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     collections,
+        ...     counts=[1, 2],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    s1 * 3/4
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                c'16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                d'8                                                                  %! baca.MusicMaker.__call__
+                                bf'16                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                fs''16                                                               %! baca.MusicMaker.__call__
+                                [
+                                e''8                                                                 %! baca.MusicMaker.__call__
+                                ef''16                                                               %! baca.MusicMaker.__call__
+                                af''8                                                                %! baca.MusicMaker.__call__
+                                g''16                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        Calltime denominator:
+
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     collections,
+        ...     talea_denominator=32,
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    s1 * 9/32
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                c'32                                                                 %! baca.MusicMaker.__call__
+                                [
+                                d'32                                                                 %! baca.MusicMaker.__call__
+                                bf'32                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                fs''32                                                               %! baca.MusicMaker.__call__
+                                [
+                                e''32                                                                %! baca.MusicMaker.__call__
+                                ef''32                                                               %! baca.MusicMaker.__call__
+                                af''32                                                               %! baca.MusicMaker.__call__
+                                g''32                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                a'32                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        Calltime time treatments:
+
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     collections,
+        ...     time_treatments=[1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    s1 * 11/16
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 4/3 {                                                             %! baca.MusicMaker.__call__
+                                c'16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                d'16                                                                 %! baca.MusicMaker.__call__
+                                bf'16                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 6/5 {                                                             %! baca.MusicMaker.__call__
+                                fs''16                                                               %! baca.MusicMaker.__call__
+                                [
+                                e''16                                                                %! baca.MusicMaker.__call__
+                                ef''16                                                               %! baca.MusicMaker.__call__
+                                af''16                                                               %! baca.MusicMaker.__call__
+                                g''16                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        Rest input:
+
+        >>> music_maker = baca.MusicMaker(
+        ...     None,
+        ...     rmakers.beam(),
+        ... )
+
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     "r4. r4.",
+        ...     baca.nest('+1/8'),
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    s1 * 7/8
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 7/6 {                                                             %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                          %! baca.MusicMaker.__call__
+                                    r4.                                                              %! baca.MusicMaker.__call__
+                                    r4.                                                              %! baca.MusicMaker.__call__
+                                }                                                                    %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
+            >>
+
+    ..  container:: example
+
+        The following negative-valued talea count patterns work:
+
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[18, 16, 15, 20, 19]],
+        ...     counts=[2, -1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    s1 * 15/16
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                fs''8                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                e''8                                                                 %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                ef''8                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                af''8                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                g''8                                                                 %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
+            >>
+
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[18, 16, 15, 20, 19]],
+        ...     counts=[2, -1, -1],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    s1 * 5/4
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                fs''8                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                e''8                                                                 %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                ef''8                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                af''8                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                g''8                                                                 %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
+            >>
+
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[18, 16, 15, 20, 19]],
+        ...     counts=[-1, 2],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    s1 * 15/16
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                fs''8                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                e''8                                                                 %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                ef''8                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                af''8                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                g''8                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
+            >>
+
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[18, 16, 15, 20, 19]],
+        ...     counts=[-1, -1, 2],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    s1 * 5/4
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                fs''8                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                e''8                                                                 %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                ef''8                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                af''8                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                g''8                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
+            >>
+
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[18, 16, 15, 20, 19]],
+        ...     counts=[-1, -1, 2, -2, -2],
+        ...     )
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    s1 * 5/2
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                fs''8                                                                %! baca.MusicMaker.__call__
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                e''8                                                                 %! baca.MusicMaker.__call__
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                ef''8                                                                %! baca.MusicMaker.__call__
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                af''8                                                                %! baca.MusicMaker.__call__
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                g''8                                                                 %! baca.MusicMaker.__call__
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                r8                                                                   %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
+            >>
+
+    ..  note:: Write hide_time_signature calltime examples.
+
+    ..  container:: example
+
+        Works with chords:
+
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     {0, 2, 10},
+        ...     [18, 16, 15, 20, 19],
+        ...     [9],
+        ...     ]
+        >>> contribution = music_maker('Voice_1', collections)
+        >>> lilypond_file = music_maker.show(contribution)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    s1 * 7/16
+                }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <c' d' bf'>16
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                fs''16                                                               %! baca.MusicMaker.__call__
+                                [
+                                e''16                                                                %! baca.MusicMaker.__call__
+                                ef''16                                                               %! baca.MusicMaker.__call__
+                                af''16                                                               %! baca.MusicMaker.__call__
+                                g''16                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
+            >>
+
     """
 
     ### CLASS VARIABLES ###
@@ -6310,566 +6867,8 @@ class MusicMaker(object):
         tuplet_denominator=None,
         tuplet_force_fraction=None,
     ):
-        r"""
+        """
         Calls music-maker on ``collections``.
-
-        ..  container:: example
-
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker('Voice_1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 9/16
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    c'16                                                                 %! baca.MusicMaker.__call__
-                                    [
-                                    d'16                                                                 %! baca.MusicMaker.__call__
-                                    bf'16                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    fs''16                                                               %! baca.MusicMaker.__call__
-                                    [
-                                    e''16                                                                %! baca.MusicMaker.__call__
-                                    ef''16                                                               %! baca.MusicMaker.__call__
-                                    af''16                                                               %! baca.MusicMaker.__call__
-                                    g''16                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    a'16                                                                 %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Calltime counts:
-
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     collections,
-            ...     counts=[1, 2],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 3/4
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    c'16                                                                 %! baca.MusicMaker.__call__
-                                    [
-                                    d'8                                                                  %! baca.MusicMaker.__call__
-                                    bf'16                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    fs''16                                                               %! baca.MusicMaker.__call__
-                                    [
-                                    e''8                                                                 %! baca.MusicMaker.__call__
-                                    ef''16                                                               %! baca.MusicMaker.__call__
-                                    af''8                                                                %! baca.MusicMaker.__call__
-                                    g''16                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    a'16                                                                 %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Calltime denominator:
-
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     collections,
-            ...     talea_denominator=32,
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 9/32
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    c'32                                                                 %! baca.MusicMaker.__call__
-                                    [
-                                    d'32                                                                 %! baca.MusicMaker.__call__
-                                    bf'32                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    fs''32                                                               %! baca.MusicMaker.__call__
-                                    [
-                                    e''32                                                                %! baca.MusicMaker.__call__
-                                    ef''32                                                               %! baca.MusicMaker.__call__
-                                    af''32                                                               %! baca.MusicMaker.__call__
-                                    g''32                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    a'32                                                                 %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Calltime time treatments:
-
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     collections,
-            ...     time_treatments=[1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 11/16
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                                \times 4/3 {                                                             %! baca.MusicMaker.__call__
-                                    c'16                                                                 %! baca.MusicMaker.__call__
-                                    [
-                                    d'16                                                                 %! baca.MusicMaker.__call__
-                                    bf'16                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                                \times 6/5 {                                                             %! baca.MusicMaker.__call__
-                                    fs''16                                                               %! baca.MusicMaker.__call__
-                                    [
-                                    e''16                                                                %! baca.MusicMaker.__call__
-                                    ef''16                                                               %! baca.MusicMaker.__call__
-                                    af''16                                                               %! baca.MusicMaker.__call__
-                                    g''16                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    a'16                                                                 %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Rest input:
-
-            >>> music_maker = baca.MusicMaker(
-            ...     None,
-            ...     rmakers.beam(),
-            ... )
-
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     "r4. r4.",
-            ...     baca.nest('+1/8'),
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 7/8
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                                \times 7/6 {                                                             %! baca.MusicMaker.__call__
-                                    \scaleDurations #'(1 . 1) {                                          %! baca.MusicMaker.__call__
-                                        r4.                                                              %! baca.MusicMaker.__call__
-                                        r4.                                                              %! baca.MusicMaker.__call__
-                                    }                                                                    %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            The following negative-valued talea count patterns work:
-
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[18, 16, 15, 20, 19]],
-            ...     counts=[2, -1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 15/16
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    fs''8                                                                %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    e''8                                                                 %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    ef''8                                                                %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    af''8                                                                %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    g''8                                                                 %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[18, 16, 15, 20, 19]],
-            ...     counts=[2, -1, -1],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 5/4
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    fs''8                                                                %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    e''8                                                                 %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    ef''8                                                                %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    af''8                                                                %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    g''8                                                                 %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[18, 16, 15, 20, 19]],
-            ...     counts=[-1, 2],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 15/16
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    fs''8                                                                %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    e''8                                                                 %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    ef''8                                                                %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    af''8                                                                %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    g''8                                                                 %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[18, 16, 15, 20, 19]],
-            ...     counts=[-1, -1, 2],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 5/4
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    fs''8                                                                %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    e''8                                                                 %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    ef''8                                                                %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    af''8                                                                %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    g''8                                                                 %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[18, 16, 15, 20, 19]],
-            ...     counts=[-1, -1, 2, -2, -2],
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 5/2
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    fs''8                                                                %! baca.MusicMaker.__call__
-                                    r8                                                                   %! baca.MusicMaker.__call__
-                                    r8                                                                   %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    e''8                                                                 %! baca.MusicMaker.__call__
-                                    r8                                                                   %! baca.MusicMaker.__call__
-                                    r8                                                                   %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    ef''8                                                                %! baca.MusicMaker.__call__
-                                    r8                                                                   %! baca.MusicMaker.__call__
-                                    r8                                                                   %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    af''8                                                                %! baca.MusicMaker.__call__
-                                    r8                                                                   %! baca.MusicMaker.__call__
-                                    r8                                                                   %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    r16                                                                  %! baca.MusicMaker.__call__
-                                    g''8                                                                 %! baca.MusicMaker.__call__
-                                    r8                                                                   %! baca.MusicMaker.__call__
-                                    r8                                                                   %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-        ..  note:: Write hide_time_signature calltime examples.
-
-
-        ..  container:: example
-
-            Works with chords:
-
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     {0, 2, 10},
-            ...     [18, 16, 15, 20, 19],
-            ...     [9],
-            ...     ]
-            >>> contribution = music_maker('Voice_1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 7/16
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    <c' d' bf'>16
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    fs''16                                                               %! baca.MusicMaker.__call__
-                                    [
-                                    e''16                                                                %! baca.MusicMaker.__call__
-                                    ef''16                                                               %! baca.MusicMaker.__call__
-                                    af''16                                                               %! baca.MusicMaker.__call__
-                                    g''16                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    a'16                                                                 %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
 
         Returns selection, time signature, state manifest.
         """
@@ -9862,10 +9861,9 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def pattern(self) -> typing.Union[
-        abjad.DurationInequality,
-        abjad.Pattern,
-        None]:
+    def pattern(
+        self
+    ) -> typing.Union[abjad.DurationInequality, abjad.Pattern, None]:
         """
         Gets pattern.
         """
