@@ -478,12 +478,10 @@ mmaker
       color_unregistered_pitches
       counts
       denominator
-      exhaustive
       extend_beam
       figure_index
       figure_name
       hide_time_signature
-      imbrication_map
       ordered_commands
       show
       specifiers
@@ -535,8 +533,6 @@ mmaker
 
    .. autoattribute:: MusicMaker.denominator
 
-   .. autoattribute:: MusicMaker.exhaustive
-
    .. autoattribute:: MusicMaker.extend_beam
 
    .. autoattribute:: MusicMaker.figure_index
@@ -544,8 +540,6 @@ mmaker
    .. autoattribute:: MusicMaker.figure_name
 
    .. autoattribute:: MusicMaker.hide_time_signature
-
-   .. autoattribute:: MusicMaker.imbrication_map
 
    .. autoattribute:: MusicMaker.ordered_commands
 

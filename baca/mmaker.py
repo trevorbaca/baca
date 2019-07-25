@@ -6776,12 +6776,10 @@ class MusicMaker(object):
         "_thread",
         "_voice_names",
         "_counts",
-        "_exhaustive",
         "_extend_beam",
         "_figure_index",
         "_figure_name",
         "_hide_time_signature",
-        "_imbrication_map",
         "_tag",
         "_talea_denominator",
         "_time_treatments",
@@ -6803,19 +6801,16 @@ class MusicMaker(object):
         *specifiers,
         allow_repeats=None,
         color_unregistered_pitches=None,
-        denominator=None,
-        ordered_commands: typing.Sequence = None,
-        thread=None,
-        # to integrate:
         counts=None,
-        exhaustive=None,
+        denominator=None,
         extend_beam=None,
         figure_index=None,
         figure_name=None,
         hide_time_signature=None,
-        imbrication_map=None,
+        ordered_commands: typing.Sequence = None,
         tag: str = "baca.MusicMaker.__call__",
         talea_denominator=None,
+        thread=None,
         time_treatments=None,
         tuplet_denominator=None,
         tuplet_force_fraction=None,
@@ -6830,114 +6825,42 @@ class MusicMaker(object):
         if color_unregistered_pitches is not None:
             color_unregistered_pitches = bool(color_unregistered_pitches)
         self._color_unregistered_pitches = color_unregistered_pitches
+        self._counts = counts
         if denominator is not None:
             assert abjad.mathtools.is_positive_integer(denominator)
         self._denominator = denominator
-        self._next_figure = 0
-        if ordered_commands is not None:
-            ordered_commands = list(ordered_commands)
-        self._ordered_commands = ordered_commands
-        if thread is not None:
-            thread = bool(thread)
-        self._thread = thread
-
-        self._counts = counts
-        self._exhaustive = exhaustive
         self._extend_beam = extend_beam
         self._figure_index = figure_index
         self._figure_name = figure_name
         self._hide_time_signature = hide_time_signature
-        self._imbrication_map = imbrication_map
+        self._next_figure = 0
+        if ordered_commands is not None:
+            ordered_commands = list(ordered_commands)
+        self._ordered_commands = ordered_commands
         self._tag = tag
         self._talea_denominator = talea_denominator
+        if thread is not None:
+            thread = bool(thread)
+        self._thread = thread
         self._time_treatments = time_treatments
         self._tuplet_denominator = tuplet_denominator
         self._tuplet_force_fraction = tuplet_force_fraction
 
     ### SPECIAL METHODS ###
 
-    def __call__(
-        self,
-        voice_name,
-        collections,
-        #        *specifiers,
-        #        allow_repeats=None,
-        #        color_unregistered_pitches=None,
-        #        counts=None,
-        #        exhaustive=None,
-        #        extend_beam=None,
-        #        figure_index=None,
-        #        figure_name=None,
-        #        hide_time_signature=None,
-        #        imbrication_map=None,
-        #        denominator=None,
-        #        ordered_commands=None,
-        #        tag: str = "baca.MusicMaker.__call__",
-        #        talea_denominator=None,
-        #        thread=None,
-        #        time_treatments=None,
-        #        tuplet_denominator=None,
-        #        tuplet_force_fraction=None,
-    ):
+    def __call__(self, voice_name, collections):
         """
         Calls music-maker on ``collections``.
 
         Returns selection, time signature, state manifest.
         """
-
-        #        if counts is None:
-        #            counts = self.counts
-        #        if exhaustive is None:
-        #            exhaustive = self.exhaustive
-        #        if extend_beam is None:
-        #            extend_beam = self.extend_beam
-        #        if figure_index is None:
-        #            figure_index = self.figure_index
-        #        if figure_name is None:
-        #            figure_name = self.figure_name
-        #        if hide_time_signature is None:
-        #            hide_time_signature = self.hide_time_signature
-        #        if imbrication_map is None:
-        #            imbrication_map = self.imbrication_map
-        #        if tag is None:
-        #            tag = self.tag
-        #        if talea_denominator is None:
-        #            talea_denominator = self.talea_denominator
-        #        if time_treatments is None:
-        #            time_treatments = self.time_treatments
-        #        if tuplet_denominator is None:
-        #            tuplet_denominator = self.tuplet_denominator
-        #        if tuplet_force_fraction is None:
-        #            tuplet_force_fraction = self.tuplet_force_fraction
-
         color_unregistered_pitches = self.color_unregistered_pitches
-        denominator = self.denominator
-        counts = self.counts
-        exhaustive = self.exhaustive
-        extend_beam = self.extend_beam
-        figure_index = self.figure_index
-        figure_name = self.figure_name
-        hide_time_signature = self.hide_time_signature
-        imbrication_map = self.imbrication_map
-        tag = self.tag
-        talea_denominator = self.talea_denominator
-        thread = self.thread
-        time_treatments = self.time_treatments
-        tuplet_denominator = self.tuplet_denominator
-        tuplet_force_fraction = self.tuplet_force_fraction
-
         if self._is_pitch_input(collections):
             color_unregistered_pitches = False
-
-        #        specifiers_ = classes.Sequence(specifiers)
-        #        specifiers_ = specifiers_.flatten()
-        #        specifiers_list = list(self.specifiers or []) + list(specifiers_)
-
-        specifiers_list = list(self.specifiers)
-
-        if any(_ is None for _ in specifiers_list):
+        specifiers = list(self.specifiers)
+        if any(_ is None for _ in specifiers):
             message = "specifiers must not be none:\n"
-            message += f"   {repr(specifiers_list)}"
+            message += f"   {repr(specifiers)}"
             raise Exception(message)
         if isinstance(collections, str):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
@@ -6947,72 +6870,62 @@ class MusicMaker(object):
             selections = [abjad.select(tuplet)]
         else:
             collections = self._coerce_collections(collections)
-            collections, specifiers_list = self._apply_pitch_specifiers(
-                collections, specifiers_list
+            collections, specifiers = self._apply_pitch_specifiers(
+                collections, specifiers
             )
-            collections, specifiers_list = self._apply_spacing_specifiers(
-                collections, specifiers_list
+            collections, specifiers = self._apply_spacing_specifiers(
+                collections, specifiers
             )
-            selections, specifiers_list = self._call_rhythm_commands(
+            selections, specifiers = self._call_rhythm_commands(
                 collections,
-                specifiers_list,
-                counts=counts,
-                talea_denominator=talea_denominator,
-                thread=thread,
-                time_treatments=time_treatments,
-                tuplet_denominator=tuplet_denominator,
-                tuplet_force_fraction=tuplet_force_fraction,
+                specifiers,
+                counts=self.counts,
+                talea_denominator=self.talea_denominator,
+                thread=self.thread,
+                time_treatments=self.time_treatments,
+                tuplet_denominator=self.tuplet_denominator,
+                tuplet_force_fraction=self.tuplet_force_fraction,
             )
         self._color_unregistered_pitches_(
             selections, color_unregistered_pitches=color_unregistered_pitches
         )
-
-        #        ordered_commands__ = self.ordered_commands or ()
-        #        ordered_commands_ = list(ordered_commands__)
-        #        ordered_commands_.extend(ordered_commands or [])
-        ordered_commands_ = self.ordered_commands
-
-        for command in ordered_commands_ or []:
+        for command in self.ordered_commands or []:
             command(selections)
-        anchor, specifiers_list = self._get_anchor_specifier(specifiers_list)
+        anchor, specifiers = self._get_anchor_specifier(specifiers)
         container = abjad.Container(selections)
-        specifiers_list = self._call_tie_commands(selections, specifiers_list)
-        specifiers_list = self._call_cluster_commands(
-            selections, specifiers_list
+        specifiers = self._call_tie_commands(selections, specifiers)
+        specifiers = self._call_cluster_commands(selections, specifiers)
+        specifiers = self._call_nesting_commands(selections, specifiers)
+        specifiers = self._call_register_commands(selections, specifiers)
+        imbricated_selections, specifiers = self._call_imbrication_commands(
+            container, specifiers
         )
-        specifiers_list = self._call_nesting_commands(
-            selections, specifiers_list
+        result = self._call_color_commands(selections, specifiers)
+        specifiers, color_selector, color_selector_result = result
+        self._call_remaining_commands(selections, specifiers)
+        self._label_figure_name_(
+            container, self.figure_name, self.figure_index
         )
-        specifiers_list = self._call_register_commands(
-            selections, specifiers_list
-        )
-        imbricated_selections, specifiers_list = self._call_imbrication_commands(
-            container, specifiers_list
-        )
-        result = self._call_color_commands(selections, specifiers_list)
-        specifiers_list, color_selector, color_selector_result = result
-        self._call_remaining_commands(selections, specifiers_list)
-        self._label_figure_name_(container, figure_name, figure_index)
         self._annotate_collection_list(container, collections)
         self._annotate_repeat_pitches(container)
-        self._extend_beam_(container, extend_beam)
+        self._extend_beam_(container, self.extend_beam)
         self._check_wellformedness(container)
         selection = abjad.select([container])
         time_signature = self._make_time_signature(
-            selection, denominator=denominator
+            selection, denominator=self.denominator
         )
         voice_to_selection = {voice_name: selection}
         voice_to_selection.update(imbricated_selections)
         for value in voice_to_selection.values():
             assert isinstance(value, abjad.Selection), repr(value)
-            if tag is not None:
-                rhythmcommands.tag_selection(value, tag)
+            if self.tag is not None:
+                rhythmcommands.tag_selection(value, self.tag)
         return MusicContribution(
             anchor=anchor,
             color_selector=color_selector,
             color_selector_result=color_selector_result,
-            figure_name=figure_name,
-            hide_time_signature=hide_time_signature,
+            figure_name=self.figure_name,
+            hide_time_signature=self.hide_time_signature,
             selections=voice_to_selection,
             time_signature=time_signature,
         )
@@ -9108,9 +9021,9 @@ class MusicMaker(object):
     def counts(self):
         return self._counts
 
-    @property
-    def exhaustive(self):
-        return self._exhaustive
+    #    @property
+    #    def exhaustive(self):
+    #        return self._exhaustive
 
     @property
     def extend_beam(self):
@@ -9128,9 +9041,9 @@ class MusicMaker(object):
     def hide_time_signature(self):
         return self._hide_time_signature
 
-    @property
-    def imbrication_map(self):
-        return self._imbrication_map
+    #    @property
+    #    def imbrication_map(self):
+    #        return self._imbrication_map
 
     @property
     def tag(self):
