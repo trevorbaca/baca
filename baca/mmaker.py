@@ -5694,8 +5694,13 @@ class MusicAccumulator(object):
         else:
             music_maker = MusicMaker()
         assert isinstance(music_maker, MusicMaker)
-        # HERE
-        ###music_maker = abjad.new(music_maker, music_maker.maker)
+        for specifier in specifiers:
+            if isinstance(specifier, MusicMaker):
+                message = "must combine music-makers:\n"
+                message += f"   {repr(music_maker)}"
+                message += f"   {repr(specifier)}"
+                raise Exception(message)
+        ###music_maker = abjad.new(music_maker)
         keywords["figure_index"] = self._figure_index
         voice_name = self.score_template.voice_abbreviations.get(
             voice_name, voice_name
