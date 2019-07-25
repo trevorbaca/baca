@@ -1472,6 +1472,11 @@ class ImbricationCommand(scoping.Command):
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam_groups(),
+        ...     baca.ImbricationCommand(
+        ...         'Voice_1',
+        ...         [2, 19, 9, 18, 16],
+        ...         rmakers.beam_groups(),
+        ...     ),
         ... )
 
         >>> collections = [
@@ -1482,11 +1487,6 @@ class ImbricationCommand(scoping.Command):
         >>> contribution = music_maker(
         ...     'Voice_2',
         ...     collections,
-        ...     baca.ImbricationCommand(
-        ...         'Voice_1',
-        ...         [2, 19, 9, 18, 16],
-        ...         rmakers.beam_groups(),
-        ...     ),
         ... )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1616,16 +1616,6 @@ class ImbricationCommand(scoping.Command):
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam_groups(),
-        ... )
-
-        >>> collections = [
-        ...     [0, 2, 10, 18, 16],
-        ...     [15, 20, 19, 9, 0],
-        ...     [2, 10, 18, 16, 15],
-        ...     ]
-        >>> contribution = music_maker(
-        ...     'Voice_2',
-        ...     collections,
         ...     baca.ImbricationCommand(
         ...         'Voice_1',
         ...         [2, 19, 9],
@@ -1638,6 +1628,16 @@ class ImbricationCommand(scoping.Command):
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.accent(selector=baca.pheads()),
         ...         ),
+        ... )
+
+        >>> collections = [
+        ...     [0, 2, 10, 18, 16],
+        ...     [15, 20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     ]
+        >>> contribution = music_maker(
+        ...     'Voice_2',
+        ...     collections,
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1807,6 +1807,12 @@ class ImbricationCommand(scoping.Command):
         ...     baca.pitch_first([1], 16, time_treatments=[1]),
         ...     rmakers.beam_groups(beam_rests=True),
         ...     baca.staccato(selector=baca.pheads()),
+        ...     baca.ImbricationCommand(
+        ...         'Voice_1',
+        ...         [2, 19, 9, 18, 16],
+        ...         baca.accent(selector=baca.pheads()),
+        ...         rmakers.beam_groups(beam_rests=True),
+        ...         ),
         ... )
 
         >>> collections = [
@@ -1817,12 +1823,6 @@ class ImbricationCommand(scoping.Command):
         >>> contribution = music_maker(
         ...     'Voice_2',
         ...     collections,
-        ...     baca.ImbricationCommand(
-        ...         'Voice_1',
-        ...         [2, 19, 9, 18, 16],
-        ...         baca.accent(selector=baca.pheads()),
-        ...         rmakers.beam_groups(beam_rests=True),
-        ...         ),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2034,27 +2034,27 @@ class ImbricationCommand(scoping.Command):
 
             Works with pitch-classes:
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([3], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> segment = [
             ...     abjad.NumberedPitchClass(10),
             ...     abjad.NumberedPitchClass(6),
             ...     abjad.NumberedPitchClass(4),
             ...     abjad.NumberedPitchClass(3),
             ...     ]
-            >>> contribution = music_maker(
-            ...     'Voice_2',
-            ...     collections,
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.pitch_first([3], 16),
+            ...     rmakers.beam(),
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         segment,
             ...         baca.accent(selector=baca.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         ),
+            ... )
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice_2',
+            ...     collections,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2141,30 +2141,30 @@ class ImbricationCommand(scoping.Command):
 
             Skips wrapped pitches:
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
-            ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
-            ...     ]
             >>> segment = [
             ...     0,
             ...     baca.coat(10),
             ...     baca.coat(18),
             ...     10, 18,
             ...     ]
-            >>> contribution = music_maker(
-            ...     'Voice_2',
-            ...     collections,
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.pitch_first([1], 16),
+            ...     rmakers.beam(),
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         segment,
             ...         baca.accent(selector=baca.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         ),
+            ... )
+
+            >>> collections = [
+            ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
+            ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
+            ...     ]
+            >>> contribution = music_maker(
+            ...     'Voice_2',
+            ...     collections,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2276,17 +2276,13 @@ class ImbricationCommand(scoping.Command):
 
             Extends beam across figures:
 
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
-            ...     rmakers.beam_groups(),
-            ... )
-
             >>> voice_1_selections = []
             >>> voice_2_selections = []
             >>> time_signatures = []
-            >>> contribution = music_maker(
-            ...     'Voice_2',
-            ...     [[0, 2, 10, 18], [16, 15, 23]],
+
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.pitch_first([1], 16),
+            ...     rmakers.beam_groups(),
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 10],
@@ -2294,20 +2290,29 @@ class ImbricationCommand(scoping.Command):
             ...         rmakers.beam_groups(beam_rests=True),
             ...         extend_beam=True,
             ...         ),
+            ... )
+            >>> contribution = music_maker(
+            ...     'Voice_2',
+            ...     [[0, 2, 10, 18], [16, 15, 23]],
             ...     )
             >>> dictionary = contribution.selections
             >>> voice_1_selections.append(dictionary['Voice_1'])
             >>> voice_2_selections.append(dictionary['Voice_2'])
             >>> time_signatures.append(contribution.time_signature)
-            >>> contribution = music_maker(
-            ...     'Voice_2',
-            ...     [[19, 13, 9, 8]],
+
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.pitch_first([1], 16),
+            ...     rmakers.beam_groups(),
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [13, 9],
             ...         baca.staccato(selector=baca.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         ),
+            ... )
+            >>> contribution = music_maker(
+            ...     'Voice_2',
+            ...     [[19, 13, 9, 8]],
             ...     )
             >>> dictionary = contribution.selections
             >>> voice_1_selections.append(dictionary['Voice_1'])
@@ -2609,6 +2614,11 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
+            ...     baca.ImbricationCommand(
+            ...         'Voice_1',
+            ...         [2, 19, 9, 18, 16],
+            ...         rmakers.beam_groups(),
+            ...     ),
             ... )
 
             >>> collections = [
@@ -2619,11 +2629,6 @@ class ImbricationCommand(scoping.Command):
             >>> contribution = music_maker(
             ...     'Voice_2',
             ...     collections,
-            ...     baca.ImbricationCommand(
-            ...         'Voice_1',
-            ...         [2, 19, 9, 18, 16],
-            ...         rmakers.beam_groups(),
-            ...     ),
             ... )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2737,6 +2742,12 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
+            ...     baca.ImbricationCommand(
+            ...         'Voice_1',
+            ...         [2, 19, 9, 18, 16],
+            ...         rmakers.beam_groups(),
+            ...     ),
+            ...     baca.rests_around([2], [2]),
             ... )
 
             >>> collections = [
@@ -2747,12 +2758,6 @@ class ImbricationCommand(scoping.Command):
             >>> contribution = music_maker(
             ...     'Voice_2',
             ...     collections,
-            ...     baca.ImbricationCommand(
-            ...         'Voice_1',
-            ...         [2, 19, 9, 18, 16],
-            ...         rmakers.beam_groups(),
-            ...     ),
-            ...     baca.rests_around([2], [2]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3050,6 +3055,13 @@ class ImbricationCommand(scoping.Command):
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.staccato(selector=baca.pheads()),
+            ...     baca.ImbricationCommand(
+            ...         'Voice_1',
+            ...         [2, 19, 9, 18, 16],
+            ...         baca.accent(selector=baca.pheads()),
+            ...         rmakers.beam_groups(beam_rests=True),
+            ...         allow_unused_pitches=True,
+            ...         ),
             ...     )
 
             >>> collections = [
@@ -3059,13 +3071,6 @@ class ImbricationCommand(scoping.Command):
             >>> contribution = music_maker(
             ...     'Voice_2',
             ...     collections,
-            ...     baca.ImbricationCommand(
-            ...         'Voice_1',
-            ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(selector=baca.pheads()),
-            ...         rmakers.beam_groups(beam_rests=True),
-            ...         allow_unused_pitches=True,
-            ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3179,6 +3184,12 @@ class ImbricationCommand(scoping.Command):
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.staccato(selector=baca.pheads()),
+            ...     baca.ImbricationCommand(
+            ...         'Voice_1',
+            ...         [2, 19, 9, 18, 16],
+            ...         baca.accent(selector=baca.pheads()),
+            ...         rmakers.beam_groups(beam_rests=True),
+            ...         ),
             ...     )
 
             >>> collections = [
@@ -3188,12 +3199,6 @@ class ImbricationCommand(scoping.Command):
             >>> result = music_maker(
             ...     'Voice_2',
             ...     collections,
-            ...     baca.ImbricationCommand(
-            ...         'Voice_1',
-            ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(selector=baca.pheads()),
-            ...         rmakers.beam_groups(beam_rests=True),
-            ...         ),
             ...     )
             Traceback (most recent call last):
                 ...
@@ -3252,6 +3257,13 @@ class ImbricationCommand(scoping.Command):
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.staccato(selector=baca.pheads()),
+            ...     baca.ImbricationCommand(
+            ...         'Voice_1',
+            ...         [2, 19, 9, 18, 16],
+            ...         baca.accent(selector=baca.pheads()),
+            ...         rmakers.beam_groups(beam_rests=True),
+            ...         hocket=True,
+            ...         ),
             ...     )
 
             >>> collections = [
@@ -3262,13 +3274,6 @@ class ImbricationCommand(scoping.Command):
             >>> contribution = music_maker(
             ...     'Voice_2',
             ...     collections,
-            ...     baca.ImbricationCommand(
-            ...         'Voice_1',
-            ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(selector=baca.pheads()),
-            ...         rmakers.beam_groups(beam_rests=True),
-            ...         hocket=True,
-            ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3430,6 +3435,13 @@ class ImbricationCommand(scoping.Command):
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.staccato(selector=baca.pheads()),
+            ...     baca.ImbricationCommand(
+            ...         'Voice_1',
+            ...         [2, 18, 16, 15],
+            ...         baca.accent(selector=baca.pheads()),
+            ...         rmakers.beam_groups(beam_rests=True),
+            ...         selector=baca.plts()[-9:],
+            ...         ),
             ... )
 
             >>> collections = [
@@ -3439,13 +3451,6 @@ class ImbricationCommand(scoping.Command):
             >>> contribution = music_maker(
             ...     'Voice_2',
             ...     collections,
-            ...     baca.ImbricationCommand(
-            ...         'Voice_1',
-            ...         [2, 18, 16, 15],
-            ...         baca.accent(selector=baca.pheads()),
-            ...         rmakers.beam_groups(beam_rests=True),
-            ...         selector=baca.plts()[-9:],
-            ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3628,6 +3633,10 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
+            ...     baca.ImbricationCommand(
+            ...         'Voice_1',
+            ...         [2, 19, 9, 18, 16],
+            ...         ),
             ... )
 
             >>> collections = [
@@ -3638,10 +3647,6 @@ class ImbricationCommand(scoping.Command):
             >>> contribution = music_maker(
             ...     'Voice_2',
             ...     collections,
-            ...     baca.ImbricationCommand(
-            ...         'Voice_1',
-            ...         [2, 19, 9, 18, 16],
-            ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3757,6 +3762,11 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
+            ...     baca.ImbricationCommand(
+            ...         'Voice_1',
+            ...         [2, 19, 9, 18, 16],
+            ...         rmakers.beam_groups(),
+            ...     ),
             ... )
 
             >>> collections = [
@@ -3767,11 +3777,6 @@ class ImbricationCommand(scoping.Command):
             >>> contribution = music_maker(
             ...     'Voice_2',
             ...     collections,
-            ...     baca.ImbricationCommand(
-            ...         'Voice_1',
-            ...         [2, 19, 9, 18, 16],
-            ...         rmakers.beam_groups(),
-            ...     ),
             ... )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3901,6 +3906,11 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
+            ...     baca.ImbricationCommand(
+            ...         'Voice_1',
+            ...         [2, 19, 9, 18, 16],
+            ...         rmakers.beam_groups(beam_rests=True),
+            ...         ),
             ... )
 
             >>> collections = [
@@ -3911,11 +3921,6 @@ class ImbricationCommand(scoping.Command):
             >>> contribution = music_maker(
             ...     'Voice_2',
             ...     collections,
-            ...     baca.ImbricationCommand(
-            ...         'Voice_1',
-            ...         [2, 19, 9, 18, 16],
-            ...         rmakers.beam_groups(beam_rests=True),
-            ...         ),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -4043,6 +4048,11 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
+            ...     baca.ImbricationCommand(
+            ...         'Voice_1',
+            ...         [2, 19, 9, 18, 16],
+            ...         rmakers.beam(beam_rests=True),
+            ...     ),
             ... )
 
             >>> collections = [
@@ -4053,11 +4063,6 @@ class ImbricationCommand(scoping.Command):
             >>> contribution = music_maker(
             ...     'Voice_2',
             ...     collections,
-            ...     baca.ImbricationCommand(
-            ...         'Voice_1',
-            ...         [2, 19, 9, 18, 16],
-            ...         rmakers.beam(beam_rests=True),
-            ...     ),
             ... )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -4542,18 +4547,18 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([5], 32),
             ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker(
-            ...     'Voice_2',
-            ...     collections,
             ...     baca.ImbricationCommand(
             ...         'Voice_1',
             ...         [2, 10, 18, 19, 9],
             ...         rmakers.beam_groups(beam_rests=True),
             ...         truncate_ties=True,
             ...         ),
+            ... )
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice_2',
+            ...     collections,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -6240,13 +6245,13 @@ class MusicMaker(object):
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
+        ...     counts=[1, 2],
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     collections,
-        ...     counts=[1, 2],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -6297,13 +6302,13 @@ class MusicMaker(object):
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
+        ...     talea_denominator=32,
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     collections,
-        ...     talea_denominator=32,
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -6354,13 +6359,13 @@ class MusicMaker(object):
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
+        ...     time_treatments=[1],
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     collections,
-        ...     time_treatments=[1],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -6412,12 +6417,12 @@ class MusicMaker(object):
 
         >>> music_maker = baca.MusicMaker(
         ...     rmakers.beam(),
+        ...     baca.nest('+1/8'),
         ... )
 
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     "r4. r4.",
-        ...     baca.nest('+1/8'),
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -6456,12 +6461,12 @@ class MusicMaker(object):
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
+        ...     counts=[2, -1],
         ... )
 
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[18, 16, 15, 20, 19]],
-        ...     counts=[2, -1],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -6498,10 +6503,15 @@ class MusicMaker(object):
                 >>
             >>
 
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[18, 16, 15, 20, 19]],
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
+        ...     rmakers.beam(),
         ...     counts=[2, -1, -1],
+        ... )
+
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[18, 16, 15, 20, 19]],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -6543,10 +6553,15 @@ class MusicMaker(object):
                 >>
             >>
 
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
+        ...     rmakers.beam(),
+        ...     counts=[-1, 2],
+        ... )
+
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[18, 16, 15, 20, 19]],
-        ...     counts=[-1, 2],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -6583,10 +6598,15 @@ class MusicMaker(object):
                 >>
             >>
 
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
+        ...     rmakers.beam(),
+        ...     counts=[-1, -1, 2],
+        ... )
+
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[18, 16, 15, 20, 19]],
-        ...     counts=[-1, -1, 2],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -6628,10 +6648,15 @@ class MusicMaker(object):
                 >>
             >>
 
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
+        ...     rmakers.beam(),
+        ...     counts=[-1, -1, 2, -2, -2],
+        ... )
+
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[18, 16, 15, 20, 19]],
-        ...     counts=[-1, -1, 2, -2, -2],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -6682,8 +6707,6 @@ class MusicMaker(object):
                     }
                 >>
             >>
-
-    ..  note:: Write hide_time_signature calltime examples.
 
     ..  container:: example
 
@@ -6837,59 +6860,81 @@ class MusicMaker(object):
         self,
         voice_name,
         collections,
-        *specifiers,
-        allow_repeats=None,
-        color_unregistered_pitches=None,
-        counts=None,
-        exhaustive=None,
-        extend_beam=None,
-        figure_index=None,
-        figure_name=None,
-        hide_time_signature=None,
-        imbrication_map=None,
-        denominator=None,
-        ordered_commands=None,
-        tag: str = "baca.MusicMaker.__call__",
-        talea_denominator=None,
-        thread=None,
-        time_treatments=None,
-        tuplet_denominator=None,
-        tuplet_force_fraction=None,
+        #        *specifiers,
+        #        allow_repeats=None,
+        #        color_unregistered_pitches=None,
+        #        counts=None,
+        #        exhaustive=None,
+        #        extend_beam=None,
+        #        figure_index=None,
+        #        figure_name=None,
+        #        hide_time_signature=None,
+        #        imbrication_map=None,
+        #        denominator=None,
+        #        ordered_commands=None,
+        #        tag: str = "baca.MusicMaker.__call__",
+        #        talea_denominator=None,
+        #        thread=None,
+        #        time_treatments=None,
+        #        tuplet_denominator=None,
+        #        tuplet_force_fraction=None,
     ):
         """
         Calls music-maker on ``collections``.
 
         Returns selection, time signature, state manifest.
         """
-        if counts is None:
-            counts = self.counts
-        if exhaustive is None:
-            exhaustive = self.exhaustive
-        if extend_beam is None:
-            extend_beam = self.extend_beam
-        if figure_index is None:
-            figure_index = self.figure_index
-        if figure_name is None:
-            figure_name = self.figure_name
-        if hide_time_signature is None:
-            hide_time_signature = self.hide_time_signature
-        if imbrication_map is None:
-            imbrication_map = self.imbrication_map
-        if tag is None:
-            tag = self.tag
-        if talea_denominator is None:
-            talea_denominator = self.talea_denominator
-        if time_treatments is None:
-            time_treatments = self.time_treatments
-        if tuplet_denominator is None:
-            tuplet_denominator = self.tuplet_denominator
-        if tuplet_force_fraction is None:
-            tuplet_force_fraction = self.tuplet_force_fraction
+
+        #        if counts is None:
+        #            counts = self.counts
+        #        if exhaustive is None:
+        #            exhaustive = self.exhaustive
+        #        if extend_beam is None:
+        #            extend_beam = self.extend_beam
+        #        if figure_index is None:
+        #            figure_index = self.figure_index
+        #        if figure_name is None:
+        #            figure_name = self.figure_name
+        #        if hide_time_signature is None:
+        #            hide_time_signature = self.hide_time_signature
+        #        if imbrication_map is None:
+        #            imbrication_map = self.imbrication_map
+        #        if tag is None:
+        #            tag = self.tag
+        #        if talea_denominator is None:
+        #            talea_denominator = self.talea_denominator
+        #        if time_treatments is None:
+        #            time_treatments = self.time_treatments
+        #        if tuplet_denominator is None:
+        #            tuplet_denominator = self.tuplet_denominator
+        #        if tuplet_force_fraction is None:
+        #            tuplet_force_fraction = self.tuplet_force_fraction
+
+        color_unregistered_pitches = self.color_unregistered_pitches
+        denominator = self.denominator
+        counts = self.counts
+        exhaustive = self.exhaustive
+        extend_beam = self.extend_beam
+        figure_index = self.figure_index
+        figure_name = self.figure_name
+        hide_time_signature = self.hide_time_signature
+        imbrication_map = self.imbrication_map
+        tag = self.tag
+        talea_denominator = self.talea_denominator
+        thread = self.thread
+        time_treatments = self.time_treatments
+        tuplet_denominator = self.tuplet_denominator
+        tuplet_force_fraction = self.tuplet_force_fraction
+
         if self._is_pitch_input(collections):
             color_unregistered_pitches = False
-        specifiers_ = classes.Sequence(specifiers)
-        specifiers_ = specifiers_.flatten()
-        specifiers_list = list(self.specifiers or []) + list(specifiers_)
+
+        #        specifiers_ = classes.Sequence(specifiers)
+        #        specifiers_ = specifiers_.flatten()
+        #        specifiers_list = list(self.specifiers or []) + list(specifiers_)
+
+        specifiers_list = list(self.specifiers)
+
         if any(_ is None for _ in specifiers_list):
             message = "specifiers must not be none:\n"
             message += f"   {repr(specifiers_list)}"
@@ -6921,10 +6966,13 @@ class MusicMaker(object):
         self._color_unregistered_pitches_(
             selections, color_unregistered_pitches=color_unregistered_pitches
         )
-        ordered_commands__ = self.ordered_commands or ()
-        ordered_commands_ = list(ordered_commands__)
-        ordered_commands_.extend(ordered_commands or [])
-        for command in ordered_commands_:
+
+        #        ordered_commands__ = self.ordered_commands or ()
+        #        ordered_commands_ = list(ordered_commands__)
+        #        ordered_commands_.extend(ordered_commands or [])
+        ordered_commands_ = self.ordered_commands
+
+        for command in ordered_commands_ or []:
             command(selections)
         anchor, specifiers_list = self._get_anchor_specifier(specifiers_list)
         container = abjad.Container(selections)
@@ -7502,6 +7550,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
+            ...     denominator=8,
             ... )
 
             >>> collections = [
@@ -7512,79 +7561,6 @@ class MusicMaker(object):
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     collections,
-            ...     denominator=8,
-            ...     )
-            >>> lilypond_file = music_maker.show(
-            ...     contribution,
-            ...     time_signatures=[contribution.time_signature],
-            ...     )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        \time 6/8
-                        s1 * 3/4
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    c'16                                                                 %! baca.MusicMaker.__call__
-                                    [
-                                    d'16                                                                 %! baca.MusicMaker.__call__
-                                    bf'16                                                                %! baca.MusicMaker.__call__
-                                    fs''16                                                               %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    e''16                                                                %! baca.MusicMaker.__call__
-                                    [
-                                    ef''16                                                               %! baca.MusicMaker.__call__
-                                    b''16                                                                %! baca.MusicMaker.__call__
-                                    f''16                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    g''16                                                                %! baca.MusicMaker.__call__
-                                    [
-                                    cs''16                                                               %! baca.MusicMaker.__call__
-                                    a'16                                                                 %! baca.MusicMaker.__call__
-                                    af'16                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-        ..  container:: example
-
-            Denominator supplied at call time overrides denominator supplied at
-            configuration time:
-
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
-            ...     rmakers.beam(),
-            ...     denominator=16,
-            ...     )
-
-            >>> collections = [
-            ...     [0, 2, 10, 18],
-            ...     [16, 15, 23, 17],
-            ...     [19, 13, 9, 8],
-            ...     ]
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     collections,
-            ...     denominator=8,
             ...     )
             >>> lilypond_file = music_maker.show(
             ...     contribution,
@@ -7845,10 +7821,6 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ... )
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
             ...     baca.new(
             ...         baca.hairpin('p < f'),
             ...         map=baca.runs(),
@@ -7860,6 +7832,10 @@ class MusicMaker(object):
             ...             ),
             ...         prefix=[1],
             ...         ),
+            ... )
+            >>> contribution = music_maker(
+            ...     'Voice_1',
+            ...     [[0, 2, 10, 18], [15, 23], [19, 13, 9, 8]],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Score]
@@ -7926,10 +7902,6 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ... )
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
             ...     baca.new(
             ...         baca.hairpin('p < f'),
             ...         map=baca.tuplet(0),
@@ -7938,6 +7910,10 @@ class MusicMaker(object):
             ...         baca.hairpin('f > p'),
             ...         map=baca.tuplet(-1),
             ...         ),
+            ... )
+            >>> contribution = music_maker(
+            ...     'Voice_1',
+            ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Score]
@@ -8004,10 +7980,6 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ... )
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
             ...     baca.new(
             ...         baca.hairpin('p < f'),
             ...         map=baca.tuplets()[:2],
@@ -8016,6 +7988,10 @@ class MusicMaker(object):
             ...         baca.hairpin('f > p'),
             ...         map=baca.tuplet(-1),
             ...         ),
+            ... )
+            >>> contribution = music_maker(
+            ...     'Voice_1',
+            ...     [[0, 2, 10, 18], [16, 15, 23], [19, 13, 9, 8]],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> staff = lilypond_file[abjad.Score]
@@ -9015,13 +8991,13 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
+            ...     counts=[1, 2, 3],
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     collections,
-            ...     counts=[1, 2, 3],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -9068,11 +9044,15 @@ class MusicMaker(object):
             Does thread rhythm-maker over collections:
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.pitch_first([1], 16),
+            ...     rmakers.beam(),
+            ...     counts=[1, 2, 3],
+            ...     thread=True,
+            ... )
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     collections,
-            ...     counts=[1, 2, 3],
-            ...     thread=True,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -9279,209 +9259,6 @@ class NestingCommand(scoping.Command):
                     }
                 >>
             >>
-
-    ..  container:: example
-
-        Calltime nesting command preserves beam subdivisions and works with
-        extend beam:
-
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
-            ...     rmakers.beam_groups(),
-            ...     )
-
-        >>> containers, time_signatures = [], []
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10, 18], [16, 15, 23]],
-        ...     baca.NestingCommand(
-        ...         time_treatments=['+1/16'],
-        ...         ),
-        ...     extend_beam=True,
-        ...     )
-        >>> containers.extend(contribution['Voice_1'])
-        >>> time_signatures.append(contribution.time_signature)
-        >>> contribution = music_maker('Voice_1', [[19, 13, 9, 8]])
-        >>> containers.extend(contribution['Voice_1'])
-        >>> time_signatures.append(contribution.time_signature)
-        >>> selection = abjad.select(containers)
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     spacing=baca.HorizontalSpacingSpecifier(
-        ...         minimum_duration=abjad.Duration(1, 24),
-        ...         ),
-        ...     time_signatures=time_signatures,
-        ...     )
-        >>> maker(
-        ...     'Music_Voice',
-        ...     baca.RhythmCommand(
-        ...         rhythm_maker=selection,
-        ...         ),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> staff = lilypond_file[abjad.Score]
-        >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-            \with                                                                                    %! baca.SingleStaffScoreTemplate.__call__
-            {                                                                                        %! baca.SingleStaffScoreTemplate.__call__
-                \override Beam.positions = #'(-5.5 . -5.5)                                           %! baca.SingleStaffScoreTemplate.__call__
-            }                                                                                        %! baca.SingleStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
-            <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
-            <BLANKLINE>
-                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/2                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                        s1 * 1/2                                                                     %! _make_global_skips(1)
-            <BLANKLINE>
-                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                        \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                        s1 * 1/4                                                                     %! _make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
-                        \bar "|"                                                                     %! _attach_final_bar_line
-            <BLANKLINE>
-                        % [Global_Skips measure 3]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
-                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
-                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
-                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
-            <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
-            <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
-            <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                            {                                                                        %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                \tweak text #tuplet-number::calc-fraction-text                       %! baca.MusicMaker.__call__
-                                \times 8/7 {                                                         %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {                                      %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                        % [Music_Voice measure 1]                                    %! _comment_measure_numbers
-                                        \set stemLeftBeamCount = 0
-                                        \set stemRightBeamCount = 2
-                                        c'16                                                         %! baca.MusicMaker.__call__
-                                        [
-            <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        d'16                                                         %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        bf'!16                                                       %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 1
-                                        fs''!16                                                      %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                    }                                                                %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {                                      %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                        \set stemLeftBeamCount = 1
-                                        \set stemRightBeamCount = 2
-                                        e''16                                                        %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 2
-                                        ef''!16                                                      %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                        \set stemLeftBeamCount = 2
-                                        \set stemRightBeamCount = 1
-                                        b''16                                                        %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                    }                                                                %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                }                                                                    %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                            }                                                                        %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                            {                                                                        %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                \scaleDurations #'(1 . 1) {                                          %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                    % [Music_Voice measure 2]                                        %! _comment_measure_numbers
-                                    \set stemLeftBeamCount = 1
-                                    \set stemRightBeamCount = 2
-                                    g''16                                                            %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    cs''!16                                                          %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 2
-                                    a'16                                                             %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                    \set stemLeftBeamCount = 2
-                                    \set stemRightBeamCount = 0
-                                    af'!16                                                           %! baca.MusicMaker.__call__
-                                    ]
-            <BLANKLINE>
-                                }                                                                    %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                            }                                                                        %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                \context Voice = "Music_Voice"                                       %! PHANTOM:_make_multimeasure_rest_container
-                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                    % [Music_Voice measure 3]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                \context Voice = "Rest_Voice"                                        %! PHANTOM:_make_multimeasure_rest_container
-                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                    % [Rest_Voice measure 3]                                         %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
-                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
-                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
-                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
-                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
-                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
 
@@ -12673,18 +12450,18 @@ class RestAffixSpecifier(object):
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     collections,
         ...     baca.RestAffixSpecifier(
         ...         prefix=[2],
         ...         suffix=[3],
         ...         ),
         ...     counts=[1, -1],
         ...     time_treatments=[1],
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     collections,
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> staff = lilypond_file[abjad.Score]
@@ -12745,15 +12522,19 @@ class RestAffixSpecifier(object):
             >>
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     collections,
+        >>> music_maker = baca.MusicMaker(
+        ...     baca.pitch_first([1], 16),
+        ...     rmakers.beam(),
         ...     baca.RestAffixSpecifier(
         ...         prefix=[2],
         ...         suffix=[3],
         ...         ),
         ...     counts=[-1, 1],
         ...     time_treatments=[1],
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     collections,
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> staff = lilypond_file[abjad.Score]
@@ -12862,14 +12643,14 @@ class RestAffixSpecifier(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
+            ...     baca.RestAffixSpecifier(prefix=[1], suffix=[1]),
+            ...     time_treatments=[-1],
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     collections,
-            ...     baca.RestAffixSpecifier(prefix=[1], suffix=[1]),
-            ...     time_treatments=[-1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -12976,17 +12757,17 @@ class RestAffixSpecifier(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
+            ...     baca.RestAffixSpecifier(
+            ...         prefix=[1],
+            ...         suffix=[2],
+            ...         ),
+            ...     time_treatments=[1],
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     collections,
-            ...     baca.RestAffixSpecifier(
-            ...         prefix=[1],
-            ...         suffix=[2],
-            ...         ),
-            ...     time_treatments=[1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -13042,17 +12823,17 @@ class RestAffixSpecifier(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
+            ...     baca.RestAffixSpecifier(
+            ...         prefix=[1],
+            ...         suffix=[2],
+            ...         ),
+            ...     time_treatments=[1],
             ... )
 
             >>> collections = [[18, 16, 15, 20, 19]]
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     collections,
-            ...     baca.RestAffixSpecifier(
-            ...         prefix=[1],
-            ...         suffix=[2],
-            ...         ),
-            ...     time_treatments=[1],
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -13096,18 +12877,18 @@ class RestAffixSpecifier(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     collections,
             ...     baca.RestAffixSpecifier(
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...         prefix=[1],
             ...         suffix=[2],
             ...         ),
             ...     time_treatments=[1],
+            ... )
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice_1',
+            ...     collections,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -13165,18 +12946,18 @@ class RestAffixSpecifier(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     collections,
             ...     baca.RestAffixSpecifier(
             ...         pattern=abjad.index_all(),
             ...         prefix=[1],
             ...         suffix=[2],
             ...         ),
             ...     time_treatments=[1],
+            ... )
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice_1',
+            ...     collections,
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -13247,13 +13028,13 @@ class RestAffixSpecifier(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
+            ...     baca.RestAffixSpecifier(prefix=[3]),
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     collections,
-            ...     baca.RestAffixSpecifier(prefix=[3]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -13329,13 +13110,13 @@ class RestAffixSpecifier(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
+            ...     baca.RestAffixSpecifier(suffix=[3]),
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     collections,
-            ...     baca.RestAffixSpecifier(suffix=[3]),
             ...     )
             >>> lilypond_file = music_maker.show(contribution)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -13458,10 +13239,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
-        ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     3 * [[0, 2, 10]],
         ...     baca.imbricate(
         ...         'Voice_2',
         ...         [baca.coat(0), baca.coat(2), 10, 0, 2],
@@ -13469,6 +13246,10 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     time_treatments=[-1],
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     3 * [[0, 2, 10]],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -13575,22 +13356,20 @@ def imbricate(
 
         Imbricates segment:
 
-        ..  todo:: Externalize beam command.
-
         >>> music_maker = baca.MusicMaker(
         ...     baca.PitchFirstRhythmMaker(
         ...         rmakers.Talea(counts=[1], denominator=16),
         ...     ),
-        ...     ordered_commands=[rmakers.beam()],
-        ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.imbricate('Voice_2', [10, 20, 19]),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
+        ...     ordered_commands=[rmakers.beam()],
         ...     time_treatments=[-1],
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -13707,15 +13486,15 @@ def nest(time_treatments: typing.Iterable = None,) -> NestingCommand:
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
-        ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.nest('+4/16'),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -13791,14 +13570,14 @@ def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
-        ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_after([2]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -13870,14 +13649,14 @@ def rests_around(
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
-        ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_around([2], [2]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -13948,14 +13727,14 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
-        ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.rests_before([2]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -14043,14 +13822,14 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
-        ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.skips_after([2]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -14122,14 +13901,14 @@ def skips_around(
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
-        ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.skips_around([2], [2]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -14202,14 +13981,14 @@ def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
-        ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.skips_before([2]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP

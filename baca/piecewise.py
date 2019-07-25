@@ -672,15 +672,15 @@ def dynamic(
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
-        ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.dynamic('f'),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -739,15 +739,15 @@ def dynamic(
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam(),
-        ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     baca.dynamic('"f"'),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     counts=[1, 1, 5, -1],
         ...     time_treatments=[-1],
+        ... )
+        >>> contribution = music_maker(
+        ...     'Voice_1',
+        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = music_maker.show(contribution)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
