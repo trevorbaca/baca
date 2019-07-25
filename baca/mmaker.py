@@ -6183,6 +6183,18 @@ class MusicMaker(object):
         "_specifiers",
         "_thread",
         "_voice_names",
+        "_counts",
+        "_exhaustive",
+        "_extend_beam",
+        "_figure_index",
+        "_figure_name",
+        "_hide_time_signature",
+        "_imbrication_map",
+        "_tag",
+        "_talea_denominator",
+        "_time_treatments",
+        "_tuplet_denominator",
+        "_tuplet_force_fraction",
     )
 
     _publish_storage_format = True
@@ -6204,6 +6216,19 @@ class MusicMaker(object):
         denominator=None,
         ordered_commands: typing.Sequence = None,
         thread=None,
+        # to integrate:
+        counts=None,
+        exhaustive=None,
+        extend_beam=None,
+        figure_index=None,
+        figure_name=None,
+        hide_time_signature=None,
+        imbrication_map=None,
+        tag: str = "baca.MusicMaker.__call__",
+        talea_denominator=None,
+        time_treatments=None,
+        tuplet_denominator=None,
+        tuplet_force_fraction=None,
     ):
         prototype = (
             PitchFirstRhythmMaker,
@@ -6233,6 +6258,19 @@ class MusicMaker(object):
             thread = bool(thread)
         self._thread = thread
 
+        self._counts = (None,)
+        self._exhaustive = (None,)
+        self._extend_beam = (None,)
+        self._figure_index = (None,)
+        self._figure_name = (None,)
+        self._hide_time_signature = (None,)
+        self._imbrication_map = (None,)
+        self._tag = tag
+        self._talea_denominator = (None,)
+        self._time_treatments = (None,)
+        self._tuplet_denominator = (None,)
+        self._tuplet_force_fraction = (None,)
+
     ### SPECIAL METHODS ###
 
     def __call__(
@@ -6249,9 +6287,6 @@ class MusicMaker(object):
         figure_name=None,
         hide_time_signature=None,
         imbrication_map=None,
-        is_foreshadow=None,
-        is_incomplete=None,
-        is_recollection=None,
         denominator=None,
         ordered_commands=None,
         tag: str = "baca.MusicMaker.__call__",
@@ -6888,11 +6923,11 @@ class MusicMaker(object):
         self._call_remaining_commands(selections, specifiers_list)
         self._label_figure_name_(container, figure_name, figure_index)
         self._annotate_collection_list(container, collections)
-        self._annotate_deployment(
-            container,
-            is_foreshadow=is_foreshadow,
-            is_recollection=is_recollection,
-        )
+        #        self._annotate_deployment(
+        #            container,
+        #            is_foreshadow=is_foreshadow,
+        #            is_recollection=is_recollection,
+        #        )
         self._annotate_repeat_pitches(container)
         self._extend_beam_(container, extend_beam)
         self._check_wellformedness(container)
@@ -6928,23 +6963,6 @@ class MusicMaker(object):
         for leaf in abjad.iterate(container).leaves():
             collections_ = copy.deepcopy(collections)
             abjad.attach(collections_, leaf, tag=None)
-
-    def _annotate_deployment(
-        self,
-        argument,
-        is_foreshadow=False,
-        is_incomplete=False,
-        is_recollection=False,
-    ):
-        if not is_foreshadow and not is_recollection and not is_incomplete:
-            return
-        for leaf in abjad.iterate(argument).leaves():
-            if is_foreshadow:
-                abjad.attach(abjad.tags.FORESHADOW, leaf)
-            if is_incomplete:
-                abjad.attach(abjad.tags.INCOMPLETE, leaf)
-            if is_recollection:
-                abjad.attach(abjad.tags.RECOLLECTION, leaf)
 
     def _annotate_repeat_pitches(self, container):
         if not self.allow_repeats:
