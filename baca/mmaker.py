@@ -5700,13 +5700,7 @@ class MusicAccumulator(object):
                 message += f"   {repr(music_maker)}"
                 message += f"   {repr(specifier)}"
                 raise Exception(message)
-        ###new_music_maker = abjad.new(music_maker)
-        #        if new_music_maker != music_maker:
-        #            message = "original music-maker:\n"
-        #            message += f"   {repr(music_maker)}\n"
-        #            message += "new music-maker:\n"
-        #            message += f"   {repr(new_music_maker)}"
-        #            raise Exception(message)
+        music_maker = abjad.new(music_maker)
         keywords["figure_index"] = self._figure_index
         voice_name = self.score_template.voice_abbreviations.get(
             voice_name, voice_name
@@ -5728,11 +5722,7 @@ class MusicAccumulator(object):
                     specifier
                 )
         music_contribution = music_maker(
-            ###music_contribution = new_music_maker(
-            voice_name,
-            collections,
-            *specifiers,
-            **keywords,
+            voice_name, collections, *specifiers, **keywords
         )
         self._cache_figure_name(music_contribution)
         self._cache_floating_selection(music_contribution)
