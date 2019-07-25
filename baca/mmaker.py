@@ -10452,6 +10452,7 @@ class PitchFirstRhythmMaker(object):
         voice.extend(tuplets)
         # self._check_wellformedness(selections)
         selections = abjad.select(voice[:]).group_by_measure()
+        assert isinstance(selections, abjad.Selection)
         voice[:] = []
         return selections
 
