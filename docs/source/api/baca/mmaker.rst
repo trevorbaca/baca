@@ -485,7 +485,6 @@ mmaker
       specifiers
       tag
       thread
-      time_treatments
       tuplet_denominator
       tuplet_force_fraction
 
@@ -541,8 +540,6 @@ mmaker
    .. autoattribute:: MusicMaker.tag
 
    .. autoattribute:: MusicMaker.thread
-
-   .. autoattribute:: MusicMaker.time_treatments
 
    .. autoattribute:: MusicMaker.tuplet_denominator
 

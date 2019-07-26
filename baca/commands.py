@@ -3201,13 +3201,12 @@ def color(*, selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
         Colors all leaves:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.color(),
         ...     rmakers.unbeam(),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -3276,13 +3275,12 @@ def color(*, selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
         Colors leaves in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.color(selector=baca.tuplets()[1:2].leaves()),
         ...     rmakers.unbeam(),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -4131,14 +4129,13 @@ def dynamic_down(
         Attaches dynamic-down command to leaf 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.dynamic('p'),
         ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
         ...     baca.dynamic_down(),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -4201,14 +4198,13 @@ def dynamic_down(
         Attaches dynamic-down command to leaf 0 in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.dynamic('p'),
         ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
         ...     baca.dynamic_down(selector=baca.tuplets()[1:2].leaf(0)),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -4287,14 +4283,13 @@ def dynamic_up(
         Attaches dynamic-up command to leaf 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.dynamic('p'),
         ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
         ...     baca.dynamic_up(),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -4357,14 +4352,13 @@ def dynamic_up(
         Attaches dynamic-up command to leaf 0 in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.dynamic('p'),
         ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
         ...     baca.dynamic_up(selector=baca.tuplets()[1:2].leaf(0)),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -4994,7 +4988,7 @@ def glissando(
         With music-maker:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.glissando(),
@@ -5002,7 +4996,6 @@ def glissando(
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -5608,12 +5601,11 @@ def label(
         Labels pitch names:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.label(abjad.label().with_pitches(locale='us')),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -5682,7 +5674,7 @@ def label(
         Labels pitch names in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.label(
         ...         abjad.label().with_pitches(locale='us'),
@@ -5690,7 +5682,6 @@ def label(
         ...         ),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -5775,13 +5766,12 @@ def markup(
         Attaches markup to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.markup('più mosso'),
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -5844,7 +5834,7 @@ def markup(
         Attaches markup to pitched head 0 in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.markup(
         ...         'più mosso',
@@ -5853,7 +5843,6 @@ def markup(
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -5916,7 +5905,7 @@ def markup(
         Attaches markup to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.markup(
         ...         '*',
@@ -5925,7 +5914,6 @@ def markup(
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -5992,7 +5980,7 @@ def markup(
         Set the ``literal=True`` to pass predefined markup commands:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16),
+        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
         ...     rmakers.beam(),
         ...     baca.markup(
         ...         r'\markup { \baca-triple-diamond-markup }',
@@ -6001,7 +5989,6 @@ def markup(
         ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_outside_staff_priority(1000),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     time_treatments=[-1],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
