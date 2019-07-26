@@ -13934,3 +13934,26 @@ def pitch_first(
         spelling=spelling,
         time_treatments=time_treatments,
     )
+
+
+def pitch_first_assn(
+    counts: abjad.IntegerSequence,
+    denominator: int,
+    *,
+    acciaccatura_specifiers=None,
+    pattern=None,
+    spelling=None,
+    time_treatments=None,
+) -> PitchFirstAssignment:
+    """
+    Makes pitch-first assignment.
+    """
+    return PitchFirstAssignment(
+        PitchFirstRhythmMaker(
+            rmakers.Talea(counts=counts, denominator=denominator),
+            acciaccatura_specifiers=acciaccatura_specifiers,
+            spelling=spelling,
+            time_treatments=time_treatments,
+        ),
+        pattern=pattern,
+    )
