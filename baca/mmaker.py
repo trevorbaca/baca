@@ -1472,7 +1472,7 @@ class ImbricationCommand(scoping.Command):
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam_groups(),
-        ...     baca.ImbricationCommand(
+        ...     baca.imbricate(
         ...         'Voice_1',
         ...         [2, 19, 9, 18, 16],
         ...         rmakers.beam_groups(),
@@ -1616,13 +1616,13 @@ class ImbricationCommand(scoping.Command):
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
         ...     rmakers.beam_groups(),
-        ...     baca.ImbricationCommand(
+        ...     baca.imbricate(
         ...         'Voice_1',
         ...         [2, 19, 9],
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.staccato(selector=baca.pheads()),
         ...         ),
-        ...     baca.ImbricationCommand(
+        ...     baca.imbricate(
         ...         'Voice_3',
         ...         [16, 10, 18],
         ...         rmakers.beam_groups(beam_rests=True),
@@ -1807,7 +1807,7 @@ class ImbricationCommand(scoping.Command):
         ...     baca.pitch_first([1], 16, time_treatments=[1]),
         ...     rmakers.beam_groups(beam_rests=True),
         ...     baca.staccato(selector=baca.pheads()),
-        ...     baca.ImbricationCommand(
+        ...     baca.imbricate(
         ...         'Voice_1',
         ...         [2, 19, 9, 18, 16],
         ...         baca.accent(selector=baca.pheads()),
@@ -2043,7 +2043,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([3], 16),
             ...     rmakers.beam(),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         segment,
             ...         baca.accent(selector=baca.pheads()),
@@ -2150,7 +2150,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         segment,
             ...         baca.accent(selector=baca.pheads()),
@@ -2283,7 +2283,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 10],
             ...         baca.staccato(selector=baca.pheads()),
@@ -2303,7 +2303,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [13, 9],
             ...         baca.staccato(selector=baca.pheads()),
@@ -2614,7 +2614,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         rmakers.beam_groups(),
@@ -2742,7 +2742,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         rmakers.beam_groups(),
@@ -3055,7 +3055,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.staccato(selector=baca.pheads()),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=baca.pheads()),
@@ -3184,7 +3184,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.staccato(selector=baca.pheads()),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=baca.pheads()),
@@ -3257,7 +3257,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.staccato(selector=baca.pheads()),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=baca.pheads()),
@@ -3435,7 +3435,7 @@ class ImbricationCommand(scoping.Command):
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.staccato(selector=baca.pheads()),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 18, 16, 15],
             ...         baca.accent(selector=baca.pheads()),
@@ -3633,7 +3633,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         ),
@@ -3762,7 +3762,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         rmakers.beam_groups(),
@@ -3906,7 +3906,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         rmakers.beam_groups(beam_rests=True),
@@ -4048,7 +4048,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam_groups(),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         rmakers.beam(beam_rests=True),
@@ -4547,7 +4547,7 @@ class ImbricationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([5], 32),
             ...     rmakers.beam(),
-            ...     baca.ImbricationCommand(
+            ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 10, 18, 19, 9],
             ...         rmakers.beam_groups(beam_rests=True),
@@ -6354,9 +6354,8 @@ class MusicMaker(object):
         Calltime time treatments:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1], 16),
+        ...     baca.pitch_first([1], 16, time_treatments=[1]),
         ...     rmakers.beam(),
-        ...     time_treatments=[1],
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -8529,13 +8528,8 @@ class MusicMaker(object):
             Sixteenths followed by eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstAssignment(
-            ...         baca.pitch_first([1], 8),
-            ...     ),
-            ...     baca.PitchFirstAssignment(
-            ...         baca.pitch_first([1], 16),
-            ...         pattern=abjad.index_first(1),
-            ...     ),
+            ...     baca.pitch_first([1], 8),
+            ...     baca.pitch_first([1], 16, pattern=abjad.index_first(1)),
             ...     rmakers.beam(),
             ...     )
 
@@ -8588,11 +8582,9 @@ class MusicMaker(object):
             Sixteenths surrounding dotted eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstAssignment(
-            ...         baca.pitch_first([3], 16),
-            ...     ),
-            ...     baca.PitchFirstAssignment(
-            ...         baca.pitch_first([1], 16),
+            ...     baca.pitch_first([3], 16),
+            ...     baca.pitch_first(
+            ...         [1], 16,
             ...         pattern=abjad.Pattern(indices=[0, -1]),
             ...     ),
             ...     rmakers.beam(),
@@ -8647,12 +8639,11 @@ class MusicMaker(object):
             Sixteenths surrounding argumented dotted eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstAssignment(
-            ...         baca.pitch_first([3], 16, time_treatments=[1]),
-            ...     ),
-            ...     baca.PitchFirstAssignment(
-            ...         baca.pitch_first([1], 16),
-            ...         pattern=abjad.Pattern(indices=[0, -1]),
+            ...     baca.pitch_first([3], 16, time_treatments=[1]),
+            ...     baca.pitch_first(
+            ...         [1],
+            ...         16,
+            ...         pattern=abjad.Pattern([0, -1]),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -8707,12 +8698,12 @@ class MusicMaker(object):
             Augmented sixteenths surrounding dotted eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstAssignment(
-            ...         baca.pitch_first([3], 16),
-            ...     ),
-            ...     baca.PitchFirstAssignment(
-            ...         baca.pitch_first([1], 16, time_treatments=[1]),
-            ...         pattern=abjad.Pattern(indices=[0, -1]),
+            ...     baca.pitch_first([3], 16),
+            ...     baca.pitch_first(
+            ...         [1],
+            ...         16,
+            ...         time_treatments=[1],
+            ...         pattern=abjad.Pattern([0, -1]),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -8767,12 +8758,11 @@ class MusicMaker(object):
             Diminished sixteenths surrounding dotted eighths:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.PitchFirstAssignment(
-            ...         baca.pitch_first([3], 16),
-            ...     ),
-            ...     baca.PitchFirstAssignment(
-            ...         baca.pitch_first([1], 16, time_treatments=[-1]),
+            ...     baca.pitch_first([3], 16),
+            ...     baca.pitch_first(
+            ...         [1], 16,
             ...         pattern=abjad.Pattern(indices=[0, -1]),
+            ...         time_treatments=[-1],
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -9314,7 +9304,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
 
     ..  container:: example
 
-        >>> baca.PitchFirstAssignment(baca.pitch_first([1], 16))
+        >>> baca.pitch_first([1], 16)
         PitchFirstAssignment(PitchFirstRhythmMaker(Talea(counts=[1], denominator=16)))
 
     """
@@ -13867,29 +13857,10 @@ def pitch_first(
     denominator: int,
     *,
     acciaccatura_specifiers=None,
-    spelling=None,
-    time_treatments=None,
-) -> PitchFirstRhythmMaker:
-    """
-    Makes pitch-first rhythm-maker.
-    """
-    return PitchFirstRhythmMaker(
-        rmakers.Talea(counts=counts, denominator=denominator),
-        acciaccatura_specifiers=acciaccatura_specifiers,
-        spelling=spelling,
-        time_treatments=time_treatments,
-    )
-
-
-def pitch_first_assn(
-    counts: abjad.IntegerSequence,
-    denominator: int,
-    *,
-    acciaccatura_specifiers=None,
     pattern=None,
     spelling=None,
     time_treatments=None,
-) -> PitchFirstAssignment:
+) -> PitchFirstRhythmMaker:
     """
     Makes pitch-first assignment.
     """
