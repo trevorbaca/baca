@@ -475,7 +475,6 @@ mmaker
       __hash__
       __repr__
       allow_repeats
-      counts
       denominator
       extend_beam
       figure_index
@@ -525,8 +524,6 @@ mmaker
       :class: class-header
 
    .. autoattribute:: MusicMaker.allow_repeats
-
-   .. autoattribute:: MusicMaker.counts
 
    .. autoattribute:: MusicMaker.denominator
 
