@@ -6877,14 +6877,7 @@ class MusicMaker(object):
                 collections, specifiers
             )
             selections, specifiers = self._call_rhythm_commands(
-                collections,
-                specifiers,
-                counts=self.counts,
-                talea_denominator=self.talea_denominator,
-                thread=self.thread,
-                time_treatments=self.time_treatments,
-                tuplet_denominator=self.tuplet_denominator,
-                tuplet_force_fraction=self.tuplet_force_fraction,
+                collections, specifiers
             )
         self._color_unregistered_pitches_(
             selections, color_unregistered_pitches=color_unregistered_pitches
@@ -7082,17 +7075,7 @@ class MusicMaker(object):
                     raise Exception(message)
             specifier(selections)
 
-    def _call_rhythm_commands(
-        self,
-        collections,
-        specifiers,
-        counts=None,
-        talea_denominator=None,
-        thread=None,
-        time_treatments=None,
-        tuplet_denominator=None,
-        tuplet_force_fraction=None,
-    ):
+    def _call_rhythm_commands(self, collections, specifiers):
         selections = len(collections) * [None]
         rhythm_commands, rest_affix_specifiers, specifiers_ = [], [], []
         for specifier in specifiers:
@@ -7121,19 +7104,18 @@ class MusicMaker(object):
         #            message += f"   {repr(rhythm_commands[0])}\n"
         #            message += f"   {repr(rhythm_commands[1])}\n"
         #            raise Exception(message)
-        thread = thread or self.thread
         for rhythm_command in rhythm_commands:
             assert isinstance(rhythm_command, PitchFirstAssignment)
             rhythm_command(
                 collections=collections,
                 selections=selections,
                 rest_affix_specifier=rest_affix_specifier,
-                talea_counts=counts,
-                talea_denominator=talea_denominator,
-                thread=thread,
-                time_treatments=time_treatments,
-                tuplet_denominator=tuplet_denominator,
-                tuplet_force_fraction=tuplet_force_fraction,
+                talea_counts=self.counts,
+                talea_denominator=self.talea_denominator,
+                thread=self.thread,
+                time_treatments=self.time_treatments,
+                tuplet_denominator=self.tuplet_denominator,
+                tuplet_force_fraction=self.tuplet_force_fraction,
             )
         return selections, specifiers_
 
