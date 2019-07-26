@@ -475,7 +475,6 @@ mmaker
       __hash__
       __repr__
       allow_repeats
-      color_unregistered_pitches
       counts
       denominator
       extend_beam
@@ -526,8 +525,6 @@ mmaker
       :class: class-header
 
    .. autoattribute:: MusicMaker.allow_repeats
-
-   .. autoattribute:: MusicMaker.color_unregistered_pitches
 
    .. autoattribute:: MusicMaker.counts
 

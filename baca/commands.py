@@ -3500,7 +3500,6 @@ def cross_staff(
         >>> music_maker = MusicMaker(
         ...     pitch_first([1], 16),
         ...     rmakers.beam(),
-        ...     color_unregistered_pitches=True,
         ...     denominator=16,
         ... )
         >>> accumulator(
@@ -3814,7 +3813,6 @@ def cross_staff(
         >>> music_maker = MusicMaker(
         ...     pitch_first([1], 16),
         ...     rmakers.beam(),
-        ...     color_unregistered_pitches=True,
         ...     denominator=16,
         ... )
         >>> accumulator(

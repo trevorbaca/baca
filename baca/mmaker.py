@@ -5669,7 +5669,6 @@ class MusicAccumulator(object):
             >>> music_maker = MusicMaker(
             ...     pitch_first([1], 16),
             ...     rmakers.beam(),
-            ...     color_unregistered_pitches=True,
             ...     denominator=16,
             ... )
             >>> accumulator(
@@ -6767,7 +6766,6 @@ class MusicMaker(object):
 
     __slots__ = (
         "_allow_repeats",
-        "_color_unregistered_pitches",
         "_denominator",
         "_maker",
         "_next_figure",
@@ -6800,7 +6798,6 @@ class MusicMaker(object):
         self,
         *specifiers,
         allow_repeats=None,
-        color_unregistered_pitches=None,
         counts=None,
         denominator=None,
         extend_beam=None,
@@ -6822,9 +6819,6 @@ class MusicMaker(object):
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
         self._allow_repeats = allow_repeats
-        if color_unregistered_pitches is not None:
-            color_unregistered_pitches = bool(color_unregistered_pitches)
-        self._color_unregistered_pitches = color_unregistered_pitches
         self._counts = counts
         if denominator is not None:
             assert abjad.mathtools.is_positive_integer(denominator)
@@ -6854,9 +6848,6 @@ class MusicMaker(object):
 
         Returns selection, time signature, state manifest.
         """
-        color_unregistered_pitches = self.color_unregistered_pitches
-        if self._is_pitch_input(collections):
-            color_unregistered_pitches = False
         specifiers = list(self.specifiers)
         if any(_ is None for _ in specifiers):
             message = "specifiers must not be none:\n"
@@ -6879,9 +6870,6 @@ class MusicMaker(object):
             selections, specifiers = self._call_rhythm_commands(
                 collections, specifiers
             )
-        self._color_unregistered_pitches_(
-            selections, color_unregistered_pitches=color_unregistered_pitches
-        )
         for command in self.ordered_commands or []:
             command(selections)
         anchor, specifiers = self._get_anchor_specifier(specifiers)
@@ -7150,13 +7138,8 @@ class MusicMaker(object):
             collections=collections, item_class=item_class
         )
 
-    def _color_unregistered_pitches_(
-        self, argument, color_unregistered_pitches=None
-    ):
-        if color_unregistered_pitches is None:
-            color_unregistered_pitches = self.color_unregistered_pitches
-        if not color_unregistered_pitches:
-            return
+    @staticmethod
+    def _color_unregistered_pitches(argument):
         for pleaf in abjad.iterate(argument).leaves(pitched=True):
             abjad.attach(abjad.tags.NOT_YET_REGISTERED, pleaf, tag="")
 
@@ -7290,19 +7273,6 @@ class MusicMaker(object):
         Returns true, false or none.
         """
         return self._allow_repeats
-
-    @property
-    def color_unregistered_pitches(self):
-        """
-        Is true when music-maker colors unregistered pitches.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        """
-        return self._color_unregistered_pitches
 
     @property
     def denominator(self):
