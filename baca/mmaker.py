@@ -6298,9 +6298,8 @@ class MusicMaker(object):
         Calltime denominator:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1], 16),
+        ...     baca.pitch_first([1], 32),
         ...     rmakers.beam(),
-        ...     talea_denominator=32,
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -6772,7 +6771,6 @@ class MusicMaker(object):
         "_figure_name",
         "_hide_time_signature",
         "_tag",
-        "_talea_denominator",
         "_time_treatments",
         "_tuplet_denominator",
         "_tuplet_force_fraction",
@@ -6798,7 +6796,6 @@ class MusicMaker(object):
         hide_time_signature=None,
         ordered_commands: typing.Sequence = None,
         tag: str = "baca.MusicMaker.__call__",
-        talea_denominator=None,
         thread=None,
         time_treatments=None,
         tuplet_denominator=None,
@@ -6823,7 +6820,6 @@ class MusicMaker(object):
             ordered_commands = list(ordered_commands)
         self._ordered_commands = ordered_commands
         self._tag = tag
-        self._talea_denominator = talea_denominator
         if thread is not None:
             thread = bool(thread)
         self._thread = thread
@@ -7089,8 +7085,6 @@ class MusicMaker(object):
                 collections=collections,
                 selections=selections,
                 rest_affix_specifier=rest_affix_specifier,
-                #                talea_counts=self.counts,
-                talea_denominator=self.talea_denominator,
                 thread=self.thread,
                 time_treatments=self.time_treatments,
                 tuplet_denominator=self.tuplet_denominator,
@@ -8979,10 +8973,6 @@ class MusicMaker(object):
         return self._tag
 
     @property
-    def talea_denominator(self):
-        return self._talea_denominator
-
-    @property
     def time_treatments(self):
         return self._time_treatments
 
@@ -9354,8 +9344,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         collections,
         selections,
         rest_affix_specifier=None,
-        talea_counts=None,
-        talea_denominator=None,
         thread=None,
         time_treatments=None,
         tuplet_denominator=None,
@@ -9363,8 +9351,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
     ):
         assert len(selections) == len(collections)
         rhythm_maker = self._make_rhythm_maker(
-            talea_counts=talea_counts,
-            talea_denominator=talea_denominator,
             time_treatments=time_treatments,
             tuplet_denominator=tuplet_denominator,
             tuplet_force_fraction=tuplet_force_fraction,
@@ -9458,8 +9444,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
 
     def _make_rhythm_maker(
         self,
-        talea_counts=None,
-        talea_denominator=None,
         time_treatments=None,
         tuplet_denominator=None,
         tuplet_force_fraction=None,
@@ -9472,10 +9456,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
                 rmakers.force_rest(classes._select().lts())
             )
         keywords = {}
-        if talea_counts is not None:
-            keywords["talea__counts"] = talea_counts
-        if talea_denominator is not None:
-            keywords["talea__denominator"] = talea_denominator
         if time_treatments is not None:
             keywords["time_treatments"] = time_treatments
         if keywords:

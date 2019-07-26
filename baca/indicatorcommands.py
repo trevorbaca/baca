@@ -427,10 +427,9 @@ def arpeggio(
         Attaches arpeggio to chord head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.arpeggio(),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -498,10 +497,9 @@ def arpeggio(
         Attaches arpeggio to last two chord heads:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.arpeggio(selector=baca.cheads()[-2:]),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -940,10 +938,9 @@ def down_arpeggio(
         Attaches down-arpeggio to chord head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.down_arpeggio(),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -1012,10 +1009,9 @@ def down_arpeggio(
         Attaches down-arpeggio to last two chord heads:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.down_arpeggio(selector=baca.cheads()[-2:]),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -4508,10 +4504,9 @@ def up_arpeggio(
         Attaches up-arpeggios to chord head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.up_arpeggio(),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -4582,10 +4577,9 @@ def up_arpeggio(
         Attaches up-arpeggios to last two chord heads:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.up_arpeggio(selector=baca.cheads()[-2:]),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',

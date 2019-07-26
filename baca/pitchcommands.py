@@ -6629,11 +6629,10 @@ def bass_to_octave(
         selection appears in octave 3:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.bass_to_octave(3),
         ...     baca.color(selector=baca.plts().group()),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -6711,14 +6710,13 @@ def bass_to_octave(
         logical tie appears in octave 3:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.bass_to_octave(3),
         ...         map=baca.plts(),
         ...         ),
         ...     baca.color(selector=baca.plts()),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -6796,14 +6794,13 @@ def bass_to_octave(
         last two pitched logical ties appears in octave 3:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.bass_to_octave(3),
         ...         map=baca.plts()[-2:],
         ...         ),
         ...     baca.color(selector=baca.plts()[-2:]),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -6889,11 +6886,10 @@ def center_to_octave(
         in octave 3:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.center_to_octave(3),
         ...     baca.color(selector=baca.plts().group()),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -6971,14 +6967,13 @@ def center_to_octave(
         logical tie appears in octave 3:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.center_to_octave(3),
         ...         map=baca.plts(),
         ...         ),
         ...     baca.color(selector=baca.plts()),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -7056,14 +7051,13 @@ def center_to_octave(
         two pitched logical ties appears in octave 3:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.center_to_octave(3),
         ...         map=baca.plts()[-2:],
         ...         ),
         ...     baca.color(selector=baca.plts()[-2:]),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -7954,11 +7948,10 @@ def soprano_to_octave(
         collection of all PLTs appears in octave 3:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.color(selector=baca.plts().group()),
         ...     baca.soprano_to_octave(3),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -8036,14 +8029,13 @@ def soprano_to_octave(
         pitched logical tie appears in octave 3:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.soprano_to_octave(3),
         ...         map=baca.plts(),
         ...         ),
         ...     baca.color(selector=baca.plts()),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -8121,14 +8113,13 @@ def soprano_to_octave(
         of the last two PLTs appears in octave 3:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, -3], 16),
+        ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.soprano_to_octave(3),
         ...         map=baca.plts()[-2:],
         ...         ),
         ...     baca.color(selector=baca.plts()[-2:]),
-        ...     talea_denominator=32,
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',

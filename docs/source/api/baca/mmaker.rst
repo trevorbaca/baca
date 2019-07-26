@@ -484,7 +484,6 @@ mmaker
       show
       specifiers
       tag
-      talea_denominator
       thread
       time_treatments
       tuplet_denominator
@@ -540,8 +539,6 @@ mmaker
    .. autoattribute:: MusicMaker.specifiers
 
    .. autoattribute:: MusicMaker.tag
-
-   .. autoattribute:: MusicMaker.talea_denominator
 
    .. autoattribute:: MusicMaker.thread
 

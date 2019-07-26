@@ -3496,7 +3496,7 @@ def cross_staff(
         >>> score_template = baca.StringTrioScoreTemplate()
         >>> accumulator = baca.MusicAccumulator(score_template=score_template)
         >>> music_maker = MusicMaker(
-        ...     pitch_first([1], 16),
+        ...     pitch_first([1], 8),
         ...     rmakers.beam(),
         ...     denominator=16,
         ... )
@@ -3508,7 +3508,6 @@ def cross_staff(
         ...     baca.stem_up(),
         ...     denominator=8,
         ...     figure_name='vn.1',
-        ...     talea_denominator=8,
         ... )
         >>> accumulator(
         ...     'Viola_Music_Voice',
@@ -3519,7 +3518,6 @@ def cross_staff(
         ...     rmakers.unbeam(),
         ...     baca.stem_up(),
         ...     figure_name='va.1',
-        ...     talea_denominator=8,
         ... )
         >>> accumulator(
         ...     'Violin_Music_Voice',
@@ -3527,7 +3525,6 @@ def cross_staff(
         ...     music_maker,
         ...     rmakers.unbeam(),
         ...     figure_name='vn.2',
-        ...     talea_denominator=8,
         ... )
 
         >>> maker = baca.SegmentMaker(
@@ -3809,7 +3806,7 @@ def cross_staff(
         >>> score_template = baca.StringTrioScoreTemplate()
         >>> accumulator = baca.MusicAccumulator(score_template=score_template)
         >>> music_maker = MusicMaker(
-        ...     pitch_first([1], 16),
+        ...     pitch_first([1], 8),
         ...     rmakers.beam(),
         ...     denominator=16,
         ... )
@@ -3821,7 +3818,6 @@ def cross_staff(
         ...     baca.stem_up(),
         ...     denominator=8,
         ...     figure_name='vn.1',
-        ...     talea_denominator=8,
         ... )
         >>> accumulator(
         ...     'Viola_Music_Voice',
@@ -3832,7 +3828,6 @@ def cross_staff(
         ...     rmakers.unbeam(),
         ...     baca.stem_up(),
         ...     figure_name='va.1',
-        ...     talea_denominator=8,
         ... )
         >>> accumulator(
         ...     'Violin_Music_Voice',
@@ -3840,7 +3835,6 @@ def cross_staff(
         ...     music_maker,
         ...     rmakers.unbeam(),
         ...     figure_name='vn.2',
-        ...     talea_denominator=8,
         ... )
 
         >>> maker = baca.SegmentMaker(
