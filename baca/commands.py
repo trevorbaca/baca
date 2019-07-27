@@ -5441,8 +5441,8 @@ def glissando(
 
 def global_fermata(
     description: str = None,
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.global_fermata",
 ) -> GlobalFermataCommand:
     """
@@ -6146,9 +6146,9 @@ def markup(
 
 def metronome_mark(
     key: typing.Union[str, indicators.Accelerando, indicators.Ritardando],
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     redundant: bool = None,
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
 ) -> typing.Optional[MetronomeMarkCommand]:
     """
     Attaches metronome mark matching ``key`` metronome mark manifest.

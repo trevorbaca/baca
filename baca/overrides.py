@@ -429,8 +429,8 @@ class OverrideCommand(scoping.Command):
 
 def accidental_extra_offset(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.accidental_extra_offset",
 ) -> OverrideCommand:
     """
@@ -446,8 +446,8 @@ def accidental_extra_offset(
 
 
 def accidental_stencil_false(
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.accidental_stencil_false",
 ) -> OverrideCommand:
     """
@@ -463,8 +463,8 @@ def accidental_stencil_false(
 
 
 def accidental_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.accidental_transparent",
 ):
     """
@@ -480,8 +480,8 @@ def accidental_transparent(
 
 
 def accidental_x_extent_false(
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.accidental_x_extent_false",
 ) -> OverrideCommand:
     """
@@ -498,9 +498,9 @@ def accidental_x_extent_false(
 
 def bar_extent(
     pair: abjad.NumberPair,
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     after: bool = None,
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca.bar_extent",
 ) -> OverrideCommand:
     r"""
@@ -688,10 +688,10 @@ def bar_extent_zero(
 
 def bar_line_color(
     color: str,
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     after: bool = None,
     context: str = "Score",
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca.bar_line_color",
 ) -> OverrideCommand:
     """
@@ -710,10 +710,10 @@ def bar_line_color(
 
 def bar_line_extra_offset(
     pair: abjad.NumberPair,
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     after: bool = None,
     context: str = "Score",
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca.bar_line_extra_offset",
 ) -> OverrideCommand:
     """
@@ -731,8 +731,8 @@ def bar_line_extra_offset(
 
 
 def bar_line_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.bar_line_transparent",
 ) -> OverrideCommand:
     r"""
@@ -1058,10 +1058,10 @@ def bar_line_transparent(
 
 def bar_line_x_extent(
     pair: abjad.NumberPair,
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     after: bool = None,
     context: str = "Score",
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca.bar_line_x_extent",
 ) -> OverrideCommand:
     """
@@ -1080,8 +1080,8 @@ def bar_line_x_extent(
 
 def beam_positions(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.beam_positions",
 ) -> OverrideCommand:
     r"""
@@ -1215,8 +1215,8 @@ def beam_positions(
 
 
 def beam_stencil_false(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.beam_stencil_false",
 ) -> OverrideCommand:
     """
@@ -1232,8 +1232,8 @@ def beam_stencil_false(
 
 
 def beam_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.beam_transparent",
 ) -> OverrideCommand:
     """
@@ -1250,8 +1250,8 @@ def beam_transparent(
 
 def clef_extra_offset(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.clef_extra_offset",
 ) -> OverrideCommand:
     """
@@ -1269,8 +1269,8 @@ def clef_extra_offset(
 
 def clef_shift(
     clef: typing.Union[str, abjad.Clef],
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.clef_shift",
 ) -> scoping.Suite:
     """
@@ -1293,8 +1293,8 @@ def clef_shift(
 
 
 def clef_x_extent_false(
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.clef_x_extent_false",
 ) -> OverrideCommand:
     """
@@ -1312,8 +1312,8 @@ def clef_x_extent_false(
 
 def dls_padding(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.dls_padding",
 ) -> OverrideCommand:
     """
@@ -1330,8 +1330,8 @@ def dls_padding(
 
 def dls_staff_padding(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.dls_staff_padding",
 ) -> OverrideCommand:
     r"""
@@ -1518,8 +1518,8 @@ def dls_staff_padding(
 
 
 def dls_up(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.dls_up",
 ) -> OverrideCommand:
     r"""
@@ -1707,8 +1707,8 @@ def dls_up(
 
 def dots_extra_offset(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.dots_extra_offset",
 ) -> OverrideCommand:
     """
@@ -1724,8 +1724,8 @@ def dots_extra_offset(
 
 
 def dots_stencil_false(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.dots_stencil_false",
 ) -> OverrideCommand:
     """
@@ -1741,8 +1741,8 @@ def dots_stencil_false(
 
 
 def dots_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.dots_transparent",
 ) -> OverrideCommand:
     """
@@ -1759,8 +1759,8 @@ def dots_transparent(
 
 def dynamic_text_color(
     color: str = "red",
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.dynamic_text_color",
 ) -> OverrideCommand:
     """
@@ -1777,8 +1777,8 @@ def dynamic_text_color(
 
 def dynamic_text_extra_offset(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.dynamic_text_extra_offset",
 ) -> OverrideCommand:
     r"""
@@ -1963,8 +1963,8 @@ def dynamic_text_extra_offset(
 
 def dynamic_text_parent_alignment_x(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.dynamic_text_parent_alignment_x",
 ) -> OverrideCommand:
     """
@@ -1981,8 +1981,8 @@ def dynamic_text_parent_alignment_x(
 
 def dynamic_text_self_alignment_x(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.dynamic_text_self_alignment_x",
 ) -> OverrideCommand:
     """
@@ -1998,8 +1998,8 @@ def dynamic_text_self_alignment_x(
 
 
 def dynamic_text_stencil_false(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.dynamic_text_stencil_false",
 ) -> OverrideCommand:
     """
@@ -2015,8 +2015,8 @@ def dynamic_text_stencil_false(
 
 
 def dynamic_text_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.dynamic_text_transparent",
 ) -> OverrideCommand:
     """
@@ -2032,8 +2032,8 @@ def dynamic_text_transparent(
 
 
 def dynamic_text_x_extent_zero(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.dynamic_text_x_extent_zero",
 ) -> OverrideCommand:
     """
@@ -2050,8 +2050,8 @@ def dynamic_text_x_extent_zero(
 
 def dynamic_text_x_offset(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.dynamic_text_x_offset",
 ) -> OverrideCommand:
     """
@@ -2068,8 +2068,8 @@ def dynamic_text_x_offset(
 
 def dynamic_text_y_offset(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.dynamic_text_y_offset",
 ) -> OverrideCommand:
     """
@@ -2085,8 +2085,8 @@ def dynamic_text_y_offset(
 
 
 def flag_stencil_false(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.flag_stencil_false",
 ) -> OverrideCommand:
     """
@@ -2102,8 +2102,8 @@ def flag_stencil_false(
 
 
 def flag_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.flag_transparent",
 ) -> OverrideCommand:
     """
@@ -2120,8 +2120,8 @@ def flag_transparent(
 
 def glissando_thickness(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.glissando_thickness",
 ) -> OverrideCommand:
     """
@@ -2138,8 +2138,8 @@ def glissando_thickness(
 
 def hairpin_shorten_pair(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.hairpin_shorten_pair",
 ) -> OverrideCommand:
     """
@@ -2156,8 +2156,8 @@ def hairpin_shorten_pair(
 
 def hairpin_start_shift(
     dynamic: typing.Union[str, abjad.Dynamic],
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.hairpin_start_shift",
 ) -> scoping.Suite:
     """
@@ -2175,8 +2175,8 @@ def hairpin_start_shift(
 
 
 def hairpin_stencil_false(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.hairpin_stencil_false",
 ) -> OverrideCommand:
     """
@@ -2192,8 +2192,8 @@ def hairpin_stencil_false(
 
 
 def hairpin_to_barline(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.hairpin_to_barline",
 ) -> OverrideCommand:
     """
@@ -2209,8 +2209,8 @@ def hairpin_to_barline(
 
 
 def hairpin_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.hairpin_transparent",
 ) -> OverrideCommand:
     """
@@ -2227,8 +2227,8 @@ def hairpin_transparent(
 
 def mmrest_color(
     color: str = "red",
-    *,
     selector: abjad.SelectorTyping = "baca.mmrests()",
+    *,
     tag: typing.Optional[str] = "baca.mmrest_text_color",
 ) -> OverrideCommand:
     r"""
@@ -2367,8 +2367,8 @@ def mmrest_color(
 
 
 def mmrest_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.mmrests()",
+    *,
     tag: typing.Optional[str] = "baca.mmrest_transparent",
 ) -> OverrideCommand:
     r"""
@@ -2386,8 +2386,8 @@ def mmrest_transparent(
 
 def mmrest_text_color(
     color: str = "red",
-    *,
     selector: abjad.SelectorTyping = "baca.mmrests()",
+    *,
     tag: typing.Optional[str] = "baca.mmrest_text_color",
 ) -> OverrideCommand:
     r"""
@@ -2562,8 +2562,8 @@ def mmrest_text_color(
 
 def mmrest_text_extra_offset(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.mmrests()",
+    *,
     tag: typing.Optional[str] = "baca.mmrest_text_extra_offset",
 ) -> OverrideCommand:
     r"""
@@ -2711,8 +2711,8 @@ def mmrest_text_extra_offset(
 
 def mmrest_text_padding(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.mmrests()",
+    *,
     tag: typing.Optional[str] = "baca.mmrest_text_padding",
 ) -> OverrideCommand:
     r"""
@@ -2859,8 +2859,8 @@ def mmrest_text_padding(
 
 
 def mmrest_text_parent_center(
-    *,
     selector: abjad.SelectorTyping = "baca.mmrests()",
+    *,
     tag: typing.Optional[str] = "baca.mmrest_text_parent_center",
 ) -> OverrideCommand:
     r"""
@@ -3008,8 +3008,8 @@ def mmrest_text_parent_center(
 
 def mmrest_text_staff_padding(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.mmrests()",
+    *,
     tag: typing.Optional[str] = "baca.mmrest_text_staff_padding",
 ) -> OverrideCommand:
     r"""
@@ -3156,8 +3156,8 @@ def mmrest_text_staff_padding(
 
 
 def mmrest_text_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.mmrests()",
+    *,
     tag: typing.Optional[str] = "baca.script_transparent",
 ) -> OverrideCommand:
     """
@@ -3174,8 +3174,8 @@ def mmrest_text_transparent(
 
 
 def no_ledgers(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.no_ledgers",
 ) -> OverrideCommand:
     """
@@ -3192,8 +3192,8 @@ def no_ledgers(
 
 def note_column_shift(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.note_colun_shift",
 ) -> OverrideCommand:
     """
@@ -3210,8 +3210,8 @@ def note_column_shift(
 
 def note_head_color(
     color: str,
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.note_head_color",
 ) -> OverrideCommand:
     """
@@ -3228,8 +3228,8 @@ def note_head_color(
 
 def note_head_duration_log(
     n: int,
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.note_head_color",
 ) -> OverrideCommand:
     """
@@ -3246,8 +3246,8 @@ def note_head_duration_log(
 
 def note_head_extra_offset(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.note_head_extra_offset",
 ) -> OverrideCommand:
     """
@@ -3264,8 +3264,8 @@ def note_head_extra_offset(
 
 def note_head_no_ledgers(
     value: bool,
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.note_head_extra_offset",
 ) -> OverrideCommand:
     """
@@ -3281,8 +3281,8 @@ def note_head_no_ledgers(
 
 
 def note_head_stencil_false(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.note_head_stencil_false",
 ) -> OverrideCommand:
     """
@@ -3299,8 +3299,8 @@ def note_head_stencil_false(
 
 def note_head_style(
     string: str,
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.note_head_stencil_false",
 ) -> OverrideCommand:
     """
@@ -3316,8 +3316,8 @@ def note_head_style(
 
 
 def note_head_style_cross(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.note_head_style_cross",
 ) -> OverrideCommand:
     r"""
@@ -3474,8 +3474,8 @@ def note_head_style_cross(
 
 
 def note_head_style_harmonic(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.note_head_style_harmonic",
 ) -> OverrideCommand:
     r"""
@@ -3632,8 +3632,8 @@ def note_head_style_harmonic(
 
 
 def note_head_style_harmonic_black(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.note_head_style_harmonic_black",
 ) -> OverrideCommand:
     r"""
@@ -3649,8 +3649,8 @@ def note_head_style_harmonic_black(
 
 
 def note_head_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.note_head_transparent",
 ):
     """
@@ -3666,8 +3666,8 @@ def note_head_transparent(
 
 
 def note_head_x_extent_zero(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.note_head_x_extent_zero",
 ) -> OverrideCommand:
     """
@@ -3687,8 +3687,8 @@ def note_head_x_extent_zero(
 
 def ottava_bracket_shorten_pair(
     pair: abjad.NumberPair = (-0.8, -0.6),
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.ottava_bracket_shorten_pair",
 ) -> OverrideCommand:
     """
@@ -3706,8 +3706,8 @@ def ottava_bracket_shorten_pair(
 
 def ottava_bracket_staff_padding(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.ottava_bracket_staff_padding",
 ) -> OverrideCommand:
     """
@@ -3724,9 +3724,9 @@ def ottava_bracket_staff_padding(
 
 
 def rehearsal_mark_down(
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     context: str = "Score",
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca.rehearsal_mark_down",
 ) -> OverrideCommand:
     """
@@ -3744,9 +3744,9 @@ def rehearsal_mark_down(
 
 def rehearsal_mark_extra_offset(
     pair: abjad.NumberPair,
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     context: str = "Score",
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca.rehearsal_mark_extra_offset",
 ) -> OverrideCommand:
     """
@@ -3764,9 +3764,9 @@ def rehearsal_mark_extra_offset(
 
 def rehearsal_mark_padding(
     n: abjad.Number,
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     context: str = "Score",
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca.rehearsal_padding",
 ) -> OverrideCommand:
     """
@@ -3784,9 +3784,9 @@ def rehearsal_mark_padding(
 
 def rehearsal_mark_self_alignment_x(
     n: typings.HorizontalAlignmentTyping,
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     context: str = "Score",
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca.rehearsal_mark_self_alignment_x",
 ) -> OverrideCommand:
     """
@@ -3804,9 +3804,9 @@ def rehearsal_mark_self_alignment_x(
 
 def rehearsal_mark_y_offset(
     n: abjad.Number,
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     context: str = "Score",
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca.rehearsal_mark_y_offset",
 ) -> OverrideCommand:
     """
@@ -3823,8 +3823,8 @@ def rehearsal_mark_y_offset(
 
 
 def repeat_tie_down(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.repeat_tie_down",
 ) -> OverrideCommand:
     r"""
@@ -4001,8 +4001,8 @@ def repeat_tie_down(
 
 def repeat_tie_extra_offset(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.repeat_tie_extra_offset",
 ) -> OverrideCommand:
     """
@@ -4018,8 +4018,8 @@ def repeat_tie_extra_offset(
 
 
 def repeat_tie_stencil_false(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.repeat_tie_stencil_false",
 ) -> OverrideCommand:
     """
@@ -4035,8 +4035,8 @@ def repeat_tie_stencil_false(
 
 
 def repeat_tie_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.repeat_tie_transparent",
 ):
     """
@@ -4052,8 +4052,8 @@ def repeat_tie_transparent(
 
 
 def repeat_tie_up(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.repeat_tie_up",
 ) -> OverrideCommand:
     r"""
@@ -4229,8 +4229,8 @@ def repeat_tie_up(
 
 
 def rest_down(
-    *,
     selector: abjad.SelectorTyping = "baca.rests()",
+    *,
     tag: typing.Optional[str] = "baca.rest_down",
 ) -> OverrideCommand:
     r"""
@@ -4390,8 +4390,8 @@ def rest_down(
 
 def rest_extra_offset(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.rest(0)",
+    *,
     tag: typing.Optional[str] = "baca.rest_extra_offset",
 ) -> OverrideCommand:
     """
@@ -4412,8 +4412,8 @@ def rest_extra_offset(
 
 def rest_position(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.rests()",
+    *,
     tag: typing.Optional[str] = "baca.rest_position",
 ) -> OverrideCommand:
     r"""
@@ -4572,8 +4572,8 @@ def rest_position(
 
 
 def rest_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.rests()",
+    *,
     tag: typing.Optional[str] = "baca.rest_transparent",
 ) -> OverrideCommand:
     r"""
@@ -4732,8 +4732,8 @@ def rest_transparent(
 
 
 def rest_up(
-    *,
     selector: abjad.SelectorTyping = "baca.rests()",
+    *,
     tag: typing.Optional[str] = "baca.rest_up",
 ) -> OverrideCommand:
     r"""
@@ -4893,8 +4893,8 @@ def rest_up(
 
 def script_color(
     color: str = "red",
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.script_color",
 ) -> OverrideCommand:
     r"""
@@ -5074,8 +5074,8 @@ def script_color(
 
 
 def script_down(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.script_down",
 ) -> OverrideCommand:
     r"""
@@ -5256,8 +5256,8 @@ def script_down(
 
 def script_extra_offset(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.script_extra_offset",
 ) -> OverrideCommand:
     r"""
@@ -5436,8 +5436,8 @@ def script_extra_offset(
 
 def script_padding(
     number: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.script_padding",
 ) -> OverrideCommand:
     """
@@ -5454,8 +5454,8 @@ def script_padding(
 
 def script_staff_padding(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.script_staff_padding",
 ) -> OverrideCommand:
     """
@@ -5471,8 +5471,8 @@ def script_staff_padding(
 
 
 def script_up(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.script_up",
 ) -> OverrideCommand:
     r"""
@@ -5652,8 +5652,8 @@ def script_up(
 
 
 def script_x_extent_zero(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.script_x_extent_zero",
 ) -> OverrideCommand:
     """
@@ -5669,8 +5669,8 @@ def script_x_extent_zero(
 
 
 def slur_down(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.slur_down",
 ) -> OverrideCommand:
     r"""
@@ -5842,8 +5842,8 @@ def slur_down(
 
 
 def slur_up(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.slur_up",
 ) -> OverrideCommand:
     r"""
@@ -6028,10 +6028,10 @@ def slur_up(
 
 def span_bar_color(
     color: str,
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     after: bool = None,
     context: str = "Score",
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca.span_bar_color",
 ) -> OverrideCommand:
     """
@@ -6050,10 +6050,10 @@ def span_bar_color(
 
 def span_bar_extra_offset(
     pair: abjad.NumberPair,
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     after: bool = None,
     context: str = "Score",
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
     tag: typing.Optional[str] = "baca.span_bar_extra_offset",
 ) -> OverrideCommand:
     """
@@ -6071,8 +6071,8 @@ def span_bar_extra_offset(
 
 
 def span_bar_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.span_bar_transparent",
 ) -> OverrideCommand:
     r"""
@@ -6160,9 +6160,9 @@ def span_bar_transparent(
 
 def stem_color(
     color: str = "red",
+    selector: abjad.SelectorTyping = "baca.pleaves()",
     *,
     context: str = None,
-    selector: abjad.SelectorTyping = "baca.pleaves()",
     tag: typing.Optional[str] = "baca.stem_color",
 ) -> OverrideCommand:
     r"""
@@ -6323,8 +6323,8 @@ def stem_color(
 
 
 def stem_down(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.stem_down",
 ) -> OverrideCommand:
     r"""
@@ -6487,8 +6487,8 @@ def stem_down(
 
 
 def stem_stencil_false(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.stem_stencil_false",
 ) -> OverrideCommand:
     """
@@ -6504,8 +6504,8 @@ def stem_stencil_false(
 
 
 def stem_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.stem_transparent",
 ) -> OverrideCommand:
     """
@@ -6521,8 +6521,8 @@ def stem_transparent(
 
 
 def stem_up(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.stem_up",
 ) -> OverrideCommand:
     r"""
@@ -6685,8 +6685,8 @@ def stem_up(
 
 
 def strict_note_spacing_off(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.strict_note_spacing_off",
 ) -> OverrideCommand:
     r"""
@@ -6775,9 +6775,9 @@ def strict_note_spacing_off(
 
 def sustain_pedal_staff_padding(
     n: abjad.Number,
+    selector: abjad.SelectorTyping = "baca.leaves()",
     *,
     context: str = "Staff",
-    selector: abjad.SelectorTyping = "baca.leaves()",
     tag: typing.Optional[str] = "baca.sustain_pedal_staff_padding",
 ) -> OverrideCommand:
     r"""
@@ -6959,9 +6959,9 @@ def sustain_pedal_staff_padding(
 
 def text_script_color(
     color: str = "red",
+    selector: abjad.SelectorTyping = "baca.leaves()",
     *,
     allow_mmrests: bool = False,
-    selector: abjad.SelectorTyping = "baca.leaves()",
     tag: typing.Optional[str] = "baca.text_script_color",
 ) -> OverrideCommand:
     r"""
@@ -7164,9 +7164,9 @@ def text_script_color(
 
 
 def text_script_down(
+    selector: abjad.SelectorTyping = "baca.leaves()",
     *,
     allow_mmrests: bool = False,
-    selector: abjad.SelectorTyping = "baca.leaves()",
     tag: typing.Optional[str] = "baca.text_script_down",
 ) -> OverrideCommand:
     r"""
@@ -7370,9 +7370,9 @@ def text_script_down(
 
 def text_script_extra_offset(
     pair: abjad.NumberPair,
+    selector: abjad.SelectorTyping = "baca.leaves()",
     *,
     allow_mmrests: bool = False,
-    selector: abjad.SelectorTyping = "baca.leaves()",
     tag: typing.Optional[str] = "baca.text_script_extra_offset",
 ) -> OverrideCommand:
     r"""
@@ -7419,9 +7419,9 @@ def text_script_extra_offset(
 
 def text_script_font_size(
     n: abjad.Number,
+    selector: abjad.SelectorTyping = "baca.leaves()",
     *,
     allow_mmrests: bool = False,
-    selector: abjad.SelectorTyping = "baca.leaves()",
     tag: typing.Optional[str] = "baca.text_script_font_size",
 ) -> OverrideCommand:
     """
@@ -7443,9 +7443,9 @@ def text_script_font_size(
 
 def text_script_padding(
     n: abjad.Number,
+    selector: abjad.SelectorTyping = "baca.leaves()",
     *,
     allow_mmrests: bool = False,
-    selector: abjad.SelectorTyping = "baca.leaves()",
     tag: typing.Optional[str] = "text.script_padding",
 ) -> OverrideCommand:
     r"""
@@ -7649,9 +7649,9 @@ def text_script_padding(
 
 def text_script_parent_alignment_x(
     n: abjad.Number,
+    selector: abjad.SelectorTyping = "baca.leaves()",
     *,
     allow_mmrests: bool = False,
-    selector: abjad.SelectorTyping = "baca.leaves()",
     tag: typing.Optional[str] = "baca.text_script_parent_alignment_x",
 ) -> OverrideCommand:
     """
@@ -7673,9 +7673,9 @@ def text_script_parent_alignment_x(
 
 def text_script_self_alignment_x(
     n: abjad.Number,
+    selector: abjad.SelectorTyping = "baca.leaves()",
     *,
     allow_mmrests: bool = False,
-    selector: abjad.SelectorTyping = "baca.leaves()",
     tag: typing.Optional[str] = "baca.text_script_self_alignment_x",
 ) -> OverrideCommand:
     """
@@ -7697,9 +7697,9 @@ def text_script_self_alignment_x(
 
 def text_script_staff_padding(
     n: abjad.Number,
+    selector: abjad.SelectorTyping = "baca.leaves()",
     *,
     allow_mmrests: bool = False,
-    selector: abjad.SelectorTyping = "baca.leaves()",
     tag: str = "baca.text_script_staff_padding",
 ) -> OverrideCommand:
     r"""
@@ -7902,9 +7902,9 @@ def text_script_staff_padding(
 
 
 def text_script_up(
+    selector: abjad.SelectorTyping = "baca.leaves()",
     *,
     allow_mmrests: bool = False,
-    selector: abjad.SelectorTyping = "baca.leaves()",
     tag: typing.Optional[str] = "baca.text_script_up",
 ) -> OverrideCommand:
     r"""
@@ -8108,9 +8108,9 @@ def text_script_up(
 
 def text_script_x_offset(
     n: abjad.Number,
+    selector: abjad.SelectorTyping = "baca.leaves()",
     *,
     allow_mmrests: bool = False,
-    selector: abjad.SelectorTyping = "baca.leaves()",
     tag: typing.Optional[str] = "baca.text_script_x_offset",
 ) -> OverrideCommand:
     """
@@ -8132,9 +8132,9 @@ def text_script_x_offset(
 
 def text_script_y_offset(
     n: abjad.Number,
+    selector: abjad.SelectorTyping = "baca.leaves()",
     *,
     allow_mmrests: bool = False,
-    selector: abjad.SelectorTyping = "baca.leaves()",
     tag: typing.Optional[str] = "baca.text_script_y_offset",
 ) -> OverrideCommand:
     """
@@ -8156,8 +8156,8 @@ def text_script_y_offset(
 
 def text_spanner_left_padding(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.text_spanner_left_padding",
 ) -> OverrideCommand:
     """
@@ -8174,8 +8174,8 @@ def text_spanner_left_padding(
 
 def text_spanner_right_padding(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.text_spanner_right_padding",
 ) -> OverrideCommand:
     """
@@ -8192,8 +8192,8 @@ def text_spanner_right_padding(
 
 def text_spanner_staff_padding(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: str = "baca.text_spanner_staff_padding",
 ) -> OverrideCommand:
     r"""
@@ -8381,8 +8381,8 @@ def text_spanner_staff_padding(
 
 
 def text_spanner_stencil_false(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.text_spanner_stencil_false",
 ) -> OverrideCommand:
     """
@@ -8398,8 +8398,8 @@ def text_spanner_stencil_false(
 
 
 def text_spanner_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.text_spanner_transparent",
 ) -> OverrideCommand:
     """
@@ -8416,8 +8416,8 @@ def text_spanner_transparent(
 
 def text_spanner_y_offset(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.text_spanner_y_offset",
 ) -> OverrideCommand:
     """
@@ -8433,8 +8433,8 @@ def text_spanner_y_offset(
 
 
 def tie_down(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.tie_down",
 ) -> OverrideCommand:
     r"""
@@ -8522,8 +8522,8 @@ def tie_down(
 
 
 def tie_up(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
     tag: typing.Optional[str] = "baca.tie_up",
 ) -> OverrideCommand:
     r"""
@@ -8610,8 +8610,8 @@ def tie_up(
 
 def time_signature_extra_offset(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.hleaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.time_signature_extra_offset",
 ) -> OverrideCommand:
     r"""
@@ -8699,8 +8699,8 @@ def time_signature_extra_offset(
 
 
 def time_signature_stencil_false(
-    *,
     selector: abjad.SelectorTyping = "baca.hleaves()",
+    *,
     tag: typing.Optional[str] = "baca.time_signature_stencil_false",
 ) -> OverrideCommand:
     """
@@ -8717,8 +8717,8 @@ def time_signature_stencil_false(
 
 
 def time_signature_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.hleaves()",
+    *,
     tag: typing.Optional[str] = "baca.time_signature_transparent",
 ) -> OverrideCommand:
     r"""
@@ -8807,8 +8807,8 @@ def time_signature_transparent(
 
 def trill_spanner_staff_padding(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.trill_spanner_staff_padding",
 ) -> OverrideCommand:
     """
@@ -8824,8 +8824,8 @@ def trill_spanner_staff_padding(
 
 
 def tuplet_bracket_down(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.tuplet_bracket_down",
 ) -> OverrideCommand:
     r"""
@@ -8986,8 +8986,8 @@ def tuplet_bracket_down(
 
 def tuplet_bracket_extra_offset(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.tuplet_bracket_extra_offset",
 ) -> OverrideCommand:
     r"""
@@ -9146,8 +9146,8 @@ def tuplet_bracket_extra_offset(
 
 def tuplet_bracket_outside_staff_priority(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.tuplet_bracket_outside_staff_priority",
 ) -> OverrideCommand:
     """
@@ -9164,8 +9164,8 @@ def tuplet_bracket_outside_staff_priority(
 
 def tuplet_bracket_padding(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.tuplet_bracket_down",
 ) -> OverrideCommand:
     """
@@ -9182,8 +9182,8 @@ def tuplet_bracket_padding(
 
 def tuplet_bracket_shorten_pair(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.tuplet_bracket_shorten_pair",
 ) -> OverrideCommand:
     """
@@ -9200,8 +9200,8 @@ def tuplet_bracket_shorten_pair(
 
 def tuplet_bracket_staff_padding(
     n: abjad.Number,
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.tuplet_bracket_staff_padding",
 ) -> OverrideCommand:
     r"""
@@ -9355,8 +9355,8 @@ def tuplet_bracket_staff_padding(
 
 
 def tuplet_bracket_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.tuplet_bracket_transparent",
 ) -> OverrideCommand:
     """
@@ -9372,8 +9372,8 @@ def tuplet_bracket_transparent(
 
 
 def tuplet_bracket_up(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.tuplet_bracket_up",
 ) -> OverrideCommand:
     r"""
@@ -9533,8 +9533,8 @@ def tuplet_bracket_up(
 
 
 def tuplet_number_denominator(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.tuplet_number_denominator",
 ) -> OverrideCommand:
     """
@@ -9551,8 +9551,8 @@ def tuplet_number_denominator(
 
 def tuplet_number_extra_offset(
     pair: abjad.NumberPair,
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.tuplet_number_extra_offset",
 ) -> OverrideCommand:
     r"""
@@ -9710,8 +9710,8 @@ def tuplet_number_extra_offset(
 
 
 def tuplet_number_transparent(
-    *,
     selector: abjad.SelectorTyping = "baca.leaves()",
+    *,
     tag: typing.Optional[str] = "baca.tuplet_number_transparent",
 ) -> OverrideCommand:
     """
