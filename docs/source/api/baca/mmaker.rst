@@ -482,7 +482,6 @@ mmaker
       figure_index
       figure_name
       hide_time_signature
-      ordered_commands
       show
       tag
 
@@ -534,8 +533,6 @@ mmaker
    .. autoattribute:: MusicMaker.figure_name
 
    .. autoattribute:: MusicMaker.hide_time_signature
-
-   .. autoattribute:: MusicMaker.ordered_commands
 
    .. autoattribute:: MusicMaker.tag
 
