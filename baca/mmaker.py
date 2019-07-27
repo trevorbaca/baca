@@ -5718,6 +5718,7 @@ class MusicAccumulator(object):
                     specifier.voice_name, specifier.voice_name
                 )
                 specifier._voice_name = voice_name_
+            # TODO: remove
             elif isinstance(specifier, AnchorSpecifier):
                 voice_name_ = self.score_template.voice_abbreviations.get(
                     specifier.remote_voice_name, specifier.remote_voice_name
@@ -5728,6 +5729,12 @@ class MusicAccumulator(object):
                 assert not hasattr(specifier, "remote_voice_name"), repr(
                     specifier
                 )
+        if "anchor" in keywords:
+            voice_name_ = self.score_template.voice_abbreviations.get(
+                keywords["anchor"].remote_voice_name,
+                keywords["anchor"].remote_voice_name,
+            )
+            keywords["anchor"]._remote_voice_name = voice_name_
         keywords["figure_index"] = self._figure_index
         music_maker = abjad.new(music_maker, *all_specifiers, **keywords)
         music_contribution = music_maker(voice_name, collections)
@@ -6761,6 +6768,7 @@ class MusicMaker(object):
 
     __slots__ = (
         "_allow_repeats",
+        "_anchor",
         "_denominator",
         "_extend_beam",
         "_figure_index",
@@ -6786,6 +6794,7 @@ class MusicMaker(object):
         self,
         *commands,
         allow_repeats=None,
+        anchor: AnchorSpecifier = None,
         denominator=None,
         extend_beam=None,
         figure_index=None,
@@ -6801,6 +6810,9 @@ class MusicMaker(object):
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
         self._allow_repeats = allow_repeats
+        if anchor is not None:
+            assert isinstance(anchor, AnchorSpecifier)
+        self._anchor = anchor
         if denominator is not None:
             assert abjad.mathtools.is_positive_integer(denominator)
         self._denominator = denominator
@@ -6844,7 +6856,6 @@ class MusicMaker(object):
             selections, commands = self._call_rhythm_commands(
                 collections, commands
             )
-        anchor, commands = self._get_anchor_specifier(commands)
         container = abjad.Container(selections)
         for command in self.ordered_commands or []:
             command(selections)
@@ -6876,7 +6887,7 @@ class MusicMaker(object):
             if self.tag is not None:
                 rhythmcommands.tag_selection(value, self.tag)
         return MusicContribution(
-            anchor=anchor,
+            anchor=self.anchor,
             color_selector=color_selector,
             color_selector_result=color_selector_result,
             figure_name=self.figure_name,
@@ -7121,22 +7132,6 @@ class MusicMaker(object):
         final_leaf = leaves[-1]
         abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, final_leaf)
 
-    @staticmethod
-    def _get_anchor_specifier(specifiers):
-        anchor_specifiers, specifiers_ = [], []
-        for specifier in specifiers:
-            if isinstance(specifier, AnchorSpecifier):
-                anchor_specifiers.append(specifier)
-            else:
-                specifiers_.append(specifier)
-        if not anchor_specifiers:
-            anchor_specifier = None
-        elif len(anchor_specifiers) == 1:
-            anchor_specifier = anchor_specifiers[0]
-        else:
-            raise Exception(f"max 1 anchor specifier: {anchor_specifiers!r}.")
-        return anchor_specifier, specifiers_
-
     def _get_storage_format_specification(self):
         manager = abjad.StorageFormatManager(self)
         keyword_argument_names = manager.signature_keyword_names
@@ -7228,6 +7223,13 @@ class MusicMaker(object):
         Returns true, false or none.
         """
         return self._allow_repeats
+
+    @property
+    def anchor(self) -> typing.Optional[AnchorSpecifier]:
+        """
+        Gets anchor specifier.
+        """
+        return self._anchor
 
     @property
     def commands(self):

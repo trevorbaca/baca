@@ -475,6 +475,8 @@ mmaker
       __hash__
       __repr__
       allow_repeats
+      anchor
+      commands
       denominator
       extend_beam
       figure_index
@@ -482,7 +484,6 @@ mmaker
       hide_time_signature
       ordered_commands
       show
-      specifiers
       tag
 
    .. raw:: html
@@ -520,6 +521,10 @@ mmaker
 
    .. autoattribute:: MusicMaker.allow_repeats
 
+   .. autoattribute:: MusicMaker.anchor
+
+   .. autoattribute:: MusicMaker.commands
+
    .. autoattribute:: MusicMaker.denominator
 
    .. autoattribute:: MusicMaker.extend_beam
@@ -531,8 +536,6 @@ mmaker
    .. autoattribute:: MusicMaker.hide_time_signature
 
    .. autoattribute:: MusicMaker.ordered_commands
-
-   .. autoattribute:: MusicMaker.specifiers
 
    .. autoattribute:: MusicMaker.tag
 

@@ -3519,10 +3519,10 @@ def cross_staff(
         ...     'Viola_Music_Voice',
         ...     [[0, 2, 4, 5, 7]],
         ...     music_maker,
-        ...     baca.anchor('Violin_Music_Voice'),
         ...     baca.cross_staff(),
         ...     rmakers.unbeam(),
         ...     baca.stem_up(),
+        ...     anchor=baca.anchor('Violin_Music_Voice'),
         ...     figure_name='va.1',
         ... )
         >>> accumulator(
@@ -3829,10 +3829,10 @@ def cross_staff(
         ...     'Viola_Music_Voice',
         ...     [[0, 2, 4, 5, 7]],
         ...     music_maker,
-        ...     baca.anchor('Violin_Music_Voice'),
         ...     baca.cross_staff(selector=baca.pleaves()[-2:]),
         ...     rmakers.unbeam(),
         ...     baca.stem_up(),
+        ...     anchor=baca.anchor('Violin_Music_Voice'),
         ...     figure_name='va.1',
         ... )
         >>> accumulator(
