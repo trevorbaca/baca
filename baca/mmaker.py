@@ -6763,7 +6763,6 @@ class MusicMaker(object):
         "_next_figure",
         "_ordered_commands",
         "_specifiers",
-        "_thread",
         "_voice_names",
         "_extend_beam",
         "_figure_index",
@@ -6794,7 +6793,6 @@ class MusicMaker(object):
         hide_time_signature=None,
         ordered_commands: typing.Sequence = None,
         tag: str = "baca.MusicMaker.__call__",
-        thread=None,
         tuplet_denominator=None,
         tuplet_force_fraction=None,
     ):
@@ -6817,9 +6815,6 @@ class MusicMaker(object):
             ordered_commands = list(ordered_commands)
         self._ordered_commands = ordered_commands
         self._tag = tag
-        if thread is not None:
-            thread = bool(thread)
-        self._thread = thread
         self._tuplet_denominator = tuplet_denominator
         self._tuplet_force_fraction = tuplet_force_fraction
 
@@ -7048,19 +7043,19 @@ class MusicMaker(object):
 
     def _call_rhythm_commands(self, collections, specifiers):
         selections = len(collections) * [None]
-        rhythm_commands, rest_affix_specifiers, specifiers_ = [], [], []
+        assignments, rest_affix_specifiers, specifiers_ = [], [], []
         for specifier in specifiers:
             if isinstance(specifier, PitchFirstAssignment):
-                rhythm_commands.append(specifier)
+                assignments.append(specifier)
             elif isinstance(specifier, PitchFirstRhythmMaker):
                 assignment = PitchFirstAssignment(specifier)
-                rhythm_commands.append(assignment)
+                assignments.append(assignment)
             elif isinstance(specifier, RestAffixSpecifier):
                 rest_affix_specifiers.append(specifier)
             else:
                 specifiers_.append(specifier)
-        if not rhythm_commands:
-            raise Exception("must provide rhythm command.")
+        if not assignments:
+            raise Exception("must provide pitch-first assignment.")
         if not rest_affix_specifiers:
             rest_affix_specifier = None
         elif len(rest_affix_specifiers) == 1:
@@ -7069,19 +7064,18 @@ class MusicMaker(object):
             message = f"max 1 rest affix specifier: {rest_affix_specifiers!r}."
             raise Exception(message)
         # TODO: activate:
-        #        if 1 < len(rhythm_commands):
-        #            assert len(rhythm_commands) == 2, repr(rhythm_commands)
+        #        if 1 < len(assignments):
+        #            assert len(assignments) == 2, repr(assignments)
         #            message = "must combine assignments:\n"
-        #            message += f"   {repr(rhythm_commands[0])}\n"
-        #            message += f"   {repr(rhythm_commands[1])}\n"
+        #            message += f"   {repr(assignments[0])}\n"
+        #            message += f"   {repr(assignments[1])}\n"
         #            raise Exception(message)
-        for rhythm_command in rhythm_commands:
-            assert isinstance(rhythm_command, PitchFirstAssignment)
-            rhythm_command(
+        for assignment in assignments:
+            assert isinstance(assignment, PitchFirstAssignment)
+            assignment(
                 collections=collections,
                 selections=selections,
                 rest_affix_specifier=rest_affix_specifier,
-                thread=self.thread,
                 tuplet_denominator=self.tuplet_denominator,
                 tuplet_force_fraction=self.tuplet_force_fraction,
             )
@@ -8816,129 +8810,6 @@ class MusicMaker(object):
         return self._specifiers
 
     @property
-    def thread(self):
-        r"""
-        Is true when music-maker threads rhythm-maker over collections.
-
-        ..  container:: example
-
-            Does not thread rhythm-maker over collections:
-
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1, 2, 3], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     collections,
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 1
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    c'16                                                                 %! baca.MusicMaker.__call__
-                                    [
-                                    d'8                                                                  %! baca.MusicMaker.__call__
-                                    bf'8.                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    fs''16                                                               %! baca.MusicMaker.__call__
-                                    [
-                                    e''8                                                                 %! baca.MusicMaker.__call__
-                                    ef''8.                                                               %! baca.MusicMaker.__call__
-                                    af''16                                                               %! baca.MusicMaker.__call__
-                                    g''8                                                                 %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    a'16                                                                 %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-            Does thread rhythm-maker over collections:
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1, 2, 3], 16),
-            ...     rmakers.beam(),
-            ...     thread=True,
-            ... )
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     collections,
-            ...     )
-            >>> lilypond_file = music_maker.show(contribution)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        s1 * 9/8
-                    }
-                    \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    c'16                                                                 %! baca.MusicMaker.__call__
-                                    [
-                                    d'8                                                                  %! baca.MusicMaker.__call__
-                                    bf'8.                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    fs''16                                                               %! baca.MusicMaker.__call__
-                                    [
-                                    e''8                                                                 %! baca.MusicMaker.__call__
-                                    ef''8.                                                               %! baca.MusicMaker.__call__
-                                    af''16                                                               %! baca.MusicMaker.__call__
-                                    g''8                                                                 %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    a'8.                                                                 %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }
-                    >>
-                >>
-
-        Set to true, false or none.
-
-        Defaults to none.
-
-        Returns true, false or none.
-        """
-        return self._thread
-
-    @property
     def extend_beam(self):
         return self._extend_beam
 
@@ -9303,14 +9174,30 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
 
     ### CLASS ATTRIBUTES ###
 
-    __slots__ = ("_pattern", "_rhythm_maker")
+    __slots__ = (
+        "_pattern",
+        "_rest_affix_specifier",
+        "_rhythm_maker",
+        "_thread",
+        "_time_treatments",
+        "_tuplet_denominator",
+        "_tuplet_force_fraction",
+    )
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
     def __init__(
-        self, rhythm_maker: "PitchFirstRhythmMaker", pattern=None
+        self,
+        rhythm_maker: "PitchFirstRhythmMaker",
+        *,
+        pattern=None,
+        rest_affix_specifier=None,
+        thread=None,
+        time_treatments=None,
+        tuplet_denominator=None,
+        tuplet_force_fraction=None,
     ) -> None:
         assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
         self._rhythm_maker = rhythm_maker
@@ -9319,6 +9206,13 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
             assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
 
+        # to integrate:
+        self._rest_affix_specifier = rest_affix_specifier
+        self._thread = thread
+        self._time_treatments = time_treatments
+        self._tuplet_denominator = tuplet_denominator
+        self._tuplet_force_fraction = tuplet_force_fraction
+
     ### SPECIAL METHODS ###
 
     def __call__(
@@ -9326,11 +9220,20 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         collections,
         selections,
         rest_affix_specifier=None,
-        thread=None,
         time_treatments=None,
         tuplet_denominator=None,
         tuplet_force_fraction=None,
     ):
+
+        if self.rest_affix_specifier is not None:
+            rest_affix_specifier = self.rest_affix_specifier
+        if self.time_treatments is not None:
+            time_treatments = self.time_treatments
+        if self.tuplet_denominator is not None:
+            tuplet_denominator = self.tuplet_denominator
+        if self.tuplet_force_fraction is not None:
+            tuplet_force_fraction = self.tuplet_force_fraction
+
         assert len(selections) == len(collections)
         rhythm_maker = self._make_rhythm_maker(
             time_treatments=time_treatments,
@@ -9351,7 +9254,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
                 continue
             collections_.append(collection_)
             indices.append(index)
-        if thread:
+        if self.thread:
             stage_selections = rhythm_maker(
                 collections_, rest_affix_specifier=rest_affix_specifier
             )
@@ -9473,6 +9376,140 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         Gets rhythm-maker.
         """
         return self._rhythm_maker
+
+    @property
+    def rest_affix_specifier(self):
+        return self._rest_affix_specifier
+
+    @property
+    def thread(self):
+        r"""
+        Is true when pitch-first assignment threads over selections.
+
+        ..  container:: example
+
+            Does not thread rhythm-maker over collections:
+
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.pitch_first([1, 2, 3], 16),
+            ...     rmakers.beam(),
+            ... )
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> contribution = music_maker(
+            ...     'Voice_1',
+            ...     collections,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        s1 * 1
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice_1"
+                        {
+                            \voiceOne
+                            {                                                                            %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    c'16                                                                 %! baca.MusicMaker.__call__
+                                    [
+                                    d'8                                                                  %! baca.MusicMaker.__call__
+                                    bf'8.                                                                %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    fs''16                                                               %! baca.MusicMaker.__call__
+                                    [
+                                    e''8                                                                 %! baca.MusicMaker.__call__
+                                    ef''8.                                                               %! baca.MusicMaker.__call__
+                                    af''16                                                               %! baca.MusicMaker.__call__
+                                    g''8                                                                 %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    a'16                                                                 %! baca.MusicMaker.__call__
+                                }                                                                        %! baca.MusicMaker.__call__
+                            }                                                                            %! baca.MusicMaker.__call__
+                        }
+                    >>
+                >>
+
+            Threads rhythm-maker over collections:
+
+            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> music_maker = baca.MusicMaker(
+            ...     baca.pitch_first([1, 2, 3], 16, thread=True),
+            ...     rmakers.beam(),
+            ... )
+            >>> contribution = music_maker(
+            ...     'Voice_1',
+            ...     collections,
+            ...     )
+            >>> lilypond_file = music_maker.show(contribution)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        s1 * 9/8
+                    }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice_1"
+                        {
+                            \voiceOne
+                            {                                                                            %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    c'16                                                                 %! baca.MusicMaker.__call__
+                                    [
+                                    d'8                                                                  %! baca.MusicMaker.__call__
+                                    bf'8.                                                                %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    fs''16                                                               %! baca.MusicMaker.__call__
+                                    [
+                                    e''8                                                                 %! baca.MusicMaker.__call__
+                                    ef''8.                                                               %! baca.MusicMaker.__call__
+                                    af''16                                                               %! baca.MusicMaker.__call__
+                                    g''8                                                                 %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    a'8.                                                                 %! baca.MusicMaker.__call__
+                                }                                                                        %! baca.MusicMaker.__call__
+                            }                                                                            %! baca.MusicMaker.__call__
+                        }
+                    >>
+                >>
+
+        """
+        return self._thread
+        self._thread
+
+    @property
+    def time_treatments(self):
+        return self._time_treatments
+
+    @property
+    def tuplet_denominator(self):
+        return self._tuplet_denominator
+
+    @property
+    def tuplet_force_fraction(self):
+        return self._tuplet_force_fraction
 
 
 class PitchFirstCommand(object):
@@ -13835,6 +13872,7 @@ def pitch_first(
     acciaccatura_specifiers=None,
     pattern=None,
     spelling=None,
+    thread: bool = None,
     time_treatments=None,
 ) -> PitchFirstRhythmMaker:
     """
@@ -13848,4 +13886,5 @@ def pitch_first(
             time_treatments=time_treatments,
         ),
         pattern=pattern,
+        thread=thread,
     )
