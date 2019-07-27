@@ -5729,6 +5729,12 @@ class MusicAccumulator(object):
                 assert not hasattr(specifier, "remote_voice_name"), repr(
                     specifier
                 )
+        for specifier in keywords.get("ordered_commands", []):
+            if isinstance(specifier, ImbricationCommand):
+                voice_name_ = self.score_template.voice_abbreviations.get(
+                    specifier.voice_name, specifier.voice_name
+                )
+                specifier._voice_name = voice_name_
         if "anchor" in keywords:
             voice_name_ = self.score_template.voice_abbreviations.get(
                 keywords["anchor"].remote_voice_name,
@@ -6857,15 +6863,21 @@ class MusicMaker(object):
                 collections, commands
             )
         container = abjad.Container(selections)
+        found_imbrication_command = False
         for command in self.ordered_commands or []:
-            command(selections)
+            if isinstance(command, ImbricationCommand):
+                found_imbrication_command = True
+                imbricated_selections = command(container)
+            else:
+                command(selections)
         commands = self._call_tie_commands(selections, commands)
         commands = self._call_cluster_commands(selections, commands)
         commands = self._call_nesting_commands(selections, commands)
         commands = self._call_register_commands(selections, commands)
-        imbricated_selections, commands = self._call_imbrication_commands(
-            container, commands
-        )
+        if not found_imbrication_command:
+            imbricated_selections, commands = self._call_imbrication_commands(
+                container, commands
+            )
         result = self._call_color_commands(selections, commands)
         commands, color_selector, color_selector_result = result
         self._call_remaining_commands(selections, commands)
