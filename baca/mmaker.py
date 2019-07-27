@@ -1471,12 +1471,14 @@ class ImbricationCommand(scoping.Command):
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
-        ...     rmakers.beam_groups(),
-        ...     baca.imbricate(
-        ...         'Voice_1',
-        ...         [2, 19, 9, 18, 16],
+        ...     ordered_commands=[
         ...         rmakers.beam_groups(),
-        ...     ),
+        ...         baca.imbricate(
+        ...             'Voice_1',
+        ...             [2, 19, 9, 18, 16],
+        ...             rmakers.beam_groups(),
+        ...         ),
+        ...     ],
         ... )
 
         >>> collections = [
@@ -1615,6 +1617,7 @@ class ImbricationCommand(scoping.Command):
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
+        ...     ordered_commands=[
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
         ...         'Voice_1',
@@ -1628,6 +1631,7 @@ class ImbricationCommand(scoping.Command):
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.accent(selector=baca.pheads()),
         ...         ),
+        ...     ],
         ... )
 
         >>> collections = [
@@ -1805,14 +1809,16 @@ class ImbricationCommand(scoping.Command):
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16, time_treatments=[1]),
+        ...     ordered_commands=[
         ...     rmakers.beam_groups(beam_rests=True),
-        ...     baca.staccato(selector=baca.pheads()),
         ...     baca.imbricate(
         ...         'Voice_1',
         ...         [2, 19, 9, 18, 16],
         ...         baca.accent(selector=baca.pheads()),
         ...         rmakers.beam_groups(beam_rests=True),
         ...         ),
+        ...     baca.staccato(selector=baca.pheads()),
+        ...     ],
         ... )
 
         >>> collections = [
@@ -2042,13 +2048,15 @@ class ImbricationCommand(scoping.Command):
             ...     ]
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([3], 16),
+            ...     ordered_commands=[
             ...     rmakers.beam(),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         segment,
             ...         baca.accent(selector=baca.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
-            ...         ),
+            ...     ),
+            ...     ],
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -2149,13 +2157,15 @@ class ImbricationCommand(scoping.Command):
             ...     ]
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
+            ...     ordered_commands=[
             ...     rmakers.beam(),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         segment,
             ...         baca.accent(selector=baca.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
-            ...         ),
+            ...     ),
+            ...     ],
             ... )
 
             >>> collections = [
@@ -2282,6 +2292,7 @@ class ImbricationCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
+            ...     ordered_commands=[
             ...     rmakers.beam_groups(),
             ...     baca.imbricate(
             ...         'Voice_1',
@@ -2289,7 +2300,8 @@ class ImbricationCommand(scoping.Command):
             ...         baca.staccato(selector=baca.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         extend_beam=True,
-            ...         ),
+            ...     ),
+            ...     ],
             ... )
             >>> contribution = music_maker(
             ...     'Voice_2',
@@ -2302,13 +2314,15 @@ class ImbricationCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
+            ...     ordered_commands=[
             ...     rmakers.beam_groups(),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [13, 9],
             ...         baca.staccato(selector=baca.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
-            ...         ),
+            ...     ),
+            ...     ],
             ... )
             >>> contribution = music_maker(
             ...     'Voice_2',
@@ -2613,12 +2627,14 @@ class ImbricationCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
+            ...     ordered_commands=[
             ...     rmakers.beam_groups(),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         rmakers.beam_groups(),
             ...     ),
+            ...     ],
             ... )
 
             >>> collections = [
@@ -2745,12 +2761,14 @@ class ImbricationCommand(scoping.Command):
             ...         16,
             ...         affix=baca.rests_around([2], [2]),
             ...     ),
+            ...     ordered_commands=[
             ...     rmakers.beam_groups(),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         rmakers.beam_groups(),
             ...     ),
+            ...     ],
             ... )
 
             >>> collections = [
@@ -3056,16 +3074,18 @@ class ImbricationCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
+            ...     ordered_commands=[
             ...     rmakers.beam_groups(beam_rests=True),
-            ...     baca.staccato(selector=baca.pheads()),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=baca.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         allow_unused_pitches=True,
-            ...         ),
-            ...     )
+            ...     ),
+            ...     baca.staccato(selector=baca.pheads()),
+            ...     ],
+            ... )
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
@@ -3185,15 +3205,17 @@ class ImbricationCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
+            ...     ordered_commands=[
             ...     rmakers.beam_groups(beam_rests=True),
-            ...     baca.staccato(selector=baca.pheads()),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=baca.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
-            ...         ),
-            ...     )
+            ...     ),
+            ...     baca.staccato(selector=baca.pheads()),
+            ...     ],
+            ... )
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
@@ -3258,16 +3280,18 @@ class ImbricationCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
+            ...     ordered_commands=[
             ...     rmakers.beam_groups(beam_rests=True),
-            ...     baca.staccato(selector=baca.pheads()),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         baca.accent(selector=baca.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         hocket=True,
-            ...         ),
-            ...     )
+            ...     ),
+            ...     baca.staccato(selector=baca.pheads()),
+            ...     ],
+            ... )
 
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
@@ -3436,15 +3460,17 @@ class ImbricationCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
+            ...     ordered_commands=[
             ...     rmakers.beam_groups(beam_rests=True),
-            ...     baca.staccato(selector=baca.pheads()),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 18, 16, 15],
             ...         baca.accent(selector=baca.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         selector=baca.plts()[-9:],
-            ...         ),
+            ...     ),
+            ...     baca.staccato(selector=baca.pheads()),
+            ...     ],
             ... )
 
             >>> collections = [
@@ -3635,11 +3661,13 @@ class ImbricationCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
-            ...     rmakers.beam_groups(),
+            ...     ordered_commands=[
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
-            ...         ),
+            ...     ),
+            ...     rmakers.beam_groups(),
+            ...     ],
             ... )
 
             >>> collections = [
@@ -3764,12 +3792,14 @@ class ImbricationCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
+            ...     ordered_commands=[
             ...     rmakers.beam_groups(),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         rmakers.beam_groups(),
             ...     ),
+            ...     ],
             ... )
 
             >>> collections = [
@@ -3908,12 +3938,14 @@ class ImbricationCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
+            ...     ordered_commands=[
             ...     rmakers.beam_groups(),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         rmakers.beam_groups(beam_rests=True),
-            ...         ),
+            ...     ),
+            ...     ],
             ... )
 
             >>> collections = [
@@ -4050,12 +4082,14 @@ class ImbricationCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
+            ...     ordered_commands=[
             ...     rmakers.beam_groups(),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         rmakers.beam(beam_rests=True),
             ...     ),
+            ...     ],
             ... )
 
             >>> collections = [
@@ -4549,13 +4583,15 @@ class ImbricationCommand(scoping.Command):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([5], 32),
+            ...     ordered_commands=[
             ...     rmakers.beam(),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 10, 18, 19, 9],
             ...         rmakers.beam_groups(beam_rests=True),
             ...         truncate_ties=True,
-            ...         ),
+            ...     ),
+            ...     ],
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -6863,21 +6899,21 @@ class MusicMaker(object):
                 collections, commands
             )
         container = abjad.Container(selections)
-        found_imbrication_command = False
+        imbricated_selections = {}
         for command in self.ordered_commands or []:
             if isinstance(command, ImbricationCommand):
-                found_imbrication_command = True
-                imbricated_selections = command(container)
+                imbricated_selections_ = command(container)
+                imbricated_selections.update(imbricated_selections_)
             else:
                 command(selections)
         commands = self._call_tie_commands(selections, commands)
         commands = self._call_cluster_commands(selections, commands)
         commands = self._call_nesting_commands(selections, commands)
         commands = self._call_register_commands(selections, commands)
-        if not found_imbrication_command:
-            imbricated_selections, commands = self._call_imbrication_commands(
-                container, commands
-            )
+        imbricated_selections_, commands = self._call_imbrication_commands(
+            container, commands
+        )
+        imbricated_selections.update(imbricated_selections_)
         result = self._call_color_commands(selections, commands)
         commands, color_selector, color_selector_result = result
         self._call_remaining_commands(selections, commands)
@@ -12973,12 +13009,14 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...         affix=baca.rests_around([2], [4]),
         ...         time_treatments=[-1],
         ...     ),
+        ...     ordered_commands=[
         ...     rmakers.beam(),
         ...     baca.imbricate(
         ...         'Voice_2',
         ...         [baca.coat(0), baca.coat(2), 10, 0, 2],
         ...         rmakers.beam_groups(),
-        ...         ),
+        ...     ),
+        ...     ],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -13096,9 +13134,11 @@ def imbricate(
         ...         affix=baca.rests_around([2], [4]),
         ...         time_treatments=[-1],
         ...         ),
+        ...     ordered_commands=[
+        ...     rmakers.beam(),
         ...     baca.imbricate('Voice_2', [10, 20, 19]),
         ...     baca.tuplet_bracket_staff_padding(5),
-        ...     ordered_commands=[rmakers.beam()],
+        ...     ],
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
