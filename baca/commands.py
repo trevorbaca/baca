@@ -3504,7 +3504,7 @@ def cross_staff(
         >>> music_maker = MusicMaker(
         ...     pitch_first([1], 8),
         ...     rmakers.beam(),
-        ...     denominator=16,
+        ...     signature=16,
         ... )
         >>> accumulator(
         ...     'Violin_Music_Voice',
@@ -3512,7 +3512,7 @@ def cross_staff(
         ...     music_maker,
         ...     rmakers.unbeam(),
         ...     baca.stem_up(),
-        ...     denominator=8,
+        ...     signature=8,
         ...     figure_name='vn.1',
         ... )
         >>> accumulator(
@@ -3814,7 +3814,7 @@ def cross_staff(
         >>> music_maker = MusicMaker(
         ...     pitch_first([1], 8),
         ...     rmakers.beam(),
-        ...     denominator=16,
+        ...     signature=16,
         ... )
         >>> accumulator(
         ...     'Violin_Music_Voice',
@@ -3822,7 +3822,7 @@ def cross_staff(
         ...     music_maker,
         ...     rmakers.unbeam(),
         ...     baca.stem_up(),
-        ...     denominator=8,
+        ...     signature=8,
         ...     figure_name='vn.1',
         ... )
         >>> accumulator(

@@ -477,12 +477,12 @@ mmaker
       allow_repeats
       anchor
       commands
-      denominator
       extend_beam
       figure_index
       figure_name
       hide_time_signature
       show
+      signature
       tag
 
    .. raw:: html
@@ -524,8 +524,6 @@ mmaker
 
    .. autoattribute:: MusicMaker.commands
 
-   .. autoattribute:: MusicMaker.denominator
-
    .. autoattribute:: MusicMaker.extend_beam
 
    .. autoattribute:: MusicMaker.figure_index
@@ -533,6 +531,8 @@ mmaker
    .. autoattribute:: MusicMaker.figure_name
 
    .. autoattribute:: MusicMaker.hide_time_signature
+
+   .. autoattribute:: MusicMaker.signature
 
    .. autoattribute:: MusicMaker.tag
 

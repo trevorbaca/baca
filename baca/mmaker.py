@@ -5672,7 +5672,7 @@ class MusicAccumulator(object):
             >>> music_maker = MusicMaker(
             ...     pitch_first([1], 16),
             ...     rmakers.beam(),
-            ...     denominator=16,
+            ...     signature=16,
             ... )
             >>> accumulator(
             ...     'Violin_Music_Voice',
@@ -6769,13 +6769,13 @@ class MusicMaker(object):
     __slots__ = (
         "_allow_repeats",
         "_anchor",
-        "_denominator",
+        "_commands",
         "_extend_beam",
         "_figure_index",
         "_figure_name",
         "_hide_time_signature",
         "_next_figure",
-        "_commands",
+        "_signature",
         "_tag",
         "_voice_names",
     )
@@ -6794,11 +6794,11 @@ class MusicMaker(object):
         *commands,
         allow_repeats=None,
         anchor: AnchorSpecifier = None,
-        denominator=None,
         extend_beam=None,
         figure_index=None,
         figure_name=None,
         hide_time_signature=None,
+        signature=None,
         tag: str = "baca.MusicMaker.__call__",
     ):
         # remove flatten
@@ -6811,14 +6811,14 @@ class MusicMaker(object):
         if anchor is not None:
             assert isinstance(anchor, AnchorSpecifier)
         self._anchor = anchor
-        if denominator is not None:
-            assert abjad.mathtools.is_positive_integer(denominator)
-        self._denominator = denominator
         self._extend_beam = extend_beam
         self._figure_index = figure_index
         self._figure_name = figure_name
         self._hide_time_signature = hide_time_signature
         self._next_figure = 0
+        if signature is not None:
+            assert abjad.mathtools.is_positive_integer(signature)
+        self._signature = signature
         self._tag = tag
 
     ### SPECIAL METHODS ###
@@ -6870,7 +6870,7 @@ class MusicMaker(object):
         self._check_wellformedness(container)
         selection = abjad.select([container])
         time_signature = self._make_time_signature(
-            selection, denominator=self.denominator
+            selection, denominator=self.signature
         )
         voice_to_selection = {voice_name: selection}
         voice_to_selection.update(imbricated_selections)
@@ -7111,7 +7111,7 @@ class MusicMaker(object):
 
     def _make_time_signature(self, selection, denominator=None):
         if denominator is None:
-            denominator = self.denominator
+            denominator = self.signature
         duration = abjad.inspect(selection).duration()
         if denominator is not None:
             duration = duration.with_denominator(denominator)
@@ -8489,9 +8489,25 @@ class MusicMaker(object):
         return self._commands
 
     @property
-    def denominator(self):
+    def extend_beam(self):
+        return self._extend_beam
+
+    @property
+    def figure_index(self):
+        return self._figure_index
+
+    @property
+    def figure_name(self):
+        return self._figure_name
+
+    @property
+    def hide_time_signature(self):
+        return self._hide_time_signature
+
+    @property
+    def signature(self):
         r"""
-        Gets denominator.
+        Gets (time) signature (denominator).
 
         ..  container:: example
 
@@ -8562,7 +8578,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ...     denominator=16,
+            ...     signature=16,
             ...     )
 
             >>> collections = [
@@ -8629,7 +8645,7 @@ class MusicMaker(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ...     denominator=8,
+            ...     signature=8,
             ... )
 
             >>> collections = [
@@ -8698,23 +8714,7 @@ class MusicMaker(object):
 
         Returns positive integer or none.
         """
-        return self._denominator
-
-    @property
-    def extend_beam(self):
-        return self._extend_beam
-
-    @property
-    def figure_index(self):
-        return self._figure_index
-
-    @property
-    def figure_name(self):
-        return self._figure_name
-
-    @property
-    def hide_time_signature(self):
-        return self._hide_time_signature
+        return self._signature
 
     @property
     def tag(self):
