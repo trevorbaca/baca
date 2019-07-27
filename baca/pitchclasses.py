@@ -152,13 +152,12 @@ class ArpeggiationSpacingSpecifier(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ...     baca.ArpeggiationSpacingSpecifier(
-            ...         direction=abjad.Up,
-            ...         ),
             ...     baca.bass_to_octave(2),
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> collections = baca.CollectionList(collections)
+            >>> collections = collections.arpeggiate_up()
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     collections,
@@ -203,13 +202,12 @@ class ArpeggiationSpacingSpecifier(object):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ...     baca.ArpeggiationSpacingSpecifier(
-            ...         direction=abjad.Down,
-            ...         ),
             ...     baca.bass_to_octave(2),
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+            >>> collections = baca.CollectionList(collections)
+            >>> collections = collections.arpeggiate_down()
             >>> contribution = music_maker(
             ...     'Voice_1',
             ...     collections,

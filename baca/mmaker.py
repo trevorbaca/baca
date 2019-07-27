@@ -6842,9 +6842,6 @@ class MusicMaker(object):
             selections = [abjad.select(tuplet)]
         else:
             collections = self._coerce_collections(collections)
-            collections, commands = self._call_spacing_commands(
-                collections, commands
-            )
             selections, commands = self._call_rhythm_commands(
                 collections, commands
             )
@@ -6970,21 +6967,6 @@ class MusicMaker(object):
             assert isinstance(assignment, PitchFirstAssignment)
             assignment(collections=collections, selections=selections)
         return selections, specifiers_
-
-    def _call_spacing_commands(self, collections, specifiers):
-        prototype = (pitchclasses.CollectionList, list, abjad.Sequence)
-        assert isinstance(collections, prototype), repr(collections)
-        specifiers_ = []
-        prototype = (
-            pitchclasses.ArpeggiationSpacingSpecifier,
-            pitchclasses.ChordalSpacingSpecifier,
-        )
-        for specifier in specifiers:
-            if isinstance(specifier, prototype):
-                collections = specifier(collections)
-            else:
-                specifiers_.append(specifier)
-        return collections, specifiers_
 
     @staticmethod
     def _check_wellformedness(selections):
