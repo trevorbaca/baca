@@ -6906,6 +6906,9 @@ class MusicMaker(object):
                 imbricated_selections.update(imbricated_selections_)
             else:
                 command(selections)
+
+        result = self._call_color_commands(selections, commands)
+        commands, color_selector, color_selector_result = result
         commands = self._call_tie_commands(selections, commands)
         commands = self._call_cluster_commands(selections, commands)
         commands = self._call_nesting_commands(selections, commands)
@@ -6914,9 +6917,8 @@ class MusicMaker(object):
             container, commands
         )
         imbricated_selections.update(imbricated_selections_)
-        result = self._call_color_commands(selections, commands)
-        commands, color_selector, color_selector_result = result
         self._call_remaining_commands(selections, commands)
+
         self._label_figure_name_(
             container, self.figure_name, self.figure_index
         )
@@ -13346,7 +13348,7 @@ def pitch_first(
     spelling=None,
     thread: bool = None,
     time_treatments=None,
-) -> PitchFirstRhythmMaker:
+) -> PitchFirstAssignment:
     """
     Makes pitch-first assignment.
     """
