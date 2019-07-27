@@ -6909,16 +6909,12 @@ class MusicMaker(object):
 
         result = self._call_color_commands(selections, commands)
         commands, color_selector, color_selector_result = result
-        commands = self._call_tie_commands(selections, commands)
-        commands = self._call_cluster_commands(selections, commands)
-        commands = self._call_nesting_commands(selections, commands)
-        commands = self._call_register_commands(selections, commands)
-        imbricated_selections_, commands = self._call_imbrication_commands(
-            container, commands
-        )
-        imbricated_selections.update(imbricated_selections_)
-        self._call_remaining_commands(selections, commands)
-
+        for command in commands:
+            if isinstance(command, ImbricationCommand):
+                imbricated_selections_ = command(container)
+                imbricated_selections.update(imbricated_selections_)
+            else:
+                command(selections)
         self._label_figure_name_(
             container, self.figure_name, self.figure_index
         )
@@ -6995,16 +6991,6 @@ class MusicMaker(object):
         for leaf in abjad.iterate(container).leaves(pitched=True):
             abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
 
-    def _call_cluster_commands(self, selections, specifiers):
-        assert self._all_are_selections(selections), repr(selections)
-        specifiers_ = []
-        for specifier in specifiers:
-            if isinstance(specifier, pitchcommands.ClusterCommand):
-                specifier(selections)
-            else:
-                specifiers_.append(specifier)
-        return specifiers_
-
     def _call_color_commands(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
         specifiers_ = []
@@ -7017,27 +7003,6 @@ class MusicMaker(object):
                 specifiers_.append(specifier)
         return specifiers_, color_selector, color_selector_result
 
-    def _call_imbrication_commands(self, container, specifiers):
-        specifiers_ = []
-        imbricated_selections = {}
-        for specifier in specifiers:
-            if isinstance(specifier, ImbricationCommand):
-                imbricated_selection = specifier(container)
-                imbricated_selections.update(imbricated_selection)
-            else:
-                specifiers_.append(specifier)
-        return imbricated_selections, specifiers_
-
-    def _call_nesting_commands(self, selections, specifiers):
-        assert self._all_are_selections(selections), repr(selections)
-        specifiers_ = []
-        for specifier in specifiers:
-            if isinstance(specifier, NestingCommand):
-                specifier(selections)
-            else:
-                specifiers_.append(specifier)
-        return specifiers_
-
     def _call_pitch_commands(self, collections, specifiers):
         prototype = (pitchclasses.CollectionList, list, abjad.Sequence)
         assert isinstance(collections, prototype), repr(collections)
@@ -7048,40 +7013,6 @@ class MusicMaker(object):
             else:
                 specifiers_.append(specifier)
         return collections, specifiers_
-
-    def _call_register_commands(self, selections, specifiers):
-        assert self._all_are_selections(selections), repr(selections)
-        specifiers_ = []
-        prototype = (
-            pitchcommands.RegisterCommand,
-            pitchcommands.RegisterInterpolationCommand,
-            pitchcommands.RegisterToOctaveCommand,
-        )
-        for specifier in specifiers:
-            if isinstance(specifier, prototype):
-                specifier(selections)
-            else:
-                specifiers_.append(specifier)
-        return specifiers_
-
-    def _call_remaining_commands(self, selections, specifiers):
-        assert self._all_are_selections(selections), repr(selections)
-        prototype = (
-            rmakers.BeamGroupsCommand,
-            rmakers.FeatherBeamCommand,
-            rmakers.BeamCommand,
-            rmakers.UnbeamCommand,
-            rmakers.ForceRestCommand,
-            rmakers.ForceNoteCommand,
-        )
-        command_prototype = (rmakers.Command, scoping.Command, scoping.Suite)
-        for specifier in specifiers:
-            if not isinstance(specifier, prototype):
-                if not isinstance(specifier, command_prototype):
-                    message = "must be command-type:\n"
-                    message += f" {repr(specifier)}"
-                    raise Exception(message)
-            specifier(selections)
 
     def _call_rhythm_commands(self, collections, specifiers):
         selections = len(collections) * [None]
@@ -7122,13 +7053,6 @@ class MusicMaker(object):
             else:
                 specifiers_.append(specifier)
         return collections, specifiers_
-
-    def _call_tie_commands(self, selections, specifiers):
-        assert self._all_are_selections(selections), repr(selections)
-        specifiers_ = []
-        for specifier in specifiers:
-            specifiers_.append(specifier)
-        return specifiers_
 
     @staticmethod
     def _check_wellformedness(selections):
