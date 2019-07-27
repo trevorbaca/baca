@@ -7649,20 +7649,17 @@ class MusicMaker(object):
 
             Maps hairpin to each run:
 
+            >>> affix = baca.RestAffixSpecifier(
+            ...     pattern=abjad.Pattern(
+            ...         indices=[0, -1],
+            ...         inverted=True,
+            ...         ),
+            ...     prefix=[1],
+            ... )
             >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
+            ...     baca.pitch_first([1], 16, affix=affix),
             ...     rmakers.beam(),
-            ...     baca.new(
-            ...         baca.hairpin('p < f'),
-            ...         map=baca.runs(),
-            ...         ),
-            ...     baca.RestAffixSpecifier(
-            ...         pattern=abjad.Pattern(
-            ...             indices=[0, -1],
-            ...             inverted=True,
-            ...             ),
-            ...         prefix=[1],
-            ...         ),
+            ...     baca.hairpin('p < f', map=baca.runs()),
             ... )
             >>> contribution = music_maker(
             ...     'Voice_1',
@@ -8959,13 +8956,13 @@ class NestingCommand(scoping.Command):
 
             With rest affixes:
 
+            >>> affix = baca.RestAffixSpecifier(
+            ...     prefix=[2],
+            ...     suffix=[3],
+            ... )
             >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
+            ...     baca.pitch_first([1], 16, affix=affix),
             ...     baca.NestingCommand(time_treatments=['+1/16']),
-            ...     baca.RestAffixSpecifier(
-            ...         prefix=[2],
-            ...         suffix=[3],
-            ...         ),
             ...     rmakers.beam_groups(),
             ...     )
 
@@ -9197,6 +9194,8 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
 
         assert len(selections) == len(collections)
         rhythm_maker = self.rhythm_maker
+        prototype = (PitchFirstRhythmMaker,)
+        assert isinstance(rhythm_maker, prototype), repr(rhythm_maker)
         length = len(selections)
         pattern = self.pattern or abjad.index_all()
         prototype = (abjad.Segment, abjad.Set, list)
@@ -9963,6 +9962,7 @@ class PitchFirstRhythmMaker(object):
 
     __slots__ = (
         "_acciaccatura_specifiers",
+        "_affix",
         "_next_attack",
         "_next_segment",
         "_spelling",
@@ -9979,6 +9979,7 @@ class PitchFirstRhythmMaker(object):
         self,
         talea: rmakers.Talea,
         acciaccatura_specifiers=None,
+        affix: "RestAffixSpecifier" = None,
         spelling=None,
         time_treatments=None,
     ):
@@ -9987,6 +9988,12 @@ class PitchFirstRhythmMaker(object):
             for acciaccatura_specifier in acciaccatura_specifiers:
                 assert isinstance(acciaccatura_specifier, prototype)
         self._acciaccatura_specifiers = acciaccatura_specifiers
+        if affix is not None:
+            if not isinstance(affix, RestAffixSpecifier):
+                message = "must be rest affix specifier:\n"
+                message += f"   {repr(affix)}"
+                raise Exception(message)
+        self._affix = affix
         self._next_attack = 0
         self._next_segment = 0
         self._spelling = spelling
@@ -10384,6 +10391,10 @@ class PitchFirstRhythmMaker(object):
         collection_index=None,
         total_collections=None,
     ) -> typing.List[abjad.Tuplet]:
+
+        if self.affix is not None:
+            rest_affix_specifier = self.affix
+
         segment_count = len(collections)
         tuplets = []
         if collection_index is None:
@@ -10802,6 +10813,13 @@ class PitchFirstRhythmMaker(object):
         Returns acciaccatura specifiers or none.
         """
         return self._acciaccatura_specifiers
+
+    @property
+    def affix(self) -> typing.Optional["RestAffixSpecifier"]:
+        """
+        Gets rest affix specifier.
+        """
+        return self._affix
 
     @property
     def spelling(self) -> typing.Optional[rmakers.Spelling]:
@@ -12199,13 +12217,13 @@ class RestAffixSpecifier(object):
 
         Works together with negative-valued talea:
 
+        >>> affix = baca.RestAffixSpecifier(
+        ...     prefix=[2],
+        ...     suffix=[3],
+        ... )
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, -1], 16, time_treatments=[1]),
+        ...     baca.pitch_first([1, -1], 16, affix=affix, time_treatments=[1]),
         ...     rmakers.beam(),
-        ...     baca.RestAffixSpecifier(
-        ...         prefix=[2],
-        ...         suffix=[3],
-        ...         ),
         ... )
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -12272,13 +12290,13 @@ class RestAffixSpecifier(object):
             >>
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> affix = baca.RestAffixSpecifier(
+        ...     prefix=[2],
+        ...     suffix=[3],
+        ... )
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([-1, 1], 16, time_treatments=[1]),
+        ...     baca.pitch_first([-1, 1], 16, affix=affix, time_treatments=[1]),
         ...     rmakers.beam(),
-        ...     baca.RestAffixSpecifier(
-        ...         prefix=[2],
-        ...         suffix=[3],
-        ...         ),
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -12388,10 +12406,10 @@ class RestAffixSpecifier(object):
 
             With time treatments:
 
+            >>> affix = baca.RestAffixSpecifier(prefix=[1], suffix=[1])
             >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16, time_treatments=[-1]),
+            ...     baca.pitch_first([1], 16, affix=affix, time_treatments=[-1]),
             ...     rmakers.beam(),
-            ...     baca.RestAffixSpecifier(prefix=[1], suffix=[1]),
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -12501,13 +12519,13 @@ class RestAffixSpecifier(object):
 
             Treats entire figure when pattern is none:
 
+            >>> affix = baca.RestAffixSpecifier(
+            ...     prefix=[1],
+            ...     suffix=[2],
+            ... )
             >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16, time_treatments=[1]),
+            ...     baca.pitch_first([1], 16, affix=affix, time_treatments=[1]),
             ...     rmakers.beam(),
-            ...     baca.RestAffixSpecifier(
-            ...         prefix=[1],
-            ...         suffix=[2],
-            ...         ),
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -12566,13 +12584,13 @@ class RestAffixSpecifier(object):
 
             Treats entire figure (of only one segment) when pattern is none:
 
+            >>> affix = baca.RestAffixSpecifier(
+            ...     prefix=[1],
+            ...     suffix=[2],
+            ... )
             >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16, time_treatments=[1]),
+            ...     baca.pitch_first([1], 16, affix=affix, time_treatments=[1]),
             ...     rmakers.beam(),
-            ...     baca.RestAffixSpecifier(
-            ...         prefix=[1],
-            ...         suffix=[2],
-            ...         ),
             ... )
 
             >>> collections = [[18, 16, 15, 20, 19]]
@@ -12619,14 +12637,14 @@ class RestAffixSpecifier(object):
 
             Treats first segment and last segment in figure:
 
+            >>> affix = baca.RestAffixSpecifier(
+            ...     pattern=abjad.Pattern(indices=[0, -1]),
+            ...     prefix=[1],
+            ...     suffix=[2],
+            ... )
             >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16, time_treatments=[1]),
+            ...     baca.pitch_first([1], 16, affix=affix, time_treatments=[1]),
             ...     rmakers.beam(),
-            ...     baca.RestAffixSpecifier(
-            ...         pattern=abjad.Pattern(indices=[0, -1]),
-            ...         prefix=[1],
-            ...         suffix=[2],
-            ...         ),
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -12687,14 +12705,14 @@ class RestAffixSpecifier(object):
 
             Treats every segment in figure:
 
+            >>> affix = baca.RestAffixSpecifier(
+            ...     pattern=abjad.index_all(),
+            ...     prefix=[1],
+            ...     suffix=[2],
+            ... )
             >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16, time_treatments=[1]),
+            ...     baca.pitch_first([1], 16, affix=affix, time_treatments=[1]),
             ...     rmakers.beam(),
-            ...     baca.RestAffixSpecifier(
-            ...         pattern=abjad.index_all(),
-            ...         prefix=[1],
-            ...         suffix=[2],
-            ...         ),
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -12768,10 +12786,10 @@ class RestAffixSpecifier(object):
 
         ..  container:: example
 
+            >>> affix = baca.RestAffixSpecifier(prefix=[3])
             >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
+            ...     baca.pitch_first([1], 16, affix=affix),
             ...     rmakers.beam(),
-            ...     baca.RestAffixSpecifier(prefix=[3]),
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -12850,10 +12868,10 @@ class RestAffixSpecifier(object):
 
         ..  container:: example
 
+            >>> affix = baca.RestAffixSpecifier(suffix=[3])
             >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
+            ...     baca.pitch_first([1], 16, affix=affix),
             ...     rmakers.beam(),
-            ...     baca.RestAffixSpecifier(suffix=[3]),
             ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
@@ -13295,6 +13313,33 @@ def nest(time_treatments: typing.Iterable = None,) -> NestingCommand:
     if not isinstance(time_treatments, list):
         time_treatments = [time_treatments]
     return NestingCommand(lmr_specifier=None, time_treatments=time_treatments)
+
+
+def pitch_first(
+    counts: abjad.IntegerSequence,
+    denominator: int,
+    *,
+    acciaccatura_specifiers=None,
+    affix: RestAffixSpecifier = None,
+    pattern=None,
+    spelling=None,
+    thread: bool = None,
+    time_treatments=None,
+) -> PitchFirstRhythmMaker:
+    """
+    Makes pitch-first assignment.
+    """
+    return PitchFirstAssignment(
+        PitchFirstRhythmMaker(
+            rmakers.Talea(counts=counts, denominator=denominator),
+            acciaccatura_specifiers=acciaccatura_specifiers,
+            affix=affix,
+            spelling=spelling,
+            time_treatments=time_treatments,
+        ),
+        pattern=pattern,
+        thread=thread,
+    )
 
 
 def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
@@ -13771,31 +13816,3 @@ def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
 
     """
     return RestAffixSpecifier(prefix=counts, skips_instead_of_rests=True)
-
-
-### FACTORY FUNCTIONS ###
-
-
-def pitch_first(
-    counts: abjad.IntegerSequence,
-    denominator: int,
-    *,
-    acciaccatura_specifiers=None,
-    pattern=None,
-    spelling=None,
-    thread: bool = None,
-    time_treatments=None,
-) -> PitchFirstRhythmMaker:
-    """
-    Makes pitch-first assignment.
-    """
-    return PitchFirstAssignment(
-        PitchFirstRhythmMaker(
-            rmakers.Talea(counts=counts, denominator=denominator),
-            acciaccatura_specifiers=acciaccatura_specifiers,
-            spelling=spelling,
-            time_treatments=time_treatments,
-        ),
-        pattern=pattern,
-        thread=thread,
-    )

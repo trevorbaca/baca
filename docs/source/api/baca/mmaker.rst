@@ -758,6 +758,7 @@ mmaker
       __hash__
       __repr__
       acciaccatura_specifiers
+      affix
       show
       spelling
       talea
@@ -797,6 +798,8 @@ mmaker
       :class: class-header
 
    .. autoattribute:: PitchFirstRhythmMaker.acciaccatura_specifiers
+
+   .. autoattribute:: PitchFirstRhythmMaker.affix
 
    .. autoattribute:: PitchFirstRhythmMaker.spelling
 
