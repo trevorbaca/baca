@@ -9183,10 +9183,10 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
             prototype = (abjad.DurationInequality, abjad.Pattern)
             assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
+        self._thread = thread
 
         # to integrate:
         self._rest_affix_specifier = rest_affix_specifier
-        self._thread = thread
 
     ### SPECIAL METHODS ###
 
@@ -9196,7 +9196,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
             rest_affix_specifier = self.rest_affix_specifier
 
         assert len(selections) == len(collections)
-        rhythm_maker = self._make_rhythm_maker()
+        rhythm_maker = self.rhythm_maker
         length = len(selections)
         pattern = self.pattern or abjad.index_all()
         prototype = (abjad.Segment, abjad.Set, list)
@@ -9281,27 +9281,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         Gets interpreter representation of command.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
-
-    ### PRIVATE METHODS ###
-
-    def _make_rhythm_maker(self):
-        rhythm_maker = self.rhythm_maker
-        if isinstance(rhythm_maker, PitchFirstCommand):
-            rhythm_maker = rhythm_maker.rhythm_maker
-        if rhythm_maker is None:
-            rhythm_maker = rmakers.note(
-                rmakers.force_rest(classes._select().lts())
-            )
-        keywords = {}
-        if keywords:
-            rhythm_maker = abjad.new(rhythm_maker, **keywords)
-        commands = []
-        if commands:
-            assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
-            rhythm_maker = PitchFirstCommand(rhythm_maker, *commands)
-        if isinstance(self.rhythm_maker, PitchFirstCommand):
-            rhythm_maker = abjad.new(self.rhythm_maker, rhythm_maker)
-        return rhythm_maker
 
     ### PUBLIC PROPERTIES ###
 
