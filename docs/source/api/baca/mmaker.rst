@@ -649,7 +649,6 @@ mmaker
       __hash__
       __repr__
       pattern
-      rest_affix_specifier
       rhythm_maker
       thread
 
@@ -682,8 +681,6 @@ mmaker
    .. container:: inherited
 
       .. autoattribute:: PitchFirstAssignment.remember_state_across_gaps
-
-   .. autoattribute:: PitchFirstAssignment.rest_affix_specifier
 
    .. autoattribute:: PitchFirstAssignment.rhythm_maker
 

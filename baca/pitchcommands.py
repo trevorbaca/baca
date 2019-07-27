@@ -7191,10 +7191,14 @@ def displacement(
         Octave-displaces PLTs:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.displacement([0, 0, -1, -1, 1, 1]),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -7259,10 +7263,13 @@ def displacement(
         Octave-displaces chords:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([4], 16),
+        ...     baca.pitch_first(
+        ...         [4],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.displacement([0, 0, -1, -1, 1, 1]),
-        ...     baca.rests_around([2], [4]),
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -7309,13 +7316,17 @@ def displacement(
         Octave-displaces last six pitched logical ties:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.displacement(
         ...         [0, 0, -1, -1, 1, 1],
         ...         selector=baca.plts()[-6:],
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -7653,10 +7664,14 @@ def register(
         Octave-transposes all PLTs to the octave rooted at -6:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.register(-6),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -7715,11 +7730,15 @@ def register(
         Octave-transposes PLTs in tuplet 1 to the octave rooted at -6:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.color(selector=baca.tuplet(1)),
         ...     baca.register(-6, selector=baca.tuplet(1)),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -7787,10 +7806,14 @@ def register(
         Octave-transposes all PLTs to an octave interpolated from -6 to 18:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.register(-6, 18),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -7850,11 +7873,15 @@ def register(
         -6 to 18:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.color(selector=baca.tuplet(1)),
         ...     baca.register(-6, 18, selector=baca.tuplet(1)),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(

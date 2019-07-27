@@ -2740,14 +2740,17 @@ class ImbricationCommand(scoping.Command):
             Works with rests:
 
             >>> music_maker = baca.MusicMaker(
-            ...     baca.pitch_first([1], 16),
+            ...     baca.pitch_first(
+            ...         [1],
+            ...         16,
+            ...         affix=baca.rests_around([2], [2]),
+            ...     ),
             ...     rmakers.beam_groups(),
             ...     baca.imbricate(
             ...         'Voice_1',
             ...         [2, 19, 9, 18, 16],
             ...         rmakers.beam_groups(),
             ...     ),
-            ...     baca.rests_around([2], [2]),
             ... )
 
             >>> collections = [
@@ -7037,26 +7040,17 @@ class MusicMaker(object):
 
     def _call_rhythm_commands(self, collections, specifiers):
         selections = len(collections) * [None]
-        assignments, rest_affix_specifiers, specifiers_ = [], [], []
+        assignments, specifiers_ = [], []
         for specifier in specifiers:
             if isinstance(specifier, PitchFirstAssignment):
                 assignments.append(specifier)
             elif isinstance(specifier, PitchFirstRhythmMaker):
                 assignment = PitchFirstAssignment(specifier)
                 assignments.append(assignment)
-            elif isinstance(specifier, RestAffixSpecifier):
-                rest_affix_specifiers.append(specifier)
             else:
                 specifiers_.append(specifier)
         if not assignments:
             raise Exception("must provide pitch-first assignment.")
-        if not rest_affix_specifiers:
-            rest_affix_specifier = None
-        elif len(rest_affix_specifiers) == 1:
-            rest_affix_specifier = rest_affix_specifiers[0]
-        else:
-            message = f"max 1 rest affix specifier: {rest_affix_specifiers!r}."
-            raise Exception(message)
         # TODO: activate:
         #        if 1 < len(assignments):
         #            assert len(assignments) == 2, repr(assignments)
@@ -7066,11 +7060,7 @@ class MusicMaker(object):
         #            raise Exception(message)
         for assignment in assignments:
             assert isinstance(assignment, PitchFirstAssignment)
-            assignment(
-                collections=collections,
-                selections=selections,
-                rest_affix_specifier=rest_affix_specifier,
-            )
+            assignment(collections=collections, selections=selections)
         return selections, specifiers_
 
     def _call_tie_commands(self, selections, specifiers):
@@ -9155,12 +9145,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
 
     ### CLASS ATTRIBUTES ###
 
-    __slots__ = (
-        "_pattern",
-        "_rest_affix_specifier",
-        "_rhythm_maker",
-        "_thread",
-    )
+    __slots__ = ("_pattern", "_rhythm_maker", "_thread")
 
     _publish_storage_format = True
 
@@ -9171,7 +9156,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         rhythm_maker: "PitchFirstRhythmMaker",
         *,
         pattern=None,
-        rest_affix_specifier=None,
         thread=None,
     ) -> None:
         assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
@@ -9182,16 +9166,9 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         self._pattern = pattern
         self._thread = thread
 
-        # to integrate:
-        self._rest_affix_specifier = rest_affix_specifier
-
     ### SPECIAL METHODS ###
 
-    def __call__(self, collections, selections, rest_affix_specifier=None):
-
-        if self.rest_affix_specifier is not None:
-            rest_affix_specifier = self.rest_affix_specifier
-
+    def __call__(self, collections, selections):
         assert len(selections) == len(collections)
         rhythm_maker = self.rhythm_maker
         prototype = (PitchFirstRhythmMaker,)
@@ -9211,16 +9188,13 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
             collections_.append(collection_)
             indices.append(index)
         if self.thread:
-            stage_selections = rhythm_maker(
-                collections_, rest_affix_specifier=rest_affix_specifier
-            )
+            stage_selections = rhythm_maker(collections_)
         else:
             stage_selections = []
             total_collections = len(collections_)
             for collection_index, collection_ in enumerate(collections_):
                 stage_selections_ = rhythm_maker(
                     [collection_],
-                    rest_affix_specifier=rest_affix_specifier,
                     collection_index=collection_index,
                     total_collections=total_collections,
                 )
@@ -9298,10 +9272,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         Gets rhythm-maker.
         """
         return self._rhythm_maker
-
-    @property
-    def rest_affix_specifier(self):
-        return self._rest_affix_specifier
 
     @property
     def thread(self):
@@ -9482,7 +9452,6 @@ class PitchFirstCommand(object):
         self,
         collections,
         collection_index=None,
-        rest_affix_specifier=None,
         state=None,
         total_collections=None,
     ) -> abjad.Selection:
@@ -9498,7 +9467,6 @@ class PitchFirstCommand(object):
         tuplets = rhythm_maker(
             collections,
             collection_index=collection_index,
-            rest_affix_specifier=rest_affix_specifier,
             state=state,
             total_collections=total_collections,
         )
@@ -10013,7 +9981,6 @@ class PitchFirstRhythmMaker(object):
         self,
         collections,
         collection_index=None,
-        rest_affix_specifier=None,
         state=None,
         total_collections=None,
     ) -> abjad.Selection:
@@ -10125,7 +10092,6 @@ class PitchFirstRhythmMaker(object):
         self._apply_state(state=state)
         tuplets = self._make_music(
             collections,
-            rest_affix_specifier=rest_affix_specifier,
             collection_index=collection_index,
             total_collections=total_collections,
         )
@@ -10385,25 +10351,17 @@ class PitchFirstRhythmMaker(object):
         return multipliers
 
     def _make_music(
-        self,
-        collections,
-        rest_affix_specifier=None,
-        collection_index=None,
-        total_collections=None,
+        self, collections, collection_index=None, total_collections=None
     ) -> typing.List[abjad.Tuplet]:
-
-        if self.affix is not None:
-            rest_affix_specifier = self.affix
-
         segment_count = len(collections)
         tuplets = []
         if collection_index is None:
             for i, segment in enumerate(collections):
-                if rest_affix_specifier is not None:
-                    result = rest_affix_specifier(i, segment_count)
+                if self.affix is not None:
+                    result = self.affix(i, segment_count)
                     rest_prefix, rest_suffix = result
                     affix_skips_instead_of_rests = (
-                        rest_affix_specifier.skips_instead_of_rests
+                        self.affix.skips_instead_of_rests
                     )
                 else:
                     rest_prefix, rest_suffix = None, None
@@ -10419,13 +10377,11 @@ class PitchFirstRhythmMaker(object):
         else:
             assert len(collections) == 1, repr(collections)
             segment = collections[0]
-            if rest_affix_specifier is not None:
-                result = rest_affix_specifier(
-                    collection_index, total_collections
-                )
+            if self.affix is not None:
+                result = self.affix(collection_index, total_collections)
                 rest_prefix, rest_suffix = result
                 affix_skips_instead_of_rests = (
-                    rest_affix_specifier.skips_instead_of_rests
+                    self.affix.skips_instead_of_rests
                 )
             else:
                 rest_prefix, rest_suffix = None, None
@@ -12998,14 +12954,18 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         Coats pitches:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.imbricate(
         ...         'Voice_2',
         ...         [baca.coat(0), baca.coat(2), 10, 0, 2],
         ...         rmakers.beam_groups(),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -13117,9 +13077,13 @@ def imbricate(
         Imbricates segment:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...         ),
         ...     baca.imbricate('Voice_2', [10, 20, 19]),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     ordered_commands=[rmakers.beam()],
         ... )
@@ -13240,10 +13204,14 @@ def nest(time_treatments: typing.Iterable = None,) -> NestingCommand:
     ..  container:: example
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.nest('+4/16'),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -13349,9 +13317,13 @@ def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
     ..  container:: example
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_after([2]),
+        ...         time_treatments=[-1],
+        ...         ),
         ...     rmakers.beam(),
-        ...     baca.rests_after([2]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -13426,9 +13398,13 @@ def rests_around(
     ..  container:: example
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [2]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
-        ...     baca.rests_around([2], [2]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -13502,9 +13478,13 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
     ..  container:: example
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_before([2]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
-        ...     baca.rests_before([2]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -13595,9 +13575,13 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
     ..  container:: example
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.skips_after([2]),
+        ...         time_treatments=[-1],
+        ...         ),
         ...     rmakers.beam(),
-        ...     baca.skips_after([2]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -13672,9 +13656,13 @@ def skips_around(
     ..  container:: example
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.skips_around([2], [2]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
-        ...     baca.skips_around([2], [2]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -13750,9 +13738,13 @@ def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
     ..  container:: example
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.skips_before([2]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
-        ...     baca.skips_before([2]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(

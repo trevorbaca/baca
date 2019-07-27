@@ -23,10 +23,14 @@ def accent(
         Attaches accent to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.accent(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -88,13 +92,17 @@ def accent(
         Attaches accent to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.accent(selector=baca.pheads()),
         ...         map=baca.tuplet(1),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -178,10 +186,14 @@ def alternate_bow_strokes(
         Attaches alternate bow strokes to pitched heads (down-bow first):
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.alternate_bow_strokes(downbow_first=True),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -251,10 +263,14 @@ def alternate_bow_strokes(
         Attaches alternate bow strokes to pitched heads (up-bow first):
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.alternate_bow_strokes(downbow_first=False),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(6),
         ... )
         >>> contribution = music_maker(
@@ -324,10 +340,14 @@ def alternate_bow_strokes(
         Attaches alternate full bow strokes to pitched heads:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.alternate_bow_strokes(full=True),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(6),
         ... )
         >>> contribution = music_maker(
@@ -625,10 +645,14 @@ def clef(
         Attaches clef to leaf 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.clef('alto'),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(7),
         ... )
         >>> contribution = music_maker(
@@ -690,13 +714,17 @@ def clef(
         Attaches clef to leaf 0 in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.clef(
         ...         clef='alto',
         ...         selector=baca.tuplets()[1:2].leaf(0),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(7),
         ... )
         >>> contribution = music_maker(
@@ -776,10 +804,14 @@ def double_staccato(
         Attaches double-staccato to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.double_staccato(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -841,13 +873,17 @@ def double_staccato(
         Attaches double-staccato to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.double_staccato(selector=baca.pheads()),
         ...         map=baca.tuplet(1),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -1090,10 +1126,14 @@ def down_bow(
         Attaches down-bow to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.down_bow(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -1155,13 +1195,17 @@ def down_bow(
         Attaches full down-bow to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.down_bow(
         ...         full=True,
         ...         selector=baca.tuplets()[1:2].pheads(),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -1245,10 +1289,14 @@ def espressivo(
         Attaches espressivo to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.espressivo(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -1310,13 +1358,17 @@ def espressivo(
         Attaches espressivo to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.espressivo(selector=baca.pheads()),
         ...         map=baca.tuplet(1),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -1399,10 +1451,14 @@ def fermata(
         Attaches fermata to first leaf:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.fermata(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -1464,10 +1520,14 @@ def fermata(
         Attaches fermata to first leaf in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.fermata(selector=baca.tuplets()[1:2].phead(0)),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -1545,10 +1605,14 @@ def flageolet(
         Attaches flageolet to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.flageolet(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -1610,13 +1674,17 @@ def flageolet(
         Attaches flageolet to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.flageolet(selector=baca.pheads()),
         ...         map=baca.tuplet(1),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -1840,10 +1908,14 @@ def laissez_vibrer(
         Attaches laissez vibrer to PLT tail 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.laissez_vibrer(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -1905,13 +1977,17 @@ def laissez_vibrer(
         Attaches laissez vibrer to pitched tails in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.laissez_vibrer(selector=baca.ptails()),
         ...         map=baca.tuplet(1),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -2009,10 +2085,14 @@ def long_fermata(
         Attaches long fermata to first leaf:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.long_fermata(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -2074,10 +2154,14 @@ def long_fermata(
         Attaches long fermata to first leaf in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.long_fermata(selector=baca.tuplets()[1:2].phead(0)),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -2155,10 +2239,14 @@ def marcato(
         Attaches marcato to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.marcato(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -2220,13 +2308,17 @@ def marcato(
         Attaches marcato to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.marcato(selector=baca.pheads()),
         ...         map=baca.tuplet(1),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -2482,10 +2574,14 @@ def parenthesize(
         Attaches parenthesize command to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.parenthesize(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -2596,13 +2692,17 @@ def repeat_tie(
         Attaches repeat-tie to pitched head 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.chunk(
         ...         baca.pitch(0, selector=baca.plt(1)),
         ...         baca.repeat_tie(baca.phead(1)),
         ...     ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -2683,10 +2783,14 @@ def short_fermata(
         Attaches short fermata to first leaf:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.short_fermata(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -2748,12 +2852,16 @@ def short_fermata(
         Attaches short fermata to first leaf in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.short_fermata(
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -2831,10 +2939,14 @@ def staccatissimo(
         Attaches staccatissimo to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.staccatissimo(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -2896,13 +3008,17 @@ def staccatissimo(
         Attaches staccatissimo to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.staccatissimo(selector=baca.pheads()),
         ...         map=baca.tuplet(1),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -2984,10 +3100,14 @@ def staccato(
         Attaches staccato to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.staccato(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -3049,13 +3169,17 @@ def staccato(
         Attaches staccato to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.staccato(selector=baca.pheads()),
         ...         map=baca.tuplet(1),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -3879,9 +4003,13 @@ def stem_tremolo(
         Attaches stem tremolo to pitched leaf 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.stem_tremolo(),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
@@ -3944,9 +4072,13 @@ def stem_tremolo(
         Attaches stem tremolo to pitched leaves in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.new(
         ...         baca.stem_tremolo(selector=baca.pleaves()),
         ...         map=baca.tuplet(1),
@@ -4033,10 +4165,14 @@ def stop_on_string(
         Attaches stop-on-string to pitched head -1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.stop_on_string(selector=baca.pleaf(-1)),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -4137,10 +4273,14 @@ def stopped(
         Attaches stopped +-sign to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.stopped(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -4216,13 +4356,17 @@ def tie(
         Attaches tie to pitched tail 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.chunk(
         ...         baca.pitch(2, selector=baca.plt(0)),
         ...         baca.tie(baca.ptail(0)),
         ...     ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -4298,9 +4442,13 @@ def tenuto(
         Attaches tenuto to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tenuto(),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
@@ -4363,13 +4511,17 @@ def tenuto(
         Attaches tenuto to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.tenuto(selector=baca.pheads()),
         ...         map=baca.tuplet(1),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -4629,9 +4781,13 @@ def up_bow(
         Attaches up-bow to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     baca.up_bow(),
         ... )
@@ -4694,13 +4850,17 @@ def up_bow(
         Attaches full up-bow to pitched heads in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.up_bow(
         ...         full=True,
         ...         selector=baca.tuplets()[1:2].pheads(),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -4784,10 +4944,14 @@ def very_long_fermata(
         Attaches very long fermata to first leaf:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.very_long_fermata(),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -4849,12 +5013,16 @@ def very_long_fermata(
         Attaches very long fermata to first leaf in tuplet 1:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.very_long_fermata(
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(

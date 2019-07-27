@@ -670,10 +670,14 @@ def dynamic(
         Attaches dynamic to pitched head 0:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.dynamic('f'),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
@@ -735,10 +739,14 @@ def dynamic(
         Works with effort dynamics:
 
         >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1, 1, 5, -1], 16, time_treatments=[-1]),
+        ...     baca.pitch_first(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         time_treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.dynamic('"f"'),
-        ...     baca.rests_around([2], [4]),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
         >>> contribution = music_maker(
