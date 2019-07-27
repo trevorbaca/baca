@@ -484,7 +484,6 @@ mmaker
       show
       specifiers
       tag
-      tuplet_force_fraction
 
    .. raw:: html
 
@@ -536,8 +535,6 @@ mmaker
    .. autoattribute:: MusicMaker.specifiers
 
    .. autoattribute:: MusicMaker.tag
-
-   .. autoattribute:: MusicMaker.tuplet_force_fraction
 
 .. autoclass:: NestingCommand
 
@@ -656,7 +653,6 @@ mmaker
       rhythm_maker
       thread
       time_treatments
-      tuplet_force_fraction
 
    .. raw:: html
 
@@ -695,8 +691,6 @@ mmaker
    .. autoattribute:: PitchFirstAssignment.thread
 
    .. autoattribute:: PitchFirstAssignment.time_treatments
-
-   .. autoattribute:: PitchFirstAssignment.tuplet_force_fraction
 
 .. autoclass:: PitchFirstCommand
 

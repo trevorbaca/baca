@@ -6769,7 +6769,6 @@ class MusicMaker(object):
         "_figure_name",
         "_hide_time_signature",
         "_tag",
-        "_tuplet_force_fraction",
     )
 
     # to make sure abjad.new() copies specifiers
@@ -6792,7 +6791,6 @@ class MusicMaker(object):
         hide_time_signature=None,
         ordered_commands: typing.Sequence = None,
         tag: str = "baca.MusicMaker.__call__",
-        tuplet_force_fraction=None,
     ):
         specifiers_ = classes.Sequence(specifiers)
         specifiers_ = specifiers_.flatten()
@@ -6813,7 +6811,6 @@ class MusicMaker(object):
             ordered_commands = list(ordered_commands)
         self._ordered_commands = ordered_commands
         self._tag = tag
-        self._tuplet_force_fraction = tuplet_force_fraction
 
     ### SPECIAL METHODS ###
 
@@ -7073,7 +7070,6 @@ class MusicMaker(object):
                 collections=collections,
                 selections=selections,
                 rest_affix_specifier=rest_affix_specifier,
-                tuplet_force_fraction=self.tuplet_force_fraction,
             )
         return selections, specifiers_
 
@@ -8825,10 +8821,6 @@ class MusicMaker(object):
     def tag(self):
         return self._tag
 
-    @property
-    def tuplet_force_fraction(self):
-        return self._tuplet_force_fraction
-
     ### PUBLIC METHODS ###
 
     @staticmethod
@@ -9172,7 +9164,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         "_rhythm_maker",
         "_thread",
         "_time_treatments",
-        "_tuplet_force_fraction",
     )
 
     _publish_storage_format = True
@@ -9187,7 +9178,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         rest_affix_specifier=None,
         thread=None,
         time_treatments=None,
-        tuplet_force_fraction=None,
     ) -> None:
         assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
         self._rhythm_maker = rhythm_maker
@@ -9200,7 +9190,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         self._rest_affix_specifier = rest_affix_specifier
         self._thread = thread
         self._time_treatments = time_treatments
-        self._tuplet_force_fraction = tuplet_force_fraction
 
     ### SPECIAL METHODS ###
 
@@ -9210,21 +9199,15 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         selections,
         rest_affix_specifier=None,
         time_treatments=None,
-        tuplet_force_fraction=None,
     ):
 
         if self.rest_affix_specifier is not None:
             rest_affix_specifier = self.rest_affix_specifier
         if self.time_treatments is not None:
             time_treatments = self.time_treatments
-        if self.tuplet_force_fraction is not None:
-            tuplet_force_fraction = self.tuplet_force_fraction
 
         assert len(selections) == len(collections)
-        rhythm_maker = self._make_rhythm_maker(
-            time_treatments=time_treatments,
-            tuplet_force_fraction=tuplet_force_fraction,
-        )
+        rhythm_maker = self._make_rhythm_maker(time_treatments=time_treatments)
         length = len(selections)
         pattern = self.pattern or abjad.index_all()
         prototype = (abjad.Segment, abjad.Set, list)
@@ -9312,9 +9295,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
 
     ### PRIVATE METHODS ###
 
-    def _make_rhythm_maker(
-        self, time_treatments=None, tuplet_force_fraction=None
-    ):
+    def _make_rhythm_maker(self, time_treatments=None):
         rhythm_maker = self.rhythm_maker
         if isinstance(rhythm_maker, PitchFirstCommand):
             rhythm_maker = rhythm_maker.rhythm_maker
@@ -9328,9 +9309,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         if keywords:
             rhythm_maker = abjad.new(rhythm_maker, **keywords)
         commands = []
-        if tuplet_force_fraction is True:
-            command = rmakers.force_fraction()
-            commands.append(command)
         if commands:
             assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
             rhythm_maker = PitchFirstCommand(rhythm_maker, *commands)
@@ -9481,10 +9459,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
     @property
     def time_treatments(self):
         return self._time_treatments
-
-    @property
-    def tuplet_force_fraction(self):
-        return self._tuplet_force_fraction
 
 
 class PitchFirstCommand(object):
