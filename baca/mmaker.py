@@ -9163,7 +9163,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         "_rest_affix_specifier",
         "_rhythm_maker",
         "_thread",
-        "_time_treatments",
     )
 
     _publish_storage_format = True
@@ -9177,7 +9176,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         pattern=None,
         rest_affix_specifier=None,
         thread=None,
-        time_treatments=None,
     ) -> None:
         assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
         self._rhythm_maker = rhythm_maker
@@ -9189,25 +9187,16 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         # to integrate:
         self._rest_affix_specifier = rest_affix_specifier
         self._thread = thread
-        self._time_treatments = time_treatments
 
     ### SPECIAL METHODS ###
 
-    def __call__(
-        self,
-        collections,
-        selections,
-        rest_affix_specifier=None,
-        time_treatments=None,
-    ):
+    def __call__(self, collections, selections, rest_affix_specifier=None):
 
         if self.rest_affix_specifier is not None:
             rest_affix_specifier = self.rest_affix_specifier
-        if self.time_treatments is not None:
-            time_treatments = self.time_treatments
 
         assert len(selections) == len(collections)
-        rhythm_maker = self._make_rhythm_maker(time_treatments=time_treatments)
+        rhythm_maker = self._make_rhythm_maker()
         length = len(selections)
         pattern = self.pattern or abjad.index_all()
         prototype = (abjad.Segment, abjad.Set, list)
@@ -9295,7 +9284,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
 
     ### PRIVATE METHODS ###
 
-    def _make_rhythm_maker(self, time_treatments=None):
+    def _make_rhythm_maker(self):
         rhythm_maker = self.rhythm_maker
         if isinstance(rhythm_maker, PitchFirstCommand):
             rhythm_maker = rhythm_maker.rhythm_maker
@@ -9304,8 +9293,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
                 rmakers.force_rest(classes._select().lts())
             )
         keywords = {}
-        if time_treatments is not None:
-            keywords["time_treatments"] = time_treatments
         if keywords:
             rhythm_maker = abjad.new(rhythm_maker, **keywords)
         commands = []
@@ -9455,10 +9442,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         """
         return self._thread
         self._thread
-
-    @property
-    def time_treatments(self):
-        return self._time_treatments
 
 
 class PitchFirstCommand(object):

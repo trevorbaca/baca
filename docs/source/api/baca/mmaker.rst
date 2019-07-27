@@ -652,7 +652,6 @@ mmaker
       rest_affix_specifier
       rhythm_maker
       thread
-      time_treatments
 
    .. raw:: html
 
@@ -689,8 +688,6 @@ mmaker
    .. autoattribute:: PitchFirstAssignment.rhythm_maker
 
    .. autoattribute:: PitchFirstAssignment.thread
-
-   .. autoattribute:: PitchFirstAssignment.time_treatments
 
 .. autoclass:: PitchFirstCommand
 
