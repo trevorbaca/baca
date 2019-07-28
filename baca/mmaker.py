@@ -5790,41 +5790,50 @@ class MusicAccumulator(object):
                 assert not hasattr(specifier, "remote_voice_name"), repr(
                     specifier
                 )
-        if "anchor" in keywords:
+        anchor = keywords.pop("anchor", None)
+        if anchor is not None:
             voice_name_ = self.score_template.voice_abbreviations.get(
-                keywords["anchor"].remote_voice_name,
-                keywords["anchor"].remote_voice_name,
+                anchor.remote_voice_name, anchor.remote_voice_name
             )
-            keywords["anchor"]._remote_voice_name = voice_name_
+            anchor._remote_voice_name = voice_name_
         keywords["figure_index"] = self._figure_index
         music_maker = abjad.new(music_maker, *all_specifiers, **keywords)
-        music_contribution = music_maker(voice_name, collections)
-        self._cache_figure_name(music_contribution)
-        self._cache_floating_selection(music_contribution)
-        self._cache_time_signature(music_contribution)
+        contribution = music_maker(voice_name, collections)
+        # hide_time_signature = keywords.get("hide_time_signature", None)
+        # figure_name = keywords.get("figure_name", None)
+        contribution = MusicContribution(
+            anchor=anchor,
+            color_selector=contribution.color_selector,
+            color_selector_result=contribution.color_selector_result,
+            figure_name=keywords.get("figure_name", None),
+            hide_time_signature=keywords.get("hide_time_signature", None),
+            selections=contribution.selections,
+            time_signature=contribution.time_signature,
+        )
+        self._cache_figure_name(contribution)
+        self._cache_floating_selection(contribution)
+        self._cache_time_signature(contribution)
         self._figure_index += 1
 
     ### PRIVATE METHODS ###
 
-    def _cache_figure_name(self, music_contribution):
-        if music_contribution.figure_name is None:
+    def _cache_figure_name(self, contribution):
+        if contribution.figure_name is None:
             return
-        if music_contribution.figure_name in self._figure_names:
-            name = music_contribution.figure_name
+        if contribution.figure_name in self._figure_names:
+            name = contribution.figure_name
             raise Exception(f"duplicate figure name: {name!r}.")
-        self._figure_names.append(music_contribution.figure_name)
+        self._figure_names.append(contribution.figure_name)
 
-    def _cache_floating_selection(self, music_contribution):
-        for voice_name in music_contribution:
+    def _cache_floating_selection(self, contribution):
+        for voice_name in contribution:
             voice_name = self.score_template.voice_abbreviations.get(
                 voice_name, voice_name
             )
-            selection = music_contribution[voice_name]
+            selection = contribution[voice_name]
             if not selection:
                 continue
-            start_offset = self._get_start_offset(
-                selection, music_contribution
-            )
+            start_offset = self._get_start_offset(selection, contribution)
             stop_offset = start_offset + abjad.inspect(selection).duration()
             timespan = abjad.Timespan(start_offset, stop_offset)
             floating_selection = abjad.AnnotatedTimespan(
@@ -5836,18 +5845,18 @@ class MusicAccumulator(object):
         self._current_offset = stop_offset
         self._score_stop_offset = max(self._score_stop_offset, stop_offset)
 
-    def _cache_time_signature(self, music_contribution):
-        if music_contribution.hide_time_signature:
+    def _cache_time_signature(self, contribution):
+        if contribution.hide_time_signature:
             return
         if (
-            music_contribution.anchor is None
-            or music_contribution.hide_time_signature is False
+            contribution.anchor is None
+            or contribution.hide_time_signature is False
             or (
-                music_contribution.anchor
-                and music_contribution.anchor.remote_voice_name is None
+                contribution.anchor
+                and contribution.anchor.remote_voice_name is None
             )
         ):
-            self.time_signatures.append(music_contribution.time_signature)
+            self.time_signatures.append(contribution.time_signature)
 
     def _get_figure_start_offset(self, figure_name):
         for voice_name in sorted(self._floating_selections.keys()):
@@ -5889,21 +5898,19 @@ class MusicAccumulator(object):
         leaf_stop_offset = leaf_start_offset + leaf_duration
         return abjad.Timespan(leaf_start_offset, leaf_stop_offset)
 
-    def _get_start_offset(self, selection, music_contribution):
+    def _get_start_offset(self, selection, contribution):
         if (
-            music_contribution.anchor is not None
-            and music_contribution.anchor.figure_name is not None
+            contribution.anchor is not None
+            and contribution.anchor.figure_name is not None
         ):
-            figure_name = music_contribution.anchor.figure_name
+            figure_name = contribution.anchor.figure_name
             start_offset = self._get_figure_start_offset(figure_name)
             return start_offset
         anchored = False
-        if music_contribution.anchor is not None:
-            remote_voice_name = music_contribution.anchor.remote_voice_name
-            remote_selector = music_contribution.anchor.remote_selector
-            use_remote_stop_offset = (
-                music_contribution.anchor.use_remote_stop_offset
-            )
+        if contribution.anchor is not None:
+            remote_voice_name = contribution.anchor.remote_voice_name
+            remote_selector = contribution.anchor.remote_selector
+            use_remote_stop_offset = contribution.anchor.use_remote_stop_offset
             anchored = True
         else:
             remote_voice_name = None
@@ -5927,8 +5934,8 @@ class MusicAccumulator(object):
         else:
             remote_anchor_offset = timespan.start_offset
         local_anchor_offset = abjad.Offset(0)
-        if music_contribution.anchor is not None:
-            local_selector = music_contribution.anchor.local_selector
+        if contribution.anchor is not None:
+            local_selector = contribution.anchor.local_selector
         else:
             local_selector = None
         if local_selector is not None:
@@ -6056,6 +6063,7 @@ class MusicContribution(object):
         ] = None,
         figure_name: str = None,
         hide_time_signature: bool = None,
+        # TODO: change name to voice_to_selection
         selections: typing.Dict[str, abjad.Selection] = None,
         time_signature: abjad.TimeSignature = None,
     ):
@@ -6072,7 +6080,7 @@ class MusicContribution(object):
             )
         self._color_selector_result = color_selector_result
         if figure_name is not None:
-            assert isinstance(figure_name, str), repr(figure_name)
+            figure_name = str(figure_name)
         self._figure_name = figure_name
         if hide_time_signature is not None:
             hide_time_signature = bool(hide_time_signature)
@@ -6995,11 +7003,8 @@ class MusicMaker(object):
             if self.tag is not None:
                 rhythmcommands.tag_selection(value, self.tag)
         return MusicContribution(
-            anchor=self.anchor,
             color_selector=color_selector,
             color_selector_result=color_selector_result,
-            figure_name=self.figure_name,
-            hide_time_signature=self.hide_time_signature,
             selections=voice_to_selection,
             time_signature=time_signature,
         )
