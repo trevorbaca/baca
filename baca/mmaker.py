@@ -5797,6 +5797,7 @@ class MusicAccumulator(object):
             )
             anchor._remote_voice_name = voice_name_
         keywords["figure_index"] = self._figure_index
+        hide_time_signature = keywords.pop("hide_time_signature", None)
         music_maker = abjad.new(music_maker, *all_specifiers, **keywords)
         contribution = music_maker(voice_name, collections)
         contribution = MusicContribution(
@@ -5804,7 +5805,7 @@ class MusicAccumulator(object):
             color_selector=contribution.color_selector,
             color_selector_result=contribution.color_selector_result,
             figure_name=keywords.get("figure_name", None),
-            hide_time_signature=keywords.get("hide_time_signature", None),
+            hide_time_signature=hide_time_signature,
             time_signature=contribution.time_signature,
             voice_to_selection=contribution.voice_to_selection,
         )
@@ -6862,12 +6863,10 @@ class MusicMaker(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        "_anchor",
         "_commands",
         "_extend_beam",
         "_figure_index",
         "_figure_name",
-        "_hide_time_signature",
         "_next_figure",
         "_signature",
         "_tag",
@@ -6886,18 +6885,13 @@ class MusicMaker(object):
     def __init__(
         self,
         *commands,
-        anchor: AnchorSpecifier = None,
         extend_beam: bool = None,
         figure_index: int = None,
         figure_name: str = None,
-        hide_time_signature: bool = None,
         signature: int = None,
         tag: str = "baca.MusicMaker.__call__",
     ) -> None:
         self._commands = list(commands)
-        if anchor is not None:
-            assert isinstance(anchor, AnchorSpecifier)
-        self._anchor = anchor
         if extend_beam is not None:
             extend_beam = bool(extend_beam)
         self._extend_beam = extend_beam
@@ -6907,9 +6901,6 @@ class MusicMaker(object):
         if figure_name is not None:
             figure_name = str(figure_name)
         self._figure_name = figure_name
-        if hide_time_signature is not None:
-            hide_time_signature = bool(hide_time_signature)
-        self._hide_time_signature = hide_time_signature
         self._next_figure = 0
         if signature is not None:
             assert isinstance(signature, int)
@@ -7102,13 +7093,6 @@ class MusicMaker(object):
         )
 
     ### PUBLIC PROPERTIES ###
-
-    @property
-    def anchor(self) -> typing.Optional[AnchorSpecifier]:
-        """
-        Gets anchor specifier.
-        """
-        return self._anchor
 
     @property
     def commands(self) -> typing.List:
@@ -8510,10 +8494,6 @@ class MusicMaker(object):
     @property
     def figure_name(self) -> typing.Optional[str]:
         return self._figure_name
-
-    @property
-    def hide_time_signature(self) -> typing.Optional[bool]:
-        return self._hide_time_signature
 
     @property
     def signature(self) -> typing.Optional[int]:

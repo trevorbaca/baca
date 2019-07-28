@@ -408,12 +408,10 @@ mmaker
       __format__
       __hash__
       __repr__
-      anchor
       commands
       extend_beam
       figure_index
       figure_name
-      hide_time_signature
       signature
       tag
 
@@ -441,8 +439,6 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: MusicMaker.anchor
-
    .. autoattribute:: MusicMaker.commands
 
    .. autoattribute:: MusicMaker.extend_beam
@@ -450,8 +446,6 @@ mmaker
    .. autoattribute:: MusicMaker.figure_index
 
    .. autoattribute:: MusicMaker.figure_name
-
-   .. autoattribute:: MusicMaker.hide_time_signature
 
    .. autoattribute:: MusicMaker.signature
 
