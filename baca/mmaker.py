@@ -13,6 +13,8 @@ from . import scoping
 from . import spannercommands
 from . import typings
 
+_commands = commands
+
 
 ### CLASSES ###
 
@@ -145,11 +147,11 @@ class AcciaccaturaSpecifier(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, collection=None):
+    def __call__(
+        self, collection: typing.Union[list, abjad.Segment] = None
+    ) -> typing.Tuple[abjad.AcciaccaturaContainer, list]:
         """
         Calls acciaccatura specifier on ``collection``.
-
-        Returns acciaccatura container together with new collection.
         """
         prototype = (list, abjad.Segment)
         assert isinstance(collection, prototype), repr(collection)
@@ -158,7 +160,7 @@ class AcciaccaturaSpecifier(object):
         segment_parts = [_ for _ in segment_parts if _]
         collection = [_[-1] for _ in segment_parts]
         durations = self._get_durations()
-        acciaccatura_containers = []
+        acciaccatura_containers: typing.List[abjad.AcciaccaturaContainer] = []
         maker = abjad.LeafMaker()
         for segment_part in segment_parts:
             if len(segment_part) <= 1:
@@ -173,6 +175,7 @@ class AcciaccaturaSpecifier(object):
                 )
             acciaccatura_containers.append(acciaccatura_container)
         assert len(acciaccatura_containers) == len(collection)
+        assert isinstance(collection, list), repr(collection)
         return acciaccatura_containers, collection
 
     ### PRIVATE METHODS ###
@@ -2030,7 +2033,7 @@ class Imbrication(object):
         self, container: abjad.Container = None
     ) -> typing.Dict[str, abjad.Selection]:
         r"""
-        Calls command on ``container``.
+        Calls imbrication on ``container``.
 
         ..  container:: example
 
@@ -2996,7 +2999,7 @@ class Imbrication(object):
             )
             if isinstance(specifier, prototype):
                 rmakers.unbeam()(selections)
-            if isinstance(specifier, NestingCommand):
+            if isinstance(specifier, Nesting):
                 nested_selections = specifier(selections)
             else:
                 specifier(selections)
@@ -4820,17 +4823,18 @@ class LMRSpecifier(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, sequence=None):
+    def __call__(
+        self, sequence: typing.Union[list, abjad.Segment] = None
+    ) -> typing.List[abjad.Sequence]:
         """
         Calls LMR specifier on ``sequence``.
-
-        Returns list of subsequences.
         """
+        assert isinstance(sequence, (list, abjad.Segment)), repr(sequence)
         top_lengths = self._get_top_lengths(len(sequence))
         top_parts = abjad.sequence(sequence).partition_by_counts(
             top_lengths, cyclic=False, overhang=abjad.Exact
         )
-        parts = []
+        parts: typing.List[abjad.Sequence] = []
         left_part, middle_part, right_part = top_parts
         if left_part:
             if self.left_counts:
@@ -4865,6 +4869,8 @@ class LMRSpecifier(object):
                 parts.extend(parts_)
             else:
                 parts.append(right_part)
+        assert isinstance(parts, list), repr(parts)
+        assert all(isinstance(_, abjad.Sequence) for _ in parts)
         return parts
 
     ### PRIVATE METHODS ###
@@ -5659,7 +5665,15 @@ class MusicAccumulator(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, voice_name, collections, *specifiers, **keywords):
+    def __call__(
+        self,
+        voice_name: str,
+        collections: typing.Union[
+            list, str, abjad.Segment, pitchclasses.CollectionList
+        ],
+        *specifiers,
+        **keywords,
+    ) -> None:
         r"""
         Calls music-accumulator.
 
@@ -5692,17 +5706,16 @@ class MusicAccumulator(object):
                 ...
             Exception: duplicate figure name: 'D'.
 
-        Returns none.
         """
         specifiers = specifiers or ()
-        specifiers = list(specifiers)
-        if specifiers and isinstance(specifiers[0], MusicMaker):
-            music_maker = specifiers[0]
-            specifiers.pop(0)
+        specifiers_list = list(specifiers)
+        if specifiers_list and isinstance(specifiers_list[0], MusicMaker):
+            music_maker = specifiers_list[0]
+            specifiers_list.pop(0)
         else:
             music_maker = MusicMaker()
         assert isinstance(music_maker, MusicMaker)
-        for specifier in specifiers:
+        for specifier in specifiers_list:
             if isinstance(specifier, MusicMaker):
                 message = "must combine music-makers:\n"
                 message += f"   {repr(music_maker)}"
@@ -5712,7 +5725,7 @@ class MusicAccumulator(object):
             voice_name, voice_name
         )
         first_specifiers = music_maker.commands or []
-        all_specifiers = first_specifiers + specifiers
+        all_specifiers = first_specifiers + specifiers_list
         for specifier in all_specifiers:
             if isinstance(specifier, Imbrication):
                 voice_name_ = self.score_template.voice_abbreviations.get(
@@ -6820,17 +6833,35 @@ class MusicMaker(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, voice_name, collections) -> MusicContribution:
+    def __call__(
+        self,
+        voice_name: str,
+        collections: typing.Union[
+            list,
+            str,
+            abjad.Segment,
+            abjad.Sequence,
+            abjad.Set,
+            pitchclasses.CollectionList,
+        ],
+    ) -> MusicContribution:
         """
-        Calls music-maker on ``collections``.
-
-        Returns music contribution.
+        Calls music-maker.
         """
         commands = list(self.commands)
         if any(_ is None for _ in commands):
             message = "commands must not be none:\n"
             message += f"   {repr(commands)}"
             raise Exception(message)
+        prototype = (
+            list,
+            str,
+            abjad.Segment,
+            abjad.Sequence,
+            abjad.Set,
+            pitchclasses.CollectionList,
+        )
+        assert isinstance(collections, prototype), repr(collections)
         if isinstance(collections, str):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
@@ -6843,13 +6874,14 @@ class MusicMaker(object):
                 collections, commands
             )
         container = abjad.Container(selections)
+        color_selector, color_selector_result = None, None
         imbricated_selections = {}
-        result = self._call_color_commands(selections, commands)
-        commands, color_selector, color_selector_result = result
         for command in commands:
             if isinstance(command, Imbrication):
-                imbricated_selections_ = command(container)
-                imbricated_selections.update(imbricated_selections_)
+                imbricated_selections.update(command(container))
+            elif isinstance(command, _commands.ColorCommand):
+                color_selector = command.selector
+                color_selector_result = command(selections)
             else:
                 command(selections)
         self._label_figure_name_(
@@ -6920,18 +6952,6 @@ class MusicMaker(object):
         for leaf in abjad.iterate(container).leaves():
             collections_ = copy.deepcopy(collections)
             abjad.attach(collections_, leaf, tag=None)
-
-    def _call_color_commands(self, selections, specifiers):
-        assert self._all_are_selections(selections), repr(selections)
-        specifiers_ = []
-        color_selector, color_selector_result = None, None
-        for specifier in specifiers:
-            if isinstance(specifier, commands.ColorCommand):
-                color_selector = specifier.selector
-                color_selector_result = specifier(selections)
-            else:
-                specifiers_.append(specifier)
-        return specifiers_, color_selector, color_selector_result
 
     def _call_rhythm_commands(self, collections, specifiers):
         selections = len(collections) * [None]
@@ -7958,7 +7978,7 @@ class MusicMaker(object):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
-            ...     baca.NestingCommand(
+            ...     baca.Nesting(
             ...         time_treatments=['+1/16'],
             ...         ),
             ...     rmakers.beam_groups(),
@@ -8049,7 +8069,7 @@ class MusicMaker(object):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
-            ...     baca.NestingCommand(
+            ...     baca.Nesting(
             ...         lmr_specifier=baca.LMRSpecifier(
             ...             left_length=2,
             ...             ),
@@ -8682,7 +8702,7 @@ class MusicMaker(object):
         )
 
 
-class NestingCommand(scoping.Command):
+class Nesting(object):
     r"""
     Nesting command.
 
@@ -8694,7 +8714,7 @@ class NestingCommand(scoping.Command):
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([1], 16),
-        ...     baca.NestingCommand(
+        ...     baca.Nesting(
         ...         time_treatments=['+1/16'],
         ...         ),
         ...     rmakers.beam_groups(),
@@ -8795,9 +8815,11 @@ class NestingCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, selections=None):
+    def __call__(
+        self, selections: typing.List[abjad.Selection] = None
+    ) -> typing.Optional[typing.List[abjad.Selection]]:
         r"""
-        Calls command on ``selections``.
+        Calls nesting command on ``selections``.
 
         ..  container:: example
 
@@ -8809,7 +8831,7 @@ class NestingCommand(scoping.Command):
             ... )
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16, affix=affix),
-            ...     baca.NestingCommand(time_treatments=['+1/16']),
+            ...     baca.Nesting(time_treatments=['+1/16']),
             ...     rmakers.beam_groups(),
             ...     )
 
@@ -8888,10 +8910,9 @@ class NestingCommand(scoping.Command):
                     >>
                 >>
 
-        Returns new selections.
         """
         if selections is None:
-            return
+            return None
         time_treatments = self._get_time_treatments()
         if time_treatments is None:
             return selections
@@ -8924,6 +8945,8 @@ class NestingCommand(scoping.Command):
                 )
                 selection_ = abjad.Selection([nested_tuplet])
                 selections_.append(selection_)
+        assert isinstance(selections_, list)
+        assert all(isinstance(_, abjad.Selection) for _ in selections_)
         return selections_
 
     ### PRIVATE METHODS ###
@@ -12548,7 +12571,7 @@ def imbricate(
     )
 
 
-def nest(time_treatments: typing.Iterable = None,) -> NestingCommand:
+def nest(time_treatments: typing.Iterable = None,) -> Nesting:
     r"""
     Nests music.
 
@@ -12631,7 +12654,7 @@ def nest(time_treatments: typing.Iterable = None,) -> NestingCommand:
     """
     if not isinstance(time_treatments, list):
         time_treatments = [time_treatments]
-    return NestingCommand(lmr_specifier=None, time_treatments=time_treatments)
+    return Nesting(lmr_specifier=None, time_treatments=time_treatments)
 
 
 def pitch_first(

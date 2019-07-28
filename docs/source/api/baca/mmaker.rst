@@ -30,7 +30,7 @@ mmaker
    ~MusicAccumulator
    ~MusicContribution
    ~MusicMaker
-   ~NestingCommand
+   ~Nesting
    ~PitchFirstAssignment
    ~PitchFirstCommand
    ~PitchFirstRhythmMaker
@@ -477,7 +477,7 @@ mmaker
 
    .. autoattribute:: MusicMaker.tag
 
-.. autoclass:: NestingCommand
+.. autoclass:: Nesting
 
    .. raw:: html
 
@@ -500,26 +500,7 @@ mmaker
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: NestingCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: NestingCommand.__format__
-
-   .. container:: inherited
-
-      .. automethod:: NestingCommand.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: NestingCommand.get_tag
+   .. automethod:: Nesting.__call__
 
    .. raw:: html
 
@@ -528,49 +509,9 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. container:: inherited
+   .. autoattribute:: Nesting.lmr_specifier
 
-      .. autoattribute:: NestingCommand.deactivate
-
-   .. autoattribute:: NestingCommand.lmr_specifier
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.match
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.measures
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.scope
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.selector
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.tag
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.tag_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: NestingCommand.tags
-
-   .. autoattribute:: NestingCommand.time_treatments
+   .. autoattribute:: Nesting.time_treatments
 
 .. autoclass:: PitchFirstAssignment
 
