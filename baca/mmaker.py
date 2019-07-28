@@ -132,7 +132,13 @@ class AcciaccaturaSpecifier(object):
 
     ### INITIALIZER ###
 
-    def __init__(self, *, durations=None, lmr_specifier=None, pattern=None):
+    def __init__(
+        self,
+        *,
+        durations: typing.Sequence[abjad.DurationTyping] = None,
+        lmr_specifier: "LMRSpecifier" = None,
+        pattern: abjad.Pattern = None,
+    ) -> None:
         if durations is not None:
             assert isinstance(durations, list), repr(durations)
             durations = [abjad.Duration(_) for _ in durations]
@@ -1315,12 +1321,12 @@ class AnchorSpecifier(object):
     def __init__(
         self,
         *,
-        figure_name=None,
-        local_selector=None,
-        remote_selector=None,
-        remote_voice_name=None,
-        use_remote_stop_offset=None,
-    ):
+        figure_name: str = None,
+        local_selector: abjad.Expression = None,
+        remote_selector: abjad.Expression = None,
+        remote_voice_name: str = None,
+        use_remote_stop_offset: bool = None,
+    ) -> None:
         # for selector evaluation:
         import baca
 
@@ -1449,13 +1455,13 @@ class Coat(object):
 
     ### INITIALIZER ###
 
-    def __init__(self, argument):
+    def __init__(self, argument: typing.Union[int, str, abjad.Pitch]) -> None:
         self._argument = argument
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def argument(self):
+    def argument(self) -> typing.Union[int, str, abjad.Pitch]:
         """
         Gets argument.
         """
@@ -1992,19 +1998,21 @@ class Imbrication(object):
 
     def __init__(
         self,
-        voice_name=None,
-        segment=None,
+        voice_name: str = None,
+        segment: typing.List[int] = None,
         *specifiers,
-        allow_unused_pitches=None,
-        by_pitch_class=None,
-        extend_beam=None,
-        hocket=None,
-        selector=None,
-        truncate_ties=None,
-    ):
+        allow_unused_pitches: bool = None,
+        by_pitch_class: bool = None,
+        extend_beam: bool = None,
+        hocket: bool = None,
+        selector: abjad.Expression = None,
+        truncate_ties: bool = None,
+    ) -> None:
         if voice_name is not None:
             assert isinstance(voice_name, str), repr(voice_name)
         self._voice_name = voice_name
+        if segment is not None:
+            assert isinstance(segment, list), repr(segment)
         self._segment = segment
         self._specifiers = specifiers
         if allow_unused_pitches is not None:
@@ -4769,19 +4777,19 @@ class LMRSpecifier(object):
     def __init__(
         self,
         *,
-        left_counts=None,
-        left_cyclic=None,
-        left_length=None,
-        left_reversed=None,
-        middle_counts=None,
-        middle_cyclic=None,
-        middle_reversed=None,
-        priority=None,
-        right_counts=None,
-        right_cyclic=None,
-        right_length=None,
-        right_reversed=None,
-    ):
+        left_counts: typing.Sequence[int] = None,
+        left_cyclic: bool = None,
+        left_length: int = None,
+        left_reversed: bool = None,
+        middle_counts: typing.Sequence[int] = None,
+        middle_cyclic: bool = None,
+        middle_reversed: bool = None,
+        priority: abjad.HorizontalAlignment = None,
+        right_counts: typing.Sequence[int] = None,
+        right_cyclic: bool = None,
+        right_length: int = None,
+        right_reversed: bool = None,
+    ) -> None:
         if left_counts is not None:
             assert abjad.mathtools.all_are_positive_integers(left_counts)
         self._left_counts = left_counts
@@ -6005,24 +6013,39 @@ class MusicContribution(object):
     def __init__(
         self,
         *,
-        anchor=None,
-        color_selector=None,
-        color_selector_result=None,
-        figure_name=None,
-        hide_time_signature=None,
-        selections=None,
-        time_signature=None,
+        anchor: AnchorSpecifier = None,
+        color_selector: abjad.Expression = None,
+        color_selector_result: typing.Union[
+            abjad.Selection, abjad.Tuplet
+        ] = None,
+        figure_name: str = None,
+        hide_time_signature: bool = None,
+        selections: typing.Dict[str, abjad.Selection] = None,
+        time_signature: abjad.TimeSignature = None,
     ):
         if anchor is not None and not isinstance(anchor, AnchorSpecifier):
             raise TypeError(f"anchor specifier only: {anchor!r}.")
         self._anchor = anchor
+        if color_selector is not None:
+            assert isinstance(color_selector, abjad.Expression)
         self._color_selector = color_selector
+        if color_selector_result is not None:
+            prototype = (abjad.Selection, abjad.Tuplet)
+            assert isinstance(color_selector_result, prototype), repr(
+                color_selector_result
+            )
         self._color_selector_result = color_selector_result
+        if figure_name is not None:
+            assert isinstance(figure_name, str), repr(figure_name)
         self._figure_name = figure_name
         if hide_time_signature is not None:
             hide_time_signature = bool(hide_time_signature)
         self._hide_time_signature = hide_time_signature
+        if selections is not None:
+            assert isinstance(selections, dict), repr(selections)
         self._selections = selections
+        if time_signature is not None:
+            assert isinstance(time_signature, abjad.TimeSignature)
         self._time_signature = time_signature
 
     ### SPECIAL METHODS ###
@@ -8801,10 +8824,14 @@ class Nesting(object):
 
     ### INITIALIZER ###
 
-    def __init__(self, *, lmr_specifier=None, time_treatments=None):
+    def __init__(
+        self,
+        *,
+        lmr_specifier: LMRSpecifier = None,
+        time_treatments: typing.Sequence[typing.Union[int, str]] = None,
+    ) -> None:
         if lmr_specifier is not None:
-            prototype = LMRSpecifier
-            assert isinstance(lmr_specifier, prototype)
+            assert isinstance(lmr_specifier, LMRSpecifier)
         self._lmr_specifier = lmr_specifier
         if time_treatments is not None:
             assert isinstance(time_treatments, (list, tuple))
@@ -9035,8 +9062,8 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         self,
         rhythm_maker: "PitchFirstRhythmMaker",
         *,
-        pattern=None,
-        thread=None,
+        pattern: typing.Union[abjad.DurationInequality, abjad.Pattern] = None,
+        thread: bool = None,
     ) -> None:
         assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
         self._rhythm_maker = rhythm_maker
@@ -9044,6 +9071,8 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
             prototype = (abjad.DurationInequality, abjad.Pattern)
             assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
+        if thread is not None:
+            thread = bool(thread)
         self._thread = thread
 
     ### SPECIAL METHODS ###
@@ -9847,10 +9876,12 @@ class PitchFirstRhythmMaker(object):
     def __init__(
         self,
         talea: rmakers.Talea,
-        acciaccatura_specifiers=None,
+        acciaccatura_specifiers: typing.Sequence[AcciaccaturaSpecifier] = None,
         affix: "RestAffixSpecifier" = None,
-        spelling=None,
-        time_treatments=None,
+        spelling: rmakers.Spelling = None,
+        time_treatments: typing.Sequence[
+            typing.Union[int, str, abjad.Duration]
+        ] = None,
     ):
         if acciaccatura_specifiers is not None:
             prototype = AcciaccaturaSpecifier
@@ -10920,7 +10951,9 @@ class PitchFirstRhythmMaker(object):
     @property
     def time_treatments(
         self
-    ) -> typing.Sequence[typing.Union[int, str, abjad.Duration]]:
+    ) -> typing.Optional[
+        typing.Sequence[typing.Union[int, str, abjad.Duration]]
+    ]:
         r"""
         Gets time treatments.
 
@@ -11732,22 +11765,22 @@ class RestAffixSpecifier(object):
     def __init__(
         self,
         *,
-        pattern=None,
-        prefix=None,
-        skips_instead_of_rests=None,
-        suffix=None,
+        pattern: abjad.Pattern = None,
+        prefix: typing.Sequence[int] = None,
+        skips_instead_of_rests: bool = None,
+        suffix: typing.Sequence[int] = None,
     ):
         if pattern is not None and not isinstance(pattern, abjad.Pattern):
             raise TypeError(f"pattern or none: {pattern!r}.")
         self._pattern = pattern
         if prefix is not None:
-            assert isinstance(prefix, collections.abc.Iterable), repr(prefix)
+            assert all(isinstance(_, int) for _ in prefix)
         self._prefix = prefix
         if skips_instead_of_rests is not None:
             skips_instead_of_rests = bool(skips_instead_of_rests)
         self._skips_instead_of_rests = skips_instead_of_rests
         if suffix is not None:
-            assert isinstance(suffix, collections.abc.Iterable), repr(suffix)
+            assert all(isinstance(_, int) for _ in suffix)
         self._suffix = suffix
 
     ### SPECIAL METHODS ###
@@ -12600,7 +12633,7 @@ def imbricate(
     )
 
 
-def nest(time_treatments: typing.Iterable = None,) -> Nesting:
+def nest(time_treatments: typing.Sequence = None,) -> Nesting:
     r"""
     Nests music.
 
@@ -12713,7 +12746,7 @@ def pitch_first(
     )
 
 
-def rests_after(counts: typing.Iterable[int]) -> RestAffixSpecifier:
+def rests_after(counts: typing.Sequence[int]) -> RestAffixSpecifier:
     r"""
     Makes rests after music.
 
