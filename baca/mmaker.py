@@ -9048,17 +9048,33 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, collections, selections):
+    def __call__(
+        self,
+        collections: pitchclasses.CollectionList,
+        selections: typing.List[typing.Union[abjad.Selection, None]],
+    ) -> typing.List[abjad.Selection]:
+        """
+        Calls pitch-first assignment.
+        """
+        prototype = (pitchclasses.CollectionList,)
+        assert isinstance(collections, prototype), repr(collections)
+        assert isinstance(selections, list), repr(selections)
+        selection_prototype = (abjad.Selection, type(None))
+        assert all(
+            isinstance(_, selection_prototype) for _ in selections
+        ), repr(selections)
         assert len(selections) == len(collections)
         rhythm_maker = self.rhythm_maker
-        prototype = (PitchFirstRhythmMaker,)
-        assert isinstance(rhythm_maker, prototype), repr(rhythm_maker)
+        prototype__ = (PitchFirstRhythmMaker,)
+        assert isinstance(rhythm_maker, prototype__), repr(rhythm_maker)
         length = len(selections)
         pattern = self.pattern or abjad.index_all()
-        prototype = (abjad.Segment, abjad.Set, list)
+        collection_prototype = (abjad.Segment, abjad.Set, list)
         collections_, indices = [], []
         for index, collection in enumerate(collections):
-            assert isinstance(collection, prototype), repr(collection)
+            assert isinstance(collection, collection_prototype), repr(
+                collection
+            )
             if isinstance(collection, (abjad.Set, set)):
                 collection_ = list(sorted(collection))[:1]
             else:
@@ -9103,6 +9119,9 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
                 for indicator in indicators:
                     abjad.attach(indicator, chord)
             selections[index] = stage_selection
+        assert isinstance(selections, list), repr(selections)
+        for selection in selections:
+            assert isinstance(selection, selection_prototype), repr(selection)
         return selections
 
     def __eq__(self, argument) -> bool:
@@ -9330,14 +9349,16 @@ class PitchFirstCommand(object):
 
     def __call__(
         self,
-        collections,
-        collection_index=None,
-        state=None,
-        total_collections=None,
+        collections: list,
+        collection_index: int = None,
+        state: dict = None,
+        total_collections: int = None,
     ) -> abjad.Selection:
         """
         Calls pitch-first command.
         """
+        prototype = (list,)
+        assert isinstance(collections, prototype), repr(collections)
         # temporary:
         assert len(self.assignments.assignments) == 1, repr(self)
         rhythm_maker = self.assignments.assignments[0].rhythm_maker
@@ -9859,10 +9880,10 @@ class PitchFirstRhythmMaker(object):
 
     def __call__(
         self,
-        collections,
-        collection_index=None,
-        state=None,
-        total_collections=None,
+        collections: list,
+        collection_index: int = None,
+        state: dict = None,
+        total_collections: int = None,
     ) -> abjad.Selection:
         r"""
         Calls rhythm-maker on ``collections``.
@@ -9968,6 +9989,8 @@ class PitchFirstRhythmMaker(object):
                 >>
 
         """
+        prototype = (list,)
+        assert isinstance(collections, prototype), repr(collections)
         self._state = state or abjad.OrderedDict()
         self._apply_state(state=state)
         tuplets = self._make_music(
@@ -9988,6 +10011,7 @@ class PitchFirstRhythmMaker(object):
         selections = abjad.select(voice[:]).group_by_measure()
         assert isinstance(selections, abjad.Selection)
         voice[:] = []
+        assert isinstance(selections, abjad.Selection)
         return selections
 
     def __eq__(self, argument) -> bool:
@@ -11728,9 +11752,15 @@ class RestAffixSpecifier(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, collection_index=None, total_collections=None):
+    def __call__(
+        self, collection_index: int, total_collections: int
+    ) -> typing.Tuple[
+        typing.Optional[abjad.IntegerSequence],
+        typing.Optional[abjad.IntegerSequence],
+    ]:
         r"""
-        Calls command on ``collection_index`` and ``total_collections``.
+        Calls rest affix specifier on ``collection_index`` and
+        ``total_collections``.
 
         ..  container:: example
 
@@ -11792,7 +11822,6 @@ class RestAffixSpecifier(object):
                     >>
                 >>
 
-        Returns prefix, suffix pair.
         """
         if self.pattern is None:
             if (
