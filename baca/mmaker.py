@@ -9046,7 +9046,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
     ..  container:: example
 
         >>> baca.pitch_first([1], 16)
-        PitchFirstAssignment(PitchFirstRhythmMaker(Talea(counts=[1], denominator=16)))
+        PitchFirstAssignment(PitchFirstRhythmMaker(Talea([1], 16)))
 
     """
 
@@ -9330,7 +9330,7 @@ class PitchFirstCommand(object):
         >>> abjad.f(command)
         baca.PitchFirstCommand(
             abjadext.RhythmCommand.MakerAssignments(
-                PitchFirstAssignment(PitchFirstRhythmMaker(Talea(counts=[1], denominator=16)))
+                PitchFirstAssignment(PitchFirstRhythmMaker(Talea([1], 16)))
                 )
             )
 
