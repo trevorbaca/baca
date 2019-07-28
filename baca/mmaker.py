@@ -6979,18 +6979,15 @@ class MusicMaker(object):
                 color_selector_result = command(selections)
             else:
                 command(selections)
-        self._label_figure_name_(
-            container, self.figure_name, self.figure_index
-        )
-        #        self._annotate_collection_list(container, collections)
+        self._label_figure_name_(container)
         if self.extend_beam:
             leaf = abjad.select(selections).leaf(-1)
             abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, leaf)
-        self._check_wellformedness(container)
         selection = abjad.select([container])
-        time_signature = self._make_time_signature(
-            selection, denominator=self.signature
-        )
+        duration = abjad.inspect(selection).duration()
+        if self.signature is not None:
+            duration = duration.with_denominator(self.signature)
+        time_signature = abjad.TimeSignature(duration)
         voice_to_selection = {voice_name: selection}
         voice_to_selection.update(imbricated_selections)
         for value in voice_to_selection.values():
@@ -7039,12 +7036,6 @@ class MusicMaker(object):
 
     ### PRIVATE METHODS ###
 
-    #    @staticmethod
-    #    def _annotate_collection_list(container, collections):
-    #        for leaf in abjad.iterate(container).leaves():
-    #            collections_ = copy.deepcopy(collections)
-    #            abjad.attach(collections_, leaf, tag=None)
-
     def _call_rhythm_commands(self, collections, specifiers):
         selections = len(collections) * [None]
         assignments, specifiers_ = [], []
@@ -7071,15 +7062,6 @@ class MusicMaker(object):
         return selections, specifiers_
 
     @staticmethod
-    def _check_wellformedness(selections):
-        for component in abjad.iterate(selections).components():
-            inspection = abjad.inspect(component)
-            if not inspection.wellformed():
-                report = inspection.tabulate_wellformedness()
-                report = repr(component) + "\n" + report
-                raise Exception(report)
-
-    @staticmethod
     def _coerce_collections(collections):
         prototype = (abjad.Segment, abjad.Set)
         if isinstance(collections, prototype):
@@ -7094,11 +7076,11 @@ class MusicMaker(object):
             collections=collections, item_class=item_class
         )
 
-    @staticmethod
-    def _label_figure_name_(container, figure_name, figure_index):
-        if figure_name is None:
+    def _label_figure_name_(self, container):
+        if self.figure_name is None:
             return
-        figure_name = str(figure_name)
+        figure_name = str(self.figure_name)
+        figure_index = self.figure_index
         original_figure_name = figure_name
         parts = figure_name.split("_")
         if len(parts) == 1:
@@ -7122,22 +7104,13 @@ class MusicMaker(object):
         )
         annotation = f"figure name: {original_figure_name}"
         figure_name_markup._annotation = annotation
-        leaves = list(abjad.iterate(container).leaves())
+        leaf = abjad.select(container).leaf(0)
         abjad.attach(
             figure_name_markup,
-            leaves[0],
+            leaf,
             deactivate=True,
             tag=abjad.const.FIGURE_NAME,
         )
-
-    def _make_time_signature(self, selection, denominator=None):
-        if denominator is None:
-            denominator = self.signature
-        duration = abjad.inspect(selection).duration()
-        if denominator is not None:
-            duration = duration.with_denominator(denominator)
-        time_signature = abjad.TimeSignature(duration)
-        return time_signature
 
     ### PUBLIC PROPERTIES ###
 
@@ -7149,7 +7122,7 @@ class MusicMaker(object):
         return self._anchor
 
     @property
-    def commands(self):
+    def commands(self) -> typing.List:
         r"""
         Gets commands.
 
@@ -8534,32 +8507,27 @@ class MusicMaker(object):
                     >>
                 >>
 
-        Defaults to none.
-
-        Set to specifiers or none.
-
-        Returns specifiers or none.
         """
         return self._commands
 
     @property
-    def extend_beam(self):
+    def extend_beam(self) -> typing.Optional[bool]:
         return self._extend_beam
 
     @property
-    def figure_index(self):
+    def figure_index(self) -> typing.Optional[int]:
         return self._figure_index
 
     @property
-    def figure_name(self):
+    def figure_name(self) -> typing.Optional[str]:
         return self._figure_name
 
     @property
-    def hide_time_signature(self):
+    def hide_time_signature(self) -> typing.Optional[bool]:
         return self._hide_time_signature
 
     @property
-    def signature(self):
+    def signature(self) -> typing.Optional[int]:
         r"""
         Gets (time) signature (denominator).
 
@@ -8767,16 +8735,11 @@ class MusicMaker(object):
                     >>
                 >>
 
-        Defaults to none.
-
-        Set to positive integer or none.
-
-        Returns positive integer or none.
         """
         return self._signature
 
     @property
-    def tag(self):
+    def tag(self) -> typing.Optional[str]:
         return self._tag
 
 
