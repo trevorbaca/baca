@@ -6982,7 +6982,7 @@ class MusicMaker(object):
         self._label_figure_name_(
             container, self.figure_name, self.figure_index
         )
-        self._annotate_collection_list(container, collections)
+        #        self._annotate_collection_list(container, collections)
         if self.extend_beam:
             leaf = abjad.select(selections).leaf(-1)
             abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, leaf)
@@ -7039,11 +7039,11 @@ class MusicMaker(object):
 
     ### PRIVATE METHODS ###
 
-    @staticmethod
-    def _annotate_collection_list(container, collections):
-        for leaf in abjad.iterate(container).leaves():
-            collections_ = copy.deepcopy(collections)
-            abjad.attach(collections_, leaf, tag=None)
+    #    @staticmethod
+    #    def _annotate_collection_list(container, collections):
+    #        for leaf in abjad.iterate(container).leaves():
+    #            collections_ = copy.deepcopy(collections)
+    #            abjad.attach(collections_, leaf, tag=None)
 
     def _call_rhythm_commands(self, collections, specifiers):
         selections = len(collections) * [None]
