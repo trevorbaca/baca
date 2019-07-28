@@ -6911,7 +6911,9 @@ class MusicMaker(object):
             container, self.figure_name, self.figure_index
         )
         self._annotate_collection_list(container, collections)
-        self._extend_beam_(container, self.extend_beam)
+        if self.extend_beam:
+            leaf = abjad.select(selections).leaf(-1)
+            abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, leaf)
         self._check_wellformedness(container)
         selection = abjad.select([container])
         time_signature = self._make_time_signature(
@@ -6964,11 +6966,6 @@ class MusicMaker(object):
         return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _all_are_selections(argument):
-        prototype = abjad.Selection
-        return all(isinstance(_, prototype) for _ in argument)
 
     @staticmethod
     def _annotate_collection_list(container, collections):
@@ -7026,55 +7023,6 @@ class MusicMaker(object):
         )
 
     @staticmethod
-    def _color_unregistered_pitches(argument):
-        for pleaf in abjad.iterate(argument).leaves(pitched=True):
-            abjad.attach(abjad.tags.NOT_YET_REGISTERED, pleaf, tag="")
-
-    @staticmethod
-    def _exactly_double(selections):
-        length = len(selections)
-        if length % 2 == 1:
-            return False
-        half_length = int(length / 2)
-        for index in range(half_length):
-            first_selection = selections[index]
-            index_ = index + half_length
-            second_selection = selections[index_]
-            first_format = format(first_selection, "lilypond")
-            second_format = format(second_selection, "lilypond")
-            if not first_format == second_format:
-                return False
-        return True
-
-    def _extend_beam_(self, selections, extend_beam):
-        if not extend_beam:
-            return
-        leaves = list(abjad.iterate(selections).leaves())
-        final_leaf = leaves[-1]
-        abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, final_leaf)
-
-    def _get_storage_format_specification(self):
-        manager = abjad.StorageFormatManager(self)
-        keyword_argument_names = manager.signature_keyword_names
-        positional_argument_values = self.commands
-        return abjad.StorageFormatSpecification(
-            self,
-            keyword_argument_names=keyword_argument_names,
-            positional_argument_values=positional_argument_values,
-        )
-
-    def _is_pitch_input(self, collections):
-        prototype = (abjad.PitchSegment, abjad.PitchSet)
-        if isinstance(collections, prototype):
-            return True
-        try:
-            if isinstance(collections[0], prototype):
-                return True
-        except (IndexError, TypeError):
-            pass
-        return False
-
-    @staticmethod
     def _label_figure_name_(container, figure_name, figure_index):
         if figure_name is None:
             return
@@ -7118,17 +7066,6 @@ class MusicMaker(object):
             duration = duration.with_denominator(denominator)
         time_signature = abjad.TimeSignature(duration)
         return time_signature
-
-    @staticmethod
-    def _to_pitch_item_class(item_class):
-        if item_class in (abjad.NamedPitch, abjad.NumberedPitch):
-            return item_class
-        elif item_class is abjad.NamedPitchClass:
-            return abjad.NamedPitch
-        elif item_class is abjad.NumberedPitchClass:
-            return abjad.NumberedPitch
-        else:
-            raise TypeError(item_class)
 
     ### PUBLIC PROPERTIES ###
 
