@@ -527,7 +527,7 @@ indicators.Markup library.
    ~baca.mmaker.AcciaccaturaSpecifier
    ~baca.mmaker.AnchorSpecifier
    ~baca.mmaker.Coat
-   ~baca.mmaker.ImbricationCommand
+   ~baca.mmaker.Imbrication
    ~baca.mmaker.LMRSpecifier
    ~baca.mmaker.MusicAccumulator
    ~baca.mmaker.MusicContribution

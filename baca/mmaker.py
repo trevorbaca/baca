@@ -1459,7 +1459,7 @@ class Coat(object):
         return self._argument
 
 
-class ImbricationCommand(scoping.Command):
+class Imbrication(object):
     r"""
     Imbrication command.
 
@@ -2026,7 +2026,9 @@ class ImbricationCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, container=None):
+    def __call__(
+        self, container: abjad.Container = None
+    ) -> typing.Dict[str, abjad.Selection]:
         r"""
         Calls command on ``container``.
 
@@ -2887,7 +2889,6 @@ class ImbricationCommand(scoping.Command):
                     >>
                 >>
 
-        Returns new container.
         """
         original_container = container
         container = copy.deepcopy(container)
@@ -2985,7 +2986,7 @@ class ImbricationCommand(scoping.Command):
                 continue
             if isinstance(specifier, rhythmcommands.RhythmCommand):
                 continue
-            if isinstance(specifier, ImbricationCommand):
+            if isinstance(specifier, Imbrication):
                 continue
             prototype = (
                 rmakers.BeamCommand,
@@ -3213,7 +3214,7 @@ class ImbricationCommand(scoping.Command):
 
             Defaults to none:
 
-            >>> specifier = baca.ImbricationCommand()
+            >>> specifier = baca.Imbrication()
             >>> specifier.allow_unused_pitches is None
             True
 
@@ -3406,7 +3407,7 @@ class ImbricationCommand(scoping.Command):
 
             Defaults to none:
 
-            >>> specifier = baca.ImbricationCommand()
+            >>> specifier = baca.Imbrication()
             >>> specifier.hocket is None
             True
 
@@ -3614,7 +3615,7 @@ class ImbricationCommand(scoping.Command):
 
             Defaults to none:
 
-            >>> specifier = baca.ImbricationCommand()
+            >>> specifier = baca.Imbrication()
             >>> specifier.selector is None
             True
 
@@ -4675,7 +4676,7 @@ class ImbricationCommand(scoping.Command):
 
             Defaults to none:
 
-            >>> specifier = baca.ImbricationCommand()
+            >>> specifier = baca.Imbrication()
             >>> specifier.truncate_ties is None
             True
 
@@ -5713,17 +5714,11 @@ class MusicAccumulator(object):
         first_specifiers = music_maker.commands or []
         all_specifiers = first_specifiers + specifiers
         for specifier in all_specifiers:
-            if isinstance(specifier, ImbricationCommand):
+            if isinstance(specifier, Imbrication):
                 voice_name_ = self.score_template.voice_abbreviations.get(
                     specifier.voice_name, specifier.voice_name
                 )
                 specifier._voice_name = voice_name_
-            # TODO: remove
-            elif isinstance(specifier, AnchorSpecifier):
-                voice_name_ = self.score_template.voice_abbreviations.get(
-                    specifier.remote_voice_name, specifier.remote_voice_name
-                )
-                specifier._remote_voice_name = voice_name_
             else:
                 assert not hasattr(specifier, "voice_name"), repr(specifier)
                 assert not hasattr(specifier, "remote_voice_name"), repr(
@@ -6767,7 +6762,6 @@ class MusicMaker(object):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        "_allow_repeats",
         "_anchor",
         "_commands",
         "_extend_beam",
@@ -6792,42 +6786,45 @@ class MusicMaker(object):
     def __init__(
         self,
         *commands,
-        allow_repeats=None,
         anchor: AnchorSpecifier = None,
-        extend_beam=None,
-        figure_index=None,
-        figure_name=None,
-        hide_time_signature=None,
-        signature=None,
+        extend_beam: bool = None,
+        figure_index: int = None,
+        figure_name: str = None,
+        hide_time_signature: bool = None,
+        signature: int = None,
         tag: str = "baca.MusicMaker.__call__",
-    ):
-        # remove flatten
-        commands_ = classes.Sequence(commands).flatten()
-        commands_list = list(commands_)
-        self._commands = commands_list
-        if allow_repeats is not None:
-            allow_repeats = bool(allow_repeats)
-        self._allow_repeats = allow_repeats
+    ) -> None:
+        self._commands = list(commands)
         if anchor is not None:
             assert isinstance(anchor, AnchorSpecifier)
         self._anchor = anchor
+        if extend_beam is not None:
+            extend_beam = bool(extend_beam)
         self._extend_beam = extend_beam
+        if figure_index is not None:
+            assert isinstance(figure_index, int), repr(figure_index)
         self._figure_index = figure_index
+        if figure_name is not None:
+            figure_name = str(figure_name)
         self._figure_name = figure_name
+        if hide_time_signature is not None:
+            hide_time_signature = bool(hide_time_signature)
         self._hide_time_signature = hide_time_signature
         self._next_figure = 0
         if signature is not None:
-            assert abjad.mathtools.is_positive_integer(signature)
+            assert isinstance(signature, int)
         self._signature = signature
+        if tag is not None:
+            assert isinstance(tag, str)
         self._tag = tag
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, voice_name, collections):
+    def __call__(self, voice_name, collections) -> MusicContribution:
         """
         Calls music-maker on ``collections``.
 
-        Returns selection, time signature, state manifest.
+        Returns music contribution.
         """
         commands = list(self.commands)
         if any(_ is None for _ in commands):
@@ -6850,7 +6847,7 @@ class MusicMaker(object):
         result = self._call_color_commands(selections, commands)
         commands, color_selector, color_selector_result = result
         for command in commands:
-            if isinstance(command, ImbricationCommand):
+            if isinstance(command, Imbrication):
                 imbricated_selections_ = command(container)
                 imbricated_selections.update(imbricated_selections_)
             else:
@@ -6859,7 +6856,6 @@ class MusicMaker(object):
             container, self.figure_name, self.figure_index
         )
         self._annotate_collection_list(container, collections)
-        self._annotate_repeat_pitches(container)
         self._extend_beam_(container, self.extend_beam)
         self._check_wellformedness(container)
         selection = abjad.select([container])
@@ -6924,12 +6920,6 @@ class MusicMaker(object):
         for leaf in abjad.iterate(container).leaves():
             collections_ = copy.deepcopy(collections)
             abjad.attach(collections_, leaf, tag=None)
-
-    def _annotate_repeat_pitches(self, container):
-        if not self.allow_repeats:
-            return
-        for leaf in abjad.iterate(container).leaves(pitched=True):
-            abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
 
     def _call_color_commands(self, selections, specifiers):
         assert self._all_are_selections(selections), repr(selections)
@@ -7098,19 +7088,6 @@ class MusicMaker(object):
             raise TypeError(item_class)
 
     ### PUBLIC PROPERTIES ###
-
-    @property
-    def allow_repeats(self):
-        """
-        Is true when music-maker allows repeat pitches.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        """
-        return self._allow_repeats
 
     @property
     def anchor(self) -> typing.Optional[AnchorSpecifier]:
@@ -12558,7 +12535,7 @@ def imbricate(
             >>
 
     """
-    return ImbricationCommand(
+    return Imbrication(
         voice_name,
         segment,
         *specifiers,

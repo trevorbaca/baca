@@ -25,7 +25,7 @@ mmaker
    ~AcciaccaturaSpecifier
    ~AnchorSpecifier
    ~Coat
-   ~ImbricationCommand
+   ~Imbrication
    ~LMRSpecifier
    ~MusicAccumulator
    ~MusicContribution
@@ -152,7 +152,7 @@ mmaker
 
    .. autoattribute:: Coat.argument
 
-.. autoclass:: ImbricationCommand
+.. autoclass:: Imbrication
 
    .. raw:: html
 
@@ -182,26 +182,7 @@ mmaker
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: ImbricationCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: ImbricationCommand.__format__
-
-   .. container:: inherited
-
-      .. automethod:: ImbricationCommand.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: ImbricationCommand.get_tag
+   .. automethod:: Imbrication.__call__
 
    .. raw:: html
 
@@ -210,59 +191,23 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: ImbricationCommand.allow_unused_pitches
+   .. autoattribute:: Imbrication.allow_unused_pitches
 
-   .. autoattribute:: ImbricationCommand.by_pitch_class
+   .. autoattribute:: Imbrication.by_pitch_class
 
-   .. container:: inherited
+   .. autoattribute:: Imbrication.extend_beam
 
-      .. autoattribute:: ImbricationCommand.deactivate
+   .. autoattribute:: Imbrication.hocket
 
-   .. autoattribute:: ImbricationCommand.extend_beam
+   .. autoattribute:: Imbrication.segment
 
-   .. autoattribute:: ImbricationCommand.hocket
+   .. autoattribute:: Imbrication.selector
 
-   .. container:: inherited
+   .. autoattribute:: Imbrication.specifiers
 
-      .. autoattribute:: ImbricationCommand.map
+   .. autoattribute:: Imbrication.truncate_ties
 
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.match
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.measures
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.scope
-
-   .. autoattribute:: ImbricationCommand.segment
-
-   .. autoattribute:: ImbricationCommand.selector
-
-   .. autoattribute:: ImbricationCommand.specifiers
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.tag
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.tag_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: ImbricationCommand.tags
-
-   .. autoattribute:: ImbricationCommand.truncate_ties
-
-   .. autoattribute:: ImbricationCommand.voice_name
+   .. autoattribute:: Imbrication.voice_name
 
 .. autoclass:: LMRSpecifier
 
@@ -473,7 +418,6 @@ mmaker
       __format__
       __hash__
       __repr__
-      allow_repeats
       anchor
       commands
       extend_beam
@@ -516,8 +460,6 @@ mmaker
 
    .. rubric:: Read-only properties
       :class: class-header
-
-   .. autoattribute:: MusicMaker.allow_repeats
 
    .. autoattribute:: MusicMaker.anchor
 
