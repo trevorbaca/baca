@@ -5737,21 +5737,21 @@ class MusicAccumulator(object):
             >>> accumulator = baca.MusicAccumulator(
             ...     score_template=baca.StringTrioScoreTemplate()
             ...     )
-            >>> music_maker = MusicMaker(
+            >>> commands = [
             ...     pitch_first([1], 16, signature=16),
             ...     rmakers.beam(),
-            ... )
+            ... ]
             >>> accumulator(
             ...     'Violin_Music_Voice',
             ...     [[0, 1, 2, 3]],
-            ...     music_maker,
+            ...     *commands,
             ...     figure_name='D',
             ... )
 
             >>> accumulator(
             ...     'Violin_Music_Voice',
             ...     [[4, 5, 6, 7]],
-            ...     music_maker,
+            ...     *commands,
             ...     figure_name='D',
             ... )
             Traceback (most recent call last):
@@ -5762,6 +5762,7 @@ class MusicAccumulator(object):
         specifiers = specifiers or ()
         specifiers_list = list(specifiers)
         if specifiers_list and isinstance(specifiers_list[0], MusicMaker):
+            raise Exception("MMM", specifiers_list)
             music_maker = specifiers_list[0]
             specifiers_list.pop(0)
         else:
