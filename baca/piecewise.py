@@ -684,7 +684,10 @@ def dynamic(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -753,7 +756,10 @@ def dynamic(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::

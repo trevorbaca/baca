@@ -265,7 +265,10 @@ class ClusterCommand(scoping.Command):
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker('Voice_1', collections)
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -450,7 +453,10 @@ class ClusterCommand(scoping.Command):
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker('Voice_1', collections)
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -572,7 +578,10 @@ class ClusterCommand(scoping.Command):
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker('Voice_1', collections)
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3693,7 +3702,10 @@ class RegisterCommand(scoping.Command):
         ...     'Voice_1',
         ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3748,7 +3760,10 @@ class RegisterCommand(scoping.Command):
         ...     'Voice_1',
         ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3804,7 +3819,10 @@ class RegisterCommand(scoping.Command):
         ...     'Voice_1',
         ...     [[10, 12, 14], [10, 12, 14], [10, 12, 14]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4008,7 +4026,10 @@ class RegisterCommand(scoping.Command):
         ...     'Voice_1',
         ...     [{10, 12, 14}],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4144,7 +4165,10 @@ class RegisterInterpolationCommand(scoping.Command):
         ...     'Voice_1',
         ...     collections,
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4210,7 +4234,10 @@ class RegisterInterpolationCommand(scoping.Command):
         ...     'Voice_1',
         ...     collections,
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5388,7 +5415,10 @@ class RegisterInterpolationCommand(scoping.Command):
             ...     'Voice_1',
             ...     collections,
             ...     )
-            >>> lilypond_file = music_maker.show(contribution)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     contribution.selections,
+            ...     attach_lilypond_voice_commands=True,
+            ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -5464,7 +5494,10 @@ class RegisterInterpolationCommand(scoping.Command):
             ...     'Voice_1',
             ...     collections,
             ...     )
-            >>> lilypond_file = music_maker.show(contribution)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     contribution.selections,
+            ...     attach_lilypond_voice_commands=True,
+            ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -5543,7 +5576,10 @@ class RegisterInterpolationCommand(scoping.Command):
             ...     'Voice_1',
             ...     collections,
             ...     )
-            >>> lilypond_file = music_maker.show(contribution)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     contribution.selections,
+            ...     attach_lilypond_voice_commands=True,
+            ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -5654,7 +5690,10 @@ class RegisterToOctaveCommand(scoping.Command):
         ...     'Voice_1',
         ...     [{0, 14, 28}],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5686,7 +5725,10 @@ class RegisterToOctaveCommand(scoping.Command):
         ...     'Voice_1',
         ...     [{0, 14, 28}],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5718,7 +5760,10 @@ class RegisterToOctaveCommand(scoping.Command):
         ...     'Voice_1',
         ...     [{0, 14, 28}],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5754,7 +5799,10 @@ class RegisterToOctaveCommand(scoping.Command):
         ...     'Voice_1',
         ...     [[0, 14, 28]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5790,7 +5838,10 @@ class RegisterToOctaveCommand(scoping.Command):
         ...     'Voice_1',
         ...     [[0, 14, 28]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5826,7 +5877,10 @@ class RegisterToOctaveCommand(scoping.Command):
         ...     'Voice_1',
         ...     [[0, 14, 28]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5866,7 +5920,10 @@ class RegisterToOctaveCommand(scoping.Command):
         ...     'Voice_1',
         ...     [[10, 12, 14]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5902,7 +5959,10 @@ class RegisterToOctaveCommand(scoping.Command):
         ...     'Voice_1',
         ...     [[10, 12, 14]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5938,7 +5998,10 @@ class RegisterToOctaveCommand(scoping.Command):
         ...     'Voice_1',
         ...     [[10, 12, 14]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6394,7 +6457,10 @@ class StaffPositionInterpolationCommand(scoping.Command):
         ...     'Voice_1',
         ...     collections,
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6462,7 +6528,10 @@ class StaffPositionInterpolationCommand(scoping.Command):
         ...     'Voice_1',
         ...     collections,
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6638,7 +6707,10 @@ def bass_to_octave(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6722,7 +6794,10 @@ def bass_to_octave(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6806,7 +6881,10 @@ def bass_to_octave(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6895,7 +6973,10 @@ def center_to_octave(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6979,7 +7060,10 @@ def center_to_octave(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -7063,7 +7147,10 @@ def center_to_octave(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -7205,7 +7292,10 @@ def displacement(
         ...     'Voice_1',
         ...     3 * [[0, 2, 3]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -7275,7 +7365,10 @@ def displacement(
         ...     'Voice_1',
         ...     6 * [{0, 2, 3}],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -7333,7 +7426,10 @@ def displacement(
         ...     'Voice_1',
         ...     3 * [[0, 2, 3]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -7678,7 +7774,10 @@ def register(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -7745,7 +7844,10 @@ def register(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -7820,7 +7922,10 @@ def register(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -7888,7 +7993,10 @@ def register(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -7978,7 +8086,10 @@ def soprano_to_octave(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -8062,7 +8173,10 @@ def soprano_to_octave(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -8146,7 +8260,10 @@ def soprano_to_octave(
         ...     'Voice_1',
         ...     [{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::

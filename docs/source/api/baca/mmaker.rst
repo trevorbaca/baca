@@ -424,7 +424,6 @@ mmaker
       figure_index
       figure_name
       hide_time_signature
-      show
       signature
       tag
 
@@ -444,15 +443,6 @@ mmaker
    .. automethod:: MusicMaker.__hash__
 
    .. automethod:: MusicMaker.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Class & static methods
-      :class: class-header
-
-   .. automethod:: MusicMaker.show
 
    .. raw:: html
 

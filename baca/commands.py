@@ -875,7 +875,10 @@ class ColorCommand(scoping.Command):
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker('Voice_1', collections)
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1700,7 +1703,10 @@ class IndicatorCommand(scoping.Command):
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker('Voice_1', collections)
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -2067,7 +2073,10 @@ class IndicatorCommand(scoping.Command):
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice_1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     contribution.selections,
+            ...     attach_lilypond_voice_commands=True,
+            ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -2139,7 +2148,10 @@ class IndicatorCommand(scoping.Command):
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> contribution = music_maker('Voice_1', collections)
-            >>> lilypond_file = music_maker.show(contribution)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     contribution.selections,
+            ...     attach_lilypond_voice_commands=True,
+            ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -2428,7 +2440,10 @@ class LabelCommand(scoping.Command):
         ...     'Voice_1',
         ...     collections,
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3216,7 +3231,10 @@ def color(*, selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3294,7 +3312,10 @@ def color(*, selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4153,7 +4174,10 @@ def dynamic_down(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4226,7 +4250,10 @@ def dynamic_down(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4315,7 +4342,10 @@ def dynamic_up(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4388,7 +4418,10 @@ def dynamic_up(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5029,7 +5062,10 @@ def glissando(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5643,7 +5679,10 @@ def label(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5723,7 +5762,10 @@ def label(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5817,7 +5859,10 @@ def markup(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5892,7 +5937,10 @@ def markup(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5967,7 +6015,10 @@ def markup(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6046,7 +6097,10 @@ def markup(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
-        >>> lilypond_file = music_maker.show(contribution)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(
+        ...     contribution.selections,
+        ...     attach_lilypond_voice_commands=True,
+        ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::

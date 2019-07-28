@@ -162,7 +162,10 @@ class ArpeggiationSpacingSpecifier(object):
             ...     'Voice_1',
             ...     collections,
             ...     )
-            >>> lilypond_file = music_maker.show(contribution)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     contribution.selections,
+            ...     attach_lilypond_voice_commands=True,
+            ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -212,7 +215,10 @@ class ArpeggiationSpacingSpecifier(object):
             ...     'Voice_1',
             ...     collections,
             ...     )
-            >>> lilypond_file = music_maker.show(contribution)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     contribution.selections,
+            ...     attach_lilypond_voice_commands=True,
+            ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
