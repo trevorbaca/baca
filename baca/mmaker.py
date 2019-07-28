@@ -6019,15 +6019,6 @@ class MusicAccumulator(object):
                 ),
             )
 
-    @staticmethod
-    def show(contribution, time_signatures) -> abjad.LilyPondFile:
-        """
-        Makes rhythm-maker-style LilyPond file for documentation examples.
-        """
-        return abjad.LilyPondFile.rhythm(
-            contribution, divisions=time_signatures, pitched_staff=True
-        )
-
 
 class MusicContribution(object):
     """
@@ -11657,19 +11648,6 @@ class PitchFirstRhythmMaker(object):
         Returns tuple of time treatments or none.
         """
         return self._time_treatments
-
-    ### PUBLIC METHODS ###
-
-    @staticmethod
-    def show(selections, time_signatures=None):
-        """
-        Makes rhythm-maker-style LilyPond file for documentation examples.
-
-        Returns LilyPond file.
-        """
-        return abjad.LilyPondFile.rhythm(
-            selections, time_signatures=time_signatures
-        )
 
 
 class RestAffixSpecifier(object):

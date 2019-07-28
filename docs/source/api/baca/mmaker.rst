@@ -291,7 +291,6 @@ mmaker
       assemble
       populate_segment_maker
       score_template
-      show
       time_signatures
 
    .. raw:: html
@@ -313,15 +312,6 @@ mmaker
    .. automethod:: MusicAccumulator.assemble
 
    .. automethod:: MusicAccumulator.populate_segment_maker
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Class & static methods
-      :class: class-header
-
-   .. automethod:: MusicAccumulator.show
 
    .. raw:: html
 
@@ -628,7 +618,6 @@ mmaker
       __repr__
       acciaccatura_specifiers
       affix
-      show
       spelling
       talea
       time_treatments
@@ -649,15 +638,6 @@ mmaker
    .. automethod:: PitchFirstRhythmMaker.__hash__
 
    .. automethod:: PitchFirstRhythmMaker.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Class & static methods
-      :class: class-header
-
-   .. automethod:: PitchFirstRhythmMaker.show
 
    .. raw:: html
 
