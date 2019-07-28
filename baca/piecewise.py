@@ -685,7 +685,7 @@ def dynamic(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -757,7 +757,7 @@ def dynamic(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP

@@ -345,8 +345,8 @@ mmaker
       figure_name
       hide_time_signature
       print_color_selector_result
-      selections
       time_signature
+      voice_to_selection
 
    .. raw:: html
 
@@ -387,9 +387,9 @@ mmaker
 
    .. autoattribute:: MusicContribution.hide_time_signature
 
-   .. autoattribute:: MusicContribution.selections
-
    .. autoattribute:: MusicContribution.time_signature
+
+   .. autoattribute:: MusicContribution.voice_to_selection
 
 .. autoclass:: MusicMaker
 

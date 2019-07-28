@@ -28,7 +28,7 @@ class SpannerIndicatorCommand(scoping.Command):
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> contribution = music_maker('Voice_1', collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     contribution.selections,
+            ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
             ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -603,7 +603,7 @@ def ottava(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -696,7 +696,7 @@ def ottava_bassa(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -790,7 +790,7 @@ def slur(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -866,7 +866,7 @@ def slur(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -965,7 +965,7 @@ def sustain_pedal(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1044,7 +1044,7 @@ def sustain_pedal(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1123,7 +1123,7 @@ def sustain_pedal(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1202,7 +1202,7 @@ def sustain_pedal(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1281,7 +1281,7 @@ def sustain_pedal(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1360,7 +1360,7 @@ def sustain_pedal(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1443,7 +1443,7 @@ def sustain_pedal(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1526,7 +1526,7 @@ def sustain_pedal(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1631,7 +1631,7 @@ def trill_spanner(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1708,7 +1708,7 @@ def trill_spanner(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1801,7 +1801,7 @@ def trill_spanner(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1882,7 +1882,7 @@ def trill_spanner(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -1960,7 +1960,7 @@ def trill_spanner(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2071,7 +2071,7 @@ def trill_spanner(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2174,7 +2174,7 @@ def trill_spanner(
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
         ...     )
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.selections,
+        ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
