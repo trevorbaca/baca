@@ -3523,9 +3523,8 @@ def cross_staff(
         >>> score_template = baca.StringTrioScoreTemplate()
         >>> accumulator = baca.MusicAccumulator(score_template=score_template)
         >>> music_maker = MusicMaker(
-        ...     pitch_first([1], 8),
+        ...     pitch_first([1], 8, signature=8),
         ...     rmakers.beam(),
-        ...     signature=16,
         ... )
         >>> accumulator(
         ...     'Violin_Music_Voice',
@@ -3533,7 +3532,6 @@ def cross_staff(
         ...     music_maker,
         ...     rmakers.unbeam(),
         ...     baca.stem_up(),
-        ...     signature=8,
         ...     figure_name='vn.1',
         ... )
         >>> accumulator(
@@ -3586,7 +3584,7 @@ def cross_staff(
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 2/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \time 1/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/8                                                                     %! _make_global_skips(1)
                         \baca-bar-line-visible                                                       %! _attach_final_bar_line
@@ -3788,7 +3786,7 @@ def cross_staff(
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 2]                                      %! _comment_measure_numbers
-                                R1 * 2/16                                                            %! _call_rhythm_commands
+                                R1 * 1/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 <<                                                                   %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -3826,6 +3824,7 @@ def cross_staff(
             <BLANKLINE>
             >>                                                                                       %! baca.StringTrioScoreTemplate.__call__
 
+
     ..  container:: example
 
         Attaches cross-staff command to last two pitched leaves:
@@ -3833,9 +3832,8 @@ def cross_staff(
         >>> score_template = baca.StringTrioScoreTemplate()
         >>> accumulator = baca.MusicAccumulator(score_template=score_template)
         >>> music_maker = MusicMaker(
-        ...     pitch_first([1], 8),
+        ...     pitch_first([1], 8, signature=8),
         ...     rmakers.beam(),
-        ...     signature=16,
         ... )
         >>> accumulator(
         ...     'Violin_Music_Voice',
@@ -3843,7 +3841,6 @@ def cross_staff(
         ...     music_maker,
         ...     rmakers.unbeam(),
         ...     baca.stem_up(),
-        ...     signature=8,
         ...     figure_name='vn.1',
         ... )
         >>> accumulator(
@@ -3896,7 +3893,7 @@ def cross_staff(
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
                         \baca-new-spacing-section #1 #12                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 2/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \time 1/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
                         s1 * 1/8                                                                     %! _make_global_skips(1)
                         \baca-bar-line-visible                                                       %! _attach_final_bar_line
@@ -4099,7 +4096,7 @@ def cross_staff(
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 2]                                      %! _comment_measure_numbers
-                                R1 * 2/16                                                            %! _call_rhythm_commands
+                                R1 * 1/8                                                             %! _call_rhythm_commands
             <BLANKLINE>
                                 <<                                                                   %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
