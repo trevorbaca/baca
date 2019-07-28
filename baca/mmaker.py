@@ -6940,6 +6940,7 @@ class MusicMaker(object):
             pitchclasses.CollectionList,
         )
         assert isinstance(collections, prototype), repr(collections)
+        assignments = []
         if isinstance(collections, str):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
@@ -6947,10 +6948,30 @@ class MusicMaker(object):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
         else:
+            commands_ = []
+            for command in commands:
+                if isinstance(command, PitchFirstAssignment):
+                    assignments.append(command)
+                elif isinstance(command, PitchFirstRhythmMaker):
+                    assignment = PitchFirstAssignment(command)
+                    assignments.append(assignment)
+                else:
+                    commands_.append(command)
+            commands = commands_
+            if not assignments:
+                raise Exception("must provide pitch-first assignment.")
+            # TODO: activate:
+            #        if 1 < len(assignments):
+            #            assert len(assignments) == 2, repr(assignments)
+            #            message = "must combine assignments:\n"
+            #            message += f"   {repr(assignments[0])}\n"
+            #            message += f"   {repr(assignments[1])}\n"
+            #            raise Exception(message)
             collections = self._coerce_collections(collections)
-            selections, commands = self._call_rhythm_commands(
-                collections, commands
-            )
+            selections = len(collections) * [None]
+            for assignment in assignments:
+                assert isinstance(assignment, PitchFirstAssignment)
+                assignment(collections=collections, selections=selections)
         container = abjad.Container(selections)
         color_selector, color_selector_result = None, None
         imbricated_selections = {}
@@ -6968,8 +6989,13 @@ class MusicMaker(object):
             abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, leaf)
         selection = abjad.select([container])
         duration = abjad.inspect(selection).duration()
-        if self.signature is not None:
-            duration = duration.with_denominator(self.signature)
+        signature = None
+        if assignments:
+            primary_rhythm_maker = assignments[0].rhythm_maker
+            signature = primary_rhythm_maker.signature
+        signature = signature or self.signature
+        if signature is not None:
+            duration = duration.with_denominator(signature)
         time_signature = abjad.TimeSignature(duration)
         voice_to_selection = {voice_name: selection}
         voice_to_selection.update(imbricated_selections)
@@ -7015,31 +7041,6 @@ class MusicMaker(object):
         return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
-
-    def _call_rhythm_commands(self, collections, specifiers):
-        selections = len(collections) * [None]
-        assignments, specifiers_ = [], []
-        for specifier in specifiers:
-            if isinstance(specifier, PitchFirstAssignment):
-                assignments.append(specifier)
-            elif isinstance(specifier, PitchFirstRhythmMaker):
-                assignment = PitchFirstAssignment(specifier)
-                assignments.append(assignment)
-            else:
-                specifiers_.append(specifier)
-        if not assignments:
-            raise Exception("must provide pitch-first assignment.")
-        # TODO: activate:
-        #        if 1 < len(assignments):
-        #            assert len(assignments) == 2, repr(assignments)
-        #            message = "must combine assignments:\n"
-        #            message += f"   {repr(assignments[0])}\n"
-        #            message += f"   {repr(assignments[1])}\n"
-        #            raise Exception(message)
-        for assignment in assignments:
-            assert isinstance(assignment, PitchFirstAssignment)
-            assignment(collections=collections, selections=selections)
-        return selections, specifiers_
 
     @staticmethod
     def _coerce_collections(collections):
@@ -9862,6 +9863,7 @@ class PitchFirstRhythmMaker(object):
         "_affix",
         "_next_attack",
         "_next_segment",
+        "_signature",
         "_spelling",
         "_state",
         "_talea",
@@ -9877,6 +9879,7 @@ class PitchFirstRhythmMaker(object):
         talea: rmakers.Talea,
         acciaccatura_specifiers: typing.Sequence[AcciaccaturaSpecifier] = None,
         affix: "RestAffixSpecifier" = None,
+        signature: int = None,
         spelling: rmakers.Spelling = None,
         time_treatments: typing.Sequence[
             typing.Union[int, str, abjad.Duration]
@@ -9895,6 +9898,11 @@ class PitchFirstRhythmMaker(object):
         self._affix = affix
         self._next_attack = 0
         self._next_segment = 0
+        if signature is not None:
+            assert isinstance(signature, int), repr(signature)
+        self._signature = signature
+        if spelling is not None:
+            assert isinstance(spelling, rmakers.Spelling)
         self._spelling = spelling
         self._state = abjad.OrderedDict()
         if not isinstance(talea, rmakers.Talea):
@@ -10710,6 +10718,13 @@ class PitchFirstRhythmMaker(object):
         Gets rest affix specifier.
         """
         return self._affix
+
+    @property
+    def signature(self) -> typing.Optional[int]:
+        """
+        Gets (time) signature (denominator).
+        """
+        return self._signature
 
     @property
     def spelling(self) -> typing.Optional[rmakers.Spelling]:
@@ -12748,7 +12763,8 @@ def pitch_first(
     acciaccatura_specifiers=None,
     affix: RestAffixSpecifier = None,
     pattern=None,
-    spelling=None,
+    signature: int = None,
+    spelling: rmakers.Spelling = None,
     thread: bool = None,
     time_treatments=None,
 ) -> PitchFirstAssignment:
@@ -12760,6 +12776,7 @@ def pitch_first(
             rmakers.Talea(counts=counts, denominator=denominator),
             acciaccatura_specifiers=acciaccatura_specifiers,
             affix=affix,
+            signature=signature,
             spelling=spelling,
             time_treatments=time_treatments,
         ),

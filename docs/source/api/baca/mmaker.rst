@@ -612,6 +612,7 @@ mmaker
       __repr__
       acciaccatura_specifiers
       affix
+      signature
       spelling
       talea
       time_treatments
@@ -643,6 +644,8 @@ mmaker
    .. autoattribute:: PitchFirstRhythmMaker.acciaccatura_specifiers
 
    .. autoattribute:: PitchFirstRhythmMaker.affix
+
+   .. autoattribute:: PitchFirstRhythmMaker.signature
 
    .. autoattribute:: PitchFirstRhythmMaker.spelling
 
