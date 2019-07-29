@@ -537,6 +537,7 @@ indicators.Markup library.
    ~baca.mmaker.PitchFirstCommand
    ~baca.mmaker.PitchFirstRhythmMaker
    ~baca.mmaker.RestAffixSpecifier
+   ~baca.mmaker.Stack
 
 .. raw:: html
 

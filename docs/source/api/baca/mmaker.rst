@@ -35,6 +35,7 @@ mmaker
    ~PitchFirstCommand
    ~PitchFirstRhythmMaker
    ~RestAffixSpecifier
+   ~Stack
 
 .. autoclass:: AcciaccaturaSpecifier
 
@@ -715,6 +716,51 @@ mmaker
    .. autoattribute:: RestAffixSpecifier.skips_instead_of_rests
 
    .. autoattribute:: RestAffixSpecifier.suffix
+
+.. autoclass:: Stack
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
+      commands
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: Stack.__call__
+
+   .. automethod:: Stack.__eq__
+
+   .. automethod:: Stack.__format__
+
+   .. automethod:: Stack.__hash__
+
+   .. automethod:: Stack.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: Stack.commands
 
 .. raw:: html
 

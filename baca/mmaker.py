@@ -16,7 +16,215 @@ from . import typings
 _commands = commands
 
 
+### UTILITIES ###
+
+
+def _coerce_collections(collections) -> pitchclasses.CollectionList:
+    prototype = (abjad.Segment, abjad.Set)
+    if isinstance(collections, prototype):
+        return pitchclasses.CollectionList(collections=[collections])
+    item_class: typing.Type = abjad.NumberedPitch
+    for collection in collections:
+        for item in collection:
+            if isinstance(item, str):
+                item_class = abjad.NamedPitch
+                break
+    return pitchclasses.CollectionList(
+        collections=collections, item_class=item_class
+    )
+
+
 ### CLASSES ###
+
+
+class Stack(object):
+    r"""
+    Stack.
+
+    ..  container:: example
+
+        >>> stack = baca.Stack(
+        ...     baca.pitch_first(
+        ...         [1, 1, 2],
+        ...         8,
+        ...         time_treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
+        ...     ).rhythm_maker,
+        ...     rmakers.denominator((1, 16)),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0, 2, 10, 18, 16],
+        ...     [15, 20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2],
+        ...     [10, 18, 16, 15, 20],
+        ...     [19, 9, 0, 2, 10],
+        ...     ]
+        >>> selections = stack(collections)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
+        >>> staff = lilypond_file[abjad.Score]
+        >>> abjad.override(staff).beam.positions = (-6, -6)
+        >>> abjad.override(staff).stem.direction = abjad.Down
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            \with
+            {
+                \override Beam.positions = #'(-6 . -6)
+                \override Stem.direction = #down
+            }
+            <<
+                \new GlobalContext
+                {
+                    \time 15/8
+                    s1 * 15/8
+                }
+                \new Staff
+                {
+                    \times 4/6 {
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        fs''16
+                        e''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/7 {
+                        ef''8
+                        [
+                        af''16
+                        g''16
+                        a'8
+                        c'16
+                        ]
+                    }
+                    \times 4/7 {
+                        d'16
+                        [
+                        bf'8
+                        fs''16
+                        e''16
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        af''16
+                        [
+                        g''16
+                        a'8
+                        c'16
+                        d'16
+                        ]
+                    }
+                    \times 4/7 {
+                        bf'8
+                        [
+                        fs''16
+                        e''16
+                        ef''8
+                        af''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/7 {
+                        g''16
+                        [
+                        a'8
+                        c'16
+                        d'16
+                        bf'8
+                        ]
+                    }
+                }
+            >>
+
+    """
+
+    ### CLASS ATTRIBUTES ###
+
+    __slots__ = "_commands"
+
+    # to make sure abjad.new() copies commands
+    _positional_arguments_name = "commands"
+
+    _publish_storage_format = True
+
+    ### INITIALIZER ###
+
+    def __init__(self, *commands) -> None:
+        commands = commands or ()
+        commands_ = tuple(commands)
+        self._commands = commands_
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self, argument: typing.Any) -> typing.Any:
+        """
+        Calls stack on ``argument``.
+        """
+        result: typing.Any = argument
+        for command in self.commands:
+            try:
+                result_ = command(result)
+            except Exception as e:
+                message = "exception while calling:\n"
+                message += f"   {format(command)}"
+                raise Exception(message)
+            if result_ is not None:
+                result = result_
+        return result
+
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when initialization values compare equal.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __format__(self, format_specification="") -> str:
+        """
+        Formats object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __hash__(self) -> int:
+        """
+        Hashes object.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f"unhashable type: {self}")
+        return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation of object.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
+    ### PRIVATE METHODS ###
+
+    def _get_format_specification(self):
+        manager = abjad.StorageFormatManager(self)
+        return abjad.FormatSpecification(
+            self, storage_format_args_values=self.commands
+        )
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def commands(self):
+        """
+        Gets commands.
+        """
+        return self._commands
 
 
 class LMRSpecifier(object):
@@ -6627,7 +6835,7 @@ class MusicMaker(object):
             #            message += f"   {repr(assignments[0])}\n"
             #            message += f"   {repr(assignments[1])}\n"
             #            raise Exception(message)
-            collections = self._coerce_collections(collections)
+            collections = _coerce_collections(collections)
             selections = len(collections) * [None]
             for assignment in assignments:
                 assert isinstance(assignment, PitchFirstAssignment)
@@ -6700,21 +6908,6 @@ class MusicMaker(object):
         return abjad.StorageFormatManager(self).get_repr_format()
 
     ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _coerce_collections(collections) -> pitchclasses.CollectionList:
-        prototype = (abjad.Segment, abjad.Set)
-        if isinstance(collections, prototype):
-            return pitchclasses.CollectionList(collections=[collections])
-        item_class: typing.Type = abjad.NumberedPitch
-        for collection in collections:
-            for item in collection:
-                if isinstance(item, str):
-                    item_class = abjad.NamedPitch
-                    break
-        return pitchclasses.CollectionList(
-            collections=collections, item_class=item_class
-        )
 
     def _label_figure_name_(self, container):
         if self.figure_name is None:
@@ -8405,11 +8598,11 @@ class Nesting(object):
             ]
         selections_ = []
         prototype = abjad.Selection
-        for index, tuplet_selection in enumerate(tuplet_selections):
+        for i, tuplet_selection in enumerate(tuplet_selections):
             assert isinstance(tuplet_selection, prototype), repr(
                 tuplet_selection
             )
-            time_treatment = time_treatments[index]
+            time_treatment = time_treatments[i]
             if time_treatment is None:
                 selections_.append(tuplet_selection)
             else:
@@ -8523,13 +8716,20 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
     def __call__(
         self,
         collections: pitchclasses.CollectionList,
-        selections: typing.Sequence[typing.Union[abjad.Selection, None]],
+        selections: typing.Sequence[
+            typing.Union[abjad.Selection, None]
+        ] = None,
     ) -> typing.List[abjad.Selection]:
         """
         Calls pitch-first assignment.
         """
+        ###print("CALLING ASSIGNMENT ...")
+        collections = _coerce_collections(collections)
         prototype = (pitchclasses.CollectionList,)
         assert isinstance(collections, prototype), repr(collections)
+
+        if selections is None:
+            selections = len(collections) * [None]
         assert isinstance(selections, list), repr(selections)
         selection_prototype = (abjad.Selection, type(None))
         assert all(
@@ -8543,7 +8743,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         pattern = self.pattern or abjad.index_all()
         collection_prototype = (abjad.Segment, abjad.Set, list)
         collections_, indices = [], []
-        for index, collection in enumerate(collections):
+        for i, collection in enumerate(collections):
             assert isinstance(collection, collection_prototype), repr(
                 collection
             )
@@ -8553,28 +8753,28 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
             else:
                 collection_ = collection
             assert isinstance(pattern, abjad.Pattern), repr(pattern)
-            if not pattern.matches_index(index, length):
+            if not pattern.matches_index(i, length):
                 continue
             collections_.append(collection_)
-            indices.append(index)
+            indices.append(i)
         stage_selections: typing.Union[list, abjad.Selection]
         if self.thread:
             stage_selections = rhythm_maker(collections_)
         else:
             stage_selections = []
             total_collections = len(collections_)
-            for collection_index, collection_ in enumerate(collections_):
+            for i, collection_ in enumerate(collections_):
                 stage_selections_ = rhythm_maker(
                     [collection_],
-                    collection_index=collection_index,
+                    collection_index=i,
                     total_collections=total_collections,
                 )
                 stage_selections.extend(stage_selections_)
         triples = zip(indices, stage_selections, collections)
-        for index, stage_selection, collection in triples:
+        for i, stage_selection, collection in triples:
             assert len(stage_selection) == 1, repr(stage_selection)
             if not isinstance(collection, (abjad.Set, set)):
-                selections[index] = stage_selection
+                selections[i] = stage_selection
                 continue
             assert len(stage_selection) == 1, repr(stage_selection)
             tuplet = stage_selection[0]
@@ -8593,7 +8793,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
                 abjad.mutate(note).replace([chord])
                 for indicator in indicators:
                     abjad.attach(indicator, chord)
-            selections[index] = stage_selection
+            selections[i] = stage_selection
         assert isinstance(selections, list), repr(selections)
         for selection in selections:
             assert isinstance(selection, selection_prototype), repr(selection)
@@ -8840,6 +9040,7 @@ class PitchFirstCommand(object):
         """
         Calls pitch-first command.
         """
+        ###print("CALLING PFCOMMAND ...")
         prototype = (list,)
         assert isinstance(collections, prototype), repr(collections)
         # temporary:
@@ -8860,7 +9061,6 @@ class PitchFirstCommand(object):
         staff = rmakers.RhythmMaker._make_staff(time_signatures)
         voice = staff["MusicVoice"]
         voice.extend(tuplets)
-        ###self._call_commands(voice, divisions_consumed, self.rhythm_maker)
         self._call_commands(voice, divisions_consumed, rhythm_maker)
         selections = abjad.select(voice[:]).group_by_measure()
         voice[:] = []
@@ -9481,6 +9681,8 @@ class PitchFirstRhythmMaker(object):
                 >>
 
         """
+        ###print("CALLING PFRMAKER ...", collections, collection_index, state,
+        ###    total_collections, self.time_treatments)
         prototype = (list,)
         assert isinstance(collections, prototype), repr(collections)
         self._state = state or abjad.OrderedDict()
