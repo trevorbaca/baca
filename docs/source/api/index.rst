@@ -534,7 +534,6 @@ indicators.Markup library.
    ~baca.mmaker.MusicMaker
    ~baca.mmaker.Nesting
    ~baca.mmaker.PitchFirstAssignment
-   ~baca.mmaker.PitchFirstCommand
    ~baca.mmaker.PitchFirstRhythmMaker
    ~baca.mmaker.RestAffixSpecifier
    ~baca.mmaker.Stack
