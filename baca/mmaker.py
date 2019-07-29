@@ -7052,7 +7052,9 @@ class MusicMaker(object):
         prototype = (abjad.Segment, abjad.Set)
         if isinstance(collections, prototype):
             return pitchclasses.CollectionList(collections=[collections])
-        item_class: abjad.Pitch = abjad.NumberedPitch
+        item_class: typing.Union[
+            abjad.NamedPitch, abjad.NumberedPitch
+        ] = abjad.NumberedPitch
         for collection in collections:
             for item in collection:
                 if isinstance(item, str):
@@ -8861,8 +8863,6 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
     ) -> None:
         assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
         self._rhythm_maker = rhythm_maker
-        prototype = (abjad.DurationInequality, abjad.Pattern, type(None))
-        assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
         if thread is not None:
             thread = bool(thread)
