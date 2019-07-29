@@ -33,7 +33,7 @@ class AcciaccaturaSpecifier(object):
         ...     baca.pitch_first(
         ...         [1],
         ...         8,
-        ...         acciaccatura_specifiers=[baca.AcciaccaturaSpecifier()],
+        ...         acciaccatura=baca.AcciaccaturaSpecifier(),
         ...     ),
         ...     rmakers.beam(),
         ... )
@@ -188,6 +188,35 @@ class AcciaccaturaSpecifier(object):
         assert isinstance(collection, list), repr(collection)
         return acciaccatura_containers, collection
 
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when initialization values are equal.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __hash__(self) -> int:
+        """
+        Hashes with storage format manager.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f"unhashable type: {self}")
+        return result
+
+    def __format__(self, format_specification="") -> str:
+        """
+        Formats with storage format manager.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
     ### PRIVATE METHODS ###
 
     def _get_durations(self):
@@ -216,7 +245,7 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura_specifiers=[baca.AcciaccaturaSpecifier()],
+            ...         acciaccatura=baca.AcciaccaturaSpecifier(),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -315,9 +344,7 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura_specifiers=[
-            ...             baca.AcciaccaturaSpecifier(durations=[(1, 8)]),
-            ...         ],
+            ...         acciaccatura=baca.AcciaccaturaSpecifier(durations=[(1, 8)]),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -429,7 +456,7 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura_specifiers=[baca.AcciaccaturaSpecifier()],
+            ...         acciaccatura=baca.AcciaccaturaSpecifier(),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -529,15 +556,13 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura_specifiers=[
-            ...             baca.AcciaccaturaSpecifier(
-            ...                 lmr_specifier=baca.LMRSpecifier(
-            ...                     left_length=3,
-            ...                     right_counts=[1],
-            ...                     right_cyclic=True,
-            ...                     ),
+            ...         acciaccatura=baca.AcciaccaturaSpecifier(
+            ...             lmr_specifier=baca.LMRSpecifier(
+            ...                 left_length=3,
+            ...                 right_counts=[1],
+            ...                 right_cyclic=True,
+            ...                 ),
             ...             ),
-            ...         ],
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -642,15 +667,13 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura_specifiers=[
-            ...             baca.AcciaccaturaSpecifier(
-            ...                 lmr_specifier=baca.LMRSpecifier(
-            ...                     right_length=3,
-            ...                     left_counts=[1],
-            ...                     left_cyclic=True,
-            ...                     ),
+            ...         acciaccatura=baca.AcciaccaturaSpecifier(
+            ...             lmr_specifier=baca.LMRSpecifier(
+            ...                 right_length=3,
+            ...                 left_counts=[1],
+            ...                 left_cyclic=True,
             ...                 ),
-            ...             ],
+            ...             ),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -756,16 +779,14 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura_specifiers=[
-            ...              baca.AcciaccaturaSpecifier(
-            ...                  lmr_specifier=baca.LMRSpecifier(
-            ...                     left_length=3,
-            ...                     middle_counts=[1],
-            ...                     middle_cyclic=True,
-            ...                     right_length=3,
-            ...                     ),
+            ...         acciaccatura=baca.AcciaccaturaSpecifier(
+            ...              lmr_specifier=baca.LMRSpecifier(
+            ...                 left_length=3,
+            ...                 middle_counts=[1],
+            ...                 middle_cyclic=True,
+            ...                 right_length=3,
             ...                 ),
-            ...             ],
+            ...             ),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -877,13 +898,11 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura_specifiers=[
-            ...             baca.AcciaccaturaSpecifier(
-            ...                 lmr_specifier=baca.LMRSpecifier(
-            ...                     left_length=1,
-            ...                     ),
+            ...         acciaccatura=baca.AcciaccaturaSpecifier(
+            ...             lmr_specifier=baca.LMRSpecifier(
+            ...                 left_length=1,
             ...                 ),
-            ...             ],
+            ...             ),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -1001,7 +1020,7 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura_specifiers=[baca.AcciaccaturaSpecifier()],
+            ...         acciaccatura=baca.AcciaccaturaSpecifier(),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -1100,11 +1119,9 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura_specifiers=[
-            ...             baca.AcciaccaturaSpecifier(
-            ...                 pattern=abjad.index_last(1),
-            ...                 ),
-            ...             ],
+            ...         acciaccatura=baca.AcciaccaturaSpecifier(
+            ...             pattern=abjad.index_last(1),
+            ...             ),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -1197,11 +1214,9 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura_specifiers=[
-            ...             baca.AcciaccaturaSpecifier(
-            ...                 pattern=abjad.index([1], 2),
-            ...                 ),
-            ...             ],
+            ...         acciaccatura=baca.AcciaccaturaSpecifier(
+            ...             pattern=abjad.index([1], 2),
+            ...             ),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -9661,7 +9676,7 @@ class PitchFirstRhythmMaker(object):
     __documentation_section__ = "Classes"
 
     __slots__ = (
-        "_acciaccatura_specifiers",
+        "_acciaccatura",
         "_affix",
         "_next_attack",
         "_next_segment",
@@ -9679,7 +9694,7 @@ class PitchFirstRhythmMaker(object):
     def __init__(
         self,
         talea: rmakers.Talea,
-        acciaccatura_specifiers: typing.Sequence[AcciaccaturaSpecifier] = None,
+        acciaccatura: AcciaccaturaSpecifier = None,
         affix: "RestAffixSpecifier" = None,
         signature: int = None,
         spelling: rmakers.Spelling = None,
@@ -9687,11 +9702,11 @@ class PitchFirstRhythmMaker(object):
             typing.Union[int, str, abjad.Duration]
         ] = None,
     ):
-        if acciaccatura_specifiers is not None:
-            prototype = AcciaccaturaSpecifier
-            for acciaccatura_specifier in acciaccatura_specifiers:
-                assert isinstance(acciaccatura_specifier, prototype)
-        self._acciaccatura_specifiers = acciaccatura_specifiers
+        if acciaccatura is not None:
+            assert isinstance(acciaccatura, AcciaccaturaSpecifier), repr(
+                acciaccatura
+            )
+        self._acciaccatura = acciaccatura
         if affix is not None:
             if not isinstance(affix, RestAffixSpecifier):
                 message = "must be rest affix specifier:\n"
@@ -9943,12 +9958,11 @@ class PitchFirstRhythmMaker(object):
         return durations
 
     def _get_acciaccatura_specifier(self, collection_index, total_collections):
-        if not self.acciaccatura_specifiers:
+        if not self.acciaccatura:
             return
-        for acciaccatura_specifier in self.acciaccatura_specifiers:
-            pattern = acciaccatura_specifier._get_pattern()
-            if pattern.matches_index(collection_index, total_collections):
-                return acciaccatura_specifier
+        pattern = self.acciaccatura._get_pattern()
+        if pattern.matches_index(collection_index, total_collections):
+            return self.acciaccatura
 
     def _get_spelling_specifier(self):
         if self.spelling is not None:
@@ -10286,11 +10300,9 @@ class PitchFirstRhythmMaker(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def acciaccatura_specifiers(
-        self
-    ) -> typing.Optional[typing.Sequence[AcciaccaturaSpecifier]]:
+    def acciaccatura(self) -> typing.Optional[AcciaccaturaSpecifier]:
         r"""
-        Gets acciaccatura specifiers.
+        Gets acciaccatura specifier.
 
         ..  container:: example
 
@@ -10300,7 +10312,7 @@ class PitchFirstRhythmMaker(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         4,
-            ...         acciaccatura_specifiers=[baca.AcciaccaturaSpecifier()],
+            ...         acciaccatura=baca.AcciaccaturaSpecifier(),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -10399,11 +10411,9 @@ class PitchFirstRhythmMaker(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         4,
-            ...         acciaccatura_specifiers=[
-            ...             baca.AcciaccaturaSpecifier(
-            ...                 lmr_specifier=baca.LMRSpecifier()
-            ...                 ),
-            ...             ],
+            ...         acciaccatura=baca.AcciaccaturaSpecifier(
+            ...             lmr_specifier=baca.LMRSpecifier()
+            ...             ),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -10508,11 +10518,8 @@ class PitchFirstRhythmMaker(object):
                     }
                 >>
 
-        Set to acciaccatura specifiers or none.
-
-        Returns acciaccatura specifiers or none.
         """
-        return self._acciaccatura_specifiers
+        return self._acciaccatura
 
     @property
     def affix(self) -> typing.Optional["RestAffixSpecifier"]:
@@ -10854,9 +10861,6 @@ class PitchFirstRhythmMaker(object):
                     }
                 >>
 
-        Set to duration specifier or none.
-
-        Returns duration specifier or none.
         """
         return self._spelling
 
@@ -10961,9 +10965,6 @@ class PitchFirstRhythmMaker(object):
                     }
                 >>
 
-        Set to talea or none.
-
-        Returns talea.
         """
         return self._talea
 
@@ -11592,12 +11593,8 @@ class PitchFirstRhythmMaker(object):
                     }
                 >>
 
-        Set to time treatments or none.
-
         Time treatments defined equal to integers; positive multipliers;
         positive durations; and the strings ``'accel'`` and ``'rit'``.
-
-        Returns tuple of time treatments or none.
         """
         return self._time_treatments
 
@@ -12753,7 +12750,7 @@ def pitch_first(
     counts: abjad.IntegerSequence,
     denominator: int,
     *,
-    acciaccatura_specifiers=None,
+    acciaccatura=None,
     affix: RestAffixSpecifier = None,
     pattern=None,
     signature: int = None,
@@ -12767,7 +12764,7 @@ def pitch_first(
     return PitchFirstAssignment(
         PitchFirstRhythmMaker(
             rmakers.Talea(counts=counts, denominator=denominator),
-            acciaccatura_specifiers=acciaccatura_specifiers,
+            acciaccatura=acciaccatura,
             affix=affix,
             signature=signature,
             spelling=spelling,

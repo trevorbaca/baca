@@ -49,6 +49,10 @@ mmaker
       :nosignatures:
 
       __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
       durations
       lmr_specifier
       pattern
@@ -61,6 +65,14 @@ mmaker
       :class: class-header
 
    .. automethod:: AcciaccaturaSpecifier.__call__
+
+   .. automethod:: AcciaccaturaSpecifier.__eq__
+
+   .. automethod:: AcciaccaturaSpecifier.__format__
+
+   .. automethod:: AcciaccaturaSpecifier.__hash__
+
+   .. automethod:: AcciaccaturaSpecifier.__repr__
 
    .. raw:: html
 
@@ -610,7 +622,7 @@ mmaker
       __format__
       __hash__
       __repr__
-      acciaccatura_specifiers
+      acciaccatura
       affix
       signature
       spelling
@@ -641,7 +653,7 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PitchFirstRhythmMaker.acciaccatura_specifiers
+   .. autoattribute:: PitchFirstRhythmMaker.acciaccatura
 
    .. autoattribute:: PitchFirstRhythmMaker.affix
 
