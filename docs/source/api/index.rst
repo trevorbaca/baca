@@ -553,6 +553,7 @@ indicators.Markup library.
    ~baca.mmaker.anchor_to_figure
    ~baca.mmaker.coat
    ~baca.mmaker.imbricate
+   ~baca.mmaker.lmr
    ~baca.mmaker.nest
    ~baca.mmaker.pitch_first
    ~baca.mmaker.rests_after

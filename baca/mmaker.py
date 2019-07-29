@@ -19,6 +19,935 @@ _commands = commands
 ### CLASSES ###
 
 
+class LMRSpecifier(object):
+    """
+    Left-middle-right specifier.
+
+    ..  container:: example
+
+        Default LMR specifier:
+
+        >>> lmr_specifier = baca.lmr()
+
+        >>> parts = lmr_specifier([1])
+        >>> for part in parts: part
+        Sequence([1])
+
+        >>> parts =lmr_specifier([1, 2])
+        >>> for part in parts: part
+        Sequence([1, 2])
+
+        >>> parts = lmr_specifier([1, 2, 3])
+        >>> for part in parts: part
+        Sequence([1, 2, 3])
+
+        >>> parts = lmr_specifier([1, 2, 3, 4])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4])
+
+        >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5])
+
+        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6])
+
+        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6, 7])
+
+        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6, 7, 8])
+
+        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = (
+        "_left_counts",
+        "_left_cyclic",
+        "_left_length",
+        "_left_reversed",
+        "_middle_counts",
+        "_middle_cyclic",
+        "_middle_reversed",
+        "_priority",
+        "_right_counts",
+        "_right_cyclic",
+        "_right_length",
+        "_right_reversed",
+    )
+
+    ### INITIALIZER ###
+
+    def __init__(
+        self,
+        *,
+        left_counts: typing.Sequence[int] = None,
+        left_cyclic: bool = None,
+        left_length: int = None,
+        left_reversed: bool = None,
+        middle_counts: typing.Sequence[int] = None,
+        middle_cyclic: bool = None,
+        middle_reversed: bool = None,
+        priority: abjad.HorizontalAlignment = None,
+        right_counts: typing.Sequence[int] = None,
+        right_cyclic: bool = None,
+        right_length: int = None,
+        right_reversed: bool = None,
+    ) -> None:
+        if left_counts is not None:
+            assert abjad.mathtools.all_are_positive_integers(left_counts)
+        self._left_counts = left_counts
+        if left_cyclic is not None:
+            left_cyclic = bool(left_cyclic)
+        self._left_cyclic = left_cyclic
+        if left_length is not None:
+            left_length = int(left_length)
+            assert 0 <= left_length, repr(left_length)
+        self._left_length = left_length
+        if left_reversed is not None:
+            left_reversed = bool(left_reversed)
+        self._left_reversed = left_reversed
+        if middle_counts is not None:
+            assert abjad.mathtools.all_are_positive_integers(middle_counts)
+        self._middle_counts = middle_counts
+        if middle_cyclic is not None:
+            middle_cyclic = bool(middle_cyclic)
+        self._middle_cyclic = middle_cyclic
+        if middle_reversed is not None:
+            middle_reversed = bool(middle_reversed)
+        self._middle_reversed = middle_reversed
+        if priority is not None:
+            assert priority in (abjad.Left, abjad.Right)
+        self._priority = priority
+        if right_counts is not None:
+            assert abjad.mathtools.all_are_positive_integers(right_counts)
+        self._right_counts = right_counts
+        if right_cyclic is not None:
+            right_cyclic = bool(right_cyclic)
+        self._right_cyclic = right_cyclic
+        if right_length is not None:
+            right_length = int(right_length)
+            assert 0 <= right_length, repr(right_length)
+        self._right_length = right_length
+        if right_reversed is not None:
+            right_reversed = bool(right_reversed)
+        self._right_reversed = right_reversed
+
+    ### SPECIAL METHODS ###
+
+    def __call__(
+        self, sequence: typing.Union[list, abjad.Segment] = None
+    ) -> typing.List[abjad.Sequence]:
+        """
+        Calls LMR specifier on ``sequence``.
+        """
+        assert isinstance(sequence, (list, abjad.Segment)), repr(sequence)
+        top_lengths = self._get_top_lengths(len(sequence))
+        top_parts = abjad.sequence(sequence).partition_by_counts(
+            top_lengths, cyclic=False, overhang=abjad.Exact
+        )
+        parts: typing.List[abjad.Sequence] = []
+        left_part, middle_part, right_part = top_parts
+        if left_part:
+            if self.left_counts:
+                parts_ = abjad.sequence(left_part).partition_by_counts(
+                    self.left_counts,
+                    cyclic=self.left_cyclic,
+                    overhang=True,
+                    reversed_=self.left_reversed,
+                )
+                parts.extend(parts_)
+            else:
+                parts.append(left_part)
+        if middle_part:
+            if self.middle_counts:
+                parts_ = abjad.sequence(middle_part).partition_by_counts(
+                    self.middle_counts,
+                    cyclic=self.middle_cyclic,
+                    overhang=True,
+                    reversed_=self.middle_reversed,
+                )
+                parts.extend(parts_)
+            else:
+                parts.append(middle_part)
+        if right_part:
+            if self.right_counts:
+                parts_ = abjad.sequence(right_part).partition_by_counts(
+                    self.right_counts,
+                    cyclic=self.right_cyclic,
+                    overhang=True,
+                    reversed_=self.right_reversed,
+                )
+                parts.extend(parts_)
+            else:
+                parts.append(right_part)
+        assert isinstance(parts, list), repr(parts)
+        assert all(isinstance(_, abjad.Sequence) for _ in parts)
+        return parts
+
+    ### PRIVATE METHODS ###
+
+    def _get_priority(self):
+        if self.priority is None:
+            return abjad.Left
+        return self.priority
+
+    def _get_top_lengths(self, total_length):
+        left_length, middle_length, right_length = 0, 0, 0
+        left_length = self.left_length or 0
+        middle_length = 0
+        right_length = self.right_length or 0
+        if left_length and right_length:
+            if self._get_priority() == abjad.Left:
+                left_length = self.left_length or 0
+                left_length = min([left_length, total_length])
+                remaining_length = total_length - left_length
+                if self.right_length is None:
+                    right_length = remaining_length
+                    middle_length = 0
+                else:
+                    right_length = self.right_length or 0
+                    right_length = min([right_length, remaining_length])
+                    remaining_length = total_length - (
+                        left_length + right_length
+                    )
+                    middle_length = remaining_length
+            else:
+                right_length = self.right_length or 0
+                right_length = min([right_length, total_length])
+                remaining_length = total_length - right_length
+                if self.left_length is None:
+                    left_length = remaining_length
+                    middle_length = 0
+                else:
+                    left_length = self.left_length or 0
+                    left_length = min([left_length, remaining_length])
+                    remaining_length = total_length - (
+                        right_length + left_length
+                    )
+                    middle_length = remaining_length
+        elif left_length and not right_length:
+            left_length = min([left_length, total_length])
+            remaining_length = total_length - left_length
+            right_length = remaining_length
+        elif not left_length and right_length:
+            right_length = min([right_length, total_length])
+            remaining_length = total_length - right_length
+            left_length = remaining_length
+        elif not left_length and not right_length:
+            middle_length = total_length
+        return left_length, middle_length, right_length
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def left_counts(self):
+        """
+        Gets left counts.
+
+        ..  container:: example
+
+            Left counts equal to a single 1:
+
+            >>> lmr_specifier = baca.lmr(
+            ...     left_counts=[1],
+            ...     left_cyclic=False,
+            ...     left_length=3,
+            ...     right_length=2,
+            ...     )
+
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
+
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4])
+            Sequence([5, 6])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5])
+            Sequence([6, 7])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5, 6])
+            Sequence([7, 8])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5, 6, 7])
+            Sequence([8, 9])
+
+        ..  container:: example
+
+            Left counts all equal to 1:
+
+            >>> lmr_specifier = baca.lmr(
+            ...     left_counts=[1],
+            ...     left_cyclic=True,
+            ...     left_length=3,
+            ...     right_length=2,
+            ...     )
+
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
+
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+            Sequence([4])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+            Sequence([4, 5])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+            Sequence([4])
+            Sequence([5, 6])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+            Sequence([4, 5])
+            Sequence([6, 7])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+            Sequence([4, 5, 6])
+            Sequence([7, 8])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3])
+            Sequence([4, 5, 6, 7])
+            Sequence([8, 9])
+
+        Defaults to none.
+
+        Set to positive integers or none.
+
+        Returns tuple of positive integers or none.
+        """
+        return self._left_counts
+
+    @property
+    def left_cyclic(self):
+        """
+        Is true when specifier reads left counts cyclically.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        """
+        return self._left_cyclic
+
+    @property
+    def left_length(self):
+        """
+        Gets left length.
+
+        ..  container:: example
+
+            Left length equal to 2:
+
+            >>> lmr_specifier = baca.lmr(
+            ...     left_length=2,
+            ...     )
+
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
+
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1, 2])
+
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7, 8])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7, 8, 9])
+
+        Defaults to none.
+
+        Set to nonnegative integer or none.
+
+        Returns nonnegative integer or none.
+        """
+        return self._left_length
+
+    @property
+    def left_reversed(self):
+        """
+        Is true when specifier reverses left partition.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        """
+        return self._left_reversed
+
+    @property
+    def middle_counts(self):
+        """
+        Gets middle counts.
+
+        Defaults to none.
+
+        Set to positive integers or none.
+
+        Returns positive integers or none.
+        """
+        return self._middle_counts
+
+    @property
+    def middle_cyclic(self):
+        """
+        Is true when specifier reads middle counts cyclically.
+
+        ..  container:: example
+
+            Cyclic middle counts equal to [2]:
+
+            >>> lmr_specifier = baca.lmr(
+            ...     middle_counts=[2],
+            ...     middle_cyclic=True,
+            ...     )
+
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
+
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1, 2])
+
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5, 6])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5, 6])
+            Sequence([7])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5, 6])
+            Sequence([7, 8])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5, 6])
+            Sequence([7, 8])
+            Sequence([9])
+
+            Odd parity produces length-1 part at right.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        """
+        return self._middle_cyclic
+
+    @property
+    def middle_reversed(self):
+        """
+        Is true when specifier reverses middle partition.
+
+        ..  container:: example
+
+            Reversed cyclic middle counts equal to [2]:
+
+            >>> lmr_specifier = baca.lmr(
+            ...     middle_counts=[2],
+            ...     middle_cyclic=True,
+            ...     middle_reversed=True,
+            ...     )
+
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
+
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1, 2])
+
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5, 6])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5])
+            Sequence([6, 7])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5, 6])
+            Sequence([7, 8])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5])
+            Sequence([6, 7])
+            Sequence([8, 9])
+
+            Odd parity produces length-1 part at left.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        """
+        return self._middle_reversed
+
+    @property
+    def priority(self):
+        """
+        Gets priority.
+
+        ..  container:: example
+
+            Priority to the left:
+
+            >>> lmr_specifier = baca.lmr(
+            ...     left_length=2,
+            ...     right_length=1,
+            ...     )
+
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
+
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1, 2])
+
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3])
+            Sequence([4])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5])
+            Sequence([6])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6])
+            Sequence([7])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7])
+            Sequence([8])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7, 8])
+            Sequence([9])
+
+        ..  container:: example
+
+            Priority to the right:
+
+            >>> lmr_specifier = baca.lmr(
+            ...     left_length=2,
+            ...     priority=abjad.Right,
+            ...     right_length=1,
+            ...     )
+
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
+
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3])
+            Sequence([4])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+            Sequence([5])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5])
+            Sequence([6])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6])
+            Sequence([7])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7])
+            Sequence([8])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4, 5, 6, 7, 8])
+            Sequence([9])
+
+        Defaults to none.
+
+        Set to left, right or none.
+
+        Returns left, right or none.
+        """
+        return self._priority
+
+    @property
+    def right_counts(self):
+        """
+        Gets right counts.
+
+        Defaults to none.
+
+        Set to positive integers or none.
+
+        Returns positive integers or none.
+        """
+        return self._right_counts
+
+    @property
+    def right_cyclic(self):
+        """
+        Is true when specifier reads right counts cyclically.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        """
+        return self._right_cyclic
+
+    @property
+    def right_length(self):
+        """
+        Gets right length.
+
+        ..  container:: example
+
+            Right length equal to 2:
+
+            >>> lmr_specifier = baca.lmr(
+            ...     right_length=2,
+            ...     )
+
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
+
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1, 2])
+
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1, 2])
+            Sequence([3, 4])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1, 2, 3])
+            Sequence([4, 5])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1, 2, 3, 4])
+            Sequence([5, 6])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1, 2, 3, 4, 5])
+            Sequence([6, 7])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1, 2, 3, 4, 5, 6])
+            Sequence([7, 8])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1, 2, 3, 4, 5, 6, 7])
+            Sequence([8, 9])
+
+        ..  container:: example
+
+            Right length equal to 2 and left counts equal to [1]:
+
+            >>> lmr_specifier = baca.lmr(
+            ...     left_counts=[1],
+            ...     left_cyclic=False,
+            ...     right_length=2,
+            ...     )
+
+            >>> parts = lmr_specifier([1])
+            >>> for part in parts: part
+            Sequence([1])
+
+            >>> parts = lmr_specifier([1, 2])
+            >>> for part in parts: part
+            Sequence([1, 2])
+
+            >>> parts = lmr_specifier([1, 2, 3])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2])
+            Sequence([3, 4])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3])
+            Sequence([4, 5])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3, 4])
+            Sequence([5, 6])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3, 4, 5])
+            Sequence([6, 7])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3, 4, 5, 6])
+            Sequence([7, 8])
+
+            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> for part in parts: part
+            Sequence([1])
+            Sequence([2, 3, 4, 5, 6, 7])
+            Sequence([8, 9])
+
+        Defaults to none.
+
+        Set to nonnegative integer or none.
+
+        Returns nonnegative integer or none.
+        """
+        return self._right_length
+
+    @property
+    def right_reversed(self):
+        """
+        Is true when specifier reverses right partition.
+
+        Defaults to none.
+
+        Set to true, false or none.
+
+        Returns true, false or none.
+        """
+        return self._right_reversed
+
+
 class AcciaccaturaSpecifier(object):
     r"""
     Acciaccatura specifier.
@@ -30,11 +959,7 @@ class AcciaccaturaSpecifier(object):
         Default acciaccatura specifier:
 
         >>> rhythm_maker = baca.PitchFirstCommand(
-        ...     baca.pitch_first(
-        ...         [1],
-        ...         8,
-        ...         acciaccatura=baca.AcciaccaturaSpecifier(),
-        ...     ),
+        ...     baca.pitch_first([1], 8, acciaccatura=True),
         ...     rmakers.beam(),
         ... )
 
@@ -135,16 +1060,12 @@ class AcciaccaturaSpecifier(object):
     def __init__(
         self,
         *,
-        durations: typing.Sequence[abjad.DurationTyping] = None,
-        lmr_specifier: "LMRSpecifier" = None,
+        durations: typing.Sequence[abjad.DurationTyping] = [(1, 16)],
+        lmr_specifier: LMRSpecifier = LMRSpecifier(),
     ) -> None:
-        if durations is not None:
-            assert isinstance(durations, list), repr(durations)
-            durations = [abjad.Duration(_) for _ in durations]
-        self._durations = durations
-        if lmr_specifier is not None:
-            prototype = LMRSpecifier
-            assert isinstance(lmr_specifier, prototype)
+        durations_ = [abjad.Duration(_) for _ in durations]
+        self._durations = durations_
+        assert isinstance(lmr_specifier, LMRSpecifier), repr(lmr_specifier)
         self._lmr_specifier = lmr_specifier
 
     ### SPECIAL METHODS ###
@@ -159,11 +1080,10 @@ class AcciaccaturaSpecifier(object):
         """
         prototype = (list, abjad.Segment)
         assert isinstance(collection, prototype), repr(collection)
-        lmr_specifier = self._get_lmr_specifier()
-        segment_parts = lmr_specifier(collection)
+        segment_parts = self.lmr_specifier(collection)
         segment_parts = [_ for _ in segment_parts if _]
         collection = [_[-1] for _ in segment_parts]
-        durations = self._get_durations()
+        durations = self.durations
         acciaccatura_containers: typing.List[
             typing.Union[abjad.AcciaccaturaContainer, None]
         ] = []
@@ -213,20 +1133,10 @@ class AcciaccaturaSpecifier(object):
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
-    ### PRIVATE METHODS ###
-
-    def _get_durations(self):
-        return self.durations or [abjad.Duration(1, 16)]
-
-    def _get_lmr_specifier(self):
-        if self.lmr_specifier is not None:
-            return self.lmr_specifier
-        return LMRSpecifier()
-
     ### PUBLIC PROPERTIES ###
 
     @property
-    def durations(self):
+    def durations(self) -> typing.List[abjad.Duration]:
         r"""
         Gets durations.
 
@@ -235,11 +1145,7 @@ class AcciaccaturaSpecifier(object):
             Sixteenth-note acciaccaturas by default:
 
             >>> rhythm_maker = baca.PitchFirstCommand(
-            ...     baca.pitch_first(
-            ...         [1],
-            ...         8,
-            ...         acciaccatura=baca.AcciaccaturaSpecifier(),
-            ...     ),
+            ...     baca.pitch_first([1], 8, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -333,12 +1239,9 @@ class AcciaccaturaSpecifier(object):
 
             Eighth-note acciaccaturas:
 
+            >>> specifier = baca.AcciaccaturaSpecifier(durations=[(1, 8)])
             >>> rhythm_maker = baca.PitchFirstCommand(
-            ...     baca.pitch_first(
-            ...         [1],
-            ...         8,
-            ...         acciaccatura=baca.AcciaccaturaSpecifier(durations=[(1, 8)]),
-            ...     ),
+            ...     baca.pitch_first([1], 8, acciaccatura=specifier),
             ...     rmakers.beam(),
             ... )
 
@@ -428,16 +1331,11 @@ class AcciaccaturaSpecifier(object):
                     }
                 >>
 
-        Defaults to none.
-
-        Set to durations or none.
-
-        Returns durations or none.
         """
         return self._durations
 
     @property
-    def lmr_specifier(self):
+    def lmr_specifier(self) -> LMRSpecifier:
         r"""
         Gets LMR specifier.
 
@@ -446,11 +1344,7 @@ class AcciaccaturaSpecifier(object):
             As many acciaccaturas as possible per collection:
 
             >>> rhythm_maker = baca.PitchFirstCommand(
-            ...     baca.pitch_first(
-            ...         [1],
-            ...         8,
-            ...         acciaccatura=baca.AcciaccaturaSpecifier(),
-            ...     ),
+            ...     baca.pitch_first([1], 8, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -549,13 +1443,11 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura=baca.AcciaccaturaSpecifier(
-            ...             lmr_specifier=baca.LMRSpecifier(
-            ...                 left_length=3,
-            ...                 right_counts=[1],
-            ...                 right_cyclic=True,
-            ...                 ),
-            ...             ),
+            ...         acciaccatura=baca.lmr(
+            ...             left_length=3,
+            ...             right_counts=[1],
+            ...             right_cyclic=True,
+            ...         ),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -660,13 +1552,11 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura=baca.AcciaccaturaSpecifier(
-            ...             lmr_specifier=baca.LMRSpecifier(
-            ...                 right_length=3,
-            ...                 left_counts=[1],
-            ...                 left_cyclic=True,
-            ...                 ),
-            ...             ),
+            ...         acciaccatura=baca.lmr(
+            ...             right_length=3,
+            ...             left_counts=[1],
+            ...             left_cyclic=True,
+            ...         ),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -772,14 +1662,12 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura=baca.AcciaccaturaSpecifier(
-            ...              lmr_specifier=baca.LMRSpecifier(
-            ...                 left_length=3,
-            ...                 middle_counts=[1],
-            ...                 middle_cyclic=True,
-            ...                 right_length=3,
-            ...                 ),
-            ...             ),
+            ...         acciaccatura=baca.lmr(
+            ...             left_length=3,
+            ...             middle_counts=[1],
+            ...             middle_cyclic=True,
+            ...             right_length=3,
+            ...         ),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -891,11 +1779,7 @@ class AcciaccaturaSpecifier(object):
             ...     baca.pitch_first(
             ...         [1],
             ...         8,
-            ...         acciaccatura=baca.AcciaccaturaSpecifier(
-            ...             lmr_specifier=baca.LMRSpecifier(
-            ...                 left_length=1,
-            ...                 ),
-            ...             ),
+            ...         acciaccatura=baca.lmr(left_length=1),
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -992,11 +1876,6 @@ class AcciaccaturaSpecifier(object):
                     }
                 >>
 
-        Defaults to none.
-
-        Set to LMR specifier or none.
-
-        Returns LMR specifier or none.
         """
         return self._lmr_specifier
 
@@ -4462,935 +5341,6 @@ class Imbrication(object):
         return self._voice_name
 
 
-class LMRSpecifier(object):
-    """
-    Left-middle-right specifier.
-
-    ..  container:: example
-
-        Default LMR specifier:
-
-        >>> lmr_specifier = baca.LMRSpecifier()
-
-        >>> parts = lmr_specifier([1])
-        >>> for part in parts: part
-        Sequence([1])
-
-        >>> parts =lmr_specifier([1, 2])
-        >>> for part in parts: part
-        Sequence([1, 2])
-
-        >>> parts = lmr_specifier([1, 2, 3])
-        >>> for part in parts: part
-        Sequence([1, 2, 3])
-
-        >>> parts = lmr_specifier([1, 2, 3, 4])
-        >>> for part in parts: part
-        Sequence([1, 2, 3, 4])
-
-        >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-        >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5])
-
-        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-        >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6])
-
-        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-        >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6, 7])
-
-        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-        >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6, 7, 8])
-
-        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-        >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6, 7, 8, 9])
-
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        "_left_counts",
-        "_left_cyclic",
-        "_left_length",
-        "_left_reversed",
-        "_middle_counts",
-        "_middle_cyclic",
-        "_middle_reversed",
-        "_priority",
-        "_right_counts",
-        "_right_cyclic",
-        "_right_length",
-        "_right_reversed",
-    )
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *,
-        left_counts: typing.Sequence[int] = None,
-        left_cyclic: bool = None,
-        left_length: int = None,
-        left_reversed: bool = None,
-        middle_counts: typing.Sequence[int] = None,
-        middle_cyclic: bool = None,
-        middle_reversed: bool = None,
-        priority: abjad.HorizontalAlignment = None,
-        right_counts: typing.Sequence[int] = None,
-        right_cyclic: bool = None,
-        right_length: int = None,
-        right_reversed: bool = None,
-    ) -> None:
-        if left_counts is not None:
-            assert abjad.mathtools.all_are_positive_integers(left_counts)
-        self._left_counts = left_counts
-        if left_cyclic is not None:
-            left_cyclic = bool(left_cyclic)
-        self._left_cyclic = left_cyclic
-        if left_length is not None:
-            left_length = int(left_length)
-            assert 0 <= left_length, repr(left_length)
-        self._left_length = left_length
-        if left_reversed is not None:
-            left_reversed = bool(left_reversed)
-        self._left_reversed = left_reversed
-        if middle_counts is not None:
-            assert abjad.mathtools.all_are_positive_integers(middle_counts)
-        self._middle_counts = middle_counts
-        if middle_cyclic is not None:
-            middle_cyclic = bool(middle_cyclic)
-        self._middle_cyclic = middle_cyclic
-        if middle_reversed is not None:
-            middle_reversed = bool(middle_reversed)
-        self._middle_reversed = middle_reversed
-        if priority is not None:
-            assert priority in (abjad.Left, abjad.Right)
-        self._priority = priority
-        if right_counts is not None:
-            assert abjad.mathtools.all_are_positive_integers(right_counts)
-        self._right_counts = right_counts
-        if right_cyclic is not None:
-            right_cyclic = bool(right_cyclic)
-        self._right_cyclic = right_cyclic
-        if right_length is not None:
-            right_length = int(right_length)
-            assert 0 <= right_length, repr(right_length)
-        self._right_length = right_length
-        if right_reversed is not None:
-            right_reversed = bool(right_reversed)
-        self._right_reversed = right_reversed
-
-    ### SPECIAL METHODS ###
-
-    def __call__(
-        self, sequence: typing.Union[list, abjad.Segment] = None
-    ) -> typing.List[abjad.Sequence]:
-        """
-        Calls LMR specifier on ``sequence``.
-        """
-        assert isinstance(sequence, (list, abjad.Segment)), repr(sequence)
-        top_lengths = self._get_top_lengths(len(sequence))
-        top_parts = abjad.sequence(sequence).partition_by_counts(
-            top_lengths, cyclic=False, overhang=abjad.Exact
-        )
-        parts: typing.List[abjad.Sequence] = []
-        left_part, middle_part, right_part = top_parts
-        if left_part:
-            if self.left_counts:
-                parts_ = abjad.sequence(left_part).partition_by_counts(
-                    self.left_counts,
-                    cyclic=self.left_cyclic,
-                    overhang=True,
-                    reversed_=self.left_reversed,
-                )
-                parts.extend(parts_)
-            else:
-                parts.append(left_part)
-        if middle_part:
-            if self.middle_counts:
-                parts_ = abjad.sequence(middle_part).partition_by_counts(
-                    self.middle_counts,
-                    cyclic=self.middle_cyclic,
-                    overhang=True,
-                    reversed_=self.middle_reversed,
-                )
-                parts.extend(parts_)
-            else:
-                parts.append(middle_part)
-        if right_part:
-            if self.right_counts:
-                parts_ = abjad.sequence(right_part).partition_by_counts(
-                    self.right_counts,
-                    cyclic=self.right_cyclic,
-                    overhang=True,
-                    reversed_=self.right_reversed,
-                )
-                parts.extend(parts_)
-            else:
-                parts.append(right_part)
-        assert isinstance(parts, list), repr(parts)
-        assert all(isinstance(_, abjad.Sequence) for _ in parts)
-        return parts
-
-    ### PRIVATE METHODS ###
-
-    def _get_priority(self):
-        if self.priority is None:
-            return abjad.Left
-        return self.priority
-
-    def _get_top_lengths(self, total_length):
-        left_length, middle_length, right_length = 0, 0, 0
-        left_length = self.left_length or 0
-        middle_length = 0
-        right_length = self.right_length or 0
-        if left_length and right_length:
-            if self._get_priority() == abjad.Left:
-                left_length = self.left_length or 0
-                left_length = min([left_length, total_length])
-                remaining_length = total_length - left_length
-                if self.right_length is None:
-                    right_length = remaining_length
-                    middle_length = 0
-                else:
-                    right_length = self.right_length or 0
-                    right_length = min([right_length, remaining_length])
-                    remaining_length = total_length - (
-                        left_length + right_length
-                    )
-                    middle_length = remaining_length
-            else:
-                right_length = self.right_length or 0
-                right_length = min([right_length, total_length])
-                remaining_length = total_length - right_length
-                if self.left_length is None:
-                    left_length = remaining_length
-                    middle_length = 0
-                else:
-                    left_length = self.left_length or 0
-                    left_length = min([left_length, remaining_length])
-                    remaining_length = total_length - (
-                        right_length + left_length
-                    )
-                    middle_length = remaining_length
-        elif left_length and not right_length:
-            left_length = min([left_length, total_length])
-            remaining_length = total_length - left_length
-            right_length = remaining_length
-        elif not left_length and right_length:
-            right_length = min([right_length, total_length])
-            remaining_length = total_length - right_length
-            left_length = remaining_length
-        elif not left_length and not right_length:
-            middle_length = total_length
-        return left_length, middle_length, right_length
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def left_counts(self):
-        """
-        Gets left counts.
-
-        ..  container:: example
-
-            Left counts equal to a single 1:
-
-            >>> lmr_specifier = baca.LMRSpecifier(
-            ...     left_counts=[1],
-            ...     left_cyclic=False,
-            ...     left_length=3,
-            ...     right_length=2,
-            ...     )
-
-            >>> parts = lmr_specifier([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr_specifier([1, 2])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-
-            >>> parts = lmr_specifier([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4])
-            Sequence([5, 6])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5])
-            Sequence([6, 7])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5, 6])
-            Sequence([7, 8])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5, 6, 7])
-            Sequence([8, 9])
-
-        ..  container:: example
-
-            Left counts all equal to 1:
-
-            >>> lmr_specifier = baca.LMRSpecifier(
-            ...     left_counts=[1],
-            ...     left_cyclic=True,
-            ...     left_length=3,
-            ...     right_length=2,
-            ...     )
-
-            >>> parts = lmr_specifier([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr_specifier([1, 2])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-
-            >>> parts = lmr_specifier([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-            Sequence([4])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-            Sequence([4, 5])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-            Sequence([4])
-            Sequence([5, 6])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-            Sequence([4, 5])
-            Sequence([6, 7])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-            Sequence([4, 5, 6])
-            Sequence([7, 8])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3])
-            Sequence([4, 5, 6, 7])
-            Sequence([8, 9])
-
-        Defaults to none.
-
-        Set to positive integers or none.
-
-        Returns tuple of positive integers or none.
-        """
-        return self._left_counts
-
-    @property
-    def left_cyclic(self):
-        """
-        Is true when specifier reads left counts cyclically.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        """
-        return self._left_cyclic
-
-    @property
-    def left_length(self):
-        """
-        Gets left length.
-
-        ..  container:: example
-
-            Left length equal to 2:
-
-            >>> lmr_specifier = baca.LMRSpecifier(
-            ...     left_length=2,
-            ...     )
-
-            >>> parts = lmr_specifier([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr_specifier([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
-
-            >>> parts = lmr_specifier([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7, 8])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7, 8, 9])
-
-        Defaults to none.
-
-        Set to nonnegative integer or none.
-
-        Returns nonnegative integer or none.
-        """
-        return self._left_length
-
-    @property
-    def left_reversed(self):
-        """
-        Is true when specifier reverses left partition.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        """
-        return self._left_reversed
-
-    @property
-    def middle_counts(self):
-        """
-        Gets middle counts.
-
-        Defaults to none.
-
-        Set to positive integers or none.
-
-        Returns positive integers or none.
-        """
-        return self._middle_counts
-
-    @property
-    def middle_cyclic(self):
-        """
-        Is true when specifier reads middle counts cyclically.
-
-        ..  container:: example
-
-            Cyclic middle counts equal to [2]:
-
-            >>> lmr_specifier = baca.LMRSpecifier(
-            ...     middle_counts=[2],
-            ...     middle_cyclic=True,
-            ...     )
-
-            >>> parts = lmr_specifier([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr_specifier([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
-
-            >>> parts = lmr_specifier([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5, 6])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5, 6])
-            Sequence([7])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5, 6])
-            Sequence([7, 8])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5, 6])
-            Sequence([7, 8])
-            Sequence([9])
-
-            Odd parity produces length-1 part at right.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        """
-        return self._middle_cyclic
-
-    @property
-    def middle_reversed(self):
-        """
-        Is true when specifier reverses middle partition.
-
-        ..  container:: example
-
-            Reversed cyclic middle counts equal to [2]:
-
-            >>> lmr_specifier = baca.LMRSpecifier(
-            ...     middle_counts=[2],
-            ...     middle_cyclic=True,
-            ...     middle_reversed=True,
-            ...     )
-
-            >>> parts = lmr_specifier([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr_specifier([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
-
-            >>> parts = lmr_specifier([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5, 6])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5])
-            Sequence([6, 7])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5, 6])
-            Sequence([7, 8])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5])
-            Sequence([6, 7])
-            Sequence([8, 9])
-
-            Odd parity produces length-1 part at left.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        """
-        return self._middle_reversed
-
-    @property
-    def priority(self):
-        """
-        Gets priority.
-
-        ..  container:: example
-
-            Priority to the left:
-
-            >>> lmr_specifier = baca.LMRSpecifier(
-            ...     left_length=2,
-            ...     right_length=1,
-            ...     )
-
-            >>> parts = lmr_specifier([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr_specifier([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
-
-            >>> parts = lmr_specifier([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3])
-            Sequence([4])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5])
-            Sequence([6])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6])
-            Sequence([7])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7])
-            Sequence([8])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7, 8])
-            Sequence([9])
-
-        ..  container:: example
-
-            Priority to the right:
-
-            >>> lmr_specifier = baca.LMRSpecifier(
-            ...     left_length=2,
-            ...     priority=abjad.Right,
-            ...     right_length=1,
-            ...     )
-
-            >>> parts = lmr_specifier([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr_specifier([1, 2])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-
-            >>> parts = lmr_specifier([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3])
-            Sequence([4])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-            Sequence([5])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5])
-            Sequence([6])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6])
-            Sequence([7])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7])
-            Sequence([8])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4, 5, 6, 7, 8])
-            Sequence([9])
-
-        Defaults to none.
-
-        Set to left, right or none.
-
-        Returns left, right or none.
-        """
-        return self._priority
-
-    @property
-    def right_counts(self):
-        """
-        Gets right counts.
-
-        Defaults to none.
-
-        Set to positive integers or none.
-
-        Returns positive integers or none.
-        """
-        return self._right_counts
-
-    @property
-    def right_cyclic(self):
-        """
-        Is true when specifier reads right counts cyclically.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        """
-        return self._right_cyclic
-
-    @property
-    def right_length(self):
-        """
-        Gets right length.
-
-        ..  container:: example
-
-            Right length equal to 2:
-
-            >>> lmr_specifier = baca.LMRSpecifier(
-            ...     right_length=2,
-            ...     )
-
-            >>> parts = lmr_specifier([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr_specifier([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
-
-            >>> parts = lmr_specifier([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1, 2])
-            Sequence([3, 4])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1, 2, 3])
-            Sequence([4, 5])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4])
-            Sequence([5, 6])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4, 5])
-            Sequence([6, 7])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4, 5, 6])
-            Sequence([7, 8])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1, 2, 3, 4, 5, 6, 7])
-            Sequence([8, 9])
-
-        ..  container:: example
-
-            Right length equal to 2 and left counts equal to [1]:
-
-            >>> lmr_specifier = baca.LMRSpecifier(
-            ...     left_counts=[1],
-            ...     left_cyclic=False,
-            ...     right_length=2,
-            ...     )
-
-            >>> parts = lmr_specifier([1])
-            >>> for part in parts: part
-            Sequence([1])
-
-            >>> parts = lmr_specifier([1, 2])
-            >>> for part in parts: part
-            Sequence([1, 2])
-
-            >>> parts = lmr_specifier([1, 2, 3])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2])
-            Sequence([3, 4])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3])
-            Sequence([4, 5])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3, 4])
-            Sequence([5, 6])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3, 4, 5])
-            Sequence([6, 7])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3, 4, 5, 6])
-            Sequence([7, 8])
-
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
-            >>> for part in parts: part
-            Sequence([1])
-            Sequence([2, 3, 4, 5, 6, 7])
-            Sequence([8, 9])
-
-        Defaults to none.
-
-        Set to nonnegative integer or none.
-
-        Returns nonnegative integer or none.
-        """
-        return self._right_length
-
-    @property
-    def right_reversed(self):
-        """
-        Is true when specifier reverses right partition.
-
-        Defaults to none.
-
-        Set to true, false or none.
-
-        Returns true, false or none.
-        """
-        return self._right_reversed
-
-
 class MusicAccumulator(object):
     """
     Music-accumulator.
@@ -7796,10 +7746,8 @@ class MusicMaker(object):
 
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
-            ...     baca.Nesting(
-            ...         lmr_specifier=baca.LMRSpecifier(
-            ...             left_length=2,
-            ...             ),
+            ...     baca.nest(
+            ...         lmr_specifier=baca.lmr(left_length=2),
             ...         time_treatments=['+1/16', None],
             ...         ),
             ...     rmakers.beam_groups(),
@@ -8326,7 +8274,7 @@ class Nesting(object):
         time_treatments: typing.Sequence[typing.Union[int, str]] = None,
     ) -> None:
         if lmr_specifier is not None:
-            assert isinstance(lmr_specifier, LMRSpecifier)
+            assert isinstance(lmr_specifier, LMRSpecifier), repr(lmr_specifier)
         self._lmr_specifier = lmr_specifier
         if time_treatments is not None:
             assert isinstance(time_treatments, (list, tuple))
@@ -9993,11 +9941,7 @@ class PitchFirstRhythmMaker(object):
             Graced quarters:
 
             >>> rhythm_maker = baca.PitchFirstCommand(
-            ...     baca.pitch_first(
-            ...         [1],
-            ...         4,
-            ...         acciaccatura=baca.AcciaccaturaSpecifier(),
-            ...     ),
+            ...     baca.pitch_first([1], 4, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -10092,13 +10036,7 @@ class PitchFirstRhythmMaker(object):
             Graced rests:
 
             >>> rhythm_maker = baca.PitchFirstCommand(
-            ...     baca.pitch_first(
-            ...         [1],
-            ...         4,
-            ...         acciaccatura=baca.AcciaccaturaSpecifier(
-            ...             lmr_specifier=baca.LMRSpecifier()
-            ...             ),
-            ...     ),
+            ...     baca.pitch_first([1], 4, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -12341,7 +12279,45 @@ def imbricate(
     )
 
 
-def nest(time_treatments: typing.Sequence = None,) -> Nesting:
+def lmr(
+    *,
+    left_counts: typing.Sequence[int] = None,
+    left_cyclic: bool = None,
+    left_length: int = None,
+    left_reversed: bool = None,
+    middle_counts: typing.Sequence[int] = None,
+    middle_cyclic: bool = None,
+    middle_reversed: bool = None,
+    priority: abjad.HorizontalAlignment = None,
+    right_counts: typing.Sequence[int] = None,
+    right_cyclic: bool = None,
+    right_length: int = None,
+    right_reversed: bool = None,
+) -> LMRSpecifier:
+    """
+    Makes LMR specifier.
+    """
+    return LMRSpecifier(
+        left_counts=left_counts,
+        left_cyclic=left_cyclic,
+        left_length=left_length,
+        left_reversed=left_reversed,
+        middle_counts=middle_counts,
+        middle_cyclic=middle_cyclic,
+        middle_reversed=middle_reversed,
+        priority=priority,
+        right_counts=right_counts,
+        right_cyclic=right_cyclic,
+        right_length=right_length,
+        right_reversed=right_reversed,
+    )
+
+
+def nest(
+    time_treatments: typing.Sequence = None,
+    *,
+    lmr_specifier: LMRSpecifier = None,
+) -> Nesting:
     r"""
     Nests music.
 
@@ -12427,7 +12403,9 @@ def nest(time_treatments: typing.Sequence = None,) -> Nesting:
     """
     if not isinstance(time_treatments, list):
         time_treatments = [time_treatments]
-    return Nesting(lmr_specifier=None, time_treatments=time_treatments)
+    return Nesting(
+        lmr_specifier=lmr_specifier, time_treatments=time_treatments
+    )
 
 
 def pitch_first(
@@ -12445,6 +12423,10 @@ def pitch_first(
     """
     Makes pitch-first assignment.
     """
+    if acciaccatura is True:
+        acciaccatura = AcciaccaturaSpecifier()
+    elif isinstance(acciaccatura, LMRSpecifier):
+        acciaccatura = AcciaccaturaSpecifier(lmr_specifier=acciaccatura)
     return PitchFirstAssignment(
         PitchFirstRhythmMaker(
             rmakers.Talea(counts=counts, denominator=denominator),

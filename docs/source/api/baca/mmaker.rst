@@ -731,6 +731,7 @@ mmaker
    ~anchor_to_figure
    ~coat
    ~imbricate
+   ~lmr
    ~nest
    ~pitch_first
    ~rests_after
@@ -751,6 +752,8 @@ mmaker
 .. autofunction:: coat
 
 .. autofunction:: imbricate
+
+.. autofunction:: lmr
 
 .. autofunction:: nest
 
