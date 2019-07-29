@@ -155,7 +155,9 @@ class AcciaccaturaSpecifier(object):
 
     def __call__(
         self, collection: typing.Union[list, abjad.Segment] = None
-    ) -> typing.Tuple[typing.List[abjad.AcciaccaturaContainer], list]:
+    ) -> typing.Tuple[
+        typing.List[typing.Optional[abjad.AcciaccaturaContainer]], list
+    ]:
         """
         Calls acciaccatura specifier on ``collection``.
         """
@@ -1324,8 +1326,8 @@ class AnchorSpecifier(object):
         self,
         *,
         figure_name: str = None,
-        local_selector: abjad.Expression = None,
-        remote_selector: abjad.Expression = None,
+        local_selector: abjad.SelectorTyping = None,
+        remote_selector: abjad.SelectorTyping = None,
         remote_voice_name: str = None,
         use_remote_stop_offset: bool = None,
     ) -> None:
@@ -2016,7 +2018,7 @@ class Imbrication(object):
         by_pitch_class: bool = None,
         extend_beam: bool = None,
         hocket: bool = None,
-        selector: abjad.Expression = None,
+        selector: abjad.SelectorTyping = None,
         truncate_ties: bool = None,
     ) -> None:
         if voice_name is not None:
@@ -7050,7 +7052,7 @@ class MusicMaker(object):
         prototype = (abjad.Segment, abjad.Set)
         if isinstance(collections, prototype):
             return pitchclasses.CollectionList(collections=[collections])
-        item_class = abjad.NumberedPitch
+        item_class: abjad.Pitch = abjad.NumberedPitch
         for collection in collections:
             for item in collection:
                 if isinstance(item, str):
@@ -8859,9 +8861,8 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
     ) -> None:
         assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
         self._rhythm_maker = rhythm_maker
-        if pattern is not None:
-            prototype = (abjad.DurationInequality, abjad.Pattern)
-            assert isinstance(pattern, prototype), repr(pattern)
+        prototype = (abjad.DurationInequality, abjad.Pattern, type(None))
+        assert isinstance(pattern, prototype), repr(pattern)
         self._pattern = pattern
         if thread is not None:
             thread = bool(thread)
@@ -9183,7 +9184,7 @@ class PitchFirstCommand(object):
         self,
         collections: list,
         collection_index: int = None,
-        state: dict = None,
+        state: abjad.OrderedDict = None,
         total_collections: int = None,
     ) -> abjad.Selection:
         """
@@ -12362,28 +12363,14 @@ class RestAffixSpecifier(object):
 
 def anchor(
     remote_voice_name: str,
-    remote_selector: abjad.Expression = None,
-    local_selector: abjad.Expression = None,
+    remote_selector: abjad.SelectorTyping = None,
+    local_selector: abjad.SelectorTyping = None,
 ) -> AnchorSpecifier:
     """
     Anchors music in this figure (filtered by ``local_selector``) to
     start offset of ``remote_voice_name`` (filtered by
     ``remote_selector``).
-
-    :param remote_voice_name: name of voice to which this music anchors.
-
-    :param remote_seelctor: selector applied to remote voice.
-
-    :param local_selector: selector applied to this music.
     """
-    if remote_selector is not None:
-        assert isinstance(remote_selector, abjad.Expression), repr(
-            remote_selector
-        )
-    if local_selector is not None:
-        assert isinstance(local_selector, abjad.Expression), repr(
-            local_selector
-        )
     return AnchorSpecifier(
         local_selector=local_selector,
         remote_selector=remote_selector,
@@ -12393,27 +12380,13 @@ def anchor(
 
 def anchor_after(
     remote_voice_name: str,
-    remote_selector: abjad.Expression = None,
-    local_selector: abjad.Expression = None,
+    remote_selector: abjad.SelectorTyping = None,
+    local_selector: abjad.SelectorTyping = None,
 ) -> AnchorSpecifier:
     """
     Anchors music in this figure (filtered by ``local_selector``) to
     stop offset of ``remote_voice_name`` (filtered by ``remote_selector``).
-
-    :param remote_voice_name: name of voice to which this music anchors.
-
-    :param remote_selector: selector applied to remote voice.
-
-    :param local_selector: selector applied to this music.
     """
-    if remote_selector is not None:
-        assert isinstance(remote_selector, abjad.Expression), repr(
-            remote_selector
-        )
-    if local_selector is not None:
-        assert isinstance(local_selector, abjad.Expression), repr(
-            local_selector
-        )
     return AnchorSpecifier(
         local_selector=local_selector,
         remote_selector=remote_selector,
