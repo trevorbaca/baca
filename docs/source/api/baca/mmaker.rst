@@ -780,6 +780,7 @@ mmaker
    ~lmr
    ~nest
    ~pitch_first
+   ~pitch_first_rmaker
    ~rests_after
    ~rests_around
    ~rests_before
@@ -804,6 +805,8 @@ mmaker
 .. autofunction:: nest
 
 .. autofunction:: pitch_first
+
+.. autofunction:: pitch_first_rmaker
 
 .. autofunction:: rests_after
 
