@@ -55,7 +55,6 @@ mmaker
       __repr__
       durations
       lmr_specifier
-      pattern
 
    .. raw:: html
 
@@ -84,8 +83,6 @@ mmaker
    .. autoattribute:: AcciaccaturaSpecifier.durations
 
    .. autoattribute:: AcciaccaturaSpecifier.lmr_specifier
-
-   .. autoattribute:: AcciaccaturaSpecifier.pattern
 
 .. autoclass:: AnchorSpecifier
 

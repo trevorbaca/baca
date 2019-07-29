@@ -128,7 +128,7 @@ class AcciaccaturaSpecifier(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_durations", "_lmr_specifier", "_pattern")
+    __slots__ = ("_durations", "_lmr_specifier")
 
     ### INITIALIZER ###
 
@@ -137,7 +137,6 @@ class AcciaccaturaSpecifier(object):
         *,
         durations: typing.Sequence[abjad.DurationTyping] = None,
         lmr_specifier: "LMRSpecifier" = None,
-        pattern: abjad.Pattern = None,
     ) -> None:
         if durations is not None:
             assert isinstance(durations, list), repr(durations)
@@ -147,9 +146,6 @@ class AcciaccaturaSpecifier(object):
             prototype = LMRSpecifier
             assert isinstance(lmr_specifier, prototype)
         self._lmr_specifier = lmr_specifier
-        if pattern is not None:
-            assert isinstance(pattern, abjad.Pattern), repr(pattern)
-        self._pattern = pattern
 
     ### SPECIAL METHODS ###
 
@@ -226,9 +222,6 @@ class AcciaccaturaSpecifier(object):
         if self.lmr_specifier is not None:
             return self.lmr_specifier
         return LMRSpecifier()
-
-    def _get_pattern(self):
-        return self.pattern or abjad.index_all()
 
     ### PUBLIC PROPERTIES ###
 
@@ -1006,310 +999,6 @@ class AcciaccaturaSpecifier(object):
         Returns LMR specifier or none.
         """
         return self._lmr_specifier
-
-    @property
-    def pattern(self):
-        r"""
-        Gets pattern.
-
-        ..  container:: example
-
-            Applies to all collections by default:
-
-            >>> rhythm_maker = baca.PitchFirstCommand(
-            ...     baca.pitch_first(
-            ...         [1],
-            ...         8,
-            ...         acciaccatura=baca.AcciaccaturaSpecifier(),
-            ...     ),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
-            >>> selections = rhythm_maker(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
-                <<
-                    \new GlobalContext
-                    {
-                        \time 3/4
-                        s1 * 3/4
-                    }
-                    \new Staff
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                fs''16
-                                [                                                                        %! AcciaccaturaSpecifier
-                                e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! AcciaccaturaSpecifier
-                                g''16
-                                a'16
-                                ]                                                                        %! AcciaccaturaSpecifier
-                            }
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                                [                                                                        %! AcciaccaturaSpecifier
-                                bf'16
-                                fs''16
-                                e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
-                            }
-                            ef''8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! AcciaccaturaSpecifier
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]                                                                        %! AcciaccaturaSpecifier
-                            }
-                            bf'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Applies to last collection:
-
-            >>> rhythm_maker = baca.PitchFirstCommand(
-            ...     baca.pitch_first(
-            ...         [1],
-            ...         8,
-            ...         acciaccatura=baca.AcciaccaturaSpecifier(
-            ...             pattern=abjad.index_last(1),
-            ...             ),
-            ...     ),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
-            >>> selections = rhythm_maker(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
-                <<
-                    \new GlobalContext
-                    {
-                        \time 2/1
-                        s1 * 2
-                    }
-                    \new Staff
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            d'8
-                            [
-                            bf'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''8
-                            [
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            af''8
-                            [
-                            g''8
-                            a'8
-                            c'8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            d'8
-                            [
-                            bf'8
-                            fs''8
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! AcciaccaturaSpecifier
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]                                                                        %! AcciaccaturaSpecifier
-                            }
-                            bf'8
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Applies to every other collection:
-
-            >>> rhythm_maker = baca.PitchFirstCommand(
-            ...     baca.pitch_first(
-            ...         [1],
-            ...         8,
-            ...         acciaccatura=baca.AcciaccaturaSpecifier(
-            ...             pattern=abjad.index([1], 2),
-            ...             ),
-            ...     ),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [0],
-            ...     [2, 10],
-            ...     [18, 16, 15],
-            ...     [20, 19, 9, 0],
-            ...     [2, 10, 18, 16, 15],
-            ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
-            >>> selections = rhythm_maker(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
-                <<
-                    \new GlobalContext
-                    {
-                        \time 3/2
-                        s1 * 3/2
-                    }
-                    \new Staff
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                            }
-                            bf'8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''8
-                            [
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! AcciaccaturaSpecifier
-                                g''16
-                                a'16
-                                ]                                                                        %! AcciaccaturaSpecifier
-                            }
-                            c'8
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            d'8
-                            [
-                            bf'8
-                            fs''8
-                            e''8
-                            ef''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! AcciaccaturaSpecifier
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                ]                                                                        %! AcciaccaturaSpecifier
-                            }
-                            bf'8
-                        }
-                    }
-                >>
-
-        Defaults to none.
-
-        Set to pattern or none.
-
-        Returns pattern or none.
-        """
-        return self._pattern
 
 
 class AnchorSpecifier(object):
@@ -10126,7 +9815,6 @@ class PitchFirstRhythmMaker(object):
                     affix_skips_instead_of_rests = None
                 tuplet = self._make_tuplet(
                     segment,
-                    segment_count,
                     rest_prefix=rest_prefix,
                     rest_suffix=rest_suffix,
                     affix_skips_instead_of_rests=affix_skips_instead_of_rests,
@@ -10146,7 +9834,6 @@ class PitchFirstRhythmMaker(object):
                 affix_skips_instead_of_rests = None
             tuplet = self._make_tuplet(
                 segment,
-                segment_count,
                 rest_prefix=rest_prefix,
                 rest_suffix=rest_suffix,
                 affix_skips_instead_of_rests=affix_skips_instead_of_rests,
@@ -10158,15 +9845,12 @@ class PitchFirstRhythmMaker(object):
     def _make_tuplet(
         self,
         segment,
-        segment_count,
         rest_prefix=None,
         rest_suffix=None,
         affix_skips_instead_of_rests=None,
     ):
         collection_index = self._next_segment
-        acciaccatura_specifier = self._get_acciaccatura_specifier(
-            collection_index, segment_count
-        )
+        acciaccatura = self.acciaccatura
         self._next_segment += 1
         talea = self._get_talea()
         leaves = []
@@ -10177,8 +9861,8 @@ class PitchFirstRhythmMaker(object):
         if time_treatment is None:
             time_treatment = 0
         grace_containers = None
-        if acciaccatura_specifier is not None:
-            grace_containers, segment = acciaccatura_specifier(segment)
+        if acciaccatura is not None:
+            grace_containers, segment = acciaccatura(segment)
             assert len(grace_containers) == len(segment)
         for pitch_expression in segment:
             prototype = abjad.NumberedPitchClass
