@@ -8856,7 +8856,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
         self,
         rhythm_maker: "PitchFirstRhythmMaker",
         *,
-        pattern = None,
+        pattern=None,
         thread: bool = None,
     ) -> None:
         assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
