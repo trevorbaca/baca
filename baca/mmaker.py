@@ -155,7 +155,7 @@ class AcciaccaturaSpecifier(object):
 
     def __call__(
         self, collection: typing.Union[list, abjad.Segment] = None
-    ) -> typing.Tuple[abjad.AcciaccaturaContainer, list]:
+    ) -> typing.Tuple[typing.List[abjad.AcciaccaturaContainer], list]:
         """
         Calls acciaccatura specifier on ``collection``.
         """
@@ -166,7 +166,9 @@ class AcciaccaturaSpecifier(object):
         segment_parts = [_ for _ in segment_parts if _]
         collection = [_[-1] for _ in segment_parts]
         durations = self._get_durations()
-        acciaccatura_containers: typing.List[abjad.AcciaccaturaContainer] = []
+        acciaccatura_containers: typing.List[
+            typing.Union[abjad.AcciaccaturaContainer, None]
+        ] = []
         maker = abjad.LeafMaker()
         for segment_part in segment_parts:
             if len(segment_part) <= 1:
@@ -3002,7 +3004,9 @@ class Imbrication(object):
             abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, final_leaf)
         selection = abjad.select(container)
         if not self.hocket:
-            for pleaf in classes.Selection(container).pleaves():
+            pleaves = classes.Selection(container).pleaves()
+            assert isinstance(pleaves, abjad.Selection)
+            for pleaf in pleaves:
                 abjad.attach(abjad.tags.ALLOW_OCTAVE, pleaf)
         return {self.voice_name: selection}
 
@@ -7042,7 +7046,7 @@ class MusicMaker(object):
     ### PRIVATE METHODS ###
 
     @staticmethod
-    def _coerce_collections(collections):
+    def _coerce_collections(collections) -> pitchclasses.CollectionList:
         prototype = (abjad.Segment, abjad.Set)
         if isinstance(collections, prototype):
             return pitchclasses.CollectionList(collections=[collections])
@@ -8868,7 +8872,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
     def __call__(
         self,
         collections: pitchclasses.CollectionList,
-        selections: typing.List[typing.Union[abjad.Selection, None]],
+        selections: typing.Sequence[typing.Union[abjad.Selection, None]],
     ) -> typing.List[abjad.Selection]:
         """
         Calls pitch-first assignment.
@@ -8892,14 +8896,17 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
             assert isinstance(collection, collection_prototype), repr(
                 collection
             )
+            collection_: typing.Union[abjad.Segment, list]
             if isinstance(collection, (abjad.Set, set)):
                 collection_ = list(sorted(collection))[:1]
             else:
                 collection_ = collection
+            assert isinstance(pattern, abjad.Pattern), repr(pattern)
             if not pattern.matches_index(index, length):
                 continue
             collections_.append(collection_)
             indices.append(index)
+        stage_selections: typing.Union[list, abjad.Selection]
         if self.thread:
             stage_selections = rhythm_maker(collections_)
         else:
@@ -8976,7 +8983,9 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
     @property
     def pattern(
         self
-    ) -> typing.Union[abjad.DurationInequality, abjad.Pattern, None]:
+    ) -> typing.Optional[
+        typing.Union[abjad.DurationInequality, abjad.Pattern]
+    ]:
         """
         Gets pattern.
         """
@@ -9714,7 +9723,7 @@ class PitchFirstRhythmMaker(object):
         self,
         collections: list,
         collection_index: int = None,
-        state: dict = None,
+        state: abjad.OrderedDict = None,
         total_collections: int = None,
     ) -> abjad.Selection:
         r"""
@@ -12353,8 +12362,8 @@ class RestAffixSpecifier(object):
 
 def anchor(
     remote_voice_name: str,
-    remote_selector: abjad.SelectorTyping = None,
-    local_selector: abjad.SelectorTyping = None,
+    remote_selector: abjad.Expression = None,
+    local_selector: abjad.Expression = None,
 ) -> AnchorSpecifier:
     """
     Anchors music in this figure (filtered by ``local_selector``) to
@@ -12367,6 +12376,14 @@ def anchor(
 
     :param local_selector: selector applied to this music.
     """
+    if remote_selector is not None:
+        assert isinstance(remote_selector, abjad.Expression), repr(
+            remote_selector
+        )
+    if local_selector is not None:
+        assert isinstance(local_selector, abjad.Expression), repr(
+            local_selector
+        )
     return AnchorSpecifier(
         local_selector=local_selector,
         remote_selector=remote_selector,
@@ -12376,8 +12393,8 @@ def anchor(
 
 def anchor_after(
     remote_voice_name: str,
-    remote_selector: abjad.SelectorTyping = None,
-    local_selector: abjad.SelectorTyping = None,
+    remote_selector: abjad.Expression = None,
+    local_selector: abjad.Expression = None,
 ) -> AnchorSpecifier:
     """
     Anchors music in this figure (filtered by ``local_selector``) to
@@ -12389,6 +12406,14 @@ def anchor_after(
 
     :param local_selector: selector applied to this music.
     """
+    if remote_selector is not None:
+        assert isinstance(remote_selector, abjad.Expression), repr(
+            remote_selector
+        )
+    if local_selector is not None:
+        assert isinstance(local_selector, abjad.Expression), repr(
+            local_selector
+        )
     return AnchorSpecifier(
         local_selector=local_selector,
         remote_selector=remote_selector,

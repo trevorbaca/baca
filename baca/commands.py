@@ -3523,7 +3523,7 @@ def cross_staff(
         >>> score_template = baca.StringTrioScoreTemplate()
         >>> accumulator = baca.MusicAccumulator(score_template=score_template)
         >>> commands = [
-        ...     pitch_first([1], 8, signature=8),
+        ...     baca.pitch_first([1], 8, signature=8),
         ...     rmakers.beam(),
         ... ]
         >>> accumulator(
@@ -3832,7 +3832,7 @@ def cross_staff(
         >>> score_template = baca.StringTrioScoreTemplate()
         >>> accumulator = baca.MusicAccumulator(score_template=score_template)
         >>> commands = [
-        ...     pitch_first([1], 8, signature=8),
+        ...     baca.pitch_first([1], 8, signature=8),
         ...     rmakers.beam(),
         ... ]
         >>> accumulator(

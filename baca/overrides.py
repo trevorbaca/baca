@@ -5958,6 +5958,7 @@ def slur_up(
 
         Up-overrides slur direction on leaves:
 
+        >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
@@ -5972,7 +5973,6 @@ def slur_up(
         ...     baca.tuplet_bracket_staff_padding(5),
         ...     baca.tuplet_bracket_down(),
         ... )
-        >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
         >>> contribution = music_maker(
         ...     'Voice_1',
         ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
