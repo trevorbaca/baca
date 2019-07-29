@@ -3792,7 +3792,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(6, 16), (6, 16)],
             ...     )
 
-        
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ... )
