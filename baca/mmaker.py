@@ -10731,7 +10731,7 @@ def imbricate(
         ...         ),
         ...     rmakers.beam(),
         ...     baca.imbricate('Voice_2', [10, 20, 19]),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -10762,7 +10762,7 @@ def imbricate(
                         {                                                                            %! baca.MusicMaker.__call__
                             \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
                             \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                                \override TupletBracket.staff-padding = #2                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                                 r8                                                                   %! baca.MusicMaker.__call__
                                 c'16                                                                 %! baca.MusicMaker.__call__
                                 [
@@ -10901,7 +10901,7 @@ def nest(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.nest('+4/16'),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
@@ -10923,7 +10923,7 @@ def nest(
                     \times 13/11 {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #2                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -11042,7 +11042,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffixSpecifier:
         ...         time_treatments=[-1],
         ...         ),
         ...     rmakers.beam(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
@@ -11062,7 +11062,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffixSpecifier:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 7/8 {
-                        \override TupletBracket.staff-padding = #5                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                         c'16
                         [
                         d'16
@@ -11115,7 +11115,7 @@ def rests_around(
         ...         time_treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
@@ -11135,7 +11135,7 @@ def rests_around(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #5                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                         r8
                         c'16
                         [
@@ -11187,7 +11187,7 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
         ...         time_treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
@@ -11207,7 +11207,7 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #5                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                         r8
                         c'16
                         [
@@ -11276,7 +11276,7 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
         ...         time_treatments=[-1],
         ...         ),
         ...     rmakers.beam(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
@@ -11296,7 +11296,7 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 7/8 {
-                        \override TupletBracket.staff-padding = #5                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                         c'16
                         [
                         d'16
@@ -11349,7 +11349,7 @@ def skips_around(
         ...         time_treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
@@ -11369,7 +11369,7 @@ def skips_around(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #5                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                         s8
                         c'16
                         [
@@ -11423,7 +11423,7 @@ def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
         ...         time_treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
@@ -11443,7 +11443,7 @@ def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #5                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
                         s8
                         c'16
                         [
