@@ -23,12 +23,12 @@ mmaker
    :nosignatures:
 
    ~AcciaccaturaSpecifier
+   ~Accumulator
    ~AnchorSpecifier
    ~Coat
+   ~Contribution
    ~Imbrication
    ~LMRSpecifier
-   ~MusicAccumulator
-   ~MusicContribution
    ~MusicMaker
    ~Nesting
    ~PitchFirstAssignment
@@ -83,6 +83,55 @@ mmaker
    .. autoattribute:: AcciaccaturaSpecifier.durations
 
    .. autoattribute:: AcciaccaturaSpecifier.lmr_specifier
+
+.. autoclass:: Accumulator
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+      assemble
+      populate_segment_maker
+      score_template
+      time_signatures
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: Accumulator.__call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. automethod:: Accumulator.assemble
+
+   .. automethod:: Accumulator.populate_segment_maker
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: Accumulator.score_template
+
+   .. autoattribute:: Accumulator.time_signatures
 
 .. autoclass:: AnchorSpecifier
 
@@ -160,6 +209,73 @@ mmaker
       :class: class-header
 
    .. autoattribute:: Coat.argument
+
+.. autoclass:: Contribution
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __getitem__
+      __iter__
+      __repr__
+      anchor
+      color_selector
+      color_selector_result
+      figure_name
+      hide_time_signature
+      print_color_selector_result
+      time_signature
+      voice_to_selection
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: Contribution.__getitem__
+
+   .. automethod:: Contribution.__iter__
+
+   .. automethod:: Contribution.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. automethod:: Contribution.print_color_selector_result
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: Contribution.anchor
+
+   .. autoattribute:: Contribution.color_selector
+
+   .. autoattribute:: Contribution.color_selector_result
+
+   .. autoattribute:: Contribution.figure_name
+
+   .. autoattribute:: Contribution.hide_time_signature
+
+   .. autoattribute:: Contribution.time_signature
+
+   .. autoattribute:: Contribution.voice_to_selection
 
 .. autoclass:: Imbrication
 
@@ -283,122 +399,6 @@ mmaker
    .. autoattribute:: LMRSpecifier.right_length
 
    .. autoattribute:: LMRSpecifier.right_reversed
-
-.. autoclass:: MusicAccumulator
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      assemble
-      populate_segment_maker
-      score_template
-      time_signatures
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: MusicAccumulator.__call__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Methods
-      :class: class-header
-
-   .. automethod:: MusicAccumulator.assemble
-
-   .. automethod:: MusicAccumulator.populate_segment_maker
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: MusicAccumulator.score_template
-
-   .. autoattribute:: MusicAccumulator.time_signatures
-
-.. autoclass:: MusicContribution
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __getitem__
-      __iter__
-      __repr__
-      anchor
-      color_selector
-      color_selector_result
-      figure_name
-      hide_time_signature
-      print_color_selector_result
-      time_signature
-      voice_to_selection
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: MusicContribution.__getitem__
-
-   .. automethod:: MusicContribution.__iter__
-
-   .. automethod:: MusicContribution.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Methods
-      :class: class-header
-
-   .. automethod:: MusicContribution.print_color_selector_result
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: MusicContribution.anchor
-
-   .. autoattribute:: MusicContribution.color_selector
-
-   .. autoattribute:: MusicContribution.color_selector_result
-
-   .. autoattribute:: MusicContribution.figure_name
-
-   .. autoattribute:: MusicContribution.hide_time_signature
-
-   .. autoattribute:: MusicContribution.time_signature
-
-   .. autoattribute:: MusicContribution.voice_to_selection
 
 .. autoclass:: MusicMaker
 

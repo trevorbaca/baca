@@ -5556,7 +5556,7 @@ class Imbrication(object):
         return self._voice_name
 
 
-class MusicAccumulator(object):
+class Accumulator(object):
     """
     Music-accumulator.
     """
@@ -5609,7 +5609,7 @@ class MusicAccumulator(object):
 
         ..  container:: example exception
 
-            >>> accumulator = baca.MusicAccumulator(
+            >>> accumulator = baca.Accumulator(
             ...     score_template=baca.StringTrioScoreTemplate()
             ...     )
             >>> commands = [
@@ -5675,7 +5675,7 @@ class MusicAccumulator(object):
         hide_time_signature = keywords.pop("hide_time_signature", None)
         music_maker = abjad.new(music_maker, *all_specifiers, **keywords)
         contribution = music_maker(voice_name, collections)
-        contribution = MusicContribution(
+        contribution = Contribution(
             anchor=anchor,
             color_selector=contribution.color_selector,
             color_selector_result=contribution.color_selector_result,
@@ -5901,14 +5901,14 @@ class MusicAccumulator(object):
             )
 
 
-class MusicContribution(object):
+class Contribution(object):
     """
     Music contribution.
 
     ..  container:: example
 
-        >>> baca.MusicContribution()
-        MusicContribution()
+        >>> baca.Contribution()
+        Contribution()
 
     """
 
@@ -6797,7 +6797,7 @@ class MusicMaker(object):
             abjad.Set,
             pitchclasses.CollectionList,
         ],
-    ) -> MusicContribution:
+    ) -> Contribution:
         """
         Calls music-maker.
         """
@@ -6877,7 +6877,7 @@ class MusicMaker(object):
             assert isinstance(value, abjad.Selection), repr(value)
             if self.tag is not None:
                 rhythmcommands.tag_selection(value, self.tag)
-        return MusicContribution(
+        return Contribution(
             color_selector=color_selector,
             color_selector_result=color_selector_result,
             time_signature=time_signature,

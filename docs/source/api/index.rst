@@ -525,12 +525,12 @@ indicators.Markup library.
    :nosignatures:
 
    ~baca.mmaker.AcciaccaturaSpecifier
+   ~baca.mmaker.Accumulator
    ~baca.mmaker.AnchorSpecifier
    ~baca.mmaker.Coat
+   ~baca.mmaker.Contribution
    ~baca.mmaker.Imbrication
    ~baca.mmaker.LMRSpecifier
-   ~baca.mmaker.MusicAccumulator
-   ~baca.mmaker.MusicContribution
    ~baca.mmaker.MusicMaker
    ~baca.mmaker.Nesting
    ~baca.mmaker.PitchFirstAssignment

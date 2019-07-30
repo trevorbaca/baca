@@ -3521,7 +3521,7 @@ def cross_staff(
         Attaches cross-staff command to pitched head 0:
 
         >>> score_template = baca.StringTrioScoreTemplate()
-        >>> accumulator = baca.MusicAccumulator(score_template=score_template)
+        >>> accumulator = baca.Accumulator(score_template=score_template)
         >>> commands = [
         ...     baca.pitch_first([1], 8, signature=8),
         ...     rmakers.beam(),
@@ -3830,7 +3830,7 @@ def cross_staff(
         Attaches cross-staff command to last two pitched leaves:
 
         >>> score_template = baca.StringTrioScoreTemplate()
-        >>> accumulator = baca.MusicAccumulator(score_template=score_template)
+        >>> accumulator = baca.Accumulator(score_template=score_template)
         >>> commands = [
         ...     baca.pitch_first([1], 8, signature=8),
         ...     rmakers.beam(),
