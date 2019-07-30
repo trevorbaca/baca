@@ -2278,6 +2278,8 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.environment == "docs":
             if abjad.inspect(self.score).indicator(abjad.tags.TWO_VOICE):
                 return ["two-voice-staff.ily"]
+            elif abjad.inspect(self.score).indicator(abjad.tags.THREE_VOICE):
+                return ["three-voice-staff.ily"]
             else:
                 return ["string-trio.ily"]
         elif self.environment == "external":

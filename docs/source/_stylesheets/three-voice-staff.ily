@@ -1,4 +1,4 @@
-% TWO-VOICE STAFF STYLESHEET -- FOR BAČA API EXAMPLES
+% THREE-VOICE STAFF STYLESHEET -- FOR BAČA API EXAMPLES
 
 #(set-global-staff-size 16)
 
@@ -34,8 +34,10 @@
         \consists Text_spanner_engraver
 
         \override StaffSymbol.stencil = ##f
+
         \override TextScript.outside-staff-priority = 600
         \override TextScript.staff-padding = 3
+
         \override TextSpanner.bound-details.right.attach-dir = #LEFT
         \override TextSpanner.staff-padding = 4
         }
@@ -109,7 +111,7 @@
         \remove Forbid_line_break_engraver
     }
 
-    % MUSIC VOICE ONE
+    % VOICE ONE
     \context {
         \Voice
         \name MusicVoiceOne
@@ -118,7 +120,7 @@
         \voiceOne
     }
 
-    % MUSIC VOICE TWO
+    % VOICE TWO
     \context {
         \Voice
         \name MusicVoiceTwo
@@ -127,7 +129,16 @@
         \voiceTwo
     }
 
-    % MUSIC STAFF
+    % VOICE THREE
+    \context {
+        \Voice
+        \name MusicVoiceThree
+        \type Engraver_group
+        \alias Voice
+        \voiceThree
+    }
+
+    % STAFF
     \context {
         \Staff
         \name MusicStaff
@@ -135,9 +146,10 @@
         \alias Staff
         \accepts MusicVoiceOne
         \accepts MusicVoiceTwo
+        \accepts MusicVoiceThree
     }
 
-    % MUSIC CONTEXT
+    % MUSIC
     \context {
         \name MusicContext
         \type Engraver_group
@@ -170,8 +182,8 @@
         \override NoteCollision.merge-differently-dotted = ##t
 
         \override NoteColumn.ignore-collision = ##t
-
         \shape #'((-2 . 0) (-1 . 0) (-0.5 . 0) (0 . 0)) RepeatTie                 
+
         \override RepeatTie.X-extent = ##f
 
         \override SpacingSpanner.strict-grace-spacing = ##t
@@ -192,7 +204,6 @@
         \override TupletBracket.breakable = ##t
         \override TupletBracket.full-length-to-extent = ##f
         \override TupletBracket.padding = 2
-
         \override TupletNumber.text = #tuplet-number::calc-fraction-text
 
         autoBeaming = ##f

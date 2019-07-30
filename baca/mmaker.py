@@ -2278,16 +2278,14 @@ class Imbrication(object):
 
     ..  container:: example
 
-        Defaults:
+        >>> template = baca.TwoVoiceStaffScoreTemplate()
+        >>> accumulator = baca.Accumulator(template)
 
         >>> collections = [
         ...     [0, 2, 10, 18, 16],
         ...     [15, 20, 19, 9, 0],
         ...     [2, 10, 18, 16, 15],
         ...     ]
-
-        >>> template = baca.TwoVoiceStaffScoreTemplate()
-        >>> accumulator = baca.Accumulator(template)
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
@@ -2307,7 +2305,7 @@ class Imbrication(object):
         ...     )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -2564,196 +2562,388 @@ class Imbrication(object):
 
         Multiple imbricated voices:
 
-        >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([1], 16),
-        ...     rmakers.beam_groups(),
-        ...     baca.imbricate(
-        ...         'Voice_1',
-        ...         [2, 19, 9],
-        ...         rmakers.beam_groups(beam_rests=True),
-        ...         baca.staccato(selector=baca.pheads()),
-        ...         ),
-        ...     baca.imbricate(
-        ...         'Voice_3',
-        ...         [16, 10, 18],
-        ...         rmakers.beam_groups(beam_rests=True),
-        ...         baca.accent(selector=baca.pheads()),
-        ...         ),
-        ... )
+        >>> template = baca.ThreeVoiceStaffScoreTemplate()
+        >>> accumulator = baca.Accumulator(template)
 
         >>> collections = [
         ...     [0, 2, 10, 18, 16],
         ...     [15, 20, 19, 9, 0],
         ...     [2, 10, 18, 16, 15],
         ...     ]
-        >>> contribution = music_maker(
-        ...     'Voice_2',
+        >>> accumulator(
+        ...     "Music_Voice_Two",
         ...     collections,
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
+        ...     baca.pitch_first([1], 16),
+        ...     baca.imbricate(
+        ...         "Music_Voice_One",
+        ...         [2, 19, 9],
+        ...         rmakers.beam_groups(beam_rests=True),
+        ...         baca.beam_positions(6),
+        ...         baca.staccato(selector=baca.pheads()),
+        ...         ),
+        ...     baca.imbricate(
+        ...         "Music_Voice_Three",
+        ...         [16, 10, 18],
+        ...         rmakers.beam_groups(beam_rests=True),
+        ...         baca.beam_positions(8),
+        ...         baca.accent(selector=baca.pheads()),
+        ...         ),
+        ...     rmakers.beam_groups(),
         ... )
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=template,
+        ...     spacing=baca.minimum_duration((1, 32)),
+        ...     time_signatures=accumulator.time_signatures,
+        ...     )
+        >>> accumulator.populate_segment_maker(maker)
+        >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 15/16
-                    s1 * 15/16
-                }
-                \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \override TupletBracket.stencil = ##f
-                            \override TupletNumber.stencil = ##f
-                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                [
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                - \staccato                                                          %! baca.staccato:IndicatorCommand
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <<                                                                                       %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 15/16                                                                  %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 15/16                                                                   %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
+                        \baca-new-spacing-section #1 #4                                              %! PHANTOM:_style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
+                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
+                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
+                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
+                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+            <BLANKLINE>
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                <<                                                                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    \context MusicStaff = "Music_Staff"                                              %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                    <<                                                                               %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                        {                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                            {                                                                        %! baca.MusicMaker.__call__
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
+            <BLANKLINE>
+                                \scaleDurations #'(1 . 1) {                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    % [Music_Voice_One measure 1]                                    %! _comment_measure_numbers
+                                    \override Beam.positions = #'(6 . 6)                             %! baca.beam_positions:OverrideCommand(1)
+                                    s16                                                              %! baca.MusicMaker.__call__
+                                    [
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16                                                             %! baca.MusicMaker.__call__
+                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                }                                                                    %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                \scaleDurations #'(1 . 1) {                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    g''16                                                            %! baca.MusicMaker.__call__
+                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    a'16                                                             %! baca.MusicMaker.__call__
+                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                }                                                                    %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                \scaleDurations #'(1 . 1) {                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+                                    ]
+                                    \revert Beam.positions                                           %! baca.beam_positions:OverrideCommand(2)
+            <BLANKLINE>
+                                }                                                                    %! baca.MusicMaker.__call__
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
+            <BLANKLINE>
                             }                                                                        %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                - \staccato                                                          %! baca.staccato:IndicatorCommand
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                - \staccato                                                          %! baca.staccato:IndicatorCommand
-                                s16                                                                  %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice_One"                                   %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice_One measure 2]                                    %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice_One"                                    %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice_One measure 2]                                     %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                        }                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                        {                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                            {                                                                        %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                \scaleDurations #'(1 . 1) {                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    % [Music_Voice_Two measure 1]                                    %! _comment_measure_numbers
+                                    \set stemLeftBeamCount = 0
+                                    \set stemRightBeamCount = 2
+                                    c'16                                                             %! baca.MusicMaker.__call__
+                                    [
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    d'16                                                             %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'!16                                                           %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''!16                                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    e''16                                                            %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                }                                                                    %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                \scaleDurations #'(1 . 1) {                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    ef''!16                                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    af''!16                                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    g''16                                                            %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    a'16                                                             %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    c'16                                                             %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                }                                                                    %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                \scaleDurations #'(1 . 1) {                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 1
+                                    \set stemRightBeamCount = 2
+                                    d'16                                                             %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'!16                                                           %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''!16                                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    e''16                                                            %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 0
+                                    ef''!16                                                          %! baca.MusicMaker.__call__
+                                    ]
+            <BLANKLINE>
+                                }                                                                    %! baca.MusicMaker.__call__
+            <BLANKLINE>
                             }                                                                        %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                ]
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice_Two"                                   %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice_Two measure 2]                                    %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice_Two"                                    %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice_Two measure 2]                                     %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                        }                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                        \context MusicVoiceThree = "Music_Voice_Three"                               %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                        {                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                            {                                                                        %! baca.MusicMaker.__call__
+                                \override TupletBracket.stencil = ##f
+                                \override TupletNumber.stencil = ##f
+            <BLANKLINE>
+                                \scaleDurations #'(1 . 1) {                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    % [Music_Voice_Three measure 1]                                  %! _comment_measure_numbers
+                                    \override Beam.positions = #'(8 . 8)                             %! baca.beam_positions:OverrideCommand(1)
+                                    s16                                                              %! baca.MusicMaker.__call__
+                                    [
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 1
+                                    e''16                                                            %! baca.MusicMaker.__call__
+                                    - \accent                                                        %! baca.accent:IndicatorCommand
+            <BLANKLINE>
+                                }                                                                    %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                \scaleDurations #'(1 . 1) {                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                }                                                                    %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                \scaleDurations #'(1 . 1) {                                          %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    bf'!16                                                           %! baca.MusicMaker.__call__
+                                    - \accent                                                        %! baca.accent:IndicatorCommand
+            <BLANKLINE>
+                                    \set stemLeftBeamCount = 2
+                                    \set stemRightBeamCount = 2
+                                    fs''!16                                                          %! baca.MusicMaker.__call__
+                                    - \accent                                                        %! baca.accent:IndicatorCommand
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+            <BLANKLINE>
+                                    s16                                                              %! baca.MusicMaker.__call__
+                                    ]
+                                    \revert Beam.positions                                           %! baca.beam_positions:OverrideCommand(2)
+            <BLANKLINE>
+                                }                                                                    %! baca.MusicMaker.__call__
+                                \revert TupletBracket.stencil
+                                \revert TupletNumber.stencil
+            <BLANKLINE>
                             }                                                                        %! baca.MusicMaker.__call__
-                            \revert TupletBracket.stencil
-                            \revert TupletNumber.stencil
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }
-                    \context Voice = "Voice_2"
-                    {
-                        \voiceTwo
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 0
-                                \set stemRightBeamCount = 2
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 1
-                                e''16                                                                %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 1
-                                \set stemRightBeamCount = 2
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 1
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 1
-                                \set stemRightBeamCount = 2
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 0
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }
-                    \context Voice = "Voice_3"
-                    {
-                        \voiceThree
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \override TupletBracket.stencil = ##f
-                            \override TupletNumber.stencil = ##f
-                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                [
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 1
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                \set stemLeftBeamCount = 2
-                                \set stemRightBeamCount = 2
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                s16                                                                  %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \revert TupletBracket.stencil
-                            \revert TupletNumber.stencil
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }
-                >>
-            >>
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice_Three"                                 %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice_Three measure 2]                                  %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice_Three"                                  %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice_Three measure 2]                                   %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                        }                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    >>                                                                               %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                >>                                                                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+            >>                                                                                       %! baca.ThreeVoiceStaffScoreTemplate.__call__
 
     ..  container:: example
 
@@ -3325,8 +3515,8 @@ class Imbrication(object):
             ...         ),
             ...     )
 
-            >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> lilypond_file = maker.run(environment="docs")
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 

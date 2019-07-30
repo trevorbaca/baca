@@ -1143,5 +1143,6 @@ Score template library.
    ~baca.templates.ScoreTemplate
    ~baca.templates.SingleStaffScoreTemplate
    ~baca.templates.StringTrioScoreTemplate
+   ~baca.templates.ThreeVoiceStaffScoreTemplate
    ~baca.templates.TwoVoiceStaffScoreTemplate
    ~baca.templates.ViolinSoloScoreTemplate

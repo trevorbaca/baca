@@ -25,6 +25,7 @@ templates
    ~ScoreTemplate
    ~SingleStaffScoreTemplate
    ~StringTrioScoreTemplate
+   ~ThreeVoiceStaffScoreTemplate
    ~TwoVoiceStaffScoreTemplate
    ~ViolinSoloScoreTemplate
 
@@ -314,6 +315,103 @@ templates
    .. container:: inherited
 
       .. autoattribute:: StringTrioScoreTemplate.voice_abbreviations
+
+.. autoclass:: ThreeVoiceStaffScoreTemplate
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: ThreeVoiceStaffScoreTemplate.__call__
+
+   .. container:: inherited
+
+      .. automethod:: ThreeVoiceStaffScoreTemplate.__illustrate__
+
+   .. container:: inherited
+
+      .. automethod:: ThreeVoiceStaffScoreTemplate.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: ThreeVoiceStaffScoreTemplate.allows_instrument
+
+   .. container:: inherited
+
+      .. automethod:: ThreeVoiceStaffScoreTemplate.allows_part_assignment
+
+   .. container:: inherited
+
+      .. automethod:: ThreeVoiceStaffScoreTemplate.attach_defaults
+
+   .. container:: inherited
+
+      .. automethod:: ThreeVoiceStaffScoreTemplate.group_families
+
+   .. container:: inherited
+
+      .. automethod:: ThreeVoiceStaffScoreTemplate.make_music_context
+
+   .. container:: inherited
+
+      .. automethod:: ThreeVoiceStaffScoreTemplate.make_piano_staff
+
+   .. container:: inherited
+
+      .. automethod:: ThreeVoiceStaffScoreTemplate.make_square_staff_group
+
+   .. container:: inherited
+
+      .. automethod:: ThreeVoiceStaffScoreTemplate.make_staff_group
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. container:: inherited
+
+      .. autoattribute:: ThreeVoiceStaffScoreTemplate.always_make_global_rests
+
+   .. container:: inherited
+
+      .. autoattribute:: ThreeVoiceStaffScoreTemplate.defaults
+
+   .. container:: inherited
+
+      .. autoattribute:: ThreeVoiceStaffScoreTemplate.do_not_require_margin_markup
+
+   .. container:: inherited
+
+      .. autoattribute:: ThreeVoiceStaffScoreTemplate.part_manifest
+
+   .. container:: inherited
+
+      .. autoattribute:: ThreeVoiceStaffScoreTemplate.voice_abbreviations
 
 .. autoclass:: TwoVoiceStaffScoreTemplate
 

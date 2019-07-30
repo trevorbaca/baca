@@ -688,6 +688,254 @@ class StringTrioScoreTemplate(ScoreTemplate):
         return score
 
 
+class ThreeVoiceStaffScoreTemplate(ScoreTemplate):
+    r"""
+    Three-voice staff score template.
+
+    ..  container:: example
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.ThreeVoiceStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ...     )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <<                                                                                       %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 1/2                                                                     %! _make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
+                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
+                        s1 * 3/8                                                                     %! _make_global_skips(1)
+                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
+                        \bar "|"                                                                     %! _attach_final_bar_line
+            <BLANKLINE>
+                        % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
+                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
+                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
+                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
+                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
+            <BLANKLINE>
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                <<                                                                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    \context MusicStaff = "Music_Staff"                                              %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                    <<                                                                               %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                        {                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                            % [Music_Voice_One measure 1]                                            %! _comment_measure_numbers
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            % [Music_Voice_One measure 2]                                            %! _comment_measure_numbers
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            % [Music_Voice_One measure 3]                                            %! _comment_measure_numbers
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            % [Music_Voice_One measure 4]                                            %! _comment_measure_numbers
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice_One"                                   %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice_One measure 5]                                    %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice_One"                                    %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice_One measure 5]                                     %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                        }                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                        {                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                            % [Music_Voice_Two measure 1]                                            %! _comment_measure_numbers
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            % [Music_Voice_Two measure 2]                                            %! _comment_measure_numbers
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            % [Music_Voice_Two measure 3]                                            %! _comment_measure_numbers
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            % [Music_Voice_Two measure 4]                                            %! _comment_measure_numbers
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice_Two"                                   %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice_Two measure 5]                                    %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice_Two"                                    %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice_Two measure 5]                                     %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                        }                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                        \context MusicVoiceThree = "Music_Voice_Three"                               %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                        {                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                            % [Music_Voice_Three measure 1]                                          %! _comment_measure_numbers
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            % [Music_Voice_Three measure 2]                                          %! _comment_measure_numbers
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            % [Music_Voice_Three measure 3]                                          %! _comment_measure_numbers
+                            R1 * 4/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            % [Music_Voice_Three measure 4]                                          %! _comment_measure_numbers
+                            R1 * 3/8                                                                 %! _call_rhythm_commands
+            <BLANKLINE>
+                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Music_Voice_Three"                                 %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Music_Voice_Three measure 5]                                  %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice_Three"                                  %! PHANTOM:_make_multimeasure_rest_container
+                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                    % [Rest_Voice_Three measure 5]                                   %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
+                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
+                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
+                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
+                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
+            <BLANKLINE>
+                        }                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                    >>                                                                               %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+                >>                                                                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            <BLANKLINE>
+            >>                                                                                       %! baca.ThreeVoiceStaffScoreTemplate.__call__
+
+    """
+
+    ### SPECIAL METHODS ###
+
+    def __call__(self) -> abjad.Score:
+        """
+        Calls three-voice staff score template.
+        """
+        tag = "baca.ThreeVoiceStaffScoreTemplate.__call__"
+        # GLOBAL CONTEXT
+        global_context = self._make_global_context()
+
+        # MUSIC STAFF
+        music_voice_1 = abjad.Voice(
+            lilypond_type="MusicVoiceOne", name="Music_Voice_One", tag=tag
+        )
+        music_voice_2 = abjad.Voice(
+            lilypond_type="MusicVoiceTwo", name="Music_Voice_Two", tag=tag
+        )
+        music_voice_3 = abjad.Voice(
+            lilypond_type="MusicVoiceThree", name="Music_Voice_Three", tag=tag
+        )
+        music_staff = abjad.Staff(
+            [music_voice_1, music_voice_2, music_voice_3],
+            lilypond_type="MusicStaff",
+            is_simultaneous=True,
+            name="Music_Staff",
+            tag=tag,
+        )
+
+        # MUSIC CONTEXT
+        music_context = abjad.Context(
+            [music_staff],
+            lilypond_type="MusicContext",
+            is_simultaneous=True,
+            name="Music_Context",
+            tag=tag,
+        )
+
+        # SCORE
+        score = abjad.Score(
+            [global_context, music_context], name="Score", tag=tag
+        )
+        abjad.attach(abjad.tags.THREE_VOICE, score, tag=None)
+        return score
+
+
 class TwoVoiceStaffScoreTemplate(ScoreTemplate):
     r"""
     Two-voice staff score template.
