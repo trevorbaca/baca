@@ -171,34 +171,42 @@ class ArpeggiationSpacingSpecifier(object):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice_1"
+                    \new GlobalContext
                     {
-                        \voiceOne
-                        {                                                                                %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                                c,16                                                                     %! baca.MusicMaker.__call__
-                                [
-                                d,16                                                                     %! baca.MusicMaker.__call__
-                                bf,16                                                                    %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                            %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                                fs,16                                                                    %! baca.MusicMaker.__call__
-                                [
-                                e16                                                                      %! baca.MusicMaker.__call__
-                                ef'16                                                                    %! baca.MusicMaker.__call__
-                                af'16                                                                    %! baca.MusicMaker.__call__
-                                g''16                                                                    %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                            %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                                a,16                                                                     %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }                                                                                %! baca.MusicMaker.__call__
+                        \time 9/16
+                        s1 * 9/16
                     }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice_1"
+                        {
+                            \voiceOne
+                            {                                                                            %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    c,16                                                                 %! baca.MusicMaker.__call__
+                                    [
+                                    d,16                                                                 %! baca.MusicMaker.__call__
+                                    bf,16                                                                %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    fs,16                                                                %! baca.MusicMaker.__call__
+                                    [
+                                    e16                                                                  %! baca.MusicMaker.__call__
+                                    ef'16                                                                %! baca.MusicMaker.__call__
+                                    af'16                                                                %! baca.MusicMaker.__call__
+                                    g''16                                                                %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    a,16                                                                 %! baca.MusicMaker.__call__
+                                }                                                                        %! baca.MusicMaker.__call__
+                            }                                                                            %! baca.MusicMaker.__call__
+                        }
+                    >>
                 >>
 
         ..  container:: example
@@ -225,34 +233,42 @@ class ArpeggiationSpacingSpecifier(object):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice_1"
+                    \new GlobalContext
                     {
-                        \voiceOne
-                        {                                                                                %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                                c'16                                                                     %! baca.MusicMaker.__call__
-                                [
-                                d16                                                                      %! baca.MusicMaker.__call__
-                                bf,16                                                                    %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                            %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                                fs16                                                                     %! baca.MusicMaker.__call__
-                                [
-                                e16                                                                      %! baca.MusicMaker.__call__
-                                ef16                                                                     %! baca.MusicMaker.__call__
-                                af,16                                                                    %! baca.MusicMaker.__call__
-                                g,16                                                                     %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                            %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                                a,16                                                                     %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }                                                                                %! baca.MusicMaker.__call__
+                        \time 9/16
+                        s1 * 9/16
                     }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice_1"
+                        {
+                            \voiceOne
+                            {                                                                            %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    c'16                                                                 %! baca.MusicMaker.__call__
+                                    [
+                                    d16                                                                  %! baca.MusicMaker.__call__
+                                    bf,16                                                                %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    fs16                                                                 %! baca.MusicMaker.__call__
+                                    [
+                                    e16                                                                  %! baca.MusicMaker.__call__
+                                    ef16                                                                 %! baca.MusicMaker.__call__
+                                    af,16                                                                %! baca.MusicMaker.__call__
+                                    g,16                                                                 %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    a,16                                                                 %! baca.MusicMaker.__call__
+                                }                                                                        %! baca.MusicMaker.__call__
+                            }                                                                            %! baca.MusicMaker.__call__
+                        }
+                    >>
                 >>
 
         """

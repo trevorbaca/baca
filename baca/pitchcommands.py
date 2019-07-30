@@ -272,169 +272,177 @@ class ClusterCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
-                            <c' e' g'>16
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
-                            [
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
-                            <d' f' a' c''>16
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
-                            <bf' d'' f''>16
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
-                            <fs'' a'' c''' e'''>16
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
-                            [
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
-                            <e'' g'' b''>16
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
-                            <ef'' g'' b'' d'''>16
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
-                            <af'' c''' e'''>16
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
-                            <g'' b'' d''' f'''>16
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \once \override Accidental.stencil = ##f
-                            \once \override AccidentalCautionary.stencil = ##f
-                            \once \override Arpeggio.X-offset = #-2
-                            \once \override NoteHead.stencil = #ly:text-interface::print
-                            \once \override NoteHead.text = \markup {
-                            	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
-                            }
-                            <a' c'' e''>16
-                            ^ \markup {
-                                \center-align
-                                    \concat
-                                        {
-                                            \natural
-                                            \flat
-                                        }
-                                }
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 9/16
+                    s1 * 9/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
+                                <c' e' g'>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                                [
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
+                                <d' f' a' c''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
+                                <bf' d'' f''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
+                                <fs'' a'' c''' e'''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                                [
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
+                                <e'' g'' b''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
+                                <ef'' g'' b'' d'''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
+                                <af'' c''' e'''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
+                                <g'' b'' d''' f'''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \once \override Accidental.stencil = ##f
+                                \once \override AccidentalCautionary.stencil = ##f
+                                \once \override Arpeggio.X-offset = #-2
+                                \once \override NoteHead.stencil = #ly:text-interface::print
+                                \once \override NoteHead.text = \markup {
+                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                }
+                                <a' c'' e''>16
+                                ^ \markup {
+                                    \center-align
+                                        \concat
+                                            {
+                                                \natural
+                                                \flat
+                                            }
+                                    }
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     """
@@ -3338,36 +3346,44 @@ class RegisterCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            bf''16                                                                   %! baca.MusicMaker.__call__
-                            [
-                            c'''16                                                                   %! baca.MusicMaker.__call__
-                            d'''16                                                                   %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            bf''16                                                                   %! baca.MusicMaker.__call__
-                            [
-                            c'''16                                                                   %! baca.MusicMaker.__call__
-                            d'''16                                                                   %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            bf''16                                                                   %! baca.MusicMaker.__call__
-                            [
-                            c'''16                                                                   %! baca.MusicMaker.__call__
-                            d'''16                                                                   %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 9/16
+                    s1 * 9/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                bf''16                                                               %! baca.MusicMaker.__call__
+                                [
+                                c'''16                                                               %! baca.MusicMaker.__call__
+                                d'''16                                                               %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                bf''16                                                               %! baca.MusicMaker.__call__
+                                [
+                                c'''16                                                               %! baca.MusicMaker.__call__
+                                d'''16                                                               %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                bf''16                                                               %! baca.MusicMaker.__call__
+                                [
+                                c'''16                                                               %! baca.MusicMaker.__call__
+                                d'''16                                                               %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     ..  container:: example
@@ -3546,18 +3562,26 @@ class RegisterCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <bf c' d'>16
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 1/16
+                    s1 * 1/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <bf c' d'>16
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     """
@@ -3686,47 +3710,55 @@ class RegisterInterpolationCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            fs'16                                                                    %! baca.MusicMaker.__call__
-                            [
-                            e'16                                                                     %! baca.MusicMaker.__call__
-                            ef'16                                                                    %! baca.MusicMaker.__call__
-                            f'16                                                                     %! baca.MusicMaker.__call__
-                            a'16                                                                     %! baca.MusicMaker.__call__
-                            bf'16                                                                    %! baca.MusicMaker.__call__
-                            c''16                                                                    %! baca.MusicMaker.__call__
-                            b'16                                                                     %! baca.MusicMaker.__call__
-                            af'16                                                                    %! baca.MusicMaker.__call__
-                            g''16                                                                    %! baca.MusicMaker.__call__
-                            cs''16                                                                   %! baca.MusicMaker.__call__
-                            d''16                                                                    %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            fs''16                                                                   %! baca.MusicMaker.__call__
-                            [
-                            e''16                                                                    %! baca.MusicMaker.__call__
-                            ef''16                                                                   %! baca.MusicMaker.__call__
-                            f''16                                                                    %! baca.MusicMaker.__call__
-                            a''16                                                                    %! baca.MusicMaker.__call__
-                            bf''16                                                                   %! baca.MusicMaker.__call__
-                            c'''16                                                                   %! baca.MusicMaker.__call__
-                            b''16                                                                    %! baca.MusicMaker.__call__
-                            af''16                                                                   %! baca.MusicMaker.__call__
-                            g'''16                                                                   %! baca.MusicMaker.__call__
-                            cs'''16                                                                  %! baca.MusicMaker.__call__
-                            d'''16                                                                   %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 3/2
+                    s1 * 3/2
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                fs'16                                                                %! baca.MusicMaker.__call__
+                                [
+                                e'16                                                                 %! baca.MusicMaker.__call__
+                                ef'16                                                                %! baca.MusicMaker.__call__
+                                f'16                                                                 %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                                bf'16                                                                %! baca.MusicMaker.__call__
+                                c''16                                                                %! baca.MusicMaker.__call__
+                                b'16                                                                 %! baca.MusicMaker.__call__
+                                af'16                                                                %! baca.MusicMaker.__call__
+                                g''16                                                                %! baca.MusicMaker.__call__
+                                cs''16                                                               %! baca.MusicMaker.__call__
+                                d''16                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                fs''16                                                               %! baca.MusicMaker.__call__
+                                [
+                                e''16                                                                %! baca.MusicMaker.__call__
+                                ef''16                                                               %! baca.MusicMaker.__call__
+                                f''16                                                                %! baca.MusicMaker.__call__
+                                a''16                                                                %! baca.MusicMaker.__call__
+                                bf''16                                                               %! baca.MusicMaker.__call__
+                                c'''16                                                               %! baca.MusicMaker.__call__
+                                b''16                                                                %! baca.MusicMaker.__call__
+                                af''16                                                               %! baca.MusicMaker.__call__
+                                g'''16                                                               %! baca.MusicMaker.__call__
+                                cs'''16                                                              %! baca.MusicMaker.__call__
+                                d'''16                                                               %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     ..  container:: example
@@ -3756,33 +3788,41 @@ class RegisterInterpolationCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <e' fs'>16
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <f' ef''>16
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <a' bf'>16
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <c'' b''>16
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <g'' af''>16
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <cs''' d'''>16
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 3/8
+                    s1 * 3/8
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <e' fs'>16
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <f' ef''>16
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <a' bf'>16
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <c'' b''>16
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <g'' af''>16
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <cs''' d'''>16
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     ..  container:: example
@@ -4938,59 +4978,67 @@ class RegisterInterpolationCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice_1"
+                    \new GlobalContext
                     {
-                        \voiceOne
-                        {                                                                                %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                fs'16                                                                    %! baca.MusicMaker.__call__
-                                [
-                                \abjad-color-music #'green
-                                e'16                                                                     %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                ef''16                                                                   %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                f''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                a'16                                                                     %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                bf'16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                c''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                b''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                af''16                                                                   %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                g''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                cs'''16                                                                  %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                d'''16                                                                   %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                            %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                                fs'16                                                                    %! baca.MusicMaker.__call__
-                                [
-                                e'16                                                                     %! baca.MusicMaker.__call__
-                                ef'16                                                                    %! baca.MusicMaker.__call__
-                                f'16                                                                     %! baca.MusicMaker.__call__
-                                a'16                                                                     %! baca.MusicMaker.__call__
-                                bf'16                                                                    %! baca.MusicMaker.__call__
-                                c'16                                                                     %! baca.MusicMaker.__call__
-                                b'16                                                                     %! baca.MusicMaker.__call__
-                                af'16                                                                    %! baca.MusicMaker.__call__
-                                g'16                                                                     %! baca.MusicMaker.__call__
-                                cs'16                                                                    %! baca.MusicMaker.__call__
-                                d'16                                                                     %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }                                                                                %! baca.MusicMaker.__call__
+                        \time 3/2
+                        s1 * 3/2
                     }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice_1"
+                        {
+                            \voiceOne
+                            {                                                                            %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    fs'16                                                                %! baca.MusicMaker.__call__
+                                    [
+                                    \abjad-color-music #'green
+                                    e'16                                                                 %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    ef''16                                                               %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    f''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    a'16                                                                 %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    bf'16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    c''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    b''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    af''16                                                               %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    g''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    cs'''16                                                              %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    d'''16                                                               %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    fs'16                                                                %! baca.MusicMaker.__call__
+                                    [
+                                    e'16                                                                 %! baca.MusicMaker.__call__
+                                    ef'16                                                                %! baca.MusicMaker.__call__
+                                    f'16                                                                 %! baca.MusicMaker.__call__
+                                    a'16                                                                 %! baca.MusicMaker.__call__
+                                    bf'16                                                                %! baca.MusicMaker.__call__
+                                    c'16                                                                 %! baca.MusicMaker.__call__
+                                    b'16                                                                 %! baca.MusicMaker.__call__
+                                    af'16                                                                %! baca.MusicMaker.__call__
+                                    g'16                                                                 %! baca.MusicMaker.__call__
+                                    cs'16                                                                %! baca.MusicMaker.__call__
+                                    d'16                                                                 %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                            }                                                                            %! baca.MusicMaker.__call__
+                        }
+                    >>
                 >>
 
         ..  container:: example
@@ -5018,59 +5066,67 @@ class RegisterInterpolationCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice_1"
+                    \new GlobalContext
                     {
-                        \voiceOne
-                        {                                                                                %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                                fs'16                                                                    %! baca.MusicMaker.__call__
-                                [
-                                e'16                                                                     %! baca.MusicMaker.__call__
-                                ef'16                                                                    %! baca.MusicMaker.__call__
-                                f'16                                                                     %! baca.MusicMaker.__call__
-                                a'16                                                                     %! baca.MusicMaker.__call__
-                                bf'16                                                                    %! baca.MusicMaker.__call__
-                                c'16                                                                     %! baca.MusicMaker.__call__
-                                b'16                                                                     %! baca.MusicMaker.__call__
-                                af'16                                                                    %! baca.MusicMaker.__call__
-                                g'16                                                                     %! baca.MusicMaker.__call__
-                                cs'16                                                                    %! baca.MusicMaker.__call__
-                                d'16                                                                     %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                            %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                fs'16                                                                    %! baca.MusicMaker.__call__
-                                [
-                                \abjad-color-music #'green
-                                e'16                                                                     %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                ef''16                                                                   %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                f''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                a'16                                                                     %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                bf'16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                c''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                b''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                af''16                                                                   %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                g''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                cs'''16                                                                  %! baca.MusicMaker.__call__
-                                \abjad-color-music #'green
-                                d'''16                                                                   %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }                                                                                %! baca.MusicMaker.__call__
+                        \time 3/2
+                        s1 * 3/2
                     }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice_1"
+                        {
+                            \voiceOne
+                            {                                                                            %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    fs'16                                                                %! baca.MusicMaker.__call__
+                                    [
+                                    e'16                                                                 %! baca.MusicMaker.__call__
+                                    ef'16                                                                %! baca.MusicMaker.__call__
+                                    f'16                                                                 %! baca.MusicMaker.__call__
+                                    a'16                                                                 %! baca.MusicMaker.__call__
+                                    bf'16                                                                %! baca.MusicMaker.__call__
+                                    c'16                                                                 %! baca.MusicMaker.__call__
+                                    b'16                                                                 %! baca.MusicMaker.__call__
+                                    af'16                                                                %! baca.MusicMaker.__call__
+                                    g'16                                                                 %! baca.MusicMaker.__call__
+                                    cs'16                                                                %! baca.MusicMaker.__call__
+                                    d'16                                                                 %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    fs'16                                                                %! baca.MusicMaker.__call__
+                                    [
+                                    \abjad-color-music #'green
+                                    e'16                                                                 %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    ef''16                                                               %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    f''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    a'16                                                                 %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    bf'16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    c''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    b''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    af''16                                                               %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    g''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    cs'''16                                                              %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'green
+                                    d'''16                                                               %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                            }                                                                            %! baca.MusicMaker.__call__
+                        }
+                    >>
                 >>
 
         ..  container:: example
@@ -5101,71 +5157,79 @@ class RegisterInterpolationCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-                \new Staff
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
                 <<
-                    \context Voice = "Voice_1"
+                    \new GlobalContext
                     {
-                        \voiceOne
-                        {                                                                                %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                                \abjad-color-music #'red
-                                fs'16                                                                    %! baca.MusicMaker.__call__
-                                [
-                                \abjad-color-music #'red
-                                e'16                                                                     %! baca.MusicMaker.__call__
-                                \abjad-color-music #'red
-                                ef''16                                                                   %! baca.MusicMaker.__call__
-                                \abjad-color-music #'red
-                                f''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'red
-                                a'16                                                                     %! baca.MusicMaker.__call__
-                                \abjad-color-music #'red
-                                bf'16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'red
-                                c''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'red
-                                b''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'red
-                                af''16                                                                   %! baca.MusicMaker.__call__
-                                \abjad-color-music #'red
-                                g''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'red
-                                cs'''16                                                                  %! baca.MusicMaker.__call__
-                                \abjad-color-music #'red
-                                d'''16                                                                   %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                            %! baca.MusicMaker.__call__
-                            \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                                \abjad-color-music #'blue
-                                fs'16                                                                    %! baca.MusicMaker.__call__
-                                [
-                                \abjad-color-music #'blue
-                                e'16                                                                     %! baca.MusicMaker.__call__
-                                \abjad-color-music #'blue
-                                ef''16                                                                   %! baca.MusicMaker.__call__
-                                \abjad-color-music #'blue
-                                f''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'blue
-                                a'16                                                                     %! baca.MusicMaker.__call__
-                                \abjad-color-music #'blue
-                                bf'16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'blue
-                                c''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'blue
-                                b''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'blue
-                                af''16                                                                   %! baca.MusicMaker.__call__
-                                \abjad-color-music #'blue
-                                g''16                                                                    %! baca.MusicMaker.__call__
-                                \abjad-color-music #'blue
-                                cs'''16                                                                  %! baca.MusicMaker.__call__
-                                \abjad-color-music #'blue
-                                d'''16                                                                   %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                            %! baca.MusicMaker.__call__
-                        }                                                                                %! baca.MusicMaker.__call__
+                        \time 3/2
+                        s1 * 3/2
                     }
+                    \new Staff
+                    <<
+                        \context Voice = "Voice_1"
+                        {
+                            \voiceOne
+                            {                                                                            %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'red
+                                    fs'16                                                                %! baca.MusicMaker.__call__
+                                    [
+                                    \abjad-color-music #'red
+                                    e'16                                                                 %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'red
+                                    ef''16                                                               %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'red
+                                    f''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'red
+                                    a'16                                                                 %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'red
+                                    bf'16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'red
+                                    c''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'red
+                                    b''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'red
+                                    af''16                                                               %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'red
+                                    g''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'red
+                                    cs'''16                                                              %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'red
+                                    d'''16                                                               %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'blue
+                                    fs'16                                                                %! baca.MusicMaker.__call__
+                                    [
+                                    \abjad-color-music #'blue
+                                    e'16                                                                 %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'blue
+                                    ef''16                                                               %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'blue
+                                    f''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'blue
+                                    a'16                                                                 %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'blue
+                                    bf'16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'blue
+                                    c''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'blue
+                                    b''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'blue
+                                    af''16                                                               %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'blue
+                                    g''16                                                                %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'blue
+                                    cs'''16                                                              %! baca.MusicMaker.__call__
+                                    \abjad-color-music #'blue
+                                    d'''16                                                               %! baca.MusicMaker.__call__
+                                    ]
+                                }                                                                        %! baca.MusicMaker.__call__
+                            }                                                                            %! baca.MusicMaker.__call__
+                        }
+                    >>
                 >>
 
         """
@@ -5216,18 +5280,26 @@ class RegisterToOctaveCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <c' d'' e'''>16
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 1/16
+                    s1 * 1/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <c' d'' e'''>16
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
         >>> music_maker = baca.MusicMaker(
@@ -5252,18 +5324,26 @@ class RegisterToOctaveCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <c d' e''>16
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 1/16
+                    s1 * 1/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <c d' e''>16
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
         >>> music_maker = baca.MusicMaker(
@@ -5288,18 +5368,26 @@ class RegisterToOctaveCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <c, d e'>16
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 1/16
+                    s1 * 1/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <c, d e'>16
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     ..  container:: example
@@ -5328,22 +5416,30 @@ class RegisterToOctaveCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            c'16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            d''16                                                                    %! baca.MusicMaker.__call__
-                            e'''16                                                                   %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 3/16
+                    s1 * 3/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                c'16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                d''16                                                                %! baca.MusicMaker.__call__
+                                e'''16                                                               %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
         >>> music_maker = baca.MusicMaker(
@@ -5368,22 +5464,30 @@ class RegisterToOctaveCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            c16                                                                      %! baca.MusicMaker.__call__
-                            [
-                            d'16                                                                     %! baca.MusicMaker.__call__
-                            e''16                                                                    %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 3/16
+                    s1 * 3/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                c16                                                                  %! baca.MusicMaker.__call__
+                                [
+                                d'16                                                                 %! baca.MusicMaker.__call__
+                                e''16                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
         >>> music_maker = baca.MusicMaker(
@@ -5408,22 +5512,30 @@ class RegisterToOctaveCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            c,16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            d16                                                                      %! baca.MusicMaker.__call__
-                            e'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 3/16
+                    s1 * 3/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                c,16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                d16                                                                  %! baca.MusicMaker.__call__
+                                e'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     ..  container:: example
@@ -5452,22 +5564,30 @@ class RegisterToOctaveCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            bf'16                                                                    %! baca.MusicMaker.__call__
-                            [
-                            c''16                                                                    %! baca.MusicMaker.__call__
-                            d''16                                                                    %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 3/16
+                    s1 * 3/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                bf'16                                                                %! baca.MusicMaker.__call__
+                                [
+                                c''16                                                                %! baca.MusicMaker.__call__
+                                d''16                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
         >>> music_maker = baca.MusicMaker(
@@ -5492,22 +5612,30 @@ class RegisterToOctaveCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            bf16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            c'16                                                                     %! baca.MusicMaker.__call__
-                            d'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 3/16
+                    s1 * 3/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                bf16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                c'16                                                                 %! baca.MusicMaker.__call__
+                                d'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
         >>> music_maker = baca.MusicMaker(
@@ -5532,22 +5660,30 @@ class RegisterToOctaveCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            bf16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            c'16                                                                     %! baca.MusicMaker.__call__
-                            d'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 3/16
+                    s1 * 3/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                bf16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                c'16                                                                 %! baca.MusicMaker.__call__
+                                d'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     ..  container:: example
@@ -5992,48 +6128,56 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \clef "treble"                                                           %! baca.clef:IndicatorCommand
-                            ef'16                                                                    %! baca.MusicMaker.__call__
-                            [
-                            e'16                                                                     %! baca.MusicMaker.__call__
-                            f'16                                                                     %! baca.MusicMaker.__call__
-                            f'16                                                                     %! baca.MusicMaker.__call__
-                            f'16                                                                     %! baca.MusicMaker.__call__
-                            g'16                                                                     %! baca.MusicMaker.__call__
-                            g'16                                                                     %! baca.MusicMaker.__call__
-                            g'16                                                                     %! baca.MusicMaker.__call__
-                            a'16                                                                     %! baca.MusicMaker.__call__
-                            a'16                                                                     %! baca.MusicMaker.__call__
-                            a'16                                                                     %! baca.MusicMaker.__call__
-                            b'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            b'16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            c''16                                                                    %! baca.MusicMaker.__call__
-                            c''16                                                                    %! baca.MusicMaker.__call__
-                            c''16                                                                    %! baca.MusicMaker.__call__
-                            d''16                                                                    %! baca.MusicMaker.__call__
-                            d''16                                                                    %! baca.MusicMaker.__call__
-                            d''16                                                                    %! baca.MusicMaker.__call__
-                            e''16                                                                    %! baca.MusicMaker.__call__
-                            e''16                                                                    %! baca.MusicMaker.__call__
-                            e''16                                                                    %! baca.MusicMaker.__call__
-                            f''16                                                                    %! baca.MusicMaker.__call__
-                            fs''16                                                                   %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 3/2
+                    s1 * 3/2
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \clef "treble"                                                       %! baca.clef:IndicatorCommand
+                                ef'16                                                                %! baca.MusicMaker.__call__
+                                [
+                                e'16                                                                 %! baca.MusicMaker.__call__
+                                f'16                                                                 %! baca.MusicMaker.__call__
+                                f'16                                                                 %! baca.MusicMaker.__call__
+                                f'16                                                                 %! baca.MusicMaker.__call__
+                                g'16                                                                 %! baca.MusicMaker.__call__
+                                g'16                                                                 %! baca.MusicMaker.__call__
+                                g'16                                                                 %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                                b'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                b'16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                c''16                                                                %! baca.MusicMaker.__call__
+                                c''16                                                                %! baca.MusicMaker.__call__
+                                c''16                                                                %! baca.MusicMaker.__call__
+                                d''16                                                                %! baca.MusicMaker.__call__
+                                d''16                                                                %! baca.MusicMaker.__call__
+                                d''16                                                                %! baca.MusicMaker.__call__
+                                e''16                                                                %! baca.MusicMaker.__call__
+                                e''16                                                                %! baca.MusicMaker.__call__
+                                e''16                                                                %! baca.MusicMaker.__call__
+                                f''16                                                                %! baca.MusicMaker.__call__
+                                fs''16                                                               %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     ..  container:: example
@@ -6064,59 +6208,67 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \override Glissando.thickness = #'3                                      %! baca.glissando_thickness:OverrideCommand(1)
-                            \clef "treble"                                                           %! baca.clef:IndicatorCommand
-                            ef'16                                                                    %! baca.MusicMaker.__call__
-                            [
-                            \glissando                                                               %! baca.glissando
-                            \hide NoteHead                                                           %! baca.glissando
-                            \override Accidental.stencil = ##f                                       %! baca.glissando
-                            \override NoteColumn.glissando-skip = ##t                                %! baca.glissando
-                            \override NoteHead.no-ledgers = ##t                                      %! baca.glissando
-                            e'16                                                                     %! baca.MusicMaker.__call__
-                            f'16                                                                     %! baca.MusicMaker.__call__
-                            f'16                                                                     %! baca.MusicMaker.__call__
-                            f'16                                                                     %! baca.MusicMaker.__call__
-                            g'16                                                                     %! baca.MusicMaker.__call__
-                            g'16                                                                     %! baca.MusicMaker.__call__
-                            g'16                                                                     %! baca.MusicMaker.__call__
-                            a'16                                                                     %! baca.MusicMaker.__call__
-                            a'16                                                                     %! baca.MusicMaker.__call__
-                            a'16                                                                     %! baca.MusicMaker.__call__
-                            b'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            b'16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            c''16                                                                    %! baca.MusicMaker.__call__
-                            c''16                                                                    %! baca.MusicMaker.__call__
-                            c''16                                                                    %! baca.MusicMaker.__call__
-                            d''16                                                                    %! baca.MusicMaker.__call__
-                            d''16                                                                    %! baca.MusicMaker.__call__
-                            d''16                                                                    %! baca.MusicMaker.__call__
-                            e''16                                                                    %! baca.MusicMaker.__call__
-                            e''16                                                                    %! baca.MusicMaker.__call__
-                            e''16                                                                    %! baca.MusicMaker.__call__
-                            f''16                                                                    %! baca.MusicMaker.__call__
-                            \revert Accidental.stencil                                               %! baca.glissando
-                            \revert NoteColumn.glissando-skip                                        %! baca.glissando
-                            \revert NoteHead.no-ledgers                                              %! baca.glissando
-                            \undo \hide NoteHead                                                     %! baca.glissando
-                            fs''16                                                                   %! baca.MusicMaker.__call__
-                            ]
-                            \revert Glissando.thickness                                              %! baca.glissando_thickness:OverrideCommand(2)
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 3/2
+                    s1 * 3/2
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \override Glissando.thickness = #'3                                  %! baca.glissando_thickness:OverrideCommand(1)
+                                \clef "treble"                                                       %! baca.clef:IndicatorCommand
+                                ef'16                                                                %! baca.MusicMaker.__call__
+                                [
+                                \glissando                                                           %! baca.glissando
+                                \hide NoteHead                                                       %! baca.glissando
+                                \override Accidental.stencil = ##f                                   %! baca.glissando
+                                \override NoteColumn.glissando-skip = ##t                            %! baca.glissando
+                                \override NoteHead.no-ledgers = ##t                                  %! baca.glissando
+                                e'16                                                                 %! baca.MusicMaker.__call__
+                                f'16                                                                 %! baca.MusicMaker.__call__
+                                f'16                                                                 %! baca.MusicMaker.__call__
+                                f'16                                                                 %! baca.MusicMaker.__call__
+                                g'16                                                                 %! baca.MusicMaker.__call__
+                                g'16                                                                 %! baca.MusicMaker.__call__
+                                g'16                                                                 %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                                b'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                b'16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                c''16                                                                %! baca.MusicMaker.__call__
+                                c''16                                                                %! baca.MusicMaker.__call__
+                                c''16                                                                %! baca.MusicMaker.__call__
+                                d''16                                                                %! baca.MusicMaker.__call__
+                                d''16                                                                %! baca.MusicMaker.__call__
+                                d''16                                                                %! baca.MusicMaker.__call__
+                                e''16                                                                %! baca.MusicMaker.__call__
+                                e''16                                                                %! baca.MusicMaker.__call__
+                                e''16                                                                %! baca.MusicMaker.__call__
+                                f''16                                                                %! baca.MusicMaker.__call__
+                                \revert Accidental.stencil                                           %! baca.glissando
+                                \revert NoteColumn.glissando-skip                                    %! baca.glissando
+                                \revert NoteHead.no-ledgers                                          %! baca.glissando
+                                \undo \hide NoteHead                                                 %! baca.glissando
+                                fs''16                                                               %! baca.MusicMaker.__call__
+                                ]
+                                \revert Glissando.thickness                                          %! baca.glissando_thickness:OverrideCommand(2)
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     """
@@ -6244,65 +6396,73 @@ def bass_to_octave(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            <c d bf>8
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            <c d bf>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            f'8                                                                      %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            f'32                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            <ef' e' fs''>8
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            <ef' e' fs''>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            <g af'>8
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            <g af'>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            a8                                                                       %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            a32                                                                      %! baca.MusicMaker.__call__
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 5/4
+                    s1 * 5/4
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                <c d bf>8
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                <c d bf>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                f'8                                                                  %! baca.MusicMaker.__call__
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                f'32                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                <ef' e' fs''>8
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                <ef' e' fs''>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                <g af'>8
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                <g af'>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                a8                                                                   %! baca.MusicMaker.__call__
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                a32                                                                  %! baca.MusicMaker.__call__
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     ..  container:: example
@@ -6332,65 +6492,73 @@ def bass_to_octave(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            <c d bf>8
-                            ~
-                            [
-                            \abjad-color-music #'red
-                            <c d bf>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'blue
-                            f8                                                                       %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'blue
-                            f32                                                                      %! baca.MusicMaker.__call__
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            <ef e fs'>8
-                            ~
-                            [
-                            \abjad-color-music #'red
-                            <ef e fs'>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'blue
-                            <g af'>8
-                            ~
-                            [
-                            \abjad-color-music #'blue
-                            <g af'>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            a8                                                                       %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'red
-                            a32                                                                      %! baca.MusicMaker.__call__
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 5/4
+                    s1 * 5/4
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'red
+                                <c d bf>8
+                                ~
+                                [
+                                \abjad-color-music #'red
+                                <c d bf>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'blue
+                                f8                                                                   %! baca.MusicMaker.__call__
+                                ~
+                                [
+                                \abjad-color-music #'blue
+                                f32                                                                  %! baca.MusicMaker.__call__
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'red
+                                <ef e fs'>8
+                                ~
+                                [
+                                \abjad-color-music #'red
+                                <ef e fs'>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'blue
+                                <g af'>8
+                                ~
+                                [
+                                \abjad-color-music #'blue
+                                <g af'>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'red
+                                a8                                                                   %! baca.MusicMaker.__call__
+                                ~
+                                [
+                                \abjad-color-music #'red
+                                a32                                                                  %! baca.MusicMaker.__call__
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     """
@@ -6431,65 +6599,73 @@ def center_to_octave(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            <c, d, bf,>8
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            <c, d, bf,>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            f8                                                                       %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            f32                                                                      %! baca.MusicMaker.__call__
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            <ef e fs'>8
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            <ef e fs'>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            <g, af>8
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            <g, af>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            a,8                                                                      %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            a,32                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 5/4
+                    s1 * 5/4
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                <c, d, bf,>8
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                <c, d, bf,>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                f8                                                                   %! baca.MusicMaker.__call__
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                f32                                                                  %! baca.MusicMaker.__call__
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                <ef e fs'>8
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                <ef e fs'>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                <g, af>8
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                <g, af>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                a,8                                                                  %! baca.MusicMaker.__call__
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                a,32                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     ..  container:: example
@@ -6519,65 +6695,73 @@ def center_to_octave(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            <c d bf>8
-                            ~
-                            [
-                            \abjad-color-music #'red
-                            <c d bf>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'blue
-                            f8                                                                       %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'blue
-                            f32                                                                      %! baca.MusicMaker.__call__
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            <ef e fs'>8
-                            ~
-                            [
-                            \abjad-color-music #'red
-                            <ef e fs'>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'blue
-                            <g, af>8
-                            ~
-                            [
-                            \abjad-color-music #'blue
-                            <g, af>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            a8                                                                       %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'red
-                            a32                                                                      %! baca.MusicMaker.__call__
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 5/4
+                    s1 * 5/4
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'red
+                                <c d bf>8
+                                ~
+                                [
+                                \abjad-color-music #'red
+                                <c d bf>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'blue
+                                f8                                                                   %! baca.MusicMaker.__call__
+                                ~
+                                [
+                                \abjad-color-music #'blue
+                                f32                                                                  %! baca.MusicMaker.__call__
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'red
+                                <ef e fs'>8
+                                ~
+                                [
+                                \abjad-color-music #'red
+                                <ef e fs'>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'blue
+                                <g, af>8
+                                ~
+                                [
+                                \abjad-color-music #'blue
+                                <g, af>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'red
+                                a8                                                                   %! baca.MusicMaker.__call__
+                                ~
+                                [
+                                \abjad-color-music #'red
+                                a32                                                                  %! baca.MusicMaker.__call__
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     """
@@ -6671,52 +6855,60 @@ def displacement(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
-                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
-                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8                                                                       %! baca.MusicMaker.__call__
-                            c'16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            d'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            ef4                                                                      %! baca.MusicMaker.__call__
-                            ~
-                            ef16                                                                     %! baca.MusicMaker.__call__
-                            r16                                                                      %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
-                        \times 7/8 {                                                                 %! baca.MusicMaker.__call__
-                            c16                                                                      %! baca.MusicMaker.__call__
-                            [
-                            d''16                                                                    %! baca.MusicMaker.__call__
-                            ]
-                            ef''4                                                                    %! baca.MusicMaker.__call__
-                            ~
-                            ef''16                                                                   %! baca.MusicMaker.__call__
-                            r16                                                                      %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
-                        \times 11/12 {                                                               %! baca.MusicMaker.__call__
-                            c'16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            d'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            ef4                                                                      %! baca.MusicMaker.__call__
-                            ~
-                            ef16                                                                     %! baca.MusicMaker.__call__
-                            r16                                                                      %! baca.MusicMaker.__call__
-                            r4                                                                       %! baca.MusicMaker.__call__
-                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 27/16
+                    s1 * 27/16
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
+                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                c'16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                d'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                ef4                                                                  %! baca.MusicMaker.__call__
+                                ~
+                                ef16                                                                 %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 7/8 {                                                             %! baca.MusicMaker.__call__
+                                c16                                                                  %! baca.MusicMaker.__call__
+                                [
+                                d''16                                                                %! baca.MusicMaker.__call__
+                                ]
+                                ef''4                                                                %! baca.MusicMaker.__call__
+                                ~
+                                ef''16                                                               %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 11/12 {                                                           %! baca.MusicMaker.__call__
+                                c'16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                d'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                ef4                                                                  %! baca.MusicMaker.__call__
+                                ~
+                                ef16                                                                 %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                r4                                                                   %! baca.MusicMaker.__call__
+                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     ..  container:: example
@@ -6745,35 +6937,43 @@ def displacement(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            r8                                                                       %! baca.MusicMaker.__call__
-                            <c' d' ef'>4
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <c' d' ef'>4
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <c d ef>4
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <c d ef>4
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <c'' d'' ef''>4
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            <c'' d'' ef''>4
-                            r4                                                                       %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 15/8
+                    s1 * 15/8
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                <c' d' ef'>4
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <c' d' ef'>4
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <c d ef>4
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <c d ef>4
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <c'' d'' ef''>4
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                <c'' d'' ef''>4
+                                r4                                                                   %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     """
@@ -7077,48 +7277,56 @@ def register(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
-                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
-                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8                                                                       %! baca.MusicMaker.__call__
-                            c'16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            d'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            bf4                                                                      %! baca.MusicMaker.__call__
-                            ~
-                            bf16                                                                     %! baca.MusicMaker.__call__
-                            r16                                                                      %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
-                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
-                            fs16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            e'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            ef'4                                                                     %! baca.MusicMaker.__call__
-                            ~
-                            ef'16                                                                    %! baca.MusicMaker.__call__
-                            r16                                                                      %! baca.MusicMaker.__call__
-                            af16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            g16                                                                      %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
-                            a16                                                                      %! baca.MusicMaker.__call__
-                            r4                                                                       %! baca.MusicMaker.__call__
-                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 11/8
+                    s1 * 11/8
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
+                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                c'16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                d'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                bf4                                                                  %! baca.MusicMaker.__call__
+                                ~
+                                bf16                                                                 %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
+                                fs16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                e'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                ef'4                                                                 %! baca.MusicMaker.__call__
+                                ~
+                                ef'16                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                af16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                g16                                                                  %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
+                                a16                                                                  %! baca.MusicMaker.__call__
+                                r4                                                                   %! baca.MusicMaker.__call__
+                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
         Octave-transposes PLTs in tuplet 1 to the octave rooted at -6:
@@ -7148,55 +7356,63 @@ def register(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
-                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
-                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8                                                                       %! baca.MusicMaker.__call__
-                            c'16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            d'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            bf'4                                                                     %! baca.MusicMaker.__call__
-                            ~
-                            bf'16                                                                    %! baca.MusicMaker.__call__
-                            r16                                                                      %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
-                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            fs16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            \abjad-color-music #'green
-                            e'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            \abjad-color-music #'green
-                            ef'4                                                                     %! baca.MusicMaker.__call__
-                            ~
-                            \abjad-color-music #'green
-                            ef'16                                                                    %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            r16                                                                      %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            af16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            \abjad-color-music #'green
-                            g16                                                                      %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
-                            a'16                                                                     %! baca.MusicMaker.__call__
-                            r4                                                                       %! baca.MusicMaker.__call__
-                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 11/8
+                    s1 * 11/8
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
+                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                c'16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                d'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                bf'4                                                                 %! baca.MusicMaker.__call__
+                                ~
+                                bf'16                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                fs16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                \abjad-color-music #'green
+                                e'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                \abjad-color-music #'green
+                                ef'4                                                                 %! baca.MusicMaker.__call__
+                                ~
+                                \abjad-color-music #'green
+                                ef'16                                                                %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                af16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                \abjad-color-music #'green
+                                g16                                                                  %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                                r4                                                                   %! baca.MusicMaker.__call__
+                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     ..  container:: example
@@ -7227,48 +7443,56 @@ def register(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
-                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
-                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8                                                                       %! baca.MusicMaker.__call__
-                            c'16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            d'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            bf'4                                                                     %! baca.MusicMaker.__call__
-                            ~
-                            bf'16                                                                    %! baca.MusicMaker.__call__
-                            r16                                                                      %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
-                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
-                            fs'16                                                                    %! baca.MusicMaker.__call__
-                            [
-                            e'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            ef''4                                                                    %! baca.MusicMaker.__call__
-                            ~
-                            ef''16                                                                   %! baca.MusicMaker.__call__
-                            r16                                                                      %! baca.MusicMaker.__call__
-                            af''16                                                                   %! baca.MusicMaker.__call__
-                            [
-                            g''16                                                                    %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
-                            a''16                                                                    %! baca.MusicMaker.__call__
-                            r4                                                                       %! baca.MusicMaker.__call__
-                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 11/8
+                    s1 * 11/8
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
+                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                c'16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                d'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                bf'4                                                                 %! baca.MusicMaker.__call__
+                                ~
+                                bf'16                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
+                                fs'16                                                                %! baca.MusicMaker.__call__
+                                [
+                                e'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                ef''4                                                                %! baca.MusicMaker.__call__
+                                ~
+                                ef''16                                                               %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                af''16                                                               %! baca.MusicMaker.__call__
+                                [
+                                g''16                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
+                                a''16                                                                %! baca.MusicMaker.__call__
+                                r4                                                                   %! baca.MusicMaker.__call__
+                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
         Octave-transposes PLTs in tuplet 1 to an octave interpolated from
@@ -7299,55 +7523,63 @@ def register(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
-                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
-                            \override TupletBracket.staff-padding = #5                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                            r8                                                                       %! baca.MusicMaker.__call__
-                            c'16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            d'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            bf'4                                                                     %! baca.MusicMaker.__call__
-                            ~
-                            bf'16                                                                    %! baca.MusicMaker.__call__
-                            r16                                                                      %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \tweak text #tuplet-number::calc-fraction-text                               %! baca.MusicMaker.__call__
-                        \times 9/10 {                                                                %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            fs16                                                                     %! baca.MusicMaker.__call__
-                            [
-                            \abjad-color-music #'green
-                            e'16                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            \abjad-color-music #'green
-                            ef'4                                                                     %! baca.MusicMaker.__call__
-                            ~
-                            \abjad-color-music #'green
-                            ef'16                                                                    %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            r16                                                                      %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            af'16                                                                    %! baca.MusicMaker.__call__
-                            [
-                            \abjad-color-music #'green
-                            g''16                                                                    %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \times 4/5 {                                                                 %! baca.MusicMaker.__call__
-                            a'16                                                                     %! baca.MusicMaker.__call__
-                            r4                                                                       %! baca.MusicMaker.__call__
-                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 11/8
+                    s1 * 11/8
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
+                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                                r8                                                                   %! baca.MusicMaker.__call__
+                                c'16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                d'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                bf'4                                                                 %! baca.MusicMaker.__call__
+                                ~
+                                bf'16                                                                %! baca.MusicMaker.__call__
+                                r16                                                                  %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
+                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                fs16                                                                 %! baca.MusicMaker.__call__
+                                [
+                                \abjad-color-music #'green
+                                e'16                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                \abjad-color-music #'green
+                                ef'4                                                                 %! baca.MusicMaker.__call__
+                                ~
+                                \abjad-color-music #'green
+                                ef'16                                                                %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                r16                                                                  %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                af'16                                                                %! baca.MusicMaker.__call__
+                                [
+                                \abjad-color-music #'green
+                                g''16                                                                %! baca.MusicMaker.__call__
+                                ]
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
+                                a'16                                                                 %! baca.MusicMaker.__call__
+                                r4                                                                   %! baca.MusicMaker.__call__
+                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     """
@@ -7393,65 +7625,73 @@ def soprano_to_octave(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            <c,, d,, bf,,>8
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            <c,, d,, bf,,>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            f,8                                                                      %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            f,32                                                                     %! baca.MusicMaker.__call__
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            <ef, e, fs>8
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            <ef, e, fs>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            <g,, af,>8
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            <g,, af,>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'green
-                            a,,8                                                                     %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'green
-                            a,,32                                                                    %! baca.MusicMaker.__call__
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 5/4
+                    s1 * 5/4
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                <c,, d,, bf,,>8
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                <c,, d,, bf,,>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                f,8                                                                  %! baca.MusicMaker.__call__
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                f,32                                                                 %! baca.MusicMaker.__call__
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                <ef, e, fs>8
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                <ef, e, fs>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                <g,, af,>8
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                <g,, af,>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'green
+                                a,,8                                                                 %! baca.MusicMaker.__call__
+                                ~
+                                [
+                                \abjad-color-music #'green
+                                a,,32                                                                %! baca.MusicMaker.__call__
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     ..  container:: example
@@ -7481,65 +7721,73 @@ def soprano_to_octave(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
             <<
-                \context Voice = "Voice_1"
+                \new GlobalContext
                 {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            <c d bf>8
-                            ~
-                            [
-                            \abjad-color-music #'red
-                            <c d bf>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'blue
-                            f8                                                                       %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'blue
-                            f32                                                                      %! baca.MusicMaker.__call__
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            <ef, e, fs>8
-                            ~
-                            [
-                            \abjad-color-music #'red
-                            <ef, e, fs>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'blue
-                            <g, af>8
-                            ~
-                            [
-                            \abjad-color-music #'blue
-                            <g, af>32
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            a8                                                                       %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'red
-                            a32                                                                      %! baca.MusicMaker.__call__
-                            ]
-                            r16.                                                                     %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
+                    \time 5/4
+                    s1 * 5/4
                 }
+                \new Staff
+                <<
+                    \context Voice = "Voice_1"
+                    {
+                        \voiceOne
+                        {                                                                            %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'red
+                                <c d bf>8
+                                ~
+                                [
+                                \abjad-color-music #'red
+                                <c d bf>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'blue
+                                f8                                                                   %! baca.MusicMaker.__call__
+                                ~
+                                [
+                                \abjad-color-music #'blue
+                                f32                                                                  %! baca.MusicMaker.__call__
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'red
+                                <ef, e, fs>8
+                                ~
+                                [
+                                \abjad-color-music #'red
+                                <ef, e, fs>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'blue
+                                <g, af>8
+                                ~
+                                [
+                                \abjad-color-music #'blue
+                                <g, af>32
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                            \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
+                                \abjad-color-music #'red
+                                a8                                                                   %! baca.MusicMaker.__call__
+                                ~
+                                [
+                                \abjad-color-music #'red
+                                a32                                                                  %! baca.MusicMaker.__call__
+                                ]
+                                r16.                                                                 %! baca.MusicMaker.__call__
+                            }                                                                        %! baca.MusicMaker.__call__
+                        }                                                                            %! baca.MusicMaker.__call__
+                    }
+                >>
             >>
 
     """
