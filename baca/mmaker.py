@@ -2302,6 +2302,7 @@ class Imbrication(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -2312,6 +2313,7 @@ class Imbrication(object):
             <<
                 \new GlobalContext
                 {
+                    \time 15/16
                     s1 * 15/16
                 }
                 \new Staff
@@ -2456,6 +2458,7 @@ class Imbrication(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -2466,6 +2469,7 @@ class Imbrication(object):
             <<
                 \new GlobalContext
                 {
+                    \time 15/16
                     s1 * 15/16
                 }
                 \new Staff
@@ -2644,6 +2648,7 @@ class Imbrication(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -2654,6 +2659,7 @@ class Imbrication(object):
             <<
                 \new GlobalContext
                 {
+                    \time 9/8
                     s1 * 9/8
                 }
                 \new Staff
@@ -2883,6 +2889,7 @@ class Imbrication(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -2893,6 +2900,7 @@ class Imbrication(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 27/16
                         s1 * 27/16
                     }
                     \new Staff
@@ -2996,6 +3004,7 @@ class Imbrication(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -3006,6 +3015,7 @@ class Imbrication(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 9/8
                         s1 * 9/8
                     }
                     \new Staff
@@ -3463,6 +3473,7 @@ class Imbrication(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -3473,6 +3484,7 @@ class Imbrication(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 11/16
                         s1 * 11/16
                     }
                     \new Staff
@@ -3598,6 +3610,7 @@ class Imbrication(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -3608,6 +3621,7 @@ class Imbrication(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 19/16
                         s1 * 19/16
                     }
                     \new Staff
@@ -3915,6 +3929,7 @@ class Imbrication(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -3925,6 +3940,7 @@ class Imbrication(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 5/8
                         s1 * 5/8
                     }
                     \new Staff
@@ -4121,6 +4137,7 @@ class Imbrication(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -4131,6 +4148,7 @@ class Imbrication(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 15/16
                         s1 * 15/16
                     }
                     \new Staff
@@ -4301,6 +4319,7 @@ class Imbrication(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -4311,6 +4330,7 @@ class Imbrication(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 9/8
                         s1 * 9/8
                     }
                     \new Staff
@@ -4500,6 +4520,7 @@ class Imbrication(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -4510,6 +4531,7 @@ class Imbrication(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 15/16
                         s1 * 15/16
                     }
                     \new Staff
@@ -4633,6 +4655,7 @@ class Imbrication(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -4643,6 +4666,7 @@ class Imbrication(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 15/16
                         s1 * 15/16
                     }
                     \new Staff
@@ -4780,6 +4804,7 @@ class Imbrication(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -4790,6 +4815,7 @@ class Imbrication(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 15/16
                         s1 * 15/16
                     }
                     \new Staff
@@ -4925,6 +4951,7 @@ class Imbrication(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -4935,6 +4962,7 @@ class Imbrication(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 15/16
                         s1 * 15/16
                     }
                     \new Staff
@@ -5424,6 +5452,7 @@ class Imbrication(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -5434,6 +5463,7 @@ class Imbrication(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 45/32
                         s1 * 45/32
                     }
                     \new Staff
@@ -6092,6 +6122,7 @@ class MusicMaker(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6102,6 +6133,7 @@ class MusicMaker(object):
             <<
                 \new GlobalContext
                 {
+                    \time 9/16
                     s1 * 9/16
                 }
                 \new Staff
@@ -6146,6 +6178,7 @@ class MusicMaker(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6156,6 +6189,7 @@ class MusicMaker(object):
             <<
                 \new GlobalContext
                 {
+                    \time 9/16
                     s1 * 9/16
                 }
                 \new Staff
@@ -6205,6 +6239,7 @@ class MusicMaker(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6215,6 +6250,7 @@ class MusicMaker(object):
             <<
                 \new GlobalContext
                 {
+                    \time 3/4
                     s1 * 3/4
                 }
                 \new Staff
@@ -6264,6 +6300,7 @@ class MusicMaker(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6274,6 +6311,7 @@ class MusicMaker(object):
             <<
                 \new GlobalContext
                 {
+                    \time 9/32
                     s1 * 9/32
                 }
                 \new Staff
@@ -6323,6 +6361,7 @@ class MusicMaker(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6333,6 +6372,7 @@ class MusicMaker(object):
             <<
                 \new GlobalContext
                 {
+                    \time 11/16
                     s1 * 11/16
                 }
                 \new Staff
@@ -6383,6 +6423,7 @@ class MusicMaker(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6393,6 +6434,7 @@ class MusicMaker(object):
             <<
                 \new GlobalContext
                 {
+                    \time 7/8
                     s1 * 7/8
                 }
                 \new Staff
@@ -6429,6 +6471,7 @@ class MusicMaker(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6439,6 +6482,7 @@ class MusicMaker(object):
             <<
                 \new GlobalContext
                 {
+                    \time 15/16
                     s1 * 15/16
                 }
                 \new Staff
@@ -6476,6 +6520,7 @@ class MusicMaker(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6486,6 +6531,7 @@ class MusicMaker(object):
             <<
                 \new GlobalContext
                 {
+                    \time 5/4
                     s1 * 5/4
                 }
                 \new Staff
@@ -6528,6 +6574,7 @@ class MusicMaker(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6538,6 +6585,7 @@ class MusicMaker(object):
             <<
                 \new GlobalContext
                 {
+                    \time 15/16
                     s1 * 15/16
                 }
                 \new Staff
@@ -6575,6 +6623,7 @@ class MusicMaker(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6585,6 +6634,7 @@ class MusicMaker(object):
             <<
                 \new GlobalContext
                 {
+                    \time 5/4
                     s1 * 5/4
                 }
                 \new Staff
@@ -6627,6 +6677,7 @@ class MusicMaker(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6637,6 +6688,7 @@ class MusicMaker(object):
             <<
                 \new GlobalContext
                 {
+                    \time 5/2
                     s1 * 5/2
                 }
                 \new Staff
@@ -6695,6 +6747,7 @@ class MusicMaker(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6705,6 +6758,7 @@ class MusicMaker(object):
             <<
                 \new GlobalContext
                 {
+                    \time 7/16
                     s1 * 7/16
                 }
                 \new Staff
@@ -6974,6 +7028,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -6984,6 +7039,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 9/16
                         s1 * 9/16
                     }
                     \new Staff
@@ -7031,6 +7087,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -7041,6 +7098,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 9/16
                         s1 * 9/16
                     }
                     \new Staff
@@ -7092,6 +7150,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
@@ -7108,6 +7167,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 11/16
                         s1 * 11/16
                     }
                     \new Staff
@@ -7170,6 +7230,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
@@ -7186,6 +7247,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 11/16
                         s1 * 11/16
                     }
                     \new Staff
@@ -7251,6 +7313,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 4.5
@@ -7267,6 +7330,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 11/16
                         s1 * 11/16
                     }
                     \new Staff
@@ -7332,6 +7396,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).dynamic_line_spanner.staff_padding = 6
@@ -7348,6 +7413,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 11/16
                         s1 * 11/16
                     }
                     \new Staff
@@ -7412,6 +7478,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).stem.direction = abjad.Down
@@ -7428,6 +7495,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 11/16
                         s1 * 11/16
                     }
                     \new Staff
@@ -7485,6 +7553,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).stem.direction = abjad.Down
@@ -7501,6 +7570,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 11/16
                         s1 * 11/16
                     }
                     \new Staff
@@ -7564,6 +7634,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).stem.direction = abjad.Down
@@ -7580,6 +7651,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 11/16
                         s1 * 11/16
                     }
                     \new Staff
@@ -7643,6 +7715,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).stem.direction = abjad.Down
@@ -7659,6 +7732,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 11/16
                         s1 * 11/16
                     }
                     \new Staff
@@ -7719,6 +7793,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
@@ -7735,6 +7810,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 11/16
                         s1 * 11/16
                     }
                     \new Staff
@@ -7806,6 +7882,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -7816,6 +7893,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 11/16
                         s1 * 11/16
                     }
                     \new Staff
@@ -7867,6 +7945,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
@@ -7883,6 +7962,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 3/4
                         s1 * 3/4
                     }
                     \new Staff
@@ -7962,6 +8042,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-5.5, -5.5)
@@ -7978,6 +8059,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 3/4
                         s1 * 3/4
                     }
                     \new Staff
@@ -8050,6 +8132,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -8060,6 +8143,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 15/16
                         s1 * 15/16
                     }
                     \new Staff
@@ -8110,6 +8194,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -8120,6 +8205,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 19/16
                         s1 * 19/16
                     }
                     \new Staff
@@ -8171,6 +8257,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -8181,6 +8268,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 5/4
                         s1 * 5/4
                     }
                     \new Staff
@@ -8234,6 +8322,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -8244,6 +8333,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 5/4
                         s1 * 5/4
                     }
                     \new Staff
@@ -8296,6 +8386,7 @@ class MusicMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -8306,6 +8397,7 @@ class MusicMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 9/8
                         s1 * 9/8
                     }
                     \new Staff
@@ -8392,6 +8484,7 @@ class Nesting(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -8402,6 +8495,7 @@ class Nesting(object):
             <<
                 \new GlobalContext
                 {
+                    \time 3/4
                     s1 * 3/4
                 }
                 \new Staff
@@ -8514,6 +8608,7 @@ class Nesting(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -8524,6 +8619,7 @@ class Nesting(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 17/16
                         s1 * 17/16
                     }
                     \new Staff
@@ -8878,6 +8974,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -8888,6 +8985,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
                 <<
                     \new GlobalContext
                     {
+                        \time 1/1
                         s1 * 1
                     }
                     \new Staff
@@ -8934,6 +9032,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -8944,6 +9043,7 @@ class PitchFirstAssignment(rmakers.MakerAssignment):
                 <<
                     \new GlobalContext
                     {
+                        \time 9/8
                         s1 * 9/8
                     }
                     \new Staff
@@ -10222,6 +10322,7 @@ class PitchFirstRhythmMaker(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -10232,6 +10333,7 @@ class PitchFirstRhythmMaker(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 3/4
                         s1 * 3/4
                     }
                     \new Staff
@@ -11295,6 +11397,7 @@ class RestAffixSpecifier(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> staff = lilypond_file[abjad.Score]
         >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
@@ -11311,6 +11414,7 @@ class RestAffixSpecifier(object):
             <<
                 \new GlobalContext
                 {
+                    \time 13/8
                     s1 * 13/8
                 }
                 \new Staff
@@ -11369,6 +11473,7 @@ class RestAffixSpecifier(object):
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> staff = lilypond_file[abjad.Score]
         >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
@@ -11385,6 +11490,7 @@ class RestAffixSpecifier(object):
             <<
                 \new GlobalContext
                 {
+                    \time 13/8
                     s1 * 13/8
                 }
                 \new Staff
@@ -11493,6 +11599,7 @@ class RestAffixSpecifier(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11503,6 +11610,7 @@ class RestAffixSpecifier(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 9/16
                         s1 * 9/16
                     }
                     \new Staff
@@ -11611,6 +11719,7 @@ class RestAffixSpecifier(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11621,6 +11730,7 @@ class RestAffixSpecifier(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 15/16
                         s1 * 15/16
                     }
                     \new Staff
@@ -11679,6 +11789,7 @@ class RestAffixSpecifier(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11689,6 +11800,7 @@ class RestAffixSpecifier(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 9/16
                         s1 * 9/16
                     }
                     \new Staff
@@ -11736,6 +11848,7 @@ class RestAffixSpecifier(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11746,6 +11859,7 @@ class RestAffixSpecifier(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 9/8
                         s1 * 9/8
                     }
                     \new Staff
@@ -11807,6 +11921,7 @@ class RestAffixSpecifier(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11817,6 +11932,7 @@ class RestAffixSpecifier(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 21/16
                         s1 * 21/16
                     }
                     \new Staff
@@ -11887,6 +12003,7 @@ class RestAffixSpecifier(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11897,6 +12014,7 @@ class RestAffixSpecifier(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 3/4
                         s1 * 3/4
                     }
                     \new Staff
@@ -11972,6 +12090,7 @@ class RestAffixSpecifier(object):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     contribution.voice_to_selection,
             ...     attach_lilypond_voice_commands=True,
+            ...     time_signatures=[contribution.time_signature],
             ... )
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -11982,6 +12101,7 @@ class RestAffixSpecifier(object):
                 <<
                     \new GlobalContext
                     {
+                        \time 3/4
                         s1 * 3/4
                     }
                     \new Staff
@@ -12099,6 +12219,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -12109,6 +12230,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <<
                 \new GlobalContext
                 {
+                    \time 3/4
                     s1 * 3/4
                 }
                 \new Staff
@@ -12222,6 +12344,7 @@ def imbricate(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -12232,6 +12355,7 @@ def imbricate(
             <<
                 \new GlobalContext
                 {
+                    \time 11/8
                     s1 * 11/8
                 }
                 \new Staff
@@ -12390,6 +12514,7 @@ def nest(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -12400,6 +12525,7 @@ def nest(
             <<
                 \new GlobalContext
                 {
+                    \time 13/8
                     s1 * 13/8
                 }
                 \new Staff
@@ -12542,6 +12668,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffixSpecifier:
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -12552,6 +12679,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffixSpecifier:
             <<
                 \new GlobalContext
                 {
+                    \time 9/8
                     s1 * 9/8
                 }
                 \new Staff
@@ -12626,6 +12754,7 @@ def rests_around(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -12636,6 +12765,7 @@ def rests_around(
             <<
                 \new GlobalContext
                 {
+                    \time 5/4
                     s1 * 5/4
                 }
                 \new Staff
@@ -12709,6 +12839,7 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -12719,6 +12850,7 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
             <<
                 \new GlobalContext
                 {
+                    \time 19/16
                     s1 * 19/16
                 }
                 \new Staff
@@ -12809,6 +12941,7 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -12819,6 +12952,7 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
             <<
                 \new GlobalContext
                 {
+                    \time 9/8
                     s1 * 9/8
                 }
                 \new Staff
@@ -12893,6 +13027,7 @@ def skips_around(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -12903,6 +13038,7 @@ def skips_around(
             <<
                 \new GlobalContext
                 {
+                    \time 5/4
                     s1 * 5/4
                 }
                 \new Staff
@@ -12978,6 +13114,7 @@ def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -12988,6 +13125,7 @@ def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
             <<
                 \new GlobalContext
                 {
+                    \time 19/16
                     s1 * 19/16
                 }
                 \new Staff

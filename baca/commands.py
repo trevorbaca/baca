@@ -2398,6 +2398,7 @@ def color(selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -2479,6 +2480,7 @@ def color(selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -3029,6 +3031,7 @@ def dynamic_down(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -3121,6 +3124,7 @@ def dynamic_up(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -4307,6 +4311,7 @@ def label(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -4408,6 +4413,7 @@ def markup(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -4486,6 +4492,7 @@ def markup(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 

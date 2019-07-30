@@ -398,6 +398,7 @@ def ottava(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -491,6 +492,7 @@ def ottava_bassa(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -585,6 +587,7 @@ def slur(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -684,6 +687,7 @@ def sustain_pedal(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -785,6 +789,7 @@ def trill_spanner(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -862,6 +867,7 @@ def trill_spanner(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -944,6 +950,7 @@ def trill_spanner(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(
         ...     contribution.voice_to_selection,
         ...     attach_lilypond_voice_commands=True,
+        ...     time_signatures=[contribution.time_signature],
         ... )
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
  
