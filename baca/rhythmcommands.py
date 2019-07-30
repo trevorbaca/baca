@@ -1401,7 +1401,7 @@ def music(
         selection = argument
     else:
         message = "baca.music() accepts string or selection,"
-        message += " not {repr(argument)}."
+        message += f" not {repr(argument)}."
         raise TypeError(message)
     if tag is not None:
         tag_selection(selection, tag)

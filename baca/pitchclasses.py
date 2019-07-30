@@ -149,7 +149,7 @@ class ArpeggiationSpacingSpecifier(object):
 
         ..  container:: example
 
-            >>> music_maker = baca.MusicMaker(
+            >>> stack = baca.Stack(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
             ...     baca.bass_to_octave(2),
@@ -158,15 +158,8 @@ class ArpeggiationSpacingSpecifier(object):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> collections = baca.CollectionList(collections)
             >>> collections = collections.arpeggiate_up()
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     collections,
-            ...     )
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     contribution.voice_to_selection,
-            ...     attach_lilypond_voice_commands=True,
-            ...     time_signatures=[contribution.time_signature],
-            ... )
+            >>> selection = stack(collections)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -180,38 +173,32 @@ class ArpeggiationSpacingSpecifier(object):
                         s1 * 9/16
                     }
                     \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    c,16                                                                 %! baca.MusicMaker.__call__
-                                    [
-                                    d,16                                                                 %! baca.MusicMaker.__call__
-                                    bf,16                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    fs,16                                                                %! baca.MusicMaker.__call__
-                                    [
-                                    e16                                                                  %! baca.MusicMaker.__call__
-                                    ef'16                                                                %! baca.MusicMaker.__call__
-                                    af'16                                                                %! baca.MusicMaker.__call__
-                                    g''16                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    a,16                                                                 %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c,16
+                            [
+                            d,16
+                            bf,16
+                            ]
                         }
-                    >>
+                        \scaleDurations #'(1 . 1) {
+                            fs,16
+                            [
+                            e16
+                            ef'16
+                            af'16
+                            g''16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a,16
+                        }
+                    }
                 >>
 
         ..  container:: example
 
-            >>> music_maker = baca.MusicMaker(
+            >>> stack = baca.Stack(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
             ...     baca.bass_to_octave(2),
@@ -220,15 +207,8 @@ class ArpeggiationSpacingSpecifier(object):
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> collections = baca.CollectionList(collections)
             >>> collections = collections.arpeggiate_down()
-            >>> contribution = music_maker(
-            ...     'Voice_1',
-            ...     collections,
-            ...     )
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     contribution.voice_to_selection,
-            ...     attach_lilypond_voice_commands=True,
-            ...     time_signatures=[contribution.time_signature],
-            ... )
+            >>> selection = stack(collections)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
@@ -242,33 +222,27 @@ class ArpeggiationSpacingSpecifier(object):
                         s1 * 9/16
                     }
                     \new Staff
-                    <<
-                        \context Voice = "Voice_1"
-                        {
-                            \voiceOne
-                            {                                                                            %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    c'16                                                                 %! baca.MusicMaker.__call__
-                                    [
-                                    d16                                                                  %! baca.MusicMaker.__call__
-                                    bf,16                                                                %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    fs16                                                                 %! baca.MusicMaker.__call__
-                                    [
-                                    e16                                                                  %! baca.MusicMaker.__call__
-                                    ef16                                                                 %! baca.MusicMaker.__call__
-                                    af,16                                                                %! baca.MusicMaker.__call__
-                                    g,16                                                                 %! baca.MusicMaker.__call__
-                                    ]
-                                }                                                                        %! baca.MusicMaker.__call__
-                                \scaleDurations #'(1 . 1) {                                              %! baca.MusicMaker.__call__
-                                    a,16                                                                 %! baca.MusicMaker.__call__
-                                }                                                                        %! baca.MusicMaker.__call__
-                            }                                                                            %! baca.MusicMaker.__call__
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'16
+                            [
+                            d16
+                            bf,16
+                            ]
                         }
-                    >>
+                        \scaleDurations #'(1 . 1) {
+                            fs16
+                            [
+                            e16
+                            ef16
+                            af,16
+                            g,16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a,16
+                        }
+                    }
                 >>
 
         """
