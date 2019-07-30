@@ -5104,7 +5104,7 @@ class Imbrication(object):
         return self._hocket
 
     @property
-    def segment(self) -> abjad.Segment:
+    def segment(self) -> typing.Optional[typing.List[int]]:
         """
         Gets to-be-imbricated segment.
         """
