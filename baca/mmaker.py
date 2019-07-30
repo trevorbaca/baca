@@ -5707,8 +5707,6 @@ class Accumulator(object):
         contribution = music_maker(voice_name, collections)
         contribution = Contribution(
             anchor=anchor,
-            color_selector=contribution.color_selector,
-            color_selector_result=contribution.color_selector_result,
             figure_name=keywords.get("figure_name", None),
             hide_time_signature=hide_time_signature,
             time_signature=contribution.time_signature,
@@ -5946,8 +5944,6 @@ class Contribution(object):
 
     __slots__ = (
         "_anchor",
-        "_color_selector",
-        "_color_selector_result",
         "_figure_name",
         "_hide_time_signature",
         "_tag",
@@ -5961,10 +5957,6 @@ class Contribution(object):
         self,
         *,
         anchor: AnchorSpecifier = None,
-        color_selector: abjad.Expression = None,
-        color_selector_result: typing.Union[
-            abjad.Selection, abjad.Tuplet
-        ] = None,
         figure_name: str = None,
         hide_time_signature: bool = None,
         time_signature: abjad.TimeSignature = None,
@@ -5973,15 +5965,6 @@ class Contribution(object):
         if anchor is not None and not isinstance(anchor, AnchorSpecifier):
             raise TypeError(f"anchor specifier only: {anchor!r}.")
         self._anchor = anchor
-        if color_selector is not None:
-            assert isinstance(color_selector, abjad.Expression)
-        self._color_selector = color_selector
-        if color_selector_result is not None:
-            prototype = (abjad.Selection, abjad.Tuplet)
-            assert isinstance(color_selector_result, prototype), repr(
-                color_selector_result
-            )
-        self._color_selector_result = color_selector_result
         if figure_name is not None:
             figure_name = str(figure_name)
         self._figure_name = figure_name
@@ -6030,24 +6013,6 @@ class Contribution(object):
         return self._anchor
 
     @property
-    def color_selector(self):
-        """
-        Gets color selector.
-
-        Returns selector or none.
-        """
-        return self._color_selector
-
-    @property
-    def color_selector_result(self):
-        """
-        Gets color selector result.
-
-        Returns selector result or none.
-        """
-        return self._color_selector_result
-
-    @property
     def figure_name(self):
         """
         Gets figure name.
@@ -6086,20 +6051,6 @@ class Contribution(object):
             for value in self._voice_to_selection.values():
                 assert isinstance(value, abjad.Selection), repr(value)
         return self._voice_to_selection
-
-    ### PUBLIC METHODS ###
-
-    def print_color_selector_result(self):
-        """
-        Prints color selector result.
-
-        Returns none.
-        """
-        if self.color_selector is None:
-            return
-        if self.color_selector_result is None:
-            return
-        self.color_selector.print(self.color_selector_result)
 
 
 class MusicMaker(object):
@@ -6902,14 +6853,10 @@ class MusicMaker(object):
                 assert isinstance(assignment, PitchFirstAssignment)
                 assignment(collections=collections, selections=selections)
         container = abjad.Container(selections)
-        color_selector, color_selector_result = None, None
         imbricated_selections = {}
         for command in commands:
             if isinstance(command, Imbrication):
                 imbricated_selections.update(command(container))
-            elif isinstance(command, _commands.ColorCommand):
-                color_selector = command.selector
-                color_selector_result = command(selections)
             else:
                 command(selections)
         self._label_figure_name_(container)
@@ -6932,8 +6879,6 @@ class MusicMaker(object):
             if self.tag is not None:
                 rhythmcommands.tag_selection(value, self.tag)
         return Contribution(
-            color_selector=color_selector,
-            color_selector_result=color_selector_result,
             time_signature=time_signature,
             voice_to_selection=voice_to_selection,
         )
@@ -9628,7 +9573,7 @@ class PitchFirstRhythmMaker(object):
                 >>
 
         """
-        ###print("CALLING PFRMAKER ...", collections, collection_index, state,
+        ##print("CALLING PFRMAKER ...", collections, collection_index, state,
         ###    total_collections, self.time_treatments)
         prototype = (list,)
         assert isinstance(collections, prototype), repr(collections)

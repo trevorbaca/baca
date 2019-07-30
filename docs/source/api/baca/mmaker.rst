@@ -226,11 +226,8 @@ mmaker
       __iter__
       __repr__
       anchor
-      color_selector
-      color_selector_result
       figure_name
       hide_time_signature
-      print_color_selector_result
       time_signature
       voice_to_selection
 
@@ -251,23 +248,10 @@ mmaker
 
       <hr/>
 
-   .. rubric:: Methods
-      :class: class-header
-
-   .. automethod:: Contribution.print_color_selector_result
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Read-only properties
       :class: class-header
 
    .. autoattribute:: Contribution.anchor
-
-   .. autoattribute:: Contribution.color_selector
-
-   .. autoattribute:: Contribution.color_selector_result
 
    .. autoattribute:: Contribution.figure_name
 

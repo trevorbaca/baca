@@ -887,17 +887,15 @@ class ColorCommand(scoping.Command):
 
     ### SPECIAL METHODS ###
 
-    def _call(self, argument=None):
+    def _call(self, argument=None) -> None:
         """
         Calls command on ``argument``.
-
-        Returns colored selector result.
         """
         if argument is None:
             return
+        assert self.selector is not None
         argument = self.selector(argument)
         self.selector.color(argument)
-        return argument
 
 
 class ContainerCommand(scoping.Command):
@@ -2374,6 +2372,8 @@ def bcps(
 def color(selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
     r"""
     Makes color command.
+
+    :param selector: selector.
 
     ..  container:: example
 
