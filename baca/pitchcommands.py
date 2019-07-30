@@ -4915,7 +4915,7 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ...     baca.color(selector=baca.tuplet(0)),
+            ...     baca.color(baca.tuplet(0)),
             ...     baca.register(0, 24, selector=baca.tuplet(0)),
             ... )
 
@@ -4994,7 +4994,7 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ...     baca.color(selector=baca.tuplet(-1)),
+            ...     baca.color(baca.tuplet(-1)),
             ...     baca.register(0, 24, selector=baca.tuplet(-1)),
             ... )
 
@@ -5073,7 +5073,7 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> music_maker = baca.MusicMaker(
             ...     baca.pitch_first([1], 16),
             ...     rmakers.beam(),
-            ...     baca.color(selector=baca.tuplets()),
+            ...     baca.color(baca.tuplets()),
             ...     baca.new(
             ...         baca.register(0, 24),
             ...         map=baca.tuplets(),
@@ -6210,7 +6210,7 @@ def bass_to_octave(
         ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.bass_to_octave(3),
-        ...     baca.color(selector=baca.plts().group()),
+        ...     baca.color(baca.plts().group()),
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -6297,7 +6297,7 @@ def bass_to_octave(
         ...         baca.bass_to_octave(3),
         ...         map=baca.plts(),
         ...         ),
-        ...     baca.color(selector=baca.plts()),
+        ...     baca.color(baca.plts()),
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -6395,7 +6395,7 @@ def center_to_octave(
         ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.center_to_octave(3),
-        ...     baca.color(selector=baca.plts().group()),
+        ...     baca.color(baca.plts().group()),
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -6482,7 +6482,7 @@ def center_to_octave(
         ...         baca.center_to_octave(3),
         ...         map=baca.plts(),
         ...         ),
-        ...     baca.color(selector=baca.plts()),
+        ...     baca.color(baca.plts()),
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',
@@ -7105,7 +7105,7 @@ def register(
         ...         time_treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.color(selector=baca.tuplet(1)),
+        ...     baca.color(baca.tuplet(1)),
         ...     baca.register(-6, selector=baca.tuplet(1)),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
@@ -7254,7 +7254,7 @@ def register(
         ...         time_treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.color(selector=baca.tuplet(1)),
+        ...     baca.color(baca.tuplet(1)),
         ...     baca.register(-6, 18, selector=baca.tuplet(1)),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
@@ -7348,7 +7348,7 @@ def soprano_to_octave(
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first([5, -3], 32),
         ...     rmakers.beam(),
-        ...     baca.color(selector=baca.plts().group()),
+        ...     baca.color(baca.plts().group()),
         ...     baca.soprano_to_octave(3),
         ... )
         >>> contribution = music_maker(
@@ -7436,7 +7436,7 @@ def soprano_to_octave(
         ...         baca.soprano_to_octave(3),
         ...         map=baca.plts(),
         ...         ),
-        ...     baca.color(selector=baca.plts()),
+        ...     baca.color(baca.plts()),
         ... )
         >>> contribution = music_maker(
         ...     'Voice_1',

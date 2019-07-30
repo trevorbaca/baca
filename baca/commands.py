@@ -856,248 +856,8 @@ class BCPCommand(scoping.Command):
 
 
 class ColorCommand(scoping.Command):
-    r"""
+    """
     Color command.
-
-    >>> from abjadext import rmakers
-
-    ..  container:: example
-
-        With music-maker:
-
-        Colors leaves by default:
-
-        >>> music_maker = baca.MusicMaker(
-        ...     baca.pitch_first([5, 4, 4, 5, 4, 4], 32),
-        ...     rmakers.beam(),
-        ...     baca.color(),
-        ...     )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> contribution = music_maker('Voice_1', collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ... )
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Staff], strict=89)
-            \new Staff
-            <<
-                \context Voice = "Voice_1"
-                {
-                    \voiceOne
-                    {                                                                                %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            c'8                                                                      %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'blue
-                            c'32                                                                     %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            d'8                                                                      %! baca.MusicMaker.__call__
-                            \abjad-color-music #'blue
-                            bf'8                                                                     %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            fs''8                                                                    %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'blue
-                            fs''32                                                                   %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            e''8                                                                     %! baca.MusicMaker.__call__
-                            \abjad-color-music #'blue
-                            ef''8                                                                    %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            af''8                                                                    %! baca.MusicMaker.__call__
-                            ~
-                            \abjad-color-music #'blue
-                            af''32                                                                   %! baca.MusicMaker.__call__
-                            \abjad-color-music #'red
-                            g''8                                                                     %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                        \scaleDurations #'(1 . 1) {                                                  %! baca.MusicMaker.__call__
-                            \abjad-color-music #'blue
-                            a'8                                                                      %! baca.MusicMaker.__call__
-                            ~
-                            [
-                            \abjad-color-music #'red
-                            a'32                                                                     %! baca.MusicMaker.__call__
-                            ]
-                        }                                                                            %! baca.MusicMaker.__call__
-                    }                                                                                %! baca.MusicMaker.__call__
-                }
-            >>
-
-    ..  container:: example
-
-        With segment-maker:
-
-        >>> maker = baca.SegmentMaker(
-        ...     score_template=baca.SingleStaffScoreTemplate(),
-        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
-        ...     )
-
-        >>> maker(
-        ...     'Music_Voice',
-        ...     baca.color(),
-        ...     baca.make_even_divisions(),
-        ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
-        ...     )
-
-        >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
-            <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
-            <BLANKLINE>
-                        % [Global_Skips measure 1]                                                   %! _comment_measure_numbers
-                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                        s1 * 1/2                                                                     %! _make_global_skips(1)
-            <BLANKLINE>
-                        % [Global_Skips measure 2]                                                   %! _comment_measure_numbers
-                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                        s1 * 3/8                                                                     %! _make_global_skips(1)
-            <BLANKLINE>
-                        % [Global_Skips measure 3]                                                   %! _comment_measure_numbers
-                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                        s1 * 1/2                                                                     %! _make_global_skips(1)
-            <BLANKLINE>
-                        % [Global_Skips measure 4]                                                   %! _comment_measure_numbers
-                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(2)
-                        \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:_attach_color_literal(2)
-                        s1 * 3/8                                                                     %! _make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! _attach_final_bar_line
-                        \bar "|"                                                                     %! _attach_final_bar_line
-            <BLANKLINE>
-                        % [Global_Skips measure 5]                                                   %! PHANTOM:_style_phantom_measures(1):_comment_measure_numbers
-                        \time 1/4                                                                    %! PHANTOM:_style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:_make_global_skips(3)
-                        \baca-time-signature-transparent                                             %! PHANTOM:_style_phantom_measures(2)
-                        s1 * 1/4                                                                     %! PHANTOM:_make_global_skips(3)
-                        \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
-                        \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:_style_phantom_measures(3)
-            <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
-            <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
-            <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                            % [Music_Voice measure 1]                                                %! _comment_measure_numbers
-                            \abjad-color-music #'red
-                            e'8                                                                      %! baca.make_even_divisions
-                            [                                                                        %! baca.make_even_divisions
-            <BLANKLINE>
-                            \abjad-color-music #'blue
-                            d''8                                                                     %! baca.make_even_divisions
-            <BLANKLINE>
-                            \abjad-color-music #'red
-                            f'8                                                                      %! baca.make_even_divisions
-            <BLANKLINE>
-                            \abjad-color-music #'blue
-                            e''8                                                                     %! baca.make_even_divisions
-                            ]                                                                        %! baca.make_even_divisions
-            <BLANKLINE>
-                            % [Music_Voice measure 2]                                                %! _comment_measure_numbers
-                            \abjad-color-music #'red
-                            g'8                                                                      %! baca.make_even_divisions
-                            [                                                                        %! baca.make_even_divisions
-            <BLANKLINE>
-                            \abjad-color-music #'blue
-                            f''8                                                                     %! baca.make_even_divisions
-            <BLANKLINE>
-                            \abjad-color-music #'red
-                            e'8                                                                      %! baca.make_even_divisions
-                            ]                                                                        %! baca.make_even_divisions
-            <BLANKLINE>
-                            % [Music_Voice measure 3]                                                %! _comment_measure_numbers
-                            \abjad-color-music #'blue
-                            d''8                                                                     %! baca.make_even_divisions
-                            [                                                                        %! baca.make_even_divisions
-            <BLANKLINE>
-                            \abjad-color-music #'red
-                            f'8                                                                      %! baca.make_even_divisions
-            <BLANKLINE>
-                            \abjad-color-music #'blue
-                            e''8                                                                     %! baca.make_even_divisions
-            <BLANKLINE>
-                            \abjad-color-music #'red
-                            g'8                                                                      %! baca.make_even_divisions
-                            ]                                                                        %! baca.make_even_divisions
-            <BLANKLINE>
-                            % [Music_Voice measure 4]                                                %! _comment_measure_numbers
-                            \abjad-color-music #'blue
-                            f''8                                                                     %! baca.make_even_divisions
-                            [                                                                        %! baca.make_even_divisions
-            <BLANKLINE>
-                            \abjad-color-music #'red
-                            e'8                                                                      %! baca.make_even_divisions
-            <BLANKLINE>
-                            \abjad-color-music #'blue
-                            d''8                                                                     %! baca.make_even_divisions
-                            ]                                                                        %! baca.make_even_divisions
-            <BLANKLINE>
-                            <<                                                                       %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                \context Voice = "Music_Voice"                                       %! PHANTOM:_make_multimeasure_rest_container
-                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                    % [Music_Voice measure 5]                                        %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                                    \baca-invisible-music                                            %! PHANTOM:_style_phantom_measures(5):_make_multimeasure_rest_container
-                                    c'1 * 1/4                                                        %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                \context Voice = "Rest_Voice"                                        %! PHANTOM:_make_multimeasure_rest_container
-                                {                                                                    %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                    % [Rest_Voice measure 5]                                         %! PHANTOM:_style_phantom_measures(5):_comment_measure_numbers
-                                    \once \override Score.TimeSignature.X-extent = ##f               %! PHANTOM:_style_phantom_measures(6)
-                                    \once \override MultiMeasureRest.transparent = ##t               %! PHANTOM:_style_phantom_measures(7)
-                                    \stopStaff                                                       %! PHANTOM:_style_phantom_measures(8)
-                                    \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:_style_phantom_measures(8)
-                                    \startStaff                                                      %! PHANTOM:_style_phantom_measures(8)
-                                    R1 * 1/4                                                         %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                                }                                                                    %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                            >>                                                                       %! PHANTOM:_make_multimeasure_rest_container
-            <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
-            <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
-
     """
 
     ### CLASS VARIABLES ###
@@ -2611,13 +2371,13 @@ def bcps(
     )
 
 
-def color(*, selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
+def color(selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
     r"""
-    Colors leaves.
+    Makes color command.
 
     ..  container:: example
 
-        Colors all leaves:
+        Colors leaves:
 
         >>> music_maker = baca.MusicMaker(
         ...     baca.pitch_first(
@@ -2708,7 +2468,7 @@ def color(*, selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
         ...         time_treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.color(selector=baca.tuplets()[1:2].leaves()),
+        ...     baca.color(baca.tuplets()[1:2].leaves()),
         ...     rmakers.unbeam(),
         ...     baca.tuplet_bracket_staff_padding(5),
         ... )
