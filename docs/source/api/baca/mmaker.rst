@@ -406,7 +406,6 @@ mmaker
       figure_index
       figure_name
       signature
-      tag
 
    .. raw:: html
 
@@ -441,8 +440,6 @@ mmaker
    .. autoattribute:: MusicMaker.figure_name
 
    .. autoattribute:: MusicMaker.signature
-
-   .. autoattribute:: MusicMaker.tag
 
 .. autoclass:: Nesting
 

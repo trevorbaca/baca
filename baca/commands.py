@@ -2771,9 +2771,9 @@ def cross_staff(
                             \context ViolinMusicVoice = "Violin_Music_Voice"                         %! baca.StringTrioScoreTemplate.__call__
                             {                                                                        %! baca.StringTrioScoreTemplate.__call__
             <BLANKLINE>
-                                {                                                                    %! baca.MusicMaker.__call__
+                                {
             <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {                                      %! baca.MusicMaker.__call__
+                                    \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         % [Violin_Music_Voice measure 1]                             %! _comment_measure_numbers
                                         \override Stem.direction = #up                               %! baca.stem_up:OverrideCommand(1)
@@ -2781,33 +2781,33 @@ def cross_staff(
                                         \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                     %@% \override ViolinMusicStaff.Clef.color = ##f                  %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                         \set ViolinMusicStaff.forceClef = ##t                        %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
-                                        a'8                                                          %! baca.MusicMaker.__call__
+                                        a'8
                                         ^ \baca-default-indicator-markup "(Violin)"                  %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                         \override ViolinMusicStaff.Clef.color = #(x11-color 'violet) %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                                        b'8                                                          %! baca.MusicMaker.__call__
+                                        b'8
             <BLANKLINE>
-                                        c''8                                                         %! baca.MusicMaker.__call__
+                                        c''8
             <BLANKLINE>
-                                        d''8                                                         %! baca.MusicMaker.__call__
+                                        d''8
             <BLANKLINE>
-                                        e''8                                                         %! baca.MusicMaker.__call__
+                                        e''8
                                         \revert Stem.direction                                       %! baca.stem_up:OverrideCommand(2)
             <BLANKLINE>
-                                    }                                                                %! baca.MusicMaker.__call__
+                                    }
             <BLANKLINE>
-                                }                                                                    %! baca.MusicMaker.__call__
+                                }
             <BLANKLINE>
-                                {                                                                    %! baca.MusicMaker.__call__
+                                {
             <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {                                      %! baca.MusicMaker.__call__
+                                    \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         % [Violin_Music_Voice measure 2]                             %! _comment_measure_numbers
-                                        ef''!8                                                       %! baca.MusicMaker.__call__
+                                        ef''!8
             <BLANKLINE>
-                                    }                                                                %! baca.MusicMaker.__call__
+                                    }
             <BLANKLINE>
-                                }                                                                    %! baca.MusicMaker.__call__
+                                }
             <BLANKLINE>
                                 <<                                                                   %! PHANTOM:_make_multimeasure_rest_container
             <BLANKLINE>
@@ -2846,9 +2846,9 @@ def cross_staff(
                             \context ViolaMusicVoice = "Viola_Music_Voice"                           %! baca.StringTrioScoreTemplate.__call__
                             {                                                                        %! baca.StringTrioScoreTemplate.__call__
             <BLANKLINE>
-                                {                                                                    %! baca.MusicMaker.__call__
+                                {
             <BLANKLINE>
-                                    \scaleDurations #'(1 . 1) {                                      %! baca.MusicMaker.__call__
+                                    \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                         % [Viola_Music_Voice measure 1]                              %! _comment_measure_numbers
                                         \override Stem.direction = #up                               %! baca.stem_up:OverrideCommand(1)
@@ -2856,24 +2856,24 @@ def cross_staff(
                                         \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:_attach_color_literal(2)
                                     %@% \override ViolaMusicStaff.Clef.color = ##f                   %! DEFAULT_CLEF_COLOR_CANCELLATION:_attach_color_literal(1)
                                         \set ViolaMusicStaff.forceClef = ##t                         %! DEFAULT_CLEF:_set_status_tag:_treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
-                                        c'8                                                          %! baca.MusicMaker.__call__
+                                        c'8
                                         ^ \baca-default-indicator-markup "(Viola)"                   %! DEFAULT_INSTRUMENT_ALERT:_attach_latent_indicator_alert
                                         \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)  %! DEFAULT_CLEF_REDRAW_COLOR:_attach_color_literal(2)
             <BLANKLINE>
-                                        d'8                                                          %! baca.MusicMaker.__call__
+                                        d'8
             <BLANKLINE>
-                                        e'8                                                          %! baca.MusicMaker.__call__
-            <BLANKLINE>
-                                        \crossStaff                                                  %! baca.cross_staff:IndicatorCommand
-                                        f'8                                                          %! baca.MusicMaker.__call__
+                                        e'8
             <BLANKLINE>
                                         \crossStaff                                                  %! baca.cross_staff:IndicatorCommand
-                                        g'8                                                          %! baca.MusicMaker.__call__
+                                        f'8
+            <BLANKLINE>
+                                        \crossStaff                                                  %! baca.cross_staff:IndicatorCommand
+                                        g'8
                                         \revert Stem.direction                                       %! baca.stem_up:OverrideCommand(2)
             <BLANKLINE>
-                                    }                                                                %! baca.MusicMaker.__call__
+                                    }
             <BLANKLINE>
-                                }                                                                    %! baca.MusicMaker.__call__
+                                }
             <BLANKLINE>
                                 <<                                                                   %! _make_multimeasure_rest_container
             <BLANKLINE>
