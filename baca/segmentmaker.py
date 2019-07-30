@@ -4358,9 +4358,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> maker = baca.SegmentMaker(
             ...     score_template=baca.SingleStaffScoreTemplate(),
-            ...     spacing=baca.HorizontalSpacingSpecifier(
-            ...         minimum_duration=abjad.Duration(1, 24),
-            ...         ),
+            ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=time_signatures,
             ...     )
             >>> maker(
