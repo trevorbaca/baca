@@ -727,7 +727,7 @@ def beam_positions(
         Overrides beam positions on all leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_rmaker(
+        ...     baca.pitch_first(
         ...         [1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -925,7 +925,7 @@ def dls_staff_padding(
 
         Overrides dynamic line spanner staff padding on all leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -942,17 +942,10 @@ def dls_staff_padding(
         ...             ),
         ...         map=baca.tuplets(),
         ...         ),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -966,56 +959,50 @@ def dls_staff_padding(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override DynamicLineSpanner.staff-padding = #4                      %! baca.dls_staff_padding:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                \p                                                                   %! baca.hairpin:PiecewiseCommand(1)
-                                \<                                                                   %! baca.hairpin:PiecewiseCommand(1)
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                \f                                                                   %! baca.hairpin:PiecewiseCommand(2)
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                \p                                                                   %! baca.hairpin:PiecewiseCommand(1)
-                                \<                                                                   %! baca.hairpin:PiecewiseCommand(1)
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                \f                                                                   %! baca.hairpin:PiecewiseCommand(2)
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                \p                                                                   %! baca.hairpin:PiecewiseCommand(1)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert DynamicLineSpanner.staff-padding                             %! baca.dls_staff_padding:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override DynamicLineSpanner.staff-padding = #4                              %! baca.dls_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        \p                                                                           %! baca.hairpin:PiecewiseCommand(1)
+                        \<                                                                           %! baca.hairpin:PiecewiseCommand(1)
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        \f                                                                           %! baca.hairpin:PiecewiseCommand(2)
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        \p                                                                           %! baca.hairpin:PiecewiseCommand(1)
+                        \<                                                                           %! baca.hairpin:PiecewiseCommand(1)
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        \f                                                                           %! baca.hairpin:PiecewiseCommand(2)
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        \p                                                                           %! baca.hairpin:PiecewiseCommand(1)
+                        r4
+                        \revert DynamicLineSpanner.staff-padding                                     %! baca.dls_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -1040,7 +1027,7 @@ def dls_up(
 
         Up-overrides dynamic line spanner direction on all leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -1057,17 +1044,10 @@ def dls_up(
         ...             ),
         ...         map=baca.tuplets(),
         ...         ),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1081,56 +1061,50 @@ def dls_up(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override DynamicLineSpanner.direction = #up                         %! baca.dls_up:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                \p                                                                   %! baca.hairpin:PiecewiseCommand(1)
-                                \<                                                                   %! baca.hairpin:PiecewiseCommand(1)
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                \f                                                                   %! baca.hairpin:PiecewiseCommand(2)
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                \p                                                                   %! baca.hairpin:PiecewiseCommand(1)
-                                \<                                                                   %! baca.hairpin:PiecewiseCommand(1)
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                \f                                                                   %! baca.hairpin:PiecewiseCommand(2)
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                \p                                                                   %! baca.hairpin:PiecewiseCommand(1)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert DynamicLineSpanner.direction                                 %! baca.dls_up:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override DynamicLineSpanner.direction = #up                                 %! baca.dls_up:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        \p                                                                           %! baca.hairpin:PiecewiseCommand(1)
+                        \<                                                                           %! baca.hairpin:PiecewiseCommand(1)
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        \f                                                                           %! baca.hairpin:PiecewiseCommand(2)
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        \p                                                                           %! baca.hairpin:PiecewiseCommand(1)
+                        \<                                                                           %! baca.hairpin:PiecewiseCommand(1)
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        \f                                                                           %! baca.hairpin:PiecewiseCommand(2)
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        \p                                                                           %! baca.hairpin:PiecewiseCommand(1)
+                        r4
+                        \revert DynamicLineSpanner.direction                                         %! baca.dls_up:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -1226,7 +1200,7 @@ def dynamic_text_extra_offset(
 
         Overrides dynamic text extra offset on pitched leaf 0:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -1237,17 +1211,10 @@ def dynamic_text_extra_offset(
         ...     baca.dynamic('p'),
         ...     baca.dynamic('f', selector=baca.tuplets()[1:2].pleaf(0)),
         ...     baca.dynamic_text_extra_offset((-3, 0)),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -1261,50 +1228,44 @@ def dynamic_text_extra_offset(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \once \override DynamicText.extra-offset = #'(-3 . 0)                %! baca.dynamic_text_extra_offset:OverrideCommand(1)
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                \p                                                                   %! baca.dynamic:IndicatorCommand
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                \f                                                                   %! baca.dynamic:IndicatorCommand
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        \once \override DynamicText.extra-offset = #'(-3 . 0)                        %! baca.dynamic_text_extra_offset:OverrideCommand(1)
+                        c'16
+                        \p                                                                           %! baca.dynamic:IndicatorCommand
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        \f                                                                           %! baca.dynamic:IndicatorCommand
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     ..  container:: example exception
@@ -2700,7 +2661,7 @@ def note_head_style_cross(
 
         Overrides note-head style on all pitched leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -2709,17 +2670,10 @@ def note_head_style_cross(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.note_head_style_cross(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -2733,49 +2687,43 @@ def note_head_style_cross(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \override NoteHead.style = #'cross                                   %! baca.note_head_style_cross:OverrideCommand(1)
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                \revert NoteHead.style                                               %! baca.note_head_style_cross:OverrideCommand(2)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        \override NoteHead.style = #'cross                                           %! baca.note_head_style_cross:OverrideCommand(1)
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        \revert NoteHead.style                                                       %! baca.note_head_style_cross:OverrideCommand(2)
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -2800,7 +2748,7 @@ def note_head_style_harmonic(
 
         Overrides note-head style on all PLTs:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -2809,17 +2757,10 @@ def note_head_style_harmonic(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.note_head_style_harmonic(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -2833,49 +2774,43 @@ def note_head_style_harmonic(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \override NoteHead.style = #'harmonic                                %! baca.note_head_style_harmonic:OverrideCommand(1)
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                \revert NoteHead.style                                               %! baca.note_head_style_harmonic:OverrideCommand(2)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        \override NoteHead.style = #'harmonic                                        %! baca.note_head_style_harmonic:OverrideCommand(1)
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        \revert NoteHead.style                                                       %! baca.note_head_style_harmonic:OverrideCommand(2)
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -3091,7 +3026,7 @@ def repeat_tie_down(
 
         Overrides repeat tie direction on pitched leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -3105,17 +3040,10 @@ def repeat_tie_down(
         ...         ),
         ...     baca.repeat_tie_down(),
         ...     baca.stem_up(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[11, 11, 12], [11, 11, 11], [11]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[11, 11, 12], [11, 11, 11], [11]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3129,52 +3057,46 @@ def repeat_tie_down(
                     s1 * 5/4
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \override RepeatTie.direction = #down                                %! baca.repeat_tie_down:OverrideCommand(1)
-                                \override Stem.direction = #up                                       %! baca.stem_up:OverrideCommand(1)
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                \repeatTie                                                           %! baca.repeat_tie:IndicatorCommand
-                                ]
-                                c''4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                c''16                                                                %! baca.MusicMaker.__call__
-                                \repeatTie                                                           %! baca.repeat_tie:IndicatorCommand
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 7/8 {                                                             %! baca.MusicMaker.__call__
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                \repeatTie                                                           %! baca.repeat_tie:IndicatorCommand
-                                ]
-                                b'4                                                                  %! baca.MusicMaker.__call__
-                                \repeatTie                                                           %! baca.repeat_tie:IndicatorCommand
-                                ~
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                \repeatTie                                                           %! baca.repeat_tie:IndicatorCommand
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                \revert RepeatTie.direction                                          %! baca.repeat_tie_down:OverrideCommand(2)
-                                \revert Stem.direction                                               %! baca.stem_up:OverrideCommand(2)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        \override RepeatTie.direction = #down                                        %! baca.repeat_tie_down:OverrideCommand(1)
+                        \override Stem.direction = #up                                               %! baca.stem_up:OverrideCommand(1)
+                        b'16
+                        [
+                        b'16
+                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        ]
+                        c''4
+                        ~
+                        c''16
+                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/8 {
+                        b'16
+                        [
+                        b'16
+                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        ]
+                        b'4
+                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        ~
+                        b'16
+                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        r16
+                    }
+                    \times 4/5 {
+                        b'16
+                        \revert RepeatTie.direction                                                  %! baca.repeat_tie_down:OverrideCommand(2)
+                        \revert Stem.direction                                                       %! baca.stem_up:OverrideCommand(2)
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -3251,7 +3173,7 @@ def repeat_tie_up(
 
         Overrides repeat tie direction on all leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -3265,17 +3187,10 @@ def repeat_tie_up(
         ...         ),
         ...     baca.repeat_tie_up(),
         ...     baca.stem_down(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[11, 11, 12], [11, 11, 11], [11]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[11, 11, 12], [11, 11, 11], [11]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3289,52 +3204,46 @@ def repeat_tie_up(
                     s1 * 5/4
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \override RepeatTie.direction = #up                                  %! baca.repeat_tie_up:OverrideCommand(1)
-                                \override Stem.direction = #down                                     %! baca.stem_down:OverrideCommand(1)
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                \repeatTie                                                           %! baca.repeat_tie:IndicatorCommand
-                                ]
-                                c''4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                c''16                                                                %! baca.MusicMaker.__call__
-                                \repeatTie                                                           %! baca.repeat_tie:IndicatorCommand
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 7/8 {                                                             %! baca.MusicMaker.__call__
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                \repeatTie                                                           %! baca.repeat_tie:IndicatorCommand
-                                ]
-                                b'4                                                                  %! baca.MusicMaker.__call__
-                                \repeatTie                                                           %! baca.repeat_tie:IndicatorCommand
-                                ~
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                \repeatTie                                                           %! baca.repeat_tie:IndicatorCommand
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                \revert RepeatTie.direction                                          %! baca.repeat_tie_up:OverrideCommand(2)
-                                \revert Stem.direction                                               %! baca.stem_down:OverrideCommand(2)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        \override RepeatTie.direction = #up                                          %! baca.repeat_tie_up:OverrideCommand(1)
+                        \override Stem.direction = #down                                             %! baca.stem_down:OverrideCommand(1)
+                        b'16
+                        [
+                        b'16
+                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        ]
+                        c''4
+                        ~
+                        c''16
+                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/8 {
+                        b'16
+                        [
+                        b'16
+                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        ]
+                        b'4
+                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        ~
+                        b'16
+                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        r16
+                    }
+                    \times 4/5 {
+                        b'16
+                        \revert RepeatTie.direction                                                  %! baca.repeat_tie_up:OverrideCommand(2)
+                        \revert Stem.direction                                                       %! baca.stem_down:OverrideCommand(2)
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -3359,7 +3268,7 @@ def rest_down(
 
         Down-overrides direction of rests:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -3368,17 +3277,10 @@ def rest_down(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.rest_down(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3392,49 +3294,43 @@ def rest_down(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override Rest.direction = #down                                     %! baca.rest_down:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert Rest.direction                                               %! baca.rest_down:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override Rest.direction = #down                                             %! baca.rest_down:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert Rest.direction                                                       %! baca.rest_down:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -3482,7 +3378,7 @@ def rest_position(
 
         Overrides rest position:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -3491,17 +3387,10 @@ def rest_position(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.rest_position(-6),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3515,49 +3404,43 @@ def rest_position(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override Rest.staff-position = #-6                                  %! baca.rest_position:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert Rest.staff-position                                          %! baca.rest_position:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override Rest.staff-position = #-6                                          %! baca.rest_position:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert Rest.staff-position                                                  %! baca.rest_position:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -3582,7 +3465,7 @@ def rest_transparent(
 
         Makes rests transparent:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -3591,17 +3474,10 @@ def rest_transparent(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.rest_transparent(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3615,49 +3491,43 @@ def rest_transparent(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override Rest.transparent = ##t                                     %! baca.rest_transparent:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert Rest.transparent                                             %! baca.rest_transparent:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override Rest.transparent = ##t                                             %! baca.rest_transparent:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert Rest.transparent                                                     %! baca.rest_transparent:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -3682,7 +3552,7 @@ def rest_up(
 
         Up-overrides rest direction:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -3691,17 +3561,10 @@ def rest_up(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.rest_up(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3715,49 +3578,43 @@ def rest_up(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override Rest.direction = #up                                       %! baca.rest_up:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert Rest.direction                                               %! baca.rest_up:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override Rest.direction = #up                                               %! baca.rest_up:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert Rest.direction                                                       %! baca.rest_up:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -3783,7 +3640,7 @@ def script_color(
 
         Overrides script color on all leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -3793,17 +3650,10 @@ def script_color(
         ...     rmakers.beam(),
         ...     baca.accent(selector=baca.pheads()),
         ...     baca.script_color('red'),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3817,58 +3667,52 @@ def script_color(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override Script.color = #red                                        %! baca.script_color:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert Script.color                                                 %! baca.script_color:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override Script.color = #red                                                %! baca.script_color:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        [
+                        d'16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ]
+                        bf'4
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        [
+                        e''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ]
+                        ef''4
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        [
+                        g''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        r4
+                        \revert Script.color                                                         %! baca.script_color:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -3893,7 +3737,7 @@ def script_down(
 
         Down-overrides script direction on all leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -3903,17 +3747,10 @@ def script_down(
         ...     rmakers.beam(),
         ...     baca.accent(selector=baca.pheads()),
         ...     baca.script_down(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -3927,58 +3764,52 @@ def script_down(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override Script.direction = #down                                   %! baca.script_down:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert Script.direction                                             %! baca.script_down:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override Script.direction = #down                                           %! baca.script_down:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        [
+                        d'16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ]
+                        bf'4
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        [
+                        e''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ]
+                        ef''4
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        [
+                        g''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        r4
+                        \revert Script.direction                                                     %! baca.script_down:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -4004,7 +3835,7 @@ def script_extra_offset(
 
         Overrides script extra offset on leaf 1:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4014,17 +3845,10 @@ def script_extra_offset(
         ...     rmakers.beam(),
         ...     baca.accent(selector=baca.pheads()),
         ...     baca.script_extra_offset((-1.5, 0), selector=baca.leaf(1)),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4038,57 +3862,51 @@ def script_extra_offset(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \once \override Script.extra-offset = #'(-1.5 . 0)                   %! baca.script_extra_offset:OverrideCommand(1)
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        \once \override Script.extra-offset = #'(-1.5 . 0)                           %! baca.script_extra_offset:OverrideCommand(1)
+                        c'16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        [
+                        d'16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ]
+                        bf'4
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        [
+                        e''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ]
+                        ef''4
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        [
+                        g''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -4149,7 +3967,7 @@ def script_up(
 
         Up-overrides script direction on all leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4159,17 +3977,10 @@ def script_up(
         ...     rmakers.beam(),
         ...     baca.accent(selector=baca.pheads()),
         ...     baca.script_up(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4183,58 +3994,52 @@ def script_up(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override Script.direction = #up                                     %! baca.script_up:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                - \accent                                                            %! baca.accent:IndicatorCommand
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert Script.direction                                             %! baca.script_up:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override Script.direction = #up                                             %! baca.script_up:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        [
+                        d'16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ]
+                        bf'4
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        [
+                        e''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ]
+                        ef''4
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        [
+                        g''16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        r4
+                        \revert Script.direction                                                     %! baca.script_up:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -4277,7 +4082,7 @@ def slur_down(
         Overrides slur direction on leaves:
 
         >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4287,17 +4092,10 @@ def slur_down(
         ...     rmakers.beam(),
         ...     baca.slur(map=selector),
         ...     baca.slur_down(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4311,53 +4109,47 @@ def slur_down(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override Slur.direction = #down                                     %! baca.slur_down:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert Slur.direction                                               %! baca.slur_down:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override Slur.direction = #down                                             %! baca.slur_down:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        (                                                                            %! baca.slur:SpannerIndicatorCommand(1)
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        )                                                                            %! baca.slur:SpannerIndicatorCommand(2)
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        (                                                                            %! baca.slur:SpannerIndicatorCommand(1)
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        )                                                                            %! baca.slur:SpannerIndicatorCommand(2)
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert Slur.direction                                                       %! baca.slur_down:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -4383,7 +4175,7 @@ def slur_up(
         Up-overrides slur direction on leaves:
 
         >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4394,18 +4186,11 @@ def slur_up(
         ...     baca.slur(map=selector),
         ...     baca.slur_up(),
         ...     baca.stem_down(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ...     baca.tuplet_bracket_down(),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4419,57 +4204,51 @@ def slur_up(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override Slur.direction = #up                                       %! baca.slur_up:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                \override TupletBracket.direction = #down                            %! baca.tuplet_bracket_down:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \override Stem.direction = #down                                     %! baca.stem_down:OverrideCommand(1)
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                (                                                                    %! baca.slur:SpannerIndicatorCommand(1)
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                )                                                                    %! baca.slur:SpannerIndicatorCommand(2)
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                \revert Stem.direction                                               %! baca.stem_down:OverrideCommand(2)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert Slur.direction                                               %! baca.slur_up:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                                \revert TupletBracket.direction                                      %! baca.tuplet_bracket_down:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override Slur.direction = #up                                               %! baca.slur_up:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.direction = #down                                    %! baca.tuplet_bracket_down:OverrideCommand(1)
+                        r8
+                        \override Stem.direction = #down                                             %! baca.stem_down:OverrideCommand(1)
+                        c'16
+                        [
+                        (                                                                            %! baca.slur:SpannerIndicatorCommand(1)
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        )                                                                            %! baca.slur:SpannerIndicatorCommand(2)
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        (                                                                            %! baca.slur:SpannerIndicatorCommand(1)
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        )                                                                            %! baca.slur:SpannerIndicatorCommand(2)
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        \revert Stem.direction                                                       %! baca.stem_down:OverrideCommand(2)
+                        r4
+                        \revert Slur.direction                                                       %! baca.slur_up:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.direction                                              %! baca.tuplet_bracket_down:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -4558,7 +4337,7 @@ def stem_color(
 
         Overrides stem color on pitched leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4567,17 +4346,10 @@ def stem_color(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.stem_color(color='red'),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4591,49 +4363,43 @@ def stem_color(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \override Stem.color = #red                                          %! baca.stem_color:OverrideCommand(1)
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                \revert Stem.color                                                   %! baca.stem_color:OverrideCommand(2)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        \override Stem.color = #red                                                  %! baca.stem_color:OverrideCommand(1)
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        \revert Stem.color                                                           %! baca.stem_color:OverrideCommand(2)
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -4659,7 +4425,7 @@ def stem_down(
 
         Down-overrides stem direction pitched leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4668,17 +4434,10 @@ def stem_down(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.stem_down(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4692,49 +4451,43 @@ def stem_down(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \override Stem.direction = #down                                     %! baca.stem_down:OverrideCommand(1)
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                \revert Stem.direction                                               %! baca.stem_down:OverrideCommand(2)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        \override Stem.direction = #down                                             %! baca.stem_down:OverrideCommand(1)
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        \revert Stem.direction                                                       %! baca.stem_down:OverrideCommand(2)
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -4793,7 +4546,7 @@ def stem_up(
 
         Up-overrides stem direction on pitched leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4802,17 +4555,10 @@ def stem_up(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.stem_up(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_2',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4826,49 +4572,43 @@ def stem_up(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_2"
-                    {
-                        \voiceTwo
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \override Stem.direction = #up                                       %! baca.stem_up:OverrideCommand(1)
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                \revert Stem.direction                                               %! baca.stem_up:OverrideCommand(2)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        \override Stem.direction = #up                                               %! baca.stem_up:OverrideCommand(1)
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        \revert Stem.direction                                                       %! baca.stem_up:OverrideCommand(2)
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -4913,7 +4653,7 @@ def sustain_pedal_staff_padding(
 
         Overrides sustain pedal staff padding on leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4926,17 +4666,10 @@ def sustain_pedal_staff_padding(
         ...         map=baca.tuplets(),
         ...         ),
         ...     baca.sustain_pedal_staff_padding(4),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -4950,55 +4683,49 @@ def sustain_pedal_staff_padding(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override Staff.SustainPedalLineSpanner.staff-padding = #4           %! baca.sustain_pedal_staff_padding:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \sustainOn                                                           %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                \sustainOff                                                          %! baca.sustain_pedal:SpannerIndicatorCommand(2)
-                                [
-                                \sustainOn                                                           %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                \sustainOff                                                          %! baca.sustain_pedal:SpannerIndicatorCommand(2)
-                                \sustainOn                                                           %! baca.sustain_pedal:SpannerIndicatorCommand(1)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \sustainOff                                                          %! baca.sustain_pedal:SpannerIndicatorCommand(2)
-                                \revert Staff.SustainPedalLineSpanner.staff-padding                  %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override Staff.SustainPedalLineSpanner.staff-padding = #4                   %! baca.sustain_pedal_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        \sustainOn                                                                   %! baca.sustain_pedal:SpannerIndicatorCommand(1)
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
+                        \sustainOff                                                                  %! baca.sustain_pedal:SpannerIndicatorCommand(2)
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        \sustainOn                                                                   %! baca.sustain_pedal:SpannerIndicatorCommand(1)
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        \sustainOff                                                                  %! baca.sustain_pedal:SpannerIndicatorCommand(2)
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        \sustainOn                                                                   %! baca.sustain_pedal:SpannerIndicatorCommand(1)
+                        r4
+                        \sustainOff                                                                  %! baca.sustain_pedal:SpannerIndicatorCommand(2)
+                        \revert Staff.SustainPedalLineSpanner.staff-padding                          %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -5026,7 +4753,7 @@ def text_script_color(
 
         Overrides text script color on all leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -5040,17 +4767,10 @@ def text_script_color(
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.text_script_color('red'),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5064,51 +4784,45 @@ def text_script_color(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TextScript.color = #red                                    %! baca.text_script_color:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                ^ \markup { "più mosso" }                                            %! baca.markup:IndicatorCommand
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                ^ \markup { "lo stesso tempo" }                                      %! baca.markup:IndicatorCommand
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TextScript.color                                             %! baca.text_script_color:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TextScript.color = #red                                            %! baca.text_script_color:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        ^ \markup { "più mosso" }                                                    %! baca.markup:IndicatorCommand
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup:IndicatorCommand
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TextScript.color                                                     %! baca.text_script_color:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     ..  container:: example exception
@@ -5163,7 +4877,7 @@ def text_script_down(
 
         Down-overrides text script direction on leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -5177,17 +4891,10 @@ def text_script_down(
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.text_script_down(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5201,51 +4908,45 @@ def text_script_down(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TextScript.direction = #down                               %! baca.text_script_down:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                ^ \markup { "più mosso" }                                            %! baca.markup:IndicatorCommand
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                ^ \markup { "lo stesso tempo" }                                      %! baca.markup:IndicatorCommand
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TextScript.direction                                         %! baca.text_script_down:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TextScript.direction = #down                                       %! baca.text_script_down:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        ^ \markup { "più mosso" }                                                    %! baca.markup:IndicatorCommand
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup:IndicatorCommand
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TextScript.direction                                                 %! baca.text_script_down:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     ..  container:: example exception
@@ -5374,7 +5075,7 @@ def text_script_padding(
 
         Overrides text script padding on leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -5388,17 +5089,10 @@ def text_script_padding(
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.text_script_padding(4),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5412,51 +5106,45 @@ def text_script_padding(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TextScript.padding = #4                                    %! text.script_padding:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                ^ \markup { "più mosso" }                                            %! baca.markup:IndicatorCommand
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                ^ \markup { "lo stesso tempo" }                                      %! baca.markup:IndicatorCommand
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TextScript.padding                                           %! text.script_padding:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TextScript.padding = #4                                            %! text.script_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        ^ \markup { "più mosso" }                                                    %! baca.markup:IndicatorCommand
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup:IndicatorCommand
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TextScript.padding                                                   %! text.script_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     ..  container:: example exception
@@ -5560,7 +5248,7 @@ def text_script_staff_padding(
 
         Overrides text script staff padding on leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -5574,17 +5262,10 @@ def text_script_staff_padding(
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.text_script_staff_padding(n=4),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5598,51 +5279,45 @@ def text_script_staff_padding(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TextScript.staff-padding = #4                              %! baca.text_script_staff_padding:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                ^ \markup { "più mosso" }                                            %! baca.markup:IndicatorCommand
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                ^ \markup { "lo stesso tempo" }                                      %! baca.markup:IndicatorCommand
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TextScript.staff-padding                                     %! baca.text_script_staff_padding:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TextScript.staff-padding = #4                                      %! baca.text_script_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        ^ \markup { "più mosso" }                                                    %! baca.markup:IndicatorCommand
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup:IndicatorCommand
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TextScript.staff-padding                                             %! baca.text_script_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     ..  container:: example exception
@@ -5697,7 +5372,7 @@ def text_script_up(
 
         Up-overrides text script direction on leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -5711,17 +5386,10 @@ def text_script_up(
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.text_script_up(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5735,51 +5403,45 @@ def text_script_up(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TextScript.direction = #up                                 %! baca.text_script_up:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                ^ \markup { "più mosso" }                                            %! baca.markup:IndicatorCommand
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                ^ \markup { "lo stesso tempo" }                                      %! baca.markup:IndicatorCommand
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TextScript.direction                                         %! baca.text_script_up:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TextScript.direction = #up                                         %! baca.text_script_up:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        ^ \markup { "più mosso" }                                                    %! baca.markup:IndicatorCommand
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup:IndicatorCommand
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TextScript.direction                                                 %! baca.text_script_up:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     ..  container:: example exception
@@ -5918,7 +5580,7 @@ def text_spanner_staff_padding(
 
         Overrides text spanner staff padding on all trimmed leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -5932,17 +5594,10 @@ def text_spanner_staff_padding(
         ...         'pont. => ord.',
         ...         selector=baca.tleaves(),
         ...         ),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -5956,58 +5611,52 @@ def text_spanner_staff_padding(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TextSpanner.staff-padding = #6                             %! baca.text_spanner_staff_padding:OverrideCommand(1)
-                                \override TextScript.staff-padding = #6                              %! baca.text_script_staff_padding:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                - \abjad-dashed-line-with-arrow                                      %! baca.text_spanner:PiecewiseCommand(1)
-                                - \baca-text-spanner-left-text "pont."                               %! baca.text_spanner:PiecewiseCommand(1)
-                                - \baca-text-spanner-right-text "ord."                               %! baca.text_spanner:PiecewiseCommand(1)
-                                - \tweak bound-details.right.padding #0.5                            %! baca.text_spanner:PiecewiseCommand(1)
-                                - \tweak bound-details.right.stencil-align-dir-y #center             %! baca.text_spanner:PiecewiseCommand(1)
-                                \startTextSpan                                                       %! baca.text_spanner:PiecewiseCommand(1)
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                \stopTextSpan                                                        %! baca.text_spanner:PiecewiseCommand(2)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TextSpanner.staff-padding                                    %! baca.text_spanner_staff_padding:OverrideCommand(2)
-                                \revert TextScript.staff-padding                                     %! baca.text_script_staff_padding:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TextSpanner.staff-padding = #6                                     %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                        \override TextScript.staff-padding = #6                                      %! baca.text_script_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        - \abjad-dashed-line-with-arrow                                              %! baca.text_spanner:PiecewiseCommand(1)
+                        - \baca-text-spanner-left-text "pont."                                       %! baca.text_spanner:PiecewiseCommand(1)
+                        - \baca-text-spanner-right-text "ord."                                       %! baca.text_spanner:PiecewiseCommand(1)
+                        - \tweak bound-details.right.padding #0.5                                    %! baca.text_spanner:PiecewiseCommand(1)
+                        - \tweak bound-details.right.stencil-align-dir-y #center                     %! baca.text_spanner:PiecewiseCommand(1)
+                        \startTextSpan                                                               %! baca.text_spanner:PiecewiseCommand(1)
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        \stopTextSpan                                                                %! baca.text_spanner:PiecewiseCommand(2)
+                        r4
+                        \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                        \revert TextScript.staff-padding                                             %! baca.text_script_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -6084,7 +5733,7 @@ def tie_down(
 
         Overrides tie direction on pitched leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -6095,17 +5744,10 @@ def tie_down(
         ...     baca.stem_up(),
         ...     baca.tie(selector=baca.pleaf(0)),
         ...     baca.tie_down(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[11, 11, 12], [11, 11, 11], [11]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[11, 11, 12], [11, 11, 11], [11]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6119,48 +5761,42 @@ def tie_down(
                     s1 * 5/4
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \override Stem.direction = #up                                       %! baca.stem_up:OverrideCommand(1)
-                                \override Tie.direction = #down                                      %! baca.tie_down:OverrideCommand(1)
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                ~                                                                    %! baca.tie:IndicatorCommand
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                c''4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                c''16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 7/8 {                                                             %! baca.MusicMaker.__call__
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                b'4                                                                  %! baca.MusicMaker.__call__
-                                ~
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                \revert Stem.direction                                               %! baca.stem_up:OverrideCommand(2)
-                                \revert Tie.direction                                                %! baca.tie_down:OverrideCommand(2)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        \override Stem.direction = #up                                               %! baca.stem_up:OverrideCommand(1)
+                        \override Tie.direction = #down                                              %! baca.tie_down:OverrideCommand(1)
+                        b'16
+                        [
+                        ~                                                                            %! baca.tie:IndicatorCommand
+                        b'16
+                        ]
+                        c''4
+                        ~
+                        c''16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/8 {
+                        b'16
+                        [
+                        b'16
+                        ]
+                        b'4
+                        ~
+                        b'16
+                        r16
+                    }
+                    \times 4/5 {
+                        b'16
+                        \revert Stem.direction                                                       %! baca.stem_up:OverrideCommand(2)
+                        \revert Tie.direction                                                        %! baca.tie_down:OverrideCommand(2)
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -6185,7 +5821,7 @@ def tie_up(
 
         Overrides tie direction on pitched leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -6195,17 +5831,10 @@ def tie_up(
         ...     rmakers.beam(),
         ...     baca.stem_down(),
         ...     baca.tie_up(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[11, 11, 12], [11, 11, 11], [11]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[11, 11, 12], [11, 11, 11], [11]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6219,47 +5848,41 @@ def tie_up(
                     s1 * 5/4
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                \override Stem.direction = #down                                     %! baca.stem_down:OverrideCommand(1)
-                                \override Tie.direction = #up                                        %! baca.tie_up:OverrideCommand(1)
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                c''4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                c''16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 7/8 {                                                             %! baca.MusicMaker.__call__
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                b'4                                                                  %! baca.MusicMaker.__call__
-                                ~
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                b'16                                                                 %! baca.MusicMaker.__call__
-                                \revert Stem.direction                                               %! baca.stem_down:OverrideCommand(2)
-                                \revert Tie.direction                                                %! baca.tie_up:OverrideCommand(2)
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        \override Stem.direction = #down                                             %! baca.stem_down:OverrideCommand(1)
+                        \override Tie.direction = #up                                                %! baca.tie_up:OverrideCommand(1)
+                        b'16
+                        [
+                        b'16
+                        ]
+                        c''4
+                        ~
+                        c''16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 7/8 {
+                        b'16
+                        [
+                        b'16
+                        ]
+                        b'4
+                        ~
+                        b'16
+                        r16
+                    }
+                    \times 4/5 {
+                        b'16
+                        \revert Stem.direction                                                       %! baca.stem_down:OverrideCommand(2)
+                        \revert Tie.direction                                                        %! baca.tie_up:OverrideCommand(2)
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -6285,7 +5908,7 @@ def time_signature_extra_offset(
 
         Overrides time signature extra offset on leaf 0:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -6294,17 +5917,10 @@ def time_signature_extra_offset(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.time_signature_extra_offset((-6, 0)),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6318,48 +5934,42 @@ def time_signature_extra_offset(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)        %! baca.time_signature_extra_offset:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)                %! baca.time_signature_extra_offset:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -6404,7 +6014,7 @@ def time_signature_transparent(
 
         Makes all time signatures transparent:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -6413,17 +6023,10 @@ def time_signature_transparent(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.time_signature_transparent(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6437,49 +6040,43 @@ def time_signature_transparent(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override Score.TimeSignature.transparent = ##t                      %! baca.time_signature_transparent:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert Score.TimeSignature.transparent                              %! baca.time_signature_transparent:OverrideCommand(2)
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override Score.TimeSignature.transparent = ##t                              %! baca.time_signature_transparent:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert Score.TimeSignature.transparent                                      %! baca.time_signature_transparent:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -6523,7 +6120,7 @@ def tuplet_bracket_down(
 
         Overrides tuplet bracket direction on leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -6531,18 +6128,11 @@ def tuplet_bracket_down(
         ...         time_treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ...     baca.tuplet_bracket_down(),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6556,49 +6146,43 @@ def tuplet_bracket_down(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                \override TupletBracket.direction = #down                            %! baca.tuplet_bracket_down:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                                \revert TupletBracket.direction                                      %! baca.tuplet_bracket_down:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.direction = #down                                    %! baca.tuplet_bracket_down:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.direction                                              %! baca.tuplet_bracket_down:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -6624,7 +6208,7 @@ def tuplet_bracket_extra_offset(
 
         Overrides tuplet bracket extra offset on leaf 0:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -6633,17 +6217,10 @@ def tuplet_bracket_extra_offset(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.tuplet_bracket_extra_offset((-1, 0)),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6657,48 +6234,42 @@ def tuplet_bracket_extra_offset(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \once \override TupletBracket.extra-offset = #'(-1 . 0)              %! baca.tuplet_bracket_extra_offset:OverrideCommand(1)
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \once \override TupletBracket.extra-offset = #'(-1 . 0)                      %! baca.tuplet_bracket_extra_offset:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -6778,7 +6349,7 @@ def tuplet_bracket_staff_padding(
 
         Overrides tuplet bracket staff padding on leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -6786,17 +6357,10 @@ def tuplet_bracket_staff_padding(
         ...         time_treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6810,47 +6374,41 @@ def tuplet_bracket_staff_padding(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -6892,7 +6450,7 @@ def tuplet_bracket_up(
 
         Override tuplet bracket direction on leaves:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -6900,18 +6458,11 @@ def tuplet_bracket_up(
         ...         time_treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ...     baca.tuplet_bracket_up(),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -6925,49 +6476,43 @@ def tuplet_bracket_up(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                \override TupletBracket.direction = #up                              %! baca.tuplet_bracket_up:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                                \revert TupletBracket.direction                                      %! baca.tuplet_bracket_up:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.direction = #up                                      %! baca.tuplet_bracket_up:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.direction                                              %! baca.tuplet_bracket_up:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
@@ -7010,7 +6555,7 @@ def tuplet_number_extra_offset(
 
         Overrides tuplet number extra offset on leaf 0:
 
-        >>> music_maker = baca.MusicMaker(
+        >>> stack = baca.Stack(
         ...     baca.pitch_first(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -7018,18 +6563,11 @@ def tuplet_number_extra_offset(
         ...         time_treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.tuplet_bracket_staff_padding(5),
+        ...     baca.tuplet_bracket_staff_padding(2),
         ...     baca.tuplet_number_extra_offset((-1, 0)),
         ... )
-        >>> contribution = music_maker(
-        ...     'Voice_1',
-        ...     [[0, 2, 10], [18, 16, 15, 20, 19], [9]],
-        ...     )
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     contribution.voice_to_selection,
-        ...     attach_lilypond_voice_commands=True,
-        ...     time_signatures=[contribution.time_signature],
-        ... )
+        >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
@@ -7043,48 +6581,42 @@ def tuplet_number_extra_offset(
                     s1 * 11/8
                 }
                 \new Staff
-                <<
-                    \context Voice = "Voice_1"
-                    {
-                        \voiceOne
-                        {                                                                            %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                \override TupletBracket.staff-padding = #5                           %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
-                                \once \override TupletNumber.extra-offset = #'(-1 . 0)               %! baca.tuplet_number_extra_offset:OverrideCommand(1)
-                                r8                                                                   %! baca.MusicMaker.__call__
-                                c'16                                                                 %! baca.MusicMaker.__call__
-                                [
-                                d'16                                                                 %! baca.MusicMaker.__call__
-                                ]
-                                bf'4                                                                 %! baca.MusicMaker.__call__
-                                ~
-                                bf'16                                                                %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \tweak text #tuplet-number::calc-fraction-text                           %! baca.MusicMaker.__call__
-                            \times 9/10 {                                                            %! baca.MusicMaker.__call__
-                                fs''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                e''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                                ef''4                                                                %! baca.MusicMaker.__call__
-                                ~
-                                ef''16                                                               %! baca.MusicMaker.__call__
-                                r16                                                                  %! baca.MusicMaker.__call__
-                                af''16                                                               %! baca.MusicMaker.__call__
-                                [
-                                g''16                                                                %! baca.MusicMaker.__call__
-                                ]
-                            }                                                                        %! baca.MusicMaker.__call__
-                            \times 4/5 {                                                             %! baca.MusicMaker.__call__
-                                a'16                                                                 %! baca.MusicMaker.__call__
-                                r4                                                                   %! baca.MusicMaker.__call__
-                                \revert TupletBracket.staff-padding                                  %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
-                            }                                                                        %! baca.MusicMaker.__call__
-                        }                                                                            %! baca.MusicMaker.__call__
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \once \override TupletNumber.extra-offset = #'(-1 . 0)                       %! baca.tuplet_number_extra_offset:OverrideCommand(1)
+                        r8
+                        c'16
+                        [
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
                     }
-                >>
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs''16
+                        [
+                        e''16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
+                        ]
+                    }
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                    }
+                }
             >>
 
     """
