@@ -8135,24 +8135,26 @@ class PitchFirstAssignment(object):
         self,
         rhythm_maker: PitchFirstRhythmMaker,
         *,
-        pattern=None,
+        pattern: abjad.Pattern = None,
         thread: bool = None,
     ) -> None:
         assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
         self._rhythm_maker = rhythm_maker
+        if pattern is not None:
+            assert isinstance(pattern, abjad.Pattern)
         self._pattern = pattern
         if thread is not None:
             thread = bool(thread)
         self._thread = thread
+        if 1 < len(rhythm_maker.treatments or []) and not thread:
+            message = "multiple treatments only make sense with thread:\n"
+            message += f"   {format(rhythm_maker)}"
+            raise Exception(message)
 
     ### SPECIAL METHODS ###
 
     def __call__(
-        self,
-        collections: typing.Sequence,
-        selections: typing.Sequence[
-            typing.Union[abjad.Selection, None]
-        ] = None,
+        self, collections: typing.Sequence, selections: typing.Sequence = None
     ) -> typing.List[abjad.Selection]:
         """
         Calls pitch-first assignment.
@@ -8264,25 +8266,21 @@ class PitchFirstAssignment(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def pattern(
-        self
-    ) -> typing.Optional[
-        typing.Union[abjad.DurationInequality, abjad.Pattern]
-    ]:
+    def pattern(self) -> typing.Optional[abjad.Pattern]:
         """
         Gets pattern.
         """
         return self._pattern
 
     @property
-    def rhythm_maker(self) -> "PitchFirstRhythmMaker":
+    def rhythm_maker(self) -> PitchFirstRhythmMaker:
         """
         Gets rhythm-maker.
         """
         return self._rhythm_maker
 
     @property
-    def thread(self):
+    def thread(self) -> typing.Optional[bool]:
         r"""
         Is true when pitch-first assignment threads rhythm-maker over
         collections.
@@ -11183,7 +11181,7 @@ def pitch_first_rmaker(
     counts: abjad.IntegerSequence,
     denominator: int,
     *,
-    acciaccatura: Acciaccatura = None,
+    acciaccatura: typing.Union[bool, Acciaccatura, LMR] = None,
     affix: RestAffix = None,
     signature: int = None,
     spelling: rmakers.Spelling = None,
@@ -11196,6 +11194,8 @@ def pitch_first_rmaker(
         acciaccatura = Acciaccatura()
     elif isinstance(acciaccatura, LMR):
         acciaccatura = Acciaccatura(lmr_specifier=acciaccatura)
+    if acciaccatura is not None:
+        assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
     return PitchFirstRhythmMaker(
         rmakers.Talea(counts=counts, denominator=denominator),
         acciaccatura=acciaccatura,
@@ -11210,7 +11210,7 @@ def pitch_first_assignment(
     counts: abjad.IntegerSequence,
     denominator: int,
     *,
-    acciaccatura: Acciaccatura = None,
+    acciaccatura: typing.Union[bool, Acciaccatura, LMR] = None,
     affix: RestAffix = None,
     pattern: abjad.Pattern = None,
     signature: int = None,
