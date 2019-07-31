@@ -3769,6 +3769,8 @@ class Accumulator(object):
             if isinstance(command, Imbrication):
                 voice_name_ = self._abbreviation(command.voice_name)
                 command._voice_name = voice_name_
+        assignments = []
+        pitch_first_command = None
         if anchor is not None:
             voice_name_ = self._abbreviation(anchor.remote_voice_name)
             anchor._remote_voice_name = voice_name_
@@ -3778,8 +3780,14 @@ class Accumulator(object):
         elif all(isinstance(_, abjad.Component) for _ in collections):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
+        elif isinstance(commands[0], PitchFirstCommand):
+            pitch_first_command = commands[0]
+            collections = _coerce_collections(collections)
+            selections = commands[0](collections)
+            selections = abjad.select(selections).flatten()
+            commands_ = list(commands[1:])
         else:
-            assignments, commands__ = [], []
+            commands__ = []
             for command in commands_:
                 if isinstance(command, PitchFirstAssignment):
                     assignments.append(command)
@@ -3817,6 +3825,11 @@ class Accumulator(object):
         duration = abjad.inspect(selection).duration()
         if signature is None and assignments:
             primary_rhythm_maker = assignments[0].rhythm_maker
+            signature = primary_rhythm_maker.signature
+        if signature is None and pitch_first_command:
+            primary_rhythm_maker = pitch_first_command.assignments[
+                0
+            ].rhythm_maker
             signature = primary_rhythm_maker.signature
         if signature is not None:
             duration = duration.with_denominator(signature)
@@ -8382,7 +8395,10 @@ class PitchFirstCommand(object):
 
     def __init__(self, *assignments: PitchFirstAssignment) -> None:
         for assignment in assignments:
-            assert isinstance(assignment, PitchFirstAssignment)
+            if not isinstance(assignment, PitchFirstAssignment):
+                message = "must be assignment:\n"
+                message += f"   {format(assignment)}"
+                raise Exception(message)
         self._assignments = list(assignments)
 
     ### SPECIAL METHODS ###
@@ -8400,8 +8416,10 @@ class PitchFirstCommand(object):
         matches = []
         for i, collection in enumerate(collections):
             for assignment in self.assignments:
-                assert isinstance(assignment.pattern, abjad.Pattern)
-                if assignment.pattern.matches_index(i, collection_count):
+                if (
+                    assignment.pattern is None
+                    or assignment.pattern.matches_index(i, collection_count)
+                ):
                     match = rmakers._MakerMatch(collection, assignment)
                     matches.append(match)
                     break
@@ -11315,6 +11333,18 @@ def pitch_first_assignment(
         treatments=treatments,
     )
     return PitchFirstAssignment(rhythm_maker, pattern=pattern, thread=thread)
+
+
+def pitch_first_command(
+    *assignments: PitchFirstAssignment
+) -> PitchFirstCommand:
+    """
+    Makes pitch-first command.
+    """
+    for assignment in assignments:
+        assert isinstance(assignment, PitchFirstAssignment)
+        assert not assignment.thread, repr(assignment)
+    return PitchFirstCommand(*assignments)
 
 
 def rests_after(counts: typing.Sequence[int]) -> RestAffix:
