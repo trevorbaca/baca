@@ -5695,10 +5695,7 @@ class PitchFirstRhythmMaker(object):
                 >>
 
         """
-        ##print("CALLING PFRMAKER ...", collections, collection_index, state,
-        ###    total_collections, self.treatments)
-        prototype = (list,)
-        assert isinstance(collections, prototype), repr(collections)
+        assert isinstance(collections, list), repr(collections)
         self._state = state or abjad.OrderedDict()
         self._apply_state(state=state)
         tuplets = self._make_music(
@@ -5707,20 +5704,8 @@ class PitchFirstRhythmMaker(object):
             total_collections=total_collections,
         )
         selections = [abjad.select(_) for _ in tuplets]
-        ###return selections
-        ###raise Exception(selections, "SSS")
-        divisions_consumed = len(tuplets)
-        durations = [abjad.inspect(_).duration() for _ in tuplets]
-        time_signatures = [abjad.TimeSignature(_) for _ in durations]
-        staff = rmakers.RhythmMaker._make_staff(time_signatures)
-        voice = staff["MusicVoice"]
-        voice.extend(tuplets)
-        # self._check_wellformedness(selections)
-        selections = abjad.select(voice[:]).group_by_measure()
-        assert isinstance(selections, abjad.Selection)
-        voice[:] = []
-        assert isinstance(selections, abjad.Selection)
-        return selections
+        selection = abjad.select(selections)
+        return selection
 
     def __eq__(self, argument) -> bool:
         """
@@ -8380,6 +8365,105 @@ class PitchFirstAssignment(object):
 
         """
         return self._thread
+
+
+class PitchFirstCommand(object):
+    """
+    Pitch-first command.
+    """
+
+    ### CLASS ATTRIBUTES ###
+
+    __slots__ = "_assignments"
+
+    _publish_storage_format = True
+
+    ### INITIALIZER ###
+
+    def __init__(self, *assignments: PitchFirstAssignment) -> None:
+        for assignment in assignments:
+            assert isinstance(assignment, PitchFirstAssignment)
+        self._assignments = list(assignments)
+
+    ### SPECIAL METHODS ###
+
+    def __call__(
+        self, collections: typing.Sequence
+    ) -> typing.List[abjad.Selection]:
+        """
+        Calls pitch-first command.
+        """
+        collections = _coerce_collections(collections)
+        prototype = (pitchclasses.CollectionList,)
+        assert isinstance(collections, prototype), repr(collections)
+        collection_count = len(collections)
+        matches = []
+        for i, collection in enumerate(collections):
+            for assignment in self.assignments:
+                assert isinstance(assignment.pattern, abjad.Pattern)
+                if assignment.pattern.matches_index(i, collection_count):
+                    match = rmakers._MakerMatch(collection, assignment)
+                    matches.append(match)
+                    break
+            else:
+                raise Exception(f"no rhythm-maker match for collection {i}.")
+        assert len(collections) == len(matches)
+        groups = abjad.sequence(matches).group_by(
+            lambda match: match.assignment.rhythm_maker
+        )
+        selections = []
+        for group in groups:
+            rhythm_maker = group[0].assignment.rhythm_maker
+            collections_ = [match.division for match in group]
+            selection = rhythm_maker(
+                collections_,
+                collection_index=None,
+                state=None,
+                total_collections=None,
+            )
+            selections.append(selection)
+        assert isinstance(selections, list)
+        assert all(isinstance(_, abjad.Selection) for _ in selections)
+        return selections
+
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when initialization values of command equal
+        initialization values of ``argument``.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __format__(self, format_specification="") -> str:
+        """
+        Formats command.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __hash__(self) -> int:
+        """
+        Hashes command.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f"unhashable type: {self}")
+        return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation of command.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def assignments(self) -> typing.List[PitchFirstAssignment]:
+        """
+        Gets assignments.
+        """
+        return self._assignments
 
 
 ### FACTORY FUNCTIONS ###

@@ -533,6 +533,7 @@ indicators.Markup library.
    ~baca.mmaker.LMR
    ~baca.mmaker.Nest
    ~baca.mmaker.PitchFirstAssignment
+   ~baca.mmaker.PitchFirstCommand
    ~baca.mmaker.PitchFirstRhythmMaker
    ~baca.mmaker.RestAffix
    ~baca.mmaker.Stack

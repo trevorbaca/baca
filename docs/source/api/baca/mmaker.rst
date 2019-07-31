@@ -31,6 +31,7 @@ mmaker
    ~LMR
    ~Nest
    ~PitchFirstAssignment
+   ~PitchFirstCommand
    ~PitchFirstRhythmMaker
    ~RestAffix
    ~Stack
@@ -478,6 +479,51 @@ mmaker
    .. autoattribute:: PitchFirstAssignment.rhythm_maker
 
    .. autoattribute:: PitchFirstAssignment.thread
+
+.. autoclass:: PitchFirstCommand
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
+      assignments
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: PitchFirstCommand.__call__
+
+   .. automethod:: PitchFirstCommand.__eq__
+
+   .. automethod:: PitchFirstCommand.__format__
+
+   .. automethod:: PitchFirstCommand.__hash__
+
+   .. automethod:: PitchFirstCommand.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: PitchFirstCommand.assignments
 
 .. autoclass:: PitchFirstRhythmMaker
 
