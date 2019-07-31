@@ -496,8 +496,6 @@ class HorizontalSpacingSpecifier(object):
     r"""
     Horizontal spacing specifier.
 
-    >>> from abjadext import rmakers
-
     ..  container:: example
 
         No spacing command:

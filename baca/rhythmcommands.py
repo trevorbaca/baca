@@ -108,8 +108,6 @@ class RhythmCommand(scoping.Command):
     r"""
     Rhythm command.
 
-    >>> from abjadext import rmakers
-
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(

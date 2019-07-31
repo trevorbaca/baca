@@ -24,8 +24,6 @@ class SegmentMaker(abjad.SegmentMaker):
     r"""
     Segment-maker.
 
-    >>> from abjadext import rmakers
-
     ..  container:: example
 
         >>> maker = baca.SegmentMaker(

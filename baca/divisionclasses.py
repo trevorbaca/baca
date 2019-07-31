@@ -15,8 +15,6 @@ class Division(abjad.NonreducedFraction):
     r"""
     Division.
 
-    >>> from abjadext import rmakers
-
     ..  container:: example
 
         Initializes empty:

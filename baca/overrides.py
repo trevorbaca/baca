@@ -14,8 +14,6 @@ class OverrideCommand(scoping.Command):
     r"""
     Override command.
 
-    >>> from abjadext import rmakers
-
     ..  container:: example
 
         >>> baca.OverrideCommand()
