@@ -8145,11 +8145,6 @@ class PitchFirstAssignment(object):
             thread = bool(thread)
         self._thread = thread
 
-    #        if 1 < len(rhythm_maker.treatments) and not thread:
-    #            message = "multiple treatments only make sense with thread:\n"
-    #            message += f"   {format(rhythm_maker)}"
-    #            raise Exception(message)
-
     ### SPECIAL METHODS ###
 
     def __call__(
@@ -11184,6 +11179,33 @@ def nest(
     return Nest(lmr_specifier=lmr_specifier, treatments=treatments)
 
 
+def pitch_first_rmaker(
+    counts: abjad.IntegerSequence,
+    denominator: int,
+    *,
+    acciaccatura: Acciaccatura = None,
+    affix: RestAffix = None,
+    signature: int = None,
+    spelling: rmakers.Spelling = None,
+    treatments: typing.Sequence = None,
+) -> PitchFirstRhythmMaker:
+    """
+    Makes pitch-first rhythm-maker.
+    """
+    if acciaccatura is True:
+        acciaccatura = Acciaccatura()
+    elif isinstance(acciaccatura, LMR):
+        acciaccatura = Acciaccatura(lmr_specifier=acciaccatura)
+    return PitchFirstRhythmMaker(
+        rmakers.Talea(counts=counts, denominator=denominator),
+        acciaccatura=acciaccatura,
+        affix=affix,
+        signature=signature,
+        spelling=spelling,
+        treatments=treatments,
+    )
+
+
 def pitch_first_assignment(
     counts: abjad.IntegerSequence,
     denominator: int,
@@ -11199,49 +11221,16 @@ def pitch_first_assignment(
     """
     Makes pitch-first assignment.
     """
-    if acciaccatura is True:
-        acciaccatura = Acciaccatura()
-    elif isinstance(acciaccatura, LMR):
-        acciaccatura = Acciaccatura(lmr_specifier=acciaccatura)
-    return PitchFirstAssignment(
-        PitchFirstRhythmMaker(
-            rmakers.Talea(counts=counts, denominator=denominator),
-            acciaccatura=acciaccatura,
-            affix=affix,
-            signature=signature,
-            spelling=spelling,
-            treatments=treatments,
-        ),
-        pattern=pattern,
-        thread=thread,
-    )
-
-
-def pitch_first_rmaker(
-    counts: abjad.IntegerSequence,
-    denominator: int,
-    *,
-    acciaccatura: Acciaccatura = None,
-    affix: RestAffix = None,
-    pattern: abjad.Pattern = None,
-    signature: int = None,
-    spelling: rmakers.Spelling = None,
-    treatments: typing.Sequence = None,
-) -> PitchFirstRhythmMaker:
-    """
-    Makes pitch-first assignment.
-    """
-    assignment = pitch_first_assignment(
+    rhythm_maker = pitch_first_rmaker(
         counts,
         denominator,
         acciaccatura=acciaccatura,
         affix=affix,
-        pattern=pattern,
         signature=signature,
         spelling=spelling,
         treatments=treatments,
     )
-    return assignment.rhythm_maker
+    return PitchFirstAssignment(rhythm_maker, pattern=pattern, thread=thread)
 
 
 def rests_after(counts: typing.Sequence[int]) -> RestAffix:
