@@ -275,7 +275,6 @@ mmaker
       __call__
       allow_unused_pitches
       by_pitch_class
-      extend_beam
       hocket
       segment
       selector
@@ -302,8 +301,6 @@ mmaker
    .. autoattribute:: Imbrication.allow_unused_pitches
 
    .. autoattribute:: Imbrication.by_pitch_class
-
-   .. autoattribute:: Imbrication.extend_beam
 
    .. autoattribute:: Imbrication.hocket
 

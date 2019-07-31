@@ -2908,7 +2908,6 @@ class Imbrication(object):
     __slots__ = (
         "_allow_unused_pitches",
         "_by_pitch_class",
-        "_extend_beam",
         "_hocket",
         "_segment",
         "_selector",
@@ -2926,7 +2925,6 @@ class Imbrication(object):
         *specifiers,
         allow_unused_pitches: bool = None,
         by_pitch_class: bool = None,
-        extend_beam: bool = None,
         hocket: bool = None,
         selector: abjad.SelectorTyping = None,
         truncate_ties: bool = None,
@@ -2943,9 +2941,6 @@ class Imbrication(object):
         if by_pitch_class is not None:
             by_pitch_class = bool(by_pitch_class)
         self._by_pitch_class = by_pitch_class
-        if extend_beam is not None:
-            extend_beam = bool(extend_beam)
-        self._extend_beam = extend_beam
         if hocket is not None:
             hocket = bool(hocket)
         self._hocket = hocket
@@ -3500,7 +3495,7 @@ class Imbrication(object):
             ...         [2, 10],
             ...         baca.staccato(selector=baca.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
-            ...         extend_beam=True,
+            ...         baca.extend_beam(),
             ...     ),
             ... )
 
@@ -4413,9 +4408,6 @@ class Imbrication(object):
             message = f"{cursor!r} used only {current} of {total} pitches."
             raise Exception(message)
         self._apply_specifiers(container)
-        if self.extend_beam:
-            final_leaf = abjad.select(container).leaf(-1)
-            abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, final_leaf)
         selection = abjad.select(container)
         if not self.hocket:
             pleaves = classes.Selection(container).pleaves()
@@ -4796,13 +4788,6 @@ class Imbrication(object):
         Is true when specifier matches on pitch-class rather than pitch.
         """
         return self._by_pitch_class
-
-    @property
-    def extend_beam(self) -> typing.Optional[bool]:
-        """
-        Is true when specifier extends beam.
-        """
-        return self._extend_beam
 
     @property
     def hocket(self) -> typing.Optional[bool]:
@@ -5904,9 +5889,6 @@ class Accumulator(object):
         if figure_name is not None:
             figure_name = str(figure_name)
             self._label_figure_name_(container, figure_name)
-        if keywords.get("extend_beam", None):
-            leaf = abjad.select(selections).leaf(-1)
-            abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, leaf)
         selection = abjad.select([container])
         duration = abjad.inspect(selection).duration()
         signature = keywords.get("signature", None)
@@ -10749,7 +10731,6 @@ def imbricate(
     *specifiers: typing.Any,
     allow_unused_pitches: bool = None,
     by_pitch_class: bool = None,
-    extend_beam: bool = None,
     hocket: bool = None,
     selector: abjad.SelectorTyping = None,
     truncate_ties: bool = None,
@@ -11046,7 +11027,6 @@ def imbricate(
         *specifiers,
         allow_unused_pitches=allow_unused_pitches,
         by_pitch_class=by_pitch_class,
-        extend_beam=extend_beam,
         hocket=hocket,
         selector=selector,
         truncate_ties=truncate_ties,
