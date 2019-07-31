@@ -22,20 +22,20 @@ mmaker
 .. autosummary::
    :nosignatures:
 
-   ~AcciaccaturaSpecifier
+   ~Acciaccatura
    ~Accumulator
    ~Anchor
    ~Coat
    ~Contribution
    ~Imbrication
-   ~LMRSpecifier
+   ~LMR
    ~Nest
    ~PitchFirstAssignment
    ~PitchFirstRhythmMaker
-   ~RestAffixSpecifier
+   ~RestAffix
    ~Stack
 
-.. autoclass:: AcciaccaturaSpecifier
+.. autoclass:: Acciaccatura
 
    .. raw:: html
 
@@ -62,15 +62,15 @@ mmaker
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: AcciaccaturaSpecifier.__call__
+   .. automethod:: Acciaccatura.__call__
 
-   .. automethod:: AcciaccaturaSpecifier.__eq__
+   .. automethod:: Acciaccatura.__eq__
 
-   .. automethod:: AcciaccaturaSpecifier.__format__
+   .. automethod:: Acciaccatura.__format__
 
-   .. automethod:: AcciaccaturaSpecifier.__hash__
+   .. automethod:: Acciaccatura.__hash__
 
-   .. automethod:: AcciaccaturaSpecifier.__repr__
+   .. automethod:: Acciaccatura.__repr__
 
    .. raw:: html
 
@@ -79,9 +79,9 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: AcciaccaturaSpecifier.durations
+   .. autoattribute:: Acciaccatura.durations
 
-   .. autoattribute:: AcciaccaturaSpecifier.lmr_specifier
+   .. autoattribute:: Acciaccatura.lmr_specifier
 
 .. autoclass:: Accumulator
 
@@ -314,7 +314,7 @@ mmaker
 
    .. autoattribute:: Imbrication.voice_name
 
-.. autoclass:: LMRSpecifier
+.. autoclass:: LMR
 
    .. raw:: html
 
@@ -351,15 +351,15 @@ mmaker
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: LMRSpecifier.__call__
+   .. automethod:: LMR.__call__
 
-   .. automethod:: LMRSpecifier.__eq__
+   .. automethod:: LMR.__eq__
 
-   .. automethod:: LMRSpecifier.__format__
+   .. automethod:: LMR.__format__
 
-   .. automethod:: LMRSpecifier.__hash__
+   .. automethod:: LMR.__hash__
 
-   .. automethod:: LMRSpecifier.__repr__
+   .. automethod:: LMR.__repr__
 
    .. raw:: html
 
@@ -368,29 +368,29 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: LMRSpecifier.left_counts
+   .. autoattribute:: LMR.left_counts
 
-   .. autoattribute:: LMRSpecifier.left_cyclic
+   .. autoattribute:: LMR.left_cyclic
 
-   .. autoattribute:: LMRSpecifier.left_length
+   .. autoattribute:: LMR.left_length
 
-   .. autoattribute:: LMRSpecifier.left_reversed
+   .. autoattribute:: LMR.left_reversed
 
-   .. autoattribute:: LMRSpecifier.middle_counts
+   .. autoattribute:: LMR.middle_counts
 
-   .. autoattribute:: LMRSpecifier.middle_cyclic
+   .. autoattribute:: LMR.middle_cyclic
 
-   .. autoattribute:: LMRSpecifier.middle_reversed
+   .. autoattribute:: LMR.middle_reversed
 
-   .. autoattribute:: LMRSpecifier.priority
+   .. autoattribute:: LMR.priority
 
-   .. autoattribute:: LMRSpecifier.right_counts
+   .. autoattribute:: LMR.right_counts
 
-   .. autoattribute:: LMRSpecifier.right_cyclic
+   .. autoattribute:: LMR.right_cyclic
 
-   .. autoattribute:: LMRSpecifier.right_length
+   .. autoattribute:: LMR.right_length
 
-   .. autoattribute:: LMRSpecifier.right_reversed
+   .. autoattribute:: LMR.right_reversed
 
 .. autoclass:: Nest
 
@@ -539,7 +539,7 @@ mmaker
 
    .. autoattribute:: PitchFirstRhythmMaker.treatments
 
-.. autoclass:: RestAffixSpecifier
+.. autoclass:: RestAffix
 
    .. raw:: html
 
@@ -568,15 +568,15 @@ mmaker
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: RestAffixSpecifier.__call__
+   .. automethod:: RestAffix.__call__
 
-   .. automethod:: RestAffixSpecifier.__eq__
+   .. automethod:: RestAffix.__eq__
 
-   .. automethod:: RestAffixSpecifier.__format__
+   .. automethod:: RestAffix.__format__
 
-   .. automethod:: RestAffixSpecifier.__hash__
+   .. automethod:: RestAffix.__hash__
 
-   .. automethod:: RestAffixSpecifier.__repr__
+   .. automethod:: RestAffix.__repr__
 
    .. raw:: html
 
@@ -585,13 +585,13 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: RestAffixSpecifier.pattern
+   .. autoattribute:: RestAffix.pattern
 
-   .. autoattribute:: RestAffixSpecifier.prefix
+   .. autoattribute:: RestAffix.prefix
 
-   .. autoattribute:: RestAffixSpecifier.skips_instead_of_rests
+   .. autoattribute:: RestAffix.skips_instead_of_rests
 
-   .. autoattribute:: RestAffixSpecifier.suffix
+   .. autoattribute:: RestAffix.suffix
 
 .. autoclass:: Stack
 

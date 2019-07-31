@@ -524,17 +524,17 @@ indicators.Markup library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.mmaker.AcciaccaturaSpecifier
+   ~baca.mmaker.Acciaccatura
    ~baca.mmaker.Accumulator
    ~baca.mmaker.Anchor
    ~baca.mmaker.Coat
    ~baca.mmaker.Contribution
    ~baca.mmaker.Imbrication
-   ~baca.mmaker.LMRSpecifier
+   ~baca.mmaker.LMR
    ~baca.mmaker.Nest
    ~baca.mmaker.PitchFirstAssignment
    ~baca.mmaker.PitchFirstRhythmMaker
-   ~baca.mmaker.RestAffixSpecifier
+   ~baca.mmaker.RestAffix
    ~baca.mmaker.Stack
 
 .. raw:: html

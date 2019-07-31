@@ -234,7 +234,7 @@ class Stack(object):
         return self._commands
 
 
-class LMRSpecifier(object):
+class LMR(object):
     """
     Left-middle-right specifier.
 
@@ -1126,7 +1126,7 @@ class LMRSpecifier(object):
         return self._right_reversed
 
 
-class AcciaccaturaSpecifier(object):
+class Acciaccatura(object):
     r"""
     Acciaccatura specifier.
 
@@ -1183,42 +1183,42 @@ class AcciaccaturaSpecifier(object):
                     \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             fs''16
-                            [                                                                        %! AcciaccaturaSpecifier
+                            [                                                                        %! Acciaccatura
                             e''16
-                            ]                                                                        %! AcciaccaturaSpecifier
+                            ]                                                                        %! Acciaccatura
                         }
                         ef''8
                     }
                     \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             af''16
-                            [                                                                        %! AcciaccaturaSpecifier
+                            [                                                                        %! Acciaccatura
                             g''16
                             a'16
-                            ]                                                                        %! AcciaccaturaSpecifier
+                            ]                                                                        %! Acciaccatura
                         }
                         c'8
                     }
                     \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             d'16
-                            [                                                                        %! AcciaccaturaSpecifier
+                            [                                                                        %! Acciaccatura
                             bf'16
                             fs''16
                             e''16
-                            ]                                                                        %! AcciaccaturaSpecifier
+                            ]                                                                        %! Acciaccatura
                         }
                         ef''8
                     }
                     \scaleDurations #'(1 . 1) {
                         \acciaccatura {
                             af''16
-                            [                                                                        %! AcciaccaturaSpecifier
+                            [                                                                        %! Acciaccatura
                             g''16
                             a'16
                             c'16
                             d'16
-                            ]                                                                        %! AcciaccaturaSpecifier
+                            ]                                                                        %! Acciaccatura
                         }
                         bf'8
                     }
@@ -1237,11 +1237,11 @@ class AcciaccaturaSpecifier(object):
         self,
         *,
         durations: typing.Sequence[abjad.DurationTyping] = [(1, 16)],
-        lmr_specifier: LMRSpecifier = LMRSpecifier(),
+        lmr_specifier: LMR = LMR(),
     ) -> None:
         durations_ = [abjad.Duration(_) for _ in durations]
         self._durations = durations_
-        assert isinstance(lmr_specifier, LMRSpecifier), repr(lmr_specifier)
+        assert isinstance(lmr_specifier, LMR), repr(lmr_specifier)
         self._lmr_specifier = lmr_specifier
 
     ### SPECIAL METHODS ###
@@ -1272,9 +1272,7 @@ class AcciaccaturaSpecifier(object):
             grace_leaves = maker(grace_token, durations)
             acciaccatura_container = abjad.AcciaccaturaContainer(grace_leaves)
             if 1 < len(acciaccatura_container):
-                abjad.beam(
-                    acciaccatura_container[:], tag="AcciaccaturaSpecifier"
-                )
+                abjad.beam(acciaccatura_container[:], tag="Acciaccatura")
             acciaccatura_containers.append(acciaccatura_container)
         assert len(acciaccatura_containers) == len(collection)
         assert isinstance(collection, list), repr(collection)
@@ -1369,42 +1367,42 @@ class AcciaccaturaSpecifier(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''16
                                 a'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 bf'16
                                 fs''16
                                 e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             bf'8
                         }
@@ -1415,7 +1413,7 @@ class AcciaccaturaSpecifier(object):
 
             Eighth-note acciaccaturas:
 
-            >>> specifier = baca.AcciaccaturaSpecifier(durations=[(1, 8)])
+            >>> specifier = baca.Acciaccatura(durations=[(1, 8)])
             >>> stack = baca.Stack(
             ...     baca.pitch_first_rmaker([1], 8, acciaccatura=specifier),
             ...     rmakers.beam(),
@@ -1465,42 +1463,42 @@ class AcciaccaturaSpecifier(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''8
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 e''8
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''8
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''8
                                 a'8
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'8
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 bf'8
                                 fs''8
                                 e''8
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''8
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''8
                                 a'8
                                 c'8
                                 d'8
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             bf'8
                         }
@@ -1511,7 +1509,7 @@ class AcciaccaturaSpecifier(object):
         return self._durations
 
     @property
-    def lmr_specifier(self) -> LMRSpecifier:
+    def lmr_specifier(self) -> LMR:
         r"""
         Gets LMR specifier.
 
@@ -1568,42 +1566,42 @@ class AcciaccaturaSpecifier(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''16
                                 a'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 bf'16
                                 fs''16
                                 e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             bf'8
                         }
@@ -1672,18 +1670,18 @@ class AcciaccaturaSpecifier(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             a'8
                             [
@@ -1693,9 +1691,9 @@ class AcciaccaturaSpecifier(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 bf'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             fs''8
                             [
@@ -1706,9 +1704,9 @@ class AcciaccaturaSpecifier(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             a'8
                             [
@@ -1781,9 +1779,9 @@ class AcciaccaturaSpecifier(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''8
                         }
@@ -1792,9 +1790,9 @@ class AcciaccaturaSpecifier(object):
                             [
                             \acciaccatura {
                                 g''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 a'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             c'8
                             ]
@@ -1805,9 +1803,9 @@ class AcciaccaturaSpecifier(object):
                             bf'8
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''8
                             ]
@@ -1819,9 +1817,9 @@ class AcciaccaturaSpecifier(object):
                             a'8
                             \acciaccatura {
                                 c'16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 d'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             bf'8
                             ]
@@ -1892,18 +1890,18 @@ class AcciaccaturaSpecifier(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             a'8
                             [
@@ -1913,9 +1911,9 @@ class AcciaccaturaSpecifier(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 bf'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             fs''8
                             [
@@ -1928,17 +1926,17 @@ class AcciaccaturaSpecifier(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             a'8
                             [
                             \acciaccatura {
                                 c'16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 d'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             bf'8
                             ]
@@ -2015,9 +2013,9 @@ class AcciaccaturaSpecifier(object):
                             [
                             \acciaccatura {
                                 g''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 a'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             c'8
                             ]
@@ -2027,10 +2025,10 @@ class AcciaccaturaSpecifier(object):
                             [
                             \acciaccatura {
                                 bf'16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 fs''16
                                 e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''8
                             ]
@@ -2040,11 +2038,11 @@ class AcciaccaturaSpecifier(object):
                             [
                             \acciaccatura {
                                 g''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             bf'8
                             ]
@@ -4319,11 +4317,11 @@ class Nest(object):
     def __init__(
         self,
         *,
-        lmr_specifier: LMRSpecifier = None,
+        lmr_specifier: LMR = None,
         treatments: typing.Sequence[typing.Union[int, str]] = None,
     ) -> None:
         if lmr_specifier is not None:
-            assert isinstance(lmr_specifier, LMRSpecifier), repr(lmr_specifier)
+            assert isinstance(lmr_specifier, LMR), repr(lmr_specifier)
         self._lmr_specifier = lmr_specifier
         if treatments is not None:
             assert isinstance(treatments, (list, tuple))
@@ -4495,7 +4493,7 @@ class Nest(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def lmr_specifier(self) -> typing.Optional[LMRSpecifier]:
+    def lmr_specifier(self) -> typing.Optional[LMR]:
         """
         Gets LMR specifier.
         """
@@ -4509,15 +4507,15 @@ class Nest(object):
         return self._treatments
 
 
-class RestAffixSpecifier(object):
+class RestAffix(object):
     r"""
-    Rest affix specifier.
+    Rest affix.
 
     ..  container:: example
 
         Works together with negative-valued talea:
 
-        >>> affix = baca.RestAffixSpecifier(
+        >>> affix = baca.RestAffix(
         ...     prefix=[2],
         ...     suffix=[3],
         ... )
@@ -4584,7 +4582,7 @@ class RestAffixSpecifier(object):
             >>
 
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> affix = baca.RestAffixSpecifier(
+        >>> affix = baca.RestAffix(
         ...     prefix=[2],
         ...     suffix=[3],
         ... )
@@ -4650,8 +4648,8 @@ class RestAffixSpecifier(object):
 
     ..  container:: example
 
-        >>> baca.RestAffixSpecifier()
-        RestAffixSpecifier()
+        >>> baca.RestAffix()
+        RestAffix()
 
     """
 
@@ -4693,14 +4691,14 @@ class RestAffixSpecifier(object):
         typing.Optional[abjad.IntegerSequence],
     ]:
         r"""
-        Calls rest affix specifier on ``collection_index`` and
+        Calls rest affix on ``collection_index`` and
         ``total_collections``.
 
         ..  container:: example
 
             With time treatments:
 
-            >>> affix = baca.RestAffixSpecifier(prefix=[1], suffix=[1])
+            >>> affix = baca.RestAffix(prefix=[1], suffix=[1])
             >>> stack = baca.Stack(
             ...     baca.pitch_first_assignment(
             ...         [1], 16, affix=affix, treatments=[-1],
@@ -4806,7 +4804,7 @@ class RestAffixSpecifier(object):
 
             Treats entire figure when pattern is none:
 
-            >>> affix = baca.RestAffixSpecifier(
+            >>> affix = baca.RestAffix(
             ...     prefix=[1],
             ...     suffix=[2],
             ... )
@@ -4865,7 +4863,7 @@ class RestAffixSpecifier(object):
 
             Treats entire figure (of only one segment) when pattern is none:
 
-            >>> affix = baca.RestAffixSpecifier(
+            >>> affix = baca.RestAffix(
             ...     prefix=[1],
             ...     suffix=[2],
             ... )
@@ -4912,7 +4910,7 @@ class RestAffixSpecifier(object):
 
             Treats first segment and last segment in figure:
 
-            >>> affix = baca.RestAffixSpecifier(
+            >>> affix = baca.RestAffix(
             ...     pattern=abjad.Pattern(indices=[0, -1]),
             ...     prefix=[1],
             ...     suffix=[2],
@@ -4974,7 +4972,7 @@ class RestAffixSpecifier(object):
 
             Treats every segment in figure:
 
-            >>> affix = baca.RestAffixSpecifier(
+            >>> affix = baca.RestAffix(
             ...     pattern=abjad.index_all(),
             ...     prefix=[1],
             ...     suffix=[2],
@@ -5044,7 +5042,7 @@ class RestAffixSpecifier(object):
 
         ..  container:: example
 
-            >>> affix = baca.RestAffixSpecifier(prefix=[3])
+            >>> affix = baca.RestAffix(prefix=[3])
             >>> stack = baca.Stack(
             ...     baca.pitch_first_assignment([1], 16, affix=affix),
             ...     rmakers.beam(),
@@ -5107,7 +5105,7 @@ class RestAffixSpecifier(object):
 
         ..  container:: example
 
-            >>> affix = baca.RestAffixSpecifier(suffix=[3])
+            >>> affix = baca.RestAffix(suffix=[3])
             >>> stack = baca.Stack(
             ...     baca.pitch_first_assignment([1], 16, affix=affix),
             ...     rmakers.beam(),
@@ -5553,20 +5551,18 @@ class PitchFirstRhythmMaker(object):
     def __init__(
         self,
         talea: rmakers.Talea,
-        acciaccatura: AcciaccaturaSpecifier = None,
-        affix: RestAffixSpecifier = None,
+        acciaccatura: Acciaccatura = None,
+        affix: RestAffix = None,
         signature: int = None,
         spelling: rmakers.Spelling = None,
         treatments: typing.Sequence = None,
     ):
         if acciaccatura is not None:
-            assert isinstance(acciaccatura, AcciaccaturaSpecifier), repr(
-                acciaccatura
-            )
+            assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
         self._acciaccatura = acciaccatura
         if affix is not None:
-            if not isinstance(affix, RestAffixSpecifier):
-                message = "must be rest affix specifier:\n"
+            if not isinstance(affix, RestAffix):
+                message = "must be rest affix:\n"
                 message += f"   {repr(affix)}"
                 raise Exception(message)
         self._affix = affix
@@ -5583,9 +5579,7 @@ class PitchFirstRhythmMaker(object):
             raise TypeError(f"must be talea: {talea!r}.")
         self._talea = talea
         if treatments is not None:
-            for treatment in treatments:
-                if not self._is_treatment(treatment):
-                    raise Exception(f"bad time treatment: {treatment!r}.")
+            self._check_treatments(treatments)
         self._treatments = treatments
 
     ### SPECIAL METHODS ###
@@ -5767,12 +5761,12 @@ class PitchFirstRhythmMaker(object):
         rest_prefix,
         rest_suffix,
         affix_skips_instead_of_rests,
-        increase_durations,
+        increase_monotonic,
     ):
         if rest_prefix:
             durations = [(_, talea.denominator) for _ in rest_prefix]
             maker = abjad.LeafMaker(
-                increase_monotonic=increase_durations,
+                increase_monotonic=increase_monotonic,
                 skips_instead_of_rests=affix_skips_instead_of_rests,
             )
             leaves_ = maker([None], durations)
@@ -5780,7 +5774,7 @@ class PitchFirstRhythmMaker(object):
         if rest_suffix:
             durations = [(_, talea.denominator) for _ in rest_suffix]
             maker = abjad.LeafMaker(
-                increase_monotonic=increase_durations,
+                increase_monotonic=increase_monotonic,
                 skips_instead_of_rests=affix_skips_instead_of_rests,
             )
             leaves_ = maker([None], durations)
@@ -5795,6 +5789,11 @@ class PitchFirstRhythmMaker(object):
         for key in state:
             value = state[key]
             setattr(self, key, value)
+
+    def _check_treatments(self, treatments):
+        for treatment in treatments:
+            if not self._is_treatment(treatment):
+                raise Exception(f"bad time treatment: {treatment!r}.")
 
     @staticmethod
     def _fix_rounding_error(durations, total_duration):
@@ -6026,8 +6025,8 @@ class PitchFirstRhythmMaker(object):
         self._next_segment += 1
         talea = self._get_talea()
         leaves = []
-        specifier = self._get_spelling_specifier()
-        increase_durations = specifier.increase_monotonic
+        spelling = self._get_spelling_specifier()
+        increase_monotonic = spelling.increase_monotonic
         current_selection = self._next_segment - 1
         treatment = self._get_treatments()[current_selection]
         if treatment is None:
@@ -6044,7 +6043,7 @@ class PitchFirstRhythmMaker(object):
             while talea[count] < 0:
                 self._next_attack += 1
                 duration = -talea[count]
-                maker = abjad.LeafMaker(increase_monotonic=increase_durations)
+                maker = abjad.LeafMaker(increase_monotonic=increase_monotonic)
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
                 count = self._next_attack
@@ -6064,7 +6063,7 @@ class PitchFirstRhythmMaker(object):
                     skips_instead_of_rests = True
                 pitch_expression = None
             maker = abjad.LeafMaker(
-                increase_monotonic=increase_durations,
+                increase_monotonic=increase_monotonic,
                 skips_instead_of_rests=skips_instead_of_rests,
             )
             leaves_ = maker([pitch_expression], [duration])
@@ -6073,7 +6072,7 @@ class PitchFirstRhythmMaker(object):
             while talea[count] < 0 and not count % len(talea) == 0:
                 self._next_attack += 1
                 duration = -talea[count]
-                maker = abjad.LeafMaker(increase_monotonic=increase_durations)
+                maker = abjad.LeafMaker(increase_monotonic=increase_monotonic)
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
                 count = self._next_attack
@@ -6083,7 +6082,7 @@ class PitchFirstRhythmMaker(object):
             rest_prefix,
             rest_suffix,
             affix_skips_instead_of_rests,
-            increase_durations,
+            increase_monotonic,
         )
         leaf_selection = abjad.select(leaves)
         if isinstance(treatment, int):
@@ -6167,7 +6166,7 @@ class PitchFirstRhythmMaker(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def acciaccatura(self) -> typing.Optional[AcciaccaturaSpecifier]:
+    def acciaccatura(self) -> typing.Optional[Acciaccatura]:
         r"""
         Gets acciaccatura specifier.
 
@@ -6224,42 +6223,42 @@ class PitchFirstRhythmMaker(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''16
                                 a'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             c'4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 bf'16
                                 fs''16
                                 e''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             ef''4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             bf'4
                         }
@@ -6320,55 +6319,55 @@ class PitchFirstRhythmMaker(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 bf'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             r4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 e''16
                                 ef''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             r4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''16
                                 a'16
                                 c'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             r4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 bf'16
                                 fs''16
                                 e''16
                                 ef''16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             r4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! AcciaccaturaSpecifier
+                                [                                                                        %! Acciaccatura
                                 g''16
                                 a'16
                                 c'16
                                 d'16
                                 bf'16
-                                ]                                                                        %! AcciaccaturaSpecifier
+                                ]                                                                        %! Acciaccatura
                             }
                             r4
                         }
@@ -6379,7 +6378,7 @@ class PitchFirstRhythmMaker(object):
         return self._acciaccatura
 
     @property
-    def affix(self) -> typing.Optional["RestAffixSpecifier"]:
+    def affix(self) -> typing.Optional["RestAffix"]:
         """
         Gets rest affix specifier.
         """
@@ -8145,6 +8144,11 @@ class PitchFirstAssignment(object):
         if thread is not None:
             thread = bool(thread)
         self._thread = thread
+
+    #        if 1 < len(rhythm_maker.treatments) and not thread:
+    #            message = "multiple treatments only make sense with thread:\n"
+    #            message += f"   {format(rhythm_maker)}"
+    #            raise Exception(message)
 
     ### SPECIAL METHODS ###
 
@@ -11080,11 +11084,11 @@ def lmr(
     right_cyclic: bool = None,
     right_length: int = None,
     right_reversed: bool = None,
-) -> LMRSpecifier:
+) -> LMR:
     """
     Makes LMR specifier.
     """
-    return LMRSpecifier(
+    return LMR(
         left_counts=left_counts,
         left_cyclic=left_cyclic,
         left_length=left_length,
@@ -11101,7 +11105,7 @@ def lmr(
 
 
 def nest(
-    treatments: typing.Sequence = None, *, lmr_specifier: LMRSpecifier = None
+    treatments: typing.Sequence = None, *, lmr_specifier: LMR = None
 ) -> Nest:
     r"""
     Nests music.
@@ -11184,21 +11188,21 @@ def pitch_first_assignment(
     counts: abjad.IntegerSequence,
     denominator: int,
     *,
-    acciaccatura=None,
-    affix: RestAffixSpecifier = None,
-    pattern=None,
+    acciaccatura: Acciaccatura = None,
+    affix: RestAffix = None,
+    pattern: abjad.Pattern = None,
     signature: int = None,
     spelling: rmakers.Spelling = None,
     thread: bool = None,
-    treatments=None,
+    treatments: typing.Sequence = None,
 ) -> PitchFirstAssignment:
     """
     Makes pitch-first assignment.
     """
     if acciaccatura is True:
-        acciaccatura = AcciaccaturaSpecifier()
-    elif isinstance(acciaccatura, LMRSpecifier):
-        acciaccatura = AcciaccaturaSpecifier(lmr_specifier=acciaccatura)
+        acciaccatura = Acciaccatura()
+    elif isinstance(acciaccatura, LMR):
+        acciaccatura = Acciaccatura(lmr_specifier=acciaccatura)
     return PitchFirstAssignment(
         PitchFirstRhythmMaker(
             rmakers.Talea(counts=counts, denominator=denominator),
@@ -11217,13 +11221,12 @@ def pitch_first_rmaker(
     counts: abjad.IntegerSequence,
     denominator: int,
     *,
-    acciaccatura=None,
-    affix: RestAffixSpecifier = None,
-    pattern=None,
+    acciaccatura: Acciaccatura = None,
+    affix: RestAffix = None,
+    pattern: abjad.Pattern = None,
     signature: int = None,
     spelling: rmakers.Spelling = None,
-    thread: bool = None,
-    treatments=None,
+    treatments: typing.Sequence = None,
 ) -> PitchFirstRhythmMaker:
     """
     Makes pitch-first assignment.
@@ -11236,13 +11239,12 @@ def pitch_first_rmaker(
         pattern=pattern,
         signature=signature,
         spelling=spelling,
-        thread=thread,
         treatments=treatments,
     )
     return assignment.rhythm_maker
 
 
-def rests_after(counts: typing.Sequence[int]) -> RestAffixSpecifier:
+def rests_after(counts: typing.Sequence[int]) -> RestAffix:
     r"""
     Makes rests after music.
 
@@ -11310,12 +11312,12 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffixSpecifier:
             >>
 
     """
-    return RestAffixSpecifier(suffix=counts)
+    return RestAffix(suffix=counts)
 
 
 def rests_around(
     prefix: typing.List[int], suffix: typing.List[int]
-) -> RestAffixSpecifier:
+) -> RestAffix:
     r"""
     Makes rests around music.
 
@@ -11384,10 +11386,10 @@ def rests_around(
             >>
 
     """
-    return RestAffixSpecifier(prefix=prefix, suffix=suffix)
+    return RestAffix(prefix=prefix, suffix=suffix)
 
 
-def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
+def rests_before(counts: typing.List[int]) -> RestAffix:
     r"""
     Makes rests before music.
 
@@ -11455,7 +11457,7 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
             >>
 
     """
-    return RestAffixSpecifier(prefix=counts)
+    return RestAffix(prefix=counts)
 
 
 def resume() -> Anchor:
@@ -11476,7 +11478,7 @@ def resume_after(remote_voice_name) -> Anchor:
     )
 
 
-def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
+def skips_after(counts: typing.List[int]) -> RestAffix:
     r"""
     Makes skips after music.
 
@@ -11544,12 +11546,12 @@ def skips_after(counts: typing.List[int]) -> RestAffixSpecifier:
             >>
 
     """
-    return RestAffixSpecifier(skips_instead_of_rests=True, suffix=counts)
+    return RestAffix(skips_instead_of_rests=True, suffix=counts)
 
 
 def skips_around(
     prefix: typing.List[int], suffix: typing.List[int]
-) -> RestAffixSpecifier:
+) -> RestAffix:
     r"""
     Makes skips around music.
 
@@ -11618,12 +11620,10 @@ def skips_around(
             >>
 
     """
-    return RestAffixSpecifier(
-        prefix=prefix, skips_instead_of_rests=True, suffix=suffix
-    )
+    return RestAffix(prefix=prefix, skips_instead_of_rests=True, suffix=suffix)
 
 
-def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
+def skips_before(counts: typing.List[int],) -> RestAffix:
     r"""
     Makes skips before music.
 
@@ -11691,4 +11691,4 @@ def skips_before(counts: typing.List[int],) -> RestAffixSpecifier:
             >>
 
     """
-    return RestAffixSpecifier(prefix=counts, skips_instead_of_rests=True)
+    return RestAffix(prefix=counts, skips_instead_of_rests=True)
