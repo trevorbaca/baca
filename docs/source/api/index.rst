@@ -555,7 +555,7 @@ indicators.Markup library.
    ~baca.mmaker.imbricate
    ~baca.mmaker.lmr
    ~baca.mmaker.nest
-   ~baca.mmaker.pitch_first
+   ~baca.mmaker.pitch_first_assignment
    ~baca.mmaker.pitch_first_rmaker
    ~baca.mmaker.rests_after
    ~baca.mmaker.rests_around

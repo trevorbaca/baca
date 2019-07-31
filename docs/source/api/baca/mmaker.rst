@@ -327,6 +327,10 @@ mmaker
       :nosignatures:
 
       __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
       left_counts
       left_cyclic
       left_length
@@ -348,6 +352,14 @@ mmaker
       :class: class-header
 
    .. automethod:: LMRSpecifier.__call__
+
+   .. automethod:: LMRSpecifier.__eq__
+
+   .. automethod:: LMRSpecifier.__format__
+
+   .. automethod:: LMRSpecifier.__hash__
+
+   .. automethod:: LMRSpecifier.__repr__
 
    .. raw:: html
 
@@ -648,7 +660,7 @@ mmaker
    ~imbricate
    ~lmr
    ~nest
-   ~pitch_first
+   ~pitch_first_assignment
    ~pitch_first_rmaker
    ~rests_after
    ~rests_around
@@ -675,7 +687,7 @@ mmaker
 
 .. autofunction:: nest
 
-.. autofunction:: pitch_first
+.. autofunction:: pitch_first_assignment
 
 .. autofunction:: pitch_first_rmaker
 

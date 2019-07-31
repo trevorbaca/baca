@@ -670,7 +670,7 @@ def dynamic(
         Attaches dynamic to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -738,7 +738,7 @@ def dynamic(
         Works with effort dynamics:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),

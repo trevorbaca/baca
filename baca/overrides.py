@@ -727,7 +727,7 @@ def beam_positions(
         Overrides beam positions on all leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -926,7 +926,7 @@ def dls_staff_padding(
         Overrides dynamic line spanner staff padding on all leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -1028,7 +1028,7 @@ def dls_up(
         Up-overrides dynamic line spanner direction on all leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -1201,7 +1201,7 @@ def dynamic_text_extra_offset(
         Overrides dynamic text extra offset on pitched leaf 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -2662,7 +2662,7 @@ def note_head_style_cross(
         Overrides note-head style on all pitched leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -2749,7 +2749,7 @@ def note_head_style_harmonic(
         Overrides note-head style on all PLTs:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3027,7 +3027,7 @@ def repeat_tie_down(
         Overrides repeat tie direction on pitched leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3174,7 +3174,7 @@ def repeat_tie_up(
         Overrides repeat tie direction on all leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3269,7 +3269,7 @@ def rest_down(
         Down-overrides direction of rests:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3379,7 +3379,7 @@ def rest_position(
         Overrides rest position:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3466,7 +3466,7 @@ def rest_transparent(
         Makes rests transparent:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3553,7 +3553,7 @@ def rest_up(
         Up-overrides rest direction:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3641,7 +3641,7 @@ def script_color(
         Overrides script color on all leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3738,7 +3738,7 @@ def script_down(
         Down-overrides script direction on all leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3836,7 +3836,7 @@ def script_extra_offset(
         Overrides script extra offset on leaf 1:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3968,7 +3968,7 @@ def script_up(
         Up-overrides script direction on all leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -4083,7 +4083,7 @@ def slur_down(
 
         >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -4176,7 +4176,7 @@ def slur_up(
 
         >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -4338,7 +4338,7 @@ def stem_color(
         Overrides stem color on pitched leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -4426,7 +4426,7 @@ def stem_down(
         Down-overrides stem direction pitched leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -4547,7 +4547,7 @@ def stem_up(
         Up-overrides stem direction on pitched leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -4654,7 +4654,7 @@ def sustain_pedal_staff_padding(
         Overrides sustain pedal staff padding on leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -4754,7 +4754,7 @@ def text_script_color(
         Overrides text script color on all leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -4878,7 +4878,7 @@ def text_script_down(
         Down-overrides text script direction on leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -5076,7 +5076,7 @@ def text_script_padding(
         Overrides text script padding on leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -5249,7 +5249,7 @@ def text_script_staff_padding(
         Overrides text script staff padding on leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -5373,7 +5373,7 @@ def text_script_up(
         Up-overrides text script direction on leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -5581,7 +5581,7 @@ def text_spanner_staff_padding(
         Overrides text spanner staff padding on all trimmed leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -5734,7 +5734,7 @@ def tie_down(
         Overrides tie direction on pitched leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -5822,7 +5822,7 @@ def tie_up(
         Overrides tie direction on pitched leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -5909,7 +5909,7 @@ def time_signature_extra_offset(
         Overrides time signature extra offset on leaf 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -6015,7 +6015,7 @@ def time_signature_transparent(
         Makes all time signatures transparent:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -6121,7 +6121,7 @@ def tuplet_bracket_down(
         Overrides tuplet bracket direction on leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -6209,7 +6209,7 @@ def tuplet_bracket_extra_offset(
         Overrides tuplet bracket extra offset on leaf 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -6350,7 +6350,7 @@ def tuplet_bracket_staff_padding(
         Overrides tuplet bracket staff padding on leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -6451,7 +6451,7 @@ def tuplet_bracket_up(
         Override tuplet bracket direction on leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -6556,7 +6556,7 @@ def tuplet_number_extra_offset(
         Overrides tuplet number extra offset on leaf 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),

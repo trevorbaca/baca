@@ -2383,7 +2383,7 @@ def color(selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
         Colors leaves:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -2460,7 +2460,7 @@ def color(selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
         Colors leaves in tuplet 1:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -2682,7 +2682,7 @@ def cross_staff(
         >>> score_template = baca.StringTrioScoreTemplate()
         >>> accumulator = baca.Accumulator(score_template=score_template)
         >>> commands = [
-        ...     baca.pitch_first([1], 8, signature=8),
+        ...     baca.pitch_first_assignment([1], 8, signature=8),
         ...     rmakers.beam(),
         ... ]
         >>> accumulator(
@@ -3005,7 +3005,7 @@ def dynamic_down(
         Attaches dynamic-down command to leaf 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3093,7 +3093,7 @@ def dynamic_up(
         Attaches dynamic-up command to leaf 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -4277,7 +4277,7 @@ def label(
         Labels pitch names:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -4373,7 +4373,7 @@ def markup(
         Attaches markup to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -4444,7 +4444,7 @@ def markup(
         Set ``literal=True`` to pass predefined markup commands:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),

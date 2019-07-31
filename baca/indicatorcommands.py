@@ -23,7 +23,7 @@ def accent(
         Attaches accent to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -109,7 +109,7 @@ def alternate_bow_strokes(
         Attaches alternate bow strokes to pitched heads (down-bow first):
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -185,7 +185,7 @@ def alternate_bow_strokes(
         Attaches alternate bow strokes to pitched heads (up-bow first):
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -261,7 +261,7 @@ def alternate_bow_strokes(
         Attaches alternate full bow strokes to pitched heads:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -362,7 +362,7 @@ def arpeggio(
         Attaches arpeggio to chord head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first([5, -3], 32),
+        ...     baca.pitch_first_assignment([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.arpeggio(),
         ... )
@@ -493,7 +493,7 @@ def clef(
         Attaches clef to leaf 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -579,7 +579,7 @@ def double_staccato(
         Attaches double-staccato to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -663,7 +663,7 @@ def down_arpeggio(
         Attaches down-arpeggio to chord head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first([5, -3], 32),
+        ...     baca.pitch_first_assignment([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.down_arpeggio(),
         ... )
@@ -750,7 +750,7 @@ def down_bow(
         Attaches down-bow to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -818,7 +818,7 @@ def down_bow(
         Attaches full down-bow to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -904,7 +904,7 @@ def espressivo(
         Attaches espressivo to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -989,7 +989,7 @@ def fermata(
         Attaches fermata to first leaf:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -1073,7 +1073,7 @@ def flageolet(
         Attaches flageolet to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -1299,7 +1299,7 @@ def laissez_vibrer(
         Attaches laissez vibrer to PLT tail 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -1399,7 +1399,7 @@ def long_fermata(
         Attaches long fermata to first leaf:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -1483,7 +1483,7 @@ def marcato(
         Attaches marcato to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -1741,7 +1741,7 @@ def parenthesize(
         Attaches parenthesize command to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -1858,7 +1858,7 @@ def repeat_tie(
         Attaches repeat-tie to pitched head 1:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -1948,7 +1948,7 @@ def short_fermata(
         Attaches short fermata to first leaf:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -2032,7 +2032,7 @@ def staccatissimo(
         Attaches staccatissimo to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -2116,7 +2116,7 @@ def staccato(
         Attaches staccato to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -2942,7 +2942,7 @@ def stem_tremolo(
         Attaches stem tremolo to pitched leaf 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3026,7 +3026,7 @@ def stop_on_string(
         Attaches stop-on-string to pitched head -1:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3133,7 +3133,7 @@ def stopped(
         Attaches stopped +-sign to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3215,7 +3215,7 @@ def tie(
         Attaches tie to pitched tail 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3300,7 +3300,7 @@ def tenuto(
         Attaches tenuto to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3399,7 +3399,7 @@ def up_arpeggio(
         Attaches up-arpeggios to chord head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first([5, -3], 32),
+        ...     baca.pitch_first_assignment([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.up_arpeggio(),
         ... )
@@ -3486,7 +3486,7 @@ def up_bow(
         Attaches up-bow to pitched head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -3572,7 +3572,7 @@ def very_long_fermata(
         Attaches very long fermata to first leaf:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first(
+        ...     baca.pitch_first_assignment(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
