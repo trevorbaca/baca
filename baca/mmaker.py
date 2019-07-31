@@ -47,7 +47,7 @@ class Stack(object):
         ...     baca.pitch_first_rmaker(
         ...         [1, 1, 2],
         ...         8,
-        ...         treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
+        ...         treatments=[(1, 4), (3, 8)],
         ...     ),
         ...     rmakers.denominator((1, 16)),
         ...     rmakers.beam(),
@@ -6391,7 +6391,7 @@ class Nesting(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_lmr_specifier", "_time_treatments")
+    __slots__ = ("_lmr_specifier", "_treatments")
 
     ### INITIALIZER ###
 
@@ -6406,10 +6406,10 @@ class Nesting(object):
         self._lmr_specifier = lmr_specifier
         if treatments is not None:
             assert isinstance(treatments, (list, tuple))
-            is_time_treatment = PitchFirstRhythmMaker._is_time_treatment
-            for time_treatment in treatments:
-                assert is_time_treatment(time_treatment), repr(time_treatment)
-        self._time_treatments = treatments
+            is_treatment = PitchFirstRhythmMaker._is_treatment
+            for treatment in treatments:
+                assert is_treatment(treatment), repr(treatment)
+        self._treatments = treatments
 
     ### SPECIAL METHODS ###
 
@@ -6503,7 +6503,7 @@ class Nesting(object):
         """
         if selections is None:
             return None
-        treatments = self._get_time_treatments()
+        treatments = self._get_treatments()
         if treatments is None:
             return selections
         tuplets = []
@@ -6526,12 +6526,12 @@ class Nesting(object):
             assert isinstance(tuplet_selection, prototype), repr(
                 tuplet_selection
             )
-            time_treatment = treatments[i]
-            if time_treatment is None:
+            treatment = treatments[i]
+            if treatment is None:
                 selections_.append(tuplet_selection)
             else:
                 nested_tuplet = self._make_nested_tuplet(
-                    tuplet_selection, time_treatment
+                    tuplet_selection, treatment
                 )
                 selection_ = abjad.Selection([nested_tuplet])
                 selections_.append(selection_)
@@ -6541,34 +6541,34 @@ class Nesting(object):
 
     ### PRIVATE METHODS ###
 
-    def _get_time_treatments(self):
+    def _get_treatments(self):
         if self.treatments:
             return abjad.CyclicTuple(self.treatments)
 
     @staticmethod
-    def _make_nested_tuplet(tuplet_selection, time_treatment):
+    def _make_nested_tuplet(tuplet_selection, treatment):
         assert isinstance(tuplet_selection, abjad.Selection)
         for tuplet in tuplet_selection:
             assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
-        if isinstance(time_treatment, str):
-            addendum = abjad.Duration(time_treatment)
+        if isinstance(treatment, str):
+            addendum = abjad.Duration(treatment)
             contents_duration = abjad.inspect(tuplet_selection).duration()
             target_duration = contents_duration + addendum
             multiplier = target_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, [])
             abjad.mutate(tuplet_selection).wrap(tuplet)
-        elif time_treatment.__class__ is abjad.Multiplier:
-            # tuplet = abjad.Tuplet(time_treatment, tuplet_selection)
-            tuplet = abjad.Tuplet(time_treatment, [])
+        elif treatment.__class__ is abjad.Multiplier:
+            # tuplet = abjad.Tuplet(treatment, tuplet_selection)
+            tuplet = abjad.Tuplet(treatment, [])
             abjad.mutate(tuplet_selection).wrap(tuplet)
-        elif time_treatment.__class__ is abjad.Duration:
-            target_duration = time_treatment
+        elif treatment.__class__ is abjad.Duration:
+            target_duration = treatment
             contents_duration = abjad.inspect(tuplet_selection).duration()
             multiplier = target_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, [])
             abjad.mutate(tuplet_selection).wrap(tuplet)
         else:
-            raise Exception(f"bad time treatment: {time_treatment!r}.")
+            raise Exception(f"bad time treatment: {treatment!r}.")
         return tuplet
 
     ### PUBLIC PROPERTIES ###
@@ -6585,7 +6585,7 @@ class Nesting(object):
         """
         Gets time treatments.
         """
-        return self._time_treatments
+        return self._treatments
 
 
 class PitchFirstAssignment(object):
@@ -7248,7 +7248,7 @@ class PitchFirstRhythmMaker(object):
         "_spelling",
         "_state",
         "_talea",
-        "_time_treatments",
+        "_treatments",
     )
 
     _state_variables = ("_next_attack", "_next_segment")
@@ -7290,10 +7290,10 @@ class PitchFirstRhythmMaker(object):
             raise TypeError(f"must be talea: {talea!r}.")
         self._talea = talea
         if treatments is not None:
-            for time_treatment in treatments:
-                if not self._is_time_treatment(time_treatment):
-                    raise Exception(f"bad time treatment: {time_treatment!r}.")
-        self._time_treatments = treatments
+            for treatment in treatments:
+                if not self._is_treatment(treatment):
+                    raise Exception(f"bad time treatment: {treatment!r}.")
+        self._treatments = treatments
 
     ### SPECIAL METHODS ###
 
@@ -7540,18 +7540,20 @@ class PitchFirstRhythmMaker(object):
             return self.talea
         return rmakers.Talea()
 
-    def _get_time_treatments(self):
+    def _get_treatments(self):
         if not self.treatments:
             return abjad.CyclicTuple([0])
         return abjad.CyclicTuple(self.treatments)
 
     @staticmethod
-    def _is_time_treatment(argument):
+    def _is_treatment(argument):
         if argument is None:
             return True
         elif isinstance(argument, int):
             return True
         elif isinstance(argument, str):
+            return True
+        elif isinstance(argument, tuple) and len(argument) == 2:
             return True
         elif isinstance(argument, abjad.Ratio):
             return True
@@ -7734,9 +7736,9 @@ class PitchFirstRhythmMaker(object):
         specifier = self._get_spelling_specifier()
         increase_durations = specifier.increase_monotonic
         current_selection = self._next_segment - 1
-        time_treatment = self._get_time_treatments()[current_selection]
-        if time_treatment is None:
-            time_treatment = 0
+        treatment = self._get_treatments()[current_selection]
+        if treatment is None:
+            treatment = 0
         grace_containers = None
         if acciaccatura is not None:
             grace_containers, segment = acciaccatura(segment)
@@ -7791,27 +7793,38 @@ class PitchFirstRhythmMaker(object):
             increase_durations,
         )
         leaf_selection = abjad.select(leaves)
-        if isinstance(time_treatment, int):
+        if isinstance(treatment, int):
             tuplet = self._make_tuplet_with_extra_count(
-                leaf_selection, time_treatment, talea.denominator
+                leaf_selection, treatment, talea.denominator
             )
-        elif time_treatment in ("accel", "rit"):
-            tuplet = self._make_accelerando(leaf_selection, time_treatment)
-        elif isinstance(time_treatment, abjad.Ratio):
-            numerator, denominator = time_treatment.numbers
+        elif treatment in ("accel", "rit"):
+            tuplet = self._make_accelerando(leaf_selection, treatment)
+        elif isinstance(treatment, abjad.Ratio):
+            numerator, denominator = treatment.numbers
             multiplier = abjad.NonreducedFraction((denominator, numerator))
             tuplet = abjad.Tuplet(multiplier, leaf_selection)
-        elif isinstance(time_treatment, abjad.Multiplier):
-            tuplet = abjad.Tuplet(time_treatment, leaf_selection)
-        elif time_treatment.__class__ is abjad.Duration:
-            tuplet_duration = time_treatment
+        elif isinstance(treatment, str) and ":" in treatment:
+            numerator, denominator = treatment.split(":")
+            numerator, denominator = int(numerator), int(denominator)
+            tuplet = abjad.Tuplet((denominator, numerator), leaf_selection)
+        elif isinstance(treatment, abjad.Multiplier):
+            tuplet = abjad.Tuplet(treatment, leaf_selection)
+        elif treatment.__class__ is abjad.Duration:
+            tuplet_duration = treatment
+            contents_duration = abjad.inspect(leaf_selection).duration()
+            multiplier = tuplet_duration / contents_duration
+            tuplet = abjad.Tuplet(multiplier, leaf_selection)
+            if not tuplet.multiplier.normalized():
+                tuplet.normalize_multiplier()
+        elif isinstance(treatment, tuple) and len(treatment) == 2:
+            tuplet_duration = abjad.Duration(treatment)
             contents_duration = abjad.inspect(leaf_selection).duration()
             multiplier = tuplet_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, leaf_selection)
             if not tuplet.multiplier.normalized():
                 tuplet.normalize_multiplier()
         else:
-            raise Exception(f"bad time treatment: {time_treatment!r}.")
+            raise Exception(f"bad time treatment: {treatment!r}.")
         assert isinstance(tuplet, abjad.Tuplet)
         if grace_containers is not None:
             logical_ties = abjad.iterate(tuplet).logical_ties()
@@ -9003,7 +9016,9 @@ class PitchFirstRhythmMaker(object):
             Accelerandi followed by ritardandi:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([1], 16, treatments=["accel", "rit"]),
+            ...     baca.pitch_first_rmaker(
+            ...         [1], 16, treatments=["accel", "rit"]
+            ...     ),
             ...     rmakers.beam(),
             ... )
 
@@ -9246,7 +9261,7 @@ class PitchFirstRhythmMaker(object):
             ...     baca.pitch_first_rmaker(
             ...         [1],
             ...         16,
-            ...         treatments=['accel', -2, 'rit'],
+            ...         treatments=["accel", -2, "rit"],
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -9514,7 +9529,7 @@ class PitchFirstRhythmMaker(object):
             ...     baca.pitch_first_assignment(
             ...         [1],
             ...         8,
-            ...         treatments=[abjad.Ratio((3, 2))],
+            ...         treatments=["3:2"],
             ...     ),
             ...     rmakers.beam(),
             ... )
@@ -9609,7 +9624,7 @@ class PitchFirstRhythmMaker(object):
             ...     baca.pitch_first_rmaker(
             ...         [1],
             ...         8,
-            ...         treatments=[abjad.Duration(1, 4)],
+            ...         treatments=[(1, 4)],
             ...     ),
             ...     rmakers.denominator((1, 16)),
             ...     rmakers.beam(),
@@ -9702,7 +9717,7 @@ class PitchFirstRhythmMaker(object):
             ...     baca.pitch_first_rmaker(
             ...         [1, 1, 2],
             ...         8,
-            ...         treatments=[abjad.Duration(1, 4), abjad.Duration(3, 8)],
+            ...         treatments=[(1, 4), (3, 8)],
             ...     ),
             ...     rmakers.denominator((1, 16)),
             ...     rmakers.beam(),
@@ -9802,7 +9817,7 @@ class PitchFirstRhythmMaker(object):
         Time treatments defined equal to integers; positive multipliers;
         positive durations; and the strings ``'accel'`` and ``'rit'``.
         """
-        return self._time_treatments
+        return self._treatments
 
 
 class RestAffixSpecifier(object):
@@ -9818,7 +9833,9 @@ class RestAffixSpecifier(object):
         ...     suffix=[3],
         ... )
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment([1, -1], 16, affix=affix, treatments=[1]),
+        ...     baca.pitch_first_assignment(
+        ...         [1, -1], 16, affix=affix, treatments=[1]
+        ...     ),
         ...     rmakers.beam(),
         ... )
 
@@ -9883,7 +9900,9 @@ class RestAffixSpecifier(object):
         ...     suffix=[3],
         ... )
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment([-1, 1], 16, affix=affix, treatments=[1]),
+        ...     baca.pitch_first_assignment(
+        ...         [-1, 1], 16, affix=affix, treatments=[1]
+        ...     ),
         ...     rmakers.beam(),
         ... )
         >>> selection = stack(collections)
@@ -9994,7 +10013,9 @@ class RestAffixSpecifier(object):
 
             >>> affix = baca.RestAffixSpecifier(prefix=[1], suffix=[1])
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment([1], 16, affix=affix, treatments=[-1]),
+            ...     baca.pitch_first_assignment(
+            ...         [1], 16, affix=affix, treatments=[-1],
+            ...     ),
             ...     rmakers.beam(),
             ... )
 
@@ -10101,7 +10122,9 @@ class RestAffixSpecifier(object):
             ...     suffix=[2],
             ... )
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment([1], 16, affix=affix, treatments=[1]),
+            ...     baca.pitch_first_assignment(
+            ...         [1], 16, affix=affix, treatments=[1]
+            ...     ),
             ...     rmakers.beam(),
             ... )
 
@@ -10158,7 +10181,9 @@ class RestAffixSpecifier(object):
             ...     suffix=[2],
             ... )
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment([1], 16, affix=affix, treatments=[1]),
+            ...     baca.pitch_first_assignment(
+            ...         [1], 16, affix=affix, treatments=[1]
+            ...     ),
             ...     rmakers.beam(),
             ... )
 
@@ -10204,7 +10229,9 @@ class RestAffixSpecifier(object):
             ...     suffix=[2],
             ... )
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment([1], 16, affix=affix, treatments=[1]),
+            ...     baca.pitch_first_assignment(
+            ...         [1], 16, affix=affix, treatments=[1]
+            ...     ),
             ...     rmakers.beam(),
             ... )
 
@@ -10264,7 +10291,9 @@ class RestAffixSpecifier(object):
             ...     suffix=[2],
             ... )
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment([1], 16, affix=affix, treatments=[1]),
+            ...     baca.pitch_first_assignment(
+            ...         [1], 16, affix=affix, treatments=[1]
+            ...     ),
             ...     rmakers.beam(),
             ... )
 
