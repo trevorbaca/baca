@@ -2056,14 +2056,14 @@ class AcciaccaturaSpecifier(object):
         return self._lmr_specifier
 
 
-class AnchorSpecifier(object):
+class Anchor(object):
     """
     Anchor specifier.
 
     ..  container:: example
 
-        >>> baca.AnchorSpecifier()
-        AnchorSpecifier()
+        >>> baca.Anchor()
+        Anchor()
 
     """
 
@@ -2235,10 +2235,10 @@ class Imbrication(object):
     __slots__ = (
         "_allow_unused_pitches",
         "_by_pitch_class",
+        "_commands",
         "_hocket",
         "_segment",
         "_selector",
-        "_specifiers",
         "_truncate_ties",
         "_voice_name",
     )
@@ -2249,7 +2249,7 @@ class Imbrication(object):
         self,
         voice_name: str,
         segment: typing.List[int] = None,
-        *specifiers,
+        *commands,
         allow_unused_pitches: bool = None,
         by_pitch_class: bool = None,
         hocket: bool = None,
@@ -2261,7 +2261,7 @@ class Imbrication(object):
         if segment is not None:
             assert isinstance(segment, list), repr(segment)
         self._segment = segment
-        self._specifiers = specifiers
+        self._commands = commands
         if allow_unused_pitches is not None:
             allow_unused_pitches = bool(allow_unused_pitches)
         self._allow_unused_pitches = allow_unused_pitches
@@ -2361,7 +2361,7 @@ class Imbrication(object):
             current, total = cursor.position - 1, len(cursor)
             message = f"{cursor!r} used only {current} of {total} pitches."
             raise Exception(message)
-        self._apply_specifiers(container)
+        self._call_commands(container)
         selection = abjad.select(container)
         if not self.hocket:
             pleaves = classes.Selection(container).pleaves()
@@ -2372,17 +2372,17 @@ class Imbrication(object):
 
     ### PRIVATE METHODS ###
 
-    def _apply_specifiers(self, container):
+    def _call_commands(self, container):
         assert isinstance(container, abjad.Container), repr(container)
         nested_selections = None
-        specifiers = self.specifiers or []
+        commands = self.commands or []
         selections = container[:]
-        for specifier in specifiers:
-            if isinstance(specifier, PitchFirstAssignment):
+        for command in commands:
+            if isinstance(command, PitchFirstAssignment):
                 continue
-            if isinstance(specifier, rhythmcommands.RhythmCommand):
+            if isinstance(command, rhythmcommands.RhythmCommand):
                 continue
-            if isinstance(specifier, Imbrication):
+            if isinstance(command, Imbrication):
                 continue
             prototype = (
                 rmakers.BeamCommand,
@@ -2390,12 +2390,12 @@ class Imbrication(object):
                 rmakers.BeamGroupsCommand,
                 rmakers.UnbeamCommand,
             )
-            if isinstance(specifier, prototype):
+            if isinstance(command, prototype):
                 rmakers.unbeam()(selections)
-            if isinstance(specifier, Nesting):
-                nested_selections = specifier(selections)
+            if isinstance(command, Nest):
+                nested_selections = command(selections)
             else:
-                specifier(selections)
+                command(selections)
         if nested_selections is not None:
             return nested_selections
         return selections
@@ -2445,7 +2445,7 @@ class Imbrication(object):
     @property
     def allow_unused_pitches(self) -> typing.Optional[bool]:
         r"""
-        Is true when specifier allows unused pitches.
+        Is true when imbrication allows unused pitches.
 
         ..  container:: example
 
@@ -2739,14 +2739,21 @@ class Imbrication(object):
     @property
     def by_pitch_class(self) -> typing.Optional[bool]:
         """
-        Is true when specifier matches on pitch-class rather than pitch.
+        Is true when imbrication matches on pitch-class rather than pitch.
         """
         return self._by_pitch_class
 
     @property
+    def commands(self) -> typing.List:
+        """
+        Gets commands.
+        """
+        return list(self._commands)
+
+    @property
     def hocket(self) -> typing.Optional[bool]:
         r"""
-        Is true when specifier hockets voices.
+        Is true when imbrication hockets voices.
 
         ..  container:: example
 
@@ -3388,16 +3395,9 @@ class Imbrication(object):
         return self._selector
 
     @property
-    def specifiers(self) -> typing.List:
-        """
-        Gets specifiers.
-        """
-        return list(self._specifiers)
-
-    @property
     def truncate_ties(self) -> typing.Optional[bool]:
         r"""
-        Is true when specifier truncates ties.
+        Is true when imbrication truncates ties.
 
         ..  container:: example
 
@@ -3756,7 +3756,7 @@ class Accumulator(object):
         voice_name: str,
         collections: typing.Iterable,
         *commands,
-        anchor: AnchorSpecifier = None,
+        anchor: Anchor = None,
         figure_name: str = None,
         hide_time_signature: bool = None,
         signature: int = None,
@@ -4131,14 +4131,14 @@ class Contribution(object):
     def __init__(
         self,
         *,
-        anchor: AnchorSpecifier = None,
+        anchor: Anchor = None,
         figure_name: str = None,
         hide_time_signature: bool = None,
         time_signature: abjad.TimeSignature = None,
         voice_to_selection: typing.Dict[str, abjad.Selection] = None,
     ):
-        if anchor is not None and not isinstance(anchor, AnchorSpecifier):
-            raise TypeError(f"anchor specifier only: {anchor!r}.")
+        if anchor is not None and not isinstance(anchor, Anchor):
+            raise TypeError(f"anchor only: {anchor!r}.")
         self._anchor = anchor
         if figure_name is not None:
             figure_name = str(figure_name)
@@ -4179,11 +4179,9 @@ class Contribution(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def anchor(self):
+    def anchor(self) -> typing.Optional[Anchor]:
         """
         Gets anchor.
-
-        Returns anchor specifier or none.
         """
         return self._anchor
 
@@ -4228,9 +4226,9 @@ class Contribution(object):
         return self._voice_to_selection
 
 
-class Nesting(object):
+class Nest(object):
     r"""
-    Nesting command.
+    Nest command.
 
     ..  container:: example
 
@@ -8136,7 +8134,7 @@ class PitchFirstAssignment(object):
 
     def __init__(
         self,
-        rhythm_maker: "PitchFirstRhythmMaker",
+        rhythm_maker: PitchFirstRhythmMaker,
         *,
         pattern=None,
         thread: bool = None,
@@ -8394,13 +8392,13 @@ def anchor(
     remote_voice_name: str,
     remote_selector: abjad.SelectorTyping = None,
     local_selector: abjad.SelectorTyping = None,
-) -> AnchorSpecifier:
+) -> Anchor:
     """
     Anchors music in this figure (filtered by ``local_selector``) to
     start offset of ``remote_voice_name`` (filtered by
     ``remote_selector``).
     """
-    return AnchorSpecifier(
+    return Anchor(
         local_selector=local_selector,
         remote_selector=remote_selector,
         remote_voice_name=remote_voice_name,
@@ -8411,12 +8409,12 @@ def anchor_after(
     remote_voice_name: str,
     remote_selector: abjad.SelectorTyping = None,
     local_selector: abjad.SelectorTyping = None,
-) -> AnchorSpecifier:
+) -> Anchor:
     """
     Anchors music in this figure (filtered by ``local_selector``) to
     stop offset of ``remote_voice_name`` (filtered by ``remote_selector``).
     """
-    return AnchorSpecifier(
+    return Anchor(
         local_selector=local_selector,
         remote_selector=remote_selector,
         remote_voice_name=remote_voice_name,
@@ -8424,13 +8422,13 @@ def anchor_after(
     )
 
 
-def anchor_to_figure(figure_name: str) -> AnchorSpecifier:
+def anchor_to_figure(figure_name: str) -> Anchor:
     """
     Anchors music in this figure to start of ``figure_name``.
 
     :param figure_name: figure name.
     """
-    return AnchorSpecifier(figure_name=figure_name)
+    return Anchor(figure_name=figure_name)
 
 
 def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
@@ -11104,7 +11102,7 @@ def lmr(
 
 def nest(
     treatments: typing.Sequence = None, *, lmr_specifier: LMRSpecifier = None
-) -> Nesting:
+) -> Nest:
     r"""
     Nests music.
 
@@ -11179,7 +11177,7 @@ def nest(
     """
     if not isinstance(treatments, list):
         treatments = [treatments]
-    return Nesting(lmr_specifier=lmr_specifier, treatments=treatments)
+    return Nest(lmr_specifier=lmr_specifier, treatments=treatments)
 
 
 def pitch_first_assignment(
@@ -11460,18 +11458,18 @@ def rests_before(counts: typing.List[int]) -> RestAffixSpecifier:
     return RestAffixSpecifier(prefix=counts)
 
 
-def resume() -> AnchorSpecifier:
+def resume() -> Anchor:
     """
     Resumes music at next offset across all voices in score.
     """
-    return AnchorSpecifier()
+    return Anchor()
 
 
-def resume_after(remote_voice_name) -> AnchorSpecifier:
+def resume_after(remote_voice_name) -> Anchor:
     """
     Resumes music after remote selection.
     """
-    return AnchorSpecifier(
+    return Anchor(
         remote_selector="baca.leaf(-1)",
         remote_voice_name=remote_voice_name,
         use_remote_stop_offset=True,

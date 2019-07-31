@@ -526,12 +526,12 @@ indicators.Markup library.
 
    ~baca.mmaker.AcciaccaturaSpecifier
    ~baca.mmaker.Accumulator
-   ~baca.mmaker.AnchorSpecifier
+   ~baca.mmaker.Anchor
    ~baca.mmaker.Coat
    ~baca.mmaker.Contribution
    ~baca.mmaker.Imbrication
    ~baca.mmaker.LMRSpecifier
-   ~baca.mmaker.Nesting
+   ~baca.mmaker.Nest
    ~baca.mmaker.PitchFirstAssignment
    ~baca.mmaker.PitchFirstRhythmMaker
    ~baca.mmaker.RestAffixSpecifier

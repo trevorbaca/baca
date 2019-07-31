@@ -24,12 +24,12 @@ mmaker
 
    ~AcciaccaturaSpecifier
    ~Accumulator
-   ~AnchorSpecifier
+   ~Anchor
    ~Coat
    ~Contribution
    ~Imbrication
    ~LMRSpecifier
-   ~Nesting
+   ~Nest
    ~PitchFirstAssignment
    ~PitchFirstRhythmMaker
    ~RestAffixSpecifier
@@ -132,7 +132,7 @@ mmaker
 
    .. autoattribute:: Accumulator.time_signatures
 
-.. autoclass:: AnchorSpecifier
+.. autoclass:: Anchor
 
    .. raw:: html
 
@@ -161,13 +161,13 @@ mmaker
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: AnchorSpecifier.__eq__
+   .. automethod:: Anchor.__eq__
 
-   .. automethod:: AnchorSpecifier.__format__
+   .. automethod:: Anchor.__format__
 
-   .. automethod:: AnchorSpecifier.__hash__
+   .. automethod:: Anchor.__hash__
 
-   .. automethod:: AnchorSpecifier.__repr__
+   .. automethod:: Anchor.__repr__
 
    .. raw:: html
 
@@ -176,15 +176,15 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: AnchorSpecifier.figure_name
+   .. autoattribute:: Anchor.figure_name
 
-   .. autoattribute:: AnchorSpecifier.local_selector
+   .. autoattribute:: Anchor.local_selector
 
-   .. autoattribute:: AnchorSpecifier.remote_selector
+   .. autoattribute:: Anchor.remote_selector
 
-   .. autoattribute:: AnchorSpecifier.remote_voice_name
+   .. autoattribute:: Anchor.remote_voice_name
 
-   .. autoattribute:: AnchorSpecifier.use_remote_stop_offset
+   .. autoattribute:: Anchor.use_remote_stop_offset
 
 .. autoclass:: Coat
 
@@ -275,10 +275,10 @@ mmaker
       __call__
       allow_unused_pitches
       by_pitch_class
+      commands
       hocket
       segment
       selector
-      specifiers
       truncate_ties
       voice_name
 
@@ -302,13 +302,13 @@ mmaker
 
    .. autoattribute:: Imbrication.by_pitch_class
 
+   .. autoattribute:: Imbrication.commands
+
    .. autoattribute:: Imbrication.hocket
 
    .. autoattribute:: Imbrication.segment
 
    .. autoattribute:: Imbrication.selector
-
-   .. autoattribute:: Imbrication.specifiers
 
    .. autoattribute:: Imbrication.truncate_ties
 
@@ -392,7 +392,7 @@ mmaker
 
    .. autoattribute:: LMRSpecifier.right_reversed
 
-.. autoclass:: Nesting
+.. autoclass:: Nest
 
    .. raw:: html
 
@@ -415,7 +415,7 @@ mmaker
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: Nesting.__call__
+   .. automethod:: Nest.__call__
 
    .. raw:: html
 
@@ -424,9 +424,9 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: Nesting.lmr_specifier
+   .. autoattribute:: Nest.lmr_specifier
 
-   .. autoattribute:: Nesting.treatments
+   .. autoattribute:: Nest.treatments
 
 .. autoclass:: PitchFirstAssignment
 
