@@ -10732,6 +10732,17 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
     return Coat(pitch)
 
 
+def extend_beam(
+    selector: abjad.SelectorTyping = "baca.leaf(-1)"
+) -> commands.IndicatorCommand:
+    """
+    Attaches RIGHT_BROKEN_BEAM to selector output.
+    """
+    return commands.IndicatorCommand(
+        indicators=[abjad.tags.RIGHT_BROKEN_BEAM], selector=selector
+    )
+
+
 def imbricate(
     voice_name: str,
     segment: typing.List,

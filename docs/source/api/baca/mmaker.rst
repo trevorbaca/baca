@@ -647,6 +647,7 @@ mmaker
    ~anchor_after
    ~anchor_to_figure
    ~coat
+   ~extend_beam
    ~imbricate
    ~lmr
    ~nest
@@ -668,6 +669,8 @@ mmaker
 .. autofunction:: anchor_to_figure
 
 .. autofunction:: coat
+
+.. autofunction:: extend_beam
 
 .. autofunction:: imbricate
 

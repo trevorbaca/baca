@@ -1528,7 +1528,10 @@ class IndicatorCommand(scoping.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        for i, leaf in enumerate(classes.Selection(argument).leaves()):
+        leaves = classes.Selection(argument).leaves(
+            do_not_iterate_grace_containers=True
+        )
+        for i, leaf in enumerate(leaves):
             if self.predicate and not self.predicate(leaf):
                 continue
             indicators = self.indicators[i]

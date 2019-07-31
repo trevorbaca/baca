@@ -2171,8 +2171,9 @@ class SegmentMaker(abjad.SegmentMaker):
     @staticmethod
     def _extend_beam(leaf):
         if not abjad.inspect(leaf).has_indicator(abjad.StopBeam):
-            voice = abjad.inspect(leaf).parentage().get(abjad.Voice)
-            message = f"leaf {leaf!s} in {voice.name} has no StopBeam."
+            parentage = abjad.inspect(leaf).parentage(grace_notes=True)
+            voice = parentage.get(abjad.Voice)
+            message = f"{leaf!s} in {voice.name} has no StopBeam."
             raise Exception(message)
         abjad.detach(abjad.StopBeam, leaf)
         if not abjad.inspect(leaf).has_indicator(abjad.StartBeam):
@@ -2184,9 +2185,10 @@ class SegmentMaker(abjad.SegmentMaker):
         while True:
             next_leaf = abjad.inspect(current_leaf).leaf(1)
             if next_leaf is None:
-                voice = (
-                    abjad.inspect(current_leaf).parentage().get(abjad.Voice)
+                parentage = abjad.inspect(current_leaf).parentage(
+                    grace_notes=True
                 )
+                voice = parentage.get(abjad.Voice)
                 message = f"no leaf follows {current_leaf!s} in {voice.name};"
                 message += "\n\tDo not set extend_beam=True on last figure."
                 raise Exception(message)

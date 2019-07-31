@@ -551,6 +551,7 @@ indicators.Markup library.
    ~baca.mmaker.anchor_after
    ~baca.mmaker.anchor_to_figure
    ~baca.mmaker.coat
+   ~baca.mmaker.extend_beam
    ~baca.mmaker.imbricate
    ~baca.mmaker.lmr
    ~baca.mmaker.nest
