@@ -5800,70 +5800,43 @@ class Accumulator(object):
     def __call__(
         self,
         voice_name: str,
-        collections: typing.Union[
-            list, str, abjad.Segment, pitchclasses.CollectionList
-        ],
-        *specifiers,
-        **keywords,
+        collections: typing.Iterable,
+        *commands,
+        anchor: AnchorSpecifier = None,
+        figure_name: str = None,
+        hide_time_signature: bool = None,
+        signature: int = None,
     ) -> None:
         r"""
         Calls music-accumulator.
         """
-        specifiers = specifiers or ()
-        specifiers_list = list(specifiers)
-        voice_name = self.score_template.voice_abbreviations.get(
-            voice_name, voice_name
-        )
-        for specifier in specifiers_list:
-            if isinstance(specifier, Imbrication):
-                voice_name_ = self.score_template.voice_abbreviations.get(
-                    specifier.voice_name, specifier.voice_name
-                )
-                specifier._voice_name = voice_name_
-            else:
-                assert not hasattr(specifier, "voice_name"), repr(specifier)
-                assert not hasattr(specifier, "remote_voice_name"), repr(
-                    specifier
-                )
-        anchor = keywords.pop("anchor", None)
+        voice_name = self._abbreviation(voice_name)
+        self._check_collections(collections)
+        commands_ = list(commands)
+        for command in commands_:
+            if isinstance(command, Imbrication):
+                voice_name_ = self._abbreviation(command.voice_name)
+                command._voice_name = voice_name_
         if anchor is not None:
-            voice_name_ = self.score_template.voice_abbreviations.get(
-                anchor.remote_voice_name, anchor.remote_voice_name
-            )
+            voice_name_ = self._abbreviation(anchor.remote_voice_name)
             anchor._remote_voice_name = voice_name_
-        keywords["figure_index"] = self._figure_index
-        hide_time_signature = keywords.pop("hide_time_signature", None)
-        commands = list(specifiers_list)
-        prototype = (
-            list,
-            str,
-            abjad.Segment,
-            abjad.Sequence,
-            abjad.Set,
-            pitchclasses.CollectionList,
-        )
-        if not isinstance(collections, prototype):
-            message = "collections must be coerceable:\n"
-            message += f"   {format(collections)}"
-            raise Exception(collections)
-        assignments = []
         if isinstance(collections, str):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
-        elif all(isinstance(_, abjad.Rest) for _ in collections):
+        elif all(isinstance(_, abjad.Component) for _ in collections):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
         else:
-            commands_ = []
-            for command in commands:
+            assignments, commands__ = [], []
+            for command in commands_:
                 if isinstance(command, PitchFirstAssignment):
                     assignments.append(command)
                 elif isinstance(command, PitchFirstRhythmMaker):
                     assignment = PitchFirstAssignment(command)
                     assignments.append(assignment)
                 else:
-                    commands_.append(command)
-            commands = commands_
+                    commands__.append(command)
+            commands_ = commands__
             if not assignments:
                 raise Exception("must provide pitch-first assignment.")
             # TODO: activate:
@@ -5880,18 +5853,16 @@ class Accumulator(object):
                 assignment(collections=collections, selections=selections)
         container = abjad.Container(selections)
         imbricated_selections = {}
-        for command in commands:
+        for command in commands_:
             if isinstance(command, Imbrication):
                 imbricated_selections.update(command(container))
             else:
                 command(selections)
-        figure_name = keywords.pop("figure_name", None)
         if figure_name is not None:
             figure_name = str(figure_name)
             self._label_figure_name_(container, figure_name)
         selection = abjad.select([container])
         duration = abjad.inspect(selection).duration()
-        signature = keywords.get("signature", None)
         if signature is None and assignments:
             primary_rhythm_maker = assignments[0].rhythm_maker
             signature = primary_rhythm_maker.signature
@@ -5915,6 +5886,11 @@ class Accumulator(object):
         self._figure_index += 1
 
     ### PRIVATE METHODS ###
+
+    def _abbreviation(self, voice_name):
+        return self.score_template.voice_abbreviations.get(
+            voice_name, voice_name
+        )
 
     def _cache_figure_name(self, contribution):
         if contribution.figure_name is None:
@@ -5956,6 +5932,21 @@ class Accumulator(object):
             )
         ):
             self.time_signatures.append(contribution.time_signature)
+
+    @staticmethod
+    def _check_collections(collections):
+        prototype = (
+            list,
+            str,
+            abjad.Segment,
+            abjad.Sequence,
+            abjad.Set,
+            pitchclasses.CollectionList,
+        )
+        if not isinstance(collections, prototype):
+            message = "collections must be coerceable:\n"
+            message += f"   {format(collections)}"
+            raise Exception(collections)
 
     def _get_figure_start_offset(self, figure_name):
         for voice_name in sorted(self._floating_selections.keys()):
