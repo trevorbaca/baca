@@ -406,7 +406,7 @@ mmaker
 
       __call__
       lmr_specifier
-      time_treatments
+      treatments
 
    .. raw:: html
 
@@ -426,7 +426,7 @@ mmaker
 
    .. autoattribute:: Nesting.lmr_specifier
 
-   .. autoattribute:: Nesting.time_treatments
+   .. autoattribute:: Nesting.treatments
 
 .. autoclass:: PitchFirstAssignment
 
@@ -475,10 +475,6 @@ mmaker
 
    .. autoattribute:: PitchFirstAssignment.pattern
 
-   .. container:: inherited
-
-      .. autoattribute:: PitchFirstAssignment.remember_state_across_gaps
-
    .. autoattribute:: PitchFirstAssignment.rhythm_maker
 
    .. autoattribute:: PitchFirstAssignment.thread
@@ -505,7 +501,7 @@ mmaker
       signature
       spelling
       talea
-      time_treatments
+      treatments
 
    .. raw:: html
 
@@ -541,7 +537,7 @@ mmaker
 
    .. autoattribute:: PitchFirstRhythmMaker.talea
 
-   .. autoattribute:: PitchFirstRhythmMaker.time_treatments
+   .. autoattribute:: PitchFirstRhythmMaker.treatments
 
 .. autoclass:: RestAffixSpecifier
 
