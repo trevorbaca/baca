@@ -703,6 +703,7 @@ mmaker
    ~lmr
    ~nest
    ~pitch_first_assignment
+   ~pitch_first_assignment_command
    ~pitch_first_command
    ~pitch_first_rmaker
    ~rests_after
@@ -731,6 +732,8 @@ mmaker
 .. autofunction:: nest
 
 .. autofunction:: pitch_first_assignment
+
+.. autofunction:: pitch_first_assignment_command
 
 .. autofunction:: pitch_first_command
 

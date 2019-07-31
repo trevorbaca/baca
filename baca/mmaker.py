@@ -11347,6 +11347,32 @@ def pitch_first_command(
     return PitchFirstCommand(*assignments)
 
 
+def pitch_first_assignment_command(
+    counts: abjad.IntegerSequence,
+    denominator: int,
+    *,
+    acciaccatura: typing.Union[bool, Acciaccatura, LMR] = None,
+    affix: RestAffix = None,
+    pattern: abjad.Pattern = None,
+    signature: int = None,
+    spelling: rmakers.Spelling = None,
+    thread: bool = None,
+    treatments: typing.Sequence = None,
+) -> PitchFirstCommand:
+    assignment = pitch_first_assignment(
+        counts,
+        denominator,
+        acciaccatura=acciaccatura,
+        affix=affix,
+        pattern=pattern,
+        signature=signature,
+        spelling=spelling,
+        thread=thread,
+        treatments=treatments,
+    )
+    return pitch_first_command(assignment)
+
+
 def rests_after(counts: typing.Sequence[int]) -> RestAffix:
     r"""
     Makes rests after music.
