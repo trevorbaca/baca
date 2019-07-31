@@ -5748,6 +5748,36 @@ class Imbrication(object):
 class Accumulator(object):
     """
     Music-accumulator.
+
+    ..  container:: example exception
+
+        Raises exception on duplicate figure name.
+
+        >>> template = baca.StringTrioScoreTemplate()
+        >>> accumulator = baca.Accumulator(template)
+
+        >>> commands = [
+        ...     pitch_first([1], 16, signature=16),
+        ...     rmakers.beam(),
+        ... ]
+
+        >>> accumulator(
+        ...     'Violin_Music_Voice',
+        ...     [[0, 1, 2, 3]],
+        ...     *commands,
+        ...     figure_name='D',
+        ... )
+
+        >>> accumulator(
+        ...     'Violin_Music_Voice',
+        ...     [[4, 5, 6, 7]],
+        ...     *commands,
+        ...     figure_name='D',
+        ... )
+        Traceback (most recent call last):
+            ...
+        Exception: duplicate figure name: 'D'.
+
     """
 
     ### CLASS VARIABLES ###
@@ -5793,58 +5823,13 @@ class Accumulator(object):
     ) -> None:
         r"""
         Calls music-accumulator.
-
-        Raises exception on duplicate figure name.
-
-        ..  container:: example exception
-
-            >>> template = baca.StringTrioScoreTemplate()
-            >>> accumulator = baca.Accumulator(template)
-
-            >>> commands = [
-            ...     pitch_first([1], 16, signature=16),
-            ...     rmakers.beam(),
-            ... ]
-
-            >>> accumulator(
-            ...     'Violin_Music_Voice',
-            ...     [[0, 1, 2, 3]],
-            ...     *commands,
-            ...     figure_name='D',
-            ... )
-
-            >>> accumulator(
-            ...     'Violin_Music_Voice',
-            ...     [[4, 5, 6, 7]],
-            ...     *commands,
-            ...     figure_name='D',
-            ... )
-            Traceback (most recent call last):
-                ...
-            Exception: duplicate figure name: 'D'.
-
         """
         specifiers = specifiers or ()
         specifiers_list = list(specifiers)
-        if specifiers_list and isinstance(specifiers_list[0], MusicMaker):
-            raise Exception("MMM", specifiers_list)
-            music_maker = specifiers_list[0]
-            specifiers_list.pop(0)
-        else:
-            music_maker = MusicMaker()
-        assert isinstance(music_maker, MusicMaker)
-        for specifier in specifiers_list:
-            if isinstance(specifier, MusicMaker):
-                message = "must combine music-makers:\n"
-                message += f"   {repr(music_maker)}"
-                message += f"   {repr(specifier)}"
-                raise Exception(message)
         voice_name = self.score_template.voice_abbreviations.get(
             voice_name, voice_name
         )
-        first_specifiers = music_maker.commands or []
-        all_specifiers = first_specifiers + specifiers_list
-        for specifier in all_specifiers:
+        for specifier in specifiers_list:
             if isinstance(specifier, Imbrication):
                 voice_name_ = self.score_template.voice_abbreviations.get(
                     specifier.voice_name, specifier.voice_name
@@ -5863,14 +5848,84 @@ class Accumulator(object):
             anchor._remote_voice_name = voice_name_
         keywords["figure_index"] = self._figure_index
         hide_time_signature = keywords.pop("hide_time_signature", None)
-        music_maker = abjad.new(music_maker, *all_specifiers, **keywords)
-        contribution = music_maker(voice_name, collections)
+        commands = list(specifiers_list)
+        prototype = (
+            list,
+            str,
+            abjad.Segment,
+            abjad.Sequence,
+            abjad.Set,
+            pitchclasses.CollectionList,
+        )
+        if not isinstance(collections, prototype):
+            message = "collections must be coerceable:\n"
+            message += f"   {format(collections)}"
+            raise Exception(collections)
+        assignments = []
+        if isinstance(collections, str):
+            tuplet = abjad.Tuplet((1, 1), collections, hide=True)
+            selections = [abjad.select(tuplet)]
+        elif all(isinstance(_, abjad.Rest) for _ in collections):
+            tuplet = abjad.Tuplet((1, 1), collections, hide=True)
+            selections = [abjad.select(tuplet)]
+        else:
+            commands_ = []
+            for command in commands:
+                if isinstance(command, PitchFirstAssignment):
+                    assignments.append(command)
+                elif isinstance(command, PitchFirstRhythmMaker):
+                    assignment = PitchFirstAssignment(command)
+                    assignments.append(assignment)
+                else:
+                    commands_.append(command)
+            commands = commands_
+            if not assignments:
+                raise Exception("must provide pitch-first assignment.")
+            # TODO: activate:
+            #        if 1 < len(assignments):
+            #            assert len(assignments) == 2, repr(assignments)
+            #            message = "must combine assignments:\n"
+            #            message += f"   {repr(assignments[0])}\n"
+            #            message += f"   {repr(assignments[1])}\n"
+            #            raise Exception(message)
+            collections = _coerce_collections(collections)
+            selections = len(collections) * [None]
+            for assignment in assignments:
+                assert isinstance(assignment, PitchFirstAssignment)
+                assignment(collections=collections, selections=selections)
+        container = abjad.Container(selections)
+        imbricated_selections = {}
+        for command in commands:
+            if isinstance(command, Imbrication):
+                imbricated_selections.update(command(container))
+            else:
+                command(selections)
+        figure_name = keywords.pop("figure_name", None)
+        if figure_name is not None:
+            figure_name = str(figure_name)
+            self._label_figure_name_(container, figure_name)
+        if keywords.get("extend_beam", None):
+            leaf = abjad.select(selections).leaf(-1)
+            abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, leaf)
+        selection = abjad.select([container])
+        duration = abjad.inspect(selection).duration()
+        signature = keywords.get("signature", None)
+        if signature is None and assignments:
+            primary_rhythm_maker = assignments[0].rhythm_maker
+            signature = primary_rhythm_maker.signature
+        if signature is not None:
+            duration = duration.with_denominator(signature)
+        time_signature = abjad.TimeSignature(duration)
+        voice_to_selection = {voice_name: selection}
+        voice_to_selection.update(imbricated_selections)
+        for value in voice_to_selection.values():
+            assert isinstance(value, abjad.Selection), repr(value)
         contribution = Contribution(
             anchor=anchor,
-            figure_name=keywords.get("figure_name", None),
+            figure_name=figure_name,
             hide_time_signature=hide_time_signature,
-            time_signature=contribution.time_signature,
-            voice_to_selection=contribution.voice_to_selection,
+            time_signature=time_signature,
+            voice_to_selection=voice_to_selection,
         )
         self._cache_figure_name(contribution)
         self._cache_floating_selection(contribution)
@@ -6038,6 +6093,39 @@ class Accumulator(object):
                 fused_selection.append(skip)
         fused_selection = abjad.select(fused_selection)
         return fused_selection
+
+    def _label_figure_name_(self, container, figure_name):
+        figure_index = self._figure_index
+        original_figure_name = figure_name
+        parts = figure_name.split("_")
+        if len(parts) == 1:
+            body = parts[0]
+            figure_name = abjad.Markup(body)
+        elif len(parts) == 2:
+            body, subscript = parts
+            figure_name = abjad.Markup.concat(
+                [abjad.Markup(body), abjad.Markup(subscript).sub()]
+            )
+        else:
+            raise Exception(f"unrecognized figure name: {figure_name!r}.")
+        figure_index = f" ({figure_index})"
+        figure_index = abjad.Markup(figure_index).fontsize(-2).raise_(0.25)
+        figure_name_markup = abjad.Markup.concat(
+            ["[", figure_name, abjad.Markup.hspace(1), figure_index, "]"]
+        )
+        figure_name_markup = figure_name_markup.fontsize(2)
+        figure_name_markup = abjad.Markup(
+            figure_name_markup, direction=abjad.Up
+        )
+        annotation = f"figure name: {original_figure_name}"
+        figure_name_markup._annotation = annotation
+        leaf = abjad.select(container).leaf(0)
+        abjad.attach(
+            figure_name_markup,
+            leaf,
+            deactivate=True,
+            tag=abjad.const.FIGURE_NAME,
+        )
 
     def _make_voice_dictionary(self):
         return dict([(_, []) for _ in self._voice_names])
@@ -6211,244 +6299,6 @@ class Contribution(object):
             for value in self._voice_to_selection.values():
                 assert isinstance(value, abjad.Selection), repr(value)
         return self._voice_to_selection
-
-
-class MusicMaker(object):
-    """
-    Music-maker.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = (
-        "_commands",
-        "_extend_beam",
-        "_figure_index",
-        "_figure_name",
-        "_next_figure",
-        "_signature",
-        "_voice_names",
-    )
-
-    # to make sure abjad.new() copies commands
-    _positional_arguments_name = "commands"
-
-    _publish_storage_format = True
-
-    _state_variables = ("_next_figure",)
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self,
-        *commands,
-        extend_beam: bool = None,
-        figure_index: int = None,
-        figure_name: str = None,
-        signature: int = None,
-    ) -> None:
-        self._commands = list(commands)
-        if extend_beam is not None:
-            extend_beam = bool(extend_beam)
-        self._extend_beam = extend_beam
-        if figure_index is not None:
-            assert isinstance(figure_index, int), repr(figure_index)
-        self._figure_index = figure_index
-        if figure_name is not None:
-            figure_name = str(figure_name)
-        self._figure_name = figure_name
-        self._next_figure = 0
-        if signature is not None:
-            assert isinstance(signature, int)
-        self._signature = signature
-
-    ### SPECIAL METHODS ###
-
-    def __call__(
-        self,
-        voice_name: str,
-        collections: typing.Union[
-            list,
-            str,
-            abjad.Segment,
-            abjad.Sequence,
-            abjad.Set,
-            pitchclasses.CollectionList,
-        ],
-    ) -> Contribution:
-        """
-        Calls music-maker.
-        """
-        commands = list(self.commands)
-        if any(_ is None for _ in commands):
-            message = "commands must not be none:\n"
-            message += f"   {repr(commands)}"
-            raise Exception(message)
-        prototype = (
-            list,
-            str,
-            abjad.Segment,
-            abjad.Sequence,
-            abjad.Set,
-            pitchclasses.CollectionList,
-        )
-        if not isinstance(collections, prototype):
-            message = "collections must be coerceable:\n"
-            message += f"   {format(collections)}"
-            raise Exception(collections)
-        assignments = []
-        if isinstance(collections, str):
-            tuplet = abjad.Tuplet((1, 1), collections, hide=True)
-            selections = [abjad.select(tuplet)]
-        elif all(isinstance(_, abjad.Rest) for _ in collections):
-            tuplet = abjad.Tuplet((1, 1), collections, hide=True)
-            selections = [abjad.select(tuplet)]
-        else:
-            commands_ = []
-            for command in commands:
-                if isinstance(command, PitchFirstAssignment):
-                    assignments.append(command)
-                elif isinstance(command, PitchFirstRhythmMaker):
-                    assignment = PitchFirstAssignment(command)
-                    assignments.append(assignment)
-                else:
-                    commands_.append(command)
-            commands = commands_
-            if not assignments:
-                raise Exception("must provide pitch-first assignment.")
-            # TODO: activate:
-            #        if 1 < len(assignments):
-            #            assert len(assignments) == 2, repr(assignments)
-            #            message = "must combine assignments:\n"
-            #            message += f"   {repr(assignments[0])}\n"
-            #            message += f"   {repr(assignments[1])}\n"
-            #            raise Exception(message)
-            collections = _coerce_collections(collections)
-            selections = len(collections) * [None]
-            for assignment in assignments:
-                assert isinstance(assignment, PitchFirstAssignment)
-                assignment(collections=collections, selections=selections)
-        container = abjad.Container(selections)
-        imbricated_selections = {}
-        for command in commands:
-            if isinstance(command, Imbrication):
-                imbricated_selections.update(command(container))
-            else:
-                command(selections)
-        self._label_figure_name_(container)
-        if self.extend_beam:
-            leaf = abjad.select(selections).leaf(-1)
-            abjad.attach(abjad.tags.RIGHT_BROKEN_BEAM, leaf)
-        selection = abjad.select([container])
-        duration = abjad.inspect(selection).duration()
-        signature = self.signature
-        if signature is None and assignments:
-            primary_rhythm_maker = assignments[0].rhythm_maker
-            signature = primary_rhythm_maker.signature
-        if signature is not None:
-            duration = duration.with_denominator(signature)
-        time_signature = abjad.TimeSignature(duration)
-        voice_to_selection = {voice_name: selection}
-        voice_to_selection.update(imbricated_selections)
-        for value in voice_to_selection.values():
-            assert isinstance(value, abjad.Selection), repr(value)
-        return Contribution(
-            time_signature=time_signature,
-            voice_to_selection=voice_to_selection,
-        )
-
-    def __eq__(self, argument) -> bool:
-        """
-        Is true when initialization values of music-maker equal
-        initialization values of ``argument``.
-        """
-        return abjad.StorageFormatManager.compare_objects(self, argument)
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Formats music-maker.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
-    def __hash__(self) -> int:
-        """
-        Hashes music-maker.
-        """
-        hash_values = abjad.StorageFormatManager(self).get_hash_values()
-        try:
-            result = hash(hash_values)
-        except TypeError:
-            raise TypeError(f"unhashable type: {self}")
-        return result
-
-    def __repr__(self) -> str:
-        """
-        Gets interpreter representation of music-maker.
-        """
-        return abjad.StorageFormatManager(self).get_repr_format()
-
-    ### PRIVATE METHODS ###
-
-    def _label_figure_name_(self, container):
-        if self.figure_name is None:
-            return
-        figure_name = str(self.figure_name)
-        figure_index = self.figure_index
-        original_figure_name = figure_name
-        parts = figure_name.split("_")
-        if len(parts) == 1:
-            body = parts[0]
-            figure_name = abjad.Markup(body)
-        elif len(parts) == 2:
-            body, subscript = parts
-            figure_name = abjad.Markup.concat(
-                [abjad.Markup(body), abjad.Markup(subscript).sub()]
-            )
-        else:
-            raise Exception(f"unrecognized figure name: {figure_name!r}.")
-        figure_index = f" ({figure_index})"
-        figure_index = abjad.Markup(figure_index).fontsize(-2).raise_(0.25)
-        figure_name_markup = abjad.Markup.concat(
-            ["[", figure_name, abjad.Markup.hspace(1), figure_index, "]"]
-        )
-        figure_name_markup = figure_name_markup.fontsize(2)
-        figure_name_markup = abjad.Markup(
-            figure_name_markup, direction=abjad.Up
-        )
-        annotation = f"figure name: {original_figure_name}"
-        figure_name_markup._annotation = annotation
-        leaf = abjad.select(container).leaf(0)
-        abjad.attach(
-            figure_name_markup,
-            leaf,
-            deactivate=True,
-            tag=abjad.const.FIGURE_NAME,
-        )
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def commands(self) -> typing.List:
-        return self._commands
-
-    @property
-    def extend_beam(self) -> typing.Optional[bool]:
-        return self._extend_beam
-
-    @property
-    def figure_index(self) -> typing.Optional[int]:
-        return self._figure_index
-
-    @property
-    def figure_name(self) -> typing.Optional[str]:
-        return self._figure_name
-
-    @property
-    def signature(self) -> typing.Optional[int]:
-        """
-        Get (time) signature (denominator).
-        """
-        return self._signature
 
 
 class Nesting(object):

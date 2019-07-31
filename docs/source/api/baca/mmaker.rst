@@ -29,7 +29,6 @@ mmaker
    ~Contribution
    ~Imbrication
    ~LMRSpecifier
-   ~MusicMaker
    ~Nesting
    ~PitchFirstAssignment
    ~PitchFirstRhythmMaker
@@ -383,63 +382,6 @@ mmaker
    .. autoattribute:: LMRSpecifier.right_length
 
    .. autoattribute:: LMRSpecifier.right_reversed
-
-.. autoclass:: MusicMaker
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      __eq__
-      __format__
-      __hash__
-      __repr__
-      commands
-      extend_beam
-      figure_index
-      figure_name
-      signature
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: MusicMaker.__call__
-
-   .. automethod:: MusicMaker.__eq__
-
-   .. automethod:: MusicMaker.__format__
-
-   .. automethod:: MusicMaker.__hash__
-
-   .. automethod:: MusicMaker.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: MusicMaker.commands
-
-   .. autoattribute:: MusicMaker.extend_beam
-
-   .. autoattribute:: MusicMaker.figure_index
-
-   .. autoattribute:: MusicMaker.figure_name
-
-   .. autoattribute:: MusicMaker.signature
 
 .. autoclass:: Nesting
 

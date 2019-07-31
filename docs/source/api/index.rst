@@ -531,7 +531,6 @@ indicators.Markup library.
    ~baca.mmaker.Contribution
    ~baca.mmaker.Imbrication
    ~baca.mmaker.LMRSpecifier
-   ~baca.mmaker.MusicMaker
    ~baca.mmaker.Nesting
    ~baca.mmaker.PitchFirstAssignment
    ~baca.mmaker.PitchFirstRhythmMaker
