@@ -737,10 +737,11 @@ Override library.
    ~baca.pfmaker.imbricate
    ~baca.pfmaker.lmr
    ~baca.pfmaker.nest
+   ~baca.pfmaker.pfassignment
+   ~baca.pfmaker.pfcommand
    ~baca.pfmaker.pfmaker
    ~baca.pfmaker.pitch_first_assignment
    ~baca.pfmaker.pitch_first_assignment_command
-   ~baca.pfmaker.pitch_first_command
    ~baca.pfmaker.rests_after
    ~baca.pfmaker.rests_around
    ~baca.pfmaker.rests_before

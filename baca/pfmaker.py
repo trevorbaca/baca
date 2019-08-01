@@ -3676,7 +3676,7 @@ class Accumulator(object):
             if isinstance(command, Imbrication):
                 voice_name_ = self._abbreviation(command.voice_name)
                 command._voice_name = voice_name_
-        pitch_first_command = None
+        command = None
         maker = None
         selection: typing.Union[list, abjad.Selection]
         selections: typing.Union[list, abjad.Selection]
@@ -3697,18 +3697,18 @@ class Accumulator(object):
             commands_ = list(commands[1:])
         else:
             assert isinstance(commands[0], PitchFirstCommand)
-            pitch_first_command = commands[0]
+            command = commands[0]
             collections = _coerce_collections(collections)
             selections = commands[0](collections)
             selections = abjad.select(selections).flatten()
             commands_ = list(commands[1:])
         container = abjad.Container(selections)
         imbricated_selections = {}
-        for command in commands_:
-            if isinstance(command, Imbrication):
-                imbricated_selections.update(command(container))
+        for command_ in commands_:
+            if isinstance(command_, Imbrication):
+                imbricated_selections.update(command_(container))
             else:
-                command(selections)
+                command_(selections)
         if figure_name is not None:
             figure_name = str(figure_name)
             self._label_figure_name_(container, figure_name)
@@ -3716,10 +3716,8 @@ class Accumulator(object):
         duration = abjad.inspect(selection).duration()
         if signature is None and maker:
             signature = maker.signature
-        if signature is None and pitch_first_command:
-            primary_rhythm_maker = pitch_first_command.assignments[
-                0
-            ].rhythm_maker
+        if signature is None and command:
+            primary_rhythm_maker = command.assignments[0].rhythm_maker
             signature = primary_rhythm_maker.signature
         if signature is not None:
             duration = duration.with_denominator(signature)
@@ -10831,13 +10829,15 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
 
     ..  container:: example
 
+        >>> maker = baca.pfmaker(
+        ...     [1, 1, 5, -1],
+        ...     16,
+        ...     affix=baca.rests_around([2], [4]),
+        ...     treatments=[-1],
+        ... )
+        >>> assignment = baca.pfassignment(maker)
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
-        ...         [1, 1, 5, -1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [4]),
-        ...         treatments=[-1],
-        ...     ),
+        ...     baca.pfcommand(assignment),
         ...     rmakers.beam(),
         ...     baca.nest('+4/16'),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -10904,6 +10904,19 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
     return Nest(lmr=lmr, treatments=treatments)
 
 
+def pfassignment(
+    maker: PitchFirstMaker,
+    *,
+    pattern: abjad.Pattern = None,
+    thread: bool = None,
+) -> PitchFirstAssignment:
+    """
+    Makes pitch-first assignment.
+    """
+    assert isinstance(maker, PitchFirstMaker), repr(maker)
+    return PitchFirstAssignment(maker, pattern=pattern, thread=thread)
+
+
 def pfmaker(
     counts: abjad.IntegerSequence,
     denominator: int,
@@ -10960,9 +10973,7 @@ def pitch_first_assignment(
     return PitchFirstAssignment(rhythm_maker, pattern=pattern, thread=thread)
 
 
-def pitch_first_command(
-    *assignments: PitchFirstAssignment
-) -> PitchFirstCommand:
+def pfcommand(*assignments: PitchFirstAssignment) -> PitchFirstCommand:
     """
     Makes pitch-first command.
     """
@@ -10981,6 +10992,9 @@ def pitch_first_assignment_command(
     thread: bool = None,
     treatments: typing.Sequence = None,
 ) -> PitchFirstCommand:
+    """
+    Deprecated.
+    """
     assignment = pitch_first_assignment(
         counts,
         denominator,
@@ -10992,7 +11006,7 @@ def pitch_first_assignment_command(
         thread=thread,
         treatments=treatments,
     )
-    return pitch_first_command(assignment)
+    return pfcommand(assignment)
 
 
 def rests_after(counts: typing.Sequence[int]) -> RestAffix:

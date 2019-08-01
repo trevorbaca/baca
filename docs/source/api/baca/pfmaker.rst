@@ -711,10 +711,11 @@ pfmaker
    ~imbricate
    ~lmr
    ~nest
+   ~pfassignment
+   ~pfcommand
    ~pfmaker
    ~pitch_first_assignment
    ~pitch_first_assignment_command
-   ~pitch_first_command
    ~rests_after
    ~rests_around
    ~rests_before
@@ -741,13 +742,15 @@ pfmaker
 
 .. autofunction:: nest
 
+.. autofunction:: pfassignment
+
+.. autofunction:: pfcommand
+
 .. autofunction:: pfmaker
 
 .. autofunction:: pitch_first_assignment
 
 .. autofunction:: pitch_first_assignment_command
-
-.. autofunction:: pitch_first_command
 
 .. autofunction:: rests_after
 
