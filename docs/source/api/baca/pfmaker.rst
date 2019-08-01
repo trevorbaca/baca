@@ -553,6 +553,7 @@ pfmaker
       __repr__
       acciaccatura
       affix
+      restart_talea
       signature
       spelling
       talea
@@ -585,6 +586,8 @@ pfmaker
    .. autoattribute:: PitchFirstMaker.acciaccatura
 
    .. autoattribute:: PitchFirstMaker.affix
+
+   .. autoattribute:: PitchFirstMaker.restart_talea
 
    .. autoattribute:: PitchFirstMaker.signature
 

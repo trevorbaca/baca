@@ -5246,6 +5246,7 @@ class PitchFirstMaker(object):
         "_affix",
         "_next_attack",
         "_next_segment",
+        "_restart_talea",
         "_signature",
         "_spelling",
         "_state",
@@ -5262,6 +5263,7 @@ class PitchFirstMaker(object):
         talea: rmakers.Talea,
         acciaccatura: Acciaccatura = None,
         affix: RestAffix = None,
+        restart_talea: bool = None,
         signature: int = None,
         spelling: rmakers.Spelling = None,
         treatments: typing.Sequence = None,
@@ -5277,6 +5279,9 @@ class PitchFirstMaker(object):
         self._affix = affix
         self._next_attack = 0
         self._next_segment = 0
+        if restart_talea is not None:
+            restart_talea = bool(restart_talea)
+        self._restart_talea = restart_talea
         if signature is not None:
             assert isinstance(signature, int), repr(signature)
         self._signature = signature
@@ -5413,11 +5418,25 @@ class PitchFirstMaker(object):
         assert isinstance(collections, prototype), repr(collections)
         self._state = state or abjad.OrderedDict()
         self._apply_state(state=state)
-        tuplets = self._make_music(
-            collections,
-            collection_index=collection_index,
-            total_collections=total_collections,
-        )
+        tuplets: typing.List[abjad.Tuplet] = []
+        if not self.restart_talea:
+            selection = self._make_music(
+                collections,
+                collection_index=collection_index,
+                total_collections=total_collections,
+            )
+            tuplets.extend(selection)
+        else:
+            total_collections = len(collections)
+            for i, collection in enumerate(collections):
+                self._apply_state(state=None)
+                selection = self._make_music(
+                    [collection],
+                    collection_index=i,
+                    total_collections=total_collections,
+                )
+                tuplets.extend(selection)
+        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         selection = abjad.select(tuplets)
         return selection
 
@@ -6182,6 +6201,13 @@ class PitchFirstMaker(object):
         Gets affix.
         """
         return self._affix
+
+    @property
+    def restart_talea(self) -> typing.Optional[bool]:
+        r"""
+        Is true when maker restarts talea for each collection.
+        """
+        return self._restart_talea
 
     @property
     def signature(self) -> typing.Optional[int]:
@@ -10828,17 +10854,16 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
 
     ..  container:: example
 
-        >>> maker = baca.pfmaker(
-        ...     [1, 1, 5, -1],
-        ...     16,
-        ...     affix=baca.rests_around([2], [4]),
-        ...     treatments=[-1],
-        ... )
-        >>> assignment = baca.pfassignment(maker)
         >>> stack = baca.stack(
-        ...     baca.pfcommand(assignment),
+        ...     baca.pfmaker(
+        ...         [1, 1, 5, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [4]),
+        ...         restart_talea=True,
+        ...         treatments=[-1],
+        ...     ),
         ...     rmakers.beam(),
-        ...     baca.nest('+4/16'),
+        ...     baca.nest("+4/16"),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -10922,6 +10947,7 @@ def pfmaker(
     *,
     acciaccatura: typing.Union[bool, Acciaccatura, LMR] = None,
     affix: RestAffix = None,
+    restart_talea: bool = None,
     signature: int = None,
     spelling: rmakers.Spelling = None,
     treatments: typing.Sequence = None,
@@ -10939,6 +10965,7 @@ def pfmaker(
         rmakers.Talea(counts=counts, denominator=denominator),
         acciaccatura=acciaccatura,
         affix=affix,
+        restart_talea=restart_talea,
         signature=signature,
         spelling=spelling,
         treatments=treatments,
