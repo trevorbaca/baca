@@ -453,7 +453,6 @@ mmaker
    .. autosummary::
       :nosignatures:
 
-      __call__
       __eq__
       __format__
       __hash__
@@ -468,8 +467,6 @@ mmaker
 
    .. rubric:: Special methods
       :class: class-header
-
-   .. automethod:: PitchFirstAssignment.__call__
 
    .. automethod:: PitchFirstAssignment.__eq__
 

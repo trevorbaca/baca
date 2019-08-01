@@ -3769,7 +3769,6 @@ class Accumulator(object):
             if isinstance(command, Imbrication):
                 voice_name_ = self._abbreviation(command.voice_name)
                 command._voice_name = voice_name_
-        assignment = None
         pitch_first_command = None
         pitch_first_maker = None
         selection: typing.Union[list, abjad.Selection]
@@ -3789,19 +3788,13 @@ class Accumulator(object):
             selections = pitch_first_maker(collections)
             selections = abjad.select(selections).flatten()
             commands_ = list(commands[1:])
-        elif isinstance(commands[0], PitchFirstCommand):
+        else:
+            assert isinstance(commands[0], PitchFirstCommand)
             pitch_first_command = commands[0]
             collections = _coerce_collections(collections)
             selections = commands[0](collections)
             selections = abjad.select(selections).flatten()
             commands_ = list(commands[1:])
-        else:
-            assert isinstance(commands[0], PitchFirstAssignment)
-            assignment = commands[0]
-            commands_ = list(commands[1:])
-            collections = _coerce_collections(collections)
-            selections = assignment(collections)
-            selections = abjad.select(selections).flatten()
         container = abjad.Container(selections)
         imbricated_selections = {}
         for command in commands_:
@@ -3816,9 +3809,6 @@ class Accumulator(object):
         duration = abjad.inspect(selection).duration()
         if signature is None and pitch_first_maker:
             signature = pitch_first_maker.signature
-        if signature is None and assignment:
-            primary_rhythm_maker = assignment.rhythm_maker
-            signature = primary_rhythm_maker.signature
         if signature is None and pitch_first_command:
             primary_rhythm_maker = pitch_first_command.assignments[
                 0
@@ -8158,80 +8148,6 @@ class PitchFirstAssignment(object):
             raise Exception(message)
 
     ### SPECIAL METHODS ###
-
-    def __call__(self, collections: typing.Sequence) -> abjad.Selection:
-        """
-        Calls pitch-first assignment.
-        """
-        collections = _coerce_collections(collections)
-        prototype = (pitchclasses.CollectionList,)
-        assert isinstance(collections, prototype), repr(collections)
-        collection_count = len(collections)
-        selections = len(collections) * [None]
-        assert len(selections) == len(collections)
-        rhythm_maker = self.rhythm_maker
-        prototype__ = (PitchFirstRhythmMaker,)
-        assert isinstance(rhythm_maker, prototype__), repr(rhythm_maker)
-        length = len(selections)
-        pattern = self.pattern or abjad.index_all()
-        collection_prototype = (abjad.Segment, abjad.Set)
-        collections_, indices = [], []
-        for i, collection in enumerate(collections):
-            assert isinstance(collection, collection_prototype), repr(
-                collection
-            )
-            collection_: typing.Union[abjad.Segment, list]
-            if isinstance(collection, (abjad.Set, set)):
-                collection_ = list(sorted(collection))[:1]
-            else:
-                collection_ = collection
-            assert isinstance(pattern, abjad.Pattern), repr(pattern)
-            if not pattern.matches_index(i, length):
-                continue
-            collections_.append(collection_)
-            indices.append(i)
-        tuplets: typing.List[abjad.Tuplet] = []
-        if self.thread:
-            selection = rhythm_maker(collections_)
-            tuplets.extend(selection)
-        else:
-            total_collections = len(collections_)
-            for i, collection_ in enumerate(collections_):
-                selection_ = rhythm_maker(
-                    [collection_],
-                    collection_index=i,
-                    total_collections=total_collections,
-                )
-                tuplets.extend(selection_)
-        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-        triples = zip(indices, tuplets, collections)
-        new_tuplets: typing.List[abjad.Tuplet] = []
-        for i in range(len(indices)):
-            new_tuplets.append(abjad.Tuplet())
-        for i, tuplet, collection in triples:
-            assert isinstance(tuplet, abjad.Tuplet)
-            if not isinstance(collection, (abjad.Set, set)):
-                new_tuplets[i] = tuplet
-                continue
-            agent = abjad.iterate(tuplet)
-            logical_ties = agent.logical_ties(pitched=True)
-            logical_ties = list(logical_ties)
-            assert len(logical_ties) == 1, repr(tuplet)
-            logical_tie = logical_ties[0]
-            for note in logical_tie.leaves:
-                assert isinstance(note, abjad.Note), repr(note)
-                duration = note.written_duration
-                pitches = collection
-                chord = abjad.Chord(pitches, duration)
-                indicators = abjad.detach(object, note)
-                abjad.mutate(note).replace([chord])
-                for indicator in indicators:
-                    abjad.attach(indicator, chord)
-            new_tuplets[i] = tuplet
-        assert all(isinstance(_, abjad.Tuplet) for _ in new_tuplets)
-        assert len(new_tuplets) == collection_count
-        selection = abjad.select(new_tuplets)
-        return selection
 
     def __eq__(self, argument) -> bool:
         """
