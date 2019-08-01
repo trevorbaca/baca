@@ -8318,9 +8318,7 @@ class PitchFirstCommand(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(
-        self, collections: typing.Sequence
-    ) -> typing.List[abjad.Selection]:
+    def __call__(self, collections: typing.Sequence) -> abjad.Selection:
         """
         Calls pitch-first command.
         """
@@ -8344,7 +8342,7 @@ class PitchFirstCommand(object):
         groups = abjad.sequence(matches).group_by(
             lambda match: match.assignment.rhythm_maker
         )
-        selections = []
+        tuplets: typing.List[abjad.Tuplet] = []
         for group in groups:
             rhythm_maker = group[0].assignment.rhythm_maker
             collections_ = [match.division for match in group]
@@ -8354,10 +8352,11 @@ class PitchFirstCommand(object):
                 state=None,
                 total_collections=None,
             )
-            selections.append(selection)
-        assert isinstance(selections, list)
-        assert all(isinstance(_, abjad.Selection) for _ in selections)
-        return selections
+            assert all(isinstance(_, abjad.Tuplet) for _ in selection)
+            tuplets.extend(selection)
+        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
+        selection = abjad.select(tuplets)
+        return selection
 
     def __eq__(self, argument) -> bool:
         """
