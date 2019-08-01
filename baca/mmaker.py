@@ -1163,6 +1163,8 @@ class Acciaccatura(object):
     ]:
         """
         Calls acciaccatura on ``collection``.
+
+        :param collection: collection.
         """
         prototype = (list, abjad.Segment)
         assert isinstance(collection, prototype), repr(collection)
@@ -1240,7 +1242,7 @@ class Acciaccatura(object):
             ...     [20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
@@ -1336,7 +1338,7 @@ class Acciaccatura(object):
             ...     [20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
@@ -1439,7 +1441,7 @@ class Acciaccatura(object):
             ...     [20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
@@ -1543,7 +1545,7 @@ class Acciaccatura(object):
             ...     [20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
@@ -1652,7 +1654,7 @@ class Acciaccatura(object):
             ...     [20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
@@ -1763,7 +1765,7 @@ class Acciaccatura(object):
             ...     [20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
@@ -1875,7 +1877,7 @@ class Acciaccatura(object):
             ...     [20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
@@ -2061,40 +2063,30 @@ class Anchor(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def figure_name(self):
+    def figure_name(self) -> typing.Optional[str]:
         """
         Gets figure name.
-
-        Returns strings or none.
         """
         return self._figure_name
 
     @property
-    def local_selector(self):
+    def local_selector(self) -> typing.Optional[abjad.Expression]:
         """
         Gets local selector.
-
-        Returns selector or none.
         """
         return self._local_selector
 
     @property
-    def remote_selector(self):
+    def remote_selector(self) -> typing.Optional[abjad.Expression]:
         """
         Gets remote selector.
-
-        Returns selector or none.
         """
         return self._remote_selector
 
     @property
-    def remote_voice_name(self):
+    def remote_voice_name(self) -> typing.Optional[str]:
         """
         Gets remote voice name.
-
-        Set to string or none.
-
-        Returns strings or none.
         """
         return self._remote_voice_name
 
@@ -2133,7 +2125,8 @@ class Coat(object):
 
 
 class Imbrication(object):
-    """ Imbrication.
+    """
+    Imbrication.
     """
 
     ### CLASS VARIABLES ###
@@ -2192,6 +2185,8 @@ class Imbrication(object):
     ) -> typing.Dict[str, abjad.Selection]:
         """
         Calls imbrication on ``container``.
+
+        :param container: container.
         """
         original_container = container
         container = copy.deepcopy(container)
@@ -2363,7 +2358,7 @@ class Imbrication(object):
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
-            ...     ]
+            ... ]
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
@@ -2384,7 +2379,7 @@ class Imbrication(object):
             ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 32)),
             ...     time_signatures=accumulator.time_signatures,
-            ...     )
+            ... )
             >>> accumulator.populate_segment_maker(maker)
             >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2618,7 +2613,7 @@ class Imbrication(object):
             >>> collections = [
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
-            ...     ]
+            ... ]
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
@@ -2672,7 +2667,7 @@ class Imbrication(object):
             ...     [0, 2, 10, 18, 16],
             ...     [15, 20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
-            ...     ]
+            ... ]
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
@@ -2693,7 +2688,7 @@ class Imbrication(object):
             ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 32)),
             ...     time_signatures=accumulator.time_signatures,
-            ...     )
+            ... )
             >>> accumulator.populate_segment_maker(maker)
             >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -2977,7 +2972,7 @@ class Imbrication(object):
             >>> collections = [
             ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
             ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
-            ...     ]
+            ... ]
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
@@ -2997,7 +2992,7 @@ class Imbrication(object):
             ...     score_template=template,
             ...     spacing=baca.minimum_duration((1, 32)),
             ...     time_signatures=accumulator.time_signatures,
-            ...     )
+            ... )
             >>> accumulator.populate_segment_maker(maker)
             >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3330,7 +3325,7 @@ class Imbrication(object):
             ...     score_template=template,
             ...     spacing=baca.minimum_duration((1, 32)),
             ...     time_signatures=accumulator.time_signatures,
-            ...     )
+            ... )
             >>> accumulator.populate_segment_maker(maker)
             >>> lilypond_file = maker.run(environment="docs")
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -3669,6 +3664,18 @@ class Accumulator(object):
     ) -> None:
         r"""
         Calls music-accumulator.
+
+        :param voice_name: voice name.
+
+        :param collections: collections.
+
+        :param anchor: anchor.
+
+        :param figure_name: figure name.
+
+        :param hide_time_signature: hide time signature.
+
+        :param signature: signature
         """
         voice_name = self._abbreviation(voice_name)
         self._check_collections(collections)
@@ -3978,15 +3985,13 @@ class Accumulator(object):
 
     ### PUBLIC METHODS ###
 
-    def assemble(self, voice_name):
+    def assemble(self, voice_name) -> typing.Optional[abjad.Selection]:
         """
         Assembles complete selection for ``voice_name``.
-
-        Returns selection or none.
         """
         floating_selections = self._floating_selections[voice_name]
         if not floating_selections:
-            return
+            return None
         selection = self._insert_skips(floating_selections, voice_name)
         assert isinstance(selection, abjad.Selection), repr(selection)
         return selection
@@ -4066,7 +4071,7 @@ class Contribution(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation with format manager.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -4080,34 +4085,28 @@ class Contribution(object):
         return self._anchor
 
     @property
-    def figure_name(self):
+    def figure_name(self) -> typing.Optional[str]:
         """
         Gets figure name.
-
-        Returns string or none.
         """
         return self._figure_name
 
     @property
-    def hide_time_signature(self):
+    def hide_time_signature(self) -> typing.Optional[bool]:
         """
         Is true when contribution hides time signature.
-
-        Returns true, false or none.
         """
         return self._hide_time_signature
 
     @property
-    def time_signature(self):
+    def time_signature(self) -> typing.Optional[abjad.TimeSignature]:
         """
         Gets time signature.
-
-        Returns time signature or none.
         """
         return self._time_signature
 
     @property
-    def voice_to_selection(self):
+    def voice_to_selection(self) -> typing.Dict[str, abjad.Selection]:
         """
         Gets voice-to-selection dictionary.
         """
@@ -4132,13 +4131,13 @@ class Nest(object):
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.nest("+1/16"),
-        ...     )
+        ... )
 
         >>> collections = [
         ...     [0, 2, 10, 18],
         ...     [16, 15, 23],
         ...     [19, 13, 9, 8],
-        ...     ]
+        ... ]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -4240,13 +4239,13 @@ class Nest(object):
             ...     baca.pitch_first_assignment_command([1], 16, affix=affix),
             ...     rmakers.beam_groups(),
             ...     baca.nest("+1/16"),
-            ...     )
+            ... )
 
             >>> collections = [
             ...     [0, 2, 10, 18],
             ...     [16, 15, 23],
             ...     [19, 13, 9, 8],
-            ...     ]
+            ... ]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -4394,7 +4393,6 @@ class Nest(object):
             tuplet = abjad.Tuplet(multiplier, [])
             abjad.mutate(tuplet_selection).wrap(tuplet)
         elif treatment.__class__ is abjad.Multiplier:
-            # tuplet = abjad.Tuplet(treatment, tuplet_selection)
             tuplet = abjad.Tuplet(treatment, [])
             abjad.mutate(tuplet_selection).wrap(tuplet)
         elif treatment.__class__ is abjad.Duration:
@@ -4419,7 +4417,7 @@ class Nest(object):
     @property
     def treatments(self) -> typing.Optional[typing.Sequence]:
         """
-        Gets time treatments.
+        Gets treatments.
         """
         return self._treatments
 
@@ -4427,141 +4425,6 @@ class Nest(object):
 class RestAffix(object):
     r"""
     Rest affix.
-
-    ..  container:: example
-
-        Works together with negative-valued talea:
-
-        >>> affix = baca.RestAffix(
-        ...     prefix=[2],
-        ...     suffix=[3],
-        ... )
-        >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment_command(
-        ...         [1, -1], 16, affix=affix, treatments=[1]
-        ...     ),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selection = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> staff = lilypond_file[abjad.Score]
-        >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            \with
-            {
-                \override TupletBracket.staff-padding = #4
-            }
-            <<
-                \new GlobalContext
-                {
-                    \time 13/8
-                    s1 * 13/8
-                }
-                \new Staff
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/8 {
-                        r8
-                        c'16
-                        r16
-                        d'16
-                        r16
-                        bf'16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 11/10 {
-                        fs''16
-                        r16
-                        e''16
-                        r16
-                        ef''16
-                        r16
-                        af''16
-                        r16
-                        g''16
-                        r16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/5 {
-                        a'16
-                        r16
-                        r8.
-                    }
-                }
-            >>
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> affix = baca.RestAffix(
-        ...     prefix=[2],
-        ...     suffix=[3],
-        ... )
-        >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment_command(
-        ...         [-1, 1], 16, affix=affix, treatments=[1]
-        ...     ),
-        ...     rmakers.beam(),
-        ... )
-        >>> selection = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> staff = lilypond_file[abjad.Score]
-        >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            \with
-            {
-                \override TupletBracket.staff-padding = #4
-            }
-            <<
-                \new GlobalContext
-                {
-                    \time 13/8
-                    s1 * 13/8
-                }
-                \new Staff
-                {
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 9/8 {
-                        r8
-                        r16
-                        c'16
-                        r16
-                        d'16
-                        r16
-                        bf'16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 11/10 {
-                        r16
-                        fs''16
-                        r16
-                        e''16
-                        r16
-                        ef''16
-                        r16
-                        af''16
-                        r16
-                        g''16
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/5 {
-                        r16
-                        a'16
-                        r8.
-                    }
-                }
-            >>
 
     ..  container:: example
 
@@ -4608,63 +4471,11 @@ class RestAffix(object):
         typing.Optional[abjad.IntegerSequence],
     ]:
         r"""
-        Calls rest affix on ``collection_index`` and
-        ``total_collections``.
+        Calls rest affix.
 
-        ..  container:: example
+        :param collection_index: collection index.
 
-            With time treatments:
-
-            >>> affix = baca.RestAffix(prefix=[1], suffix=[1])
-            >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment_command(
-            ...         [1], 16, affix=affix, treatments=[-1],
-            ...     ),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selection = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        \time 9/16
-                        s1 * 9/16
-                    }
-                    \new Staff
-                    {
-                        \tweak text #tuplet-number::calc-fraction-text
-                        \times 3/4 {
-                            r16
-                            c'16
-                            [
-                            d'16
-                            bf'16
-                            ]
-                        }
-                        \times 4/5 {
-                            fs''16
-                            [
-                            e''16
-                            ef''16
-                            af''16
-                            g''16
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
-                            r16
-                        }
-                    }
-                >>
-
+        :param total_collections: total collections.
         """
         if self.pattern is None:
             if (
@@ -4718,7 +4529,7 @@ class RestAffix(object):
 
         ..  container:: example
 
-            Treats entire figure when pattern is none:
+            Affixes rests to complete output when pattern is none:
 
             >>> affix = baca.RestAffix(
             ...     prefix=[1],
@@ -4777,7 +4588,7 @@ class RestAffix(object):
 
         ..  container:: example
 
-            Treats entire figure (of only one segment) when pattern is none:
+            Affixes rest to complete output when pattern is none:
 
             >>> affix = baca.RestAffix(
             ...     prefix=[1],
@@ -4824,7 +4635,7 @@ class RestAffix(object):
 
         ..  container:: example
 
-            Treats first segment and last segment in figure:
+            Affixes rests to first and last segments only:
 
             >>> affix = baca.RestAffix(
             ...     pattern=abjad.Pattern(indices=[0, -1]),
@@ -4886,7 +4697,7 @@ class RestAffix(object):
 
         ..  container:: example
 
-            Treats every segment in figure:
+            Affixes rests to every segment:
 
             >>> affix = baca.RestAffix(
             ...     pattern=abjad.index_all(),
@@ -5010,7 +4821,7 @@ class RestAffix(object):
     @property
     def skips_instead_of_rests(self) -> typing.Optional[bool]:
         """
-        Is true when command makes skips instead of rests.
+        Is true when command affixes skips instead of rests.
         """
         return self._skips_instead_of_rests
 
@@ -5355,7 +5166,7 @@ class PitchFirstMaker(object):
 
     ..  container:: example
 
-        Silences every other division:
+        Silences every other tuplet:
 
         >>> stack = baca.Stack(
         ...     baca.pitch_first_maker([1, 1, 2], 16),
@@ -5508,7 +5319,15 @@ class PitchFirstMaker(object):
         total_collections: int = None,
     ) -> abjad.Selection:
         r"""
-        Calls rhythm-maker on ``collections``.
+        Calls pitch-first maker.
+
+        :param collections: collections.
+
+        :param collection_index: collection index.
+
+        :param state: state.
+
+        :param total_collections: total collections.
 
         ..  container:: example
 
@@ -5569,10 +5388,7 @@ class PitchFirstMaker(object):
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> state = {'_next_attack': 2}
-            >>> selections = stack(
-            ...     collections,
-            ...     state=state,
-            ...     )
+            >>> selections = stack(collections, state=state)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
@@ -5793,10 +5609,7 @@ class PitchFirstMaker(object):
 
             >>> class_ = baca.PitchFirstMaker
             >>> durations = 4 * [abjad.Duration(1)]
-            >>> result = class_._make_accelerando_multipliers(
-            ...     durations,
-            ...     0.5,
-            ...     )
+            >>> result = class_._make_accelerando_multipliers(durations, 0.5)
             >>> for multiplier in result: multiplier
             ...
             NonreducedFraction(2048, 1024)
@@ -6383,7 +6196,7 @@ class PitchFirstMaker(object):
     @property
     def affix(self) -> typing.Optional["RestAffix"]:
         """
-        Gets rest affix specifier.
+        Gets affix.
         """
         return self._affix
 
@@ -6397,7 +6210,7 @@ class PitchFirstMaker(object):
     @property
     def spelling(self) -> typing.Optional[rmakers.Spelling]:
         r"""
-        Gets duration specifier.
+        Gets spelling.
 
         ..  container:: example
 
@@ -6585,7 +6398,7 @@ class PitchFirstMaker(object):
 
         ..  container:: example
 
-            With very large nonassignable counts:
+            Works with very large nonassignable counts:
 
             >>> stack = baca.Stack(
             ...     baca.pitch_first_maker([29], 64),
@@ -6631,7 +6444,7 @@ class PitchFirstMaker(object):
         typing.Sequence[typing.Union[int, str, abjad.Duration]]
     ]:
         r"""
-        Gets time treatments.
+        Gets treatments.
 
         ..  container:: example
 
@@ -6691,7 +6504,7 @@ class PitchFirstMaker(object):
             >>> stack = baca.Stack(
             ...     baca.pitch_first_maker([1, 1, 2], 16, treatments=[-1]),
             ...     rmakers.beam(),
-            ...     )
+            ... )
 
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
@@ -6750,7 +6563,7 @@ class PitchFirstMaker(object):
             ...     [20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -7036,7 +6849,7 @@ class PitchFirstMaker(object):
             ...     [20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -7322,7 +7135,7 @@ class PitchFirstMaker(object):
             ...     [15, 20, 19, 9, 0, 2],
             ...     [10, 18, 16, 15, 20],
             ...     [19, 9, 0, 2, 10, 18],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -7568,7 +7381,7 @@ class PitchFirstMaker(object):
             ...     [20, 19, 9, 0, 2],
             ...     [10, 18, 16, 15, 20],
             ...     [19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -7836,7 +7649,7 @@ class PitchFirstMaker(object):
             ...     [20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> staff = lilypond_file[abjad.Score]
@@ -7932,7 +7745,7 @@ class PitchFirstMaker(object):
             ...     [20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> staff = lilypond_file[abjad.Score]
@@ -8025,7 +7838,7 @@ class PitchFirstMaker(object):
             ...     [20, 19, 9, 0, 2],
             ...     [10, 18, 16, 15, 20],
             ...     [19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> staff = lilypond_file[abjad.Score]
@@ -8188,6 +8001,7 @@ class PitchFirstAssignment(object):
         """
         return self._pattern
 
+    # TODO: change to "maker"
     @property
     def rhythm_maker(self) -> PitchFirstMaker:
         """
@@ -8198,8 +8012,7 @@ class PitchFirstAssignment(object):
     @property
     def thread(self) -> typing.Optional[bool]:
         """
-        Is true when pitch-first assignment threads rhythm-maker over
-        collections.
+        Is true when pitch-first assignment threads maker over collections.
         """
         return self._thread
 
@@ -8230,6 +8043,8 @@ class PitchFirstCommand(object):
     def __call__(self, collections: typing.Sequence) -> abjad.Selection:
         """
         Calls pitch-first command.
+
+        :param collections: collections.
         """
         collections = _coerce_collections(collections)
         prototype = (pitchclasses.CollectionList,)
@@ -8246,7 +8061,7 @@ class PitchFirstCommand(object):
                     matches.append(match)
                     break
             else:
-                raise Exception(f"no rhythm-maker match for collection {i}.")
+                raise Exception(f"no maker match for collection {i}.")
         assert len(collections) == len(matches)
         groups = abjad.sequence(matches).group_by(
             lambda match: match.assignment.rhythm_maker
@@ -8328,6 +8143,12 @@ def anchor(
     Anchors music in this figure (filtered by ``local_selector``) to
     start offset of ``remote_voice_name`` (filtered by
     ``remote_selector``).
+
+    :param remote_voice_name: remote voice name.
+
+    :param remote_selector: remote selector.
+
+    :param local_selector: local selector.
     """
     return Anchor(
         local_selector=local_selector,
@@ -8344,6 +8165,12 @@ def anchor_after(
     """
     Anchors music in this figure (filtered by ``local_selector``) to
     stop offset of ``remote_voice_name`` (filtered by ``remote_selector``).
+
+    :param remote_voice_name: remote voice name.
+
+    :param remote_selector: remote selector.
+
+    :param local_selector: local selector.
     """
     return Anchor(
         local_selector=local_selector,
@@ -8365,6 +8192,8 @@ def anchor_to_figure(figure_name: str) -> Anchor:
 def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
     r"""
     Coats ``pitch``.
+
+    :param pitch: pitch.
 
     ..  container:: example
 
@@ -8394,7 +8223,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     score_template=template,
         ...     spacing=baca.minimum_duration((1, 32)),
         ...     time_signatures=accumulator.time_signatures,
-        ...     )
+        ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -8614,13 +8443,13 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         >>> collections = [
         ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
         ...     [0, 2, 10, 18, 16], [15, 20, 19, 9],
-        ...     ]
+        ... ]
         >>> segment = [
         ...     0,
         ...     baca.coat(10),
         ...     baca.coat(18),
         ...     10, 18,
-        ...     ]
+        ... ]
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
@@ -8936,7 +8765,7 @@ def extend_beam(
         ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 32)),
         ...     time_signatures=accumulator.time_signatures,
-        ...     )
+        ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -9221,7 +9050,7 @@ def imbricate(
         ...     [0, 2, 10, 18, 16],
         ...     [15, 20, 19, 9, 0],
         ...     [2, 10, 18, 16, 15],
-        ...     ]
+        ... ]
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
@@ -9238,7 +9067,7 @@ def imbricate(
         ...     score_template=template,
         ...     spacing=baca.minimum_duration((1, 32)),
         ...     time_signatures=accumulator.time_signatures,
-        ...     )
+        ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -9505,7 +9334,7 @@ def imbricate(
         ...     [0, 2, 10, 18, 16],
         ...     [15, 20, 19, 9, 0],
         ...     [2, 10, 18, 16, 15],
-        ...     ]
+        ... ]
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
@@ -9531,7 +9360,7 @@ def imbricate(
         ...     score_template=template,
         ...     spacing=baca.minimum_duration((1, 32)),
         ...     time_signatures=accumulator.time_signatures,
-        ...     )
+        ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -9892,7 +9721,7 @@ def imbricate(
         ...     [0, 2, 10, 18, 16],
         ...     [15, 20, 19, 9, 0],
         ...     [2, 10, 18, 16, 15],
-        ...     ]
+        ... ]
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
@@ -9903,7 +9732,7 @@ def imbricate(
         ...         [2, 19, 9, 18, 16],
         ...         baca.accent(selector=baca.pheads()),
         ...         rmakers.beam_groups(beam_rests=True),
-        ...         ),
+        ...     ),
         ...     baca.staccato(selector=baca.pheads()),
         ... )
 
@@ -10203,7 +10032,7 @@ def imbricate(
         ...     abjad.NumberedPitchClass(6),
         ...     abjad.NumberedPitchClass(4),
         ...     abjad.NumberedPitchClass(3),
-        ...     ]
+        ... ]
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> accumulator(
         ...     "Music_Voice_Two",
@@ -10437,7 +10266,7 @@ def imbricate(
         ...     {0, 2, 10, 18, 16},
         ...     [15, 20, 19, 9, 0],
         ...     [2, 10, 18, 16, 15],
-        ...     ]
+        ... ]
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
@@ -10455,7 +10284,7 @@ def imbricate(
         ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 32)),
         ...     time_signatures=accumulator.time_signatures,
-        ...     )
+        ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -10698,7 +10527,7 @@ def imbricate(
         ...     [0, 2, 10, 18, 16],
         ...     [15, 20, 19, 9, 0],
         ...     [2, 10, 18, 16, 15],
-        ...     ]
+        ... ]
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
@@ -10720,7 +10549,7 @@ def imbricate(
         ...     score_template=baca.TwoVoiceStaffScoreTemplate(),
         ...     spacing=baca.minimum_duration((1, 32)),
         ...     time_signatures=accumulator.time_signatures,
-        ...     )
+        ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
@@ -11013,7 +10842,7 @@ def lmr(
     right_reversed: bool = None,
 ) -> LMR:
     """
-    Makes LMR specifier.
+    Makes left-middle-right.
     """
     return LMR(
         left_counts=left_counts,
@@ -11121,7 +10950,7 @@ def pitch_first_maker(
     treatments: typing.Sequence = None,
 ) -> PitchFirstMaker:
     """
-    Makes pitch-first rhythm-maker.
+    Makes pitch-first maker.
     """
     if acciaccatura is True:
         acciaccatura = Acciaccatura()
@@ -11213,7 +11042,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
         ...         16,
         ...         affix=baca.rests_after([2]),
         ...         treatments=[-1],
-        ...         ),
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -11342,6 +11171,200 @@ def rests_around(
                 }
             >>
 
+    ..  container:: example
+
+        Works together with negative-valued talea:
+
+        >>> affix = baca.RestAffix(
+        ...     prefix=[2],
+        ...     suffix=[3],
+        ... )
+        >>> affix = baca.rests_around([2], [3])
+        >>> stack = baca.Stack(
+        ...     baca.pitch_first_assignment_command(
+        ...         [1, -1], 16, affix=affix, treatments=[1]
+        ...     ),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selection = stack(collections)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> staff = lilypond_file[abjad.Score]
+        >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            \with
+            {
+                \override TupletBracket.staff-padding = #4
+            }
+            <<
+                \new GlobalContext
+                {
+                    \time 13/8
+                    s1 * 13/8
+                }
+                \new Staff
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/8 {
+                        r8
+                        c'16
+                        r16
+                        d'16
+                        r16
+                        bf'16
+                        r16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 11/10 {
+                        fs''16
+                        r16
+                        e''16
+                        r16
+                        ef''16
+                        r16
+                        af''16
+                        r16
+                        g''16
+                        r16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/5 {
+                        a'16
+                        r16
+                        r8.
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> affix = baca.RestAffix(
+        ...     prefix=[2],
+        ...     suffix=[3],
+        ... )
+        >>> affix = baca.rests_around([2], [3])
+        >>> stack = baca.Stack(
+        ...     baca.pitch_first_assignment_command(
+        ...         [-1, 1], 16, affix=affix, treatments=[1]
+        ...     ),
+        ...     rmakers.beam(),
+        ... )
+        >>> selection = stack(collections)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> staff = lilypond_file[abjad.Score]
+        >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            \with
+            {
+                \override TupletBracket.staff-padding = #4
+            }
+            <<
+                \new GlobalContext
+                {
+                    \time 13/8
+                    s1 * 13/8
+                }
+                \new Staff
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/8 {
+                        r8
+                        r16
+                        c'16
+                        r16
+                        d'16
+                        r16
+                        bf'16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 11/10 {
+                        r16
+                        fs''16
+                        r16
+                        e''16
+                        r16
+                        ef''16
+                        r16
+                        af''16
+                        r16
+                        g''16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/5 {
+                        r16
+                        a'16
+                        r8.
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        With time treatments:
+
+        >>> affix = baca.RestAffix(prefix=[1], suffix=[1])
+        >>> affix = baca.rests_around([1], [1])
+        >>> stack = baca.Stack(
+        ...     baca.pitch_first_assignment_command(
+        ...         [1], 16, affix=affix, treatments=[-1],
+        ...     ),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
+        >>> selection = stack(collections)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 9/16
+                    s1 * 9/16
+                }
+                \new Staff
+                {
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 3/4 {
+                        r16
+                        c'16
+                        [
+                        d'16
+                        bf'16
+                        ]
+                    }
+                    \times 4/5 {
+                        fs''16
+                        [
+                        e''16
+                        ef''16
+                        af''16
+                        g''16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        a'16
+                        r16
+                    }
+                }
+            >>
+
     """
     return RestAffix(prefix=prefix, suffix=suffix)
 
@@ -11447,7 +11470,7 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
         ...         16,
         ...         affix=baca.skips_after([2]),
         ...         treatments=[-1],
-        ...         ),
+        ...     ),
         ...     rmakers.beam(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
