@@ -362,7 +362,7 @@ def arpeggio(
         Attaches arpeggio to chord head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment([5, -3], 32),
+        ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.arpeggio(),
         ... )
@@ -663,7 +663,7 @@ def down_arpeggio(
         Attaches down-arpeggio to chord head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment([5, -3], 32),
+        ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.down_arpeggio(),
         ... )
@@ -3399,7 +3399,7 @@ def up_arpeggio(
         Attaches up-arpeggios to chord head 0:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment([5, -3], 32),
+        ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.up_arpeggio(),
         ... )

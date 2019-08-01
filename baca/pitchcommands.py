@@ -6134,7 +6134,7 @@ def bass_to_octave(
         selection appears in octave 3:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment([5, -3], 32),
+        ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.bass_to_octave(3),
         ...     baca.color(baca.plts().group()),
@@ -6214,7 +6214,7 @@ def bass_to_octave(
         logical tie appears in octave 3:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment([5, -3], 32),
+        ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.bass_to_octave(3),
@@ -6311,7 +6311,7 @@ def center_to_octave(
         in octave 3:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment([5, -3], 32),
+        ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.center_to_octave(3),
         ...     baca.color(baca.plts().group()),
@@ -6391,7 +6391,7 @@ def center_to_octave(
         logical tie appears in octave 3:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment([5, -3], 32),
+        ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.center_to_octave(3),
@@ -6607,7 +6607,7 @@ def displacement(
         Octave-displaces chords:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment(
+        ...     baca.pitch_first_assignment_command(
         ...         [4],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -7233,7 +7233,7 @@ def soprano_to_octave(
         collection of all PLTs appears in octave 3:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment([5, -3], 32),
+        ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.color(baca.plts().group()),
         ...     baca.soprano_to_octave(3),
@@ -7313,7 +7313,7 @@ def soprano_to_octave(
         pitched logical tie appears in octave 3:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment([5, -3], 32),
+        ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.soprano_to_octave(3),
