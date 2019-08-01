@@ -11257,9 +11257,6 @@ def pitch_first_command(
     """
     Makes pitch-first command.
     """
-    for assignment in assignments:
-        assert isinstance(assignment, PitchFirstAssignment)
-        assert not assignment.thread, repr(assignment)
     return PitchFirstCommand(*assignments)
 
 
