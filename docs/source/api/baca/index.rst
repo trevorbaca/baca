@@ -28,9 +28,9 @@ baca
    indicatorcommands
    indicators
    markups
-   mmaker
    overrides
    persistence
+   pfmaker
    piecewise
    pitcharray
    pitchclasses
@@ -51,9 +51,9 @@ baca
    indicatorcommands
    indicators
    markups
-   mmaker
    overrides
    persistence
+   pfmaker
    piecewise
    pitcharray
    pitchclasses

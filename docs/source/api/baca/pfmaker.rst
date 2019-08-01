@@ -1,16 +1,16 @@
-.. _baca--mmaker:
+.. _baca--pfmaker:
 
-mmaker
-======
+pfmaker
+=======
 
-.. automodule:: baca.mmaker
+.. automodule:: baca.pfmaker
 
-.. currentmodule:: baca.mmaker
+.. currentmodule:: baca.pfmaker
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.mmaker
+      :lineage: baca.pfmaker
 
 .. raw:: html
 

@@ -4,9 +4,9 @@ from .commands import *
 from .divisionclasses import *
 from .indicatorcommands import *
 from .indicators import *
-from .mmaker import *
 from .overrides import *
 from .persistence import *
+from .pfmaker import *
 from .piecewise import *
 from .pitcharray import *
 from .pitchcommands import *
