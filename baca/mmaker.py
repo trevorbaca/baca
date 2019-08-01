@@ -4329,27 +4329,26 @@ class Nest(object):
 
     def __init__(
         self,
+        treatments: typing.Sequence[typing.Union[int, str]],
         *,
         lmr_specifier: LMR = None,
-        treatments: typing.Sequence[typing.Union[int, str]] = None,
     ) -> None:
+        assert isinstance(treatments, (list, tuple))
+        is_treatment = PitchFirstRhythmMaker._is_treatment
+        for treatment in treatments:
+            assert is_treatment(treatment), repr(treatment)
+        self._treatments = treatments
         if lmr_specifier is not None:
             assert isinstance(lmr_specifier, LMR), repr(lmr_specifier)
         self._lmr_specifier = lmr_specifier
-        if treatments is not None:
-            assert isinstance(treatments, (list, tuple))
-            is_treatment = PitchFirstRhythmMaker._is_treatment
-            for treatment in treatments:
-                assert is_treatment(treatment), repr(treatment)
-        self._treatments = treatments
 
     ### SPECIAL METHODS ###
 
     def __call__(
-        self, selections: typing.List[abjad.Selection] = None
-    ) -> typing.Optional[typing.List[abjad.Selection]]:
+        self, selection: abjad.Selection
+    ) -> typing.List[abjad.Selection]:
         r"""
-        Calls nesting command on ``selections``.
+        Calls nesting command on ``selection``.
 
         ..  container:: example
 
@@ -4433,18 +4432,18 @@ class Nest(object):
                 >>
 
         """
-        if selections is None:
-            return None
         treatments = self._get_treatments()
-        if treatments is None:
-            return selections
+        assert treatments is not None
         tuplets = []
-        for selection in selections:
-            if not isinstance(selection, abjad.Selection):
-                raise Exception(f"should be selection: {selection!r}.")
-            assert len(selection) == 1, repr(selection)
-            assert isinstance(selection[0], abjad.Tuplet)
-            tuplets.append(selection[0])
+        for item in selection:
+            if isinstance(item, abjad.Tuplet):
+                tuplets.append(item)
+            else:
+                assert isinstance(item, abjad.Selection), repr(item)
+                assert len(item) == 1, repr(item)
+                assert isinstance(item[0], abjad.Tuplet), repr(item)
+                tuplet = item[0]
+                tuplets.append(tuplet)
         if self.lmr_specifier is None:
             tuplet_selections = [abjad.select(tuplets)]
         else:
@@ -5716,8 +5715,7 @@ class PitchFirstRhythmMaker(object):
             collection_index=collection_index,
             total_collections=total_collections,
         )
-        selections = [abjad.select(_) for _ in tuplets]
-        selection = abjad.select(selections)
+        selection = abjad.select(tuplets)
         return selection
 
     def __eq__(self, argument) -> bool:
@@ -8204,6 +8202,9 @@ class PitchFirstAssignment(object):
                 stage_selections.extend(stage_selections_)
         triples = zip(indices, stage_selections, collections)
         for i, stage_selection, collection in triples:
+            assert isinstance(stage_selection, abjad.Tuplet)
+            stage_selection = abjad.select(stage_selection)
+            # stage_selection is actually a tuplet
             assert len(stage_selection) == 1, repr(stage_selection)
             if not isinstance(collection, (abjad.Set, set)):
                 selections[i] = stage_selection
@@ -11199,9 +11200,7 @@ def lmr(
     )
 
 
-def nest(
-    treatments: typing.Sequence = None, *, lmr_specifier: LMR = None
-) -> Nest:
+def nest(treatments: typing.Sequence, *, lmr_specifier: LMR = None) -> Nest:
     r"""
     Nests music.
 
@@ -11274,6 +11273,7 @@ def nest(
             >>
 
     """
+    assert treatments is not None
     if not isinstance(treatments, list):
         treatments = [treatments]
     return Nest(lmr_specifier=lmr_specifier, treatments=treatments)
