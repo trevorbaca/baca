@@ -3782,7 +3782,7 @@ class Accumulator(object):
         elif all(isinstance(_, abjad.Component) for _ in collections):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
-        elif isinstance(commands[0], PitchFirstRhythmMaker):
+        elif isinstance(commands[0], PitchFirstMaker):
             pitch_first_maker = commands[0]
             collections = _coerce_collections(collections)
             selections = pitch_first_maker(collections)
@@ -4309,7 +4309,7 @@ class Nest(object):
         lmr_specifier: LMR = None,
     ) -> None:
         assert isinstance(treatments, (list, tuple))
-        is_treatment = PitchFirstRhythmMaker._is_treatment
+        is_treatment = PitchFirstMaker._is_treatment
         for treatment in treatments:
             assert is_treatment(treatment), repr(treatment)
         self._treatments = treatments
@@ -5164,7 +5164,7 @@ class RestAffix(object):
         return self._suffix
 
 
-class PitchFirstRhythmMaker(object):
+class PitchFirstMaker(object):
     r"""
     Pitch-first rhythm-maker.
 
@@ -5885,7 +5885,7 @@ class PitchFirstRhythmMaker(object):
 
             Set exponent less than 1 for decreasing durations:
 
-            >>> class_ = baca.PitchFirstRhythmMaker
+            >>> class_ = baca.PitchFirstMaker
             >>> durations = 4 * [abjad.Duration(1)]
             >>> result = class_._make_accelerando_multipliers(
             ...     durations,
@@ -5902,7 +5902,7 @@ class PitchFirstRhythmMaker(object):
 
             Set exponent to 1 for trivial multipliers:
 
-            >>> class_ = baca.PitchFirstRhythmMaker
+            >>> class_ = baca.PitchFirstMaker
             >>> durations = 4 * [abjad.Duration(1)]
             >>> result = class_._make_accelerando_multipliers(durations, 1)
             >>> for multiplier in result: multiplier
@@ -5916,7 +5916,7 @@ class PitchFirstRhythmMaker(object):
 
             Set exponent greater than 1 for increasing durations:
 
-            >>> class_ = baca.PitchFirstRhythmMaker
+            >>> class_ = baca.PitchFirstMaker
             >>> durations = 4 * [abjad.Duration(1)]
             >>> result = class_._make_accelerando_multipliers(
             ...     durations,
@@ -8129,12 +8129,12 @@ class PitchFirstAssignment(object):
 
     def __init__(
         self,
-        rhythm_maker: PitchFirstRhythmMaker,
+        rhythm_maker: PitchFirstMaker,
         *,
         pattern: abjad.Pattern = None,
         thread: bool = None,
     ) -> None:
-        assert isinstance(rhythm_maker, PitchFirstRhythmMaker)
+        assert isinstance(rhythm_maker, PitchFirstMaker)
         self._rhythm_maker = rhythm_maker
         if pattern is not None:
             assert isinstance(pattern, abjad.Pattern)
@@ -8189,7 +8189,7 @@ class PitchFirstAssignment(object):
         return self._pattern
 
     @property
-    def rhythm_maker(self) -> PitchFirstRhythmMaker:
+    def rhythm_maker(self) -> PitchFirstMaker:
         """
         Gets rhythm-maker.
         """
@@ -11120,7 +11120,7 @@ def pitch_first_maker(
     signature: int = None,
     spelling: rmakers.Spelling = None,
     treatments: typing.Sequence = None,
-) -> PitchFirstRhythmMaker:
+) -> PitchFirstMaker:
     """
     Makes pitch-first rhythm-maker.
     """
@@ -11130,7 +11130,7 @@ def pitch_first_maker(
         acciaccatura = Acciaccatura(lmr_specifier=acciaccatura)
     if acciaccatura is not None:
         assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
-    return PitchFirstRhythmMaker(
+    return PitchFirstMaker(
         rmakers.Talea(counts=counts, denominator=denominator),
         acciaccatura=acciaccatura,
         affix=affix,

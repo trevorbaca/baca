@@ -32,7 +32,7 @@ mmaker
    ~Nest
    ~PitchFirstAssignment
    ~PitchFirstCommand
-   ~PitchFirstRhythmMaker
+   ~PitchFirstMaker
    ~RestAffix
    ~Stack
 
@@ -534,7 +534,7 @@ mmaker
 
    .. autoattribute:: PitchFirstCommand.assignments
 
-.. autoclass:: PitchFirstRhythmMaker
+.. autoclass:: PitchFirstMaker
 
    .. raw:: html
 
@@ -565,15 +565,15 @@ mmaker
    .. rubric:: Special methods
       :class: class-header
 
-   .. automethod:: PitchFirstRhythmMaker.__call__
+   .. automethod:: PitchFirstMaker.__call__
 
-   .. automethod:: PitchFirstRhythmMaker.__eq__
+   .. automethod:: PitchFirstMaker.__eq__
 
-   .. automethod:: PitchFirstRhythmMaker.__format__
+   .. automethod:: PitchFirstMaker.__format__
 
-   .. automethod:: PitchFirstRhythmMaker.__hash__
+   .. automethod:: PitchFirstMaker.__hash__
 
-   .. automethod:: PitchFirstRhythmMaker.__repr__
+   .. automethod:: PitchFirstMaker.__repr__
 
    .. raw:: html
 
@@ -582,17 +582,17 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PitchFirstRhythmMaker.acciaccatura
+   .. autoattribute:: PitchFirstMaker.acciaccatura
 
-   .. autoattribute:: PitchFirstRhythmMaker.affix
+   .. autoattribute:: PitchFirstMaker.affix
 
-   .. autoattribute:: PitchFirstRhythmMaker.signature
+   .. autoattribute:: PitchFirstMaker.signature
 
-   .. autoattribute:: PitchFirstRhythmMaker.spelling
+   .. autoattribute:: PitchFirstMaker.spelling
 
-   .. autoattribute:: PitchFirstRhythmMaker.talea
+   .. autoattribute:: PitchFirstMaker.talea
 
-   .. autoattribute:: PitchFirstRhythmMaker.treatments
+   .. autoattribute:: PitchFirstMaker.treatments
 
 .. autoclass:: RestAffix
 
