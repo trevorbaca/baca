@@ -7928,31 +7928,20 @@ class PitchFirstAssignment(object):
 
     ### CLASS ATTRIBUTES ###
 
-    __slots__ = ("_maker", "_pattern", "_thread")
+    __slots__ = ("_maker", "_pattern")
 
     _publish_storage_format = True
 
     ### INITIALIZER ###
 
     def __init__(
-        self,
-        maker: PitchFirstMaker,
-        *,
-        pattern: abjad.Pattern = None,
-        thread: bool = None,
+        self, maker: PitchFirstMaker, *, pattern: abjad.Pattern = None
     ) -> None:
         assert isinstance(maker, PitchFirstMaker)
         self._maker = maker
         if pattern is not None:
             assert isinstance(pattern, abjad.Pattern)
         self._pattern = pattern
-        if thread is not None:
-            thread = bool(thread)
-        self._thread = thread
-        if 1 < len(maker.treatments or []) and not thread:
-            message = "multiple treatments only make sense with thread:\n"
-            message += f"   {format(maker)}"
-            raise Exception(message)
 
     ### SPECIAL METHODS ###
 
@@ -8000,14 +7989,6 @@ class PitchFirstAssignment(object):
         Gets pattern.
         """
         return self._pattern
-
-    # TODO: remove thread
-    @property
-    def thread(self) -> typing.Optional[bool]:
-        """
-        Is true when pitch-first assignment threads maker over collections.
-        """
-        return self._thread
 
 
 class PitchFirstCommand(object):
@@ -8063,25 +8044,13 @@ class PitchFirstCommand(object):
         for group in groups:
             maker = group[0].assignment.maker
             collections_ = [match.division for match in group]
-            # TODO: remove thread
-            if group[0].assignment.thread:
-                selection = maker(
-                    collections_,
-                    collection_index=None,
-                    state=None,
-                    total_collections=None,
-                )
-                tuplets.extend(selection)
-            else:
-                total_collections = len(collections_)
-                for i, collection_ in enumerate(collections_):
-                    selection = maker(
-                        [collection_],
-                        collection_index=i,
-                        state=None,
-                        total_collections=total_collections,
-                    )
-                    tuplets.extend(selection)
+            selection = maker(
+                collections_,
+                collection_index=None,
+                state=None,
+                total_collections=None,
+            )
+            tuplets.extend(selection)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         selection = abjad.select(tuplets)
         return selection
@@ -10962,17 +10931,13 @@ def pfmaker(
 
 
 def pfassignment(
-    maker: PitchFirstMaker,
-    pattern: abjad.Pattern = None,
-    *,
-    # TODO: remove thread
-    thread: bool = None,
+    maker: PitchFirstMaker, pattern: abjad.Pattern = None
 ) -> PitchFirstAssignment:
     """
     Makes pitch-first assignment.
     """
     assert isinstance(maker, PitchFirstMaker), repr(maker)
-    return PitchFirstAssignment(maker, pattern=pattern, thread=thread)
+    return PitchFirstAssignment(maker, pattern=pattern)
 
 
 def pfcommand(*assignments: PitchFirstAssignment) -> PitchFirstCommand:

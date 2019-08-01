@@ -459,7 +459,6 @@ pfmaker
       __repr__
       maker
       pattern
-      thread
 
    .. raw:: html
 
@@ -486,8 +485,6 @@ pfmaker
    .. autoattribute:: PitchFirstAssignment.maker
 
    .. autoattribute:: PitchFirstAssignment.pattern
-
-   .. autoattribute:: PitchFirstAssignment.thread
 
 .. autoclass:: PitchFirstCommand
 
