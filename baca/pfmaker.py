@@ -44,11 +44,7 @@ class Stack(object):
     ..  container:: example
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_maker(
-        ...         [1, 1, 2],
-        ...         8,
-        ...         treatments=[(1, 4), (3, 8)],
-        ...     ),
+        ...     baca.pfmaker([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
         ...     rmakers.denominator((1, 16)),
         ...     rmakers.beam(),
         ... )
@@ -1231,7 +1227,7 @@ class Acciaccatura(object):
             Sixteenth-note acciaccaturas by default:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1], 8, acciaccatura=True),
+            ...     baca.pfmaker([1], 8, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -1327,7 +1323,7 @@ class Acciaccatura(object):
 
             >>> specifier = baca.Acciaccatura(durations=[(1, 8)])
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1], 8, acciaccatura=specifier),
+            ...     baca.pfmaker([1], 8, acciaccatura=specifier),
             ...     rmakers.beam(),
             ... )
 
@@ -1430,7 +1426,7 @@ class Acciaccatura(object):
             As many acciaccaturas as possible per collection:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1], 8, acciaccatura=True),
+            ...     baca.pfmaker([1], 8, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -1526,7 +1522,7 @@ class Acciaccatura(object):
             At most two acciaccaturas at the beginning of every collection:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
+            ...     baca.pfmaker(
             ...         [1],
             ...         8,
             ...         acciaccatura=baca.lmr(
@@ -1635,7 +1631,7 @@ class Acciaccatura(object):
             At most two acciaccaturas at the end of every collection:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
+            ...     baca.pfmaker(
             ...         [1],
             ...         8,
             ...         acciaccatura=baca.lmr(
@@ -1745,7 +1741,7 @@ class Acciaccatura(object):
             then at most two acciaccaturas at the end of every collection:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
+            ...     baca.pfmaker(
             ...         [1],
             ...         8,
             ...         acciaccatura=baca.lmr(
@@ -1862,11 +1858,7 @@ class Acciaccatura(object):
             collection:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
-            ...         [1],
-            ...         8,
-            ...         acciaccatura=baca.lmr(left_length=1),
-            ...     ),
+            ...     baca.pfmaker([1], 8, acciaccatura=baca.lmr(left_length=1)),
             ...     rmakers.beam(),
             ... )
 
@@ -2362,7 +2354,7 @@ class Imbrication(object):
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
-            ...     baca.pitch_first_maker([1], 16),
+            ...     baca.pfmaker([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
             ...         "Music_Voice_One",
@@ -2617,7 +2609,7 @@ class Imbrication(object):
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
-            ...     baca.pitch_first_maker([1], 16),
+            ...     baca.pfmaker([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
             ...         "Music_Voice_One",
@@ -2671,7 +2663,7 @@ class Imbrication(object):
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
-            ...     baca.pitch_first_maker([1], 16),
+            ...     baca.pfmaker([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
             ...         "Music_Voice_One",
@@ -2976,7 +2968,7 @@ class Imbrication(object):
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
-            ...     baca.pitch_first_maker([1], 16),
+            ...     baca.pfmaker([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
             ...         "Music_Voice_One",
@@ -3311,7 +3303,7 @@ class Imbrication(object):
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
-            ...     baca.pitch_first_maker([5], 32),
+            ...     baca.pfmaker([5], 32),
             ...     rmakers.beam(),
             ...     baca.imbricate(
             ...         "Music_Voice_One",
@@ -3597,7 +3589,7 @@ class Accumulator(object):
         >>> accumulator = baca.Accumulator(template)
 
         >>> commands = [
-        ...     baca.pitch_first_maker([1], 16, signature=16),
+        ...     baca.pfmaker([1], 16, signature=16),
         ...     rmakers.beam(),
         ... ]
 
@@ -3685,7 +3677,7 @@ class Accumulator(object):
                 voice_name_ = self._abbreviation(command.voice_name)
                 command._voice_name = voice_name_
         pitch_first_command = None
-        pitch_first_maker = None
+        maker = None
         selection: typing.Union[list, abjad.Selection]
         selections: typing.Union[list, abjad.Selection]
         if anchor is not None:
@@ -3698,9 +3690,9 @@ class Accumulator(object):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
         elif isinstance(commands[0], PitchFirstMaker):
-            pitch_first_maker = commands[0]
+            maker = commands[0]
             collections = _coerce_collections(collections)
-            selections = pitch_first_maker(collections)
+            selections = maker(collections)
             selections = abjad.select(selections).flatten()
             commands_ = list(commands[1:])
         else:
@@ -3722,8 +3714,8 @@ class Accumulator(object):
             self._label_figure_name_(container, figure_name)
         selection = abjad.select([container])
         duration = abjad.inspect(selection).duration()
-        if signature is None and pitch_first_maker:
-            signature = pitch_first_maker.signature
+        if signature is None and maker:
+            signature = maker.signature
         if signature is None and pitch_first_command:
             primary_rhythm_maker = pitch_first_command.assignments[
                 0
@@ -4128,7 +4120,7 @@ class Nest(object):
         Augments one sixteenth:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_maker([1], 16),
+        ...     baca.pfmaker([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.nest("+1/16"),
         ... )
@@ -4236,7 +4228,7 @@ class Nest(object):
 
             >>> affix = baca.rests_around([2], [3])
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1], 16, affix=affix),
+            ...     baca.pfmaker([1], 16, affix=affix),
             ...     rmakers.beam_groups(),
             ...     baca.nest("+1/16"),
             ... )
@@ -4536,9 +4528,7 @@ class RestAffix(object):
             ...     suffix=[2],
             ... )
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
-            ...         [1], 16, affix=affix, treatments=[1]
-            ...     ),
+            ...     baca.pfmaker([1], 16, affix=affix, treatments=[1]),
             ...     rmakers.beam(),
             ... )
 
@@ -4595,9 +4585,7 @@ class RestAffix(object):
             ...     suffix=[2],
             ... )
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
-            ...         [1], 16, affix=affix, treatments=[1]
-            ...     ),
+            ...     baca.pfmaker([1], 16, affix=affix, treatments=[1]),
             ...     rmakers.beam(),
             ... )
 
@@ -4643,9 +4631,7 @@ class RestAffix(object):
             ...     suffix=[2],
             ... )
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
-            ...         [1], 16, affix=affix, treatments=[1]
-            ...     ),
+            ...     baca.pfmaker([1], 16, affix=affix, treatments=[1]),
             ...     rmakers.beam(),
             ... )
 
@@ -4705,9 +4691,7 @@ class RestAffix(object):
             ...     suffix=[2],
             ... )
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
-            ...         [1], 16, affix=affix, treatments=[1]
-            ...     ),
+            ...     baca.pfmaker([1], 16, affix=affix, treatments=[1]),
             ...     rmakers.beam(),
             ... )
 
@@ -4771,7 +4755,7 @@ class RestAffix(object):
 
             >>> affix = baca.RestAffix(prefix=[3])
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1], 16, affix=affix),
+            ...     baca.pfmaker([1], 16, affix=affix),
             ...     rmakers.beam(),
             ... )
 
@@ -4834,7 +4818,7 @@ class RestAffix(object):
 
             >>> affix = baca.RestAffix(suffix=[3])
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1], 16, affix=affix),
+            ...     baca.pfmaker([1], 16, affix=affix),
             ...     rmakers.beam(),
             ... )
 
@@ -4891,7 +4875,7 @@ class PitchFirstMaker(object):
         Sixteenths and eighths:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_maker([1, 1, 2], 16),
+        ...     baca.pfmaker([1, 1, 2], 16),
         ...     rmakers.beam(),
         ... )
 
@@ -5020,7 +5004,7 @@ class PitchFirstMaker(object):
         Silences every third logical tie:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_maker([1, 1, 2], 16),
+        ...     baca.pfmaker([1, 1, 2], 16),
         ...     rmakers.force_rest(baca.lts().get([2], 3)),
         ...     rmakers.beam(),
         ... )
@@ -5071,7 +5055,7 @@ class PitchFirstMaker(object):
         Silences first and last logical ties:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_maker([1, 1, 2], 16),
+        ...     baca.pfmaker([1, 1, 2], 16),
         ...     rmakers.force_rest(baca.lt(0)),
         ...     rmakers.force_rest(baca.lt(-1)),
         ...     rmakers.beam(),
@@ -5121,7 +5105,7 @@ class PitchFirstMaker(object):
         No rest commands:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_maker([1, 1, 2], 16),
+        ...     baca.pfmaker([1, 1, 2], 16),
         ...     rmakers.beam(),
         ... )
 
@@ -5169,7 +5153,7 @@ class PitchFirstMaker(object):
         Silences every other tuplet:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_maker([1, 1, 2], 16),
+        ...     baca.pfmaker([1, 1, 2], 16),
         ...     rmakers.force_rest(baca.tuplets().get([1], 2)),
         ...     rmakers.rewrite_rest_filled(),
         ...     rmakers.beam(),
@@ -5214,7 +5198,7 @@ class PitchFirstMaker(object):
 
         >>> tuplets = selector=baca.tuplets().get([1], 2)
         >>> stack = baca.stack(
-        ...     baca.pitch_first_maker([1, 1, 2], 16),
+        ...     baca.pfmaker([1, 1, 2], 16),
         ...     rmakers.tie(tuplets.map(baca.leaves()[:-1])),
         ...     rmakers.rewrite_sustained(),
         ...     rmakers.beam(),
@@ -5334,7 +5318,7 @@ class PitchFirstMaker(object):
             Without state manifest:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1, 1, 2], 16),
+            ...     baca.pfmaker([1, 1, 2], 16),
             ...     rmakers.beam(),
             ... )
 
@@ -5382,7 +5366,7 @@ class PitchFirstMaker(object):
             With state manifest:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1, 1, 2], 16),
+            ...     baca.pfmaker([1, 1, 2], 16),
             ...     rmakers.beam(),
             ... )
 
@@ -5897,7 +5881,7 @@ class PitchFirstMaker(object):
             Default acciaccatura:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1], 8, acciaccatura=True),
+            ...     baca.pfmaker([1], 8, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -5992,7 +5976,7 @@ class PitchFirstMaker(object):
             Graced quarters:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1], 4, acciaccatura=True),
+            ...     baca.pfmaker([1], 4, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -6087,7 +6071,7 @@ class PitchFirstMaker(object):
             Graced rests:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1], 4, acciaccatura=True),
+            ...     baca.pfmaker([1], 4, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -6219,7 +6203,7 @@ class PitchFirstMaker(object):
             durations by default:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([4, 4, 5], 32),
+            ...     baca.pfmaker([4, 4, 5], 32),
             ...     rmakers.beam(),
             ... )
 
@@ -6276,7 +6260,7 @@ class PitchFirstMaker(object):
             durations:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
+            ...     baca.pfmaker(
             ...         [4, 4, 5],
             ...         32,
             ...         spelling=rmakers.Spelling(increase_monotonic=True),
@@ -6344,7 +6328,7 @@ class PitchFirstMaker(object):
             With rests:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([3, -1, 2, 2], 16),
+            ...     baca.pfmaker([3, -1, 2, 2], 16),
             ...     rmakers.beam(
             ...         beam_rests=True,
             ...         stemlet_length=1.5,
@@ -6402,7 +6386,7 @@ class PitchFirstMaker(object):
             Works with very large nonassignable counts:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([29], 64),
+            ...     baca.pfmaker([29], 64),
             ...     rmakers.beam(),
             ...     rmakers.force_repeat_tie(),
             ... )
@@ -6452,7 +6436,7 @@ class PitchFirstMaker(object):
             One extra count per division:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1, 1, 2], 16, treatments=[1]),
+            ...     baca.pfmaker([1, 1, 2], 16, treatments=[1]),
             ...     rmakers.beam(),
             ... )
 
@@ -6503,7 +6487,7 @@ class PitchFirstMaker(object):
             One missing count per division:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1, 1, 2], 16, treatments=[-1]),
+            ...     baca.pfmaker([1, 1, 2], 16, treatments=[-1]),
             ...     rmakers.beam(),
             ... )
 
@@ -6553,7 +6537,7 @@ class PitchFirstMaker(object):
             Accelerandi:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1], 16, treatments=["accel"]),
+            ...     baca.pfmaker([1], 16, treatments=["accel"]),
             ...     rmakers.beam(),
             ... )
 
@@ -6839,7 +6823,7 @@ class PitchFirstMaker(object):
             Ritardandi:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker([1], 16, treatments=["rit"]),
+            ...     baca.pfmaker([1], 16, treatments=["rit"]),
             ...     rmakers.beam(),
             ... )
 
@@ -7125,7 +7109,7 @@ class PitchFirstMaker(object):
             Accelerandi followed by ritardandi:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
+            ...     baca.pfmaker(
             ...         [1], 16, treatments=["accel", "rit"]
             ...     ),
             ...     rmakers.beam(),
@@ -7367,11 +7351,7 @@ class PitchFirstMaker(object):
             Mixed accelerandi, ritardandi and prolation:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
-            ...         [1],
-            ...         16,
-            ...         treatments=["accel", -2, "rit"],
-            ...     ),
+            ...     baca.pfmaker([1], 16, treatments=["accel", -2, "rit"]),
             ...     rmakers.beam(),
             ... )
 
@@ -7635,11 +7615,7 @@ class PitchFirstMaker(object):
             Specified by tuplet multiplier:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
-            ...         [1],
-            ...         8,
-            ...         treatments=["3:2"],
-            ...     ),
+            ...     baca.pfmaker([1], 8, treatments=["3:2"]),
             ...     rmakers.beam(),
             ... )
 
@@ -7730,11 +7706,7 @@ class PitchFirstMaker(object):
             Segment durations equal to a quarter:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
-            ...         [1],
-            ...         8,
-            ...         treatments=[(1, 4)],
-            ...     ),
+            ...     baca.pfmaker([1], 8, treatments=[(1, 4)]),
             ...     rmakers.denominator((1, 16)),
             ...     rmakers.beam(),
             ... )
@@ -7823,11 +7795,7 @@ class PitchFirstMaker(object):
             quarter:
 
             >>> stack = baca.stack(
-            ...     baca.pitch_first_maker(
-            ...         [1, 1, 2],
-            ...         8,
-            ...         treatments=[(1, 4), (3, 8)],
-            ...     ),
+            ...     baca.pfmaker([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
             ...     rmakers.denominator((1, 16)),
             ...     rmakers.beam(),
             ... )
@@ -8206,7 +8174,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     3 * [[0, 2, 10]],
-        ...     baca.pitch_first_maker(
+        ...     baca.pfmaker(
         ...         [1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -8454,7 +8422,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_maker([1], 16),
+        ...     baca.pfmaker([1], 16),
         ...     rmakers.beam(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -8737,7 +8705,7 @@ def extend_beam(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     [[0, 2, 10, 18], [16, 15, 23]],
-        ...     baca.pitch_first_maker([1], 16),
+        ...     baca.pfmaker([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -8751,7 +8719,7 @@ def extend_beam(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     [[19, 13, 9, 8]],
-        ...     baca.pitch_first_maker([1], 16),
+        ...     baca.pfmaker([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -9055,7 +9023,7 @@ def imbricate(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_maker([1], 16),
+        ...     baca.pfmaker([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -9339,7 +9307,7 @@ def imbricate(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_maker([1], 16),
+        ...     baca.pfmaker([1], 16),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
         ...         [2, 19, 9],
@@ -9726,7 +9694,7 @@ def imbricate(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_maker([1], 16, treatments=[1]),
+        ...     baca.pfmaker([1], 16, treatments=[1]),
         ...     rmakers.beam_groups(beam_rests=True),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -10038,7 +10006,7 @@ def imbricate(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_maker([3], 16),
+        ...     baca.pfmaker([3], 16),
         ...     rmakers.beam(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -10271,7 +10239,7 @@ def imbricate(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_maker([1], 16),
+        ...     baca.pfmaker([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -10532,11 +10500,7 @@ def imbricate(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_maker(
-        ...         [1],
-        ...         16,
-        ...         affix=baca.rests_around([2], [2]),
-        ...     ),
+        ...     baca.pfmaker([1], 16, affix=baca.rests_around([2], [2])),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -10940,7 +10904,7 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
     return Nest(lmr=lmr, treatments=treatments)
 
 
-def pitch_first_maker(
+def pfmaker(
     counts: abjad.IntegerSequence,
     denominator: int,
     *,
@@ -10984,7 +10948,7 @@ def pitch_first_assignment(
     """
     Makes pitch-first assignment.
     """
-    rhythm_maker = pitch_first_maker(
+    rhythm_maker = pfmaker(
         counts,
         denominator,
         acciaccatura=acciaccatura,
