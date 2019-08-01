@@ -255,7 +255,7 @@ class ClusterCommand(scoping.Command):
 
     ..  container:: example
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.clusters([3, 4]),
@@ -3314,7 +3314,7 @@ class RegisterCommand(scoping.Command):
 
         With music-maker:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterCommand(
@@ -3519,7 +3519,7 @@ class RegisterCommand(scoping.Command):
 
         Works with chords:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterCommand(
@@ -3654,7 +3654,7 @@ class RegisterInterpolationCommand(scoping.Command):
 
         With music-maker:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.register(0, 24),
@@ -3716,7 +3716,7 @@ class RegisterInterpolationCommand(scoping.Command):
 
         With chords:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.register(0, 24),
@@ -4895,7 +4895,7 @@ class RegisterInterpolationCommand(scoping.Command):
 
             Selects tuplet 0:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command([1], 16),
             ...     rmakers.beam(),
             ...     baca.color(baca.tuplet(0)),
@@ -4970,7 +4970,7 @@ class RegisterInterpolationCommand(scoping.Command):
 
             Selects tuplet -1:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command([1], 16),
             ...     rmakers.beam(),
             ...     baca.color(baca.tuplet(-1)),
@@ -5045,7 +5045,7 @@ class RegisterInterpolationCommand(scoping.Command):
 
             Maps to tuplets:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command([1], 16),
             ...     rmakers.beam(),
             ...     baca.color(baca.tuplets()),
@@ -5157,7 +5157,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
         Chords:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
@@ -5188,7 +5188,7 @@ class RegisterToOctaveCommand(scoping.Command):
                 }
             >>
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
@@ -5219,7 +5219,7 @@ class RegisterToOctaveCommand(scoping.Command):
                 }
             >>
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
@@ -5254,7 +5254,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
         Disjunct notes:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
@@ -5289,7 +5289,7 @@ class RegisterToOctaveCommand(scoping.Command):
                 }
             >>
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
@@ -5324,7 +5324,7 @@ class RegisterToOctaveCommand(scoping.Command):
                 }
             >>
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
@@ -5363,7 +5363,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
         Conjunct notes:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
@@ -5398,7 +5398,7 @@ class RegisterToOctaveCommand(scoping.Command):
                 }
             >>
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
@@ -5433,7 +5433,7 @@ class RegisterToOctaveCommand(scoping.Command):
                 }
             >>
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.RegisterToOctaveCommand(
@@ -5889,7 +5889,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     ..  container:: example
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.clef('treble'),
@@ -5951,7 +5951,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     ..  container:: example
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.clef('treble'),
@@ -6133,7 +6133,7 @@ def bass_to_octave(
         Octave-transposes music such that the lowest note in the entire
         selection appears in octave 3:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.bass_to_octave(3),
@@ -6213,7 +6213,7 @@ def bass_to_octave(
         Octave-transposes music such that the lowest pitch in each pitched
         logical tie appears in octave 3:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.new(
@@ -6310,7 +6310,7 @@ def center_to_octave(
         Octave-transposes music such that the centroid of all PLTs appears
         in octave 3:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.center_to_octave(3),
@@ -6390,7 +6390,7 @@ def center_to_octave(
         Octave-transposes music such that the centroid of each pitched
         logical tie appears in octave 3:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.new(
@@ -6535,7 +6535,7 @@ def displacement(
 
         Octave-displaces PLTs:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -6606,7 +6606,7 @@ def displacement(
 
         Octave-displaces chords:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [4],
         ...         16,
@@ -6931,7 +6931,7 @@ def register(
 
         Octave-transposes all PLTs to the octave rooted at -6:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -6996,7 +6996,7 @@ def register(
 
         Octave-transposes PLTs in tuplet 1 to the octave rooted at -6:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -7071,7 +7071,7 @@ def register(
 
         Octave-transposes all PLTs to an octave interpolated from -6 to 18:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -7137,7 +7137,7 @@ def register(
         Octave-transposes PLTs in tuplet 1 to an octave interpolated from
         -6 to 18:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -7232,7 +7232,7 @@ def soprano_to_octave(
         Octave-transposes music such that the highest note in the
         collection of all PLTs appears in octave 3:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.color(baca.plts().group()),
@@ -7312,7 +7312,7 @@ def soprano_to_octave(
         Octave-transposes music that such that the highest note in each
         pitched logical tie appears in octave 3:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.new(

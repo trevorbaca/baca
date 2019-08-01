@@ -148,7 +148,7 @@ class ArpeggiationSpacingSpecifier(object):
 
         ..  container:: example
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command([1], 16),
             ...     rmakers.beam(),
             ...     baca.bass_to_octave(2),
@@ -197,7 +197,7 @@ class ArpeggiationSpacingSpecifier(object):
 
         ..  container:: example
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command([1], 16),
             ...     rmakers.beam(),
             ...     baca.bass_to_octave(2),

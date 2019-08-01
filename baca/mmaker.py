@@ -43,7 +43,7 @@ class Stack(object):
 
     ..  container:: example
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_maker(
         ...         [1, 1, 2],
         ...         8,
@@ -1230,7 +1230,7 @@ class Acciaccatura(object):
 
             Sixteenth-note acciaccaturas by default:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([1], 8, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
@@ -1326,7 +1326,7 @@ class Acciaccatura(object):
             Eighth-note acciaccaturas:
 
             >>> specifier = baca.Acciaccatura(durations=[(1, 8)])
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([1], 8, acciaccatura=specifier),
             ...     rmakers.beam(),
             ... )
@@ -1429,7 +1429,7 @@ class Acciaccatura(object):
 
             As many acciaccaturas as possible per collection:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([1], 8, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
@@ -1525,7 +1525,7 @@ class Acciaccatura(object):
 
             At most two acciaccaturas at the beginning of every collection:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker(
             ...         [1],
             ...         8,
@@ -1634,7 +1634,7 @@ class Acciaccatura(object):
 
             At most two acciaccaturas at the end of every collection:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command(
             ...         [1],
             ...         8,
@@ -1744,7 +1744,7 @@ class Acciaccatura(object):
             At most two acciaccaturas at the beginning of every collection and
             then at most two acciaccaturas at the end of every collection:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker(
             ...         [1],
             ...         8,
@@ -1861,7 +1861,7 @@ class Acciaccatura(object):
             As many acciaccaturas as possible in the middle of every
             collection:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker(
             ...         [1],
             ...         8,
@@ -4127,7 +4127,7 @@ class Nest(object):
 
         Augments one sixteenth:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.nest("+1/16"),
@@ -4235,7 +4235,7 @@ class Nest(object):
             With rest affixes:
 
             >>> affix = baca.rests_around([2], [3])
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command([1], 16, affix=affix),
             ...     rmakers.beam_groups(),
             ...     baca.nest("+1/16"),
@@ -4535,7 +4535,7 @@ class RestAffix(object):
             ...     prefix=[1],
             ...     suffix=[2],
             ... )
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command(
             ...         [1], 16, affix=affix, treatments=[1]
             ...     ),
@@ -4594,7 +4594,7 @@ class RestAffix(object):
             ...     prefix=[1],
             ...     suffix=[2],
             ... )
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command(
             ...         [1], 16, affix=affix, treatments=[1]
             ...     ),
@@ -4642,7 +4642,7 @@ class RestAffix(object):
             ...     prefix=[1],
             ...     suffix=[2],
             ... )
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command(
             ...         [1], 16, affix=affix, treatments=[1]
             ...     ),
@@ -4704,7 +4704,7 @@ class RestAffix(object):
             ...     prefix=[1],
             ...     suffix=[2],
             ... )
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command(
             ...         [1], 16, affix=affix, treatments=[1]
             ...     ),
@@ -4770,7 +4770,7 @@ class RestAffix(object):
         ..  container:: example
 
             >>> affix = baca.RestAffix(prefix=[3])
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command([1], 16, affix=affix),
             ...     rmakers.beam(),
             ... )
@@ -4833,7 +4833,7 @@ class RestAffix(object):
         ..  container:: example
 
             >>> affix = baca.RestAffix(suffix=[3])
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command([1], 16, affix=affix),
             ...     rmakers.beam(),
             ... )
@@ -4890,7 +4890,7 @@ class PitchFirstMaker(object):
 
         Sixteenths and eighths:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_maker([1, 1, 2], 16),
         ...     rmakers.beam(),
         ... )
@@ -5019,7 +5019,7 @@ class PitchFirstMaker(object):
 
         Silences every third logical tie:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_maker([1, 1, 2], 16),
         ...     rmakers.force_rest(baca.lts().get([2], 3)),
         ...     rmakers.beam(),
@@ -5070,7 +5070,7 @@ class PitchFirstMaker(object):
 
         Silences first and last logical ties:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_maker([1, 1, 2], 16),
         ...     rmakers.force_rest(baca.lt(0)),
         ...     rmakers.force_rest(baca.lt(-1)),
@@ -5120,7 +5120,7 @@ class PitchFirstMaker(object):
 
         No rest commands:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_maker([1, 1, 2], 16),
         ...     rmakers.beam(),
         ... )
@@ -5168,7 +5168,7 @@ class PitchFirstMaker(object):
 
         Silences every other tuplet:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_maker([1, 1, 2], 16),
         ...     rmakers.force_rest(baca.tuplets().get([1], 2)),
         ...     rmakers.rewrite_rest_filled(),
@@ -5213,7 +5213,7 @@ class PitchFirstMaker(object):
         Sustains every other division:
 
         >>> tuplets = selector=baca.tuplets().get([1], 2)
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_maker([1, 1, 2], 16),
         ...     rmakers.tie(tuplets.map(baca.leaves()[:-1])),
         ...     rmakers.rewrite_sustained(),
@@ -5333,7 +5333,7 @@ class PitchFirstMaker(object):
 
             Without state manifest:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([1, 1, 2], 16),
             ...     rmakers.beam(),
             ... )
@@ -5381,7 +5381,7 @@ class PitchFirstMaker(object):
 
             With state manifest:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([1, 1, 2], 16),
             ...     rmakers.beam(),
             ... )
@@ -5895,7 +5895,7 @@ class PitchFirstMaker(object):
 
             Default acciaccatura:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([1], 8, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
@@ -5990,7 +5990,7 @@ class PitchFirstMaker(object):
 
             Graced quarters:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([1], 4, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
@@ -6085,7 +6085,7 @@ class PitchFirstMaker(object):
 
             Graced rests:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([1], 4, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
@@ -6217,7 +6217,7 @@ class PitchFirstMaker(object):
             Spells nonassignable durations with monontonically decreasing
             durations by default:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([4, 4, 5], 32),
             ...     rmakers.beam(),
             ... )
@@ -6274,7 +6274,7 @@ class PitchFirstMaker(object):
             Spells nonassignable durations with monontonically increasing
             durations:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker(
             ...         [4, 4, 5],
             ...         32,
@@ -6342,7 +6342,7 @@ class PitchFirstMaker(object):
 
             With rests:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([3, -1, 2, 2], 16),
             ...     rmakers.beam(
             ...         beam_rests=True,
@@ -6400,7 +6400,7 @@ class PitchFirstMaker(object):
 
             Works with very large nonassignable counts:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([29], 64),
             ...     rmakers.beam(),
             ...     rmakers.force_repeat_tie(),
@@ -6450,7 +6450,7 @@ class PitchFirstMaker(object):
 
             One extra count per division:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([1, 1, 2], 16, treatments=[1]),
             ...     rmakers.beam(),
             ... )
@@ -6501,7 +6501,7 @@ class PitchFirstMaker(object):
 
             One missing count per division:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([1, 1, 2], 16, treatments=[-1]),
             ...     rmakers.beam(),
             ... )
@@ -6551,7 +6551,7 @@ class PitchFirstMaker(object):
 
             Accelerandi:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([1], 16, treatments=["accel"]),
             ...     rmakers.beam(),
             ... )
@@ -6837,7 +6837,7 @@ class PitchFirstMaker(object):
 
             Ritardandi:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker([1], 16, treatments=["rit"]),
             ...     rmakers.beam(),
             ... )
@@ -7123,7 +7123,7 @@ class PitchFirstMaker(object):
 
             Accelerandi followed by ritardandi:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker(
             ...         [1], 16, treatments=["accel", "rit"]
             ...     ),
@@ -7365,7 +7365,7 @@ class PitchFirstMaker(object):
 
             Mixed accelerandi, ritardandi and prolation:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker(
             ...         [1],
             ...         16,
@@ -7633,7 +7633,7 @@ class PitchFirstMaker(object):
 
             Specified by tuplet multiplier:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command(
             ...         [1],
             ...         8,
@@ -7728,7 +7728,7 @@ class PitchFirstMaker(object):
 
             Segment durations equal to a quarter:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker(
             ...         [1],
             ...         8,
@@ -7821,7 +7821,7 @@ class PitchFirstMaker(object):
             Segment durations alternating between a quarter and a dotted
             quarter:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_maker(
             ...         [1, 1, 2],
             ...         8,
@@ -10866,7 +10866,7 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
 
     ..  container:: example
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -11036,7 +11036,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
 
     ..  container:: example
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -11109,7 +11109,7 @@ def rests_around(
 
     ..  container:: example
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -11180,7 +11180,7 @@ def rests_around(
         ...     suffix=[3],
         ... )
         >>> affix = baca.rests_around([2], [3])
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, -1], 16, affix=affix, treatments=[1]
         ...     ),
@@ -11250,7 +11250,7 @@ def rests_around(
         ...     suffix=[3],
         ... )
         >>> affix = baca.rests_around([2], [3])
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [-1, 1], 16, affix=affix, treatments=[1]
         ...     ),
@@ -11316,7 +11316,7 @@ def rests_around(
 
         >>> affix = baca.RestAffix(prefix=[1], suffix=[1])
         >>> affix = baca.rests_around([1], [1])
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1], 16, affix=affix, treatments=[-1],
         ...     ),
@@ -11375,7 +11375,7 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
 
     ..  container:: example
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -11464,7 +11464,7 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
 
     ..  container:: example
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -11537,7 +11537,7 @@ def skips_around(
 
     ..  container:: example
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -11609,7 +11609,7 @@ def skips_before(counts: typing.List[int],) -> RestAffix:
 
     ..  container:: example
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -11672,3 +11672,10 @@ def skips_before(counts: typing.List[int],) -> RestAffix:
 
     """
     return RestAffix(prefix=counts, skips_instead_of_rests=True)
+
+
+def stack(*commands) -> Stack:
+    """
+    Makes stack.
+    """
+    return Stack(*commands)

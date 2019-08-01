@@ -723,6 +723,7 @@ mmaker
    ~skips_after
    ~skips_around
    ~skips_before
+   ~stack
 
 .. autofunction:: anchor
 
@@ -763,3 +764,5 @@ mmaker
 .. autofunction:: skips_around
 
 .. autofunction:: skips_before
+
+.. autofunction:: stack

@@ -3794,7 +3794,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(6, 16), (6, 16)],
             ...     )
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command([1], 16),
             ... )
             >>> selection = stack([[2, 4, 5, 7, 9, 11]])
@@ -4132,7 +4132,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Colors out-of-range pitches:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command([1], 16),
             ... )
 
@@ -4334,7 +4334,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Colors repeat pitch-classes:
 
-            >>> stack = baca.Stack(
+            >>> stack = baca.stack(
             ...     baca.pitch_first_assignment_command([1], 16),
             ... )
 

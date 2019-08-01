@@ -380,7 +380,7 @@ def ottava(
 
         Attaches ottava indicators to trimmed leaves:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -469,7 +469,7 @@ def ottava_bassa(
 
         Attaches ottava bassa indicators to trimmed leaves:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -558,7 +558,7 @@ def slur(
 
         Attaches slur to trimmed leaves:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -653,7 +653,7 @@ def sustain_pedal(
 
         Pedals leaves:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -751,7 +751,7 @@ def trill_spanner(
 
         Attaches trill spanner to trimmed leaves (leaked to the right):
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -821,7 +821,7 @@ def trill_spanner(
         Attaches trill to trimmed leaves (leaked to the right) in every
         run:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -899,7 +899,7 @@ def trill_spanner(
  
         Tweaks trill spanner:
  
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,

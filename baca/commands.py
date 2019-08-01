@@ -2382,7 +2382,7 @@ def color(selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
 
         Colors leaves:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -2459,7 +2459,7 @@ def color(selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
 
         Colors leaves in tuplet 1:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -3004,7 +3004,7 @@ def dynamic_down(
 
         Attaches dynamic-down command to leaf 0:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -3092,7 +3092,7 @@ def dynamic_up(
 
         Attaches dynamic-up command to leaf 0:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4276,7 +4276,7 @@ def label(
 
         Labels pitch names:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4372,7 +4372,7 @@ def markup(
 
         Attaches markup to pitched head 0:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4443,7 +4443,7 @@ def markup(
 
         Set ``literal=True`` to pass predefined markup commands:
 
-        >>> stack = baca.Stack(
+        >>> stack = baca.stack(
         ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,

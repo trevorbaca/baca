@@ -568,6 +568,7 @@ indicators.Markup library.
    ~baca.mmaker.skips_after
    ~baca.mmaker.skips_around
    ~baca.mmaker.skips_before
+   ~baca.mmaker.stack
 
 .. raw:: html
 
