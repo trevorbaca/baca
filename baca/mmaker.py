@@ -8205,13 +8205,13 @@ class PitchFirstAssignment(object):
                 tuplets.extend(selection_)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         triples = zip(indices, tuplets, collections)
-        tuplets: typing.List[abjad.Tuplet] = []
+        new_tuplets: typing.List[abjad.Tuplet] = []
         for i in range(len(indices)):
-            tuplets.append("foo")
+            new_tuplets.append(abjad.Tuplet())
         for i, tuplet, collection in triples:
             assert isinstance(tuplet, abjad.Tuplet)
             if not isinstance(collection, (abjad.Set, set)):
-                tuplets[i] = tuplet
+                new_tuplets[i] = tuplet
                 continue
             agent = abjad.iterate(tuplet)
             logical_ties = agent.logical_ties(pitched=True)
@@ -8227,10 +8227,10 @@ class PitchFirstAssignment(object):
                 abjad.mutate(note).replace([chord])
                 for indicator in indicators:
                     abjad.attach(indicator, chord)
-            tuplets[i] = tuplet
-        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
-        assert len(tuplets) == collection_count
-        selection = abjad.select(tuplets)
+            new_tuplets[i] = tuplet
+        assert all(isinstance(_, abjad.Tuplet) for _ in new_tuplets)
+        assert len(new_tuplets) == collection_count
+        selection = abjad.select(new_tuplets)
         return selection
 
     def __eq__(self, argument) -> bool:
