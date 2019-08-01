@@ -4231,7 +4231,7 @@ class Nest(object):
         Augments one sixteenth:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment([1], 16),
+        ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.nest("+1/16"),
         ...     )
@@ -4339,7 +4339,7 @@ class Nest(object):
 
             >>> affix = baca.rests_around([2], [3])
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment([1], 16, affix=affix),
+            ...     baca.pitch_first_assignment_command([1], 16, affix=affix),
             ...     rmakers.beam_groups(),
             ...     baca.nest("+1/16"),
             ...     )
