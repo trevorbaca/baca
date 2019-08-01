@@ -44,7 +44,7 @@ class Stack(object):
     ..  container:: example
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_rmaker(
+        ...     baca.pitch_first_maker(
         ...         [1, 1, 2],
         ...         8,
         ...         treatments=[(1, 4), (3, 8)],
@@ -1135,7 +1135,7 @@ class Acciaccatura(object):
         Default acciaccatura specifier:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_rmaker([1], 8, acciaccatura=True),
+        ...     baca.pitch_first_maker([1], 8, acciaccatura=True),
         ...     rmakers.beam(),
         ... )
 
@@ -1319,7 +1319,7 @@ class Acciaccatura(object):
             Sixteenth-note acciaccaturas by default:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([1], 8, acciaccatura=True),
+            ...     baca.pitch_first_maker([1], 8, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -1415,7 +1415,7 @@ class Acciaccatura(object):
 
             >>> specifier = baca.Acciaccatura(durations=[(1, 8)])
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([1], 8, acciaccatura=specifier),
+            ...     baca.pitch_first_maker([1], 8, acciaccatura=specifier),
             ...     rmakers.beam(),
             ... )
 
@@ -1518,7 +1518,7 @@ class Acciaccatura(object):
             As many acciaccaturas as possible per collection:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([1], 8, acciaccatura=True),
+            ...     baca.pitch_first_maker([1], 8, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -1614,7 +1614,7 @@ class Acciaccatura(object):
             At most two acciaccaturas at the beginning of every collection:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker(
+            ...     baca.pitch_first_maker(
             ...         [1],
             ...         8,
             ...         acciaccatura=baca.lmr(
@@ -1833,7 +1833,7 @@ class Acciaccatura(object):
             then at most two acciaccaturas at the end of every collection:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker(
+            ...     baca.pitch_first_maker(
             ...         [1],
             ...         8,
             ...         acciaccatura=baca.lmr(
@@ -1950,7 +1950,7 @@ class Acciaccatura(object):
             collection:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker(
+            ...     baca.pitch_first_maker(
             ...         [1],
             ...         8,
             ...         acciaccatura=baca.lmr(left_length=1),
@@ -3694,7 +3694,7 @@ class Accumulator(object):
         >>> accumulator = baca.Accumulator(template)
 
         >>> commands = [
-        ...     baca.pitch_first_assignment([1], 16, signature=16),
+        ...     baca.pitch_first_assignment_command([1], 16, signature=16),
         ...     rmakers.beam(),
         ... ]
 
@@ -4455,6 +4455,35 @@ class Nest(object):
         assert all(isinstance(_, abjad.Selection) for _ in selections_)
         return selections_
 
+    def __eq__(self, argument) -> bool:
+        """
+        Is true when initialization values compare equal.
+        """
+        return abjad.StorageFormatManager.compare_objects(self, argument)
+
+    def __format__(self, format_specification="") -> str:
+        """
+        Formats object.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __hash__(self) -> int:
+        """
+        Hashes object.
+        """
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f"unhashable type: {self}")
+        return result
+
+    def __repr__(self) -> str:
+        """
+        Gets interpreter representation of object.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
     ### PRIVATE METHODS ###
 
     def _get_treatments(self):
@@ -5161,7 +5190,7 @@ class PitchFirstRhythmMaker(object):
         Sixteenths and eighths:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_rmaker([1, 1, 2], 16),
+        ...     baca.pitch_first_maker([1, 1, 2], 16),
         ...     rmakers.beam(),
         ... )
 
@@ -5290,7 +5319,7 @@ class PitchFirstRhythmMaker(object):
         Silences every third logical tie:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_rmaker([1, 1, 2], 16),
+        ...     baca.pitch_first_maker([1, 1, 2], 16),
         ...     rmakers.force_rest(baca.lts().get([2], 3)),
         ...     rmakers.beam(),
         ... )
@@ -5341,7 +5370,7 @@ class PitchFirstRhythmMaker(object):
         Silences first and last logical ties:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_rmaker([1, 1, 2], 16),
+        ...     baca.pitch_first_maker([1, 1, 2], 16),
         ...     rmakers.force_rest(baca.lt(0)),
         ...     rmakers.force_rest(baca.lt(-1)),
         ...     rmakers.beam(),
@@ -5391,7 +5420,7 @@ class PitchFirstRhythmMaker(object):
         No rest commands:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_rmaker([1, 1, 2], 16),
+        ...     baca.pitch_first_maker([1, 1, 2], 16),
         ...     rmakers.beam(),
         ... )
 
@@ -5439,7 +5468,7 @@ class PitchFirstRhythmMaker(object):
         Silences every other division:
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_rmaker([1, 1, 2], 16),
+        ...     baca.pitch_first_maker([1, 1, 2], 16),
         ...     rmakers.force_rest(baca.tuplets().get([1], 2)),
         ...     rmakers.rewrite_rest_filled(),
         ...     rmakers.beam(),
@@ -5484,7 +5513,7 @@ class PitchFirstRhythmMaker(object):
 
         >>> tuplets = selector=baca.tuplets().get([1], 2)
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_rmaker([1, 1, 2], 16),
+        ...     baca.pitch_first_maker([1, 1, 2], 16),
         ...     rmakers.tie(tuplets.map(baca.leaves()[:-1])),
         ...     rmakers.rewrite_sustained(),
         ...     rmakers.beam(),
@@ -5596,7 +5625,7 @@ class PitchFirstRhythmMaker(object):
             Without state manifest:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([1, 1, 2], 16),
+            ...     baca.pitch_first_maker([1, 1, 2], 16),
             ...     rmakers.beam(),
             ... )
 
@@ -5644,7 +5673,7 @@ class PitchFirstRhythmMaker(object):
             With state manifest:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([1, 1, 2], 16),
+            ...     baca.pitch_first_maker([1, 1, 2], 16),
             ...     rmakers.beam(),
             ... )
 
@@ -6165,7 +6194,7 @@ class PitchFirstRhythmMaker(object):
             Graced quarters:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([1], 4, acciaccatura=True),
+            ...     baca.pitch_first_maker([1], 4, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -6260,7 +6289,7 @@ class PitchFirstRhythmMaker(object):
             Graced rests:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([1], 4, acciaccatura=True),
+            ...     baca.pitch_first_maker([1], 4, acciaccatura=True),
             ...     rmakers.beam(),
             ... )
 
@@ -6392,7 +6421,7 @@ class PitchFirstRhythmMaker(object):
             durations by default:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([4, 4, 5], 32),
+            ...     baca.pitch_first_maker([4, 4, 5], 32),
             ...     rmakers.beam(),
             ... )
 
@@ -6449,7 +6478,7 @@ class PitchFirstRhythmMaker(object):
             durations:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker(
+            ...     baca.pitch_first_maker(
             ...         [4, 4, 5],
             ...         32,
             ...         spelling=rmakers.Spelling(increase_monotonic=True),
@@ -6517,7 +6546,7 @@ class PitchFirstRhythmMaker(object):
             With rests:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([3, -1, 2, 2], 16),
+            ...     baca.pitch_first_maker([3, -1, 2, 2], 16),
             ...     rmakers.beam(
             ...         beam_rests=True,
             ...         stemlet_length=1.5,
@@ -6575,7 +6604,7 @@ class PitchFirstRhythmMaker(object):
             With very large nonassignable counts:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([29], 64),
+            ...     baca.pitch_first_maker([29], 64),
             ...     rmakers.beam(),
             ...     rmakers.force_repeat_tie(),
             ... )
@@ -6625,7 +6654,7 @@ class PitchFirstRhythmMaker(object):
             One extra count per division:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([1, 1, 2], 16, treatments=[1]),
+            ...     baca.pitch_first_maker([1, 1, 2], 16, treatments=[1]),
             ...     rmakers.beam(),
             ... )
 
@@ -6676,7 +6705,7 @@ class PitchFirstRhythmMaker(object):
             One missing count per division:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([1, 1, 2], 16, treatments=[-1]),
+            ...     baca.pitch_first_maker([1, 1, 2], 16, treatments=[-1]),
             ...     rmakers.beam(),
             ...     )
 
@@ -6726,7 +6755,7 @@ class PitchFirstRhythmMaker(object):
             Accelerandi:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([1], 16, treatments=["accel"]),
+            ...     baca.pitch_first_maker([1], 16, treatments=["accel"]),
             ...     rmakers.beam(),
             ... )
 
@@ -7012,7 +7041,7 @@ class PitchFirstRhythmMaker(object):
             Ritardandi:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker([1], 16, treatments=["rit"]),
+            ...     baca.pitch_first_maker([1], 16, treatments=["rit"]),
             ...     rmakers.beam(),
             ... )
 
@@ -7298,7 +7327,7 @@ class PitchFirstRhythmMaker(object):
             Accelerandi followed by ritardandi:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker(
+            ...     baca.pitch_first_maker(
             ...         [1], 16, treatments=["accel", "rit"]
             ...     ),
             ...     rmakers.beam(),
@@ -7540,7 +7569,7 @@ class PitchFirstRhythmMaker(object):
             Mixed accelerandi, ritardandi and prolation:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker(
+            ...     baca.pitch_first_maker(
             ...         [1],
             ...         16,
             ...         treatments=["accel", -2, "rit"],
@@ -7903,7 +7932,7 @@ class PitchFirstRhythmMaker(object):
             Segment durations equal to a quarter:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker(
+            ...     baca.pitch_first_maker(
             ...         [1],
             ...         8,
             ...         treatments=[(1, 4)],
@@ -7996,7 +8025,7 @@ class PitchFirstRhythmMaker(object):
             quarter:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_rmaker(
+            ...     baca.pitch_first_maker(
             ...         [1, 1, 2],
             ...         8,
             ...         treatments=[(1, 4), (3, 8)],
@@ -8105,12 +8134,6 @@ class PitchFirstRhythmMaker(object):
 class PitchFirstAssignment(object):
     """
     Pitch-first assignment.
-
-    ..  container:: example
-
-        >>> baca.pitch_first_assignment([1], 16)
-        PitchFirstAssignment(PitchFirstRhythmMaker(Talea([1], 16)))
-
     """
 
     ### CLASS ATTRIBUTES ###
@@ -8272,103 +8295,9 @@ class PitchFirstAssignment(object):
 
     @property
     def thread(self) -> typing.Optional[bool]:
-        r"""
+        """
         Is true when pitch-first assignment threads rhythm-maker over
         collections.
-
-        ..  container:: example
-
-            Does not thread rhythm-maker over collections:
-
-            >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment([1, 2, 3], 16),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> selection = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        \time 1/1
-                        s1 * 1
-                    }
-                    \new Staff
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'8
-                            bf'8.
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
-                            [
-                            e''8
-                            ef''8.
-                            af''16
-                            g''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'16
-                        }
-                    }
-                >>
-
-            Threads rhythm-maker over collections:
-
-            >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-            >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment([1, 2, 3], 16, thread=True),
-            ...     rmakers.beam(),
-            ... )
-            >>> selection = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                <<
-                    \new GlobalContext
-                    {
-                        \time 9/8
-                        s1 * 9/8
-                    }
-                    \new Staff
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            c'16
-                            [
-                            d'8
-                            bf'8.
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            fs''16
-                            [
-                            e''8
-                            ef''8.
-                            af''16
-                            g''8
-                            ]
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            a'8.
-                        }
-                    }
-                >>
-
         """
         return self._thread
 
@@ -11271,7 +11200,7 @@ def nest(treatments: typing.Sequence, *, lmr_specifier: LMR = None) -> Nest:
     return Nest(lmr_specifier=lmr_specifier, treatments=treatments)
 
 
-def pitch_first_rmaker(
+def pitch_first_maker(
     counts: abjad.IntegerSequence,
     denominator: int,
     *,
@@ -11315,7 +11244,7 @@ def pitch_first_assignment(
     """
     Makes pitch-first assignment.
     """
-    rhythm_maker = pitch_first_rmaker(
+    rhythm_maker = pitch_first_maker(
         counts,
         denominator,
         acciaccatura=acciaccatura,

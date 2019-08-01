@@ -559,7 +559,7 @@ indicators.Markup library.
    ~baca.mmaker.pitch_first_assignment
    ~baca.mmaker.pitch_first_assignment_command
    ~baca.mmaker.pitch_first_command
-   ~baca.mmaker.pitch_first_rmaker
+   ~baca.mmaker.pitch_first_maker
    ~baca.mmaker.rests_after
    ~baca.mmaker.rests_around
    ~baca.mmaker.rests_before

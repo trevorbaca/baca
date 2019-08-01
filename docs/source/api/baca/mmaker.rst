@@ -406,6 +406,10 @@ mmaker
       :nosignatures:
 
       __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
       lmr_specifier
       treatments
 
@@ -417,6 +421,14 @@ mmaker
       :class: class-header
 
    .. automethod:: Nest.__call__
+
+   .. automethod:: Nest.__eq__
+
+   .. automethod:: Nest.__format__
+
+   .. automethod:: Nest.__hash__
+
+   .. automethod:: Nest.__repr__
 
    .. raw:: html
 
@@ -705,7 +717,7 @@ mmaker
    ~pitch_first_assignment
    ~pitch_first_assignment_command
    ~pitch_first_command
-   ~pitch_first_rmaker
+   ~pitch_first_maker
    ~rests_after
    ~rests_around
    ~rests_before
@@ -737,7 +749,7 @@ mmaker
 
 .. autofunction:: pitch_first_command
 
-.. autofunction:: pitch_first_rmaker
+.. autofunction:: pitch_first_maker
 
 .. autofunction:: rests_after
 
