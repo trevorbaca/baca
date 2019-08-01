@@ -1723,7 +1723,7 @@ class Acciaccatura(object):
             At most two acciaccaturas at the end of every collection:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment(
+            ...     baca.pitch_first_assignment_command(
             ...         [1],
             ...         8,
             ...         acciaccatura=baca.lmr(
@@ -2459,7 +2459,7 @@ class Imbrication(object):
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
-            ...     baca.pitch_first_assignment([1], 16),
+            ...     baca.pitch_first_assignment_command([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
             ...         "Music_Voice_One",
@@ -2714,7 +2714,7 @@ class Imbrication(object):
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
-            ...     baca.pitch_first_assignment([1], 16),
+            ...     baca.pitch_first_assignment_command([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
             ...         "Music_Voice_One",
@@ -2768,7 +2768,7 @@ class Imbrication(object):
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
-            ...     baca.pitch_first_assignment([1], 16),
+            ...     baca.pitch_first_assignment_command([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
             ...         "Music_Voice_One",
@@ -3073,7 +3073,7 @@ class Imbrication(object):
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
-            ...     baca.pitch_first_assignment([1], 16),
+            ...     baca.pitch_first_assignment_command([1], 16),
             ...     rmakers.beam_groups(beam_rests=True),
             ...     baca.imbricate(
             ...         "Music_Voice_One",
@@ -3408,7 +3408,7 @@ class Imbrication(object):
             >>> accumulator(
             ...     "Music_Voice_Two",
             ...     collections,
-            ...     baca.pitch_first_assignment([5], 32),
+            ...     baca.pitch_first_assignment_command([5], 32),
             ...     rmakers.beam(),
             ...     baca.imbricate(
             ...         "Music_Voice_One",
@@ -4524,7 +4524,7 @@ class RestAffix(object):
         ...     suffix=[3],
         ... )
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment(
+        ...     baca.pitch_first_assignment_command(
         ...         [1, -1], 16, affix=affix, treatments=[1]
         ...     ),
         ...     rmakers.beam(),
@@ -4591,7 +4591,7 @@ class RestAffix(object):
         ...     suffix=[3],
         ... )
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment(
+        ...     baca.pitch_first_assignment_command(
         ...         [-1, 1], 16, affix=affix, treatments=[1]
         ...     ),
         ...     rmakers.beam(),
@@ -4704,7 +4704,7 @@ class RestAffix(object):
 
             >>> affix = baca.RestAffix(prefix=[1], suffix=[1])
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment(
+            ...     baca.pitch_first_assignment_command(
             ...         [1], 16, affix=affix, treatments=[-1],
             ...     ),
             ...     rmakers.beam(),
@@ -4813,7 +4813,7 @@ class RestAffix(object):
             ...     suffix=[2],
             ... )
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment(
+            ...     baca.pitch_first_assignment_command(
             ...         [1], 16, affix=affix, treatments=[1]
             ...     ),
             ...     rmakers.beam(),
@@ -4872,7 +4872,7 @@ class RestAffix(object):
             ...     suffix=[2],
             ... )
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment(
+            ...     baca.pitch_first_assignment_command(
             ...         [1], 16, affix=affix, treatments=[1]
             ...     ),
             ...     rmakers.beam(),
@@ -4920,7 +4920,7 @@ class RestAffix(object):
             ...     suffix=[2],
             ... )
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment(
+            ...     baca.pitch_first_assignment_command(
             ...         [1], 16, affix=affix, treatments=[1]
             ...     ),
             ...     rmakers.beam(),
@@ -4982,7 +4982,7 @@ class RestAffix(object):
             ...     suffix=[2],
             ... )
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment(
+            ...     baca.pitch_first_assignment_command(
             ...         [1], 16, affix=affix, treatments=[1]
             ...     ),
             ...     rmakers.beam(),
@@ -5048,7 +5048,7 @@ class RestAffix(object):
 
             >>> affix = baca.RestAffix(prefix=[3])
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment([1], 16, affix=affix),
+            ...     baca.pitch_first_assignment_command([1], 16, affix=affix),
             ...     rmakers.beam(),
             ... )
 
@@ -5111,7 +5111,7 @@ class RestAffix(object):
 
             >>> affix = baca.RestAffix(suffix=[3])
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment([1], 16, affix=affix),
+            ...     baca.pitch_first_assignment_command([1], 16, affix=affix),
             ...     rmakers.beam(),
             ... )
 
@@ -7815,7 +7815,7 @@ class PitchFirstRhythmMaker(object):
             Specified by tuplet multiplier:
 
             >>> stack = baca.Stack(
-            ...     baca.pitch_first_assignment(
+            ...     baca.pitch_first_assignment_command(
             ...         [1],
             ...         8,
             ...         treatments=["3:2"],
@@ -8539,7 +8539,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     3 * [[0, 2, 10]],
-        ...     baca.pitch_first_assignment(
+        ...     baca.pitch_first_assignment_command(
         ...         [1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -8787,7 +8787,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_assignment([1], 16),
+        ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -9070,7 +9070,7 @@ def extend_beam(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     [[0, 2, 10, 18], [16, 15, 23]],
-        ...     baca.pitch_first_assignment([1], 16),
+        ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -9084,7 +9084,7 @@ def extend_beam(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     [[19, 13, 9, 8]],
-        ...     baca.pitch_first_assignment([1], 16),
+        ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -9388,7 +9388,7 @@ def imbricate(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_assignment([1], 16),
+        ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -9672,7 +9672,7 @@ def imbricate(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_assignment([1], 16),
+        ...     baca.pitch_first_assignment_command([1], 16),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
         ...         [2, 19, 9],
@@ -10059,7 +10059,7 @@ def imbricate(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_assignment([1], 16, treatments=[1]),
+        ...     baca.pitch_first_assignment_command([1], 16, treatments=[1]),
         ...     rmakers.beam_groups(beam_rests=True),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -10371,7 +10371,7 @@ def imbricate(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_assignment([3], 16),
+        ...     baca.pitch_first_assignment_command([3], 16),
         ...     rmakers.beam(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -10604,7 +10604,7 @@ def imbricate(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_assignment([1], 16),
+        ...     baca.pitch_first_assignment_command([1], 16),
         ...     rmakers.beam_groups(),
         ...     baca.imbricate(
         ...         "Music_Voice_One",
@@ -10865,7 +10865,7 @@ def imbricate(
         >>> accumulator(
         ...     "Music_Voice_Two",
         ...     collections,
-        ...     baca.pitch_first_assignment(
+        ...     baca.pitch_first_assignment_command(
         ...         [1],
         ...         16,
         ...         affix=baca.rests_around([2], [2]),
