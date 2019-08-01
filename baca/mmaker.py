@@ -3771,6 +3771,7 @@ class Accumulator(object):
                 command._voice_name = voice_name_
         assignment = None
         pitch_first_command = None
+        pitch_first_maker = None
         if anchor is not None:
             voice_name_ = self._abbreviation(anchor.remote_voice_name)
             anchor._remote_voice_name = voice_name_
@@ -3780,6 +3781,12 @@ class Accumulator(object):
         elif all(isinstance(_, abjad.Component) for _ in collections):
             tuplet = abjad.Tuplet((1, 1), collections, hide=True)
             selections = [abjad.select(tuplet)]
+        elif isinstance(commands[0], PitchFirstRhythmMaker):
+            pitch_first_maker = commands[0]
+            collections = _coerce_collections(collections)
+            selections = pitch_first_maker(collections)
+            selections = abjad.select(selections).flatten()
+            commands_ = list(commands[1:])
         elif isinstance(commands[0], PitchFirstCommand):
             pitch_first_command = commands[0]
             collections = _coerce_collections(collections)
@@ -3787,13 +3794,8 @@ class Accumulator(object):
             selections = abjad.select(selections).flatten()
             commands_ = list(commands[1:])
         else:
-            pp = (PitchFirstRhythmMaker, PitchFirstAssignment)
-            assert isinstance(commands[0], pp), repr(commands[0])
-            if isinstance(commands[0], PitchFirstAssignment):
-                assignment = commands[0]
-            else:
-                assert isinstance(commands[0], PitchFirstRhythmMaker)
-                assignment = PitchFirstAssignment(commands[0])
+            assert isinstance(commands[0], PitchFirstAssignment)
+            assignment = commands[0]
             commands_ = list(commands[1:])
             collections = _coerce_collections(collections)
             selections = len(collections) * [None]
@@ -3810,6 +3812,8 @@ class Accumulator(object):
             self._label_figure_name_(container, figure_name)
         selection = abjad.select([container])
         duration = abjad.inspect(selection).duration()
+        if signature is None and pitch_first_maker:
+            signature = pitch_first_maker.signature
         if signature is None and assignment:
             primary_rhythm_maker = assignment.rhythm_maker
             signature = primary_rhythm_maker.signature
@@ -5585,7 +5589,7 @@ class PitchFirstRhythmMaker(object):
 
     def __call__(
         self,
-        collections: list,
+        collections: typing.Union[list, pitchclasses.CollectionList],
         collection_index: int = None,
         state: abjad.OrderedDict = None,
         total_collections: int = None,
