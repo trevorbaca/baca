@@ -112,20 +112,19 @@ class ArpeggiationSpacingSpecifier(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when all initialization values of Abjad value object equal
-        the initialization values of ``argument``.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats Abjad object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
-        Hashes Abjad value object.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -136,7 +135,7 @@ class ArpeggiationSpacingSpecifier(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -381,20 +380,19 @@ class ChordalSpacingSpecifier(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when all initialization values of Abjad value object equal
-        the initialization values of ``argument``.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats Abjad object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
-        Hashes Abjad value object.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -405,7 +403,7 @@ class ChordalSpacingSpecifier(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -1080,7 +1078,7 @@ class CollectionList(collections_module.abc.Sequence):
 
     def __format__(self, format_specification="") -> str:
         """
-        Gets storage format of collections.
+        Delegates to format manager.
 
         ..  container:: example
 
@@ -9167,20 +9165,19 @@ class Registration(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when all initialization values of Abjad value object equal
-        the initialization values of ``argument``.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats Abjad object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
-        Hashes Abjad value object.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -9191,7 +9188,7 @@ class Registration(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -9269,31 +9266,19 @@ class RegistrationComponent(object):
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is a registration component with source pitch
-        range and target octave start pitch equal to those of this registration
-        component.
-
-        Returns true or false.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __format__(self, format_specification=""):
         """
-        Formats registration component.
-
-        Returns string.
+        Delegates to format manager.
         """
-        if format_specification in ("", "storage"):
-            return abjad.StorageFormatManager(self).get_storage_format()
-        return str(self)
+        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self):
         """
-        Hashes registration component.
-
-        Required to be explicitly redefined on Python 3 if __eq__ changes.
-
-        Returns integer.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -9304,7 +9289,7 @@ class RegistrationComponent(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -9472,20 +9457,20 @@ class ZaggedPitchClassMaker(object):
 
     def __eq__(self, argument):
         """
-        Is true when ``argument`` is a zagged pitch-class with type and
-        public properties equal to those of this zagged pitch-class maker.
-
-        Returns boolean.
+        Delegates to format manager.
         """
-        manager = abjad.StorageFormatManager(self)
-        return manager.compare(argument)
+        return abjad.StorageFormatManager(self).compare_objects(self, argument)
 
     def __hash__(self):
         """
-        Hashes zagged pitch-class maker.
+        Delegates to format manager.
         """
-        manager = abjad.StorageFormatManager(self)
-        return hash(manager.hash_values)
+        hash_values = abjad.StorageFormatManager(self).get_hash_values()
+        try:
+            result = hash(hash_values)
+        except TypeError:
+            raise TypeError(f"unhashable type: {self}")
+        return result
 
     ### PUBLIC PROPERTIES ###
 

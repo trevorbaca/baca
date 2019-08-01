@@ -189,19 +189,19 @@ class Stack(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when initialization values compare equal.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
-        Hashes object.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -212,7 +212,7 @@ class Stack(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation of object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -236,47 +236,47 @@ class Stack(object):
 
 class LMR(object):
     """
-    Left-middle-right specifier.
+    Left-middle-right.
 
     ..  container:: example
 
         Default LMR specifier:
 
-        >>> lmr_specifier = baca.lmr()
+        >>> lmr = baca.lmr()
 
-        >>> parts = lmr_specifier([1])
+        >>> parts = lmr([1])
         >>> for part in parts: part
         Sequence([1])
 
-        >>> parts =lmr_specifier([1, 2])
+        >>> parts =lmr([1, 2])
         >>> for part in parts: part
         Sequence([1, 2])
 
-        >>> parts = lmr_specifier([1, 2, 3])
+        >>> parts = lmr([1, 2, 3])
         >>> for part in parts: part
         Sequence([1, 2, 3])
 
-        >>> parts = lmr_specifier([1, 2, 3, 4])
+        >>> parts = lmr([1, 2, 3, 4])
         >>> for part in parts: part
         Sequence([1, 2, 3, 4])
 
-        >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+        >>> parts = lmr([1, 2, 3, 4, 5])
         >>> for part in parts: part
         Sequence([1, 2, 3, 4, 5])
 
-        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+        >>> parts = lmr([1, 2, 3, 4, 5, 6])
         >>> for part in parts: part
         Sequence([1, 2, 3, 4, 5, 6])
 
-        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
         >>> for part in parts: part
         Sequence([1, 2, 3, 4, 5, 6, 7])
 
-        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
         >>> for part in parts: part
         Sequence([1, 2, 3, 4, 5, 6, 7, 8])
 
-        >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
         >>> for part in parts: part
         Sequence([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
@@ -410,19 +410,19 @@ class LMR(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when initialization values compare equal.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
-        Hashes object.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -433,7 +433,7 @@ class LMR(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation of object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -501,61 +501,61 @@ class LMR(object):
 
             Left counts equal to a single 1:
 
-            >>> lmr_specifier = baca.lmr(
+            >>> lmr = baca.lmr(
             ...     left_counts=[1],
             ...     left_cyclic=False,
             ...     left_length=3,
             ...     right_length=2,
             ...     )
 
-            >>> parts = lmr_specifier([1])
+            >>> parts = lmr([1])
             >>> for part in parts: part
             Sequence([1])
 
-            >>> parts = lmr_specifier([1, 2])
+            >>> parts = lmr([1, 2])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2])
 
-            >>> parts = lmr_specifier([1, 2, 3])
+            >>> parts = lmr([1, 2, 3])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> parts = lmr([1, 2, 3, 4])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
             Sequence([4])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> parts = lmr([1, 2, 3, 4, 5])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
             Sequence([4, 5])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
             Sequence([4])
             Sequence([5, 6])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
             Sequence([4, 5])
             Sequence([6, 7])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
             Sequence([4, 5, 6])
             Sequence([7, 8])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
@@ -566,43 +566,43 @@ class LMR(object):
 
             Left counts all equal to 1:
 
-            >>> lmr_specifier = baca.lmr(
+            >>> lmr = baca.lmr(
             ...     left_counts=[1],
             ...     left_cyclic=True,
             ...     left_length=3,
             ...     right_length=2,
             ...     )
 
-            >>> parts = lmr_specifier([1])
+            >>> parts = lmr([1])
             >>> for part in parts: part
             Sequence([1])
 
-            >>> parts = lmr_specifier([1, 2])
+            >>> parts = lmr([1, 2])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2])
 
-            >>> parts = lmr_specifier([1, 2, 3])
+            >>> parts = lmr([1, 2, 3])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2])
             Sequence([3])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> parts = lmr([1, 2, 3, 4])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2])
             Sequence([3])
             Sequence([4])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> parts = lmr([1, 2, 3, 4, 5])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2])
             Sequence([3])
             Sequence([4, 5])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2])
@@ -610,7 +610,7 @@ class LMR(object):
             Sequence([4])
             Sequence([5, 6])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2])
@@ -618,7 +618,7 @@ class LMR(object):
             Sequence([4, 5])
             Sequence([6, 7])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2])
@@ -626,7 +626,7 @@ class LMR(object):
             Sequence([4, 5, 6])
             Sequence([7, 8])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2])
@@ -653,49 +653,49 @@ class LMR(object):
 
             Left length equal to 2:
 
-            >>> lmr_specifier = baca.lmr(
+            >>> lmr = baca.lmr(
             ...     left_length=2,
             ...     )
 
-            >>> parts = lmr_specifier([1])
+            >>> parts = lmr([1])
             >>> for part in parts: part
             Sequence([1])
 
-            >>> parts = lmr_specifier([1, 2])
+            >>> parts = lmr([1, 2])
             >>> for part in parts: part
             Sequence([1, 2])
 
-            >>> parts = lmr_specifier([1, 2, 3])
+            >>> parts = lmr([1, 2, 3])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> parts = lmr([1, 2, 3, 4])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> parts = lmr([1, 2, 3, 4, 5])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5, 6])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5, 6, 7])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5, 6, 7, 8])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5, 6, 7, 8, 9])
@@ -726,56 +726,56 @@ class LMR(object):
 
             Cyclic middle counts equal to [2]:
 
-            >>> lmr_specifier = baca.lmr(
+            >>> lmr = baca.lmr(
             ...     middle_counts=[2],
             ...     middle_cyclic=True,
             ...     )
 
-            >>> parts = lmr_specifier([1])
+            >>> parts = lmr([1])
             >>> for part in parts: part
             Sequence([1])
 
-            >>> parts = lmr_specifier([1, 2])
+            >>> parts = lmr([1, 2])
             >>> for part in parts: part
             Sequence([1, 2])
 
-            >>> parts = lmr_specifier([1, 2, 3])
+            >>> parts = lmr([1, 2, 3])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> parts = lmr([1, 2, 3, 4])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> parts = lmr([1, 2, 3, 4, 5])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
             Sequence([5])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
             Sequence([5, 6])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
             Sequence([5, 6])
             Sequence([7])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
             Sequence([5, 6])
             Sequence([7, 8])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
@@ -797,57 +797,57 @@ class LMR(object):
 
             Reversed cyclic middle counts equal to [2]:
 
-            >>> lmr_specifier = baca.lmr(
+            >>> lmr = baca.lmr(
             ...     middle_counts=[2],
             ...     middle_cyclic=True,
             ...     middle_reversed=True,
             ...     )
 
-            >>> parts = lmr_specifier([1])
+            >>> parts = lmr([1])
             >>> for part in parts: part
             Sequence([1])
 
-            >>> parts = lmr_specifier([1, 2])
+            >>> parts = lmr([1, 2])
             >>> for part in parts: part
             Sequence([1, 2])
 
-            >>> parts = lmr_specifier([1, 2, 3])
+            >>> parts = lmr([1, 2, 3])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> parts = lmr([1, 2, 3, 4])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> parts = lmr([1, 2, 3, 4, 5])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
             Sequence([4, 5])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
             Sequence([5, 6])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
             Sequence([4, 5])
             Sequence([6, 7])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
             Sequence([5, 6])
             Sequence([7, 8])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
@@ -869,55 +869,55 @@ class LMR(object):
 
             Priority to the left:
 
-            >>> lmr_specifier = baca.lmr(
+            >>> lmr = baca.lmr(
             ...     left_length=2,
             ...     right_length=1,
             ...     )
 
-            >>> parts = lmr_specifier([1])
+            >>> parts = lmr([1])
             >>> for part in parts: part
             Sequence([1])
 
-            >>> parts = lmr_specifier([1, 2])
+            >>> parts = lmr([1, 2])
             >>> for part in parts: part
             Sequence([1, 2])
 
-            >>> parts = lmr_specifier([1, 2, 3])
+            >>> parts = lmr([1, 2, 3])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> parts = lmr([1, 2, 3, 4])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3])
             Sequence([4])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> parts = lmr([1, 2, 3, 4, 5])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
             Sequence([5])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5])
             Sequence([6])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5, 6])
             Sequence([7])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5, 6, 7])
             Sequence([8])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5, 6, 7, 8])
@@ -927,57 +927,57 @@ class LMR(object):
 
             Priority to the right:
 
-            >>> lmr_specifier = baca.lmr(
+            >>> lmr = baca.lmr(
             ...     left_length=2,
             ...     priority=abjad.Right,
             ...     right_length=1,
             ...     )
 
-            >>> parts = lmr_specifier([1])
+            >>> parts = lmr([1])
             >>> for part in parts: part
             Sequence([1])
 
-            >>> parts = lmr_specifier([1, 2])
+            >>> parts = lmr([1, 2])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2])
 
-            >>> parts = lmr_specifier([1, 2, 3])
+            >>> parts = lmr([1, 2, 3])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> parts = lmr([1, 2, 3, 4])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3])
             Sequence([4])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> parts = lmr([1, 2, 3, 4, 5])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
             Sequence([5])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5])
             Sequence([6])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5, 6])
             Sequence([7])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5, 6, 7])
             Sequence([8])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4, 5, 6, 7, 8])
@@ -1009,49 +1009,49 @@ class LMR(object):
 
             Right length equal to 2:
 
-            >>> lmr_specifier = baca.lmr(
+            >>> lmr = baca.lmr(
             ...     right_length=2,
             ...     )
 
-            >>> parts = lmr_specifier([1])
+            >>> parts = lmr([1])
             >>> for part in parts: part
             Sequence([1])
 
-            >>> parts = lmr_specifier([1, 2])
+            >>> parts = lmr([1, 2])
             >>> for part in parts: part
             Sequence([1, 2])
 
-            >>> parts = lmr_specifier([1, 2, 3])
+            >>> parts = lmr([1, 2, 3])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> parts = lmr([1, 2, 3, 4])
             >>> for part in parts: part
             Sequence([1, 2])
             Sequence([3, 4])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> parts = lmr([1, 2, 3, 4, 5])
             >>> for part in parts: part
             Sequence([1, 2, 3])
             Sequence([4, 5])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6])
             >>> for part in parts: part
             Sequence([1, 2, 3, 4])
             Sequence([5, 6])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
             >>> for part in parts: part
             Sequence([1, 2, 3, 4, 5])
             Sequence([6, 7])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
             >>> for part in parts: part
             Sequence([1, 2, 3, 4, 5, 6])
             Sequence([7, 8])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
             >>> for part in parts: part
             Sequence([1, 2, 3, 4, 5, 6, 7])
             Sequence([8, 9])
@@ -1060,56 +1060,56 @@ class LMR(object):
 
             Right length equal to 2 and left counts equal to [1]:
 
-            >>> lmr_specifier = baca.lmr(
+            >>> lmr = baca.lmr(
             ...     left_counts=[1],
             ...     left_cyclic=False,
             ...     right_length=2,
             ...     )
 
-            >>> parts = lmr_specifier([1])
+            >>> parts = lmr([1])
             >>> for part in parts: part
             Sequence([1])
 
-            >>> parts = lmr_specifier([1, 2])
+            >>> parts = lmr([1, 2])
             >>> for part in parts: part
             Sequence([1, 2])
 
-            >>> parts = lmr_specifier([1, 2, 3])
+            >>> parts = lmr([1, 2, 3])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4])
+            >>> parts = lmr([1, 2, 3, 4])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2])
             Sequence([3, 4])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5])
+            >>> parts = lmr([1, 2, 3, 4, 5])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3])
             Sequence([4, 5])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3, 4])
             Sequence([5, 6])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3, 4, 5])
             Sequence([6, 7])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3, 4, 5, 6])
             Sequence([7, 8])
 
-            >>> parts = lmr_specifier([1, 2, 3, 4, 5, 6, 7, 8, 9])
+            >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
             >>> for part in parts: part
             Sequence([1])
             Sequence([2, 3, 4, 5, 6, 7])
@@ -1127,109 +1127,19 @@ class LMR(object):
 
 
 class Acciaccatura(object):
-    r"""
-    Acciaccatura specifier.
+    """
+    Acciaccatura.
 
     ..  container:: example
 
-        Default acciaccatura specifier:
-
-        >>> stack = baca.Stack(
-        ...     baca.pitch_first_maker([1], 8, acciaccatura=True),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [
-        ...     [0],
-        ...     [2, 10],
-        ...     [18, 16, 15],
-        ...     [20, 19, 9, 0],
-        ...     [2, 10, 18, 16, 15],
-        ...     [20, 19, 9, 0, 2, 10],
-        ...     ]
-        >>> selections = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> score = lilypond_file[abjad.Score]
-        >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-        >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            \with
-            {
-                \override SpacingSpanner.strict-grace-spacing = ##f
-                \override SpacingSpanner.strict-note-spacing = ##f
-            }
-            <<
-                \new GlobalContext
-                {
-                    \time 3/4
-                    s1 * 3/4
-                }
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                        }
-                        bf'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            fs''16
-                            [                                                                        %! Acciaccatura
-                            e''16
-                            ]                                                                        %! Acciaccatura
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                        %! Acciaccatura
-                            g''16
-                            a'16
-                            ]                                                                        %! Acciaccatura
-                        }
-                        c'8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            d'16
-                            [                                                                        %! Acciaccatura
-                            bf'16
-                            fs''16
-                            e''16
-                            ]                                                                        %! Acciaccatura
-                        }
-                        ef''8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        \acciaccatura {
-                            af''16
-                            [                                                                        %! Acciaccatura
-                            g''16
-                            a'16
-                            c'16
-                            d'16
-                            ]                                                                        %! Acciaccatura
-                        }
-                        bf'8
-                    }
-                }
-            >>
+        >>> baca.Acciaccatura()
+        Acciaccatura(durations=[Duration(1, 16)], lmr=LMR())
 
     """
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_durations", "_lmr_specifier")
+    __slots__ = ("_durations", "_lmr")
 
     ### INITIALIZER ###
 
@@ -1237,12 +1147,12 @@ class Acciaccatura(object):
         self,
         *,
         durations: typing.Sequence[abjad.DurationTyping] = [(1, 16)],
-        lmr_specifier: LMR = LMR(),
+        lmr: LMR = LMR(),
     ) -> None:
         durations_ = [abjad.Duration(_) for _ in durations]
         self._durations = durations_
-        assert isinstance(lmr_specifier, LMR), repr(lmr_specifier)
-        self._lmr_specifier = lmr_specifier
+        assert isinstance(lmr, LMR), repr(lmr)
+        self._lmr = lmr
 
     ### SPECIAL METHODS ###
 
@@ -1252,11 +1162,11 @@ class Acciaccatura(object):
         typing.List[typing.Optional[abjad.AcciaccaturaContainer]], list
     ]:
         """
-        Calls acciaccatura specifier on ``collection``.
+        Calls acciaccatura on ``collection``.
         """
         prototype = (list, abjad.Segment)
         assert isinstance(collection, prototype), repr(collection)
-        segment_parts = self.lmr_specifier(collection)
+        segment_parts = self.lmr(collection)
         segment_parts = [_ for _ in segment_parts if _]
         collection = [_[-1] for _ in segment_parts]
         durations = self.durations
@@ -1280,13 +1190,13 @@ class Acciaccatura(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when initialization values are equal.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
-        Hashes with storage format manager.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -1297,13 +1207,13 @@ class Acciaccatura(object):
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats with storage format manager.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -1509,7 +1419,7 @@ class Acciaccatura(object):
         return self._durations
 
     @property
-    def lmr_specifier(self) -> LMR:
+    def lmr(self) -> LMR:
         r"""
         Gets LMR specifier.
 
@@ -2051,12 +1961,12 @@ class Acciaccatura(object):
                 >>
 
         """
-        return self._lmr_specifier
+        return self._lmr
 
 
 class Anchor(object):
     """
-    Anchor specifier.
+    Anchor.
 
     ..  container:: example
 
@@ -2121,20 +2031,19 @@ class Anchor(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when all initialization values of Abjad value object equal
-        the initialization values of ``argument``.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats Abjad object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
-        Hashes Abjad value object.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -2145,7 +2054,7 @@ class Anchor(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -2224,8 +2133,7 @@ class Coat(object):
 
 
 class Imbrication(object):
-    """
-    Imbrication command.
+    """ Imbrication.
     """
 
     ### CLASS VARIABLES ###
@@ -3684,7 +3592,7 @@ class Imbrication(object):
 
 class Accumulator(object):
     """
-    Music-accumulator.
+    Accumulator.
 
     ..  container:: example exception
 
@@ -4158,7 +4066,7 @@ class Contribution(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Gets interpreter representation with format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -4214,7 +4122,7 @@ class Contribution(object):
 
 class Nest(object):
     r"""
-    Nest command.
+    Nest.
 
     ..  container:: example
 
@@ -4298,7 +4206,7 @@ class Nest(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_lmr_specifier", "_treatments")
+    __slots__ = ("_lmr", "_treatments")
 
     ### INITIALIZER ###
 
@@ -4306,16 +4214,16 @@ class Nest(object):
         self,
         treatments: typing.Sequence[typing.Union[int, str]],
         *,
-        lmr_specifier: LMR = None,
+        lmr: LMR = None,
     ) -> None:
         assert isinstance(treatments, (list, tuple))
         is_treatment = PitchFirstMaker._is_treatment
         for treatment in treatments:
             assert is_treatment(treatment), repr(treatment)
         self._treatments = treatments
-        if lmr_specifier is not None:
-            assert isinstance(lmr_specifier, LMR), repr(lmr_specifier)
-        self._lmr_specifier = lmr_specifier
+        if lmr is not None:
+            assert isinstance(lmr, LMR), repr(lmr)
+        self._lmr = lmr
 
     ### SPECIAL METHODS ###
 
@@ -4417,10 +4325,10 @@ class Nest(object):
                 assert isinstance(item[0], abjad.Tuplet), repr(item)
                 tuplet = item[0]
                 tuplets.append(tuplet)
-        if self.lmr_specifier is None:
+        if self.lmr is None:
             tuplet_selections = [abjad.select(tuplets)]
         else:
-            tuplet_selections = self.lmr_specifier(tuplets)
+            tuplet_selections = self.lmr(tuplets)
             tuplet_selections = [
                 abjad.select(list(_)) for _ in tuplet_selections
             ]
@@ -4440,19 +4348,19 @@ class Nest(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when initialization values compare equal.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
-        Hashes object.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -4463,7 +4371,7 @@ class Nest(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation of object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -4502,11 +4410,11 @@ class Nest(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def lmr_specifier(self) -> typing.Optional[LMR]:
+    def lmr(self) -> typing.Optional[LMR]:
         """
         Gets LMR specifier.
         """
-        return self._lmr_specifier
+        return self._lmr
 
     @property
     def treatments(self) -> typing.Optional[typing.Sequence]:
@@ -4774,20 +4682,19 @@ class RestAffix(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when all initialization values of Abjad value object equal
-        the initialization values of ``argument``.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats Abjad object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
-        Hashes Abjad value object.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -4798,7 +4705,7 @@ class RestAffix(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -5166,7 +5073,7 @@ class RestAffix(object):
 
 class PitchFirstMaker(object):
     r"""
-    Pitch-first rhythm-maker.
+    Pitch-first maker.
 
     ..  container:: example
 
@@ -5717,14 +5624,13 @@ class PitchFirstMaker(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when all initialization values of rhythm-maker equal
-        initialization values of ``argument``.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
-        Hashes rhythm-maker.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -5735,13 +5641,13 @@ class PitchFirstMaker(object):
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats rhythm-maker.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -6170,7 +6076,102 @@ class PitchFirstMaker(object):
     @property
     def acciaccatura(self) -> typing.Optional[Acciaccatura]:
         r"""
-        Gets acciaccatura specifier.
+        Gets acciaccatura.
+
+        ..  container:: example
+
+            Default acciaccatura:
+
+            >>> stack = baca.Stack(
+            ...     baca.pitch_first_maker([1], 8, acciaccatura=True),
+            ...     rmakers.beam(),
+            ... )
+
+            >>> collections = [
+            ...     [0],
+            ...     [2, 10],
+            ...     [18, 16, 15],
+            ...     [20, 19, 9, 0],
+            ...     [2, 10, 18, 16, 15],
+            ...     [20, 19, 9, 0, 2, 10],
+            ... ]
+            >>> selections = stack(collections)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
+            >>> score = lilypond_file[abjad.Score]
+            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
+            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                \with
+                {
+                    \override SpacingSpanner.strict-grace-spacing = ##f
+                    \override SpacingSpanner.strict-note-spacing = ##f
+                }
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                            }
+                            bf'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                fs''16
+                                [                                                                        %! Acciaccatura
+                                e''16
+                                ]                                                                        %! Acciaccatura
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! Acciaccatura
+                                g''16
+                                a'16
+                                ]                                                                        %! Acciaccatura
+                            }
+                            c'8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                d'16
+                                [                                                                        %! Acciaccatura
+                                bf'16
+                                fs''16
+                                e''16
+                                ]                                                                        %! Acciaccatura
+                            }
+                            ef''8
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            \acciaccatura {
+                                af''16
+                                [                                                                        %! Acciaccatura
+                                g''16
+                                a'16
+                                c'16
+                                d'16
+                                ]                                                                        %! Acciaccatura
+                            }
+                            bf'8
+                        }
+                    }
+                >>
 
         ..  container:: example
 
@@ -6188,7 +6189,7 @@ class PitchFirstMaker(object):
             ...     [20, 19, 9, 0],
             ...     [2, 10, 18, 16, 15],
             ...     [20, 19, 9, 0, 2, 10],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
@@ -6284,7 +6285,7 @@ class PitchFirstMaker(object):
             ...     [20, 19, 9, 0, None],
             ...     [2, 10, 18, 16, 15, None],
             ...     [20, 19, 9, 0, 2, 10, None],
-            ...     ]
+            ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
@@ -8151,20 +8152,19 @@ class PitchFirstAssignment(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when initialization values of command equal
-        initialization values of ``argument``.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats command.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
-        Hashes command.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -8175,7 +8175,7 @@ class PitchFirstAssignment(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation of command.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -8279,20 +8279,19 @@ class PitchFirstCommand(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when initialization values of command equal
-        initialization values of ``argument``.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats command.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
-        Hashes command.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -8303,7 +8302,7 @@ class PitchFirstCommand(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation of command.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -11032,7 +11031,7 @@ def lmr(
     )
 
 
-def nest(treatments: typing.Sequence, *, lmr_specifier: LMR = None) -> Nest:
+def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
     r"""
     Nests music.
 
@@ -11108,7 +11107,7 @@ def nest(treatments: typing.Sequence, *, lmr_specifier: LMR = None) -> Nest:
     assert treatments is not None
     if not isinstance(treatments, list):
         treatments = [treatments]
-    return Nest(lmr_specifier=lmr_specifier, treatments=treatments)
+    return Nest(lmr=lmr, treatments=treatments)
 
 
 def pitch_first_maker(
@@ -11127,7 +11126,7 @@ def pitch_first_maker(
     if acciaccatura is True:
         acciaccatura = Acciaccatura()
     elif isinstance(acciaccatura, LMR):
-        acciaccatura = Acciaccatura(lmr_specifier=acciaccatura)
+        acciaccatura = Acciaccatura(lmr=acciaccatura)
     if acciaccatura is not None:
         assert isinstance(acciaccatura, Acciaccatura), repr(acciaccatura)
     return PitchFirstMaker(

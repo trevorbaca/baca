@@ -150,14 +150,9 @@ class PitchArray(object):
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats Abjad object.
-
-        Set ``format_specification`` to ``''`` or ``'storage'``.
-        Interprets ``''`` equal to ``'storage'``.
+        Delegates to format manager.
         """
-        if format_specification in ("", "storage"):
-            return abjad.StorageFormatManager(self).get_storage_format()
-        return str(self)
+        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __getitem__(self, argument):
         """
@@ -169,11 +164,7 @@ class PitchArray(object):
 
     def __hash__(self):
         """
-        Hashes pitch array.
-
-        Required to be explicitly redefined on Python 3 if __eq__ changes.
-
-        Returns integer.
+        Delegates to format manager.
         """
         return super().__hash__()
 
@@ -1093,13 +1084,13 @@ class PitchArrayCell(object):
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats Abjad object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 

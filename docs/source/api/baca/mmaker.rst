@@ -54,7 +54,7 @@ mmaker
       __hash__
       __repr__
       durations
-      lmr_specifier
+      lmr
 
    .. raw:: html
 
@@ -82,7 +82,7 @@ mmaker
 
    .. autoattribute:: Acciaccatura.durations
 
-   .. autoattribute:: Acciaccatura.lmr_specifier
+   .. autoattribute:: Acciaccatura.lmr
 
 .. autoclass:: Accumulator
 
@@ -410,7 +410,7 @@ mmaker
       __format__
       __hash__
       __repr__
-      lmr_specifier
+      lmr
       treatments
 
    .. raw:: html
@@ -437,7 +437,7 @@ mmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: Nest.lmr_specifier
+   .. autoattribute:: Nest.lmr
 
    .. autoattribute:: Nest.treatments
 

@@ -75,14 +75,13 @@ class Accelerando(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when all initialization values of Abjad value object equal
-        the initialization values of ``argument``.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
-        Hashes Abjad value object.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -93,7 +92,7 @@ class Accelerando(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -425,14 +424,13 @@ class Ritardando(object):
 
     def __eq__(self, argument) -> bool:
         """
-        Is true when all initialization values of Abjad value object equal
-        the initialization values of ``argument``.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
     def __hash__(self) -> int:
         """
-        Hashes Abjad value object.
+        Delegates to format manager.
         """
         hash_values = abjad.StorageFormatManager(self).get_hash_values()
         try:
@@ -443,7 +441,7 @@ class Ritardando(object):
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -731,13 +729,13 @@ class StaffLines(object):
 
     def __format__(self, format_specification="") -> str:
         """
-        Formats Abjad object.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_storage_format()
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
@@ -908,15 +906,13 @@ class SpacingSection(object):
 
     def __hash__(self):
         """
-        Hashes spacing section.
-
-        Redefined with ``__eq__()``.
+        Delegates to format manager.
         """
         return super().__hash__()
 
     def __repr__(self) -> str:
         """
-        Gets interpreter representation.
+        Delegates to format manager.
         """
         return abjad.StorageFormatManager(self).get_repr_format()
 
