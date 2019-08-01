@@ -3769,7 +3769,7 @@ class Accumulator(object):
             if isinstance(command, Imbrication):
                 voice_name_ = self._abbreviation(command.voice_name)
                 command._voice_name = voice_name_
-        assignments = []
+        assignment = None
         pitch_first_command = None
         if anchor is not None:
             voice_name_ = self._abbreviation(anchor.remote_voice_name)
@@ -3787,30 +3787,17 @@ class Accumulator(object):
             selections = abjad.select(selections).flatten()
             commands_ = list(commands[1:])
         else:
-            commands__ = []
-            for command in commands_:
-                if isinstance(command, PitchFirstAssignment):
-                    assignments.append(command)
-                elif isinstance(command, PitchFirstRhythmMaker):
-                    assignment = PitchFirstAssignment(command)
-                    assignments.append(assignment)
-                else:
-                    commands__.append(command)
-            commands_ = commands__
-            if not assignments:
-                raise Exception("must provide pitch-first assignment.")
-            # TODO: activate:
-            #        if 1 < len(assignments):
-            #            assert len(assignments) == 2, repr(assignments)
-            #            message = "must combine assignments:\n"
-            #            message += f"   {repr(assignments[0])}\n"
-            #            message += f"   {repr(assignments[1])}\n"
-            #            raise Exception(message)
+            pp = (PitchFirstRhythmMaker, PitchFirstAssignment)
+            assert isinstance(commands[0], pp), repr(commands[0])
+            if isinstance(commands[0], PitchFirstAssignment):
+                assignment = commands[0]
+            else:
+                assert isinstance(commands[0], PitchFirstRhythmMaker)
+                assignment = PitchFirstAssignment(commands[0])
+            commands_ = list(commands[1:])
             collections = _coerce_collections(collections)
             selections = len(collections) * [None]
-            for assignment in assignments:
-                assert isinstance(assignment, PitchFirstAssignment)
-                assignment(collections=collections, selections=selections)
+            assignment(collections=collections, selections=selections)
         container = abjad.Container(selections)
         imbricated_selections = {}
         for command in commands_:
@@ -3823,8 +3810,8 @@ class Accumulator(object):
             self._label_figure_name_(container, figure_name)
         selection = abjad.select([container])
         duration = abjad.inspect(selection).duration()
-        if signature is None and assignments:
-            primary_rhythm_maker = assignments[0].rhythm_maker
+        if signature is None and assignment:
+            primary_rhythm_maker = assignment.rhythm_maker
             signature = primary_rhythm_maker.signature
         if signature is None and pitch_first_command:
             primary_rhythm_maker = pitch_first_command.assignments[
