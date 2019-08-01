@@ -20,108 +20,8 @@ _commands = commands
 
 
 class Stack(object):
-    r"""
+    """
     Stack.
-
-    ..  container:: example
-
-        >>> stack = baca.stack(
-        ...     baca.pfmaker([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
-        ...     rmakers.denominator((1, 16)),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [
-        ...     [0, 2, 10, 18, 16],
-        ...     [15, 20, 19, 9, 0],
-        ...     [2, 10, 18, 16, 15],
-        ...     [20, 19, 9, 0, 2],
-        ...     [10, 18, 16, 15, 20],
-        ...     [19, 9, 0, 2, 10],
-        ...     ]
-        >>> selections = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> staff = lilypond_file[abjad.Score]
-        >>> abjad.override(staff).beam.positions = (-6, -6)
-        >>> abjad.override(staff).stem.direction = abjad.Down
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            \with
-            {
-                \override Beam.positions = #'(-6 . -6)
-                \override Stem.direction = #down
-            }
-            <<
-                \new GlobalContext
-                {
-                    \time 15/8
-                    s1 * 15/8
-                }
-                \new Staff
-                {
-                    \times 4/6 {
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        fs''16
-                        e''16
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/7 {
-                        ef''8
-                        [
-                        af''16
-                        g''16
-                        a'8
-                        c'16
-                        ]
-                    }
-                    \times 4/7 {
-                        d'16
-                        [
-                        bf'8
-                        fs''16
-                        e''16
-                        ef''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        af''16
-                        [
-                        g''16
-                        a'8
-                        c'16
-                        d'16
-                        ]
-                    }
-                    \times 4/7 {
-                        bf'8
-                        [
-                        fs''16
-                        e''16
-                        ef''8
-                        af''16
-                        ]
-                    }
-                    \tweak text #tuplet-number::calc-fraction-text
-                    \times 6/7 {
-                        g''16
-                        [
-                        a'8
-                        c'16
-                        d'16
-                        bf'8
-                        ]
-                    }
-                }
-            >>
-
     """
 
     ### CLASS ATTRIBUTES ###
@@ -215,49 +115,6 @@ class Stack(object):
 class LMR(object):
     """
     Left-middle-right.
-
-    ..  container:: example
-
-        Default LMR specifier:
-
-        >>> lmr = baca.lmr()
-
-        >>> parts = lmr([1])
-        >>> for part in parts: part
-        Sequence([1])
-
-        >>> parts =lmr([1, 2])
-        >>> for part in parts: part
-        Sequence([1, 2])
-
-        >>> parts = lmr([1, 2, 3])
-        >>> for part in parts: part
-        Sequence([1, 2, 3])
-
-        >>> parts = lmr([1, 2, 3, 4])
-        >>> for part in parts: part
-        Sequence([1, 2, 3, 4])
-
-        >>> parts = lmr([1, 2, 3, 4, 5])
-        >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5])
-
-        >>> parts = lmr([1, 2, 3, 4, 5, 6])
-        >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6])
-
-        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
-        >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6, 7])
-
-        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
-        >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6, 7, 8])
-
-        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
-        >>> for part in parts: part
-        Sequence([1, 2, 3, 4, 5, 6, 7, 8, 9])
-
     """
 
     ### CLASS VARIABLES ###
@@ -340,7 +197,7 @@ class LMR(object):
         self, sequence: typing.Union[list, abjad.Segment] = None
     ) -> typing.List[abjad.Sequence]:
         """
-        Calls LMR specifier on ``sequence``.
+        Calls LMR on ``sequence``.
         """
         assert isinstance(sequence, (list, abjad.Segment)), repr(sequence)
         top_lengths = self._get_top_lengths(len(sequence))
@@ -484,7 +341,7 @@ class LMR(object):
             ...     left_cyclic=False,
             ...     left_length=3,
             ...     right_length=2,
-            ...     )
+            ... )
 
             >>> parts = lmr([1])
             >>> for part in parts: part
@@ -549,7 +406,7 @@ class LMR(object):
             ...     left_cyclic=True,
             ...     left_length=3,
             ...     right_length=2,
-            ...     )
+            ... )
 
             >>> parts = lmr([1])
             >>> for part in parts: part
@@ -633,7 +490,7 @@ class LMR(object):
 
             >>> lmr = baca.lmr(
             ...     left_length=2,
-            ...     )
+            ... )
 
             >>> parts = lmr([1])
             >>> for part in parts: part
@@ -707,7 +564,7 @@ class LMR(object):
             >>> lmr = baca.lmr(
             ...     middle_counts=[2],
             ...     middle_cyclic=True,
-            ...     )
+            ... )
 
             >>> parts = lmr([1])
             >>> for part in parts: part
@@ -779,7 +636,7 @@ class LMR(object):
             ...     middle_counts=[2],
             ...     middle_cyclic=True,
             ...     middle_reversed=True,
-            ...     )
+            ... )
 
             >>> parts = lmr([1])
             >>> for part in parts: part
@@ -850,7 +707,7 @@ class LMR(object):
             >>> lmr = baca.lmr(
             ...     left_length=2,
             ...     right_length=1,
-            ...     )
+            ... )
 
             >>> parts = lmr([1])
             >>> for part in parts: part
@@ -909,7 +766,7 @@ class LMR(object):
             ...     left_length=2,
             ...     priority=abjad.Right,
             ...     right_length=1,
-            ...     )
+            ... )
 
             >>> parts = lmr([1])
             >>> for part in parts: part
@@ -989,7 +846,7 @@ class LMR(object):
 
             >>> lmr = baca.lmr(
             ...     right_length=2,
-            ...     )
+            ... )
 
             >>> parts = lmr([1])
             >>> for part in parts: part
@@ -1042,7 +899,7 @@ class LMR(object):
             ...     left_counts=[1],
             ...     left_cyclic=False,
             ...     right_length=2,
-            ...     )
+            ... )
 
             >>> parts = lmr([1])
             >>> for part in parts: part
@@ -1401,7 +1258,7 @@ class Acciaccatura(object):
     @property
     def lmr(self) -> LMR:
         r"""
-        Gets LMR specifier.
+        Gets LMR. 
 
         ..  container:: example
 
@@ -1497,7 +1354,6 @@ class Acciaccatura(object):
                         }
                     }
                 >>
-
 
         ..  container:: example
 
@@ -4380,7 +4236,7 @@ class Nest(object):
     @property
     def lmr(self) -> typing.Optional[LMR]:
         """
-        Gets LMR specifier.
+        Gets LMR.
         """
         return self._lmr
 
@@ -4601,7 +4457,7 @@ class RestAffix(object):
 
         ..  container:: example
 
-            Affixes rests to first and last segments only:
+            Affixes rests to first and last collections only:
 
             >>> affix = baca.RestAffix(
             ...     pattern=abjad.Pattern(indices=[0, -1]),
@@ -4661,7 +4517,7 @@ class RestAffix(object):
 
         ..  container:: example
 
-            Affixes rests to every segment:
+            Affixes rests to every collection:
 
             >>> affix = baca.RestAffix(
             ...     pattern=abjad.index_all(),
@@ -4845,376 +4701,8 @@ class RestAffix(object):
 
 
 class PitchFirstMaker(object):
-    r"""
+    """
     Pitch-first maker.
-
-    ..  container:: example
-
-        Sixteenths and eighths:
-
-        >>> stack = baca.stack(
-        ...     baca.pfmaker([1, 1, 2], 16),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10, 8]]
-        >>> selections = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 5/16
-                    s1 * 5/16
-                }
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        af'16
-                        ]
-                    }
-                }
-            >>
-
-        >>> collections = [[18, 16, 15, 20, 19]]
-        >>> selections = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 3/8
-                    s1 * 3/8
-                }
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
-                    }
-                }
-            >>
-
-        >>> collections = [[9]]
-        >>> selections = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 1/16
-                    s1 * 1/16
-                }
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        a'16
-                    }
-                }
-            >>
-
-        >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
-        >>> selections = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 13/16
-                    s1 * 13/16
-                }
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        af'16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        fs''16
-                        [
-                        e''8
-                        ef''16
-                        af''16
-                        g''8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        a'16
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Silences every third logical tie:
-
-        >>> stack = baca.stack(
-        ...     baca.pfmaker([1, 1, 2], 16),
-        ...     rmakers.force_rest(baca.lts().get([2], 3)),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selections = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 3/4
-                    s1 * 3/4
-                }
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        c'16
-                        [
-                        d'16
-                        ]
-                        r8
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        fs''16
-                        [
-                        e''16
-                        ]
-                        r8
-                        af''16
-                        [
-                        g''16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        r8
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Silences first and last logical ties:
-
-        >>> stack = baca.stack(
-        ...     baca.pfmaker([1, 1, 2], 16),
-        ...     rmakers.force_rest(baca.lt(0)),
-        ...     rmakers.force_rest(baca.lt(-1)),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selections = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 3/4
-                    s1 * 3/4
-                }
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        r16
-                        d'16
-                        [
-                        bf'8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        r8
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        No rest commands:
-
-        >>> stack = baca.stack(
-        ...     baca.pfmaker([1, 1, 2], 16),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selections = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 3/4
-                    s1 * 3/4
-                }
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        fs''16
-                        [
-                        e''16
-                        ef''8
-                        af''16
-                        g''16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        a'8
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Silences every other tuplet:
-
-        >>> stack = baca.stack(
-        ...     baca.pfmaker([1, 1, 2], 16),
-        ...     rmakers.force_rest(baca.tuplets().get([1], 2)),
-        ...     rmakers.rewrite_rest_filled(),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selections = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 3/4
-                    s1 * 3/4
-                }
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        r4.
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        a'8
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        Sustains every other division:
-
-        >>> tuplets = selector=baca.tuplets().get([1], 2)
-        >>> stack = baca.stack(
-        ...     baca.pfmaker([1, 1, 2], 16),
-        ...     rmakers.tie(tuplets.map(baca.leaves()[:-1])),
-        ...     rmakers.rewrite_sustained(),
-        ...     rmakers.beam(),
-        ... )
-
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> selections = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 3/4
-                    s1 * 3/4
-                }
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        c'16
-                        [
-                        d'16
-                        bf'8
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        fs''4.
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        a'8
-                    }
-                }
-            >>
-
     """
 
     ### CLASS VARIABLES ###
@@ -5889,7 +5377,7 @@ class PitchFirstMaker(object):
 
         ..  container:: example
 
-            Default acciaccatura:
+            As many acciaccaturas as possible per collection:
 
             >>> stack = baca.stack(
             ...     baca.pfmaker([1], 8, acciaccatura=True),
@@ -6234,7 +5722,136 @@ class PitchFirstMaker(object):
 
         ..  container:: example
 
-            With rests:
+            Sixteenths and eighths:
+
+            >>> stack = baca.stack(
+            ...     baca.pfmaker([1, 1, 2], 16),
+            ...     rmakers.beam(),
+            ... )
+
+            >>> collections = [[0, 2, 10, 8]]
+            >>> selections = stack(collections)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/16
+                        s1 * 5/16
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            af'16
+                            ]
+                        }
+                    }
+                >>
+
+            >>> collections = [[18, 16, 15, 20, 19]]
+            >>> selections = stack(collections)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/8
+                        s1 * 3/8
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            fs''16
+                            [
+                            e''16
+                            ef''8
+                            af''16
+                            g''16
+                            ]
+                        }
+                    }
+                >>
+
+            >>> collections = [[9]]
+            >>> selections = stack(collections)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 1/16
+                        s1 * 1/16
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            a'16
+                        }
+                    }
+                >>
+
+            >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
+            >>> selections = stack(collections)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 13/16
+                        s1 * 13/16
+                    }
+                    \new Staff
+                    {
+                        \scaleDurations #'(1 . 1) {
+                            c'16
+                            [
+                            d'16
+                            bf'8
+                            af'16
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            fs''16
+                            [
+                            e''8
+                            ef''16
+                            af''16
+                            g''8
+                            ]
+                        }
+                        \scaleDurations #'(1 . 1) {
+                            a'16
+                        }
+                    }
+                >>
+
+        ..  container:: example
+
+            Works with rests:
 
             >>> stack = baca.stack(
             ...     baca.pfmaker([3, -1, 2, 2], 16),
@@ -6292,7 +5909,7 @@ class PitchFirstMaker(object):
 
         ..  container:: example
 
-            Works with very large nonassignable counts:
+            Works with large counts:
 
             >>> stack = baca.stack(
             ...     baca.pfmaker([29], 64),
@@ -7700,7 +7317,7 @@ class PitchFirstMaker(object):
 
         ..  container:: example
 
-            Segment durations alternating between a quarter and a dotted
+            Collection durations alternating between a quarter and a dotted
             quarter:
 
             >>> stack = baca.stack(
@@ -10684,6 +10301,49 @@ def lmr(
 ) -> LMR:
     """
     Makes left-middle-right.
+
+    ..  container:: example
+
+        Default LMR:
+
+        >>> lmr = baca.lmr()
+
+        >>> parts = lmr([1])
+        >>> for part in parts: part
+        Sequence([1])
+
+        >>> parts =lmr([1, 2])
+        >>> for part in parts: part
+        Sequence([1, 2])
+
+        >>> parts = lmr([1, 2, 3])
+        >>> for part in parts: part
+        Sequence([1, 2, 3])
+
+        >>> parts = lmr([1, 2, 3, 4])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4])
+
+        >>> parts = lmr([1, 2, 3, 4, 5])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6, 7])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6, 7, 8])
+
+        >>> parts = lmr([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        >>> for part in parts: part
+        Sequence([1, 2, 3, 4, 5, 6, 7, 8, 9])
+
     """
     return LMR(
         left_counts=left_counts,
@@ -11477,7 +11137,107 @@ def skips_before(counts: typing.List[int],) -> RestAffix:
 
 
 def stack(*commands) -> Stack:
-    """
+    r"""
     Makes stack.
+
+    ..  container:: example
+
+        >>> stack = baca.stack(
+        ...     baca.pfmaker([1, 1, 2], 8, treatments=[(1, 4), (3, 8)]),
+        ...     rmakers.denominator((1, 16)),
+        ...     rmakers.beam(),
+        ... )
+
+        >>> collections = [
+        ...     [0, 2, 10, 18, 16],
+        ...     [15, 20, 19, 9, 0],
+        ...     [2, 10, 18, 16, 15],
+        ...     [20, 19, 9, 0, 2],
+        ...     [10, 18, 16, 15, 20],
+        ...     [19, 9, 0, 2, 10],
+        ...     ]
+        >>> selections = stack(collections)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
+        >>> staff = lilypond_file[abjad.Score]
+        >>> abjad.override(staff).beam.positions = (-6, -6)
+        >>> abjad.override(staff).stem.direction = abjad.Down
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            \with
+            {
+                \override Beam.positions = #'(-6 . -6)
+                \override Stem.direction = #down
+            }
+            <<
+                \new GlobalContext
+                {
+                    \time 15/8
+                    s1 * 15/8
+                }
+                \new Staff
+                {
+                    \times 4/6 {
+                        c'16
+                        [
+                        d'16
+                        bf'8
+                        fs''16
+                        e''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/7 {
+                        ef''8
+                        [
+                        af''16
+                        g''16
+                        a'8
+                        c'16
+                        ]
+                    }
+                    \times 4/7 {
+                        d'16
+                        [
+                        bf'8
+                        fs''16
+                        e''16
+                        ef''8
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        af''16
+                        [
+                        g''16
+                        a'8
+                        c'16
+                        d'16
+                        ]
+                    }
+                    \times 4/7 {
+                        bf'8
+                        [
+                        fs''16
+                        e''16
+                        ef''8
+                        af''16
+                        ]
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 6/7 {
+                        g''16
+                        [
+                        a'8
+                        c'16
+                        d'16
+                        bf'8
+                        ]
+                    }
+                }
+            >>
+
     """
     return Stack(*commands)
