@@ -8339,14 +8339,24 @@ class PitchFirstCommand(object):
         for group in groups:
             rhythm_maker = group[0].assignment.rhythm_maker
             collections_ = [match.division for match in group]
-            selection = rhythm_maker(
-                collections_,
-                collection_index=None,
-                state=None,
-                total_collections=None,
-            )
-            assert all(isinstance(_, abjad.Tuplet) for _ in selection)
-            tuplets.extend(selection)
+            if group[0].assignment.thread:
+                selection = rhythm_maker(
+                    collections_,
+                    collection_index=None,
+                    state=None,
+                    total_collections=None,
+                )
+                tuplets.extend(selection)
+            else:
+                total_collections = len(collections_)
+                for i, collection_ in enumerate(collections_):
+                    selection = rhythm_maker(
+                        [collection_],
+                        collection_index=i,
+                        state=None,
+                        total_collections=total_collections,
+                    )
+                    tuplets.extend(selection)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         selection = abjad.select(tuplets)
         return selection
@@ -11113,7 +11123,7 @@ def nest(treatments: typing.Sequence, *, lmr_specifier: LMR = None) -> Nest:
     ..  container:: example
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment(
+        ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
@@ -11286,7 +11296,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
     ..  container:: example
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment(
+        ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_after([2]),
@@ -11359,7 +11369,7 @@ def rests_around(
     ..  container:: example
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment(
+        ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [2]),
@@ -11431,7 +11441,7 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
     ..  container:: example
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment(
+        ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_before([2]),
@@ -11520,7 +11530,7 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
     ..  container:: example
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment(
+        ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.skips_after([2]),
@@ -11593,7 +11603,7 @@ def skips_around(
     ..  container:: example
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment(
+        ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.skips_around([2], [2]),
@@ -11665,7 +11675,7 @@ def skips_before(counts: typing.List[int],) -> RestAffix:
     ..  container:: example
 
         >>> stack = baca.Stack(
-        ...     baca.pitch_first_assignment(
+        ...     baca.pitch_first_assignment_command(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.skips_before([2]),
