@@ -8001,6 +8001,7 @@ class PitchFirstAssignment(object):
         """
         return self._pattern
 
+    # TODO: remove thread
     @property
     def thread(self) -> typing.Optional[bool]:
         """
@@ -8062,6 +8063,7 @@ class PitchFirstCommand(object):
         for group in groups:
             maker = group[0].assignment.maker
             collections_ = [match.division for match in group]
+            # TODO: remove thread
             if group[0].assignment.thread:
                 selection = maker(
                     collections_,
@@ -10928,19 +10930,6 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
     return Nest(lmr=lmr, treatments=treatments)
 
 
-def pfassignment(
-    maker: PitchFirstMaker,
-    *,
-    pattern: abjad.Pattern = None,
-    thread: bool = None,
-) -> PitchFirstAssignment:
-    """
-    Makes pitch-first assignment.
-    """
-    assert isinstance(maker, PitchFirstMaker), repr(maker)
-    return PitchFirstAssignment(maker, pattern=pattern, thread=thread)
-
-
 def pfmaker(
     counts: abjad.IntegerSequence,
     denominator: int,
@@ -10972,30 +10961,17 @@ def pfmaker(
     )
 
 
-def pitch_first_assignment(
-    counts: abjad.IntegerSequence,
-    denominator: int,
-    *,
-    acciaccatura: typing.Union[bool, Acciaccatura, LMR] = None,
-    affix: RestAffix = None,
+def pfassignment(
+    maker: PitchFirstMaker,
     pattern: abjad.Pattern = None,
-    signature: int = None,
-    spelling: rmakers.Spelling = None,
+    *,
+    # TODO: remove thread
     thread: bool = None,
-    treatments: typing.Sequence = None,
 ) -> PitchFirstAssignment:
     """
     Makes pitch-first assignment.
     """
-    maker = pfmaker(
-        counts,
-        denominator,
-        acciaccatura=acciaccatura,
-        affix=affix,
-        signature=signature,
-        spelling=spelling,
-        treatments=treatments,
-    )
+    assert isinstance(maker, PitchFirstMaker), repr(maker)
     return PitchFirstAssignment(maker, pattern=pattern, thread=thread)
 
 
@@ -11004,35 +10980,6 @@ def pfcommand(*assignments: PitchFirstAssignment) -> PitchFirstCommand:
     Makes pitch-first command.
     """
     return PitchFirstCommand(*assignments)
-
-
-def pitch_first_assignment_command(
-    counts: abjad.IntegerSequence,
-    denominator: int,
-    *,
-    acciaccatura: typing.Union[bool, Acciaccatura, LMR] = None,
-    affix: RestAffix = None,
-    pattern: abjad.Pattern = None,
-    signature: int = None,
-    spelling: rmakers.Spelling = None,
-    thread: bool = None,
-    treatments: typing.Sequence = None,
-) -> PitchFirstCommand:
-    """
-    Deprecated.
-    """
-    assignment = pitch_first_assignment(
-        counts,
-        denominator,
-        acciaccatura=acciaccatura,
-        affix=affix,
-        pattern=pattern,
-        signature=signature,
-        spelling=spelling,
-        thread=thread,
-        treatments=treatments,
-    )
-    return pfcommand(assignment)
 
 
 def rests_after(counts: typing.Sequence[int]) -> RestAffix:

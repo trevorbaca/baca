@@ -740,8 +740,6 @@ Override library.
    ~baca.pfmaker.pfassignment
    ~baca.pfmaker.pfcommand
    ~baca.pfmaker.pfmaker
-   ~baca.pfmaker.pitch_first_assignment
-   ~baca.pfmaker.pitch_first_assignment_command
    ~baca.pfmaker.rests_after
    ~baca.pfmaker.rests_around
    ~baca.pfmaker.rests_before

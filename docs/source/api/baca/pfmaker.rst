@@ -717,8 +717,6 @@ pfmaker
    ~pfassignment
    ~pfcommand
    ~pfmaker
-   ~pitch_first_assignment
-   ~pitch_first_assignment_command
    ~rests_after
    ~rests_around
    ~rests_before
@@ -750,10 +748,6 @@ pfmaker
 .. autofunction:: pfcommand
 
 .. autofunction:: pfmaker
-
-.. autofunction:: pitch_first_assignment
-
-.. autofunction:: pitch_first_assignment_command
 
 .. autofunction:: rests_after
 
