@@ -3717,8 +3717,8 @@ class Accumulator(object):
         if signature is None and maker:
             signature = maker.signature
         if signature is None and command:
-            primary_rhythm_maker = command.assignments[0].rhythm_maker
-            signature = primary_rhythm_maker.signature
+            primary_maker = command.assignments[0].maker
+            signature = primary_maker.signature
         if signature is not None:
             duration = duration.with_denominator(signature)
         time_signature = abjad.TimeSignature(duration)
@@ -7902,7 +7902,7 @@ class PitchFirstAssignment(object):
 
     ### CLASS ATTRIBUTES ###
 
-    __slots__ = ("_pattern", "_rhythm_maker", "_thread")
+    __slots__ = ("_maker", "_pattern", "_thread")
 
     _publish_storage_format = True
 
@@ -7910,22 +7910,22 @@ class PitchFirstAssignment(object):
 
     def __init__(
         self,
-        rhythm_maker: PitchFirstMaker,
+        maker: PitchFirstMaker,
         *,
         pattern: abjad.Pattern = None,
         thread: bool = None,
     ) -> None:
-        assert isinstance(rhythm_maker, PitchFirstMaker)
-        self._rhythm_maker = rhythm_maker
+        assert isinstance(maker, PitchFirstMaker)
+        self._maker = maker
         if pattern is not None:
             assert isinstance(pattern, abjad.Pattern)
         self._pattern = pattern
         if thread is not None:
             thread = bool(thread)
         self._thread = thread
-        if 1 < len(rhythm_maker.treatments or []) and not thread:
+        if 1 < len(maker.treatments or []) and not thread:
             message = "multiple treatments only make sense with thread:\n"
-            message += f"   {format(rhythm_maker)}"
+            message += f"   {format(maker)}"
             raise Exception(message)
 
     ### SPECIAL METHODS ###
@@ -7962,19 +7962,18 @@ class PitchFirstAssignment(object):
     ### PUBLIC PROPERTIES ###
 
     @property
+    def maker(self) -> PitchFirstMaker:
+        """
+        Gets maker.
+        """
+        return self._maker
+
+    @property
     def pattern(self) -> typing.Optional[abjad.Pattern]:
         """
         Gets pattern.
         """
         return self._pattern
-
-    # TODO: change to "maker"
-    @property
-    def rhythm_maker(self) -> PitchFirstMaker:
-        """
-        Gets rhythm-maker.
-        """
-        return self._rhythm_maker
 
     @property
     def thread(self) -> typing.Optional[bool]:
@@ -8031,14 +8030,14 @@ class PitchFirstCommand(object):
                 raise Exception(f"no maker match for collection {i}.")
         assert len(collections) == len(matches)
         groups = abjad.sequence(matches).group_by(
-            lambda match: match.assignment.rhythm_maker
+            lambda match: match.assignment.maker
         )
         tuplets: typing.List[abjad.Tuplet] = []
         for group in groups:
-            rhythm_maker = group[0].assignment.rhythm_maker
+            maker = group[0].assignment.maker
             collections_ = [match.division for match in group]
             if group[0].assignment.thread:
-                selection = rhythm_maker(
+                selection = maker(
                     collections_,
                     collection_index=None,
                     state=None,
@@ -8048,7 +8047,7 @@ class PitchFirstCommand(object):
             else:
                 total_collections = len(collections_)
                 for i, collection_ in enumerate(collections_):
-                    selection = rhythm_maker(
+                    selection = maker(
                         [collection_],
                         collection_index=i,
                         state=None,
@@ -10961,7 +10960,7 @@ def pitch_first_assignment(
     """
     Makes pitch-first assignment.
     """
-    rhythm_maker = pfmaker(
+    maker = pfmaker(
         counts,
         denominator,
         acciaccatura=acciaccatura,
@@ -10970,7 +10969,7 @@ def pitch_first_assignment(
         spelling=spelling,
         treatments=treatments,
     )
-    return PitchFirstAssignment(rhythm_maker, pattern=pattern, thread=thread)
+    return PitchFirstAssignment(maker, pattern=pattern, thread=thread)
 
 
 def pfcommand(*assignments: PitchFirstAssignment) -> PitchFirstCommand:

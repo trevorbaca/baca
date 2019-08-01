@@ -457,8 +457,8 @@ pfmaker
       __format__
       __hash__
       __repr__
+      maker
       pattern
-      rhythm_maker
       thread
 
    .. raw:: html
@@ -483,9 +483,9 @@ pfmaker
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: PitchFirstAssignment.pattern
+   .. autoattribute:: PitchFirstAssignment.maker
 
-   .. autoattribute:: PitchFirstAssignment.rhythm_maker
+   .. autoattribute:: PitchFirstAssignment.pattern
 
    .. autoattribute:: PitchFirstAssignment.thread
 
