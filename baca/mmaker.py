@@ -8159,15 +8159,14 @@ class PitchFirstAssignment(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(
-        self, collections: typing.Sequence
-    ) -> typing.List[abjad.Selection]:
+    def __call__(self, collections: typing.Sequence) -> abjad.Selection:
         """
         Calls pitch-first assignment.
         """
         collections = _coerce_collections(collections)
         prototype = (pitchclasses.CollectionList,)
         assert isinstance(collections, prototype), repr(collections)
+        collection_count = len(collections)
         selections = len(collections) * [None]
         assert len(selections) == len(collections)
         rhythm_maker = self.rhythm_maker
@@ -8191,39 +8190,33 @@ class PitchFirstAssignment(object):
                 continue
             collections_.append(collection_)
             indices.append(i)
-        stage_selections: typing.Union[list, abjad.Selection]
+        tuplets: typing.List[abjad.Tuplet] = []
         if self.thread:
-            stage_selections = rhythm_maker(collections_)
+            selection = rhythm_maker(collections_)
+            tuplets.extend(selection)
         else:
-            stage_selections = []
             total_collections = len(collections_)
             for i, collection_ in enumerate(collections_):
-                stage_selections_ = rhythm_maker(
+                selection_ = rhythm_maker(
                     [collection_],
                     collection_index=i,
                     total_collections=total_collections,
                 )
-                stage_selections.extend(stage_selections_)
-        triples = zip(indices, stage_selections, collections)
-        result = []
+                tuplets.extend(selection_)
+        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
+        triples = zip(indices, tuplets, collections)
+        tuplets: typing.List[abjad.Tuplet] = []
         for i in range(len(indices)):
-            result.append(abjad.Selection())
-        for i, stage_selection, collection in triples:
-            assert isinstance(stage_selection, abjad.Tuplet)
-            stage_selection = abjad.select(stage_selection)
-            # stage_selection is actually a tuplet
-            assert len(stage_selection) == 1, repr(stage_selection)
+            tuplets.append("foo")
+        for i, tuplet, collection in triples:
+            assert isinstance(tuplet, abjad.Tuplet)
             if not isinstance(collection, (abjad.Set, set)):
-                ###selections[i] = stage_selection
-                result[i] = stage_selection
+                tuplets[i] = tuplet
                 continue
-            assert len(stage_selection) == 1, repr(stage_selection)
-            tuplet = stage_selection[0]
-            assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
-            agent = abjad.iterate(stage_selection)
+            agent = abjad.iterate(tuplet)
             logical_ties = agent.logical_ties(pitched=True)
             logical_ties = list(logical_ties)
-            assert len(logical_ties) == 1, repr(stage_selection)
+            assert len(logical_ties) == 1, repr(tuplet)
             logical_tie = logical_ties[0]
             for note in logical_tie.leaves:
                 assert isinstance(note, abjad.Note), repr(note)
@@ -8234,11 +8227,11 @@ class PitchFirstAssignment(object):
                 abjad.mutate(note).replace([chord])
                 for indicator in indicators:
                     abjad.attach(indicator, chord)
-            ###selections[i] = stage_selection
-            result[i] = stage_selection
-        assert isinstance(result, list), repr(result)
-        assert all(isinstance(_, abjad.Selection) for _ in result)
-        return result
+            tuplets[i] = tuplet
+        assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
+        assert len(tuplets) == collection_count
+        selection = abjad.select(tuplets)
+        return selection
 
     def __eq__(self, argument) -> bool:
         """
