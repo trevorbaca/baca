@@ -16,24 +16,6 @@ from . import typings
 _commands = commands
 
 
-### UTILITIES ###
-
-
-def _coerce_collections(collections) -> pitchclasses.CollectionList:
-    prototype = (abjad.Segment, abjad.Set)
-    if isinstance(collections, prototype):
-        return pitchclasses.CollectionList(collections=[collections])
-    item_class: typing.Type = abjad.NumberedPitch
-    for collection in collections:
-        for item in collection:
-            if isinstance(item, str):
-                item_class = abjad.NamedPitch
-                break
-    return pitchclasses.CollectionList(
-        collections=collections, item_class=item_class
-    )
-
-
 ### CLASSES ###
 
 
@@ -3647,7 +3629,7 @@ class Accumulator(object):
     def __call__(
         self,
         voice_name: str,
-        collections: typing.Iterable,
+        collections: typing.Sequence,
         *commands,
         anchor: Anchor = None,
         figure_name: str = None,
@@ -3691,14 +3673,12 @@ class Accumulator(object):
             selections = [abjad.select(tuplet)]
         elif isinstance(commands[0], PitchFirstMaker):
             maker = commands[0]
-            collections = _coerce_collections(collections)
             selections = maker(collections)
             selections = abjad.select(selections).flatten()
             commands_ = list(commands[1:])
         else:
             assert isinstance(commands[0], PitchFirstCommand)
             command = commands[0]
-            collections = _coerce_collections(collections)
             selections = commands[0](collections)
             selections = abjad.select(selections).flatten()
             commands_ = list(commands[1:])
@@ -5300,7 +5280,7 @@ class PitchFirstMaker(object):
 
     def __call__(
         self,
-        collections: typing.Union[list, pitchclasses.CollectionList],
+        collections: typing.Sequence,
         collection_index: int = None,
         state: abjad.OrderedDict = None,
         total_collections: int = None,
@@ -5414,8 +5394,7 @@ class PitchFirstMaker(object):
                 >>
 
         """
-        prototype = (list, pitchclasses.CollectionList)
-        assert isinstance(collections, prototype), repr(collections)
+        collections = self._coerce_collections(collections)
         self._state = state or abjad.OrderedDict()
         self._apply_state(state=state)
         tuplets: typing.List[abjad.Tuplet] = []
@@ -5511,6 +5490,21 @@ class PitchFirstMaker(object):
         for treatment in treatments:
             if not self._is_treatment(treatment):
                 raise Exception(f"bad time treatment: {treatment!r}.")
+
+    @staticmethod
+    def _coerce_collections(collections) -> pitchclasses.CollectionList:
+        prototype = (abjad.Segment, abjad.Set)
+        if isinstance(collections, prototype):
+            return pitchclasses.CollectionList(collections=[collections])
+        item_class: typing.Type = abjad.NumberedPitch
+        for collection in collections:
+            for item in collection:
+                if isinstance(item, str):
+                    item_class = abjad.NamedPitch
+                    break
+        return pitchclasses.CollectionList(
+            collections=collections, item_class=item_class
+        )
 
     @staticmethod
     def _fix_rounding_error(durations, total_duration):
@@ -6079,115 +6073,6 @@ class PitchFirstMaker(object):
                                 ]                                                                        %! Acciaccatura
                             }
                             bf'4
-                        }
-                    }
-                >>
-
-        ..  container:: example
-
-            Graced rests:
-
-            >>> stack = baca.stack(
-            ...     baca.pfmaker([1], 4, acciaccatura=True),
-            ...     rmakers.beam(),
-            ... )
-
-            >>> collections = [
-            ...     [None],
-            ...     [0, None],
-            ...     [2, 10, None],
-            ...     [18, 16, 15, None],
-            ...     [20, 19, 9, 0, None],
-            ...     [2, 10, 18, 16, 15, None],
-            ...     [20, 19, 9, 0, 2, 10, None],
-            ... ]
-            >>> selections = stack(collections)
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-                \new Score
-                \with
-                {
-                    \override SpacingSpanner.strict-grace-spacing = ##f
-                    \override SpacingSpanner.strict-note-spacing = ##f
-                }
-                <<
-                    \new GlobalContext
-                    {
-                        \time 7/4
-                        s1 * 7/4
-                    }
-                    \new Staff
-                    {
-                        \scaleDurations #'(1 . 1) {
-                            r4
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                c'16
-                            }
-                            r4
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                                [                                                                        %! Acciaccatura
-                                bf'16
-                                ]                                                                        %! Acciaccatura
-                            }
-                            r4
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                fs''16
-                                [                                                                        %! Acciaccatura
-                                e''16
-                                ef''16
-                                ]                                                                        %! Acciaccatura
-                            }
-                            r4
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! Acciaccatura
-                                g''16
-                                a'16
-                                c'16
-                                ]                                                                        %! Acciaccatura
-                            }
-                            r4
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                d'16
-                                [                                                                        %! Acciaccatura
-                                bf'16
-                                fs''16
-                                e''16
-                                ef''16
-                                ]                                                                        %! Acciaccatura
-                            }
-                            r4
-                        }
-                        \scaleDurations #'(1 . 1) {
-                            \acciaccatura {
-                                af''16
-                                [                                                                        %! Acciaccatura
-                                g''16
-                                a'16
-                                c'16
-                                d'16
-                                bf'16
-                                ]                                                                        %! Acciaccatura
-                            }
-                            r4
                         }
                     }
                 >>
@@ -8020,9 +7905,6 @@ class PitchFirstCommand(object):
 
         :param collections: collections.
         """
-        collections = _coerce_collections(collections)
-        prototype = (pitchclasses.CollectionList,)
-        assert isinstance(collections, prototype), repr(collections)
         collection_count = len(collections)
         matches = []
         for i, collection in enumerate(collections):
