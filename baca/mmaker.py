@@ -4329,9 +4329,7 @@ class Nest(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(
-        self, selection: abjad.Selection
-    ) -> typing.List[abjad.Selection]:
+    def __call__(self, selection: abjad.Selection) -> abjad.Selection:
         r"""
         Calls nesting command on ``selection``.
 
@@ -4436,24 +4434,19 @@ class Nest(object):
             tuplet_selections = [
                 abjad.select(list(_)) for _ in tuplet_selections
             ]
-        selections_ = []
-        prototype = abjad.Selection
+        tuplets = []
         for i, tuplet_selection in enumerate(tuplet_selections):
-            assert isinstance(tuplet_selection, prototype), repr(
-                tuplet_selection
-            )
+            assert isinstance(tuplet_selection, abjad.Selection)
             treatment = treatments[i]
             if treatment is None:
-                selections_.append(tuplet_selection)
+                tuplets.extend(tuplet_selection)
             else:
                 nested_tuplet = self._make_nested_tuplet(
                     tuplet_selection, treatment
                 )
-                selection_ = abjad.Selection([nested_tuplet])
-                selections_.append(selection_)
-        assert isinstance(selections_, list)
-        assert all(isinstance(_, abjad.Selection) for _ in selections_)
-        return selections_
+                tuplets.append(nested_tuplet)
+        selection = abjad.select(tuplets)
+        return selection
 
     def __eq__(self, argument) -> bool:
         """
