@@ -5931,9 +5931,7 @@ class PitchFirstRhythmMaker(object):
         pairs = abjad.mathtools.cumulative_sums_pairwise(durations)
         total_duration = pairs[-1][-1]
         start_offsets = [_[0] for _ in pairs]
-        # print(total_duration, start_offsets)
         start_offsets = [_ / total_duration for _ in start_offsets]
-        # print(total_duration, start_offsets)
         start_offsets_ = []
         rhythm_maker_class = rmakers.AccelerandoRhythmMaker
         for start_offset in start_offsets:
@@ -5941,8 +5939,6 @@ class PitchFirstRhythmMaker(object):
                 0, total_duration, start_offset, exponent
             )
             start_offsets_.append(start_offset_)
-        # print(start_offsets_)
-        # start_offsets_ = [float(total_duration * _) for _ in start_offsets_]
         start_offsets_.append(float(total_duration))
         durations_ = abjad.mathtools.difference_series(start_offsets_)
         durations_ = rhythm_maker_class._round_durations(durations_, 2 ** 10)
@@ -6009,68 +6005,81 @@ class PitchFirstRhythmMaker(object):
         affix_skips_instead_of_rests=None,
     ):
         collection_index = self._next_segment
-        acciaccatura = self.acciaccatura
         self._next_segment += 1
         talea = self._get_talea()
         leaves = []
         spelling = self._get_spelling_specifier()
-        increase_monotonic = spelling.increase_monotonic
         current_selection = self._next_segment - 1
         treatment = self._get_treatments()[current_selection]
         if treatment is None:
             treatment = 0
         grace_containers = None
-        if acciaccatura is not None:
-            grace_containers, segment = acciaccatura(segment)
+        if self.acciaccatura is not None:
+            if isinstance(segment, (set, abjad.Set)):
+                message = "decide how to model chords with acciaccatura."
+                raise NotImplementError(message)
+            grace_containers, segment = self.acciaccatura(segment)
             assert len(grace_containers) == len(segment)
-        for pitch_expression in segment:
-            prototype = abjad.NumberedPitchClass
-            if isinstance(pitch_expression, prototype):
-                pitch_expression = pitch_expression.number
+        if isinstance(segment, (set, abjad.Set)):
             count = self._next_attack
-            while talea[count] < 0:
-                self._next_attack += 1
-                duration = -talea[count]
-                maker = abjad.LeafMaker(increase_monotonic=increase_monotonic)
-                leaves_ = maker([None], [duration])
-                leaves.extend(leaves_)
-                count = self._next_attack
-            self._next_attack += 1
             duration = talea[count]
-            assert 0 < duration, repr(duration)
-            skips_instead_of_rests = False
-            if (
-                isinstance(pitch_expression, tuple)
-                and len(pitch_expression) == 2
-                and pitch_expression[-1] in (None, "skip")
-            ):
-                multiplier = pitch_expression[0]
-                duration = abjad.Duration(1, talea.denominator)
-                duration *= multiplier
-                if pitch_expression[-1] == "skip":
-                    skips_instead_of_rests = True
-                pitch_expression = None
             maker = abjad.LeafMaker(
-                increase_monotonic=increase_monotonic,
-                skips_instead_of_rests=skips_instead_of_rests,
+                increase_monotonic=spelling.increase_monotonic
             )
-            leaves_ = maker([pitch_expression], [duration])
-            leaves.extend(leaves_)
-            count = self._next_attack
-            while talea[count] < 0 and not count % len(talea) == 0:
+            leaves = maker([tuple(segment)], [duration])
+        else:
+            for pitch_expression in segment:
+                prototype = abjad.NumberedPitchClass
+                if isinstance(pitch_expression, prototype):
+                    pitch_expression = pitch_expression.number
+                count = self._next_attack
+                while talea[count] < 0:
+                    self._next_attack += 1
+                    duration = -talea[count]
+                    maker = abjad.LeafMaker(
+                        increase_monotonic=spelling.increase_monotonic
+                    )
+                    leaves_ = maker([None], [duration])
+                    leaves.extend(leaves_)
+                    count = self._next_attack
                 self._next_attack += 1
-                duration = -talea[count]
-                maker = abjad.LeafMaker(increase_monotonic=increase_monotonic)
-                leaves_ = maker([None], [duration])
+                duration = talea[count]
+                assert 0 < duration, repr(duration)
+                skips_instead_of_rests = False
+                if (
+                    isinstance(pitch_expression, tuple)
+                    and len(pitch_expression) == 2
+                    and pitch_expression[-1] in (None, "skip")
+                ):
+                    multiplier = pitch_expression[0]
+                    duration = abjad.Duration(1, talea.denominator)
+                    duration *= multiplier
+                    if pitch_expression[-1] == "skip":
+                        skips_instead_of_rests = True
+                    pitch_expression = None
+                maker = abjad.LeafMaker(
+                    increase_monotonic=spelling.increase_monotonic,
+                    skips_instead_of_rests=skips_instead_of_rests,
+                )
+                leaves_ = maker([pitch_expression], [duration])
                 leaves.extend(leaves_)
                 count = self._next_attack
+                while talea[count] < 0 and not count % len(talea) == 0:
+                    self._next_attack += 1
+                    duration = -talea[count]
+                    maker = abjad.LeafMaker(
+                        increase_monotonic=spelling.increase_monotonic
+                    )
+                    leaves_ = maker([None], [duration])
+                    leaves.extend(leaves_)
+                    count = self._next_attack
         leaves = self._add_rest_affixes(
             leaves,
             talea,
             rest_prefix,
             rest_suffix,
             affix_skips_instead_of_rests,
-            increase_monotonic,
+            spelling.increase_monotonic,
         )
         leaf_selection = abjad.select(leaves)
         if isinstance(treatment, int):
