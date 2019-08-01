@@ -5420,22 +5420,22 @@ class PitchFirstMaker(object):
         self._apply_state(state=state)
         tuplets: typing.List[abjad.Tuplet] = []
         if not self.restart_talea:
-            selection = self._make_music(
+            selection_ = self._make_music(
                 collections,
                 collection_index=collection_index,
                 total_collections=total_collections,
             )
-            tuplets.extend(selection)
+            tuplets.extend(selection_)
         else:
             total_collections = len(collections)
             for i, collection in enumerate(collections):
                 self._apply_state(state=None)
-                selection = self._make_music(
+                selection_ = self._make_music(
                     [collection],
                     collection_index=i,
                     total_collections=total_collections,
                 )
-                tuplets.extend(selection)
+                tuplets.extend(selection_)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
         selection = abjad.select(tuplets)
         return selection
