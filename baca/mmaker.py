@@ -3772,6 +3772,7 @@ class Accumulator(object):
         assignment = None
         pitch_first_command = None
         pitch_first_maker = None
+        selection: typing.Union[list, abjad.Selection]
         if anchor is not None:
             voice_name_ = self._abbreviation(anchor.remote_voice_name)
             anchor._remote_voice_name = voice_name_
@@ -3798,8 +3799,8 @@ class Accumulator(object):
             assignment = commands[0]
             commands_ = list(commands[1:])
             collections = _coerce_collections(collections)
-            selections = len(collections) * [None]
-            assignment(collections=collections, selections=selections)
+            selections = assignment(collections)
+            selections = abjad.select(selections).flatten()
         container = abjad.Container(selections)
         imbricated_selections = {}
         for command in commands_:
@@ -8141,7 +8142,7 @@ class PitchFirstAssignment(object):
     ### SPECIAL METHODS ###
 
     def __call__(
-        self, collections: typing.Sequence, selections: typing.Sequence = None
+        self, collections: typing.Sequence
     ) -> typing.List[abjad.Selection]:
         """
         Calls pitch-first assignment.
@@ -8149,13 +8150,7 @@ class PitchFirstAssignment(object):
         collections = _coerce_collections(collections)
         prototype = (pitchclasses.CollectionList,)
         assert isinstance(collections, prototype), repr(collections)
-        if selections is None:
-            selections = len(collections) * [None]
-        assert isinstance(selections, list), repr(selections)
-        selection_prototype = (abjad.Selection, type(None))
-        assert all(
-            isinstance(_, selection_prototype) for _ in selections
-        ), repr(selections)
+        selections = len(collections) * [None]
         assert len(selections) == len(collections)
         rhythm_maker = self.rhythm_maker
         prototype__ = (PitchFirstRhythmMaker,)
@@ -8219,8 +8214,7 @@ class PitchFirstAssignment(object):
                     abjad.attach(indicator, chord)
             selections[i] = stage_selection
         assert isinstance(selections, list), repr(selections)
-        for selection in selections:
-            assert isinstance(selection, selection_prototype), repr(selection)
+        assert all(isinstance(_, abjad.Selection) for _ in selections)
         return selections
 
     def __eq__(self, argument) -> bool:
