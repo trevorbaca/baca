@@ -3794,18 +3794,14 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(6, 16), (6, 16)],
             ...     )
 
-            >>> stack = baca.stack(
-            ...     baca.pitch_first_assignment_command([1], 16),
-            ... )
-            >>> selection = stack([[2, 4, 5, 7, 9, 11]])
-            >>> selection = abjad.select(selection).flatten()
+            >>> pfmaker = baca.pfmaker([1], 16)
+            >>> selection = pfmaker([[2, 4, 5, 7, 9, 11]])
             >>> maker(
             ...     ('Violin_Music_Voice', 1),
             ...     baca.music(selection),
             ...     )
 
-            >>> selection = stack([[-3, -5, -7, -8, -10, -12]])
-            >>> selection = abjad.select(selection).flatten()
+            >>> selection = pfmaker([[-3, -5, -7, -8, -10, -12]])
             >>> maker(
             ...     ('Cello_Music_Voice', 1),
             ...     baca.music(selection),
@@ -4132,10 +4128,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Colors out-of-range pitches:
 
-            >>> stack = baca.stack(
-            ...     baca.pitch_first_assignment_command([1], 16),
-            ... )
-
+            >>> pfmaker = baca.pfmaker([1], 16)
             >>> collection_lists = [
             ...     [[4]],
             ...     [[-12, 2, 3, 5, 8, 9, 0]],
@@ -4144,8 +4137,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ]
             >>> figures, time_signatures = [], []
             >>> for i, collections in enumerate(collection_lists):
-            ...     selection = stack(collections)
-            ...     selection = abjad.select(selection).flatten()
+            ...     selection = pfmaker(collections)
             ...     figures.append(selection)
             ...     time_signature = abjad.inspect(selection).duration()
             ...     time_signatures.append(time_signature)
@@ -4334,10 +4326,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Colors repeat pitch-classes:
 
-            >>> stack = baca.stack(
-            ...     baca.pitch_first_assignment_command([1], 16),
-            ... )
-
+            >>> pfmaker = baca.pfmaker([1], 16)
             >>> collection_lists = [
             ...     [[4]],
             ...     [[6, 2, 3, 5, 9, 9, 0]],
@@ -4346,8 +4335,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ]
             >>> figures, time_signatures = [], []
             >>> for i, collections in enumerate(collection_lists):
-            ...     selection = stack(collections)
-            ...     selection = abjad.select(selection).flatten()
+            ...     selection = pfmaker(collections)
             ...     figures.append(selection)
             ...     time_signature = abjad.inspect(selection).duration()
             ...     time_signatures.append(time_signature)

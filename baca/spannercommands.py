@@ -381,10 +381,11 @@ def ottava(
         Attaches ottava indicators to trimmed leaves:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...         ),
         ...     rmakers.beam(),
@@ -470,10 +471,11 @@ def ottava_bassa(
         Attaches ottava bassa indicators to trimmed leaves:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...         ),
         ...     rmakers.beam(),
@@ -559,10 +561,11 @@ def slur(
         Attaches slur to trimmed leaves:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...         ),
         ...     rmakers.beam(),
@@ -654,10 +657,11 @@ def sustain_pedal(
         Pedals leaves:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...         ),
         ...     rmakers.beam(),
@@ -752,10 +756,11 @@ def trill_spanner(
         Attaches trill spanner to trimmed leaves (leaked to the right):
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
@@ -822,10 +827,11 @@ def trill_spanner(
         run:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
@@ -900,10 +906,11 @@ def trill_spanner(
         Tweaks trill spanner:
  
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),

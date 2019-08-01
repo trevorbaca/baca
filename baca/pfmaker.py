@@ -11042,10 +11042,11 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
     ..  container:: example
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_after([2]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
@@ -11115,10 +11116,11 @@ def rests_around(
     ..  container:: example
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [2]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
@@ -11180,14 +11182,12 @@ def rests_around(
 
         Works together with negative-valued talea:
 
-        >>> affix = baca.RestAffix(
-        ...     prefix=[2],
-        ...     suffix=[3],
-        ... )
-        >>> affix = baca.rests_around([2], [3])
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
-        ...         [1, -1], 16, affix=affix, treatments=[1]
+        ...     baca.pfmaker(
+        ...         [1, -1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [3]),
+        ...         treatments=[1],
         ...     ),
         ...     rmakers.beam(),
         ... )
@@ -11249,18 +11249,16 @@ def rests_around(
 
     ..  container:: example
 
-        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
-        >>> affix = baca.RestAffix(
-        ...     prefix=[2],
-        ...     suffix=[3],
-        ... )
-        >>> affix = baca.rests_around([2], [3])
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
-        ...         [-1, 1], 16, affix=affix, treatments=[1]
+        ...     baca.pfmaker(
+        ...         [-1, 1],
+        ...         16,
+        ...         affix=baca.rests_around([2], [3]),
+        ...         treatments=[1],
         ...     ),
         ...     rmakers.beam(),
         ... )
+        >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> staff = lilypond_file[abjad.Score]
@@ -11319,11 +11317,12 @@ def rests_around(
 
         With time treatments:
 
-        >>> affix = baca.RestAffix(prefix=[1], suffix=[1])
-        >>> affix = baca.rests_around([1], [1])
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
-        ...         [1], 16, affix=affix, treatments=[-1],
+        ...     baca.pfmaker(
+        ...         [1],
+        ...         16,
+        ...         affix=baca.rests_around([1], [1]),
+        ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
         ... )
@@ -11381,10 +11380,11 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
     ..  container:: example
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_before([2]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
@@ -11470,10 +11470,11 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
     ..  container:: example
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.skips_after([2]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
@@ -11543,10 +11544,11 @@ def skips_around(
     ..  container:: example
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.skips_around([2], [2]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
@@ -11615,10 +11617,11 @@ def skips_before(counts: typing.List[int],) -> RestAffix:
     ..  container:: example
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.skips_before([2]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),

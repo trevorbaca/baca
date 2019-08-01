@@ -670,10 +670,11 @@ def dynamic(
         Attaches dynamic to pitched head 0:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
@@ -738,10 +739,11 @@ def dynamic(
         Works with effort dynamics:
 
         >>> stack = baca.stack(
-        ...     baca.pitch_first_assignment_command(
+        ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
         ...         affix=baca.rests_around([2], [4]),
+        ...         restart_talea=True,
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
