@@ -7530,7 +7530,7 @@ class PitchFirstCommand(object):
                     assignment.pattern is None
                     or assignment.pattern.matches_index(i, collection_count)
                 ):
-                    match = rmakers._MakerMatch(collection, assignment)
+                    match = rmakers.MakerMatch(assignment, collection)
                     matches.append(match)
                     break
             else:
@@ -7542,7 +7542,7 @@ class PitchFirstCommand(object):
         tuplets: typing.List[abjad.Tuplet] = []
         for group in groups:
             maker = group[0].assignment.maker
-            collections_ = [match.division for match in group]
+            collections_ = [match.payload for match in group]
             selection = maker(
                 collections_,
                 collection_index=None,
