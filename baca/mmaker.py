@@ -3773,6 +3773,7 @@ class Accumulator(object):
         pitch_first_command = None
         pitch_first_maker = None
         selection: typing.Union[list, abjad.Selection]
+        selections: typing.Union[list, abjad.Selection]
         if anchor is not None:
             voice_name_ = self._abbreviation(anchor.remote_voice_name)
             anchor._remote_voice_name = voice_name_
@@ -3826,16 +3827,17 @@ class Accumulator(object):
         if signature is not None:
             duration = duration.with_denominator(signature)
         time_signature = abjad.TimeSignature(duration)
+        assert isinstance(selection, abjad.Selection)
         voice_to_selection = {voice_name: selection}
         voice_to_selection.update(imbricated_selections)
         for value in voice_to_selection.values():
             assert isinstance(value, abjad.Selection), repr(value)
         contribution = Contribution(
+            voice_to_selection,
             anchor=anchor,
             figure_name=figure_name,
             hide_time_signature=hide_time_signature,
             time_signature=time_signature,
-            voice_to_selection=voice_to_selection,
         )
         self._cache_figure_name(contribution)
         self._cache_floating_selection(contribution)
@@ -4109,13 +4111,7 @@ class Accumulator(object):
 
 class Contribution(object):
     """
-    Music contribution.
-
-    ..  container:: example
-
-        >>> baca.Contribution()
-        Contribution()
-
+    Contribution.
     """
 
     ### CLASS VARIABLES ###
@@ -4133,13 +4129,15 @@ class Contribution(object):
 
     def __init__(
         self,
+        voice_to_selection: typing.Dict[str, abjad.Selection],
         *,
         anchor: Anchor = None,
         figure_name: str = None,
         hide_time_signature: bool = None,
         time_signature: abjad.TimeSignature = None,
-        voice_to_selection: typing.Dict[str, abjad.Selection] = None,
     ):
+        assert isinstance(voice_to_selection, dict), repr(voice_to_selection)
+        self._voice_to_selection = voice_to_selection
         if anchor is not None and not isinstance(anchor, Anchor):
             raise TypeError(f"anchor only: {anchor!r}.")
         self._anchor = anchor
@@ -4152,11 +4150,6 @@ class Contribution(object):
         if time_signature is not None:
             assert isinstance(time_signature, abjad.TimeSignature)
         self._time_signature = time_signature
-        if voice_to_selection is not None:
-            assert isinstance(voice_to_selection, dict), repr(
-                voice_to_selection
-            )
-        self._voice_to_selection = voice_to_selection
 
     ### SPECIAL METHODS ###
 
@@ -8196,13 +8189,17 @@ class PitchFirstAssignment(object):
                 )
                 stage_selections.extend(stage_selections_)
         triples = zip(indices, stage_selections, collections)
+        result = []
+        for i in range(len(indices)):
+            result.append(abjad.Selection())
         for i, stage_selection, collection in triples:
             assert isinstance(stage_selection, abjad.Tuplet)
             stage_selection = abjad.select(stage_selection)
             # stage_selection is actually a tuplet
             assert len(stage_selection) == 1, repr(stage_selection)
             if not isinstance(collection, (abjad.Set, set)):
-                selections[i] = stage_selection
+                ###selections[i] = stage_selection
+                result[i] = stage_selection
                 continue
             assert len(stage_selection) == 1, repr(stage_selection)
             tuplet = stage_selection[0]
@@ -8221,10 +8218,11 @@ class PitchFirstAssignment(object):
                 abjad.mutate(note).replace([chord])
                 for indicator in indicators:
                     abjad.attach(indicator, chord)
-            selections[i] = stage_selection
-        assert isinstance(selections, list), repr(selections)
-        assert all(isinstance(_, abjad.Selection) for _ in selections)
-        return selections
+            ###selections[i] = stage_selection
+            result[i] = stage_selection
+        assert isinstance(result, list), repr(result)
+        assert all(isinstance(_, abjad.Selection) for _ in result)
+        return result
 
     def __eq__(self, argument) -> bool:
         """
