@@ -17,7 +17,6 @@ from . import typings
 
 RhythmMakerTyping = typing.Union[
     rmakers.RhythmAssignment,
-    rmakers.RhythmCommand,
     rmakers.RhythmMaker,
     rmakers.Stack,
     rmakers.Tesselation,
@@ -343,7 +342,6 @@ class RhythmCommand(scoping.Command):
             return
         prototype = (
             abjad.Selection,
-            rmakers.RhythmCommand,
             rmakers.RhythmMaker,
             rmakers.RhythmAssignment,
             rmakers.Stack,
@@ -381,13 +379,11 @@ class RhythmCommand(scoping.Command):
                 message += f" equal total duration ({total_duration})."
                 raise Exception(message)
         else:
-            rcommand: typing.Union[rmakers.RhythmCommand, rmakers.Stack]
-            if isinstance(self.rhythm_maker, rmakers.RhythmCommand):
-                rcommand = self.rhythm_maker
-            elif isinstance(self.rhythm_maker, rmakers.Stack):
+            rcommand: rmakers.Stack
+            if isinstance(self.rhythm_maker, rmakers.Stack):
                 rcommand = self.rhythm_maker
             else:
-                rcommand = rmakers.command(self.rhythm_maker)
+                rcommand = rmakers.stack(self.rhythm_maker)
             previous_segment_stop_state = self._previous_segment_stop_state(
                 runtime
             )
@@ -472,12 +468,12 @@ class RhythmCommand(scoping.Command):
             ...     time_signatures=5 * [(4, 8)],
             ...     )
 
-            >>> note_command = rmakers.command(
+            >>> note_command = rmakers.stack(
             ...     rmakers.note(),
             ...     rmakers.force_rest(baca.lts()),
             ...     rmakers.beam(baca.plts()),
             ... )
-            >>> talea_command = rmakers.command(
+            >>> talea_command = rmakers.stack(
             ...     rmakers.talea([3, 4], 16),
             ...     rmakers.beam(),
             ...     rmakers.extract_trivial(),
@@ -884,7 +880,6 @@ class SkipRhythmMaker(rmakers.RhythmMaker):
 ### FACTORY FUNCTIONS ###
 
 
-# TODO: is this being used?
 def make_even_divisions(
     *,
     measures: typings.SliceTyping = None,
@@ -894,7 +889,7 @@ def make_even_divisions(
     Makes even divisions.
     """
     return RhythmCommand(
-        rmakers.command(
+        rmakers.stack(
             rmakers.even_division([8]),
             rmakers.beam(),
             rmakers.extract_trivial(),
@@ -919,8 +914,8 @@ def make_fused_tuplet_monads(
     else:
         tuplet_ratios.append(tuplet_ratio)
     return RhythmCommand(
-        rmakers.command(
-            rmakers.TupletRhythmMaker(tuplet_ratios=tuplet_ratios),
+        rmakers.stack(
+            rmakers.tuplet(tuplet_ratios),
             rmakers.beam(),
             rmakers.rewrite_rest_filled(),
             rmakers.trivialize(),
@@ -1074,7 +1069,7 @@ def make_multimeasure_rests(
     Makes multimeasure rests.
     """
     return RhythmCommand(
-        rmakers.command(SkipRhythmMaker(use_multimeasure_rests=True), tag=tag),
+        rmakers.stack(SkipRhythmMaker(use_multimeasure_rests=True), tag=tag),
         measures=measures,
     )
 
@@ -1093,7 +1088,7 @@ def make_notes(
     else:
         repeat_tie_specifier = []
     return RhythmCommand(
-        rmakers.command(
+        rmakers.stack(
             rmakers.note(),
             *specifiers,
             # TODO: can this beam specifier be removed?
@@ -1238,9 +1233,7 @@ def make_repeat_tied_notes(
         specifiers_.append(command)
     specifier = rmakers.force_repeat_tie()
     specifiers_.append(specifier)
-    return RhythmCommand(
-        rmakers.command(rmakers.note(), *specifiers_, tag=tag)
-    )
+    return RhythmCommand(rmakers.stack(rmakers.note(), *specifiers_, tag=tag))
 
 
 def make_repeated_duration_notes(
@@ -1264,7 +1257,7 @@ def make_repeated_duration_notes(
     if not do_not_rewrite_meter:
         rewrite_specifiers.append(rmakers.rewrite_meter())
     return RhythmCommand(
-        rmakers.command(
+        rmakers.stack(
             rmakers.note(),
             *specifiers,
             *rewrite_specifiers,
@@ -1283,7 +1276,7 @@ def make_rests(
     Makes rests.
     """
     return RhythmCommand(
-        rmakers.command(
+        rmakers.stack(
             rmakers.note(),
             rmakers.force_rest(classes._select().lts()),
             tag=tag,
@@ -1304,7 +1297,7 @@ def make_single_attack(
     duration = abjad.Duration(duration)
     numerator, denominator = duration.pair
     return RhythmCommand(
-        rmakers.command(
+        rmakers.stack(
             rmakers.incised(
                 fill_with_rests=True,
                 outer_divisions_only=True,
@@ -1327,7 +1320,7 @@ def make_skips(
     Makes skips.
     """
     return RhythmCommand(
-        rmakers.command(SkipRhythmMaker(), tag=tag), measures=measures
+        rmakers.stack(SkipRhythmMaker(), tag=tag), measures=measures
     )
 
 
@@ -1338,7 +1331,7 @@ def make_tied_notes(
     Makes tied notes; rewrites meter.
     """
     return RhythmCommand(
-        rmakers.command(
+        rmakers.stack(
             rmakers.note(),
             rmakers.beam(classes._select().plts()),
             rmakers.tie(classes._select().ptails()[:-1]),
@@ -1372,7 +1365,7 @@ def make_tied_repeated_durations(
     divisions = divisionclasses._divisions().fuse()
     divisions = divisions.split(durations, cyclic=True)
     return RhythmCommand(
-        rmakers.command(
+        rmakers.stack(
             rmakers.note(), *specifiers, preprocessor=divisions, tag=tag
         ),
         measures=measures,
