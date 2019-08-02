@@ -669,7 +669,7 @@ def dynamic(
 
         Attaches dynamic to pitched head 0:
 
-        >>> stack = rmakers.stack(
+        >>> stack = baca.stack(
         ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -738,7 +738,7 @@ def dynamic(
 
         Works with effort dynamics:
 
-        >>> stack = rmakers.stack(
+        >>> stack = baca.stack(
         ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,

@@ -2382,7 +2382,7 @@ def color(selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
 
         Colors leaves:
 
-        >>> stack = rmakers.stack(
+        >>> stack = baca.stack(
         ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -2460,7 +2460,7 @@ def color(selector: abjad.SelectorTyping = "baca.leaves()") -> ColorCommand:
 
         Colors leaves in tuplet 1:
 
-        >>> stack = rmakers.stack(
+        >>> stack = baca.stack(
         ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -3006,7 +3006,7 @@ def dynamic_down(
 
         Attaches dynamic-down command to leaf 0:
 
-        >>> stack = rmakers.stack(
+        >>> stack = baca.stack(
         ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -3095,7 +3095,7 @@ def dynamic_up(
 
         Attaches dynamic-up command to leaf 0:
 
-        >>> stack = rmakers.stack(
+        >>> stack = baca.stack(
         ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4280,7 +4280,7 @@ def label(
 
         Labels pitch names:
 
-        >>> stack = rmakers.stack(
+        >>> stack = baca.stack(
         ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4377,7 +4377,7 @@ def markup(
 
         Attaches markup to pitched head 0:
 
-        >>> stack = rmakers.stack(
+        >>> stack = baca.stack(
         ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
@@ -4449,7 +4449,7 @@ def markup(
 
         Set ``literal=True`` to pass predefined markup commands:
 
-        >>> stack = rmakers.stack(
+        >>> stack = baca.stack(
         ...     baca.pfmaker(
         ...         [1, 1, 5, -1],
         ...         16,
