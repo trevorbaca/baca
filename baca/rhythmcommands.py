@@ -1400,7 +1400,6 @@ def rhythm(
     preprocessor: abjad.Expression = None,
     measures: typings.SliceTyping = None,
     persist: str = None,
-    stack: bool = None,
     tag: str = None,
 ) -> RhythmCommand:
     """
