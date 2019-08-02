@@ -3274,7 +3274,7 @@ class PitchCommand(scoping.Command):
         return self._persist
 
     @property
-    def pitches(self) -> typing.Optional[typing.Sequence]:
+    def pitches(self):
         """
         Gets pitches.
 

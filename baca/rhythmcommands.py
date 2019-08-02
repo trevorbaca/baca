@@ -383,6 +383,7 @@ class RhythmCommand(scoping.Command):
                 message += f" equal total duration ({total_duration})."
                 raise Exception(message)
         else:
+            rcommand: typing.Union[rmakers.RhythmCommand, rmakers.Stack]
             if isinstance(self.rhythm_maker, rmakers.RhythmCommand):
                 rcommand = self.rhythm_maker
             elif isinstance(self.rhythm_maker, rmakers.Stack):
