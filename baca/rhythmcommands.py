@@ -20,6 +20,7 @@ RhythmMakerTyping = typing.Union[
     rmakers.RhythmMaker,
     rmakers.RhythmAssignment,
     rmakers.RhythmAssignments,
+    rmakers.Tesselation,
 ]
 
 ### CLASSES ###
@@ -347,6 +348,7 @@ class RhythmCommand(scoping.Command):
             rmakers.RhythmAssignment,
             rmakers.RhythmAssignments,
             rmakers.Stack,
+            rmakers.Tesselation,
         )
         if isinstance(rhythm_maker, prototype):
             return
@@ -1440,6 +1442,7 @@ def rhythm(
         rmakers.RhythmCommand,
         rmakers.RhythmMaker,
         rmakers.Stack,
+        rmakers.Tesselation,
     )
     if not isinstance(argument, prototype):
         message = "baca.rhythm() does not accept this type:\n"
@@ -1448,6 +1451,8 @@ def rhythm(
 
     if tag is not None:
         if isinstance(argument, rmakers.Stack):
+            argument = abjad.new(argument, tag=tag)
+        elif isinstance(argument, rmakers.Tesselation):
             argument = abjad.new(argument, tag=tag)
         elif isinstance(argument, rmakers.RhythmAssignment):
             argument = abjad.new(argument, rhythm_maker__tag=tag)
