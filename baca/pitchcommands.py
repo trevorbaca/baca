@@ -3002,7 +3002,7 @@ class PitchCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         persist: str = None,
-        pitches: typing.Sequence = None,
+        pitches: typing.Union[typing.Sequence, Loop] = None,
         scope: scoping.ScopeTyping = None,
         selector: abjad.SelectorTyping = None,
     ) -> None:

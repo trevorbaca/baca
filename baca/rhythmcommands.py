@@ -1413,13 +1413,17 @@ def rhythm(
     preprocessor: abjad.Expression = None,
     measures: typings.SliceTyping = None,
     persist: str = None,
+    stack: bool = None,
     tag: str = None,
 ) -> RhythmCommand:
     """
     Makes rhythm command from ``argument``.
     """
 
-    argument = rmakers.command(*arguments, preprocessor=preprocessor)
+    if stack:
+        argument = rmakers.stack(*arguments, preprocessor=preprocessor)
+    else:
+        argument = rmakers.command(*arguments, preprocessor=preprocessor)
 
     prototype = (
         rmakers.RhythmAssignment,
