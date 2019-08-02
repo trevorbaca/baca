@@ -18,8 +18,8 @@ from . import typings
 RhythmMakerTyping = typing.Union[
     rmakers.RhythmCommand,
     rmakers.RhythmMaker,
-    rmakers.MakerAssignment,
-    rmakers.MakerAssignments,
+    rmakers.RhythmAssignment,
+    rmakers.RhythmAssignments,
 ]
 
 ### CLASSES ###
@@ -344,8 +344,8 @@ class RhythmCommand(scoping.Command):
             abjad.Selection,
             rmakers.RhythmCommand,
             rmakers.RhythmMaker,
-            rmakers.MakerAssignment,
-            rmakers.MakerAssignments,
+            rmakers.RhythmAssignment,
+            rmakers.RhythmAssignments,
         )
         if isinstance(rhythm_maker, prototype):
             return
@@ -382,7 +382,7 @@ class RhythmCommand(scoping.Command):
             if isinstance(self.rhythm_maker, rmakers.RhythmCommand):
                 rcommand = self.rhythm_maker
             else:
-                rcommand = rmakers.rhythm(self.rhythm_maker)
+                rcommand = rmakers.command(self.rhythm_maker)
             previous_segment_stop_state = self._previous_segment_stop_state(
                 runtime
             )
@@ -461,24 +461,22 @@ class RhythmCommand(scoping.Command):
             ...     time_signatures=5 * [(4, 8)],
             ...     )
 
-            >>> note_command = rmakers.rhythm(
+            >>> note_command = rmakers.command(
             ...     rmakers.note(),
             ...     rmakers.force_rest(baca.lts()),
             ...     rmakers.beam(baca.plts()),
             ... )
-            >>> talea_command = rmakers.rhythm(
+            >>> talea_command = rmakers.command(
             ...     rmakers.talea([3, 4], 16),
             ...     rmakers.beam(),
             ...     rmakers.extract_trivial(),
             ... )
             >>> command = baca.rhythm(
-            ...     rmakers.MakerAssignments(
-            ...         rmakers.MakerAssignment(
-            ...             abjad.index([2]), note_command,
-            ...         ),
-            ...         rmakers.MakerAssignment(
-            ...             abjad.index([0], 1),
+            ...     rmakers.RhythmAssignments(
+            ...         rmakers.assign(note_command, abjad.index([2])),
+            ...         rmakers.assign(
             ...             talea_command,
+            ...             abjad.index([0], 1),
             ...             remember_state_across_gaps=True,
             ...         ),
             ...     ),
@@ -899,7 +897,7 @@ def make_even_divisions(
     Makes even divisions.
     """
     return RhythmCommand(
-        rmakers.rhythm(
+        rmakers.command(
             rmakers.even_division([8]),
             rmakers.beam(),
             rmakers.extract_trivial(),
@@ -924,7 +922,7 @@ def make_fused_tuplet_monads(
     else:
         tuplet_ratios.append(tuplet_ratio)
     return RhythmCommand(
-        rmakers.rhythm(
+        rmakers.command(
             rmakers.TupletRhythmMaker(tuplet_ratios=tuplet_ratios),
             rmakers.beam(),
             rmakers.rewrite_rest_filled(),
@@ -1079,7 +1077,7 @@ def make_multimeasure_rests(
     Makes multimeasure rests.
     """
     return RhythmCommand(
-        rmakers.rhythm(SkipRhythmMaker(use_multimeasure_rests=True), tag=tag),
+        rmakers.command(SkipRhythmMaker(use_multimeasure_rests=True), tag=tag),
         measures=measures,
     )
 
@@ -1098,7 +1096,7 @@ def make_notes(
     else:
         repeat_tie_specifier = []
     return RhythmCommand(
-        rmakers.rhythm(
+        rmakers.command(
             rmakers.note(),
             *specifiers,
             # TODO: can this beam specifier be removed?
@@ -1243,7 +1241,9 @@ def make_repeat_tied_notes(
         specifiers_.append(command)
     specifier = rmakers.force_repeat_tie()
     specifiers_.append(specifier)
-    return RhythmCommand(rmakers.rhythm(rmakers.note(), *specifiers_, tag=tag))
+    return RhythmCommand(
+        rmakers.command(rmakers.note(), *specifiers_, tag=tag)
+    )
 
 
 def make_repeated_duration_notes(
@@ -1267,7 +1267,7 @@ def make_repeated_duration_notes(
     if not do_not_rewrite_meter:
         rewrite_specifiers.append(rmakers.rewrite_meter())
     return RhythmCommand(
-        rmakers.rhythm(
+        rmakers.command(
             rmakers.note(),
             *specifiers,
             *rewrite_specifiers,
@@ -1286,7 +1286,7 @@ def make_rests(
     Makes rests.
     """
     return RhythmCommand(
-        rmakers.rhythm(
+        rmakers.command(
             rmakers.note(),
             rmakers.force_rest(classes._select().lts()),
             tag=tag,
@@ -1307,7 +1307,7 @@ def make_single_attack(
     duration = abjad.Duration(duration)
     numerator, denominator = duration.pair
     return RhythmCommand(
-        rmakers.rhythm(
+        rmakers.command(
             rmakers.incised(
                 fill_with_rests=True,
                 outer_divisions_only=True,
@@ -1330,7 +1330,7 @@ def make_skips(
     Makes skips.
     """
     return RhythmCommand(
-        rmakers.rhythm(SkipRhythmMaker(), tag=tag), measures=measures
+        rmakers.command(SkipRhythmMaker(), tag=tag), measures=measures
     )
 
 
@@ -1341,7 +1341,7 @@ def make_tied_notes(
     Makes tied notes; rewrites meter.
     """
     return RhythmCommand(
-        rmakers.rhythm(
+        rmakers.command(
             rmakers.note(),
             rmakers.beam(classes._select().plts()),
             rmakers.tie(classes._select().ptails()[:-1]),
@@ -1375,7 +1375,7 @@ def make_tied_repeated_durations(
     divisions = divisionclasses._divisions().fuse()
     divisions = divisions.split(durations, cyclic=True)
     return RhythmCommand(
-        rmakers.rhythm(
+        rmakers.command(
             rmakers.note(), *specifiers, preprocessor=divisions, tag=tag
         ),
         measures=measures,
@@ -1419,11 +1419,11 @@ def rhythm(
     Makes rhythm command from ``argument``.
     """
 
-    argument = rmakers.rhythm(*arguments, preprocessor=preprocessor)
+    argument = rmakers.command(*arguments, preprocessor=preprocessor)
 
     prototype = (
-        rmakers.MakerAssignment,
-        rmakers.MakerAssignments,
+        rmakers.RhythmAssignment,
+        rmakers.RhythmAssignments,
         rmakers.RhythmCommand,
         rmakers.RhythmMaker,
     )
@@ -1434,9 +1434,9 @@ def rhythm(
         raise TypeError(message)
 
     if tag is not None:
-        if isinstance(argument, rmakers.MakerAssignment):
+        if isinstance(argument, rmakers.RhythmAssignment):
             argument = abjad.new(argument, rhythm_maker__tag=tag)
-        elif isinstance(argument, rmakers.MakerAssignments):
+        elif isinstance(argument, rmakers.RhythmAssignments):
             assignments_ = []
             for assignment in argument.assignments:
                 assignment_ = abjad.new(assignment, rhythm_maker__tag=tag)
