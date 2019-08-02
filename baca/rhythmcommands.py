@@ -17,7 +17,6 @@ from . import typings
 
 RhythmMakerTyping = typing.Union[
     rmakers.RhythmAssignment,
-    rmakers.RhythmAssignments,
     rmakers.RhythmCommand,
     rmakers.RhythmMaker,
     rmakers.Stack,
@@ -347,7 +346,6 @@ class RhythmCommand(scoping.Command):
             rmakers.RhythmCommand,
             rmakers.RhythmMaker,
             rmakers.RhythmAssignment,
-            rmakers.RhythmAssignments,
             rmakers.Stack,
             rmakers.Tesselation,
         )
