@@ -2123,7 +2123,7 @@ def bar_extent_persistent(
 
 
 def bcps(
-    bcps: typing.Sequence[abjad.IntegerPair],
+    bcps,
     *tweaks: abjad.IndexedTweakManager,
     bow_change_tweaks: abjad.IndexedTweakManagers = None,
     final_spanner: bool = None,

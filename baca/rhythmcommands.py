@@ -16,10 +16,11 @@ from . import typings
 
 
 RhythmMakerTyping = typing.Union[
-    rmakers.RhythmCommand,
-    rmakers.RhythmMaker,
     rmakers.RhythmAssignment,
     rmakers.RhythmAssignments,
+    rmakers.RhythmCommand,
+    rmakers.RhythmMaker,
+    rmakers.Stack,
     rmakers.Tesselation,
 ]
 
