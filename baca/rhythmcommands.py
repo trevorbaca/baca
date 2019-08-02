@@ -346,6 +346,7 @@ class RhythmCommand(scoping.Command):
             rmakers.RhythmMaker,
             rmakers.RhythmAssignment,
             rmakers.RhythmAssignments,
+            rmakers.Stack,
         )
         if isinstance(rhythm_maker, prototype):
             return
@@ -381,16 +382,24 @@ class RhythmCommand(scoping.Command):
         else:
             if isinstance(self.rhythm_maker, rmakers.RhythmCommand):
                 rcommand = self.rhythm_maker
+            elif isinstance(self.rhythm_maker, rmakers.Stack):
+                rcommand = self.rhythm_maker
             else:
                 rcommand = rmakers.command(self.rhythm_maker)
             previous_segment_stop_state = self._previous_segment_stop_state(
                 runtime
             )
-            selection = rcommand(
-                time_signatures,
-                previous_segment_stop_state=previous_segment_stop_state,
-            )
-            self._state = rcommand.state
+            if isinstance(rcommand, rmakers.Stack):
+                selection = rcommand(
+                    time_signatures, previous_state=previous_segment_stop_state
+                )
+                self._state = rcommand.maker.state
+            else:
+                selection = rcommand(
+                    time_signatures,
+                    previous_segment_stop_state=previous_segment_stop_state,
+                )
+                self._state = rcommand.state
         assert isinstance(selection, abjad.Selection), repr(selection)
         if self.annotate_unpitched_music or not isinstance(
             self.rhythm_maker, abjad.Selection
@@ -1430,15 +1439,17 @@ def rhythm(
         rmakers.RhythmAssignments,
         rmakers.RhythmCommand,
         rmakers.RhythmMaker,
+        rmakers.Stack,
     )
     if not isinstance(argument, prototype):
-        message = "baca.rhythm() accepts rhythm-maker and division"
-        message += " assignment(s):\n"
+        message = "baca.rhythm() does not accept this type:\n"
         message += f" {repr(argument)}."
         raise TypeError(message)
 
     if tag is not None:
-        if isinstance(argument, rmakers.RhythmAssignment):
+        if isinstance(argument, rmakers.Stack):
+            argument = abjad.new(argument, tag=tag)
+        elif isinstance(argument, rmakers.RhythmAssignment):
             argument = abjad.new(argument, rhythm_maker__tag=tag)
         elif isinstance(argument, rmakers.RhythmAssignments):
             assignments_ = []
