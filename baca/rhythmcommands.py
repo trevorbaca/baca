@@ -16,10 +16,7 @@ from . import typings
 
 
 RhythmMakerTyping = typing.Union[
-    rmakers.RhythmAssignment,
-    rmakers.RhythmMaker,
-    rmakers.Stack,
-    rmakers.Tesselation,
+    rmakers.RhythmAssignment, rmakers.RhythmMaker, rmakers.Stack, rmakers.Bind
 ]
 
 ### CLASSES ###
@@ -345,7 +342,7 @@ class RhythmCommand(scoping.Command):
             rmakers.RhythmMaker,
             rmakers.RhythmAssignment,
             rmakers.Stack,
-            rmakers.Tesselation,
+            rmakers.Bind,
         )
         if isinstance(rhythm_maker, prototype):
             return
@@ -479,7 +476,7 @@ class RhythmCommand(scoping.Command):
             ...     rmakers.extract_trivial(),
             ... )
             >>> command = baca.rhythm(
-            ...     rmakers.tesselate(
+            ...     rmakers.bind(
             ...         rmakers.assign(note_command, abjad.index([2])),
             ...         rmakers.assign(
             ...             talea_command,
