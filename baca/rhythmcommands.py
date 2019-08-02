@@ -485,7 +485,7 @@ class RhythmCommand(scoping.Command):
             ...     rmakers.extract_trivial(),
             ... )
             >>> command = baca.rhythm(
-            ...     rmakers.RhythmAssignments(
+            ...     rmakers.tesselate(
             ...         rmakers.assign(note_command, abjad.index([2])),
             ...         rmakers.assign(
             ...             talea_command,
@@ -711,20 +711,6 @@ class RhythmCommand(scoping.Command):
                     >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                 >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
-
-        ..  container:: example exception
-
-            Raises exception on invalid input:
-
-            >>> command = baca.rhythm("text")
-            Traceback (most recent call last):
-                ...
-            Exception:
-              Input parameter "rhythm_maker" accepts:
-                maker assignment(s)
-                rhythm-maker
-              Input parameter "rhythm_maker" received:
-                text
 
         """
         return self._rhythm_maker
@@ -1432,44 +1418,7 @@ def rhythm(
     """
     Makes rhythm command from ``argument``.
     """
-
-    if stack:
-        argument = rmakers.stack(*arguments, preprocessor=preprocessor)
-    else:
-        argument = rmakers.command(*arguments, preprocessor=preprocessor)
-
-    prototype = (
-        rmakers.RhythmAssignment,
-        rmakers.RhythmAssignments,
-        rmakers.RhythmCommand,
-        rmakers.RhythmMaker,
-        rmakers.Stack,
-        rmakers.Tesselation,
-    )
-    if not isinstance(argument, prototype):
-        message = "baca.rhythm() does not accept this type:\n"
-        message += f" {repr(argument)}."
-        raise TypeError(message)
-
-    if tag is not None:
-        if isinstance(argument, rmakers.Stack):
-            argument = abjad.new(argument, tag=tag)
-        elif isinstance(argument, rmakers.Tesselation):
-            argument = abjad.new(argument, tag=tag)
-        elif isinstance(argument, rmakers.RhythmAssignment):
-            argument = abjad.new(argument, rhythm_maker__tag=tag)
-        elif isinstance(argument, rmakers.RhythmAssignments):
-            assignments_ = []
-            for assignment in argument.assignments:
-                assignment_ = abjad.new(assignment, rhythm_maker__tag=tag)
-                assignments_.append(assignment_)
-            argument = abjad.new(argument, assignments=assignments_)
-        elif isinstance(argument, rmakers.RhythmCommand):
-            argument = abjad.new(argument, tag=tag)
-        elif isinstance(argument, rmakers.RhythmMaker):
-            argument = abjad.new(argument, tag=tag)
-        else:
-            raise TypeError(argument)
+    argument = rmakers.stack(*arguments, preprocessor=preprocessor, tag=tag)
     return RhythmCommand(
         argument,
         annotate_unpitched_music=True,
