@@ -2,11 +2,11 @@ import abjad
 from .classes import *
 from .commands import *
 from .divisionclasses import *
+from .figuremaker import *
 from .indicatorcommands import *
 from .indicators import *
 from .overrides import *
 from .persistence import *
-from .pfmaker import *
 from .piecewise import *
 from .pitcharray import *
 from .pitchcommands import *

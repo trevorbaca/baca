@@ -25,12 +25,12 @@ baca
    classes
    commands
    divisionclasses
+   figuremaker
    indicatorcommands
    indicators
    markups
    overrides
    persistence
-   pfmaker
    piecewise
    pitcharray
    pitchclasses
@@ -48,12 +48,12 @@ baca
    classes
    commands
    divisionclasses
+   figuremaker
    indicatorcommands
    indicators
    markups
    overrides
    persistence
-   pfmaker
    piecewise
    pitcharray
    pitchclasses

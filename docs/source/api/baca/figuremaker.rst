@@ -1,16 +1,16 @@
-.. _baca--pfmaker:
+.. _baca--figuremaker:
 
-pfmaker
-=======
+figuremaker
+===========
 
-.. automodule:: baca.pfmaker
+.. automodule:: baca.figuremaker
 
-.. currentmodule:: baca.pfmaker
+.. currentmodule:: baca.figuremaker
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.pfmaker
+      :lineage: baca.figuremaker
 
 .. raw:: html
 
@@ -25,14 +25,14 @@ pfmaker
    ~Acciaccatura
    ~Accumulator
    ~Anchor
+   ~Assignment
+   ~Bind
    ~Coat
    ~Contribution
+   ~FigureMaker
    ~Imbrication
    ~LMR
    ~Nest
-   ~PitchFirstAssignment
-   ~PitchFirstCommand
-   ~PitchFirstMaker
    ~RestAffix
    ~Stack
 
@@ -187,6 +187,96 @@ pfmaker
 
    .. autoattribute:: Anchor.use_remote_stop_offset
 
+.. autoclass:: Assignment
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __eq__
+      __format__
+      __hash__
+      __repr__
+      maker
+      pattern
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: Assignment.__eq__
+
+   .. automethod:: Assignment.__format__
+
+   .. automethod:: Assignment.__hash__
+
+   .. automethod:: Assignment.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: Assignment.maker
+
+   .. autoattribute:: Assignment.pattern
+
+.. autoclass:: Bind
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
+      assignments
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: Bind.__call__
+
+   .. automethod:: Bind.__eq__
+
+   .. automethod:: Bind.__format__
+
+   .. automethod:: Bind.__hash__
+
+   .. automethod:: Bind.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: Bind.assignments
+
 .. autoclass:: Coat
 
    .. raw:: html
@@ -260,6 +350,69 @@ pfmaker
    .. autoattribute:: Contribution.time_signature
 
    .. autoattribute:: Contribution.voice_to_selection
+
+.. autoclass:: FigureMaker
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __call__
+      __eq__
+      __format__
+      __hash__
+      __repr__
+      acciaccatura
+      affix
+      restart_talea
+      signature
+      spelling
+      talea
+      treatments
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: FigureMaker.__call__
+
+   .. automethod:: FigureMaker.__eq__
+
+   .. automethod:: FigureMaker.__format__
+
+   .. automethod:: FigureMaker.__hash__
+
+   .. automethod:: FigureMaker.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: FigureMaker.acciaccatura
+
+   .. autoattribute:: FigureMaker.affix
+
+   .. autoattribute:: FigureMaker.restart_talea
+
+   .. autoattribute:: FigureMaker.signature
+
+   .. autoattribute:: FigureMaker.spelling
+
+   .. autoattribute:: FigureMaker.talea
+
+   .. autoattribute:: FigureMaker.treatments
 
 .. autoclass:: Imbrication
 
@@ -441,159 +594,6 @@ pfmaker
 
    .. autoattribute:: Nest.treatments
 
-.. autoclass:: PitchFirstAssignment
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __eq__
-      __format__
-      __hash__
-      __repr__
-      maker
-      pattern
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: PitchFirstAssignment.__eq__
-
-   .. automethod:: PitchFirstAssignment.__format__
-
-   .. automethod:: PitchFirstAssignment.__hash__
-
-   .. automethod:: PitchFirstAssignment.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: PitchFirstAssignment.maker
-
-   .. autoattribute:: PitchFirstAssignment.pattern
-
-.. autoclass:: PitchFirstCommand
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      __eq__
-      __format__
-      __hash__
-      __repr__
-      assignments
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: PitchFirstCommand.__call__
-
-   .. automethod:: PitchFirstCommand.__eq__
-
-   .. automethod:: PitchFirstCommand.__format__
-
-   .. automethod:: PitchFirstCommand.__hash__
-
-   .. automethod:: PitchFirstCommand.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: PitchFirstCommand.assignments
-
-.. autoclass:: PitchFirstMaker
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      __eq__
-      __format__
-      __hash__
-      __repr__
-      acciaccatura
-      affix
-      restart_talea
-      signature
-      spelling
-      talea
-      treatments
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: PitchFirstMaker.__call__
-
-   .. automethod:: PitchFirstMaker.__eq__
-
-   .. automethod:: PitchFirstMaker.__format__
-
-   .. automethod:: PitchFirstMaker.__hash__
-
-   .. automethod:: PitchFirstMaker.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: PitchFirstMaker.acciaccatura
-
-   .. autoattribute:: PitchFirstMaker.affix
-
-   .. autoattribute:: PitchFirstMaker.restart_talea
-
-   .. autoattribute:: PitchFirstMaker.signature
-
-   .. autoattribute:: PitchFirstMaker.spelling
-
-   .. autoattribute:: PitchFirstMaker.talea
-
-   .. autoattribute:: PitchFirstMaker.treatments
-
 .. autoclass:: RestAffix
 
    .. raw:: html
@@ -706,14 +706,14 @@ pfmaker
    ~anchor
    ~anchor_after
    ~anchor_to_figure
+   ~assign
+   ~bind
    ~coat
    ~extend_beam
+   ~figure
    ~imbricate
    ~lmr
    ~nest
-   ~pfassignment
-   ~pfcommand
-   ~pfmaker
    ~rests_after
    ~rests_around
    ~rests_before
@@ -730,21 +730,21 @@ pfmaker
 
 .. autofunction:: anchor_to_figure
 
+.. autofunction:: assign
+
+.. autofunction:: bind
+
 .. autofunction:: coat
 
 .. autofunction:: extend_beam
+
+.. autofunction:: figure
 
 .. autofunction:: imbricate
 
 .. autofunction:: lmr
 
 .. autofunction:: nest
-
-.. autofunction:: pfassignment
-
-.. autofunction:: pfcommand
-
-.. autofunction:: pfmaker
 
 .. autofunction:: rests_after
 

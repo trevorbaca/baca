@@ -226,6 +226,68 @@ Division library.
 
    <hr/>
 
+.. rubric:: :ref:`baca.figuremaker <baca--figuremaker>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.figuremaker.Acciaccatura
+   ~baca.figuremaker.Accumulator
+   ~baca.figuremaker.Anchor
+   ~baca.figuremaker.Assignment
+   ~baca.figuremaker.Bind
+   ~baca.figuremaker.Coat
+   ~baca.figuremaker.Contribution
+   ~baca.figuremaker.FigureMaker
+   ~baca.figuremaker.Imbrication
+   ~baca.figuremaker.LMR
+   ~baca.figuremaker.Nest
+   ~baca.figuremaker.RestAffix
+   ~baca.figuremaker.Stack
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.figuremaker.anchor
+   ~baca.figuremaker.anchor_after
+   ~baca.figuremaker.anchor_to_figure
+   ~baca.figuremaker.assign
+   ~baca.figuremaker.bind
+   ~baca.figuremaker.coat
+   ~baca.figuremaker.extend_beam
+   ~baca.figuremaker.figure
+   ~baca.figuremaker.imbricate
+   ~baca.figuremaker.lmr
+   ~baca.figuremaker.nest
+   ~baca.figuremaker.rests_after
+   ~baca.figuremaker.rests_around
+   ~baca.figuremaker.rests_before
+   ~baca.figuremaker.resume
+   ~baca.figuremaker.resume_after
+   ~baca.figuremaker.skips_after
+   ~baca.figuremaker.skips_around
+   ~baca.figuremaker.skips_before
+   ~baca.figuremaker.stack
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.indicatorcommands <baca--indicatorcommands>`
    :class: section-header
 
@@ -687,68 +749,6 @@ Override library.
    :nosignatures:
 
    ~baca.persistence.PersistentIndicatorTests
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.pfmaker <baca--pfmaker>`
-   :class: section-header
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.pfmaker.Acciaccatura
-   ~baca.pfmaker.Accumulator
-   ~baca.pfmaker.Anchor
-   ~baca.pfmaker.Coat
-   ~baca.pfmaker.Contribution
-   ~baca.pfmaker.Imbrication
-   ~baca.pfmaker.LMR
-   ~baca.pfmaker.Nest
-   ~baca.pfmaker.PitchFirstAssignment
-   ~baca.pfmaker.PitchFirstCommand
-   ~baca.pfmaker.PitchFirstMaker
-   ~baca.pfmaker.RestAffix
-   ~baca.pfmaker.Stack
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.pfmaker.anchor
-   ~baca.pfmaker.anchor_after
-   ~baca.pfmaker.anchor_to_figure
-   ~baca.pfmaker.coat
-   ~baca.pfmaker.extend_beam
-   ~baca.pfmaker.imbricate
-   ~baca.pfmaker.lmr
-   ~baca.pfmaker.nest
-   ~baca.pfmaker.pfassignment
-   ~baca.pfmaker.pfcommand
-   ~baca.pfmaker.pfmaker
-   ~baca.pfmaker.rests_after
-   ~baca.pfmaker.rests_around
-   ~baca.pfmaker.rests_before
-   ~baca.pfmaker.resume
-   ~baca.pfmaker.resume_after
-   ~baca.pfmaker.skips_after
-   ~baca.pfmaker.skips_around
-   ~baca.pfmaker.skips_before
-   ~baca.pfmaker.stack
 
 .. raw:: html
 

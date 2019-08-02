@@ -16,7 +16,7 @@ from . import typings
 
 
 RhythmMakerTyping = typing.Union[
-    rmakers.RhythmAssignment, rmakers.RhythmMaker, rmakers.Stack, rmakers.Bind
+    rmakers.Assignment, rmakers.RhythmMaker, rmakers.Stack, rmakers.Bind
 ]
 
 ### CLASSES ###
@@ -340,7 +340,7 @@ class RhythmCommand(scoping.Command):
         prototype = (
             abjad.Selection,
             rmakers.RhythmMaker,
-            rmakers.RhythmAssignment,
+            rmakers.Assignment,
             rmakers.Stack,
             rmakers.Bind,
         )

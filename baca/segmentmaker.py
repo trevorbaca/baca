@@ -3794,14 +3794,14 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     time_signatures=[(6, 16), (6, 16)],
             ...     )
 
-            >>> pfmaker = baca.pfmaker([1], 16)
-            >>> selection = pfmaker([[2, 4, 5, 7, 9, 11]])
+            >>> figure = baca.figure([1], 16)
+            >>> selection = figure([[2, 4, 5, 7, 9, 11]])
             >>> maker(
             ...     ('Violin_Music_Voice', 1),
             ...     baca.music(selection),
             ...     )
 
-            >>> selection = pfmaker([[-3, -5, -7, -8, -10, -12]])
+            >>> selection = figure([[-3, -5, -7, -8, -10, -12]])
             >>> maker(
             ...     ('Cello_Music_Voice', 1),
             ...     baca.music(selection),
@@ -4128,7 +4128,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Colors out-of-range pitches:
 
-            >>> pfmaker = baca.pfmaker([1], 16)
+            >>> figure = baca.figure([1], 16)
             >>> collection_lists = [
             ...     [[4]],
             ...     [[-12, 2, 3, 5, 8, 9, 0]],
@@ -4137,7 +4137,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ]
             >>> figures, time_signatures = [], []
             >>> for i, collections in enumerate(collection_lists):
-            ...     selection = pfmaker(collections)
+            ...     selection = figure(collections)
             ...     figures.append(selection)
             ...     time_signature = abjad.inspect(selection).duration()
             ...     time_signatures.append(time_signature)
@@ -4326,7 +4326,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             Colors repeat pitch-classes:
 
-            >>> pfmaker = baca.pfmaker([1], 16)
+            >>> figure = baca.figure([1], 16)
             >>> collection_lists = [
             ...     [[4]],
             ...     [[6, 2, 3, 5, 9, 9, 0]],
@@ -4335,7 +4335,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     ]
             >>> figures, time_signatures = [], []
             >>> for i, collections in enumerate(collection_lists):
-            ...     selection = pfmaker(collections)
+            ...     selection = figure(collections)
             ...     figures.append(selection)
             ...     time_signature = abjad.inspect(selection).duration()
             ...     time_signatures.append(time_signature)
