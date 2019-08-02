@@ -3002,7 +3002,7 @@ class PitchCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         persist: str = None,
-        pitches: typing.Iterable = None,
+        pitches: typing.Sequence = None,
         scope: scoping.ScopeTyping = None,
         selector: abjad.SelectorTyping = None,
     ) -> None:
@@ -3274,7 +3274,7 @@ class PitchCommand(scoping.Command):
         return self._persist
 
     @property
-    def pitches(self) -> typing.Optional[typing.Iterable]:
+    def pitches(self) -> typing.Optional[typing.Sequence]:
         """
         Gets pitches.
 
@@ -6810,8 +6810,8 @@ def interpolate_staff_positions(
 
 
 def loop(
-    items: typing.Iterable,
-    intervals: typing.Iterable,
+    items: typing.Sequence,
+    intervals: typing.Sequence,
     *,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> PitchCommand:
@@ -6823,7 +6823,7 @@ def loop(
 
 
 def natural_clusters(
-    widths: typing.Iterable[int],
+    widths: typing.Sequence[int],
     *,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
     start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
@@ -6875,7 +6875,7 @@ def pitch(
 
 
 def pitches(
-    pitches: typing.Iterable,
+    pitches: typing.Sequence,
     *,
     allow_octaves: bool = None,
     allow_repeats: bool = None,

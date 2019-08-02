@@ -360,7 +360,7 @@ class RhythmCommand(scoping.Command):
 
     def _make_selection(
         self,
-        time_signatures: typing.Iterable[abjad.TimeSignature],
+        time_signatures: typing.Sequence[abjad.IntegerPair],
         runtime: abjad.OrderedDict = None,
     ) -> abjad.Selection:
         """

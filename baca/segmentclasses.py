@@ -2346,7 +2346,7 @@ class SystemSpecifier(object):
     def __init__(
         self,
         *,
-        distances: typing.Iterable[abjad.Number] = None,
+        distances: typing.Sequence[abjad.Number] = None,
         measure: int = None,
         y_offset: abjad.Number = None,
     ) -> None:

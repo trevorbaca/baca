@@ -32,7 +32,7 @@ class BCPCommand(scoping.Command):
 
     def __init__(
         self,
-        bcps: typing.Iterable[abjad.IntegerPair] = None,
+        bcps: typing.Sequence[abjad.IntegerPair] = None,
         bow_change_tweaks: abjad.IndexedTweakManagers = None,
         final_spanner: bool = None,
         helper: typing.Callable = None,
@@ -268,7 +268,7 @@ class BCPCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def bcps(self) -> typing.Optional[typing.Iterable[abjad.IntegerPair]]:
+    def bcps(self) -> typing.Optional[typing.Sequence[abjad.IntegerPair]]:
         r"""
         Gets bow contact points.
 
@@ -1119,7 +1119,7 @@ class DetachCommand(scoping.Command):
 
     def __init__(
         self,
-        arguments: typing.Iterable[typing.Any],
+        arguments: typing.Sequence[typing.Any],
         selector: abjad.SelectorTyping,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
@@ -1155,7 +1155,7 @@ class DetachCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def arguments(self) -> typing.Iterable[typing.Any]:
+    def arguments(self) -> typing.Sequence[typing.Any]:
         """
         Gets arguments.
         """
@@ -2123,7 +2123,7 @@ def bar_extent_persistent(
 
 
 def bcps(
-    bcps: typing.Iterable[abjad.IntegerPair],
+    bcps: typing.Sequence[abjad.IntegerPair],
     *tweaks: abjad.IndexedTweakManager,
     bow_change_tweaks: abjad.IndexedTweakManagers = None,
     final_spanner: bool = None,
