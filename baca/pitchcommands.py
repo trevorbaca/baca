@@ -6875,7 +6875,7 @@ def pitch(
 
 
 def pitches(
-    pitches: typing.Union[typing.Sequence, Loop],
+    pitches,
     *,
     allow_octaves: bool = None,
     allow_repeats: bool = None,
