@@ -717,7 +717,6 @@ Override library.
    ~baca.pfmaker.PitchFirstCommand
    ~baca.pfmaker.PitchFirstMaker
    ~baca.pfmaker.RestAffix
-   ~baca.pfmaker.Stack
 
 .. raw:: html
 
@@ -748,7 +747,7 @@ Override library.
    ~baca.pfmaker.skips_after
    ~baca.pfmaker.skips_around
    ~baca.pfmaker.skips_before
-   ~baca.pfmaker.stack
+   ~baca.pfmaker.stack_examples
 
 .. raw:: html
 

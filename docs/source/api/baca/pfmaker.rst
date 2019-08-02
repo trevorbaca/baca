@@ -34,7 +34,6 @@ pfmaker
    ~PitchFirstCommand
    ~PitchFirstMaker
    ~RestAffix
-   ~Stack
 
 .. autoclass:: Acciaccatura
 
@@ -648,51 +647,6 @@ pfmaker
 
    .. autoattribute:: RestAffix.suffix
 
-.. autoclass:: Stack
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-      __eq__
-      __format__
-      __hash__
-      __repr__
-      commands
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: Stack.__call__
-
-   .. automethod:: Stack.__eq__
-
-   .. automethod:: Stack.__format__
-
-   .. automethod:: Stack.__hash__
-
-   .. automethod:: Stack.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. autoattribute:: Stack.commands
-
 .. raw:: html
 
    <hr/>
@@ -722,7 +676,7 @@ pfmaker
    ~skips_after
    ~skips_around
    ~skips_before
-   ~stack
+   ~stack_examples
 
 .. autofunction:: anchor
 
@@ -762,4 +716,4 @@ pfmaker
 
 .. autofunction:: skips_before
 
-.. autofunction:: stack
+.. autofunction:: stack_examples
