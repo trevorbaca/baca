@@ -2898,7 +2898,7 @@ class SegmentMaker(abjad.SegmentMaker):
             literal = abjad.LilyPondLiteral(string, "opening")
             abjad.attach(literal, include, tag=tag)
             container = abjad.Container(
-                [include, score], is_simultaneous=True, tag=tag
+                [include, score], simultaneous=True, tag=tag
             )
             literal = abjad.LilyPondLiteral("", "absolute_before")
             abjad.attach(literal, container, tag=None)
@@ -2966,7 +2966,7 @@ class SegmentMaker(abjad.SegmentMaker):
         abjad.annotate(multimeasure_rest_voice, const.INTERMITTENT, True)
         container = abjad.Container(
             [hidden_note_voice, multimeasure_rest_voice],
-            is_simultaneous=True,
+            simultaneous=True,
             tag=tag,
         )
         abjad.annotate(container, const.MULTIMEASURE_REST_CONTAINER, True)
@@ -3027,7 +3027,7 @@ class SegmentMaker(abjad.SegmentMaker):
         music_context = self.score["Music_Context"]
         for staff in abjad.iterate(music_context).components(abjad.Staff):
             break
-        staff.is_simultaneous = True
+        staff.simultaneous = True
         staff.insert(0, global_rests)
 
     def _populate_offset_to_measure_number(self):

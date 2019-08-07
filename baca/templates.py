@@ -136,7 +136,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         return abjad.Context(
             contexts,
             lilypond_type="MusicContext",
-            is_simultaneous=True,
+            simultaneous=True,
             name="Music_Context",
             tag="baca.ScoreTemplate.make_music_context",
         )
@@ -334,7 +334,7 @@ class SingleStaffScoreTemplate(ScoreTemplate):
         music_context = abjad.Context(
             [music_staff],
             lilypond_type="MusicContext",
-            is_simultaneous=True,
+            simultaneous=True,
             name="Music_Context",
             tag=tag,
         )
@@ -678,7 +678,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
         music_context = abjad.Context(
             [string_section_staff_group],
             lilypond_type="MusicContext",
-            is_simultaneous=True,
+            simultaneous=True,
             name="Music_Context",
             tag=tag,
         )
@@ -914,7 +914,7 @@ class ThreeVoiceStaffScoreTemplate(ScoreTemplate):
         music_staff = abjad.Staff(
             [music_voice_1, music_voice_2, music_voice_3],
             lilypond_type="MusicStaff",
-            is_simultaneous=True,
+            simultaneous=True,
             name="Music_Staff",
             tag=tag,
         )
@@ -923,7 +923,7 @@ class ThreeVoiceStaffScoreTemplate(ScoreTemplate):
         music_context = abjad.Context(
             [music_staff],
             lilypond_type="MusicContext",
-            is_simultaneous=True,
+            simultaneous=True,
             name="Music_Context",
             tag=tag,
         )
@@ -1116,7 +1116,7 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         music_staff = abjad.Staff(
             [music_voice_1, music_voice_2],
             lilypond_type="MusicStaff",
-            is_simultaneous=True,
+            simultaneous=True,
             name="Music_Staff",
             tag=tag,
         )
@@ -1125,7 +1125,7 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         music_context = abjad.Context(
             [music_staff],
             lilypond_type="MusicContext",
-            is_simultaneous=True,
+            simultaneous=True,
             name="Music_Context",
             tag=tag,
         )
@@ -1298,7 +1298,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         music_context = abjad.Context(
             [violin_music_staff],
             lilypond_type="MusicContext",
-            is_simultaneous=True,
+            simultaneous=True,
             name="Music_Context",
             tag=tag,
         )
