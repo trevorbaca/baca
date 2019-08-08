@@ -378,7 +378,7 @@ class Division(abjad.NonreducedFraction):
             True
 
             >>> baca.Division((3, 8), start_offset=(5, 4)).timespan
-            Timespan(start_offset=Offset((5, 4)), stop_offset=Offset((13, 8)))
+            Timespan(Offset((5, 4)), Offset((13, 8)))
 
         """
         if self.start_offset is None:
@@ -722,7 +722,7 @@ class DivisionSequence(abjad.Sequence):
         ..  container:: example
 
             >>> baca.divisions([(2, 8), (2, 8)], start_offset=0).timespan
-            Timespan(start_offset=Offset((0, 1)), stop_offset=Offset((1, 2)))
+            Timespan(Offset((0, 1)), Offset((1, 2)))
 
         """
         if self.start_offset is None:
