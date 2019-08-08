@@ -34,7 +34,7 @@ class Division(abjad.NonreducedFraction):
         Initializes with start offset:
 
         >>> baca.Division((4, 8), start_offset=(6, 4))
-        Division((4, 8), start_offset=Offset(3, 2))
+        Division((4, 8), start_offset=Offset((3, 2)))
 
     ..  container:: example
 
@@ -104,7 +104,7 @@ class Division(abjad.NonreducedFraction):
             >>> division_1 = baca.Division((2, 4), start_offset=1)
             >>> division_2 = baca.Division((4, 4))
             >>> division_1 + division_2
-            Division((6, 4), start_offset=Offset(1, 1))
+            Division((6, 4), start_offset=Offset((1, 1)))
 
         ..  container:: example
 
@@ -113,7 +113,7 @@ class Division(abjad.NonreducedFraction):
             >>> division_1 = baca.Division((2, 4), start_offset=1)
             >>> division_2 = baca.Division((4, 4), start_offset=(3, 2))
             >>> division_1 + division_2
-            Division((6, 4), start_offset=Offset(1, 1))
+            Division((6, 4), start_offset=Offset((1, 1)))
 
         ..  container:: example
 
@@ -122,7 +122,7 @@ class Division(abjad.NonreducedFraction):
             >>> division_1 = baca.Division((2, 4), start_offset=1)
             >>> division_2 = baca.Division((4, 4), start_offset=10)
             >>> division_1 + division_2
-            Division((40, 4), start_offset=Offset(1, 1))
+            Division((40, 4), start_offset=Offset((1, 1)))
 
         ..  container:: example
 
@@ -131,7 +131,7 @@ class Division(abjad.NonreducedFraction):
             >>> division_1 = baca.Division((2, 4), start_offset=1)
             >>> division_2 = baca.Division((4, 4), start_offset=1)
             >>> division_1 + division_2
-            Division((4, 4), start_offset=Offset(1, 1))
+            Division((4, 4), start_offset=Offset((1, 1)))
 
         ..  container:: example
 
@@ -140,7 +140,7 @@ class Division(abjad.NonreducedFraction):
             >>> division_1 = baca.Division((2, 4), start_offset=1)
             >>> division_2 = baca.Division((4, 4), start_offset=(5, 4))
             >>> division_1 + division_2
-            Division((5, 4), start_offset=Offset(1, 1))
+            Division((5, 4), start_offset=Offset((1, 1)))
 
         """
         if not isinstance(argument, type(self)):
@@ -222,10 +222,10 @@ class Division(abjad.NonreducedFraction):
             >>> division_2 = baca.Division((2, 1), start_offset=10)
 
             >>> division_1 - division_2
-            Division((2, 1), start_offset=Offset(12, 1))
+            Division((2, 1), start_offset=Offset((12, 1)))
 
             >>> division_2 - division_1
-            Division((-2, 1), start_offset=Offset(12, 1))
+            Division((-2, 1), start_offset=Offset((12, 1)))
 
         ..  container:: example
 
@@ -235,10 +235,10 @@ class Division(abjad.NonreducedFraction):
             >>> division_2 = baca.Division((4, 1), start_offset=12)
 
             >>> division_1 - division_2
-            Division((2, 1), start_offset=Offset(10, 1))
+            Division((2, 1), start_offset=Offset((10, 1)))
 
             >>> division_2 - division_1
-            Division((2, 1), start_offset=Offset(14, 1))
+            Division((2, 1), start_offset=Offset((14, 1)))
 
         ..  container:: example
 
@@ -248,10 +248,10 @@ class Division(abjad.NonreducedFraction):
             >>> division_2 = baca.Division((4, 2), start_offset=20)
 
             >>> division_1 - division_2
-            Division((6, 2), start_offset=Offset(0, 1))
+            Division((6, 2), start_offset=Offset((0, 1)))
 
             >>> division_2 - division_1
-            Division((4, 2), start_offset=Offset(20, 1))
+            Division((4, 2), start_offset=Offset((20, 1)))
 
         ..  container:: example exception
 
@@ -344,7 +344,7 @@ class Division(abjad.NonreducedFraction):
             True
 
             >>> baca.Division((3, 8), start_offset=(5, 4)).start_offset
-            Offset(5, 4)
+            Offset((5, 4))
 
         """
         return self._start_offset
@@ -360,7 +360,7 @@ class Division(abjad.NonreducedFraction):
             True
 
             >>> baca.Division((3, 8), start_offset=(5, 4)).stop_offset
-            Offset(13, 8)
+            Offset((13, 8))
 
         """
         if self.start_offset is None:
@@ -378,7 +378,7 @@ class Division(abjad.NonreducedFraction):
             True
 
             >>> baca.Division((3, 8), start_offset=(5, 4)).timespan
-            Timespan(start_offset=Offset(5, 4), stop_offset=Offset(13, 8))
+            Timespan(start_offset=Offset((5, 4)), stop_offset=Offset((13, 8)))
 
         """
         if self.start_offset is None:
@@ -607,18 +607,17 @@ class DivisionSequence(abjad.Sequence):
 
         >>> divisions = baca.divisions(10 * [(1, 8)], start_offset=0)
         >>> for division in divisions:
-        ...     print(division)
-        ...
-        Division((1, 8), start_offset=Offset(0, 1))
-        Division((1, 8), start_offset=Offset(1, 8))
-        Division((1, 8), start_offset=Offset(1, 4))
-        Division((1, 8), start_offset=Offset(3, 8))
-        Division((1, 8), start_offset=Offset(1, 2))
-        Division((1, 8), start_offset=Offset(5, 8))
-        Division((1, 8), start_offset=Offset(3, 4))
-        Division((1, 8), start_offset=Offset(7, 8))
-        Division((1, 8), start_offset=Offset(1, 1))
-        Division((1, 8), start_offset=Offset(9, 8))
+        ...     division
+        Division((1, 8), start_offset=Offset((0, 1)))
+        Division((1, 8), start_offset=Offset((1, 8)))
+        Division((1, 8), start_offset=Offset((1, 4)))
+        Division((1, 8), start_offset=Offset((3, 8)))
+        Division((1, 8), start_offset=Offset((1, 2)))
+        Division((1, 8), start_offset=Offset((5, 8)))
+        Division((1, 8), start_offset=Offset((3, 4)))
+        Division((1, 8), start_offset=Offset((7, 8)))
+        Division((1, 8), start_offset=Offset((1, 1)))
+        Division((1, 8), start_offset=Offset((9, 8)))
 
         Partitions divisions into thirds:
 
@@ -629,15 +628,15 @@ class DivisionSequence(abjad.Sequence):
 
         >>> for division in parts[1]:
         ...     division
-        Division((1, 8), start_offset=Offset(3, 8))
-        Division((1, 8), start_offset=Offset(1, 2))
-        Division((1, 8), start_offset=Offset(5, 8))
-        Division((1, 8), start_offset=Offset(3, 4))
+        Division((1, 8), start_offset=Offset((3, 8)))
+        Division((1, 8), start_offset=Offset((1, 2)))
+        Division((1, 8), start_offset=Offset((5, 8)))
+        Division((1, 8), start_offset=Offset((3, 4)))
 
         Gets start offset of middle third:
 
         >>> parts[1][0].start_offset
-        Offset(3, 8)
+        Offset((3, 8))
 
     """
 
@@ -693,7 +692,7 @@ class DivisionSequence(abjad.Sequence):
         ..  container:: example
 
             >>> baca.divisions([(2, 8), (2, 8)], start_offset=0).start_offset
-            Offset(0, 1)
+            Offset((0, 1))
 
         """
         if 0 < len(self):
@@ -708,7 +707,7 @@ class DivisionSequence(abjad.Sequence):
         ..  container:: example
 
             >>> baca.divisions([(2, 8), (2, 8)], start_offset=0).stop_offset
-            Offset(1, 2)
+            Offset((1, 2))
 
         """
         if 0 < len(self):
@@ -723,7 +722,7 @@ class DivisionSequence(abjad.Sequence):
         ..  container:: example
 
             >>> baca.divisions([(2, 8), (2, 8)], start_offset=0).timespan
-            Timespan(start_offset=Offset(0, 1), stop_offset=Offset(1, 2))
+            Timespan(start_offset=Offset((0, 1)), stop_offset=Offset((1, 2)))
 
         """
         if self.start_offset is None:
@@ -758,7 +757,7 @@ class DivisionSequence(abjad.Sequence):
             >>> divisions = expression(divisions)
             >>> divisions = divisions.flatten(depth=-1)
             >>> divisions
-            DivisionSequence([Division((15, 8), start_offset=Offset(0, 1))])
+            DivisionSequence([Division((15, 8), start_offset=Offset((0, 1)))])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
@@ -792,8 +791,8 @@ class DivisionSequence(abjad.Sequence):
             >>> divisions = expression(divisions)
             >>> for division in divisions:
             ...     division
-            Division((4, 8), start_offset=Offset(0, 1))
-            Division((12, 8), start_offset=Offset(1, 2))
+            Division((4, 8), start_offset=Offset((0, 1)))
+            Division((12, 8), start_offset=Offset((1, 2)))
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
@@ -828,9 +827,9 @@ class DivisionSequence(abjad.Sequence):
             >>> divisions = expression(divisions)
             >>> for division in divisions:
             ...     division
-            Division((4, 8), start_offset=Offset(0, 1))
-            Division((8, 8), start_offset=Offset(1, 2))
-            Division((2, 4), start_offset=Offset(3, 2))
+            Division((4, 8), start_offset=Offset((0, 1)))
+            Division((8, 8), start_offset=Offset((1, 2)))
+            Division((2, 4), start_offset=Offset((3, 2)))
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
@@ -870,9 +869,9 @@ class DivisionSequence(abjad.Sequence):
             >>> divisions = expression(divisions)
             >>> for division in divisions:
             ...     division
-            Division((6, 8), start_offset=Offset(0, 1))
-            Division((7, 8), start_offset=Offset(3, 4))
-            Division((2, 8), start_offset=Offset(13, 8))
+            Division((6, 8), start_offset=Offset((0, 1)))
+            Division((7, 8), start_offset=Offset((3, 4)))
+            Division((2, 8), start_offset=Offset((13, 8)))
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
@@ -916,24 +915,24 @@ class DivisionSequence(abjad.Sequence):
             >>> divisions = expression(divisions)
             >>> for division in divisions:
             ...     division
-            Division((1, 16), start_offset=Offset(0, 1))
-            Division((1, 16), start_offset=Offset(1, 16))
-            Division((1, 16), start_offset=Offset(1, 8))
-            Division((1, 16), start_offset=Offset(3, 16))
-            Division((1, 16), start_offset=Offset(1, 4))
-            Division((5, 16), start_offset=Offset(5, 16))
-            Division((1, 16), start_offset=Offset(5, 8))
-            Division((1, 16), start_offset=Offset(11, 16))
-            Division((1, 16), start_offset=Offset(3, 4))
-            Division((1, 16), start_offset=Offset(13, 16))
-            Division((1, 16), start_offset=Offset(7, 8))
-            Division((5, 16), start_offset=Offset(15, 16))
-            Division((1, 16), start_offset=Offset(5, 4))
-            Division((1, 16), start_offset=Offset(21, 16))
-            Division((1, 16), start_offset=Offset(11, 8))
-            Division((1, 16), start_offset=Offset(23, 16))
-            Division((1, 16), start_offset=Offset(3, 2))
-            Division((5, 16), start_offset=Offset(25, 16))
+            Division((1, 16), start_offset=Offset((0, 1)))
+            Division((1, 16), start_offset=Offset((1, 16)))
+            Division((1, 16), start_offset=Offset((1, 8)))
+            Division((1, 16), start_offset=Offset((3, 16)))
+            Division((1, 16), start_offset=Offset((1, 4)))
+            Division((5, 16), start_offset=Offset((5, 16)))
+            Division((1, 16), start_offset=Offset((5, 8)))
+            Division((1, 16), start_offset=Offset((11, 16)))
+            Division((1, 16), start_offset=Offset((3, 4)))
+            Division((1, 16), start_offset=Offset((13, 16)))
+            Division((1, 16), start_offset=Offset((7, 8)))
+            Division((5, 16), start_offset=Offset((15, 16)))
+            Division((1, 16), start_offset=Offset((5, 4)))
+            Division((1, 16), start_offset=Offset((21, 16)))
+            Division((1, 16), start_offset=Offset((11, 8)))
+            Division((1, 16), start_offset=Offset((23, 16)))
+            Division((1, 16), start_offset=Offset((3, 2)))
+            Division((5, 16), start_offset=Offset((25, 16)))
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
@@ -1054,17 +1053,17 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in sequence:
             ...         print(f"\t{repr(division)}")
             sequence:
-                DivisionSequence([Division((2, 8), start_offset=Offset(0, 1))])
-                DivisionSequence([Division((2, 8), start_offset=Offset(1, 4))])
-                DivisionSequence([Division((2, 8), start_offset=Offset(1, 2))])
-                DivisionSequence([Division((1, 8), start_offset=Offset(3, 4))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((0, 1)))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((1, 4)))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((1, 2)))])
+            	DivisionSequence([Division((1, 8), start_offset=Offset((3, 4)))])
             sequence:
-                DivisionSequence([Division((2, 8), start_offset=Offset(7, 8))])
-                DivisionSequence([Division((1, 8), start_offset=Offset(9, 8))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((7, 8)))])
+            	DivisionSequence([Division((1, 8), start_offset=Offset((9, 8)))])
             sequence:
-                DivisionSequence([Division((2, 8), start_offset=Offset(5, 4))])
-                DivisionSequence([Division((2, 8), start_offset=Offset(3, 2))])
-                DivisionSequence([Division((1, 8), start_offset=Offset(7, 4))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((5, 4)))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((3, 2)))])
+            	DivisionSequence([Division((1, 8), start_offset=Offset((7, 4)))])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1119,13 +1118,12 @@ class DivisionSequence(abjad.Sequence):
 
                 >>> for division in divisions.reverse():
                 ...     division
-                ...
-                Division((15, 16), start_offset=Offset(0, 1))
-                Division((8, 16), start_offset=Offset(15, 16))
-                Division((12, 16), start_offset=Offset(23, 16))
-                Division((12, 16), start_offset=Offset(35, 16))
-                Division((12, 16), start_offset=Offset(47, 16))
-                Division((10, 16), start_offset=Offset(59, 16))
+                Division((15, 16), start_offset=Offset((0, 1)))
+                Division((8, 16), start_offset=Offset((15, 16)))
+                Division((12, 16), start_offset=Offset((23, 16)))
+                Division((12, 16), start_offset=Offset((35, 16)))
+                Division((12, 16), start_offset=Offset((47, 16)))
+                Division((10, 16), start_offset=Offset((59, 16)))
 
             ..  container:: example expression
 
@@ -1134,13 +1132,12 @@ class DivisionSequence(abjad.Sequence):
 
                 >>> for division in expression(divisions):
                 ...     division
-                ...
-                Division((15, 16), start_offset=Offset(0, 1))
-                Division((8, 16), start_offset=Offset(15, 16))
-                Division((12, 16), start_offset=Offset(23, 16))
-                Division((12, 16), start_offset=Offset(35, 16))
-                Division((12, 16), start_offset=Offset(47, 16))
-                Division((10, 16), start_offset=Offset(59, 16))
+                Division((15, 16), start_offset=Offset((0, 1)))
+                Division((8, 16), start_offset=Offset((15, 16)))
+                Division((12, 16), start_offset=Offset((23, 16)))
+                Division((12, 16), start_offset=Offset((35, 16)))
+                Division((12, 16), start_offset=Offset((47, 16)))
+                Division((10, 16), start_offset=Offset((59, 16)))
 
                 >>> expression.get_string()
                 'R(J)'
@@ -1183,13 +1180,12 @@ class DivisionSequence(abjad.Sequence):
 
                 >>> for division in divisions.rotate(n=-1):
                 ...     division
-                ...
-                Division((12, 16), start_offset=Offset(0, 1))
-                Division((12, 16), start_offset=Offset(3, 4))
-                Division((12, 16), start_offset=Offset(3, 2))
-                Division((8, 16), start_offset=Offset(9, 4))
-                Division((15, 16), start_offset=Offset(11, 4))
-                Division((10, 16), start_offset=Offset(59, 16))
+                Division((12, 16), start_offset=Offset((0, 1)))
+                Division((12, 16), start_offset=Offset((3, 4)))
+                Division((12, 16), start_offset=Offset((3, 2)))
+                Division((8, 16), start_offset=Offset((9, 4)))
+                Division((15, 16), start_offset=Offset((11, 4)))
+                Division((10, 16), start_offset=Offset((59, 16)))
 
             ..  container:: example expression
 
@@ -1198,13 +1194,12 @@ class DivisionSequence(abjad.Sequence):
 
                 >>> for division in expression(divisions):
                 ...     division
-                ...
-                Division((12, 16), start_offset=Offset(0, 1))
-                Division((12, 16), start_offset=Offset(3, 4))
-                Division((12, 16), start_offset=Offset(3, 2))
-                Division((8, 16), start_offset=Offset(9, 4))
-                Division((15, 16), start_offset=Offset(11, 4))
-                Division((10, 16), start_offset=Offset(59, 16))
+                Division((12, 16), start_offset=Offset((0, 1)))
+                Division((12, 16), start_offset=Offset((3, 4)))
+                Division((12, 16), start_offset=Offset((3, 2)))
+                Division((8, 16), start_offset=Offset((9, 4)))
+                Division((15, 16), start_offset=Offset((11, 4)))
+                Division((10, 16), start_offset=Offset((59, 16)))
 
                 >>> expression.get_string()
                 'r-1(J)'
@@ -1255,18 +1250,17 @@ class DivisionSequence(abjad.Sequence):
             >>> divisions = baca.divisions(10 * [(1, 8)], start_offset=0)
 
             >>> for division in divisions:
-            ...     print(division)
-            ...
-            Division((1, 8), start_offset=Offset(0, 1))
-            Division((1, 8), start_offset=Offset(1, 8))
-            Division((1, 8), start_offset=Offset(1, 4))
-            Division((1, 8), start_offset=Offset(3, 8))
-            Division((1, 8), start_offset=Offset(1, 2))
-            Division((1, 8), start_offset=Offset(5, 8))
-            Division((1, 8), start_offset=Offset(3, 4))
-            Division((1, 8), start_offset=Offset(7, 8))
-            Division((1, 8), start_offset=Offset(1, 1))
-            Division((1, 8), start_offset=Offset(9, 8))
+            ...     division
+            Division((1, 8), start_offset=Offset((0, 1)))
+            Division((1, 8), start_offset=Offset((1, 8)))
+            Division((1, 8), start_offset=Offset((1, 4)))
+            Division((1, 8), start_offset=Offset((3, 8)))
+            Division((1, 8), start_offset=Offset((1, 2)))
+            Division((1, 8), start_offset=Offset((5, 8)))
+            Division((1, 8), start_offset=Offset((3, 4)))
+            Division((1, 8), start_offset=Offset((7, 8)))
+            Division((1, 8), start_offset=Offset((1, 1)))
+            Division((1, 8), start_offset=Offset((9, 8)))
 
             Splits division sequence every five sixteenths:
 
@@ -1274,34 +1268,33 @@ class DivisionSequence(abjad.Sequence):
             >>> for i, sequence_ in enumerate(divisions):
             ...     print(f"sequence {i}")
             ...     for division in sequence_:
-            ...         print('\t' + str(division))
-            ...
+            ...         print("\t" + str(division))
             sequence 0
-                Division((1, 8), start_offset=Offset(0, 1))
-                Division((1, 8), start_offset=Offset(1, 8))
-                Division((1, 16), start_offset=Offset(1, 4))
+            	Division((1, 8), start_offset=Offset((0, 1)))
+            	Division((1, 8), start_offset=Offset((1, 8)))
+            	Division((1, 16), start_offset=Offset((1, 4)))
             sequence 1
-                Division((1, 16), start_offset=Offset(5, 16))
-                Division((1, 8), start_offset=Offset(3, 8))
-                Division((1, 8), start_offset=Offset(1, 2))
+            	Division((1, 16), start_offset=Offset((5, 16)))
+            	Division((1, 8), start_offset=Offset((3, 8)))
+            	Division((1, 8), start_offset=Offset((1, 2)))
             sequence 2
-                Division((1, 8), start_offset=Offset(5, 8))
-                Division((1, 8), start_offset=Offset(3, 4))
-                Division((1, 16), start_offset=Offset(7, 8))
+            	Division((1, 8), start_offset=Offset((5, 8)))
+            	Division((1, 8), start_offset=Offset((3, 4)))
+            	Division((1, 16), start_offset=Offset((7, 8)))
             sequence 3
-                Division((1, 16), start_offset=Offset(15, 16))
-                Division((1, 8), start_offset=Offset(1, 1))
-                Division((1, 8), start_offset=Offset(9, 8))
+            	Division((1, 16), start_offset=Offset((15, 16)))
+            	Division((1, 8), start_offset=Offset((1, 1)))
+            	Division((1, 8), start_offset=Offset((9, 8)))
 
             Gets start offset of last sequence:
 
             >>> divisions[-1].start_offset
-            Offset(15, 16)
+            Offset((15, 16))
 
             Gets start offset of first division in last sequence:
 
             >>> divisions[-1][0].start_offset
-            Offset(15, 16)
+            Offset((15, 16))
 
         ..  container:: example expression
 
@@ -1315,14 +1308,14 @@ class DivisionSequence(abjad.Sequence):
             >>> divisions = expression(divisions)
             >>> for item in divisions:
             ...     item
-            DivisionSequence([Division((2, 8), start_offset=Offset(0, 1))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(1, 4))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(1, 2))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(3, 4))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(1, 1))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(5, 4))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(3, 2))])
-            DivisionSequence([Division((1, 8), start_offset=Offset(7, 4))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((0, 1)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((1, 4)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((1, 2)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((3, 4)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((1, 1)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((5, 4)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((3, 2)))])
+            DivisionSequence([Division((1, 8), start_offset=Offset((7, 4)))])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1364,13 +1357,13 @@ class DivisionSequence(abjad.Sequence):
             >>> divisions = expression(divisions)
             >>> for item in divisions:
             ...     item
-            DivisionSequence([Division((2, 8), start_offset=Offset(0, 1))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(1, 4))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(1, 2))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(3, 4))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(1, 1))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(5, 4))])
-            DivisionSequence([Division((3, 8), start_offset=Offset(3, 2))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((0, 1)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((1, 4)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((1, 2)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((3, 4)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((1, 1)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((5, 4)))])
+            DivisionSequence([Division((3, 8), start_offset=Offset((3, 2)))])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1413,14 +1406,14 @@ class DivisionSequence(abjad.Sequence):
             >>> divisions = expression(divisions)
             >>> for item in divisions:
             ...     item
-            DivisionSequence([Division((1, 8), start_offset=Offset(0, 1))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(1, 8))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(3, 8))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(5, 8))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(7, 8))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(11, 8))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(13, 8))])
+            DivisionSequence([Division((1, 8), start_offset=Offset((0, 1)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((1, 8)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((3, 8)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((5, 8)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((7, 8)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((9, 8)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((11, 8)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((13, 8)))])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1465,13 +1458,13 @@ class DivisionSequence(abjad.Sequence):
             >>> divisions = expression(divisions)
             >>> for item in divisions:
             ...     item
-            DivisionSequence([Division((3, 8), start_offset=Offset(0, 1))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(3, 8))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(5, 8))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(7, 8))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(11, 8))])
-            DivisionSequence([Division((2, 8), start_offset=Offset(13, 8))])
+            DivisionSequence([Division((3, 8), start_offset=Offset((0, 1)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((3, 8)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((5, 8)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((7, 8)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((9, 8)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((11, 8)))])
+            DivisionSequence([Division((2, 8), start_offset=Offset((13, 8)))])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1517,18 +1510,18 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                Division((2, 8), start_offset=Offset(0, 1))
-                Division((2, 8), start_offset=Offset(1, 4))
-                Division((2, 8), start_offset=Offset(1, 2))
-                Division((1, 8), start_offset=Offset(3, 4))
+            	Division((2, 8), start_offset=Offset((0, 1)))
+            	Division((2, 8), start_offset=Offset((1, 4)))
+            	Division((2, 8), start_offset=Offset((1, 2)))
+            	Division((1, 8), start_offset=Offset((3, 4)))
             sequence:
-                Division((2, 8), start_offset=Offset(7, 8))
-                Division((2, 8), start_offset=Offset(9, 8))
-                Division((2, 8), start_offset=Offset(11, 8))
-                Division((1, 8), start_offset=Offset(13, 8))
+            	Division((2, 8), start_offset=Offset((7, 8)))
+            	Division((2, 8), start_offset=Offset((9, 8)))
+            	Division((2, 8), start_offset=Offset((11, 8)))
+            	Division((1, 8), start_offset=Offset((13, 8)))
             sequence:
-                Division((4, 16), start_offset=Offset(7, 4))
-                Division((3, 16), start_offset=Offset(2, 1))
+            	Division((4, 16), start_offset=Offset((7, 4)))
+            	Division((3, 16), start_offset=Offset((2, 1)))
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1582,18 +1575,18 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                Division((1, 8), start_offset=Offset(0, 1))
-                Division((2, 8), start_offset=Offset(1, 8))
-                Division((2, 8), start_offset=Offset(3, 8))
-                Division((2, 8), start_offset=Offset(5, 8))
+            	Division((1, 8), start_offset=Offset((0, 1)))
+            	Division((2, 8), start_offset=Offset((1, 8)))
+            	Division((2, 8), start_offset=Offset((3, 8)))
+            	Division((2, 8), start_offset=Offset((5, 8)))
             sequence:
-                Division((1, 8), start_offset=Offset(7, 8))
-                Division((2, 8), start_offset=Offset(1, 1))
-                Division((2, 8), start_offset=Offset(5, 4))
-                Division((2, 8), start_offset=Offset(3, 2))
+            	Division((1, 8), start_offset=Offset((7, 8)))
+            	Division((2, 8), start_offset=Offset((1, 1)))
+            	Division((2, 8), start_offset=Offset((5, 4)))
+            	Division((2, 8), start_offset=Offset((3, 2)))
             sequence:
-                Division((3, 16), start_offset=Offset(7, 4))
-                Division((4, 16), start_offset=Offset(31, 16))
+            	Division((3, 16), start_offset=Offset((7, 4)))
+            	Division((4, 16), start_offset=Offset((31, 16)))
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1652,8 +1645,8 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                Division((2, 8), start_offset=Offset(0, 1))
-                Division((3, 8), start_offset=Offset(1, 4))
+            	Division((2, 8), start_offset=Offset((0, 1)))
+            	Division((3, 8), start_offset=Offset((1, 4)))
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1701,8 +1694,8 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                Division((3, 8), start_offset=Offset(0, 1))
-                Division((2, 8), start_offset=Offset(3, 8))
+            	Division((3, 8), start_offset=Offset((0, 1)))
+            	Division((2, 8), start_offset=Offset((3, 8)))
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1743,14 +1736,13 @@ class DivisionSequence(abjad.Sequence):
             ...     print("sequence:")
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
-            ...
             sequence:
-                Division((1, 4), start_offset=Offset(0, 1))
-                Division((1, 4), start_offset=Offset(1, 4))
-                Division((1, 4), start_offset=Offset(1, 2))
+            	Division((1, 4), start_offset=Offset((0, 1)))
+            	Division((1, 4), start_offset=Offset((1, 4)))
+            	Division((1, 4), start_offset=Offset((1, 2)))
             sequence:
-                Division((3, 8), start_offset=Offset(3, 4))
-                Division((3, 8), start_offset=Offset(9, 8))
+            	Division((3, 8), start_offset=Offset((3, 4)))
+            	Division((3, 8), start_offset=Offset((9, 8)))
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1802,17 +1794,17 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                Division((1, 16), start_offset=Offset(0, 1))
-                Division((2, 16), start_offset=Offset(1, 16))
-                Division((4, 16), start_offset=Offset(3, 16))
+            	Division((1, 16), start_offset=Offset((0, 1)))
+            	Division((2, 16), start_offset=Offset((1, 16)))
+            	Division((4, 16), start_offset=Offset((3, 16)))
             sequence:
-                Division((2, 16), start_offset=Offset(7, 16))
-                Division((4, 16), start_offset=Offset(9, 16))
-                Division((1, 16), start_offset=Offset(13, 16))
+            	Division((2, 16), start_offset=Offset((7, 16)))
+            	Division((4, 16), start_offset=Offset((9, 16)))
+            	Division((1, 16), start_offset=Offset((13, 16)))
             sequence:
-                Division((4, 16), start_offset=Offset(7, 8))
-                Division((1, 16), start_offset=Offset(9, 8))
-                Division((2, 16), start_offset=Offset(19, 16))
+            	Division((4, 16), start_offset=Offset((7, 8)))
+            	Division((1, 16), start_offset=Offset((9, 8)))
+            	Division((2, 16), start_offset=Offset((19, 16)))
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1933,10 +1925,10 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                Division((5, 8), start_offset=Offset(0, 1))
-                Division((7, 24), start_offset=Offset(5, 8))
+            	Division((5, 8), start_offset=Offset((0, 1)))
+            	Division((7, 24), start_offset=Offset((5, 8)))
             sequence:
-                Division((11, 24), start_offset=Offset(11, 12))
+            	Division((11, 24), start_offset=Offset((11, 12)))
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -1988,10 +1980,10 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                Division((5, 8), start_offset=Offset(0, 1))
-                Division((2, 8), start_offset=Offset(5, 8))
+            	Division((5, 8), start_offset=Offset((0, 1)))
+            	Division((2, 8), start_offset=Offset((5, 8)))
             sequence:
-                Division((4, 8), start_offset=Offset(7, 8))
+            	Division((4, 8), start_offset=Offset((7, 8)))
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -2037,11 +2029,11 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                DivisionSequence([Division((5, 12), start_offset=Offset(0, 1))])
-                DivisionSequence([Division((5, 24), start_offset=Offset(5, 12))])
+            	DivisionSequence([Division((5, 12), start_offset=Offset((0, 1)))])
+            	DivisionSequence([Division((5, 24), start_offset=Offset((5, 12)))])
             sequence:
-                DivisionSequence([Division((4, 8), start_offset=Offset(5, 8))])
-                DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
+            	DivisionSequence([Division((4, 8), start_offset=Offset((5, 8)))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((9, 8)))])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -2094,11 +2086,11 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                DivisionSequence([Division((3, 8), start_offset=Offset(0, 1))])
-                DivisionSequence([Division((2, 8), start_offset=Offset(3, 8))])
+            	DivisionSequence([Division((3, 8), start_offset=Offset((0, 1)))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((3, 8)))])
             sequence:
-                DivisionSequence([Division((4, 8), start_offset=Offset(5, 8))])
-                DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
+            	DivisionSequence([Division((4, 8), start_offset=Offset((5, 8)))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((9, 8)))])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -2144,12 +2136,12 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                DivisionSequence([Division((5, 12), start_offset=Offset(0, 1))])
-                DivisionSequence([Division((5, 24), start_offset=Offset(5, 12))])
+            	DivisionSequence([Division((5, 12), start_offset=Offset((0, 1)))])
+            	DivisionSequence([Division((5, 24), start_offset=Offset((5, 12)))])
             sequence:
-                DivisionSequence([Division((2, 8), start_offset=Offset(5, 8))])
-                DivisionSequence([Division((2, 8), start_offset=Offset(7, 8))])
-                DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((5, 8)))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((7, 8)))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((9, 8)))])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -2206,12 +2198,12 @@ class DivisionSequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                DivisionSequence([Division((3, 8), start_offset=Offset(0, 1))])
-                DivisionSequence([Division((2, 8), start_offset=Offset(3, 8))])
+            	DivisionSequence([Division((3, 8), start_offset=Offset((0, 1)))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((3, 8)))])
             sequence:
-                DivisionSequence([Division((2, 8), start_offset=Offset(5, 8))])
-                DivisionSequence([Division((2, 8), start_offset=Offset(7, 8))])
-                DivisionSequence([Division((2, 8), start_offset=Offset(9, 8))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((5, 8)))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((7, 8)))])
+            	DivisionSequence([Division((2, 8), start_offset=Offset((9, 8)))])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
