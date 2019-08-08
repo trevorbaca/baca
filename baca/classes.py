@@ -2068,7 +2068,7 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return super().leaves(
-            abjad.Chord, exclude=exclude, head=True, grace_notes=False
+            abjad.Chord, exclude=exclude, head=True, grace=False
         )
 
     def clparts(
@@ -2707,7 +2707,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.leaves(exclude=exclude, grace_notes=True)
+        return self.leaves(exclude=exclude, grace=True)
 
     def hleaf(
         self, n: int = 0, *, exclude: abjad.Strings = None
@@ -2896,7 +2896,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.leaves(exclude=exclude, grace_notes=False)
+        return self.leaves(exclude=exclude, grace=False)
 
     def lleaf(
         self, n: int = 0, *, exclude: abjad.Strings = None
@@ -3594,9 +3594,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super().leaves(
-            exclude=exclude, grace_notes=False, trim=abjad.Left
-        )
+        return super().leaves(exclude=exclude, grace=False, trim=abjad.Left)
 
     def ltqrun(
         self, n: int, *, exclude: abjad.Strings = None
@@ -4156,7 +4154,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.logical_ties(exclude=exclude, grace_notes=None)
+        return self.logical_ties(exclude=exclude, grace=None)
 
     def mgroups(
         self,
@@ -4506,7 +4504,7 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return super().leaves(
-            abjad.MultimeasureRest, exclude=exclude, grace_notes=False
+            abjad.MultimeasureRest, exclude=exclude, grace=False
         )
 
     def ntrun(
@@ -5259,7 +5257,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super().leaves(exclude=exclude, grace_notes=False, pitched=True)
+        return super().leaves(exclude=exclude, grace=False, pitched=True)
 
     def plt(
         self, n: int, *, exclude: abjad.Strings = None
@@ -5480,9 +5478,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.logical_ties(
-            exclude=exclude, grace_notes=None, pitched=True
-        )
+        return self.logical_ties(exclude=exclude, grace=None, pitched=True)
 
     def ptail(
         self, n: int, *, exclude: abjad.Strings = None
@@ -5908,7 +5904,7 @@ class Selection(abjad.Selection):
         if self._expression:
             return self._update_expression(inspect.currentframe())
         return self.logical_ties(
-            exclude=exclude, grace_notes=None, nontrivial=False, pitched=True
+            exclude=exclude, grace=None, nontrivial=False, pitched=True
         )
 
     def qrun(
@@ -7045,7 +7041,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super().leaves(exclude=exclude, grace_notes=False, trim=True)
+        return super().leaves(exclude=exclude, grace=False, trim=True)
 
     def wleaf(
         self, n: int = 0, *, exclude: abjad.Strings = None

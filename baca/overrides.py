@@ -102,7 +102,7 @@ class OverrideCommand(scoping.Command):
             argument = self.selector(argument)
         if not argument:
             return
-        leaves = abjad.select(argument).leaves(grace_notes=False)
+        leaves = abjad.select(argument).leaves(grace=False)
         if self.blacklist:
             for leaf in leaves:
                 if isinstance(leaf, self.blacklist):

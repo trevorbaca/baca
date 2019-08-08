@@ -1589,7 +1589,7 @@ class SegmentMaker(abjad.SegmentMaker):
             measure_timespans.append(measure_timespan)
         self._cache = abjad.OrderedDict()
         for leaf in abjad.select(self.score).leaves():
-            parentage = abjad.inspect(leaf).parentage(grace_notes=True)
+            parentage = abjad.inspect(leaf).parentage(grace=True)
             context = parentage.get(abjad.Context)
             leaves_by_measure_number = self._cache.setdefault(
                 context.name, abjad.OrderedDict()
@@ -2169,7 +2169,7 @@ class SegmentMaker(abjad.SegmentMaker):
     @staticmethod
     def _extend_beam(leaf):
         if not abjad.inspect(leaf).has_indicator(abjad.StopBeam):
-            parentage = abjad.inspect(leaf).parentage(grace_notes=True)
+            parentage = abjad.inspect(leaf).parentage(grace=True)
             voice = parentage.get(abjad.Voice)
             message = f"{leaf!s} in {voice.name} has no StopBeam."
             raise Exception(message)
@@ -2183,9 +2183,7 @@ class SegmentMaker(abjad.SegmentMaker):
         while True:
             next_leaf = abjad.inspect(current_leaf).leaf(1)
             if next_leaf is None:
-                parentage = abjad.inspect(current_leaf).parentage(
-                    grace_notes=True
-                )
+                parentage = abjad.inspect(current_leaf).parentage(grace=True)
                 voice = parentage.get(abjad.Voice)
                 message = f"no leaf follows {current_leaf!s} in {voice.name};"
                 message += "\n\tDo not set extend_beam=True on last figure."

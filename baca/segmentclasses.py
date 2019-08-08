@@ -1601,7 +1601,7 @@ class HorizontalSpacingSpecifier(object):
         if self.measures and len(self.measures) == len(skips):
             programmatic = False
         if programmatic:
-            leaves = abjad.iterate(score).leaves(grace_notes=False)
+            leaves = abjad.iterate(score).leaves(grace=False)
             method = self._get_minimum_durations_by_measure
             minimum_durations_by_measure = method(skips, leaves)
         else:
