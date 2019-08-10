@@ -387,7 +387,10 @@ class PiecewiseCommand(scoping.Command):
 
         assert isinstance(tag, str), repr(tag)
         for indicator in bundle:
-            indicator = abjad.new(indicator)
+            if indicator in (True, False):
+                pass
+            else:
+                indicator = abjad.new(indicator)
             if (
                 not getattr(indicator, "trend", False)
                 and leaf is just_bookended_leaf
