@@ -1089,7 +1089,7 @@ def make_notes(
             rmakers.note(),
             *specifiers,
             # TODO: can this beam specifier be removed?
-            rmakers.beam(classes._select().plts()),
+            ###rmakers.beam(classes._select().plts()),
             rmakers.rewrite_meter(),
             *repeat_tie_specifier,
             tag=tag,
