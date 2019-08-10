@@ -1528,8 +1528,15 @@ class IndicatorCommand(scoping.Command):
             argument = self.selector(argument)
         if not argument:
             return
+        # TODO: this should be grace=None;
+        #       wait until completely clean run of all scores;
+        #       then change to grace=None;
+        #       then run all tests and build all scores;
+        #       then adjust selector with which indicator command is called
+        #       to set grace=False in selector of calling command
         leaves = classes.Selection(argument).leaves(
-            do_not_iterate_grace_containers=True
+            ###do_not_iterate_grace_containers=True
+            grace=False
         )
         for i, leaf in enumerate(leaves):
             if self.predicate and not self.predicate(leaf):
