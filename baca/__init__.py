@@ -5,7 +5,6 @@ from .divisionclasses import *
 from .figuremaker import *
 from .indicatorcommands import *
 from .indicators import *
-from .obgc import OnBeatGraceContainer
 from .overrides import *
 from .persistence import *
 from .piecewise import *
