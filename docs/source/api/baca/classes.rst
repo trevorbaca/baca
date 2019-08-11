@@ -742,6 +742,10 @@ classes
 
    .. container:: inherited
 
+      .. automethod:: Selection.logical_tie
+
+   .. container:: inherited
+
       .. automethod:: Selection.logical_ties
 
    .. automethod:: Selection.lparts
