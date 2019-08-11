@@ -573,6 +573,25 @@ indicators.Markup library.
 
    <hr/>
 
+.. rubric:: :ref:`baca.obgc <baca--obgc>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Containers
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.obgc.OnBeatGraceContainer
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.overrides <baca--overrides>`
    :class: section-header
 
