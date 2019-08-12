@@ -3,7 +3,11 @@ import os
 import sys
 
 
-path = '/Applications/LilyPond.app/Contents/Resources/bin/lilypond' 
-command = '{} -dno-point-and-click {}'
-command = command.format(path, sys.argv[1])
+LILYPOND = "/Applications/LilyPond.app/Contents/Resources/bin/lilypond"
+_STYLESHEETS = "/Users/trevorbaca/abjad/docs/source/_stylesheets"
+
+command = f"{LILYPOND}"
+command += f" --include={_STYLESHEETS}"
+command += f" -dno-point-and-click"
+command += f" {sys.argv[1]}"
 os.system(command)
