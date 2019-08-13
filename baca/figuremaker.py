@@ -26,7 +26,7 @@ class Stack(object):
 
     ### CLASS ATTRIBUTES ###
 
-    __slots__ = "_commands"
+    __slots__ = ("_commands",)
 
     # to make sure abjad.new() copies commands
     _positional_arguments_name = "commands"
@@ -7502,7 +7502,7 @@ class Bind(object):
 
     ### CLASS ATTRIBUTES ###
 
-    __slots__ = "_assignments"
+    __slots__ = ("_assignments",)
 
     _publish_storage_format = True
 
