@@ -24,7 +24,6 @@ baca
 
    classes
    commands
-   divisionclasses
    figuremaker
    indicatorcommands
    indicators
@@ -47,7 +46,6 @@ baca
 
    classes
    commands
-   divisionclasses
    figuremaker
    indicatorcommands
    indicators

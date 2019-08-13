@@ -1198,38 +1198,6 @@ class Expression(abjad.Expression):
 
     ### PUBLIC METHODS ###
 
-    def divisions(self, **keywords) -> "Expression":
-        """
-        Makes division sequence subclass expression.
-
-        ..  container:: example expression
-
-            Maps quarters to each division:
-
-            >>> expression = baca.divisions(name="J")
-            >>> expression = expression.map(baca.divisions().quarters())
-
-            >>> divisions = baca.divisions([(7, 8), (7, 8), (7, 16)])
-            >>> sequence = expression(divisions)
-            >>> for sequence_ in sequence:
-            ...     sequence_.flatten(depth=-1)
-            DivisionSequence([Division((2, 8)), Division((2, 8)), Division((2, 8)), Division((1, 8))])
-            DivisionSequence([Division((2, 8)), Division((2, 8)), Division((2, 8)), Division((1, 8))])
-            DivisionSequence([Division((4, 16)), Division((3, 16))])
-
-            >>> expression.get_string()
-            'quarters(X) /@ J'
-
-        """
-        from .divisionclasses import DivisionSequence
-
-        class_ = DivisionSequence
-        callback = self._make_initializer_callback(
-            class_, module_names=["baca"], string_template="{}", **keywords
-        )
-        expression = self.append_callback(callback)
-        return abjad.new(expression, proxy_class=class_)
-
     def pitch_class_segment(self, **keywords) -> "Expression":
         r"""
         Makes pitch-class segment subclass expression.
@@ -9129,21 +9097,21 @@ class Sequence(abjad.Sequence):
 
             Splits divisions by rounded ``2:1`` ratio:
 
-            >>> expression = baca.divisions()
+            >>> expression = baca.sequence()
             >>> expression = expression.ratios([(2, 1)], rounded=True)
 
-            >>> time_signatures = [(5, 8), (6, 8)]
-            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
+            >>> divisions = baca.sequence(time_signatures)
             >>> divisions = expression(divisions)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-            	Division((5, 8), start_offset=Offset((0, 1)))
-            	Division((2, 8), start_offset=Offset((5, 8)))
+                NonreducedFraction(5, 8)
+                NonreducedFraction(2, 8)
             sequence:
-            	Division((4, 8), start_offset=Offset((7, 8)))
+                NonreducedFraction(4, 8)
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -9178,22 +9146,22 @@ class Sequence(abjad.Sequence):
 
             Splits each division by exact ``2:1`` ratio:
 
-            >>> split = baca.divisions().ratios([(2, 1)])
-            >>> expression = baca.divisions().map(split)
+            >>> split = baca.sequence().ratios([(2, 1)])
+            >>> expression = baca.sequence().map(split)
 
-            >>> time_signatures = [(5, 8), (6, 8)]
-            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
+            >>> divisions = baca.sequence(time_signatures)
             >>> divisions = expression(divisions)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-            	DivisionSequence([Division((5, 12), start_offset=Offset((0, 1)))])
-            	DivisionSequence([Division((5, 24), start_offset=Offset((5, 12)))])
+                Sequence([NonreducedFraction(10, 24)])
+                Sequence([NonreducedFraction(5, 24)])
             sequence:
-            	DivisionSequence([Division((4, 8), start_offset=Offset((5, 8)))])
-            	DivisionSequence([Division((2, 8), start_offset=Offset((9, 8)))])
+                Sequence([NonreducedFraction(4, 8)])
+                Sequence([NonreducedFraction(2, 8)])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -9235,22 +9203,22 @@ class Sequence(abjad.Sequence):
 
             Splits each division by rounded ``2:1`` ratio:
 
-            >>> split = baca.divisions().ratios([(2, 1)], rounded=True)
-            >>> expression = baca.divisions().map(split)
+            >>> split = baca.sequence().ratios([(2, 1)], rounded=True)
+            >>> expression = baca.sequence().map(split)
 
-            >>> time_signatures = [(5, 8), (6, 8)]
-            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
+            >>> divisions = baca.sequence(time_signatures)
             >>> divisions = expression(divisions)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-            	DivisionSequence([Division((3, 8), start_offset=Offset((0, 1)))])
-            	DivisionSequence([Division((2, 8), start_offset=Offset((3, 8)))])
+                Sequence([NonreducedFraction(3, 8)])
+                Sequence([NonreducedFraction(2, 8)])
             sequence:
-            	DivisionSequence([Division((4, 8), start_offset=Offset((5, 8)))])
-            	DivisionSequence([Division((2, 8), start_offset=Offset((9, 8)))])
+                Sequence([NonreducedFraction(4, 8)])
+                Sequence([NonreducedFraction(2, 8)])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -9285,23 +9253,23 @@ class Sequence(abjad.Sequence):
             Splits divisions with alternating exact ``2:1`` and ``1:1:1``
             ratios:
 
-            >>> split = baca.divisions().ratios([(2, 1), (1, 1, 1)])
-            >>> expression = baca.divisions().map(split)
+            >>> split = baca.sequence().ratios([(2, 1), (1, 1, 1)])
+            >>> expression = baca.sequence().map(split)
 
-            >>> time_signatures = [(5, 8), (6, 8)]
-            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
+            >>> divisions = baca.sequence(time_signatures)
             >>> divisions = expression(divisions)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-            	DivisionSequence([Division((5, 12), start_offset=Offset((0, 1)))])
-            	DivisionSequence([Division((5, 24), start_offset=Offset((5, 12)))])
+                Sequence([NonreducedFraction(10, 24)])
+                Sequence([NonreducedFraction(5, 24)])
             sequence:
-            	DivisionSequence([Division((2, 8), start_offset=Offset((5, 8)))])
-            	DivisionSequence([Division((2, 8), start_offset=Offset((7, 8)))])
-            	DivisionSequence([Division((2, 8), start_offset=Offset((9, 8)))])
+                Sequence([NonreducedFraction(2, 8)])
+                Sequence([NonreducedFraction(2, 8)])
+                Sequence([NonreducedFraction(2, 8)])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -9345,25 +9313,25 @@ class Sequence(abjad.Sequence):
             Splits divisions with alternating rounded ``2:1`` and ``1:1:1``
             ratios:
 
-            >>> split = baca.divisions().ratios(
+            >>> split = baca.sequence().ratios(
             ...     [(2, 1), (1, 1, 1)], rounded=True
             ... )
-            >>> expression = baca.divisions().map(split)
+            >>> expression = baca.sequence().map(split)
 
-            >>> time_signatures = [(5, 8), (6, 8)]
-            >>> divisions = baca.divisions(time_signatures, start_offset=0)
+            >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
+            >>> divisions = baca.sequence(time_signatures)
             >>> divisions = expression(divisions)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-            	DivisionSequence([Division((3, 8), start_offset=Offset((0, 1)))])
-            	DivisionSequence([Division((2, 8), start_offset=Offset((3, 8)))])
+                Sequence([NonreducedFraction(3, 8)])
+                Sequence([NonreducedFraction(2, 8)])
             sequence:
-            	DivisionSequence([Division((2, 8), start_offset=Offset((5, 8)))])
-            	DivisionSequence([Division((2, 8), start_offset=Offset((7, 8)))])
-            	DivisionSequence([Division((2, 8), start_offset=Offset((9, 8)))])
+                Sequence([NonreducedFraction(2, 8)])
+                Sequence([NonreducedFraction(2, 8)])
+                Sequence([NonreducedFraction(2, 8)])
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -10086,10 +10054,10 @@ class Sequence(abjad.Sequence):
             right:
 
             >>> expression = baca.sequence()
-            >>> quarters = baca.divisions().quarters().flatten(depth=-1)
+            >>> quarters = baca.sequence().quarters().flatten(depth=-1)
             >>> expression = expression.map(quarters)
 
-            >>> time_signatures = [(7, 8), (7, 8), (7, 16)]
+            >>> time_signatures = baca.fractions([(7, 8), (7, 8), (7, 16)])
             >>> time_signatures = [abjad.NonreducedFraction(_) for _ in time_signatures]
             >>> divisions = baca.sequence(time_signatures)
             >>> divisions = expression(divisions)
@@ -10098,18 +10066,18 @@ class Sequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                Division((2, 8))
-                Division((2, 8))
-                Division((2, 8))
-                Division((1, 8))
+                NonreducedFraction(2, 8)
+                NonreducedFraction(2, 8)
+                NonreducedFraction(2, 8)
+                NonreducedFraction(1, 8)
             sequence:
-                Division((2, 8))
-                Division((2, 8))
-                Division((2, 8))
-                Division((1, 8))
+                NonreducedFraction(2, 8)
+                NonreducedFraction(2, 8)
+                NonreducedFraction(2, 8)
+                NonreducedFraction(1, 8)
             sequence:
-                Division((4, 16))
-                Division((3, 16))
+                NonreducedFraction(4, 16)
+                NonreducedFraction(3, 16)
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -10164,18 +10132,18 @@ class Sequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                Division((1, 8))
-                Division((2, 8))
-                Division((2, 8))
-                Division((2, 8))
+                NonreducedFraction(1, 8)
+                NonreducedFraction(2, 8)
+                NonreducedFraction(2, 8)
+                NonreducedFraction(2, 8)
             sequence:
-                Division((1, 8))
-                Division((2, 8))
-                Division((2, 8))
-                Division((2, 8))
+                NonreducedFraction(1, 8)
+                NonreducedFraction(2, 8)
+                NonreducedFraction(2, 8)
+                NonreducedFraction(2, 8)
             sequence:
-                Division((3, 16))
-                Division((4, 16))
+                NonreducedFraction(3, 16)
+                NonreducedFraction(4, 16)
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -10373,10 +10341,9 @@ class Sequence(abjad.Sequence):
             ...     rotate_indexed=-1,
             ...     )
             >>> split = split.flatten(depth=-1)
-            >>> expression = baca.divisions().map(split)
+            >>> expression = baca.sequence().map(split)
 
-            >>> time_signatures = [(7, 16), (7, 16), (7, 16)]
-            >>> time_signstures = [abjad.NonreducedFraction(_) for _ in time_signatures]
+            >>> time_signatures = baca.fractions([(7, 16), (7, 16), (7, 16)])
             >>> divisions = baca.sequence(time_signatures)
             >>> divisions = expression(divisions)
             >>> for item in divisions:
@@ -10384,17 +10351,17 @@ class Sequence(abjad.Sequence):
             ...     for division in item:
             ...         print(f"\t{repr(division)}")
             sequence:
-                Division((1, 16))
-                Division((2, 16))
-                Division((4, 16))
+                NonreducedFraction(1, 16)
+                NonreducedFraction(2, 16)
+                NonreducedFraction(4, 16)
             sequence:
-                Division((2, 16))
-                Division((4, 16))
-                Division((1, 16))
+                NonreducedFraction(2, 16)
+                NonreducedFraction(4, 16)
+                NonreducedFraction(1, 16)
             sequence:
-                Division((4, 16))
-                Division((1, 16))
-                Division((2, 16))
+                NonreducedFraction(4, 16)
+                NonreducedFraction(1, 16)
+                NonreducedFraction(2, 16)
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
@@ -10456,7 +10423,6 @@ class Sequence(abjad.Sequence):
             n = rotate_indexed * _map_index
             durations_ = abjad.sequence(durations).rotate(n=n)
             durations = list(durations_)
-        ###start_offset = self.start_offset
         sequence = abjad.Sequence.split(
             self, durations, cyclic=cyclic, overhang=True
         )
@@ -10469,9 +10435,7 @@ class Sequence(abjad.Sequence):
             if remainder == abjad.Left:
                 if remainder_fuse_threshold is None:
                     items.insert(0, remaining_item)
-                ###elif remaining_item.duration <= remainder_fuse_threshold:
                 elif sum(remaining_item) <= remainder_fuse_threshold:
-                    ###fused_value = DivisionSequence([remaining_item, items[0]])
                     fused_value = Sequence([remaining_item, items[0]])
                     fused_value = fused_value.flatten(depth=-1)
                     fused_value = fused_value.fuse()
@@ -10481,16 +10445,13 @@ class Sequence(abjad.Sequence):
             else:
                 if remainder_fuse_threshold is None:
                     items.append(remaining_item)
-                ###elif remaining_item.duration <= remainder_fuse_threshold:
                 elif sum(remaining_item) <= remainder_fuse_threshold:
-                    ###fused_value = DivisionSequence([items[-1], remaining_item])
                     fused_value = Sequence([items[-1], remaining_item])
                     fused_value = fused_value.flatten(depth=-1)
                     fused_value = fused_value.fuse()
                     items[-1] = fused_value
                 else:
                     items.append(remaining_item)
-            ###sequence = DivisionSequence(items, start_offset=start_offset)
             sequence = Sequence(items)
         return sequence
 
@@ -11872,3 +11833,14 @@ def _sequence(items=None, **keywords):
 
 
 sequence_expression = _sequence
+
+
+def fractions(items):
+    """
+    Makes fractions.
+    """
+    result = []
+    for item in items:
+        item_ = abjad.NonreducedFraction(item)
+        result.append(item_)
+    return result

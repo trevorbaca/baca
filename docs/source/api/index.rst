@@ -129,6 +129,7 @@ Bača API
 .. autosummary::
    :nosignatures:
 
+   ~baca.classes.fractions
    ~baca.classes._select
    ~baca.classes._sequence
 
@@ -199,40 +200,6 @@ Bača API
    ~baca.commands.voice_three
    ~baca.commands.voice_two
    ~baca.commands.volta
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.divisionclasses <baca--divisionclasses>`
-   :class: section-header
-
-Division library.
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.divisionclasses.Division
-   ~baca.divisionclasses.DivisionSequence
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.divisionclasses.fractions
 
 .. raw:: html
 

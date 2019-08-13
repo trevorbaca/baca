@@ -8,7 +8,6 @@ import math
 import typing
 from abjadext import rmakers
 from . import classes
-from . import divisionclasses
 from . import const
 from . import overrides
 from . import scoping
@@ -1090,8 +1089,8 @@ def make_repeated_duration_notes(
     elif isinstance(durations, tuple):
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
-    divisions = divisionclasses._divisions().fuse()
-    divisions = divisions.split(durations, cyclic=True)
+    divisions = classes._sequence().fuse()
+    divisions = divisions.split_divisions(durations, cyclic=True)
     rewrite_specifiers: typing.List[rmakers.Command] = []
     if not do_not_rewrite_meter:
         rewrite_specifiers.append(rmakers.rewrite_meter())
@@ -1201,8 +1200,8 @@ def make_tied_repeated_durations(
     specifiers.append(tie_specifier)
     tie_specifier = rmakers.force_repeat_tie()
     specifiers.append(tie_specifier)
-    divisions = divisionclasses._divisions().fuse()
-    divisions = divisions.split(durations, cyclic=True)
+    divisions = classes._sequence().fuse()
+    divisions = divisions.split_divisions(durations, cyclic=True)
     return RhythmCommand(
         rmakers.stack(
             rmakers.note(), *specifiers, preprocessor=divisions, tag=tag
