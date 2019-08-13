@@ -226,6 +226,18 @@ Division library.
 
    <hr/>
 
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.divisionclasses.fractions
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.figuremaker <baca--figuremaker>`
    :class: section-header
 

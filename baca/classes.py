@@ -8248,6 +8248,278 @@ class Sequence(abjad.Sequence):
                         result.append(item)
         return type(self)(items=result)
 
+    # TODO: remove ``counts`` in favor of partition-then-``indices`` recipe
+    # TODO: generalize ``indices`` to pattern
+    @abjad.Signature()
+    def fuse(
+        self,
+        counts: typing.List[int] = None,
+        *,
+        cyclic: bool = None,
+        indices: typing.Sequence[int] = None,
+    ):
+        r"""
+        Fuses sequence by ``counts``.
+
+        ..  container:: example expression
+
+            Fuses items:
+
+            >>> expression = baca.sequence().fuse()
+
+            >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
+            >>> divisions = baca.sequence(divisions)
+            >>> divisions = expression(divisions)
+            >>> divisions = divisions.flatten(depth=-1)
+            >>> divisions
+            Sequence([NonreducedFraction(15, 8)])
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, divisions)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/8
+                        s1 * 15/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'1...
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Fuses first two items and then remaining items:
+
+            >>> expression = baca.sequence().fuse([2])
+
+            >>> divisions = baca.fractions([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
+            >>> divisions = baca.sequence(divisions)
+            >>> divisions = expression(divisions)
+            >>> for division in divisions:
+            ...     division
+            NonreducedFraction(4, 8)
+            NonreducedFraction(12, 8)
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/1
+                        s1 * 2
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'2
+                        c'1.
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Fuses items two at a time:
+
+            >>> expression = baca.sequence().fuse([2], cyclic=True)
+
+            >>> divisions = baca.fractions([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
+            >>> divisions = baca.sequence(divisions)
+            >>> divisions = expression(divisions)
+            >>> for division in divisions:
+            ...     division
+            NonreducedFraction(4, 8)
+            NonreducedFraction(8, 8)
+            NonreducedFraction(2, 4)
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 2/1
+                        s1 * 2
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'2
+                        c'1
+                        c'2
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Splits each item by ``3/8``;  then flattens; then fuses into
+            differently sized groups:
+
+            >>> split = expression.split_divisions([(3, 8)], cyclic=True)
+            >>> expression = baca.sequence().map(split)
+            >>> expression = expression.flatten(depth=-1)
+            >>> expression = expression.fuse([2, 3, 1])
+
+            >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
+            >>> divisions = baca.sequence(divisions)
+            >>> divisions = expression(divisions)
+            >>> for division in divisions:
+            ...     division
+            NonreducedFraction(6, 8)
+            NonreducedFraction(7, 8)
+            NonreducedFraction(2, 8)
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/8
+                        s1 * 15/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'2.
+                        c'2..
+                        c'4
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Splits into sixteenths; partitions; then fuses every other part:
+
+            >>> split = baca.sequence().split_divisions([(1, 16)], cyclic=True)
+            >>> expression = baca.sequence().fuse()
+            >>> expression = expression.map(split)
+            >>> expression = expression.flatten(depth=-1)
+            >>> expression = expression.partition_by_ratio_of_lengths(
+            ...     (1, 1, 1, 1, 1, 1),
+            ... )
+            >>> expression = expression.fuse(indices=[1, 3, 5])
+            >>> expression = expression.flatten(depth=-1)
+
+            >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
+            >>> divisions = baca.sequence(divisions)
+            >>> divisions = expression(divisions)
+            >>> for division in divisions:
+            ...     division
+            NonreducedFraction(1, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(5, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(5, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(1, 16)
+            NonreducedFraction(5, 16)
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions)
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/8
+                        s1 * 15/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'4
+                        ~
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'4
+                        ~
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'16
+                        c'4
+                        ~
+                        c'16
+                    }
+                >>
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        if indices is not None:
+            assert all(isinstance(_, int) for _ in indices), repr(indices)
+        if indices and counts:
+            raise Exception("do not set indices and counts together.")
+        if not indices:
+            counts = counts or []
+            sequence = self.partition_by_counts(
+                counts, cyclic=cyclic, overhang=True
+            )
+        else:
+            sequence = self
+        items_ = []
+        for i, item in enumerate(sequence):
+            if indices and i not in indices:
+                item_ = item
+            else:
+                ###item_ = _divisions(item).sum()
+                item_ = Sequence(item).sum()
+            items_.append(item_)
+        ###sequence = _divisions(items_)
+        sequence = Sequence(items_)
+        sequence = sequence.flatten(depth=-1)
+        return sequence
+
     def degree_of_rotational_symmetry(self):
         """
         Gets degree of rotational symmetry.
@@ -8689,6 +8961,105 @@ class Sequence(abjad.Sequence):
         return len(self) // self.degree_of_rotational_symmetry()
 
     @abjad.Signature()
+    def quarters(
+        self,
+        *,
+        compound: abjad.DurationTyping = None,
+        remainder: abjad.VerticalAlignment = None,
+    ):
+        r"""
+        Splits sequence into quarter-note durations.
+
+        ..  container:: example expression
+
+            >>> expression = baca.sequence().quarters()
+            >>> for item in expression(baca.fractions([(2, 4), (6, 4)])):
+            ...     item
+            ...
+            Sequence([NonreducedFraction(1, 4)])
+            Sequence([NonreducedFraction(1, 4)])
+            Sequence([NonreducedFraction(1, 4)])
+            Sequence([NonreducedFraction(1, 4)])
+            Sequence([NonreducedFraction(1, 4)])
+            Sequence([NonreducedFraction(1, 4)])
+            Sequence([NonreducedFraction(1, 4)])
+            Sequence([NonreducedFraction(1, 4)])
+
+        ..  container:: example expression
+
+            >>> expression = baca.sequence().quarters(compound=(3, 2))
+            >>> for item in expression(baca.fractions([(6, 4)])):
+            ...     item
+            ...
+            Sequence([NonreducedFraction(3, 8)])
+            Sequence([NonreducedFraction(3, 8)])
+            Sequence([NonreducedFraction(3, 8)])
+            Sequence([NonreducedFraction(3, 8)])
+
+        ..  container:: example expression
+
+            Maps to each division: splits by ``1/4`` with remainder on right:
+
+            >>> expression = baca.sequence().map(baca.sequence().quarters())
+
+            >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
+            >>> divisions = baca.sequence(divisions)
+            >>> divisions = expression(divisions)
+            >>> for sequence in divisions:
+            ...     print("sequence:")
+            ...     for division in sequence:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                Sequence([NonreducedFraction(2, 8)])
+                Sequence([NonreducedFraction(2, 8)])
+                Sequence([NonreducedFraction(2, 8)])
+                Sequence([NonreducedFraction(1, 8)])
+            sequence:
+                Sequence([NonreducedFraction(2, 8)])
+                Sequence([NonreducedFraction(1, 8)])
+            sequence:
+                Sequence([NonreducedFraction(2, 8)])
+                Sequence([NonreducedFraction(2, 8)])
+                Sequence([NonreducedFraction(1, 8)])
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/8
+                        s1 * 15/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                        c'4
+                        c'8
+                        c'4
+                        c'4
+                        c'8
+                    }
+                >>
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        sequence = self.split_divisions(
+            [(1, 4)], cyclic=True, compound=compound, remainder=remainder
+        )
+        return sequence
+
+    @abjad.Signature()
     def repeat_by(self, counts=None, cyclic=None):
         r"""
         Repeat sequence elements at ``counts``.
@@ -9096,6 +9467,667 @@ class Sequence(abjad.Sequence):
                 if current == count:
                     return type(self)(items=items_)
         return type(self)(items=items_)
+
+    @abjad.Signature()
+    def split_divisions(
+        self,
+        durations: typing.List[abjad.DurationTyping],
+        *,
+        compound: abjad.DurationTyping = None,
+        cyclic: bool = None,
+        remainder: abjad.HorizontalAlignment = None,
+        remainder_fuse_threshold: abjad.DurationTyping = None,
+        rotate_indexed: int = None,
+        _map_index: int = None,
+    ):
+        r"""
+        Splits sequence divisions by ``durations``.
+
+        ..  container:: example
+
+            Splits every five sixteenths:
+
+            >>> divisions = baca.fractions(10 * [(1, 8)])
+            >>> divisions = baca.sequence(divisions)
+
+            Splits division sequence every five sixteenths:
+
+            >>> divisions = divisions.split_divisions([(5, 16)], cyclic=True)
+            >>> for i, sequence_ in enumerate(divisions):
+            ...     print(f"sequence {i}")
+            ...     for division in sequence_:
+            ...         print("\t" + repr(division))
+            sequence 0
+                NonreducedFraction(1, 8)
+                NonreducedFraction(1, 8)
+                NonreducedFraction(1, 16)
+            sequence 1
+                NonreducedFraction(1, 16)
+                NonreducedFraction(1, 8)
+                NonreducedFraction(1, 8)
+            sequence 2
+                NonreducedFraction(1, 8)
+                NonreducedFraction(1, 8)
+                NonreducedFraction(1, 16)
+            sequence 3
+                NonreducedFraction(1, 16)
+                NonreducedFraction(1, 8)
+                NonreducedFraction(1, 8)
+
+        ..  container:: example expression
+
+            Fuses divisions and then splits by ``1/4`` with remainder on right:
+
+            >>> expression = baca.sequence().fuse()
+            >>> expression = expression.split_divisions([(1, 4)], cyclic=True)
+
+            >>> divisions = [(7, 8), (3, 8), (5, 8)]
+            >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
+            >>> divisions = baca.sequence(divisions)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     item
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(1, 8)])
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/8
+                        s1 * 15/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                    }
+                >>
+
+            Fuses remainder:
+
+            >>> expression = baca.sequence().fuse()
+            >>> expression = expression.split_divisions(
+            ...     [(1, 4)], cyclic=True, remainder_fuse_threshold=(1, 8)
+            ... )
+
+            >>> divisions = [(7, 8), (3, 8), (5, 8)]
+            >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
+            >>> divisions = baca.sequence(divisions)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     item
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(3, 8)])
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/8
+                        s1 * 15/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4.
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Fuses divisions and then splits by ``1/4`` with remainder on left:
+
+            >>> expression = baca.sequence().fuse()
+            >>> expression = expression.split_divisions(
+            ...     [(1, 4)], cyclic=True, remainder=abjad.Left
+            ... )
+
+            >>> divisions = [(7, 8), (3, 8), (5, 8)]
+            >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
+            >>> divisions = baca.sequence(divisions)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     item
+            Sequence([NonreducedFraction(1, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/8
+                        s1 * 15/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'8
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                    }
+                >>
+
+            Fuses remainder:
+
+            >>> expression = baca.sequence().fuse()
+            >>> expression = expression.split_divisions(
+            ...     [(1, 4)],
+            ...     cyclic=True,
+            ...     remainder=abjad.Left,
+            ...     remainder_fuse_threshold=(1, 8),
+            ... )
+
+            >>> divisions = [(7, 8), (3, 8), (5, 8)]
+            >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
+            >>> divisions = baca.sequence(divisions)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     item
+            Sequence([NonreducedFraction(3, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+            Sequence([NonreducedFraction(2, 8)])
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 15/8
+                        s1 * 15/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4.
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                        c'4
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Splits each division into quarters and positions remainder at
+            right:
+
+            >>> expression = baca.sequence()
+            >>> quarters = baca.divisions().quarters().flatten(depth=-1)
+            >>> expression = expression.map(quarters)
+
+            >>> time_signatures = [(7, 8), (7, 8), (7, 16)]
+            >>> time_signatures = [abjad.NonreducedFraction(_) for _ in time_signatures]
+            >>> divisions = baca.sequence(time_signatures)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                Division((2, 8))
+                Division((2, 8))
+                Division((2, 8))
+                Division((1, 8))
+            sequence:
+                Division((2, 8))
+                Division((2, 8))
+                Division((2, 8))
+                Division((1, 8))
+            sequence:
+                Division((4, 16))
+                Division((3, 16))
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ... )
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/16
+                        s1 * 7/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                        c'4
+                        c'8.
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Splits each division into quarters and positions remainder at left:
+
+            >>> quarters = baca.sequence().quarters(remainder=abjad.Left)
+            >>> quarters = quarters.flatten(depth=-1)
+            >>> expression = expression.map(quarters)
+
+            >>> time_signatures = [(7, 8), (7, 8), (7, 16)]
+            >>> time_signatures = [abjad.NonreducedFraction(_) for _ in time_signatures]
+            >>> divisions = baca.sequence(time_signatures)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                Division((1, 8))
+                Division((2, 8))
+                Division((2, 8))
+                Division((2, 8))
+            sequence:
+                Division((1, 8))
+                Division((2, 8))
+                Division((2, 8))
+                Division((2, 8))
+            sequence:
+                Division((3, 16))
+                Division((4, 16))
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ...     )
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/8
+                        s1 * 7/8
+                        \time 7/16
+                        s1 * 7/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'8
+                        c'4
+                        c'4
+                        c'4
+                        c'8
+                        c'4
+                        c'4
+                        c'4
+                        c'8.
+                        c'4
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Splits each division into quarters and fuses remainder less than or
+            equal to ``1/8`` to the right:
+
+            >>> quarters = baca.sequence().split_divisions(
+            ...     [(1, 4)],
+            ...     cyclic=True,
+            ...     remainder_fuse_threshold=(1, 8)
+            ... )
+            >>> quarters = quarters.flatten(depth=-1)
+            >>> expression = baca.sequence().map(quarters)
+
+            >>> time_signatures = [abjad.NonreducedFraction(5, 8)]
+            >>> divisions = baca.sequence(time_signatures)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                NonreducedFraction(2, 8)
+                NonreducedFraction(3, 8)
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ...     )
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/8
+                        s1 * 5/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4.
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Splits each division into quarters and fuses remainder less than or
+            equal to ``1/8`` to the left:
+
+            >>> quarters = baca.sequence().split_divisions(
+            ...     [(1, 4)],
+            ...     cyclic=True,
+            ...     remainder=abjad.Left,
+            ...     remainder_fuse_threshold=(1, 8)
+            ... )
+            >>> quarters = quarters.flatten(depth=-1)
+            >>> expression = baca.sequence().map(quarters)
+
+            >>> time_signatures = [abjad.NonreducedFraction(5, 8)]
+            >>> divisions = baca.sequence(time_signatures)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                NonreducedFraction(3, 8)
+                NonreducedFraction(2, 8)
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ...     )
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 5/8
+                        s1 * 5/8
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4.
+                        c'4
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Splits each division into compound quarters:
+
+            >>> quarters = baca.sequence().quarters(compound=(3, 2))
+            >>> quarters = quarters.flatten(depth=-1)
+            >>> expression = baca.sequence().map(quarters)
+
+            >>> time_signatures = baca.fractions([(3, 4), (6, 8)])
+            >>> divisions = baca.sequence(time_signatures)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                NonreducedFraction(1, 4)
+                NonreducedFraction(1, 4)
+                NonreducedFraction(1, 4)
+            sequence:
+                NonreducedFraction(3, 8)
+                NonreducedFraction(3, 8)
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ...     )
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 3/4
+                        s1 * 3/4
+                        \time 6/8
+                        s1 * 3/4
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'4
+                        c'4
+                        c'4
+                        c'4.
+                        c'4.
+                    }
+                >>
+
+        ..  container:: example expression
+
+            Splits each division by durations and rotates durations one to the
+            left at each new division:
+
+            >>> split = baca.sequence().split_divisions(
+            ...     [(1, 16), (1, 8), (1, 4)],
+            ...     cyclic=True,
+            ...     rotate_indexed=-1,
+            ...     )
+            >>> split = split.flatten(depth=-1)
+            >>> expression = baca.divisions().map(split)
+
+            >>> time_signatures = [(7, 16), (7, 16), (7, 16)]
+            >>> time_signstures = [abjad.NonreducedFraction(_) for _ in time_signatures]
+            >>> divisions = baca.sequence(time_signatures)
+            >>> divisions = expression(divisions)
+            >>> for item in divisions:
+            ...     print("sequence:")
+            ...     for division in item:
+            ...         print(f"\t{repr(division)}")
+            sequence:
+                Division((1, 16))
+                Division((2, 16))
+                Division((4, 16))
+            sequence:
+                Division((2, 16))
+                Division((4, 16))
+                Division((1, 16))
+            sequence:
+                Division((4, 16))
+                Division((1, 16))
+                Division((2, 16))
+
+            >>> rhythm_maker = rmakers.note()
+            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(
+            ...     music, time_signatures
+            ... )
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+            ..  docs::
+
+                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                \new Score
+                <<
+                    \new GlobalContext
+                    {
+                        \time 7/16
+                        s1 * 7/16
+                        \time 7/16
+                        s1 * 7/16
+                        \time 7/16
+                        s1 * 7/16
+                    }
+                    \new RhythmicStaff
+                    {
+                        c'16
+                        c'8
+                        c'4
+                        c'8
+                        c'4
+                        c'16
+                        c'4
+                        c'16
+                        c'8
+                    }
+                >>
+
+        """
+        if self._expression:
+            return self._update_expression(inspect.currentframe())
+        durations = [abjad.Duration(_) for _ in durations]
+        if compound is not None:
+            compound = abjad.Multiplier(compound)
+        if compound is not None:
+            divisions = self.flatten(depth=-1)
+            meters = [abjad.Meter(_) for _ in divisions]
+            if all(_.is_compound for _ in meters):
+                durations = [compound * _ for _ in durations]
+        if cyclic is not None:
+            cyclic = bool(cyclic)
+        if rotate_indexed is not None:
+            assert isinstance(rotate_indexed, int)
+        rotate_indexed = rotate_indexed or 0
+        if remainder is not None:
+            assert remainder in (abjad.Left, abjad.Right), repr(remainder)
+        if remainder_fuse_threshold is not None:
+            remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
+        if _map_index is not None:
+            assert isinstance(_map_index, int), repr(_map_index)
+            n = rotate_indexed * _map_index
+            durations_ = abjad.sequence(durations).rotate(n=n)
+            durations = list(durations_)
+        ###start_offset = self.start_offset
+        sequence = abjad.Sequence.split(
+            self, durations, cyclic=cyclic, overhang=True
+        )
+        without_overhang = abjad.Sequence.split(
+            self, durations, cyclic=cyclic, overhang=False
+        )
+        if sequence != without_overhang:
+            items = list(sequence)
+            remaining_item = items.pop()
+            if remainder == abjad.Left:
+                if remainder_fuse_threshold is None:
+                    items.insert(0, remaining_item)
+                ###elif remaining_item.duration <= remainder_fuse_threshold:
+                elif sum(remaining_item) <= remainder_fuse_threshold:
+                    ###fused_value = DivisionSequence([remaining_item, items[0]])
+                    fused_value = Sequence([remaining_item, items[0]])
+                    fused_value = fused_value.flatten(depth=-1)
+                    fused_value = fused_value.fuse()
+                    items[0] = fused_value
+                else:
+                    items.insert(0, remaining_item)
+            else:
+                if remainder_fuse_threshold is None:
+                    items.append(remaining_item)
+                ###elif remaining_item.duration <= remainder_fuse_threshold:
+                elif sum(remaining_item) <= remainder_fuse_threshold:
+                    ###fused_value = DivisionSequence([items[-1], remaining_item])
+                    fused_value = Sequence([items[-1], remaining_item])
+                    fused_value = fused_value.flatten(depth=-1)
+                    fused_value = fused_value.fuse()
+                    items[-1] = fused_value
+                else:
+                    items.append(remaining_item)
+            ###sequence = DivisionSequence(items, start_offset=start_offset)
+            sequence = Sequence(items)
+        return sequence
 
 
 class Tree(object):

@@ -2281,3 +2281,17 @@ def _divisions(items=None, **keywords):
     )
     expression = expression.append_callback(callback)
     return abjad.new(expression, proxy_class=DivisionSequence)
+
+
+### FACTORY FUNCTION ###
+
+
+def fractions(items):
+    """
+    Makes fractions.
+    """
+    result = []
+    for item in items:
+        item_ = abjad.NonreducedFraction(item)
+        result.append(item_)
+    return result

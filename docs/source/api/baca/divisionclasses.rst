@@ -548,3 +548,17 @@ divisionclasses
    .. autoattribute:: DivisionSequence.stop_offset
 
    .. autoattribute:: DivisionSequence.timespan
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~fractions
+
+.. autofunction:: fractions

@@ -920,12 +920,15 @@ classes
       accumulate
       boustrophedon
       degree_of_rotational_symmetry
+      fuse
       group_by_sign
       helianthate
       partition
       period_of_rotation
+      quarters
       repeat_by
       reveal
+      split_divisions
 
    .. raw:: html
 
@@ -1003,6 +1006,8 @@ classes
 
       .. automethod:: Sequence.flatten
 
+   .. automethod:: Sequence.fuse
+
    .. container:: inherited
 
       .. automethod:: Sequence.group_by
@@ -1067,6 +1072,8 @@ classes
 
       .. automethod:: Sequence.permute
 
+   .. automethod:: Sequence.quarters
+
    .. container:: inherited
 
       .. automethod:: Sequence.remove
@@ -1126,6 +1133,8 @@ classes
    .. container:: inherited
 
       .. automethod:: Sequence.split
+
+   .. automethod:: Sequence.split_divisions
 
    .. container:: inherited
 
