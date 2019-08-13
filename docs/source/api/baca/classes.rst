@@ -926,6 +926,7 @@ classes
       partition
       period_of_rotation
       quarters
+      ratios
       repeat_by
       reveal
       split_divisions
@@ -1073,6 +1074,8 @@ classes
       .. automethod:: Sequence.permute
 
    .. automethod:: Sequence.quarters
+
+   .. automethod:: Sequence.ratios
 
    .. container:: inherited
 
