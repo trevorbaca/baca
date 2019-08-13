@@ -9410,7 +9410,8 @@ class Sequence(abjad.Sequence):
                 numerator, ratio
             )
             divisions = [
-                Division((numerator, denominator)) for numerator in numerators
+                abjad.NonreducedFraction((numerator, denominator))
+                for numerator in numerators
             ]
         else:
             divisions = []
