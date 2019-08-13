@@ -716,164 +716,6 @@ class RhythmCommand(scoping.Command):
         return self._state
 
 
-class SkipRhythmMaker(rmakers.RhythmMaker):
-    r"""
-    Skip rhythm-maker.
-
-    ..  container:: example
-
-        Makes skips.
-
-        >>> rhythm_maker = baca.SkipRhythmMaker()
-
-        >>> divisions = [(1, 4), (3, 16), (5, 8), (1, 3)]
-        >>> selections = rhythm_maker(divisions)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     selections,
-        ...     divisions,
-        ...     )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score])
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 1/4
-                    s1 * 1/4
-                    \time 3/16
-                    s1 * 3/16
-                    \time 5/8
-                    s1 * 5/8
-                    #(ly:expect-warning "strange time signature found")
-                    \time 1/3
-                    s1 * 1/3
-                }
-                \new RhythmicStaff
-                {
-                    s1 * 1/4
-                    s1 * 3/16
-                    s1 * 5/8
-                    s1 * 1/3
-                }
-            >>
-
-    ..  container:: example
-
-        Makes multimeasure rests.
-
-        >>> rhythm_maker = baca.SkipRhythmMaker(use_multimeasure_rests=True)
-
-        >>> divisions = [(1, 4), (3, 16), (5, 8), (1, 3)]
-        >>> selections = rhythm_maker(divisions)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(
-        ...     selections,
-        ...     divisions,
-        ...     )
-        >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score])
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 1/4
-                    s1 * 1/4
-                    \time 3/16
-                    s1 * 3/16
-                    \time 5/8
-                    s1 * 5/8
-                    #(ly:expect-warning "strange time signature found")
-                    \time 1/3
-                    s1 * 1/3
-                }
-                \new RhythmicStaff
-                {
-                    R1 * 1/4
-                    R1 * 3/16
-                    R1 * 5/8
-                    R1 * 1/3
-                }
-            >>
-
-    Usage follows the two-step configure-once / call-repeatedly pattern shown
-    here.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __slots__ = ("_use_multimeasure_rests",)
-
-    ### INITIALIZER ###
-
-    def __init__(
-        self, *, tag: str = None, use_multimeasure_rests: bool = None
-    ) -> None:
-        rmakers.RhythmMaker.__init__(self, tag=tag)
-        if use_multimeasure_rests is not None:
-            use_multimeasure_rests = bool(use_multimeasure_rests)
-        self._use_multimeasure_rests = use_multimeasure_rests
-
-    ### SPECIAL METHODS ###
-
-    def __call__(
-        self,
-        divisions: typing.Sequence[abjad.IntegerPair],
-        previous_state: abjad.OrderedDict = None,
-    ) -> abjad.Selection:
-        """
-        Calls skip rhythm-maker on ``divisions``.
-        """
-        return rmakers.RhythmMaker.__call__(
-            self, divisions, previous_state=previous_state
-        )
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Formats skip rhythm-maker.
-
-        Set ``format_specification`` to ``''`` or ``'storage'``.
-
-        ..  container:: example
-
-            >>> rhythm_maker = baca.SkipRhythmMaker()
-            >>> abjad.f(rhythm_maker)
-            baca.SkipRhythmMaker()
-
-        """
-        return super().__format__(format_specification=format_specification)
-
-    ### PRIVATE METHODS ###
-
-    def _make_music(self, divisions) -> typing.List[abjad.Selection]:
-        component: typing.Union[abjad.MultimeasureRest, abjad.Skip]
-        components = []
-        for division in divisions:
-            assert isinstance(division, abjad.NonreducedFraction)
-            if self.use_multimeasure_rests is True:
-                component = abjad.MultimeasureRest(
-                    1, multiplier=division, tag=self.tag
-                )
-            else:
-                component = abjad.Skip(1, multiplier=division, tag=self.tag)
-            components.append(component)
-        selection = abjad.select(components)
-        return [selection]
-
-    ### PUBLIC PROPERTIES ###
-
-    @property
-    def use_multimeasure_rests(self) -> typing.Optional[bool]:
-        r"""
-        Is true when rhythm-maker makes multimeasure rests instead of skips.
-        """
-        return self._use_multimeasure_rests
-
-
 ### FACTORY FUNCTIONS ###
 
 
@@ -1063,10 +905,10 @@ def make_multimeasure_rests(
     tag: str = "baca.make_multimeasure_rests",
 ) -> RhythmCommand:
     """
-    Makes multimeasure rests.
+    Makes multiplied-duration multimeasure rests.
     """
     return RhythmCommand(
-        rmakers.stack(SkipRhythmMaker(use_multimeasure_rests=True), tag=tag),
+        rmakers.multiplied_duration(abjad.MultimeasureRest, tag=tag),
         measures=measures,
     )
 
@@ -1314,10 +1156,10 @@ def make_skips(
     *, measures: typings.SliceTyping = None, tag: str = "baca.make_skips"
 ) -> RhythmCommand:
     """
-    Makes skips.
+    Makes multiplied-duration skips.
     """
     return RhythmCommand(
-        rmakers.stack(SkipRhythmMaker(), tag=tag), measures=measures
+        rmakers.multiplied_duration(abjad.Skip, tag=tag), measures=measures
     )
 
 

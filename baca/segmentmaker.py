@@ -1708,9 +1708,11 @@ class SegmentMaker(abjad.SegmentMaker):
         self._attach_fermatas()
         command_count = 0
         tag = "_call_rhythm_commands"
-        silence_maker = rhythmcommands.SkipRhythmMaker(
-            tag=tag, use_multimeasure_rests=not (self.skips_instead_of_rests)
-        )
+        if self.skips_instead_of_rests:
+            prototype = abjad.Skip
+        else:
+            prototype = abjad.MultimeasureRest
+        silence_maker = rmakers.multiplied_duration(prototype, tag=tag)
         for voice in abjad.select(self.score).components(abjad.Voice):
             assert not len(voice), repr(voice)
             voice_metadata = self._voice_metadata.get(

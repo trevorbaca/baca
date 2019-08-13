@@ -976,18 +976,6 @@ Rhythm library.
 
    <hr/>
 
-.. rubric:: Rhythm-makers
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.rhythmcommands.SkipRhythmMaker
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: :ref:`baca.scoping <baca--scoping>`
    :class: section-header
 
