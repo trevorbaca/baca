@@ -79,6 +79,7 @@ baca
    ~chords
    ~clparts
    ~cmgroups
+   ~components
    ~enchain
    ~grace
    ~graces
@@ -154,6 +155,8 @@ baca
 .. autofunction:: clparts
 
 .. autofunction:: cmgroups
+
+.. autofunction:: components
 
 .. autofunction:: enchain
 

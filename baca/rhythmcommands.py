@@ -398,7 +398,9 @@ class RhythmCommand(scoping.Command):
         if self.annotate_unpitched_music or not isinstance(
             self.rhythm_maker, abjad.Selection
         ):
-            self._annotate_unpitched_music_(selection)
+            container = abjad.Container(selection, name="Dummy")
+            self._annotate_unpitched_music_(container)
+            container[:] = []
         return selection
 
     def _previous_segment_stop_state(self, runtime):

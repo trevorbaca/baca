@@ -29,6 +29,7 @@ Bača API
    ~baca.chords
    ~baca.clparts
    ~baca.cmgroups
+   ~baca.components
    ~baca.enchain
    ~baca.grace
    ~baca.graces

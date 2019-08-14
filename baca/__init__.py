@@ -71,6 +71,13 @@ def cmgroups(*arguments, **keywords):
 cmgroups.__doc__ = Selection.cmgroups.__doc__
 
 
+def components(*arguments, **keywords):
+    return select().components(*arguments, **keywords)
+
+
+components.__doc__ = Selection.components.__doc__
+
+
 def enchain(*arguments, **keywords):
     return select().enchain(*arguments, **keywords)
 
