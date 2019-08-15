@@ -1881,6 +1881,12 @@ class SegmentMaker(abjad.SegmentMaker):
             )
             raise Exception("\n" + message)
 
+    def _clean_up_rhythm_maker_voice_names(self):
+        for voice in abjad.iterate(self.score).components(abjad.Voice):
+            if voice.name == "Rhythm_Maker_Music_Voice":
+                outer = abjad.inspect(voice).parentage().get(abjad.Voice, 1)
+                voice.name = outer.name
+
     def _clone_segment_initial_short_instrument_name(self):
         if self.first_segment:
             return
@@ -6692,6 +6698,7 @@ class SegmentMaker(abjad.SegmentMaker):
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
                 command_count = self._call_rhythm_commands()
+                self._clean_up_rhythm_maker_voice_names()
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         commands = abjad.String("command").pluralize(command_count)

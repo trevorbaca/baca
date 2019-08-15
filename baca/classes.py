@@ -5316,7 +5316,7 @@ class Selection(abjad.Selection):
         return self.plts(exclude=exclude)[n]
 
     def plts(
-        self, *, exclude: abjad.Strings = None
+        self, *, exclude: abjad.Strings = None, grace: bool = None,
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched logical ties.
@@ -5442,7 +5442,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.logical_ties(exclude=exclude, pitched=True)
+        return self.logical_ties(exclude=exclude, grace=grace, pitched=True)
 
     def ptail(
         self, n: int, *, exclude: abjad.Strings = None
