@@ -323,10 +323,7 @@ class RhythmCommand(scoping.Command):
     def _annotate_unpitched_music_(argument):
         rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
         for leaf in abjad.iterate(argument).leaves():
-            if isinstance(leaf, abjad.Chord):
-                message = f"rhythm-makers make only notes and rests: {leaf!r}."
-                raise Exception(message)
-            elif isinstance(leaf, abjad.Note):
+            if isinstance(leaf, (abjad.Note, abjad.Chord)):
                 abjad.attach(abjad.tags.NOT_YET_PITCHED, leaf, tag=None)
             elif isinstance(leaf, rest_prototype):
                 pass
