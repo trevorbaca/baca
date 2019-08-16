@@ -1881,6 +1881,12 @@ class SegmentMaker(abjad.SegmentMaker):
             )
             raise Exception("\n" + message)
 
+    def _clean_up_on_beat_grace_containers(self):
+        prototype = abjad.OnBeatGraceRedo
+        for container in abjad.select(self.score).components(prototype):
+            container._match_anchor_leaf()
+            container._set_leaf_durations()
+
     def _clean_up_rhythm_maker_voice_names(self):
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             if voice.name == "Rhythm_Maker_Music_Voice":
@@ -6694,7 +6700,6 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and self.environment != "docs":
             print(f"  Score initialization {count} {seconds} ...")
-
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
                 command_count = self._call_rhythm_commands()
@@ -6706,7 +6711,6 @@ class SegmentMaker(abjad.SegmentMaker):
             message = f"  Rhythm commands {count} {seconds}"
             message += f" [for {command_count} {commands}] ..."
             print(message)
-
         with abjad.Timer() as timer:
             self._populate_offset_to_measure_number()
             self._extend_beams()
@@ -6719,7 +6723,6 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and self.environment != "docs":
             print(f"  After-rhythm methods {count} {seconds} ...")
-
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
                 command_count = self._call_commands()
@@ -6730,7 +6733,6 @@ class SegmentMaker(abjad.SegmentMaker):
             message = f"  Nonrhythm commands {count} {seconds}"
             message += f" [for {command_count} {commands}] ..."
             print(message)
-
         # TODO: optimize by consolidating score iteration:
         with abjad.Timer() as timer:
             with abjad.ForbidUpdate(component=self.score, update_on_exit=True):
@@ -6751,6 +6753,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._check_persistent_indicators()
                 self._color_repeat_pitch_classes_()
                 self._color_octaves_()
+                self._clean_up_on_beat_grace_containers()
                 self._force_nonnatural_accidentals()
                 self._magnify_staves_()
                 self._whitespace_leaves()
@@ -6764,14 +6767,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._check_all_music_in_part_containers()
                 self._check_duplicate_part_assignments()
                 self._move_global_rests()
-
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if self.environment == "layout" or (
             not do_not_print_timing and self.environment != "docs"
         ):
             print(f"  Postprocessing {count} {seconds} ...")
-
         with abjad.Timer() as timer:
             method = getattr(self.score, "_update_now")
             method(offsets_in_seconds=True)
@@ -6779,7 +6780,6 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and self.environment != "docs":
             print(f"  Offsets-in-seconds update {count} {seconds} ...")
-
         with abjad.Timer() as timer:
             self._label_clock_time()
             self._activate_tags(activate)
@@ -6789,6 +6789,5 @@ class SegmentMaker(abjad.SegmentMaker):
         seconds = abjad.String("second").pluralize(count)
         if not do_not_print_timing and self.environment != "docs":
             print(f"  Clocktime markup {count} {seconds} ...")
-
         assert isinstance(self.lilypond_file, abjad.LilyPondFile)
         return self.lilypond_file
