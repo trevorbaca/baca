@@ -5223,13 +5223,13 @@ class FigureMaker(object):
         treatment = self._get_treatments()[current_selection]
         if treatment is None:
             treatment = 0
-        grace_containers = None
+        before_grace_containers = None
         if self.acciaccatura is not None:
             if isinstance(segment, (set, abjad.Set)):
                 message = "decide how to model chords with acciaccatura."
                 raise NotImplementError(message)
-            grace_containers, segment = self.acciaccatura(segment)
-            assert len(grace_containers) == len(segment)
+            before_grace_containers, segment = self.acciaccatura(segment)
+            assert len(before_grace_containers) == len(segment)
         if isinstance(segment, (set, abjad.Set)):
             segment = [segment]
         for pitch_expression in segment:
@@ -5325,13 +5325,15 @@ class FigureMaker(object):
         else:
             raise Exception(f"bad time treatment: {treatment!r}.")
         assert isinstance(tuplet, abjad.Tuplet)
-        if grace_containers is not None:
+        if before_grace_containers is not None:
             logical_ties = abjad.iterate(tuplet).logical_ties()
-            pairs = zip(grace_containers, logical_ties)
-            for grace_container, logical_tie in pairs:
-                if grace_container is None:
+            pairs = zip(before_grace_containers, logical_ties)
+            for before_grace_container, logical_tie in pairs:
+                if before_grace_container is None:
                     continue
-                abjad.attach(grace_container, logical_tie.head, tag="PFRM_1")
+                abjad.attach(
+                    before_grace_container, logical_tie.head, tag="PFRM_1"
+                )
         if tuplet.trivial():
             tuplet.hide = True
         assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
