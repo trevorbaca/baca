@@ -994,7 +994,7 @@ class Acciaccatura(object):
     def __call__(
         self, collection: typing.Union[list, abjad.Segment] = None
     ) -> typing.Tuple[
-        typing.List[typing.Optional[abjad.GraceContainer]], list
+        typing.List[typing.Optional[abjad.BeforeGraceContainer]], list
     ]:
         """
         Calls acciaccatura on ``collection``.
@@ -1008,7 +1008,7 @@ class Acciaccatura(object):
         collection = [_[-1] for _ in segment_parts]
         durations = self.durations
         acciaccatura_containers: typing.List[
-            typing.Union[abjad.GraceContainer, None]
+            typing.Union[abjad.BeforeGraceContainer, None]
         ] = []
         maker = abjad.LeafMaker()
         for segment_part in segment_parts:
@@ -1017,7 +1017,7 @@ class Acciaccatura(object):
                 continue
             grace_token = list(segment_part[:-1])
             grace_leaves = maker(grace_token, durations)
-            acciaccatura_container = abjad.GraceContainer(
+            acciaccatura_container = abjad.BeforeGraceContainer(
                 grace_leaves, command=r"\acciaccatura"
             )
             if 1 < len(acciaccatura_container):

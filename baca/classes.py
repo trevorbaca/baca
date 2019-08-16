@@ -2499,7 +2499,7 @@ class Selection(abjad.Selection):
             ..  container:: example
 
                 >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
-                >>> container = abjad.GraceContainer("cf''16 bf'16")
+                >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
                 >>> abjad.attach(container, staff[1])
                 >>> container = abjad.AfterGraceContainer("af'16 gf'16")
                 >>> abjad.attach(container, staff[1])
@@ -2587,7 +2587,7 @@ class Selection(abjad.Selection):
             ..  container:: example
 
                 >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
-                >>> container = abjad.GraceContainer("cf''16 bf'16")
+                >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
                 >>> abjad.attach(container, staff[1])
                 >>> container = abjad.AfterGraceContainer("af'16 gf'16")
                 >>> abjad.attach(container, staff[1])
@@ -2688,7 +2688,7 @@ class Selection(abjad.Selection):
             ..  container:: example
 
                 >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
-                >>> container = abjad.GraceContainer("cf''16 bf'16")
+                >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
                 >>> abjad.attach(container, staff[1])
                 >>> container = abjad.AfterGraceContainer("af'16 gf'16")
                 >>> abjad.attach(container, staff[1])
@@ -2776,7 +2776,7 @@ class Selection(abjad.Selection):
             ..  container:: example
 
                 >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
-                >>> container = abjad.GraceContainer("cf''16 bf'16")
+                >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
                 >>> abjad.attach(container, staff[1])
                 >>> container = abjad.AfterGraceContainer("af'16 gf'16")
                 >>> abjad.attach(container, staff[1])

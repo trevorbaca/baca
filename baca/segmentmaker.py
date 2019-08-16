@@ -1882,7 +1882,7 @@ class SegmentMaker(abjad.SegmentMaker):
             raise Exception("\n" + message)
 
     def _clean_up_on_beat_grace_containers(self):
-        prototype = abjad.OnBeatGraceRedo
+        prototype = abjad.OnBeatGraceContainer
         for container in abjad.select(self.score).components(prototype):
             container._match_anchor_leaf()
             container._set_leaf_durations()
