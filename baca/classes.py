@@ -2747,8 +2747,8 @@ class Selection(abjad.Selection):
                         cf''16
                         bf'16
                     }
-                    \afterGrace
                     \abjad-color-music #'green
+                    \afterGrace
                     d'8
                     {
                         af'16
@@ -2846,8 +2846,8 @@ class Selection(abjad.Selection):
                         cf''16
                         bf'16
                     }
-                    \afterGrace
                     \abjad-color-music #'blue
+                    \afterGrace
                     d'8
                     {
                         af'16
