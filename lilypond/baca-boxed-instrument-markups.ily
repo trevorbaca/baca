@@ -24,12 +24,6 @@ baca-bd-rolled-markup = \markup
     \box
     "BD (rolled)"
 
-baca-very-small-maraca-boxed = \markup
-    \whiteout
-    \override #'(box-padding . 0.5)
-    \box
-    "very small maraca"
-
 baca-castanets-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
@@ -47,6 +41,18 @@ baca-ratchet-markup = \markup
     \override #'(box-padding . 0.5)
     \box
     ratchet
+
+baca-slate-brush-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "slate (brush)"
+
+baca-slate-scrape-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "slate (scrape)"
 
 baca-woodblock-markup = \markup
     \whiteout
