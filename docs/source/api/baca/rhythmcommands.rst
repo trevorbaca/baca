@@ -22,101 +22,7 @@ rhythmcommands
 .. autosummary::
    :nosignatures:
 
-   ~DurationMultiplierCommand
    ~RhythmCommand
-
-.. autoclass:: DurationMultiplierCommand
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      written_duration
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: DurationMultiplierCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: DurationMultiplierCommand.__format__
-
-   .. container:: inherited
-
-      .. automethod:: DurationMultiplierCommand.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: DurationMultiplierCommand.get_tag
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: DurationMultiplierCommand.deactivate
-
-   .. container:: inherited
-
-      .. autoattribute:: DurationMultiplierCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: DurationMultiplierCommand.match
-
-   .. container:: inherited
-
-      .. autoattribute:: DurationMultiplierCommand.measures
-
-   .. container:: inherited
-
-      .. autoattribute:: DurationMultiplierCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: DurationMultiplierCommand.scope
-
-   .. container:: inherited
-
-      .. autoattribute:: DurationMultiplierCommand.selector
-
-   .. container:: inherited
-
-      .. autoattribute:: DurationMultiplierCommand.tag
-
-   .. container:: inherited
-
-      .. autoattribute:: DurationMultiplierCommand.tag_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: DurationMultiplierCommand.tags
-
-   .. autoattribute:: DurationMultiplierCommand.written_duration
 
 .. autoclass:: RhythmCommand
 
@@ -250,7 +156,6 @@ rhythmcommands
    ~make_tied_repeated_durations
    ~music
    ~rhythm
-   ~set_duration_multiplier
    ~skeleton
    ~tacet
    ~tag_selection
@@ -282,8 +187,6 @@ rhythmcommands
 .. autofunction:: music
 
 .. autofunction:: rhythm
-
-.. autofunction:: set_duration_multiplier
 
 .. autofunction:: skeleton
 

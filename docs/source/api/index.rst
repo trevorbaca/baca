@@ -920,7 +920,6 @@ Rhythm library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.rhythmcommands.DurationMultiplierCommand
    ~baca.rhythmcommands.RhythmCommand
 
 .. raw:: html
@@ -947,7 +946,6 @@ Rhythm library.
    ~baca.rhythmcommands.make_tied_repeated_durations
    ~baca.rhythmcommands.music
    ~baca.rhythmcommands.rhythm
-   ~baca.rhythmcommands.set_duration_multiplier
    ~baca.rhythmcommands.skeleton
    ~baca.rhythmcommands.tacet
    ~baca.rhythmcommands.tag_selection
