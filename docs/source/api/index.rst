@@ -984,6 +984,7 @@ Rhythm library.
 
    ~baca.scoping.chunk
    ~baca.scoping.compare_persistent_indicators
+   ~baca.scoping.frame
    ~baca.scoping.new
    ~baca.scoping.not_parts
    ~baca.scoping.not_score

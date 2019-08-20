@@ -1,6 +1,7 @@
 import abjad
 import copy
 import functools
+import inspect
 import typing
 from . import classes
 from . import indicators
@@ -800,6 +801,18 @@ def compare_persistent_indicators(indicator_1, indicator_2) -> bool:
     if indicator_1.name == indicator_2.name:
         return indicator_1.command == indicator_2.command
     return False
+
+
+def frame(frame):
+    """
+    Makes tag from ``frame``.
+
+    ..  todo:: Retrieve module name dynamically.
+
+    """
+    frame_info = inspect.getframeinfo(frame)
+    module_name = "harmony"
+    return f"{module_name}.{frame_info.function}"
 
 
 def new(*commands: CommandTyping, **keywords) -> CommandTyping:

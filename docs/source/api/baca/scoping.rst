@@ -235,6 +235,7 @@ scoping
 
    ~chunk
    ~compare_persistent_indicators
+   ~frame
    ~new
    ~not_parts
    ~not_score
@@ -249,6 +250,8 @@ scoping
 .. autofunction:: chunk
 
 .. autofunction:: compare_persistent_indicators
+
+.. autofunction:: frame
 
 .. autofunction:: new
 
