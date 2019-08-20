@@ -2982,6 +2982,7 @@ class PitchCommand(scoping.Command):
         "_do_not_transpose",
         "_ignore_incomplete",
         "_mutated_score",
+        "_not_yet_pitched",
         "_persist",
         "_pitches",
         "_state",
@@ -3001,6 +3002,7 @@ class PitchCommand(scoping.Command):
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
+        not_yet_pitched: bool = None,
         persist: str = None,
         pitches: typing.Union[typing.Sequence, Loop] = None,
         scope: scoping.ScopeTyping = None,
@@ -3033,6 +3035,9 @@ class PitchCommand(scoping.Command):
             ignore_incomplete = bool(ignore_incomplete)
         self._ignore_incomplete = ignore_incomplete
         self._mutated_score = None
+        if not_yet_pitched is not None:
+            not_yet_pitched = bool(not_yet_pitched)
+        self._not_yet_pitched = not_yet_pitched
         if persist is not None:
             assert isinstance(persist, str), repr(persist)
         self._persist = persist
@@ -3070,7 +3075,7 @@ class PitchCommand(scoping.Command):
         pitches_consumed = 0
         for i, plt in enumerate(plts):
             pitch = pitches[i + previous_pitches_consumed]
-            new_plt = self._set_lt_pitch(plt, pitch)
+            new_plt = self._set_lt_pitch(plt, pitch, self.not_yet_pitched)
             if new_plt is not None:
                 self._mutated_score = True
                 plt = new_plt
@@ -3253,6 +3258,13 @@ class PitchCommand(scoping.Command):
         incomplete last note.
         """
         return self._ignore_incomplete
+
+    @property
+    def not_yet_pitched(self) -> typing.Optional[bool]:
+        """
+        Is true when command tags leaves as not-yet pitched.
+        """
+        return self._not_yet_pitched
 
     @property
     def parameter(self) -> str:
@@ -6861,6 +6873,7 @@ def pitch(
     *,
     allow_out_of_range: bool = None,
     do_not_transpose: bool = None,
+    not_yet_pitched: bool = None,
     persist: str = None,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> PitchCommand:
@@ -6885,6 +6898,7 @@ def pitch(
         allow_repeats=True,
         cyclic=True,
         do_not_transpose=do_not_transpose,
+        not_yet_pitched=not_yet_pitched,
         persist=persist,
         pitches=[pitch],
         selector=selector,
@@ -6899,6 +6913,7 @@ def pitches(
     do_not_transpose: bool = None,
     exact: bool = None,
     ignore_incomplete: bool = None,
+    not_yet_pitched: bool = None,
     persist: str = None,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> PitchCommand:
@@ -6930,6 +6945,7 @@ def pitches(
         cyclic=cyclic,
         do_not_transpose=do_not_transpose,
         ignore_incomplete=ignore_incomplete,
+        not_yet_pitched=not_yet_pitched,
         persist=persist,
         pitches=pitches,
         selector=selector,

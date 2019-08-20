@@ -694,6 +694,7 @@ pitchcommands
       cyclic
       do_not_transpose
       ignore_incomplete
+      not_yet_pitched
       parameter
       persist
       pitches
@@ -763,6 +764,8 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: PitchCommand.measures
+
+   .. autoattribute:: PitchCommand.not_yet_pitched
 
    .. autoattribute:: PitchCommand.parameter
 
