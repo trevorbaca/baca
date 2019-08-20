@@ -4121,8 +4121,8 @@ def instrument(
 
 
 def invisible_music(
-    *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
     tag: typing.Optional[str] = "baca.invisible_music",
 ) -> IndicatorCommand:
     r"""
