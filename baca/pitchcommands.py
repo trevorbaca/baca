@@ -3174,10 +3174,11 @@ class PitchCommand(scoping.Command):
         return pitches_consumed
 
     @staticmethod
-    def _set_lt_pitch(lt, pitch):
+    def _set_lt_pitch(lt, pitch, not_yet_pitched=False):
         new_lt = None
-        for leaf in lt:
-            abjad.detach(abjad.tags.NOT_YET_PITCHED, leaf)
+        if not not_yet_pitched:
+            for leaf in lt:
+                abjad.detach(abjad.tags.NOT_YET_PITCHED, leaf)
         if pitch is None:
             if not lt.is_pitched:
                 pass
@@ -5772,20 +5773,27 @@ class StaffPositionCommand(scoping.Command):
 
     ### CLASS ATTRIBUTES ###
 
-    __slots__ = ("_allow_out_of_range", "_allow_repeats", "_exact", "_numbers")
+    __slots__ = (
+        "_allow_out_of_range",
+        "_allow_repeats",
+        "_exact",
+        "_not_yet_pitched",
+        "_numbers",
+    )
 
     ### INITIALIZER ###
 
     def __init__(
         self,
-        *,
         numbers,
+        *,
         allow_out_of_range: bool = None,
         allow_repeats: bool = None,
         exact: bool = None,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
+        not_yet_pitched: bool = None,
         scope: scoping.ScopeTyping = None,
         selector: abjad.SelectorTyping = "baca.plts()",
     ) -> None:
@@ -5797,12 +5805,8 @@ class StaffPositionCommand(scoping.Command):
             scope=scope,
             selector=selector,
         )
-        if exact is not None:
-            exact = bool(exact)
-        self._exact = exact
-        if numbers is not None:
-            assert all(isinstance(_, int) for _ in numbers), repr(numbers)
-            numbers = abjad.CyclicTuple(numbers)
+        assert all(isinstance(_, int) for _ in numbers), repr(numbers)
+        numbers = abjad.CyclicTuple(numbers)
         self._numbers = numbers
         if allow_out_of_range is not None:
             allow_out_of_range = bool(allow_out_of_range)
@@ -5810,6 +5814,12 @@ class StaffPositionCommand(scoping.Command):
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
         self._allow_repeats = allow_repeats
+        if exact is not None:
+            exact = bool(exact)
+        self._exact = exact
+        if not_yet_pitched is not None:
+            not_yet_pitched = bool(not_yet_pitched)
+        self._not_yet_pitched = not_yet_pitched
 
     ### SPECIAL METHODS ###
 
@@ -5831,7 +5841,7 @@ class StaffPositionCommand(scoping.Command):
             number = self.numbers[i]
             position = abjad.StaffPosition(number)
             pitch = position.to_pitch(clef)
-            PitchCommand._set_lt_pitch(plt, pitch)
+            PitchCommand._set_lt_pitch(plt, pitch, self.not_yet_pitched)
             plt_count += 1
             for pleaf in plt:
                 abjad.attach(abjad.tags.STAFF_POSITION, pleaf)
@@ -5868,6 +5878,13 @@ class StaffPositionCommand(scoping.Command):
         exactly.
         """
         return self._exact
+
+    @property
+    def not_yet_pitched(self) -> typing.Optional[bool]:
+        """
+        Is true when command tags leaves as not-yet pitched.
+        """
+        return self._not_yet_pitched
 
     @property
     def numbers(self) -> typing.Optional[abjad.CyclicTuple]:
@@ -7405,6 +7422,7 @@ def staff_position(
     number: int,
     *,
     allow_out_of_range: bool = None,
+    not_yet_pitched: bool = None,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> StaffPositionCommand:
     """
@@ -7412,9 +7430,10 @@ def staff_position(
     """
     assert isinstance(number, int), repr(number)
     return StaffPositionCommand(
+        [number],
         allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
-        numbers=[number],
+        not_yet_pitched=not_yet_pitched,
         selector=selector,
     )
 
@@ -7425,6 +7444,7 @@ def staff_positions(
     allow_out_of_range: bool = None,
     allow_repeats: bool = None,
     exact: bool = None,
+    not_yet_pitched: bool = None,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> StaffPositionCommand:
     """
@@ -7433,9 +7453,10 @@ def staff_positions(
     if allow_repeats is None and len(numbers) == 1:
         allow_repeats = True
     return StaffPositionCommand(
+        numbers,
         allow_out_of_range=allow_out_of_range,
         allow_repeats=allow_repeats,
         exact=exact,
-        numbers=numbers,
+        not_yet_pitched=not_yet_pitched,
         selector=selector,
     )

@@ -1095,6 +1095,7 @@ pitchcommands
       allow_out_of_range
       allow_repeats
       exact
+      not_yet_pitched
       numbers
 
    .. raw:: html
@@ -1155,6 +1156,8 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: StaffPositionCommand.measures
+
+   .. autoattribute:: StaffPositionCommand.not_yet_pitched
 
    .. autoattribute:: StaffPositionCommand.numbers
 
