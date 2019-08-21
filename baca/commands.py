@@ -3352,6 +3352,7 @@ def finger_pressure_transition(
 
 
 def flat_glissando(
+    # TODO: allow staff position entry in addition to pitch entry:
     pitch,
     *tweaks,
     hide_middle_stems=None,

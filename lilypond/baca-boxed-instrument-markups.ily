@@ -54,6 +54,12 @@ baca-slate-scrape-markup = \markup
     \box
     "slate (scrape)"
 
+baca-tam-tam-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    tam-tam
+
 baca-woodblock-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
