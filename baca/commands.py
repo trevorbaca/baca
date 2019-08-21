@@ -4091,7 +4091,7 @@ def glissando(
 
 
 def global_fermata(
-    description: str = None,
+    description: str = "fermata",
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     tag: typing.Optional[str] = "baca.global_fermata",
@@ -4099,6 +4099,11 @@ def global_fermata(
     """
     Attaches global fermata.
     """
+    fermatas = GlobalFermataCommand.description_to_command.keys()
+    if description not in fermatas:
+        message = f"must be in {repr(', '.join(fermatas))}:\n"
+        message += f"   {repr(description)}"
+        raise Exception(message)
     return GlobalFermataCommand(
         description=description, selector=selector, tags=[tag]
     )
