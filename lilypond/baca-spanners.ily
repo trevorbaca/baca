@@ -261,6 +261,16 @@ bacaStopTextSpanCircleBow = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "CircleBow"
     )
 
+%%% COVERED SPANNER %%%
+
+bacaStartTextSpanCovered = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "Covered"
+    )
+
+bacaStopTextSpanCovered = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "Covered"
+    )
+
 %%% DAMP SPANNER %%%
 
 bacaStartTextSpanDamp = #(

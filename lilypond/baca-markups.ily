@@ -6,7 +6,7 @@ baca-sharp-markup = \markup
         \sharp
     }
 
-%%% BOW SPEED MARKUP %%%
+%%% BOWSPEED MARKUP %%%
 
 baca-left-broken-xfb-markup =
     \markup
@@ -121,20 +121,6 @@ baca-left-broken-circle-bowing-markup =
         \hspace #0.5
     }
 
-%%% CLT MARKUP
-
-baca-left-broken-half-clt-markup =
-    \markup
-    \upright
-    \line {
-        (
-        \hspace #-0.5
-        "½ clt"
-        \hspace #-0.5
-        )
-        \hspace #0.5
-    }
-
 %%% DAMP MARKUP %%%
 
 baca-damp-markup =
@@ -220,6 +206,43 @@ baca-left-broken-clb-markup =
         \hspace #-0.5
         )
         \hspace #0.75
+    }
+
+%%% CLT MARKUP
+
+baca-left-broken-half-clt-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.5
+        "½ clt"
+        \hspace #-0.5
+        )
+        \hspace #0.5
+    }
+
+%%% COVERED MARKUP %%%
+
+baca-covered-markup =
+    \markup
+    \upright
+    \line {
+        %%%\hspace #-0.5
+        covered
+        %%%%\hspace #-0.5
+    }
+
+baca-left-broken-covered-markup =
+    \markup
+    \upright
+    \line {
+        (
+        \hspace #-0.85
+        cov.
+        \hspace #-0.85
+        )
+        \hspace #0.5
     }
 
 %%% DIAMOND MARKUP %%%
