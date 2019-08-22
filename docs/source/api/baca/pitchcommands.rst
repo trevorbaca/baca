@@ -1201,8 +1201,8 @@ pitchcommands
       :nosignatures:
 
       not_yet_pitched
-      start_pitch
-      stop_pitch
+      start
+      stop
 
    .. raw:: html
 
@@ -1271,9 +1271,9 @@ pitchcommands
 
       .. autoattribute:: StaffPositionInterpolationCommand.selector
 
-   .. autoattribute:: StaffPositionInterpolationCommand.start_pitch
+   .. autoattribute:: StaffPositionInterpolationCommand.start
 
-   .. autoattribute:: StaffPositionInterpolationCommand.stop_pitch
+   .. autoattribute:: StaffPositionInterpolationCommand.stop
 
    .. container:: inherited
 

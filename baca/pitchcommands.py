@@ -5912,155 +5912,16 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     :param selector: selector.
  
-    :param start_pitch: start pitch.
+    :param start: start pitch or start staff position.
 
-    :param stop_pitch: stop pitch.
+    :param stop: stop pitch or stop staff position.
 
-    ..  container:: example
-
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.clef('treble'),
-        ...     baca.interpolate_staff_positions('Eb4', 'F#5'),
-        ... )
-
-        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> selection = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 3/2
-                    s1 * 3/2
-                }
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        \clef "treble"                                                               %! baca.clef:IndicatorCommand
-                        ef'16
-                        [
-                        e'16
-                        f'16
-                        f'16
-                        f'16
-                        g'16
-                        g'16
-                        g'16
-                        a'16
-                        a'16
-                        a'16
-                        b'16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        b'16
-                        [
-                        c''16
-                        c''16
-                        c''16
-                        d''16
-                        d''16
-                        d''16
-                        e''16
-                        e''16
-                        e''16
-                        f''16
-                        fs''16
-                        ]
-                    }
-                }
-            >>
-
-    ..  container:: example
-
-        >>> stack = baca.stack(
-        ...     baca.figure([1], 16),
-        ...     rmakers.beam(),
-        ...     baca.clef('treble'),
-        ...     baca.interpolate_staff_positions('Eb4', 'F#5'),
-        ...     baca.glissando(
-        ...         allow_repeats=True,
-        ...         hide_middle_note_heads=True,
-        ...         ),
-        ...     baca.glissando_thickness(3),
-        ... )
-
-        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
-        >>> selection = stack(collections)
-        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
-            \new Score
-            <<
-                \new GlobalContext
-                {
-                    \time 3/2
-                    s1 * 3/2
-                }
-                \new Staff
-                {
-                    \scaleDurations #'(1 . 1) {
-                        \override Glissando.thickness = #'3                                          %! baca.glissando_thickness:OverrideCommand(1)
-                        \clef "treble"                                                               %! baca.clef:IndicatorCommand
-                        ef'16
-                        [
-                        \glissando                                                                   %! baca.glissando
-                        \hide NoteHead                                                               %! baca.glissando
-                        \override Accidental.stencil = ##f                                           %! baca.glissando
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando
-                        e'16
-                        f'16
-                        f'16
-                        f'16
-                        g'16
-                        g'16
-                        g'16
-                        a'16
-                        a'16
-                        a'16
-                        b'16
-                        ]
-                    }
-                    \scaleDurations #'(1 . 1) {
-                        b'16
-                        [
-                        c''16
-                        c''16
-                        c''16
-                        d''16
-                        d''16
-                        d''16
-                        e''16
-                        e''16
-                        e''16
-                        f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando
-                        \undo \hide NoteHead                                                         %! baca.glissando
-                        fs''16
-                        ]
-                        \revert Glissando.thickness                                                  %! baca.glissando_thickness:OverrideCommand(2)
-                    }
-                }
-            >>
 
     """
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_not_yet_pitched", "_start_pitch", "_stop_pitch")
+    __slots__ = ("_not_yet_pitched", "_start", "_stop")
 
     _publish_storage_format = True
 
@@ -6068,8 +5929,8 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     def __init__(
         self,
-        start_pitch: typing.Union[str, abjad.NamedPitch],
-        stop_pitch: typing.Union[str, abjad.NamedPitch],
+        start: typing.Union[str, abjad.NamedPitch],
+        stop: typing.Union[str, abjad.NamedPitch],
         *,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
@@ -6086,10 +5947,19 @@ class StaffPositionInterpolationCommand(scoping.Command):
             scope=scope,
             selector=selector,
         )
-        start_pitch = abjad.NamedPitch(start_pitch)
-        self._start_pitch: abjad.NamedPitch = start_pitch
-        stop_pitch = abjad.NamedPitch(stop_pitch)
-        self._stop_pitch: abjad.NamedPitch = stop_pitch
+        prototype = (abjad.NamedPitch, abjad.StaffPosition)
+        if isinstance(start, str):
+            start = abjad.NamedPitch(start)
+        elif isinstance(start, int):
+            start = abjad.StaffPosition(start)
+        assert isinstance(start, prototype), repr(start)
+        self._start = start
+        if isinstance(stop, str):
+            stop = abjad.NamedPitch(stop)
+        elif isinstance(stop, int):
+            stop = abjad.StaffPosition(stop)
+        assert isinstance(stop, prototype), repr(stop)
+        self._stop = stop
         if not_yet_pitched is not None:
             not_yet_pitched = bool(not_yet_pitched)
         self._not_yet_pitched = not_yet_pitched
@@ -6108,14 +5978,20 @@ class StaffPositionInterpolationCommand(scoping.Command):
         if not plts:
             return
         count = len(plts)
-        start_pl = plts[0].head
-        clef = abjad.inspect(start_pl).effective(abjad.Clef)
-        start_staff_position = self.start_pitch.to_staff_position(clef=clef)
-        stop_pl = plts[-1].head
-        clef = abjad.inspect(stop_pl).effective(
-            abjad.Clef, default=abjad.Clef("treble")
-        )
-        stop_staff_position = self.stop_pitch.to_staff_position(clef=clef)
+        if isinstance(self.start, abjad.StaffPosition):
+            start_staff_position = self.start
+        else:
+            start_phead = plts[0].head
+            clef = abjad.inspect(start_phead).effective(abjad.Clef)
+            start_staff_position = self.start.to_staff_position(clef=clef)
+        if isinstance(self.stop, abjad.StaffPosition):
+            stop_staff_position = self.stop
+        else:
+            stop_phead = plts[-1].head
+            clef = abjad.inspect(stop_phead).effective(
+                abjad.Clef, default=abjad.Clef("treble")
+            )
+            stop_staff_position = self.stop.to_staff_position(clef=clef)
         unit_distance = abjad.Fraction(
             stop_staff_position.number - start_staff_position.number, count - 1
         )
@@ -6130,12 +6006,22 @@ class StaffPositionInterpolationCommand(scoping.Command):
             PitchCommand._set_lt_pitch(plt, pitch, self.not_yet_pitched)
             for leaf in plt:
                 abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
-        PitchCommand._set_lt_pitch(
-            plts[0], self.start_pitch, self.not_yet_pitched
-        )
-        PitchCommand._set_lt_pitch(
-            plts[-1], self.stop_pitch, self.not_yet_pitched
-        )
+        if isinstance(self.start, abjad.NamedPitch):
+            start_pitch = self.start
+        else:
+            clef = abjad.inspect(plts[0].head).effective(
+                abjad.Clef, default=abjad.Clef("treble")
+            )
+            start_pitch = self.start.to_pitch(clef=clef)
+        PitchCommand._set_lt_pitch(plts[0], start_pitch, self.not_yet_pitched)
+        if isinstance(self.stop, abjad.NamedPitch):
+            stop_pitch = self.stop
+        else:
+            clef = abjad.inspect(plts[0].head).effective(
+                abjad.Clef, default=abjad.Clef("treble")
+            )
+            stop_pitch = self.stop.to_pitch(clef=clef)
+        PitchCommand._set_lt_pitch(plts[-1], stop_pitch, self.not_yet_pitched)
 
     ### PUBLIC PROPERTIES ###
 
@@ -6147,18 +6033,18 @@ class StaffPositionInterpolationCommand(scoping.Command):
         return self._not_yet_pitched
 
     @property
-    def start_pitch(self) -> abjad.NamedPitch:
+    def start(self) -> typing.Union[abjad.NamedPitch, abjad.StaffPosition]:
         """
-        Gets start pitch.
+        Gets start.
         """
-        return self._start_pitch
+        return self._start
 
     @property
-    def stop_pitch(self) -> abjad.NamedPitch:
+    def stop(self) -> typing.Union[abjad.NamedPitch, abjad.StaffPosition]:
         """
-        Gets stop pitch.
+        Gets stop.
         """
-        return self._stop_pitch
+        return self._stop
 
 
 ### FACTORY FUNCTIONS ###
@@ -6839,22 +6725,159 @@ def force_accidental(
 
 
 def interpolate_staff_positions(
-    # TODO: allow numeric staff position input in addition to pitch input:
-    start_pitch: typing.Union[str, abjad.NamedPitch],
-    stop_pitch: typing.Union[str, abjad.NamedPitch],
+    start: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
+    stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
     *,
     not_yet_pitched: bool = None,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> StaffPositionInterpolationCommand:
-    """
-    Interpolates from staff position of ``start_pitch`` to staff
-    position of ``stop_pitch``.
+    r"""
+    Interpolates from staff position of ``start`` to staff
+    position of ``stop``.
+
+    ..  container:: example
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16),
+        ...     rmakers.beam(),
+        ...     baca.clef("treble"),
+        ...     baca.interpolate_staff_positions("Eb4", "F#5"),
+        ... )
+
+        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+        >>> selection = stack(collections)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 3/2
+                    s1 * 3/2
+                }
+                \new Staff
+                {
+                    \scaleDurations #'(1 . 1) {
+                        \clef "treble"                                                               %! baca.clef:IndicatorCommand
+                        ef'16
+                        [
+                        e'16
+                        f'16
+                        f'16
+                        f'16
+                        g'16
+                        g'16
+                        g'16
+                        a'16
+                        a'16
+                        a'16
+                        b'16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        b'16
+                        [
+                        c''16
+                        c''16
+                        c''16
+                        d''16
+                        d''16
+                        d''16
+                        e''16
+                        e''16
+                        e''16
+                        f''16
+                        fs''16
+                        ]
+                    }
+                }
+            >>
+
+    ..  container:: example
+
+        >>> stack = baca.stack(
+        ...     baca.figure([1], 16),
+        ...     rmakers.beam(),
+        ...     baca.clef('treble'),
+        ...     baca.interpolate_staff_positions('Eb4', 'F#5'),
+        ...     baca.glissando(
+        ...         allow_repeats=True,
+        ...         hide_middle_note_heads=True,
+        ...         ),
+        ...     baca.glissando_thickness(3),
+        ... )
+
+        >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
+        >>> selection = stack(collections)
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            \new Score
+            <<
+                \new GlobalContext
+                {
+                    \time 3/2
+                    s1 * 3/2
+                }
+                \new Staff
+                {
+                    \scaleDurations #'(1 . 1) {
+                        \override Glissando.thickness = #'3                                          %! baca.glissando_thickness:OverrideCommand(1)
+                        \clef "treble"                                                               %! baca.clef:IndicatorCommand
+                        ef'16
+                        [
+                        \glissando                                                                   %! baca.glissando
+                        \hide NoteHead                                                               %! baca.glissando
+                        \override Accidental.stencil = ##f                                           %! baca.glissando
+                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando
+                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando
+                        e'16
+                        f'16
+                        f'16
+                        f'16
+                        g'16
+                        g'16
+                        g'16
+                        a'16
+                        a'16
+                        a'16
+                        b'16
+                        ]
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        b'16
+                        [
+                        c''16
+                        c''16
+                        c''16
+                        d''16
+                        d''16
+                        d''16
+                        e''16
+                        e''16
+                        e''16
+                        f''16
+                        \revert Accidental.stencil                                                   %! baca.glissando
+                        \revert NoteColumn.glissando-skip                                            %! baca.glissando
+                        \revert NoteHead.no-ledgers                                                  %! baca.glissando
+                        \undo \hide NoteHead                                                         %! baca.glissando
+                        fs''16
+                        ]
+                        \revert Glissando.thickness                                                  %! baca.glissando_thickness:OverrideCommand(2)
+                    }
+                }
+            >>
+
     """
     return StaffPositionInterpolationCommand(
-        start_pitch=start_pitch,
-        stop_pitch=stop_pitch,
-        not_yet_pitched=not_yet_pitched,
-        selector=selector,
+        start, stop, not_yet_pitched=not_yet_pitched, selector=selector
     )
 
 
