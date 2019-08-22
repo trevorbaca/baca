@@ -1200,6 +1200,7 @@ pitchcommands
    .. autosummary::
       :nosignatures:
 
+      not_yet_pitched
       start_pitch
       stop_pitch
 
@@ -1255,6 +1256,8 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: StaffPositionInterpolationCommand.measures
+
+   .. autoattribute:: StaffPositionInterpolationCommand.not_yet_pitched
 
    .. container:: inherited
 

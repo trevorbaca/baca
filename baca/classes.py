@@ -4998,7 +4998,7 @@ class Selection(abjad.Selection):
         return self.plts(exclude=exclude).map(_select()[0])
 
     def pleaf(
-        self, n: int, *, exclude: abjad.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None, grace: bool = None
     ) -> typing.Union[abjad.Note, abjad.Chord, abjad.Expression]:
         r"""
         Selects pitched leaf ``n``.
@@ -5086,10 +5086,10 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe(), lone=True)
-        return self.pleaves(exclude=exclude)[n]
+        return self.pleaves(exclude=exclude, grace=grace)[n]
 
     def pleaves(
-        self, *, exclude: abjad.Strings = None
+        self, *, exclude: abjad.Strings = None, grace: bool = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched leaves.
@@ -5221,10 +5221,10 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super().leaves(exclude=exclude, pitched=True)
+        return super().leaves(exclude=exclude, grace=grace, pitched=True)
 
     def plt(
-        self, n: int, *, exclude: abjad.Strings = None
+        self, n: int, *, exclude: abjad.Strings = None, grace: bool = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched logical tie ``n``.
@@ -5313,7 +5313,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe(), lone=True)
-        return self.plts(exclude=exclude)[n]
+        return self.plts(exclude=exclude, grace=grace)[n]
 
     def plts(
         self, *, exclude: abjad.Strings = None, grace: bool = None

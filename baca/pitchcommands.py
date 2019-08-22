@@ -6060,7 +6060,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_start_pitch", "_stop_pitch")
+    __slots__ = ("_not_yet_pitched", "_start_pitch", "_stop_pitch")
 
     _publish_storage_format = True
 
@@ -6068,14 +6068,15 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     def __init__(
         self,
+        start_pitch: typing.Union[str, abjad.NamedPitch],
+        stop_pitch: typing.Union[str, abjad.NamedPitch],
         *,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
+        not_yet_pitched: bool = None,
         scope: scoping.ScopeTyping = None,
         selector: abjad.SelectorTyping = "baca.plts()",
-        start_pitch: typing.Union[str, abjad.NamedPitch] = "C4",
-        stop_pitch: typing.Union[str, abjad.NamedPitch] = "C4",
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -6089,6 +6090,9 @@ class StaffPositionInterpolationCommand(scoping.Command):
         self._start_pitch: abjad.NamedPitch = start_pitch
         stop_pitch = abjad.NamedPitch(stop_pitch)
         self._stop_pitch: abjad.NamedPitch = stop_pitch
+        if not_yet_pitched is not None:
+            not_yet_pitched = bool(not_yet_pitched)
+        self._not_yet_pitched = not_yet_pitched
 
     ### SPECIAL METHODS ###
 
@@ -6123,13 +6127,24 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 abjad.Clef, default=abjad.Clef("treble")
             )
             pitch = staff_position.to_pitch(clef=clef)
-            PitchCommand._set_lt_pitch(plt, pitch)
+            PitchCommand._set_lt_pitch(plt, pitch, self.not_yet_pitched)
             for leaf in plt:
                 abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
-        PitchCommand._set_lt_pitch(plts[0], self.start_pitch)
-        PitchCommand._set_lt_pitch(plts[-1], self.stop_pitch)
+        PitchCommand._set_lt_pitch(
+            plts[0], self.start_pitch, self.not_yet_pitched
+        )
+        PitchCommand._set_lt_pitch(
+            plts[-1], self.stop_pitch, self.not_yet_pitched
+        )
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def not_yet_pitched(self) -> typing.Optional[bool]:
+        """
+        Is true when output is not yet pitched.
+        """
+        return self._not_yet_pitched
 
     @property
     def start_pitch(self) -> abjad.NamedPitch:
@@ -6824,9 +6839,11 @@ def force_accidental(
 
 
 def interpolate_staff_positions(
+    # TODO: allow numeric staff position input in addition to pitch input:
     start_pitch: typing.Union[str, abjad.NamedPitch],
     stop_pitch: typing.Union[str, abjad.NamedPitch],
     *,
+    not_yet_pitched: bool = None,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> StaffPositionInterpolationCommand:
     """
@@ -6834,7 +6851,10 @@ def interpolate_staff_positions(
     position of ``stop_pitch``.
     """
     return StaffPositionInterpolationCommand(
-        start_pitch=start_pitch, stop_pitch=stop_pitch, selector=selector
+        start_pitch=start_pitch,
+        stop_pitch=stop_pitch,
+        not_yet_pitched=not_yet_pitched,
+        selector=selector,
     )
 
 
