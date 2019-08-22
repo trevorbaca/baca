@@ -766,6 +766,7 @@ Piecewise library.
    ~baca.piecewise.circle_bow_spanner
    ~baca.piecewise.clb_spanner
    ~baca.piecewise.covered_spanner
+   ~baca.piecewise.damp_spanner
    ~baca.piecewise.dynamic
    ~baca.piecewise.hairpin
    ~baca.piecewise.half_clt_spanner

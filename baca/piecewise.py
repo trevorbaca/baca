@@ -657,6 +657,40 @@ def covered_spanner(
     )
 
 
+def damp_spanner(
+    *tweaks: abjad.IndexedTweakManager,
+    # NOTE: autodetect default differs from text_spanner():
+    autodetect_right_padding: bool = True,
+    left_broken_text: typing.Optional[str] = r"\baca-left-broken-damp-markup",
+    map: abjad.SelectorTyping = None,
+    match: typings.Indices = None,
+    measures: typings.SliceTyping = None,
+    pieces: abjad.SelectorTyping = "baca.group()",
+    right_broken: bool = None,
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    tag: typing.Optional[str] = f"{const.DAMP}:baca.damp_spanner",
+) -> PiecewiseCommand:
+    r"""
+    Makes damp spanner.
+    """
+    return text_spanner(
+        r"\baca-damp-markup =|",
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=False,
+        left_broken_text=left_broken_text,
+        lilypond_id="Damp",
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        right_broken=right_broken,
+        selector=selector,
+        tag=tag,
+    )
+
+
 def dynamic(
     dynamic: typing.Union[str, abjad.Dynamic],
     *tweaks: abjad.LilyPondTweakManager,

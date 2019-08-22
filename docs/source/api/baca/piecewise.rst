@@ -222,6 +222,7 @@ piecewise
    ~circle_bow_spanner
    ~clb_spanner
    ~covered_spanner
+   ~damp_spanner
    ~dynamic
    ~hairpin
    ~half_clt_spanner
@@ -244,6 +245,8 @@ piecewise
 .. autofunction:: clb_spanner
 
 .. autofunction:: covered_spanner
+
+.. autofunction:: damp_spanner
 
 .. autofunction:: dynamic
 
