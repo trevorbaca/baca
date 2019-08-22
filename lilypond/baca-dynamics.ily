@@ -957,6 +957,55 @@ baca-sfpp = #(make-dynamic-script "sfpp")
 baca-sffz = #(make-dynamic-script "sffz")
 baca-sfffz = #(make-dynamic-script "sfffz")
 
+%%% SFORZANDO ANCORA DYNAMICS %%%
+
+baca-sf-ancora = #(
+    make-dynamic-script
+    (markup #:baca-ancora-dynamic "sf")
+    )
+
+baca-sff-ancora = #(
+    make-dynamic-script
+    (markup #:baca-ancora-dynamic "sff")
+    )
+
+baca-sfp-ancora = #(
+    make-dynamic-script
+    (markup #:baca-ancora-dynamic "sfp")
+    )
+
+baca-sffp-ancora = #(
+    make-dynamic-script
+    (markup #:baca-ancora-dynamic "sffp")
+    )
+
+baca-sffpp-ancora = #(
+    make-dynamic-script
+    (markup #:baca-ancora-dynamic "sffpp")
+    )
+
+baca-sfpp-ancora = #(
+    make-dynamic-script
+    (markup #:baca-ancora-dynamic "sfpp")
+    )
+
+baca-sfz-ancora = #(
+    make-dynamic-script
+    (markup #:baca-ancora-dynamic "sfz")
+    )
+
+baca-sffz-ancora = #(
+    make-dynamic-script
+    (markup #:baca-ancora-dynamic "sffz")
+    )
+
+baca-sfffz-ancora = #(
+    make-dynamic-script
+    (markup #:baca-ancora-dynamic "sfffz")
+    )
+
+%%% SFORZANDO / TENUTO DYNAMICS %%%
+
 baca-sfz-f = #(
     make-dynamic-script
     (markup
