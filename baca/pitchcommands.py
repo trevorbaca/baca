@@ -5929,8 +5929,8 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     def __init__(
         self,
-        start: typing.Union[str, abjad.NamedPitch],
-        stop: typing.Union[str, abjad.NamedPitch],
+        start: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
+        stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
         *,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
