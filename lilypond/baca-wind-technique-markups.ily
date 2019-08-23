@@ -12,6 +12,12 @@ baca-doubletrill-markup = \markup
     \box
     doubletrill
 
+baca-jet-whistle-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "jet whistle"
+
 baca-keynoise-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)

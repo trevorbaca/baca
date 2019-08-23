@@ -266,8 +266,12 @@ class Command(object):
             selector_ = eval(selector)
         else:
             selector_ = selector
-        if selector_ is not None:
-            assert isinstance(selector_, abjad.Expression), repr(selector_)
+        if selector_ is not None and not isinstance(
+            selector_, abjad.Expression
+        ):
+            message = "selector must be Abjad expression:\n"
+            message += f"   {repr(selector_)}"
+            raise Exception(message)
         self._selector = selector_
         self._tag_measure_number = tag_measure_number
         self._initialize_tags(tags)

@@ -66,6 +66,18 @@ baca-tam-tam-markup = \markup
     \box
     tam-tam
 
+baca-triangle-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    triangle
+
+baca-triangle-small-beater-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "triangle (small beater)"
+
 baca-woodblock-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)

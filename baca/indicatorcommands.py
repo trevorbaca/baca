@@ -475,7 +475,7 @@ def breathe(
     """
     Attaches breathe command.
     """
-    # TODO: change to abjad.Articulation('breath', format_slot='after')?
+    # TODO: change to abjad.Articulation("breathe", format_slot="after")?
     breathe = abjad.LilyPondLiteral(r"\breathe", format_slot="after")
     return commands.IndicatorCommand(
         indicators=[breathe], selector=selector, tags=[tag], tweaks=tweaks
