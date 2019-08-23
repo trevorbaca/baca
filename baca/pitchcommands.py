@@ -704,7 +704,7 @@ class ClusterCommand(scoping.Command):
         return self._hide_flat_markup
 
     @property
-    def selector(self) -> abjad.Expression:
+    def selector(self) -> typing.Optional[abjad.Expression]:
         """
         Selects PLTs.
 
