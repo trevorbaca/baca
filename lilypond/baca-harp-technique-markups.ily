@@ -6,6 +6,12 @@ baca-bisb-markup = \markup
     \box
     bisb.
 
+baca-pdlt-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    pdlt
+
 baca-tuning-key-glissando-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
