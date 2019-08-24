@@ -1742,6 +1742,18 @@ def mark(
     )
 
 
+def not_yet_pitched(
+    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
+    # do not include tag=None because function creates no .ly output
+) -> commands.IndicatorCommand:
+    r"""
+    Attaches NOT_YET_PITCHED tag.
+    """
+    return commands.IndicatorCommand(
+        indicators=[abjad.tags.NOT_YET_PITCHED], selector=selector
+    )
+
+
 def parenthesize(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,

@@ -42,6 +42,7 @@ indicatorcommands
    ~marcato
    ~margin_markup
    ~mark
+   ~not_yet_pitched
    ~parenthesize
    ~quadruple_staccato
    ~rehearsal_mark
@@ -101,6 +102,8 @@ indicatorcommands
 .. autofunction:: margin_markup
 
 .. autofunction:: mark
+
+.. autofunction:: not_yet_pitched
 
 .. autofunction:: parenthesize
 

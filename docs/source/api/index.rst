@@ -301,6 +301,7 @@ Bača API
    ~baca.indicatorcommands.marcato
    ~baca.indicatorcommands.margin_markup
    ~baca.indicatorcommands.mark
+   ~baca.indicatorcommands.not_yet_pitched
    ~baca.indicatorcommands.parenthesize
    ~baca.indicatorcommands.quadruple_staccato
    ~baca.indicatorcommands.rehearsal_mark
