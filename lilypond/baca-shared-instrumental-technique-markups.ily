@@ -5,6 +5,3 @@ baca-attackless-markup = \markup
 
 baca-lv-possibile-markup = \markup
     "lv possibile"
-
-baca-whisk-markup = \markup
-    whisk

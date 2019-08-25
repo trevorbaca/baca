@@ -17,3 +17,9 @@ baca-tuning-key-glissando-markup = \markup
     \override #'(box-padding . 0.5)
     \box
     "tuning key glissando" 
+
+baca-whisk-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    whisk

@@ -24,6 +24,12 @@ baca-bd-rolled-markup = \markup
     \box
     "BD (rolled)"
 
+baca-brake-drum-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "brake drum"
+
 baca-castanets-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
