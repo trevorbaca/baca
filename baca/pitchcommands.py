@@ -6052,7 +6052,6 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
 def bass_to_octave(
     n: int,
-    *,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> RegisterToOctaveCommand:
     r"""
@@ -6229,7 +6228,6 @@ def bass_to_octave(
 
 def center_to_octave(
     n: int,
-    *,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> RegisterToOctaveCommand:
     r"""
@@ -6406,8 +6404,8 @@ def center_to_octave(
 
 def clusters(
     widths: typing.List[int],
-    *,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
+    *,
     start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
 ) -> ClusterCommand:
     """
@@ -6433,7 +6431,6 @@ def color_fingerings(
 
 def deviation(
     deviations: typing.List[abjad.Number],
-    *,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> MicrotoneDeviationCommand:
     """
@@ -6444,7 +6441,6 @@ def deviation(
 
 def diatonic_clusters(
     widths: typing.List[int],
-    *,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> DiatonicClusterCommand:
     """
@@ -6455,7 +6451,6 @@ def diatonic_clusters(
 
 def displacement(
     displacements: typing.List[int],
-    *,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> OctaveDisplacementCommand:
     r"""
@@ -6592,7 +6587,6 @@ def displacement(
 
 
 def force_accidental(
-    *,
     selector: abjad.SelectorTyping = "baca.pleaf(0, exclude=abjad.const.HIDDEN)",
 ) -> AccidentalAdjustmentCommand:
     r"""
@@ -6727,9 +6721,9 @@ def force_accidental(
 def interpolate_staff_positions(
     start: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
     stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
+    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
     *,
     not_yet_pitched: bool = None,
-    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> StaffPositionInterpolationCommand:
     r"""
     Interpolates from staff position of ``start`` to staff
@@ -6884,7 +6878,6 @@ def interpolate_staff_positions(
 def loop(
     items: typing.Sequence,
     intervals: typing.Sequence,
-    *,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> PitchCommand:
     """
@@ -6896,8 +6889,8 @@ def loop(
 
 def natural_clusters(
     widths: typing.Sequence[int],
-    *,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
+    *,
     start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
 ) -> ClusterCommand:
     """
@@ -6913,12 +6906,12 @@ def natural_clusters(
 
 def pitch(
     pitch,
+    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
     *,
     allow_out_of_range: bool = None,
     do_not_transpose: bool = None,
     not_yet_pitched: bool = None,
     persist: str = None,
-    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> PitchCommand:
     """
     Makes pitch command.
@@ -6950,6 +6943,7 @@ def pitch(
 
 def pitches(
     pitches,
+    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
     *,
     allow_octaves: bool = None,
     allow_repeats: bool = None,
@@ -6958,7 +6952,6 @@ def pitches(
     ignore_incomplete: bool = None,
     not_yet_pitched: bool = None,
     persist: str = None,
-    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> PitchCommand:
     """
     Makes pitch command.
@@ -7302,7 +7295,6 @@ def register(
 
 def soprano_to_octave(
     n: int,
-    *,
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> RegisterToOctaveCommand:
     r"""
@@ -7479,10 +7471,10 @@ def soprano_to_octave(
 
 def staff_position(
     number: int,
+    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
     *,
     allow_out_of_range: bool = None,
     not_yet_pitched: bool = None,
-    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> StaffPositionCommand:
     """
     Makes staff position command; allows repeats.
@@ -7499,12 +7491,12 @@ def staff_position(
 
 def staff_positions(
     numbers,
+    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
     *,
     allow_out_of_range: bool = None,
     allow_repeats: bool = None,
     exact: bool = None,
     not_yet_pitched: bool = None,
-    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
 ) -> StaffPositionCommand:
     """
     Makes staff position command; does not allow repeats.
