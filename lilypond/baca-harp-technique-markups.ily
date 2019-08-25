@@ -12,6 +12,12 @@ baca-pdlt-markup = \markup
     \box
     pdlt
 
+baca-pince-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    pincé
+
 baca-tuning-key-glissando-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
