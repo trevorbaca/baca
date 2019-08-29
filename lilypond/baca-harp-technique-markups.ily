@@ -6,6 +6,12 @@ baca-bisb-markup = \markup
     \box
     bisb.
 
+baca-bow-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    bow
+
 baca-pdlt-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)

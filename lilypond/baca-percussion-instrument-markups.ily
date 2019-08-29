@@ -1,5 +1,11 @@
 %%% BOXED INSTRUMENT MARKUPS %%%
 
+baca-bd-fingertips-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "BD (fingertips)"
+
 baca-bd-sponge-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
