@@ -184,6 +184,8 @@ overrides
    ~hairpin_stencil_false
    ~hairpin_to_barline
    ~hairpin_transparent
+   ~laissez_vibrer_tie_down
+   ~laissez_vibrer_tie_up
    ~mmrest_color
    ~mmrest_text_color
    ~mmrest_text_extra_offset
@@ -353,6 +355,10 @@ overrides
 .. autofunction:: hairpin_to_barline
 
 .. autofunction:: hairpin_transparent
+
+.. autofunction:: laissez_vibrer_tie_down
+
+.. autofunction:: laissez_vibrer_tie_up
 
 .. autofunction:: mmrest_color
 

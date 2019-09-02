@@ -1560,6 +1560,40 @@ def hairpin_transparent(
     )
 
 
+def laissez_vibrer_tie_down(
+    selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
+    tag: typing.Optional[str] = "baca.laissez_vibrer_tie_down",
+) -> OverrideCommand:
+    r"""
+    Overrides laissez-vibrer-tie direction.
+    """
+    return OverrideCommand(
+        attribute="direction",
+        value=abjad.Down,
+        grob="laissez_vibrer_tie",
+        selector=selector,
+        tags=[tag],
+    )
+
+
+def laissez_vibrer_tie_up(
+    selector: abjad.SelectorTyping = "baca.pleaves()",
+    *,
+    tag: typing.Optional[str] = "baca.laissez_vibrer_tie_up",
+) -> OverrideCommand:
+    r"""
+    Overrides laissez-vibrer-tie direction.
+    """
+    return OverrideCommand(
+        attribute="direction",
+        value=abjad.Up,
+        grob="laissez_vibrer_tie",
+        selector=selector,
+        tags=[tag],
+    )
+
+
 def mmrest_color(
     color: str = "red",
     selector: abjad.SelectorTyping = "baca.mmrests()",

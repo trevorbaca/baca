@@ -620,6 +620,8 @@ Override library.
    ~baca.overrides.hairpin_stencil_false
    ~baca.overrides.hairpin_to_barline
    ~baca.overrides.hairpin_transparent
+   ~baca.overrides.laissez_vibrer_tie_down
+   ~baca.overrides.laissez_vibrer_tie_up
    ~baca.overrides.mmrest_color
    ~baca.overrides.mmrest_text_color
    ~baca.overrides.mmrest_text_extra_offset
