@@ -24,6 +24,12 @@ baca-pince-markup = \markup
     \box
     pincé
 
+baca-sons-xylophoniques-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "sons xylophoniques"
+
 baca-tuning-key-glissando-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)

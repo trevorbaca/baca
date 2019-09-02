@@ -48,6 +48,12 @@ baca-crotales-bowed-markup = \markup
     \box
     "crotales (bowed)"
 
+baca-glockenspiel-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    glockenspiel
+
 baca-purpleheart-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
