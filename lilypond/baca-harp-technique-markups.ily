@@ -30,6 +30,12 @@ baca-sons-xylophoniques-markup = \markup
     \box
     "sons xylophoniques"
 
+baca-soundboard-pizz-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "soundboard pizz."
+
 baca-tuning-key-glissando-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
