@@ -3800,10 +3800,10 @@ def make_dynamic(
         Al niente hairpins are special-cased to carry to-barline tweaks:
 
         >>> baca.make_dynamic('>o')
-        StartHairpin(shape='>o', tweaks=LilyPondTweakManager(('to_barline', True)))
+        StartHairpin(shape='>o', tweaks=LilyPondTweakManager(('_literal', None), ('to_barline', True)))
 
         >>> baca.make_dynamic('|>o')
-        StartHairpin(shape='|>o', tweaks=LilyPondTweakManager(('to_barline', True)))
+        StartHairpin(shape='|>o', tweaks=LilyPondTweakManager(('_literal', None), ('to_barline', True)))
 
     ..  container:: example exception
 
@@ -4014,7 +4014,7 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor('f >o'):
         ...     item
-        Bundle(indicator=Dynamic('f'), spanner_start=StartHairpin(shape='>o', tweaks=LilyPondTweakManager(('to_barline', True))))
+        Bundle(indicator=Dynamic('f'), spanner_start=StartHairpin(shape='>o', tweaks=LilyPondTweakManager(('_literal', None), ('to_barline', True))))
 
         >>> for item in baca.parse_hairpin_descriptor('p mp mf f'):
         ...     item

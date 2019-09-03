@@ -831,7 +831,7 @@ class BCPCommand(scoping.Command):
                     abjad.Tag('baca.bcps'),
                     ],
                 tweaks=(
-                    LilyPondTweakManager(('color', 'red')),
+                    LilyPondTweakManager(('_literal', None), ('color', 'red')),
                     ),
                 )
 
@@ -847,7 +847,7 @@ class BCPCommand(scoping.Command):
                     abjad.Tag('baca.bcps'),
                     ],
                 tweaks=(
-                    LilyPondTweakManager(('color', 'red')),
+                    LilyPondTweakManager(('_literal', None), ('color', 'red')),
                     ),
                 )
 

@@ -316,6 +316,7 @@ class Command(object):
         if not tweaks:
             return
         manager = abjad.tweak(argument)
+        literals = []
         for item in tweaks:
             if isinstance(item, tuple):
                 assert len(item) == 2
@@ -327,9 +328,19 @@ class Command(object):
             else:
                 manager_ = item
             assert isinstance(manager_, abjad.LilyPondTweakManager)
+            literals.append(bool(manager_._literal))
+            if manager_._literal is True:
+                manager._literal = True
             tuples = manager_._get_attribute_tuples()
             for attribute, value in tuples:
                 setattr(manager, attribute, value)
+        if True in literals and False in literals:
+            message = "all tweaks must be literal"
+            message += ", or else all tweaks must be nonliteral:\n"
+            strings = [f"    {repr(_)}" for _ in tweaks]
+            string = "\n".join(strings)
+            message += string
+            raise Exception(message)
 
     def _call(self, argument=None):
         pass

@@ -266,7 +266,7 @@ class Accelerando(object):
             Tweaks can set at initialization:
 
             >>> baca.Accelerando(tweaks=abjad.tweak('blue').color)
-            Accelerando(tweaks=LilyPondTweakManager(('color', 'blue')))
+            Accelerando(tweaks=LilyPondTweakManager(('_literal', None), ('color', 'blue')))
 
         ..  container:: example
 
@@ -275,11 +275,11 @@ class Accelerando(object):
             >>> accelerando = baca.Accelerando()
             >>> abjad.tweak(accelerando).color = 'blue'
             >>> accelerando
-            Accelerando(tweaks=LilyPondTweakManager(('color', 'blue')))
+            Accelerando(tweaks=LilyPondTweakManager(('_literal', None), ('color', 'blue')))
 
             >>> import copy
             >>> copy.copy(accelerando)
-            Accelerando(tweaks=LilyPondTweakManager(('color', 'blue')))
+            Accelerando(tweaks=LilyPondTweakManager(('_literal', None), ('color', 'blue')))
 
         Tweak extra-offset to align accelerando markup with other metronome
         mark spanner segments.
@@ -641,7 +641,7 @@ class Ritardando(object):
             Tweaks can set at initialization:
 
             >>> baca.Ritardando(tweaks=abjad.tweak('blue').color)
-            Ritardando(tweaks=LilyPondTweakManager(('color', 'blue')))
+            Ritardando(tweaks=LilyPondTweakManager(('_literal', None), ('color', 'blue')))
 
         ..  container:: example
 
@@ -650,11 +650,11 @@ class Ritardando(object):
             >>> ritardando = baca.Ritardando()
             >>> abjad.tweak(ritardando).color = 'blue'
             >>> ritardando
-            Ritardando(tweaks=LilyPondTweakManager(('color', 'blue')))
+            Ritardando(tweaks=LilyPondTweakManager(('_literal', None), ('color', 'blue')))
 
             >>> import copy
             >>> copy.copy(ritardando)
-            Ritardando(tweaks=LilyPondTweakManager(('color', 'blue')))
+            Ritardando(tweaks=LilyPondTweakManager(('_literal', None), ('color', 'blue')))
 
         Tweak extra-offset to align ritardando markup with other metronome
         mark spanner segments.
