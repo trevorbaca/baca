@@ -6776,7 +6776,7 @@ class Selection(abjad.Selection):
         return self.components(abjad.Skip, exclude=exclude)
 
     def tleaf(
-        self, n: int = 0, exclude: abjad.Strings = None
+        self, n: int = 0, *, exclude: abjad.Strings = None, grace: bool = None
     ) -> typing.Union[abjad.Leaf, abjad.Expression]:
         r"""
         Selects trimmed leaf ``n``.
@@ -6864,10 +6864,10 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe(), lone=True)
-        return self.tleaves(exclude=exclude)[n]
+        return self.tleaves(exclude=exclude, grace=grace)[n]
 
     def tleaves(
-        self, *, exclude: abjad.Strings = None
+        self, *, exclude: abjad.Strings = None, grace: bool = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects trimmed leaves.
@@ -7005,7 +7005,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return super().leaves(exclude=exclude, trim=True)
+        return super().leaves(exclude=exclude, grace=grace, trim=True)
 
     def wleaf(
         self, n: int = 0, *, exclude: abjad.Strings = None
