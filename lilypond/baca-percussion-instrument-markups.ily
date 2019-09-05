@@ -36,6 +36,12 @@ baca-brake-drum-markup = \markup
     \box
     "brake drum"
 
+baca-brake-drum-paper-towel-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "brake drum (paper towel)"
+
 baca-castanets-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
