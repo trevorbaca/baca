@@ -1,4 +1,4 @@
-%%% SHARED INSTRUMENTAL TECHNIQUE MARKUPS %%%
+%%% SHARED INSTRUMENT MARKUPS %%%
 
 baca-attackless-markup = \markup
     attackless

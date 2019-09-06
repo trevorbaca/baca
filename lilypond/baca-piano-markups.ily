@@ -1,4 +1,4 @@
-%%% PIANO TECHNIQUE MARKUPS %%%
+%%% PIANO MARKUPS %%%
 
 baca-depress-silently-markup = \markup
     \whiteout

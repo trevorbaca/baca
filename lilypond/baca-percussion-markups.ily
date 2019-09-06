@@ -6,6 +6,12 @@ baca-bd-fingertips-markup = \markup
     \box
     "BD (fingertips)"
 
+baca-bd-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    BD
+
 baca-bd-sponge-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)

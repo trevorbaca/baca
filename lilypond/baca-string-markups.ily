@@ -1,4 +1,4 @@
-%%% STRING TECHNIQUE MARKUPS %%%
+%%% STRING MARKUPS %%%
 
 baca-bow-directly-on-bridge-noise-only-markup = \markup
     \whiteout

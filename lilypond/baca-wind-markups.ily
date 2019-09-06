@@ -1,49 +1,49 @@
-%%% HARP TECHNIQUE MARKUPS %%%
+%%% WIND MARKUPS %%%
 
-baca-bisb-markup = \markup
+baca-airtone-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
     \box
-    bisb.
+    airtone
 
-baca-bow-markup = \markup
+baca-doubletrill-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
     \box
-    bow
+    doubletrill
 
-baca-pdlt-markup = \markup
+baca-jet-whistle-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
     \box
-    pdlt
+    "jet whistle"
 
-baca-pince-markup = \markup
+baca-keynoise-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
     \box
-    pincé
+    keynoise
 
-baca-sons-xylophoniques-markup = \markup
+baca-put-staple-back-in-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
     \box
-    "sons xylophoniques"
+    "put staple back in"
 
-baca-soundboard-pizz-markup = \markup
+baca-remove-staple-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
     \box
-    "soundboard pizz."
+    "remove staple"
 
-baca-tuning-key-glissando-markup = \markup
+baca-to-bass-clarinet-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
     \box
-    "tuning key glissando" 
+    "to bass clarinet"
 
-baca-whisk-markup = \markup
+baca-to-bass-flute-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
     \box
-    whisk
+    "to bass flute"
