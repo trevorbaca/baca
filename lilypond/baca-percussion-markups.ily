@@ -60,6 +60,18 @@ baca-glockenspiel-markup = \markup
     \box
     glockenspiel
 
+baca-marimba-attackless-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "marimba (attackless)"
+
+baca-to-marimba-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "to marimba"
+
 baca-purpleheart-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
@@ -83,6 +95,12 @@ baca-slate-scrape-markup = \markup
     \override #'(box-padding . 0.5)
     \box
     "slate (scrape)"
+
+baca-superball-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    superball
 
 baca-tam-tam-markup = \markup
     \whiteout
