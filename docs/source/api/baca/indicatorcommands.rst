@@ -48,6 +48,7 @@ indicatorcommands
    ~rehearsal_mark
    ~repeat_tie
    ~short_fermata
+   ~snap_pizzicato
    ~staccatissimo
    ~staccato
    ~staff_lines
@@ -114,6 +115,8 @@ indicatorcommands
 .. autofunction:: repeat_tie
 
 .. autofunction:: short_fermata
+
+.. autofunction:: snap_pizzicato
 
 .. autofunction:: staccatissimo
 

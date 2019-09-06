@@ -2048,6 +2048,21 @@ def short_fermata(
     )
 
 
+def snap_pizzicato(
+    selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
+    *,
+    tag: typing.Optional[str] = "baca.snap_pizzicato",
+) -> commands.IndicatorCommand:
+    r"""
+    Attaches snap pizzicato.
+    """
+    return commands.IndicatorCommand(
+        indicators=[abjad.Articulation("snappizzicato")],
+        selector=selector,
+        tags=[tag],
+    )
+
+
 def staccatissimo(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,

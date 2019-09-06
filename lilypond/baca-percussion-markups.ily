@@ -24,6 +24,12 @@ baca-bd-struck-markup = \markup
     \box
     "BD (struck)"
 
+baca-bd-struck-then-superball-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "BD (struck then superball)"
+
 baca-bd-superball-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
@@ -72,12 +78,6 @@ baca-marimba-attackless-markup = \markup
     \box
     "marimba (attackless)"
 
-baca-to-marimba-markup = \markup
-    \whiteout
-    \override #'(box-padding . 0.5)
-    \box
-    "to marimba"
-
 baca-purpleheart-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
@@ -102,6 +102,12 @@ baca-slate-scrape-markup = \markup
     \box
     "slate (scrape)"
 
+baca-struck-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    struck
+
 baca-superball-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
@@ -113,6 +119,12 @@ baca-tam-tam-markup = \markup
     \override #'(box-padding . 0.5)
     \box
     tam-tam
+
+baca-to-marimba-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "to marimba"
 
 baca-triangle-markup = \markup
     \whiteout

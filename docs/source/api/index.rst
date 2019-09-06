@@ -307,6 +307,7 @@ Bača API
    ~baca.indicatorcommands.rehearsal_mark
    ~baca.indicatorcommands.repeat_tie
    ~baca.indicatorcommands.short_fermata
+   ~baca.indicatorcommands.snap_pizzicato
    ~baca.indicatorcommands.staccatissimo
    ~baca.indicatorcommands.staccato
    ~baca.indicatorcommands.staff_lines
