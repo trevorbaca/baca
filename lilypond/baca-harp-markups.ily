@@ -53,3 +53,9 @@ baca-whisk-markup = \markup
     \override #'(box-padding . 0.5)
     \box
     whisk
+
+baca-xyl-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    xyl.
