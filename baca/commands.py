@@ -4129,6 +4129,7 @@ def instrument(
 def invisible_music(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
+    map: abjad.SelectorTyping = None,
     tag: typing.Optional[str] = "baca.invisible_music",
 ) -> IndicatorCommand:
     r"""
@@ -4267,6 +4268,7 @@ def invisible_music(
     """
     return IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\baca-invisible-music")],
+        map=map,
         selector=selector,
         tags=[tag],
     )
