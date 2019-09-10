@@ -224,6 +224,15 @@ baca-left-broken-half-clt-markup =
 
 %%% COVERED MARKUP %%%
 
+baca-cov-markup =
+    \markup
+    \upright
+    \line {
+        %%%\hspace #-0.5
+        cov.
+        %%%%\hspace #-0.5
+    }
+
 baca-covered-markup =
     \markup
     \upright

@@ -630,6 +630,7 @@ def covered_spanner(
     ] = r"\baca-left-broken-covered-markup",
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
+    markup=r"\baca-covered-markup =|",
     measures: typings.SliceTyping = None,
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
@@ -641,7 +642,8 @@ def covered_spanner(
     Makes covered spanner.
     """
     return text_spanner(
-        r"\baca-covered-markup =|",
+        # r"\baca-covered-markup =|",
+        markup,
         *tweaks,
         autodetect_right_padding=autodetect_right_padding,
         bookend=False,
