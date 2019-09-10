@@ -3063,6 +3063,7 @@ def stem_tremolo(
 def stop_on_string(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
+    map: abjad.SelectorTyping = None,
     tag: typing.Optional[str] = "baca.stop_on_string",
 ) -> commands.IndicatorCommand:
     r"""
@@ -3140,7 +3141,7 @@ def stop_on_string(
     """
     articulation = abjad.Articulation("baca-stop-on-string")
     return commands.IndicatorCommand(
-        indicators=[articulation], selector=selector, tags=[tag]
+        indicators=[articulation], map=map, selector=selector, tags=[tag]
     )
 
 
