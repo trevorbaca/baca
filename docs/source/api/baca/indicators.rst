@@ -23,6 +23,7 @@ indicators
    :nosignatures:
 
    ~Accelerando
+   ~BarExtent
    ~Markup
    ~Ritardando
    ~SpacingSection
@@ -84,6 +85,51 @@ indicators
    .. autoattribute:: Accelerando.persistent
 
    .. autoattribute:: Accelerando.tweaks
+
+.. autoclass:: BarExtent
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __eq__
+      __format__
+      __repr__
+      context
+      line_count
+      persistent
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: BarExtent.__eq__
+
+   .. automethod:: BarExtent.__format__
+
+   .. automethod:: BarExtent.__repr__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: BarExtent.context
+
+   .. autoattribute:: BarExtent.line_count
+
+   .. autoattribute:: BarExtent.persistent
 
 .. autoclass:: Markup
 

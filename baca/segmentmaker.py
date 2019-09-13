@@ -1085,6 +1085,8 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if isinstance(wrapper.indicator, abjad.PersistentOverride):
             return
+        if isinstance(wrapper.indicator, indicators.BarExtent):
+            return
         stem = abjad.String.to_indicator_stem(wrapper.indicator)
         grob = SegmentMaker._indicator_to_grob(wrapper.indicator)
         context = wrapper._find_correct_effective_context()
@@ -2534,6 +2536,8 @@ class SegmentMaker(abjad.SegmentMaker):
             )
         elif isinstance(indicator, abjad.PersistentOverride):
             key = indicator
+        elif isinstance(indicator, indicators.BarExtent):
+            key = indicator.line_count
         elif isinstance(indicator, indicators.StaffLines):
             key = indicator.line_count
         elif isinstance(

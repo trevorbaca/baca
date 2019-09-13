@@ -287,6 +287,153 @@ class Accelerando(object):
         return self._tweaks
 
 
+class BarExtent(object):
+    """
+    Bar extent.
+    """
+
+    ### CLASS VARIABLES ###
+
+    __slots__ = ("_line_count",)
+
+    _context = "Staff"
+
+    _persistent = True
+
+    _publish_storage_format = True
+
+    ### INITIALIZER ###
+
+    def __init__(self, line_count):
+        if not isinstance(line_count, int):
+            message = f"line count must be integer (not {line_count!r})."
+            raise Exception(message)
+        assert 0 <= line_count, repr(line_count)
+        self._line_count = line_count
+
+    ### SPECIAL METHODS ###
+
+    def __eq__(self, argument):
+        """
+        Is true when bar extent line count equals ``argument`` line count.
+
+        ..  container:: example
+
+            >>> bar_extent_1 = baca.BarExtent(1)
+            >>> bar_extent_2 = baca.BarExtent(1)
+            >>> bar_extent_3 = baca.BarExtent(5)
+
+            >>> bar_extent_1 == bar_extent_1
+            True
+            >>> bar_extent_1 == bar_extent_2
+            True
+            >>> bar_extent_1 == bar_extent_3
+            False
+
+            >>> bar_extent_2 == bar_extent_1
+            True
+            >>> bar_extent_2 == bar_extent_2
+            True
+            >>> bar_extent_2 == bar_extent_3
+            False
+
+            >>> bar_extent_3 == bar_extent_1
+            False
+            >>> bar_extent_3 == bar_extent_2
+            False
+            >>> bar_extent_3 == bar_extent_3
+            True
+
+        """
+        if not isinstance(argument, type(self)):
+            return False
+        return self.line_count == argument.line_count
+
+    def __format__(self, format_specification="") -> str:
+        """
+        Delegates to format manager.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
+    def __repr__(self) -> str:
+        """
+        Delegates to format manager.
+        """
+        return abjad.StorageFormatManager(self).get_repr_format()
+
+    ### PRIVATE METHODS ###
+
+    def _get_bar_extent(self, component):
+        if not isinstance(component, abjad.Leaf):
+            return None
+        staff = abjad.inspect(component).parentage().get(abjad.Staff)
+        staff_parent = abjad.inspect(staff).parentage().parent
+        if staff_parent[0] is not staff and staff_parent[-1] is not staff:
+            return None
+        bottom, top = -2, 2
+        line_count_to_bar_extent = {1: 0, 3: 1, 5: 2}
+        if staff_parent[0] is staff:
+            top = line_count_to_bar_extent[self.line_count]
+        if staff_parent[-1] is staff:
+            bottom = -line_count_to_bar_extent[self.line_count]
+        return (bottom, top)
+
+    def _get_lilypond_format_bundle(self, component=None):
+        bundle = abjad.LilyPondFormatBundle()
+        bar_extent = self._get_bar_extent(component)
+        if bar_extent is None:
+            return bundle
+        bottom, top = bar_extent
+        string = r"\override Staff.BarLine.bar-extent = "
+        string += f"#'({bottom} . {top})"
+        bundle.before.commands.append(string)
+        return bundle
+
+    ### PUBLIC PROPERTIES ###
+
+    @property
+    def context(self):
+        """
+        Returns class constant ``'Staff'``.
+
+        ..  container:: example
+
+            >>> baca.BarExtent(1).context
+            'Staff'
+
+        Returns ``'Staff'``.
+        """
+        return self._context
+
+    @property
+    def line_count(self):
+        """
+        Gets line count.
+
+        ..  container:: example
+
+            >>> baca.BarExtent(1).line_count
+            1
+
+        Returns nonnegative integer.
+        """
+        return self._line_count
+
+    @property
+    def persistent(self):
+        """
+        Is true.
+
+        ..  container:: example
+
+            >>> baca.BarExtent(1).persistent
+            True
+
+        Class constant.
+        """
+        return self._persistent
+
+
 class Markup(abjad.Markup):
     """
     Markup subclass.

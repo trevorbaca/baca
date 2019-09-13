@@ -421,6 +421,7 @@ class Command(object):
             prototype = type(indicator)
         stem = abjad.String.to_indicator_stem(indicator)
         assert stem in (
+            "BAR_EXTENT",
             "BEAM",
             "CLEF",
             "DYNAMIC",

@@ -286,6 +286,7 @@ Bača API
    ~baca.indicatorcommands.arpeggio
    ~baca.indicatorcommands.articulation
    ~baca.indicatorcommands.articulations
+   ~baca.indicatorcommands.bar_extent_indicator
    ~baca.indicatorcommands.breathe
    ~baca.indicatorcommands.clef
    ~baca.indicatorcommands.double_staccato
@@ -341,6 +342,7 @@ Bača API
    :nosignatures:
 
    ~baca.indicators.Accelerando
+   ~baca.indicators.BarExtent
    ~baca.indicators.Markup
    ~baca.indicators.Ritardando
    ~baca.indicators.SpacingSection
