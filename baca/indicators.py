@@ -386,7 +386,11 @@ class BarExtent(object):
         bottom, top = bar_extent
         string = r"\override Staff.BarLine.bar-extent = "
         string += f"#'({bottom} . {top})"
-        bundle.before.commands.append(string)
+        previous = abjad.inspect(component).effective(BarExtent, n=-1)
+        if previous is None or previous.line_count <= self.line_count:
+            bundle.before.commands.append(string)
+        else:
+            bundle.after.commands.append(string)
         return bundle
 
     ### PUBLIC PROPERTIES ###
