@@ -2652,7 +2652,7 @@ def staff_lines(
             <BLANKLINE>
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
-        Two-line staff with bass clef:
+        Two-line staff with bass clef; clef set before staff positions:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -2787,11 +2787,7 @@ def staff_lines(
             <BLANKLINE>
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
-    ..  container:: example
-
-        ..  note:: It is currently necessary to make sure that clef
-            commands precede staff position commands. Otherwise output like
-            the following can result:
+        Two-line staff with bass clef; staff positions set before clef:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -2803,10 +2799,8 @@ def staff_lines(
         ...     'Music_Voice',
         ...     baca.make_notes(),
         ...     baca.staff_lines(2),
-        ...     baca.suite(
-        ...         baca.staff_positions([-2, -1, 0, 1, 2]),
-        ...         baca.clef('bass'),
-        ...         ),
+        ...     baca.staff_positions([-2, -1, 0, 1, 2]),
+        ...     baca.clef('bass'),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')

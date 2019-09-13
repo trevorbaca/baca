@@ -3252,17 +3252,12 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = tag.prepend(status_tag)
         wrapper.tag = tag
 
-    def _shift_clefs_into_fermata_measures(self):
-        fermata_stop_offsets = self._fermata_stop_offsets[:]
-        if self.previous_metadata.get("final_measure_is_fermata") is True:
-            fermata_stop_offsets.insert(0, abjad.Offset(0))
-        if not fermata_stop_offsets:
+    def _shift_measure_initial_clefs(self):
+        if self.environment == "docs":
             return
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             for leaf in abjad.iterate(staff).leaves():
                 start_offset = abjad.inspect(leaf).timespan().start_offset
-                if start_offset not in fermata_stop_offsets:
-                    continue
                 wrapper = abjad.inspect(leaf).wrapper(abjad.Clef)
                 if wrapper is None or not wrapper.tag:
                     continue
@@ -6760,7 +6755,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._comment_measure_numbers()
                 self._apply_breaks()
                 self._style_fermata_measures()
-                self._shift_clefs_into_fermata_measures()
+                self._shift_measure_initial_clefs()
                 self._deactivate_tags(deactivate)
                 self._remove_tags(remove)
                 self._add_container_identifiers()
