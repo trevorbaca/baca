@@ -138,6 +138,12 @@ baca-triangle-small-beater-markup = \markup
     \box
     "triangle (small beater)"
 
+baca-very-small-maraca-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    "very small maraca"
+
 baca-woodblock-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)

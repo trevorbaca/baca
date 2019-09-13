@@ -866,12 +866,12 @@ def clef_shift(
         assert isinstance(clef, abjad.Clef)
         width = clef._to_width[clef.name]
         extra_offset_x = -width
-    command = scoping.suite(
+    suite = scoping.suite(
         clef_x_extent_false(tag=tag),
         clef_extra_offset((extra_offset_x, 0), tag=tag),
     )
-    scoping.tag(abjad.tags.SHIFTED_CLEF, command, tag_measure_number=True)
-    return command
+    scoping.tag(abjad.tags.SHIFTED_CLEF, suite, tag_measure_number=True)
+    return suite
 
 
 def clef_x_extent_false(
