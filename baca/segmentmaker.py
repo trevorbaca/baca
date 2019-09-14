@@ -3275,7 +3275,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 suite(leaf, runtime=runtime)
 
     def _style_fermata_measures(self):
-        if self.fermata_measure_empty_overrides is None:
+        if not self.fermata_measure_empty_overrides:
             return
         if not self._fermata_start_offsets:
             return
@@ -3296,10 +3296,18 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 if start_offset not in empty_fermata_measure_start_offsets:
                     continue
-                staff_lines = indicators.StaffLines(0)
+                empty_staff_lines = indicators.StaffLines(0)
                 previous_staff_lines = abjad.inspect(leaf).effective(
                     indicators.StaffLines
                 )
+                if previous_staff_lines != empty_staff_lines:
+                    strings = empty_staff_lines._get_lilypond_format(
+                        context=staff
+                    )
+                    literal = abjad.LilyPondLiteral(strings)
+                    abjad.attach(
+                        literal, leaf, tag="_style_fermata_measures(1)"
+                    )
                 next_leaf = abjad.inspect(leaf).leaf(1)
                 if abjad.inspect(next_leaf).annotation(const.PHANTOM) is True:
                     next_leaf = None
@@ -3308,22 +3316,10 @@ class SegmentMaker(abjad.SegmentMaker):
                     next_staff_lines = abjad.inspect(next_leaf).effective(
                         indicators.StaffLines
                     )
-                if previous_staff_lines != staff_lines:
-                    strings = staff_lines._get_lilypond_format(context=staff)
-                    if (
-                        previous_staff_lines is None
-                        or previous_staff_lines.line_count == 5
-                    ):
-                        grob = f"{staff.lilypond_type}.BarLine"
-                        string = f"{grob}.bar-extent = #'(-2 . 2)"
-                        string = r"\once \override " + string
-                        strings.append(string)
-                    if strings:
-                        literal = abjad.LilyPondLiteral(strings)
-                        abjad.attach(
-                            literal, leaf, tag="_style_fermata_measures(1)"
-                        )
-                if next_leaf is not None and staff_lines != next_staff_lines:
+                if (
+                    next_leaf is not None
+                    and empty_staff_lines != next_staff_lines
+                ):
                     if next_staff_lines is None:
                         next_staff_lines_ = indicators.StaffLines(5)
                     else:
@@ -3335,13 +3331,13 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal, next_leaf, tag="_style_fermata_measures(2)"
                     )
-                if next_leaf is None and previous_staff_lines != staff_lines:
-                    if previous_staff_lines is None:
-                        previous_line_count = 5
-                    else:
-                        previous_line_count = getattr(
-                            previous_staff_lines, "line_count", 5
-                        )
+                if (
+                    next_leaf is None
+                    and previous_staff_lines != empty_staff_lines
+                ):
+                    previous_line_count = 5
+                    if previous_staff_lines is not None:
+                        previous_line_count = previous_staff_lines.line_count
                     strings = [
                         r"\stopStaff",
                         r"\once \override Staff.StaffSymbol.line-count ="
@@ -3356,21 +3352,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     )
                 if start_offset in bar_lines_already_styled:
                     continue
-                strings = []
-                if staff_lines.line_count == 0 and not (
-                    next_leaf is None and self.final_segment
-                ):
+                if not (next_leaf is None and self.final_segment):
+                    strings = []
                     string = r"Score.BarLine.transparent = ##t"
                     string = r"\once \override " + string
                     strings.append(string)
                     string = r"Score.SpanBar.transparent = ##t"
                     string = r"\once \override " + string
                     strings.append(string)
-                elif staff_lines.line_count == 1:
-                    string = "Score.BarLine.bar-extent = #'(-2 . 2)"
-                    string = r"\once \override " + string
-                    strings.append(string)
-                if strings:
                     literal = abjad.LilyPondLiteral(strings, "after")
                     tag = abjad.Tag(abjad.tags.EOL_FERMATA)
                     measure_number_tag = self._get_measure_number_tag(leaf)
@@ -3382,16 +3371,14 @@ class SegmentMaker(abjad.SegmentMaker):
                         tag=tag.prepend("_style_fermata_measures(4)"),
                     )
                 bar_lines_already_styled.append(start_offset)
-        if not self.fermata_measure_empty_overrides:
-            return
-        pair = (0, 2.5)
         rests = classes.Selection(self.score["Global_Rests"]).leaves(
             abjad.MultimeasureRest
         )
         for measure_number in self.fermata_measure_empty_overrides:
             measure_index = measure_number - 1
             rest = rests[measure_index]
-            abjad.override(rest).multi_measure_rest_text.extra_offset = pair
+            grob = abjad.override(rest).multi_measure_rest_text
+            grob.extra_offset = (0, 2.5)
 
     def _style_phantom_measures(self):
         if self.remove_phantom_measure:
