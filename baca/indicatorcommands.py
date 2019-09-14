@@ -1,6 +1,7 @@
 import abjad
 import typing
 from . import commands
+from . import const
 from . import indicators
 from . import markups
 from . import scoping
@@ -2254,7 +2255,8 @@ def staff_lines(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     tag: typing.Optional[str] = "baca.staff_lines",
-) -> commands.IndicatorCommand:
+    # ) -> commands.IndicatorCommand:
+) -> scoping.Suite:
     r"""
     Makes staff line command.
 
@@ -2338,6 +2340,7 @@ def staff_lines(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                             \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
@@ -2474,6 +2477,7 @@ def staff_lines(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                             \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
@@ -2611,6 +2615,7 @@ def staff_lines(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)                      %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                             \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
@@ -2746,6 +2751,7 @@ def staff_lines(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)                      %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                             \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
@@ -2881,6 +2887,7 @@ def staff_lines(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                            \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)                      %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                             \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
@@ -2939,11 +2946,13 @@ def staff_lines(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    return commands.IndicatorCommand(
+    command_1 = bar_extent_indicator(n, selector=selector, tag=const.NOT_PARTS)
+    command_2 = commands.IndicatorCommand(
         indicators=[indicators.StaffLines(line_count=n)],
         selector=selector,
         tags=[tag],
     )
+    return scoping.suite(command_1, command_2)
 
 
 def start_markup(

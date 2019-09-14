@@ -371,7 +371,9 @@ class BarExtent(object):
         if staff_parent[0] is not staff and staff_parent[-1] is not staff:
             return None
         bottom, top = -2, 2
-        line_count_to_bar_extent = {1: 0, 3: 1, 5: 2}
+        # 7, 14 used in Huitzil
+        line_count_to_bar_extent = {1: 0, 2: 0.5, 3: 1, 4: 1.5, 5: 2, 6: 2.5,
+            7: 4, 14: 4}
         if staff_parent[0] is staff:
             top = line_count_to_bar_extent[self.line_count]
         if staff_parent[-1] is staff:

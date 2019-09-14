@@ -2030,6 +2030,7 @@ def bar_extent_persistent(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                             \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca.bar_extent_persistent:IndicatorCommand
+                            \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                             \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                             \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand

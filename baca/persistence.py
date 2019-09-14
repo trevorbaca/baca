@@ -7026,6 +7026,7 @@ class PersistentIndicatorTests(object):
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca.bar_extent_persistent:IndicatorCommand
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
@@ -7077,6 +7078,12 @@ class PersistentIndicatorTests(object):
                     (
                         'Music_Staff',
                         [
+                            abjad.Momento(
+                                context='Music_Voice',
+                                edition=abjad.Tag('-PARTS'),
+                                prototype='baca.BarExtent',
+                                value=1,
+                                ),
                             abjad.Momento(
                                 context='Music_Voice',
                                 prototype='abjad.PersistentOverride',
@@ -7312,6 +7319,7 @@ class PersistentIndicatorTests(object):
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_PERSISTENT_OVERRIDE:_set_status_tag:baca.bar_extent_persistent:IndicatorCommand
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
@@ -7562,6 +7570,7 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                                \override Staff.BarLine.bar-extent = #'(-2 . 2)                          %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
@@ -7687,6 +7696,7 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                                \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
@@ -7926,6 +7936,7 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                                \override Staff.BarLine.bar-extent = #'(-2 . 2)                          %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                                 \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
@@ -7933,6 +7944,7 @@ class PersistentIndicatorTests(object):
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! _comment_measure_numbers
+                                \override Staff.BarLine.bar-extent = #'(-2 . 2)                          %! REDUNDANT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                                 \stopStaff                                                               %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \startStaff                                                              %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
@@ -8055,6 +8067,7 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! _comment_measure_numbers
+                                \override Staff.BarLine.bar-extent = #'(-2 . 2)                          %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
                                 \stopStaff                                                               %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \startStaff                                                              %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
