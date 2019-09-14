@@ -397,6 +397,13 @@ class BarExtent(object):
         string = r"\override Staff.BarLine.bar-extent = "
         string += f"#'({bottom} . {top})"
         previous = abjad.inspect(component).effective(BarExtent, n=-1)
+
+        #        previous_sl = abjad.inspect(component).effective(StaffLines, n=-1)
+        #        print()
+        #        staff = abjad.inspect(component).parentage().get(abjad.Staff)
+        #        print(staff.name)
+        #        print(previous_sl, previous, self)
+
         if previous is None or previous.line_count <= self.line_count:
             bundle.before.commands.append(string)
         else:
@@ -840,7 +847,7 @@ class StaffLines(object):
 
     ### INITIALIZER ###
 
-    def __init__(self, *, line_count=5, hide=None):
+    def __init__(self, line_count, *, hide=None):
         if not isinstance(line_count, int):
             message = f"line count must be integer (not {line_count!r})."
             raise Exception(message)
@@ -858,9 +865,9 @@ class StaffLines(object):
 
         ..  container:: example
 
-            >>> staff_lines_1 = baca.StaffLines(line_count=1)
-            >>> staff_lines_2 = baca.StaffLines(line_count=1)
-            >>> staff_lines_3 = baca.StaffLines(line_count=5)
+            >>> staff_lines_1 = baca.StaffLines(1)
+            >>> staff_lines_2 = baca.StaffLines(1)
+            >>> staff_lines_3 = baca.StaffLines(5)
 
             >>> staff_lines_1 == staff_lines_1
             True
@@ -934,7 +941,7 @@ class StaffLines(object):
 
         ..  container:: example
 
-            >>> baca.StaffLines(line_count=1).context
+            >>> baca.StaffLines(1).context
             'Staff'
 
         Returns ``'Staff'``.
@@ -948,7 +955,7 @@ class StaffLines(object):
 
         ..  container:: example
 
-            >>> baca.StaffLines(line_count=1, hide=True).hide
+            >>> baca.StaffLines(1, hide=True).hide
             True
 
         Defaults to none.
@@ -964,7 +971,7 @@ class StaffLines(object):
 
         ..  container:: example
 
-            >>> baca.StaffLines(line_count=1).line_count
+            >>> baca.StaffLines(1).line_count
             1
 
         Returns nonnegative integer.
@@ -978,7 +985,7 @@ class StaffLines(object):
 
         ..  container:: example
 
-            >>> baca.StaffLines(line_count=1).persistent
+            >>> baca.StaffLines(1).persistent
             True
 
         Class constant.

@@ -2948,9 +2948,7 @@ def staff_lines(
     """
     command_1 = bar_extent_indicator(n, selector=selector, tag=const.NOT_PARTS)
     command_2 = commands.IndicatorCommand(
-        indicators=[indicators.StaffLines(line_count=n)],
-        selector=selector,
-        tags=[tag],
+        indicators=[indicators.StaffLines(n)], selector=selector, tags=[tag]
     )
     return scoping.suite(command_1, command_2)
 
