@@ -366,6 +366,58 @@ class BarExtent(object):
 
     ### PRIVATE METHODS ###
 
+    @staticmethod
+    def _staff_is_effectively_bottommost(staff):
+        assert isinstance(staff, abjad.Staff)
+        staff_parent = abjad.inspect(staff).parentage().parent
+        if staff_parent[-1] is not staff:
+            return False
+        if len(staff_parent) == 1:
+            return True
+        empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
+        siblings = staff_parent[:-1]
+        tag = abjad.const.REMOVE_ALL_EMPTY_STAVES
+        for sibling in siblings:
+            if not abjad.inspect(sibling).annotation(tag):
+                return True
+            for leaf in abjad.iterate(sibling).leaves():
+                if not isinstance(leaf, empty_prototype):
+                    return True
+        staff_grandparent = abjad.inspect(staff_parent).parentage().parent
+        if staff_grandparent is None:
+            return True
+        if staff_grandparent[-1] is staff_parent:
+            return True
+        if len(staff_grandparent) == 1:
+            return True
+        return False
+
+    @staticmethod
+    def _staff_is_effectively_topmost(staff):
+        assert isinstance(staff, abjad.Staff)
+        staff_parent = abjad.inspect(staff).parentage().parent
+        if staff_parent[0] is not staff:
+            return False
+        if len(staff_parent) == 1:
+            return True
+        empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
+        siblings = staff_parent[1:]
+        tag = abjad.const.REMOVE_ALL_EMPTY_STAVES
+        for sibling in siblings:
+            if not abjad.inspect(sibling).annotation(tag):
+                return True
+            for leaf in abjad.iterate(sibling).leaves():
+                if not isinstance(leaf, empty_prototype):
+                    return True
+        staff_grandparent = abjad.inspect(staff_parent).parentage().parent
+        if staff_grandparent is None:
+            return True
+        if staff_grandparent[0] is staff_parent:
+            return True
+        if len(staff_grandparent) == 1:
+            return True
+        return False
+
     def _get_bar_extent(self, component):
         if not isinstance(component, abjad.Leaf):
             return None
@@ -386,9 +438,9 @@ class BarExtent(object):
             7: 4,
             14: 4,
         }
-        if staff_parent[0] is staff:
+        if self._staff_is_effectively_topmost(staff):
             top = line_count_to_bar_extent[self.line_count]
-        if staff_parent[-1] is staff:
+        if self._staff_is_effectively_bottommost(staff):
             bottom = -line_count_to_bar_extent[self.line_count]
         return (bottom, top)
 
