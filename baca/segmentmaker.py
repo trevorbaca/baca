@@ -3297,8 +3297,12 @@ class SegmentMaker(abjad.SegmentMaker):
                 if start_offset not in empty_fermata_measure_start_offsets:
                     continue
                 empty_staff_lines = indicators.StaffLines(0)
+                empty_bar_extent = indicators.BarExtent(0)
                 previous_staff_lines = abjad.inspect(leaf).effective(
                     indicators.StaffLines
+                )
+                previous_bar_extent = abjad.inspect(leaf).effective(
+                    indicators.BarExtent
                 )
                 next_leaf = abjad.inspect(leaf).leaf(1)
                 if abjad.inspect(next_leaf).annotation(const.PHANTOM) is True:
@@ -3307,6 +3311,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 if next_leaf is not None:
                     next_staff_lines = abjad.inspect(next_leaf).effective(
                         indicators.StaffLines
+                    )
+                    next_bar_extent = abjad.inspect(next_leaf).effective(
+                        indicators.BarExtent
                     )
                 if (
                     previous_staff_lines != empty_staff_lines
@@ -3318,6 +3325,11 @@ class SegmentMaker(abjad.SegmentMaker):
                         leaf,
                         tag="_style_fermata_measures(1)",
                     )
+                    abjad.attach(
+                        empty_bar_extent,
+                        leaf,
+                        tag="_style_fermata_measures(1.5)",
+                    )
                 if (
                     next_leaf is not None
                     and empty_staff_lines != next_staff_lines
@@ -3326,6 +3338,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         next_staff_lines_ = indicators.StaffLines(5)
                     else:
                         next_staff_lines_ = next_staff_lines
+                    if next_bar_extent is None:
+                        next_bar_extent_ = indicators.StaffLines(5)
+                    else:
+                        next_bar_extent_ = next_bar_extent
                     wrapper = abjad.inspect(next_leaf).effective_wrapper(
                         indicators.StaffLines
                     )
@@ -3339,6 +3355,11 @@ class SegmentMaker(abjad.SegmentMaker):
                             next_staff_lines_,
                             next_leaf,
                             tag="_style_fermata_measures(2)",
+                        )
+                        abjad.attach(
+                            next_bar_extent_,
+                            next_leaf,
+                            tag="_style_fermata_measures(2.5)",
                         )
                 if (
                     next_leaf is None
@@ -3355,6 +3376,18 @@ class SegmentMaker(abjad.SegmentMaker):
                         leaf,
                         synthetic_offset=99,
                         tag="_style_fermata_measures(3)",
+                    )
+                    previous_line_count = 5
+                    if previous_bar_extent is not None:
+                        previous_line_count = previous_bar_extent.line_count
+                    resume_bar_extent = indicators.BarExtent(
+                        previous_line_count, hide=True
+                    )
+                    abjad.attach(
+                        resume_bar_extent,
+                        leaf,
+                        synthetic_offset=99,
+                        tag="_style_fermata_measures(3.5)",
                     )
                 if start_offset in bar_lines_already_styled:
                     continue

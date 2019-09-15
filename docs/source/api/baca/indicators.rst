@@ -102,6 +102,7 @@ indicators
       __format__
       __repr__
       context
+      hide
       line_count
       persistent
 
@@ -126,6 +127,8 @@ indicators
       :class: class-header
 
    .. autoattribute:: BarExtent.context
+
+   .. autoattribute:: BarExtent.hide
 
    .. autoattribute:: BarExtent.line_count
 

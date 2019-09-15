@@ -294,7 +294,7 @@ class BarExtent(object):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_line_count",)
+    __slots__ = ("_hide", "_line_count")
 
     _context = "Staff"
 
@@ -304,12 +304,15 @@ class BarExtent(object):
 
     ### INITIALIZER ###
 
-    def __init__(self, line_count):
+    def __init__(self, line_count, *, hide=None):
         if not isinstance(line_count, int):
             message = f"line count must be integer (not {line_count!r})."
             raise Exception(message)
         assert 0 <= line_count, repr(line_count)
         self._line_count = line_count
+        if hide is not None:
+            hide = bool(hide)
+        self._hide = hide
 
     ### SPECIAL METHODS ###
 
@@ -373,6 +376,7 @@ class BarExtent(object):
         bottom, top = -2, 2
         # 7, 14 used in Huitzil
         line_count_to_bar_extent = {
+            0: 0,
             1: 0,
             2: 0.5,
             3: 1,
@@ -390,6 +394,8 @@ class BarExtent(object):
 
     def _get_lilypond_format_bundle(self, component=None):
         bundle = abjad.LilyPondFormatBundle()
+        if self.hide:
+            return bundle
         bar_extent = self._get_bar_extent(component)
         if bar_extent is None:
             return bundle
@@ -397,13 +403,6 @@ class BarExtent(object):
         string = r"\override Staff.BarLine.bar-extent = "
         string += f"#'({bottom} . {top})"
         previous = abjad.inspect(component).effective(BarExtent, n=-1)
-
-        #        previous_sl = abjad.inspect(component).effective(StaffLines, n=-1)
-        #        print()
-        #        staff = abjad.inspect(component).parentage().get(abjad.Staff)
-        #        print(staff.name)
-        #        print(previous_sl, previous, self)
-
         if previous is None or previous.line_count <= self.line_count:
             bundle.before.commands.append(string)
         else:
@@ -425,6 +424,13 @@ class BarExtent(object):
         Returns ``'Staff'``.
         """
         return self._context
+
+    @property
+    def hide(self) -> typing.Optional[bool]:
+        """
+        Is true when bar extent generates no LilyPond input.
+        """
+        return self._hide
 
     @property
     def line_count(self):
