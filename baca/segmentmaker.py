@@ -3300,14 +3300,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 previous_staff_lines = abjad.inspect(leaf).effective(
                     indicators.StaffLines
                 )
-                if previous_staff_lines != empty_staff_lines:
-                    strings = empty_staff_lines._get_lilypond_format(
-                        context=staff
-                    )
-                    literal = abjad.LilyPondLiteral(strings)
-                    abjad.attach(
-                        literal, leaf, tag="_style_fermata_measures(1)"
-                    )
                 next_leaf = abjad.inspect(leaf).leaf(1)
                 if abjad.inspect(next_leaf).annotation(const.PHANTOM) is True:
                     next_leaf = None
@@ -3317,6 +3309,16 @@ class SegmentMaker(abjad.SegmentMaker):
                         indicators.StaffLines
                     )
                 if (
+                    previous_staff_lines != empty_staff_lines
+                ) and not abjad.inspect(leaf).has_indicator(
+                    indicators.StaffLines
+                ):
+                    abjad.attach(
+                        empty_staff_lines,
+                        leaf,
+                        tag="_style_fermata_measures(1)",
+                    )
+                if (
                     next_leaf is not None
                     and empty_staff_lines != next_staff_lines
                 ):
@@ -3324,13 +3326,20 @@ class SegmentMaker(abjad.SegmentMaker):
                         next_staff_lines_ = indicators.StaffLines(5)
                     else:
                         next_staff_lines_ = next_staff_lines
-                    strings = next_staff_lines_._get_lilypond_format(
-                        context=staff
+                    wrapper = abjad.inspect(next_leaf).effective_wrapper(
+                        indicators.StaffLines
                     )
-                    literal = abjad.LilyPondLiteral(strings)
-                    abjad.attach(
-                        literal, next_leaf, tag="_style_fermata_measures(2)"
+                    next_leaf_start_offset = (
+                        abjad.inspect(next_leaf).timespan().start_offset
                     )
+                    if wrapper is None or (
+                        wrapper.start_offset != next_leaf_start_offset
+                    ):
+                        abjad.attach(
+                            next_staff_lines_,
+                            next_leaf,
+                            tag="_style_fermata_measures(2)",
+                        )
                 if (
                     next_leaf is None
                     and previous_staff_lines != empty_staff_lines
@@ -3338,17 +3347,14 @@ class SegmentMaker(abjad.SegmentMaker):
                     previous_line_count = 5
                     if previous_staff_lines is not None:
                         previous_line_count = previous_staff_lines.line_count
-                    strings = [
-                        r"\stopStaff",
-                        r"\once \override Staff.StaffSymbol.line-count ="
-                        f" {previous_line_count}",
-                        r"\startStaff",
-                    ]
-                    literal = abjad.LilyPondLiteral(
-                        strings, format_slot="after"
+                    resume_staff_lines = indicators.StaffLines(
+                        previous_line_count, hide=True
                     )
                     abjad.attach(
-                        literal, leaf, tag="_style_fermata_measures(3)"
+                        resume_staff_lines,
+                        leaf,
+                        synthetic_offset=99,
+                        tag="_style_fermata_measures(3)",
                     )
                 if start_offset in bar_lines_already_styled:
                     continue
@@ -6730,7 +6736,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._check_persistent_indicators()
                 self._color_repeat_pitch_classes_()
                 self._color_octaves_()
-                self._clean_up_on_beat_grace_containers()
                 self._force_nonnatural_accidentals()
                 self._magnify_staves_()
                 self._whitespace_leaves()
@@ -6744,6 +6749,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._check_all_music_in_part_containers()
                 self._check_duplicate_part_assignments()
                 self._move_global_rests()
+            # mutates offsets:
+            self._clean_up_on_beat_grace_containers()
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if self.environment == "layout" or (
