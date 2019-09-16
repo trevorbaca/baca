@@ -708,7 +708,7 @@ baca-bracketed-mixed-number-metric-modulation-tuplet-lhs = #(
     \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
         \abjad-bracketed-mixed-number-metric-modulation-tuplet-lhs
-            #mm-length #mm-dots #mm-stem #mm-base #mm-n #mm-b
+            #mm-length #mm-dots #mm-stem #mm-base #mm-n #mm-d
             #tuplet-length #tuplet-dots #tuplet-n #tuplet-d
             #note-length #note-dots
             #modulation-scale
