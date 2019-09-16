@@ -3392,6 +3392,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if start_offset in bar_lines_already_styled:
                     continue
                 if not (next_leaf is None and self.final_segment):
+                    # TODO: replace literal with tagged override
                     strings = []
                     string = r"Score.BarLine.transparent = ##t"
                     string = r"\once \override " + string
@@ -3399,14 +3400,16 @@ class SegmentMaker(abjad.SegmentMaker):
                     string = r"Score.SpanBar.transparent = ##t"
                     string = r"\once \override " + string
                     strings.append(string)
-                    literal = abjad.LilyPondLiteral(strings, "after")
+                    literal = abjad.LilyPondLiteral(strings)
                     tag = abjad.Tag(abjad.tags.EOL_FERMATA)
                     measure_number_tag = self._get_measure_number_tag(leaf)
                     if measure_number_tag is not None:
                         tag = tag.append(measure_number_tag)
+                    next_leaf_ = abjad.inspect(leaf).leaf(1)
+                    assert next_leaf_ is not None, repr(next_leaf_)
                     abjad.attach(
                         literal,
-                        leaf,
+                        next_leaf_,
                         tag=tag.prepend("_style_fermata_measures(4)"),
                     )
                 bar_lines_already_styled.append(start_offset)
