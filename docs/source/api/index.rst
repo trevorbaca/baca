@@ -286,7 +286,6 @@ Bača API
    ~baca.indicatorcommands.arpeggio
    ~baca.indicatorcommands.articulation
    ~baca.indicatorcommands.articulations
-   ~baca.indicatorcommands.bar_extent_indicator
    ~baca.indicatorcommands.breathe
    ~baca.indicatorcommands.clef
    ~baca.indicatorcommands.double_staccato
@@ -588,8 +587,6 @@ Override library.
    ~baca.overrides.accidental_stencil_false
    ~baca.overrides.accidental_transparent
    ~baca.overrides.accidental_x_extent_false
-   ~baca.overrides.bar_extent
-   ~baca.overrides.bar_extent_zero
    ~baca.overrides.bar_line_color
    ~baca.overrides.bar_line_extra_offset
    ~baca.overrides.bar_line_transparent

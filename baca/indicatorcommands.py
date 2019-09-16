@@ -468,22 +468,6 @@ def articulations(
     )
 
 
-def bar_extent_indicator(
-    line_count: int,
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
-    *,
-    tag: typing.Optional[str] = "baca.bar_extent_indicator",
-) -> commands.IndicatorCommand:
-    r"""
-    Attaches ``baca.BarExtent``.
-    """
-    return commands.IndicatorCommand(
-        indicators=[indicators.BarExtent(line_count)],
-        selector=selector,
-        tags=[tag],
-    )
-
-
 def breathe(
     selector: abjad.SelectorTyping = "baca.pleaf(-1, exclude=abjad.const.HIDDEN)",
     *tweaks: abjad.LilyPondTweakManager,
@@ -2946,7 +2930,11 @@ def staff_lines(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    command_1 = bar_extent_indicator(n, selector=selector, tag=const.NOT_PARTS)
+    command_1 = commands.IndicatorCommand(
+        indicators=[indicators.BarExtent(n)],
+        selector=selector,
+        tags=[const.NOT_PARTS],
+    )
     command_2 = commands.IndicatorCommand(
         indicators=[indicators.StaffLines(n)], selector=selector, tags=[tag]
     )

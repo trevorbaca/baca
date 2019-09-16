@@ -149,8 +149,6 @@ overrides
    ~accidental_stencil_false
    ~accidental_transparent
    ~accidental_x_extent_false
-   ~bar_extent
-   ~bar_extent_zero
    ~bar_line_color
    ~bar_line_extra_offset
    ~bar_line_transparent
@@ -285,10 +283,6 @@ overrides
 .. autofunction:: accidental_transparent
 
 .. autofunction:: accidental_x_extent_false
-
-.. autofunction:: bar_extent
-
-.. autofunction:: bar_extent_zero
 
 .. autofunction:: bar_line_color
 
