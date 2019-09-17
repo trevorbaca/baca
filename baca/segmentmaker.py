@@ -3418,7 +3418,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     string = r"\once \override " + string
                     strings.append(string)
                     literal = abjad.LilyPondLiteral(strings)
-                    tag = abjad.Tag(abjad.tags.EOL_FERMATA)
+                    tag = abjad.Tag(abjad.tags.FERMATA_MEASURE)
                     measure_number_tag = self._get_measure_number_tag(leaf)
                     if measure_number_tag is not None:
                         tag = tag.append(measure_number_tag)
