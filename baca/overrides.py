@@ -5519,7 +5519,7 @@ def text_spanner_staff_padding(
                     }
                     \times 4/5 {
                         a'16
-                        \stopTextSpan                                                                %! baca.text_spanner:PiecewiseCommand(2)
+                        \stopTextSpan                                                                %! STOP_TEXT_SPAN:baca.text_spanner:PiecewiseCommand(2)
                         r4
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding:OverrideCommand(2)
                         \revert TextScript.staff-padding                                             %! baca.text_script_staff_padding:OverrideCommand(2)
