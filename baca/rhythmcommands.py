@@ -108,56 +108,56 @@ class RhythmCommand(scoping.Command):
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
                             [
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
                             ]
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
                             [
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
                             ]
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
                             [
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
                             ]
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
                             [
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'8
                             ]
             <BLANKLINE>
@@ -481,7 +481,7 @@ class RhythmCommand(scoping.Command):
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 \override TextScript.font-size = #-2                                     %! baca.text_script_font_size:OverrideCommand(1)
                                 \override TextScript.staff-padding = #5                                  %! baca.text_script_staff_padding:OverrideCommand(1)
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8.
                                 _ \markup {
                                     \fraction
@@ -489,7 +489,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -497,7 +497,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'16
                                 _ \markup {
                                     \fraction
@@ -507,10 +507,10 @@ class RhythmCommand(scoping.Command):
                                 ~
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -518,7 +518,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8
                                 _ \markup {
                                     \fraction
@@ -535,7 +535,7 @@ class RhythmCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'16
                                 _ \markup {
                                     \fraction
@@ -543,7 +543,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -551,7 +551,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8.
                                 _ \markup {
                                     \fraction
@@ -560,7 +560,7 @@ class RhythmCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                                 % [Music_Voice measure 5]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4
                                 _ \markup {
                                     \fraction
@@ -568,7 +568,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8.
                                 _ \markup {
                                     \fraction
@@ -577,7 +577,7 @@ class RhythmCommand(scoping.Command):
                                     }
                                 [
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'16
                                 _ \markup {
                                     \fraction
@@ -752,7 +752,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
                             \times 4/5 {
             <BLANKLINE>
                                 % [Music_Voice measure 1]                                            %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                        %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                        %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2
             <BLANKLINE>
                             }
@@ -760,7 +760,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
                             \tweak edge-height #'(0.7 . 0)
                             \times 4/5 {
             <BLANKLINE>
-                                \baca-unpitched-music-warning                                        %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                        %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2
             <BLANKLINE>
                             }
@@ -768,7 +768,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
                             \tweak edge-height #'(0.7 . 0)
                             \times 4/5 {
             <BLANKLINE>
-                                \baca-unpitched-music-warning                                        %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                        %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4
             <BLANKLINE>
                             }
@@ -930,18 +930,18 @@ def make_repeat_tied_notes(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'4.
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'4
                             \repeatTie
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'4.
                             \repeatTie
             <BLANKLINE>
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'4                                                                      %! baca.make_repeat_tied_notes
                             \repeatTie
             <BLANKLINE>

@@ -1236,21 +1236,21 @@ def hide_black_note_heads(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \once \override NoteHead.transparent = ##t                               %! hide.black_note_heads:IndicatorCommand
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \once \override NoteHead.transparent = ##t                               %! hide.black_note_heads:IndicatorCommand
-                            \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                            \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()

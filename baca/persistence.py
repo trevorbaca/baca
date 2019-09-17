@@ -7214,12 +7214,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REAPPLIED_PERSISTENT_OVERRIDE:_set_status_tag:baca.SegmentMaker._reapply_persistent_indicators(3)
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -7354,11 +7354,11 @@ class PersistentIndicatorTests(object):
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! REDUNDANT_PERSISTENT_OVERRIDE:_set_status_tag:baca.bar_extent_persistent:IndicatorCommand
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()

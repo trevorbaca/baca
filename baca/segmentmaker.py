@@ -556,69 +556,69 @@ class SegmentMaker(abjad.SegmentMaker):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 0 }
                                 [                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 1 }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 2 }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 3 }
                                 ]                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 4 }
                                 [                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 5 }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 6 }
                                 ]                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 7 }
                                 [                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 8 }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 9 }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 10 }
                                 ]                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 11 }
                                 [                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 12 }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 13 }
                                 ]                                                                        %! baca.make_even_divisions
@@ -734,69 +734,69 @@ class SegmentMaker(abjad.SegmentMaker):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 0 }
                                 [                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 1 }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 2 }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 3 }
                                 ]                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 4 }
                                 [                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 5 }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 6 }
                                 ]                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 7 }
                                 [                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 8 }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 9 }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 10 }
                                 ]                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 11 }
                                 [                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 12 }
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ^ \markup { 13 }
                                 ]                                                                        %! baca.make_even_divisions
@@ -2133,7 +2133,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             string = r"\baca-unpitched-music-warning"
             literal = abjad.LilyPondLiteral(string)
-            abjad.attach(literal, pleaf, tag=_site(inspect.currentframe()))
+            tag_ = abjad.Tag(_site(inspect.currentframe()))
+            tag_ = tag_.prepend(tag)
+            abjad.attach(literal, pleaf, tag=tag_)
 
     def _color_unregistered_pitches(self):
         if self.do_not_color_unregistered_pitches:
@@ -4798,56 +4800,56 @@ class SegmentMaker(abjad.SegmentMaker):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 [                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ]                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 [                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ]                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 [                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ]                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 [                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                 <BLANKLINE>
-                                \baca-unpitched-music-warning                                            %! baca.SegmentMaker._color_unpitched_notes()
+                                \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8                                                                      %! baca.make_even_divisions
                                 ]                                                                        %! baca.make_even_divisions
                 <BLANKLINE>
