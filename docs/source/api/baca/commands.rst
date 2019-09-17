@@ -1207,7 +1207,6 @@ commands
    :nosignatures:
 
    ~allow_octaves
-   ~bar_extent_persistent
    ~bcps
    ~color
    ~container
@@ -1235,8 +1234,6 @@ commands
    ~volta
 
 .. autofunction:: allow_octaves
-
-.. autofunction:: bar_extent_persistent
 
 .. autofunction:: bcps
 

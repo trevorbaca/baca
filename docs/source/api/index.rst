@@ -175,7 +175,6 @@ Bača API
    :nosignatures:
 
    ~baca.commands.allow_octaves
-   ~baca.commands.bar_extent_persistent
    ~baca.commands.bcps
    ~baca.commands.color
    ~baca.commands.container
