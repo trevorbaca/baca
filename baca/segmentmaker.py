@@ -981,7 +981,6 @@ class SegmentMaker(abjad.SegmentMaker):
         if isinstance(previous_indicator, indicators.SpacingSection):
             return
         if momento.context in self.score:
-            # momento_context = self.score[momento.context]
             for context in abjad.iterate(self.score).components(abjad.Context):
                 if context.name == momento.context:
                     momento_context = context
@@ -1007,7 +1006,12 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             status = "redundant"
         edition = momento.edition or abjad.Tag()
-        return leaf, previous_indicator, status, edition
+        if momento.synthetic_offset is None:
+            synthetic_offset = None
+        else:
+            assert 0 < momento.synthetic_offset, repr(momento)
+            synthetic_offset = -momento.synthetic_offset
+        return leaf, previous_indicator, status, edition, synthetic_offset
 
     def _annotate_sounds_during(self):
         for voice in abjad.iterate(self.score).components(abjad.Voice):
@@ -2057,6 +2061,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     edition=editions,
                     manifest=manifest,
                     prototype=prototype,
+                    synthetic_offset=wrapper.synthetic_offset,
                     value=value,
                 )
                 momentos.append(momento)
@@ -3090,6 +3095,21 @@ class SegmentMaker(abjad.SegmentMaker):
             parts.append(class_.__name__)
         return f"{parts[0]}.{parts[-1]}"
 
+    def _reanalyze_reapplied_synthetic_wrappers(self):
+        site = _site(inspect.currentframe())
+        for leaf in abjad.iterate(self.score).leaves():
+            for wrapper in abjad.inspect(leaf).wrappers():
+                if wrapper.synthetic_offset is None:
+                    continue
+                if 0 <= wrapper.synthetic_offset:
+                    continue
+                if "REAPPLIED" in str(wrapper.tag):
+                    string = str(wrapper.tag)
+                    string = string.replace("REAPPLIED", "EXPLICIT")
+                    tag_ = abjad.Tag(string).append(site)
+                    wrapper._tag = tag_
+                    wrapper._synthetic_offset = None
+
     def _reanalyze_trending_dynamics(self):
         for leaf in abjad.iterate(self.score).leaves():
             for wrapper in abjad.inspect(leaf).wrappers():
@@ -3115,7 +3135,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 result = self._analyze_momento(context, momento)
                 if result is None:
                     continue
-                leaf, previous_indicator, status, edition = result
+                leaf, previous_indicator, status, edition, synthetic_offset = (
+                    result
+                )
                 if isinstance(previous_indicator, abjad.TimeSignature):
                     if status in (None, "explicit"):
                         continue
@@ -3140,6 +3162,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         wrapper = abjad.attach(
                             previous_indicator,
                             leaf,
+                            synthetic_offset=synthetic_offset,
                             tag=edition.append(site),
                             wrapper=True,
                         )
@@ -3171,7 +3194,11 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag = tag.append("-PARTS")
                 try:
                     wrapper = abjad.attach(
-                        previous_indicator, leaf, tag=tag, wrapper=True
+                        previous_indicator,
+                        leaf,
+                        synthetic_offset=synthetic_offset,
+                        tag=tag,
+                        wrapper=True,
                     )
                     attached = True
                 except abjad.PersistentIndicatorError:
@@ -6788,6 +6815,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._treat_untreated_persistent_wrappers()
                 self._attach_metronome_marks()
                 self._reanalyze_trending_dynamics()
+                self._reanalyze_reapplied_synthetic_wrappers()
                 self._transpose_score_()
                 self._attach_final_bar_line()
                 self._add_final_markup()
