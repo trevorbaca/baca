@@ -962,7 +962,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             c'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
-                            )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
+                            )                                                                        %! SPANNER_STOP:baca.slur:SpannerIndicatorCommand(2)
                             ]                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
@@ -1150,7 +1150,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             c'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
-                            )                                                                        %! baca.slur:SpannerIndicatorCommand(2)
+                            )                                                                        %! SPANNER_STOP:baca.slur:SpannerIndicatorCommand(2)
                             ]                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
@@ -1324,7 +1324,7 @@ def only_parts(command: _command_typing) -> _command_typing:
                             \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'2                                                                      %! baca.make_notes
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1):+PARTS
-                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:+PARTS:PiecewiseCommand(1)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:+PARTS:PiecewiseCommand(1)
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1):+PARTS
                             \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:+PARTS:PiecewiseCommand(1)
             <BLANKLINE>
@@ -1340,7 +1340,7 @@ def only_parts(command: _command_typing) -> _command_typing:
                             \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                             c'4.                                                                     %! baca.make_notes
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1):+PARTS
-                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:+PARTS:PiecewiseCommand(2)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:+PARTS:PiecewiseCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>

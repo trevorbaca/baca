@@ -123,12 +123,11 @@ class SpannerIndicatorCommand(scoping.Command):
 
         assert isinstance(tag, str), repr(tag)
         reapplied = scoping.Command._remove_reapplied_wrappers(leaf, indicator)
+        tag_ = self.tag.append(tag)
+        if getattr(indicator, "spanner_stop", None) is True:
+            tag_ = tag_.prepend(abjad.tags.SPANNER_STOP)
         wrapper = abjad.attach(
-            indicator,
-            leaf,
-            deactivate=deactivate,
-            tag=self.tag.append(tag),
-            wrapper=True,
+            indicator, leaf, deactivate=deactivate, tag=tag_, wrapper=True
         )
         if scoping.compare_persistent_indicators(indicator, reapplied):
             status = "redundant"
@@ -316,7 +315,7 @@ def beam(
                             c'8                                                                      %! baca.make_even_divisions
             <BLANKLINE>
                             c'8                                                                      %! baca.make_even_divisions
-                            ]                                                                        %! baca.beam:SpannerIndicatorCommand(2)
+                            ]                                                                        %! SPANNER_STOP:baca.beam:SpannerIndicatorCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -621,7 +620,7 @@ def slur(
                     }
                     \times 4/5 {
                         a'16
-                        )                                                                            %! baca.slur:SpannerIndicatorCommand(2)
+                        )                                                                            %! SPANNER_STOP:baca.slur:SpannerIndicatorCommand(2)
                         r4
                         \revert Slur.direction                                                       %! baca.slur_down:OverrideCommand(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
@@ -718,7 +717,7 @@ def sustain_pedal(
                     \times 4/5 {
                         a'16
                         r4
-                        \sustainOff                                                                  %! baca.sustain_pedal:SpannerIndicatorCommand(2)
+                        \sustainOff                                                                  %! SPANNER_STOP:baca.sustain_pedal:SpannerIndicatorCommand(2)
                         \revert Staff.SustainPedalLineSpanner.staff-padding                          %! baca.sustain_pedal_staff_padding:OverrideCommand(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                     }
@@ -815,7 +814,7 @@ def trill_spanner(
                     \times 4/5 {
                         a'16
                         r4
-                        \stopTrillSpan                                                               %! baca.trill_spanner:SpannerIndicatorCommand(2)
+                        \stopTrillSpan                                                               %! SPANNER_STOP:baca.trill_spanner:SpannerIndicatorCommand(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                     }
                 }
@@ -870,7 +869,7 @@ def trill_spanner(
                         ~
                         bf'16
                         r16
-                        \stopTrillSpan                                                               %! baca.trill_spanner:SpannerIndicatorCommand(2)
+                        \stopTrillSpan                                                               %! SPANNER_STOP:baca.trill_spanner:SpannerIndicatorCommand(2)
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
@@ -883,19 +882,19 @@ def trill_spanner(
                         ~
                         ef''16
                         r16
-                        \stopTrillSpan                                                               %! baca.trill_spanner:SpannerIndicatorCommand(2)
+                        \stopTrillSpan                                                               %! SPANNER_STOP:baca.trill_spanner:SpannerIndicatorCommand(2)
                         af''16
                         [
                         \startTrillSpan                                                              %! baca.trill_spanner:SpannerIndicatorCommand(1)
                         g''16
-                        \stopTrillSpan                                                               %! baca.trill_spanner:SpannerIndicatorCommand(2)
+                        \stopTrillSpan                                                               %! SPANNER_STOP:baca.trill_spanner:SpannerIndicatorCommand(2)
                         ]
                     }
                     \times 4/5 {
                         a'16
                         \startTrillSpan                                                              %! baca.trill_spanner:SpannerIndicatorCommand(1)
                         r4
-                        \stopTrillSpan                                                               %! baca.trill_spanner:SpannerIndicatorCommand(2)
+                        \stopTrillSpan                                                               %! SPANNER_STOP:baca.trill_spanner:SpannerIndicatorCommand(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                     }
                 }
@@ -972,7 +971,7 @@ def trill_spanner(
                     \times 4/5 {
                         a'16
                         r4
-                        \stopTrillSpan                                                               %! baca.trill_spanner:SpannerIndicatorCommand(2)
+                        \stopTrillSpan                                                               %! SPANNER_STOP:baca.trill_spanner:SpannerIndicatorCommand(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
                     }
                 }
