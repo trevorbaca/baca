@@ -505,6 +505,7 @@ def bar_line_x_extent(
     *,
     after: bool = None,
     context: str = "Score",
+    measures: typings.SliceTyping = None,
     tag: typing.Optional[str] = "baca.bar_line_x_extent",
 ) -> OverrideCommand:
     """
@@ -515,6 +516,7 @@ def bar_line_x_extent(
         attribute="X_extent",
         value=pair,
         context=context,
+        measures=measures,
         grob="bar_line",
         selector=selector,
         tags=[tag],
