@@ -1218,7 +1218,7 @@ def not_mol(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``NOT_MOL`` (not middle-of-line).
     """
-    return tag(abjad.tags.NOT_MOL, command)
+    return tag(abjad.tags.NOT_MOL, command, tag_measure_number=True)
 
 
 def not_parts(command: _command_typing) -> _command_typing:
@@ -1246,7 +1246,7 @@ def only_mol(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``ONLY_MOL`` (only middle-of-line).
     """
-    return tag(abjad.tags.ONLY_MOL, command)
+    return tag(abjad.tags.ONLY_MOL, command, tag_measure_number=True)
 
 
 def only_parts(command: _command_typing) -> _command_typing:
