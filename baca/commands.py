@@ -4792,7 +4792,11 @@ def voice_two(
     )
 
 
-def volta(*, selector: abjad.SelectorTyping = "baca.leaves()") -> VoltaCommand:
+def volta(
+    *,
+    measures: typings.SliceTyping = None,
+    selector: abjad.SelectorTyping = "baca.leaves()",
+) -> VoltaCommand:
     r"""
     Makes volta container and extends container with ``selector`` output.
 
@@ -4970,4 +4974,4 @@ def volta(*, selector: abjad.SelectorTyping = "baca.leaves()") -> VoltaCommand:
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    return VoltaCommand(selector=selector)
+    return VoltaCommand(measures=measures, selector=selector)

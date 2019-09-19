@@ -271,7 +271,7 @@ def accidental_x_extent_false(
     tag: typing.Optional[str] = "baca.accidental_x_extent_false",
 ) -> OverrideCommand:
     """
-    Overrides accidental x-extent.
+    Overrides accidental X-extent.
     """
     return OverrideCommand(
         attribute="X_extent",
