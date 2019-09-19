@@ -472,12 +472,13 @@ def bar_line(
     abbreviation: str = "|",
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
+    format_slot: str = "after",
     tag: typing.Optional[str] = "baca.bar_line",
 ) -> commands.IndicatorCommand:
     """
     Attaches bar line.
     """
-    indicator = abjad.BarLine(abbreviation)
+    indicator = abjad.BarLine(abbreviation, format_slot=format_slot)
     return commands.IndicatorCommand(
         indicators=[indicator], selector=selector, tags=[tag]
     )
