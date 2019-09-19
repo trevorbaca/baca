@@ -1192,6 +1192,8 @@ class SegmentMaker(abjad.SegmentMaker):
             skip = skips[-1]
         else:
             skip = skips[-2]
+        if abjad.inspect(skip).has_indicator(abjad.BarLine):
+            return
         abjad.attach(literal, skip, tag=_site(inspect.currentframe()))
 
     def _attach_first_appearance_score_template_defaults(self):

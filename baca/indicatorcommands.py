@@ -468,6 +468,21 @@ def articulations(
     )
 
 
+def bar_line(
+    abbreviation: str = "|",
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
+    tag: typing.Optional[str] = "baca.bar_line",
+) -> commands.IndicatorCommand:
+    """
+    Attaches bar line.
+    """
+    indicator = abjad.BarLine(abbreviation)
+    return commands.IndicatorCommand(
+        indicators=[indicator], selector=selector, tags=[tag]
+    )
+
+
 def breathe(
     selector: abjad.SelectorTyping = "baca.pleaf(-1, exclude=abjad.const.HIDDEN)",
     *tweaks: abjad.LilyPondTweakManager,

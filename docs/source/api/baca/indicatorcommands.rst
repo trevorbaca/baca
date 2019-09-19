@@ -27,6 +27,7 @@ indicatorcommands
    ~arpeggio
    ~articulation
    ~articulations
+   ~bar_line
    ~breathe
    ~clef
    ~double_staccato
@@ -73,6 +74,8 @@ indicatorcommands
 .. autofunction:: articulation
 
 .. autofunction:: articulations
+
+.. autofunction:: bar_line
 
 .. autofunction:: breathe
 

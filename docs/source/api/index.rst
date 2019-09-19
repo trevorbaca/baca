@@ -285,6 +285,7 @@ Bača API
    ~baca.indicatorcommands.arpeggio
    ~baca.indicatorcommands.articulation
    ~baca.indicatorcommands.articulations
+   ~baca.indicatorcommands.bar_line
    ~baca.indicatorcommands.breathe
    ~baca.indicatorcommands.clef
    ~baca.indicatorcommands.double_staccato
