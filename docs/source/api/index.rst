@@ -988,14 +988,10 @@ Rhythm library.
    ~baca.scoping.chunk
    ~baca.scoping.compare_persistent_indicators
    ~baca.scoping.new
-   ~baca.scoping.not_bol
-   ~baca.scoping.not_eol
    ~baca.scoping.not_mol
    ~baca.scoping.not_parts
    ~baca.scoping.not_score
    ~baca.scoping.not_segment
-   ~baca.scoping.only_bol
-   ~baca.scoping.only_eol
    ~baca.scoping.only_mol
    ~baca.scoping.only_parts
    ~baca.scoping.only_score

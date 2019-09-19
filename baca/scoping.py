@@ -1214,20 +1214,6 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 _command_typing = typing.Union[Command, Suite]
 
 
-def not_bol(command: _command_typing) -> _command_typing:
-    """
-    Tags ``command`` with ``-BOL``.
-    """
-    return tag("-BOL", command)
-
-
-def not_eol(command: _command_typing) -> _command_typing:
-    """
-    Tags ``command`` with ``-EOL``.
-    """
-    return tag("-EOL", command)
-
-
 def not_mol(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-MOL``.
@@ -1254,20 +1240,6 @@ def not_segment(command: _command_typing) -> _command_typing:
     Tags ``command`` with ``-SEGMENT``.
     """
     return tag("-SEGMENT", command)
-
-
-def only_bol(command: _command_typing) -> _command_typing:
-    """
-    Tags ``command`` with ``+BOL``.
-    """
-    return tag("+BOL", command)
-
-
-def only_eol(command: _command_typing) -> _command_typing:
-    """
-    Tags ``command`` with ``+EOL``.
-    """
-    return tag("+EOL", command)
 
 
 def only_mol(command: _command_typing) -> _command_typing:

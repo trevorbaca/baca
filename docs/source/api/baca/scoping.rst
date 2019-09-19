@@ -236,14 +236,10 @@ scoping
    ~chunk
    ~compare_persistent_indicators
    ~new
-   ~not_bol
-   ~not_eol
    ~not_mol
    ~not_parts
    ~not_score
    ~not_segment
-   ~only_bol
-   ~only_eol
    ~only_mol
    ~only_parts
    ~only_score
@@ -259,10 +255,6 @@ scoping
 
 .. autofunction:: new
 
-.. autofunction:: not_bol
-
-.. autofunction:: not_eol
-
 .. autofunction:: not_mol
 
 .. autofunction:: not_parts
@@ -270,10 +262,6 @@ scoping
 .. autofunction:: not_score
 
 .. autofunction:: not_segment
-
-.. autofunction:: only_bol
-
-.. autofunction:: only_eol
 
 .. autofunction:: only_mol
 
