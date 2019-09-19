@@ -33,7 +33,6 @@ commands
    ~LabelCommand
    ~MetronomeMarkCommand
    ~PartAssignmentCommand
-   ~VoltaCommand
 
 .. autoclass:: BCPCommand
 
@@ -1117,85 +1116,6 @@ commands
 
       .. autoattribute:: PartAssignmentCommand.tags
 
-.. autoclass:: VoltaCommand
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: VoltaCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: VoltaCommand.__format__
-
-   .. container:: inherited
-
-      .. automethod:: VoltaCommand.__repr__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Methods
-      :class: class-header
-
-   .. container:: inherited
-
-      .. automethod:: VoltaCommand.get_tag
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Read-only properties
-      :class: class-header
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.deactivate
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.map
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.match
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.measures
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.runtime
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.scope
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.selector
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.tag
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.tag_measure_number
-
-   .. container:: inherited
-
-      .. autoattribute:: VoltaCommand.tags
-
 .. raw:: html
 
    <hr/>
@@ -1231,7 +1151,6 @@ commands
    ~voice_one
    ~voice_three
    ~voice_two
-   ~volta
 
 .. autofunction:: allow_octaves
 
@@ -1282,5 +1201,3 @@ commands
 .. autofunction:: voice_three
 
 .. autofunction:: voice_two
-
-.. autofunction:: volta

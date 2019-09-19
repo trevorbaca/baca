@@ -162,7 +162,6 @@ Bača API
    ~baca.commands.LabelCommand
    ~baca.commands.MetronomeMarkCommand
    ~baca.commands.PartAssignmentCommand
-   ~baca.commands.VoltaCommand
 
 .. raw:: html
 
@@ -199,7 +198,6 @@ Bača API
    ~baca.commands.voice_one
    ~baca.commands.voice_three
    ~baca.commands.voice_two
-   ~baca.commands.volta
 
 .. raw:: html
 
