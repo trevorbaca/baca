@@ -591,6 +591,8 @@ class Command(object):
             measure_number = self.runtime["offset_to_measure_number"].get(
                 start_offset
             )
+            if getattr(self, "after", None) is True:
+                measure_number += 1
             if measure_number is not None:
                 tag = abjad.Tag(f"MEASURE_{measure_number}")
                 tags.append(tag)
