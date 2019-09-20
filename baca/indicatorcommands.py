@@ -1,6 +1,6 @@
 import abjad
 import typing
-from . import commands
+from . import commandclasses
 from . import const
 from . import indicators
 from . import markups
@@ -15,7 +15,7 @@ def accent(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.accent",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches accent.
 
@@ -89,7 +89,7 @@ def accent(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation(">")], selector=selector, tags=[tag]
     )
 
@@ -100,7 +100,7 @@ def alternate_bow_strokes(
     downbow_first: bool = True,
     full: bool = None,
     tag: typing.Optional[str] = "baca.alternate_bow_strokes",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches alternate bow strokes.
 
@@ -349,7 +349,7 @@ def alternate_bow_strokes(
         else:
             strings = ["upbow", "downbow"]
     indicators = [abjad.Articulation(_) for _ in strings]
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=indicators, selector=selector, tags=[tag]
     )
 
@@ -358,7 +358,7 @@ def arpeggio(
     selector: abjad.SelectorTyping = "baca.chead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.arpeggio",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches arpeggio.
 
@@ -432,7 +432,7 @@ def arpeggio(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("arpeggio")],
         selector=selector,
         tags=[tag],
@@ -444,12 +444,12 @@ def articulation(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.articulation",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     """
     Attaches articulation.
     """
     articulation_ = abjad.Articulation(articulation)
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[articulation_], selector=selector, tags=[tag]
     )
 
@@ -459,11 +459,11 @@ def articulations(
     selector: abjad.SelectorTyping = "baca.pheads(exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.articulations",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     """
     Attaches articulations.
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=articulations, selector=selector, tags=[tag]
     )
 
@@ -474,12 +474,12 @@ def bar_line(
     *,
     format_slot: str = "after",
     tag: typing.Optional[str] = "baca.bar_line",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     """
     Attaches bar line.
     """
     indicator = abjad.BarLine(abbreviation, format_slot=format_slot)
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[indicator], selector=selector, tags=[tag]
     )
 
@@ -488,13 +488,13 @@ def breathe(
     selector: abjad.SelectorTyping = "baca.pleaf(-1, exclude=abjad.const.HIDDEN)",
     *tweaks: abjad.LilyPondTweakManager,
     tag: typing.Optional[str] = "baca.breathe",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     """
     Attaches breathe command.
     """
     # TODO: change to abjad.Articulation("breathe", format_slot="after")?
     breathe = abjad.LilyPondLiteral(r"\breathe", format_slot="after")
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[breathe], selector=selector, tags=[tag], tweaks=tweaks
     )
 
@@ -505,7 +505,7 @@ def clef(
     *,
     redundant: bool = None,
     tag: typing.Optional[str] = "baca.clef",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches clef.
 
@@ -580,7 +580,7 @@ def clef(
 
     """
     indicator = abjad.Clef(clef)
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[indicator],
         redundant=redundant,
         selector=selector,
@@ -592,7 +592,7 @@ def double_staccato(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.double_staccato",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches double-staccato.
 
@@ -666,7 +666,7 @@ def double_staccato(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #2")],
         selector=selector,
         tags=[tag],
@@ -677,7 +677,7 @@ def down_arpeggio(
     selector: abjad.SelectorTyping = "baca.chead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.down_arpeggio",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches down-arpeggio.
 
@@ -752,7 +752,7 @@ def down_arpeggio(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.Down)],
         selector=selector,
         tags=[tag],
@@ -764,7 +764,7 @@ def down_bow(
     *tweaks: abjad.LilyPondTweakManager,
     full: bool = None,
     tag: typing.Optional[str] = "baca.down_bow",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches down-bow.
 
@@ -911,7 +911,7 @@ def down_bow(
         articulation = abjad.Articulation("baca-full-downbow")
     else:
         articulation = abjad.Articulation("downbow")
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[articulation], selector=selector, tags=[tag], tweaks=tweaks
     )
 
@@ -920,7 +920,7 @@ def espressivo(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *tweaks: abjad.LilyPondTweakManager,
     tag: typing.Optional[str] = "baca.espressivo",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches espressivo.
 
@@ -994,7 +994,7 @@ def espressivo(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("espressivo")],
         selector=selector,
         tags=[tag],
@@ -1006,7 +1006,7 @@ def fermata(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     tag: typing.Optional[str] = "baca.fermata",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches fermata.
 
@@ -1080,7 +1080,7 @@ def fermata(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("fermata")],
         selector=selector,
         tags=[tag],
@@ -1091,7 +1091,7 @@ def flageolet(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.flageolet",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches flageolet.
 
@@ -1165,7 +1165,7 @@ def flageolet(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("flageolet")],
         selector=selector,
         tags=[tag],
@@ -1176,7 +1176,7 @@ def hide_black_note_heads(
     selector: abjad.SelectorTyping = "baca.leaves(exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "hide.black_note_heads",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches note-head stencil false to black note-heads.
 
@@ -1306,7 +1306,7 @@ def hide_black_note_heads(
     """
     string = r"\once \override NoteHead.transparent = ##t"
     literal = abjad.LilyPondLiteral(string)
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[literal],
         predicate=lambda _: _.written_duration < abjad.Duration(1, 2),
         selector=selector,
@@ -1318,7 +1318,7 @@ def laissez_vibrer(
     selector: abjad.SelectorTyping = "baca.ptail(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.laissez_vibrer",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches laissez vibrer.
 
@@ -1392,7 +1392,7 @@ def laissez_vibrer(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("laissezVibrer")],
         selector=selector,
         tags=[tag],
@@ -1405,12 +1405,12 @@ def literal(
     *,
     format_slot: str = "before",
     tag: typing.Optional[str] = "baca.literal",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     """
     Attaches LilyPond literal.
     """
     literal = abjad.LilyPondLiteral(string, format_slot=format_slot)
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[literal], selector=selector, tags=[tag]
     )
 
@@ -1419,7 +1419,7 @@ def long_fermata(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     tag: typing.Optional[str] = "baca.long_fermata",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches long fermata.
 
@@ -1493,7 +1493,7 @@ def long_fermata(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("longfermata")],
         selector=selector,
         tags=[tag],
@@ -1504,7 +1504,7 @@ def marcato(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.marcato",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches marcato.
 
@@ -1578,7 +1578,7 @@ def marcato(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("marcato")],
         selector=selector,
         tags=[tag],
@@ -1589,10 +1589,10 @@ def margin_markup(
     argument: str,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
-    alert: commands.IndicatorCommand = None,
+    alert: commandclasses.IndicatorCommand = None,
     context: str = "Staff",
     tag: typing.Optional[str] = "baca.margin_markup",
-) -> typing.Union[commands.IndicatorCommand, scoping.Suite]:
+) -> typing.Union[commandclasses.IndicatorCommand, scoping.Suite]:
     r"""
     Attaches margin markup.
 
@@ -1730,11 +1730,11 @@ def margin_markup(
     else:
         raise TypeError(argument)
     assert isinstance(margin_markup, abjad.MarginMarkup)
-    command = commands.IndicatorCommand(
+    command = commandclasses.IndicatorCommand(
         indicators=[margin_markup], selector=selector, tags=[tag]
     )
     if bool(alert):
-        assert isinstance(alert, commands.IndicatorCommand), repr(alert)
+        assert isinstance(alert, commandclasses.IndicatorCommand), repr(alert)
         return scoping.suite(command, alert)
     else:
         return command
@@ -1745,13 +1745,13 @@ def mark(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *tweaks: abjad.LilyPondTweakManager,
     tag: typing.Optional[str] = "baca.mark",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     """
     Attaches mark.
     """
     assert isinstance(argument, (abjad.Markup, str)), repr(argument)
     rehearsal_mark = abjad.RehearsalMark(markup=argument)
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[rehearsal_mark],
         selector=selector,
         tags=[tag],
@@ -1762,11 +1762,11 @@ def mark(
 def not_yet_pitched(
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
     # do not include tag=None because function creates no .ly output
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches NOT_YET_PITCHED tag.
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.tags.NOT_YET_PITCHED], selector=selector
     )
 
@@ -1775,7 +1775,7 @@ def parenthesize(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.parenthesize",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches LilyPond ``\parenthesize`` command.
 
@@ -1849,7 +1849,7 @@ def parenthesize(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\parenthesize")],
         selector=selector,
         tags=[tag],
@@ -1860,11 +1860,11 @@ def quadruple_staccato(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.quadruple_staccato",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     """
     Attaches quadruple-staccato.
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #4")],
         selector=selector,
         tags=[tag],
@@ -1876,14 +1876,14 @@ def rehearsal_mark(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *tweaks: abjad.LilyPondTweakManager,
     tag: typing.Optional[str] = "baca.rehearsal_mark",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     """
     Attaches rehearsal mark.
     """
     assert isinstance(argument, str), repr(argument)
     string = rf'\baca-rehearsal-mark-markup "{argument}"'
     markup = abjad.Markup(string, direction=abjad.Center, literal=True)
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[markup], selector=selector, tags=[tag], tweaks=tweaks
     )
 
@@ -1893,7 +1893,7 @@ def repeat_tie(
     *,
     allow_rest: bool = None,
     tag: typing.Optional[str] = "baca.repeat_tie",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches repeat-tie.
 
@@ -1972,7 +1972,7 @@ def repeat_tie(
     """
     if allow_rest is not None:
         allow_rest = bool(allow_rest)
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         do_not_test=allow_rest,
         indicators=[abjad.RepeatTie()],
         selector=selector,
@@ -1984,7 +1984,7 @@ def short_fermata(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     tag: typing.Optional[str] = "short.fermata",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches short fermata.
 
@@ -2058,7 +2058,7 @@ def short_fermata(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("shortfermata")],
         selector=selector,
         tags=[tag],
@@ -2069,11 +2069,11 @@ def snap_pizzicato(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.snap_pizzicato",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches snap pizzicato.
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("snappizzicato")],
         selector=selector,
         tags=[tag],
@@ -2084,7 +2084,7 @@ def staccatissimo(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.staccatissimo",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches staccatissimo.
 
@@ -2158,7 +2158,7 @@ def staccatissimo(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("staccatissimo")],
         selector=selector,
         tags=[tag],
@@ -2169,7 +2169,7 @@ def staccato(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.staccato",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches staccato.
 
@@ -2243,7 +2243,7 @@ def staccato(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("staccato")],
         selector=selector,
         tags=[tag],
@@ -2255,7 +2255,7 @@ def staff_lines(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     tag: typing.Optional[str] = "baca.staff_lines",
-    # ) -> commands.IndicatorCommand:
+    # ) -> commandclasses.IndicatorCommand:
 ) -> scoping.Suite:
     r"""
     Makes staff line command.
@@ -2946,12 +2946,12 @@ def staff_lines(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    command_1 = commands.IndicatorCommand(
+    command_1 = commandclasses.IndicatorCommand(
         indicators=[indicators.BarExtent(n)],
         selector=selector,
         tags=[const.NOT_PARTS],
     )
-    command_2 = commands.IndicatorCommand(
+    command_2 = commandclasses.IndicatorCommand(
         indicators=[indicators.StaffLines(n)], selector=selector, tags=[tag]
     )
     return scoping.suite(command_1, command_2)
@@ -2965,7 +2965,7 @@ def start_markup(
     hcenter_in: abjad.Number = None,
     literal: bool = None,
     tag: typing.Optional[str] = "baca.start_markup",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     """
     Attaches start markup.
     """
@@ -2987,7 +2987,7 @@ def start_markup(
         raise TypeError(argument)
     assert isinstance(start_markup, abjad.StartMarkup)
     start_markup = abjad.new(start_markup, context=context)
-    command = commands.IndicatorCommand(
+    command = commandclasses.IndicatorCommand(
         indicators=[start_markup],
         selector=selector,
         tags=[tag, abjad.Tag("baca_start_markup"), abjad.Tag("-PARTS")],
@@ -3000,7 +3000,7 @@ def stem_tremolo(
     *,
     tag: typing.Optional[str] = "baca.stem_tremolo",
     tremolo_flags: int = 32,
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches stem tremolo.
 
@@ -3074,7 +3074,7 @@ def stem_tremolo(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.StemTremolo(tremolo_flags=tremolo_flags)],
         selector=selector,
         tags=[tag],
@@ -3086,7 +3086,7 @@ def stop_on_string(
     *,
     map: abjad.SelectorTyping = None,
     tag: typing.Optional[str] = "baca.stop_on_string",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches stop-on-string.
 
@@ -3161,7 +3161,7 @@ def stop_on_string(
 
     """
     articulation = abjad.Articulation("baca-stop-on-string")
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[articulation], map=map, selector=selector, tags=[tag]
     )
 
@@ -3170,7 +3170,7 @@ def stop_trill(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     tag: typing.Optional[str] = "baca.stop_trill",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches stop trill to closing-slot.
 
@@ -3194,7 +3194,7 @@ def stopped(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.stoppped",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches stopped +-sign.
 
@@ -3268,7 +3268,7 @@ def stopped(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("stopped")],
         selector=selector,
         tags=[tag],
@@ -3277,7 +3277,7 @@ def stopped(
 
 def tie(
     selector: abjad.SelectorTyping, *, tag: typing.Optional[str] = "baca.tie"
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches tie.
 
@@ -3354,7 +3354,7 @@ def tie(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Tie()], selector=selector, tags=[tag]
     )
 
@@ -3363,7 +3363,7 @@ def tenuto(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.tenuto",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches tenuto.
 
@@ -3437,7 +3437,7 @@ def tenuto(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("tenuto")],
         selector=selector,
         tags=[tag],
@@ -3448,11 +3448,11 @@ def triple_staccato(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.triple_staccato",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     """
     Attaches triple-staccato.
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #3")],
         selector=selector,
         tags=[tag],
@@ -3463,7 +3463,7 @@ def up_arpeggio(
     selector: abjad.SelectorTyping = "baca.chead(0, exclude=abjad.const.HIDDEN)",
     *,
     tag: typing.Optional[str] = "baca.up_arpeggio",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches up-arpeggio.
 
@@ -3538,7 +3538,7 @@ def up_arpeggio(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.Up)],
         selector=selector,
         tags=[tag],
@@ -3550,7 +3550,7 @@ def up_bow(
     *tweaks: abjad.LilyPondTweakManager,
     full: bool = None,
     tag: typing.Optional[str] = "baca.up_bow",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches up-bow.
 
@@ -3628,7 +3628,7 @@ def up_bow(
         articulation = abjad.Articulation("baca-full-upbow")
     else:
         articulation = abjad.Articulation("upbow")
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[articulation], selector=selector, tags=[tag], tweaks=tweaks
     )
 
@@ -3637,7 +3637,7 @@ def very_long_fermata(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     tag: typing.Optional[str] = "baca.very_long_fermata",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches very long fermata.
 
@@ -3711,7 +3711,7 @@ def very_long_fermata(
             >>
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("verylongfermata")],
         selector=selector,
         tags=[tag],

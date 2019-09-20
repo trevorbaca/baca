@@ -138,7 +138,7 @@ Bača API
 
    <hr/>
 
-.. rubric:: :ref:`baca.commands <baca--commands>`
+.. rubric:: :ref:`baca.commandclasses <baca--commandclasses>`
    :class: section-header
 
 .. raw:: html
@@ -151,17 +151,24 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.commands.BCPCommand
-   ~baca.commands.ColorCommand
-   ~baca.commands.ContainerCommand
-   ~baca.commands.DetachCommand
-   ~baca.commands.GlissandoCommand
-   ~baca.commands.GlobalFermataCommand
-   ~baca.commands.IndicatorCommand
-   ~baca.commands.InstrumentChangeCommand
-   ~baca.commands.LabelCommand
-   ~baca.commands.MetronomeMarkCommand
-   ~baca.commands.PartAssignmentCommand
+   ~baca.commandclasses.BCPCommand
+   ~baca.commandclasses.ColorCommand
+   ~baca.commandclasses.ContainerCommand
+   ~baca.commandclasses.DetachCommand
+   ~baca.commandclasses.GlissandoCommand
+   ~baca.commandclasses.GlobalFermataCommand
+   ~baca.commandclasses.IndicatorCommand
+   ~baca.commandclasses.InstrumentChangeCommand
+   ~baca.commandclasses.LabelCommand
+   ~baca.commandclasses.MetronomeMarkCommand
+   ~baca.commandclasses.PartAssignmentCommand
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.commands <baca--commands>`
+   :class: section-header
 
 .. raw:: html
 

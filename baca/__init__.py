@@ -1,5 +1,6 @@
 import abjad
 from .classes import *
+from .commandclasses import *
 from .commands import *
 from .figuremaker import *
 from .indicatorcommands import *

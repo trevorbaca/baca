@@ -4,7 +4,7 @@ Piecewise library.
 import abjad
 import typing
 from . import classes
-from . import commands
+from . import commandclasses
 from . import const
 from . import scoping
 from . import typings
@@ -702,7 +702,7 @@ def dynamic(
     selector: abjad.SelectorTyping = "baca.phead(0)",
     redundant: bool = None,
     tag: typing.Optional[str] = "baca.dynamic",
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches dynamic.
 
@@ -1175,7 +1175,7 @@ def dynamic(
         indicator = dynamic
     prototype = (abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin)
     assert isinstance(indicator, prototype), repr(indicator)
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         context="Voice",
         indicators=[indicator],
         map=map,

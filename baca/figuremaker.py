@@ -5,15 +5,13 @@ import math
 import typing
 from abjadext import rmakers
 from . import classes
-from . import commands
+from . import commandclasses
 from . import pitchcommands
 from . import pitchclasses
 from . import rhythmcommands
 from . import scoping
 from . import spannercommands
 from . import typings
-
-_commands = commands
 
 
 ### CLASSES ###
@@ -8203,7 +8201,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
 def extend_beam(
     selector: abjad.SelectorTyping = "baca.leaf(-1)"
-) -> commands.IndicatorCommand:
+) -> commandclasses.IndicatorCommand:
     r"""
     Attaches RIGHT_BROKEN_BEAM to selector output.
 
@@ -8504,7 +8502,7 @@ def extend_beam(
             >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
 
     """
-    return commands.IndicatorCommand(
+    return commandclasses.IndicatorCommand(
         indicators=[abjad.tags.RIGHT_BROKEN_BEAM], selector=selector
     )
 

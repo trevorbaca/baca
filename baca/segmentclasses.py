@@ -2,7 +2,7 @@ import abjad
 import collections
 import typing
 from . import classes
-from . import commands as baca_commands
+from . import commandclasses
 from . import indicators
 from . import scoping
 from . import typings
@@ -2635,7 +2635,7 @@ def breaks(
                 break_ = abjad.LilyPondLiteral(r"\pageBreak")
             else:
                 break_ = abjad.LilyPondLiteral(r"\break")
-            command = baca_commands.IndicatorCommand(
+            command = commandclasses.IndicatorCommand(
                 indicators=[break_], selector=selector
             )
             alignment_distances = classes.Sequence(alignment_distances)
@@ -2643,7 +2643,7 @@ def breaks(
             lbsd = LBSD(
                 alignment_distances=alignment_distances, y_offset=y_offset
             )
-            lbsd_command = baca_commands.IndicatorCommand(
+            lbsd_command = commandclasses.IndicatorCommand(
                 indicators=[lbsd], selector=selector
             )
             commands[measure_number] = [command, lbsd_command]

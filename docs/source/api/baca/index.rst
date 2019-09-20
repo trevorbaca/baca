@@ -23,6 +23,7 @@ baca
    :hidden:
 
    classes
+   commandclasses
    commands
    figuremaker
    indicatorcommands
@@ -45,6 +46,7 @@ baca
    :nosignatures:
 
    classes
+   commandclasses
    commands
    figuremaker
    indicatorcommands
