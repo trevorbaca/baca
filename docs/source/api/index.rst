@@ -124,20 +124,6 @@ Bača API
 
    <hr/>
 
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.classes.fractions
-   ~baca.classes._select
-   ~baca.classes._sequence
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: :ref:`baca.commandclasses <baca--commandclasses>`
    :class: section-header
 
@@ -182,14 +168,17 @@ Bača API
 
    ~baca.commands.allow_octaves
    ~baca.commands.bcps
+   ~baca.commands.close_volta
    ~baca.commands.color
    ~baca.commands.container
    ~baca.commands.cross_staff
+   ~baca.commands.double_volta
    ~baca.commands.dynamic_down
    ~baca.commands.dynamic_up
    ~baca.commands.edition
    ~baca.commands.finger_pressure_transition
    ~baca.commands.flat_glissando
+   ~baca.commands.fractions
    ~baca.commands.glissando
    ~baca.commands.global_fermata
    ~baca.commands.instrument
@@ -198,8 +187,11 @@ Bača API
    ~baca.commands.markup
    ~baca.commands.metronome_mark
    ~baca.commands.one_voice
+   ~baca.commands.open_volta
    ~baca.commands.parts
    ~baca.commands.previous_metadata
+   ~baca.commands.select
+   ~baca.commands.sequence
    ~baca.commands.untie
    ~baca.commands.voice_four
    ~baca.commands.voice_one

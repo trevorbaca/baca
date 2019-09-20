@@ -856,7 +856,7 @@ def make_notes(
             rmakers.note(),
             *specifiers,
             # TODO: can this beam specifier be removed?
-            ###rmakers.beam(classes._select().plts()),
+            ###rmakers.beam(classes.Expression().select().plts()),
             rmakers.rewrite_meter(),
             *repeat_tie_specifier,
             tag=tag,
@@ -988,9 +988,9 @@ def make_repeat_tied_notes(
     """
     specifier: rmakers.Command
     specifiers_ = list(specifiers)
-    specifier = rmakers.beam(classes._select().plts())
+    specifier = rmakers.beam(classes.Expression().select().plts())
     specifiers_.append(specifier)
-    specifier = rmakers.repeat_tie(classes._select().pheads()[1:])
+    specifier = rmakers.repeat_tie(classes.Expression().select().pheads()[1:])
     specifiers_.append(specifier)
     if not do_not_rewrite_meter:
         command = rmakers.rewrite_meter()
@@ -1015,7 +1015,7 @@ def make_repeated_duration_notes(
     elif isinstance(durations, tuple):
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
-    divisions = classes._sequence().fuse()
+    divisions = classes.Expression().sequence().fuse()
     divisions = divisions.split_divisions(durations, cyclic=True)
     rewrite_specifiers: typing.List[rmakers.Command] = []
     if not do_not_rewrite_meter:
@@ -1042,7 +1042,7 @@ def make_rests(
     return RhythmCommand(
         rmakers.stack(
             rmakers.note(),
-            rmakers.force_rest(classes._select().lts()),
+            rmakers.force_rest(classes.Expression().select().lts()),
             tag=tag,
         ),
         measures=measures,
@@ -1097,8 +1097,8 @@ def make_tied_notes(
     return RhythmCommand(
         rmakers.stack(
             rmakers.note(),
-            rmakers.beam(classes._select().plts()),
-            rmakers.tie(classes._select().ptails()[:-1]),
+            rmakers.beam(classes.Expression().select().plts()),
+            rmakers.tie(classes.Expression().select().ptails()[:-1]),
             rmakers.rewrite_meter(),
             tag=tag,
         ),
@@ -1122,11 +1122,13 @@ def make_tied_repeated_durations(
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
     tie_specifier: rmakers.Command
-    tie_specifier = rmakers.repeat_tie(classes._select().pheads()[1:])
+    tie_specifier = rmakers.repeat_tie(
+        classes.Expression().select().pheads()[1:]
+    )
     specifiers.append(tie_specifier)
     tie_specifier = rmakers.force_repeat_tie()
     specifiers.append(tie_specifier)
-    divisions = classes._sequence().fuse()
+    divisions = classes.Expression().sequence().fuse()
     divisions = divisions.split_divisions(durations, cyclic=True)
     return RhythmCommand(
         rmakers.stack(

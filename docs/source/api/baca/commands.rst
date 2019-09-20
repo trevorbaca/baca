@@ -24,14 +24,17 @@ commands
 
    ~allow_octaves
    ~bcps
+   ~close_volta
    ~color
    ~container
    ~cross_staff
+   ~double_volta
    ~dynamic_down
    ~dynamic_up
    ~edition
    ~finger_pressure_transition
    ~flat_glissando
+   ~fractions
    ~glissando
    ~global_fermata
    ~instrument
@@ -40,8 +43,11 @@ commands
    ~markup
    ~metronome_mark
    ~one_voice
+   ~open_volta
    ~parts
    ~previous_metadata
+   ~select
+   ~sequence
    ~untie
    ~voice_four
    ~voice_one
@@ -52,11 +58,15 @@ commands
 
 .. autofunction:: bcps
 
+.. autofunction:: close_volta
+
 .. autofunction:: color
 
 .. autofunction:: container
 
 .. autofunction:: cross_staff
+
+.. autofunction:: double_volta
 
 .. autofunction:: dynamic_down
 
@@ -67,6 +77,8 @@ commands
 .. autofunction:: finger_pressure_transition
 
 .. autofunction:: flat_glissando
+
+.. autofunction:: fractions
 
 .. autofunction:: glissando
 
@@ -84,9 +96,15 @@ commands
 
 .. autofunction:: one_voice
 
+.. autofunction:: open_volta
+
 .. autofunction:: parts
 
 .. autofunction:: previous_metadata
+
+.. autofunction:: select
+
+.. autofunction:: sequence
 
 .. autofunction:: untie
 

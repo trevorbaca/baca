@@ -171,6 +171,7 @@ classes
       pitch_class_segment
       pitch_class_segments
       select
+      sequence
 
    .. raw:: html
 
@@ -272,9 +273,7 @@ classes
 
    .. automethod:: Expression.select
 
-   .. container:: inherited
-
-      .. automethod:: Expression.sequence
+   .. automethod:: Expression.sequence
 
    .. container:: inherited
 
@@ -1237,23 +1236,3 @@ classes
    .. autoattribute:: Tree.item_class
 
    .. autoattribute:: Tree.items
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: section-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~fractions
-   ~_select
-   ~_sequence
-
-.. autofunction:: fractions
-
-.. autofunction:: _select
-
-.. autofunction:: _sequence

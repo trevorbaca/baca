@@ -1326,6 +1326,18 @@ class Expression(abjad.Expression):
         expression = self.append_callback(callback)
         return abjad.new(expression, proxy_class=class_, template="baca")
 
+    def sequence(items=None, **keywords):
+        """
+        Makes sequence expression.
+        """
+        name = keywords.pop("name", None)
+        expression = Expression(name=name)
+        callback = expression._make_initializer_callback(
+            Sequence, module_names=["baca"], string_template="{}", **keywords
+        )
+        expression = expression.append_callback(callback)
+        return abjad.new(expression, proxy_class=Sequence)
+
 
 class PaddedTuple(object):
     """
@@ -2237,7 +2249,7 @@ class Selection(abjad.Selection):
         result = self.leaves(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, cyclic=True)
-        result_ = result.map(_select().flatten())
+        result_ = result.map(Expression().select().flatten())
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
@@ -3771,7 +3783,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.plts(exclude=exclude)
         result = result.group_by_pitch()
-        result = result.map(_select().group_by_contiguity())
+        result = result.map(Expression().select().group_by_contiguity())
         result = result.flatten(depth=1)
         result = result.map(Selection)
         return result
@@ -4195,7 +4207,7 @@ class Selection(abjad.Selection):
         result = self.leaves(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts)
-        result_ = result.map(_select().flatten())
+        result_ = result.map(Expression().select().flatten())
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
@@ -4758,7 +4770,7 @@ class Selection(abjad.Selection):
         result = self.leaves(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, overhang=True)
-        result_ = result.map(_select().flatten())
+        result_ = result.map(Expression().select().flatten())
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
@@ -4776,7 +4788,7 @@ class Selection(abjad.Selection):
         result = self.plts(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, overhang=True)
-        result_ = result.map(_select().flatten())
+        result_ = result.map(Expression().select().flatten())
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
@@ -4995,7 +5007,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.plts(exclude=exclude).map(_select()[0])
+        return self.plts(exclude=exclude).map(Expression().select()[0])
 
     def pleaf(
         self, n: int, *, exclude: abjad.Strings = None, grace: bool = None
@@ -5659,7 +5671,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.plts(exclude=exclude).map(_select()[-1])
+        return self.plts(exclude=exclude).map(Expression().select()[-1])
 
     def ptlt(
         self, n: int, *, exclude: abjad.Strings = None
@@ -6080,7 +6092,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.pleaves(exclude=exclude)
         result = result.group_by_pitch()
-        result = result.map(_select().group_by_contiguity())
+        result = result.map(Expression().select().group_by_contiguity())
         result = result.flatten(depth=1)
         result = result.map(Selection)
         return result
@@ -6639,7 +6651,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        result = self.runs(exclude=exclude).map(_select().rleak())
+        result = self.runs(exclude=exclude).map(Expression().select().rleak())
         return result.map(Selection)
 
     def skip(
@@ -11806,41 +11818,3 @@ class Tree(object):
             else:
                 if node._get_level(negative=True) == level:
                     yield node
-
-
-### FACTORY FUNCTIONS ###
-
-
-def _select(items=None):
-    if items is None:
-        return Expression().select()
-    return Selection(items=items)
-
-
-selector = _select
-
-
-def _sequence(items=None, **keywords):
-    if items is not None:
-        return Sequence(items=items, **keywords)
-    name = keywords.pop("name", None)
-    expression = Expression(name=name)
-    callback = expression._make_initializer_callback(
-        Sequence, module_names=["baca"], string_template="{}", **keywords
-    )
-    expression = expression.append_callback(callback)
-    return abjad.new(expression, proxy_class=Sequence)
-
-
-sequence_expression = _sequence
-
-
-def fractions(items):
-    """
-    Makes fractions.
-    """
-    result = []
-    for item in items:
-        item_ = abjad.NonreducedFraction(item)
-        result.append(item_)
-    return result

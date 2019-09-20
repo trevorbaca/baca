@@ -5,6 +5,8 @@ from . import classes
 from . import commandclasses
 from . import const
 from . import indicators
+from . import indicatorcommands
+from . import overrides
 from . import pitchcommands
 from . import rhythmcommands
 from . import scoping
@@ -272,6 +274,25 @@ def bcps(
         selector=selector,
         tags=[tag],
         tweaks=tweaks,
+    )
+
+
+def close_volta(
+    selector: abjad.SelectorTyping = "baca.leaf(0)",
+    *,
+    format_slot: str = "before",
+) -> scoping.Suite:
+    """
+    Attaches bar line and overrides bar line X-extent.
+    """
+    assert format_slot in ("after", "before"), repr(format_slot)
+    after = format_slot == "after"
+    # does not require not_mol() tagging, just only_mol() tagging:
+    return scoping.suite(
+        indicatorcommands.bar_line(":|.", selector, format_slot=format_slot),
+        scoping.only_mol(
+            overrides.bar_line_x_extent((0, 1.5), selector, after=after)
+        ),
     )
 
 
@@ -901,6 +922,19 @@ def cross_staff(
     )
 
 
+def double_volta(
+    selector: abjad.SelectorTyping = "baca.leaf(0)"
+) -> scoping.Suite:
+    """
+    Attaches bar line and overrides bar line X-extent.
+    """
+    return scoping.suite(
+        indicatorcommands.bar_line(":.|.:", selector, format_slot="before"),
+        scoping.not_mol(overrides.bar_line_x_extent((0, 3), selector)),
+        scoping.only_mol(overrides.bar_line_x_extent((0, 4), selector)),
+    )
+
+
 def dynamic_down(
     *,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
@@ -1312,6 +1346,17 @@ def flat_glissando(
         )
         commands.append(command)
     return scoping.suite(*commands)
+
+
+def fractions(items):
+    """
+    Makes fractions.
+    """
+    result = []
+    for item in items:
+        item_ = abjad.NonreducedFraction(item)
+        result.append(item_)
+    return result
 
 
 def glissando(
@@ -2804,6 +2849,19 @@ def one_voice(
     )
 
 
+def open_volta(
+    selector: abjad.SelectorTyping = "baca.leaf(0)"
+) -> scoping.Suite:
+    """
+    Attaches bar line and overrides bar line X-extent.
+    """
+    return scoping.suite(
+        indicatorcommands.bar_line(".|:", selector, format_slot="before"),
+        scoping.not_mol(overrides.bar_line_x_extent((0, 2), selector)),
+        scoping.only_mol(overrides.bar_line_x_extent((0, 3), selector)),
+    )
+
+
 def previous_metadata(path: str) -> abjad.OrderedDict:
     """
     Gets previous segment metadata before ``path``.
@@ -2825,6 +2883,18 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     previous_segment = paths[previous_index]
     previous_metadata = previous_segment.get_metadata()
     return previous_metadata
+
+
+def select(items=None):
+    if items is None:
+        return classes.Expression().select()
+    return classes.Selection(items=items)
+
+
+def sequence(items=None, **keywords):
+    if items is None:
+        return classes.Expression.sequence(**keywords)
+    return classes.Sequence(items=items, **keywords)
 
 
 def untie(selector: abjad.SelectorTyping) -> commandclasses.DetachCommand:
