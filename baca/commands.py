@@ -1302,6 +1302,7 @@ def flat_glissando(
     # TODO: allow staff position entry in addition to pitch entry:
     pitch,
     *tweaks,
+    allow_repitch=None,
     hide_middle_stems=None,
     left_broken=None,
     right_broken=None,
@@ -1338,7 +1339,9 @@ def flat_glissando(
     command = untie(selector.leaves())
     commands.append(command)
     if pitch is not None and stop_pitch is None:
-        command = pitchcommands.pitch(pitch, selector=selector)
+        command = pitchcommands.pitch(
+            pitch, allow_repitch=allow_repitch, selector=selector
+        )
         commands.append(command)
     elif pitch is not None and stop_pitch is not None:
         command = pitchcommands.interpolate_staff_positions(

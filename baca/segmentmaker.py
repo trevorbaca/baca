@@ -187,6 +187,7 @@ class SegmentMaker(abjad.SegmentMaker):
         "_breaks",
         "_cache",
         "_cached_time_signatures",
+        "_check_all_are_pitched",
         "_clock_time_extra_offset",
         "_clock_time_override",
         "_color_octaves",
@@ -315,6 +316,7 @@ class SegmentMaker(abjad.SegmentMaker):
         activate: typing.List[str] = None,
         allow_empty_selections: bool = None,
         breaks: segmentclasses.BreakMeasureMap = None,
+        check_all_are_pitched: bool = None,
         clock_time_extra_offset: typing.Union[bool, typings.Pair] = None,
         clock_time_override: abjad.MetronomeMark = None,
         color_octaves: bool = None,
@@ -372,6 +374,9 @@ class SegmentMaker(abjad.SegmentMaker):
         self._activate = activate
         self._allow_empty_selections = allow_empty_selections
         self._breaks = breaks
+        if check_all_are_pitched is not None:
+            check_all_are_pitched = bool(check_all_are_pitched)
+        self._check_all_are_pitched = check_all_are_pitched
         if clock_time_extra_offset not in (False, None):
             assert isinstance(clock_time_extra_offset, tuple)
             assert len(clock_time_extra_offset) == 2
@@ -1784,6 +1789,17 @@ class SegmentMaker(abjad.SegmentMaker):
                 selections.append(selection)
             voice.extend(selections)
         return command_count
+
+    def _check_all_are_pitched_(self):
+        if not self.check_all_are_pitched:
+            return
+        tag = abjad.tags.NOT_YET_PITCHED
+        for voice in abjad.iterate(self.score).components(abjad.Voice):
+            for leaf in abjad.iterate(voice).leaves():
+                if abjad.inspect(leaf).has_indicator(tag):
+                    message = "not yet pitched:\n"
+                    message += f"   {repr(leaf)} in {voice.name}"
+                    raise Exception(message)
 
     def _check_all_music_in_part_containers(self):
         name = "all_music_in_part_containers"
@@ -3855,6 +3871,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Gets breaks.
         """
         return self._breaks
+
+    @property
+    def check_all_are_pitched(self) -> typing.Optional[bool]:
+        """
+        Is true when segment-maker checks for NOT_YET_PITCHED tags.
+        """
+        return self._check_all_are_pitched
 
     @property
     def clock_time_extra_offset(
@@ -6823,6 +6846,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._add_final_markup()
                 self._color_unregistered_pitches()
                 self._color_unpitched_notes()
+                self._check_all_are_pitched_()
                 self._check_wellformedness()
                 self._check_doubled_dynamics()
                 self._check_range()

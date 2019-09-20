@@ -691,6 +691,7 @@ pitchcommands
       allow_octaves
       allow_out_of_range
       allow_repeats
+      allow_repitch
       cyclic
       do_not_transpose
       ignore_incomplete
@@ -742,6 +743,8 @@ pitchcommands
    .. autoattribute:: PitchCommand.allow_out_of_range
 
    .. autoattribute:: PitchCommand.allow_repeats
+
+   .. autoattribute:: PitchCommand.allow_repitch
 
    .. autoattribute:: PitchCommand.cyclic
 

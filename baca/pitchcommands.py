@@ -2978,6 +2978,7 @@ class PitchCommand(scoping.Command):
         "_allow_octaves",
         "_allow_out_of_range",
         "_allow_repeats",
+        "_allow_repitch",
         "_cyclic",
         "_do_not_transpose",
         "_ignore_incomplete",
@@ -2996,6 +2997,7 @@ class PitchCommand(scoping.Command):
         allow_octaves: bool = None,
         allow_out_of_range: bool = None,
         allow_repeats: bool = None,
+        allow_repitch: bool = None,
         cyclic: bool = None,
         do_not_transpose: bool = None,
         ignore_incomplete: bool = None,
@@ -3025,6 +3027,9 @@ class PitchCommand(scoping.Command):
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
         self._allow_repeats = allow_repeats
+        if allow_repitch is not None:
+            allow_repitch = bool(allow_repitch)
+        self._allow_repitch = allow_repitch
         if cyclic is not None:
             cyclic = bool(cyclic)
         self._cyclic = cyclic
@@ -3075,7 +3080,12 @@ class PitchCommand(scoping.Command):
         pitches_consumed = 0
         for i, plt in enumerate(plts):
             pitch = pitches[i + previous_pitches_consumed]
-            new_plt = self._set_lt_pitch(plt, pitch, self.not_yet_pitched)
+            new_plt = self._set_lt_pitch(
+                plt,
+                pitch,
+                self.not_yet_pitched,
+                allow_repitch=self.allow_repitch,
+            )
             if new_plt is not None:
                 self._mutated_score = True
                 plt = new_plt
@@ -3179,11 +3189,25 @@ class PitchCommand(scoping.Command):
         return pitches_consumed
 
     @staticmethod
-    def _set_lt_pitch(lt, pitch, not_yet_pitched=False):
+    def _set_lt_pitch(
+        lt, pitch, not_yet_pitched=False, *, allow_repitch=False
+    ):
         new_lt = None
+        already_pitched = abjad.tags.ALREADY_PITCHED
         if not not_yet_pitched:
             for leaf in lt:
                 abjad.detach(abjad.tags.NOT_YET_PITCHED, leaf)
+                if allow_repitch:
+                    continue
+                if abjad.inspect(leaf).has_indicator(already_pitched):
+                    voice = abjad.inspect(leaf).parentage().get(abjad.Voice)
+                    if voice is None:
+                        name = "no voice"
+                    else:
+                        name = voice.name
+                    message = f"already pitched {repr(leaf)} in {name}."
+                    raise Exception(message)
+                abjad.attach(already_pitched, leaf)
         if pitch is None:
             if not lt.is_pitched:
                 pass
@@ -3236,6 +3260,13 @@ class PitchCommand(scoping.Command):
         Is true when command allows repeat pitches.
         """
         return self._allow_repeats
+
+    @property
+    def allow_repitch(self) -> typing.Optional[bool]:
+        """
+        Is true when command allows repitch.
+        """
+        return self._allow_repitch
 
     @property
     def cyclic(self) -> typing.Optional[bool]:
@@ -6003,7 +6034,9 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 abjad.Clef, default=abjad.Clef("treble")
             )
             pitch = staff_position.to_pitch(clef=clef)
-            PitchCommand._set_lt_pitch(plt, pitch, self.not_yet_pitched)
+            PitchCommand._set_lt_pitch(
+                plt, pitch, self.not_yet_pitched, allow_repitch=True
+            )
             for leaf in plt:
                 abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
         if isinstance(self.start, abjad.NamedPitch):
@@ -6013,7 +6046,9 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 abjad.Clef, default=abjad.Clef("treble")
             )
             start_pitch = self.start.to_pitch(clef=clef)
-        PitchCommand._set_lt_pitch(plts[0], start_pitch, self.not_yet_pitched)
+        PitchCommand._set_lt_pitch(
+            plts[0], start_pitch, self.not_yet_pitched, allow_repitch=True
+        )
         if isinstance(self.stop, abjad.NamedPitch):
             stop_pitch = self.stop
         else:
@@ -6021,7 +6056,9 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 abjad.Clef, default=abjad.Clef("treble")
             )
             stop_pitch = self.stop.to_pitch(clef=clef)
-        PitchCommand._set_lt_pitch(plts[-1], stop_pitch, self.not_yet_pitched)
+        PitchCommand._set_lt_pitch(
+            plts[-1], stop_pitch, self.not_yet_pitched, allow_repitch=True
+        )
 
     ### PUBLIC PROPERTIES ###
 
@@ -6909,6 +6946,7 @@ def pitch(
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
     *,
     allow_out_of_range: bool = None,
+    allow_repitch: bool = None,
     do_not_transpose: bool = None,
     not_yet_pitched: bool = None,
     persist: str = None,
@@ -6932,6 +6970,7 @@ def pitch(
     return PitchCommand(
         allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
+        allow_repitch=allow_repitch,
         cyclic=True,
         do_not_transpose=do_not_transpose,
         not_yet_pitched=not_yet_pitched,
@@ -6947,6 +6986,7 @@ def pitches(
     *,
     allow_octaves: bool = None,
     allow_repeats: bool = None,
+    allow_repitch: bool = None,
     do_not_transpose: bool = None,
     exact: bool = None,
     ignore_incomplete: bool = None,
@@ -6978,6 +7018,7 @@ def pitches(
     return PitchCommand(
         allow_octaves=allow_octaves,
         allow_repeats=allow_repeats,
+        allow_repitch=allow_repitch,
         cyclic=cyclic,
         do_not_transpose=do_not_transpose,
         ignore_incomplete=ignore_incomplete,
