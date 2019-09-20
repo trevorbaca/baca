@@ -740,7 +740,7 @@ def dynamic(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
                         \f                                                                           %! baca.dynamic:IndicatorCommand
@@ -770,7 +770,7 @@ def dynamic(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
                 }
             >>
@@ -809,7 +809,7 @@ def dynamic(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
                         \baca-effort-f                                                               %! baca.dynamic:IndicatorCommand
@@ -839,7 +839,7 @@ def dynamic(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
                 }
             >>
@@ -928,7 +928,7 @@ def dynamic(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
@@ -972,7 +972,7 @@ def dynamic(
                             d''8                                                                     %! baca.make_even_divisions
                             \!                                                                       %! baca.dynamic:IndicatorCommand
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1090,7 +1090,7 @@ def dynamic(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             - \tweak extra-offset #'(-4 . 0)                                         %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
@@ -1132,7 +1132,7 @@ def dynamic(
             <BLANKLINE>
                             d''8                                                                     %! baca.make_even_divisions
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1288,7 +1288,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -1333,7 +1333,7 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1451,7 +1451,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \baca-effort-ff                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -1498,7 +1498,7 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \!                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1616,7 +1616,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \!                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -1662,7 +1662,7 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \baca-effort-ff                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1780,7 +1780,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \baca-effort-p                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -1826,7 +1826,7 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1951,7 +1951,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \baca-effort-mp                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -2004,7 +2004,7 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \baca-effort-p                                                           %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -2125,7 +2125,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -2174,7 +2174,7 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -2293,7 +2293,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -2350,7 +2350,7 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -2470,7 +2470,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -2525,7 +2525,7 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -2645,7 +2645,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -2710,7 +2710,7 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -2828,7 +2828,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -2869,7 +2869,7 @@ def hairpin(
             <BLANKLINE>
                             d''8                                                                     %! baca.make_even_divisions
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -2987,7 +2987,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \<                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca.hairpin:PiecewiseCommand(1)
@@ -3029,7 +3029,7 @@ def hairpin(
                             d''8                                                                     %! baca.make_even_divisions
                             \!                                                                       %! SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -3158,7 +3158,7 @@ def hairpin(
                             {                                                                        %! baca.skeleton
             <BLANKLINE>
                                 % [Music_Voice measure 1]                                            %! baca.SegmentMaker._comment_measure_numbers()
-                                \override DynamicLineSpanner.staff-padding = #4                      %! baca.dls_staff_padding:OverrideCommand(1)
+                                \override DynamicLineSpanner.staff-padding = #4                      %! baca.dls_staff_padding():OverrideCommand(1)
                                 c'2                                                                  %! baca.skeleton
                                 - \tweak color #(x11-color 'blue)                                    %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 - \tweak to-barline ##t                                              %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -3189,7 +3189,7 @@ def hairpin(
                                 - \tweak color #(x11-color 'blue)                                    %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 - \tweak to-barline ##t                                              %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
                                 \!                                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
-                                \revert DynamicLineSpanner.staff-padding                             %! baca.dls_staff_padding:OverrideCommand(2)
+                                \revert DynamicLineSpanner.staff-padding                             %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             }                                                                        %! baca.skeleton
             <BLANKLINE>
@@ -3313,7 +3313,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #4                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #4                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \mf                                                                      %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -3361,7 +3361,7 @@ def hairpin(
             <BLANKLINE>
                             d''8                                                                     %! baca.make_even_divisions
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -3479,7 +3479,7 @@ def hairpin(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #4                          %! baca.dls_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #4                          %! baca.dls_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \baca-mp-parenthesized                                                   %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(1)
@@ -3524,7 +3524,7 @@ def hairpin(
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                             \mf                                                                      %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -4380,7 +4380,7 @@ def text_spanner(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
                             - \abjad-dashed-line-with-arrow                                          %! baca.text_spanner:PiecewiseCommand(1)
@@ -4426,7 +4426,7 @@ def text_spanner(
                             d''8                                                                     %! baca.make_even_divisions
                             \stopTextSpan                                                            %! SPANNER_STOP:baca.text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -4542,7 +4542,7 @@ def text_spanner(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
                             - \abjad-dashed-line-with-hook                                           %! baca.text_spanner:PiecewiseCommand(1)
@@ -4603,7 +4603,7 @@ def text_spanner(
                             d''8                                                                     %! baca.make_even_divisions
                             \stopTextSpan                                                            %! SPANNER_STOP:baca.text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -4719,7 +4719,7 @@ def text_spanner(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
                             - \abjad-solid-line-with-arrow                                           %! baca.text_spanner:PiecewiseCommand(1)
@@ -4765,7 +4765,7 @@ def text_spanner(
                             d''8                                                                     %! baca.make_even_divisions
                             \stopTextSpan                                                            %! SPANNER_STOP:baca.text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -4881,7 +4881,7 @@ def text_spanner(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
                             - \abjad-solid-line-with-hook                                            %! baca.text_spanner:PiecewiseCommand(1)
@@ -4942,7 +4942,7 @@ def text_spanner(
                             d''8                                                                     %! baca.make_even_divisions
                             \stopTextSpan                                                            %! SPANNER_STOP:baca.text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -5058,7 +5058,7 @@ def text_spanner(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
                             - \abjad-invisible-line                                                  %! baca.text_spanner:PiecewiseCommand(1)
@@ -5104,7 +5104,7 @@ def text_spanner(
                             d''8                                                                     %! baca.make_even_divisions
                             \stopTextSpan                                                            %! SPANNER_STOP:baca.text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -5226,8 +5226,8 @@ def text_spanner(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
-                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
                             - \abjad-invisible-line                                                  %! baca.text_spanner:PiecewiseCommand(1)
@@ -5285,8 +5285,8 @@ def text_spanner(
                             d''8                                                                     %! baca.make_even_divisions
                             \stopTextSpan                                                            %! SPANNER_STOP:baca.text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
-                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -5406,8 +5406,8 @@ def text_spanner(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
-                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
                             - \abjad-solid-line-with-arrow                                           %! baca.text_spanner:PiecewiseCommand(1)
@@ -5465,8 +5465,8 @@ def text_spanner(
                             d''8                                                                     %! baca.make_even_divisions
                             \stopTextSpan                                                            %! SPANNER_STOP:baca.text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
-                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -5587,8 +5587,8 @@ def text_spanner(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
-                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
                             - \abjad-invisible-line                                                  %! baca.text_spanner:PiecewiseCommand(1)
@@ -5655,8 +5655,8 @@ def text_spanner(
                             d''8                                                                     %! baca.make_even_divisions
                             \stopTextSpan                                                            %! SPANNER_STOP:baca.text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
-                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -5777,8 +5777,8 @@ def text_spanner(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
-                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
                             - \abjad-solid-line-with-arrow                                           %! baca.text_spanner:PiecewiseCommand(1)
@@ -5845,8 +5845,8 @@ def text_spanner(
                             d''8                                                                     %! baca.make_even_divisions
                             \stopTextSpan                                                            %! SPANNER_STOP:baca.text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
-                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -5975,7 +5975,7 @@ def text_spanner(
                             {                                                                        %! baca.skeleton
             <BLANKLINE>
                                 % [Music_Voice measure 1]                                            %! baca.SegmentMaker._comment_measure_numbers()
-                                \override TextSpanner.staff-padding = #4.5                           %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                                \override TextSpanner.staff-padding = #4.5                           %! baca.text_spanner_staff_padding():OverrideCommand(1)
                                 c'2                                                                  %! baca.skeleton
                                 - \abjad-solid-line-with-arrow                                       %! baca.text_spanner:PiecewiseCommand(1)
                                 - \baca-text-spanner-left-text "P"                                   %! baca.text_spanner:PiecewiseCommand(1)
@@ -6004,7 +6004,7 @@ def text_spanner(
                                 % [Music_Voice measure 4]                                            %! baca.SegmentMaker._comment_measure_numbers()
                                 f'4.                                                                 %! baca.skeleton
                                 \stopTextSpan                                                        %! SPANNER_STOP:baca.text_spanner:PiecewiseCommand(1)
-                                \revert TextSpanner.staff-padding                                    %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                                \revert TextSpanner.staff-padding                                    %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             }                                                                        %! baca.skeleton
             <BLANKLINE>
@@ -6129,8 +6129,8 @@ def text_spanner(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
-                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
                             - \abjad-dashed-line-with-hook                                           %! baca.text_spanner:PiecewiseCommand(1)
@@ -6173,8 +6173,8 @@ def text_spanner(
             <BLANKLINE>
                             d''8                                                                     %! baca.make_even_divisions
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
-                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -6296,8 +6296,8 @@ def text_spanner(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding:OverrideCommand(1)
-                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override DynamicLineSpanner.staff-padding = #5                          %! baca.dls_staff_padding():OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             e'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
                             - \abjad-solid-line-with-hook                                            %! baca.text_spanner:PiecewiseCommand(1)
@@ -6370,8 +6370,8 @@ def text_spanner(
                             d''8                                                                     %! baca.make_even_divisions
                             \stopTextSpan                                                            %! SPANNER_STOP:baca.text_spanner:PiecewiseCommand(2)
                             ]                                                                        %! baca.make_even_divisions
-                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding:OverrideCommand(2)
-                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert DynamicLineSpanner.staff-padding                                 %! baca.dls_staff_padding():OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -6504,7 +6504,7 @@ def text_spanner(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4.5                               %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             c'2                                                                      %! baca.make_notes
                             - \abjad-solid-line-with-arrow                                           %! baca.text_spanner:PiecewiseCommand(1)
                             - \baca-text-spanner-left-text "P"                                       %! baca.text_spanner:PiecewiseCommand(1)
@@ -6544,7 +6544,7 @@ def text_spanner(
                             % [Music_Voice measure 6]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             a'4.                                                                     %! baca.make_notes
                             \stopTextSpan                                                            %! SPANNER_STOP:baca.text_spanner:PiecewiseCommand(1)
-                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -6668,7 +6668,7 @@ def text_spanner(
                             {                                                                        %! baca.skeleton
             <BLANKLINE>
                                 % [Music_Voice measure 1]                                            %! baca.SegmentMaker._comment_measure_numbers()
-                                \override TextSpanner.staff-padding = #4.5                           %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                                \override TextSpanner.staff-padding = #4.5                           %! baca.text_spanner_staff_padding():OverrideCommand(1)
                                 c'2                                                                  %! baca.skeleton
                                 - \abjad-solid-line-with-arrow                                       %! baca.text_spanner:PiecewiseCommand(1)
                                 - \baca-text-spanner-left-text "P"                                   %! baca.text_spanner:PiecewiseCommand(1)
@@ -6697,7 +6697,7 @@ def text_spanner(
                                 ~
             <BLANKLINE>
                                 f'8                                                                  %! baca.skeleton
-                                \revert TextSpanner.staff-padding                                    %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                                \revert TextSpanner.staff-padding                                    %! baca.text_spanner_staff_padding():OverrideCommand(2)
             <BLANKLINE>
                             }                                                                        %! baca.skeleton
             <BLANKLINE>

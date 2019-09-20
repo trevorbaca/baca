@@ -18,6 +18,12 @@ RhythmMakerTyping = typing.Union[
     rmakers.Assignment, rmakers.RhythmMaker, rmakers.Stack, rmakers.Bind
 ]
 
+
+def _site(frame):
+    prefix = "baca"
+    return scoping.site(frame, prefix)
+
+
 ### CLASSES ###
 
 
@@ -479,8 +485,8 @@ class RhythmCommand(scoping.Command):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \override TextScript.font-size = #-2                                     %! baca.text_script_font_size:OverrideCommand(1)
-                                \override TextScript.staff-padding = #5                                  %! baca.text_script_staff_padding:OverrideCommand(1)
+                                \override TextScript.font-size = #-2                                     %! baca.text_script_font_size():OverrideCommand(1)
+                                \override TextScript.staff-padding = #5                                  %! baca.text_script_staff_padding():OverrideCommand(1)
                                 \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'8.
                                 _ \markup {
@@ -585,8 +591,8 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                                 ]
-                                \revert TextScript.font-size                                             %! baca.text_script_font_size:OverrideCommand(2)
-                                \revert TextScript.staff-padding                                         %! baca.text_script_staff_padding:OverrideCommand(2)
+                                \revert TextScript.font-size                                             %! baca.text_script_font_size():OverrideCommand(2)
+                                \revert TextScript.staff-padding                                         %! baca.text_script_staff_padding():OverrideCommand(2)
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -1212,9 +1218,9 @@ def tacet(
     """
     Colors multimeasure rests.
     """
-    command = overrides.mmrest_color(
-        color, selector=selector, tag=f"{const.TACET}:baca_tacet"
-    )
+    command = overrides.mmrest_color(color, selector=selector)
+    scoping.tag(const.TACET, command)
+    scoping.tag(_site(inspect.currentframe()), command)
     command_ = scoping.new(command, measures=measures)
     assert isinstance(command_, overrides.OverrideCommand)
     return command_

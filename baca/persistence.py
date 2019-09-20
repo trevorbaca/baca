@@ -6441,7 +6441,7 @@ class PersistentIndicatorTests(object):
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #4 #'(8)                                                          %! BREAK:IndicatorCommand
@@ -6461,7 +6461,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
@@ -6584,7 +6584,7 @@ class PersistentIndicatorTests(object):
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #4 #'(8)                                                          %! BREAK:IndicatorCommand
@@ -6604,7 +6604,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
@@ -6860,7 +6860,7 @@ class PersistentIndicatorTests(object):
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #4 #'(8)                                                          %! BREAK:IndicatorCommand
@@ -6880,7 +6880,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
@@ -8228,7 +8228,7 @@ class PersistentIndicatorTests(object):
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #4 #'(8)                                                          %! BREAK:IndicatorCommand
@@ -8268,7 +8268,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
@@ -8390,7 +8390,7 @@ class PersistentIndicatorTests(object):
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #4 #'(8)                                                          %! BREAK:IndicatorCommand
@@ -8430,7 +8430,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
@@ -8736,7 +8736,7 @@ class PersistentIndicatorTests(object):
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding:OverrideCommand(1)
+                            \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding():OverrideCommand(1)
                             \autoPageBreaksOff                                                           %! BreakMeasureMap(1):BREAK
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             \baca-lbsd #4 #'(8)                                                          %! BREAK:IndicatorCommand
@@ -8776,7 +8776,7 @@ class PersistentIndicatorTests(object):
                             \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
                             \noBreak                                                                     %! BreakMeasureMap(2):BREAK
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding:OverrideCommand(2)
+                            \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():OverrideCommand(2)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>

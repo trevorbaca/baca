@@ -8895,7 +8895,7 @@ def imbricate(
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                     % [Music_Voice_One measure 1]                                    %! baca.SegmentMaker._comment_measure_numbers()
-                                    \override Beam.positions = #'(6 . 6)                             %! baca.beam_positions:OverrideCommand(1)
+                                    \override Beam.positions = #'(6 . 6)                             %! baca.beam_positions():OverrideCommand(1)
                                     s16
                                     [
             <BLANKLINE>
@@ -8944,7 +8944,7 @@ def imbricate(
             <BLANKLINE>
                                     s16
                                     ]
-                                    \revert Beam.positions                                           %! baca.beam_positions:OverrideCommand(2)
+                                    \revert Beam.positions                                           %! baca.beam_positions():OverrideCommand(2)
             <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
@@ -9100,7 +9100,7 @@ def imbricate(
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                     % [Music_Voice_Three measure 1]                                  %! baca.SegmentMaker._comment_measure_numbers()
-                                    \override Beam.positions = #'(8 . 8)                             %! baca.beam_positions:OverrideCommand(1)
+                                    \override Beam.positions = #'(8 . 8)                             %! baca.beam_positions():OverrideCommand(1)
                                     s16
                                     [
             <BLANKLINE>
@@ -9149,7 +9149,7 @@ def imbricate(
             <BLANKLINE>
                                     s16
                                     ]
-                                    \revert Beam.positions                                           %! baca.beam_positions:OverrideCommand(2)
+                                    \revert Beam.positions                                           %! baca.beam_positions():OverrideCommand(2)
             <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
@@ -10418,7 +10418,7 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
                     \times 13/11 {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #2                               %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #2                               %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                             r8
                             c'16
                             [
@@ -10447,7 +10447,7 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                         }
                     }
                 }
@@ -10526,7 +10526,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 7/8 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         c'16
                         [
                         d'16
@@ -10554,7 +10554,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
                     \times 2/3 {
                         a'16
                         r8
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
                 }
             >>
@@ -10600,7 +10600,7 @@ def rests_around(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
                         [
@@ -10629,7 +10629,7 @@ def rests_around(
                     \times 2/3 {
                         a'16
                         r8
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
                 }
             >>
@@ -10864,7 +10864,7 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
                         [
@@ -10892,7 +10892,7 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
                     }
                     \scaleDurations #'(1 . 1) {
                         a'16
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
                 }
             >>
@@ -10954,7 +10954,7 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 7/8 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         c'16
                         [
                         d'16
@@ -10982,7 +10982,7 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
                     \times 2/3 {
                         a'16
                         s8
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
                 }
             >>
@@ -11028,7 +11028,7 @@ def skips_around(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         s8
                         c'16
                         [
@@ -11057,7 +11057,7 @@ def skips_around(
                     \times 2/3 {
                         a'16
                         s8
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
                 }
             >>
@@ -11101,7 +11101,7 @@ def skips_before(counts: typing.List[int],) -> RestAffix:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding:OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         s8
                         c'16
                         [
@@ -11129,7 +11129,7 @@ def skips_before(counts: typing.List[int],) -> RestAffix:
                     }
                     \scaleDurations #'(1 . 1) {
                         a'16
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding:OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
                 }
             >>
