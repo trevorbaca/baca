@@ -51,7 +51,6 @@ segmentmaker
       do_not_check_wellformedness
       do_not_color_out_of_range_pitches
       do_not_color_repeat_pitch_classes
-      do_not_color_unpitched_music
       do_not_color_unregistered_pitches
       do_not_force_nonnatural_accidentals
       do_not_include_layout_ly
@@ -176,8 +175,6 @@ segmentmaker
    .. autoattribute:: SegmentMaker.do_not_color_out_of_range_pitches
 
    .. autoattribute:: SegmentMaker.do_not_color_repeat_pitch_classes
-
-   .. autoattribute:: SegmentMaker.do_not_color_unpitched_music
 
    .. autoattribute:: SegmentMaker.do_not_color_unregistered_pitches
 

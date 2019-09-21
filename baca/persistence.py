@@ -34,7 +34,6 @@ class PersistentIndicatorTests(object):
             >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
             ...     score_template=score_template,
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -157,7 +156,6 @@ class PersistentIndicatorTests(object):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -282,7 +280,6 @@ class PersistentIndicatorTests(object):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -424,7 +421,6 @@ class PersistentIndicatorTests(object):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -563,7 +559,6 @@ class PersistentIndicatorTests(object):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8), (3, 8)],
@@ -702,7 +697,6 @@ class PersistentIndicatorTests(object):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -846,7 +840,7 @@ class PersistentIndicatorTests(object):
             Explicit dynamics color blue:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -910,11 +904,13 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -954,7 +950,7 @@ class PersistentIndicatorTests(object):
             Even after a previous dynamic:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -1033,11 +1029,13 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -1079,7 +1077,7 @@ class PersistentIndicatorTests(object):
             Reapplied dynamics color green:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -1157,11 +1155,13 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 - \tweak color #(x11-color 'green4)                                      %! REAPPLIED_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \f                                                                       %! REAPPLIED_DYNAMIC:_set_status_tag:baca.SegmentMaker._reapply_persistent_indicators(3)
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -1203,7 +1203,7 @@ class PersistentIndicatorTests(object):
             Redundant dynamics color pink:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -1268,11 +1268,13 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
@@ -1314,7 +1316,7 @@ class PersistentIndicatorTests(object):
             Even at the beginning of a segment:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -1393,11 +1395,13 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 - \tweak color #(x11-color 'DeepPink1)                                   %! REDUNDANT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \f                                                                       %! REDUNDANT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -1437,7 +1441,7 @@ class PersistentIndicatorTests(object):
             Sforzando dynamics do not count as redundant:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -1502,11 +1506,13 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
@@ -1548,7 +1554,7 @@ class PersistentIndicatorTests(object):
             Even at the beginning of a segment:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -1627,11 +1633,13 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \sfz                                                                     %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -1674,7 +1682,7 @@ class PersistentIndicatorTests(object):
             nonredundantly:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -1739,11 +1747,13 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \mf                                                                      %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1)
                                 \baca-effort-mf                                                          %! EXPLICIT_DYNAMIC:_set_status_tag:baca.dynamic:IndicatorCommand
@@ -1813,7 +1823,7 @@ class PersistentIndicatorTests(object):
             >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     instruments=instruments,
             ...     score_template=score_template,
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -1885,10 +1895,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-default-indicator-markup "(“Flute”)"                             %! DEFAULT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -1991,10 +2003,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                             %%% ^ \baca-default-indicator-markup "(“Flute”)"                             %! DEFAULT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -2093,10 +2107,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-default-indicator-markup "(“Flute”)"                             %! DEFAULT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -2139,7 +2155,7 @@ class PersistentIndicatorTests(object):
 
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -2212,10 +2228,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "(“Flute”)"                            %! EXPLICIT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -2318,10 +2336,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                             %%% ^ \baca-explicit-indicator-markup "(“Flute”)"                            %! EXPLICIT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -2421,10 +2441,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                    %@% \baca-unpitched-music-warning                                                    %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "(“Flute”)"                            %! EXPLICIT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                    %@% \baca-unpitched-music-warning                                                    %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -2465,7 +2487,7 @@ class PersistentIndicatorTests(object):
 
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -2553,10 +2575,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "(“Flute”)"                            %! EXPLICIT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -2660,10 +2684,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                             %%% ^ \baca-explicit-indicator-markup "(“Flute”)"                            %! EXPLICIT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -2763,10 +2789,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "(“Flute”)"                            %! EXPLICIT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -2809,7 +2837,7 @@ class PersistentIndicatorTests(object):
 
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -2896,10 +2924,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-reapplied-indicator-markup "(“Flute”)"                           %! REAPPLIED_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -3003,10 +3033,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                             %%% ^ \baca-reapplied-indicator-markup "(“Flute”)"                           %! REAPPLIED_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -3107,10 +3139,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                    %@% \baca-unpitched-music-warning                                                    %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-reapplied-indicator-markup "(“Flute”)"                           %! REAPPLIED_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                    %@% \baca-unpitched-music-warning                                                    %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -3159,7 +3193,7 @@ class PersistentIndicatorTests(object):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -3241,14 +3275,17 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "(“Flute”)"                            %! EXPLICIT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                                 ^ \baca-redundant-indicator-markup "(“Flute”)"                           %! REDUNDANT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -3356,14 +3393,17 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                             %%% ^ \baca-explicit-indicator-markup "(“Flute”)"                            %! EXPLICIT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                             %%% ^ \baca-redundant-indicator-markup "(“Flute”)"                           %! REDUNDANT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -3467,14 +3507,17 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "(“Flute”)"                            %! EXPLICIT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                                 ^ \baca-redundant-indicator-markup "(“Flute”)"                           %! REDUNDANT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -3521,7 +3564,7 @@ class PersistentIndicatorTests(object):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     instruments=instruments,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -3609,10 +3652,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-redundant-indicator-markup "(“Flute”)"                           %! REDUNDANT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -3716,10 +3761,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                             %%% ^ \baca-redundant-indicator-markup "(“Flute”)"                           %! REDUNDANT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -3819,10 +3866,12 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-redundant-indicator-markup "(“Flute”)"                           %! REDUNDANT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -3898,7 +3947,7 @@ class PersistentIndicatorTests(object):
             >>> score_template.defaults.append(triple)
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     margin_markups=margin_markups,
             ...     score_template=score_template,
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -3973,6 +4022,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.shortInstrumentName =                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:abjad.ScoreTemplate.attach_defaults:-PARTS
                                 \markup { I+II }                                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:abjad.ScoreTemplate.attach_defaults:-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-default-indicator-markup "[“I+II”]"                              %! DEFAULT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -3980,6 +4030,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):abjad.ScoreTemplate.attach_defaults:-PARTS
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -4085,6 +4136,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.shortInstrumentName =                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:abjad.ScoreTemplate.attach_defaults:-PARTS
                                 \markup { I+II }                                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:abjad.ScoreTemplate.attach_defaults:-PARTS
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                             %%% ^ \baca-default-indicator-markup "[“I+II”]"                              %! DEFAULT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             %%% \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -4092,6 +4144,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):abjad.ScoreTemplate.attach_defaults:-PARTS
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -4193,6 +4246,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.shortInstrumentName =                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:abjad.ScoreTemplate.attach_defaults:-PARTS
                                 \markup { I+II }                                                         %! DEFAULT_MARGIN_MARKUP:_set_status_tag:abjad.ScoreTemplate.attach_defaults:-PARTS
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! DEFAULT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-default-indicator-markup "[“I+II”]"                              %! DEFAULT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'violet)              %! REDRAWN_DEFAULT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -4200,6 +4254,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_DEFAULT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):abjad.ScoreTemplate.attach_defaults:-PARTS
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -4242,7 +4297,7 @@ class PersistentIndicatorTests(object):
 
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -4318,6 +4373,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -4325,6 +4381,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -4430,6 +4487,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                             %%% ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -4437,6 +4495,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -4538,6 +4597,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -4545,6 +4605,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -4585,7 +4646,7 @@ class PersistentIndicatorTests(object):
 
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -4678,6 +4739,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \markup { III+IV }                                                       %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -4685,6 +4747,7 @@ class PersistentIndicatorTests(object):
                                 \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -4793,6 +4856,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \markup { III+IV }                                                       %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                             %%% ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -4800,6 +4864,7 @@ class PersistentIndicatorTests(object):
                                 \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -4904,6 +4969,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \markup { III+IV }                                                       %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -4911,6 +4977,7 @@ class PersistentIndicatorTests(object):
                                 \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -4953,7 +5020,7 @@ class PersistentIndicatorTests(object):
 
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -5045,6 +5112,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \markup { I+II }                                                         %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! REAPPLIED_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-reapplied-indicator-markup "[“I+II”]"                            %! REAPPLIED_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -5052,6 +5120,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.SegmentMaker._reapply_persistent_indicators(3):-PARTS
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -5160,6 +5229,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \markup { I+II }                                                         %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! REAPPLIED_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                             %%% ^ \baca-reapplied-indicator-markup "[“I+II”]"                            %! REAPPLIED_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             %%% \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -5167,6 +5237,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.SegmentMaker._reapply_persistent_indicators(3):-PARTS
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -5271,6 +5342,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \markup { I+II }                                                         %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! REAPPLIED_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-reapplied-indicator-markup "[“I+II”]"                            %! REAPPLIED_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)           %! REDRAWN_REAPPLIED_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -5278,6 +5350,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_REAPPLIED_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.SegmentMaker._reapply_persistent_indicators(3):-PARTS
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -5326,7 +5399,7 @@ class PersistentIndicatorTests(object):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -5411,6 +5484,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -5421,6 +5495,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                                 ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -5428,6 +5503,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -5538,6 +5614,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                             %%% ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -5548,6 +5625,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                             %%% ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -5555,6 +5633,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -5661,6 +5740,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \markup { I+II }                                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -5671,6 +5751,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.shortInstrumentName =                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \markup { I+II }                                                         %! REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                                 ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -5678,6 +5759,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -5724,7 +5806,7 @@ class PersistentIndicatorTests(object):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -5817,6 +5899,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \markup { I+II }                                                         %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -5824,6 +5907,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -5932,6 +6016,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \markup { I+II }                                                         %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                             %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                             %%% ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -5939,6 +6024,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -6043,6 +6129,7 @@ class PersistentIndicatorTests(object):
                                 \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \markup { I+II }                                                         %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                                 \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! REDUNDANT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                                 ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -6050,6 +6137,7 @@ class PersistentIndicatorTests(object):
                                 \markup { I+II }                                                         %! REDRAWN_REDUNDANT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                        %@% \baca-unpitched-music-warning                                                %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -6098,7 +6186,7 @@ class PersistentIndicatorTests(object):
             ...     )
             >>> maker = baca.SegmentMaker(
             ...     breaks=breaks,
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     margin_markups=margin_markups,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -6195,6 +6283,7 @@ class PersistentIndicatorTests(object):
                             %@% \markup { III+IV }                                                       %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:-PARTS:IndicatorCommand
                                 \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                                 ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             %@% ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
@@ -6206,9 +6295,11 @@ class PersistentIndicatorTests(object):
                                 \markup { III+IV }                                                       %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:-PARTS:IndicatorCommand
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'2                                                                      %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -6265,8 +6356,8 @@ class PersistentIndicatorTests(object):
             Explicit metronome marks color blue:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 25)),
@@ -6347,9 +6438,11 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -6389,8 +6482,8 @@ class PersistentIndicatorTests(object):
             Even after a previous metronome mark:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -6489,9 +6582,11 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -6533,8 +6628,8 @@ class PersistentIndicatorTests(object):
             Reapplied metronome marks color green:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -6632,9 +6727,11 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -6676,8 +6773,8 @@ class PersistentIndicatorTests(object):
             Redundant metronome marks color pink:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -6766,9 +6863,11 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -6808,8 +6907,8 @@ class PersistentIndicatorTests(object):
             Even at the beginning of a segment:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -6908,9 +7007,11 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -7408,7 +7509,7 @@ class PersistentIndicatorTests(object):
             Explicit staff lines color blue:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -7477,9 +7578,11 @@ class PersistentIndicatorTests(object):
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -7519,7 +7622,7 @@ class PersistentIndicatorTests(object):
             Even after previous staff lines:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -7603,9 +7706,11 @@ class PersistentIndicatorTests(object):
                                 \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -7647,7 +7752,7 @@ class PersistentIndicatorTests(object):
             Reapplied staff lines color green:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -7729,9 +7834,11 @@ class PersistentIndicatorTests(object):
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! REAPPLIED_STAFF_LINES:_set_status_tag:baca.SegmentMaker._reapply_persistent_indicators(3)
                                 \startStaff                                                              %! REAPPLIED_STAFF_LINES:_set_status_tag:baca.SegmentMaker._reapply_persistent_indicators(3)
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'green4)           %! REAPPLIED_STAFF_LINES_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -7773,7 +7880,7 @@ class PersistentIndicatorTests(object):
             Redundant staff lines color pink:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -7843,6 +7950,7 @@ class PersistentIndicatorTests(object):
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
@@ -7851,6 +7959,7 @@ class PersistentIndicatorTests(object):
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \startStaff                                                              %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! REDUNDANT_STAFF_LINES_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -7890,7 +7999,7 @@ class PersistentIndicatorTests(object):
             Even at the beginning of a segment:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
             ...     time_signatures=[(3, 8), (3, 8)],
@@ -7974,9 +8083,11 @@ class PersistentIndicatorTests(object):
                                 \once \override Staff.StaffSymbol.line-count = 5                         %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \startStaff                                                              %! REDUNDANT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
                                 \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! REDUNDANT_STAFF_LINES_COLOR:baca.SegmentMaker._attach_color_literal(2)
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -8033,8 +8144,8 @@ class PersistentIndicatorTests(object):
             Explicit tempo trends color blue:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 25)),
@@ -8135,9 +8246,11 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -8177,8 +8290,8 @@ class PersistentIndicatorTests(object):
             Even after a previous tempo trend:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -8296,9 +8409,11 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -8340,8 +8455,8 @@ class PersistentIndicatorTests(object):
             Reapplied tempo trends color green:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -8458,9 +8573,11 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -8502,8 +8619,8 @@ class PersistentIndicatorTests(object):
             Redundant tempo trends color pink:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -8640,12 +8757,15 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -8685,8 +8805,8 @@ class PersistentIndicatorTests(object):
             Even at the beginning of a segment:
 
             >>> maker = baca.SegmentMaker(
-            ...     do_not_color_unpitched_music=True,
             ...     breaks=breaks,
+            ...     deactivate=[abjad.tags.NOT_YET_PITCHED],
             ...     metronome_marks=metronome_marks,
             ...     score_template=baca.SingleStaffScoreTemplate(),
             ...     spacing=baca.minimum_duration((1, 24)),
@@ -8804,9 +8924,11 @@ class PersistentIndicatorTests(object):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            %@% \baca-unpitched-music-warning                                            %! NOT_YET_PITCHED:baca.SegmentMaker._color_unpitched_notes()
                                 c'4.                                                                     %! baca.make_notes
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
