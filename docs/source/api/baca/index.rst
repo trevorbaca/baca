@@ -30,7 +30,6 @@ baca
    indicators
    markups
    overrides
-   persistence
    piecewise
    pitcharray
    pitchclasses
@@ -53,7 +52,6 @@ baca
    indicators
    markups
    overrides
-   persistence
    piecewise
    pitcharray
    pitchclasses
@@ -71,6 +69,11 @@ baca
 
 .. rubric:: Functions
    :class: section-header
+
+.. toctree::
+   :hidden:
+
+   persistence
 
 .. autosummary::
    :nosignatures:
@@ -145,6 +148,7 @@ baca
    ~tuplets
    ~wleaf
    ~wleaves
+   ~persistence.persistence
 
 .. autofunction:: chead
 

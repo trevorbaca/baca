@@ -93,6 +93,7 @@ Bača API
    ~baca.tuplets
    ~baca.wleaf
    ~baca.wleaves
+   ~baca.persistence.persistence
 
 .. raw:: html
 
@@ -710,25 +711,6 @@ Override library.
    ~baca.overrides.tuplet_number_denominator
    ~baca.overrides.tuplet_number_extra_offset
    ~baca.overrides.tuplet_number_transparent
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: :ref:`baca.persistence <baca--persistence>`
-   :class: section-header
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Classes
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.persistence.PersistentIndicatorTests
 
 .. raw:: html
 
