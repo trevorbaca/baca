@@ -692,10 +692,10 @@ pitchcommands
       allow_out_of_range
       allow_repeats
       allow_repitch
+      approximate_pitch
       cyclic
       do_not_transpose
       ignore_incomplete
-      not_yet_pitched
       parameter
       persist
       pitches
@@ -746,6 +746,8 @@ pitchcommands
 
    .. autoattribute:: PitchCommand.allow_repitch
 
+   .. autoattribute:: PitchCommand.approximate_pitch
+
    .. autoattribute:: PitchCommand.cyclic
 
    .. container:: inherited
@@ -767,8 +769,6 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: PitchCommand.measures
-
-   .. autoattribute:: PitchCommand.not_yet_pitched
 
    .. autoattribute:: PitchCommand.parameter
 
@@ -1100,9 +1100,10 @@ pitchcommands
 
       allow_out_of_range
       allow_repeats
+      approximate_pitch
       exact
-      not_yet_pitched
       numbers
+      set_chord_pitches_equal
 
    .. raw:: html
 
@@ -1145,6 +1146,8 @@ pitchcommands
 
    .. autoattribute:: StaffPositionCommand.allow_repeats
 
+   .. autoattribute:: StaffPositionCommand.approximate_pitch
+
    .. container:: inherited
 
       .. autoattribute:: StaffPositionCommand.deactivate
@@ -1163,8 +1166,6 @@ pitchcommands
 
       .. autoattribute:: StaffPositionCommand.measures
 
-   .. autoattribute:: StaffPositionCommand.not_yet_pitched
-
    .. autoattribute:: StaffPositionCommand.numbers
 
    .. container:: inherited
@@ -1178,6 +1179,8 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: StaffPositionCommand.selector
+
+   .. autoattribute:: StaffPositionCommand.set_chord_pitches_equal
 
    .. container:: inherited
 
@@ -1203,7 +1206,7 @@ pitchcommands
    .. autosummary::
       :nosignatures:
 
-      not_yet_pitched
+      approximate_pitch
       start
       stop
 
@@ -1244,6 +1247,8 @@ pitchcommands
    .. rubric:: Read-only properties
       :class: class-header
 
+   .. autoattribute:: StaffPositionInterpolationCommand.approximate_pitch
+
    .. container:: inherited
 
       .. autoattribute:: StaffPositionInterpolationCommand.deactivate
@@ -1259,8 +1264,6 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: StaffPositionInterpolationCommand.measures
-
-   .. autoattribute:: StaffPositionInterpolationCommand.not_yet_pitched
 
    .. container:: inherited
 

@@ -1,5 +1,6 @@
 import abjad
 import collections
+import inspect
 import numbers
 import typing
 from . import classes
@@ -7,6 +8,11 @@ from . import const
 from . import pitchclasses
 from . import scoping
 from . import typings
+
+
+def _site(frame):
+    prefix = "baca"
+    return scoping.site(frame, prefix)
 
 
 ### CLASSES ###
@@ -2979,11 +2985,11 @@ class PitchCommand(scoping.Command):
         "_allow_out_of_range",
         "_allow_repeats",
         "_allow_repitch",
+        "_approximate_pitch",
         "_cyclic",
         "_do_not_transpose",
         "_ignore_incomplete",
         "_mutated_score",
-        "_not_yet_pitched",
         "_persist",
         "_pitches",
         "_state",
@@ -2998,13 +3004,13 @@ class PitchCommand(scoping.Command):
         allow_out_of_range: bool = None,
         allow_repeats: bool = None,
         allow_repitch: bool = None,
+        approximate_pitch: bool = None,
         cyclic: bool = None,
         do_not_transpose: bool = None,
         ignore_incomplete: bool = None,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        not_yet_pitched: bool = None,
         persist: str = None,
         pitches: typing.Union[typing.Sequence, Loop] = None,
         scope: scoping.ScopeTyping = None,
@@ -3030,6 +3036,9 @@ class PitchCommand(scoping.Command):
         if allow_repitch is not None:
             allow_repitch = bool(allow_repitch)
         self._allow_repitch = allow_repitch
+        if approximate_pitch is not None:
+            approximate_pitch = bool(approximate_pitch)
+        self._approximate_pitch = approximate_pitch
         if cyclic is not None:
             cyclic = bool(cyclic)
         self._cyclic = cyclic
@@ -3040,9 +3049,6 @@ class PitchCommand(scoping.Command):
             ignore_incomplete = bool(ignore_incomplete)
         self._ignore_incomplete = ignore_incomplete
         self._mutated_score = None
-        if not_yet_pitched is not None:
-            not_yet_pitched = bool(not_yet_pitched)
-        self._not_yet_pitched = not_yet_pitched
         if persist is not None:
             assert isinstance(persist, str), repr(persist)
         self._persist = persist
@@ -3083,8 +3089,8 @@ class PitchCommand(scoping.Command):
             new_plt = self._set_lt_pitch(
                 plt,
                 pitch,
-                self.not_yet_pitched,
                 allow_repitch=self.allow_repitch,
+                approximate_pitch=self.approximate_pitch,
             )
             if new_plt is not None:
                 self._mutated_score = True
@@ -3190,24 +3196,30 @@ class PitchCommand(scoping.Command):
 
     @staticmethod
     def _set_lt_pitch(
-        lt, pitch, not_yet_pitched=False, *, allow_repitch=False
+        lt,
+        pitch,
+        *,
+        allow_repitch=False,
+        approximate_pitch=False,
+        set_chord_pitches_equal=False,
     ):
         new_lt = None
         already_pitched = abjad.tags.ALREADY_PITCHED
-        if not not_yet_pitched:
-            for leaf in lt:
-                abjad.detach(abjad.tags.NOT_YET_PITCHED, leaf)
-                if allow_repitch:
-                    continue
-                if abjad.inspect(leaf).has_indicator(already_pitched):
-                    voice = abjad.inspect(leaf).parentage().get(abjad.Voice)
-                    if voice is None:
-                        name = "no voice"
-                    else:
-                        name = voice.name
-                    message = f"already pitched {repr(leaf)} in {name}."
-                    raise Exception(message)
-                abjad.attach(already_pitched, leaf)
+        for leaf in lt:
+            abjad.detach(abjad.tags.NOT_YET_PITCHED, leaf)
+            if approximate_pitch is True:
+                abjad.attach(abjad.tags.APPROXIMATE_PITCH, leaf)
+            if allow_repitch:
+                continue
+            if abjad.inspect(leaf).has_indicator(already_pitched):
+                voice = abjad.inspect(leaf).parentage().get(abjad.Voice)
+                if voice is None:
+                    name = "no voice"
+                else:
+                    name = voice.name
+                message = f"already pitched {repr(leaf)} in {name}."
+                raise Exception(message)
+            abjad.attach(already_pitched, leaf)
         if pitch is None:
             if not lt.is_pitched:
                 pass
@@ -3230,6 +3242,12 @@ class PitchCommand(scoping.Command):
             if isinstance(lt.head, abjad.Note):
                 for note in lt:
                     note.written_pitch = pitch
+            elif set_chord_pitches_equal is True and isinstance(
+                lt.head, abjad.Chord
+            ):
+                for chord in lt:
+                    for note_head in chord.note_heads:
+                        note_head.written_pitch = pitch
             else:
                 assert isinstance(lt.head, (abjad.Chord, abjad.Rest))
                 for leaf in lt:
@@ -3269,6 +3287,13 @@ class PitchCommand(scoping.Command):
         return self._allow_repitch
 
     @property
+    def approximate_pitch(self) -> typing.Optional[bool]:
+        """
+        Is true when command tags leaves as approximate pitch.
+        """
+        return self._approximate_pitch
+
+    @property
     def cyclic(self) -> typing.Optional[bool]:
         """
         Is true when command reads pitches cyclically.
@@ -3289,13 +3314,6 @@ class PitchCommand(scoping.Command):
         incomplete last note.
         """
         return self._ignore_incomplete
-
-    @property
-    def not_yet_pitched(self) -> typing.Optional[bool]:
-        """
-        Is true when command tags leaves as not-yet pitched.
-        """
-        return self._not_yet_pitched
 
     @property
     def parameter(self) -> str:
@@ -5819,9 +5837,10 @@ class StaffPositionCommand(scoping.Command):
     __slots__ = (
         "_allow_out_of_range",
         "_allow_repeats",
+        "_approximate_pitch",
         "_exact",
-        "_not_yet_pitched",
         "_numbers",
+        "_set_chord_pitches_equal",
     )
 
     ### INITIALIZER ###
@@ -5836,9 +5855,10 @@ class StaffPositionCommand(scoping.Command):
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        not_yet_pitched: bool = None,
+        approximate_pitch: bool = None,
         scope: scoping.ScopeTyping = None,
         selector: abjad.SelectorTyping = "baca.plts()",
+        set_chord_pitches_equal: bool = None,
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -5857,12 +5877,15 @@ class StaffPositionCommand(scoping.Command):
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
         self._allow_repeats = allow_repeats
+        if approximate_pitch is not None:
+            approximate_pitch = bool(approximate_pitch)
+        self._approximate_pitch = approximate_pitch
         if exact is not None:
             exact = bool(exact)
         self._exact = exact
-        if not_yet_pitched is not None:
-            not_yet_pitched = bool(not_yet_pitched)
-        self._not_yet_pitched = not_yet_pitched
+        if set_chord_pitches_equal is not None:
+            set_chord_pitches_equal = bool(set_chord_pitches_equal)
+        self._set_chord_pitches_equal = set_chord_pitches_equal
 
     ### SPECIAL METHODS ###
 
@@ -5884,7 +5907,14 @@ class StaffPositionCommand(scoping.Command):
             number = self.numbers[i]
             position = abjad.StaffPosition(number)
             pitch = position.to_pitch(clef)
-            PitchCommand._set_lt_pitch(plt, pitch, self.not_yet_pitched)
+            new_lt = PitchCommand._set_lt_pitch(
+                plt,
+                pitch,
+                approximate_pitch=self.approximate_pitch,
+                set_chord_pitches_equal=self.set_chord_pitches_equal,
+            )
+            # TODO: make this assert work:
+            # assert new_lt is None, repr(new_lt)
             plt_count += 1
             for pleaf in plt:
                 abjad.attach(abjad.tags.STAFF_POSITION, pleaf)
@@ -5915,6 +5945,13 @@ class StaffPositionCommand(scoping.Command):
         return self._allow_repeats
 
     @property
+    def approximate_pitch(self) -> typing.Optional[bool]:
+        """
+        Is true when command tags leaves as approximate pitch.
+        """
+        return self._approximate_pitch
+
+    @property
     def exact(self) -> typing.Optional[bool]:
         """
         Is true when number of staff positions must match number of leaves
@@ -5923,18 +5960,18 @@ class StaffPositionCommand(scoping.Command):
         return self._exact
 
     @property
-    def not_yet_pitched(self) -> typing.Optional[bool]:
-        """
-        Is true when command tags leaves as not-yet pitched.
-        """
-        return self._not_yet_pitched
-
-    @property
     def numbers(self) -> typing.Optional[abjad.CyclicTuple]:
         """
         Gets numbers.
         """
         return self._numbers
+
+    @property
+    def set_chord_pitches_equal(self) -> typing.Optional[bool]:
+        """
+        Is true when command sets chord pitches equal.
+        """
+        return self._set_chord_pitches_equal
 
 
 class StaffPositionInterpolationCommand(scoping.Command):
@@ -5952,7 +5989,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_not_yet_pitched", "_start", "_stop")
+    __slots__ = ("_approximate_pitch", "_start", "_stop")
 
     _publish_storage_format = True
 
@@ -5963,10 +6000,10 @@ class StaffPositionInterpolationCommand(scoping.Command):
         start: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
         stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
         *,
+        approximate_pitch: bool = None,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        not_yet_pitched: bool = None,
         scope: scoping.ScopeTyping = None,
         selector: abjad.SelectorTyping = "baca.plts()",
     ) -> None:
@@ -5991,9 +6028,9 @@ class StaffPositionInterpolationCommand(scoping.Command):
             stop = abjad.StaffPosition(stop)
         assert isinstance(stop, prototype), repr(stop)
         self._stop = stop
-        if not_yet_pitched is not None:
-            not_yet_pitched = bool(not_yet_pitched)
-        self._not_yet_pitched = not_yet_pitched
+        if approximate_pitch is not None:
+            approximate_pitch = bool(approximate_pitch)
+        self._approximate_pitch = approximate_pitch
 
     ### SPECIAL METHODS ###
 
@@ -6034,9 +6071,14 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 abjad.Clef, default=abjad.Clef("treble")
             )
             pitch = staff_position.to_pitch(clef=clef)
-            PitchCommand._set_lt_pitch(
-                plt, pitch, self.not_yet_pitched, allow_repitch=True
+            new_lt = PitchCommand._set_lt_pitch(
+                plt,
+                pitch,
+                allow_repitch=True,
+                approximate_pitch=self.approximate_pitch,
             )
+            # TODO: make this assert work:
+            # assert new_lt is None, repr(new_lt)
             for leaf in plt:
                 abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
         if isinstance(self.start, abjad.NamedPitch):
@@ -6046,9 +6088,14 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 abjad.Clef, default=abjad.Clef("treble")
             )
             start_pitch = self.start.to_pitch(clef=clef)
-        PitchCommand._set_lt_pitch(
-            plts[0], start_pitch, self.not_yet_pitched, allow_repitch=True
+        new_lt = PitchCommand._set_lt_pitch(
+            plts[0],
+            start_pitch,
+            allow_repitch=True,
+            approximate_pitch=self.approximate_pitch,
         )
+        # TODO: make this assert work:
+        # assert new_lt is None, repr(new_lt)
         if isinstance(self.stop, abjad.NamedPitch):
             stop_pitch = self.stop
         else:
@@ -6056,18 +6103,23 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 abjad.Clef, default=abjad.Clef("treble")
             )
             stop_pitch = self.stop.to_pitch(clef=clef)
-        PitchCommand._set_lt_pitch(
-            plts[-1], stop_pitch, self.not_yet_pitched, allow_repitch=True
+        new_lt = PitchCommand._set_lt_pitch(
+            plts[-1],
+            stop_pitch,
+            allow_repitch=True,
+            approximate_pitch=self.approximate_pitch,
         )
+        # TODO: make this assert work:
+        # assert new_lt is None, repr(new_lt)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def not_yet_pitched(self) -> typing.Optional[bool]:
+    def approximate_pitch(self) -> typing.Optional[bool]:
         """
-        Is true when output is not yet pitched.
+        Is true command tags leaves as approximate pitch.
         """
-        return self._not_yet_pitched
+        return self._approximate_pitch
 
     @property
     def start(self) -> typing.Union[abjad.NamedPitch, abjad.StaffPosition]:
@@ -6760,7 +6812,7 @@ def interpolate_staff_positions(
     stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
     *,
-    not_yet_pitched: bool = None,
+    approximate_pitch: bool = None,
 ) -> StaffPositionInterpolationCommand:
     r"""
     Interpolates from staff position of ``start`` to staff
@@ -6908,7 +6960,7 @@ def interpolate_staff_positions(
 
     """
     return StaffPositionInterpolationCommand(
-        start, stop, not_yet_pitched=not_yet_pitched, selector=selector
+        start, stop, approximate_pitch=approximate_pitch, selector=selector
     )
 
 
@@ -6947,8 +6999,8 @@ def pitch(
     *,
     allow_out_of_range: bool = None,
     allow_repitch: bool = None,
+    approximate_pitch: bool = None,
     do_not_transpose: bool = None,
-    not_yet_pitched: bool = None,
     persist: str = None,
 ) -> PitchCommand:
     """
@@ -6973,7 +7025,7 @@ def pitch(
         allow_repitch=allow_repitch,
         cyclic=True,
         do_not_transpose=do_not_transpose,
-        not_yet_pitched=not_yet_pitched,
+        approximate_pitch=approximate_pitch,
         persist=persist,
         pitches=[pitch],
         selector=selector,
@@ -6987,10 +7039,10 @@ def pitches(
     allow_octaves: bool = None,
     allow_repeats: bool = None,
     allow_repitch: bool = None,
+    approximate_pitch: bool = None,
     do_not_transpose: bool = None,
     exact: bool = None,
     ignore_incomplete: bool = None,
-    not_yet_pitched: bool = None,
     persist: str = None,
 ) -> PitchCommand:
     """
@@ -7022,7 +7074,7 @@ def pitches(
         cyclic=cyclic,
         do_not_transpose=do_not_transpose,
         ignore_incomplete=ignore_incomplete,
-        not_yet_pitched=not_yet_pitched,
+        approximate_pitch=approximate_pitch,
         persist=persist,
         pitches=pitches,
         selector=selector,
@@ -7515,7 +7567,8 @@ def staff_position(
     selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
     *,
     allow_out_of_range: bool = None,
-    not_yet_pitched: bool = None,
+    approximate_pitch: bool = None,
+    set_chord_pitches_equal: bool = None,
 ) -> StaffPositionCommand:
     """
     Makes staff position command; allows repeats.
@@ -7525,8 +7578,9 @@ def staff_position(
         [number],
         allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
-        not_yet_pitched=not_yet_pitched,
+        approximate_pitch=approximate_pitch,
         selector=selector,
+        set_chord_pitches_equal=set_chord_pitches_equal,
     )
 
 
@@ -7536,8 +7590,8 @@ def staff_positions(
     *,
     allow_out_of_range: bool = None,
     allow_repeats: bool = None,
+    approximate_pitch: bool = None,
     exact: bool = None,
-    not_yet_pitched: bool = None,
 ) -> StaffPositionCommand:
     """
     Makes staff position command; does not allow repeats.
@@ -7549,6 +7603,6 @@ def staff_positions(
         allow_out_of_range=allow_out_of_range,
         allow_repeats=allow_repeats,
         exact=exact,
-        not_yet_pitched=not_yet_pitched,
+        approximate_pitch=approximate_pitch,
         selector=selector,
     )

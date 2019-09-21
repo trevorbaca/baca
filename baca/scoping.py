@@ -911,57 +911,57 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             ]                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
                             [                                                                        %! baca.make_even_divisions
                             (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
                             ]                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
                             [                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
                             )                                                                        %! SPANNER_STOP:baca.slur:SpannerIndicatorCommand(2)
@@ -969,14 +969,14 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             ]                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -1099,57 +1099,57 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             ]                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
                             [                                                                        %! baca.make_even_divisions
                             (                                                                        %! baca.slur:SpannerIndicatorCommand(1)
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
                             ]                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
                             [                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             - \marcato                                                               %! baca.marcato:IndicatorCommand
                             - \staccato                                                              %! baca.staccato:IndicatorCommand
                             )                                                                        %! SPANNER_STOP:baca.slur:SpannerIndicatorCommand(2)
@@ -1157,14 +1157,14 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             [                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8                                                                      %! baca.make_even_divisions
+                            b'8                                                                      %! baca.make_even_divisions
                             ]                                                                        %! baca.make_even_divisions
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -1338,7 +1338,7 @@ def only_parts(command: _command_typing) -> _command_typing:
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'2                                                                      %! baca.make_notes
+                            b'2                                                                      %! baca.make_notes
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1):+PARTS
                             \p                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:+PARTS:PiecewiseCommand(1)
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1):+PARTS
@@ -1346,15 +1346,15 @@ def only_parts(command: _command_typing) -> _command_typing:
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'4.                                                                     %! baca.make_notes
+                            b'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'2                                                                      %! baca.make_notes
+                            b'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'4.                                                                     %! baca.make_notes
+                            b'4.                                                                     %! baca.make_notes
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1):+PARTS
                             \f                                                                       %! EXPLICIT_DYNAMIC:_set_status_tag:SPANNER_STOP:baca.hairpin:+PARTS:PiecewiseCommand(2)
             <BLANKLINE>

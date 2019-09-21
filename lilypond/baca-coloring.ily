@@ -1,5 +1,15 @@
 %%% COLORED MUSIC %%%
 
+baca-approximate-pitch-coloring = #(
+    define-music-function
+    (parser location music)
+    (ly:music?)
+    #{
+    \abjad-color-music #'goldenrod
+    $music
+    #}
+    )
+
 baca-not-yet-pitched-coloring = #(
     define-music-function
     (parser location music)

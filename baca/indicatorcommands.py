@@ -354,6 +354,18 @@ def alternate_bow_strokes(
     )
 
 
+def approximate_pitch(
+    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
+    # do not include tag=None because function creates no .ly output
+) -> commandclasses.IndicatorCommand:
+    r"""
+    Attaches APPROXIMATE_PITCH tag.
+    """
+    return commandclasses.IndicatorCommand(
+        indicators=[abjad.tags.APPROXIMATE_PITCH], selector=selector
+    )
+
+
 def arpeggio(
     selector: abjad.SelectorTyping = "baca.chead(0, exclude=abjad.const.HIDDEN)",
     *,
@@ -1253,21 +1265,21 @@ def hide_black_note_heads(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'2                                                                      %! baca.make_notes
+                            b'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \once \override NoteHead.transparent = ##t                               %! hide.black_note_heads:IndicatorCommand
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'4.                                                                     %! baca.make_notes
+                            b'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'2                                                                      %! baca.make_notes
+                            b'2                                                                      %! baca.make_notes
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \once \override NoteHead.transparent = ##t                               %! hide.black_note_heads:IndicatorCommand
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'4.                                                                     %! baca.make_notes
+                            b'4.                                                                     %! baca.make_notes
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1756,18 +1768,6 @@ def mark(
         selector=selector,
         tags=[tag],
         tweaks=tweaks,
-    )
-
-
-def not_yet_pitched(
-    selector: abjad.SelectorTyping = "baca.plts(exclude=abjad.const.HIDDEN)",
-    # do not include tag=None because function creates no .ly output
-) -> commandclasses.IndicatorCommand:
-    r"""
-    Attaches NOT_YET_PITCHED tag.
-    """
-    return commandclasses.IndicatorCommand(
-        indicators=[abjad.tags.NOT_YET_PITCHED], selector=selector
     )
 
 

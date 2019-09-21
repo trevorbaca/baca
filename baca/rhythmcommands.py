@@ -115,56 +115,56 @@ class RhythmCommand(scoping.Command):
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
                             [
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
                             ]
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
                             [
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
                             ]
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
                             [
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
                             ]
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
                             [
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'8
+                            b'8
                             ]
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -488,7 +488,7 @@ class RhythmCommand(scoping.Command):
                                 \override TextScript.font-size = #-2                                     %! baca.text_script_font_size():OverrideCommand(1)
                                 \override TextScript.staff-padding = #5                                  %! baca.text_script_staff_padding():OverrideCommand(1)
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'8.
+                                b'8.
                                 _ \markup {
                                     \fraction
                                         3
@@ -496,7 +496,7 @@ class RhythmCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'4
+                                b'4
                                 _ \markup {
                                     \fraction
                                         4
@@ -504,7 +504,7 @@ class RhythmCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'16
+                                b'16
                                 _ \markup {
                                     \fraction
                                         3
@@ -514,10 +514,10 @@ class RhythmCommand(scoping.Command):
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'8
+                                b'8
                 <BLANKLINE>
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'4
+                                b'4
                                 _ \markup {
                                     \fraction
                                         4
@@ -525,7 +525,7 @@ class RhythmCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'8
+                                b'8
                                 _ \markup {
                                     \fraction
                                         2
@@ -542,7 +542,7 @@ class RhythmCommand(scoping.Command):
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'16
+                                b'16
                                 _ \markup {
                                     \fraction
                                         1
@@ -550,7 +550,7 @@ class RhythmCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'4
+                                b'4
                                 _ \markup {
                                     \fraction
                                         4
@@ -558,7 +558,7 @@ class RhythmCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'8.
+                                b'8.
                                 _ \markup {
                                     \fraction
                                         3
@@ -567,7 +567,7 @@ class RhythmCommand(scoping.Command):
                 <BLANKLINE>
                                 % [Music_Voice measure 5]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'4
+                                b'4
                                 _ \markup {
                                     \fraction
                                         4
@@ -575,7 +575,7 @@ class RhythmCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'8.
+                                b'8.
                                 _ \markup {
                                     \fraction
                                         3
@@ -584,7 +584,7 @@ class RhythmCommand(scoping.Command):
                                 [
                 <BLANKLINE>
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'16
+                                b'16
                                 _ \markup {
                                     \fraction
                                         1
@@ -759,7 +759,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
             <BLANKLINE>
                                 % [Music_Voice measure 1]                                            %! baca.SegmentMaker._comment_measure_numbers()
                                 \baca-not-yet-pitched-coloring                                       %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'2
+                                b'2
             <BLANKLINE>
                             }
             <BLANKLINE>
@@ -767,7 +767,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
                             \times 4/5 {
             <BLANKLINE>
                                 \baca-not-yet-pitched-coloring                                       %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'2
+                                b'2
             <BLANKLINE>
                             }
             <BLANKLINE>
@@ -775,7 +775,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
                             \times 4/5 {
             <BLANKLINE>
                                 \baca-not-yet-pitched-coloring                                       %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                                c'4
+                                b'4
             <BLANKLINE>
                             }
             <BLANKLINE>
@@ -937,18 +937,18 @@ def make_repeat_tied_notes(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'4.
+                            b'4.
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'4
+                            b'4
                             \repeatTie
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'4.
+                            b'4.
                             \repeatTie
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            c'4                                                                      %! baca.make_repeat_tied_notes
+                            b'4                                                                      %! baca.make_repeat_tied_notes
                             \repeatTie
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()

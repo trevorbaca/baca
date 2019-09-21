@@ -24,6 +24,7 @@ indicatorcommands
 
    ~accent
    ~alternate_bow_strokes
+   ~approximate_pitch
    ~arpeggio
    ~articulation
    ~articulations
@@ -43,7 +44,6 @@ indicatorcommands
    ~marcato
    ~margin_markup
    ~mark
-   ~not_yet_pitched
    ~parenthesize
    ~quadruple_staccato
    ~rehearsal_mark
@@ -68,6 +68,8 @@ indicatorcommands
 .. autofunction:: accent
 
 .. autofunction:: alternate_bow_strokes
+
+.. autofunction:: approximate_pitch
 
 .. autofunction:: arpeggio
 
@@ -106,8 +108,6 @@ indicatorcommands
 .. autofunction:: margin_markup
 
 .. autofunction:: mark
-
-.. autofunction:: not_yet_pitched
 
 .. autofunction:: parenthesize
 
