@@ -643,7 +643,6 @@ def cross_staff(
 
         >>> maker = baca.SegmentMaker(
         ...     ignore_repeat_pitch_classes=True,
-        ...     do_not_color_unregistered_pitches=True,
         ...     score_template=accumulator.score_template,
         ...     spacing=baca.minimum_duration((1, 12)),
         ...     time_signatures=accumulator.time_signatures,

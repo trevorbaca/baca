@@ -1,36 +1,6 @@
 %%% COLORED MUSIC %%%
 
-baca-octave-warning = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
-    #{
-    \abjad-color-music #'red
-    $music
-    #}
-    )
-
-baca-out-of-range-warning = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
-    #{
-    \abjad-color-music #'red
-    $music
-    #}
-    )
-
-baca-repeat-pitch-class-warning = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
-    #{
-    \abjad-color-music #'red
-    $music
-    #}
-    )
-
-baca-unpitched-music-warning = #(
+baca-not-yet-pitched-coloring = #(
     define-music-function
     (parser location music)
     (ly:music?)
@@ -40,12 +10,42 @@ baca-unpitched-music-warning = #(
     #}
     )
 
-baca-unregistered-pitch-warning = #(
+baca-not-yet-registered-pitch-coloring = #(
     define-music-function
     (parser location music)
     (ly:music?)
     #{
     \abjad-color-music #'magenta
+    $music
+    #}
+    )
+
+baca-octave-coloring = #(
+    define-music-function
+    (parser location music)
+    (ly:music?)
+    #{
+    \abjad-color-music #'red
+    $music
+    #}
+    )
+
+baca-out-of-range-coloring = #(
+    define-music-function
+    (parser location music)
+    (ly:music?)
+    #{
+    \abjad-color-music #'red
+    $music
+    #}
+    )
+
+baca-repeat-pitch-class-coloring = #(
+    define-music-function
+    (parser location music)
+    (ly:music?)
+    #{
+    \abjad-color-music #'red
     $music
     #}
     )

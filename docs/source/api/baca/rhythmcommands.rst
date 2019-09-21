@@ -36,7 +36,7 @@ rhythmcommands
    .. autosummary::
       :nosignatures:
 
-      annotate_unpitched_music
+      annotate_not_yet_pitched
       do_not_check_total_duration
       parameter
       persist
@@ -80,7 +80,7 @@ rhythmcommands
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: RhythmCommand.annotate_unpitched_music
+   .. autoattribute:: RhythmCommand.annotate_not_yet_pitched
 
    .. container:: inherited
 
