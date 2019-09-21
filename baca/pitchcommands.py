@@ -5913,8 +5913,7 @@ class StaffPositionCommand(scoping.Command):
                 approximate_pitch=self.approximate_pitch,
                 set_chord_pitches_equal=self.set_chord_pitches_equal,
             )
-            # TODO: make this assert work:
-            # assert new_lt is None, repr(new_lt)
+            assert new_lt is None, repr(new_lt)
             plt_count += 1
             for pleaf in plt:
                 abjad.attach(abjad.tags.STAFF_POSITION, pleaf)
@@ -6077,8 +6076,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
                 allow_repitch=True,
                 approximate_pitch=self.approximate_pitch,
             )
-            # TODO: make this assert work:
-            # assert new_lt is None, repr(new_lt)
+            assert new_lt is None, repr(new_lt)
             for leaf in plt:
                 abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
         if isinstance(self.start, abjad.NamedPitch):
@@ -6094,8 +6092,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
             allow_repitch=True,
             approximate_pitch=self.approximate_pitch,
         )
-        # TODO: make this assert work:
-        # assert new_lt is None, repr(new_lt)
+        assert new_lt is None, repr(new_lt)
         if isinstance(self.stop, abjad.NamedPitch):
             stop_pitch = self.stop
         else:
@@ -6109,8 +6106,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
             allow_repitch=True,
             approximate_pitch=self.approximate_pitch,
         )
-        # TODO: make this assert work:
-        # assert new_lt is None, repr(new_lt)
+        assert new_lt is None, repr(new_lt)
 
     ### PUBLIC PROPERTIES ###
 
