@@ -3957,6 +3957,8 @@ class SegmentMaker(abjad.SegmentMaker):
         for pleaf in classes.Selection(self.score).pleaves():
             if abjad.inspect(pleaf).has_indicator(abjad.tags.DO_NOT_TRANSPOSE):
                 continue
+            if abjad.inspect(pleaf).has_indicator(abjad.tags.STAFF_POSITION):
+                continue
             abjad.Instrument.transpose_from_sounding_pitch(pleaf)
 
     @staticmethod

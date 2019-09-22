@@ -6076,6 +6076,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
             assert new_lt is None, repr(new_lt)
             for leaf in plt:
                 abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
+                abjad.attach(abjad.tags.STAFF_POSITION, leaf)
         if isinstance(self.start, abjad.NamedPitch):
             start_pitch = self.start
         else:
