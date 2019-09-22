@@ -24,7 +24,6 @@ indicatorcommands
 
    ~accent
    ~alternate_bow_strokes
-   ~approximate_pitch
    ~arpeggio
    ~articulation
    ~articulations
@@ -68,8 +67,6 @@ indicatorcommands
 .. autofunction:: accent
 
 .. autofunction:: alternate_bow_strokes
-
-.. autofunction:: approximate_pitch
 
 .. autofunction:: arpeggio
 

@@ -280,7 +280,6 @@ Bača API
 
    ~baca.indicatorcommands.accent
    ~baca.indicatorcommands.alternate_bow_strokes
-   ~baca.indicatorcommands.approximate_pitch
    ~baca.indicatorcommands.arpeggio
    ~baca.indicatorcommands.articulation
    ~baca.indicatorcommands.articulations

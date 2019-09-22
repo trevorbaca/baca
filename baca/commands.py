@@ -1302,6 +1302,7 @@ def flat_glissando(
     pitch,
     *tweaks,
     allow_repitch=None,
+    approximate_pitch: bool = None,
     hide_middle_stems=None,
     left_broken=None,
     right_broken=None,
@@ -1334,12 +1335,18 @@ def flat_glissando(
     commands.append(untie_command)
     if pitch is not None and stop_pitch is None:
         pitch_command = pitchcommands.pitch(
-            pitch, allow_repitch=allow_repitch, selector=selector
+            pitch,
+            allow_repitch=allow_repitch,
+            approximate_pitch=approximate_pitch,
+            selector=selector,
         )
         commands.append(pitch_command)
     elif pitch is not None and stop_pitch is not None:
         staff_position_command = pitchcommands.interpolate_staff_positions(
-            pitch, stop_pitch, selector=selector
+            pitch,
+            stop_pitch,
+            approximate_pitch=approximate_pitch,
+            selector=selector,
         )
         commands.append(staff_position_command)
     return scoping.suite(*commands)

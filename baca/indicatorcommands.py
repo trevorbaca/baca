@@ -366,20 +366,6 @@ def alternate_bow_strokes(
     )
 
 
-def approximate_pitch(
-    selector: abjad.SelectorTyping = classes.Expression()
-    .select()
-    .plts(exclude=abjad.const.HIDDEN),
-    # do not include tag=None because function creates no .ly output
-) -> commandclasses.IndicatorCommand:
-    r"""
-    Attaches APPROXIMATE_PITCH tag.
-    """
-    return commandclasses.IndicatorCommand(
-        indicators=[abjad.tags.APPROXIMATE_PITCH], selector=selector
-    )
-
-
 def arpeggio(
     selector: abjad.SelectorTyping = classes.Expression()
     .select()
