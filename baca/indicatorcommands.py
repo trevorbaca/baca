@@ -1,4 +1,5 @@
 import abjad
+import inspect
 import typing
 from . import commandclasses
 from . import const
@@ -8,13 +9,16 @@ from . import scoping
 from . import typings
 
 
+def _site(frame):
+    prefix = "baca"
+    return scoping.site(frame, prefix)
+
+
 ### FACTORY FUNCTIONS ###
 
 
 def accent(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.accent",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches accent.
@@ -56,7 +60,7 @@ def accent(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         d'16
                         ]
@@ -90,7 +94,9 @@ def accent(
 
     """
     return commandclasses.IndicatorCommand(
-        indicators=[abjad.Articulation(">")], selector=selector, tags=[tag]
+        indicators=[abjad.Articulation(">")],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -99,7 +105,6 @@ def alternate_bow_strokes(
     *,
     downbow_first: bool = True,
     full: bool = None,
-    tag: typing.Optional[str] = "baca.alternate_bow_strokes",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches alternate bow strokes.
@@ -143,13 +148,13 @@ def alternate_bow_strokes(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \downbow                                                                   %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \downbow                                                                   %! baca.alternate_bow_strokes():IndicatorCommand
                         [
                         d'16
-                        - \upbow                                                                     %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \upbow                                                                     %! baca.alternate_bow_strokes():IndicatorCommand
                         ]
                         bf'4
-                        - \downbow                                                                   %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \downbow                                                                   %! baca.alternate_bow_strokes():IndicatorCommand
                         ~
                         bf'16
                         r16
@@ -157,26 +162,26 @@ def alternate_bow_strokes(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        - \upbow                                                                     %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \upbow                                                                     %! baca.alternate_bow_strokes():IndicatorCommand
                         [
                         e''16
-                        - \downbow                                                                   %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \downbow                                                                   %! baca.alternate_bow_strokes():IndicatorCommand
                         ]
                         ef''4
-                        - \upbow                                                                     %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \upbow                                                                     %! baca.alternate_bow_strokes():IndicatorCommand
                         ~
                         ef''16
                         r16
                         af''16
-                        - \downbow                                                                   %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \downbow                                                                   %! baca.alternate_bow_strokes():IndicatorCommand
                         [
                         g''16
-                        - \upbow                                                                     %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \upbow                                                                     %! baca.alternate_bow_strokes():IndicatorCommand
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        - \downbow                                                                   %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \downbow                                                                   %! baca.alternate_bow_strokes():IndicatorCommand
                         r4
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
@@ -220,13 +225,13 @@ def alternate_bow_strokes(
                         \override TupletBracket.staff-padding = #6                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \upbow                                                                     %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \upbow                                                                     %! baca.alternate_bow_strokes():IndicatorCommand
                         [
                         d'16
-                        - \downbow                                                                   %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \downbow                                                                   %! baca.alternate_bow_strokes():IndicatorCommand
                         ]
                         bf'4
-                        - \upbow                                                                     %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \upbow                                                                     %! baca.alternate_bow_strokes():IndicatorCommand
                         ~
                         bf'16
                         r16
@@ -234,26 +239,26 @@ def alternate_bow_strokes(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        - \downbow                                                                   %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \downbow                                                                   %! baca.alternate_bow_strokes():IndicatorCommand
                         [
                         e''16
-                        - \upbow                                                                     %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \upbow                                                                     %! baca.alternate_bow_strokes():IndicatorCommand
                         ]
                         ef''4
-                        - \downbow                                                                   %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \downbow                                                                   %! baca.alternate_bow_strokes():IndicatorCommand
                         ~
                         ef''16
                         r16
                         af''16
-                        - \upbow                                                                     %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \upbow                                                                     %! baca.alternate_bow_strokes():IndicatorCommand
                         [
                         g''16
-                        - \downbow                                                                   %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \downbow                                                                   %! baca.alternate_bow_strokes():IndicatorCommand
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        - \upbow                                                                     %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \upbow                                                                     %! baca.alternate_bow_strokes():IndicatorCommand
                         r4
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
@@ -297,13 +302,13 @@ def alternate_bow_strokes(
                         \override TupletBracket.staff-padding = #6                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \baca-full-downbow                                                         %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \baca-full-downbow                                                         %! baca.alternate_bow_strokes():IndicatorCommand
                         [
                         d'16
-                        - \baca-full-upbow                                                           %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \baca-full-upbow                                                           %! baca.alternate_bow_strokes():IndicatorCommand
                         ]
                         bf'4
-                        - \baca-full-downbow                                                         %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \baca-full-downbow                                                         %! baca.alternate_bow_strokes():IndicatorCommand
                         ~
                         bf'16
                         r16
@@ -311,26 +316,26 @@ def alternate_bow_strokes(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        - \baca-full-upbow                                                           %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \baca-full-upbow                                                           %! baca.alternate_bow_strokes():IndicatorCommand
                         [
                         e''16
-                        - \baca-full-downbow                                                         %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \baca-full-downbow                                                         %! baca.alternate_bow_strokes():IndicatorCommand
                         ]
                         ef''4
-                        - \baca-full-upbow                                                           %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \baca-full-upbow                                                           %! baca.alternate_bow_strokes():IndicatorCommand
                         ~
                         ef''16
                         r16
                         af''16
-                        - \baca-full-downbow                                                         %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \baca-full-downbow                                                         %! baca.alternate_bow_strokes():IndicatorCommand
                         [
                         g''16
-                        - \baca-full-upbow                                                           %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \baca-full-upbow                                                           %! baca.alternate_bow_strokes():IndicatorCommand
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        - \baca-full-downbow                                                         %! baca.alternate_bow_strokes:IndicatorCommand
+                        - \baca-full-downbow                                                         %! baca.alternate_bow_strokes():IndicatorCommand
                         r4
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
@@ -350,7 +355,9 @@ def alternate_bow_strokes(
             strings = ["upbow", "downbow"]
     indicators = [abjad.Articulation(_) for _ in strings]
     return commandclasses.IndicatorCommand(
-        indicators=indicators, selector=selector, tags=[tag]
+        indicators=indicators,
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -368,8 +375,6 @@ def approximate_pitch(
 
 def arpeggio(
     selector: abjad.SelectorTyping = "baca.chead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.arpeggio",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches arpeggio.
@@ -401,7 +406,7 @@ def arpeggio(
                 {
                     \scaleDurations #'(1 . 1) {
                         <c' d' bf'>8
-                        - \arpeggio                                                                  %! baca.arpeggio:IndicatorCommand
+                        - \arpeggio                                                                  %! baca.arpeggio():IndicatorCommand
                         ~
                         [
                         <c' d' bf'>32
@@ -447,36 +452,36 @@ def arpeggio(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("arpeggio")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def articulation(
     articulation: str,
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.articulation",
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches articulation.
     """
     articulation_ = abjad.Articulation(articulation)
     return commandclasses.IndicatorCommand(
-        indicators=[articulation_], selector=selector, tags=[tag]
+        indicators=[articulation_],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def articulations(
     articulations: typing.List,
     selector: abjad.SelectorTyping = "baca.pheads(exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.articulations",
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches articulations.
     """
     return commandclasses.IndicatorCommand(
-        indicators=articulations, selector=selector, tags=[tag]
+        indicators=articulations,
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -485,21 +490,21 @@ def bar_line(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     format_slot: str = "after",
-    tag: typing.Optional[str] = "baca.bar_line",
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches bar line.
     """
     indicator = abjad.BarLine(abbreviation, format_slot=format_slot)
     return commandclasses.IndicatorCommand(
-        indicators=[indicator], selector=selector, tags=[tag]
+        indicators=[indicator],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def breathe(
     selector: abjad.SelectorTyping = "baca.pleaf(-1, exclude=abjad.const.HIDDEN)",
     *tweaks: abjad.LilyPondTweakManager,
-    tag: typing.Optional[str] = "baca.breathe",
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches breathe command.
@@ -507,7 +512,10 @@ def breathe(
     # TODO: change to abjad.Articulation("breathe", format_slot="after")?
     breathe = abjad.LilyPondLiteral(r"\breathe", format_slot="after")
     return commandclasses.IndicatorCommand(
-        indicators=[breathe], selector=selector, tags=[tag], tweaks=tweaks
+        indicators=[breathe],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        tweaks=tweaks,
     )
 
 
@@ -516,7 +524,6 @@ def clef(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     redundant: bool = None,
-    tag: typing.Optional[str] = "baca.clef",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches clef.
@@ -556,7 +563,7 @@ def clef(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override TupletBracket.staff-padding = #7                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
-                        \clef "alto"                                                                 %! baca.clef:IndicatorCommand
+                        \clef "alto"                                                                 %! baca.clef():IndicatorCommand
                         r8
                         c'16
                         [
@@ -596,14 +603,12 @@ def clef(
         indicators=[indicator],
         redundant=redundant,
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def double_staccato(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.double_staccato",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches double-staccato.
@@ -645,7 +650,7 @@ def double_staccato(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \baca-staccati #2                                                          %! baca.double_staccato:IndicatorCommand
+                        - \baca-staccati #2                                                          %! baca.double_staccato():IndicatorCommand
                         [
                         d'16
                         ]
@@ -681,14 +686,12 @@ def double_staccato(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #2")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def down_arpeggio(
     selector: abjad.SelectorTyping = "baca.chead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.down_arpeggio",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches down-arpeggio.
@@ -719,9 +722,9 @@ def down_arpeggio(
                 \new Staff
                 {
                     \scaleDurations #'(1 . 1) {
-                        \arpeggioArrowDown                                                           %! baca.down_arpeggio:IndicatorCommand
+                        \arpeggioArrowDown                                                           %! baca.down_arpeggio():IndicatorCommand
                         <c' d' bf'>8
-                        \arpeggio                                                                    %! baca.down_arpeggio:IndicatorCommand
+                        \arpeggio                                                                    %! baca.down_arpeggio():IndicatorCommand
                         ~
                         [
                         <c' d' bf'>32
@@ -767,7 +770,7 @@ def down_arpeggio(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.Down)],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -775,7 +778,6 @@ def down_bow(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *tweaks: abjad.LilyPondTweakManager,
     full: bool = None,
-    tag: typing.Optional[str] = "baca.down_bow",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches down-bow.
@@ -817,7 +819,7 @@ def down_bow(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \downbow                                                                   %! baca.down_bow:IndicatorCommand
+                        - \downbow                                                                   %! baca.down_bow():IndicatorCommand
                         [
                         d'16
                         ]
@@ -886,7 +888,7 @@ def down_bow(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \baca-full-downbow                                                         %! baca.down_bow:IndicatorCommand
+                        - \baca-full-downbow                                                         %! baca.down_bow():IndicatorCommand
                         [
                         d'16
                         ]
@@ -924,14 +926,16 @@ def down_bow(
     else:
         articulation = abjad.Articulation("downbow")
     return commandclasses.IndicatorCommand(
-        indicators=[articulation], selector=selector, tags=[tag], tweaks=tweaks
+        indicators=[articulation],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        tweaks=tweaks,
     )
 
 
 def espressivo(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *tweaks: abjad.LilyPondTweakManager,
-    tag: typing.Optional[str] = "baca.espressivo",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches espressivo.
@@ -973,7 +977,7 @@ def espressivo(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \espressivo                                                                %! baca.espressivo:IndicatorCommand
+                        - \espressivo                                                                %! baca.espressivo():IndicatorCommand
                         [
                         d'16
                         ]
@@ -1009,15 +1013,13 @@ def espressivo(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("espressivo")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
         tweaks=tweaks,
     )
 
 
 def fermata(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
-    *,
-    tag: typing.Optional[str] = "baca.fermata",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches fermata.
@@ -1058,7 +1060,7 @@ def fermata(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
-                        - \fermata                                                                   %! baca.fermata:IndicatorCommand
+                        - \fermata                                                                   %! baca.fermata():IndicatorCommand
                         c'16
                         [
                         d'16
@@ -1095,14 +1097,12 @@ def fermata(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("fermata")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def flageolet(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.flageolet",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches flageolet.
@@ -1144,7 +1144,7 @@ def flageolet(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \flageolet                                                                 %! baca.flageolet:IndicatorCommand
+                        - \flageolet                                                                 %! baca.flageolet():IndicatorCommand
                         [
                         d'16
                         ]
@@ -1180,14 +1180,12 @@ def flageolet(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("flageolet")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def hide_black_note_heads(
     selector: abjad.SelectorTyping = "baca.leaves(exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "hide.black_note_heads",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches note-head stencil false to black note-heads.
@@ -1265,21 +1263,21 @@ def hide_black_note_heads(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            b'2                                                                      %! baca.make_notes
+                            b'2                                                                      %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \once \override NoteHead.transparent = ##t                               %! hide.black_note_heads:IndicatorCommand
+                            \once \override NoteHead.transparent = ##t                               %! baca.hide_black_note_heads():IndicatorCommand
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            b'4.                                                                     %! baca.make_notes
+                            b'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            b'2                                                                      %! baca.make_notes
+                            b'2                                                                      %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \once \override NoteHead.transparent = ##t                               %! hide.black_note_heads:IndicatorCommand
+                            \once \override NoteHead.transparent = ##t                               %! baca.hide_black_note_heads():IndicatorCommand
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
-                            b'4.                                                                     %! baca.make_notes
+                            b'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1322,14 +1320,12 @@ def hide_black_note_heads(
         indicators=[literal],
         predicate=lambda _: _.written_duration < abjad.Duration(1, 2),
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def laissez_vibrer(
     selector: abjad.SelectorTyping = "baca.ptail(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.laissez_vibrer",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches laissez vibrer.
@@ -1371,7 +1367,7 @@ def laissez_vibrer(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \laissezVibrer                                                             %! baca.laissez_vibrer:IndicatorCommand
+                        - \laissezVibrer                                                             %! baca.laissez_vibrer():IndicatorCommand
                         [
                         d'16
                         ]
@@ -1407,7 +1403,7 @@ def laissez_vibrer(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("laissezVibrer")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -1416,21 +1412,20 @@ def literal(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *,
     format_slot: str = "before",
-    tag: typing.Optional[str] = "baca.literal",
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches LilyPond literal.
     """
     literal = abjad.LilyPondLiteral(string, format_slot=format_slot)
     return commandclasses.IndicatorCommand(
-        indicators=[literal], selector=selector, tags=[tag]
+        indicators=[literal],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def long_fermata(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
-    *,
-    tag: typing.Optional[str] = "baca.long_fermata",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches long fermata.
@@ -1471,7 +1466,7 @@ def long_fermata(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
-                        - \longfermata                                                               %! baca.long_fermata:IndicatorCommand
+                        - \longfermata                                                               %! baca.long_fermata():IndicatorCommand
                         c'16
                         [
                         d'16
@@ -1508,14 +1503,12 @@ def long_fermata(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("longfermata")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def marcato(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.marcato",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches marcato.
@@ -1557,7 +1550,7 @@ def marcato(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \marcato                                                                   %! baca.marcato:IndicatorCommand
+                        - \marcato                                                                   %! baca.marcato():IndicatorCommand
                         [
                         d'16
                         ]
@@ -1593,7 +1586,7 @@ def marcato(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("marcato")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -1603,7 +1596,6 @@ def margin_markup(
     *,
     alert: commandclasses.IndicatorCommand = None,
     context: str = "Staff",
-    tag: typing.Optional[str] = "baca.margin_markup",
 ) -> typing.Union[commandclasses.IndicatorCommand, scoping.Suite]:
     r"""
     Attaches margin markup.
@@ -1681,23 +1673,23 @@ def margin_markup(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
-                            \markup { Fl. }                                                          %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup:IndicatorCommand
+                            \set Staff.shortInstrumentName =                                         %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup():IndicatorCommand
+                            \markup { Fl. }                                                          %! EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.margin_markup():IndicatorCommand
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
-                            e'2                                                                      %! baca.make_notes
+                            e'2                                                                      %! baca.make_notes()
                             ^ \baca-explicit-indicator-markup "[MarginMarkup]"                       %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)        %! REDRAWN_EXPLICIT_MARGIN_MARKUP_COLOR:baca.SegmentMaker._attach_color_literal(2)
-                            \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
-                            \markup { Fl. }                                                          %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup:IndicatorCommand
+                            \set Staff.shortInstrumentName =                                         %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup():IndicatorCommand
+                            \markup { Fl. }                                                          %! REDRAWN_EXPLICIT_MARGIN_MARKUP:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(3):baca.margin_markup():IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            f'4.                                                                     %! baca.make_notes
+                            f'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            e'2                                                                      %! baca.make_notes
+                            e'2                                                                      %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            f'4.                                                                     %! baca.make_notes
+                            f'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1743,7 +1735,9 @@ def margin_markup(
         raise TypeError(argument)
     assert isinstance(margin_markup, abjad.MarginMarkup)
     command = commandclasses.IndicatorCommand(
-        indicators=[margin_markup], selector=selector, tags=[tag]
+        indicators=[margin_markup],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
     if bool(alert):
         assert isinstance(alert, commandclasses.IndicatorCommand), repr(alert)
@@ -1756,7 +1750,6 @@ def mark(
     argument: str,
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *tweaks: abjad.LilyPondTweakManager,
-    tag: typing.Optional[str] = "baca.mark",
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches mark.
@@ -1766,15 +1759,13 @@ def mark(
     return commandclasses.IndicatorCommand(
         indicators=[rehearsal_mark],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
         tweaks=tweaks,
     )
 
 
 def parenthesize(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.parenthesize",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches LilyPond ``\parenthesize`` command.
@@ -1815,7 +1806,7 @@ def parenthesize(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
-                        \parenthesize                                                                %! baca.parenthesize:IndicatorCommand
+                        \parenthesize                                                                %! baca.parenthesize():IndicatorCommand
                         c'16
                         [
                         d'16
@@ -1852,14 +1843,12 @@ def parenthesize(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\parenthesize")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def quadruple_staccato(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.quadruple_staccato",
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches quadruple-staccato.
@@ -1867,7 +1856,7 @@ def quadruple_staccato(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #4")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -1875,7 +1864,6 @@ def rehearsal_mark(
     argument: typing.Union[int, str],
     selector: abjad.SelectorTyping = "baca.leaf(0)",
     *tweaks: abjad.LilyPondTweakManager,
-    tag: typing.Optional[str] = "baca.rehearsal_mark",
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches rehearsal mark.
@@ -1884,15 +1872,15 @@ def rehearsal_mark(
     string = rf'\baca-rehearsal-mark-markup "{argument}"'
     markup = abjad.Markup(string, direction=abjad.Center, literal=True)
     return commandclasses.IndicatorCommand(
-        indicators=[markup], selector=selector, tags=[tag], tweaks=tweaks
+        indicators=[markup],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        tweaks=tweaks,
     )
 
 
 def repeat_tie(
-    selector: abjad.SelectorTyping,
-    *,
-    allow_rest: bool = None,
-    tag: typing.Optional[str] = "baca.repeat_tie",
+    selector: abjad.SelectorTyping, *, allow_rest: bool = None
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches repeat-tie.
@@ -1939,7 +1927,7 @@ def repeat_tie(
                         c'16
                         [
                         c'16
-                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        \repeatTie                                                                   %! baca.repeat_tie():IndicatorCommand
                         ]
                         bf'4
                         ~
@@ -1976,14 +1964,12 @@ def repeat_tie(
         do_not_test=allow_rest,
         indicators=[abjad.RepeatTie()],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def short_fermata(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
-    *,
-    tag: typing.Optional[str] = "short.fermata",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches short fermata.
@@ -2024,7 +2010,7 @@ def short_fermata(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
-                        - \shortfermata                                                              %! short.fermata:IndicatorCommand
+                        - \shortfermata                                                              %! baca.short_fermata():IndicatorCommand
                         c'16
                         [
                         d'16
@@ -2061,14 +2047,12 @@ def short_fermata(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("shortfermata")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def snap_pizzicato(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.snap_pizzicato",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches snap pizzicato.
@@ -2076,14 +2060,12 @@ def snap_pizzicato(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("snappizzicato")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def staccatissimo(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.staccatissimo",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches staccatissimo.
@@ -2125,7 +2107,7 @@ def staccatissimo(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \staccatissimo                                                             %! baca.staccatissimo:IndicatorCommand
+                        - \staccatissimo                                                             %! baca.staccatissimo():IndicatorCommand
                         [
                         d'16
                         ]
@@ -2161,14 +2143,12 @@ def staccatissimo(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("staccatissimo")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def staccato(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.staccato",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches staccato.
@@ -2210,7 +2190,7 @@ def staccato(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \staccato                                                                  %! baca.staccato:IndicatorCommand
+                        - \staccato                                                                  %! baca.staccato():IndicatorCommand
                         [
                         d'16
                         ]
@@ -2246,16 +2226,12 @@ def staccato(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("staccato")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def staff_lines(
-    n: int,
-    selector: abjad.SelectorTyping = "baca.leaf(0)",
-    *,
-    tag: typing.Optional[str] = "baca.staff_lines",
-    # ) -> commandclasses.IndicatorCommand:
+    n: int, selector: abjad.SelectorTyping = "baca.leaf(0)"
 ) -> scoping.Suite:
     r"""
     Makes staff line command.
@@ -2341,28 +2317,28 @@ def staff_lines(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:baca.clef():IndicatorCommand
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:baca.SegmentMaker._attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):baca.clef:IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):baca.clef():IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:baca.SegmentMaker._attach_color_literal(2)
-                            a4.                                                                      %! baca.make_notes
+                            a4.                                                                      %! baca.make_notes()
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            b4.                                                                      %! baca.make_notes
+                            b4.                                                                      %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            c'4.                                                                     %! baca.make_notes
+                            c'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            d'4.                                                                     %! baca.make_notes
+                            d'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 5]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            e'4.                                                                     %! baca.make_notes
+                            e'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -2478,28 +2454,28 @@ def staff_lines(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \override Staff.BarLine.bar-extent = #'(0 . 0)                           %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 1                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca.clef():IndicatorCommand
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:baca.SegmentMaker._attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):baca.clef:IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):baca.clef():IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:baca.SegmentMaker._attach_color_literal(2)
-                            b,4.                                                                     %! baca.make_notes
+                            b,4.                                                                     %! baca.make_notes()
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            c4.                                                                      %! baca.make_notes
+                            c4.                                                                      %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            d4.                                                                      %! baca.make_notes
+                            d4.                                                                      %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            e4.                                                                      %! baca.make_notes
+                            e4.                                                                      %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 5]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            f4.                                                                      %! baca.make_notes
+                            f4.                                                                      %! baca.make_notes()
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -2616,28 +2592,28 @@ def staff_lines(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)                      %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \clef "percussion"                                                       %! EXPLICIT_CLEF:_set_status_tag:baca.clef():IndicatorCommand
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:baca.SegmentMaker._attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):baca.clef:IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):baca.clef():IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:baca.SegmentMaker._attach_color_literal(2)
-                            a4.                                                                      %! baca.make_notes
+                            a4.                                                                      %! baca.make_notes()
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            b4.                                                                      %! baca.make_notes
+                            b4.                                                                      %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            c'4.                                                                     %! baca.make_notes
+                            c'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            d'4.                                                                     %! baca.make_notes
+                            d'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 5]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            e'4.                                                                     %! baca.make_notes
+                            e'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -2752,28 +2728,28 @@ def staff_lines(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)                      %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca.clef():IndicatorCommand
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:baca.SegmentMaker._attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):baca.clef:IndicatorCommand
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):baca.clef():IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:baca.SegmentMaker._attach_color_literal(2)
-                            b,4.                                                                     %! baca.make_notes
+                            b,4.                                                                     %! baca.make_notes()
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            c4.                                                                      %! baca.make_notes
+                            c4.                                                                      %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            d4.                                                                      %! baca.make_notes
+                            d4.                                                                      %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            e4.                                                                      %! baca.make_notes
+                            e4.                                                                      %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 5]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            f4.                                                                      %! baca.make_notes
+                            f4.                                                                      %! baca.make_notes()
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -2888,28 +2864,28 @@ def staff_lines(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \override Staff.BarLine.bar-extent = #'(-0.5 . 0.5)                      %! EXPLICIT_BAR_EXTENT:_set_status_tag:-PARTS:IndicatorCommand
-                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines:IndicatorCommand
-                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca.clef:IndicatorCommand
+                            \stopStaff                                                               %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \once \override Staff.StaffSymbol.line-count = 2                         %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \startStaff                                                              %! EXPLICIT_STAFF_LINES:_set_status_tag:baca.staff_lines():IndicatorCommand
+                            \clef "bass"                                                             %! EXPLICIT_CLEF:_set_status_tag:baca.clef():IndicatorCommand
                             \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! EXPLICIT_STAFF_LINES_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             \once \override Staff.Clef.color = #(x11-color 'blue)                    %! EXPLICIT_CLEF_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         %@% \override Staff.Clef.color = ##f                                         %! EXPLICIT_CLEF_COLOR_CANCELLATION:baca.SegmentMaker._attach_color_literal(1)
-                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):baca.clef:IndicatorCommand
-                            g'4.                                                                     %! baca.make_notes
+                            \set Staff.forceClef = ##t                                               %! EXPLICIT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):baca.clef():IndicatorCommand
+                            g'4.                                                                     %! baca.make_notes()
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)                  %! EXPLICIT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            a'4.                                                                     %! baca.make_notes
+                            a'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            b'4.                                                                     %! baca.make_notes
+                            b'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            c''4.                                                                    %! baca.make_notes
+                            c''4.                                                                    %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 5]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            d''4.                                                                    %! baca.make_notes
+                            d''4.                                                                    %! baca.make_notes()
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -2952,7 +2928,9 @@ def staff_lines(
         tags=[const.NOT_PARTS],
     )
     command_2 = commandclasses.IndicatorCommand(
-        indicators=[indicators.StaffLines(n)], selector=selector, tags=[tag]
+        indicators=[indicators.StaffLines(n)],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
     return scoping.suite(command_1, command_2)
 
@@ -2964,7 +2942,6 @@ def start_markup(
     context: str = "Staff",
     hcenter_in: abjad.Number = None,
     literal: bool = None,
-    tag: typing.Optional[str] = "baca.start_markup",
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches start markup.
@@ -2990,7 +2967,11 @@ def start_markup(
     command = commandclasses.IndicatorCommand(
         indicators=[start_markup],
         selector=selector,
-        tags=[tag, abjad.Tag("baca_start_markup"), abjad.Tag("-PARTS")],
+        tags=[
+            _site(inspect.currentframe()),
+            abjad.Tag("baca_start_markup"),
+            abjad.Tag("-PARTS"),
+        ],
     )
     return command
 
@@ -2998,7 +2979,6 @@ def start_markup(
 def stem_tremolo(
     selector: abjad.SelectorTyping = "baca.pleaf(0, exclude=abjad.const.HIDDEN)",
     *,
-    tag: typing.Optional[str] = "baca.stem_tremolo",
     tremolo_flags: int = 32,
 ) -> commandclasses.IndicatorCommand:
     r"""
@@ -3041,7 +3021,7 @@ def stem_tremolo(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        :32                                                                          %! baca.stem_tremolo:IndicatorCommand
+                        :32                                                                          %! baca.stem_tremolo():IndicatorCommand
                         [
                         d'16
                         ]
@@ -3077,7 +3057,7 @@ def stem_tremolo(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.StemTremolo(tremolo_flags=tremolo_flags)],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -3085,7 +3065,6 @@ def stop_on_string(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *,
     map: abjad.SelectorTyping = None,
-    tag: typing.Optional[str] = "baca.stop_on_string",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches stop-on-string.
@@ -3152,7 +3131,7 @@ def stop_on_string(
                     }
                     \times 4/5 {
                         a'16
-                        - \baca-stop-on-string                                                       %! baca.stop_on_string:IndicatorCommand
+                        - \baca-stop-on-string                                                       %! baca.stop_on_string():IndicatorCommand
                         r4
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
@@ -3162,14 +3141,15 @@ def stop_on_string(
     """
     articulation = abjad.Articulation("baca-stop-on-string")
     return commandclasses.IndicatorCommand(
-        indicators=[articulation], map=map, selector=selector, tags=[tag]
+        indicators=[articulation],
+        map=map,
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def stop_trill(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
-    *,
-    tag: typing.Optional[str] = "baca.stop_trill",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches stop trill to closing-slot.
@@ -3185,15 +3165,11 @@ def stop_trill(
     Eventually it will probably be necessary to model ``\stopTrillSpan``
     with a dedicated format slot.
     """
-    return literal(
-        r"\stopTrillSpan", format_slot="closing", selector=selector, tag=tag
-    )
+    return literal(r"\stopTrillSpan", format_slot="closing", selector=selector)
 
 
 def stopped(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.stoppped",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches stopped +-sign.
@@ -3235,7 +3211,7 @@ def stopped(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \stopped                                                                   %! baca.stoppped:IndicatorCommand
+                        - \stopped                                                                   %! baca.stopped():IndicatorCommand
                         [
                         d'16
                         ]
@@ -3271,13 +3247,11 @@ def stopped(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("stopped")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
-def tie(
-    selector: abjad.SelectorTyping, *, tag: typing.Optional[str] = "baca.tie"
-) -> commandclasses.IndicatorCommand:
+def tie(selector: abjad.SelectorTyping) -> commandclasses.IndicatorCommand:
     r"""
     Attaches tie.
 
@@ -3322,7 +3296,7 @@ def tie(
                         r8
                         d'16
                         [
-                        ~                                                                            %! baca.tie:IndicatorCommand
+                        ~                                                                            %! baca.tie():IndicatorCommand
                         d'16
                         ]
                         bf'4
@@ -3355,14 +3329,14 @@ def tie(
 
     """
     return commandclasses.IndicatorCommand(
-        indicators=[abjad.Tie()], selector=selector, tags=[tag]
+        indicators=[abjad.Tie()],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def tenuto(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.tenuto",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches tenuto.
@@ -3404,7 +3378,7 @@ def tenuto(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \tenuto                                                                    %! baca.tenuto:IndicatorCommand
+                        - \tenuto                                                                    %! baca.tenuto():IndicatorCommand
                         [
                         d'16
                         ]
@@ -3440,14 +3414,12 @@ def tenuto(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("tenuto")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def triple_staccato(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.triple_staccato",
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches triple-staccato.
@@ -3455,14 +3427,12 @@ def triple_staccato(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("baca-staccati #3")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
 def up_arpeggio(
     selector: abjad.SelectorTyping = "baca.chead(0, exclude=abjad.const.HIDDEN)",
-    *,
-    tag: typing.Optional[str] = "baca.up_arpeggio",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches up-arpeggio.
@@ -3493,9 +3463,9 @@ def up_arpeggio(
                 \new Staff
                 {
                     \scaleDurations #'(1 . 1) {
-                        \arpeggioArrowUp                                                             %! baca.up_arpeggio:IndicatorCommand
+                        \arpeggioArrowUp                                                             %! baca.up_arpeggio():IndicatorCommand
                         <c' d' bf'>8
-                        \arpeggio                                                                    %! baca.up_arpeggio:IndicatorCommand
+                        \arpeggio                                                                    %! baca.up_arpeggio():IndicatorCommand
                         ~
                         [
                         <c' d' bf'>32
@@ -3541,7 +3511,7 @@ def up_arpeggio(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Arpeggio(direction=abjad.Up)],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -3549,7 +3519,6 @@ def up_bow(
     selector: abjad.SelectorTyping = "baca.phead(0, exclude=abjad.const.HIDDEN)",
     *tweaks: abjad.LilyPondTweakManager,
     full: bool = None,
-    tag: typing.Optional[str] = "baca.up_bow",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches up-bow.
@@ -3591,7 +3560,7 @@ def up_bow(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \upbow                                                                     %! baca.up_bow:IndicatorCommand
+                        - \upbow                                                                     %! baca.up_bow():IndicatorCommand
                         [
                         d'16
                         ]
@@ -3629,14 +3598,15 @@ def up_bow(
     else:
         articulation = abjad.Articulation("upbow")
     return commandclasses.IndicatorCommand(
-        indicators=[articulation], selector=selector, tags=[tag], tweaks=tweaks
+        indicators=[articulation],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        tweaks=tweaks,
     )
 
 
 def very_long_fermata(
     selector: abjad.SelectorTyping = "baca.leaf(0)",
-    *,
-    tag: typing.Optional[str] = "baca.very_long_fermata",
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches very long fermata.
@@ -3677,7 +3647,7 @@ def very_long_fermata(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
-                        - \verylongfermata                                                           %! baca.very_long_fermata:IndicatorCommand
+                        - \verylongfermata                                                           %! baca.very_long_fermata():IndicatorCommand
                         c'16
                         [
                         d'16
@@ -3714,5 +3684,5 @@ def very_long_fermata(
     return commandclasses.IndicatorCommand(
         indicators=[abjad.Articulation("verylongfermata")],
         selector=selector,
-        tags=[tag],
+        tags=[_site(inspect.currentframe())],
     )

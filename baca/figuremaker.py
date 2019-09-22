@@ -2269,7 +2269,7 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \accent                                                        %! baca.accent:IndicatorCommand
+                                        - \accent                                                        %! baca.accent():IndicatorCommand
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2288,12 +2288,12 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
-                                        - \accent                                                        %! baca.accent:IndicatorCommand
+                                        - \accent                                                        %! baca.accent():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         a'16
-                                        - \accent                                                        %! baca.accent:IndicatorCommand
+                                        - \accent                                                        %! baca.accent():IndicatorCommand
                 <BLANKLINE>
                                         s16
                                         ]
@@ -2343,28 +2343,28 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                                         [
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -2373,27 +2373,27 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         af''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         a'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
                                         c'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                                         ]
                 <BLANKLINE>
                                     }
@@ -2578,7 +2578,7 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \accent                                                        %! baca.accent:IndicatorCommand
+                                        - \accent                                                        %! baca.accent():IndicatorCommand
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2597,12 +2597,12 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
-                                        - \accent                                                        %! baca.accent:IndicatorCommand
+                                        - \accent                                                        %! baca.accent():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         a'16
-                                        - \accent                                                        %! baca.accent:IndicatorCommand
+                                        - \accent                                                        %! baca.accent():IndicatorCommand
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2617,12 +2617,12 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
-                                        - \accent                                                        %! baca.accent:IndicatorCommand
+                                        - \accent                                                        %! baca.accent():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         e''16
-                                        - \accent                                                        %! baca.accent:IndicatorCommand
+                                        - \accent                                                        %! baca.accent():IndicatorCommand
                 <BLANKLINE>
                                         s16
                                         ]
@@ -2672,7 +2672,7 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                                         [
                 <BLANKLINE>
                                         s16
@@ -2680,17 +2680,17 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -2699,12 +2699,12 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         af''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2713,7 +2713,7 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         c'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -2722,12 +2722,12 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2736,7 +2736,7 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
                                         ef''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                                         ]
                 <BLANKLINE>
                                     }
@@ -2908,19 +2908,19 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \accent                                                        %! baca.accent:IndicatorCommand
+                                        - \accent                                                        %! baca.accent():IndicatorCommand
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
-                                        - \accent                                                        %! baca.accent:IndicatorCommand
+                                        - \accent                                                        %! baca.accent():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
-                                        - \accent                                                        %! baca.accent:IndicatorCommand
+                                        - \accent                                                        %! baca.accent():IndicatorCommand
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -2929,7 +2929,7 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
-                                        - \accent                                                        %! baca.accent:IndicatorCommand
+                                        - \accent                                                        %! baca.accent():IndicatorCommand
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2983,28 +2983,28 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                                         [
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -3013,22 +3013,22 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         af''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         a'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -3037,27 +3037,27 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         c'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -3066,22 +3066,22 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         af''!16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
                                         a'16
-                                        - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
                                         ]
                 <BLANKLINE>
                                     }
@@ -8005,7 +8005,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
                                     [
             <BLANKLINE>
                                     s16
@@ -8039,12 +8039,12 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8311,12 +8311,12 @@ def extend_beam(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8352,12 +8352,12 @@ def extend_beam(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     cs''!16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     s16
                                     ]
@@ -8902,7 +8902,7 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8921,12 +8921,12 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -9113,7 +9113,7 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                 }
             <BLANKLINE>
@@ -9138,12 +9138,12 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -9282,7 +9282,7 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -9302,12 +9302,12 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -9323,12 +9323,12 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     e''16
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                     s16
                                     ]
@@ -9379,28 +9379,28 @@ def imbricate(
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
                                     [
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                 }
             <BLANKLINE>
@@ -9410,27 +9410,27 @@ def imbricate(
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''!16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''!16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     c'16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                 }
             <BLANKLINE>
@@ -9440,27 +9440,27 @@ def imbricate(
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     e''16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     ef''!16
-                                    - \staccato                                                      %! baca.staccato:IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
                                     ]
             <BLANKLINE>
                                 }
@@ -9594,7 +9594,7 @@ def imbricate(
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     bf'!8.
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                 }
             <BLANKLINE>
@@ -9603,17 +9603,17 @@ def imbricate(
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     fs''!8.
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     e''8.
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     ef''!8.
-                                    - \accent                                                        %! baca.accent:IndicatorCommand
+                                    - \accent                                                        %! baca.accent():IndicatorCommand
             <BLANKLINE>
                                     s8.
             <BLANKLINE>

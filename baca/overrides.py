@@ -1564,12 +1564,12 @@ def mmrest_text_color(
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            ^ \markup {                                                              %! baca.markup:IndicatorCommand
-                                \override                                                            %! baca.markup:IndicatorCommand
-                                    #'(box-padding . 0.5)                                            %! baca.markup:IndicatorCommand
-                                    \box                                                             %! baca.markup:IndicatorCommand
-                                        still                                                        %! baca.markup:IndicatorCommand
-                                }                                                                    %! baca.markup:IndicatorCommand
+                            ^ \markup {                                                              %! baca.markup():IndicatorCommand
+                                \override                                                            %! baca.markup():IndicatorCommand
+                                    #'(box-padding . 0.5)                                            %! baca.markup():IndicatorCommand
+                                    \box                                                             %! baca.markup():IndicatorCommand
+                                        still                                                        %! baca.markup():IndicatorCommand
+                                }                                                                    %! baca.markup():IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 4/8                                                                 %! _call_rhythm_commands
@@ -1737,12 +1737,12 @@ def mmrest_text_extra_offset(
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            ^ \markup {                                                              %! baca.markup:IndicatorCommand
-                                \override                                                            %! baca.markup:IndicatorCommand
-                                    #'(box-padding . 0.5)                                            %! baca.markup:IndicatorCommand
-                                    \box                                                             %! baca.markup:IndicatorCommand
-                                        still                                                        %! baca.markup:IndicatorCommand
-                                }                                                                    %! baca.markup:IndicatorCommand
+                            ^ \markup {                                                              %! baca.markup():IndicatorCommand
+                                \override                                                            %! baca.markup():IndicatorCommand
+                                    #'(box-padding . 0.5)                                            %! baca.markup():IndicatorCommand
+                                    \box                                                             %! baca.markup():IndicatorCommand
+                                        still                                                        %! baca.markup():IndicatorCommand
+                                }                                                                    %! baca.markup():IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 4/8                                                                 %! _call_rhythm_commands
@@ -1883,12 +1883,12 @@ def mmrest_text_padding(
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            ^ \markup {                                                              %! baca.markup:IndicatorCommand
-                                \override                                                            %! baca.markup:IndicatorCommand
-                                    #'(box-padding . 0.5)                                            %! baca.markup:IndicatorCommand
-                                    \box                                                             %! baca.markup:IndicatorCommand
-                                        still                                                        %! baca.markup:IndicatorCommand
-                                }                                                                    %! baca.markup:IndicatorCommand
+                            ^ \markup {                                                              %! baca.markup():IndicatorCommand
+                                \override                                                            %! baca.markup():IndicatorCommand
+                                    #'(box-padding . 0.5)                                            %! baca.markup():IndicatorCommand
+                                    \box                                                             %! baca.markup():IndicatorCommand
+                                        still                                                        %! baca.markup():IndicatorCommand
+                                }                                                                    %! baca.markup():IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 4/8                                                                 %! _call_rhythm_commands
@@ -2029,12 +2029,12 @@ def mmrest_text_parent_center(
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            ^ \markup {                                                              %! baca.markup:IndicatorCommand
-                                \override                                                            %! baca.markup:IndicatorCommand
-                                    #'(box-padding . 0.5)                                            %! baca.markup:IndicatorCommand
-                                    \box                                                             %! baca.markup:IndicatorCommand
-                                        still                                                        %! baca.markup:IndicatorCommand
-                                }                                                                    %! baca.markup:IndicatorCommand
+                            ^ \markup {                                                              %! baca.markup():IndicatorCommand
+                                \override                                                            %! baca.markup():IndicatorCommand
+                                    #'(box-padding . 0.5)                                            %! baca.markup():IndicatorCommand
+                                    \box                                                             %! baca.markup():IndicatorCommand
+                                        still                                                        %! baca.markup():IndicatorCommand
+                                }                                                                    %! baca.markup():IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 4/8                                                                 %! _call_rhythm_commands
@@ -2175,12 +2175,12 @@ def mmrest_text_staff_padding(
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 3/8                                                                 %! _call_rhythm_commands
-                            ^ \markup {                                                              %! baca.markup:IndicatorCommand
-                                \override                                                            %! baca.markup:IndicatorCommand
-                                    #'(box-padding . 0.5)                                            %! baca.markup:IndicatorCommand
-                                    \box                                                             %! baca.markup:IndicatorCommand
-                                        still                                                        %! baca.markup:IndicatorCommand
-                                }                                                                    %! baca.markup:IndicatorCommand
+                            ^ \markup {                                                              %! baca.markup():IndicatorCommand
+                                \override                                                            %! baca.markup():IndicatorCommand
+                                    #'(box-padding . 0.5)                                            %! baca.markup():IndicatorCommand
+                                    \box                                                             %! baca.markup():IndicatorCommand
+                                        still                                                        %! baca.markup():IndicatorCommand
+                                }                                                                    %! baca.markup():IndicatorCommand
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 4/8                                                                 %! _call_rhythm_commands
@@ -2765,12 +2765,12 @@ def repeat_tie_down(
                         b'16
                         [
                         b'16
-                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        \repeatTie                                                                   %! baca.repeat_tie():IndicatorCommand
                         ]
                         c''4
                         ~
                         c''16
-                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        \repeatTie                                                                   %! baca.repeat_tie():IndicatorCommand
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
@@ -2778,13 +2778,13 @@ def repeat_tie_down(
                         b'16
                         [
                         b'16
-                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        \repeatTie                                                                   %! baca.repeat_tie():IndicatorCommand
                         ]
                         b'4
-                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        \repeatTie                                                                   %! baca.repeat_tie():IndicatorCommand
                         ~
                         b'16
-                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        \repeatTie                                                                   %! baca.repeat_tie():IndicatorCommand
                         r16
                     }
                     \times 4/5 {
@@ -2902,12 +2902,12 @@ def repeat_tie_up(
                         b'16
                         [
                         b'16
-                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        \repeatTie                                                                   %! baca.repeat_tie():IndicatorCommand
                         ]
                         c''4
                         ~
                         c''16
-                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        \repeatTie                                                                   %! baca.repeat_tie():IndicatorCommand
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
@@ -2915,13 +2915,13 @@ def repeat_tie_up(
                         b'16
                         [
                         b'16
-                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        \repeatTie                                                                   %! baca.repeat_tie():IndicatorCommand
                         ]
                         b'4
-                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        \repeatTie                                                                   %! baca.repeat_tie():IndicatorCommand
                         ~
                         b'16
-                        \repeatTie                                                                   %! baca.repeat_tie:IndicatorCommand
+                        \repeatTie                                                                   %! baca.repeat_tie():IndicatorCommand
                         r16
                     }
                     \times 4/5 {
@@ -3352,13 +3352,13 @@ def script_color(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         d'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ]
                         bf'4
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ~
                         bf'16
                         r16
@@ -3366,26 +3366,26 @@ def script_color(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         e''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ]
                         ef''4
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ~
                         ef''16
                         r16
                         af''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         g''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         r4
                         \revert Script.color                                                         %! baca.script_color():OverrideCommand(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
@@ -3448,13 +3448,13 @@ def script_down(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         d'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ]
                         bf'4
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ~
                         bf'16
                         r16
@@ -3462,26 +3462,26 @@ def script_down(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         e''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ]
                         ef''4
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ~
                         ef''16
                         r16
                         af''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         g''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         r4
                         \revert Script.direction                                                     %! baca.script_down():OverrideCommand(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
@@ -3544,13 +3544,13 @@ def script_extra_offset(
                         r8
                         \once \override Script.extra-offset = #'(-1.5 . 0)                           %! baca.script_extra_offset():OverrideCommand(1)
                         c'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         d'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ]
                         bf'4
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ~
                         bf'16
                         r16
@@ -3558,26 +3558,26 @@ def script_extra_offset(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         e''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ]
                         ef''4
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ~
                         ef''16
                         r16
                         af''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         g''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         r4
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
@@ -3669,13 +3669,13 @@ def script_up(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         d'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ]
                         bf'4
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ~
                         bf'16
                         r16
@@ -3683,26 +3683,26 @@ def script_up(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         e''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ]
                         ef''4
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ~
                         ef''16
                         r16
                         af''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         [
                         g''16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        - \accent                                                                    %! baca.accent:IndicatorCommand
+                        - \accent                                                                    %! baca.accent():IndicatorCommand
                         r4
                         \revert Script.direction                                                     %! baca.script_up():OverrideCommand(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
@@ -3782,20 +3782,20 @@ def slur_down(
                         r8
                         c'16
                         [
-                        (                                                                            %! baca.slur:SpannerIndicatorCommand(1)
+                        (                                                                            %! baca.slur():SpannerIndicatorCommand(1)
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
-                        )                                                                            %! SPANNER_STOP:baca.slur:SpannerIndicatorCommand(2)
+                        )                                                                            %! SPANNER_STOP:baca.slur():SpannerIndicatorCommand(2)
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
                         [
-                        (                                                                            %! baca.slur:SpannerIndicatorCommand(1)
+                        (                                                                            %! baca.slur():SpannerIndicatorCommand(1)
                         e''16
                         ]
                         ef''4
@@ -3805,7 +3805,7 @@ def slur_down(
                         af''16
                         [
                         g''16
-                        )                                                                            %! SPANNER_STOP:baca.slur:SpannerIndicatorCommand(2)
+                        )                                                                            %! SPANNER_STOP:baca.slur():SpannerIndicatorCommand(2)
                         ]
                     }
                     \times 4/5 {
@@ -3878,20 +3878,20 @@ def slur_up(
                         \override Stem.direction = #down                                             %! baca.stem_down():OverrideCommand(1)
                         c'16
                         [
-                        (                                                                            %! baca.slur:SpannerIndicatorCommand(1)
+                        (                                                                            %! baca.slur():SpannerIndicatorCommand(1)
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
-                        )                                                                            %! SPANNER_STOP:baca.slur:SpannerIndicatorCommand(2)
+                        )                                                                            %! SPANNER_STOP:baca.slur():SpannerIndicatorCommand(2)
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
                         [
-                        (                                                                            %! baca.slur:SpannerIndicatorCommand(1)
+                        (                                                                            %! baca.slur():SpannerIndicatorCommand(1)
                         e''16
                         ]
                         ef''4
@@ -3901,7 +3901,7 @@ def slur_up(
                         af''16
                         [
                         g''16
-                        )                                                                            %! SPANNER_STOP:baca.slur:SpannerIndicatorCommand(2)
+                        )                                                                            %! SPANNER_STOP:baca.slur():SpannerIndicatorCommand(2)
                         ]
                     }
                     \times 4/5 {
@@ -4341,7 +4341,7 @@ def sustain_pedal_staff_padding(
                         \override Staff.SustainPedalLineSpanner.staff-padding = #4                   %! baca.sustain_pedal_staff_padding():OverrideCommand(1)
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
-                        \sustainOn                                                                   %! baca.sustain_pedal:SpannerIndicatorCommand(1)
+                        \sustainOn                                                                   %! baca.sustain_pedal():SpannerIndicatorCommand(1)
                         c'16
                         [
                         d'16
@@ -4350,13 +4350,13 @@ def sustain_pedal_staff_padding(
                         ~
                         bf'16
                         r16
-                        \sustainOff                                                                  %! SPANNER_STOP:baca.sustain_pedal:SpannerIndicatorCommand(2)
+                        \sustainOff                                                                  %! SPANNER_STOP:baca.sustain_pedal():SpannerIndicatorCommand(2)
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
                         [
-                        \sustainOn                                                                   %! baca.sustain_pedal:SpannerIndicatorCommand(1)
+                        \sustainOn                                                                   %! baca.sustain_pedal():SpannerIndicatorCommand(1)
                         e''16
                         ]
                         ef''4
@@ -4366,14 +4366,14 @@ def sustain_pedal_staff_padding(
                         af''16
                         [
                         g''16
-                        \sustainOff                                                                  %! SPANNER_STOP:baca.sustain_pedal:SpannerIndicatorCommand(2)
+                        \sustainOff                                                                  %! SPANNER_STOP:baca.sustain_pedal():SpannerIndicatorCommand(2)
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        \sustainOn                                                                   %! baca.sustain_pedal:SpannerIndicatorCommand(1)
+                        \sustainOn                                                                   %! baca.sustain_pedal():SpannerIndicatorCommand(1)
                         r4
-                        \sustainOff                                                                  %! SPANNER_STOP:baca.sustain_pedal:SpannerIndicatorCommand(2)
+                        \sustainOff                                                                  %! SPANNER_STOP:baca.sustain_pedal():SpannerIndicatorCommand(2)
                         \revert Staff.SustainPedalLineSpanner.staff-padding                          %! baca.sustain_pedal_staff_padding():OverrideCommand(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
                     }
@@ -4443,7 +4443,7 @@ def text_script_color(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        ^ \markup { "più mosso" }                                                    %! baca.markup:IndicatorCommand
+                        ^ \markup { "più mosso" }                                                    %! baca.markup():IndicatorCommand
                         [
                         d'16
                         ]
@@ -4455,7 +4455,7 @@ def text_script_color(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup:IndicatorCommand
+                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup():IndicatorCommand
                         [
                         e''16
                         ]
@@ -4567,7 +4567,7 @@ def text_script_down(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        ^ \markup { "più mosso" }                                                    %! baca.markup:IndicatorCommand
+                        ^ \markup { "più mosso" }                                                    %! baca.markup():IndicatorCommand
                         [
                         d'16
                         ]
@@ -4579,7 +4579,7 @@ def text_script_down(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup:IndicatorCommand
+                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup():IndicatorCommand
                         [
                         e''16
                         ]
@@ -4763,7 +4763,7 @@ def text_script_padding(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        ^ \markup { "più mosso" }                                                    %! baca.markup:IndicatorCommand
+                        ^ \markup { "più mosso" }                                                    %! baca.markup():IndicatorCommand
                         [
                         d'16
                         ]
@@ -4775,7 +4775,7 @@ def text_script_padding(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup:IndicatorCommand
+                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup():IndicatorCommand
                         [
                         e''16
                         ]
@@ -4934,7 +4934,7 @@ def text_script_staff_padding(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        ^ \markup { "più mosso" }                                                    %! baca.markup:IndicatorCommand
+                        ^ \markup { "più mosso" }                                                    %! baca.markup():IndicatorCommand
                         [
                         d'16
                         ]
@@ -4946,7 +4946,7 @@ def text_script_staff_padding(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup:IndicatorCommand
+                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup():IndicatorCommand
                         [
                         e''16
                         ]
@@ -5058,7 +5058,7 @@ def text_script_up(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
                         r8
                         c'16
-                        ^ \markup { "più mosso" }                                                    %! baca.markup:IndicatorCommand
+                        ^ \markup { "più mosso" }                                                    %! baca.markup():IndicatorCommand
                         [
                         d'16
                         ]
@@ -5070,7 +5070,7 @@ def text_script_up(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup:IndicatorCommand
+                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup():IndicatorCommand
                         [
                         e''16
                         ]
@@ -5400,7 +5400,7 @@ def tie_down(
                         \override Tie.direction = #down                                              %! baca.tie_down():OverrideCommand(1)
                         b'16
                         [
-                        ~                                                                            %! baca.tie:IndicatorCommand
+                        ~                                                                            %! baca.tie():IndicatorCommand
                         b'16
                         ]
                         c''4
