@@ -1308,14 +1308,18 @@ def flat_glissando(
     right_broken=None,
     right_broken_show_next=None,
     rleak=None,
-    selector: abjad.SelectorTyping = classes.Expression().select().pleaves(),
+    selector: abjad.Expression = classes.Expression().select().pleaves(),
     stop_pitch=None,
 ) -> scoping.Suite:
     """
     Makes flat glissando.
     """
+    prototype = (str, abjad.NamedPitch)
     if stop_pitch is not None:
+        assert isinstance(stop_pitch, prototype), repr(stop_pitch)
         assert pitch is not None
+    if pitch is not None:
+        assert isinstance(pitch, prototype), repr(pitch)
     if rleak:
         selector = selector.rleak()
     commands: typing.List[scoping.Command] = []
@@ -1342,7 +1346,7 @@ def flat_glissando(
         )
         commands.append(pitch_command)
     elif pitch is not None and stop_pitch is not None:
-        staff_position_command = pitchcommands.interpolate_staff_positions(
+        staff_position_command = pitchcommands.interpolate_pitches(
             pitch,
             stop_pitch,
             approximate_pitch=approximate_pitch,

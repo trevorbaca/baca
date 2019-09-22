@@ -873,6 +873,7 @@ Pitch library.
    ~baca.pitchcommands.diatonic_clusters
    ~baca.pitchcommands.displacement
    ~baca.pitchcommands.force_accidental
+   ~baca.pitchcommands.interpolate_pitches
    ~baca.pitchcommands.interpolate_staff_positions
    ~baca.pitchcommands.loop
    ~baca.pitchcommands.natural_clusters

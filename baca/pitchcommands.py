@@ -5985,7 +5985,12 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ("_approximate_pitch", "_start", "_stop")
+    __slots__ = (
+        "_approximate_pitch",
+        "_pitches_instead_of_staff_positions",
+        "_start",
+        "_stop",
+    )
 
     _publish_storage_format = True
 
@@ -6000,6 +6005,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
+        pitches_instead_of_staff_positions: bool = None,
         scope: scoping.ScopeTyping = None,
         selector: abjad.SelectorTyping = classes.Expression().select().plts(),
     ) -> None:
@@ -6027,6 +6033,13 @@ class StaffPositionInterpolationCommand(scoping.Command):
         if approximate_pitch is not None:
             approximate_pitch = bool(approximate_pitch)
         self._approximate_pitch = approximate_pitch
+        if pitches_instead_of_staff_positions is not None:
+            pitches_instead_of_staff_positions = bool(
+                pitches_instead_of_staff_positions
+            )
+        self._pitches_instead_of_staff_positions = (
+            pitches_instead_of_staff_positions
+        )
 
     ### SPECIAL METHODS ###
 
@@ -6076,7 +6089,8 @@ class StaffPositionInterpolationCommand(scoping.Command):
             assert new_lt is None, repr(new_lt)
             for leaf in plt:
                 abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
-                abjad.attach(abjad.tags.STAFF_POSITION, leaf)
+                if not self.pitches_instead_of_staff_positions:
+                    abjad.attach(abjad.tags.STAFF_POSITION, leaf)
         if isinstance(self.start, abjad.NamedPitch):
             start_pitch = self.start
         else:
@@ -6114,6 +6128,14 @@ class StaffPositionInterpolationCommand(scoping.Command):
         Is true command tags leaves as approximate pitch.
         """
         return self._approximate_pitch
+
+    @property
+    def pitches_instead_of_staff_positions(self) -> typing.Optional[bool]:
+        """
+        Is true command interprets ``start`` and ``stop`` as pitches instead of
+        staff positions.
+        """
+        return self._pitches_instead_of_staff_positions
 
     @property
     def start(self) -> typing.Union[abjad.NamedPitch, abjad.StaffPosition]:
@@ -6817,9 +6839,9 @@ def force_accidental(
     return AccidentalAdjustmentCommand(forced=True, selector=selector)
 
 
-def interpolate_staff_positions(
-    start: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
-    stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
+def interpolate_pitches(
+    start: typing.Union[int, str, abjad.NamedPitch],
+    stop: typing.Union[int, str, abjad.NamedPitch],
     selector: abjad.SelectorTyping = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
@@ -6827,8 +6849,8 @@ def interpolate_staff_positions(
     approximate_pitch: bool = None,
 ) -> StaffPositionInterpolationCommand:
     r"""
-    Interpolates from staff position of ``start`` to staff
-    position of ``stop``.
+    Interpolates from staff position of ``start`` pitch to staff
+    position of ``stop`` pitch.
 
     ..  container:: example
 
@@ -6836,7 +6858,7 @@ def interpolate_staff_positions(
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.clef("treble"),
-        ...     baca.interpolate_staff_positions("Eb4", "F#5"),
+        ...     baca.interpolate_pitches("Eb4", "F#5"),
         ... )
 
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
@@ -6898,7 +6920,7 @@ def interpolate_staff_positions(
         ...     baca.figure([1], 16),
         ...     rmakers.beam(),
         ...     baca.clef('treble'),
-        ...     baca.interpolate_staff_positions('Eb4', 'F#5'),
+        ...     baca.interpolate_pitches('Eb4', 'F#5'),
         ...     baca.glissando(
         ...         allow_repeats=True,
         ...         hide_middle_note_heads=True,
@@ -6971,8 +6993,33 @@ def interpolate_staff_positions(
             >>
 
     """
+    start_ = abjad.NamedPitch(start)
+    stop_ = abjad.NamedPitch(stop)
     return StaffPositionInterpolationCommand(
-        start, stop, approximate_pitch=approximate_pitch, selector=selector
+        start_,
+        stop_,
+        approximate_pitch=approximate_pitch,
+        pitches_instead_of_staff_positions=True,
+        selector=selector,
+    )
+
+
+def interpolate_staff_positions(
+    start: typing.Union[int, abjad.StaffPosition],
+    stop: typing.Union[int, abjad.StaffPosition],
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .plts(exclude=abjad.const.HIDDEN),
+    *,
+    approximate_pitch: bool = None,
+) -> StaffPositionInterpolationCommand:
+    r"""
+    Interpolates from ``start`` staff position to ``stop`` staff position.
+    """
+    start_ = abjad.StaffPosition(start)
+    stop_ = abjad.StaffPosition(stop)
+    return StaffPositionInterpolationCommand(
+        start_, stop_, approximate_pitch=approximate_pitch, selector=selector
     )
 
 

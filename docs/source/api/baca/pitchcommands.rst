@@ -1207,6 +1207,7 @@ pitchcommands
       :nosignatures:
 
       approximate_pitch
+      pitches_instead_of_staff_positions
       start
       stop
 
@@ -1265,6 +1266,8 @@ pitchcommands
 
       .. autoattribute:: StaffPositionInterpolationCommand.measures
 
+   .. autoattribute:: StaffPositionInterpolationCommand.pitches_instead_of_staff_positions
+
    .. container:: inherited
 
       .. autoattribute:: StaffPositionInterpolationCommand.runtime
@@ -1311,6 +1314,7 @@ pitchcommands
    ~diatonic_clusters
    ~displacement
    ~force_accidental
+   ~interpolate_pitches
    ~interpolate_staff_positions
    ~loop
    ~natural_clusters
@@ -1336,6 +1340,8 @@ pitchcommands
 .. autofunction:: displacement
 
 .. autofunction:: force_accidental
+
+.. autofunction:: interpolate_pitches
 
 .. autofunction:: interpolate_staff_positions
 
