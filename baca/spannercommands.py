@@ -45,7 +45,9 @@ class SpannerIndicatorCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = "baca.leaves()",
+        selector: abjad.SelectorTyping = classes.Expression()
+        .select()
+        .leaves(),
         start_indicator: typing.Any = None,
         stop_indicator: typing.Any = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
@@ -199,7 +201,7 @@ class SpannerIndicatorCommand(scoping.Command):
 def beam(
     *tweaks: abjad.LilyPondTweakManager,
     direction: abjad.VerticalAlignment = None,
-    selector: abjad.SelectorTyping = "baca.tleaves()",
+    selector: abjad.SelectorTyping = classes.Expression().select().tleaves(),
     start_beam: abjad.StartBeam = None,
     stop_beam: abjad.StopBeam = None,
 ) -> SpannerIndicatorCommand:
@@ -374,7 +376,7 @@ def ottava(
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot="after"),
     *,
     right_broken: bool = None,
-    selector: abjad.SelectorTyping = "baca.tleaves()",
+    selector: abjad.SelectorTyping = classes.Expression().select().tleaves(),
 ) -> SpannerIndicatorCommand:
     r"""
     Attaches ottava indicators.
@@ -463,7 +465,7 @@ def ottava_bassa(
     start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot="after"),
     *,
-    selector: abjad.SelectorTyping = "baca.tleaves()",
+    selector: abjad.SelectorTyping = classes.Expression().select().tleaves(),
 ) -> SpannerIndicatorCommand:
     r"""
     Attaches ottava bassa indicators.
@@ -550,7 +552,7 @@ def ottava_bassa(
 def slur(
     *tweaks: abjad.LilyPondTweakManager,
     map: abjad.SelectorTyping = None,
-    selector: abjad.SelectorTyping = "baca.tleaves()",
+    selector: abjad.SelectorTyping = classes.Expression().select().tleaves(),
     start_slur: abjad.StartSlur = None,
     stop_slur: abjad.StopSlur = None,
 ) -> SpannerIndicatorCommand:
@@ -645,7 +647,7 @@ def slur(
 
 def sustain_pedal(
     *,
-    selector: abjad.SelectorTyping = "baca.leaves()",
+    selector: abjad.SelectorTyping = classes.Expression().select().leaves(),
     start_piano_pedal: abjad.StartPianoPedal = None,
     stop_piano_pedal: abjad.StopPianoPedal = None,
 ) -> SpannerIndicatorCommand:
@@ -743,7 +745,10 @@ def trill_spanner(
     left_broken: bool = None,
     map: abjad.SelectorTyping = None,
     right_broken: bool = None,
-    selector: abjad.SelectorTyping = "baca.tleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .tleaves()
+    .rleak(),
     start_trill_span: abjad.StartTrillSpan = None,
     stop_trill_span: abjad.StopTrillSpan = None,
 ) -> SpannerIndicatorCommand:

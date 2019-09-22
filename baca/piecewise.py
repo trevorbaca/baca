@@ -170,11 +170,13 @@ class PiecewiseCommand(scoping.Command):
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        pieces: abjad.SelectorTyping = "baca.leaves()",
+        pieces: abjad.SelectorTyping = classes.Expression().select().leaves(),
         remove_length_1_spanner_start: bool = None,
         right_broken: typing.Any = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = "baca.leaves()",
+        selector: abjad.SelectorTyping = classes.Expression()
+        .select()
+        .leaves(),
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
@@ -512,7 +514,10 @@ def bow_speed_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
     tag: typing.Optional[str] = f"{const.BOW_SPEED}:baca.bow_speed_spanner",
 ) -> PiecewiseCommand:
     r"""
@@ -548,7 +553,10 @@ def circle_bow_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
     tag: typing.Optional[str] = f"{const.CIRCLE_BOW}:baca.circle_bow_spanner",
 ) -> PiecewiseCommand:
     r"""
@@ -588,7 +596,10 @@ def clb_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
     tag: typing.Optional[str] = f"{const.CLB}:baca.clb_spanner",
 ) -> PiecewiseCommand:
     r"""
@@ -636,7 +647,10 @@ def covered_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
     tag: typing.Optional[str] = f"{const.COVERED}:baca.covered_spanner",
 ) -> PiecewiseCommand:
     r"""
@@ -670,7 +684,10 @@ def damp_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
     tag: typing.Optional[str] = f"{const.DAMP}:baca.damp_spanner",
 ) -> PiecewiseCommand:
     r"""
@@ -699,7 +716,7 @@ def dynamic(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    selector: abjad.SelectorTyping = "baca.phead(0)",
+    selector: abjad.SelectorTyping = classes.Expression().select().phead(0),
     redundant: bool = None,
     tag: typing.Optional[str] = "baca.dynamic",
 ) -> commandclasses.IndicatorCommand:
@@ -1200,7 +1217,7 @@ def hairpin(
     pieces: abjad.SelectorTyping = "baca.group()",
     remove_length_1_spanner_start: bool = None,
     right_broken: bool = None,
-    selector: abjad.SelectorTyping = "baca.leaves()",
+    selector: abjad.SelectorTyping = classes.Expression().select().leaves(),
     tag: typing.Optional[str] = "baca.hairpin",
 ) -> PiecewiseCommand:
     r"""
@@ -3611,7 +3628,10 @@ def half_clt_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
     tag: typing.Optional[str] = f"{const.HALF_CLT}:baca.half_clt_spanner",
 ) -> PiecewiseCommand:
     r"""
@@ -3919,7 +3939,10 @@ def material_annotation_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
-    selector: abjad.SelectorTyping = "baca.leaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .leaves()
+    .rleak(),
     tag: typing.Optional[
         str
     ] = f"{const.MATERIAL}:baca.material_annotation_spanner",
@@ -4107,7 +4130,10 @@ def pitch_annotation_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
-    selector: abjad.SelectorTyping = "baca.leaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .leaves()
+    .rleak(),
     tag: typing.Optional[str] = f"{const.PITCH}:baca.pitch_annotation_spanner",
 ) -> PiecewiseCommand:
     r"""
@@ -4142,7 +4168,10 @@ def scp_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
     tag: typing.Optional[str] = f"{const.SCP}:baca.scp_spanner",
 ) -> PiecewiseCommand:
     r"""
@@ -4178,7 +4207,10 @@ def spazzolato_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
     tag: typing.Optional[str] = f"{const.SPAZZOLATO}:baca.spazzolato_spanner",
 ) -> PiecewiseCommand:
     r"""
@@ -4214,7 +4246,10 @@ def string_number_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
     tag: typing.Optional[
         str
     ] = f"{const.STRING_NUMBER}:baca.string_number_spanner",
@@ -4252,7 +4287,10 @@ def tasto_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
     tag: typing.Optional[str] = f"{const.SCP}:baca.tasto_spanner",
 ) -> PiecewiseCommand:
     r"""
@@ -4290,7 +4328,7 @@ def text_spanner(
     measures: typings.SliceTyping = None,
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
-    selector: abjad.SelectorTyping = "baca.leaves()",
+    selector: abjad.SelectorTyping = classes.Expression().select().leaves(),
     tag: typing.Optional[str] = "baca.text_spanner",
 ) -> PiecewiseCommand:
     r"""
@@ -6915,7 +6953,10 @@ def vibrato_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
     tag: typing.Optional[str] = f"{const.VIBRATO}:baca.vibrato_spanner",
 ) -> PiecewiseCommand:
     r"""
@@ -6951,7 +6992,10 @@ def xfb_spanner(
     pieces: abjad.SelectorTyping = "baca.group()",
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.SelectorTyping = "baca.ltleaves().rleak()",
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
     tag: typing.Optional[str] = f"{const.BOW_SPEED}:baca.xfb_spanner",
 ) -> PiecewiseCommand:
     r"""

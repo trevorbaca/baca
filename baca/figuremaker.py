@@ -8202,7 +8202,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
 
 def extend_beam(
-    selector: abjad.SelectorTyping = "baca.leaf(-1)"
+    selector: abjad.SelectorTyping = classes.Expression().select().leaf(-1)
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches RIGHT_BROKEN_BEAM to selector output.
@@ -10913,7 +10913,7 @@ def resume_after(remote_voice_name) -> Anchor:
     Resumes music after remote selection.
     """
     return Anchor(
-        remote_selector="baca.leaf(-1)",
+        remote_selector=classes.Expression().select().leaf(-1),
         remote_voice_name=remote_voice_name,
         use_remote_stop_offset=True,
     )
