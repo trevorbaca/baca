@@ -1328,7 +1328,9 @@ class SegmentMaker(abjad.SegmentMaker):
             final_markup = markups.final_markup(*self.final_markup)
         assert isinstance(final_markup, abjad.Markup)
         command = baca_commands.markup(
-            final_markup, selector="baca.leaf(-1)", direction=abjad.Down
+            final_markup,
+            selector=classes.Expression().select().leaf(-1),
+            direction=abjad.Down,
         )
         self.score.add_final_markup(
             command.indicators[0], extra_offset=self.final_markup_extra_offset
@@ -3418,7 +3420,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.setting(score).current_bar_number = first_measure_number
 
     def _momento_to_indicator(self, momento):
-        # for selector evaluation:
+        # for class evaluation:
         import baca
 
         if momento.manifest is not None:
@@ -3722,7 +3724,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 clef = wrapper.indicator
                 suite = baca_overrides.clef_shift(
-                    clef, selector="baca.leaf(0)"
+                    clef, selector=classes.Expression().select().leaf(0)
                 )
                 runtime = self._bundle_manifests()
                 suite(leaf, runtime=runtime)

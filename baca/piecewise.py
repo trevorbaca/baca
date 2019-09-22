@@ -180,9 +180,6 @@ class PiecewiseCommand(scoping.Command):
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
-        # for selector evaluation
-        import baca
-
         scoping.Command.__init__(
             self,
             map=map,
@@ -205,8 +202,6 @@ class PiecewiseCommand(scoping.Command):
         if final_piece_spanner not in (None, False):
             assert getattr(final_piece_spanner, "spanner_start", False)
         self._final_piece_spanner = final_piece_spanner
-        if isinstance(pieces, str):
-            pieces = eval(pieces)
         if pieces is not None:
             assert isinstance(pieces, abjad.Expression), repr(pieces)
         self._pieces = pieces
@@ -511,7 +506,7 @@ def bow_speed_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.SelectorTyping = classes.Expression()
@@ -550,7 +545,7 @@ def circle_bow_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.SelectorTyping = classes.Expression()
@@ -593,7 +588,7 @@ def clb_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.SelectorTyping = classes.Expression()
@@ -644,7 +639,7 @@ def covered_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.SelectorTyping = classes.Expression()
@@ -681,7 +676,7 @@ def damp_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.SelectorTyping = classes.Expression()
@@ -1214,7 +1209,7 @@ def hairpin(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     remove_length_1_spanner_start: bool = None,
     right_broken: bool = None,
     selector: abjad.SelectorTyping = classes.Expression().select().leaves(),
@@ -3625,7 +3620,7 @@ def half_clt_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.SelectorTyping = classes.Expression()
@@ -3936,7 +3931,7 @@ def material_annotation_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
     selector: abjad.SelectorTyping = classes.Expression()
@@ -4127,7 +4122,7 @@ def pitch_annotation_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
     selector: abjad.SelectorTyping = classes.Expression()
@@ -4165,7 +4160,7 @@ def scp_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.SelectorTyping = classes.Expression()
@@ -4204,7 +4199,7 @@ def spazzolato_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.SelectorTyping = classes.Expression()
@@ -4243,7 +4238,7 @@ def string_number_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.SelectorTyping = classes.Expression()
@@ -4284,7 +4279,7 @@ def tasto_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.SelectorTyping = classes.Expression()
@@ -4326,7 +4321,7 @@ def text_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     selector: abjad.SelectorTyping = classes.Expression().select().leaves(),
     tag: typing.Optional[str] = "baca.text_spanner",
@@ -6950,7 +6945,7 @@ def vibrato_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.SelectorTyping = classes.Expression()
@@ -6989,7 +6984,7 @@ def xfb_spanner(
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    pieces: abjad.SelectorTyping = "baca.group()",
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.SelectorTyping = classes.Expression()

@@ -1737,7 +1737,7 @@ class ColorFingeringCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         numbers=None,
         scope: scoping.ScopeTyping = None,
-        selector="baca.pheads()",
+        selector=classes.Expression().select().pheads(),
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
         scoping.Command.__init__(

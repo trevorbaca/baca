@@ -253,19 +253,13 @@ class Command(object):
         tag_measure_number: bool = None,
         tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
     ) -> None:
-        # for selector evaluation
-        import baca
-
         self._deactivate = deactivate
         self._map = map
         self._match = match
         self._measures: typing.Optional[typings.SliceTyping] = measures
         self._runtime = abjad.OrderedDict()
         self._scope = scope
-        if isinstance(selector, str):
-            selector_ = eval(selector)
-        else:
-            selector_ = selector
+        selector_ = selector
         if selector_ is not None and not isinstance(
             selector_, abjad.Expression
         ):

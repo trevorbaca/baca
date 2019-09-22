@@ -1313,11 +1313,6 @@ def flat_glissando(
     """
     Makes flat glissando.
     """
-    # for selector evaluation
-    import baca
-
-    if isinstance(selector, str):
-        selector = eval(selector)
     if stop_pitch is not None:
         assert pitch is not None
     if rleak:
