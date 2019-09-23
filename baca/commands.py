@@ -1369,8 +1369,8 @@ def flat_glissando(
                 pitch, stop_pitch, mock=mock, selector=selector
             )
         else:
-            assert isinstance(pitch, abjad.NamedPitch)
-            assert isinstance(stop_pitch, abjad.NamedPitch)
+            assert isinstance(pitch, (str, abjad.NamedPitch))
+            assert isinstance(stop_pitch, (str, abjad.NamedPitch))
             interpolation_command = pitchcommands.interpolate_pitches(
                 pitch, stop_pitch, mock=mock, selector=selector
             )
