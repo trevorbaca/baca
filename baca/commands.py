@@ -1301,7 +1301,7 @@ def flat_glissando(
     pitch: typing.Union[str, abjad.NamedPitch, abjad.StaffPosition] = None,
     *tweaks,
     allow_repitch: bool = None,
-    approximate_pitch: bool = None,
+    mock: bool = None,
     hide_middle_stems: bool = None,
     left_broken: bool = None,
     right_broken: bool = None,
@@ -1345,7 +1345,7 @@ def flat_glissando(
             staff_position_command = pitchcommands.staff_position(
                 pitch,
                 allow_repitch=allow_repitch,
-                approximate_pitch=approximate_pitch,
+                mock=mock,
                 selector=selector,
             )
             commands.append(staff_position_command)
@@ -1353,24 +1353,18 @@ def flat_glissando(
             pitch_command = pitchcommands.pitch(
                 pitch,
                 allow_repitch=allow_repitch,
-                approximate_pitch=approximate_pitch,
+                mock=mock,
                 selector=selector,
             )
             commands.append(pitch_command)
     elif pitch is not None and stop_pitch is not None:
         if isinstance(pitch, abjad.StaffPosition):
             interpolation_command = pitchcommands.interpolate_staff_positions(
-                pitch,
-                stop_pitch,
-                approximate_pitch=approximate_pitch,
-                selector=selector,
+                pitch, stop_pitch, mock=mock, selector=selector
             )
         else:
             interpolation_command = pitchcommands.interpolate_pitches(
-                pitch,
-                stop_pitch,
-                approximate_pitch=approximate_pitch,
-                selector=selector,
+                pitch, stop_pitch, mock=mock, selector=selector
             )
         commands.append(interpolation_command)
     return scoping.suite(*commands)

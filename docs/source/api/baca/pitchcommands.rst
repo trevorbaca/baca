@@ -692,10 +692,10 @@ pitchcommands
       allow_out_of_range
       allow_repeats
       allow_repitch
-      approximate_pitch
       cyclic
       do_not_transpose
       ignore_incomplete
+      mock
       parameter
       persist
       pitches
@@ -746,8 +746,6 @@ pitchcommands
 
    .. autoattribute:: PitchCommand.allow_repitch
 
-   .. autoattribute:: PitchCommand.approximate_pitch
-
    .. autoattribute:: PitchCommand.cyclic
 
    .. container:: inherited
@@ -769,6 +767,8 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: PitchCommand.measures
+
+   .. autoattribute:: PitchCommand.mock
 
    .. autoattribute:: PitchCommand.parameter
 
@@ -1101,8 +1101,8 @@ pitchcommands
       allow_out_of_range
       allow_repeats
       allow_repitch
-      approximate_pitch
       exact
+      mock
       numbers
       set_chord_pitches_equal
 
@@ -1149,8 +1149,6 @@ pitchcommands
 
    .. autoattribute:: StaffPositionCommand.allow_repitch
 
-   .. autoattribute:: StaffPositionCommand.approximate_pitch
-
    .. container:: inherited
 
       .. autoattribute:: StaffPositionCommand.deactivate
@@ -1168,6 +1166,8 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: StaffPositionCommand.measures
+
+   .. autoattribute:: StaffPositionCommand.mock
 
    .. autoattribute:: StaffPositionCommand.numbers
 
@@ -1209,7 +1209,7 @@ pitchcommands
    .. autosummary::
       :nosignatures:
 
-      approximate_pitch
+      mock
       pitches_instead_of_staff_positions
       start
       stop
@@ -1251,8 +1251,6 @@ pitchcommands
    .. rubric:: Read-only properties
       :class: class-header
 
-   .. autoattribute:: StaffPositionInterpolationCommand.approximate_pitch
-
    .. container:: inherited
 
       .. autoattribute:: StaffPositionInterpolationCommand.deactivate
@@ -1268,6 +1266,8 @@ pitchcommands
    .. container:: inherited
 
       .. autoattribute:: StaffPositionInterpolationCommand.measures
+
+   .. autoattribute:: StaffPositionInterpolationCommand.mock
 
    .. autoattribute:: StaffPositionInterpolationCommand.pitches_instead_of_staff_positions
 

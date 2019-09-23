@@ -2447,15 +2447,15 @@ class SegmentMaker(abjad.SegmentMaker):
                     result[context_name] = momentos
         return result
 
-    def _color_approximate_pitch(self):
-        indicator = abjad.tags.APPROXIMATE_PITCH
+    def _color_mock_pitch(self):
+        indicator = abjad.tags.MOCK
         tag = abjad.Tag(_site(inspect.currentframe()))
         tag = tag.prepend(indicator)
         leaves = []
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
             if not abjad.inspect(pleaf).has_indicator(indicator):
                 continue
-            string = r"\baca-approximate-pitch-coloring"
+            string = r"\baca-mock-pitch-coloring"
             literal = abjad.LilyPondLiteral(string)
             abjad.attach(literal, pleaf, tag=tag)
             leaves.append(pleaf)
@@ -6597,7 +6597,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._attach_final_bar_line()
                 self._add_final_markup()
                 self._color_not_yet_registered()
-                self._color_approximate_pitch()
+                self._color_mock_pitch()
                 self._color_not_yet_pitched()
                 self._set_not_yet_pitched_to_staff_position_zero()
                 self._check_all_are_pitched_()

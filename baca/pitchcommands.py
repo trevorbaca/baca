@@ -2982,7 +2982,7 @@ class PitchCommand(scoping.Command):
         "_allow_out_of_range",
         "_allow_repeats",
         "_allow_repitch",
-        "_approximate_pitch",
+        "_mock",
         "_cyclic",
         "_do_not_transpose",
         "_ignore_incomplete",
@@ -3001,7 +3001,7 @@ class PitchCommand(scoping.Command):
         allow_out_of_range: bool = None,
         allow_repeats: bool = None,
         allow_repitch: bool = None,
-        approximate_pitch: bool = None,
+        mock: bool = None,
         cyclic: bool = None,
         do_not_transpose: bool = None,
         ignore_incomplete: bool = None,
@@ -3033,9 +3033,9 @@ class PitchCommand(scoping.Command):
         if allow_repitch is not None:
             allow_repitch = bool(allow_repitch)
         self._allow_repitch = allow_repitch
-        if approximate_pitch is not None:
-            approximate_pitch = bool(approximate_pitch)
-        self._approximate_pitch = approximate_pitch
+        if mock is not None:
+            mock = bool(mock)
+        self._mock = mock
         if cyclic is not None:
             cyclic = bool(cyclic)
         self._cyclic = cyclic
@@ -3084,10 +3084,7 @@ class PitchCommand(scoping.Command):
         for i, plt in enumerate(plts):
             pitch = pitches[i + previous_pitches_consumed]
             new_plt = self._set_lt_pitch(
-                plt,
-                pitch,
-                allow_repitch=self.allow_repitch,
-                approximate_pitch=self.approximate_pitch,
+                plt, pitch, allow_repitch=self.allow_repitch, mock=self.mock
             )
             if new_plt is not None:
                 self._mutated_score = True
@@ -3197,15 +3194,15 @@ class PitchCommand(scoping.Command):
         pitch,
         *,
         allow_repitch=False,
-        approximate_pitch=False,
+        mock=False,
         set_chord_pitches_equal=False,
     ):
         new_lt = None
         already_pitched = abjad.tags.ALREADY_PITCHED
         for leaf in lt:
             abjad.detach(abjad.tags.NOT_YET_PITCHED, leaf)
-            if approximate_pitch is True:
-                abjad.attach(abjad.tags.APPROXIMATE_PITCH, leaf)
+            if mock is True:
+                abjad.attach(abjad.tags.MOCK, leaf)
             if allow_repitch:
                 continue
             if abjad.inspect(leaf).has_indicator(already_pitched):
@@ -3284,13 +3281,6 @@ class PitchCommand(scoping.Command):
         return self._allow_repitch
 
     @property
-    def approximate_pitch(self) -> typing.Optional[bool]:
-        """
-        Is true when command tags leaves as approximate pitch.
-        """
-        return self._approximate_pitch
-
-    @property
     def cyclic(self) -> typing.Optional[bool]:
         """
         Is true when command reads pitches cyclically.
@@ -3311,6 +3301,13 @@ class PitchCommand(scoping.Command):
         incomplete last note.
         """
         return self._ignore_incomplete
+
+    @property
+    def mock(self) -> typing.Optional[bool]:
+        """
+        Is true when command tags leaves as mock.
+        """
+        return self._mock
 
     @property
     def parameter(self) -> str:
@@ -5835,7 +5832,7 @@ class StaffPositionCommand(scoping.Command):
         "_allow_out_of_range",
         "_allow_repeats",
         "_allow_repitch",
-        "_approximate_pitch",
+        "_mock",
         "_exact",
         "_mutated_score",
         "_numbers",
@@ -5855,7 +5852,7 @@ class StaffPositionCommand(scoping.Command):
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
-        approximate_pitch: bool = None,
+        mock: bool = None,
         scope: scoping.ScopeTyping = None,
         selector: abjad.SelectorTyping = classes.Expression().select().plts(),
         set_chord_pitches_equal: bool = None,
@@ -5881,9 +5878,9 @@ class StaffPositionCommand(scoping.Command):
         if allow_repitch is not None:
             allow_repitch = bool(allow_repitch)
         self._allow_repitch = allow_repitch
-        if approximate_pitch is not None:
-            approximate_pitch = bool(approximate_pitch)
-        self._approximate_pitch = approximate_pitch
+        if mock is not None:
+            mock = bool(mock)
+        self._mock = mock
         if exact is not None:
             exact = bool(exact)
         self._exact = exact
@@ -5917,7 +5914,7 @@ class StaffPositionCommand(scoping.Command):
                     plt,
                     pitches,
                     allow_repitch=self.allow_repitch,
-                    approximate_pitch=self.approximate_pitch,
+                    mock=self.mock,
                     set_chord_pitches_equal=self.set_chord_pitches_equal,
                 )
                 if new_lt is not None:
@@ -5930,7 +5927,7 @@ class StaffPositionCommand(scoping.Command):
                     plt,
                     pitch,
                     allow_repitch=self.allow_repitch,
-                    approximate_pitch=self.approximate_pitch,
+                    mock=self.mock,
                     set_chord_pitches_equal=self.set_chord_pitches_equal,
                 )
                 assert new_lt is None, repr(new_lt)
@@ -5979,19 +5976,19 @@ class StaffPositionCommand(scoping.Command):
         return self._allow_repitch
 
     @property
-    def approximate_pitch(self) -> typing.Optional[bool]:
-        """
-        Is true when command tags leaves as approximate pitch.
-        """
-        return self._approximate_pitch
-
-    @property
     def exact(self) -> typing.Optional[bool]:
         """
         Is true when number of staff positions must match number of leaves
         exactly.
         """
         return self._exact
+
+    @property
+    def mock(self) -> typing.Optional[bool]:
+        """
+        Is true when command tags leaves as mock.
+        """
+        return self._mock
 
     @property
     def numbers(self) -> typing.Optional[abjad.CyclicTuple]:
@@ -6024,7 +6021,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
     ### CLASS VARIABLES ###
 
     __slots__ = (
-        "_approximate_pitch",
+        "_mock",
         "_pitches_instead_of_staff_positions",
         "_start",
         "_stop",
@@ -6039,7 +6036,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
         start: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
         stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
         *,
-        approximate_pitch: bool = None,
+        mock: bool = None,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
@@ -6068,9 +6065,9 @@ class StaffPositionInterpolationCommand(scoping.Command):
             stop = abjad.StaffPosition(stop)
         assert isinstance(stop, prototype), repr(stop)
         self._stop = stop
-        if approximate_pitch is not None:
-            approximate_pitch = bool(approximate_pitch)
-        self._approximate_pitch = approximate_pitch
+        if mock is not None:
+            mock = bool(mock)
+        self._mock = mock
         if pitches_instead_of_staff_positions is not None:
             pitches_instead_of_staff_positions = bool(
                 pitches_instead_of_staff_positions
@@ -6119,10 +6116,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
             )
             pitch = staff_position.to_pitch(clef=clef)
             new_lt = PitchCommand._set_lt_pitch(
-                plt,
-                pitch,
-                allow_repitch=True,
-                approximate_pitch=self.approximate_pitch,
+                plt, pitch, allow_repitch=True, mock=self.mock
             )
             assert new_lt is None, repr(new_lt)
             for leaf in plt:
@@ -6137,10 +6131,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
             )
             start_pitch = self.start.to_pitch(clef=clef)
         new_lt = PitchCommand._set_lt_pitch(
-            plts[0],
-            start_pitch,
-            allow_repitch=True,
-            approximate_pitch=self.approximate_pitch,
+            plts[0], start_pitch, allow_repitch=True, mock=self.mock
         )
         assert new_lt is None, repr(new_lt)
         if isinstance(self.stop, abjad.NamedPitch):
@@ -6151,21 +6142,18 @@ class StaffPositionInterpolationCommand(scoping.Command):
             )
             stop_pitch = self.stop.to_pitch(clef=clef)
         new_lt = PitchCommand._set_lt_pitch(
-            plts[-1],
-            stop_pitch,
-            allow_repitch=True,
-            approximate_pitch=self.approximate_pitch,
+            plts[-1], stop_pitch, allow_repitch=True, mock=self.mock
         )
         assert new_lt is None, repr(new_lt)
 
     ### PUBLIC PROPERTIES ###
 
     @property
-    def approximate_pitch(self) -> typing.Optional[bool]:
+    def mock(self) -> typing.Optional[bool]:
         """
-        Is true command tags leaves as approximate pitch.
+        Is true command tags leaves as mock.
         """
-        return self._approximate_pitch
+        return self._mock
 
     @property
     def pitches_instead_of_staff_positions(self) -> typing.Optional[bool]:
@@ -6884,7 +6872,7 @@ def interpolate_pitches(
     .select()
     .plts(exclude=abjad.const.HIDDEN),
     *,
-    approximate_pitch: bool = None,
+    mock: bool = None,
 ) -> StaffPositionInterpolationCommand:
     r"""
     Interpolates from staff position of ``start`` pitch to staff
@@ -7036,7 +7024,7 @@ def interpolate_pitches(
     return StaffPositionInterpolationCommand(
         start_,
         stop_,
-        approximate_pitch=approximate_pitch,
+        mock=mock,
         pitches_instead_of_staff_positions=True,
         selector=selector,
     )
@@ -7049,7 +7037,7 @@ def interpolate_staff_positions(
     .select()
     .plts(exclude=abjad.const.HIDDEN),
     *,
-    approximate_pitch: bool = None,
+    mock: bool = None,
 ) -> StaffPositionInterpolationCommand:
     r"""
     Interpolates from ``start`` staff position to ``stop`` staff position.
@@ -7057,7 +7045,7 @@ def interpolate_staff_positions(
     start_ = abjad.StaffPosition(start)
     stop_ = abjad.StaffPosition(stop)
     return StaffPositionInterpolationCommand(
-        start_, stop_, approximate_pitch=approximate_pitch, selector=selector
+        start_, stop_, mock=mock, selector=selector
     )
 
 
@@ -7102,7 +7090,7 @@ def pitch(
     *,
     allow_out_of_range: bool = None,
     allow_repitch: bool = None,
-    approximate_pitch: bool = None,
+    mock: bool = None,
     do_not_transpose: bool = None,
     persist: str = None,
 ) -> PitchCommand:
@@ -7128,7 +7116,7 @@ def pitch(
         allow_repitch=allow_repitch,
         cyclic=True,
         do_not_transpose=do_not_transpose,
-        approximate_pitch=approximate_pitch,
+        mock=mock,
         persist=persist,
         pitches=[pitch],
         selector=selector,
@@ -7144,7 +7132,7 @@ def pitches(
     allow_octaves: bool = None,
     allow_repeats: bool = None,
     allow_repitch: bool = None,
-    approximate_pitch: bool = None,
+    mock: bool = None,
     do_not_transpose: bool = None,
     exact: bool = None,
     ignore_incomplete: bool = None,
@@ -7179,7 +7167,7 @@ def pitches(
         cyclic=cyclic,
         do_not_transpose=do_not_transpose,
         ignore_incomplete=ignore_incomplete,
-        approximate_pitch=approximate_pitch,
+        mock=mock,
         persist=persist,
         pitches=pitches,
         selector=selector,
@@ -7679,7 +7667,7 @@ def staff_position(
     *,
     allow_out_of_range: bool = None,
     allow_repitch: bool = None,
-    approximate_pitch: bool = None,
+    mock: bool = None,
     set_chord_pitches_equal: bool = None,
 ) -> StaffPositionCommand:
     """
@@ -7695,7 +7683,7 @@ def staff_position(
         allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
         allow_repitch=allow_repitch,
-        approximate_pitch=approximate_pitch,
+        mock=mock,
         selector=selector,
         set_chord_pitches_equal=set_chord_pitches_equal,
     )
@@ -7709,7 +7697,7 @@ def staff_positions(
     *,
     allow_out_of_range: bool = None,
     allow_repeats: bool = None,
-    approximate_pitch: bool = None,
+    mock: bool = None,
     exact: bool = None,
 ) -> StaffPositionCommand:
     """
@@ -7722,6 +7710,6 @@ def staff_positions(
         allow_out_of_range=allow_out_of_range,
         allow_repeats=allow_repeats,
         exact=exact,
-        approximate_pitch=approximate_pitch,
+        mock=mock,
         selector=selector,
     )

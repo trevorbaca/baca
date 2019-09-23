@@ -1,6 +1,6 @@
 %%% COLORED MUSIC %%%
 
-baca-approximate-pitch-coloring = #(
+baca-mock-pitch-coloring = #(
     define-music-function
     (parser location music)
     (ly:music?)
