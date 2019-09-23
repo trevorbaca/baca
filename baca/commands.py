@@ -1298,7 +1298,12 @@ def finger_pressure_transition(
 
 
 def flat_glissando(
-    pitch: typing.Union[str, abjad.NamedPitch, abjad.StaffPosition] = None,
+    pitch: typing.Union[
+        str,
+        abjad.NamedPitch,
+        abjad.StaffPosition,
+        typing.List[abjad.StaffPosition],
+    ] = None,
     *tweaks,
     allow_repitch: bool = None,
     mock: bool = None,
@@ -1359,10 +1364,12 @@ def flat_glissando(
             commands.append(pitch_command)
     elif pitch is not None and stop_pitch is not None:
         if isinstance(pitch, abjad.StaffPosition):
+            assert isinstance(stop_pitch, abjad.StaffPosition)
             interpolation_command = pitchcommands.interpolate_staff_positions(
                 pitch, stop_pitch, mock=mock, selector=selector
             )
         else:
+            assert isinstance(stop_pitch, abjad.NamedPitch)
             interpolation_command = pitchcommands.interpolate_pitches(
                 pitch, stop_pitch, mock=mock, selector=selector
             )
