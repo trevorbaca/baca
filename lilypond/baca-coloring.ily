@@ -1,5 +1,15 @@
 %%% COLORED MUSIC %%%
 
+baca-invisible-music-coloring = #(
+    define-music-function
+    (parser location music)
+    (ly:music?)
+    #{
+    \abjad-color-music #'salmon
+    $music
+    #}
+    )
+
 baca-mock-pitch-coloring = #(
     define-music-function
     (parser location music)

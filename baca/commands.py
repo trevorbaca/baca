@@ -2209,11 +2209,13 @@ def invisible_music(
                             c''2                                                                     %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-invisible-music                                                    %! baca.invisible_music():IndicatorCommand
+                        %@% \baca-invisible-music-coloring                                           %! INVISIBLE_COLORING:baca.invisible_music():IndicatorCommand
+                            \baca-invisible-music                                                    %! INVISIBLE:baca.invisible_music():IndicatorCommand
                             c''4.                                                                    %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-invisible-music                                                    %! baca.invisible_music():IndicatorCommand
+                        %@% \baca-invisible-music-coloring                                           %! INVISIBLE_COLORING:baca.invisible_music():IndicatorCommand
+                            \baca-invisible-music                                                    %! INVISIBLE:baca.invisible_music():IndicatorCommand
                             c''2                                                                     %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
@@ -2254,12 +2256,20 @@ def invisible_music(
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
 
     """
-    return commandclasses.IndicatorCommand(
+    command_1 = commandclasses.IndicatorCommand(
+        indicators=[abjad.LilyPondLiteral(r"\baca-invisible-music-coloring")],
+        deactivate=True,
+        map=map,
+        selector=selector,
+        tags=[abjad.tags.INVISIBLE_COLORING, _site(inspect.currentframe())],
+    )
+    command_2 = commandclasses.IndicatorCommand(
         indicators=[abjad.LilyPondLiteral(r"\baca-invisible-music")],
         map=map,
         selector=selector,
-        tags=[_site(inspect.currentframe())],
+        tags=[abjad.tags.INVISIBLE, _site(inspect.currentframe())],
     )
+    return scoping.suite(command_1, command_2)
 
 
 def label(
