@@ -5,7 +5,7 @@ baca-approximate-pitch-coloring = #(
     (parser location music)
     (ly:music?)
     #{
-    \abjad-color-music #'goldenrod
+    \abjad-color-music #'firebrick
     $music
     #}
     )

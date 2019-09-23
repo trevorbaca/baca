@@ -1100,6 +1100,7 @@ pitchcommands
 
       allow_out_of_range
       allow_repeats
+      allow_repitch
       approximate_pitch
       exact
       numbers
@@ -1145,6 +1146,8 @@ pitchcommands
    .. autoattribute:: StaffPositionCommand.allow_out_of_range
 
    .. autoattribute:: StaffPositionCommand.allow_repeats
+
+   .. autoattribute:: StaffPositionCommand.allow_repitch
 
    .. autoattribute:: StaffPositionCommand.approximate_pitch
 

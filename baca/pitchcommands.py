@@ -3045,7 +3045,7 @@ class PitchCommand(scoping.Command):
         if ignore_incomplete is not None:
             ignore_incomplete = bool(ignore_incomplete)
         self._ignore_incomplete = ignore_incomplete
-        self._mutated_score = None
+        self._mutated_score = False
         if persist is not None:
             assert isinstance(persist, str), repr(persist)
         self._persist = persist
@@ -5834,8 +5834,10 @@ class StaffPositionCommand(scoping.Command):
     __slots__ = (
         "_allow_out_of_range",
         "_allow_repeats",
+        "_allow_repitch",
         "_approximate_pitch",
         "_exact",
+        "_mutated_score",
         "_numbers",
         "_set_chord_pitches_equal",
     )
@@ -5848,6 +5850,7 @@ class StaffPositionCommand(scoping.Command):
         *,
         allow_out_of_range: bool = None,
         allow_repeats: bool = None,
+        allow_repitch: bool = None,
         exact: bool = None,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
@@ -5865,7 +5868,8 @@ class StaffPositionCommand(scoping.Command):
             scope=scope,
             selector=selector,
         )
-        assert all(isinstance(_, int) for _ in numbers), repr(numbers)
+        prototype = (int, list, abjad.StaffPosition)
+        assert all(isinstance(_, prototype) for _ in numbers), repr(numbers)
         numbers = abjad.CyclicTuple(numbers)
         self._numbers = numbers
         if allow_out_of_range is not None:
@@ -5874,12 +5878,16 @@ class StaffPositionCommand(scoping.Command):
         if allow_repeats is not None:
             allow_repeats = bool(allow_repeats)
         self._allow_repeats = allow_repeats
+        if allow_repitch is not None:
+            allow_repitch = bool(allow_repitch)
+        self._allow_repitch = allow_repitch
         if approximate_pitch is not None:
             approximate_pitch = bool(approximate_pitch)
         self._approximate_pitch = approximate_pitch
         if exact is not None:
             exact = bool(exact)
         self._exact = exact
+        self._mutated_score = False
         if set_chord_pitches_equal is not None:
             set_chord_pitches_equal = bool(set_chord_pitches_equal)
         self._set_chord_pitches_equal = set_chord_pitches_equal
@@ -5902,15 +5910,30 @@ class StaffPositionCommand(scoping.Command):
                 abjad.Clef, default=abjad.Clef("treble")
             )
             number = self.numbers[i]
-            position = abjad.StaffPosition(number)
-            pitch = position.to_pitch(clef)
-            new_lt = PitchCommand._set_lt_pitch(
-                plt,
-                pitch,
-                approximate_pitch=self.approximate_pitch,
-                set_chord_pitches_equal=self.set_chord_pitches_equal,
-            )
-            assert new_lt is None, repr(new_lt)
+            if isinstance(number, list):
+                positions = [abjad.StaffPosition(_) for _ in number]
+                pitches = [_.to_pitch(clef) for _ in positions]
+                new_lt = PitchCommand._set_lt_pitch(
+                    plt,
+                    pitches,
+                    allow_repitch=self.allow_repitch,
+                    approximate_pitch=self.approximate_pitch,
+                    set_chord_pitches_equal=self.set_chord_pitches_equal,
+                )
+                if new_lt is not None:
+                    self._mutated_score = True
+                    plt = new_lt
+            else:
+                position = abjad.StaffPosition(number)
+                pitch = position.to_pitch(clef)
+                new_lt = PitchCommand._set_lt_pitch(
+                    plt,
+                    pitch,
+                    allow_repitch=self.allow_repitch,
+                    approximate_pitch=self.approximate_pitch,
+                    set_chord_pitches_equal=self.set_chord_pitches_equal,
+                )
+                assert new_lt is None, repr(new_lt)
             plt_count += 1
             for pleaf in plt:
                 abjad.attach(abjad.tags.STAFF_POSITION, pleaf)
@@ -5923,6 +5946,14 @@ class StaffPositionCommand(scoping.Command):
             message = f"PLT count ({plt_count}) does not match"
             message += f" staff position count ({len(self.numbers)})."
             raise Exception(message)
+
+    ### PRIVATE METHODS ###
+
+    def _mutates_score(self):
+        numbers = self.numbers or []
+        if any(isinstance(_, collections.abc.Iterable) for _ in numbers):
+            return True
+        return self._mutated_score
 
     ### PUBLIC PROPERTIES ###
 
@@ -5939,6 +5970,13 @@ class StaffPositionCommand(scoping.Command):
         Is true when repeat staff positions are allowed.
         """
         return self._allow_repeats
+
+    @property
+    def allow_repitch(self) -> typing.Optional[bool]:
+        """
+        Is true when command allows repitch.
+        """
+        return self._allow_repitch
 
     @property
     def approximate_pitch(self) -> typing.Optional[bool]:
@@ -7634,23 +7672,29 @@ def soprano_to_octave(
 
 
 def staff_position(
-    number: int,
+    argument: typing.Union[int, list, abjad.StaffPosition],
     selector: abjad.SelectorTyping = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
     *,
     allow_out_of_range: bool = None,
+    allow_repitch: bool = None,
     approximate_pitch: bool = None,
     set_chord_pitches_equal: bool = None,
 ) -> StaffPositionCommand:
     """
     Makes staff position command; allows repeats.
     """
-    assert isinstance(number, int), repr(number)
+    assert isinstance(argument, (int, list, abjad.StaffPosition)), repr(
+        argument
+    )
+    if isinstance(argument, list):
+        assert all(isinstance(_, (int, abjad.StaffPosition)) for _ in argument)
     return StaffPositionCommand(
-        [number],
+        [argument],
         allow_out_of_range=allow_out_of_range,
         allow_repeats=True,
+        allow_repitch=allow_repitch,
         approximate_pitch=approximate_pitch,
         selector=selector,
         set_chord_pitches_equal=set_chord_pitches_equal,

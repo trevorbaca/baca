@@ -1298,28 +1298,28 @@ def finger_pressure_transition(
 
 
 def flat_glissando(
-    # TODO: allow staff position entry in addition to pitch entry:
-    pitch,
+    pitch: typing.Union[str, abjad.NamedPitch, abjad.StaffPosition] = None,
     *tweaks,
-    allow_repitch=None,
+    allow_repitch: bool = None,
     approximate_pitch: bool = None,
-    hide_middle_stems=None,
-    left_broken=None,
-    right_broken=None,
-    right_broken_show_next=None,
-    rleak=None,
+    hide_middle_stems: bool = None,
+    left_broken: bool = None,
+    right_broken: bool = None,
+    right_broken_show_next: bool = None,
+    rleak: bool = None,
     selector: abjad.Expression = classes.Expression().select().pleaves(),
-    stop_pitch=None,
+    stop_pitch: typing.Union[
+        str, abjad.NamedPitch, abjad.StaffPosition
+    ] = None,
 ) -> scoping.Suite:
     """
     Makes flat glissando.
     """
-    prototype = (str, abjad.NamedPitch)
-    if stop_pitch is not None:
-        assert isinstance(stop_pitch, prototype), repr(stop_pitch)
-        assert pitch is not None
+    prototype = (list, str, abjad.NamedPitch, abjad.StaffPosition)
     if pitch is not None:
         assert isinstance(pitch, prototype), repr(pitch)
+    if stop_pitch is not None:
+        assert type(pitch) is type(stop_pitch), repr((pitch, stop_pitch))
     if rleak:
         selector = selector.rleak()
     commands: typing.List[scoping.Command] = []
@@ -1338,21 +1338,41 @@ def flat_glissando(
     untie_command = untie(selector.leaves())
     commands.append(untie_command)
     if pitch is not None and stop_pitch is None:
-        pitch_command = pitchcommands.pitch(
-            pitch,
-            allow_repitch=allow_repitch,
-            approximate_pitch=approximate_pitch,
-            selector=selector,
-        )
-        commands.append(pitch_command)
+        if isinstance(pitch, abjad.StaffPosition) or (
+            isinstance(pitch, list)
+            and isinstance(pitch[0], abjad.StaffPosition)
+        ):
+            staff_position_command = pitchcommands.staff_position(
+                pitch,
+                allow_repitch=allow_repitch,
+                approximate_pitch=approximate_pitch,
+                selector=selector,
+            )
+            commands.append(staff_position_command)
+        else:
+            pitch_command = pitchcommands.pitch(
+                pitch,
+                allow_repitch=allow_repitch,
+                approximate_pitch=approximate_pitch,
+                selector=selector,
+            )
+            commands.append(pitch_command)
     elif pitch is not None and stop_pitch is not None:
-        staff_position_command = pitchcommands.interpolate_pitches(
-            pitch,
-            stop_pitch,
-            approximate_pitch=approximate_pitch,
-            selector=selector,
-        )
-        commands.append(staff_position_command)
+        if isinstance(pitch, abjad.StaffPosition):
+            interpolation_command = pitchcommands.interpolate_staff_positions(
+                pitch,
+                stop_pitch,
+                approximate_pitch=approximate_pitch,
+                selector=selector,
+            )
+        else:
+            interpolation_command = pitchcommands.interpolate_pitches(
+                pitch,
+                stop_pitch,
+                approximate_pitch=approximate_pitch,
+                selector=selector,
+            )
+        commands.append(interpolation_command)
     return scoping.suite(*commands)
 
 
