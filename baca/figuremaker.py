@@ -2211,18 +2211,18 @@ class Imbrication(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 5/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 5/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 5/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -2230,24 +2230,24 @@ class Imbrication(object):
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 {
                                     \override TupletBracket.stencil = ##f
@@ -2262,7 +2262,7 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \accent                                                        %! baca.accent():IndicatorCommand
+                                        - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2281,12 +2281,12 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
-                                        - \accent                                                        %! baca.accent():IndicatorCommand
+                                        - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         a'16
-                                        - \accent                                                        %! baca.accent():IndicatorCommand
+                                        - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         s16
                                         ]
@@ -2305,7 +2305,7 @@ class Imbrication(object):
                                         % [Music_Voice_One measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -2319,16 +2319,16 @@ class Imbrication(object):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
@@ -2338,28 +2338,28 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                                         [
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -2368,27 +2368,27 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         af''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         a'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
                                         c'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                                         ]
                 <BLANKLINE>
                                     }
@@ -2403,7 +2403,7 @@ class Imbrication(object):
                                         % [Music_Voice_Two measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -2417,19 +2417,19 @@ class Imbrication(object):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
 
         ..  container:: example exception
 
@@ -2524,18 +2524,18 @@ class Imbrication(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 15/16                                                                  %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 15/16                                                                  %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 15/16                                                                   %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -2543,24 +2543,24 @@ class Imbrication(object):
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 {
                                     \override TupletBracket.stencil = ##f
@@ -2575,7 +2575,7 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \accent                                                        %! baca.accent():IndicatorCommand
+                                        - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2594,12 +2594,12 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
-                                        - \accent                                                        %! baca.accent():IndicatorCommand
+                                        - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         a'16
-                                        - \accent                                                        %! baca.accent():IndicatorCommand
+                                        - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2614,12 +2614,12 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
-                                        - \accent                                                        %! baca.accent():IndicatorCommand
+                                        - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         e''16
-                                        - \accent                                                        %! baca.accent():IndicatorCommand
+                                        - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         s16
                                         ]
@@ -2638,7 +2638,7 @@ class Imbrication(object):
                                         % [Music_Voice_One measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -2652,16 +2652,16 @@ class Imbrication(object):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
@@ -2671,7 +2671,7 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                                         [
                 <BLANKLINE>
                                         s16
@@ -2679,17 +2679,17 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -2698,12 +2698,12 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         af''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2712,7 +2712,7 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         c'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -2721,12 +2721,12 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2735,7 +2735,7 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
                                         ef''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                                         ]
                 <BLANKLINE>
                                     }
@@ -2750,7 +2750,7 @@ class Imbrication(object):
                                         % [Music_Voice_Two measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -2764,19 +2764,19 @@ class Imbrication(object):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
 
         """
         return self._hocket
@@ -2832,18 +2832,18 @@ class Imbrication(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 9/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 9/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 9/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -2851,24 +2851,24 @@ class Imbrication(object):
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 {
                                     \override TupletBracket.stencil = ##f
@@ -2909,19 +2909,19 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \accent                                                        %! baca.accent():IndicatorCommand
+                                        - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
-                                        - \accent                                                        %! baca.accent():IndicatorCommand
+                                        - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
-                                        - \accent                                                        %! baca.accent():IndicatorCommand
+                                        - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -2930,7 +2930,7 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
-                                        - \accent                                                        %! baca.accent():IndicatorCommand
+                                        - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         s16
                 <BLANKLINE>
@@ -2953,7 +2953,7 @@ class Imbrication(object):
                                         % [Music_Voice_One measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -2967,16 +2967,16 @@ class Imbrication(object):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
@@ -2986,28 +2986,28 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 0
                                         \set stemRightBeamCount = 2
                                         c'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                                         [
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -3016,22 +3016,22 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         af''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         a'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -3040,27 +3040,27 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         c'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         d'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         bf'!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         fs''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 1
                                         e''16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                     }
                 <BLANKLINE>
@@ -3069,22 +3069,22 @@ class Imbrication(object):
                                         \set stemLeftBeamCount = 1
                                         \set stemRightBeamCount = 2
                                         ef''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         af''!16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 2
                                         g''16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
                                         \set stemRightBeamCount = 0
                                         a'16
-                                        - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                        - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                                         ]
                 <BLANKLINE>
                                     }
@@ -3099,7 +3099,7 @@ class Imbrication(object):
                                         % [Music_Voice_Two measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -3113,19 +3113,19 @@ class Imbrication(object):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
 
         """
         return self._selector
@@ -3169,18 +3169,18 @@ class Imbrication(object):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 45/32                                                                  %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 45/32                                                                  %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 45/32                                                                   %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -3188,24 +3188,24 @@ class Imbrication(object):
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 {
                                     \override TupletBracket.stencil = ##f
@@ -3284,7 +3284,7 @@ class Imbrication(object):
                                         % [Music_Voice_One measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -3298,16 +3298,16 @@ class Imbrication(object):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 {
                 <BLANKLINE>
@@ -3385,7 +3385,7 @@ class Imbrication(object):
                                         % [Music_Voice_Two measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -3399,19 +3399,19 @@ class Imbrication(object):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                            }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
 
         """
         return self._truncate_ties
@@ -7722,18 +7722,18 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 3/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 3/4                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 3/4                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -7741,24 +7741,24 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                         \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                         \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
@@ -7820,7 +7820,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     % [Music_Voice_One measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -7834,16 +7834,16 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
             <BLANKLINE>
@@ -7899,7 +7899,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     % [Music_Voice_Two measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -7913,19 +7913,19 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
 
     ..  container:: example
 
@@ -7970,18 +7970,18 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 9/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 9/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 9/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -7989,24 +7989,24 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                         \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                         \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
@@ -8018,7 +8018,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
                                     [
             <BLANKLINE>
                                     s16
@@ -8052,12 +8052,12 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8088,7 +8088,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     % [Music_Voice_One measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -8102,16 +8102,16 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
             <BLANKLINE>
@@ -8186,7 +8186,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     % [Music_Voice_Two measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -8200,19 +8200,19 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
 
     """
     return Coat(pitch)
@@ -8272,24 +8272,24 @@ def extend_beam(
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 7/16                                                                    %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 1/4                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -8302,18 +8302,18 @@ def extend_beam(
                         \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                         \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
@@ -8328,12 +8328,12 @@ def extend_beam(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8369,12 +8369,12 @@ def extend_beam(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     cs''!16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     s16
                                     ]
@@ -8393,7 +8393,7 @@ def extend_beam(
                                     % [Music_Voice_One measure 3]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -8407,16 +8407,16 @@ def extend_beam(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
             <BLANKLINE>
@@ -8496,7 +8496,7 @@ def extend_beam(
                                     % [Music_Voice_Two measure 3]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -8510,19 +8510,19 @@ def extend_beam(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
 
     """
     return commandclasses.IndicatorCommand(
@@ -8578,18 +8578,18 @@ def imbricate(
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 15/16                                                                  %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 15/16                                                                  %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 15/16                                                                   %! baca.SegmentMaker._make_global_skips(1)
                         \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -8597,24 +8597,24 @@ def imbricate(
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                         \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                         \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
@@ -8689,7 +8689,7 @@ def imbricate(
                                     % [Music_Voice_One measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -8703,16 +8703,16 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
             <BLANKLINE>
@@ -8801,7 +8801,7 @@ def imbricate(
                                     % [Music_Voice_Two measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -8815,19 +8815,19 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
 
     ..  container:: example
 
@@ -8875,18 +8875,18 @@ def imbricate(
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.ThreeVoiceStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            \context Score = "Score"                                                                 %! baca.ThreeVoiceStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 15/16                                                                  %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 15/16                                                                  %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 15/16                                                                   %! baca.SegmentMaker._make_global_skips(1)
                         \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -8894,24 +8894,24 @@ def imbricate(
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                         \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                         \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.ThreeVoiceStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                \context MusicContext = "Music_Context"                                              %! baca.ThreeVoiceStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"                                              %! baca.ThreeVoiceStaffScoreTemplate.__call__
-                    <<                                                                               %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                    \context MusicStaff = "Music_Staff"                                              %! baca.ThreeVoiceStaffScoreTemplate.__call__()
+                    <<                                                                               %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
@@ -8920,14 +8920,14 @@ def imbricate(
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                     % [Music_Voice_One measure 1]                                    %! baca.SegmentMaker._comment_measure_numbers()
-                                    \override Beam.positions = #'(6 . 6)                             %! baca.beam_positions():OverrideCommand(1)
+                                    \override Beam.positions = #'(6 . 6)                             %! baca.beam_positions():baca.OverrideCommand._call(1)
                                     s16
                                     [
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8946,12 +8946,12 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -8969,7 +8969,7 @@ def imbricate(
             <BLANKLINE>
                                     s16
                                     ]
-                                    \revert Beam.positions                                           %! baca.beam_positions():OverrideCommand(2)
+                                    \revert Beam.positions                                           %! baca.beam_positions():baca.OverrideCommand._call(2)
             <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
@@ -8985,7 +8985,7 @@ def imbricate(
                                     % [Music_Voice_One measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -8999,16 +8999,16 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
             <BLANKLINE>
@@ -9097,7 +9097,7 @@ def imbricate(
                                     % [Music_Voice_Two measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -9111,16 +9111,16 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceThree = "Music_Voice_Three"                               %! baca.ThreeVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceThree = "Music_Voice_Three"                               %! baca.ThreeVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
@@ -9129,7 +9129,7 @@ def imbricate(
                                 \scaleDurations #'(1 . 1) {
             <BLANKLINE>
                                     % [Music_Voice_Three measure 1]                                  %! baca.SegmentMaker._comment_measure_numbers()
-                                    \override Beam.positions = #'(8 . 8)                             %! baca.beam_positions():OverrideCommand(1)
+                                    \override Beam.positions = #'(8 . 8)                             %! baca.beam_positions():baca.OverrideCommand._call(1)
                                     s16
                                     [
             <BLANKLINE>
@@ -9142,7 +9142,7 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                 }
             <BLANKLINE>
@@ -9167,18 +9167,18 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     s16
             <BLANKLINE>
                                     s16
                                     ]
-                                    \revert Beam.positions                                           %! baca.beam_positions():OverrideCommand(2)
+                                    \revert Beam.positions                                           %! baca.beam_positions():baca.OverrideCommand._call(2)
             <BLANKLINE>
                                 }
                                 \revert TupletBracket.stencil
@@ -9194,7 +9194,7 @@ def imbricate(
                                     % [Music_Voice_Three measure 2]                                  %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -9208,19 +9208,19 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    >>                                                                               %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                    >>                                                                               %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                >>                                                                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__
+                >>                                                                                   %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-            >>                                                                                       %! baca.ThreeVoiceStaffScoreTemplate.__call__
+            >>                                                                                       %! baca.ThreeVoiceStaffScoreTemplate.__call__()
 
     ..  container:: example
 
@@ -9261,18 +9261,18 @@ def imbricate(
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 9/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 9/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 9/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -9280,24 +9280,24 @@ def imbricate(
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                         \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                         \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
@@ -9313,7 +9313,7 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -9333,12 +9333,12 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     s16
             <BLANKLINE>
@@ -9354,12 +9354,12 @@ def imbricate(
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     e''16
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     s16
                                     ]
@@ -9378,7 +9378,7 @@ def imbricate(
                                     % [Music_Voice_One measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -9392,16 +9392,16 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
             <BLANKLINE>
@@ -9412,28 +9412,28 @@ def imbricate(
                                     \set stemLeftBeamCount = 0
                                     \set stemRightBeamCount = 2
                                     c'16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                                     [
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     e''16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                 }
             <BLANKLINE>
@@ -9443,27 +9443,27 @@ def imbricate(
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     ef''!16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     af''!16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     g''16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     a'16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 1
                                     c'16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                 }
             <BLANKLINE>
@@ -9473,27 +9473,27 @@ def imbricate(
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 2
                                     d'16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     bf'!16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     fs''!16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 2
                                     e''16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
                                     \set stemRightBeamCount = 0
                                     ef''!16
-                                    - \staccato                                                      %! baca.staccato():IndicatorCommand
+                                    - \staccato                                                      %! baca.staccato():baca.IndicatorCommand._call()
                                     ]
             <BLANKLINE>
                                 }
@@ -9508,7 +9508,7 @@ def imbricate(
                                     % [Music_Voice_Two measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -9522,19 +9522,19 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
 
     ..  container:: example
 
@@ -9576,18 +9576,18 @@ def imbricate(
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 27/16                                                                  %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 27/16                                                                  %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 27/16                                                                   %! baca.SegmentMaker._make_global_skips(1)
                         \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -9595,24 +9595,24 @@ def imbricate(
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                         \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                         \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
@@ -9629,7 +9629,7 @@ def imbricate(
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     bf'!8.
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                 }
             <BLANKLINE>
@@ -9638,17 +9638,17 @@ def imbricate(
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     fs''!8.
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     e''8.
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     \set stemLeftBeamCount = 1
                                     \set stemRightBeamCount = 1
                                     ef''!8.
-                                    - \accent                                                        %! baca.accent():IndicatorCommand
+                                    - \accent                                                        %! baca.accent():baca.IndicatorCommand._call()
             <BLANKLINE>
                                     s8.
             <BLANKLINE>
@@ -9675,7 +9675,7 @@ def imbricate(
                                     % [Music_Voice_One measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -9689,16 +9689,16 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
             <BLANKLINE>
@@ -9747,7 +9747,7 @@ def imbricate(
                                     % [Music_Voice_Two measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -9761,19 +9761,19 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
 
     ..  container:: example
 
@@ -9813,18 +9813,18 @@ def imbricate(
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 11/16                                                                  %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 11/16                                                                  %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 11/16                                                                   %! baca.SegmentMaker._make_global_skips(1)
                         \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -9832,24 +9832,24 @@ def imbricate(
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                         \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                         \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
@@ -9916,7 +9916,7 @@ def imbricate(
                                     % [Music_Voice_One measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -9930,16 +9930,16 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
             <BLANKLINE>
@@ -10012,7 +10012,7 @@ def imbricate(
                                     % [Music_Voice_Two measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -10026,19 +10026,19 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
 
     ..  container:: example
 
@@ -10078,18 +10078,18 @@ def imbricate(
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #32                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 19/16                                                                  %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 19/16                                                                  %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 19/16                                                                   %! baca.SegmentMaker._make_global_skips(1)
                         \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -10097,24 +10097,24 @@ def imbricate(
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                         \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                         \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                \context MusicContext = "Music_Context"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__
-                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    \context MusicStaff = "Music_Staff"                                              %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                    <<                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceOne = "Music_Voice_One"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
                                 \override TupletBracket.stencil = ##f
@@ -10193,7 +10193,7 @@ def imbricate(
                                     % [Music_Voice_One measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -10207,16 +10207,16 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
-                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        \context MusicVoiceTwo = "Music_Voice_Two"                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
                             {
             <BLANKLINE>
@@ -10309,7 +10309,7 @@ def imbricate(
                                     % [Music_Voice_Two measure 2]                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -10323,19 +10323,19 @@ def imbricate(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__
+                        }                                                                            %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__
+                    >>                                                                               %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__
+                >>                                                                                   %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <BLANKLINE>
-            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__
+            >>                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
 
     """
     return Imbrication(
@@ -10465,7 +10465,7 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
                     \times 13/11 {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #2                               %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
+                            \override TupletBracket.staff-padding = #2                               %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                             r8
                             c'16
                             [
@@ -10494,7 +10494,7 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
                         \times 4/5 {
                             a'16
                             r4
-                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
+                            \revert TupletBracket.staff-padding                                      %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                         }
                     }
                 }
@@ -10573,7 +10573,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 7/8 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         c'16
                         [
                         d'16
@@ -10601,7 +10601,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
                     \times 2/3 {
                         a'16
                         r8
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
             >>
@@ -10647,7 +10647,7 @@ def rests_around(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
                         [
@@ -10676,7 +10676,7 @@ def rests_around(
                     \times 2/3 {
                         a'16
                         r8
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
             >>
@@ -10911,7 +10911,7 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
                         [
@@ -10939,7 +10939,7 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
                     }
                     \scaleDurations #'(1 . 1) {
                         a'16
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
             >>
@@ -11001,7 +11001,7 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 7/8 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         c'16
                         [
                         d'16
@@ -11029,7 +11029,7 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
                     \times 2/3 {
                         a'16
                         s8
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
             >>
@@ -11075,7 +11075,7 @@ def skips_around(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         s8
                         c'16
                         [
@@ -11104,7 +11104,7 @@ def skips_around(
                     \times 2/3 {
                         a'16
                         s8
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
             >>
@@ -11148,7 +11148,7 @@ def skips_before(counts: typing.List[int],) -> RestAffix:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():OverrideCommand(1)
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         s8
                         c'16
                         [
@@ -11176,7 +11176,7 @@ def skips_before(counts: typing.List[int],) -> RestAffix:
                     }
                     \scaleDurations #'(1 . 1) {
                         a'16
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():OverrideCommand(2)
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
             >>

@@ -50,56 +50,56 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                         \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                         \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                         \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                         %@% \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
@@ -163,7 +163,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -177,19 +177,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
     ..  container:: example
 
@@ -232,36 +232,36 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 1/16                                                                    %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 7/16                                                                    %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 1/16                                                                    %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -269,24 +269,24 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                         % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                         \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                         \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
                             \scaleDurations #'(1 . 1) {                                              %! baca.music()
             <BLANKLINE>
@@ -350,7 +350,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -364,19 +364,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
     ..  container:: example
 
@@ -422,40 +422,40 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-            \with                                                                                    %! baca.SingleStaffScoreTemplate.__call__
-            {                                                                                        %! baca.SingleStaffScoreTemplate.__call__
-                autoBeaming = ##f                                                                    %! baca.SingleStaffScoreTemplate.__call__
-            }                                                                                        %! baca.SingleStaffScoreTemplate.__call__
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+            \with                                                                                    %! baca.SingleStaffScoreTemplate.__call__()
+            {                                                                                        %! baca.SingleStaffScoreTemplate.__call__()
+                autoBeaming = ##f                                                                    %! baca.SingleStaffScoreTemplate.__call__()
+            }                                                                                        %! baca.SingleStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 1/16                                                                    %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 7/16                                                                   %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 7/16                                                                    %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 1/16                                                                   %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 1/16                                                                    %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                        \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                         \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
@@ -463,24 +463,24 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
                         % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                        \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                         \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                         s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                         \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                         \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
                             \scaleDurations #'(1 . 1) {                                              %! baca.music()
             <BLANKLINE>
@@ -542,7 +542,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                     % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -556,19 +556,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
                             >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
     """
 
@@ -886,56 +886,56 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
@@ -1013,7 +1013,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -1027,19 +1027,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         ..  container:: example
 
@@ -1066,56 +1066,56 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
@@ -1193,7 +1193,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -1207,19 +1207,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         ..  container:: example exception
 
@@ -3068,7 +3068,7 @@ class SegmentMaker(abjad.SegmentMaker):
             seconds = int(clock_time)
             fermata_string = f"{seconds}''"
             if measure_index < total - 1:
-                tag = abjad.const.CLOCK_TIME
+                tag = abjad.Tag(abjad.const.CLOCK_TIME)
                 if measure_index == total - 2:
                     if is_fermata and final_is_fermata:
                         string = r"- \baca-start-ct-both-fermata"
@@ -3106,7 +3106,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag,
+                    tag=tag.append(_site(inspect.currentframe())),
                 )
             if 0 < measure_index:
                 tag = abjad.Tag(abjad.const.CLOCK_TIME)
@@ -3118,10 +3118,10 @@ class SegmentMaker(abjad.SegmentMaker):
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
-                    tag=tag,
+                    tag=tag.append(_site(inspect.currentframe())),
                 )
 
-    def _label_duration_mutlipliers(self):
+    def _label_duration_multipliers(self):
         tag = abjad.Tag(_site(inspect.currentframe()))
         tag = tag.prepend(abjad.tags.DURATION_MULTIPLIER)
         already_labeled = set()
@@ -3149,6 +3149,7 @@ class SegmentMaker(abjad.SegmentMaker):
             measure_number = first_measure_number + measure_index
             if measure_index < total - 1:
                 tag = abjad.Tag(abjad.const.LOCAL_MEASURE_NUMBER)
+                tag = tag.append(_site(inspect.currentframe()))
                 string = r"- \baca-start-lmn-left-only"
                 string += f' "{local_measure_number}"'
                 start_text_span = abjad.StartTextSpan(
@@ -3162,6 +3163,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                 )
                 tag = abjad.Tag(abjad.const.MEASURE_NUMBER)
+                tag = tag.append(_site(inspect.currentframe()))
                 string = r"- \baca-start-mn-left-only"
                 string += f' "{measure_number}"'
                 start_text_span = abjad.StartTextSpan(
@@ -3176,6 +3178,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
             if 0 < measure_index:
                 tag = abjad.Tag(abjad.const.LOCAL_MEASURE_NUMBER)
+                tag = tag.append(_site(inspect.currentframe()))
                 stop_text_span = abjad.StopTextSpan(
                     command=r"\bacaStopTextSpanLMN"
                 )
@@ -3187,6 +3190,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                 )
                 tag = abjad.Tag(abjad.const.MEASURE_NUMBER)
+                tag = tag.append(_site(inspect.currentframe()))
                 stop_text_span = abjad.StopTextSpan(
                     command=r"\bacaStopTextSpanMN"
                 )
@@ -3214,6 +3218,7 @@ class SegmentMaker(abjad.SegmentMaker):
             measure_index = lmn - 1
             skip = skips[measure_index]
             tag = abjad.Tag(abjad.const.STAGE_NUMBER)
+            tag = tag.append(_site(inspect.currentframe()))
             if color is not None:
                 string = r"- \baca-start-snm-colored-left-only"
                 string += f' "{value}" #{color}'
@@ -3232,6 +3237,7 @@ class SegmentMaker(abjad.SegmentMaker):
             )
             if 0 < i:
                 tag = abjad.Tag(abjad.const.STAGE_NUMBER)
+                tag = tag.append(_site(inspect.currentframe()))
                 stop_text_span = abjad.StopTextSpan(
                     command=r"\bacaStopTextSpanSNM"
                 )
@@ -3244,6 +3250,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
         skip = skips[-1]
         tag = abjad.Tag(abjad.const.STAGE_NUMBER)
+        tag = tag.append(_site(inspect.currentframe()))
         stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
         abjad.attach(
             stop_text_span,
@@ -3263,7 +3270,7 @@ class SegmentMaker(abjad.SegmentMaker):
         multiplier = abjad.Multiplier(multiplier)
         numerator, denominator = multiplier.pair
         string = rf"\magnifyStaff #{numerator}/{denominator}"
-        tag = abjad.Tag(tag).prepend("_magnify_staves_")
+        tag = abjad.Tag(tag).prepend(_site(inspect.currentframe()))
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             first_leaf = abjad.inspect(staff).leaf(0)
             assert first_leaf is not None
@@ -3570,7 +3577,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         continue
                     assert status == "reapplied", repr(status)
                     wrapper = abjad.inspect(leaf).wrapper(abjad.TimeSignature)
-                    site = "_reapply_persistent_indicators(1)"
+                    site = _site(inspect.currentframe(), 1)
                     edition = edition.prepend(site)
                     wrapper.tag = wrapper.tag.prepend(edition)
                     self._treat_persistent_wrapper(
@@ -3729,7 +3736,7 @@ class SegmentMaker(abjad.SegmentMaker):
         prefix = None
         if redraw is True:
             prefix = "redrawn"
-        tag = wrapper.tag.prepend("_set_status_tag")
+        tag = wrapper.tag.prepend(_site(inspect.currentframe()))
         status_tag = SegmentMaker._get_tag(status, stem, prefix=prefix)
         tag = tag.prepend(status_tag)
         wrapper.tag = tag
@@ -4355,22 +4362,22 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.StringTrioScoreTemplate.__call__
-                \with                                                                                    %! baca.StringTrioScoreTemplate.__call__
-                {                                                                                        %! baca.StringTrioScoreTemplate.__call__
-                    autoBeaming = ##f                                                                    %! baca.StringTrioScoreTemplate.__call__
-                }                                                                                        %! baca.StringTrioScoreTemplate.__call__
-                <<                                                                                       %! baca.StringTrioScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.StringTrioScoreTemplate.__call__()
+                \with                                                                                    %! baca.StringTrioScoreTemplate.__call__()
+                {                                                                                        %! baca.StringTrioScoreTemplate.__call__()
+                    autoBeaming = ##f                                                                    %! baca.StringTrioScoreTemplate.__call__()
+                }                                                                                        %! baca.StringTrioScoreTemplate.__call__()
+                <<                                                                                       %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #31                                             %! HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 6/16                                                                   %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 6/16                                                                   %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
@@ -4382,36 +4389,36 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #4                                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):HorizontalSpacingSpecifier(1):SPACING_COMMAND
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.StringTrioScoreTemplate.__call__
-                    <<                                                                                   %! baca.StringTrioScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.StringTrioScoreTemplate.__call__()
+                    <<                                                                                   %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context StringSectionStaffGroup = "String_Section_Staff_Group"                  %! baca.StringTrioScoreTemplate.__call__
-                        <<                                                                               %! baca.StringTrioScoreTemplate.__call__
+                        \context StringSectionStaffGroup = "String_Section_Staff_Group"                  %! baca.StringTrioScoreTemplate.__call__()
+                        <<                                                                               %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                            \tag Violin                                                                  %! baca.ScoreTemplate._attach_liypond_tag
-                            \context ViolinMusicStaff = "Violin_Music_Staff"                             %! baca.StringTrioScoreTemplate.__call__
-                            {                                                                            %! baca.StringTrioScoreTemplate.__call__
+                            \tag Violin                                                                  %! baca.ScoreTemplate._attach_liypond_tag()
+                            \context ViolinMusicStaff = "Violin_Music_Staff"                             %! baca.StringTrioScoreTemplate.__call__()
+                            {                                                                            %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                                \context ViolinMusicVoice = "Violin_Music_Voice"                         %! baca.StringTrioScoreTemplate.__call__
-                                {                                                                        %! baca.StringTrioScoreTemplate.__call__
+                                \context ViolinMusicVoice = "Violin_Music_Voice"                         %! baca.StringTrioScoreTemplate.__call__()
+                                {                                                                        %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {                                          %! baca.music()
                 <BLANKLINE>
                                         % [Violin_Music_Voice measure 1]                                 %! baca.SegmentMaker._comment_measure_numbers()
-                                        \clef "treble"                                                   %! DEFAULT_CLEF:_set_status_tag:abjad.ScoreTemplate.attach_defaults
+                                        \clef "treble"                                                   %! DEFAULT_CLEF:baca.SegmentMaker._set_status_tag():abjad.ScoreTemplate.attach_defaults(3)
                                         \once \override ViolinMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:baca.SegmentMaker._attach_color_literal(2)
                                     %@% \override ViolinMusicStaff.Clef.color = ##f                      %! DEFAULT_CLEF_COLOR_CANCELLATION:baca.SegmentMaker._attach_color_literal(1)
-                                        \set ViolinMusicStaff.forceClef = ##t                            %! DEFAULT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
+                                        \set ViolinMusicStaff.forceClef = ##t                            %! DEFAULT_CLEF:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults(3)
                                         d'16                                                             %! baca.music()
                                         ^ \baca-default-indicator-markup "(Violin)"                      %! DEFAULT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                         \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)     %! DEFAULT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -4439,7 +4446,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             % [Violin_Music_Voice measure 2]                             %! baca.SegmentMaker._comment_measure_numbers()
                                             \baca-invisible-music                                        %! baca.SegmentMaker._make_multimeasure_rest_container()
                                             c'1 * 3/8                                                    %! baca.SegmentMaker._make_multimeasure_rest_container()
-                                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                 %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                 %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                         }                                                                %! baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -4448,7 +4455,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             % [Violin_Rest_Voice measure 2]                              %! baca.SegmentMaker._comment_measure_numbers()
                                             R1 * 3/8                                                     %! baca.SegmentMaker._make_multimeasure_rest_container()
-                                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                 %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                 %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                         }                                                                %! baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -4462,7 +4469,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             % [Violin_Music_Voice measure 3]                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                             \baca-invisible-music                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                             R1 * 1/4                                                     %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                         }                                                                %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -4476,36 +4483,36 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override Staff.StaffSymbol.transparent = ##t          %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                             \startStaff                                                  %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                             R1 * 1/4                                                     %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                         }                                                                %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                     >>                                                                   %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                                }                                                                        %! baca.StringTrioScoreTemplate.__call__
+                                }                                                                        %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                            }                                                                            %! baca.StringTrioScoreTemplate.__call__
+                            }                                                                            %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                            \tag Viola                                                                   %! baca.ScoreTemplate._attach_liypond_tag
-                            \context ViolaMusicStaff = "Viola_Music_Staff"                               %! baca.StringTrioScoreTemplate.__call__
-                            {                                                                            %! baca.StringTrioScoreTemplate.__call__
+                            \tag Viola                                                                   %! baca.ScoreTemplate._attach_liypond_tag()
+                            \context ViolaMusicStaff = "Viola_Music_Staff"                               %! baca.StringTrioScoreTemplate.__call__()
+                            {                                                                            %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                                \context ViolaMusicVoice = "Viola_Music_Voice"                           %! baca.StringTrioScoreTemplate.__call__
-                                {                                                                        %! baca.StringTrioScoreTemplate.__call__
+                                \context ViolaMusicVoice = "Viola_Music_Voice"                           %! baca.StringTrioScoreTemplate.__call__()
+                                {                                                                        %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
                                     % [Viola_Music_Voice measure 1]                                      %! baca.SegmentMaker._comment_measure_numbers()
-                                    \clef "alto"                                                         %! DEFAULT_CLEF:_set_status_tag:abjad.ScoreTemplate.attach_defaults
+                                    \clef "alto"                                                         %! DEFAULT_CLEF:baca.SegmentMaker._set_status_tag():abjad.ScoreTemplate.attach_defaults(3)
                                     \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:baca.SegmentMaker._attach_color_literal(2)
                                 %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:baca.SegmentMaker._attach_color_literal(1)
-                                    \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
+                                    \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults(3)
                                     R1 * 6/16                                                            %! _call_rhythm_commands
                                     ^ \baca-default-indicator-markup "(Viola)"                           %! DEFAULT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
-                                %@% ^ \baca-duration-multiplier-markup #"6" #"16"                        %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"6" #"16"                        %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                                     \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
                 <BLANKLINE>
                                     % [Viola_Music_Voice measure 2]                                      %! baca.SegmentMaker._comment_measure_numbers()
                                     R1 * 6/16                                                            %! _call_rhythm_commands
-                                %@% ^ \baca-duration-multiplier-markup #"6" #"16"                        %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                %@% ^ \baca-duration-multiplier-markup #"6" #"16"                        %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     <<                                                                   %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -4515,7 +4522,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             % [Viola_Music_Voice measure 3]                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                             \baca-invisible-music                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                             R1 * 1/4                                                     %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                         }                                                                %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -4529,30 +4536,30 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override Staff.StaffSymbol.transparent = ##t          %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                             \startStaff                                                  %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                             R1 * 1/4                                                     %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                         }                                                                %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                     >>                                                                   %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                                }                                                                        %! baca.StringTrioScoreTemplate.__call__
+                                }                                                                        %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                            }                                                                            %! baca.StringTrioScoreTemplate.__call__
+                            }                                                                            %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                            \tag Cello                                                                   %! baca.ScoreTemplate._attach_liypond_tag
-                            \context CelloMusicStaff = "Cello_Music_Staff"                               %! baca.StringTrioScoreTemplate.__call__
-                            {                                                                            %! baca.StringTrioScoreTemplate.__call__
+                            \tag Cello                                                                   %! baca.ScoreTemplate._attach_liypond_tag()
+                            \context CelloMusicStaff = "Cello_Music_Staff"                               %! baca.StringTrioScoreTemplate.__call__()
+                            {                                                                            %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                                \context CelloMusicVoice = "Cello_Music_Voice"                           %! baca.StringTrioScoreTemplate.__call__
-                                {                                                                        %! baca.StringTrioScoreTemplate.__call__
+                                \context CelloMusicVoice = "Cello_Music_Voice"                           %! baca.StringTrioScoreTemplate.__call__()
+                                {                                                                        %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
                                     \scaleDurations #'(1 . 1) {                                          %! baca.music()
                 <BLANKLINE>
                                         % [Cello_Music_Voice measure 1]                                  %! baca.SegmentMaker._comment_measure_numbers()
-                                        \clef "bass"                                                     %! DEFAULT_CLEF:_set_status_tag:abjad.ScoreTemplate.attach_defaults
+                                        \clef "bass"                                                     %! DEFAULT_CLEF:baca.SegmentMaker._set_status_tag():abjad.ScoreTemplate.attach_defaults(3)
                                         \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:baca.SegmentMaker._attach_color_literal(2)
                                     %@% \override CelloMusicStaff.Clef.color = ##f                       %! DEFAULT_CLEF_COLOR_CANCELLATION:baca.SegmentMaker._attach_color_literal(1)
-                                        \set CelloMusicStaff.forceClef = ##t                             %! DEFAULT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
+                                        \set CelloMusicStaff.forceClef = ##t                             %! DEFAULT_CLEF:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults(3)
                                         a16                                                              %! baca.music()
                                         ^ \baca-default-indicator-markup "(Cello)"                       %! DEFAULT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                         \override CelloMusicStaff.Clef.color = #(x11-color 'violet)      %! DEFAULT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
@@ -4580,7 +4587,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             % [Cello_Music_Voice measure 2]                              %! baca.SegmentMaker._comment_measure_numbers()
                                             \baca-invisible-music                                        %! baca.SegmentMaker._make_multimeasure_rest_container()
                                             c'1 * 3/8                                                    %! baca.SegmentMaker._make_multimeasure_rest_container()
-                                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                 %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                 %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                         }                                                                %! baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -4589,7 +4596,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                             % [Cello_Rest_Voice measure 2]                               %! baca.SegmentMaker._comment_measure_numbers()
                                             R1 * 3/8                                                     %! baca.SegmentMaker._make_multimeasure_rest_container()
-                                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                 %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                 %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                         }                                                                %! baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -4603,7 +4610,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                             % [Cello_Music_Voice measure 3]                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                             \baca-invisible-music                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                             R1 * 1/4                                                     %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                         }                                                                %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -4617,21 +4624,21 @@ class SegmentMaker(abjad.SegmentMaker):
                                             \once \override Staff.StaffSymbol.transparent = ##t          %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                             \startStaff                                                  %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                             R1 * 1/4                                                     %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                        %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                         }                                                                %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                     >>                                                                   %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                                }                                                                        %! baca.StringTrioScoreTemplate.__call__
+                                }                                                                        %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                            }                                                                            %! baca.StringTrioScoreTemplate.__call__
+                            }                                                                            %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                        >>                                                                               %! baca.StringTrioScoreTemplate.__call__
+                        >>                                                                               %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.StringTrioScoreTemplate.__call__
+                    >>                                                                                   %! baca.StringTrioScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.StringTrioScoreTemplate.__call__
+                >>                                                                                       %! baca.StringTrioScoreTemplate.__call__()
 
         """
         return self._color_octaves
@@ -4721,56 +4728,56 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             %@% \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
@@ -4834,7 +4841,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -4848,19 +4855,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
             Override nonlast segment final bar line like this:
 
@@ -4883,56 +4890,56 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "||"                                                                    %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             %@% \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
@@ -4996,7 +5003,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -5010,19 +5017,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         ..  container:: example
 
@@ -5047,56 +5054,56 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|."                                                                    %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             %@% \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
@@ -5160,7 +5167,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -5174,19 +5181,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
             Override last segment final bar line like this:
 
@@ -5213,56 +5220,56 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "||"                                                                    %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             %@% \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
@@ -5326,7 +5333,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -5340,19 +5347,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         """
         return self._final_bar_line
@@ -5387,56 +5394,56 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|."                                                                    %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             %@% \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
@@ -5500,7 +5507,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -5515,7 +5522,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                                         _ \markup {                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):SCORE_2
                                             \override                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):SCORE_2
                                                 #'(font-name . "Palatino")                               %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):SCORE_2
@@ -5538,13 +5545,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         """
         return self._final_markup
@@ -5698,73 +5705,73 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \bar ""                                                                      %! baca.SegmentMaker._make_global_skips(4):+SEGMENT:EMPTY_START_BAR
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 4/8                                                                 %! _call_rhythm_commands
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 4/8                                                                 %! _call_rhythm_commands
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -5774,7 +5781,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -5788,19 +5795,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
             >>> abjad.f(maker.metadata, strict=89)
             abjad.OrderedDict(
@@ -5952,72 +5959,72 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 4/8                                                                 %! _call_rhythm_commands
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 4/8                                                                 %! _call_rhythm_commands
-                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 3/8                                                                 %! _call_rhythm_commands
-                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -6027,7 +6034,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -6041,19 +6048,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         ..  container:: example
 
@@ -6071,56 +6078,56 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 s1 * 4/8                                                                 %! _call_rhythm_commands
@@ -6142,7 +6149,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -6156,13 +6163,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         """
         return self._skips_instead_of_rests
@@ -6246,56 +6253,56 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 fs'!8                                                                    %! baca.make_even_divisions()
@@ -6346,7 +6353,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         d'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -6360,19 +6367,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         ..  container:: example
 
@@ -6401,56 +6408,56 @@ class SegmentMaker(abjad.SegmentMaker):
 
                 >>> abjad.f(lilypond_file[abjad.Score], strict=89)
                 <BLANKLINE>
-                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__
-                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context
-                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                    <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context
-                        {                                                                                %! abjad.ScoreTemplate._make_global_context
+                        \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                        {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 4/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(2)
+                            \time 3/8                                                                    %! EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(2)
                             \baca-time-signature-color #'blue                                            %! EXPLICIT_TIME_SIGNATURE_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                             \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
                             \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):baca.SegmentMaker._comment_measure_numbers()
-                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:_set_status_tag:baca.SegmentMaker._make_global_skips(3)
+                            \time 1/4                                                                    %! PHANTOM:baca.SegmentMaker._style_phantom_measures(1):EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._make_global_skips(3)
                             \baca-time-signature-transparent                                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(2)
                             s1 * 1/4                                                                     %! PHANTOM:baca.SegmentMaker._make_global_skips(3)
                             \once \override Score.BarLine.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                             \once \override Score.SpanBar.transparent = ##t                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(3)
                 <BLANKLINE>
-                        }                                                                                %! abjad.ScoreTemplate._make_global_context
+                        }                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context
+                    >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
-                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__
-                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                    <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__
-                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__
-                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                            {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 e'8                                                                      %! baca.make_even_divisions()
@@ -6501,7 +6508,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                         % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
@@ -6515,19 +6522,19 @@ class SegmentMaker(abjad.SegmentMaker):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
                                 >>                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
-                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__
+                            }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__
+                        }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__
+                    >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
-                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__
+                >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         """
         return self._transpose_score
@@ -6675,7 +6682,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._color_repeat_pitch_classes_()
                 self._color_octaves_()
                 self._force_nonnatural_accidentals()
-                self._label_duration_mutlipliers()
+                self._label_duration_multipliers()
                 self._magnify_staves_()
                 self._whitespace_leaves()
                 self._comment_measure_numbers()
