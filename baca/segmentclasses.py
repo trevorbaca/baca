@@ -1660,7 +1660,7 @@ class HorizontalSpacingSpecifier(object):
             if measure_index == total - 1:
                 duration = abjad.Duration(1, 4)
             spacing_section = indicators.SpacingSection(duration=duration)
-            tag = abjad.Tag(abjad.const.SPACING_COMMAND)
+            tag = abjad.Tag(abjad.tags.SPACING_COMMAND)
             abjad.attach(
                 spacing_section,
                 skip,
@@ -1668,7 +1668,7 @@ class HorizontalSpacingSpecifier(object):
             )
             string_ = self._make_annotation(duration, eol_adjusted, duration_)
             if measure_index < total - 1:
-                tag = abjad.Tag(abjad.const.SPACING)
+                tag = abjad.Tag(abjad.tags.SPACING)
                 string = r"- \baca-start-spm-left-only"
                 string += f' "{string_}"'
                 start_text_span = abjad.StartTextSpan(
@@ -1682,7 +1682,7 @@ class HorizontalSpacingSpecifier(object):
                     tag=tag,
                 )
             if 0 < measure_index:
-                tag = abjad.Tag(abjad.const.SPACING)
+                tag = abjad.Tag(abjad.tags.SPACING)
                 stop_text_span = abjad.StopTextSpan(
                     command=r"\bacaStopTextSpanSPM"
                 )

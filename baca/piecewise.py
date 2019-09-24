@@ -4356,7 +4356,7 @@ def tasto_spanner(
     Makes tasto spanner.
     """
     tag = abjad.Tag(_site(inspect.currentframe()))
-    tag = tag.prepend("TASTO")
+    tag = tag.prepend(const.TASTO)
     command = text_spanner(
         "T =|",
         *tweaks,

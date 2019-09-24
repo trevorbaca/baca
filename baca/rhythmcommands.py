@@ -1144,7 +1144,7 @@ def music(
     argument: typing.Union[str, abjad.Selection],
     *,
     do_not_check_total_duration: bool = None,
-    tag: typing.Optional[str] = "baca.music()",
+    tag: typing.Optional[abjad.Tag] = abjad.Tag("baca.music()"),
 ) -> RhythmCommand:
     """
     Makes rhythm command from string or selection ``argument``.
@@ -1189,7 +1189,7 @@ def skeleton(
     argument: typing.Union[str, abjad.Selection],
     *,
     do_not_check_total_duration: bool = None,
-    tag: typing.Optional[str] = "baca.skeleton()",
+    tag: typing.Optional[abjad.Tag] = abjad.Tag("baca.skeleton()"),
 ) -> RhythmCommand:
     """
     Makes rhythm command from ``string`` and annotates music as NOT_YET_PITCHED.
@@ -1223,18 +1223,18 @@ def tacet(
     Colors multimeasure rests.
     """
     command = overrides.mmrest_color(color, selector=selector)
-    scoping.tag(const.TACET, command)
+    scoping.tag(abjad.tags.TACET, command)
     scoping.tag(_site(inspect.currentframe()), command)
     command_ = scoping.new(command, measures=measures)
     assert isinstance(command_, overrides.OverrideCommand)
     return command_
 
 
-def tag_selection(selection: abjad.Selection, tag: str) -> None:
+def tag_selection(selection: abjad.Selection, tag: abjad.Tag) -> None:
     """
     Tags selection.
     """
-    assert isinstance(tag, str), repr(tag)
+    assert isinstance(tag, abjad.Tag), repr(tag)
     # TODO: tag attachments
     for component in abjad.iterate(selection).components():
         component._tag = tag

@@ -3798,7 +3798,7 @@ class Accumulator(object):
             figure_name_markup,
             leaf,
             deactivate=True,
-            tag=abjad.const.FIGURE_NAME,
+            tag=abjad.tags.FIGURE_NAME,
         )
 
     def _make_voice_dictionary(self):

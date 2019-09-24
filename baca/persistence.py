@@ -6280,16 +6280,16 @@ r"""
         >>> maker(
         ...     'Music_Voice',
         ...     baca.tag(
-        ...         '-PARTS',
+        ...         abjad.Tag('-PARTS'),
         ...         baca.margin_markup(margin_markups['I+II']),
         ...         ),
         ...     baca.tag(
-        ...         '-PARTS',
+        ...         abjad.Tag('-PARTS'),
         ...         baca.margin_markup(margin_markups['III+IV']),
         ...         deactivate=True,
         ...         ),
         ...     baca.tag(
-        ...         '-PARTS',
+        ...         abjad.Tag('-PARTS'),
         ...         baca.margin_markup(margin_markups['III+IV']),
         ...         deactivate=True,
         ...         ),

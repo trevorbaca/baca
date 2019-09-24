@@ -1225,21 +1225,21 @@ def not_parts(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-PARTS``.
     """
-    return tag("-PARTS", command)
+    return tag(abjad.Tag("-PARTS"), command)
 
 
 def not_score(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-SCORE``.
     """
-    return tag("-SCORE", command)
+    return tag(abjad.Tag("-SCORE"), command)
 
 
 def not_segment(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-SEGMENT``.
     """
-    return tag("-SEGMENT", command)
+    return tag(abjad.Tag("-SEGMENT"), command)
 
 
 def only_mol(command: _command_typing) -> _command_typing:
@@ -1393,24 +1393,24 @@ def only_parts(command: _command_typing) -> _command_typing:
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
     """
-    return tag("+PARTS", command)
+    return tag(abjad.Tag("+PARTS"), command)
 
 
 def only_score(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``+SCORE``.
     """
-    return tag("+SCORE", command)
+    return tag(abjad.Tag("+SCORE"), command)
 
 
 def only_segment(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``+SEGMENT``.
     """
-    return tag("+SEGMENT", command)
+    return tag(abjad.Tag("+SEGMENT"), command)
 
 
-def site(frame, prefix, *, n=None):
+def site(frame, prefix, *, n=None) -> abjad.Tag:
     """
     Makes site from ``frame``.
 
@@ -1419,9 +1419,10 @@ def site(frame, prefix, *, n=None):
     """
     frame_info = inspect.getframeinfo(frame)
     if n is None:
-        return f"{prefix}.{frame_info.function}()"
+        string = f"{prefix}.{frame_info.function}()"
     else:
-        return f"{prefix}.{frame_info.function}({n})"
+        string = f"{prefix}.{frame_info.function}({n})"
+    return abjad.Tag(string)
 
 
 def suite(*commands: CommandTyping, **keywords) -> Suite:
@@ -1458,7 +1459,7 @@ def suite(*commands: CommandTyping, **keywords) -> Suite:
 
 
 def tag(
-    tags: typing.Union[str, typing.List[str]],
+    tags: typing.Union[abjad.Tag, typing.List[abjad.Tag]],
     command: CommandTyping,
     *,
     deactivate: bool = None,
@@ -1471,12 +1472,13 @@ def tag(
 
     Acts in place.
     """
-    if isinstance(tags, str):
+    if isinstance(tags, abjad.Tag):
         tags = [tags]
     if not isinstance(tags, list):
-        message = f"tags must be string or list of strings"
+        message = f"tags must be tag or list of tags"
         message += f" (not {tags!r})."
         raise Exception(message)
+    assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)
     assert Command._validate_tags(tags), repr(tags)
     if not isinstance(command, (Command, Suite)):
         raise Exception("can only tag command or suite.")

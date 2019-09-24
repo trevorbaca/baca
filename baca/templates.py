@@ -71,7 +71,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
                 raise Exception(f"not listed in parts manifest: {tag_!r}.")
         literal = abjad.LilyPondLiteral(fr"\tag {tag}", "before")
         site = "baca.ScoreTemplate._attach_liypond_tag()"
-        abjad.attach(literal, context, tag=site)
+        tag = abjad.Tag(site)
+        abjad.attach(literal, context, tag=tag)
 
     @staticmethod
     def _set_square_delimiter(staff_group):
@@ -134,12 +135,13 @@ class ScoreTemplate(abjad.ScoreTemplate):
         """
         contexts = tuple(_ for _ in contexts if _ is not None)
         site = "baca.ScoreTemplate.make_music_context()"
+        tag = abjad.Tag(site)
         return abjad.Context(
             contexts,
             lilypond_type="MusicContext",
             simultaneous=True,
             name="Music_Context",
-            tag=site,
+            tag=tag,
         )
 
     def make_piano_staff(
@@ -165,6 +167,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         if not isinstance(stem, str):
             raise Exception(f"stem must be string: {stem!r}.")
         site = "baca.ScoreTemplate.make_square_staff_group()"
+        tag = abjad.Tag(site)
         contexts = tuple(_ for _ in contexts if _ is not None)
         result = None
         if len(contexts) == 1:
@@ -173,7 +176,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             result = contexts[0]
         elif 1 < len(contexts):
             name = f"{stem}_Square_Staff_Group"
-            staff_group = abjad.StaffGroup(contexts, name=name, tag=site)
+            staff_group = abjad.StaffGroup(contexts, name=name, tag=tag)
             self._set_square_delimiter(staff_group)
             result = staff_group
         return result
@@ -187,10 +190,11 @@ class ScoreTemplate(abjad.ScoreTemplate):
         if not isinstance(stem, str):
             raise Exception(f"stem must be string: {stem!r}.")
         site = "baca.ScoreTemplate.make_staff_group()"
+        tag = abjad.Tag(site)
         contexts = tuple(_ for _ in contexts if _ is not None)
         if contexts:
             return abjad.StaffGroup(
-                contexts, name=f"{stem}_Staff_Group", tag=site
+                contexts, name=f"{stem}_Staff_Group", tag=tag
             )
         else:
             return None
@@ -326,12 +330,13 @@ class SingleStaffScoreTemplate(ScoreTemplate):
         Calls score template.
         """
         site = "baca.SingleStaffScoreTemplate.__call__()"
+        tag = abjad.Tag(site)
         # GLOBAL CONTEXT
         global_context = self._make_global_context()
 
         # MUSIC VOICE, MUSIC STAFF
-        music_voice = abjad.Voice(name="Music_Voice", tag=site)
-        music_staff = abjad.Staff([music_voice], name="Music_Staff", tag=site)
+        music_voice = abjad.Voice(name="Music_Voice", tag=tag)
+        music_staff = abjad.Staff([music_voice], name="Music_Staff", tag=tag)
 
         # MUSIC CONTEXT
         music_context = abjad.Context(
@@ -339,12 +344,12 @@ class SingleStaffScoreTemplate(ScoreTemplate):
             lilypond_type="MusicContext",
             simultaneous=True,
             name="Music_Context",
-            tag=site,
+            tag=tag,
         )
 
         # SCORE
         score = abjad.Score(
-            [global_context, music_context], name="Score", tag=site
+            [global_context, music_context], name="Score", tag=tag
         )
         self._attach_calltime_defaults(score)
         return score
@@ -622,6 +627,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
         Calls string trio score template.
         """
         site = "baca.StringTrioScoreTemplate.__call__()"
+        tag = abjad.Tag(site)
         # GLOBAL CONTEXT
         global_context = self._make_global_context()
 
@@ -629,13 +635,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
         violin_music_voice = abjad.Voice(
             lilypond_type="ViolinMusicVoice",
             name="Violin_Music_Voice",
-            tag=site,
+            tag=tag,
         )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
             lilypond_type="ViolinMusicStaff",
             name="Violin_Music_Staff",
-            tag=site,
+            tag=tag,
         )
         violin = abjad.Violin(
             markup=markups.instrument("Violin", hcenter_in=10),
@@ -649,13 +655,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
         # VIOLA
         viola_music_voice = abjad.Voice(
-            lilypond_type="ViolaMusicVoice", name="Viola_Music_Voice", tag=site
+            lilypond_type="ViolaMusicVoice", name="Viola_Music_Voice", tag=tag
         )
         viola_music_staff = abjad.Staff(
             [viola_music_voice],
             lilypond_type="ViolaMusicStaff",
             name="Viola_Music_Staff",
-            tag=site,
+            tag=tag,
         )
         abjad.annotate(
             viola_music_staff,
@@ -670,13 +676,13 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
         # CELLO
         cello_music_voice = abjad.Voice(
-            lilypond_type="CelloMusicVoice", name="Cello_Music_Voice", tag=site
+            lilypond_type="CelloMusicVoice", name="Cello_Music_Voice", tag=tag
         )
         cello_music_staff = abjad.Staff(
             [cello_music_voice],
             lilypond_type="CelloMusicStaff",
             name="Cello_Music_Staff",
-            tag=site,
+            tag=tag,
         )
         abjad.annotate(
             cello_music_staff,
@@ -694,17 +700,17 @@ class StringTrioScoreTemplate(ScoreTemplate):
             [violin_music_staff, viola_music_staff, cello_music_staff],
             lilypond_type="StringSectionStaffGroup",
             name="String_Section_Staff_Group",
-            tag=site,
+            tag=tag,
         )
         music_context = abjad.Context(
             [string_section_staff_group],
             lilypond_type="MusicContext",
             simultaneous=True,
             name="Music_Context",
-            tag=site,
+            tag=tag,
         )
         score = abjad.Score(
-            [global_context, music_context], name="Score", tag=site
+            [global_context, music_context], name="Score", tag=tag
         )
         return score
 
@@ -937,25 +943,26 @@ class ThreeVoiceStaffScoreTemplate(ScoreTemplate):
         Calls three-voice staff score template.
         """
         site = "baca.ThreeVoiceStaffScoreTemplate.__call__()"
+        tag = abjad.Tag(site)
         # GLOBAL CONTEXT
         global_context = self._make_global_context()
 
         # MUSIC STAFF
         music_voice_1 = abjad.Voice(
-            lilypond_type="MusicVoiceOne", name="Music_Voice_One", tag=site
+            lilypond_type="MusicVoiceOne", name="Music_Voice_One", tag=tag
         )
         music_voice_2 = abjad.Voice(
-            lilypond_type="MusicVoiceTwo", name="Music_Voice_Two", tag=site
+            lilypond_type="MusicVoiceTwo", name="Music_Voice_Two", tag=tag
         )
         music_voice_3 = abjad.Voice(
-            lilypond_type="MusicVoiceThree", name="Music_Voice_Three", tag=site
+            lilypond_type="MusicVoiceThree", name="Music_Voice_Three", tag=tag
         )
         music_staff = abjad.Staff(
             [music_voice_1, music_voice_2, music_voice_3],
             lilypond_type="MusicStaff",
             simultaneous=True,
             name="Music_Staff",
-            tag=site,
+            tag=tag,
         )
 
         # MUSIC CONTEXT
@@ -964,12 +971,12 @@ class ThreeVoiceStaffScoreTemplate(ScoreTemplate):
             lilypond_type="MusicContext",
             simultaneous=True,
             name="Music_Context",
-            tag=site,
+            tag=tag,
         )
 
         # SCORE
         score = abjad.Score(
-            [global_context, music_context], name="Score", tag=site
+            [global_context, music_context], name="Score", tag=tag
         )
         abjad.attach(abjad.tags.THREE_VOICE, score, tag=None)
         return score
@@ -1154,22 +1161,23 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         Calls two-voice staff score template.
         """
         site = "baca.TwoVoiceStaffScoreTemplate.__call__()"
+        tag = abjad.Tag(site)
         # GLOBAL CONTEXT
         global_context = self._make_global_context()
 
         # MUSIC STAFF
         music_voice_1 = abjad.Voice(
-            lilypond_type="MusicVoiceOne", name="Music_Voice_One", tag=site
+            lilypond_type="MusicVoiceOne", name="Music_Voice_One", tag=tag
         )
         music_voice_2 = abjad.Voice(
-            lilypond_type="MusicVoiceTwo", name="Music_Voice_Two", tag=site
+            lilypond_type="MusicVoiceTwo", name="Music_Voice_Two", tag=tag
         )
         music_staff = abjad.Staff(
             [music_voice_1, music_voice_2],
             lilypond_type="MusicStaff",
             simultaneous=True,
             name="Music_Staff",
-            tag=site,
+            tag=tag,
         )
 
         # MUSIC CONTEXT
@@ -1178,12 +1186,12 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
             lilypond_type="MusicContext",
             simultaneous=True,
             name="Music_Context",
-            tag=site,
+            tag=tag,
         )
 
         # SCORE
         score = abjad.Score(
-            [global_context, music_context], name="Score", tag=site
+            [global_context, music_context], name="Score", tag=tag
         )
         abjad.attach(abjad.tags.TWO_VOICE, score, tag=None)
         return score
@@ -1326,6 +1334,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         Calls violin solo score template.
         """
         site = "baca.ViolinSoloScoreTemplate.__call__()"
+        tag = abjad.Tag(site)
         # GLOBAL CONTEXT
         global_context = self._make_global_context()
 
@@ -1333,13 +1342,13 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         violin_music_voice = abjad.Voice(
             lilypond_type="ViolinMusicVoice",
             name="Violin_Music_Voice",
-            tag=site,
+            tag=tag,
         )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
             lilypond_type="ViolinMusicStaff",
             name="Violin_Music_Staff",
-            tag=site,
+            tag=tag,
         )
         violin = abjad.Violin(
             markup=markups.instrument("Violin"),
@@ -1357,11 +1366,11 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             lilypond_type="MusicContext",
             simultaneous=True,
             name="Music_Context",
-            tag=site,
+            tag=tag,
         )
 
         # SCORE
         score = abjad.Score(
-            [global_context, music_context], name="Score", tag=site
+            [global_context, music_context], name="Score", tag=tag
         )
         return score

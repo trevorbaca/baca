@@ -50,7 +50,7 @@ class SpannerIndicatorCommand(scoping.Command):
         .leaves(),
         start_indicator: typing.Any = None,
         stop_indicator: typing.Any = None,
-        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tags: typing.List[typing.Union[abjad.Tag, None]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
         scoping.Command.__init__(
