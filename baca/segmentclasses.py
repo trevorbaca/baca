@@ -169,6 +169,7 @@ class BreakMeasureMap(object):
                                         % [Violin_Music_Voice measure 6]                             %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         c'1 * 1/4                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                     }                                                                %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -182,6 +183,7 @@ class BreakMeasureMap(object):
                                         \once \override Staff.StaffSymbol.transparent = ##t          %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                  %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                     %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                     }                                                                %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -205,19 +207,24 @@ class BreakMeasureMap(object):
                                 \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
                                 R1 * 4/8                                                             %! _call_rhythm_commands
                                 ^ \baca-default-indicator-markup "(Viola)"                           %! DEFAULT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
                                 \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
             <BLANKLINE>
                                 % [Viola_Music_Voice measure 2]                                      %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 3/8                                                             %! _call_rhythm_commands
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 % [Viola_Music_Voice measure 3]                                      %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 4/8                                                             %! _call_rhythm_commands
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 % [Viola_Music_Voice measure 4]                                      %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 3/8                                                             %! _call_rhythm_commands
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 % [Viola_Music_Voice measure 5]                                      %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 4/8                                                             %! _call_rhythm_commands
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 <<                                                                   %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -227,6 +234,7 @@ class BreakMeasureMap(object):
                                         % [Viola_Music_Voice measure 6]                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         R1 * 1/4                                                     %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                     }                                                                %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -240,6 +248,7 @@ class BreakMeasureMap(object):
                                         \once \override Staff.StaffSymbol.transparent = ##t          %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                  %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                     %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                     }                                                                %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -263,19 +272,24 @@ class BreakMeasureMap(object):
                                 \set CelloMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:_set_status_tag:baca.SegmentMaker._treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults
                                 R1 * 4/8                                                             %! _call_rhythm_commands
                                 ^ \baca-default-indicator-markup "(Cello)"                           %! DEFAULT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 2]                                      %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 3/8                                                             %! _call_rhythm_commands
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 3]                                      %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 4/8                                                             %! _call_rhythm_commands
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 4]                                      %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 3/8                                                             %! _call_rhythm_commands
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 5]                                      %! baca.SegmentMaker._comment_measure_numbers()
                                 R1 * 4/8                                                             %! _call_rhythm_commands
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 <<                                                                   %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -285,6 +299,7 @@ class BreakMeasureMap(object):
                                         % [Cello_Music_Voice measure 6]                              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                         \baca-invisible-music                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                         R1 * 1/4                                                     %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                     }                                                                %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -298,6 +313,7 @@ class BreakMeasureMap(object):
                                         \once \override Staff.StaffSymbol.transparent = ##t          %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         \startStaff                                                  %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                         R1 * 1/4                                                     %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                 %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                     }                                                                %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -621,6 +637,7 @@ class HorizontalSpacingSpecifier(object):
                                     % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -634,6 +651,7 @@ class HorizontalSpacingSpecifier(object):
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -778,6 +796,7 @@ class HorizontalSpacingSpecifier(object):
                                     % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -791,6 +810,7 @@ class HorizontalSpacingSpecifier(object):
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -937,6 +957,7 @@ class HorizontalSpacingSpecifier(object):
                                     % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -950,6 +971,7 @@ class HorizontalSpacingSpecifier(object):
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1097,6 +1119,7 @@ class HorizontalSpacingSpecifier(object):
                                     % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1110,6 +1133,7 @@ class HorizontalSpacingSpecifier(object):
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1258,6 +1282,7 @@ class HorizontalSpacingSpecifier(object):
                                     % [Music_Voice measure 5]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1271,6 +1296,7 @@ class HorizontalSpacingSpecifier(object):
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1401,17 +1427,23 @@ class HorizontalSpacingSpecifier(object):
                                 % [Music_Voice measure 1]                                            %! baca.SegmentMaker._comment_measure_numbers()
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 63/32
+                            %@% ^ \baca-duration-multiplier-markup #"63" #"32"                       %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
                                 [
             <BLANKLINE>
                                 f'16 * 115/64
+                            %@% ^ \baca-duration-multiplier-markup #"115" #"64"                      %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 e'16 * 91/64
+                            %@% ^ \baca-duration-multiplier-markup #"91" #"64"                       %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 f'16 * 35/32
+                            %@% ^ \baca-duration-multiplier-markup #"35" #"32"                       %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 e'16 * 29/32
+                            %@% ^ \baca-duration-multiplier-markup #"29" #"32"                       %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 f'16 * 13/16
+                            %@% ^ \baca-duration-multiplier-markup #"13" #"16"                       %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
                                 ]
             <BLANKLINE>
                             }
@@ -1461,15 +1493,20 @@ class HorizontalSpacingSpecifier(object):
                                 % [Music_Voice measure 2]                                            %! baca.SegmentMaker._comment_measure_numbers()
                                 \once \override Beam.grow-direction = #right
                                 e'16 * 117/64
+                            %@% ^ \baca-duration-multiplier-markup #"117" #"64"                      %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
                                 [
             <BLANKLINE>
                                 f'16 * 99/64
+                            %@% ^ \baca-duration-multiplier-markup #"99" #"64"                       %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 e'16 * 69/64
+                            %@% ^ \baca-duration-multiplier-markup #"69" #"64"                       %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 f'16 * 13/16
+                            %@% ^ \baca-duration-multiplier-markup #"13" #"16"                       %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 e'16 * 47/64
+                            %@% ^ \baca-duration-multiplier-markup #"47" #"64"                       %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
                                 ]
             <BLANKLINE>
                             }
@@ -1483,6 +1520,7 @@ class HorizontalSpacingSpecifier(object):
                                     % [Music_Voice measure 3]                                        %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._comment_measure_numbers()
                                     \baca-invisible-music                                            %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):baca.SegmentMaker._make_multimeasure_rest_container()
                                     c'1 * 1/4                                                        %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>
@@ -1496,6 +1534,7 @@ class HorizontalSpacingSpecifier(object):
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     \startStaff                                                      %! PHANTOM:baca.SegmentMaker._style_phantom_measures(8)
                                     R1 * 1/4                                                         %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! PHANTOM:baca.SegmentMaker._style_phantom_measures(5):DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_mutlipliers()
             <BLANKLINE>
                                 }                                                                    %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>

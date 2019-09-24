@@ -121,7 +121,7 @@ baca-left-broken-circle-bowing-markup =
         \hspace #0.5
     }
 
-%%% DAMP MARKUP %%%
+%%% DAMP MARKUP (intentionally out of alphabetical order) %%%
 
 baca-damp-markup =
     \markup
@@ -371,6 +371,21 @@ baca-triple-diamond-parenthesized-top-markup =
             \musicglyph #"noteheads.s0harmonic"
         }
     }
+
+%%% DURATION MULTIPLIER MARKUP %%%
+
+baca-duration-multiplier-markup = #(
+    define-music-function
+    (n d)
+    (string? string?)
+    #{
+    - \tweak color #(x11-color 'sienna)
+    - \tweak extra-offset #'(0 . 3)
+    - \markup
+    \with-dimensions-from \null
+    \fraction #n #d
+    #}
+    )
 
 %%% FERMATA MARKUP %%%
 
