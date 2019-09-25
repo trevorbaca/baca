@@ -2967,7 +2967,7 @@ def staff_lines(
     command_1 = commandclasses.IndicatorCommand(
         indicators=[indicators.BarExtent(n)],
         selector=selector,
-        tags=[const.NOT_PARTS],
+        tags=[abjad.Tag(const.NOT_PARTS)],
     )
     command_2 = commandclasses.IndicatorCommand(
         indicators=[indicators.StaffLines(n)],

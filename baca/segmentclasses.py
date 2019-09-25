@@ -500,7 +500,7 @@ class BreakMeasureMap(object):
             return abjad.Tag()
 
     @property
-    def tags(self) -> typing.List[str]:
+    def tags(self) -> typing.List[abjad.Tag]:
         """
         Gets tags.
         """

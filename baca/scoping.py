@@ -592,7 +592,6 @@ class Command(object):
                 tags.append(tag)
         if tags:
             words = [str(_) for _ in tags]
-            words.sort()
             tag = abjad.Tag.from_words(words)
             return tag
         # TODO: return empty tag (instead of none)

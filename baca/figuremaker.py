@@ -1021,7 +1021,7 @@ class Acciaccatura(object):
             if 1 < len(acciaccatura_container):
                 abjad.beam(
                     acciaccatura_container[:],
-                    tag="baca.Acciaccatura.__call__()",
+                    tag=abjad.Tag("baca.Acciaccatura.__call__()"),
                 )
             acciaccatura_containers.append(acciaccatura_container)
         assert len(acciaccatura_containers) == len(collection)
