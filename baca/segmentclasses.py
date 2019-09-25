@@ -205,25 +205,25 @@ class BreakMeasureMap(object):
                                 \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:baca.SegmentMaker._attach_color_literal(1)
                                 \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults(3)
-                                R1 * 4/8                                                             %! _call_rhythm_commands
+                                R1 * 4/8                                                             %! baca.SegmentMaker._call_rhythm_commands()
                                 ^ \baca-default-indicator-markup "(Viola)"                           %! DEFAULT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                                 \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
             <BLANKLINE>
                                 % [Viola_Music_Voice measure 2]                                      %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 3/8                                                             %! _call_rhythm_commands
+                                R1 * 3/8                                                             %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 % [Viola_Music_Voice measure 3]                                      %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 4/8                                                             %! _call_rhythm_commands
+                                R1 * 4/8                                                             %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 % [Viola_Music_Voice measure 4]                                      %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 3/8                                                             %! _call_rhythm_commands
+                                R1 * 3/8                                                             %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 % [Viola_Music_Voice measure 5]                                      %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 4/8                                                             %! _call_rhythm_commands
+                                R1 * 4/8                                                             %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 <<                                                                   %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -270,25 +270,25 @@ class BreakMeasureMap(object):
                                 \once \override CelloMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:baca.SegmentMaker._attach_color_literal(2)
                             %@% \override CelloMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:baca.SegmentMaker._attach_color_literal(1)
                                 \set CelloMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults(3)
-                                R1 * 4/8                                                             %! _call_rhythm_commands
+                                R1 * 4/8                                                             %! baca.SegmentMaker._call_rhythm_commands()
                                 ^ \baca-default-indicator-markup "(Cello)"                           %! DEFAULT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                                 \override CelloMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 2]                                      %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 3/8                                                             %! _call_rhythm_commands
+                                R1 * 3/8                                                             %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 3]                                      %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 4/8                                                             %! _call_rhythm_commands
+                                R1 * 4/8                                                             %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 4]                                      %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 3/8                                                             %! _call_rhythm_commands
+                                R1 * 3/8                                                             %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 % [Cello_Music_Voice measure 5]                                      %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 4/8                                                             %! _call_rhythm_commands
+                                R1 * 4/8                                                             %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"                         %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                                 <<                                                                   %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -355,7 +355,7 @@ class BreakMeasureMap(object):
         local_measure_numbers: bool = None,
         page_count: int = None,
         partial_score: int = None,
-        tags: typing.List[str] = None,
+        tags: typing.List[abjad.Tag] = None,
     ) -> None:
         tags = scoping.Command._preprocess_tags(tags)
         assert scoping.Command._validate_tags(tags), repr(tags)
@@ -1660,7 +1660,7 @@ class HorizontalSpacingSpecifier(object):
             if measure_index == total - 1:
                 duration = abjad.Duration(1, 4)
             spacing_section = indicators.SpacingSection(duration=duration)
-            tag = abjad.Tag(abjad.tags.SPACING_COMMAND)
+            tag = abjad.tags.SPACING_COMMAND
             abjad.attach(
                 spacing_section,
                 skip,
@@ -1668,7 +1668,7 @@ class HorizontalSpacingSpecifier(object):
             )
             string_ = self._make_annotation(duration, eol_adjusted, duration_)
             if measure_index < total - 1:
-                tag = abjad.Tag(abjad.tags.SPACING)
+                tag = abjad.tags.SPACING
                 string = r"- \baca-start-spm-left-only"
                 string += f' "{string_}"'
                 start_text_span = abjad.StartTextSpan(
@@ -1682,7 +1682,7 @@ class HorizontalSpacingSpecifier(object):
                     tag=tag,
                 )
             if 0 < measure_index:
-                tag = abjad.Tag(abjad.tags.SPACING)
+                tag = abjad.tags.SPACING
                 stop_text_span = abjad.StopTextSpan(
                     command=r"\bacaStopTextSpanSPM"
                 )

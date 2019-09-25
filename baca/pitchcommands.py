@@ -163,7 +163,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
         selector: abjad.SelectorTyping = classes.Expression()
         .select()
         .pleaf(0),
-        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         scoping.Command.__init__(
             self,

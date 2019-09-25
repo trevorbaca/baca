@@ -1171,11 +1171,13 @@ def rhythm(
     preprocessor: abjad.Expression = None,
     measures: typings.SliceTyping = None,
     persist: str = None,
-    tag: str = None,
+    tag: abjad.Tag = None,
 ) -> RhythmCommand:
     """
     Makes rhythm command from ``argument``.
     """
+    if tag is not None:
+        assert isinstance(tag, abjad.Tag), repr(tag)
     argument = rmakers.stack(*arguments, preprocessor=preprocessor, tag=tag)
     return RhythmCommand(
         argument,

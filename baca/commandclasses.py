@@ -41,7 +41,7 @@ class BCPCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
         selector: abjad.SelectorTyping = None,
-        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1217,7 +1217,7 @@ class GlissandoCommand(scoping.Command):
         selector: abjad.SelectorTyping = classes.Expression()
         .select()
         .tleaves(),
-        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
         zero_padding: bool = None,
     ) -> None:
@@ -1269,7 +1269,7 @@ class GlissandoCommand(scoping.Command):
             parenthesize_repeats=self.parenthesize_repeats,
             right_broken=self.right_broken,
             right_broken_show_next=self.right_broken_show_next,
-            tag=str(self.tag),
+            tag=self.tag,
             zero_padding=self.zero_padding,
         )
 
@@ -1379,7 +1379,7 @@ class GlobalFermataCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
         selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
-        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -1425,17 +1425,21 @@ class GlobalFermataCommand(scoping.Command):
             markup = abjad.Markup(string, literal=True)
             markup = abjad.new(markup, direction=abjad.Up)
             abjad.attach(
-                markup, leaf, tag=self.tag.append("GlobalFermataCommand(1)")
+                markup,
+                leaf,
+                tag=self.tag.append("baca.GlobalFermataCommand._call(1)"),
             )
             literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
             abjad.attach(
-                literal, leaf, tag=self.tag.append("GlobalFermataCommand(2)")
+                literal,
+                leaf,
+                tag=self.tag.append("baca.GlobalFermataCommand._call(2)"),
             )
             tag = abjad.Tag.from_words(
                 [
-                    abjad.tags.FERMATA_MEASURE,
+                    str(abjad.tags.FERMATA_MEASURE),
                     str(self.tag),
-                    "GlobalFermataCommand(3)",
+                    "baca.GlobalFermataCommand._call(3)",
                 ]
             )
             abjad.attach(
@@ -1490,7 +1494,7 @@ class IndicatorCommand(scoping.Command):
         selector: abjad.SelectorTyping = classes.Expression()
         .select()
         .pheads(),
-        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1744,7 +1748,7 @@ class MetronomeMarkCommand(scoping.Command):
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
         selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
-        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         scoping.Command.__init__(
             self,

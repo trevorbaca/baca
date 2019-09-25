@@ -60,7 +60,7 @@ class OverrideCommand(scoping.Command):
         .select()
         .leaves(),
         tag_measure_number: bool = None,
-        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tags: typing.List[typing.Optional[abjad.Tag]] = None,
         value: typing.Any = None,
         whitelist: typing.Tuple[type] = None,
     ) -> None:
@@ -759,22 +759,22 @@ def dls_staff_padding(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
-                        \p                                                                           %! SPANNER_STOP:baca.hairpin():PiecewiseCommand(1)
-                        \<                                                                           %! baca.hairpin():PiecewiseCommand(1)
+                        \p                                                                           %! SPANNER_STOP:baca.hairpin():baca.PiecewiseCommand._call(1)
+                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1)
                         [
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
-                        \f                                                                           %! SPANNER_STOP:baca.hairpin():PiecewiseCommand(2)
+                        \f                                                                           %! SPANNER_STOP:baca.hairpin():baca.PiecewiseCommand._call(2)
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        \p                                                                           %! SPANNER_STOP:baca.hairpin():PiecewiseCommand(1)
-                        \<                                                                           %! baca.hairpin():PiecewiseCommand(1)
+                        \p                                                                           %! SPANNER_STOP:baca.hairpin():baca.PiecewiseCommand._call(1)
+                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1)
                         [
                         e''16
                         ]
@@ -785,12 +785,12 @@ def dls_staff_padding(
                         af''16
                         [
                         g''16
-                        \f                                                                           %! SPANNER_STOP:baca.hairpin():PiecewiseCommand(2)
+                        \f                                                                           %! SPANNER_STOP:baca.hairpin():baca.PiecewiseCommand._call(2)
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        \p                                                                           %! SPANNER_STOP:baca.hairpin():PiecewiseCommand(1)
+                        \p                                                                           %! SPANNER_STOP:baca.hairpin():baca.PiecewiseCommand._call(1)
                         r4
                         \revert DynamicLineSpanner.staff-padding                                     %! baca.dls_staff_padding():baca.OverrideCommand._call(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
@@ -860,22 +860,22 @@ def dls_up(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
-                        \p                                                                           %! SPANNER_STOP:baca.hairpin():PiecewiseCommand(1)
-                        \<                                                                           %! baca.hairpin():PiecewiseCommand(1)
+                        \p                                                                           %! SPANNER_STOP:baca.hairpin():baca.PiecewiseCommand._call(1)
+                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1)
                         [
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
-                        \f                                                                           %! SPANNER_STOP:baca.hairpin():PiecewiseCommand(2)
+                        \f                                                                           %! SPANNER_STOP:baca.hairpin():baca.PiecewiseCommand._call(2)
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        \p                                                                           %! SPANNER_STOP:baca.hairpin():PiecewiseCommand(1)
-                        \<                                                                           %! baca.hairpin():PiecewiseCommand(1)
+                        \p                                                                           %! SPANNER_STOP:baca.hairpin():baca.PiecewiseCommand._call(1)
+                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1)
                         [
                         e''16
                         ]
@@ -886,12 +886,12 @@ def dls_up(
                         af''16
                         [
                         g''16
-                        \f                                                                           %! SPANNER_STOP:baca.hairpin():PiecewiseCommand(2)
+                        \f                                                                           %! SPANNER_STOP:baca.hairpin():baca.PiecewiseCommand._call(2)
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        \p                                                                           %! SPANNER_STOP:baca.hairpin():PiecewiseCommand(1)
+                        \p                                                                           %! SPANNER_STOP:baca.hairpin():baca.PiecewiseCommand._call(1)
                         r4
                         \revert DynamicLineSpanner.direction                                         %! baca.dls_up():baca.OverrideCommand._call(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
@@ -1426,19 +1426,19 @@ def mmrest_color(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)              %! baca.mmrest_color():baca.OverrideCommand._call(1)
-                            R1 * 4/8                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 4/8                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                             \revert MultiMeasureRest.color                                           %! baca.mmrest_color():baca.OverrideCommand._call(2)
             <BLANKLINE>
@@ -1589,11 +1589,11 @@ def mmrest_text_color(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \override MultiMeasureRestText.color = #red                              %! baca.mmrest_text_color():baca.OverrideCommand._call(1)
-                            R1 * 4/8                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             ^ \markup {                                                              %! baca.markup():baca.IndicatorCommand._call()
                                 \override                                                            %! baca.markup():baca.IndicatorCommand._call()
                                     #'(box-padding . 0.5)                                            %! baca.markup():baca.IndicatorCommand._call()
@@ -1603,11 +1603,11 @@ def mmrest_text_color(
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 4/8                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                             \revert MultiMeasureRestText.color                                       %! baca.mmrest_text_color():baca.OverrideCommand._call(2)
             <BLANKLINE>
@@ -1769,11 +1769,11 @@ def mmrest_text_extra_offset(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \override MultiMeasureRestText.extra-offset = #'(0 . 2)                  %! baca.mmrest_text_extra_offset():baca.OverrideCommand._call(1)
-                            R1 * 4/8                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             ^ \markup {                                                              %! baca.markup():baca.IndicatorCommand._call()
                                 \override                                                            %! baca.markup():baca.IndicatorCommand._call()
                                     #'(box-padding . 0.5)                                            %! baca.markup():baca.IndicatorCommand._call()
@@ -1783,11 +1783,11 @@ def mmrest_text_extra_offset(
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 4/8                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                             \revert MultiMeasureRestText.extra-offset                                %! baca.mmrest_text_extra_offset():baca.OverrideCommand._call(2)
             <BLANKLINE>
@@ -1922,11 +1922,11 @@ def mmrest_text_padding(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \override MultiMeasureRestText.padding = #2                              %! baca.mmrest_text_padding():baca.OverrideCommand._call(1)
-                            R1 * 4/8                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             ^ \markup {                                                              %! baca.markup():baca.IndicatorCommand._call()
                                 \override                                                            %! baca.markup():baca.IndicatorCommand._call()
                                     #'(box-padding . 0.5)                                            %! baca.markup():baca.IndicatorCommand._call()
@@ -1936,11 +1936,11 @@ def mmrest_text_padding(
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 4/8                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                             \revert MultiMeasureRestText.padding                                     %! baca.mmrest_text_padding():baca.OverrideCommand._call(2)
             <BLANKLINE>
@@ -2074,11 +2074,11 @@ def mmrest_text_parent_center(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \override MultiMeasureRestText.parent-alignment-X = #0                   %! baca.mmrest_text_parent_center():baca.OverrideCommand._call(1)
-                            R1 * 4/8                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             ^ \markup {                                                              %! baca.markup():baca.IndicatorCommand._call()
                                 \override                                                            %! baca.markup():baca.IndicatorCommand._call()
                                     #'(box-padding . 0.5)                                            %! baca.markup():baca.IndicatorCommand._call()
@@ -2088,11 +2088,11 @@ def mmrest_text_parent_center(
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 4/8                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                             \revert MultiMeasureRestText.parent-alignment-X                          %! baca.mmrest_text_parent_center():baca.OverrideCommand._call(2)
             <BLANKLINE>
@@ -2227,11 +2227,11 @@ def mmrest_text_staff_padding(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \override MultiMeasureRestText.staff-padding = #2                        %! baca.mmrest_text_staff_padding():baca.OverrideCommand._call(1)
-                            R1 * 4/8                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             ^ \markup {                                                              %! baca.markup():baca.IndicatorCommand._call()
                                 \override                                                            %! baca.markup():baca.IndicatorCommand._call()
                                     #'(box-padding . 0.5)                                            %! baca.markup():baca.IndicatorCommand._call()
@@ -2241,11 +2241,11 @@ def mmrest_text_staff_padding(
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 4/8                                                                 %! _call_rhythm_commands
+                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! _call_rhythm_commands
+                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                             \revert MultiMeasureRestText.staff-padding                               %! baca.mmrest_text_staff_padding():baca.OverrideCommand._call(2)
             <BLANKLINE>
@@ -5343,12 +5343,12 @@ def text_spanner_staff_padding(
                         r8
                         c'16
                         [
-                        - \abjad-dashed-line-with-arrow                                              %! baca.text_spanner():PiecewiseCommand(1)
-                        - \baca-text-spanner-left-text "pont."                                       %! baca.text_spanner():PiecewiseCommand(1)
-                        - \baca-text-spanner-right-text "ord."                                       %! baca.text_spanner():PiecewiseCommand(1)
-                        - \tweak bound-details.right.padding #0.5                                    %! baca.text_spanner():PiecewiseCommand(1)
-                        - \tweak bound-details.right.stencil-align-dir-y #center                     %! baca.text_spanner():PiecewiseCommand(1)
-                        \startTextSpan                                                               %! baca.text_spanner():PiecewiseCommand(1)
+                        - \abjad-dashed-line-with-arrow                                              %! baca.text_spanner():baca.PiecewiseCommand._call(1)
+                        - \baca-text-spanner-left-text "pont."                                       %! baca.text_spanner():baca.PiecewiseCommand._call(1)
+                        - \baca-text-spanner-right-text "ord."                                       %! baca.text_spanner():baca.PiecewiseCommand._call(1)
+                        - \tweak bound-details.right.padding #0.5                                    %! baca.text_spanner():baca.PiecewiseCommand._call(1)
+                        - \tweak bound-details.right.stencil-align-dir-y #center                     %! baca.text_spanner():baca.PiecewiseCommand._call(1)
+                        \startTextSpan                                                               %! baca.text_spanner():baca.PiecewiseCommand._call(1)
                         d'16
                         ]
                         bf'4
@@ -5373,7 +5373,7 @@ def text_spanner_staff_padding(
                     }
                     \times 4/5 {
                         a'16
-                        \stopTextSpan                                                                %! SPANNER_STOP:baca.text_spanner():PiecewiseCommand(2)
+                        \stopTextSpan                                                                %! SPANNER_STOP:baca.text_spanner():baca.PiecewiseCommand._call(2)
                         r4
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
                         \revert TextScript.staff-padding                                             %! baca.text_script_staff_padding():baca.OverrideCommand._call(2)

@@ -1019,7 +1019,10 @@ class Acciaccatura(object):
                 grace_leaves, command=r"\acciaccatura"
             )
             if 1 < len(acciaccatura_container):
-                abjad.beam(acciaccatura_container[:], tag="Acciaccatura")
+                abjad.beam(
+                    acciaccatura_container[:],
+                    tag="baca.Acciaccatura.__call__()",
+                )
             acciaccatura_containers.append(acciaccatura_container)
         assert len(acciaccatura_containers) == len(collection)
         assert isinstance(collection, list), repr(collection)
@@ -1114,42 +1117,42 @@ class Acciaccatura(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''16
                                 a'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 bf'16
                                 fs''16
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             bf'8
                         }
@@ -1210,42 +1213,42 @@ class Acciaccatura(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''8
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 e''8
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''8
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''8
                                 a'8
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'8
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 bf'8
                                 fs''8
                                 e''8
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''8
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''8
                                 a'8
                                 c'8
                                 d'8
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             bf'8
                         }
@@ -1313,42 +1316,42 @@ class Acciaccatura(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''16
                                 a'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 bf'16
                                 fs''16
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             bf'8
                         }
@@ -1416,18 +1419,18 @@ class Acciaccatura(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             a'8
                             [
@@ -1437,9 +1440,9 @@ class Acciaccatura(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 bf'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             fs''8
                             [
@@ -1450,9 +1453,9 @@ class Acciaccatura(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             a'8
                             [
@@ -1525,9 +1528,9 @@ class Acciaccatura(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                         }
@@ -1536,9 +1539,9 @@ class Acciaccatura(object):
                             [
                             \acciaccatura {
                                 g''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 a'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             c'8
                             ]
@@ -1549,9 +1552,9 @@ class Acciaccatura(object):
                             bf'8
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                             ]
@@ -1563,9 +1566,9 @@ class Acciaccatura(object):
                             a'8
                             \acciaccatura {
                                 c'16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 d'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             bf'8
                             ]
@@ -1636,18 +1639,18 @@ class Acciaccatura(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             a'8
                             [
@@ -1657,9 +1660,9 @@ class Acciaccatura(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 bf'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             fs''8
                             [
@@ -1672,17 +1675,17 @@ class Acciaccatura(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             a'8
                             [
                             \acciaccatura {
                                 c'16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 d'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             bf'8
                             ]
@@ -1755,9 +1758,9 @@ class Acciaccatura(object):
                             [
                             \acciaccatura {
                                 g''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 a'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             c'8
                             ]
@@ -1767,10 +1770,10 @@ class Acciaccatura(object):
                             [
                             \acciaccatura {
                                 bf'16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 fs''16
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                             ]
@@ -1780,11 +1783,11 @@ class Acciaccatura(object):
                             [
                             \acciaccatura {
                                 g''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             bf'8
                             ]
@@ -5441,42 +5444,42 @@ class FigureMaker(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''16
                                 a'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             c'8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 bf'16
                                 fs''16
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''8
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             bf'8
                         }
@@ -5536,42 +5539,42 @@ class FigureMaker(object):
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 fs''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''16
                                 a'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             c'4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 d'16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 bf'16
                                 fs''16
                                 e''16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             ef''4
                         }
                         \scaleDurations #'(1 . 1) {
                             \acciaccatura {
                                 af''16
-                                [                                                                        %! Acciaccatura
+                                [                                                                        %! baca.Acciaccatura.__call__()
                                 g''16
                                 a'16
                                 c'16
                                 d'16
-                                ]                                                                        %! Acciaccatura
+                                ]                                                                        %! baca.Acciaccatura.__call__()
                             }
                             bf'4
                         }

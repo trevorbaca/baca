@@ -251,7 +251,7 @@ class Command(object):
         scope: ScopeTyping = None,
         selector: abjad.SelectorTyping = None,
         tag_measure_number: bool = None,
-        tags: typing.List[typing.Union[str, abjad.Tag, None]] = None,
+        tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         self._deactivate = deactivate
         self._map = map
@@ -1338,9 +1338,9 @@ def only_parts(command: _command_typing) -> _command_typing:
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
                             b'2                                                                      %! baca.make_notes()
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1):+PARTS
-                            \p                                                                       %! EXPLICIT_DYNAMIC:baca.SegmentMaker._set_status_tag():SPANNER_STOP:baca.hairpin():+PARTS:PiecewiseCommand(1)
+                            \p                                                                       %! EXPLICIT_DYNAMIC:baca.SegmentMaker._set_status_tag():SPANNER_STOP:baca.hairpin():+PARTS:baca.PiecewiseCommand._call(1)
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1):+PARTS
-                            \<                                                                       %! EXPLICIT_DYNAMIC:baca.SegmentMaker._set_status_tag():baca.hairpin():+PARTS:PiecewiseCommand(1)
+                            \<                                                                       %! EXPLICIT_DYNAMIC:baca.SegmentMaker._set_status_tag():baca.hairpin():+PARTS:baca.PiecewiseCommand._call(1)
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
@@ -1354,7 +1354,7 @@ def only_parts(command: _command_typing) -> _command_typing:
                             \baca-not-yet-pitched-coloring                                           %! NOT_YET_PITCHED:baca.SegmentMaker._color_not_yet_pitched()
                             b'4.                                                                     %! baca.make_notes()
                             - \tweak color #(x11-color 'blue)                                        %! EXPLICIT_DYNAMIC_COLOR:_treat_persistent_wrapper(1):+PARTS
-                            \f                                                                       %! EXPLICIT_DYNAMIC:baca.SegmentMaker._set_status_tag():SPANNER_STOP:baca.hairpin():+PARTS:PiecewiseCommand(2)
+                            \f                                                                       %! EXPLICIT_DYNAMIC:baca.SegmentMaker._set_status_tag():SPANNER_STOP:baca.hairpin():+PARTS:baca.PiecewiseCommand._call(2)
             <BLANKLINE>
                             <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
             <BLANKLINE>

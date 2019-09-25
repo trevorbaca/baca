@@ -1527,11 +1527,11 @@ class SegmentMaker(abjad.SegmentMaker):
             string = rf"\baca-time-signature-color #'{color}"
             literal = abjad.LilyPondLiteral(string)
         if cancelation is True:
-            tag = abjad.Tag(_site(inspect.currentframe(), 1))
+            tag = _site(inspect.currentframe(), 1)
             tag = tag.prepend(status_tag)
             abjad.attach(literal, wrapper.component, deactivate=True, tag=tag)
         else:
-            tag = abjad.Tag(_site(inspect.currentframe(), 2))
+            tag = _site(inspect.currentframe(), 2)
             tag = tag.prepend(status_tag)
             abjad.attach(
                 literal,
@@ -1809,8 +1809,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 status = None
             assert status is not None
             color = self._status_to_color[status]
-            tag = f"{status.upper()}_METRONOME_MARK_WITH_COLOR"
-            tag = abjad.Tag(tag)
+            string = f"{status.upper()}_METRONOME_MARK_WITH_COLOR"
+            tag = abjad.Tag(string)
             if isinstance(left_text, str):
                 string = left_text.replace(
                     "baca-metronome-mark-spanner-left-markup",
@@ -2110,8 +2110,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _call_rhythm_commands(self):
         self._attach_fermatas()
         command_count = 0
-        # tag = _site(inspect.currentframe())
-        tag = abjad.Tag("_call_rhythm_commands")
+        tag = _site(inspect.currentframe())
         if self.skips_instead_of_rests:
             prototype = abjad.Skip
         else:
@@ -2465,7 +2464,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _color_mock_pitch(self):
         indicator = abjad.tags.MOCK
-        tag = abjad.Tag(_site(inspect.currentframe()))
+        tag = _site(inspect.currentframe())
         tag = tag.prepend(indicator)
         leaves = []
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
@@ -2478,7 +2477,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _color_not_yet_pitched(self):
         indicator = abjad.tags.NOT_YET_PITCHED
-        tag = abjad.Tag(_site(inspect.currentframe()))
+        tag = _site(inspect.currentframe())
         tag = tag.prepend(indicator)
         leaves = []
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
@@ -2491,7 +2490,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _color_not_yet_registered(self):
         indicator = abjad.tags.NOT_YET_REGISTERED
-        tag = abjad.Tag(_site(inspect.currentframe()))
+        tag = _site(inspect.currentframe())
         tag = tag.prepend(indicator)
         for pleaf in abjad.iterate(self.score).leaves(pitched=True):
             if not abjad.inspect(pleaf).has_indicator(indicator):
@@ -2507,7 +2506,7 @@ class SegmentMaker(abjad.SegmentMaker):
         vertical_moments = abjad.iterate(score).vertical_moments()
         markup = abjad.Markup("OCTAVE", direction=abjad.Up)
         abjad.tweak(markup).color = "red"
-        tag = abjad.Tag(_site(inspect.currentframe()))
+        tag = _site(inspect.currentframe())
         tag = tag.prepend("OCTAVE")
         for vertical_moment in vertical_moments:
             pleaves, pitches = [], []
@@ -2543,7 +2542,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _color_out_of_range(self):
         indicator = abjad.tags.ALLOW_OUT_OF_RANGE
-        tag = abjad.Tag(_site(inspect.currentframe()))
+        tag = _site(inspect.currentframe())
         tag = tag.prepend(abjad.tags.OUT_OF_RANGE)
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             for pleaf in abjad.iterate(voice).leaves(pitched=True):
@@ -2561,7 +2560,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _color_repeat_pitch_classes_(self):
         indicator = abjad.tags.REPEAT_PITCH_CLASS
-        tag = abjad.Tag(_site(inspect.currentframe()))
+        tag = _site(inspect.currentframe())
         tag = tag.prepend(indicator)
         lts = self._find_repeat_pitch_classes(self.score)
         for lt in lts:
@@ -3075,7 +3074,7 @@ class SegmentMaker(abjad.SegmentMaker):
             seconds = int(clock_time)
             fermata_string = f"{seconds}''"
             if measure_index < total - 1:
-                tag = abjad.Tag(abjad.tags.CLOCK_TIME)
+                tag = abjad.tags.CLOCK_TIME
                 if measure_index == total - 2:
                     if is_fermata and final_is_fermata:
                         string = r"- \baca-start-ct-both-fermata"
@@ -3116,7 +3115,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag.append(_site(inspect.currentframe())),
                 )
             if 0 < measure_index:
-                tag = abjad.Tag(abjad.tags.CLOCK_TIME)
+                tag = abjad.tags.CLOCK_TIME
                 stop_text_span = abjad.StopTextSpan(
                     command=r"\bacaStopTextSpanCT"
                 )
@@ -3129,7 +3128,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
 
     def _label_duration_multipliers(self):
-        tag = abjad.Tag(_site(inspect.currentframe()))
+        tag = _site(inspect.currentframe())
         tag = tag.prepend(abjad.tags.DURATION_MULTIPLIER)
         already_labeled = set()
         for voice in abjad.iterate(self.score).components(abjad.Voice):
@@ -3155,7 +3154,7 @@ class SegmentMaker(abjad.SegmentMaker):
             local_measure_number = measure_index + 1
             measure_number = first_measure_number + measure_index
             if measure_index < total - 1:
-                tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER)
+                tag = abjad.tags.LOCAL_MEASURE_NUMBER
                 tag = tag.append(_site(inspect.currentframe()))
                 string = r"- \baca-start-lmn-left-only"
                 string += f' "{local_measure_number}"'
@@ -3169,7 +3168,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     deactivate=True,
                     tag=tag,
                 )
-                tag = abjad.Tag(abjad.tags.MEASURE_NUMBER)
+                tag = abjad.tags.MEASURE_NUMBER
                 tag = tag.append(_site(inspect.currentframe()))
                 string = r"- \baca-start-mn-left-only"
                 string += f' "{measure_number}"'
@@ -3184,7 +3183,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                 )
             if 0 < measure_index:
-                tag = abjad.Tag(abjad.tags.LOCAL_MEASURE_NUMBER)
+                tag = abjad.tags.LOCAL_MEASURE_NUMBER
                 tag = tag.append(_site(inspect.currentframe()))
                 stop_text_span = abjad.StopTextSpan(
                     command=r"\bacaStopTextSpanLMN"
@@ -3196,7 +3195,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     deactivate=True,
                     tag=tag,
                 )
-                tag = abjad.Tag(abjad.tags.MEASURE_NUMBER)
+                tag = abjad.tags.MEASURE_NUMBER
                 tag = tag.append(_site(inspect.currentframe()))
                 stop_text_span = abjad.StopTextSpan(
                     command=r"\bacaStopTextSpanMN"
@@ -3224,7 +3223,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(item)
             measure_index = lmn - 1
             skip = skips[measure_index]
-            tag = abjad.Tag(abjad.tags.STAGE_NUMBER)
+            tag = abjad.tags.STAGE_NUMBER
             tag = tag.append(_site(inspect.currentframe()))
             if color is not None:
                 string = r"- \baca-start-snm-colored-left-only"
@@ -3243,7 +3242,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 tag=tag,
             )
             if 0 < i:
-                tag = abjad.Tag(abjad.tags.STAGE_NUMBER)
+                tag = abjad.tags.STAGE_NUMBER
                 tag = tag.append(_site(inspect.currentframe()))
                 stop_text_span = abjad.StopTextSpan(
                     command=r"\bacaStopTextSpanSNM"
@@ -3256,7 +3255,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=tag,
                 )
         skip = skips[-1]
-        tag = abjad.Tag(abjad.tags.STAGE_NUMBER)
+        tag = abjad.tags.STAGE_NUMBER
         tag = tag.append(_site(inspect.currentframe()))
         stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
         abjad.attach(
@@ -3277,7 +3276,8 @@ class SegmentMaker(abjad.SegmentMaker):
         multiplier = abjad.Multiplier(multiplier)
         numerator, denominator = multiplier.pair
         string = rf"\magnifyStaff #{numerator}/{denominator}"
-        tag = abjad.Tag(tag).prepend(_site(inspect.currentframe()))
+        tag = abjad.Tag(tag)
+        tag = tag.prepend(_site(inspect.currentframe()))
         for staff in abjad.iterate(self.score).components(abjad.Staff):
             first_leaf = abjad.inspect(staff).leaf(0)
             assert first_leaf is not None
@@ -3318,7 +3318,7 @@ class SegmentMaker(abjad.SegmentMaker):
             )
             context.append(skip)
         if not self.remove_phantom_measure:
-            tag = abjad.Tag(_site(inspect.currentframe(), 3))
+            tag = _site(inspect.currentframe(), 3)
             tag = tag.prepend(const.PHANTOM)
             skip = abjad.Skip(1, multiplier=(1, 4), tag=tag)
             abjad.annotate(skip, const.PHANTOM, True)
@@ -3332,7 +3332,7 @@ class SegmentMaker(abjad.SegmentMaker):
         # at start of nonfirst segments
         first_skip = classes.Selection(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
-        tag = abjad.Tag(abjad.tags.EMPTY_START_BAR)
+        tag = abjad.tags.EMPTY_START_BAR
         tag = tag.prepend("+SEGMENT")
         abjad.attach(
             literal,
@@ -3412,7 +3412,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _make_multimeasure_rest_container(
         self, voice_name, duration, phantom=False, suppress_note=False
     ):
-        tag = abjad.Tag(_site(inspect.currentframe()))
+        tag = _site(inspect.currentframe())
         if phantom is True:
             tag = tag.prepend(const.PHANTOM)
         if suppress_note is True:
@@ -3905,7 +3905,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     string = r"\once \override " + string
                     strings.append(string)
                     literal = abjad.LilyPondLiteral(strings)
-                    tag = abjad.Tag(abjad.tags.FERMATA_MEASURE)
+                    tag = abjad.tags.FERMATA_MEASURE
                     measure_number_tag = self._get_measure_number_tag(leaf)
                     if measure_number_tag is not None:
                         tag = tag.append(measure_number_tag)
@@ -4529,13 +4529,13 @@ class SegmentMaker(abjad.SegmentMaker):
                                     \once \override ViolaMusicStaff.Clef.color = #(x11-color 'DarkViolet) %! DEFAULT_CLEF_COLOR:baca.SegmentMaker._attach_color_literal(2)
                                 %@% \override ViolaMusicStaff.Clef.color = ##f                           %! DEFAULT_CLEF_COLOR_CANCELLATION:baca.SegmentMaker._attach_color_literal(1)
                                     \set ViolaMusicStaff.forceClef = ##t                                 %! DEFAULT_CLEF:baca.SegmentMaker._set_status_tag():baca.SegmentMaker._treat_persistent_wrapper(2):abjad.ScoreTemplate.attach_defaults(3)
-                                    R1 * 6/16                                                            %! _call_rhythm_commands
+                                    R1 * 6/16                                                            %! baca.SegmentMaker._call_rhythm_commands()
                                     ^ \baca-default-indicator-markup "(Viola)"                           %! DEFAULT_INSTRUMENT_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                                 %@% ^ \baca-duration-multiplier-markup #"6" #"16"                        %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                                     \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)          %! DEFAULT_CLEF_REDRAW_COLOR:baca.SegmentMaker._attach_color_literal(2)
                 <BLANKLINE>
                                     % [Viola_Music_Voice measure 2]                                      %! baca.SegmentMaker._comment_measure_numbers()
-                                    R1 * 6/16                                                            %! _call_rhythm_commands
+                                    R1 * 6/16                                                            %! baca.SegmentMaker._call_rhythm_commands()
                                 %@% ^ \baca-duration-multiplier-markup #"6" #"16"                        %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                     <<                                                                   %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -5782,19 +5782,19 @@ class SegmentMaker(abjad.SegmentMaker):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 4/8                                                                 %! _call_rhythm_commands
+                                R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 3/8                                                                 %! _call_rhythm_commands
+                                R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 4/8                                                                 %! _call_rhythm_commands
+                                R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 3/8                                                                 %! _call_rhythm_commands
+                                R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -6035,19 +6035,19 @@ class SegmentMaker(abjad.SegmentMaker):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 4/8                                                                 %! _call_rhythm_commands
+                                R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 3/8                                                                 %! _call_rhythm_commands
+                                R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 4/8                                                                 %! _call_rhythm_commands
+                                R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                R1 * 3/8                                                                 %! _call_rhythm_commands
+                                R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                             %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! DURATION_MULTIPLIER:baca.SegmentMaker._label_duration_multipliers()
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
@@ -6154,16 +6154,16 @@ class SegmentMaker(abjad.SegmentMaker):
                             {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
                 <BLANKLINE>
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                s1 * 4/8                                                                 %! _call_rhythm_commands
+                                s1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                s1 * 3/8                                                                 %! _call_rhythm_commands
+                                s1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                s1 * 4/8                                                                 %! _call_rhythm_commands
+                                s1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                s1 * 3/8                                                                 %! _call_rhythm_commands
+                                s1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
                 <BLANKLINE>
                                 <<                                                                       %! PHANTOM:baca.SegmentMaker._make_multimeasure_rest_container()
                 <BLANKLINE>
