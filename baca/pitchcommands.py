@@ -521,8 +521,8 @@ class ClusterCommand(scoping.Command):
                 abjad.attach(indicator, chord)
             abjad.mutate(pleaf).replace(chord)
             abjad.attach(key_cluster, chord)
-            abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, chord)
-            abjad.detach(abjad.tags.NOT_YET_PITCHED, chord)
+            abjad.attach(abjad.const.ALLOW_REPEAT_PITCH, chord)
+            abjad.detach(abjad.const.NOT_YET_PITCHED, chord)
 
     def _make_pitches(self, start_pitch, width):
         pitches = [start_pitch]
@@ -3143,16 +3143,16 @@ class PitchCommand(scoping.Command):
                 plt = new_plt
             if self.allow_octaves:
                 for pleaf in plt:
-                    abjad.attach(abjad.tags.ALLOW_OCTAVE, pleaf)
+                    abjad.attach(abjad.const.ALLOW_OCTAVE, pleaf)
             if self.allow_out_of_range:
                 for pleaf in plt:
-                    abjad.attach(abjad.tags.ALLOW_OUT_OF_RANGE, pleaf)
+                    abjad.attach(abjad.const.ALLOW_OUT_OF_RANGE, pleaf)
             if self.allow_repeats:
                 for pleaf in plt:
-                    abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
+                    abjad.attach(abjad.const.ALLOW_REPEAT_PITCH, pleaf)
             if self.do_not_transpose is True:
                 for pleaf in plt:
-                    abjad.attach(abjad.tags.DO_NOT_TRANSPOSE, pleaf)
+                    abjad.attach(abjad.const.DO_NOT_TRANSPOSE, pleaf)
             pitches_consumed += 1
         self._state = abjad.OrderedDict()
         pitches_consumed += previous_pitches_consumed
@@ -3250,11 +3250,11 @@ class PitchCommand(scoping.Command):
         set_chord_pitches_equal=False,
     ):
         new_lt = None
-        already_pitched = abjad.tags.ALREADY_PITCHED
+        already_pitched = abjad.const.ALREADY_PITCHED
         for leaf in lt:
-            abjad.detach(abjad.tags.NOT_YET_PITCHED, leaf)
+            abjad.detach(abjad.const.NOT_YET_PITCHED, leaf)
             if mock is True:
-                abjad.attach(abjad.tags.MOCK, leaf)
+                abjad.attach(abjad.const.MOCK, leaf)
             if allow_repitch:
                 continue
             if abjad.inspect(leaf).has_indicator(already_pitched):
@@ -3717,7 +3717,7 @@ class RegisterCommand(scoping.Command):
                     pleaf.written_pitches = pitches
                 else:
                     raise TypeError(pleaf)
-                abjad.detach(abjad.tags.NOT_YET_REGISTERED, pleaf)
+                abjad.detach(abjad.const.NOT_YET_REGISTERED, pleaf)
 
     ### PUBLIC PROPERTIES ###
 
@@ -5002,7 +5002,7 @@ class RegisterInterpolationCommand(scoping.Command):
                     pleaf.written_pitches = written_pitches
                 else:
                     raise TypeError(pleaf)
-                abjad.detach(abjad.tags.NOT_YET_REGISTERED, pleaf)
+                abjad.detach(abjad.const.NOT_YET_REGISTERED, pleaf)
 
     ### PRIVATE METHODS ###
 
@@ -5699,7 +5699,7 @@ class RegisterToOctaveCommand(scoping.Command):
         elif isinstance(leaf, abjad.Chord):
             pitches = [transposition(_) for _ in leaf.written_pitches]
             leaf.written_pitches = pitches
-        abjad.detach(abjad.tags.NOT_YET_REGISTERED, leaf)
+        abjad.detach(abjad.const.NOT_YET_REGISTERED, leaf)
 
     ### PUBLIC PROPERTIES ###
 
@@ -6009,12 +6009,12 @@ class StaffPositionCommand(scoping.Command):
                 assert new_lt is None, repr(new_lt)
             plt_count += 1
             for pleaf in plt:
-                abjad.attach(abjad.tags.STAFF_POSITION, pleaf)
+                abjad.attach(abjad.const.STAFF_POSITION, pleaf)
                 if self.allow_out_of_range:
                     abjad.attach(abjad.const.ALLOW_OUT_OF_RANGE, pleaf)
                 if self.allow_repeats:
-                    abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, pleaf)
-                    abjad.attach(abjad.tags.DO_NOT_TRANSPOSE, pleaf)
+                    abjad.attach(abjad.const.ALLOW_REPEAT_PITCH, pleaf)
+                    abjad.attach(abjad.const.DO_NOT_TRANSPOSE, pleaf)
         if self.exact and plt_count != len(self.numbers):
             message = f"PLT count ({plt_count}) does not match"
             message += f" staff position count ({len(self.numbers)})."
@@ -6196,9 +6196,9 @@ class StaffPositionInterpolationCommand(scoping.Command):
             )
             assert new_lt is None, repr(new_lt)
             for leaf in plt:
-                abjad.attach(abjad.tags.ALLOW_REPEAT_PITCH, leaf)
+                abjad.attach(abjad.const.ALLOW_REPEAT_PITCH, leaf)
                 if not self.pitches_instead_of_staff_positions:
-                    abjad.attach(abjad.tags.STAFF_POSITION, leaf)
+                    abjad.attach(abjad.const.STAFF_POSITION, leaf)
         if isinstance(self.start, abjad.NamedPitch):
             start_pitch = self.start
         else:

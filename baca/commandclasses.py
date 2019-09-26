@@ -1443,17 +1443,19 @@ class GlobalFermataCommand(scoping.Command):
             )
             tag = abjad.Tag.from_words(
                 [
-                    str(abjad.tags.FERMATA_MEASURE),
+                    abjad.const.FERMATA_MEASURE,
                     str(self.tag),
                     "baca.GlobalFermataCommand._call(3)",
                 ]
             )
             abjad.attach(
-                abjad.tags.FERMATA_MEASURE,
+                abjad.const.FERMATA_MEASURE,
                 leaf,
                 tag=abjad.tags.FERMATA_MEASURE,
             )
-            abjad.annotate(leaf, const.FERMATA_DURATION, fermata_duration)
+            abjad.annotate(
+                leaf, abjad.const.FERMATA_DURATION, fermata_duration
+            )
 
     ### PUBLIC PROPERTIES ###
 

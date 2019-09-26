@@ -2094,7 +2094,7 @@ class Imbrication(object):
             pleaves = classes.Selection(container).pleaves()
             assert isinstance(pleaves, abjad.Selection)
             for pleaf in pleaves:
-                abjad.attach(abjad.tags.ALLOW_OCTAVE, pleaf)
+                abjad.attach(abjad.const.ALLOW_OCTAVE, pleaf)
         return {self.voice_name: selection}
 
     ### PRIVATE METHODS ###
@@ -8557,7 +8557,7 @@ def extend_beam(
 
     """
     return commandclasses.IndicatorCommand(
-        indicators=[abjad.tags.RIGHT_BROKEN_BEAM], selector=selector
+        indicators=[abjad.const.RIGHT_BROKEN_BEAM], selector=selector
     )
 
 

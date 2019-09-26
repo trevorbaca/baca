@@ -319,7 +319,10 @@ class PiecewiseCommand(scoping.Command):
             # TextSpanner.bound-details.right.to-extent = ##t implementation
             # only 100% workable solution
             if is_final_piece and self.autodetect_right_padding:
-                if abjad.inspect(stop_leaf).annotation(const.PHANTOM) is True:
+                if (
+                    abjad.inspect(stop_leaf).annotation(abjad.const.PHANTOM)
+                    is True
+                ):
                     autodetected_right_padding = 2.5
                 # stop leaf multiplied whole note on fermata measure downbeat
                 elif (
