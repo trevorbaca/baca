@@ -114,56 +114,56 @@ class RhythmCommand(scoping.Command):
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
                             [
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
                             ]
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
                             [
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
                             ]
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
                             [
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
                             ]
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
                             [
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8
                             ]
             <BLANKLINE>
@@ -173,11 +173,11 @@ class RhythmCommand(scoping.Command):
                                 {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
             <BLANKLINE>
                                     % [Music_Voice measure 5]                                        %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \baca-invisible-music-coloring                                   %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:INVISIBLE_MUSIC_COLORING:PHANTOM_NOTE:baca.SegmentMaker._style_phantom_measures(5)
-                                %@% \baca-invisible-music                                            %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:INVISIBLE_MUSIC:PHANTOM_NOTE:baca.SegmentMaker._style_phantom_measures(5)
-                                    \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:PHANTOM_NOTE
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    \baca-invisible-music-coloring                                   %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:NOTE:INVISIBLE_MUSIC_COLORING:baca.SegmentMaker._style_phantom_measures(5)
+                                %@% \baca-invisible-music                                            %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:NOTE:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
+                                    \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:NOTE
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
             <BLANKLINE>
                                 }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
             <BLANKLINE>
@@ -190,8 +190,8 @@ class RhythmCommand(scoping.Command):
                                     \stopStaff                                                       %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                     \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
             <BLANKLINE>
                                 }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
             <BLANKLINE>
@@ -491,7 +491,7 @@ class RhythmCommand(scoping.Command):
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 \override TextScript.font-size = #-2                                     %! baca.text_script_font_size():baca.OverrideCommand._call(1)
                                 \override TextScript.staff-padding = #5                                  %! baca.text_script_staff_padding():baca.OverrideCommand._call(1)
-                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'8.
                                 _ \markup {
                                     \fraction
@@ -499,7 +499,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'4
                                 _ \markup {
                                     \fraction
@@ -507,7 +507,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'16
                                 _ \markup {
                                     \fraction
@@ -517,10 +517,10 @@ class RhythmCommand(scoping.Command):
                                 ~
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'8
                 <BLANKLINE>
-                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'4
                                 _ \markup {
                                     \fraction
@@ -528,7 +528,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'8
                                 _ \markup {
                                     \fraction
@@ -545,7 +545,7 @@ class RhythmCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'16
                                 _ \markup {
                                     \fraction
@@ -553,7 +553,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'4
                                 _ \markup {
                                     \fraction
@@ -561,7 +561,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'8.
                                 _ \markup {
                                     \fraction
@@ -570,7 +570,7 @@ class RhythmCommand(scoping.Command):
                                     }
                 <BLANKLINE>
                                 % [Music_Voice measure 5]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'4
                                 _ \markup {
                                     \fraction
@@ -578,7 +578,7 @@ class RhythmCommand(scoping.Command):
                                         16
                                     }
                 <BLANKLINE>
-                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'8.
                                 _ \markup {
                                     \fraction
@@ -587,7 +587,7 @@ class RhythmCommand(scoping.Command):
                                     }
                                 [
                 <BLANKLINE>
-                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'16
                                 _ \markup {
                                     \fraction
@@ -604,11 +604,11 @@ class RhythmCommand(scoping.Command):
                                     {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
                 <BLANKLINE>
                                         % [Music_Voice measure 6]                                        %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                        \baca-invisible-music-coloring                                   %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:INVISIBLE_MUSIC_COLORING:PHANTOM_NOTE:baca.SegmentMaker._style_phantom_measures(5)
-                                    %@% \baca-invisible-music                                            %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:INVISIBLE_MUSIC:PHANTOM_NOTE:baca.SegmentMaker._style_phantom_measures(5)
-                                        \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                        b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:PHANTOM_NOTE
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                        \baca-invisible-music-coloring                                   %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:NOTE:INVISIBLE_MUSIC_COLORING:baca.SegmentMaker._style_phantom_measures(5)
+                                    %@% \baca-invisible-music                                            %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:NOTE:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
+                                        \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                        b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:NOTE
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
                 <BLANKLINE>
                                     }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
                 <BLANKLINE>
@@ -621,8 +621,8 @@ class RhythmCommand(scoping.Command):
                                         \stopStaff                                                       %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                         \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                        R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                        R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
                 <BLANKLINE>
                                     }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
                 <BLANKLINE>
@@ -763,7 +763,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
                             \times 4/5 {
             <BLANKLINE>
                                 % [Music_Voice measure 1]                                            %! baca.SegmentMaker._comment_measure_numbers()
-                                \baca-not-yet-pitched-coloring                                       %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                       %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'2
             <BLANKLINE>
                             }
@@ -771,7 +771,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
                             \tweak edge-height #'(0.7 . 0)
                             \times 4/5 {
             <BLANKLINE>
-                                \baca-not-yet-pitched-coloring                                       %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                       %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'2
             <BLANKLINE>
                             }
@@ -779,7 +779,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
                             \tweak edge-height #'(0.7 . 0)
                             \times 4/5 {
             <BLANKLINE>
-                                \baca-not-yet-pitched-coloring                                       %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                                \baca-not-yet-pitched-coloring                                       %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'4
             <BLANKLINE>
                             }
@@ -790,11 +790,11 @@ def make_monads(fractions: str,) -> RhythmCommand:
                                 {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
             <BLANKLINE>
                                     % [Music_Voice measure 2]                                        %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \baca-invisible-music-coloring                                   %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:INVISIBLE_MUSIC_COLORING:PHANTOM_NOTE:baca.SegmentMaker._style_phantom_measures(5)
-                                %@% \baca-invisible-music                                            %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:INVISIBLE_MUSIC:PHANTOM_NOTE:baca.SegmentMaker._style_phantom_measures(5)
-                                    \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:PHANTOM_NOTE
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    \baca-invisible-music-coloring                                   %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:NOTE:INVISIBLE_MUSIC_COLORING:baca.SegmentMaker._style_phantom_measures(5)
+                                %@% \baca-invisible-music                                            %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:NOTE:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
+                                    \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:NOTE
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
             <BLANKLINE>
                                 }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
             <BLANKLINE>
@@ -807,8 +807,8 @@ def make_monads(fractions: str,) -> RhythmCommand:
                                     \stopStaff                                                       %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                     \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
             <BLANKLINE>
                                 }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
             <BLANKLINE>
@@ -883,7 +883,7 @@ def make_repeat_tied_notes(
 
     ..  container:: example
 
-        REGRESSION. All notes below are tagged NOT_YET_PITCHED (and colored
+        REGRESSION. All notes below are tagged NOT_YET_PITCHED_COLORING (and colored
         gold), even tied notes resulting from meter rewriting:
 
         >>> maker = baca.SegmentMaker(
@@ -943,18 +943,18 @@ def make_repeat_tied_notes(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'4.
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'4
                             \repeatTie
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'4.
                             \repeatTie
             <BLANKLINE>
-                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED
+                            \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'4                                                                      %! baca.make_repeat_tied_notes()
                             \repeatTie
             <BLANKLINE>
@@ -964,11 +964,11 @@ def make_repeat_tied_notes(
                                 {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
             <BLANKLINE>
                                     % [Music_Voice measure 2]                                        %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \baca-invisible-music-coloring                                   %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:INVISIBLE_MUSIC_COLORING:PHANTOM_NOTE:baca.SegmentMaker._style_phantom_measures(5)
-                                %@% \baca-invisible-music                                            %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:INVISIBLE_MUSIC:PHANTOM_NOTE:baca.SegmentMaker._style_phantom_measures(5)
-                                    \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:PHANTOM_NOTE
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    \baca-invisible-music-coloring                                   %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:NOTE:INVISIBLE_MUSIC_COLORING:baca.SegmentMaker._style_phantom_measures(5)
+                                %@% \baca-invisible-music                                            %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:NOTE:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
+                                    \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:NOTE
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
             <BLANKLINE>
                                 }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
             <BLANKLINE>
@@ -981,8 +981,8 @@ def make_repeat_tied_notes(
                                     \stopStaff                                                       %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                     \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
             <BLANKLINE>
                                 }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
             <BLANKLINE>
@@ -1202,7 +1202,7 @@ def skeleton(
     tag: typing.Optional[abjad.Tag] = abjad.Tag("baca.skeleton()"),
 ) -> RhythmCommand:
     """
-    Makes rhythm command from ``string`` and annotates music as NOT_YET_PITCHED.
+    Makes rhythm command from ``string`` and annotates music as NOT_YET_PITCHED_COLORING.
     """
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
@@ -1233,7 +1233,7 @@ def tacet(
     Colors multimeasure rests.
     """
     command = overrides.mmrest_color(color, selector=selector)
-    scoping.tag(abjad.tags.TACET, command)
+    scoping.tag(abjad.tags.TACET_COLORING, command)
     scoping.tag(_site(inspect.currentframe()), command)
     command_ = scoping.new(command, measures=measures)
     assert isinstance(command_, overrides.OverrideCommand)

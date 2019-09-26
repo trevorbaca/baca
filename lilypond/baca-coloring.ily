@@ -10,7 +10,7 @@ baca-invisible-music-coloring = #(
     #}
     )
 
-baca-mock-pitch-coloring = #(
+baca-mock-coloring = #(
     define-music-function
     (parser location music)
     (ly:music?)
