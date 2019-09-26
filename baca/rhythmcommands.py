@@ -177,7 +177,7 @@ class RhythmCommand(scoping.Command):
                                 %@% \baca-invisible-music                                            %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:NOTE:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
                                     \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
                                     b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:NOTE
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:PHANTOM:baca.SegmentMaker._style_phantom_measures(5)
             <BLANKLINE>
                                 }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
             <BLANKLINE>
@@ -191,7 +191,7 @@ class RhythmCommand(scoping.Command):
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                     \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                     R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:PHANTOM:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5)
             <BLANKLINE>
                                 }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
             <BLANKLINE>
@@ -210,7 +210,7 @@ class RhythmCommand(scoping.Command):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
-        "_annotate_not_yet_pitched",
+        "_attach_not_yet_pitched",
         "_do_not_check_total_duration",
         "_persist",
         "_rhythm_maker",
@@ -225,7 +225,7 @@ class RhythmCommand(scoping.Command):
         self,
         rhythm_maker: RhythmMakerTyping,
         *,
-        annotate_not_yet_pitched: bool = None,
+        attach_not_yet_pitched: bool = None,
         do_not_check_total_duration: bool = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
@@ -235,9 +235,9 @@ class RhythmCommand(scoping.Command):
         scoping.Command.__init__(
             self, match=match, measures=measures, scope=scope
         )
-        if annotate_not_yet_pitched is not None:
-            annotate_not_yet_pitched = bool(annotate_not_yet_pitched)
-        self._annotate_not_yet_pitched = annotate_not_yet_pitched
+        if attach_not_yet_pitched is not None:
+            attach_not_yet_pitched = bool(attach_not_yet_pitched)
+        self._attach_not_yet_pitched = attach_not_yet_pitched
         if do_not_check_total_duration is not None:
             do_not_check_total_duration = bool(do_not_check_total_duration)
         self._do_not_check_total_duration = do_not_check_total_duration
@@ -251,7 +251,7 @@ class RhythmCommand(scoping.Command):
     ### PRIVATE METHODS ###
 
     @staticmethod
-    def _annotate_not_yet_pitched_(argument):
+    def _attach_not_yet_pitched_(argument):
         rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
         for leaf in abjad.iterate(argument).leaves():
             if isinstance(leaf, (abjad.Note, abjad.Chord)):
@@ -323,11 +323,11 @@ class RhythmCommand(scoping.Command):
                 )
                 self._state = rcommand.state
         assert isinstance(selection, abjad.Selection), repr(selection)
-        if self.annotate_not_yet_pitched or not isinstance(
+        if self.attach_not_yet_pitched or not isinstance(
             self.rhythm_maker, abjad.Selection
         ):
             container = abjad.Container(selection, name="Dummy")
-            self._annotate_not_yet_pitched_(container)
+            self._attach_not_yet_pitched_(container)
             container[:] = []
         return selection
 
@@ -346,11 +346,11 @@ class RhythmCommand(scoping.Command):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def annotate_not_yet_pitched(self) -> typing.Optional[bool]:
+    def attach_not_yet_pitched(self) -> typing.Optional[bool]:
         """
-        Is true when command annotates not-yet-pitched music.
+        Is true when command attaches NOT_YET_PITCHED indicator.
         """
-        return self._annotate_not_yet_pitched
+        return self._attach_not_yet_pitched
 
     @property
     def do_not_check_total_duration(self) -> typing.Optional[bool]:
@@ -608,7 +608,7 @@ class RhythmCommand(scoping.Command):
                                     %@% \baca-invisible-music                                            %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:NOTE:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
                                         \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
                                         b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:NOTE
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:PHANTOM:baca.SegmentMaker._style_phantom_measures(5)
                 <BLANKLINE>
                                     }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
                 <BLANKLINE>
@@ -622,7 +622,7 @@ class RhythmCommand(scoping.Command):
                                         \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                         \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                         R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
-                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:PHANTOM:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5)
                 <BLANKLINE>
                                     }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
                 <BLANKLINE>
@@ -794,7 +794,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
                                 %@% \baca-invisible-music                                            %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:NOTE:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
                                     \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
                                     b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:NOTE
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:PHANTOM:baca.SegmentMaker._style_phantom_measures(5)
             <BLANKLINE>
                                 }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
             <BLANKLINE>
@@ -808,7 +808,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                     \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                     R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:PHANTOM:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5)
             <BLANKLINE>
                                 }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
             <BLANKLINE>
@@ -830,7 +830,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
         leaves = maker([pitch], [fraction])
         components.extend(leaves)
     rhythm_maker = abjad.select(components)
-    return RhythmCommand(rhythm_maker, annotate_not_yet_pitched=True)
+    return RhythmCommand(rhythm_maker, attach_not_yet_pitched=True)
 
 
 def make_multimeasure_rests(
@@ -968,7 +968,7 @@ def make_repeat_tied_notes(
                                 %@% \baca-invisible-music                                            %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:NOTE:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
                                     \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
                                     b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:NOTE
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:PHANTOM:baca.SegmentMaker._style_phantom_measures(5)
             <BLANKLINE>
                                 }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
             <BLANKLINE>
@@ -982,7 +982,7 @@ def make_repeat_tied_notes(
                                     \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                     \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
                                     R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:PHANTOM:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5)
             <BLANKLINE>
                                 }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
             <BLANKLINE>
@@ -1189,7 +1189,7 @@ def rhythm(
     argument = rmakers.stack(*arguments, preprocessor=preprocessor, tag=tag)
     return RhythmCommand(
         argument,
-        annotate_not_yet_pitched=True,
+        attach_not_yet_pitched=True,
         measures=measures,
         persist=persist,
     )
@@ -1202,7 +1202,8 @@ def skeleton(
     tag: typing.Optional[abjad.Tag] = abjad.Tag("baca.skeleton()"),
 ) -> RhythmCommand:
     """
-    Makes rhythm command from ``string`` and annotates music as NOT_YET_PITCHED_COLORING.
+    Makes rhythm command from ``string`` and attaches NOT_YET_PITCHED
+    indicators to music.
     """
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
@@ -1218,7 +1219,7 @@ def skeleton(
         tag_selection(selection, tag)
     return RhythmCommand(
         selection,
-        annotate_not_yet_pitched=True,
+        attach_not_yet_pitched=True,
         do_not_check_total_duration=do_not_check_total_duration,
     )
 
