@@ -1228,21 +1228,21 @@ def not_parts(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-PARTS``.
     """
-    return tag(abjad.Tag("-PARTS"), command)
+    return tag(abjad.tags.NOT_PARTS, command)
 
 
 def not_score(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-SCORE``.
     """
-    return tag(abjad.Tag("-SCORE"), command)
+    return tag(abjad.tags.NOT_SCORE, command)
 
 
 def not_segment(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-SEGMENT``.
     """
-    return tag(abjad.Tag("-SEGMENT"), command)
+    return tag(abjad.tags.NOT_SEGMENT, command)
 
 
 def only_mol(command: _command_typing) -> _command_typing:
@@ -1398,21 +1398,21 @@ def only_parts(command: _command_typing) -> _command_typing:
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
     """
-    return tag(abjad.Tag("+PARTS"), command)
+    return tag(abjad.tags.ONLY_PARTS, command)
 
 
 def only_score(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``+SCORE``.
     """
-    return tag(abjad.Tag("+SCORE"), command)
+    return tag(abjad.tags.ONLY_SCORE, command)
 
 
 def only_segment(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``+SEGMENT``.
     """
-    return tag(abjad.Tag("+SEGMENT"), command)
+    return tag(abjad.tags.ONLY_SEGMENT, command)
 
 
 def site(frame, prefix, *, n=None) -> abjad.Tag:
