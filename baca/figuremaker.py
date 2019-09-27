@@ -5353,15 +5353,14 @@ class FigureMaker(object):
         else:
             raise Exception(f"bad time treatment: {treatment!r}.")
         assert isinstance(tuplet, abjad.Tuplet)
+        tag = abjad.Tag("baca.FigureMaker._make_tuplet()")
         if before_grace_containers is not None:
             logical_ties = abjad.iterate(tuplet).logical_ties()
             pairs = zip(before_grace_containers, logical_ties)
             for before_grace_container, logical_tie in pairs:
                 if before_grace_container is None:
                     continue
-                abjad.attach(
-                    before_grace_container, logical_tie.head, tag="PFRM_1"
-                )
+                abjad.attach(before_grace_container, logical_tie.head, tag=tag)
         if tuplet.trivial():
             tuplet.hide = True
         assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
