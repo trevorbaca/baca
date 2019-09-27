@@ -1879,7 +1879,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if indicator_count:
             final_skip = skip
             stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanMM")
-            tag_ = abjad.tags.SEGMENT_FINAL_STOP_MM_SPANNER
+            tag_ = abjad.tags.EOS_STOP_MM_SPANNER
             tag_ = tag_.append(_site(inspect.currentframe(), 4))
             abjad.attach(stop_text_span, final_skip, tag=tag_)
 
