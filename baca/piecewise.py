@@ -313,7 +313,7 @@ class PiecewiseCommand(scoping.Command):
                 bundle = abjad.new(bundle, spanner_stop=None)
             tag = abjad.Tag("baca.PiecewiseCommand._call(1)")
             if is_final_piece and self.right_broken:
-                tag = tag.append("right_broken")
+                tag = tag.append(abjad.Tag("right_broken"))
             autodetected_right_padding = None
             # solution is merely heuristic;
             # TextSpanner.bound-details.right.to-extent = ##t implementation
@@ -407,7 +407,8 @@ class PiecewiseCommand(scoping.Command):
             ):
                 number = autodetected_right_padding
                 abjad.tweak(
-                    indicator, tag=self.tag.append(tag).append("autodetect")
+                    indicator,
+                    tag=self.tag.append(tag).append(abjad.Tag("autodetect")),
                 ).bound_details__right__padding = number
             if self.tweaks and hasattr(indicator, "_tweaks"):
                 self._apply_tweaks(
@@ -527,7 +528,7 @@ def bow_speed_spanner(
     Makes bow speed spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.BOW_SPEED)
+    tag = tag.append(abjad.Tag(const.BOW_SPEED))
     command = text_spanner(
         items,
         *tweaks,
@@ -569,7 +570,7 @@ def circle_bow_spanner(
     Makes circle bow spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.CIRCLE_BOW)
+    tag = tag.append(abjad.Tag(const.CIRCLE_BOW))
     if qualifier is None:
         string = r"\baca-circle-markup =|"
     else:
@@ -615,7 +616,7 @@ def clb_spanner(
     Makes clb spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.CLB)
+    tag = tag.append(abjad.Tag(const.CLB))
     assert string_number in (1, 2, 3, 4), repr(string_number)
     if string_number == 1:
         markup = r"\baca-damp-clb-one-markup"
@@ -669,7 +670,7 @@ def covered_spanner(
     Makes covered spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.COVERED)
+    tag = tag.append(abjad.Tag(const.COVERED))
     command = text_spanner(
         argument,
         *tweaks,
@@ -709,7 +710,7 @@ def damp_spanner(
     Makes damp spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.DAMP)
+    tag = tag.append(abjad.Tag(const.DAMP))
     command = text_spanner(
         r"\baca-damp-markup =|",
         *tweaks,
@@ -3718,7 +3719,7 @@ def half_clt_spanner(
     Makes 1/2 clt spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.HALF_CLT)
+    tag = tag.append(abjad.Tag(const.HALF_CLT))
     command = text_spanner(
         "½ clt =|",
         *tweaks,
@@ -4032,7 +4033,7 @@ def material_annotation_spanner(
     Makes material annotation spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.MATERIAL)
+    tag = tag.append(abjad.Tag(const.MATERIAL))
     lilypond_id = lilypond_id or "MA"
     command = text_spanner(
         items,
@@ -4224,7 +4225,7 @@ def pitch_annotation_spanner(
     Makes pitch annotation spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.PITCH)
+    tag = tag.append(abjad.Tag(const.PITCH))
     command = text_spanner(
         items,
         *tweaks,
@@ -4265,7 +4266,7 @@ def scp_spanner(
     Makes SCP spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.SCP)
+    tag = tag.append(abjad.Tag(const.SCP))
     command = text_spanner(
         items,
         *tweaks,
@@ -4307,7 +4308,7 @@ def spazzolato_spanner(
     Makes spazzolato spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.SPAZZOLATO)
+    tag = tag.append(abjad.Tag(const.SPAZZOLATO))
     command = text_spanner(
         items,
         *tweaks,
@@ -4349,7 +4350,7 @@ def string_number_spanner(
     Makes string number spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.STRING_NUMBER)
+    tag = tag.append(abjad.Tag(const.STRING_NUMBER))
     command = text_spanner(
         items,
         *tweaks,
@@ -4391,7 +4392,7 @@ def tasto_spanner(
     Makes tasto spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.TASTO)
+    tag = tag.append(abjad.Tag(const.TASTO))
     command = text_spanner(
         "T =|",
         *tweaks,
@@ -7115,7 +7116,7 @@ def vibrato_spanner(
     Makes vibrato spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.VIBRATO)
+    tag = tag.append(abjad.Tag(const.VIBRATO))
     command = text_spanner(
         items,
         *tweaks,
@@ -7157,7 +7158,7 @@ def xfb_spanner(
     Makes XFB spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(const.BOW_SPEED)
+    tag = tag.append(abjad.Tag(const.BOW_SPEED))
     command = text_spanner(
         "XFB =|",
         *tweaks,

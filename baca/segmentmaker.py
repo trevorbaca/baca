@@ -1792,7 +1792,8 @@ class SegmentMaker(abjad.SegmentMaker):
                         word = word.replace("REAPPLIED", "EXPLICIT")
                         word = word.replace("REDUNDANT", "EXPLICIT")
                     words.append(word)
-                new_tag = abjad.Tag.from_words(words)
+                string = ":".join(words)
+                new_tag = abjad.Tag(string)
                 indicator = wrapper.indicator
                 abjad.detach(wrapper, skip)
                 abjad.attach(
@@ -2448,7 +2449,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 editions = wrapper.tag.editions()
                 if editions:
                     words = [str(_) for _ in editions]
-                    editions = abjad.Tag.from_words(words)
+                    string = ":".join(words)
+                    editions = abjad.Tag(string)
                 else:
                     editions = None
                 momento = abjad.Momento(
@@ -2520,7 +2522,7 @@ class SegmentMaker(abjad.SegmentMaker):
         markup = abjad.Markup("OCTAVE", direction=abjad.Up)
         abjad.tweak(markup).color = "red"
         tag = _site(inspect.currentframe())
-        tag = tag.append("OCTAVE")
+        tag = tag.append(abjad.Tag("OCTAVE"))
         for vertical_moment in vertical_moments:
             pleaves, pitches = [], []
             for leaf in vertical_moment.leaves:
@@ -2798,7 +2800,7 @@ class SegmentMaker(abjad.SegmentMaker):
         start_offset = abjad.inspect(leaf).timespan().start_offset
         measure_number = self._offset_to_measure_number.get(start_offset)
         if measure_number is not None:
-            return f"MEASURE_{measure_number}"
+            return abjad.Tag(f"MEASURE_{measure_number}")
 
     def _get_measure_offsets(self, start_measure, stop_measure):
         skips = classes.Selection(self.score["Global_Skips"]).skips()
@@ -3358,7 +3360,7 @@ class SegmentMaker(abjad.SegmentMaker):
         first_skip = classes.Selection(context).skip(0)
         literal = abjad.LilyPondLiteral(r'\bar ""')
         tag = abjad.tags.EMPTY_START_BAR
-        tag = tag.append("+SEGMENT")
+        tag = tag.append(abjad.tags.ONLY_SEGMENT)
         abjad.attach(
             literal,
             first_skip,
@@ -3692,7 +3694,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 site = _site(inspect.currentframe(), 3)
                 tag = edition.append(site)
                 if isinstance(previous_indicator, abjad.MarginMarkup):
-                    tag = tag.append("-PARTS")
+                    tag = tag.append(abjad.tags.NOT_PARTS)
                 try:
                     wrapper = abjad.attach(
                         previous_indicator,
@@ -4126,7 +4128,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 "_treat_persistent_wrapper(1)",
             ]
             words.extend(existing_tag.editions())
-            tag_ = abjad.Tag.from_words(words)
+            words = [str(_) for _ in words]
+            string = ":".join(words)
+            tag_ = abjad.Tag(string)
             string = f"#(x11-color '{color})"
             abjad.tweak(wrapper.indicator, tag=tag_).color = string
             SegmentMaker._set_status_tag(wrapper, status)

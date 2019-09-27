@@ -199,7 +199,8 @@ class AccidentalAdjustmentCommand(scoping.Command):
         if self.tag:
             if not self.tag.only_edition() and not self.tag.not_editions():
                 raise Exception(f"tag must have edition: {self.tag!r}.")
-            alternative_tag = self.tag.append("AccidentalAdjustmentCommand")
+            tag = abjad.Tag("AccidentalAdjustmentCommand")
+            alternative_tag = self.tag.append(tag)
             primary_tag = alternative_tag.invert_edition_tags()
         pleaves = classes.Selection(argument).pleaves()
         assert isinstance(pleaves, classes.Selection)

@@ -122,7 +122,7 @@ class BCPCommand(scoping.Command):
                 abjad.attach(
                     stop_text_span,
                     lt.head,
-                    tag=self.tag.append("BCPCommand(1)"),
+                    tag=self.tag.append(abjad.Tag("BCPCommand(1)")),
                 )
                 break
             previous_leaf = abjad.inspect(lt.head).leaf(-1)
@@ -174,19 +174,19 @@ class BCPCommand(scoping.Command):
                 abjad.attach(
                     start_text_span,
                     lt.head,
-                    tag=self.tag.append("BCPCommand(2)"),
+                    tag=self.tag.append(abjad.Tag("BCPCommand(2)")),
                 )
             if 0 < i - 1:
                 abjad.attach(
                     stop_text_span,
                     lt.head,
-                    tag=self.tag.append("BCPCommand(3)"),
+                    tag=self.tag.append(abjad.Tag("BCPCommand(3)")),
                 )
             if lt is lts[-1] and self.final_spanner:
                 abjad.attach(
                     stop_text_span,
                     next_leaf_after_argument,
-                    tag=self.tag.append("BCPCommand(4)"),
+                    tag=self.tag.append(abjad.Tag("BCPCommand(4)")),
                 )
             bcp_fraction = abjad.Fraction(*bcp)
             next_bcp_fraction = abjad.Fraction(*bcps[i])
@@ -203,7 +203,7 @@ class BCPCommand(scoping.Command):
                         # abjad.Articulation('upbow'),
                         articulation,
                         lt.head,
-                        tag=self.tag.append("BCPCommand(5)"),
+                        tag=self.tag.append(abjad.Tag("BCPCommand(5)")),
                     )
                 elif bcp_fraction < next_bcp_fraction:
                     articulation = abjad.Articulation("downbow")
@@ -215,7 +215,7 @@ class BCPCommand(scoping.Command):
                         # abjad.Articulation('downbow'),
                         articulation,
                         lt.head,
-                        tag=self.tag.append("BCPCommand(6)"),
+                        tag=self.tag.append(abjad.Tag("BCPCommand(6)")),
                     )
             else:
                 previous_bcp_fraction = abjad.Fraction(*previous_bcp)
@@ -229,7 +229,7 @@ class BCPCommand(scoping.Command):
                         # abjad.Articulation('upbow'),
                         articulation,
                         lt.head,
-                        tag=self.tag.append("BCPCommand(7)"),
+                        tag=self.tag.append(abjad.Tag("BCPCommand(7)")),
                     )
                 elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
                     articulation = abjad.Articulation("downbow")
@@ -241,7 +241,7 @@ class BCPCommand(scoping.Command):
                         # abjad.Articulation('downbow'),
                         articulation,
                         lt.head,
-                        tag=self.tag.append("BCPCommand(8)"),
+                        tag=self.tag.append(abjad.Tag("BCPCommand(8)")),
                     )
             previous_bcp = bcp
 
@@ -1433,21 +1433,21 @@ class GlobalFermataCommand(scoping.Command):
             abjad.attach(
                 markup,
                 leaf,
-                tag=self.tag.append("baca.GlobalFermataCommand._call(1)"),
+                tag=self.tag.append(
+                    abjad.Tag("baca.GlobalFermataCommand._call(1)")
+                ),
             )
             literal = abjad.LilyPondLiteral(r"\baca-fermata-measure")
             abjad.attach(
                 literal,
                 leaf,
-                tag=self.tag.append("baca.GlobalFermataCommand._call(2)"),
+                tag=self.tag.append(
+                    abjad.Tag("baca.GlobalFermataCommand._call(2)")
+                ),
             )
-            tag = abjad.Tag.from_words(
-                [
-                    abjad.const.FERMATA_MEASURE,
-                    str(self.tag),
-                    "baca.GlobalFermataCommand._call(3)",
-                ]
-            )
+            tag = abjad.Tag(abjad.const.FERMATA_MEASURE)
+            tag = tag.append(self.tag)
+            tag = tag.append(abjad.Tag("baca.GlobalFermataCommand._call(3)"))
             abjad.attach(
                 abjad.const.FERMATA_MEASURE,
                 leaf,
@@ -1569,7 +1569,9 @@ class IndicatorCommand(scoping.Command):
                     context=self.context,
                     deactivate=self.deactivate,
                     do_not_test=self.do_not_test,
-                    tag=self.tag.append("baca.IndicatorCommand._call()"),
+                    tag=self.tag.append(
+                        abjad.Tag("baca.IndicatorCommand._call()")
+                    ),
                     wrapper=True,
                 )
                 if scoping.compare_persistent_indicators(indicator, reapplied):

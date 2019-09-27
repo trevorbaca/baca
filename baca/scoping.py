@@ -550,7 +550,8 @@ class Command(object):
         """
         # TODO: replace self.get_tag() functionality
         words = [str(_) for _ in self.tags]
-        tag = abjad.Tag.from_words(words)
+        string = ":".join(words)
+        tag = abjad.Tag(string)
         assert isinstance(tag, abjad.Tag)
         return tag
 
@@ -592,7 +593,8 @@ class Command(object):
                 tags.append(tag)
         if tags:
             words = [str(_) for _ in tags]
-            tag = abjad.Tag.from_words(words)
+            string = ":".join(words)
+            tag = abjad.Tag(string)
             return tag
         # TODO: return empty tag (instead of none)
         return None

@@ -405,7 +405,7 @@ class BreakMeasureMap(object):
             literal,
             skips[0],
             deactivate=self.deactivate,
-            tag=self.tag.append("BreakMeasureMap(1)"),
+            tag=self.tag.append(abjad.Tag("BreakMeasureMap(1)")),
         )
         for skip in skips[:measure_count]:
             if not abjad.inspect(skip).has_indicator(LBSD):
@@ -414,7 +414,7 @@ class BreakMeasureMap(object):
                     literal,
                     skip,
                     deactivate=self.deactivate,
-                    tag=self.tag.append("BreakMeasureMap(2)"),
+                    tag=self.tag.append(abjad.Tag("BreakMeasureMap(2)")),
                 )
         assert self.commands is not None
         for measure_number, commands in self.commands.items():
@@ -499,7 +499,9 @@ class BreakMeasureMap(object):
         Gets tag.
         """
         if self.tags:
-            return abjad.Tag.from_words([str(_) for _ in self.tags])
+            words = [str(_) for _ in self.tags]
+            string = ":".join(words)
+            return abjad.Tag(string)
         else:
             return abjad.Tag()
 
@@ -1680,7 +1682,7 @@ class HorizontalSpacingSpecifier(object):
             abjad.attach(
                 spacing_section,
                 skip,
-                tag=tag.append("HorizontalSpacingSpecifier(1)"),
+                tag=tag.append(abjad.Tag("HorizontalSpacingSpecifier(1)")),
             )
             string_ = self._make_annotation(duration, eol_adjusted, duration_)
             if measure_index < total - 1:

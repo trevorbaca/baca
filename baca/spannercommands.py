@@ -104,7 +104,7 @@ class SpannerIndicatorCommand(scoping.Command):
                 start_indicator,
                 first_leaf,
                 deactivate=self.deactivate,
-                tag="SpannerIndicatorCommand(1)",
+                tag=abjad.Tag("SpannerIndicatorCommand(1)"),
             )
         if self.stop_indicator is not None:
             stop_indicator = self.stop_indicator
@@ -120,7 +120,7 @@ class SpannerIndicatorCommand(scoping.Command):
                 stop_indicator,
                 final_leaf,
                 deactivate=self.deactivate,
-                tag="SpannerIndicatorCommand(2)",
+                tag=abjad.Tag("SpannerIndicatorCommand(2)"),
             )
 
     ### PRIVATE METHODS ###
@@ -129,7 +129,7 @@ class SpannerIndicatorCommand(scoping.Command):
         # TODO: factor out late import
         from .segmentmaker import SegmentMaker
 
-        assert isinstance(tag, str), repr(tag)
+        assert isinstance(tag, abjad.Tag), repr(tag)
         reapplied = scoping.Command._remove_reapplied_wrappers(leaf, indicator)
         tag_ = self.tag.append(tag)
         if getattr(indicator, "spanner_stop", None) is True:

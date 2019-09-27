@@ -150,9 +150,9 @@ class OverrideCommand(scoping.Command):
         literal = abjad.LilyPondLiteral(string, format_slot)
         tag = self.get_tag(leaves[0])
         if tag:
-            tag = tag.append("baca.OverrideCommand._call(1)")
+            tag = tag.append(abjad.Tag("baca.OverrideCommand._call(1)"))
         else:
-            tag = abjad.Tag("baca.OverrideCommand._call(1)")
+            tag = abjad.Tag(abjad.Tag("baca.OverrideCommand._call(1)"))
         abjad.attach(literal, leaves[0], deactivate=self.deactivate, tag=tag)
         if once:
             return
@@ -162,9 +162,9 @@ class OverrideCommand(scoping.Command):
         literal = abjad.LilyPondLiteral(string, "after")
         tag = self.get_tag(leaves[-1])
         if tag:
-            tag = tag.append("baca.OverrideCommand._call(2)")
+            tag = tag.append(abjad.Tag("baca.OverrideCommand._call(2)"))
         else:
-            tag = abjad.Tag("baca.OverrideCommand._call(2)")
+            tag = abjad.Tag(abjad.Tag("baca.OverrideCommand._call(2)"))
         abjad.attach(literal, leaves[-1], deactivate=self.deactivate, tag=tag)
 
     ### PUBLIC PROPERTIES ###
