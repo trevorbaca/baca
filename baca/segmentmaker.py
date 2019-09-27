@@ -2289,6 +2289,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for container in abjad.select(self.score).components(prototype):
             container._match_anchor_leaf()
             container._set_leaf_durations()
+            container._attach_lilypond_one_voice()
 
     def _clean_up_rhythm_maker_voice_names(self):
         for voice in abjad.iterate(self.score).components(abjad.Voice):
