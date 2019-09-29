@@ -3885,11 +3885,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         leaf,
                         tag=_site(inspect.currentframe(), 1),
                     )
-                    abjad.attach(
-                        empty_bar_extent,
-                        leaf,
-                        tag=_site(inspect.currentframe(), 3),
-                    )
+                    if not self.final_segment:
+                        abjad.attach(
+                            empty_bar_extent,
+                            leaf,
+                            tag=_site(inspect.currentframe(), 3),
+                        )
                 if (
                     next_leaf is not None
                     and empty_staff_lines != next_staff_lines
@@ -3952,7 +3953,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if start_offset in bar_lines_already_styled:
                     continue
                 if not (next_leaf is None and self.final_segment):
-                    # TODO: replace literal with tagged override
+                    # TODO: replace literal with override
                     strings = []
                     string = r"Score.BarLine.transparent = ##t"
                     string = r"\once \override " + string
