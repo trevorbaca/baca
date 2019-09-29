@@ -52,7 +52,6 @@ segmentmaker
       do_not_force_nonnatural_accidentals
       do_not_include_layout_ly
       fermata_measure_empty_overrides
-      final_bar_line
       final_markup
       final_markup_extra_offset
       final_segment
@@ -178,8 +177,6 @@ segmentmaker
       .. autoattribute:: SegmentMaker.environment
 
    .. autoattribute:: SegmentMaker.fermata_measure_empty_overrides
-
-   .. autoattribute:: SegmentMaker.final_bar_line
 
    .. autoattribute:: SegmentMaker.final_markup
 
