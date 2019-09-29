@@ -79,8 +79,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
@@ -267,8 +265,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -463,8 +459,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -914,8 +908,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                            \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                             \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
@@ -1096,8 +1088,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                            \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                             \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
@@ -1540,23 +1530,6 @@ class SegmentMaker(abjad.SegmentMaker):
         context = self.score["Global_Rests"]
         rests = self._make_global_rests()
         context.extend(rests)
-
-    def _attach_final_bar_line(self):
-        strings = []
-        abbreviation = "|"
-        if self.final_segment:
-            abbreviation = "|."
-        strings.append(r"\baca-bar-line-visible")
-        strings.append(rf'\bar "{abbreviation}"')
-        literal = abjad.LilyPondLiteral(strings, "after")
-        skips = classes.Selection(self.score["Global_Skips"]).skips()
-        if self.remove_phantom_measure:
-            skip = skips[-1]
-        else:
-            skip = skips[-2]
-        if abjad.inspect(skip).has_indicator(abjad.BarLine):
-            return
-        abjad.attach(literal, skip, tag=_site(inspect.currentframe()))
 
     def _attach_first_appearance_score_template_defaults(self):
         if self.first_segment:
@@ -4440,8 +4413,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-new-spacing-section #1 #31                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                            \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                             \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -4935,8 +4906,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                            \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                             \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
@@ -5189,8 +5158,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                            \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                             \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
@@ -5309,8 +5276,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                            \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                             \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
@@ -5485,8 +5450,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                            \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                             \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
@@ -5642,8 +5605,6 @@ class SegmentMaker(abjad.SegmentMaker):
                             \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                            \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                            \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                             \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
@@ -5876,7 +5837,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._reanalyze_trending_dynamics()
                 self._reanalyze_reapplied_synthetic_wrappers()
                 self._transpose_score_()
-                self._attach_final_bar_line()
                 self._color_not_yet_registered()
                 self._color_mock_pitch()
                 self._color_not_yet_pitched()

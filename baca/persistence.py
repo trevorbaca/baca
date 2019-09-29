@@ -58,8 +58,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -189,8 +187,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -333,8 +329,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -476,8 +470,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -613,8 +605,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -767,8 +757,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -890,8 +878,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -1019,8 +1005,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -1149,8 +1133,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -1266,8 +1248,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -1397,8 +1377,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -1512,8 +1490,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -1643,8 +1619,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -1761,8 +1735,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -1908,8 +1880,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -2020,8 +1990,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -2128,8 +2096,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -2253,8 +2219,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -2365,8 +2329,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -2474,8 +2436,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -2612,8 +2572,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -2725,8 +2683,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -2834,8 +2790,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -2973,8 +2927,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -3086,8 +3038,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -3196,8 +3146,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -3336,8 +3284,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -3458,8 +3404,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -3576,8 +3520,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -3725,8 +3667,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -3838,8 +3778,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -3947,8 +3885,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -4100,8 +4036,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -4218,8 +4152,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -4332,8 +4264,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -4463,8 +4393,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -4581,8 +4509,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -4695,8 +4621,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -4839,8 +4763,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -4960,8 +4882,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -5077,8 +4997,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -5224,8 +5142,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -5345,8 +5261,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -5462,8 +5376,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -5610,8 +5522,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -5744,8 +5654,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -5874,8 +5782,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -6035,8 +5941,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -6156,8 +6060,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -6273,8 +6175,6 @@ r"""
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -6430,8 +6330,6 @@ r"""
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -6590,8 +6488,6 @@ r"""
                         \baca-new-spacing-section #1 #25                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -6738,8 +6634,6 @@ r"""
                         \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -6887,8 +6781,6 @@ r"""
                         \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -7027,8 +6919,6 @@ r"""
                         - \abjad-invisible-line                                                      %! REDUNDANT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
                         - \baca-metronome-mark-spanner-colored-left-text 2 0 1 "112" #'DeepPink1     %! REDUNDANT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
                         \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -7175,8 +7065,6 @@ r"""
                         \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -7307,8 +7195,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -7489,8 +7375,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -7632,8 +7516,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -7751,8 +7633,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -7883,8 +7763,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -8016,8 +7894,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -8135,8 +8011,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -8272,8 +8146,6 @@ r"""
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -8438,8 +8310,6 @@ r"""
                         \baca-new-spacing-section #1 #25                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -8605,8 +8475,6 @@ r"""
                         \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -8773,8 +8641,6 @@ r"""
                         \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -8961,8 +8827,6 @@ r"""
                         \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
                         \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
@@ -9132,8 +8996,6 @@ r"""
                         \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
-                        \baca-bar-line-visible                                                       %! baca.SegmentMaker._attach_final_bar_line()
-                        \bar "|"                                                                     %! baca.SegmentMaker._attach_final_bar_line()
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
