@@ -420,7 +420,6 @@ indicators.Markup library.
    ~baca.markups.estr_sul_pont
    ~baca.markups.ext_pont
    ~baca.markups.fast_whisked_ellipses
-   ~baca.markups.final_markup
    ~baca.markups.flaut
    ~baca.markups.flaut_partial_2
    ~baca.markups.flaut_possibile

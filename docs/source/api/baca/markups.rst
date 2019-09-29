@@ -79,7 +79,6 @@ markups
    ~estr_sul_pont
    ~ext_pont
    ~fast_whisked_ellipses
-   ~final_markup
    ~flaut
    ~flaut_partial_2
    ~flaut_possibile
@@ -321,8 +320,6 @@ markups
 .. autofunction:: ext_pont
 
 .. autofunction:: fast_whisked_ellipses
-
-.. autofunction:: final_markup
 
 .. autofunction:: flaut
 
