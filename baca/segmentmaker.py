@@ -3889,7 +3889,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(
                             empty_bar_extent,
                             leaf,
-                            tag=_site(inspect.currentframe(), 3),
+                            tag=_site(inspect.currentframe(), 2),
                         )
                 if (
                     next_leaf is not None
@@ -3915,12 +3915,12 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(
                             next_staff_lines_,
                             next_leaf,
-                            tag=_site(inspect.currentframe(), 2),
+                            tag=_site(inspect.currentframe(), 3),
                         )
                         abjad.attach(
                             next_bar_extent_,
                             next_leaf,
-                            tag=_site(inspect.currentframe(), 2.5),
+                            tag=_site(inspect.currentframe(), 4),
                         )
                 if (
                     next_leaf is None
@@ -3936,7 +3936,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         resume_staff_lines,
                         leaf,
                         synthetic_offset=99,
-                        tag=_site(inspect.currentframe(), 3),
+                        tag=_site(inspect.currentframe(), 5),
                     )
                     previous_line_count = 5
                     if previous_bar_extent is not None:
@@ -3948,7 +3948,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         resume_bar_extent,
                         leaf,
                         synthetic_offset=99,
-                        tag=_site(inspect.currentframe(), 3.5),
+                        tag=_site(inspect.currentframe(), 6),
                     )
                 if start_offset in bar_lines_already_styled:
                     continue
@@ -3971,7 +3971,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(
                         literal,
                         next_leaf_,
-                        tag=tag.append(_site(inspect.currentframe(), 4)),
+                        tag=tag.append(_site(inspect.currentframe(), 7)),
                     )
                 bar_lines_already_styled.append(start_offset)
         rests = classes.Selection(self.score["Global_Rests"]).leaves(
