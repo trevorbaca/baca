@@ -2325,17 +2325,23 @@ class SegmentMaker(abjad.SegmentMaker):
         contexts = abjad.iterate(self.score).components(abjad.Context)
         contexts = list(contexts)
         contexts.sort(key=lambda _: _.name)
+        name_to_wrappers = abjad.OrderedDict()
+        for context in contexts:
+            if context.name not in name_to_wrappers:
+                name_to_wrappers[context.name] = []
+            wrappers = context._dependent_wrappers[:]
+            name_to_wrappers[context.name].extend(wrappers)
         do_not_persist_on_phantom_measure = (
             abjad.Instrument,
             abjad.MetronomeMark,
             abjad.MarginMarkup,
             abjad.TimeSignature,
         )
-        # TODO: must aggregate contexts similar to wellformedness manager
-        for context in contexts:
+        for name, dependent_wrappers in name_to_wrappers.items():
             momentos = []
             wrappers = []
-            dictionary = context._get_persistent_wrappers(
+            dictionary = abjad.Context._get_persistent_wrappers(
+                dependent_wrappers=dependent_wrappers,
                 omit_with_indicator=abjad.const.PHANTOM
             )
             for wrapper in dictionary.values():
@@ -2343,7 +2349,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     wrapper.indicator, do_not_persist_on_phantom_measure
                 ):
                     wrappers.append(wrapper)
-            dictionary = context._get_persistent_wrappers()
+            dictionary = abjad.Context._get_persistent_wrappers(
+                dependent_wrappers=dependent_wrappers,
+            )
             for wrapper in dictionary.values():
                 if not isinstance(
                     wrapper.indicator, do_not_persist_on_phantom_measure
@@ -2404,7 +2412,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 momentos.append(momento)
             if momentos:
                 momentos.sort(key=lambda _: format(_))
-                result[context.name] = momentos
+                result[name] = momentos
         dictionary = self.previous_persist.get("persistent_indicators")
         if dictionary:
             for context_name, momentos in dictionary.items():
