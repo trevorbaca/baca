@@ -2331,6 +2331,7 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.MarginMarkup,
             abjad.TimeSignature,
         )
+        # TODO: must aggregate contexts similar to wellformedness manager
         for context in contexts:
             momentos = []
             wrappers = []

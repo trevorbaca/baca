@@ -378,12 +378,12 @@ baca-start-lmn-both = #(
 
 %%% MATERIAL ANNOTATION SPANNER %%%
 
-bacaStartTextSpanMA = #(
-    make-music 'TextSpanEvent 'span-direction START 'spanner-id "MA"
+bacaStartTextSpanMaterialAnnotation = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "MaterialAnnotation"
     )
 
-bacaStopTextSpanMA = #(
-    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "MA"
+bacaStopTextSpanMaterialAnnotation = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "MaterialAnnotation"
     )
 
 %%% MEASURE NUMBER SPANNER %%%
@@ -872,12 +872,22 @@ baca-colored-bracketed-mixed-number-metric-modulation-tuplet-rhs = #(
 
 %%% PITCH ANNOTATION SPANNER %%%
 
-bacaStartTextSpanPA = #(
-    make-music 'TextSpanEvent 'span-direction START 'spanner-id "PA"
+bacaStartTextSpanPitchAnnotation = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "PitchAnnotation"
     )
 
-bacaStopTextSpanPA = #(
-    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "PA"
+bacaStopTextSpanPitchAnnotation = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "PitchAnnotation"
+    )
+
+%%% RHYTHM ANNOTATION SPANNER %%%
+
+bacaStartTextSpanRhythmAnnotation = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "RhythmAnnotation"
+    )
+
+bacaStopTextSpanRhythmAnnotation = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "RhythmAnnotation"
     )
 
 %%% SCP SPANNER %%%

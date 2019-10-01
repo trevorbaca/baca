@@ -524,11 +524,11 @@ def bow_speed_spanner(
     .ltleaves()
     .rleak(),
 ) -> PiecewiseCommand:
-    r"""
+    """
     Makes bow speed spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.BOW_SPEED))
+    tag = tag.append(abjad.tags.BOW_SPEED_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -570,7 +570,7 @@ def circle_bow_spanner(
     Makes circle bow spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.CIRCLE_BOW))
+    tag = tag.append(abjad.tags.CIRCLE_BOW_SPANNER)
     if qualifier is None:
         string = r"\baca-circle-markup =|"
     else:
@@ -616,7 +616,7 @@ def clb_spanner(
     Makes clb spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.CLB))
+    tag = tag.append(abjad.tags.CLB_SPANNER)
     assert string_number in (1, 2, 3, 4), repr(string_number)
     if string_number == 1:
         markup = r"\baca-damp-clb-one-markup"
@@ -670,7 +670,7 @@ def covered_spanner(
     Makes covered spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.COVERED))
+    tag = tag.append(abjad.tags.COVERED_SPANNER)
     command = text_spanner(
         argument,
         *tweaks,
@@ -710,7 +710,7 @@ def damp_spanner(
     Makes damp spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.DAMP))
+    tag = tag.append(abjad.tags.DAMP_SPANNER)
     command = text_spanner(
         r"\baca-damp-markup =|",
         *tweaks,
@@ -3687,7 +3687,7 @@ def half_clt_spanner(
     Makes 1/2 clt spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.HALF_CLT))
+    tag = tag.append(abjad.tags.HALF_CLT_SPANNER)
     command = text_spanner(
         "½ clt =|",
         *tweaks,
@@ -3985,7 +3985,6 @@ def make_dynamic(
 def material_annotation_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
-    lilypond_id: typing.Union[int, str] = None,
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
@@ -4001,14 +4000,13 @@ def material_annotation_spanner(
     Makes material annotation spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.MATERIAL))
-    lilypond_id = lilypond_id or "MA"
+    tag = tag.append(abjad.tags.MATERIAL_ANNOTATION_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
         autodetect_right_padding=True,
         bookend=False,
-        lilypond_id=lilypond_id,
+        lilypond_id="MaterialAnnotation",
         map=map,
         match=match,
         measures=measures,
@@ -4177,7 +4175,6 @@ def parse_hairpin_descriptor(
 def pitch_annotation_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
-    lilypond_id: typing.Union[int, str] = None,
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
@@ -4193,13 +4190,50 @@ def pitch_annotation_spanner(
     Makes pitch annotation spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.PITCH))
+    tag = tag.append(abjad.tags.PITCH_ANNOTATION_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
         autodetect_right_padding=True,
         bookend=False,
-        lilypond_id="PA",
+        lilypond_id="PitchAnnotation",
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        right_broken=right_broken,
+        selector=selector,
+    )
+    result = abjad.new(command, tags=[tag])
+    assert isinstance(result, PiecewiseCommand)
+    return result
+
+
+def rhythm_annotation_spanner(
+    items: typing.Union[str, typing.List],
+    *tweaks: abjad.IndexedTweakManager,
+    map: abjad.SelectorTyping = None,
+    match: typings.Indices = None,
+    measures: typings.SliceTyping = None,
+    pieces: abjad.SelectorTyping = classes.Expression().select().group(),
+    right_broken: bool = None,
+    # NOTE: selector differs from text_spanner()
+    selector: abjad.SelectorTyping = classes.Expression()
+    .select()
+    .leaves()
+    .rleak(),
+) -> PiecewiseCommand:
+    r"""
+    Makes rhythm command spanner.
+    """
+    tag = _site(inspect.currentframe())
+    tag = tag.append(abjad.tags.RHYTHM_ANNOTATION_SPANNER)
+    command = text_spanner(
+        items,
+        *tweaks,
+        autodetect_right_padding=True,
+        bookend=False,
+        lilypond_id="RhythmAnnotation",
         map=map,
         match=match,
         measures=measures,
@@ -4234,7 +4268,7 @@ def scp_spanner(
     Makes SCP spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.SCP))
+    tag = tag.append(abjad.tags.SCP_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -4276,7 +4310,7 @@ def spazzolato_spanner(
     Makes spazzolato spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.SPAZZOLATO))
+    tag = tag.append(abjad.tags.SPAZZOLATO_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -4318,7 +4352,7 @@ def string_number_spanner(
     Makes string number spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.STRING_NUMBER))
+    tag = tag.append(abjad.tags.STRING_NUMBER_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -4360,7 +4394,7 @@ def tasto_spanner(
     Makes tasto spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.TASTO))
+    tag = tag.append(abjad.tags.TASTO_SPANNER)
     command = text_spanner(
         "T =|",
         *tweaks,
@@ -7056,7 +7090,7 @@ def vibrato_spanner(
     Makes vibrato spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.VIBRATO))
+    tag = tag.append(abjad.tags.VIBRATO_SPANNER)
     command = text_spanner(
         items,
         *tweaks,
@@ -7098,7 +7132,7 @@ def xfb_spanner(
     Makes XFB spanner.
     """
     tag = _site(inspect.currentframe())
-    tag = tag.append(abjad.Tag(const.BOW_SPEED))
+    tag = tag.append(abjad.tags.BOW_SPEED_SPANNER)
     command = text_spanner(
         "XFB =|",
         *tweaks,

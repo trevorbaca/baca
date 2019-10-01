@@ -210,6 +210,7 @@ class RhythmCommand(scoping.Command):
     __slots__ = (
         "_attach_not_yet_pitched",
         "_do_not_check_total_duration",
+        "_frame",
         "_persist",
         "_rhythm_maker",
         "_state",
@@ -225,6 +226,7 @@ class RhythmCommand(scoping.Command):
         *,
         attach_not_yet_pitched: bool = None,
         do_not_check_total_duration: bool = None,
+        frame=None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         persist: str = None,
@@ -243,10 +245,23 @@ class RhythmCommand(scoping.Command):
             assert isinstance(persist, str), repr(persist)
         self._persist = persist
         self._check_rhythm_maker_input(rhythm_maker)
+        self._frame = frame
         self._rhythm_maker = rhythm_maker
         self._state: typing.Optional[abjad.OrderedDict] = None
 
     ### PRIVATE METHODS ###
+
+    def _attach_annotation_spanner(self, selection):
+        from . import piecewise
+
+        return
+        string = self._make_annotation_string()
+        command = piecewise.rhythm_annotation_spanner(
+            string,
+            abjad.tweak(3).staff_padding,
+            selector=classes.Expression().select().leaves(),
+        )
+        command(selection)
 
     @staticmethod
     def _attach_not_yet_pitched_(argument):
@@ -279,6 +294,9 @@ class RhythmCommand(scoping.Command):
         message += '\n  Input parameter "rhythm_maker" received:'
         message += f"\n    {format(rhythm_maker)}"
         raise Exception(message)
+
+    def _make_annotation_string(self):
+        return "FOO =|"
 
     def _make_selection(
         self,
@@ -327,6 +345,7 @@ class RhythmCommand(scoping.Command):
             container = abjad.Container(selection, name="Dummy")
             self._attach_not_yet_pitched_(container)
             container[:] = []
+        self._attach_annotation_spanner(selection)
         return selection
 
     def _previous_segment_stop_state(self, runtime):
@@ -356,6 +375,13 @@ class RhythmCommand(scoping.Command):
         Is true when command does not check total duration.
         """
         return self._do_not_check_total_duration
+
+    @property
+    def frame(self):
+        """
+        Gets frame in which rhythm command was called.
+        """
+        return self._frame
 
     @property
     def parameter(self) -> str:
@@ -1168,6 +1194,7 @@ def music(
 
 def rhythm(
     *arguments,
+    frame=None,
     preprocessor: abjad.Expression = None,
     measures: typings.SliceTyping = None,
     persist: str = None,
@@ -1182,6 +1209,7 @@ def rhythm(
     return RhythmCommand(
         argument,
         attach_not_yet_pitched=True,
+        frame=frame,
         measures=measures,
         persist=persist,
     )

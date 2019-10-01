@@ -38,6 +38,7 @@ rhythmcommands
 
       attach_not_yet_pitched
       do_not_check_total_duration
+      frame
       parameter
       persist
       rhythm_maker
@@ -87,6 +88,8 @@ rhythmcommands
       .. autoattribute:: RhythmCommand.deactivate
 
    .. autoattribute:: RhythmCommand.do_not_check_total_duration
+
+   .. autoattribute:: RhythmCommand.frame
 
    .. container:: inherited
 
