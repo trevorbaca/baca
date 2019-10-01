@@ -318,8 +318,7 @@ class PiecewiseCommand(scoping.Command):
                 bundle = abjad.new(bundle, spanner_stop=None)
             tag = abjad.Tag("baca.PiecewiseCommand._call(1)")
             if is_final_piece and self.right_broken:
-                # TODO: change to abjad.tags.RIGHT_BROKEN
-                tag = tag.append(abjad.Tag("right_broken"))
+                tag = tag.append(abjad.tags.RIGHT_BROKEN)
             autodetected_right_padding = None
             # solution is merely heuristic;
             # TextSpanner.bound-details.right.to-extent = ##t implementation
@@ -416,7 +415,7 @@ class PiecewiseCommand(scoping.Command):
                 number = autodetected_right_padding
                 abjad.tweak(
                     indicator,
-                    tag=self.tag.append(tag).append(abjad.Tag("autodetect")),
+                    tag=self.tag.append(tag).append(abjad.tags.AUTODETECT),
                 ).bound_details__right__padding = number
             if self.tweaks and hasattr(indicator, "_tweaks"):
                 self._apply_tweaks(

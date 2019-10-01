@@ -2470,7 +2470,7 @@ class SegmentMaker(abjad.SegmentMaker):
         markup = abjad.Markup("OCTAVE", direction=abjad.Up)
         abjad.tweak(markup).color = "red"
         tag = _site(inspect.currentframe())
-        tag = tag.append(abjad.Tag("OCTAVE"))
+        tag = tag.append(abjad.tags.OCTAVE_COLORING)
         for vertical_moment in vertical_moments:
             pleaves, pitches = [], []
             for leaf in vertical_moment.leaves:
@@ -4461,10 +4461,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         e'16                                                             %! baca.music()
                 <BLANKLINE>
-                                        \baca-octave-coloring                                            %! baca.SegmentMaker._color_octaves_():OCTAVE
+                                        \baca-octave-coloring                                            %! baca.SegmentMaker._color_octaves_():OCTAVE_COLORING
                                         f'16                                                             %! baca.music()
-                                        - \tweak color #red                                              %! baca.SegmentMaker._color_octaves_():OCTAVE
-                                        ^ \markup { OCTAVE }                                             %! baca.SegmentMaker._color_octaves_():OCTAVE
+                                        - \tweak color #red                                              %! baca.SegmentMaker._color_octaves_():OCTAVE_COLORING
+                                        ^ \markup { OCTAVE }                                             %! baca.SegmentMaker._color_octaves_():OCTAVE_COLORING
                 <BLANKLINE>
                                         g'16                                                             %! baca.music()
                 <BLANKLINE>
@@ -4606,10 +4606,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                                         g16                                                              %! baca.music()
                 <BLANKLINE>
-                                        \baca-octave-coloring                                            %! baca.SegmentMaker._color_octaves_():OCTAVE
+                                        \baca-octave-coloring                                            %! baca.SegmentMaker._color_octaves_():OCTAVE_COLORING
                                         f16                                                              %! baca.music()
-                                        - \tweak color #red                                              %! baca.SegmentMaker._color_octaves_():OCTAVE
-                                        ^ \markup { OCTAVE }                                             %! baca.SegmentMaker._color_octaves_():OCTAVE
+                                        - \tweak color #red                                              %! baca.SegmentMaker._color_octaves_():OCTAVE_COLORING
+                                        ^ \markup { OCTAVE }                                             %! baca.SegmentMaker._color_octaves_():OCTAVE_COLORING
                 <BLANKLINE>
                                         e16                                                              %! baca.music()
                 <BLANKLINE>
