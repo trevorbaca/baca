@@ -265,6 +265,8 @@ class RhythmCommand(scoping.Command):
     def _attach_rhythm_annotation_spanner(self, selection):
         from . import piecewise
 
+        return
+
         if not self.frame:
             return
         string = self._make_rhythm_annotation_string()
