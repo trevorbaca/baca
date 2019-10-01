@@ -157,6 +157,7 @@ class PiecewiseCommand(scoping.Command):
         "_bookend",
         "_bundles",
         "_final_piece_spanner",
+        "_leak_spanner_stop",
         "_pieces",
         "_remove_length_1_spanner_start",
         "_right_broken",
@@ -173,6 +174,7 @@ class PiecewiseCommand(scoping.Command):
         bookend: typing.Union[bool, int] = None,
         bundles: typing.List[Bundle] = None,
         final_piece_spanner: typing.Any = None,
+        leak_spanner_stop: bool = None,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
@@ -208,6 +210,9 @@ class PiecewiseCommand(scoping.Command):
         if final_piece_spanner not in (None, False):
             assert getattr(final_piece_spanner, "spanner_start", False)
         self._final_piece_spanner = final_piece_spanner
+        if leak_spanner_stop is not None:
+            leak_spanner_stop = bool(leak_spanner_stop)
+        self._leak_spanner_stop = leak_spanner_stop
         if pieces is not None:
             assert isinstance(pieces, abjad.Expression), repr(pieces)
         self._pieces = pieces
@@ -313,6 +318,7 @@ class PiecewiseCommand(scoping.Command):
                 bundle = abjad.new(bundle, spanner_stop=None)
             tag = abjad.Tag("baca.PiecewiseCommand._call(1)")
             if is_final_piece and self.right_broken:
+                # TODO: change to abjad.tags.RIGHT_BROKEN
                 tag = tag.append(abjad.Tag("right_broken"))
             autodetected_right_padding = None
             # solution is merely heuristic;
@@ -366,6 +372,8 @@ class PiecewiseCommand(scoping.Command):
                 and next_bundle.spanner_stop
             ):
                 spanner_stop = abjad.new(next_bundle.spanner_stop)
+                if self.leak_spanner_stop:
+                    spanner_stop = abjad.new(spanner_stop, leak=True)
                 bundle = Bundle(spanner_stop=spanner_stop)
                 self._attach_indicators(
                     bundle,
@@ -466,6 +474,13 @@ class PiecewiseCommand(scoping.Command):
         Gets last piece spanner start.
         """
         return self._final_piece_spanner
+
+    @property
+    def leak_spanner_stop(self) -> typing.Optional[bool]:
+        """
+        Is true when piecewise command leaks stop indicator.
+        """
+        return self._leak_spanner_stop
 
     @property
     def pieces(self) -> typing.Optional[abjad.Expression]:
@@ -4212,6 +4227,7 @@ def pitch_annotation_spanner(
 def rhythm_annotation_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,
+    leak_spanner_stop: bool = None,
     map: abjad.SelectorTyping = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
@@ -4233,6 +4249,7 @@ def rhythm_annotation_spanner(
         *tweaks,
         autodetect_right_padding=True,
         bookend=False,
+        leak_spanner_stop=leak_spanner_stop,
         lilypond_id="RhythmAnnotation",
         map=map,
         match=match,
@@ -4422,6 +4439,7 @@ def text_spanner(
     bookend: typing.Union[bool, int] = -1,
     boxed: bool = None,
     final_piece_spanner: bool = None,
+    leak_spanner_stop: bool = None,
     left_broken_text: str = None,
     lilypond_id: typing.Union[int, str] = None,
     map: abjad.SelectorTyping = None,
@@ -7057,6 +7075,7 @@ def text_spanner(
         bookend=bookend,
         bundles=bundles,
         final_piece_spanner=final_piece_spanner,
+        leak_spanner_stop=leak_spanner_stop,
         map=map,
         match=match,
         measures=measures,

@@ -276,6 +276,7 @@ class RhythmCommand(scoping.Command):
             string,
             abjad.tweak("darkyellow").color,
             abjad.tweak(5.5).staff_padding,
+            leak_spanner_stop=True,
             selector=classes.Expression().select().leaves(),
         )
         command(selection)
