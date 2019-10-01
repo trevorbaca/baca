@@ -1,15 +1,5 @@
 %%% COLORED MUSIC %%%
 
-baca-invisible-music-coloring = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
-    #{
-    \abjad-color-music #'salmon
-    $music
-    #}
-    )
-
 baca-mock-coloring = #(
     define-music-function
     (parser location music)
@@ -88,23 +78,6 @@ baca-time-signature-transparent = #(
     (ly:music?)
     #{
     \once \override Score.TimeSignature.transparent = ##t
-    $music
-    #}
-    )
-
-baca-invisible-music = #(
-    define-music-function
-    (parser location music)
-    (ly:music?)
-    #{
-    \once \override Accidental.transparent = ##t
-    \once \override Dots.transparent = ##t
-    \once \override MultiMeasureRest.transparent = ##t
-    \once \override NoteHead.no-ledgers = ##t
-    \once \override NoteHead.transparent = ##t
-    \once \override RepeatTie.transparent = ##t
-    \once \override Stem.transparent = ##t
-    \once \override StemTremolo.transparent = ##t
     $music
     #}
     )
