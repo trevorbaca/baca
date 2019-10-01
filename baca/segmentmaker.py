@@ -2342,7 +2342,7 @@ class SegmentMaker(abjad.SegmentMaker):
             wrappers = []
             dictionary = abjad.Context._get_persistent_wrappers(
                 dependent_wrappers=dependent_wrappers,
-                omit_with_indicator=abjad.const.PHANTOM
+                omit_with_indicator=abjad.const.PHANTOM,
             )
             for wrapper in dictionary.values():
                 if isinstance(
@@ -2350,7 +2350,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 ):
                     wrappers.append(wrapper)
             dictionary = abjad.Context._get_persistent_wrappers(
-                dependent_wrappers=dependent_wrappers,
+                dependent_wrappers=dependent_wrappers
             )
             for wrapper in dictionary.values():
                 if not isinstance(

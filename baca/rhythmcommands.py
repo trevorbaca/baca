@@ -251,18 +251,6 @@ class RhythmCommand(scoping.Command):
 
     ### PRIVATE METHODS ###
 
-    def _attach_annotation_spanner(self, selection):
-        from . import piecewise
-
-        return
-        string = self._make_annotation_string()
-        command = piecewise.rhythm_annotation_spanner(
-            string,
-            abjad.tweak(3).staff_padding,
-            selector=classes.Expression().select().leaves(),
-        )
-        command(selection)
-
     @staticmethod
     def _attach_not_yet_pitched_(argument):
         rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
@@ -273,6 +261,20 @@ class RhythmCommand(scoping.Command):
                 pass
             else:
                 raise TypeError(leaf)
+
+    def _attach_rhythm_annotation_spanner(self, selection):
+        from . import piecewise
+
+        if not self.frame:
+            return
+        string = self._make_rhythm_annotation_string()
+        command = piecewise.rhythm_annotation_spanner(
+            string,
+            abjad.tweak("darkyellow").color,
+            abjad.tweak(5.5).staff_padding,
+            selector=classes.Expression().select().leaves(),
+        )
+        command(selection)
 
     def _check_rhythm_maker_input(self, rhythm_maker):
         if rhythm_maker is None:
@@ -295,8 +297,14 @@ class RhythmCommand(scoping.Command):
         message += f"\n    {format(rhythm_maker)}"
         raise Exception(message)
 
-    def _make_annotation_string(self):
-        return "FOO =|"
+    def _make_rhythm_annotation_string(self):
+        if not self.frame:
+            return
+        frame_info = inspect.getframeinfo(self.frame)
+        function_name = frame_info.function
+        wrapped_arguments = abjad.Expression._wrap_arguments(self.frame)
+        string = f"{function_name}({wrapped_arguments}) =|"
+        return string
 
     def _make_selection(
         self,
@@ -345,7 +353,7 @@ class RhythmCommand(scoping.Command):
             container = abjad.Container(selection, name="Dummy")
             self._attach_not_yet_pitched_(container)
             container[:] = []
-        self._attach_annotation_spanner(selection)
+        self._attach_rhythm_annotation_spanner(selection)
         return selection
 
     def _previous_segment_stop_state(self, runtime):
