@@ -43,9 +43,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -53,15 +53,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -172,9 +172,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -182,15 +182,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -313,9 +313,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -324,15 +324,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -454,9 +454,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -465,15 +465,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -585,9 +585,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -595,20 +595,20 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -741,9 +741,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -752,15 +752,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -870,17 +870,17 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -996,18 +996,18 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -1124,18 +1124,18 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -1240,17 +1240,17 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -1368,18 +1368,18 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -1482,17 +1482,17 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -1610,18 +1610,18 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -1727,17 +1727,17 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -1865,9 +1865,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -1875,15 +1875,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -1975,9 +1975,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -1985,15 +1985,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -2081,9 +2081,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -2091,15 +2091,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -2204,9 +2204,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -2214,15 +2214,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -2314,9 +2314,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -2324,15 +2324,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -2421,9 +2421,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -2431,15 +2431,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -2556,9 +2556,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -2567,15 +2567,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -2667,9 +2667,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -2678,15 +2678,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -2774,9 +2774,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -2785,15 +2785,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -2911,9 +2911,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -2922,15 +2922,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -3022,9 +3022,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -3033,15 +3033,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -3130,9 +3130,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -3141,15 +3141,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -3264,9 +3264,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -3274,20 +3274,20 @@ r"""
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -3384,9 +3384,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -3394,20 +3394,20 @@ r"""
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -3500,9 +3500,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -3510,20 +3510,20 @@ r"""
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -3651,9 +3651,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -3662,15 +3662,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -3762,9 +3762,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -3773,15 +3773,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -3869,9 +3869,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -3880,15 +3880,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -4021,9 +4021,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -4031,15 +4031,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -4137,9 +4137,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -4147,15 +4147,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -4249,9 +4249,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -4259,15 +4259,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -4378,9 +4378,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -4388,15 +4388,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -4494,9 +4494,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -4504,15 +4504,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -4606,9 +4606,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -4616,15 +4616,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -4747,9 +4747,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -4758,15 +4758,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -4866,9 +4866,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -4877,15 +4877,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -4981,9 +4981,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -4992,15 +4992,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -5126,9 +5126,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -5137,15 +5137,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -5245,9 +5245,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -5256,15 +5256,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -5360,9 +5360,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -5371,15 +5371,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -5502,9 +5502,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -5512,20 +5512,20 @@ r"""
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -5634,9 +5634,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -5644,20 +5644,20 @@ r"""
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -5762,9 +5762,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -5772,20 +5772,20 @@ r"""
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -5925,9 +5925,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -5936,15 +5936,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -6044,9 +6044,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -6055,15 +6055,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -6159,9 +6159,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -6170,15 +6170,15 @@ r"""
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -6274,16 +6274,16 @@ r"""
         >>> maker(
         ...     'Music_Voice',
         ...     baca.tag(
-        ...         abjad.Tag('-PARTS'),
+        ...         abjad.tags.NOT_PARTS,
         ...         baca.margin_markup(margin_markups['I+II']),
         ...         ),
         ...     baca.tag(
-        ...         abjad.Tag('-PARTS'),
+        ...         abjad.tags.NOT_PARTS,
         ...         baca.margin_markup(margin_markups['III+IV']),
         ...         deactivate=True,
         ...         ),
         ...     baca.tag(
-        ...         abjad.Tag('-PARTS'),
+        ...         abjad.tags.NOT_PARTS,
         ...         baca.margin_markup(margin_markups['III+IV']),
         ...         deactivate=True,
         ...         ),
@@ -6310,9 +6310,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #0 #'(11)                                                         %! BREAK:baca.IndicatorCommand._call()
                         \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -6320,20 +6320,20 @@ r"""
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #15 #'(11)                                                        %! BREAK:baca.IndicatorCommand._call()
                         \break                                                                       %! BREAK:baca.IndicatorCommand._call()
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -6469,9 +6469,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #25                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #25                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #4 #'(8)                                                          %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -6485,13 +6485,13 @@ r"""
                         \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #25                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #25                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -6612,10 +6612,10 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #4 #'(8)                                                          %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -6630,14 +6630,14 @@ r"""
                         \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -6759,10 +6759,10 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #4 #'(8)                                                          %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -6777,14 +6777,14 @@ r"""
                         \bacaStartTextSpanMM                                                         %! REAPPLIED_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -6893,9 +6893,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #4 #'(8)                                                          %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -6909,8 +6909,8 @@ r"""
                         \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \bacaStopTextSpanMM                                                          %! baca.SegmentMaker._attach_metronome_marks(1)
                     %@% - \abjad-invisible-line                                                      %! baca.SegmentMaker._set_status_tag():REDUNDANT_METRONOME_MARK:baca.SegmentMaker._attach_metronome_marks(2)
@@ -6921,8 +6921,8 @@ r"""
                         \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -7043,10 +7043,10 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #4 #'(8)                                                          %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -7061,14 +7061,14 @@ r"""
                         \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -7187,17 +7187,17 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -7366,18 +7366,18 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -7507,18 +7507,18 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -7625,17 +7625,17 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -7754,18 +7754,18 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -7885,18 +7885,18 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -8003,17 +8003,17 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -8137,18 +8137,18 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -8271,9 +8271,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #25                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #25                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #4 #'(8)                                                          %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -8307,13 +8307,13 @@ r"""
                         \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #25                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #25                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -8433,10 +8433,10 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #4 #'(8)                                                          %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -8471,14 +8471,14 @@ r"""
                         \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -8599,10 +8599,10 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #4 #'(8)                                                          %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -8637,14 +8637,14 @@ r"""
                         \bacaStartTextSpanMM                                                         %! REAPPLIED_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -8756,9 +8756,9 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #4 #'(8)                                                          %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
@@ -8792,8 +8792,8 @@ r"""
                         \bacaStartTextSpanMM                                                         %! EXPLICIT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \bacaStopTextSpanMM                                                          %! baca.SegmentMaker._attach_metronome_marks(1)
                     %@% - \abjad-dashed-line-with-arrow                                              %! baca.SegmentMaker._set_status_tag():REDUNDANT_METRONOME_MARK:baca.SegmentMaker._attach_metronome_marks(2)
@@ -8824,13 +8824,13 @@ r"""
                         \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -8954,10 +8954,10 @@ r"""
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \override TextSpanner.staff-padding = #4                                     %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(1)
-                        \autoPageBreaksOff                                                           %! BREAK:BreakMeasureMap(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \autoPageBreaksOff                                                           %! BREAK:baca.BreakMeasureMap.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         \baca-lbsd #4 #'(8)                                                          %! BREAK:baca.IndicatorCommand._call()
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \bar ""                                                                      %! EMPTY_START_BAR:+SEGMENT:baca.SegmentMaker._make_global_skips(4)
@@ -8992,14 +8992,14 @@ r"""
                         \bacaStartTextSpanMM                                                         %! REDUNDANT_METRONOME_MARK_WITH_COLOR:baca.SegmentMaker._attach_metronome_marks(3)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2)
+                        \baca-new-spacing-section #1 #24                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2)
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \noBreak                                                                     %! BREAK:BreakMeasureMap(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \noBreak                                                                     %! BREAK:baca.BreakMeasureMap.__call__(2):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM

@@ -122,7 +122,7 @@ class BCPCommand(scoping.Command):
                 abjad.attach(
                     stop_text_span,
                     lt.head,
-                    tag=self.tag.append(abjad.Tag("BCPCommand(1)")),
+                    tag=self.tag.append(abjad.Tag("baca.BCPCommand._call(1)")),
                 )
                 break
             previous_leaf = abjad.inspect(lt.head).leaf(-1)
@@ -174,19 +174,19 @@ class BCPCommand(scoping.Command):
                 abjad.attach(
                     start_text_span,
                     lt.head,
-                    tag=self.tag.append(abjad.Tag("BCPCommand(2)")),
+                    tag=self.tag.append(abjad.Tag("baca.BCPCommand._call(2)")),
                 )
             if 0 < i - 1:
                 abjad.attach(
                     stop_text_span,
                     lt.head,
-                    tag=self.tag.append(abjad.Tag("BCPCommand(3)")),
+                    tag=self.tag.append(abjad.Tag("baca.BCPCommand._call(3)")),
                 )
             if lt is lts[-1] and self.final_spanner:
                 abjad.attach(
                     stop_text_span,
                     next_leaf_after_argument,
-                    tag=self.tag.append(abjad.Tag("BCPCommand(4)")),
+                    tag=self.tag.append(abjad.Tag("baca.BCPCommand._call(4)")),
                 )
             bcp_fraction = abjad.Fraction(*bcp)
             next_bcp_fraction = abjad.Fraction(*bcps[i])
@@ -200,10 +200,11 @@ class BCPCommand(scoping.Command):
                             articulation, self.bow_change_tweaks
                         )
                     abjad.attach(
-                        # abjad.Articulation('upbow'),
                         articulation,
                         lt.head,
-                        tag=self.tag.append(abjad.Tag("BCPCommand(5)")),
+                        tag=self.tag.append(
+                            abjad.Tag("baca.BCPCommand._call(5)")
+                        ),
                     )
                 elif bcp_fraction < next_bcp_fraction:
                     articulation = abjad.Articulation("downbow")
@@ -212,10 +213,11 @@ class BCPCommand(scoping.Command):
                             articulation, self.bow_change_tweaks
                         )
                     abjad.attach(
-                        # abjad.Articulation('downbow'),
                         articulation,
                         lt.head,
-                        tag=self.tag.append(abjad.Tag("BCPCommand(6)")),
+                        tag=self.tag.append(
+                            abjad.Tag("baca.BCPCommand._call(6)")
+                        ),
                     )
             else:
                 previous_bcp_fraction = abjad.Fraction(*previous_bcp)
@@ -226,10 +228,11 @@ class BCPCommand(scoping.Command):
                             articulation, self.bow_change_tweaks
                         )
                     abjad.attach(
-                        # abjad.Articulation('upbow'),
                         articulation,
                         lt.head,
-                        tag=self.tag.append(abjad.Tag("BCPCommand(7)")),
+                        tag=self.tag.append(
+                            abjad.Tag("baca.BCPCommand._call(7)")
+                        ),
                     )
                 elif previous_bcp_fraction > bcp_fraction < next_bcp_fraction:
                     articulation = abjad.Articulation("downbow")
@@ -238,10 +241,11 @@ class BCPCommand(scoping.Command):
                             articulation, self.bow_change_tweaks
                         )
                     abjad.attach(
-                        # abjad.Articulation('downbow'),
                         articulation,
                         lt.head,
-                        tag=self.tag.append(abjad.Tag("BCPCommand(8)")),
+                        tag=self.tag.append(
+                            abjad.Tag("baca.BCPCommand._call(8)")
+                        ),
                     )
             previous_bcp = bcp
 
@@ -315,31 +319,31 @@ class BCPCommand(scoping.Command):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                             \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                             \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                             \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                             \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                            \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                            \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                             \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                             \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                             s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -363,104 +367,104 @@ class BCPCommand(scoping.Command):
                                 \override Script.staff-padding = #5.5                                    %! baca.script_staff_padding():baca.OverrideCommand._call(1)
                                 \override TextSpanner.staff-padding = #2.5                               %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(1)
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(6)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(6)
                                 [                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca.make_even_divisions()
-                                - \upbow                                                                 %! baca.bcps():BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps():baca.BCPCommand._call(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca.make_even_divisions()
-                                - \upbow                                                                 %! baca.bcps():BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps():baca.BCPCommand._call(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
                                 ]                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
                                 [                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca.make_even_divisions()
-                                - \upbow                                                                 %! baca.bcps():BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-right-text #1 #5                                     %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps():baca.BCPCommand._call(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-right-text #1 #5                                     %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca.make_even_divisions()
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(1)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(1)
                                 ]                                                                        %! baca.make_even_divisions()
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 f'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(6)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(6)
                                 [                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \upbow                                                                 %! baca.bcps():BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps():baca.BCPCommand._call(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \upbow                                                                 %! baca.bcps():BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps():baca.BCPCommand._call(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
                                 ]                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 f'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
                                 [                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #3 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \upbow                                                                 %! baca.bcps():BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-right-text #3 #5                                     %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps():baca.BCPCommand._call(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #4 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-right-text #3 #5                                     %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca.make_even_divisions()
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(1)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(1)
                                 ]                                                                        %! baca.make_even_divisions()
                                 \revert Script.staff-padding                                             %! baca.script_staff_padding():baca.OverrideCommand._call(2)
                                 \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
@@ -600,31 +604,31 @@ class BCPCommand(scoping.Command):
                         {                                                                                %! abjad.ScoreTemplate._make_global_context()
                 <BLANKLINE>
                             % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                             \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                             \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                             \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                            \baca-new-spacing-section #1 #16                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                             \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                             \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                             s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
                 <BLANKLINE>
                             % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                            \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                            \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                             \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                             \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                             s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -647,134 +651,134 @@ class BCPCommand(scoping.Command):
                                 % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 \override Script.staff-padding = #5                                      %! baca.script_staff_padding():baca.OverrideCommand._call(1)
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(6)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(6)
                                 [                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca.make_even_divisions()
-                                - \upbow                                                                 %! baca.bcps():BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps():baca.BCPCommand._call(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca.make_even_divisions()
-                                - \upbow                                                                 %! baca.bcps():BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps():baca.BCPCommand._call(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
                                 ]                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
                                 [                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca.make_even_divisions()
-                                - \upbow                                                                 %! baca.bcps():BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps():baca.BCPCommand._call(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
                                 ]                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 f'8                                                                      %! baca.make_even_divisions()
-                                - \upbow                                                                 %! baca.bcps():BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps():baca.BCPCommand._call(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
                                 [                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca.make_even_divisions()
-                                - \upbow                                                                 %! baca.bcps():BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \upbow                                                                 %! baca.bcps():baca.BCPCommand._call(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
                                 ]                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
                                 f'8                                                                      %! baca.make_even_divisions()
-                                - \upbow                                                                 %! baca.bcps():BCPCommand(7)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
+                                - \upbow                                                                 %! baca.bcps():baca.BCPCommand._call(7)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
                                 [                                                                        %! baca.make_even_divisions()
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #2 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 e'8                                                                      %! baca.make_even_divisions()
-                                - \downbow                                                               %! baca.bcps():BCPCommand(8)
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(3)
-                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():BCPCommand(2)
-                                - \baca-bcp-spanner-right-text #2 #5                                     %! baca.bcps():BCPCommand(2)
-                                - \tweak color #red                                                      %! baca.bcps():BCPCommand(2)
-                                - \tweak staff-padding #2.5                                              %! baca.bcps():BCPCommand(2)
-                                \bacaStartTextSpanBCP                                                    %! baca.bcps():BCPCommand(2)
+                                - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(8)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(3)
+                                - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \baca-bcp-spanner-right-text #2 #5                                     %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
+                                - \tweak staff-padding #2.5                                              %! baca.bcps():baca.BCPCommand._call(2)
+                                \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
                 <BLANKLINE>
                                 f'8                                                                      %! baca.make_even_divisions()
-                                \bacaStopTextSpanBCP                                                     %! baca.bcps():BCPCommand(1)
+                                \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(1)
                                 ]                                                                        %! baca.make_even_divisions()
                                 \revert Script.staff-padding                                             %! baca.script_staff_padding():baca.OverrideCommand._call(2)
                 <BLANKLINE>

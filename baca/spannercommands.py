@@ -104,7 +104,7 @@ class SpannerIndicatorCommand(scoping.Command):
                 start_indicator,
                 first_leaf,
                 deactivate=self.deactivate,
-                tag=abjad.Tag("SpannerIndicatorCommand(1)"),
+                tag=abjad.Tag("baca.SpannerIndicatorCommand._call(1)"),
             )
         if self.stop_indicator is not None:
             stop_indicator = self.stop_indicator
@@ -120,7 +120,7 @@ class SpannerIndicatorCommand(scoping.Command):
                 stop_indicator,
                 final_leaf,
                 deactivate=self.deactivate,
-                tag=abjad.Tag("SpannerIndicatorCommand(2)"),
+                tag=abjad.Tag("baca.SpannerIndicatorCommand._call(2)"),
             )
 
     ### PRIVATE METHODS ###
@@ -244,31 +244,31 @@ def beam(
                     {                                                                                %! abjad.ScoreTemplate._make_global_context()
             <BLANKLINE>
                         % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #12                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #12                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #12                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #12                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #12                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #12                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \baca-new-spacing-section #1 #12                                             %! SPACING_COMMAND:HorizontalSpacingSpecifier(1)
+                        \baca-new-spacing-section #1 #12                                             %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1)
                         \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
                         \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
                         s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
             <BLANKLINE>
                         % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:HorizontalSpacingSpecifier(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \baca-new-spacing-section #1 #4                                              %! SPACING_COMMAND:baca.HorizontalSpacingSpecifier.__call__(1):baca.SegmentMaker._style_phantom_measures(1):PHANTOM
                         \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
                         \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
                         s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
@@ -290,7 +290,7 @@ def beam(
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             c'8                                                                      %! baca.make_even_divisions()
-                            _ [                                                                      %! baca.beam():SpannerIndicatorCommand(1)
+                            _ [                                                                      %! baca.beam():baca.SpannerIndicatorCommand._call(1)
             <BLANKLINE>
                             c'8                                                                      %! baca.make_even_divisions()
             <BLANKLINE>
@@ -320,7 +320,7 @@ def beam(
                             c'8                                                                      %! baca.make_even_divisions()
             <BLANKLINE>
                             c'8                                                                      %! baca.make_even_divisions()
-                            ]                                                                        %! baca.beam():SpannerIndicatorCommand(2):SPANNER_STOP
+                            ]                                                                        %! baca.beam():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
             <BLANKLINE>
                             <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
             <BLANKLINE>
@@ -419,7 +419,7 @@ def ottava(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
-                        \ottava 1                                                                    %! baca.ottava():SpannerIndicatorCommand(1)
+                        \ottava 1                                                                    %! baca.ottava():baca.SpannerIndicatorCommand._call(1)
                         c'16
                         [
                         d'16
@@ -446,7 +446,7 @@ def ottava(
                     }
                     \times 4/5 {
                         a'16
-                        \ottava 0                                                                    %! baca.ottava():SpannerIndicatorCommand(2)
+                        \ottava 0                                                                    %! baca.ottava():baca.SpannerIndicatorCommand._call(2)
                         r4
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
@@ -508,7 +508,7 @@ def ottava_bassa(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
-                        \ottava -1                                                                   %! baca.ottava_bassa():SpannerIndicatorCommand(1)
+                        \ottava -1                                                                   %! baca.ottava_bassa():baca.SpannerIndicatorCommand._call(1)
                         c'16
                         [
                         d'16
@@ -535,7 +535,7 @@ def ottava_bassa(
                     }
                     \times 4/5 {
                         a'16
-                        \ottava 0                                                                    %! baca.ottava_bassa():SpannerIndicatorCommand(2)
+                        \ottava 0                                                                    %! baca.ottava_bassa():baca.SpannerIndicatorCommand._call(2)
                         r4
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
@@ -601,7 +601,7 @@ def slur(
                         r8
                         c'16
                         [
-                        (                                                                            %! baca.slur():SpannerIndicatorCommand(1)
+                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(1)
                         d'16
                         ]
                         bf'4
@@ -626,7 +626,7 @@ def slur(
                     }
                     \times 4/5 {
                         a'16
-                        )                                                                            %! baca.slur():SpannerIndicatorCommand(2):SPANNER_STOP
+                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
                         r4
                         \revert Slur.direction                                                       %! baca.slur_down():baca.OverrideCommand._call(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
@@ -694,7 +694,7 @@ def sustain_pedal(
                         \override Staff.SustainPedalLineSpanner.staff-padding = #4                   %! baca.sustain_pedal_staff_padding():baca.OverrideCommand._call(1)
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
-                        \sustainOn                                                                   %! baca.sustain_pedal():SpannerIndicatorCommand(1)
+                        \sustainOn                                                                   %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(1)
                         c'16
                         [
                         d'16
@@ -722,7 +722,7 @@ def sustain_pedal(
                     \times 4/5 {
                         a'16
                         r4
-                        \sustainOff                                                                  %! baca.sustain_pedal():SpannerIndicatorCommand(2):SPANNER_STOP
+                        \sustainOff                                                                  %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
                         \revert Staff.SustainPedalLineSpanner.staff-padding                          %! baca.sustain_pedal_staff_padding():baca.OverrideCommand._call(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
@@ -795,7 +795,7 @@ def trill_spanner(
                         r8
                         c'16
                         [
-                        \startTrillSpan                                                              %! baca.trill_spanner():SpannerIndicatorCommand(1)
+                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
                         d'16
                         ]
                         bf'4
@@ -821,7 +821,7 @@ def trill_spanner(
                     \times 4/5 {
                         a'16
                         r4
-                        \stopTrillSpan                                                               %! baca.trill_spanner():SpannerIndicatorCommand(2):SPANNER_STOP
+                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
@@ -869,39 +869,39 @@ def trill_spanner(
                         r8
                         c'16
                         [
-                        \startTrillSpan                                                              %! baca.trill_spanner():SpannerIndicatorCommand(1)
+                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
                         r16
-                        \stopTrillSpan                                                               %! baca.trill_spanner():SpannerIndicatorCommand(2):SPANNER_STOP
+                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
                         [
-                        \startTrillSpan                                                              %! baca.trill_spanner():SpannerIndicatorCommand(1)
+                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
                         e''16
                         ]
                         ef''4
                         ~
                         ef''16
                         r16
-                        \stopTrillSpan                                                               %! baca.trill_spanner():SpannerIndicatorCommand(2):SPANNER_STOP
+                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
                         af''16
                         [
-                        \startTrillSpan                                                              %! baca.trill_spanner():SpannerIndicatorCommand(1)
+                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
                         g''16
-                        \stopTrillSpan                                                               %! baca.trill_spanner():SpannerIndicatorCommand(2):SPANNER_STOP
+                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        \startTrillSpan                                                              %! baca.trill_spanner():SpannerIndicatorCommand(1)
+                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
                         r4
-                        \stopTrillSpan                                                               %! baca.trill_spanner():SpannerIndicatorCommand(2):SPANNER_STOP
+                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
@@ -948,11 +948,11 @@ def trill_spanner(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
-                        \pitchedTrill                                                                %! baca.trill_spanner():SpannerIndicatorCommand(1)
+                        \pitchedTrill                                                                %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
                         c'16
                         [
-                        - \tweak color #red                                                          %! baca.trill_spanner():SpannerIndicatorCommand(1)
-                        \startTrillSpan d'                                                           %! baca.trill_spanner():SpannerIndicatorCommand(1)
+                        - \tweak color #red                                                          %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
+                        \startTrillSpan d'                                                           %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
                         d'16
                         ]
                         bf'4
@@ -978,7 +978,7 @@ def trill_spanner(
                     \times 4/5 {
                         a'16
                         r4
-                        \stopTrillSpan                                                               %! baca.trill_spanner():SpannerIndicatorCommand(2):SPANNER_STOP
+                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }

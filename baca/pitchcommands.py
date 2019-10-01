@@ -197,7 +197,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
         if self.tag:
             if not self.tag.only_edition() and not self.tag.not_editions():
                 raise Exception(f"tag must have edition: {self.tag!r}.")
-            tag = abjad.Tag("AccidentalAdjustmentCommand")
+            tag = abjad.Tag("baca.AccidentalAdjustmentCommand._call()")
             alternative_tag = self.tag.append(tag)
             primary_tag = alternative_tag.invert_edition_tags()
         pleaves = classes.Selection(argument).pleaves()
@@ -9523,12 +9523,12 @@ def force_accidental(
                         {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            e'2                                                                      %! +PARTS:AccidentalAdjustmentCommand
-                        %@% e'!2                                                                     %! -PARTS:AccidentalAdjustmentCommand %! baca.make_notes()
+                            e'2                                                                      %! +PARTS:baca.AccidentalAdjustmentCommand._call()
+                        %@% e'!2                                                                     %! -PARTS:baca.AccidentalAdjustmentCommand._call() %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            f'4.                                                                     %! +PARTS:AccidentalAdjustmentCommand
-                        %@% f'!4.                                                                    %! -PARTS:AccidentalAdjustmentCommand %! baca.make_notes()
+                            f'4.                                                                     %! +PARTS:baca.AccidentalAdjustmentCommand._call()
+                        %@% f'!4.                                                                    %! -PARTS:baca.AccidentalAdjustmentCommand._call() %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             e'2                                                                      %! baca.make_notes()
