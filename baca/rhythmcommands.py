@@ -265,9 +265,11 @@ class RhythmCommand(scoping.Command):
     def _attach_rhythm_annotation_spanner(self, selection):
         from . import piecewise
 
-        return
-
         if not self.frame:
+            return
+        # TODO: eventually allow spanners to attach to single leaf:
+        leaves = abjad.select(selection).leaves()
+        if len(leaves) == 1:
             return
         string = self._make_rhythm_annotation_string()
         command = piecewise.rhythm_annotation_spanner(
