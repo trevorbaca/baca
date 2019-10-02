@@ -275,7 +275,7 @@ class RhythmCommand(scoping.Command):
         command = piecewise.rhythm_annotation_spanner(
             string,
             abjad.tweak("darkyellow").color,
-            abjad.tweak(5.5).staff_padding,
+            abjad.tweak(8).staff_padding,
             leak_spanner_stop=True,
             selector=classes.Expression().select().leaves(),
         )
