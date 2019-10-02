@@ -267,8 +267,12 @@ class RhythmCommand(scoping.Command):
 
         if not self.frame:
             return
+        leaves = []
+        for leaf in abjad.iterate(selection).leaves():
+            if abjad.inspect(leaf).parentage().get(abjad.OnBeatGraceContainer):
+                continue
+            leaves.append(leaf)
         # TODO: eventually allow spanners to attach to single leaf:
-        leaves = abjad.select(selection).leaves()
         if len(leaves) == 1:
             return
         string = self._make_rhythm_annotation_string()
@@ -279,7 +283,7 @@ class RhythmCommand(scoping.Command):
             leak_spanner_stop=True,
             selector=classes.Expression().select().leaves(),
         )
-        command(selection)
+        command(leaves)
 
     def _check_rhythm_maker_input(self, rhythm_maker):
         if rhythm_maker is None:
