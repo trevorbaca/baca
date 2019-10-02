@@ -5851,7 +5851,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._color_not_yet_pitched()
                 self._set_not_yet_pitched_to_staff_position_zero()
                 self._check_all_are_pitched_()
-                self._check_wellformedness()
                 self._check_doubled_dynamics()
                 self._color_out_of_range()
                 self._check_persistent_indicators()
@@ -5873,6 +5872,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._move_global_rests()
             # mutates offsets:
             self._clean_up_on_beat_grace_containers()
+            self._check_wellformedness()
         count = int(timer.elapsed_time)
         seconds = abjad.String("second").pluralize(count)
         if self.environment == "layout" or (

@@ -272,6 +272,14 @@ class RhythmCommand(scoping.Command):
             if abjad.inspect(leaf).parentage().get(abjad.OnBeatGraceContainer):
                 continue
             leaves.append(leaf)
+        container = abjad.inspect(leaves[0]).before_grace_container()
+        if container is not None:
+            leaves_ = abjad.select(container).leaves()
+            leaves[0:0] = leaves_
+        container = abjad.inspect(leaves[-1]).after_grace_container()
+        if container is not None:
+            leaves_ = abjad.select(container).leaves()
+            leaves.extend(leaves_)
         # TODO: eventually allow spanners to attach to single leaf:
         if len(leaves) == 1:
             return
