@@ -2211,17 +2211,12 @@ class SegmentMaker(abjad.SegmentMaker):
     def _check_wellformedness(self):
         if self.do_not_check_wellformedness:
             return
+        check_out_of_range_pitches = not self.do_not_check_out_of_range_pitches
         if not abjad.inspect(self.score).wellformed(
-            allow_percussion_clef=True,
-            check_out_of_range_pitches=not (
-                self.do_not_check_out_of_range_pitches
-            ),
+            check_out_of_range_pitches=check_out_of_range_pitches
         ):
             message = abjad.inspect(self.score).tabulate_wellformedness(
-                allow_percussion_clef=True,
-                check_out_of_range_pitches=not (
-                    self.do_not_check_out_of_range_pitches
-                ),
+                check_out_of_range_pitches=check_out_of_range_pitches
             )
             raise Exception("\n" + message)
 
