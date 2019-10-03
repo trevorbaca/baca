@@ -369,6 +369,12 @@ class BCPCommand(scoping.Command):
                                 e'8                                                                      %! baca.make_even_divisions()
                                 - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(6)
                                 [                                                                        %! baca.make_even_divisions()
+                                - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                                - \baca-text-spanner-left-text "make_even_divisions()"                   %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                                - \tweak bound-details.right.padding #2.75                               %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1):AUTODETECT
+                                - \tweak color #darkcyan                                                 %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                                - \tweak staff-padding #8                                                %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                                \bacaStartTextSpanRhythmAnnotation                                       %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
                                 - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
                                 - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
                                 \bacaStartTextSpanBCP                                                    %! baca.bcps():baca.BCPCommand._call(2)
@@ -468,6 +474,7 @@ class BCPCommand(scoping.Command):
                                 ]                                                                        %! baca.make_even_divisions()
                                 \revert Script.staff-padding                                             %! baca.script_staff_padding():baca.OverrideCommand._call(2)
                                 \revert TextSpanner.staff-padding                                        %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
+                                <> \bacaStopTextSpanRhythmAnnotation                                     %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(3):SPANNER_STOP
                 <BLANKLINE>
                                 <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
                 <BLANKLINE>
@@ -653,6 +660,12 @@ class BCPCommand(scoping.Command):
                                 e'8                                                                      %! baca.make_even_divisions()
                                 - \downbow                                                               %! baca.bcps():baca.BCPCommand._call(6)
                                 [                                                                        %! baca.make_even_divisions()
+                                - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                                - \baca-text-spanner-left-text "make_even_divisions()"                   %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                                - \tweak bound-details.right.padding #2.75                               %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1):AUTODETECT
+                                - \tweak color #darkcyan                                                 %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                                - \tweak staff-padding #8                                                %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                                \bacaStartTextSpanRhythmAnnotation                                       %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
                                 - \abjad-solid-line-with-arrow                                           %! baca.bcps():baca.BCPCommand._call(2)
                                 - \baca-bcp-spanner-left-text #1 #5                                      %! baca.bcps():baca.BCPCommand._call(2)
                                 - \tweak color #red                                                      %! baca.bcps():baca.BCPCommand._call(2)
@@ -781,6 +794,7 @@ class BCPCommand(scoping.Command):
                                 \bacaStopTextSpanBCP                                                     %! baca.bcps():baca.BCPCommand._call(1)
                                 ]                                                                        %! baca.make_even_divisions()
                                 \revert Script.staff-padding                                             %! baca.script_staff_padding():baca.OverrideCommand._call(2)
+                                <> \bacaStopTextSpanRhythmAnnotation                                     %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(3):SPANNER_STOP
                 <BLANKLINE>
                                 <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
                 <BLANKLINE>
@@ -989,6 +1003,12 @@ class ContainerCommand(scoping.Command):
         <BLANKLINE>
                             % [Music_Voice measure 1]                                            %! baca.SegmentMaker._comment_measure_numbers()
                             e'2                                                                  %! baca.make_notes()
+                            - \abjad-dashed-line-with-hook                                       %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                            - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"        %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                            - \tweak bound-details.right.padding #2.75                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1):AUTODETECT
+                            - \tweak color #darkcyan                                             %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                            - \tweak staff-padding #8                                            %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                            \bacaStartTextSpanRhythmAnnotation                                   %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
         <BLANKLINE>
                             % [Music_Voice measure 2]                                            %! baca.SegmentMaker._comment_measure_numbers()
                             f'4.                                                                 %! baca.make_notes()
@@ -1002,6 +1022,7 @@ class ContainerCommand(scoping.Command):
         <BLANKLINE>
                             % [Music_Voice measure 4]                                            %! baca.SegmentMaker._comment_measure_numbers()
                             f'4.                                                                 %! baca.make_notes()
+                            <> \bacaStopTextSpanRhythmAnnotation                                 %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(3):SPANNER_STOP
         <BLANKLINE>
                         }   %*% ViolinII
         <BLANKLINE>

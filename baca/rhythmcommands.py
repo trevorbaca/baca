@@ -208,6 +208,8 @@ class RhythmCommand(scoping.Command):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = (
+        "_annotation_spanner_color",
+        "_annotation_spanner_text",
         "_attach_not_yet_pitched",
         "_do_not_check_total_duration",
         "_frame",
@@ -224,6 +226,8 @@ class RhythmCommand(scoping.Command):
         self,
         rhythm_maker: RhythmMakerTyping,
         *,
+        annotation_spanner_color: str = None,
+        annotation_spanner_text: str = None,
         attach_not_yet_pitched: bool = None,
         do_not_check_total_duration: bool = None,
         frame=None,
@@ -235,6 +239,12 @@ class RhythmCommand(scoping.Command):
         scoping.Command.__init__(
             self, match=match, measures=measures, scope=scope
         )
+        if annotation_spanner_color is not None:
+            assert isinstance(annotation_spanner_color, str)
+        self._annotation_spanner_color = annotation_spanner_color
+        if annotation_spanner_text is not None:
+            assert isinstance(annotation_spanner_text, str)
+        self._annotation_spanner_text = annotation_spanner_text
         if attach_not_yet_pitched is not None:
             attach_not_yet_pitched = bool(attach_not_yet_pitched)
         self._attach_not_yet_pitched = attach_not_yet_pitched
@@ -265,7 +275,7 @@ class RhythmCommand(scoping.Command):
     def _attach_rhythm_annotation_spanner(self, selection):
         from . import piecewise
 
-        if not self.frame:
+        if not self.annotation_spanner_text and not self.frame:
             return
         leaves = []
         for leaf in abjad.iterate(selection).leaves():
@@ -280,10 +290,13 @@ class RhythmCommand(scoping.Command):
         if container is not None:
             leaves_ = abjad.select(container).leaves()
             leaves.extend(leaves_)
-        string = self._make_rhythm_annotation_string()
+        string = self.annotation_spanner_text
+        if string is None:
+            string = self._make_rhythm_annotation_string()
+        color = self.annotation_spanner_color or "darkyellow"
         command = piecewise.rhythm_annotation_spanner(
             string,
-            abjad.tweak("darkyellow").color,
+            abjad.tweak(color).color,
             abjad.tweak(8).staff_padding,
             leak_spanner_stop=True,
             selector=classes.Expression().select().leaves(),
@@ -383,6 +396,20 @@ class RhythmCommand(scoping.Command):
         return previous_segment_stop_state
 
     ### PUBLIC PROPERTIES ###
+
+    @property
+    def annotation_spanner_color(self) -> typing.Optional[str]:
+        """
+        Gets annotation spanner color.
+        """
+        return self._annotation_spanner_color
+
+    @property
+    def annotation_spanner_text(self) -> typing.Optional[str]:
+        """
+        Gets annotation spanner text.
+        """
+        return self._annotation_spanner_text
 
     @property
     def attach_not_yet_pitched(self) -> typing.Optional[bool]:
@@ -709,6 +736,8 @@ def make_even_divisions(
             rmakers.extract_trivial(),
             tag=_site(inspect.currentframe()),
         ),
+        annotation_spanner_color="darkcyan",
+        frame=inspect.currentframe(),
         measures=measures,
     )
 
@@ -737,6 +766,8 @@ def make_fused_tuplet_monads(
             preprocessor=abjad.sequence().sum().sequence(),
             tag=_site(inspect.currentframe()),
         ),
+        annotation_spanner_color="darkcyan",
+        frame=inspect.currentframe(),
         measures=measures,
     )
 
@@ -807,6 +838,12 @@ def make_monads(fractions: str,) -> RhythmCommand:
                                 % [Music_Voice measure 1]                                            %! baca.SegmentMaker._comment_measure_numbers()
                                 \baca-not-yet-pitched-coloring                                       %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'2
+                                - \abjad-dashed-line-with-hook                                       %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                                - \baca-text-spanner-left-text "make_monads('2/5 2/5 1/5')"          %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                                - \tweak bound-details.right.padding #2.75                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1):AUTODETECT
+                                - \tweak color #darkcyan                                             %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                                - \tweak staff-padding #8                                            %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                                \bacaStartTextSpanRhythmAnnotation                                   %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
             <BLANKLINE>
                             }
             <BLANKLINE>
@@ -823,6 +860,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
             <BLANKLINE>
                                 \baca-not-yet-pitched-coloring                                       %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                                 b'4
+                                <> \bacaStopTextSpanRhythmAnnotation                                 %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(3):SPANNER_STOP
             <BLANKLINE>
                             }
             <BLANKLINE>
@@ -872,9 +910,15 @@ def make_monads(fractions: str,) -> RhythmCommand:
         leaves = maker([pitch], [fraction])
         components.extend(leaves)
     rhythm_maker = abjad.select(components)
-    return RhythmCommand(rhythm_maker, attach_not_yet_pitched=True)
+    return RhythmCommand(
+        rhythm_maker,
+        annotation_spanner_color="darkcyan",
+        attach_not_yet_pitched=True,
+        frame=inspect.currentframe(),
+    )
 
 
+# TODO: REMOVE?
 def make_multimeasure_rests(
     *, measures: typings.SliceTyping = None
 ) -> RhythmCommand:
@@ -905,12 +949,12 @@ def make_notes(
         rmakers.stack(
             rmakers.note(),
             *specifiers,
-            # TODO: can this beam specifier be removed?
-            ###rmakers.beam(classes.Expression().select().plts()),
             rmakers.rewrite_meter(),
             *repeat_tie_specifier,
             tag=_site(inspect.currentframe()),
         ),
+        annotation_spanner_color="darkcyan",
+        frame=inspect.currentframe(),
         measures=measures,
     )
 
@@ -925,8 +969,8 @@ def make_repeat_tied_notes(
 
     ..  container:: example
 
-        REGRESSION. All notes below are tagged NOT_YET_PITCHED_COLORING (and colored
-        gold), even tied notes resulting from meter rewriting:
+        REGRESSION. All notes below are tagged NOT_YET_PITCHED_COLORING (and
+        colored gold), even tied notes resulting from meter rewriting:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),
@@ -985,6 +1029,12 @@ def make_repeat_tied_notes(
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'4.
+                            - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                            - \baca-text-spanner-left-text "make_repeat_tied_notes()"                %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                            - \tweak bound-details.right.padding #2.75                               %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1):AUTODETECT
+                            - \tweak color #darkcyan                                                 %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                            - \tweak staff-padding #8                                                %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
+                            \bacaStartTextSpanRhythmAnnotation                                       %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(1)
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'4
@@ -997,6 +1047,7 @@ def make_repeat_tied_notes(
                             \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'4                                                                      %! baca.make_repeat_tied_notes()
                             \repeatTie
+                            <> \bacaStopTextSpanRhythmAnnotation                                     %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(3):SPANNER_STOP
             <BLANKLINE>
                             <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
             <BLANKLINE>
@@ -1051,7 +1102,9 @@ def make_repeat_tied_notes(
     return RhythmCommand(
         rmakers.stack(
             rmakers.note(), *specifiers_, tag=_site(inspect.currentframe())
-        )
+        ),
+        annotation_spanner_color="darkcyan",
+        frame=inspect.currentframe(),
     )
 
 
@@ -1083,6 +1136,8 @@ def make_repeated_duration_notes(
             preprocessor=divisions,
             tag=_site(inspect.currentframe()),
         ),
+        annotation_spanner_color="darkcyan",
+        frame=inspect.currentframe(),
         measures=measures,
     )
 
@@ -1097,6 +1152,8 @@ def make_rests(*, measures: typings.SliceTyping = None) -> RhythmCommand:
             rmakers.force_rest(classes.Expression().select().lts()),
             tag=_site(inspect.currentframe()),
         ),
+        annotation_spanner_color="darkcyan",
+        frame=inspect.currentframe(),
         measures=measures,
     )
 
@@ -1122,10 +1179,13 @@ def make_single_attack(
             rmakers.extract_trivial(),
             tag=_site(inspect.currentframe()),
         ),
+        annotation_spanner_color="darkcyan",
+        frame=inspect.currentframe(),
         measures=measures,
     )
 
 
+# TODO: REMOVE?
 def make_skips(*, measures: typings.SliceTyping = None) -> RhythmCommand:
     """
     Makes multiplied-duration skips.
@@ -1150,6 +1210,8 @@ def make_tied_notes(*, measures: typings.SliceTyping = None) -> RhythmCommand:
             rmakers.rewrite_meter(),
             tag=_site(inspect.currentframe()),
         ),
+        annotation_spanner_color="darkcyan",
+        frame=inspect.currentframe(),
         measures=measures,
     )
 
@@ -1184,6 +1246,8 @@ def make_tied_repeated_durations(
             preprocessor=divisions,
             tag=_site(inspect.currentframe()),
         ),
+        annotation_spanner_color="darkcyan",
+        frame=inspect.currentframe(),
         measures=measures,
     )
 
@@ -1210,7 +1274,10 @@ def music(
     if tag is not None:
         tag_selection(selection, tag)
     return RhythmCommand(
-        selection, do_not_check_total_duration=do_not_check_total_duration
+        selection,
+        annotation_spanner_color="darkcyan",
+        annotation_spanner_text="baca.music() =|",
+        do_not_check_total_duration=do_not_check_total_duration,
     )
 
 
@@ -1261,6 +1328,8 @@ def skeleton(
         tag_selection(selection, tag)
     return RhythmCommand(
         selection,
+        annotation_spanner_color="darkcyan",
+        annotation_spanner_text="baca.skeleton() =|",
         attach_not_yet_pitched=True,
         do_not_check_total_duration=do_not_check_total_duration,
     )

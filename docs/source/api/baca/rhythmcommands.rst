@@ -36,6 +36,8 @@ rhythmcommands
    .. autosummary::
       :nosignatures:
 
+      annotation_spanner_color
+      annotation_spanner_text
       attach_not_yet_pitched
       do_not_check_total_duration
       frame
@@ -80,6 +82,10 @@ rhythmcommands
 
    .. rubric:: Read-only properties
       :class: class-header
+
+   .. autoattribute:: RhythmCommand.annotation_spanner_color
+
+   .. autoattribute:: RhythmCommand.annotation_spanner_text
 
    .. autoattribute:: RhythmCommand.attach_not_yet_pitched
 
