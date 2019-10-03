@@ -366,9 +366,9 @@ class PiecewiseCommand(scoping.Command):
                 just_bookended_leaf = stop_leaf
             elif (
                 is_final_piece
-                and start_leaf is not stop_leaf
                 and not just_backstole_right_text
                 and next_bundle.spanner_stop
+                and ((start_leaf is not stop_leaf) or self.leak_spanner_stop)
             ):
                 spanner_stop = abjad.new(next_bundle.spanner_stop)
                 if self.leak_spanner_stop:

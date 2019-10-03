@@ -280,9 +280,6 @@ class RhythmCommand(scoping.Command):
         if container is not None:
             leaves_ = abjad.select(container).leaves()
             leaves.extend(leaves_)
-        # TODO: eventually allow spanners to attach to single leaf:
-        if len(leaves) == 1:
-            return
         string = self._make_rhythm_annotation_string()
         command = piecewise.rhythm_annotation_spanner(
             string,
