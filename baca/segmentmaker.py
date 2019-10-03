@@ -589,6 +589,7 @@ class SegmentMaker(abjad.SegmentMaker):
         "_color_octaves",
         "_commands",
         "_deactivate",
+        "_do_not_check_beamed_long_notes",
         "_do_not_check_out_of_range_pitches",
         "_do_not_check_persistence",
         "_do_not_check_wellformedness",
@@ -710,6 +711,7 @@ class SegmentMaker(abjad.SegmentMaker):
         clock_time_override: abjad.MetronomeMark = None,
         color_octaves: bool = None,
         deactivate: typing.List[abjad.Tag] = None,
+        do_not_check_beamed_long_notes: bool = None,
         do_not_check_out_of_range_pitches: bool = None,
         do_not_check_persistence: bool = None,
         do_not_check_wellformedness: bool = None,
@@ -778,6 +780,7 @@ class SegmentMaker(abjad.SegmentMaker):
             do_not_check_out_of_range_pitches = bool(
                 do_not_check_out_of_range_pitches
             )
+        self._do_not_check_beamed_long_notes = do_not_check_beamed_long_notes
         self._do_not_check_out_of_range_pitches = (
             do_not_check_out_of_range_pitches
         )
@@ -2211,11 +2214,14 @@ class SegmentMaker(abjad.SegmentMaker):
     def _check_wellformedness(self):
         if self.do_not_check_wellformedness:
             return
+        check_beamed_long_notes = not self.do_not_check_beamed_long_notes
         check_out_of_range_pitches = not self.do_not_check_out_of_range_pitches
         if not abjad.inspect(self.score).wellformed(
+            check_beamed_long_notes=check_beamed_long_notes,
             check_out_of_range_pitches=check_out_of_range_pitches
         ):
             message = abjad.inspect(self.score).tabulate_wellformedness(
+                check_beamed_long_notes=check_beamed_long_notes,
                 check_out_of_range_pitches=check_out_of_range_pitches
             )
             raise Exception("\n" + message)
@@ -4694,6 +4700,13 @@ class SegmentMaker(abjad.SegmentMaker):
         Gets tags to deactivate in LilyPond output.
         """
         return self._deactivate
+
+    @property
+    def do_not_check_beamed_long_notes(self) -> typing.Optional[bool]:
+        """
+        Is true when segment does not check beamed long notes.
+        """
+        return self._do_not_check_beamed_long_notes
 
     @property
     def do_not_check_out_of_range_pitches(self) -> typing.Optional[bool]:

@@ -46,6 +46,7 @@ segmentmaker
       color_octaves
       commands
       deactivate
+      do_not_check_beamed_long_notes
       do_not_check_out_of_range_pitches
       do_not_check_persistence
       do_not_check_wellformedness
@@ -159,6 +160,8 @@ segmentmaker
    .. autoattribute:: SegmentMaker.commands
 
    .. autoattribute:: SegmentMaker.deactivate
+
+   .. autoattribute:: SegmentMaker.do_not_check_beamed_long_notes
 
    .. autoattribute:: SegmentMaker.do_not_check_out_of_range_pitches
 
