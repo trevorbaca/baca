@@ -238,6 +238,22 @@ def accidental_extra_offset(
     )
 
 
+def accidental_font_size(
+    n: abjad.Number,
+    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+) -> OverrideCommand:
+    """
+    Overrides accidental font size.
+    """
+    return OverrideCommand(
+        attribute="font_size",
+        grob="accidental",
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        value=n,
+    )
+
+
 def accidental_stencil_false(
     selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
 ) -> OverrideCommand:
@@ -280,6 +296,38 @@ def accidental_x_extent_false(
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
+    )
+
+
+def accidental_x_offset(
+    n: abjad.Number,
+    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+) -> OverrideCommand:
+    """
+    Overrides accidental X-offset.
+    """
+    return OverrideCommand(
+        attribute="X_offset",
+        grob="accidental",
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        value=n,
+    )
+
+
+def accidental_y_offset(
+    n: abjad.Number,
+    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+) -> OverrideCommand:
+    """
+    Overrides accidental Y-offset.
+    """
+    return OverrideCommand(
+        attribute="Y_offset",
+        grob="accidental",
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        value=n,
     )
 
 
@@ -2382,6 +2430,22 @@ def note_head_extra_offset(
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
+    )
+
+
+def note_head_font_size(
+    n: abjad.Number,
+    selector: abjad.SelectorTyping = classes.Expression().select().pleaf(0),
+) -> OverrideCommand:
+    """
+    Overrides note-head font size.
+    """
+    return OverrideCommand(
+        attribute="font_size",
+        grob="note_head",
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        value=n,
     )
 
 

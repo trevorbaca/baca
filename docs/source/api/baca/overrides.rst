@@ -146,9 +146,12 @@ overrides
    :nosignatures:
 
    ~accidental_extra_offset
+   ~accidental_font_size
    ~accidental_stencil_false
    ~accidental_transparent
    ~accidental_x_extent_false
+   ~accidental_x_offset
+   ~accidental_y_offset
    ~bar_line_color
    ~bar_line_extra_offset
    ~bar_line_transparent
@@ -197,6 +200,7 @@ overrides
    ~note_head_color
    ~note_head_duration_log
    ~note_head_extra_offset
+   ~note_head_font_size
    ~note_head_no_ledgers
    ~note_head_stencil_false
    ~note_head_style
@@ -278,11 +282,17 @@ overrides
 
 .. autofunction:: accidental_extra_offset
 
+.. autofunction:: accidental_font_size
+
 .. autofunction:: accidental_stencil_false
 
 .. autofunction:: accidental_transparent
 
 .. autofunction:: accidental_x_extent_false
+
+.. autofunction:: accidental_x_offset
+
+.. autofunction:: accidental_y_offset
 
 .. autofunction:: bar_line_color
 
@@ -379,6 +389,8 @@ overrides
 .. autofunction:: note_head_duration_log
 
 .. autofunction:: note_head_extra_offset
+
+.. autofunction:: note_head_font_size
 
 .. autofunction:: note_head_no_ledgers
 

@@ -581,9 +581,12 @@ Override library.
    :nosignatures:
 
    ~baca.overrides.accidental_extra_offset
+   ~baca.overrides.accidental_font_size
    ~baca.overrides.accidental_stencil_false
    ~baca.overrides.accidental_transparent
    ~baca.overrides.accidental_x_extent_false
+   ~baca.overrides.accidental_x_offset
+   ~baca.overrides.accidental_y_offset
    ~baca.overrides.bar_line_color
    ~baca.overrides.bar_line_extra_offset
    ~baca.overrides.bar_line_transparent
@@ -632,6 +635,7 @@ Override library.
    ~baca.overrides.note_head_color
    ~baca.overrides.note_head_duration_log
    ~baca.overrides.note_head_extra_offset
+   ~baca.overrides.note_head_font_size
    ~baca.overrides.note_head_no_ledgers
    ~baca.overrides.note_head_stencil_false
    ~baca.overrides.note_head_style
