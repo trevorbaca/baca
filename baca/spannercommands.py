@@ -111,21 +111,20 @@ class SpannerIndicatorCommand(scoping.Command):
             if self.detach_first:
                 for leaf in abjad.iterate(argument).leaves(grace=False):
                     abjad.detach(type(stop_indicator), leaf)
-            if self.right_broken:
-                stop_indicator = abjad.new(
-                    stop_indicator, right_broken=self.right_broken
-                )
             final_leaf = abjad.select(argument).leaf(-1)
             self._attach_indicator(
                 stop_indicator,
                 final_leaf,
                 deactivate=self.deactivate,
+                right_broken=self.right_broken,
                 tag=abjad.Tag("baca.SpannerIndicatorCommand._call(2)"),
             )
 
     ### PRIVATE METHODS ###
 
-    def _attach_indicator(self, indicator, leaf, deactivate=None, tag=None):
+    def _attach_indicator(
+        self, indicator, leaf, deactivate=None, right_broken=None, tag=None
+    ):
         # TODO: factor out late import
         from .segmentmaker import SegmentMaker
 
@@ -134,6 +133,8 @@ class SpannerIndicatorCommand(scoping.Command):
         tag_ = self.tag.append(tag)
         if getattr(indicator, "spanner_stop", None) is True:
             tag_ = tag_.append(abjad.tags.SPANNER_STOP)
+        if right_broken:
+            tag_ = tag_.append(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS)
         wrapper = abjad.attach(
             indicator, leaf, deactivate=deactivate, tag=tag_, wrapper=True
         )
