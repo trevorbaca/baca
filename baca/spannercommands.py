@@ -94,24 +94,33 @@ class SpannerIndicatorCommand(scoping.Command):
             if self.detach_first:
                 for leaf in abjad.iterate(argument).leaves(grace=False):
                     abjad.detach(type(start_indicator), leaf)
-            if self.left_broken:
-                start_indicator = abjad.new(
-                    start_indicator, left_broken=self.left_broken
-                )
             self._apply_tweaks(start_indicator, self.tweaks)
             first_leaf = abjad.select(argument).leaf(0)
-            self._attach_indicator(
-                start_indicator,
-                first_leaf,
-                deactivate=self.deactivate,
-                tag=abjad.Tag("baca.SpannerIndicatorCommand._call(1)"),
-            )
+            if self.left_broken:
+                self._attach_indicator(
+                    start_indicator,
+                    first_leaf,
+                    deactivate=self.deactivate,
+                    tag=abjad.Tag("baca.SpannerIndicatorCommand._call(0)")
+                    .append(abjad.tags.SPANNER_START)
+                    .append(abjad.tags.LEFT_BROKEN)
+                    .append(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS),
+                )
+            # TODO: add abjad.tags.SPANNER_START
+            else:
+                self._attach_indicator(
+                    start_indicator,
+                    first_leaf,
+                    deactivate=self.deactivate,
+                    tag=abjad.Tag("baca.SpannerIndicatorCommand._call(1)"),
+                )
         if self.stop_indicator is not None:
             stop_indicator = self.stop_indicator
             if self.detach_first:
                 for leaf in abjad.iterate(argument).leaves(grace=False):
                     abjad.detach(type(stop_indicator), leaf)
             final_leaf = abjad.select(argument).leaf(-1)
+            # TODO: split into two cases based on right_broken
             self._attach_indicator(
                 stop_indicator,
                 final_leaf,
@@ -122,6 +131,7 @@ class SpannerIndicatorCommand(scoping.Command):
 
     ### PRIVATE METHODS ###
 
+    # TODO: promot right_broken keyword to _call()
     def _attach_indicator(
         self, indicator, leaf, deactivate=None, right_broken=None, tag=None
     ):
