@@ -9976,11 +9976,11 @@ def interpolate_pitches(
                         \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
                         ef'16
                         [
-                        \glissando                                                                   %! baca.glissando()
-                        \hide NoteHead                                                               %! baca.glissando()
-                        \override Accidental.stencil = ##f                                           %! baca.glissando()
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando()
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando()
+                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
+                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
+                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
+                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
+                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
                         e'16
                         f'16
                         f'16
@@ -10007,10 +10007,10 @@ def interpolate_pitches(
                         e''16
                         e''16
                         f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando()
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando()
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando()
-                        \undo \hide NoteHead                                                         %! baca.glissando()
+                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
+                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
+                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
+                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
                         fs''16
                         ]
                         \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
@@ -10220,11 +10220,11 @@ def register(
                         \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
                         ef'16
                         [
-                        \glissando                                                                   %! baca.glissando()
-                        \hide NoteHead                                                               %! baca.glissando()
-                        \override Accidental.stencil = ##f                                           %! baca.glissando()
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando()
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando()
+                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
+                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
+                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
+                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
+                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
                         e'16
                         f'16
                         f'16
@@ -10251,10 +10251,10 @@ def register(
                         e''16
                         e''16
                         f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando()
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando()
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando()
-                        \undo \hide NoteHead                                                         %! baca.glissando()
+                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
+                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
+                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
+                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
                         fs''16
                         ]
                         \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
@@ -10296,11 +10296,11 @@ def register(
                         \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
                         ef'16
                         [
-                        \glissando                                                                   %! baca.glissando()
-                        \hide NoteHead                                                               %! baca.glissando()
-                        \override Accidental.stencil = ##f                                           %! baca.glissando()
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando()
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando()
+                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
+                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
+                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
+                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
+                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
                         e'16
                         f'16
                         f'16
@@ -10327,10 +10327,10 @@ def register(
                         e''16
                         e''16
                         f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando()
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando()
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando()
-                        \undo \hide NoteHead                                                         %! baca.glissando()
+                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
+                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
+                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
+                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
                         fs''16
                         ]
                         \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
@@ -10373,11 +10373,11 @@ def register(
                         \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
                         ef'16
                         [
-                        \glissando                                                                   %! baca.glissando()
-                        \hide NoteHead                                                               %! baca.glissando()
-                        \override Accidental.stencil = ##f                                           %! baca.glissando()
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando()
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando()
+                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
+                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
+                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
+                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
+                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
                         e'16
                         f'16
                         f'16
@@ -10404,10 +10404,10 @@ def register(
                         e''16
                         e''16
                         f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando()
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando()
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando()
-                        \undo \hide NoteHead                                                         %! baca.glissando()
+                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
+                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
+                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
+                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
                         fs''16
                         ]
                         \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
@@ -10450,11 +10450,11 @@ def register(
                         \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
                         ef'16
                         [
-                        \glissando                                                                   %! baca.glissando()
-                        \hide NoteHead                                                               %! baca.glissando()
-                        \override Accidental.stencil = ##f                                           %! baca.glissando()
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando()
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando()
+                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
+                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
+                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
+                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
+                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
                         e'16
                         f'16
                         f'16
@@ -10481,10 +10481,10 @@ def register(
                         e''16
                         e''16
                         f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando()
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando()
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando()
-                        \undo \hide NoteHead                                                         %! baca.glissando()
+                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
+                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
+                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
+                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
                         fs''16
                         ]
                         \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
@@ -10542,11 +10542,11 @@ def soprano_to_octave(
                         \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
                         ef'16
                         [
-                        \glissando                                                                   %! baca.glissando()
-                        \hide NoteHead                                                               %! baca.glissando()
-                        \override Accidental.stencil = ##f                                           %! baca.glissando()
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando()
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando()
+                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
+                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
+                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
+                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
+                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
                         e'16
                         f'16
                         f'16
@@ -10573,10 +10573,10 @@ def soprano_to_octave(
                         e''16
                         e''16
                         f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando()
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando()
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando()
-                        \undo \hide NoteHead                                                         %! baca.glissando()
+                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
+                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
+                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
+                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
                         fs''16
                         ]
                         \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
@@ -10617,11 +10617,11 @@ def soprano_to_octave(
                         \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
                         ef'16
                         [
-                        \glissando                                                                   %! baca.glissando()
-                        \hide NoteHead                                                               %! baca.glissando()
-                        \override Accidental.stencil = ##f                                           %! baca.glissando()
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando()
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando()
+                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
+                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
+                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
+                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
+                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
                         e'16
                         f'16
                         f'16
@@ -10648,10 +10648,10 @@ def soprano_to_octave(
                         e''16
                         e''16
                         f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando()
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando()
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando()
-                        \undo \hide NoteHead                                                         %! baca.glissando()
+                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
+                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
+                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
+                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
                         fs''16
                         ]
                         \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
