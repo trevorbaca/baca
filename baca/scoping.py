@@ -929,7 +929,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             - \marcato                                                               %! baca.marcato():baca.IndicatorCommand._call()
                             - \staccato                                                              %! baca.staccato():baca.IndicatorCommand._call()
                             [                                                                        %! baca.make_even_divisions()
-                            (                                                                        %! baca.slur():baca.SpannerIndicatorCommand._call(1)
+                            (                                                                        %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_START
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8                                                                      %! baca.make_even_divisions()
@@ -963,7 +963,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             b'8                                                                      %! baca.make_even_divisions()
                             - \marcato                                                               %! baca.marcato():baca.IndicatorCommand._call()
                             - \staccato                                                              %! baca.staccato():baca.IndicatorCommand._call()
-                            )                                                                        %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                            )                                                                        %! baca.slur():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                             ]                                                                        %! baca.make_even_divisions()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
@@ -1126,7 +1126,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             - \marcato                                                               %! baca.marcato():baca.IndicatorCommand._call()
                             - \staccato                                                              %! baca.staccato():baca.IndicatorCommand._call()
                             [                                                                        %! baca.make_even_divisions()
-                            (                                                                        %! baca.slur():baca.SpannerIndicatorCommand._call(1)
+                            (                                                                        %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_START
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'8                                                                      %! baca.make_even_divisions()
@@ -1160,7 +1160,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             b'8                                                                      %! baca.make_even_divisions()
                             - \marcato                                                               %! baca.marcato():baca.IndicatorCommand._call()
                             - \staccato                                                              %! baca.staccato():baca.IndicatorCommand._call()
-                            )                                                                        %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                            )                                                                        %! baca.slur():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                             ]                                                                        %! baca.make_even_divisions()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()

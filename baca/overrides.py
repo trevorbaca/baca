@@ -3922,20 +3922,20 @@ def slur_down(
                         r8
                         c'16
                         [
-                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(1)
+                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
-                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
                         [
-                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(1)
+                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         e''16
                         ]
                         ef''4
@@ -3945,7 +3945,7 @@ def slur_down(
                         af''16
                         [
                         g''16
-                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         ]
                     }
                     \times 4/5 {
@@ -4018,20 +4018,20 @@ def slur_up(
                         \override Stem.direction = #down                                             %! baca.stem_down():baca.OverrideCommand._call(1)
                         c'16
                         [
-                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(1)
+                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
-                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
                         [
-                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(1)
+                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         e''16
                         ]
                         ef''4
@@ -4041,7 +4041,7 @@ def slur_up(
                         af''16
                         [
                         g''16
-                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         ]
                     }
                     \times 4/5 {
@@ -4481,7 +4481,7 @@ def sustain_pedal_staff_padding(
                         \override Staff.SustainPedalLineSpanner.staff-padding = #4                   %! baca.sustain_pedal_staff_padding():baca.OverrideCommand._call(1)
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
-                        \sustainOn                                                                   %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(1)
+                        \sustainOn                                                                   %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         c'16
                         [
                         d'16
@@ -4490,13 +4490,13 @@ def sustain_pedal_staff_padding(
                         ~
                         bf'16
                         r16
-                        \sustainOff                                                                  %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        \sustainOff                                                                  %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
                         [
-                        \sustainOn                                                                   %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(1)
+                        \sustainOn                                                                   %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         e''16
                         ]
                         ef''4
@@ -4506,14 +4506,14 @@ def sustain_pedal_staff_padding(
                         af''16
                         [
                         g''16
-                        \sustainOff                                                                  %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        \sustainOff                                                                  %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        \sustainOn                                                                   %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(1)
+                        \sustainOn                                                                   %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         r4
-                        \sustainOff                                                                  %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        \sustainOff                                                                  %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         \revert Staff.SustainPedalLineSpanner.staff-padding                          %! baca.sustain_pedal_staff_padding():baca.OverrideCommand._call(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }

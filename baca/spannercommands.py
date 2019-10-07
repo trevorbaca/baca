@@ -101,18 +101,19 @@ class SpannerIndicatorCommand(scoping.Command):
                     start_indicator,
                     first_leaf,
                     deactivate=self.deactivate,
-                    tag=abjad.Tag("baca.SpannerIndicatorCommand._call(0)")
+                    tag=abjad.Tag("baca.SpannerIndicatorCommand._call(1)")
                     .append(abjad.tags.SPANNER_START)
                     .append(abjad.tags.LEFT_BROKEN)
                     .append(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS),
                 )
-            # TODO: add abjad.tags.SPANNER_START
             else:
                 self._attach_indicator(
                     start_indicator,
                     first_leaf,
                     deactivate=self.deactivate,
-                    tag=abjad.Tag("baca.SpannerIndicatorCommand._call(1)"),
+                    tag=abjad.Tag(
+                        "baca.SpannerIndicatorCommand._call(2)"
+                    ).append(abjad.tags.SPANNER_START),
                 )
         if self.stop_indicator is not None:
             stop_indicator = self.stop_indicator
@@ -120,31 +121,35 @@ class SpannerIndicatorCommand(scoping.Command):
                 for leaf in abjad.iterate(argument).leaves(grace=False):
                     abjad.detach(type(stop_indicator), leaf)
             final_leaf = abjad.select(argument).leaf(-1)
-            # TODO: split into two cases based on right_broken
-            self._attach_indicator(
-                stop_indicator,
-                final_leaf,
-                deactivate=self.deactivate,
-                right_broken=self.right_broken,
-                tag=abjad.Tag("baca.SpannerIndicatorCommand._call(2)"),
-            )
+            if self.right_broken:
+                self._attach_indicator(
+                    stop_indicator,
+                    final_leaf,
+                    deactivate=self.deactivate,
+                    tag=abjad.Tag("baca.SpannerIndicatorCommand._call(3)")
+                    .append(abjad.tags.SPANNER_STOP)
+                    .append(abjad.tags.RIGHT_BROKEN)
+                    .append(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS),
+                )
+            else:
+                self._attach_indicator(
+                    stop_indicator,
+                    final_leaf,
+                    deactivate=self.deactivate,
+                    tag=abjad.Tag(
+                        "baca.SpannerIndicatorCommand._call(4)"
+                    ).append(abjad.tags.SPANNER_STOP),
+                )
 
     ### PRIVATE METHODS ###
 
-    # TODO: promot right_broken keyword to _call()
-    def _attach_indicator(
-        self, indicator, leaf, deactivate=None, right_broken=None, tag=None
-    ):
+    def _attach_indicator(self, indicator, leaf, deactivate=None, tag=None):
         # TODO: factor out late import
         from .segmentmaker import SegmentMaker
 
         assert isinstance(tag, abjad.Tag), repr(tag)
         reapplied = scoping.Command._remove_reapplied_wrappers(leaf, indicator)
         tag_ = self.tag.append(tag)
-        if getattr(indicator, "spanner_stop", None) is True:
-            tag_ = tag_.append(abjad.tags.SPANNER_STOP)
-        if right_broken:
-            tag_ = tag_.append(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS)
         wrapper = abjad.attach(
             indicator, leaf, deactivate=deactivate, tag=tag_, wrapper=True
         )
@@ -307,7 +312,7 @@ def beam(
                             - \tweak color #darkcyan                                                 %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2)
                             - \tweak staff-padding #8                                                %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2)
                             \bacaStartTextSpanRhythmAnnotation                                       %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2)
-                            _ [                                                                      %! baca.beam():baca.SpannerIndicatorCommand._call(1)
+                            _ [                                                                      %! baca.beam():baca.SpannerIndicatorCommand._call(2):SPANNER_START
             <BLANKLINE>
                             c'8                                                                      %! baca.make_even_divisions()
             <BLANKLINE>
@@ -337,7 +342,7 @@ def beam(
                             c'8                                                                      %! baca.make_even_divisions()
             <BLANKLINE>
                             c'8                                                                      %! baca.make_even_divisions()
-                            ]                                                                        %! baca.beam():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                            ]                                                                        %! baca.beam():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                             <> \bacaStopTextSpanRhythmAnnotation                                     %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(4):SPANNER_STOP
             <BLANKLINE>
                             <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
@@ -437,7 +442,7 @@ def ottava(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
-                        \ottava 1                                                                    %! baca.ottava():baca.SpannerIndicatorCommand._call(1)
+                        \ottava 1                                                                    %! baca.ottava():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         c'16
                         [
                         d'16
@@ -464,7 +469,7 @@ def ottava(
                     }
                     \times 4/5 {
                         a'16
-                        \ottava 0                                                                    %! baca.ottava():baca.SpannerIndicatorCommand._call(2)
+                        \ottava 0                                                                    %! baca.ottava():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         r4
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
@@ -526,7 +531,7 @@ def ottava_bassa(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
-                        \ottava -1                                                                   %! baca.ottava_bassa():baca.SpannerIndicatorCommand._call(1)
+                        \ottava -1                                                                   %! baca.ottava_bassa():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         c'16
                         [
                         d'16
@@ -553,7 +558,7 @@ def ottava_bassa(
                     }
                     \times 4/5 {
                         a'16
-                        \ottava 0                                                                    %! baca.ottava_bassa():baca.SpannerIndicatorCommand._call(2)
+                        \ottava 0                                                                    %! baca.ottava_bassa():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         r4
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
@@ -619,7 +624,7 @@ def slur(
                         r8
                         c'16
                         [
-                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(1)
+                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         d'16
                         ]
                         bf'4
@@ -644,7 +649,7 @@ def slur(
                     }
                     \times 4/5 {
                         a'16
-                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         r4
                         \revert Slur.direction                                                       %! baca.slur_down():baca.OverrideCommand._call(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
@@ -712,7 +717,7 @@ def sustain_pedal(
                         \override Staff.SustainPedalLineSpanner.staff-padding = #4                   %! baca.sustain_pedal_staff_padding():baca.OverrideCommand._call(1)
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
-                        \sustainOn                                                                   %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(1)
+                        \sustainOn                                                                   %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         c'16
                         [
                         d'16
@@ -740,7 +745,7 @@ def sustain_pedal(
                     \times 4/5 {
                         a'16
                         r4
-                        \sustainOff                                                                  %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        \sustainOff                                                                  %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         \revert Staff.SustainPedalLineSpanner.staff-padding                          %! baca.sustain_pedal_staff_padding():baca.OverrideCommand._call(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
@@ -813,7 +818,7 @@ def trill_spanner(
                         r8
                         c'16
                         [
-                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
+                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         d'16
                         ]
                         bf'4
@@ -839,7 +844,7 @@ def trill_spanner(
                     \times 4/5 {
                         a'16
                         r4
-                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
@@ -887,39 +892,39 @@ def trill_spanner(
                         r8
                         c'16
                         [
-                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
+                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
                         r16
-                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
                         [
-                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
+                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         e''16
                         ]
                         ef''4
                         ~
                         ef''16
                         r16
-                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         af''16
                         [
-                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
+                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         g''16
-                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
+                        \startTrillSpan                                                              %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         r4
-                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
@@ -966,11 +971,11 @@ def trill_spanner(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
-                        \pitchedTrill                                                                %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
+                        \pitchedTrill                                                                %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         c'16
                         [
-                        - \tweak color #red                                                          %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
-                        \startTrillSpan d'                                                           %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(1)
+                        - \tweak color #red                                                          %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_START
+                        \startTrillSpan d'                                                           %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_START
                         d'16
                         ]
                         bf'4
@@ -996,7 +1001,7 @@ def trill_spanner(
                     \times 4/5 {
                         a'16
                         r4
-                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(2):SPANNER_STOP
+                        \stopTrillSpan                                                               %! baca.trill_spanner():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
