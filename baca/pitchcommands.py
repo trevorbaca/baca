@@ -3271,7 +3271,9 @@ class PitchCommand(scoping.Command):
                 pass
             else:
                 for leaf in lt:
-                    rest = abjad.Rest(leaf.written_duration)
+                    rest = abjad.Rest(
+                        leaf.written_duration, multiplier=leaf.multiplier
+                    )
                     abjad.mutate(leaf).replace(rest, wrappers=True)
                 new_lt = abjad.inspect(rest).logical_tie()
         elif isinstance(pitch, collections.abc.Iterable):
@@ -3281,7 +3283,11 @@ class PitchCommand(scoping.Command):
             else:
                 assert isinstance(lt.head, (abjad.Note, abjad.Rest))
                 for leaf in lt:
-                    chord = abjad.Chord(pitch, leaf.written_duration)
+                    chord = abjad.Chord(
+                        pitch,
+                        leaf.written_duration,
+                        multiplier=leaf.multiplier,
+                    )
                     abjad.mutate(leaf).replace(chord, wrappers=True)
                 new_lt = abjad.inspect(chord).logical_tie()
         else:
@@ -3297,7 +3303,11 @@ class PitchCommand(scoping.Command):
             else:
                 assert isinstance(lt.head, (abjad.Chord, abjad.Rest))
                 for leaf in lt:
-                    note = abjad.Note(pitch, leaf.written_duration)
+                    note = abjad.Note(
+                        pitch,
+                        leaf.written_duration,
+                        multiplier=leaf.multiplier,
+                    )
                     abjad.mutate(leaf).replace(note, wrappers=True)
                 new_lt = abjad.inspect(note).logical_tie()
         return new_lt
@@ -10094,8 +10104,138 @@ def pitch(
     do_not_transpose: bool = None,
     persist: str = None,
 ) -> PitchCommand:
-    """
+    r"""
     Makes pitch command.
+
+    ..  container:: example
+
+        REGRESSION. Preserves duration multipliers when leaves cast from one
+        type to another (note to chord in this example):
+
+        >>> maker = baca.SegmentMaker(
+        ...     score_template=baca.SingleStaffScoreTemplate(),
+        ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
+        ... )
+
+        >>> maker(
+        ...     "Music_Voice",
+        ...     baca.rhythm(
+        ...         rmakers.note(),
+        ...         rmakers.written_duration(1),
+        ...     ),
+        ...     baca.pitch("<C4 D4 E4>"),
+        ... )
+
+        >>> lilypond_file = maker.run(environment='docs')
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+
+        ..  docs::
+
+            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            <BLANKLINE>
+            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
+            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            <BLANKLINE>
+                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
+                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
+            <BLANKLINE>
+                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
+                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
+            <BLANKLINE>
+                        % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
+                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
+                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
+                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
+                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
+                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
+                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
+                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
+                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
+                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
+                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
+                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
+                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+            <BLANKLINE>
+                        % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
+                        \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
+                        \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
+                        s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
+                        \once \override Score.BarLine.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
+                        \once \override Score.SpanBar.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
+            <BLANKLINE>
+                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
+            <BLANKLINE>
+                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
+            <BLANKLINE>
+                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
+                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+            <BLANKLINE>
+                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+            <BLANKLINE>
+                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
+                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+            <BLANKLINE>
+                            % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            <c' d' e'>1 * 1/2
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+            <BLANKLINE>
+                            % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            <c' d' e'>1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+            <BLANKLINE>
+                            % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            <c' d' e'>1 * 1/2
+                        %@% ^ \baca-duration-multiplier-markup #"1" #"2"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+            <BLANKLINE>
+                            % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            <c' d' e'>1 * 3/8
+                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+            <BLANKLINE>
+                            <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+            <BLANKLINE>
+                                \context Voice = "Music_Voice"                                       %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+            <BLANKLINE>
+                                    % [Music_Voice measure 5]                                        %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    \abjad-invisible-music-coloring                                  %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:NOTE:INVISIBLE_MUSIC_COLORING:baca.SegmentMaker._style_phantom_measures(5)
+                                %@% \abjad-invisible-music                                           %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:NOTE:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
+                                    \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:NOTE
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:PHANTOM:baca.SegmentMaker._style_phantom_measures(5)
+            <BLANKLINE>
+                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+            <BLANKLINE>
+                                \context Voice = "Rest_Voice"                                        %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+            <BLANKLINE>
+                                    % [Rest_Voice measure 5]                                         %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
+                                    \once \override Score.TimeSignature.X-extent = ##f               %! baca.SegmentMaker._style_phantom_measures(6):PHANTOM
+                                    \once \override MultiMeasureRest.transparent = ##t               %! baca.SegmentMaker._style_phantom_measures(7):PHANTOM
+                                    \stopStaff                                                       %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
+                                    \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
+                                    \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
+                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
+                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:PHANTOM:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5)
+            <BLANKLINE>
+                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+            <BLANKLINE>
+                            >>                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+            <BLANKLINE>
+                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+            <BLANKLINE>
+                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+            <BLANKLINE>
+                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+            <BLANKLINE>
+            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+
     """
     if isinstance(pitch, (list, tuple)) and len(pitch) == 1:
         raise Exception(f"one-note chord {pitch!r}?")
@@ -10202,6 +10342,8 @@ def register(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -10210,54 +10352,43 @@ def register(
             <<
                 \new GlobalContext
                 {
-                    \time 3/2
-                    s1 * 3/2
+                    \time 11/8
+                    s1 * 11/8
                 }
                 \new Staff
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \override Glissando.thickness = #'3                                          %! baca.glissando_thickness():baca.OverrideCommand._call(1)
-                        \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
-                        ef'16
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        r8
+                        c'16
                         [
-                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
-                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
-                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
+                        d'16
+                        ]
+                        bf4
+                        ~
+                        bf16
+                        r16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs16
+                        [
                         e'16
-                        f'16
-                        f'16
-                        f'16
-                        g'16
-                        g'16
-                        g'16
-                        a'16
-                        a'16
-                        a'16
-                        b'16
+                        ]
+                        ef'4
+                        ~
+                        ef'16
+                        r16
+                        af16
+                        [
+                        g16
                         ]
                     }
-                    \scaleDurations #'(1 . 1) {
-                        b'16
-                        [
-                        c''16
-                        c''16
-                        c''16
-                        d''16
-                        d''16
-                        d''16
-                        e''16
-                        e''16
-                        e''16
-                        f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
-                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
-                        fs''16
-                        ]
-                        \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
+                    \times 4/5 {
+                        a16
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
             >>
@@ -10278,6 +10409,8 @@ def register(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -10286,58 +10419,54 @@ def register(
             <<
                 \new GlobalContext
                 {
-                    \time 3/2
-                    s1 * 3/2
+                    \time 11/8
+                    s1 * 11/8
                 }
                 \new Staff
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \override Glissando.thickness = #'3                                          %! baca.glissando_thickness():baca.OverrideCommand._call(1)
-                        \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
-                        ef'16
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        r8
+                        c'16
                         [
-                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
-                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
-                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \abjad-color-music #'green
+                        fs16
+                        [
+                        \abjad-color-music #'green
                         e'16
-                        f'16
-                        f'16
-                        f'16
-                        g'16
-                        g'16
-                        g'16
-                        a'16
-                        a'16
-                        a'16
-                        b'16
+                        ]
+                        \abjad-color-music #'green
+                        ef'4
+                        ~
+                        \abjad-color-music #'green
+                        ef'16
+                        \abjad-color-music #'green
+                        r16
+                        \abjad-color-music #'green
+                        af16
+                        [
+                        \abjad-color-music #'green
+                        g16
                         ]
                     }
-                    \scaleDurations #'(1 . 1) {
-                        b'16
-                        [
-                        c''16
-                        c''16
-                        c''16
-                        d''16
-                        d''16
-                        d''16
-                        e''16
-                        e''16
-                        e''16
-                        f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
-                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
-                        fs''16
-                        ]
-                        \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
             >>
-
+            
     ..  container:: example
 
         Octave-transposes all PLTs to an octave interpolated from -6 to 18:
@@ -10355,6 +10484,8 @@ def register(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -10363,54 +10494,43 @@ def register(
             <<
                 \new GlobalContext
                 {
-                    \time 3/2
-                    s1 * 3/2
+                    \time 11/8
+                    s1 * 11/8
                 }
                 \new Staff
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \override Glissando.thickness = #'3                                          %! baca.glissando_thickness():baca.OverrideCommand._call(1)
-                        \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
-                        ef'16
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        r8
+                        c'16
                         [
-                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
-                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
-                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        fs'16
+                        [
                         e'16
-                        f'16
-                        f'16
-                        f'16
-                        g'16
-                        g'16
-                        g'16
-                        a'16
-                        a'16
-                        a'16
-                        b'16
+                        ]
+                        ef''4
+                        ~
+                        ef''16
+                        r16
+                        af''16
+                        [
+                        g''16
                         ]
                     }
-                    \scaleDurations #'(1 . 1) {
-                        b'16
-                        [
-                        c''16
-                        c''16
-                        c''16
-                        d''16
-                        d''16
-                        d''16
-                        e''16
-                        e''16
-                        e''16
-                        f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
-                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
-                        fs''16
-                        ]
-                        \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
+                    \times 4/5 {
+                        a''16
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
             >>
@@ -10432,6 +10552,8 @@ def register(
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -10440,54 +10562,50 @@ def register(
             <<
                 \new GlobalContext
                 {
-                    \time 3/2
-                    s1 * 3/2
+                    \time 11/8
+                    s1 * 11/8
                 }
                 \new Staff
                 {
-                    \scaleDurations #'(1 . 1) {
-                        \override Glissando.thickness = #'3                                          %! baca.glissando_thickness():baca.OverrideCommand._call(1)
-                        \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
-                        ef'16
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        r8
+                        c'16
                         [
-                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
-                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
-                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
+                        d'16
+                        ]
+                        bf'4
+                        ~
+                        bf'16
+                        r16
+                    }
+                    \tweak text #tuplet-number::calc-fraction-text
+                    \times 9/10 {
+                        \abjad-color-music #'green
+                        fs16
+                        [
+                        \abjad-color-music #'green
                         e'16
-                        f'16
-                        f'16
-                        f'16
-                        g'16
-                        g'16
-                        g'16
-                        a'16
-                        a'16
-                        a'16
-                        b'16
+                        ]
+                        \abjad-color-music #'green
+                        ef'4
+                        ~
+                        \abjad-color-music #'green
+                        ef'16
+                        \abjad-color-music #'green
+                        r16
+                        \abjad-color-music #'green
+                        af'16
+                        [
+                        \abjad-color-music #'green
+                        g''16
                         ]
                     }
-                    \scaleDurations #'(1 . 1) {
-                        b'16
-                        [
-                        c''16
-                        c''16
-                        c''16
-                        d''16
-                        d''16
-                        d''16
-                        e''16
-                        e''16
-                        e''16
-                        f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
-                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
-                        fs''16
-                        ]
-                        \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
+                    \times 4/5 {
+                        a'16
+                        r4
+                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
                     }
                 }
             >>
@@ -10524,6 +10642,8 @@ def soprano_to_octave(
         ...     baca.soprano_to_octave(3),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -10532,54 +10652,60 @@ def soprano_to_octave(
             <<
                 \new GlobalContext
                 {
-                    \time 3/2
-                    s1 * 3/2
+                    \time 5/4
+                    s1 * 5/4
                 }
                 \new Staff
                 {
                     \scaleDurations #'(1 . 1) {
-                        \override Glissando.thickness = #'3                                          %! baca.glissando_thickness():baca.OverrideCommand._call(1)
-                        \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
-                        ef'16
+                        \abjad-color-music #'green
+                        <c,, d,, bf,,>8
+                        ~
                         [
-                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
-                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
-                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
-                        e'16
-                        f'16
-                        f'16
-                        f'16
-                        g'16
-                        g'16
-                        g'16
-                        a'16
-                        a'16
-                        a'16
-                        b'16
+                        \abjad-color-music #'green
+                        <c,, d,, bf,,>32
                         ]
+                        r16.
                     }
                     \scaleDurations #'(1 . 1) {
-                        b'16
+                        \abjad-color-music #'green
+                        f,8
+                        ~
                         [
-                        c''16
-                        c''16
-                        c''16
-                        d''16
-                        d''16
-                        d''16
-                        e''16
-                        e''16
-                        e''16
-                        f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
-                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
-                        fs''16
+                        \abjad-color-music #'green
+                        f,32
                         ]
-                        \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
+                        r16.
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \abjad-color-music #'green
+                        <ef, e, fs>8
+                        ~
+                        [
+                        \abjad-color-music #'green
+                        <ef, e, fs>32
+                        ]
+                        r16.
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \abjad-color-music #'green
+                        <g,, af,>8
+                        ~
+                        [
+                        \abjad-color-music #'green
+                        <g,, af,>32
+                        ]
+                        r16.
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \abjad-color-music #'green
+                        a,,8
+                        ~
+                        [
+                        \abjad-color-music #'green
+                        a,,32
+                        ]
+                        r16.
                     }
                 }
             >>
@@ -10599,6 +10725,8 @@ def soprano_to_octave(
         ...     baca.color(baca.plts()),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
+        >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -10607,54 +10735,60 @@ def soprano_to_octave(
             <<
                 \new GlobalContext
                 {
-                    \time 3/2
-                    s1 * 3/2
+                    \time 5/4
+                    s1 * 5/4
                 }
                 \new Staff
                 {
                     \scaleDurations #'(1 . 1) {
-                        \override Glissando.thickness = #'3                                          %! baca.glissando_thickness():baca.OverrideCommand._call(1)
-                        \clef "treble"                                                               %! baca.clef():baca.IndicatorCommand._call()
-                        ef'16
+                        \abjad-color-music #'red
+                        <c d bf>8
+                        ~
                         [
-                        \glissando                                                                   %! baca.glissando():abjad.glissando(7)
-                        \hide NoteHead                                                               %! baca.glissando():abjad.glissando(1)
-                        \override Accidental.stencil = ##f                                           %! baca.glissando():abjad.glissando(1)
-                        \override NoteColumn.glissando-skip = ##t                                    %! baca.glissando():abjad.glissando(1)
-                        \override NoteHead.no-ledgers = ##t                                          %! baca.glissando():abjad.glissando(1)
-                        e'16
-                        f'16
-                        f'16
-                        f'16
-                        g'16
-                        g'16
-                        g'16
-                        a'16
-                        a'16
-                        a'16
-                        b'16
+                        \abjad-color-music #'red
+                        <c d bf>32
                         ]
+                        r16.
                     }
                     \scaleDurations #'(1 . 1) {
-                        b'16
+                        \abjad-color-music #'blue
+                        f8
+                        ~
                         [
-                        c''16
-                        c''16
-                        c''16
-                        d''16
-                        d''16
-                        d''16
-                        e''16
-                        e''16
-                        e''16
-                        f''16
-                        \revert Accidental.stencil                                                   %! baca.glissando():abjad.glissando(6)
-                        \revert NoteColumn.glissando-skip                                            %! baca.glissando():abjad.glissando(6)
-                        \revert NoteHead.no-ledgers                                                  %! baca.glissando():abjad.glissando(6)
-                        \undo \hide NoteHead                                                         %! baca.glissando():abjad.glissando(6)
-                        fs''16
+                        \abjad-color-music #'blue
+                        f32
                         ]
-                        \revert Glissando.thickness                                                  %! baca.glissando_thickness():baca.OverrideCommand._call(2)
+                        r16.
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \abjad-color-music #'red
+                        <ef, e, fs>8
+                        ~
+                        [
+                        \abjad-color-music #'red
+                        <ef, e, fs>32
+                        ]
+                        r16.
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \abjad-color-music #'blue
+                        <g, af>8
+                        ~
+                        [
+                        \abjad-color-music #'blue
+                        <g, af>32
+                        ]
+                        r16.
+                    }
+                    \scaleDurations #'(1 . 1) {
+                        \abjad-color-music #'red
+                        a8
+                        ~
+                        [
+                        \abjad-color-music #'red
+                        a32
+                        ]
+                        r16.
                     }
                 }
             >>
