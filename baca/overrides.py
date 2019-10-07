@@ -807,22 +807,22 @@ def dls_staff_padding(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
-                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1):SPANNER_STOP
-                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1)
+                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
+                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2)
                         [
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
-                        \f                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
+                        \f                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(3):SPANNER_STOP
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1):SPANNER_STOP
-                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1)
+                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
+                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2)
                         [
                         e''16
                         ]
@@ -833,12 +833,12 @@ def dls_staff_padding(
                         af''16
                         [
                         g''16
-                        \f                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
+                        \f                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(3):SPANNER_STOP
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1):SPANNER_STOP
+                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
                         r4
                         \revert DynamicLineSpanner.staff-padding                                     %! baca.dls_staff_padding():baca.OverrideCommand._call(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
@@ -908,22 +908,22 @@ def dls_up(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
-                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1):SPANNER_STOP
-                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1)
+                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
+                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2)
                         [
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
-                        \f                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
+                        \f                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(3):SPANNER_STOP
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1):SPANNER_STOP
-                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1)
+                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
+                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2)
                         [
                         e''16
                         ]
@@ -934,12 +934,12 @@ def dls_up(
                         af''16
                         [
                         g''16
-                        \f                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
+                        \f                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(3):SPANNER_STOP
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(1):SPANNER_STOP
+                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
                         r4
                         \revert DynamicLineSpanner.direction                                         %! baca.dls_up():baca.OverrideCommand._call(2)
                         \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
@@ -5401,12 +5401,12 @@ def text_spanner_staff_padding(
                         r8
                         c'16
                         [
-                        - \abjad-dashed-line-with-arrow                                              %! baca.text_spanner():baca.PiecewiseCommand._call(1)
-                        - \baca-text-spanner-left-text "pont."                                       %! baca.text_spanner():baca.PiecewiseCommand._call(1)
-                        - \baca-text-spanner-right-text "ord."                                       %! baca.text_spanner():baca.PiecewiseCommand._call(1)
-                        - \tweak bound-details.right.padding #0.5                                    %! baca.text_spanner():baca.PiecewiseCommand._call(1)
-                        - \tweak bound-details.right.stencil-align-dir-y #center                     %! baca.text_spanner():baca.PiecewiseCommand._call(1)
-                        \startTextSpan                                                               %! baca.text_spanner():baca.PiecewiseCommand._call(1)
+                        - \abjad-dashed-line-with-arrow                                              %! baca.text_spanner():baca.PiecewiseCommand._call(2)
+                        - \baca-text-spanner-left-text "pont."                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2)
+                        - \baca-text-spanner-right-text "ord."                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2)
+                        - \tweak bound-details.right.padding #0.5                                    %! baca.text_spanner():baca.PiecewiseCommand._call(2)
+                        - \tweak bound-details.right.stencil-align-dir-y #center                     %! baca.text_spanner():baca.PiecewiseCommand._call(2)
+                        \startTextSpan                                                               %! baca.text_spanner():baca.PiecewiseCommand._call(2)
                         d'16
                         ]
                         bf'4
@@ -5431,7 +5431,7 @@ def text_spanner_staff_padding(
                     }
                     \times 4/5 {
                         a'16
-                        \stopTextSpan                                                                %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_STOP
+                        \stopTextSpan                                                                %! baca.text_spanner():baca.PiecewiseCommand._call(3):SPANNER_STOP
                         r4
                         \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
                         \revert TextScript.staff-padding                                             %! baca.text_script_staff_padding():baca.OverrideCommand._call(2)
