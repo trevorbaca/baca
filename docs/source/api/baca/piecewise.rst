@@ -112,6 +112,7 @@ piecewise
       bundles
       final_piece_spanner
       leak_spanner_stop
+      left_broken
       pieces
       remove_length_1_spanner_start
       right_broken
@@ -168,6 +169,8 @@ piecewise
    .. autoattribute:: PiecewiseCommand.final_piece_spanner
 
    .. autoattribute:: PiecewiseCommand.leak_spanner_stop
+
+   .. autoattribute:: PiecewiseCommand.left_broken
 
    .. container:: inherited
 

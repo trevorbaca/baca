@@ -158,6 +158,7 @@ class PiecewiseCommand(scoping.Command):
         "_bundles",
         "_final_piece_spanner",
         "_leak_spanner_stop",
+        "_left_broken",
         "_pieces",
         "_remove_length_1_spanner_start",
         "_right_broken",
@@ -175,6 +176,7 @@ class PiecewiseCommand(scoping.Command):
         bundles: typing.List[Bundle] = None,
         final_piece_spanner: typing.Any = None,
         leak_spanner_stop: bool = None,
+        left_broken: bool = None,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
@@ -213,6 +215,9 @@ class PiecewiseCommand(scoping.Command):
         if leak_spanner_stop is not None:
             leak_spanner_stop = bool(leak_spanner_stop)
         self._leak_spanner_stop = leak_spanner_stop
+        if left_broken is not None:
+            left_broken = bool(left_broken)
+        self._left_broken = left_broken
         if pieces is not None:
             assert isinstance(pieces, abjad.Expression), repr(pieces)
         self._pieces = pieces
@@ -268,6 +273,7 @@ class PiecewiseCommand(scoping.Command):
                     stop_leaf,
                     i,
                     total_pieces,
+                    # TODO: change tag to include site
                     tag=abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS,
                 )
             if bookend_pattern.matches_index(i, piece_count) and 1 < len(
@@ -314,9 +320,12 @@ class PiecewiseCommand(scoping.Command):
                 elif isinstance(bundle.spanner_start, abjad.StartTextSpan):
                     if self.final_piece_spanner is False:
                         bundle = abjad.new(bundle, spanner_start=None)
+            tag = abjad.Tag("baca.PiecewiseCommand._call(1)")
             if is_first_piece or previous_had_bookend:
                 bundle = abjad.new(bundle, spanner_stop=None)
-            tag = abjad.Tag("baca.PiecewiseCommand._call(1)")
+                if self.left_broken:
+                    tag = tag.append(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS)
+                    tag = tag.append(abjad.tags.LEFT_BROKEN)
             if is_final_piece and self.right_broken:
                 tag = tag.append(abjad.tags.RIGHT_BROKEN)
             autodetected_right_padding = None
@@ -392,6 +401,7 @@ class PiecewiseCommand(scoping.Command):
         i,
         total_pieces,
         autodetected_right_padding=None,
+        left_broken=None,
         just_bookended_leaf=None,
         tag=None,
     ):
@@ -399,6 +409,8 @@ class PiecewiseCommand(scoping.Command):
         from .segmentmaker import SegmentMaker
 
         assert isinstance(tag, abjad.Tag), repr(tag)
+        if left_broken is True:
+            tag = tag.append(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS)
         for indicator in bundle:
             if indicator in (True, False):
                 pass
@@ -480,6 +492,13 @@ class PiecewiseCommand(scoping.Command):
         Is true when piecewise command leaks stop indicator.
         """
         return self._leak_spanner_stop
+
+    @property
+    def left_broken(self) -> typing.Optional[bool]:
+        """
+        Is true when piecewise command is left-broken.
+        """
+        return self._left_broken
 
     @property
     def pieces(self) -> typing.Optional[abjad.Expression]:
@@ -3767,12 +3786,6 @@ def hairpin(
         final_hairpin_ = abjad.StartHairpin(final_hairpin)
     if left_broken is not None:
         left_broken = bool(left_broken)
-    if left_broken is True:
-        bundle = bundles[0]
-        assert bundle.spanner_start_only()
-        dynamic_trend = abjad.new(bundle.spanner_start, left_broken=True)
-        bundle = Bundle(spanner_start=dynamic_trend)
-        bundles[0] = bundle
     if remove_length_1_spanner_start is not None:
         remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
     right_broken_: typing.Any = False
@@ -3782,6 +3795,7 @@ def hairpin(
         bookend=bookend,
         bundles=bundles,
         final_piece_spanner=final_hairpin_,
+        left_broken=left_broken,
         match=match,
         map=map,
         measures=measures,
