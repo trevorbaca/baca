@@ -1279,6 +1279,7 @@ def hairpin(
     *tweaks: abjad.LilyPondTweakManager,
     bookend: typing.Union[bool, int] = -1,
     final_hairpin: typing.Union[bool, str, abjad.StartHairpin] = None,
+    forbid_al_niente_to_bar_line: bool = None,
     left_broken: bool = None,
     map: abjad.Expression = None,
     match: typings.Indices = None,
@@ -3773,7 +3774,11 @@ def hairpin(
 
     """
     if isinstance(dynamics, str):
-        bundles = parse_hairpin_descriptor(dynamics, *tweaks)
+        bundles = parse_hairpin_descriptor(
+            dynamics,
+            *tweaks,
+            forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line,
+        )
     else:
         bundles = dynamics
     for item in bundles:
@@ -3847,7 +3852,7 @@ def half_clt_spanner(
 
 
 def make_dynamic(
-    string: str
+    string: str, *, forbid_al_niente_to_bar_line: bool = None
 ) -> typing.Union[abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin]:
     r"""
     Makes dynamic.
@@ -4105,7 +4110,7 @@ def make_dynamic(
         indicator = abjad.Dynamic(f"{string}", command=command)
     elif string in known_shapes:
         indicator = abjad.StartHairpin(string)
-        if string.endswith(">o"):
+        if string.endswith(">o") and not forbid_al_niente_to_bar_line:
             abjad.tweak(indicator).to_barline = True
     elif string == "!":
         indicator = abjad.StopHairpin()
@@ -4159,7 +4164,9 @@ def material_annotation_spanner(
 
 
 def parse_hairpin_descriptor(
-    descriptor: str, *tweaks: abjad.LilyPondTweakManager
+    descriptor: str,
+    *tweaks: abjad.LilyPondTweakManager,
+    forbid_al_niente_to_bar_line: bool = None,
 ) -> typing.List[Bundle]:
     r"""
     Parses hairpin descriptor.
@@ -4265,7 +4272,9 @@ def parse_hairpin_descriptor(
     ] = []
     bundles: typing.List[Bundle] = []
     for string in descriptor.split():
-        indicator = make_dynamic(string)
+        indicator = make_dynamic(
+            string, forbid_al_niente_to_bar_line=forbid_al_niente_to_bar_line
+        )
         if tweaks and hasattr(indicator, "_tweaks"):
             PiecewiseCommand._apply_tweaks(indicator, tweaks)
         indicators.append(indicator)
