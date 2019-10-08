@@ -2261,6 +2261,18 @@ class SegmentMaker(abjad.SegmentMaker):
             )
             raise Exception("\n" + message)
 
+    def _clean_up_laissez_vibrer_tie_direction(self):
+        default = abjad.Clef("treble")
+        for note in abjad.iterate(self.score).leaves(abjad.Note):
+            if note.written_duration < 1:
+                continue
+            if not abjad.inspect(note).has_indicator(abjad.LaissezVibrer):
+                continue
+            clef = abjad.inspect(note).effective(abjad.Clef, default=default)
+            staff_position = note.written_pitch.to_staff_position(clef=clef)
+            if staff_position == abjad.StaffPosition(0):
+                abjad.override(note).laissez_vibrer_tie.direction = abjad.Up
+
     def _clean_up_on_beat_grace_containers(self):
         prototype = abjad.OnBeatGraceContainer
         for container in abjad.select(self.score).components(prototype):
@@ -5921,6 +5933,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._color_mock_pitch()
                 self._color_not_yet_pitched()
                 self._set_not_yet_pitched_to_staff_position_zero()
+                self._clean_up_laissez_vibrer_tie_direction()
                 self._check_all_are_pitched_()
                 self._check_doubled_dynamics()
                 self._color_out_of_range()

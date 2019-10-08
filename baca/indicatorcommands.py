@@ -1391,7 +1391,7 @@ def laissez_vibrer(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
-                        - \laissezVibrer                                                             %! baca.laissez_vibrer():baca.IndicatorCommand._call()
+                        \laissezVibrer                                                               %! baca.laissez_vibrer():baca.IndicatorCommand._call()
                         [
                         d'16
                         ]
@@ -1425,7 +1425,7 @@ def laissez_vibrer(
 
     """
     return commandclasses.IndicatorCommand(
-        indicators=[abjad.Articulation("laissezVibrer")],
+        indicators=[abjad.LaissezVibrer()],
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
