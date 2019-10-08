@@ -603,6 +603,7 @@ Override library.
    ~baca.overrides.dots_extra_offset
    ~baca.overrides.dots_stencil_false
    ~baca.overrides.dots_transparent
+   ~baca.overrides.dots_x_extent_false
    ~baca.overrides.dynamic_text_color
    ~baca.overrides.dynamic_text_extra_offset
    ~baca.overrides.dynamic_text_parent_alignment_x
@@ -656,11 +657,13 @@ Override library.
    ~baca.overrides.repeat_tie_stencil_false
    ~baca.overrides.repeat_tie_transparent
    ~baca.overrides.repeat_tie_up
+   ~baca.overrides.rest_color
    ~baca.overrides.rest_down
    ~baca.overrides.rest_extra_offset
    ~baca.overrides.rest_position
    ~baca.overrides.rest_transparent
    ~baca.overrides.rest_up
+   ~baca.overrides.rest_x_extent_false
    ~baca.overrides.script_color
    ~baca.overrides.script_down
    ~baca.overrides.script_extra_offset

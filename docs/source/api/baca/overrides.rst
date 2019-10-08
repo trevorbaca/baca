@@ -168,6 +168,7 @@ overrides
    ~dots_extra_offset
    ~dots_stencil_false
    ~dots_transparent
+   ~dots_x_extent_false
    ~dynamic_text_color
    ~dynamic_text_extra_offset
    ~dynamic_text_parent_alignment_x
@@ -221,11 +222,13 @@ overrides
    ~repeat_tie_stencil_false
    ~repeat_tie_transparent
    ~repeat_tie_up
+   ~rest_color
    ~rest_down
    ~rest_extra_offset
    ~rest_position
    ~rest_transparent
    ~rest_up
+   ~rest_x_extent_false
    ~script_color
    ~script_down
    ~script_extra_offset
@@ -325,6 +328,8 @@ overrides
 .. autofunction:: dots_stencil_false
 
 .. autofunction:: dots_transparent
+
+.. autofunction:: dots_x_extent_false
 
 .. autofunction:: dynamic_text_color
 
@@ -432,6 +437,8 @@ overrides
 
 .. autofunction:: repeat_tie_up
 
+.. autofunction:: rest_color
+
 .. autofunction:: rest_down
 
 .. autofunction:: rest_extra_offset
@@ -441,6 +448,8 @@ overrides
 .. autofunction:: rest_transparent
 
 .. autofunction:: rest_up
+
+.. autofunction:: rest_x_extent_false
 
 .. autofunction:: script_color
 

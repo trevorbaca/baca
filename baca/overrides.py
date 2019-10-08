@@ -1001,6 +1001,21 @@ def dots_transparent(
     )
 
 
+def dots_x_extent_false(
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
+) -> OverrideCommand:
+    """
+    Overrides dots X-extent.
+    """
+    return OverrideCommand(
+        attribute="X_extent",
+        grob="dots",
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        value=False,
+    )
+
+
 def dynamic_text_color(
     color: str = "red",
     selector: abjad.Expression = classes.Expression().select().pleaf(0),
@@ -3076,6 +3091,22 @@ def repeat_tie_up(
     )
 
 
+def rest_color(
+    color: str,
+    selector: abjad.Expression = classes.Expression().select().rest(0),
+) -> OverrideCommand:
+    """
+    Overrides rest extra offset.
+    """
+    return OverrideCommand(
+        attribute="color",
+        value=color,
+        grob="rest",
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+    )
+
+
 def rest_down(
     selector: abjad.Expression = classes.Expression().select().rests(),
 ) -> OverrideCommand:
@@ -3438,6 +3469,21 @@ def rest_up(
         grob="rest",
         selector=selector,
         tags=[_site(inspect.currentframe())],
+    )
+
+
+def rest_x_extent_false(
+    selector: abjad.Expression = classes.Expression().select().rest(0),
+) -> OverrideCommand:
+    """
+    Overrides rest X-extent.
+    """
+    return OverrideCommand(
+        attribute="X_extent",
+        grob="rest",
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        value=False,
     )
 
 
