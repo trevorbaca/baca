@@ -1013,7 +1013,6 @@ bacaStopTextSpanSNM = #(
     (interpret-markup layout props
         #{
         \markup
-        %%%\with-color #(x11-color 'red)
         \fontsize #-3
         \upright
         \concat { #snm \hspace #-0.25 }
@@ -1089,7 +1088,6 @@ baca-start-snm-left-only = #(
     - \baca-snm-left-text-tweak #left
     - \tweak extra-offset #stage-number-extra-offset
     - \tweak bound-details.right.padding 1.25
-    %%%- \tweak color #red
     $music
     #}
     )
@@ -1100,7 +1098,6 @@ baca-start-snm-colored-left-only = #(
     (string? color? ly:music?)
     #{
     - \abjad-solid-line-with-hook
-    %%%- \baca-snm-left-text-tweak #left
     - \baca-snm-colored-left-text-tweak #left #color
     - \tweak extra-offset #stage-number-extra-offset
     - \tweak bound-details.right.padding 1.25
@@ -1120,7 +1117,6 @@ baca-start-snm-both = #(
     - \tweak extra-offset #stage-number-extra-offset
     - \tweak bound-details.right.padding 0
     - \tweak bound-details.right.stencil-align-dir-y #center
-    %%%- \tweak color #red
     $music
     #}
     )
