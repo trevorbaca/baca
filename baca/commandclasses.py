@@ -1215,6 +1215,7 @@ class GlissandoCommand(scoping.Command):
         "_allow_ties",
         "_hide_middle_note_heads",
         "_hide_middle_stems",
+        "_hide_stem_selector",
         "_left_broken",
         "_parenthesize_repeats",
         "_right_broken",
@@ -1231,6 +1232,7 @@ class GlissandoCommand(scoping.Command):
         allow_ties: bool = None,
         hide_middle_note_heads: bool = None,
         hide_middle_stems: bool = None,
+        hide_stem_selector: abjad.SelectorTyping = None,
         left_broken: bool = None,
         map: abjad.SelectorTyping = None,
         match: typings.Indices = None,
@@ -1259,6 +1261,7 @@ class GlissandoCommand(scoping.Command):
         self._allow_ties = allow_ties
         self._hide_middle_note_heads = hide_middle_note_heads
         self._hide_middle_stems = hide_middle_stems
+        self._hide_stem_selector = hide_stem_selector
         self._left_broken = left_broken
         self._parenthesize_repeats = parenthesize_repeats
         self._right_broken = right_broken
@@ -1290,6 +1293,7 @@ class GlissandoCommand(scoping.Command):
             allow_ties=self.allow_ties,
             hide_middle_note_heads=self.hide_middle_note_heads,
             hide_middle_stems=self.hide_middle_stems,
+            hide_stem_selector=self.hide_stem_selector,
             left_broken=self.left_broken,
             parenthesize_repeats=self.parenthesize_repeats,
             right_broken=self.right_broken,
@@ -1327,6 +1331,13 @@ class GlissandoCommand(scoping.Command):
         Is true when glissando hides middle stems.
         """
         return self._hide_middle_stems
+
+    @property
+    def hide_stem_selector(self) -> typing.Optional[abjad.SelectorTyping]:
+        """
+        Gets hide-stem selector.
+        """
+        return self._hide_stem_selector
 
     @property
     def left_broken(self) -> typing.Optional[bool]:

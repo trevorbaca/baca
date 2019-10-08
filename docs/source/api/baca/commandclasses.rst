@@ -425,6 +425,7 @@ commandclasses
       allow_ties
       hide_middle_note_heads
       hide_middle_stems
+      hide_stem_selector
       left_broken
       parenthesize_repeats
       right_broken
@@ -480,6 +481,8 @@ commandclasses
    .. autoattribute:: GlissandoCommand.hide_middle_note_heads
 
    .. autoattribute:: GlissandoCommand.hide_middle_stems
+
+   .. autoattribute:: GlissandoCommand.hide_stem_selector
 
    .. autoattribute:: GlissandoCommand.left_broken
 
