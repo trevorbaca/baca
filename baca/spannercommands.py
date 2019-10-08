@@ -764,8 +764,8 @@ def sustain_pedal(
 
 
 def trill_spanner(
-    argument: str = None,
     *tweaks: abjad.LilyPondTweakManager,
+    alteration: str = None,
     harmonic: bool = None,
     left_broken: bool = None,
     map: abjad.SelectorTyping = None,
@@ -945,8 +945,8 @@ def trill_spanner(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.trill_spanner(
-        ...             'M2',
         ...             abjad.tweak('red').color,
+        ...             alteration='M2',
         ...             ),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -1008,19 +1008,21 @@ def trill_spanner(
             >>
 
     """
-    if argument is not None:
+    if alteration is not None:
         prototype = (abjad.NamedPitch, abjad.NamedInterval, str)
-        if not isinstance(argument, prototype):
-            message = f"trill spanner 'argument' must be pitch, interval, str:"
-            message += f"\n   {argument}"
+        if not isinstance(alteration, prototype):
+            message = (
+                f"trill spanner 'alteration' must be pitch, interval, str:"
+            )
+            message += f"\n   {alteration}"
             raise Exception(message)
     interval = pitch = None
-    if argument is not None:
+    if alteration is not None:
         try:
-            pitch = abjad.NamedPitch(argument)
+            pitch = abjad.NamedPitch(alteration)
         except:
             try:
-                interval = abjad.NamedInterval(argument)
+                interval = abjad.NamedInterval(alteration)
             except:
                 pass
     start_trill_span = start_trill_span or abjad.StartTrillSpan()
