@@ -12,5 +12,5 @@ baca-quasi-bisb-ancora-markup = \markup
 baca-lv-possibile-markup = \markup
     "lv possibile"
 
-baca-lv-into-following-silence-markup = \markup
-    "lv into following silence"
+baca-lv-into-fermata-markup = \markup
+    "lv into fermata"
