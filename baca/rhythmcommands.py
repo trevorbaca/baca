@@ -1339,7 +1339,7 @@ def tacet(
     color: str = "green",
     *,
     measures: typings.SliceTyping = None,
-    selector: abjad.SelectorTyping = classes.Expression().select().mmrests(),
+    selector: abjad.Expression = classes.Expression().select().mmrests(),
 ) -> overrides.OverrideCommand:
     """
     Colors multimeasure rests.

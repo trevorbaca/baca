@@ -245,11 +245,11 @@ class Command(object):
         self,
         *,
         deactivate: bool = None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: ScopeTyping = None,
-        selector: abjad.SelectorTyping = None,
+        selector: abjad.Expression = None,
         tag_measure_number: bool = None,
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:

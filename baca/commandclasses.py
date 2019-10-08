@@ -36,11 +36,11 @@ class BCPCommand(scoping.Command):
         bow_change_tweaks: abjad.IndexedTweakManagers = None,
         final_spanner: bool = None,
         helper: typing.Callable = None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = None,
+        selector: abjad.Expression = None,
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
@@ -891,13 +891,11 @@ class ColorCommand(scoping.Command):
     def __init__(
         self,
         *,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = classes.Expression()
-        .select()
-        .leaves(),
+        selector: abjad.Expression = classes.Expression().select().leaves(),
     ) -> None:
         assert selector is not None
         scoping.Command.__init__(
@@ -1076,13 +1074,11 @@ class ContainerCommand(scoping.Command):
         self,
         *,
         identifier: str = None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = classes.Expression()
-        .select()
-        .leaves(),
+        selector: abjad.Expression = classes.Expression().select().leaves(),
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -1155,8 +1151,8 @@ class DetachCommand(scoping.Command):
     def __init__(
         self,
         arguments: typing.Sequence[typing.Any],
-        selector: abjad.SelectorTyping,
-        map: abjad.SelectorTyping = None,
+        selector: abjad.Expression,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
@@ -1232,18 +1228,16 @@ class GlissandoCommand(scoping.Command):
         allow_ties: bool = None,
         hide_middle_note_heads: bool = None,
         hide_middle_stems: bool = None,
-        hide_stem_selector: abjad.SelectorTyping = None,
+        hide_stem_selector: abjad.Expression = None,
         left_broken: bool = None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         parenthesize_repeats: bool = None,
         right_broken: bool = None,
         right_broken_show_next: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = classes.Expression()
-        .select()
-        .tleaves(),
+        selector: abjad.Expression = classes.Expression().select().tleaves(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
         zero_padding: bool = None,
@@ -1333,7 +1327,7 @@ class GlissandoCommand(scoping.Command):
         return self._hide_middle_stems
 
     @property
-    def hide_stem_selector(self) -> typing.Optional[abjad.SelectorTyping]:
+    def hide_stem_selector(self) -> typing.Optional[abjad.Expression]:
         """
         Gets hide-stem selector.
         """
@@ -1410,11 +1404,11 @@ class GlobalFermataCommand(scoping.Command):
         self,
         *,
         description: str = None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+        selector: abjad.Expression = classes.Expression().select().leaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1523,15 +1517,13 @@ class IndicatorCommand(scoping.Command):
         context: str = None,
         deactivate: bool = None,
         do_not_test: bool = None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         predicate: typing.Callable = None,
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = classes.Expression()
-        .select()
-        .pheads(),
+        selector: abjad.Expression = classes.Expression().select().pheads(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
@@ -1714,7 +1706,7 @@ class LabelCommand(scoping.Command):
         self,
         *,
         expression=None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
@@ -1782,12 +1774,12 @@ class MetronomeMarkCommand(scoping.Command):
         key: typing.Union[
             str, indicators.Accelerando, indicators.Ritardando
         ] = None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+        selector: abjad.Expression = classes.Expression().select().leaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1882,14 +1874,12 @@ class PartAssignmentCommand(scoping.Command):
     def __init__(
         self,
         *,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         part_assignment: abjad.PartAssignment = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = classes.Expression()
-        .select()
-        .leaves(),
+        selector: abjad.Expression = classes.Expression().select().leaves(),
     ) -> None:
         scoping.Command.__init__(
             self,

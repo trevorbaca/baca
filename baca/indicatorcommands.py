@@ -19,7 +19,7 @@ def _site(frame):
 
 
 def accent(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -104,7 +104,7 @@ def accent(
 
 
 def alternate_bow_strokes(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .pheads(exclude=abjad.const.HIDDEN),
     *,
@@ -367,7 +367,7 @@ def alternate_bow_strokes(
 
 
 def arpeggio(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .chead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -453,7 +453,7 @@ def arpeggio(
 
 def articulation(
     articulation: str,
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -470,7 +470,7 @@ def articulation(
 
 def articulations(
     articulations: typing.List,
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .pheads(exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -486,7 +486,7 @@ def articulations(
 
 def bar_line(
     abbreviation: str = "|",
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
     *,
     format_slot: str = "after",
 ) -> commandclasses.IndicatorCommand:
@@ -502,7 +502,7 @@ def bar_line(
 
 
 def breathe(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .pleaf(-1, exclude=abjad.const.HIDDEN),
     *tweaks: abjad.LilyPondTweakManager,
@@ -522,7 +522,7 @@ def breathe(
 
 def clef(
     clef: str = "treble",
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
     *,
     redundant: bool = None,
 ) -> commandclasses.IndicatorCommand:
@@ -609,7 +609,7 @@ def clef(
 
 
 def double_staccato(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -694,7 +694,7 @@ def double_staccato(
 
 
 def down_arpeggio(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .chead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -780,7 +780,7 @@ def down_arpeggio(
 
 
 def down_bow(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
     *tweaks: abjad.LilyPondTweakManager,
@@ -941,7 +941,7 @@ def down_bow(
 
 
 def espressivo(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
     *tweaks: abjad.LilyPondTweakManager,
@@ -1028,7 +1028,7 @@ def espressivo(
 
 
 def fermata(
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches fermata.
@@ -1111,7 +1111,7 @@ def fermata(
 
 
 def flageolet(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -1196,7 +1196,7 @@ def flageolet(
 
 
 def hide_black_note_heads(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .leaves(exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -1347,7 +1347,7 @@ def hide_black_note_heads(
 
 
 def laissez_vibrer(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .ptail(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -1433,7 +1433,7 @@ def laissez_vibrer(
 
 def literal(
     string: typing.Union[str, typing.List[str]],
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
     *,
     format_slot: str = "before",
 ) -> commandclasses.IndicatorCommand:
@@ -1449,7 +1449,7 @@ def literal(
 
 
 def long_fermata(
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches long fermata.
@@ -1532,7 +1532,7 @@ def long_fermata(
 
 
 def marcato(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -1618,7 +1618,7 @@ def marcato(
 
 def margin_markup(
     argument: str,
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
     *,
     alert: commandclasses.IndicatorCommand = None,
     context: str = "Staff",
@@ -1783,7 +1783,7 @@ def margin_markup(
 
 def mark(
     argument: str,
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
     *tweaks: abjad.LilyPondTweakManager,
 ) -> commandclasses.IndicatorCommand:
     """
@@ -1800,7 +1800,7 @@ def mark(
 
 
 def parenthesize(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -1885,7 +1885,7 @@ def parenthesize(
 
 
 def quadruple_staccato(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -1901,7 +1901,7 @@ def quadruple_staccato(
 
 def rehearsal_mark(
     argument: typing.Union[int, str],
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
     *tweaks: abjad.LilyPondTweakManager,
 ) -> commandclasses.IndicatorCommand:
     """
@@ -1919,7 +1919,7 @@ def rehearsal_mark(
 
 
 def repeat_tie(
-    selector: abjad.SelectorTyping, *, allow_rest: bool = None
+    selector: abjad.Expression, *, allow_rest: bool = None
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches repeat-tie.
@@ -2008,7 +2008,7 @@ def repeat_tie(
 
 
 def short_fermata(
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches short fermata.
@@ -2091,7 +2091,7 @@ def short_fermata(
 
 
 def snap_pizzicato(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -2106,7 +2106,7 @@ def snap_pizzicato(
 
 
 def staccatissimo(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -2191,7 +2191,7 @@ def staccatissimo(
 
 
 def staccato(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -2276,8 +2276,7 @@ def staccato(
 
 
 def staff_lines(
-    n: int,
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    n: int, selector: abjad.Expression = classes.Expression().select().leaf(0)
 ) -> scoping.Suite:
     r"""
     Makes staff line command.
@@ -3028,7 +3027,7 @@ def staff_lines(
 
 def start_markup(
     argument: typing.Union[str, typing.List[str]],
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
     *,
     context: str = "Staff",
     hcenter_in: abjad.Number = None,
@@ -3064,7 +3063,7 @@ def start_markup(
 
 
 def stem_tremolo(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .pleaf(0, exclude=abjad.const.HIDDEN),
     *,
@@ -3151,11 +3150,11 @@ def stem_tremolo(
 
 
 def stop_on_string(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
     *,
-    map: abjad.SelectorTyping = None,
+    map: abjad.Expression = None,
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches stop-on-string.
@@ -3240,7 +3239,7 @@ def stop_on_string(
 
 
 def stop_trill(
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches stop trill to closing-slot.
@@ -3260,7 +3259,7 @@ def stop_trill(
 
 
 def stopped(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -3344,7 +3343,7 @@ def stopped(
     )
 
 
-def tie(selector: abjad.SelectorTyping) -> commandclasses.IndicatorCommand:
+def tie(selector: abjad.Expression) -> commandclasses.IndicatorCommand:
     r"""
     Attaches tie.
 
@@ -3429,7 +3428,7 @@ def tie(selector: abjad.SelectorTyping) -> commandclasses.IndicatorCommand:
 
 
 def tenuto(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -3514,7 +3513,7 @@ def tenuto(
 
 
 def triple_staccato(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -3529,7 +3528,7 @@ def triple_staccato(
 
 
 def up_arpeggio(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .chead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
@@ -3615,7 +3614,7 @@ def up_arpeggio(
 
 
 def up_bow(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
     *tweaks: abjad.LilyPondTweakManager,
@@ -3707,7 +3706,7 @@ def up_bow(
 
 
 def very_long_fermata(
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches very long fermata.

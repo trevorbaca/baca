@@ -1828,8 +1828,8 @@ class Anchor(object):
         self,
         *,
         figure_name: str = None,
-        local_selector: abjad.SelectorTyping = None,
-        remote_selector: abjad.SelectorTyping = None,
+        local_selector: abjad.Expression = None,
+        remote_selector: abjad.Expression = None,
         remote_voice_name: str = None,
         use_remote_stop_offset: bool = None,
     ) -> None:
@@ -1978,7 +1978,7 @@ class Imbrication(object):
         allow_unused_pitches: bool = None,
         by_pitch_class: bool = None,
         hocket: bool = None,
-        selector: abjad.SelectorTyping = None,
+        selector: abjad.Expression = None,
         truncate_ties: bool = None,
     ) -> None:
         assert isinstance(voice_name, str), repr(voice_name)
@@ -7677,8 +7677,8 @@ class Bind(object):
 
 def anchor(
     remote_voice_name: str,
-    remote_selector: abjad.SelectorTyping = None,
-    local_selector: abjad.SelectorTyping = None,
+    remote_selector: abjad.Expression = None,
+    local_selector: abjad.Expression = None,
 ) -> Anchor:
     """
     Anchors music in this figure (filtered by ``local_selector``) to
@@ -7700,8 +7700,8 @@ def anchor(
 
 def anchor_after(
     remote_voice_name: str,
-    remote_selector: abjad.SelectorTyping = None,
-    local_selector: abjad.SelectorTyping = None,
+    remote_selector: abjad.Expression = None,
+    local_selector: abjad.Expression = None,
 ) -> Anchor:
     """
     Anchors music in this figure (filtered by ``local_selector``) to
@@ -8317,7 +8317,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
 
 def extend_beam(
-    selector: abjad.SelectorTyping = classes.Expression().select().leaf(-1)
+    selector: abjad.Expression = classes.Expression().select().leaf(-1)
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches RIGHT_BROKEN_BEAM to selector output.
@@ -8651,7 +8651,7 @@ def imbricate(
     allow_unused_pitches: bool = None,
     by_pitch_class: bool = None,
     hocket: bool = None,
-    selector: abjad.SelectorTyping = None,
+    selector: abjad.Expression = None,
     truncate_ties: bool = None,
 ):
     r"""

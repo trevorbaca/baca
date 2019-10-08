@@ -162,14 +162,12 @@ class AccidentalAdjustmentCommand(scoping.Command):
         *,
         cautionary: bool = None,
         forced: bool = None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         parenthesized: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = classes.Expression()
-        .select()
-        .pleaf(0),
+        selector: abjad.Expression = classes.Expression().select().pleaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         scoping.Command.__init__(
@@ -399,7 +397,7 @@ class ClusterCommand(scoping.Command):
         self,
         *,
         hide_flat_markup=None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
@@ -1739,7 +1737,7 @@ class ColorFingeringCommand(scoping.Command):
     def __init__(
         self,
         *,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         numbers=None,
@@ -1843,7 +1841,7 @@ class DiatonicClusterCommand(scoping.Command):
     def __init__(
         self,
         *,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
@@ -2207,7 +2205,7 @@ class MicrotoneDeviationCommand(scoping.Command):
         self,
         *,
         deviations=None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
@@ -2449,7 +2447,7 @@ class OctaveDisplacementCommand(scoping.Command):
         self,
         *,
         displacements=None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
@@ -3057,13 +3055,13 @@ class PitchCommand(scoping.Command):
         cyclic: bool = None,
         do_not_transpose: bool = None,
         ignore_incomplete: bool = None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         persist: str = None,
         pitches: typing.Union[typing.Sequence, Loop] = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = None,
+        selector: abjad.Expression = None,
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -3903,7 +3901,7 @@ class RegisterCommand(scoping.Command):
     def __init__(
         self,
         *,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         registration=None,
@@ -5402,11 +5400,11 @@ class RegisterInterpolationCommand(scoping.Command):
     def __init__(
         self,
         *,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = classes.Expression().select().plts(),
+        selector: abjad.Expression = classes.Expression().select().plts(),
         start_pitch: typing.Union[abjad.Number, abjad.NumberedPitch] = 0,
         stop_pitch: typing.Union[abjad.Number, abjad.NumberedPitch] = 0,
     ) -> None:
@@ -8039,7 +8037,7 @@ class RegisterToOctaveCommand(scoping.Command):
         *,
         anchor=None,
         octave_number=None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
@@ -8326,12 +8324,12 @@ class StaffPositionCommand(scoping.Command):
         allow_repeats: bool = None,
         allow_repitch: bool = None,
         exact: bool = None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         mock: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = classes.Expression().select().plts(),
+        selector: abjad.Expression = classes.Expression().select().plts(),
         set_chord_pitches_equal: bool = None,
     ) -> None:
         scoping.Command.__init__(
@@ -8514,12 +8512,12 @@ class StaffPositionInterpolationCommand(scoping.Command):
         stop: typing.Union[int, str, abjad.NamedPitch, abjad.StaffPosition],
         *,
         mock: bool = None,
-        map: abjad.SelectorTyping = None,
+        map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         pitches_instead_of_staff_positions: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.SelectorTyping = classes.Expression().select().plts(),
+        selector: abjad.Expression = classes.Expression().select().plts(),
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -8660,7 +8658,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
 def bass_to_octave(
     n: int,
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
 ) -> RegisterToOctaveCommand:
@@ -9100,7 +9098,7 @@ def bass_to_octave(
 
 def center_to_octave(
     n: int,
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
 ) -> RegisterToOctaveCommand:
@@ -9540,7 +9538,7 @@ def center_to_octave(
 
 def clusters(
     widths: typing.List[int],
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
     *,
@@ -9557,7 +9555,7 @@ def clusters(
 def color_fingerings(
     numbers: typing.List[abjad.Number],
     *tweaks: abjad.IndexedTweakManager,
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .pheads(exclude=abjad.const.HIDDEN),
 ) -> ColorFingeringCommand:
@@ -9571,7 +9569,7 @@ def color_fingerings(
 
 def deviation(
     deviations: typing.List[abjad.Number],
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
 ) -> MicrotoneDeviationCommand:
@@ -9583,7 +9581,7 @@ def deviation(
 
 def diatonic_clusters(
     widths: typing.List[int],
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
 ) -> DiatonicClusterCommand:
@@ -9595,7 +9593,7 @@ def diatonic_clusters(
 
 def displacement(
     displacements: typing.List[int],
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
 ) -> OctaveDisplacementCommand:
@@ -9733,7 +9731,7 @@ def displacement(
 
 
 def force_accidental(
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .pleaf(0, exclude=abjad.const.HIDDEN),
 ) -> AccidentalAdjustmentCommand:
@@ -9878,7 +9876,7 @@ def force_accidental(
 def interpolate_pitches(
     start: typing.Union[int, str, abjad.NamedPitch],
     stop: typing.Union[int, str, abjad.NamedPitch],
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
     *,
@@ -10043,7 +10041,7 @@ def interpolate_pitches(
 def interpolate_staff_positions(
     start: typing.Union[int, abjad.StaffPosition],
     stop: typing.Union[int, abjad.StaffPosition],
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
     *,
@@ -10062,7 +10060,7 @@ def interpolate_staff_positions(
 def loop(
     items: typing.Sequence,
     intervals: typing.Sequence,
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
 ) -> PitchCommand:
@@ -10075,7 +10073,7 @@ def loop(
 
 def natural_clusters(
     widths: typing.Sequence[int],
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
     *,
@@ -10094,7 +10092,7 @@ def natural_clusters(
 
 def pitch(
     pitch,
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
     *,
@@ -10265,7 +10263,7 @@ def pitch(
 
 def pitches(
     pitches,
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
     *,
@@ -10318,7 +10316,7 @@ def register(
     start: int,
     stop: int = None,
     *,
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
 ) -> typing.Union[RegisterCommand, RegisterInterpolationCommand]:
@@ -10623,7 +10621,7 @@ def register(
 
 def soprano_to_octave(
     n: int,
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
 ) -> RegisterToOctaveCommand:
@@ -10801,7 +10799,7 @@ def soprano_to_octave(
 
 def staff_position(
     argument: typing.Union[int, list, abjad.StaffPosition],
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
     *,
@@ -10831,7 +10829,7 @@ def staff_position(
 
 def staff_positions(
     numbers,
-    selector: abjad.SelectorTyping = classes.Expression()
+    selector: abjad.Expression = classes.Expression()
     .select()
     .plts(exclude=abjad.const.HIDDEN),
     *,
