@@ -101,8 +101,7 @@ class SpannerIndicatorCommand(scoping.Command):
                     deactivate=self.deactivate,
                     tag=abjad.Tag("baca.SpannerIndicatorCommand._call(1)")
                     .append(abjad.tags.SPANNER_START)
-                    .append(abjad.tags.LEFT_BROKEN)
-                    .append(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS),
+                    .append(abjad.tags.LEFT_BROKEN),
                 )
             else:
                 self._attach_indicator(
@@ -126,8 +125,7 @@ class SpannerIndicatorCommand(scoping.Command):
                     deactivate=self.deactivate,
                     tag=abjad.Tag("baca.SpannerIndicatorCommand._call(3)")
                     .append(abjad.tags.SPANNER_STOP)
-                    .append(abjad.tags.RIGHT_BROKEN)
-                    .append(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS),
+                    .append(abjad.tags.RIGHT_BROKEN),
                 )
             else:
                 self._attach_indicator(

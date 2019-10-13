@@ -266,14 +266,10 @@ class PiecewiseCommand(scoping.Command):
             is_final_piece = i == piece_count - 1
             if is_final_piece and self.right_broken:
                 bundle = Bundle(spanner_start=self.right_broken)
+                tag = abjad.Tag("baca.PiecewiseCommand._call(1)")
+                tag = tag.append(abjad.tags.RIGHT_BROKEN)
                 self._attach_indicators(
-                    bundle,
-                    stop_leaf,
-                    i,
-                    total_pieces,
-                    tag=abjad.Tag("baca.PiecewiseCommand._call(1)").append(
-                        abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS
-                    ),
+                    bundle, stop_leaf, i, total_pieces, tag=tag
                 )
             if bookend_pattern.matches_index(i, piece_count) and 1 < len(
                 piece
@@ -323,7 +319,6 @@ class PiecewiseCommand(scoping.Command):
             if is_first_piece or previous_had_bookend:
                 bundle = abjad.new(bundle, spanner_stop=None)
                 if self.left_broken:
-                    tag = tag.append(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS)
                     tag = tag.append(abjad.tags.LEFT_BROKEN)
             if is_final_piece and self.right_broken:
                 tag = tag.append(abjad.tags.RIGHT_BROKEN)
@@ -398,7 +393,6 @@ class PiecewiseCommand(scoping.Command):
         i,
         total_pieces,
         autodetected_right_padding=None,
-        left_broken=None,
         just_bookended_leaf=None,
         tag=None,
     ):
@@ -406,8 +400,6 @@ class PiecewiseCommand(scoping.Command):
         from .segmentmaker import SegmentMaker
 
         assert isinstance(tag, abjad.Tag), repr(tag)
-        if left_broken is True:
-            tag = tag.append(abjad.tags.HIDE_TO_JOIN_BROKEN_SPANNERS)
         for indicator in bundle:
             if indicator in (True, False):
                 pass
