@@ -82,7 +82,7 @@ baca-purpleheart-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
     \box
-    purepleheart
+    purpleheart
 
 baca-ratchet-markup = \markup
     \whiteout
