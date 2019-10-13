@@ -471,6 +471,16 @@ baca-start-mn-both = #(
     #}
     )
 
+%%% METRIC MODULATION SPANNER %%%
+
+bacaStartTextSpanMetricModulation = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "MetricModulation"
+    )
+
+bacaStopTextSpanMetricModulation = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "MetricModulation"
+    )
+
 %%% METRONOME MARK SPANNER %%%
 
 bacaStartTextSpanMM = #(

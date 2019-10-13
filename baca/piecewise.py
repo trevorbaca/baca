@@ -698,7 +698,7 @@ def covered_spanner(
     .ltleaves()
     .rleak(),
 ) -> PiecewiseCommand:
-    r"""
+    """
     Makes covered spanner.
     """
     tag = _site(inspect.currentframe())
@@ -4151,6 +4151,43 @@ def material_annotation_spanner(
         autodetect_right_padding=True,
         bookend=False,
         lilypond_id="MaterialAnnotation",
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        right_broken=right_broken,
+        selector=selector,
+    )
+    result = abjad.new(command, tags=[tag])
+    assert isinstance(result, PiecewiseCommand)
+    return result
+
+
+def metric_modulation_spanner(
+    *tweaks: abjad.IndexedTweakManager,
+    argument: str = r"MM =|",
+    map: abjad.Expression = None,
+    match: typings.Indices = None,
+    measures: typings.SliceTyping = None,
+    pieces: abjad.Expression = classes.Expression().select().group(),
+    right_broken: bool = None,
+    # NOTE: selector differs from text_spanner()
+    selector: abjad.Expression = classes.Expression()
+    .select()
+    .leaves()
+    .rleak(),
+) -> PiecewiseCommand:
+    """
+    Makes metric modulation spanner.
+    """
+    tag = _site(inspect.currentframe())
+    tag = tag.append(abjad.tags.METRIC_MODULATION_SPANNER)
+    command = text_spanner(
+        argument,
+        *tweaks,
+        autodetect_right_padding=True,
+        bookend=False,
+        lilypond_id="MetricModulation",
         map=map,
         match=match,
         measures=measures,

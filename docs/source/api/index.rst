@@ -716,6 +716,7 @@ Override library.
    ~baca.overrides.tuplet_bracket_up
    ~baca.overrides.tuplet_number_denominator
    ~baca.overrides.tuplet_number_extra_offset
+   ~baca.overrides.tuplet_number_text
    ~baca.overrides.tuplet_number_transparent
 
 .. raw:: html
@@ -760,6 +761,7 @@ Piecewise library.
    ~baca.piecewise.half_clt_spanner
    ~baca.piecewise.make_dynamic
    ~baca.piecewise.material_annotation_spanner
+   ~baca.piecewise.metric_modulation_spanner
    ~baca.piecewise.parse_hairpin_descriptor
    ~baca.piecewise.pitch_annotation_spanner
    ~baca.piecewise.rhythm_annotation_spanner

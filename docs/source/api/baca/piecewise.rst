@@ -234,6 +234,7 @@ piecewise
    ~half_clt_spanner
    ~make_dynamic
    ~material_annotation_spanner
+   ~metric_modulation_spanner
    ~parse_hairpin_descriptor
    ~pitch_annotation_spanner
    ~rhythm_annotation_spanner
@@ -264,6 +265,8 @@ piecewise
 .. autofunction:: make_dynamic
 
 .. autofunction:: material_annotation_spanner
+
+.. autofunction:: metric_modulation_spanner
 
 .. autofunction:: parse_hairpin_descriptor
 

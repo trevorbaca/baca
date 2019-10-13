@@ -6425,6 +6425,22 @@ def tuplet_number_extra_offset(
     )
 
 
+def tuplet_number_text(
+    string: str,
+    selector: abjad.Expression = classes.Expression().select().leaves(),
+) -> OverrideCommand:
+    """
+    Overrides tuplet number text.
+    """
+    return OverrideCommand(
+        attribute="text",
+        grob="tuplet_number",
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        value=string,
+    )
+
+
 def tuplet_number_transparent(
     selector: abjad.Expression = classes.Expression().select().leaves(),
 ) -> OverrideCommand:

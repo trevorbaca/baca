@@ -281,6 +281,7 @@ overrides
    ~tuplet_bracket_up
    ~tuplet_number_denominator
    ~tuplet_number_extra_offset
+   ~tuplet_number_text
    ~tuplet_number_transparent
 
 .. autofunction:: accidental_extra_offset
@@ -554,5 +555,7 @@ overrides
 .. autofunction:: tuplet_number_denominator
 
 .. autofunction:: tuplet_number_extra_offset
+
+.. autofunction:: tuplet_number_text
 
 .. autofunction:: tuplet_number_transparent
