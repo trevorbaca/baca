@@ -6186,7 +6186,9 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe(), lone=True)
         return self.rleaves(exclude=exclude)[n]
 
-    def rleak(self) -> typing.Union[abjad.Selection, abjad.Expression]:
+    def rleak(
+        self, *, grace: bool = None
+    ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Leaks to the right.
 
@@ -6253,7 +6255,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.with_next_leaf()
+        return self.with_next_leaf(grace=grace)
 
     def rleaves(
         self, *, exclude: abjad.Strings = None
