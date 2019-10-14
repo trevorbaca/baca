@@ -286,6 +286,7 @@ Bača API
    ~baca.indicatorcommands.bar_line
    ~baca.indicatorcommands.breathe
    ~baca.indicatorcommands.clef
+   ~baca.indicatorcommands.damp
    ~baca.indicatorcommands.double_staccato
    ~baca.indicatorcommands.down_arpeggio
    ~baca.indicatorcommands.down_bow

@@ -608,6 +608,21 @@ def clef(
     )
 
 
+def damp(
+    selector: abjad.Expression = classes.Expression()
+    .select()
+    .phead(0, exclude=abjad.const.HIDDEN),
+) -> commandclasses.IndicatorCommand:
+    """
+    Attaches damp.
+    """
+    return commandclasses.IndicatorCommand(
+        indicators=[abjad.Articulation("baca-damp")],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+    )
+
+
 def double_staccato(
     selector: abjad.Expression = classes.Expression()
     .select()
@@ -2095,7 +2110,7 @@ def snap_pizzicato(
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
-    r"""
+    """
     Attaches snap pizzicato.
     """
     return commandclasses.IndicatorCommand(
