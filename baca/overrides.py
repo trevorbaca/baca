@@ -720,6 +720,23 @@ def clef_shift(
     return suite
 
 
+def clef_whiteout(
+    n: abjad.Number,
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
+) -> OverrideCommand:
+    """
+    Overrides clef whiteout.
+    """
+    return OverrideCommand(
+        attribute="whiteout",
+        context="Staff",
+        grob="clef",
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        value=n,
+    )
+
+
 def clef_x_extent_false(
     selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> OverrideCommand:
