@@ -225,7 +225,7 @@ def accidental_extra_offset(
     selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> OverrideCommand:
     """
-    Overrides accidental stencil.
+    Overrides accidental extra-offset.
     """
     return OverrideCommand(
         attribute="extra_offset",
@@ -1245,6 +1245,22 @@ def dynamic_text_y_offset(
         grob="dynamic_text",
         selector=selector,
         tags=[_site(inspect.currentframe())],
+    )
+
+
+def flag_extra_offset(
+    pair: abjad.NumberPair,
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
+) -> OverrideCommand:
+    """
+    Overrides flag extra-offset.
+    """
+    return OverrideCommand(
+        attribute="extra_offset",
+        grob="flag",
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        value=pair,
     )
 
 
@@ -4343,6 +4359,22 @@ def stem_down(
     )
 
 
+def stem_extra_offset(
+    pair: abjad.NumberPair,
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
+) -> OverrideCommand:
+    """
+    Overrides stem extra-offset.
+    """
+    return OverrideCommand(
+        attribute="extra_offset",
+        grob="stem",
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        value=pair,
+    )
+
+
 def stem_stencil_false(
     selector: abjad.Expression = classes.Expression().select().pleaf(0),
 ) -> OverrideCommand:
@@ -4370,6 +4402,22 @@ def stem_transparent(
         grob="stem",
         selector=selector,
         tags=[_site(inspect.currentframe())],
+    )
+
+
+def stem_tremolo_extra_offset(
+    pair: abjad.NumberPair,
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
+) -> OverrideCommand:
+    """
+    Overrides stem tremolo extra-offset.
+    """
+    return OverrideCommand(
+        attribute="extra_offset",
+        grob="stem_tremolo",
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+        value=pair,
     )
 
 

@@ -178,6 +178,7 @@ overrides
    ~dynamic_text_x_extent_zero
    ~dynamic_text_x_offset
    ~dynamic_text_y_offset
+   ~flag_extra_offset
    ~flag_stencil_false
    ~flag_transparent
    ~glissando_thickness
@@ -243,8 +244,10 @@ overrides
    ~span_bar_transparent
    ~stem_color
    ~stem_down
+   ~stem_extra_offset
    ~stem_stencil_false
    ~stem_transparent
+   ~stem_tremolo_extra_offset
    ~stem_up
    ~strict_note_spacing_off
    ~sustain_pedal_staff_padding
@@ -349,6 +352,8 @@ overrides
 .. autofunction:: dynamic_text_x_offset
 
 .. autofunction:: dynamic_text_y_offset
+
+.. autofunction:: flag_extra_offset
 
 .. autofunction:: flag_stencil_false
 
@@ -480,9 +485,13 @@ overrides
 
 .. autofunction:: stem_down
 
+.. autofunction:: stem_extra_offset
+
 .. autofunction:: stem_stencil_false
 
 .. autofunction:: stem_transparent
+
+.. autofunction:: stem_tremolo_extra_offset
 
 .. autofunction:: stem_up
 

@@ -613,6 +613,7 @@ Override library.
    ~baca.overrides.dynamic_text_x_extent_zero
    ~baca.overrides.dynamic_text_x_offset
    ~baca.overrides.dynamic_text_y_offset
+   ~baca.overrides.flag_extra_offset
    ~baca.overrides.flag_stencil_false
    ~baca.overrides.flag_transparent
    ~baca.overrides.glissando_thickness
@@ -678,8 +679,10 @@ Override library.
    ~baca.overrides.span_bar_transparent
    ~baca.overrides.stem_color
    ~baca.overrides.stem_down
+   ~baca.overrides.stem_extra_offset
    ~baca.overrides.stem_stencil_false
    ~baca.overrides.stem_transparent
+   ~baca.overrides.stem_tremolo_extra_offset
    ~baca.overrides.stem_up
    ~baca.overrides.strict_note_spacing_off
    ~baca.overrides.sustain_pedal_staff_padding
