@@ -576,7 +576,6 @@ def bow_speed_spanner(
 
 
 def circle_bow_spanner(
-    qualifier: str = None,
     *tweaks: abjad.IndexedTweakManager,
     left_broken: bool = None,
     left_broken_text: typing.Optional[
@@ -586,6 +585,7 @@ def circle_bow_spanner(
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces: abjad.Expression = classes.Expression().select().group(),
+    qualifier: str = None,
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
     selector: abjad.Expression = classes.Expression()

@@ -597,6 +597,7 @@ Override library.
    ~baca.overrides.beam_transparent
    ~baca.overrides.clef_extra_offset
    ~baca.overrides.clef_shift
+   ~baca.overrides.clef_whiteout
    ~baca.overrides.clef_x_extent_false
    ~baca.overrides.dls_padding
    ~baca.overrides.dls_staff_padding

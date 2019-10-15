@@ -161,6 +161,7 @@ overrides
    ~beam_transparent
    ~clef_extra_offset
    ~clef_shift
+   ~clef_whiteout
    ~clef_x_extent_false
    ~dls_padding
    ~dls_staff_padding
@@ -318,6 +319,8 @@ overrides
 .. autofunction:: clef_extra_offset
 
 .. autofunction:: clef_shift
+
+.. autofunction:: clef_whiteout
 
 .. autofunction:: clef_x_extent_false
 
