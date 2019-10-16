@@ -4884,7 +4884,7 @@ class Selection(abjad.Selection):
         return self.pheads(exclude=exclude)[n]
 
     def pheads(
-        self, *, exclude: abjad.Strings = None
+        self, *, exclude: abjad.Strings = None, grace: bool = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects pitched heads.
@@ -5007,7 +5007,9 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.plts(exclude=exclude).map(Expression().select()[0])
+        return self.plts(exclude=exclude, grace=grace).map(
+            Expression().select()[0]
+        )
 
     def pleaf(
         self, n: int, *, exclude: abjad.Strings = None, grace: bool = None
