@@ -4244,8 +4244,8 @@ r"""
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \set Staff.shortInstrumentName =                                         %! -PARTS:abjad.ScoreTemplate.attach_defaults(2):baca.SegmentMaker._set_status_tag():DEFAULT_MARGIN_MARKUP
                             \markup { I+II }                                                         %! -PARTS:abjad.ScoreTemplate.attach_defaults(2):baca.SegmentMaker._set_status_tag():DEFAULT_MARGIN_MARKUP
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! baca.SegmentMaker._attach_color_literal(2):DEFAULT_MARGIN_MARKUP_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! baca.SegmentMaker._attach_color_literal(2):DEFAULT_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             ^ \baca-default-indicator-markup "[“I+II”]"                              %! DEFAULT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -4367,8 +4367,8 @@ r"""
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \set Staff.shortInstrumentName =                                         %! -PARTS:abjad.ScoreTemplate.attach_defaults(2):baca.SegmentMaker._set_status_tag():DEFAULT_MARGIN_MARKUP
                             \markup { I+II }                                                         %! -PARTS:abjad.ScoreTemplate.attach_defaults(2):baca.SegmentMaker._set_status_tag():DEFAULT_MARGIN_MARKUP
-                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! baca.SegmentMaker._attach_color_literal(2):DEFAULT_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! baca.SegmentMaker._attach_color_literal(2):DEFAULT_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                         %%% ^ \baca-default-indicator-markup "[“I+II”]"                              %! DEFAULT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -4486,8 +4486,8 @@ r"""
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \set Staff.shortInstrumentName =                                         %! -PARTS:abjad.ScoreTemplate.attach_defaults(2):baca.SegmentMaker._set_status_tag():DEFAULT_MARGIN_MARKUP
                             \markup { I+II }                                                         %! -PARTS:abjad.ScoreTemplate.attach_defaults(2):baca.SegmentMaker._set_status_tag():DEFAULT_MARGIN_MARKUP
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! baca.SegmentMaker._attach_color_literal(2):DEFAULT_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'DarkViolet)    %! baca.SegmentMaker._attach_color_literal(2):DEFAULT_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             ^ \baca-default-indicator-markup "[“I+II”]"                              %! DEFAULT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -4622,8 +4622,8 @@ r"""
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \set Staff.shortInstrumentName =                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
                             \markup { I+II }                                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -4745,8 +4745,8 @@ r"""
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \set Staff.shortInstrumentName =                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
                             \markup { I+II }                                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
-                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                         %%% ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -4864,8 +4864,8 @@ r"""
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \set Staff.shortInstrumentName =                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
                             \markup { I+II }                                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -5015,8 +5015,8 @@ r"""
                             \markup { III+IV }                                                       %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
                             \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                             \markup { III+IV }                                                       %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -5141,8 +5141,8 @@ r"""
                             \markup { III+IV }                                                       %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
                             \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                             \markup { III+IV }                                                       %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
-                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                         %%% ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -5263,8 +5263,8 @@ r"""
                             \markup { III+IV }                                                       %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
                             \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                             \markup { III+IV }                                                       %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -5415,8 +5415,8 @@ r"""
                             \markup { I+II }                                                         %! baca.SegmentMaker._reapply_persistent_indicators(3):-PARTS:baca.SegmentMaker._set_status_tag():REAPPLIED_MARGIN_MARKUP
                             \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                             \markup { I+II }                                                         %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
-                            \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! baca.SegmentMaker._attach_color_literal(2):REAPPLIED_MARGIN_MARKUP_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! baca.SegmentMaker._attach_color_literal(2):REAPPLIED_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             ^ \baca-reapplied-indicator-markup "[“I+II”]"                            %! REAPPLIED_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -5541,8 +5541,8 @@ r"""
                             \markup { I+II }                                                         %! baca.SegmentMaker._reapply_persistent_indicators(3):-PARTS:baca.SegmentMaker._set_status_tag():REAPPLIED_MARGIN_MARKUP
                             \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                             \markup { I+II }                                                         %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
-                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! baca.SegmentMaker._attach_color_literal(2):REAPPLIED_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! baca.SegmentMaker._attach_color_literal(2):REAPPLIED_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                         %%% ^ \baca-reapplied-indicator-markup "[“I+II”]"                            %! REAPPLIED_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -5663,8 +5663,8 @@ r"""
                             \markup { I+II }                                                         %! baca.SegmentMaker._reapply_persistent_indicators(3):-PARTS:baca.SegmentMaker._set_status_tag():REAPPLIED_MARGIN_MARKUP
                             \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                             \markup { I+II }                                                         %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
-                            \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! baca.SegmentMaker._attach_color_literal(2):REAPPLIED_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'green4)        %! baca.SegmentMaker._attach_color_literal(2):REAPPLIED_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             ^ \baca-reapplied-indicator-markup "[“I+II”]"                            %! REAPPLIED_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -5814,8 +5814,8 @@ r"""
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \set Staff.shortInstrumentName =                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
                             \markup { I+II }                                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                             b'2                                                                      %! baca.make_notes()
                             ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -5831,8 +5831,8 @@ r"""
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \set Staff.shortInstrumentName =                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_MARGIN_MARKUP
                             \markup { I+II }                                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_MARGIN_MARKUP
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_MARGIN_MARKUP_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_MARGIN_MARKUP_COLOR
                             b'2                                                                      %! baca.make_notes()
                             ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! baca.SegmentMaker._attach_color_literal(2):REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR
@@ -5953,8 +5953,8 @@ r"""
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \set Staff.shortInstrumentName =                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
                             \markup { I+II }                                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
-                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                             b'2                                                                      %! baca.make_notes()
                         %%% ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -5970,8 +5970,8 @@ r"""
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \set Staff.shortInstrumentName =                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_MARGIN_MARKUP
                             \markup { I+II }                                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_MARGIN_MARKUP
-                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_MARGIN_MARKUP_COLOR
                             b'2                                                                      %! baca.make_notes()
                         %%% ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                         %%% \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! baca.SegmentMaker._attach_color_literal(2):REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR
@@ -6088,8 +6088,8 @@ r"""
                             % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \set Staff.shortInstrumentName =                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
                             \markup { I+II }                                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
-                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                             b'2                                                                      %! baca.make_notes()
                             ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -6105,8 +6105,8 @@ r"""
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             \set Staff.shortInstrumentName =                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_MARGIN_MARKUP
                             \markup { I+II }                                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_MARGIN_MARKUP
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_MARGIN_MARKUP_COLOR
                             b'2                                                                      %! baca.make_notes()
                             ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)           %! baca.SegmentMaker._attach_color_literal(2):REDRAWN_REDUNDANT_MARGIN_MARKUP_COLOR
@@ -6256,8 +6256,8 @@ r"""
                             \markup { I+II }                                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_MARGIN_MARKUP
                             \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                             \markup { I+II }                                                         %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_MARGIN_MARKUP_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -6382,8 +6382,8 @@ r"""
                             \markup { I+II }                                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_MARGIN_MARKUP
                             \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                             \markup { I+II }                                                         %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
-                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                        %%% \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                         %%% ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -6504,8 +6504,8 @@ r"""
                             \markup { I+II }                                                         %! baca.margin_markup():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_MARGIN_MARKUP
                             \set Staff.instrumentName =                                              %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
                             \markup { I+II }                                                         %! baca.SegmentMaker._clone_segment_initial_short_instrument_name()
-                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_MARGIN_MARKUP_COLOR
                     %@% \baca-not-yet-pitched-coloring                                               %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.InstrumentName.color = #(x11-color 'DeepPink1)     %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_MARGIN_MARKUP_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             ^ \baca-redundant-indicator-markup "[“I+II”]"                            %! REDUNDANT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -6666,9 +6666,9 @@ r"""
                             \markup { I+II }                                                         %! baca.margin_markup():-PARTS:baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
                         %@% \set Staff.shortInstrumentName =                                         %! baca.margin_markup():-PARTS:baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
                         %@% \markup { III+IV }                                                       %! baca.margin_markup():-PARTS:baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_MARGIN_MARKUP
+                        %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
                         %@% \once \override Staff.InstrumentName.color = #(x11-color 'blue)          %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_MARGIN_MARKUP_COLOR
-                        %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'2                                                                      %! baca.make_notes()
                             ^ \baca-explicit-indicator-markup "[“I+II”]"                             %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
                         %@% ^ \baca-explicit-indicator-markup "[“III+IV”]"                           %! EXPLICIT_MARGIN_MARKUP_ALERT:baca.SegmentMaker._attach_latent_indicator_alert()
@@ -8031,8 +8031,8 @@ r"""
                             \stopStaff                                                               %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_STAFF_LINES
                             \once \override Staff.StaffSymbol.line-count = 5                         %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_STAFF_LINES
                             \startStaff                                                              %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_STAFF_LINES
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_STAFF_LINES_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_STAFF_LINES_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
                             - \baca-text-spanner-left-text "make_notes()"                            %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -8168,8 +8168,8 @@ r"""
                             \stopStaff                                                               %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_STAFF_LINES
                             \once \override Staff.StaffSymbol.line-count = 1                         %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_STAFF_LINES
                             \startStaff                                                              %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_STAFF_LINES
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_STAFF_LINES_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_STAFF_LINES_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
                             - \baca-text-spanner-left-text "make_notes()"                            %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -8305,8 +8305,8 @@ r"""
                             \stopStaff                                                               %! baca.SegmentMaker._reapply_persistent_indicators(3):baca.SegmentMaker._set_status_tag():REAPPLIED_STAFF_LINES
                             \once \override Staff.StaffSymbol.line-count = 5                         %! baca.SegmentMaker._reapply_persistent_indicators(3):baca.SegmentMaker._set_status_tag():REAPPLIED_STAFF_LINES
                             \startStaff                                                              %! baca.SegmentMaker._reapply_persistent_indicators(3):baca.SegmentMaker._set_status_tag():REAPPLIED_STAFF_LINES
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'green4)           %! baca.SegmentMaker._attach_color_literal(2):REAPPLIED_STAFF_LINES_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'green4)           %! baca.SegmentMaker._attach_color_literal(2):REAPPLIED_STAFF_LINES_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
                             - \baca-text-spanner-left-text "make_notes()"                            %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -8430,8 +8430,8 @@ r"""
                             \stopStaff                                                               %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_STAFF_LINES
                             \once \override Staff.StaffSymbol.line-count = 5                         %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_STAFF_LINES
                             \startStaff                                                              %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():EXPLICIT_STAFF_LINES
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_STAFF_LINES_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'blue)             %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_STAFF_LINES_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
                             - \baca-text-spanner-left-text "make_notes()"                            %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
@@ -8445,8 +8445,8 @@ r"""
                             \stopStaff                                                               %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_STAFF_LINES
                             \once \override Staff.StaffSymbol.line-count = 5                         %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_STAFF_LINES
                             \startStaff                                                              %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_STAFF_LINES
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_STAFF_LINES_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_STAFF_LINES_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             <> \bacaStopTextSpanRhythmAnnotation                                     %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(4):SPANNER_STOP
             <BLANKLINE>
@@ -8572,8 +8572,8 @@ r"""
                             \stopStaff                                                               %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_STAFF_LINES
                             \once \override Staff.StaffSymbol.line-count = 5                         %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_STAFF_LINES
                             \startStaff                                                              %! baca.staff_lines():baca.IndicatorCommand._call():baca.SegmentMaker._set_status_tag():REDUNDANT_STAFF_LINES
-                            \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_STAFF_LINES_COLOR
                         %@% \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override Staff.StaffSymbol.color = #(x11-color 'DeepPink1)        %! baca.SegmentMaker._attach_color_literal(2):REDUNDANT_STAFF_LINES_COLOR
                             b'4.                                                                     %! baca.make_notes()
                             - \abjad-dashed-line-with-hook                                           %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
                             - \baca-text-spanner-left-text "make_notes()"                            %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START

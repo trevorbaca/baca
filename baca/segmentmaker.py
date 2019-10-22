@@ -1501,7 +1501,7 @@ class SegmentMaker(abjad.SegmentMaker):
             color = SegmentMaker._status_to_color[status]
             string += f" #(x11-color '{color})"
         if redraw:
-            literal = abjad.LilyPondLiteral(string, "after")
+            literal = abjad.LilyPondLiteral(string, format_slot="after")
         else:
             literal = abjad.LilyPondLiteral(string)
         if getattr(wrapper.indicator, "latent", False):
@@ -2477,7 +2477,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if not abjad.inspect(pleaf).has_indicator(indicator):
                 continue
             string = r"\baca-mock-coloring"
-            literal = abjad.LilyPondLiteral(string)
+            literal = abjad.LilyPondLiteral(string, format_slot="before")
             abjad.attach(literal, pleaf, tag=tag)
             leaves.append(pleaf)
 
@@ -2490,7 +2490,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if not abjad.inspect(pleaf).has_indicator(indicator):
                 continue
             string = r"\baca-not-yet-pitched-coloring"
-            literal = abjad.LilyPondLiteral(string)
+            literal = abjad.LilyPondLiteral(string, format_slot="before")
             tag_ = tag
             if abjad.inspect(pleaf).has_indicator(abjad.const.HIDDEN):
                 tag_ = tag_.append(abjad.tags.HIDDEN)
@@ -2507,7 +2507,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if not abjad.inspect(pleaf).has_indicator(indicator):
                 continue
             string = r"\baca-not-yet-registered-coloring"
-            literal = abjad.LilyPondLiteral(string)
+            literal = abjad.LilyPondLiteral(string, format_slot="before")
             abjad.attach(literal, pleaf, tag=tag)
 
     def _color_octaves_(self):
@@ -2548,7 +2548,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 for pleaf in pleaves:
                     abjad.attach(markup, pleaf, tag=tag)
                     string = r"\baca-octave-coloring"
-                    literal = abjad.LilyPondLiteral(string)
+                    literal = abjad.LilyPondLiteral(
+                        string, format_slot="before"
+                    )
                     abjad.attach(literal, pleaf, tag=tag)
 
     def _color_out_of_range(self):
@@ -2566,7 +2568,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 if pleaf not in instrument.pitch_range:
                     string = r"\baca-out-of-range-coloring"
-                    literal = abjad.LilyPondLiteral(string)
+                    literal = abjad.LilyPondLiteral(
+                        string, format_slot="before"
+                    )
                     abjad.attach(literal, pleaf, tag=tag)
 
     def _color_repeat_pitch_classes_(self):
@@ -2577,7 +2581,7 @@ class SegmentMaker(abjad.SegmentMaker):
         for lt in lts:
             for leaf in lt:
                 string = r"\baca-repeat-pitch-class-coloring"
-                literal = abjad.LilyPondLiteral(string)
+                literal = abjad.LilyPondLiteral(string, format_slot="before")
                 abjad.attach(literal, leaf, tag=tag)
 
     def _comment_measure_numbers(self):
@@ -2601,7 +2605,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 string = f"% [{name}{context.name}"
                 string += f" measure {measure_number} /"
                 string += f" measure {local_measure_number}]"
-            literal = abjad.LilyPondLiteral(string, "absolute_before")
+            literal = abjad.LilyPondLiteral(
+                string, format_slot="absolute_before"
+            )
             abjad.attach(literal, leaf, tag=_site(inspect.currentframe()))
 
     def _deactivate_tags(self, tags):
@@ -3388,17 +3394,17 @@ class SegmentMaker(abjad.SegmentMaker):
             score = lilypond_file.score_block.items[0]
             assert isinstance(score, abjad.Score)
             include = abjad.Container(tag=tag)
-            literal = abjad.LilyPondLiteral("", "absolute_before")
+            literal = abjad.LilyPondLiteral("", format_slot="absolute_before")
             abjad.attach(literal, include, tag=None)
             string = r'\include "layout.ly"'
-            literal = abjad.LilyPondLiteral(string, "opening")
+            literal = abjad.LilyPondLiteral(string, format_slot="opening")
             abjad.attach(literal, include, tag=tag)
             container = abjad.Container(
                 [include, score], simultaneous=True, tag=tag
             )
-            literal = abjad.LilyPondLiteral("", "absolute_before")
+            literal = abjad.LilyPondLiteral("", format_slot="absolute_before")
             abjad.attach(literal, container, tag=None)
-            literal = abjad.LilyPondLiteral("", "closing")
+            literal = abjad.LilyPondLiteral("", format_slot="closing")
             abjad.attach(literal, container, tag=None)
             lilypond_file.score_block.items[:] = [container]
             lilypond_file.score_block.items.append("")
@@ -3460,13 +3466,17 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = tag.append(phantom_tag)
         tag = tag.append(note_or_rest)
         tag = tag.append(abjad.tags.INVISIBLE_MUSIC_COLORING)
-        literal = abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring")
+        literal = abjad.LilyPondLiteral(
+            r"\abjad-invisible-music-coloring", format_slot="before"
+        )
         abjad.attach(literal, note, tag=tag)
         tag = _site(inspect.currentframe(), 3)
         tag = tag.append(phantom_tag)
         tag = tag.append(note_or_rest)
         tag = tag.append(abjad.tags.INVISIBLE_MUSIC_COMMAND)
-        literal = abjad.LilyPondLiteral(r"\abjad-invisible-music")
+        literal = abjad.LilyPondLiteral(
+            r"\abjad-invisible-music", format_slot="before"
+        )
         abjad.attach(literal, note, deactivate=True, tag=tag)
         abjad.attach(abjad.const.HIDDEN, note)
         tag = _site(inspect.currentframe(), 4)
@@ -4165,7 +4175,7 @@ class SegmentMaker(abjad.SegmentMaker):
             indicator, (abjad.Instrument, abjad.MarginMarkup)
         ) and not getattr(indicator, "hide", False):
             strings = indicator._get_lilypond_format(context=context)
-            literal = abjad.LilyPondLiteral(strings, "after")
+            literal = abjad.LilyPondLiteral(strings, format_slot="after")
             stem = abjad.String.to_indicator_stem(indicator)
             wrapper_ = abjad.attach(
                 literal,
@@ -4351,16 +4361,20 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _whitespace_leaves(self):
         for leaf in abjad.iterate(self.score).leaves():
-            literal = abjad.LilyPondLiteral("", "absolute_before")
+            literal = abjad.LilyPondLiteral("", format_slot="absolute_before")
             abjad.attach(literal, leaf, tag=None)
         for container in abjad.iterate(self.score).components(abjad.Container):
             if hasattr(container, "_main_leaf"):
-                literal = abjad.LilyPondLiteral("", "absolute_after")
+                literal = abjad.LilyPondLiteral(
+                    "", format_slot="absolute_after"
+                )
                 abjad.attach(literal, container, tag=None)
             else:
-                literal = abjad.LilyPondLiteral("", "absolute_before")
+                literal = abjad.LilyPondLiteral(
+                    "", format_slot="absolute_before"
+                )
                 abjad.attach(literal, container, tag=None)
-            literal = abjad.LilyPondLiteral("", "closing")
+            literal = abjad.LilyPondLiteral("", format_slot="closing")
             abjad.attach(literal, container, tag=None)
 
     ### PUBLIC PROPERTIES ###

@@ -1298,8 +1298,8 @@ def hide_black_note_heads(
                             \bacaStartTextSpanRhythmAnnotation                                       %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \once \override NoteHead.transparent = ##t                               %! baca.hide_black_note_heads():baca.IndicatorCommand._call()
                             \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override NoteHead.transparent = ##t                               %! baca.hide_black_note_heads():baca.IndicatorCommand._call()
                             b'4.                                                                     %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
@@ -1307,8 +1307,8 @@ def hide_black_note_heads(
                             b'2                                                                      %! baca.make_notes()
             <BLANKLINE>
                             % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \once \override NoteHead.transparent = ##t                               %! baca.hide_black_note_heads():baca.IndicatorCommand._call()
                             \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
+                            \once \override NoteHead.transparent = ##t                               %! baca.hide_black_note_heads():baca.IndicatorCommand._call()
                             b'4.                                                                     %! baca.make_notes()
                             <> \bacaStopTextSpanRhythmAnnotation                                     %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(4):SPANNER_STOP
             <BLANKLINE>
