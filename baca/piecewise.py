@@ -4632,6 +4632,7 @@ def text_spanner(
     autodetect_right_padding: bool = None,
     bookend: typing.Union[bool, int] = -1,
     boxed: bool = None,
+    direction: typing.Union[str, abjad.enums.VerticalAlignment] = None,
     final_piece_spanner: bool = None,
     leak_spanner_stop: bool = None,
     left_broken: bool = None,
@@ -7228,13 +7229,22 @@ def text_spanner(
     original_items = items
     if autodetect_right_padding is not None:
         autodetect_right_padding = bool(autodetect_right_padding)
-    shape_to_style = {
-        "=>": "dashed-line-with-arrow",
-        "=|": "dashed-line-with-hook",
-        "||": "invisible-line",
-        "->": "solid-line-with-arrow",
-        "-|": "solid-line-with-hook",
-    }
+    if direction == abjad.Down:
+        shape_to_style = {
+            "=>": "dashed-line-with-arrow",
+            "=|": "dashed-line-with-up-hook",
+            "||": "invisible-line",
+            "->": "solid-line-with-arrow",
+            "-|": "solid-line-with-up-hook",
+        }
+    else:
+        shape_to_style = {
+            "=>": "dashed-line-with-arrow",
+            "=|": "dashed-line-with-hook",
+            "||": "invisible-line",
+            "->": "solid-line-with-arrow",
+            "-|": "solid-line-with-hook",
+        }
     if isinstance(items, str):
         items_: typing.List[typing.Union[str, abjad.Markup]] = []
         current_item: typing.List[str] = []
