@@ -8405,7 +8405,9 @@ class StaffPositionCommand(scoping.Command):
                     mock=self.mock,
                     set_chord_pitches_equal=self.set_chord_pitches_equal,
                 )
-                assert new_lt is None, repr(new_lt)
+                if new_lt is not None:
+                    self._mutated_score = True
+                    plt = new_lt
             plt_count += 1
             for pleaf in plt:
                 abjad.attach(abjad.const.STAFF_POSITION, pleaf)
