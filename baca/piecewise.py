@@ -4632,7 +4632,7 @@ def text_spanner(
     autodetect_right_padding: bool = None,
     bookend: typing.Union[bool, int] = -1,
     boxed: bool = None,
-    direction: typing.Union[str, abjad.enums.VerticalAlignment] = None,
+    direction: typing.Union[int, str, abjad.enums.VerticalAlignment] = None,
     final_piece_spanner: bool = None,
     leak_spanner_stop: bool = None,
     left_broken: bool = None,
