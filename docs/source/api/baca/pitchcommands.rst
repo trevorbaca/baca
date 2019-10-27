@@ -1319,6 +1319,7 @@ pitchcommands
    ~force_accidental
    ~interpolate_pitches
    ~interpolate_staff_positions
+   ~levine_multiphonic
    ~loop
    ~natural_clusters
    ~pitch
@@ -1347,6 +1348,8 @@ pitchcommands
 .. autofunction:: interpolate_pitches
 
 .. autofunction:: interpolate_staff_positions
+
+.. autofunction:: levine_multiphonic
 
 .. autofunction:: loop
 

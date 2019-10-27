@@ -5,6 +5,7 @@ import numbers
 import typing
 from . import classes
 from . import const
+from . import indicators
 from . import pitchclasses
 from . import scoping
 from . import typings
@@ -10057,6 +10058,14 @@ def interpolate_staff_positions(
     return StaffPositionInterpolationCommand(
         start_, stop_, mock=mock, selector=selector
     )
+
+
+def levine_multiphonic(n: int) -> indicators.Markup:
+    """
+    Makes Levine multiphonic markup.
+    """
+    string = f"L.{n}"
+    return indicators.Markup(string).boxed()
 
 
 def loop(

@@ -890,6 +890,7 @@ Pitch library.
    ~baca.pitchcommands.force_accidental
    ~baca.pitchcommands.interpolate_pitches
    ~baca.pitchcommands.interpolate_staff_positions
+   ~baca.pitchcommands.levine_multiphonic
    ~baca.pitchcommands.loop
    ~baca.pitchcommands.natural_clusters
    ~baca.pitchcommands.pitch
