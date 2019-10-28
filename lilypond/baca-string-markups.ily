@@ -1,5 +1,11 @@
 %%% STRING MARKUPS %%%
 
+baca-arco-markup = \markup
+    \whiteout
+    \override #'(box-padding . 0.5)
+    \box
+    arco
+
 baca-bow-directly-on-bridge-noise-only-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
