@@ -222,6 +222,90 @@ baca-p-fff = #(
     (markup #:baca-delimited-composite-dynamic "p" "fff")
     )
 
+% from mf
+
+baca-mf-ppp = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "mf" "ppp")
+    )
+
+baca-mf-pp = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "mf" "pp")
+    )
+
+baca-mf-p = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "mf" "p")
+    )
+
+baca-mf-mp = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "mf" "mp")
+    )
+
+baca-mf-mf = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "mf" "mf")
+    )
+
+baca-mf-f = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "mf" "f")
+    )
+
+baca-mf-ff = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "mf" "ff")
+    )
+
+baca-mf-fff = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "mf" "fff")
+    )
+
+% from f
+
+baca-f-ppp = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "f" "ppp")
+    )
+
+baca-f-pp = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "f" "pp")
+    )
+
+baca-f-p = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "f" "p")
+    )
+
+baca-f-mp = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "f" "mp")
+    )
+
+baca-f-mf = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "f" "mf")
+    )
+
+baca-f-f = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "f" "f")
+    )
+
+baca-f-ff = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "f" "ff")
+    )
+
+baca-f-fff = #(
+    make-dynamic-script 
+    (markup #:baca-delimited-composite-dynamic "f" "fff")
+    )
+
 %%% EFFORT DYNAMICS %%%
 
 #(define-markup-command
