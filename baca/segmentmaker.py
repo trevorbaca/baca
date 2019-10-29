@@ -3644,9 +3644,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 result = self._analyze_momento(context, momento)
                 if result is None:
                     continue
-                leaf, previous_indicator, status, edition, synthetic_offset = (
-                    result
-                )
+                (
+                    leaf,
+                    previous_indicator,
+                    status,
+                    edition,
+                    synthetic_offset,
+                ) = result
                 if isinstance(previous_indicator, abjad.TimeSignature):
                     if status in (None, "explicit"):
                         continue
@@ -4411,7 +4415,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def clock_time_extra_offset(
-        self
+        self,
     ) -> typing.Union[bool, typings.Pair, None]:
         """
         Gets clock time extra offset.
@@ -4820,7 +4824,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def fermata_measure_empty_overrides(
-        self
+        self,
     ) -> typing.Optional[typing.Sequence[int]]:
         """
         Gets fermata measure empty overrides.
@@ -4880,7 +4884,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def local_measure_number_extra_offset(
-        self
+        self,
     ) -> typing.Union[bool, typings.Pair, None]:
         """
         Gets local measure number extra offset.
@@ -4889,7 +4893,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def magnify_staves(
-        self
+        self,
     ) -> typing.Union[
         abjad.Multiplier, typing.Tuple[abjad.Multiplier, str], None
     ]:
@@ -4927,7 +4931,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def measure_number_extra_offset(
-        self
+        self,
     ) -> typing.Union[bool, typings.Pair, None]:
         """
         Gets measure number extra offset.
@@ -5437,7 +5441,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def spacing(
-        self
+        self,
     ) -> typing.Optional[segmentclasses.HorizontalSpacingSpecifier]:
         """
         Gets spacing.
@@ -5460,7 +5464,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     @property
     def stage_number_extra_offset(
-        self
+        self,
     ) -> typing.Union[bool, typings.Pair, None]:
         """
         Gets stage number extra offset.

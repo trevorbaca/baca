@@ -6029,7 +6029,7 @@ class FigureMaker(object):
 
     @property
     def treatments(
-        self
+        self,
     ) -> typing.Optional[
         typing.Sequence[typing.Union[int, str, abjad.Duration]]
     ]:
@@ -8317,7 +8317,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
 
 def extend_beam(
-    selector: abjad.Expression = classes.Expression().select().leaf(-1)
+    selector: abjad.Expression = classes.Expression().select().leaf(-1),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches RIGHT_BROKEN_BEAM to selector output.

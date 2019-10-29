@@ -1843,7 +1843,7 @@ class MetronomeMarkCommand(scoping.Command):
 
     @property
     def key(
-        self
+        self,
     ) -> typing.Optional[
         typing.Union[str, indicators.Accelerando, indicators.Ritardando]
     ]:

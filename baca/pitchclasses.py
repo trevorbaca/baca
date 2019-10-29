@@ -3554,7 +3554,7 @@ class ConstellationCircuit(object):
         return self._illustrate_chords(self._colored_generator_chords)
 
     def illustrate_colored_generator_chords_and_pivot_chords(
-        self
+        self,
     ) -> abjad.LilyPondFile:
         r"""
         Illustrates colored generator chords and pivot chords.
@@ -3688,7 +3688,7 @@ class ConstellationCircuit(object):
         return self._illustrate_chords(self.generator_chords)
 
     def illustrate_generator_chords_and_pivot_chords(
-        self
+        self,
     ) -> abjad.LilyPondFile:
         r"""
         Illustrates generator chords and pivot chords.

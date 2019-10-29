@@ -311,7 +311,7 @@ def close_volta(
 
 
 def color(
-    selector: abjad.Expression = classes.Expression().select().leaves()
+    selector: abjad.Expression = classes.Expression().select().leaves(),
 ) -> commandclasses.ColorCommand:
     r"""
     Makes color command.
@@ -973,7 +973,7 @@ def cross_staff(
 
 
 def double_volta(
-    selector: abjad.Expression = classes.Expression().select().leaf(0)
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.
@@ -3018,7 +3018,7 @@ def one_voice(
 
 
 def open_volta(
-    selector: abjad.Expression = classes.Expression().select().leaf(0)
+    selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.

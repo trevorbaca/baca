@@ -2421,7 +2421,7 @@ class PageSpecifier(object):
 
     @property
     def systems(
-        self
+        self,
     ) -> typing.Optional[typing.List[typing.Union[list, "SystemSpecifier"]]]:
         """
         Gets systems.
