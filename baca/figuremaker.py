@@ -3392,7 +3392,7 @@ class Imbrication(object):
                                         bf'!8
                                         ~
                 <BLANKLINE>
-                                        bf'!32
+                                        bf'32
                                         ]
                 <BLANKLINE>
                                     }
@@ -3403,7 +3403,7 @@ class Imbrication(object):
                                         ~
                                         [
                 <BLANKLINE>
-                                        fs''!32
+                                        fs''32
                 <BLANKLINE>
                                         e''8
                                         ~
@@ -3413,12 +3413,12 @@ class Imbrication(object):
                                         ef''!8
                                         ~
                 <BLANKLINE>
-                                        ef''!32
+                                        ef''32
                 <BLANKLINE>
                                         af''!8
                                         ~
                 <BLANKLINE>
-                                        af''!32
+                                        af''32
                 <BLANKLINE>
                                         g''8
                                         ~

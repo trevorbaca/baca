@@ -1852,6 +1852,23 @@ class SegmentMaker(abjad.SegmentMaker):
             tag_ = tag_.append(_site(inspect.currentframe(), 4))
             abjad.attach(stop_text_span, final_skip, tag=tag_)
 
+    # this exists because of an incompletely implemented behavior in LilyPond;
+    # LilyPond doesn't understand repeat-tied notes to be tied;
+    # because of this LilyPond incorrectly prints accidentals in front of some
+    # repeat-tied notes;
+    # this method works around LilyPond's behavior
+    def _attach_shadow_tie_indicators(self):
+        tag = _site(inspect.currentframe())
+        for plt in classes.Selection(self.score).plts():
+            if len(plt) == 1:
+                continue
+            for pleaf in plt[:-1]:
+                if abjad.inspect(pleaf).has_indicator(abjad.Tie):
+                    continue
+                tie = abjad.Tie()
+                abjad.tweak(tie).stencil = False
+                abjad.attach(tie, pleaf, tag=tag)
+
     def _attach_sounds_during(self):
         for voice in abjad.iterate(self.score).components(abjad.Voice):
             pleaves = []
@@ -2701,11 +2718,11 @@ class SegmentMaker(abjad.SegmentMaker):
         if self.do_not_force_nonnatural_accidentals:
             return
         natural = abjad.Accidental("natural")
-        for pleaf in classes.Selection(self.score).pleaves():
-            if isinstance(pleaf, abjad.Note):
-                note_heads = [pleaf.note_head]
+        for plt in classes.Selection(self.score).plts():
+            if isinstance(plt[0], abjad.Note):
+                note_heads = [plt[0].note_head]
             else:
-                note_heads = pleaf.note_heads
+                note_heads = plt[0].note_heads
             for note_head in note_heads:
                 if note_head.written_pitch.accidental != natural:
                     note_head.is_forced = True
@@ -5958,6 +5975,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._check_persistent_indicators()
                 self._color_repeat_pitch_classes_()
                 self._color_octaves_()
+                self._attach_shadow_tie_indicators()
                 self._force_nonnatural_accidentals()
                 self._label_duration_multipliers()
                 self._magnify_staves_()

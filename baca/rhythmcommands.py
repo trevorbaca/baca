@@ -1035,14 +1035,20 @@ def make_repeat_tied_notes(
                             - \tweak color #darkcyan                                                 %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
                             - \tweak staff-padding #8                                                %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
                             \bacaStartTextSpanRhythmAnnotation                                       %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
+                            - \tweak stencil ##f                                                     %! baca.SegmentMaker._attach_shadow_tie_indicators()
+                            ~                                                                        %! baca.SegmentMaker._attach_shadow_tie_indicators()
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'4
                             \repeatTie
+                            - \tweak stencil ##f                                                     %! baca.SegmentMaker._attach_shadow_tie_indicators()
+                            ~                                                                        %! baca.SegmentMaker._attach_shadow_tie_indicators()
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'4.
                             \repeatTie
+                            - \tweak stencil ##f                                                     %! baca.SegmentMaker._attach_shadow_tie_indicators()
+                            ~                                                                        %! baca.SegmentMaker._attach_shadow_tie_indicators()
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring                                           %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING
                             b'4                                                                      %! baca.make_repeat_tied_notes()
