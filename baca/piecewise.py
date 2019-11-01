@@ -4189,8 +4189,9 @@ def metric_modulation_spanner(
     """
     Makes metric modulation spanner.
     """
-    red_tweak = abjad.tweak("red").color
-    tweaks = tweaks + (red_tweak,)
+    # TODO: tag red tweak with METRIC_MODULATION_SPANNER_COLOR
+    # red_tweak = abjad.tweak("red").color
+    # tweaks = tweaks + (red_tweak,)
     tag = _site(inspect.currentframe())
     tag = tag.append(abjad.tags.METRIC_MODULATION_SPANNER)
     command = text_spanner(
