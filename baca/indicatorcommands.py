@@ -1918,12 +1918,14 @@ def rehearsal_mark(
     argument: typing.Union[int, str],
     selector: abjad.Expression = classes.Expression().select().leaf(0),
     *tweaks: abjad.LilyPondTweakManager,
+    font_size: int = 10,
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches rehearsal mark.
     """
     assert isinstance(argument, str), repr(argument)
-    string = rf'\baca-rehearsal-mark-markup "{argument}"'
+    assert isinstance(font_size, (int, float)), repr(font_size)
+    string = rf'\baca-rehearsal-mark-markup "{argument}" #{font_size}'
     markup = abjad.Markup(string, direction=abjad.Center, literal=True)
     return commandclasses.IndicatorCommand(
         indicators=[markup],

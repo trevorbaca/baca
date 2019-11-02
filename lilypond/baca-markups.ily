@@ -419,15 +419,15 @@ baca-null-markup = \markup \null
 %            skips context vertical spacing
 baca-rehearsal-mark-markup = #(
     define-music-function
-    string
-    (string?)
+    (string font-size)
+    (string? number?)
     #{
-    - \tweak font-size #10
+    - \tweak font-size #font-size
     - \markup
     \with-dimensions-from \null
     \override #'(box-padding . 0.5)
     \box
-    { #string }
+    { \combine \halign #0 #string \halign #0 \transparent "O" }
     #}
     )
 
