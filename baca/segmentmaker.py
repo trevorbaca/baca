@@ -1693,6 +1693,7 @@ class SegmentMaker(abjad.SegmentMaker):
             has_trend = accelerando is not None or ritardando is not None
             indicator_count += 1
             tag = wrapper.tag
+            stripped_left_text = None
             if metronome_mark is not None:
                 if metric_modulation is not None:
                     if metronome_mark.custom_markup is not None:
@@ -1714,6 +1715,30 @@ class SegmentMaker(abjad.SegmentMaker):
                         left_text = self._bracket_metric_modulation(
                             metronome_mark, metric_modulation
                         )
+
+                    if metronome_mark.custom_markup is not None:
+                        assert metronome_mark.custom_markup.literal
+                        stripped_left_text = (
+                            r"- \baca-metronome-mark-spanner-left-markup"
+                        )
+                        string = format(metronome_mark.custom_markup)
+                        assert string.startswith("\\")
+                        stripped_left_text += f" {string}"
+                    # mixed number
+                    elif metronome_mark.decimal is True:
+                        arguments = metronome_mark._get_markup_arguments()
+                        log, dots, stem, base, n, d = arguments
+                        stripped_left_text = r"- \baca-metronome-mark-spanner-left-text-mixed-number"
+                        stripped_left_text += (
+                            f' {log} {dots} {stem} "{base}" "{n}" "{d}"'
+                        )
+                    else:
+                        arguments = metronome_mark._get_markup_arguments()
+                        log, dots, stem, value = arguments
+                        stripped_left_text = (
+                            r"- \baca-metronome-mark-spanner-left-text"
+                        )
+                        stripped_left_text += f' {log} {dots} {stem} "{value}"'
                 elif metronome_mark.custom_markup is not None:
                     assert metronome_mark.custom_markup.literal
                     left_text = r"- \baca-metronome-mark-spanner-left-markup"
@@ -1796,7 +1821,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     skip,
                     deactivate=True,
                     tag=tag.append(_site(inspect.currentframe(), 2.1)).append(
-                        abjad.tags.HIDE_IN_PARTS
+                        abjad.tags.METRIC_MODULATION_IS_NOT_SCALED,
                     ),
                 )
                 left_text_ = start_text_span.left_text
@@ -1811,7 +1836,19 @@ class SegmentMaker(abjad.SegmentMaker):
                     skip,
                     deactivate=True,
                     tag=tag.append(_site(inspect.currentframe(), 2.2)).append(
-                        abjad.tags.ONLY_PARTS
+                        abjad.tags.METRIC_MODULATION_IS_SCALED,
+                    ),
+                )
+            if stripped_left_text is not None:
+                start_text_span_ = abjad.new(
+                    start_text_span, left_text=stripped_left_text
+                )
+                abjad.attach(
+                    start_text_span_,
+                    skip,
+                    deactivate=True,
+                    tag=tag.append(_site(inspect.currentframe(), 2.2)).append(
+                        abjad.tags.METRIC_MODULATION_IS_STRIPPED,
                     ),
                 )
             string = str(tag)

@@ -581,7 +581,7 @@ baca-metronome-mark-spanner-left-text-mixed-number = #(
     #{
     \baca-metronome-mark-spanner-layer
     \tweak bound-details.left.text \markup \concat {
-        \abjad-metronome-mark-fraction-markup #log #dots #stem #base #n #d
+        \abjad-metronome-mark-mixed-number-markup #log #dots #stem #base #n #d
         \hspace #0.5
         }
     $music
