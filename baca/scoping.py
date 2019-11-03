@@ -1515,7 +1515,10 @@ def tag(
     else:
         assert isinstance(command, Command), repr(command)
         assert command._tags is not None
-        tags.sort()
+        try:
+            tags.sort()
+        except TypeError:
+            pass
         tags_ = [abjad.Tag(_) for _ in tags]
         # TODO: maybe use abjad.new() here?
         command._tags.extend(tags_)
