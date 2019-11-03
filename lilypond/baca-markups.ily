@@ -425,6 +425,7 @@ baca-rehearsal-mark-markup = #(
     - \tweak font-size #font-size
     - \markup
     \with-dimensions-from \null
+    \halign #-1
     \override #'(box-padding . 0.5)
     \box
     { \combine \halign #0 #string \halign #0 \transparent "O" }
