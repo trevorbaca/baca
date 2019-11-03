@@ -70,6 +70,7 @@ segmentmaker
       metronome_marks
       midi
       nonfirst_segment_lilypond_include
+      parts_metric_modulation_multiplier
       persist
       previous_metadata
       previous_persist
@@ -212,6 +213,8 @@ segmentmaker
    .. autoattribute:: SegmentMaker.midi
 
    .. autoattribute:: SegmentMaker.nonfirst_segment_lilypond_include
+
+   .. autoattribute:: SegmentMaker.parts_metric_modulation_multiplier
 
    .. autoattribute:: SegmentMaker.persist
 

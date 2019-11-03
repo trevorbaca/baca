@@ -633,6 +633,7 @@ class SegmentMaker(abjad.SegmentMaker):
         "_magnify_staves",
         "_margin_markups",
         "_measure_number_extra_offset",
+        "_parts_metric_modulation_multiplier",
         "_metronome_marks",
         "_midi",
         "_nonfirst_segment_lilypond_include",
@@ -755,6 +756,7 @@ class SegmentMaker(abjad.SegmentMaker):
         measure_number_extra_offset: typing.Union[bool, typings.Pair] = None,
         metronome_marks: abjad.OrderedDict = None,
         nonfirst_segment_lilypond_include: bool = None,
+        parts_metric_modulation_multiplier: abjad.DurationTyping = None,
         phantom: bool = None,
         remove_phantom_measure: bool = None,
         score_template: templates.ScoreTemplate = None,
@@ -837,6 +839,12 @@ class SegmentMaker(abjad.SegmentMaker):
         self._metronome_marks = metronome_marks
         self._midi: typing.Optional[bool] = None
         self._offset_to_measure_number: typing.Dict[abjad.Offset, int] = {}
+        if parts_metric_modulation_multiplier is not None:
+            assert isinstance(parts_metric_modulation_multiplier, tuple)
+            assert len(parts_metric_modulation_multiplier) == 2
+        self._parts_metric_modulation_multiplier = (
+            parts_metric_modulation_multiplier
+        )
         self._previously_alive_contexts: typing.List[str] = []
         if remove_phantom_measure is not None:
             remove_phantom_measure = bool(remove_phantom_measure)
@@ -1771,12 +1779,41 @@ class SegmentMaker(abjad.SegmentMaker):
                     tag=new_tag.append(_site(inspect.currentframe(), 5)),
                 )
                 tag = new_tag
-            abjad.attach(
-                start_text_span,
-                skip,
-                deactivate=True,
-                tag=tag.append(_site(inspect.currentframe(), 2)),
-            )
+            if not (
+                isinstance(start_text_span.left_text, str)
+                and start_text_span.left_text.endswith("(1 . 1)")
+                and self.parts_metric_modulation_multiplier is not None
+            ):
+                abjad.attach(
+                    start_text_span,
+                    skip,
+                    deactivate=True,
+                    tag=tag.append(_site(inspect.currentframe(), 2)),
+                )
+            else:
+                abjad.attach(
+                    start_text_span,
+                    skip,
+                    deactivate=True,
+                    tag=tag.append(_site(inspect.currentframe(), 2.1)).append(
+                        abjad.tags.HIDE_IN_PARTS
+                    ),
+                )
+                left_text_ = start_text_span.left_text
+                assert left_text_.endswith("(1 . 1)")
+                n, d = self.parts_metric_modulation_multiplier
+                left_text_ = left_text_[:-7] + f"({n} . {d})"
+                start_text_span_ = abjad.new(
+                    start_text_span, left_text=left_text_
+                )
+                abjad.attach(
+                    start_text_span_,
+                    skip,
+                    deactivate=True,
+                    tag=tag.append(_site(inspect.currentframe(), 2.2)).append(
+                        abjad.tags.ONLY_PARTS
+                    ),
+                )
             string = str(tag)
             if "DEFAULT" in string:
                 status = "default"
@@ -1951,7 +1988,6 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception(
                     "implement tied note values in metric modulation."
                 )
-
         scale = metric_modulation.scale
         command += f" #'({scale[0]} . {scale[1]})"
         return command
@@ -5174,6 +5210,15 @@ class SegmentMaker(abjad.SegmentMaker):
         Is true when nonfirst segment lilypond include appears in output file.
         """
         return self._nonfirst_segment_lilypond_include
+
+    @property
+    def parts_metric_modulation_multiplier(
+        self,
+    ) -> typing.Optional[abjad.NumberPair]:
+        """
+        Gets parts metric modulation multiplier.
+        """
+        return self._parts_metric_modulation_multiplier
 
     @property
     def persist(self) -> abjad.OrderedDict:
