@@ -2121,7 +2121,11 @@ class SegmentMaker(abjad.SegmentMaker):
         skips = classes.Selection(self.score["Global_Skips"]).skips()
         if "Global_Rests" not in self.score:
             return
-        rests = classes.Selection(self.score["Global_Rests"]).rests()
+        for context in abjad.iterate(self.score).components(abjad.Context):
+            if context.name == "Global_Rests":
+                break
+        # rests = classes.Selection(self.score["Global_Rests"]).rests()
+        rests = classes.Selection(context).rests()
         assert len(skips) == len(rests)
         start_clock_time = self._get_previous_stop_clock_time()
         start_clock_time = start_clock_time or "0'00''"
@@ -3648,18 +3652,33 @@ class SegmentMaker(abjad.SegmentMaker):
         return indicator
 
     def _move_global_rests(self):
-        string = "_global_rests_in_topmost_staff"
-        if not getattr(self.score_template, string, None):
+        topmost = "_global_rests_in_topmost_staff"
+        every = "_global_rests_in_every_staff"
+        if not getattr(self.score_template, topmost, None) and not getattr(
+            self.score_template, every, None
+        ):
             return
         if "Global_Rests" not in self.score:
             return
         global_rests = self.score["Global_Rests"]
         self.score["Global_Context"].remove(global_rests)
         music_context = self.score["Music_Context"]
-        for staff in abjad.iterate(music_context).components(abjad.Staff):
-            break
-        staff.simultaneous = True
-        staff.insert(0, global_rests)
+        if getattr(self.score_template, topmost, None) is True:
+            for staff in abjad.iterate(music_context).components(abjad.Staff):
+                break
+            staff.simultaneous = True
+            staff.insert(0, global_rests)
+            return
+        if getattr(self.score_template, every, None) is True:
+            topmost_staff = True
+            tag = global_rests.tag or abjad.Tag()
+            for staff in abjad.iterate(music_context).components(abjad.Staff):
+                staff.simultaneous = True
+                global_rests_ = copy.deepcopy(global_rests)
+                if not topmost_staff:
+                    global_rests_._tag = tag.append(abjad.Tag("NOT_TOPMOST"))
+                staff.insert(0, global_rests_)
+                topmost_staff = False
 
     def _populate_offset_to_measure_number(self):
         measure_number = self._get_first_measure_number()
@@ -4113,7 +4132,10 @@ class SegmentMaker(abjad.SegmentMaker):
             tag=_site(inspect.currentframe(), 3).append(abjad.tags.PHANTOM),
         )
         if "Global_Rests" in self.score:
-            rest = self.score["Global_Rests"][-1]
+            for context in abjad.iterate(self.score).components(abjad.Context):
+                if context.name == "Global_Rests":
+                    rest = context[-1]
+                    break
             self._append_tag_to_wrappers(
                 rest,
                 _site(inspect.currentframe(), 4).append(abjad.tags.PHANTOM),
