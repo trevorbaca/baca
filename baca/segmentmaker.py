@@ -756,7 +756,7 @@ class SegmentMaker(abjad.SegmentMaker):
         measure_number_extra_offset: typing.Union[bool, typings.Pair] = None,
         metronome_marks: abjad.OrderedDict = None,
         nonfirst_segment_lilypond_include: bool = None,
-        parts_metric_modulation_multiplier: abjad.DurationTyping = None,
+        parts_metric_modulation_multiplier: abjad.NumberPair = None,
         phantom: bool = None,
         remove_phantom_measure: bool = None,
         score_template: templates.ScoreTemplate = None,
