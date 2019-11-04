@@ -1714,7 +1714,9 @@ class SchemeManifest(object):
         ("baca-pff", "ff"),
         ("baca-pfff", "fff"),
         #
+        ("baca-ppp-ppp", "ppp"),
         ("baca-ppp-pp", "pp"),
+        ("baca-ppp-p", "p"),
         ("baca-ppp-mp", "mp"),
         ("baca-ppp-mf", "mf"),
         ("baca-ppp-f", "f"),
@@ -1722,6 +1724,7 @@ class SchemeManifest(object):
         ("baca-ppp-fff", "fff"),
         #
         ("baca-pp-ppp", "ppp"),
+        ("baca-pp-pp", "pp"),
         ("baca-pp-p", "p"),
         ("baca-pp-mp", "mp"),
         ("baca-pp-mf", "mf"),
@@ -1731,11 +1734,21 @@ class SchemeManifest(object):
         #
         ("baca-p-ppp", "ppp"),
         ("baca-p-pp", "pp"),
+        ("baca-p-p", "p"),
         ("baca-p-mp", "mp"),
         ("baca-p-mf", "mf"),
         ("baca-p-f", "f"),
         ("baca-p-ff", "ff"),
         ("baca-p-fff", "fff"),
+        #
+        ("baca-mp-ppp", "ppp"),
+        ("baca-mp-pp", "pp"),
+        ("baca-mp-p", "p"),
+        ("baca-mp-mp", "mp"),
+        ("baca-mp-mf", "mf"),
+        ("baca-mp-f", "f"),
+        ("baca-mp-ff", "ff"),
+        ("baca-mp-fff", "fff"),
         #
         ("baca-mf-ppp", "ppp"),
         ("baca-mf-pp", "pp"),
@@ -1755,6 +1768,24 @@ class SchemeManifest(object):
         ("baca-f-ff", "ff"),
         ("baca-f-fff", "fff"),
         #
+        ("baca-ff-ppp", "ppp"),
+        ("baca-ff-pp", "pp"),
+        ("baca-ff-p", "p"),
+        ("baca-ff-mp", "mp"),
+        ("baca-ff-mf", "mf"),
+        ("baca-ff-f", "f"),
+        ("baca-ff-ff", "ff"),
+        ("baca-ff-fff", "fff"),
+        #
+        ("baca-fff-ppp", "ppp"),
+        ("baca-fff-pp", "pp"),
+        ("baca-fff-p", "p"),
+        ("baca-fff-mp", "mp"),
+        ("baca-fff-mf", "mf"),
+        ("baca-fff-f", "f"),
+        ("baca-fff-ff", "ff"),
+        ("baca-fff-fff", "fff"),
+        #
         ("baca-sff", "ff"),
         ("baca-sffp", "p"),
         ("baca-sffpp", "pp"),
@@ -1768,7 +1799,7 @@ class SchemeManifest(object):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def dynamics(self):
+    def dynamics(self) -> typing.List[str]:
         """
         Gets dynamics.
 
@@ -1794,13 +1825,16 @@ class SchemeManifest(object):
             'baca-pf'
             'baca-pff'
             'baca-pfff'
+            'baca-ppp-ppp'
             'baca-ppp-pp'
+            'baca-ppp-p'
             'baca-ppp-mp'
             'baca-ppp-mf'
             'baca-ppp-f'
             'baca-ppp-ff'
             'baca-ppp-fff'
             'baca-pp-ppp'
+            'baca-pp-pp'
             'baca-pp-p'
             'baca-pp-mp'
             'baca-pp-mf'
@@ -1809,11 +1843,20 @@ class SchemeManifest(object):
             'baca-pp-fff'
             'baca-p-ppp'
             'baca-p-pp'
+            'baca-p-p'
             'baca-p-mp'
             'baca-p-mf'
             'baca-p-f'
             'baca-p-ff'
             'baca-p-fff'
+            'baca-mp-ppp'
+            'baca-mp-pp'
+            'baca-mp-p'
+            'baca-mp-mp'
+            'baca-mp-mf'
+            'baca-mp-f'
+            'baca-mp-ff'
+            'baca-mp-fff'
             'baca-mf-ppp'
             'baca-mf-pp'
             'baca-mf-p'
@@ -1830,6 +1873,22 @@ class SchemeManifest(object):
             'baca-f-f'
             'baca-f-ff'
             'baca-f-fff'
+            'baca-ff-ppp'
+            'baca-ff-pp'
+            'baca-ff-p'
+            'baca-ff-mp'
+            'baca-ff-mf'
+            'baca-ff-f'
+            'baca-ff-ff'
+            'baca-ff-fff'
+            'baca-fff-ppp'
+            'baca-fff-pp'
+            'baca-fff-p'
+            'baca-fff-mp'
+            'baca-fff-mf'
+            'baca-fff-f'
+            'baca-fff-ff'
+            'baca-fff-fff'
             'baca-sff'
             'baca-sffp'
             'baca-sffpp'
@@ -1839,7 +1898,6 @@ class SchemeManifest(object):
             'baca-sfz-f'
             'baca-sfz-p'
 
-        Returns list.
         """
         return [_[0] for _ in self._dynamics]
 

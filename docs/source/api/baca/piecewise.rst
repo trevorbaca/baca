@@ -237,6 +237,7 @@ piecewise
    ~metric_modulation_spanner
    ~parse_hairpin_descriptor
    ~pitch_annotation_spanner
+   ~pizzicato_spanner
    ~rhythm_annotation_spanner
    ~scp_spanner
    ~spazzolato_spanner
@@ -271,6 +272,8 @@ piecewise
 .. autofunction:: parse_hairpin_descriptor
 
 .. autofunction:: pitch_annotation_spanner
+
+.. autofunction:: pizzicato_spanner
 
 .. autofunction:: rhythm_annotation_spanner
 

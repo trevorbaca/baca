@@ -4409,6 +4409,48 @@ def pitch_annotation_spanner(
     return result
 
 
+def pizzicato_spanner(
+    *tweaks: abjad.IndexedTweakManager,
+    # NOTE: autodetect default differs from text_spanner():
+    autodetect_right_padding: bool = True,
+    left_broken: bool = None,
+    left_broken_text: typing.Optional[str] = r"\baca-pizz-markup",
+    map: abjad.Expression = None,
+    match: typings.Indices = None,
+    measures: typings.SliceTyping = None,
+    pieces: abjad.Expression = classes.Expression().select().group(),
+    right_broken: bool = None,
+    # NOTE: selector differs from text_spanner(), annotation spanners:
+    selector: abjad.Expression = classes.Expression()
+    .select()
+    .ltleaves()
+    .rleak(),
+) -> PiecewiseCommand:
+    """
+    Makes pizzicato spanner.
+    """
+    tag = _site(inspect.currentframe())
+    tag = tag.append(abjad.tags.PIZZICATO_SPANNER)
+    command = text_spanner(
+        r"\baca-pizz-markup =|",
+        *tweaks,
+        autodetect_right_padding=autodetect_right_padding,
+        bookend=False,
+        left_broken=left_broken,
+        left_broken_text=left_broken_text,
+        lilypond_id="Pizzicato",
+        map=map,
+        match=match,
+        measures=measures,
+        pieces=pieces,
+        right_broken=right_broken,
+        selector=selector,
+    )
+    result = abjad.new(command, tags=[tag])
+    assert isinstance(result, PiecewiseCommand)
+    return result
+
+
 def rhythm_annotation_spanner(
     items: typing.Union[str, typing.List],
     *tweaks: abjad.IndexedTweakManager,

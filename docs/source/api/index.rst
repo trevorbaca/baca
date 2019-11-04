@@ -769,6 +769,7 @@ Piecewise library.
    ~baca.piecewise.metric_modulation_spanner
    ~baca.piecewise.parse_hairpin_descriptor
    ~baca.piecewise.pitch_annotation_spanner
+   ~baca.piecewise.pizzicato_spanner
    ~baca.piecewise.rhythm_annotation_spanner
    ~baca.piecewise.scp_spanner
    ~baca.piecewise.spazzolato_spanner

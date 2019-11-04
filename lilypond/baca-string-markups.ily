@@ -28,9 +28,6 @@ baca-ob-markup = \markup
     "OB"
 
 baca-pizz-markup = \markup
-    \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     pizz.
 
 baca-pochiss-scratch-markup = \markup

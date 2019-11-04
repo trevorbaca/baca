@@ -890,6 +890,16 @@ bacaStopTextSpanPitchAnnotation = #(
     make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "PitchAnnotation"
     )
 
+%%% PIZZICATO SPANNER %%%
+
+bacaStartTextSpanPizzicato = #(
+    make-music 'TextSpanEvent 'span-direction START 'spanner-id "Pizzicato"
+    )
+
+bacaStopTextSpanPizzicato = #(
+    make-music 'TextSpanEvent 'span-direction STOP 'spanner-id "Pizzicato"
+    )
+
 %%% RHYTHM ANNOTATION SPANNER %%%
 
 bacaStartTextSpanRhythmAnnotation = #(
