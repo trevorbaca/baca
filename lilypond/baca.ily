@@ -8,6 +8,7 @@
 \include "baca-markups.ily"
 \include "baca-note-heads.ily"
 \include "baca-page-layout.ily"
+\include "baca-partial-markups.ily"
 \include "baca-percussion-markups.ily"
 \include "baca-piano-markups.ily"
 \include "baca-sforzando-markups.ily"
