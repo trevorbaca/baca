@@ -31,6 +31,7 @@ indicatorcommands
    ~breathe
    ~clef
    ~damp
+   ~double_flageolet
    ~double_staccato
    ~down_arpeggio
    ~down_bow
@@ -82,6 +83,8 @@ indicatorcommands
 .. autofunction:: clef
 
 .. autofunction:: damp
+
+.. autofunction:: double_flageolet
 
 .. autofunction:: double_staccato
 

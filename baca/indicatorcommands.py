@@ -623,6 +623,21 @@ def damp(
     )
 
 
+def double_flageolet(
+    selector: abjad.Expression = classes.Expression()
+    .select()
+    .phead(0, exclude=abjad.const.HIDDEN),
+) -> commandclasses.IndicatorCommand:
+    """
+    Attaches double flageolet.
+    """
+    return commandclasses.IndicatorCommand(
+        indicators=[abjad.Articulation("baca-double-flageolet")],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
+    )
+
+
 def double_staccato(
     selector: abjad.Expression = classes.Expression()
     .select()

@@ -138,6 +138,24 @@ baca-damp = #(make-articulation "bacadamp")
 
 baca-double-diamond = #(make-articulation "bacadoublediamond")
 
+%%% DOUBLE FLAGEOLET ARTICULATION %%%
+
+#(append! default-script-alist
+   (list
+    `("bacadoubleflageolet"
+       . (
+           (stencil . ,ly:text-interface::print)
+           (text . ,baca-double-flageolet-markup)
+           (avoid-slur . around)
+           (padding . 0.20)
+           (script-priority . 125)
+           (side-relative-direction . ,DOWN)
+           (skyline-horizontal-padding . 0.20)
+           ;;(toward-stem-shift . 0.5)
+           ))))
+
+baca-double-flageolet = #(make-articulation "bacadoubleflageolet")
+
 %%% STACCATO ARTICULATIONS (MULTIPLE) %%%
 
 baca-staccati =

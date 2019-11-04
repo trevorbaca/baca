@@ -372,6 +372,19 @@ baca-triple-diamond-parenthesized-top-markup =
         }
     }
 
+%%% DOUBLE FLAGEOLET MARKUP %%%
+
+baca-double-flageolet-markup =
+    \markup
+    \translate #'(0.6 . 0)
+    \scale #'(0.25 . 0.25)
+    \concat {
+        \draw-circle #2 #0.3 ##f
+        \hspace #-4.3
+        \raise #5
+        \draw-circle #2 #0.3 ##f
+    }
+
 %%% DURATION MULTIPLIER MARKUP %%%
 
 baca-duration-multiplier-markup = #(
