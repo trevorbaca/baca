@@ -1717,7 +1717,6 @@ class SegmentMaker(abjad.SegmentMaker):
                         )
 
                     if metronome_mark.custom_markup is not None:
-                        assert metronome_mark.custom_markup.literal
                         stripped_left_text = (
                             r"- \baca-metronome-mark-spanner-left-markup"
                         )
