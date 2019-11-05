@@ -12,6 +12,10 @@ baca-bow-markup = \markup
     \box
     bow
 
+baca-fingernail-markup = \markup
+    \whiteout
+    fingernail
+
 baca-pdlt-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)

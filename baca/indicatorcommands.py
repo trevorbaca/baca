@@ -613,6 +613,7 @@ def damp(
     selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
+    *tweaks: abjad.LilyPondTweakManager,
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches damp.
@@ -621,6 +622,7 @@ def damp(
         indicators=[abjad.Articulation("baca-damp")],
         selector=selector,
         tags=[_site(inspect.currentframe())],
+        tweaks=tweaks,
     )
 
 
