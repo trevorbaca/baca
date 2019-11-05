@@ -107,7 +107,7 @@ def alternate_bow_strokes(
     selector: abjad.Expression = classes.Expression()
     .select()
     .pheads(exclude=abjad.const.HIDDEN),
-    *,
+    *tweaks: abjad.LilyPondTweakManager,
     downbow_first: bool = True,
     full: bool = None,
 ) -> commandclasses.IndicatorCommand:
@@ -363,6 +363,7 @@ def alternate_bow_strokes(
         indicators=indicators,
         selector=selector,
         tags=[_site(inspect.currentframe())],
+        tweaks=tweaks,
     )
 
 
