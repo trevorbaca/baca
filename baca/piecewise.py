@@ -4174,6 +4174,7 @@ def material_annotation_spanner(
 def metric_modulation_spanner(
     *tweaks: abjad.IndexedTweakManager,
     argument: str = r"MM =|",
+    autodetect_right_padding: bool = True,
     left_broken: bool = None,
     map: abjad.Expression = None,
     match: typings.Indices = None,
@@ -4197,7 +4198,7 @@ def metric_modulation_spanner(
     command = text_spanner(
         argument,
         *tweaks,
-        autodetect_right_padding=True,
+        autodetect_right_padding=autodetect_right_padding,
         bookend=False,
         left_broken=left_broken,
         lilypond_id="MetricModulation",
