@@ -3932,6 +3932,16 @@ def make_dynamic(
 
     ..  container:: example
 
+        Effort dynamics (ancora):
+
+        >>> baca.make_dynamic('"p"-ancora')
+        Dynamic('p', command='\\baca-effort-ancora-p')
+
+        >>> baca.make_dynamic('"f"-ancora')
+        Dynamic('f', command='\\baca-effort-ancora-f')
+
+    ..  container:: example
+
         Effort dynamics (sempre):
 
         >>> baca.make_dynamic('"p"-sempre')
@@ -4050,9 +4060,14 @@ def make_dynamic(
         raise Exception(f"use hyphens instead of underscores ({string!r}).")
     if string == "niente":
         indicator = abjad.Dynamic("niente", command=r"\!")
-    elif string.endswith("-ancora"):
+    elif string.endswith("-ancora") and '"' not in string:
         dynamic = string.split("-")[0]
         command = rf"\baca-{dynamic}-ancora"
+        indicator = abjad.Dynamic(dynamic, command=command)
+    elif string.endswith("-ancora") and '"' in string:
+        dynamic = string.split("-")[0]
+        dynamic = dynamic.strip('"')
+        command = rf"\baca-effort-ancora-{dynamic}"
         indicator = abjad.Dynamic(dynamic, command=command)
     elif string.endswith("-effort-sub"):
         dynamic = string.split("-")[0]

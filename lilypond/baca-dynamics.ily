@@ -517,6 +517,78 @@ baca-effort-sffz = #(
     (markup #:baca-effort-dynamic -0.3 "sffz" -0.2)
     )
 
+%%% EFFORT ANCORA DYNAMICS %%%
+
+#(define-markup-command
+    (baca-effort-ancora-dynamic layout props left dynamic right)
+    (number? string? number?)
+    (interpret-markup layout props
+    #{
+    \markup
+    \override #'(style . outline)
+    \override #'(thickness . 4.5)
+    \whiteout
+    \line {
+        \general-align #Y #-2 \normal-text \larger "“"
+        \hspace #left
+        \dynamic #dynamic
+        \hspace #right
+        \general-align #Y #-2 \normal-text \larger "”"
+        \hspace #0.25
+        \normal-text ancora
+        }
+    #}))
+
+baca-effort-ancora-ppp = #(
+    make-dynamic-script
+    (markup #:baca-effort-ancora-dynamic -0.1 "ppp" -0.25)
+    )
+
+baca-effort-ancora-pp = #(
+    make-dynamic-script
+    (markup #:baca-effort-ancora-dynamic -0.1 "pp" -0.25)
+    )
+
+baca-effort-ancora-p = #(
+    make-dynamic-script
+    (markup #:baca-effort-ancora-dynamic -0.1 "p" -0.25)
+    )
+
+baca-effort-ancora-mp = #(
+    make-dynamic-script
+    (markup #:baca-effort-ancora-dynamic -0.1 "mp" -0.25)
+    )
+
+baca-effort-ancora-mf = #(
+    make-dynamic-script
+    (markup #:baca-effort-ancora-dynamic -0.1 "mf" -0.2)
+    )
+
+baca-effort-ancora-f = #(
+    make-dynamic-script
+    (markup #:baca-effort-ancora-dynamic -0.4 "f" -0.2)
+    )
+
+baca-effort-ancora-ff = #(
+    make-dynamic-script
+    (markup #:baca-effort-ancora-dynamic -0.4 "ff" -0.2)
+    )
+
+baca-effort-ancora-fff = #(
+    make-dynamic-script
+    (markup #:baca-effort-ancora-dynamic -0.4 "fff" -0.2)
+    )
+
+baca-effort-ancora-sfz = #(
+    make-dynamic-script
+    (markup #:baca-effort-ancora-dynamic -0.3 "sfz" -0.2)
+    )
+
+baca-effort-ancora-sffz = #(
+    make-dynamic-script
+    (markup #:baca-effort-ancora-dynamic -0.3 "sffz" -0.2)
+    )
+
 %%% EFFORT DYNAMICS (PARENTHESIZED) %%%
 
 baca-effort-ppppp-parenthesized = #(
