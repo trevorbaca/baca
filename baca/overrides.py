@@ -3505,18 +3505,22 @@ def rest_up(
     )
 
 
-def rest_x_extent_false(
+def rest_x_extent_zero(
     selector: abjad.Expression = classes.Expression().select().rest(0),
 ) -> OverrideCommand:
     """
     Overrides rest X-extent.
+    
+    Note that overriding Rest.X-extent = ##f generates LilyPond warnings.
+
+    But overriding Rest.X-extent = #'(0 . 0) does not generate warnings.
     """
     return OverrideCommand(
         attribute="X_extent",
         grob="rest",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=False,
+        value=(0, 0),
     )
 
 
