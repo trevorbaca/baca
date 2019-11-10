@@ -9,6 +9,9 @@ baca-quasi-bisb-markup = \markup
 baca-quasi-bisb-ancora-markup = \markup
     "quasi bisb. ancora"
 
+baca-lv-markup = \markup
+    "l.v."
+
 baca-lv-possibile-markup = \markup
     "lv possibile"
 
