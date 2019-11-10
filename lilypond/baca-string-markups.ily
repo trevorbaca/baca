@@ -28,6 +28,7 @@ baca-ob-markup = \markup
     "OB"
 
 baca-pizz-markup = \markup
+    \upright
     pizz.
 
 baca-pochiss-scratch-markup = \markup
