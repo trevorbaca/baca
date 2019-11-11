@@ -277,11 +277,15 @@ class PiecewiseCommand(scoping.Command):
                 should_bookend = True
             else:
                 should_bookend = False
-            if is_final_piece and self.right_broken:
-                should_bookend = False
             if is_final_piece and self.final_piece_spanner is False:
                 should_bookend = False
             bundle = self.bundles[i]
+            if (
+                is_final_piece
+                and self.right_broken
+                and not isinstance(bundle.spanner_start, abjad.StartTextSpan)
+            ):
+                should_bookend = False
             if is_final_piece and just_backstole_right_text:
                 bundle = abjad.new(bundle, spanner_start=None)
             next_bundle = self.bundles[i + 1]
