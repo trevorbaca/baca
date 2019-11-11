@@ -230,7 +230,7 @@ overrides
    ~rest_position
    ~rest_transparent
    ~rest_up
-   ~rest_x_extent_false
+   ~rest_x_extent_zero
    ~script_color
    ~script_down
    ~script_extra_offset
@@ -458,7 +458,7 @@ overrides
 
 .. autofunction:: rest_up
 
-.. autofunction:: rest_x_extent_false
+.. autofunction:: rest_x_extent_zero
 
 .. autofunction:: script_color
 

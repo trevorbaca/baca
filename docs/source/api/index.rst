@@ -667,7 +667,7 @@ Override library.
    ~baca.overrides.rest_position
    ~baca.overrides.rest_transparent
    ~baca.overrides.rest_up
-   ~baca.overrides.rest_x_extent_false
+   ~baca.overrides.rest_x_extent_zero
    ~baca.overrides.script_color
    ~baca.overrides.script_down
    ~baca.overrides.script_extra_offset
