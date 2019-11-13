@@ -4009,7 +4009,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(
                             empty_bar_extent,
                             leaf,
-                            tag=_site(inspect.currentframe(), 2),
+                            tag=_site(inspect.currentframe(), 2).append(
+                                abjad.Tag("FERMATA_MEASURE_EMPTY_BAR_EXTENT")
+                            ),
                         )
                 if (
                     next_leaf is not None
@@ -4040,7 +4042,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         abjad.attach(
                             next_bar_extent_,
                             next_leaf,
-                            tag=_site(inspect.currentframe(), 4),
+                            tag=_site(inspect.currentframe(), 4).append(
+                                abjad.Tag("FERMATA_MEASURE_NEXT_BAR_EXTENT")
+                            ),
                         )
                 if (
                     next_leaf is None
@@ -4068,7 +4072,9 @@ class SegmentMaker(abjad.SegmentMaker):
                         resume_bar_extent,
                         leaf,
                         synthetic_offset=99,
-                        tag=_site(inspect.currentframe(), 6),
+                        tag=_site(inspect.currentframe(), 6).append(
+                            abjad.Tag("FERMATA_MEASURE_RESUME_BAR_EXTENT")
+                        ),
                     )
                 if start_offset in bar_lines_already_styled:
                     continue
