@@ -3061,12 +3061,12 @@ def select(items=None):
 
 def sequence(items=None, **keywords):
     if items is None:
-        return classes.Expression.sequence(**keywords)
+        return classes.Expression().sequence(**keywords)
     return classes.Sequence(items=items, **keywords)
 
 
 def untie(selector: abjad.Expression) -> commandclasses.DetachCommand:
-    r"""
+    """
     Makes (repeat-)tie detach command.
     """
     return commandclasses.DetachCommand(

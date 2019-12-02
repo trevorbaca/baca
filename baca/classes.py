@@ -1326,7 +1326,7 @@ class Expression(abjad.Expression):
         expression = self.append_callback(callback)
         return abjad.new(expression, proxy_class=class_, template="baca")
 
-    def sequence(items=None, **keywords):
+    def sequence(self, **keywords) -> "Expression":
         """
         Makes sequence expression.
         """
