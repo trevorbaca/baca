@@ -1335,8 +1335,8 @@ class Expression(abjad.Expression):
         callback = expression._make_initializer_callback(
             Sequence, module_names=["baca"], string_template="{}", **keywords
         )
-        expression = expression.append_callback(callback)
-        return abjad.new(expression, proxy_class=Sequence)
+        expression_ = expression.append_callback(callback)
+        return abjad.new(expression_, proxy_class=Sequence)
 
 
 class PaddedTuple(object):
