@@ -1186,6 +1186,7 @@ classes
       __eq__
       __format__
       __getitem__
+      __graph__
       __hash__
       __len__
       __repr__
@@ -1208,6 +1209,8 @@ classes
    .. automethod:: Tree.__format__
 
    .. automethod:: Tree.__getitem__
+
+   .. automethod:: Tree.__graph__
 
    .. automethod:: Tree.__hash__
 

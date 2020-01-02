@@ -1456,6 +1456,10 @@ pitchclasses
 
    .. container:: inherited
 
+      .. automethod:: PitchTree.__graph__
+
+   .. container:: inherited
+
       .. automethod:: PitchTree.__hash__
 
    .. automethod:: PitchTree.__illustrate__

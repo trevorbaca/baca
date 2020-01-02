@@ -1,3 +1,4 @@
+import abjad
 import sphinx_rtd_theme
 from pygments.formatters.latex import LatexFormatter
 from sphinx.highlighting import PygmentsBridge
@@ -14,9 +15,7 @@ PygmentsBridge.latex_formatter = CustomLatexFormatter
 ### CORE ###
 
 add_function_parentheses = True
-
-copyright = "1997-2018, Trevor Bača"
-
+copyright = "1997-2020, Trevor Bača"
 exclude_patterns = []
 
 extensions = [
@@ -26,33 +25,35 @@ extensions = [
     "sphinx.ext.graphviz",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
+    "abjad.ext.sphinx",
     "sphinx_autodoc_typehints",
     "uqbar.sphinx.api",
+    "uqbar.sphinx.book",
     "uqbar.sphinx.inheritance",
     "uqbar.sphinx.style",
-    "abjadext.book.sphinx",
 ]
 
 master_doc = "index"
-
 project = "Bača API"
-
 pygments_style = "sphinx"
-
 release = ""
-
 source_suffix = ".rst"
-
 templates_path = ["_templates"]
-
 version = ""
 
 ### HTML ###
 
-html_theme = "default"
-html_theme = "sphinx_rtd_theme"
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+html_last_updated_fmt = "%b %d, %Y"
+html_show_sourcelink = True
 html_static_path = ["_static"]
+html_theme = "sphinx_rtd_theme"
+html_theme_options = {
+    "collapse_navigation": True,
+    "navigation_depth": -1,
+    "sticky_navigation": True,
+    "style_external_links": True,
+}
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 ### HTML HELP ###
 
@@ -79,38 +80,17 @@ latex_documents = [
     ("index", "BačaAPI.tex", "Bača API", "Trevor Bača", "manual")
 ]
 
-# latex_use_parts = True
-
 latex_domain_indices = False
-
-### MAN ###
-
-man_pages = [("index", "BačaAPI", "Bača API", ["Trevor Bača"], 1)]
-
-### TEXINFO ###
-
-texinfo_documents = [
-    (
-        "index",
-        "BačaAPI",
-        "Bača API",
-        "Trevor Bača",
-        "BačaAPI",
-        "One line description of project.",
-        "Miscellaneous",
-    )
-]
 
 ### EXTESNIONS ###
 
-abjadbook_ignored_documents = ()
-abjadbook_console_module_names = ("baca",)
 autodoc_member_order = "groupwise"
 graphviz_dot_args = ["-s32"]
 graphviz_output_format = "svg"
 intersphinx_mapping = {
-    "abjad": ("http://abjad.mbrsi.org", None),
-    "python": ("http://docs.python.org/3.6", None),
+    "http://josiahwolfoberholtzer.com/uqbar/": None,
+    "http://www.sphinx-doc.org/en/master/": None,
+    "https://docs.python.org/3.7/": None,
 }
 todo_include_todos = True
 
@@ -122,3 +102,17 @@ uqbar_api_member_documenter_classes = [
     "uqbar.apis.FunctionDocumenter",
     "uqbar.apis.SummarizingClassDocumenter",
 ]
+
+uqbar_book_console_setup = [
+    "import abjad",
+    "import baca",
+    "from abjadext import rmakers",
+]
+uqbar_book_console_teardown = []
+uqbar_book_extensions = [
+    "uqbar.book.extensions.GraphExtension",
+    "abjad.ext.sphinx.LilyPondExtension",
+]
+uqbar_book_strict = False
+uqbar_book_use_black = True
+uqbar_book_use_cache = True
