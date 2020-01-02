@@ -7505,7 +7505,7 @@ r"""
         ...     value=(0, 0),
         ... )
         >>> tag = "baca.bar_extent_persistent"
-        >>> command = IndicatorCommand(
+        >>> command = baca.IndicatorCommand(
         ...     indicators=[override], selector=baca.leaf(0), tags=[tag]
         ... )
 
@@ -7822,7 +7822,7 @@ r"""
         ...     value=(0, 0),
         ... )
         >>> tag = "baca.bar_extent_persistent"
-        >>> command = IndicatorCommand(
+        >>> command = baca.IndicatorCommand(
         ...     indicators=[override], selector=baca.leaf(0), tags=[tag]
         ... )
         >>> maker(

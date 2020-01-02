@@ -4590,7 +4590,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             >>> items = [-2, -1, 6, 7, -1, 7]
             >>> segment_1 = baca.PitchClassSegment(items=items)
-            >>> abjad.show(segment, strict=89) # doctest: +SKIP
+            >>> abjad.show(segment_1, strict=89) # doctest: +SKIP
 
             >>> items = [9, 2, 1, 6, 2, 6]
             >>> segment_2 = baca.PitchClassSegment(items=items)
@@ -7000,7 +7000,7 @@ class PitchTree(classes.Tree):
         >>> segment_3 = segment_3.transpose(n=1)
         >>> items = [[segment_1, segment_2], segment_3]
         >>> tree = baca.PitchTree(items=items)
-        >>> graph(tree) # doctest: +SKIP
+        >>> abjad.graph(tree) # doctest: +SKIP
 
         ..  docs::
 
@@ -7152,7 +7152,7 @@ class PitchTree(classes.Tree):
     #            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
     #            >>> tree = PitchTree(items=items)
     #
-    #            >>> graph(tree) # doctest: +SKIP
+    #            >>> abjad.graph(tree) # doctest: +SKIP
     #
     #            ..  docs::
     #
@@ -7223,7 +7223,7 @@ class PitchTree(classes.Tree):
     #            ...     item_class=abjad.NamedPitch,
     #            ...     )
     #
-    #            >>> graph(tree) # doctest: +SKIP
+    #            >>> abjad.graph(tree) # doctest: +SKIP
     #
     #            ..  docs::
     #

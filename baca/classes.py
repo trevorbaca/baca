@@ -4,6 +4,7 @@ import copy
 import inspect
 import itertools
 import typing
+import uqbar
 from . import typings
 
 
@@ -10575,7 +10576,7 @@ class Tree(object):
         >>> items = [[[0, 1], [2, 3]], [4, 5]]
         >>> tree = baca.Tree(items=items)
 
-        >>> graph(tree) # doctest: +SKIP
+        >>> abjad.graph(tree) # doctest: +SKIP
 
         >>> tree.get_payload(nested=True)
         [[[0, 1], [2, 3]], [4, 5]]
@@ -10635,7 +10636,7 @@ class Tree(object):
         >>> tree_3 = baca.Tree(items=[4, 5])
         >>> tree = baca.Tree(items=[[tree_1, tree_2], tree_3])
 
-        >>> graph(tree) # doctest: +SKIP
+        >>> abjad.graph(tree) # doctest: +SKIP
 
         ..  docs::
 
@@ -10870,84 +10871,48 @@ class Tree(object):
         """
         return self._children.__getitem__(argument)
 
-    #    def __graph__(self, **keywords):
-    #        """
-    #        Graphs tree.
-    #
-    #        ..  container:: example
-    #
-    #            Graphs tree:
-    #
-    #            >>> items = [[[0, 1], [2, 3]], [4, 5]]
-    #            >>> tree = baca.Tree(items=items)
-    #
-    #            >>> graph(tree) # doctest: +SKIP
-    #
-    #            >>> tree_graph = tree.__graph__()
-    #            >>> abjad.f(tree_graph, strict=89)
-    #            digraph G {
-    #                graph [bgcolor=transparent,
-    #                    truecolor=true];
-    #                node_0 [label="",
-    #                    shape=circle];
-    #                node_1 [label="",
-    #                    shape=circle];
-    #                node_2 [label="",
-    #                    shape=circle];
-    #                node_3 [label="0",
-    #                    shape=box];
-    #                node_4 [label="1",
-    #                    shape=box];
-    #                node_5 [label="",
-    #                    shape=circle];
-    #                node_6 [label="2",
-    #                    shape=box];
-    #                node_7 [label="3",
-    #                    shape=box];
-    #                node_8 [label="",
-    #                    shape=circle];
-    #                node_9 [label="4",
-    #                    shape=box];
-    #                node_10 [label="5",
-    #                    shape=box];
-    #                node_0 -> node_1;
-    #                node_0 -> node_8;
-    #                node_1 -> node_2;
-    #                node_1 -> node_5;
-    #                node_2 -> node_3;
-    #                node_2 -> node_4;
-    #                node_5 -> node_6;
-    #                node_5 -> node_7;
-    #                node_8 -> node_9;
-    #                node_8 -> node_10;
-    #            }
-    #
-    #        Returns Graphviz graph.
-    #        """
-    #        graph = abjad.graphtools.GraphvizGraph(
-    #            attributes={
-    #                'bgcolor': 'transparent',
-    #                'truecolor': True,
-    #                },
-    #            name='G',
-    #            )
-    #        node_mapping = {}
-    #        for node in self._iterate_depth_first():
-    #            graphviz_node = abjad.graphtools.GraphvizNode()
-    #            if list(node):
-    #                graphviz_node.attributes['shape'] = 'circle'
-    #                graphviz_node.attributes['label'] = ''
-    #            else:
-    #                graphviz_node.attributes['shape'] = 'box'
-    #                graphviz_node.attributes['label'] = str(node._payload)
-    #            graph.append(graphviz_node)
-    #            node_mapping[node] = graphviz_node
-    #            if node._parent is not None:
-    #                abjad.graphtools.GraphvizEdge().attach(
-    #                    node_mapping[node._parent],
-    #                    node_mapping[node],
-    #                    )
-    #        return graph
+    def __graph__(self, **keywords):
+        """
+        Graphs tree.
+
+        ..  container:: example
+
+            Graphs tree:
+
+            >>> items = [[[0, 1], [2, 3]], [4, 5]]
+            >>> tree = baca.Tree(items=items)
+
+            >>> abjad.graph(tree) # doctest: +SKIP
+
+            >>> tree.__graph__()
+            <uqbar.graphs.Graph.Graph object at 0x...>
+
+        Returns uqbar graph.
+        """
+        graph = uqbar.graphs.Graph(
+            attributes={
+                'bgcolor': 'transparent',
+                'truecolor': True,
+                },
+            name='G',
+            )
+        node_mapping = {}
+        for node in self._iterate_depth_first():
+            graphviz_node = uqbar.graphs.Node()
+            if list(node):
+                graphviz_node.attributes['shape'] = 'circle'
+                graphviz_node.attributes['label'] = ''
+            else:
+                graphviz_node.attributes['shape'] = 'box'
+                graphviz_node.attributes['label'] = str(node._payload)
+            graph.append(graphviz_node)
+            node_mapping[node] = graphviz_node
+            if node._parent is not None:
+                uqbar.graphs.Edge().attach(
+                    node_mapping[node._parent],
+                    node_mapping[node],
+                    )
+        return graph
 
     def __hash__(self):
         """
@@ -11773,7 +11738,7 @@ class Tree(object):
 
             >>> items = [[[0, 1], [2, 3]], [4, 5]]
             >>> tree = baca.Tree(items=items)
-            >>> graph(tree) # doctest: +SKIP
+            >>> abjad.graph(tree) # doctest: +SKIP
 
             Iterates all levels:
 
