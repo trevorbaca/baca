@@ -268,12 +268,8 @@ class PiecewiseCommand(scoping.Command):
                 bundle = Bundle(spanner_start=self.right_broken)
                 tag = abjad.Tag("baca.PiecewiseCommand._call(1)")
                 tag = tag.append(abjad.tags.RIGHT_BROKEN)
-                self._attach_indicators(
-                    bundle, stop_leaf, i, total_pieces, tag=tag
-                )
-            if bookend_pattern.matches_index(i, piece_count) and 1 < len(
-                piece
-            ):
+                self._attach_indicators(bundle, stop_leaf, i, total_pieces, tag=tag)
+            if bookend_pattern.matches_index(i, piece_count) and 1 < len(piece):
                 should_bookend = True
             else:
                 should_bookend = False
@@ -290,17 +286,13 @@ class PiecewiseCommand(scoping.Command):
                 bundle = abjad.new(bundle, spanner_start=None)
             next_bundle = self.bundles[i + 1]
             if should_bookend and bundle.bookended_spanner_start:
-                bundle = abjad.new(
-                    bundle, spanner_start=bundle.bookended_spanner_start
-                )
+                bundle = abjad.new(bundle, spanner_start=bundle.bookended_spanner_start)
             if (
                 is_penultimate_piece
                 and (len(pieces[-1]) == 1 or self.final_piece_spanner is False)
                 and isinstance(next_bundle.spanner_start, abjad.StartTextSpan)
             ):
-                bundle = abjad.new(
-                    bundle, spanner_start=bundle.bookended_spanner_start
-                )
+                bundle = abjad.new(bundle, spanner_start=bundle.bookended_spanner_start)
                 just_backstole_right_text = True
             if (
                 len(piece) == 1
@@ -331,10 +323,7 @@ class PiecewiseCommand(scoping.Command):
             # TextSpanner.bound-details.right.to-extent = ##t implementation
             # only 100% workable solution
             if is_final_piece and self.autodetect_right_padding:
-                if (
-                    abjad.inspect(stop_leaf).annotation(abjad.const.PHANTOM)
-                    is True
-                ):
+                if abjad.inspect(stop_leaf).annotation(abjad.const.PHANTOM) is True:
                     autodetected_right_padding = 2.5
                 # stop leaf multiplied whole note on fermata measure downbeat
                 elif (
@@ -383,9 +372,7 @@ class PiecewiseCommand(scoping.Command):
                 tag = abjad.Tag("baca.PiecewiseCommand._call(4)")
                 if self.right_broken:
                     tag = tag.append(abjad.tags.RIGHT_BROKEN)
-                self._attach_indicators(
-                    bundle, stop_leaf, i, total_pieces, tag=tag
-                )
+                self._attach_indicators(bundle, stop_leaf, i, total_pieces, tag=tag)
             previous_had_bookend = should_bookend
 
     ### PRIVATE METHODS ###
@@ -409,10 +396,7 @@ class PiecewiseCommand(scoping.Command):
                 pass
             else:
                 indicator = abjad.new(indicator)
-            if (
-                not getattr(indicator, "trend", False)
-                and leaf is just_bookended_leaf
-            ):
+            if not getattr(indicator, "trend", False) and leaf is just_bookended_leaf:
                 continue
             if autodetected_right_padding is not None and isinstance(
                 indicator, abjad.StartTextSpan
@@ -425,12 +409,8 @@ class PiecewiseCommand(scoping.Command):
                     .append(abjad.tags.SPANNER_START),
                 ).bound_details__right__padding = number
             if self.tweaks and hasattr(indicator, "_tweaks"):
-                self._apply_tweaks(
-                    indicator, self.tweaks, i=i, total=total_pieces
-                )
-            reapplied = scoping.Command._remove_reapplied_wrappers(
-                leaf, indicator
-            )
+                self._apply_tweaks(indicator, self.tweaks, i=i, total=total_pieces)
+            reapplied = scoping.Command._remove_reapplied_wrappers(leaf, indicator)
             tag_ = self.tag.append(tag)
             if getattr(indicator, "spanner_start", None) is True:
                 tag_ = tag_.append(abjad.tags.SPANNER_START)
@@ -550,10 +530,7 @@ def bow_speed_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes bow speed spanner.
@@ -584,9 +561,7 @@ def bow_speed_spanner(
 def circle_bow_spanner(
     *tweaks: abjad.IndexedTweakManager,
     left_broken: bool = None,
-    left_broken_text: typing.Optional[
-        str
-    ] = r"\baca-left-broken-circle-bowing-markup",
+    left_broken_text: typing.Optional[str] = r"\baca-left-broken-circle-bowing-markup",
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
@@ -594,10 +569,7 @@ def circle_bow_spanner(
     qualifier: str = None,
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes circle bow spanner.
@@ -642,10 +614,7 @@ def clb_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes clb spanner.
@@ -689,19 +658,14 @@ def covered_spanner(
     autodetect_right_padding: bool = True,
     argument: str = r"\baca-covered-markup =|",
     left_broken: bool = None,
-    left_broken_text: typing.Optional[
-        str
-    ] = r"\baca-left-broken-covered-markup",
+    left_broken_text: typing.Optional[str] = r"\baca-left-broken-covered-markup",
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes covered spanner.
@@ -740,10 +704,7 @@ def damp_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes damp spanner.
@@ -3822,19 +3783,14 @@ def hairpin(
 def half_clt_spanner(
     *tweaks: abjad.IndexedTweakManager,
     left_broken: bool = None,
-    left_broken_text: typing.Optional[
-        str
-    ] = r"\baca-left-broken-half-clt-markup",
+    left_broken_text: typing.Optional[str] = r"\baca-left-broken-half-clt-markup",
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes 1/2 clt spanner.
@@ -4057,9 +4013,7 @@ def make_dynamic(
     assert isinstance(string, str), repr(string)
     scheme_manifest = classes.SchemeManifest()
     known_shapes = abjad.StartHairpin("<").known_shapes
-    indicator: typing.Union[
-        abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin
-    ]
+    indicator: typing.Union[abjad.Dynamic, abjad.StartHairpin, abjad.StopHairpin]
     if "_" in string:
         raise Exception(f"use hyphens instead of underscores ({string!r}).")
     if string == "niente":
@@ -4123,10 +4077,7 @@ def make_dynamic(
             sforzando = False
         name_is_textual = not (sforzando)
         indicator = abjad.Dynamic(
-            name,
-            command=command,
-            name_is_textual=name_is_textual,
-            sforzando=sforzando,
+            name, command=command, name_is_textual=name_is_textual, sforzando=sforzando,
         )
     elif string.startswith('"'):
         assert string.endswith('"')
@@ -4161,10 +4112,7 @@ def material_annotation_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .leaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().leaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes material annotation spanner.
@@ -4201,10 +4149,7 @@ def metric_modulation_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .leaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().leaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes metric modulation spanner.
@@ -4373,14 +4318,12 @@ def parse_hairpin_descriptor(
             right, abjad.StartHairpin
         ):
             raise Exception("consecutive start hairpin commands.")
-        elif isinstance(left, abjad.Dynamic) and isinstance(
-            right, abjad.Dynamic
-        ):
+        elif isinstance(left, abjad.Dynamic) and isinstance(right, abjad.Dynamic):
             bundle = Bundle(indicator=left)
             bundles.append(bundle)
-        elif isinstance(
-            left, (abjad.Dynamic, abjad.StopHairpin)
-        ) and isinstance(right, abjad.StartHairpin):
+        elif isinstance(left, (abjad.Dynamic, abjad.StopHairpin)) and isinstance(
+            right, abjad.StartHairpin
+        ):
             bundle = Bundle(indicator=left, spanner_start=right)
             bundles.append(bundle)
     prototype = (abjad.Dynamic, abjad.StopHairpin)
@@ -4400,10 +4343,7 @@ def pitch_annotation_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .leaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().leaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes pitch annotation spanner.
@@ -4441,10 +4381,7 @@ def pizzicato_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes pizzicato spanner.
@@ -4482,10 +4419,7 @@ def rhythm_annotation_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner()
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .leaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().leaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes rhythm command spanner.
@@ -4526,10 +4460,7 @@ def scp_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes SCP spanner.
@@ -4570,10 +4501,7 @@ def spazzolato_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes spazzolato spanner.
@@ -4614,10 +4542,7 @@ def string_number_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes string number spanner.
@@ -4658,10 +4583,7 @@ def tasto_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes tasto spanner.
@@ -7420,9 +7342,7 @@ def text_spanner(
             hspace = abjad.Markup.hspace(0.75)
             right_markup = right_markup.general_align("Y", 1)
             right_markup = abjad.Markup.concat([line, hspace, right_markup])
-        bookended_spanner_start = abjad.new(
-            start_text_span, right_text=right_markup
-        )
+        bookended_spanner_start = abjad.new(start_text_span, right_text=right_markup)
         # TODO: find some way to make these tweaks explicit to composer
         manager = abjad.tweak(bookended_spanner_start)
         manager.bound_details__right__stencil_align_dir_y = abjad.Center
@@ -7468,10 +7388,7 @@ def vibrato_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes vibrato spanner.
@@ -7512,10 +7429,7 @@ def xfb_spanner(
     pieces: abjad.Expression = classes.Expression().select().group(),
     right_broken: bool = None,
     # NOTE: selector differs from text_spanner(), annotation spanners:
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .ltleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().ltleaves().rleak(),
 ) -> PiecewiseCommand:
     """
     Makes XFB spanner.

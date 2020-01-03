@@ -516,9 +516,7 @@ class ClusterCommand(scoping.Command):
         else:
             start_pitch = plt.head.written_pitch
         pitches = self._make_pitches(start_pitch, width)
-        key_cluster = abjad.KeyCluster(
-            include_black_keys=not self.hide_flat_markup
-        )
+        key_cluster = abjad.KeyCluster(include_black_keys=not self.hide_flat_markup)
         for pleaf in plt:
             chord = abjad.Chord(pitches, pleaf.written_duration)
             indicators = abjad.detach(object, pleaf)
@@ -3302,12 +3300,7 @@ class PitchCommand(scoping.Command):
 
     @staticmethod
     def _set_lt_pitch(
-        lt,
-        pitch,
-        *,
-        allow_repitch=False,
-        mock=False,
-        set_chord_pitches_equal=False,
+        lt, pitch, *, allow_repitch=False, mock=False, set_chord_pitches_equal=False,
     ):
         new_lt = None
         already_pitched = abjad.const.ALREADY_PITCHED
@@ -3331,9 +3324,7 @@ class PitchCommand(scoping.Command):
                 pass
             else:
                 for leaf in lt:
-                    rest = abjad.Rest(
-                        leaf.written_duration, multiplier=leaf.multiplier
-                    )
+                    rest = abjad.Rest(leaf.written_duration, multiplier=leaf.multiplier)
                     abjad.mutate(leaf).replace(rest, wrappers=True)
                 new_lt = abjad.inspect(rest).logical_tie()
         elif isinstance(pitch, collections.abc.Iterable):
@@ -3344,9 +3335,7 @@ class PitchCommand(scoping.Command):
                 assert isinstance(lt.head, (abjad.Note, abjad.Rest))
                 for leaf in lt:
                     chord = abjad.Chord(
-                        pitch,
-                        leaf.written_duration,
-                        multiplier=leaf.multiplier,
+                        pitch, leaf.written_duration, multiplier=leaf.multiplier,
                     )
                     abjad.mutate(leaf).replace(chord, wrappers=True)
                 new_lt = abjad.inspect(chord).logical_tie()
@@ -3354,9 +3343,7 @@ class PitchCommand(scoping.Command):
             if isinstance(lt.head, abjad.Note):
                 for note in lt:
                     note.written_pitch = pitch
-            elif set_chord_pitches_equal is True and isinstance(
-                lt.head, abjad.Chord
-            ):
+            elif set_chord_pitches_equal is True and isinstance(lt.head, abjad.Chord):
                 for chord in lt:
                     for note_head in chord.note_heads:
                         note_head.written_pitch = pitch
@@ -3364,9 +3351,7 @@ class PitchCommand(scoping.Command):
                 assert isinstance(lt.head, (abjad.Chord, abjad.Rest))
                 for leaf in lt:
                     note = abjad.Note(
-                        pitch,
-                        leaf.written_duration,
-                        multiplier=leaf.multiplier,
+                        pitch, leaf.written_duration, multiplier=leaf.multiplier,
                     )
                     abjad.mutate(leaf).replace(note, wrappers=True)
                 new_lt = abjad.inspect(note).logical_tie()
@@ -6224,9 +6209,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
             pitches_instead_of_staff_positions = bool(
                 pitches_instead_of_staff_positions
             )
-        self._pitches_instead_of_staff_positions = (
-            pitches_instead_of_staff_positions
-        )
+        self._pitches_instead_of_staff_positions = pitches_instead_of_staff_positions
 
     ### SPECIAL METHODS ###
 
@@ -6700,9 +6683,7 @@ def clusters(
     """
     Makes clusters with ``widths`` and ``start_pitch``.
     """
-    return ClusterCommand(
-        selector=selector, start_pitch=start_pitch, widths=widths
-    )
+    return ClusterCommand(selector=selector, start_pitch=start_pitch, widths=widths)
 
 
 def color_fingerings(
@@ -6715,9 +6696,7 @@ def color_fingerings(
     """
     Adds color fingerings.
     """
-    return ColorFingeringCommand(
-        numbers=numbers, selector=selector, tweaks=tweaks
-    )
+    return ColorFingeringCommand(numbers=numbers, selector=selector, tweaks=tweaks)
 
 
 def deviation(
@@ -6878,9 +6857,7 @@ def displacement(
             >>
 
     """
-    return OctaveDisplacementCommand(
-        displacements=displacements, selector=selector
-    )
+    return OctaveDisplacementCommand(displacements=displacements, selector=selector)
 
 
 def force_accidental(
@@ -7400,8 +7377,7 @@ def pitch(
         raise Exception(f"one-note chord {pitch!r}?")
     if allow_out_of_range not in (None, True, False):
         raise Exception(
-            "allow_out_of_range must be boolean"
-            f" (not {allow_out_of_range!r})."
+            "allow_out_of_range must be boolean" f" (not {allow_out_of_range!r})."
         )
     if do_not_transpose not in (None, True, False):
         raise Exception(
@@ -7450,13 +7426,10 @@ def pitches(
         cyclic = True
     if ignore_incomplete not in (None, True, False):
         raise Exception(
-            "ignore_incomplete must be boolean"
-            f" (not {ignore_incomplete!r})."
+            "ignore_incomplete must be boolean" f" (not {ignore_incomplete!r})."
         )
     if ignore_incomplete is True and not persist:
-        raise Exception(
-            f"ignore_incomplete is ignored" " when persist is not set."
-        )
+        raise Exception(f"ignore_incomplete is ignored" " when persist is not set.")
     if persist is not None and not isinstance(persist, str):
         raise Exception(f"persist name must be string (not {persist!r}).")
     return PitchCommand(
@@ -7953,9 +7926,7 @@ def soprano_to_octave(
             >>
 
     """
-    return RegisterToOctaveCommand(
-        anchor=abjad.Up, octave_number=n, selector=selector
-    )
+    return RegisterToOctaveCommand(anchor=abjad.Up, octave_number=n, selector=selector)
 
 
 def staff_position(
@@ -7972,9 +7943,7 @@ def staff_position(
     """
     Makes staff position command; allows repeats.
     """
-    assert isinstance(argument, (int, list, abjad.StaffPosition)), repr(
-        argument
-    )
+    assert isinstance(argument, (int, list, abjad.StaffPosition)), repr(argument)
     if isinstance(argument, list):
         assert all(isinstance(_, (int, abjad.StaffPosition)) for _ in argument)
     return StaffPositionCommand(

@@ -236,9 +236,7 @@ class RhythmCommand(scoping.Command):
         persist: str = None,
         scope: scoping.ScopeTyping = None,
     ) -> None:
-        scoping.Command.__init__(
-            self, match=match, measures=measures, scope=scope
-        )
+        scoping.Command.__init__(self, match=match, measures=measures, scope=scope)
         if annotation_spanner_color is not None:
             assert isinstance(annotation_spanner_color, str)
         self._annotation_spanner_color = annotation_spanner_color
@@ -359,9 +357,7 @@ class RhythmCommand(scoping.Command):
                 rcommand = self.rhythm_maker
             else:
                 rcommand = rmakers.stack(self.rhythm_maker)
-            previous_segment_stop_state = self._previous_segment_stop_state(
-                runtime
-            )
+            previous_segment_stop_state = self._previous_segment_stop_state(runtime)
             if isinstance(rcommand, rmakers.Stack):
                 selection = rcommand(
                     time_signatures, previous_state=previous_segment_stop_state
@@ -723,9 +719,7 @@ class RhythmCommand(scoping.Command):
 ### FACTORY FUNCTIONS ###
 
 
-def make_even_divisions(
-    *, measures: typings.SliceTyping = None
-) -> RhythmCommand:
+def make_even_divisions(*, measures: typings.SliceTyping = None) -> RhythmCommand:
     """
     Makes even divisions.
     """
@@ -743,9 +737,7 @@ def make_even_divisions(
 
 
 def make_fused_tuplet_monads(
-    *,
-    measures: typings.SliceTyping = None,
-    tuplet_ratio: typing.Tuple[int] = None,
+    *, measures: typings.SliceTyping = None, tuplet_ratio: typing.Tuple[int] = None,
 ) -> RhythmCommand:
     """
     Makes fused tuplet monads.
@@ -919,9 +911,7 @@ def make_monads(fractions: str,) -> RhythmCommand:
 
 
 # TODO: REMOVE?
-def make_multimeasure_rests(
-    *, measures: typings.SliceTyping = None
-) -> RhythmCommand:
+def make_multimeasure_rests(*, measures: typings.SliceTyping = None) -> RhythmCommand:
     """
     Makes multiplied-duration multimeasure rests.
     """
@@ -934,9 +924,7 @@ def make_multimeasure_rests(
 
 
 def make_notes(
-    *specifiers,
-    measures: typings.SliceTyping = None,
-    repeat_ties: bool = False,
+    *specifiers, measures: typings.SliceTyping = None, repeat_ties: bool = False,
 ) -> RhythmCommand:
     """
     Makes notes; rewrites meter.
@@ -1106,9 +1094,7 @@ def make_repeat_tied_notes(
     specifier = rmakers.force_repeat_tie()
     specifiers_.append(specifier)
     return RhythmCommand(
-        rmakers.stack(
-            rmakers.note(), *specifiers_, tag=_site(inspect.currentframe())
-        ),
+        rmakers.stack(rmakers.note(), *specifiers_, tag=_site(inspect.currentframe())),
         annotation_spanner_color="darkcyan",
         frame=inspect.currentframe(),
     )
@@ -1197,9 +1183,7 @@ def make_skips(*, measures: typings.SliceTyping = None) -> RhythmCommand:
     Makes multiplied-duration skips.
     """
     return RhythmCommand(
-        rmakers.multiplied_duration(
-            abjad.Skip, tag=_site(inspect.currentframe())
-        ),
+        rmakers.multiplied_duration(abjad.Skip, tag=_site(inspect.currentframe())),
         measures=measures,
     )
 
@@ -1237,9 +1221,7 @@ def make_tied_repeated_durations(
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
     tie_specifier: rmakers.Command
-    tie_specifier = rmakers.repeat_tie(
-        classes.Expression().select().pheads()[1:]
-    )
+    tie_specifier = rmakers.repeat_tie(classes.Expression().select().pheads()[1:])
     specifiers.append(tie_specifier)
     tie_specifier = rmakers.force_repeat_tie()
     specifiers.append(tie_specifier)

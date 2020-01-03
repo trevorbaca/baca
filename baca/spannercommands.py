@@ -108,9 +108,9 @@ class SpannerIndicatorCommand(scoping.Command):
                     start_indicator,
                     first_leaf,
                     deactivate=self.deactivate,
-                    tag=abjad.Tag(
-                        "baca.SpannerIndicatorCommand._call(2)"
-                    ).append(abjad.tags.SPANNER_START),
+                    tag=abjad.Tag("baca.SpannerIndicatorCommand._call(2)").append(
+                        abjad.tags.SPANNER_START
+                    ),
                 )
         if self.stop_indicator is not None:
             stop_indicator = self.stop_indicator
@@ -132,9 +132,9 @@ class SpannerIndicatorCommand(scoping.Command):
                     stop_indicator,
                     final_leaf,
                     deactivate=self.deactivate,
-                    tag=abjad.Tag(
-                        "baca.SpannerIndicatorCommand._call(4)"
-                    ).append(abjad.tags.SPANNER_STOP),
+                    tag=abjad.Tag("baca.SpannerIndicatorCommand._call(4)").append(
+                        abjad.tags.SPANNER_STOP
+                    ),
                 )
 
     ### PRIVATE METHODS ###
@@ -766,10 +766,7 @@ def trill_spanner(
     left_broken: bool = None,
     map: abjad.Expression = None,
     right_broken: bool = None,
-    selector: abjad.Expression = classes.Expression()
-    .select()
-    .tleaves()
-    .rleak(),
+    selector: abjad.Expression = classes.Expression().select().tleaves().rleak(),
     start_trill_span: abjad.StartTrillSpan = None,
     stop_trill_span: abjad.StopTrillSpan = None,
 ) -> SpannerIndicatorCommand:
@@ -1007,9 +1004,7 @@ def trill_spanner(
     if alteration is not None:
         prototype = (abjad.NamedPitch, abjad.NamedInterval, str)
         if not isinstance(alteration, prototype):
-            message = (
-                f"trill spanner 'alteration' must be pitch, interval, str:"
-            )
+            message = f"trill spanner 'alteration' must be pitch, interval, str:"
             message += f"\n   {alteration}"
             raise Exception(message)
     interval = pitch = None
@@ -1023,9 +1018,7 @@ def trill_spanner(
                 pass
     start_trill_span = start_trill_span or abjad.StartTrillSpan()
     if pitch is not None or interval is not None:
-        start_trill_span = abjad.new(
-            start_trill_span, interval=interval, pitch=pitch
-        )
+        start_trill_span = abjad.new(start_trill_span, interval=interval, pitch=pitch)
     if harmonic is True:
         string = "#(lambda (grob) (grob-interpret-markup grob"
         string += r' #{ \markup \musicglyph #"noteheads.s0harmonic" #}))'

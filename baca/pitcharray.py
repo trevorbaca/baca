@@ -850,9 +850,7 @@ class PitchArray(object):
         self._rows.remove(row)
         row._parent_array = None
 
-    def to_measures(
-        self, cell_duration_denominator=8
-    ) -> typing.List[abjad.Container]:
+    def to_measures(self, cell_duration_denominator=8) -> typing.List[abjad.Container]:
         r"""
         Changes pitch array  to measures.
 
@@ -1109,9 +1107,7 @@ class PitchArrayCell(object):
         composite_column_width = 0
         columns = self.parent_array.columns
         for column_index in self.column_indices:
-            composite_column_width += columns[
-                column_index
-            ]._column_format_width
+            composite_column_width += columns[column_index]._column_format_width
         return composite_column_width
 
     @property
@@ -2531,14 +2527,10 @@ class PitchArrayRow(object):
         if not len_self:
             return ""
         elif 0 < len_self <= 8:
-            result = [
-                cell._format_row_column_repr_string for cell in self.cells
-            ]
+            result = [cell._format_row_column_repr_string for cell in self.cells]
             return ", ".join(result)
         else:
-            left = ", ".join(
-                [x._format_row_column_repr_string for x in self.cells[:2]]
-            )
+            left = ", ".join([x._format_row_column_repr_string for x in self.cells[:2]])
             right = ", ".join(
                 [x._format_row_column_repr_string for x in self.cells[-2:]]
             )
@@ -2800,9 +2792,7 @@ class PitchArrayRow(object):
         new_cells = []
         for cell in cells:
             if cell not in new_cells:
-                trim = [
-                    x for x in cell.column_indices if x not in column_indices
-                ]
+                trim = [x for x in cell.column_indices if x not in column_indices]
                 new_width = cell.width - len(trim)
                 new_cell = copy.copy(cell)
                 new_cell._width = new_width

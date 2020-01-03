@@ -304,9 +304,7 @@ def close_volta(
     # does not require not_mol() tagging, just only_mol() tagging:
     return scoping.suite(
         indicatorcommands.bar_line(":|.", selector, format_slot=format_slot),
-        scoping.only_mol(
-            overrides.bar_line_x_extent((0, 1.5), selector, after=after)
-        ),
+        scoping.only_mol(overrides.bar_line_x_extent((0, 1.5), selector, after=after)),
     )
 
 
@@ -617,9 +615,7 @@ def container(
         if not isinstance(identifier, str):
             message = f"identifier must be string (not {identifier!r})."
             raise Exception(message)
-    return commandclasses.ContainerCommand(
-        identifier=identifier, selector=selector
-    )
+    return commandclasses.ContainerCommand(identifier=identifier, selector=selector)
 
 
 def cross_staff(
@@ -1160,12 +1156,8 @@ def dynamic_up(
 
 
 def edition(
-    not_parts: typing.Union[
-        str, abjad.Markup, commandclasses.IndicatorCommand
-    ],
-    only_parts: typing.Union[
-        str, abjad.Markup, commandclasses.IndicatorCommand
-    ],
+    not_parts: typing.Union[str, abjad.Markup, commandclasses.IndicatorCommand],
+    only_parts: typing.Union[str, abjad.Markup, commandclasses.IndicatorCommand],
 ) -> scoping.Suite:
     """
     Makes not-parts / only-parts markup suite.
@@ -1354,10 +1346,7 @@ def finger_pressure_transition(
 
 def flat_glissando(
     pitch: typing.Union[
-        str,
-        abjad.NamedPitch,
-        abjad.StaffPosition,
-        typing.List[abjad.StaffPosition],
+        str, abjad.NamedPitch, abjad.StaffPosition, typing.List[abjad.StaffPosition],
     ] = None,
     *tweaks,
     allow_repitch: bool = None,
@@ -1370,9 +1359,7 @@ def flat_glissando(
     right_broken_show_next: bool = None,
     rleak: bool = None,
     selector: abjad.Expression = classes.Expression().select().pleaves(),
-    stop_pitch: typing.Union[
-        str, abjad.NamedPitch, abjad.StaffPosition
-    ] = None,
+    stop_pitch: typing.Union[str, abjad.NamedPitch, abjad.StaffPosition] = None,
 ) -> scoping.Suite:
     """
     Makes flat glissando.
@@ -1402,22 +1389,15 @@ def flat_glissando(
     commands.append(untie_command)
     if pitch is not None and stop_pitch is None:
         if isinstance(pitch, abjad.StaffPosition) or (
-            isinstance(pitch, list)
-            and isinstance(pitch[0], abjad.StaffPosition)
+            isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
         ):
             staff_position_command = pitchcommands.staff_position(
-                pitch,
-                allow_repitch=allow_repitch,
-                mock=mock,
-                selector=selector,
+                pitch, allow_repitch=allow_repitch, mock=mock, selector=selector,
             )
             commands.append(staff_position_command)
         else:
             pitch_command = pitchcommands.pitch(
-                pitch,
-                allow_repitch=allow_repitch,
-                mock=mock,
-                selector=selector,
+                pitch, allow_repitch=allow_repitch, mock=mock, selector=selector,
             )
             commands.append(pitch_command)
     elif pitch is not None and stop_pitch is not None:
@@ -2180,9 +2160,7 @@ def global_fermata(
     """
     Attaches global fermata.
     """
-    fermatas = (
-        commandclasses.GlobalFermataCommand.description_to_command.keys()
-    )
+    fermatas = commandclasses.GlobalFermataCommand.description_to_command.keys()
     if description not in fermatas:
         message = f"must be in {repr(', '.join(fermatas))}:\n"
         message += f"   {repr(description)}"
@@ -2466,9 +2444,7 @@ def label(
             >>
 
     """
-    return commandclasses.LabelCommand(
-        expression=expression, selector=selector
-    )
+    return commandclasses.LabelCommand(expression=expression, selector=selector)
 
 
 def markup(
@@ -3011,9 +2987,7 @@ def one_voice(
     """
     literal = abjad.LilyPondLiteral(r"\oneVoice")
     return commandclasses.IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[_site(inspect.currentframe())],
+        indicators=[literal], selector=selector, tags=[_site(inspect.currentframe())],
     )
 
 
@@ -3069,9 +3043,7 @@ def untie(selector: abjad.Expression) -> commandclasses.DetachCommand:
     """
     Makes (repeat-)tie detach command.
     """
-    return commandclasses.DetachCommand(
-        [abjad.Tie, abjad.RepeatTie], selector=selector
-    )
+    return commandclasses.DetachCommand([abjad.Tie, abjad.RepeatTie], selector=selector)
 
 
 def voice_four(
@@ -3082,9 +3054,7 @@ def voice_four(
     """
     literal = abjad.LilyPondLiteral(r"\voiceFour")
     return commandclasses.IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[_site(inspect.currentframe())],
+        indicators=[literal], selector=selector, tags=[_site(inspect.currentframe())],
     )
 
 
@@ -3096,9 +3066,7 @@ def voice_one(
     """
     literal = abjad.LilyPondLiteral(r"\voiceOne")
     return commandclasses.IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[_site(inspect.currentframe())],
+        indicators=[literal], selector=selector, tags=[_site(inspect.currentframe())],
     )
 
 
@@ -3110,9 +3078,7 @@ def voice_three(
     """
     literal = abjad.LilyPondLiteral(r"\voiceThree")
     return commandclasses.IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[_site(inspect.currentframe())],
+        indicators=[literal], selector=selector, tags=[_site(inspect.currentframe())],
     )
 
 
@@ -3124,7 +3090,5 @@ def voice_two(
     """
     literal = abjad.LilyPondLiteral(r"\voiceTwo")
     return commandclasses.IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[_site(inspect.currentframe())],
+        indicators=[literal], selector=selector, tags=[_site(inspect.currentframe())],
     )

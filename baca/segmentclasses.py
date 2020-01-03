@@ -419,9 +419,7 @@ class BreakMeasureMap(object):
                     literal,
                     skip,
                     deactivate=self.deactivate,
-                    tag=self.tag.append(
-                        abjad.Tag("baca.BreakMeasureMap.__call__(2)")
-                    ),
+                    tag=self.tag.append(abjad.Tag("baca.BreakMeasureMap.__call__(2)")),
                 )
         assert self.commands is not None
         for measure_number, commands in self.commands.items():
@@ -1641,9 +1639,7 @@ class HorizontalSpacingSpecifier(object):
             assert isinstance(breaks, BreakMeasureMap), repr(breaks)
         self._breaks = breaks
         if fermata_measure_numbers is not None:
-            assert isinstance(
-                fermata_measure_numbers, collections.abc.Iterable
-            )
+            assert isinstance(fermata_measure_numbers, collections.abc.Iterable)
             assert all(isinstance(_, int) for _ in fermata_measure_numbers)
         self._fermata_measure_numbers = fermata_measure_numbers or []
         duration_ = None
@@ -1700,10 +1696,7 @@ class HorizontalSpacingSpecifier(object):
         for measure_index, skip in enumerate(skips):
             measure_number = first_measure_number + measure_index
             duration, eol_adjusted, duration_ = self._calculate_duration(
-                measure_index,
-                measure_number,
-                skip,
-                minimum_durations_by_measure,
+                measure_index, measure_number, skip, minimum_durations_by_measure,
             )
             if measure_index == total - 1:
                 duration = abjad.Duration(1, 4)
@@ -1730,25 +1723,19 @@ class HorizontalSpacingSpecifier(object):
                     context="GlobalSkips",
                     deactivate=True,
                     tag=tag.append(
-                        abjad.Tag(
-                            "baca.HorizontalSpacingSpecifier.__call__(2)"
-                        )
+                        abjad.Tag("baca.HorizontalSpacingSpecifier.__call__(2)")
                     ),
                 )
             if 0 < measure_index:
                 tag = abjad.tags.SPACING
-                stop_text_span = abjad.StopTextSpan(
-                    command=r"\bacaStopTextSpanSPM"
-                )
+                stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSPM")
                 abjad.attach(
                     stop_text_span,
                     skip,
                     context="GlobalSkips",
                     deactivate=True,
                     tag=tag.append(
-                        abjad.Tag(
-                            "baca.HorizontalSpacingSpecifier.__call__(3)"
-                        )
+                        abjad.Tag("baca.HorizontalSpacingSpecifier.__call__(3)")
                     ),
                 )
 
@@ -1763,9 +1750,8 @@ class HorizontalSpacingSpecifier(object):
         ):
             duration = self.measures[measure_number]
             duration = abjad.NonreducedFraction(duration)
-        elif (
-            self.fermata_measure_duration is not None
-            and self._is_fermata_measure(measure_number, skip)
+        elif self.fermata_measure_duration is not None and self._is_fermata_measure(
+            measure_number, skip
         ):
             duration = self.fermata_measure_duration
         elif self.measures and measure_number in self.measures:
@@ -1791,9 +1777,7 @@ class HorizontalSpacingSpecifier(object):
         if force_local is True:
             measure_number = self.first_measure_number + measure_number - 1
         if measure_number < 0:
-            measure_number = (
-                self.final_measure_number - abs(measure_number) + 1
-            )
+            measure_number = self.final_measure_number - abs(measure_number) + 1
         if measure_number < self.first_measure_number:
             measure_number += self.first_measure_number - 1
         if self.final_measure_number < measure_number:
@@ -1978,10 +1962,7 @@ class HorizontalSpacingSpecifier(object):
 
         Gives none when measure count is not defined.
         """
-        if (
-            self.first_measure_number is not None
-            and self.measure_count is not None
-        ):
+        if self.first_measure_number is not None and self.measure_count is not None:
             return self.first_measure_number + self.measure_count - 1
         else:
             return None
@@ -2295,9 +2276,7 @@ class HorizontalSpacingSpecifier(object):
         measures_ = []
         duration = abjad.NonreducedFraction(pair)
         if isinstance(measures, int):
-            number = self._coerce_measure_number(
-                measures, force_local=force_local
-            )
+            number = self._coerce_measure_number(measures, force_local=force_local)
             self.measures[number] = duration
             measures_.append(number)
         elif isinstance(measures, tuple):
@@ -2314,9 +2293,7 @@ class HorizontalSpacingSpecifier(object):
                 measures_.append(number)
         elif isinstance(measures, list):
             for measure in measures:
-                number = self._coerce_measure_number(
-                    measure, force_local=force_local
-                )
+                number = self._coerce_measure_number(measure, force_local=force_local)
                 self.measures[number] = duration
                 measures_.append(number)
         else:
@@ -2351,9 +2328,7 @@ class LBSD(object):
 
     def _get_lilypond_format_bundle(self, component=None):
         bundle = abjad.LilyPondFormatBundle()
-        alignment_distances = " ".join(
-            str(_) for _ in self.alignment_distances
-        )
+        alignment_distances = " ".join(str(_) for _ in self.alignment_distances)
         string = rf"\baca-lbsd #{self.y_offset} #'({alignment_distances})"
         bundle.before.commands.append(string)
         return bundle
@@ -2449,9 +2424,7 @@ class SystemSpecifier(object):
     ) -> None:
         distances_: typing.Optional[typing.List[abjad.Number]] = None
         if distances is not None:
-            assert isinstance(distances, collections.abc.Iterable), repr(
-                distances
-            )
+            assert isinstance(distances, collections.abc.Iterable), repr(distances)
             for distance in distances:
                 assert isinstance(distance, (int, float)), repr(distance)
             distances_ = list(distances)
@@ -2737,9 +2710,7 @@ def breaks(
             )
             alignment_distances = classes.Sequence(alignment_distances)
             alignment_distances = alignment_distances.flatten()
-            lbsd = LBSD(
-                alignment_distances=alignment_distances, y_offset=y_offset
-            )
+            lbsd = LBSD(alignment_distances=alignment_distances, y_offset=y_offset)
             lbsd_command = commandclasses.IndicatorCommand(
                 indicators=[lbsd], selector=selector
             )
@@ -2754,9 +2725,7 @@ def breaks(
     return breaks
 
 
-def minimum_duration(
-    duration: abjad.DurationTyping,
-) -> HorizontalSpacingSpecifier:
+def minimum_duration(duration: abjad.DurationTyping,) -> HorizontalSpacingSpecifier:
     """
     Makes horizontal spacing specifier with ``duration`` minimum width.
     """
@@ -2880,6 +2849,4 @@ def system(
     Makes system specifier.
     """
     distances_ = classes.Sequence(distances).flatten()
-    return SystemSpecifier(
-        distances=distances_, measure=measure, y_offset=y_offset
-    )
+    return SystemSpecifier(distances=distances_, measure=measure, y_offset=y_offset)

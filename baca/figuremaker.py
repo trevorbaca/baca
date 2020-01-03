@@ -96,9 +96,7 @@ class Stack(object):
 
     def _get_format_specification(self):
         manager = abjad.StorageFormatManager(self)
-        return abjad.FormatSpecification(
-            self, storage_format_args_values=self.commands
-        )
+        return abjad.FormatSpecification(self, storage_format_args_values=self.commands)
 
     ### PUBLIC PROPERTIES ###
 
@@ -293,9 +291,7 @@ class LMR(object):
                 else:
                     right_length = self.right_length or 0
                     right_length = min([right_length, remaining_length])
-                    remaining_length = total_length - (
-                        left_length + right_length
-                    )
+                    remaining_length = total_length - (left_length + right_length)
                     middle_length = remaining_length
             else:
                 right_length = self.right_length or 0
@@ -307,9 +303,7 @@ class LMR(object):
                 else:
                     left_length = self.left_length or 0
                     left_length = min([left_length, remaining_length])
-                    remaining_length = total_length - (
-                        right_length + left_length
-                    )
+                    remaining_length = total_length - (right_length + left_length)
                     middle_length = remaining_length
         elif left_length and not right_length:
             left_length = min([left_length, total_length])
@@ -991,9 +985,7 @@ class Acciaccatura(object):
 
     def __call__(
         self, collection: typing.Union[list, abjad.Segment] = None
-    ) -> typing.Tuple[
-        typing.List[typing.Optional[abjad.BeforeGraceContainer]], list
-    ]:
+    ) -> typing.Tuple[typing.List[typing.Optional[abjad.BeforeGraceContainer]], list]:
         """
         Calls acciaccatura on ``collection``.
 
@@ -1846,9 +1838,7 @@ class Anchor(object):
         ):
             raise TypeError(f"must be selector: {remote_selector!r}.")
         self._remote_selector = remote_selector
-        if remote_voice_name is not None and not isinstance(
-            remote_voice_name, str
-        ):
+        if remote_voice_name is not None and not isinstance(remote_voice_name, str):
             raise TypeError(f"must be string: {remote_voice_name!r}.")
         self._remote_voice_name = remote_voice_name
         if use_remote_stop_offset is not None:
@@ -3654,9 +3644,7 @@ class Accumulator(object):
     ### PRIVATE METHODS ###
 
     def _abbreviation(self, voice_name):
-        return self.score_template.voice_abbreviations.get(
-            voice_name, voice_name
-        )
+        return self.score_template.voice_abbreviations.get(voice_name, voice_name)
 
     def _cache_figure_name(self, contribution):
         if contribution.figure_name is None:
@@ -3678,9 +3666,7 @@ class Accumulator(object):
             stop_offset = start_offset + abjad.inspect(selection).duration()
             timespan = abjad.Timespan(start_offset, stop_offset)
             floating_selection = abjad.AnnotatedTimespan(
-                timespan.start_offset,
-                timespan.stop_offset,
-                annotation=selection,
+                timespan.start_offset, timespan.stop_offset, annotation=selection,
             )
             self._floating_selections[voice_name].append(floating_selection)
         self._current_offset = stop_offset
@@ -3692,10 +3678,7 @@ class Accumulator(object):
         if (
             contribution.anchor is None
             or contribution.hide_time_signature is False
-            or (
-                contribution.anchor
-                and contribution.anchor.remote_voice_name is None
-            )
+            or (contribution.anchor and contribution.anchor.remote_voice_name is None)
         ):
             self.time_signatures.append(contribution.time_signature)
 
@@ -3726,9 +3709,7 @@ class Accumulator(object):
                             markup_._annotation, str
                         ) and markup_._annotation.startswith("figure name: "):
                             figure_name_ = markup_._annotation
-                            figure_name_ = figure_name_.replace(
-                                "figure name: ", ""
-                            )
+                            figure_name_ = figure_name_.replace("figure name: ", "")
                             if figure_name_ == figure_name:
                                 return leaf_start_offset
                     leaf_duration = abjad.inspect(leaf).duration()
@@ -3776,17 +3757,13 @@ class Accumulator(object):
             return self._current_offset
         if anchored and remote_voice_name is None:
             return self._score_stop_offset
-        remote_selector = remote_selector or classes.Expression().select().leaf(
-            0
-        )
+        remote_selector = remote_selector or classes.Expression().select().leaf(0)
         floating_selections = self._floating_selections[remote_voice_name]
         selections = [_.annotation for _ in floating_selections]
         result = remote_selector(selections)
         selected_leaves = list(abjad.iterate(result).leaves())
         first_selected_leaf = selected_leaves[0]
-        timespan = self._get_leaf_timespan(
-            first_selected_leaf, floating_selections
-        )
+        timespan = self._get_leaf_timespan(first_selected_leaf, floating_selections)
         if use_remote_stop_offset:
             remote_anchor_offset = timespan.stop_offset
         else:
@@ -3855,17 +3832,12 @@ class Accumulator(object):
             ["[", figure_name, abjad.Markup.hspace(1), figure_index, "]"]
         )
         figure_name_markup = figure_name_markup.fontsize(2)
-        figure_name_markup = abjad.Markup(
-            figure_name_markup, direction=abjad.Up
-        )
+        figure_name_markup = abjad.Markup(figure_name_markup, direction=abjad.Up)
         annotation = f"figure name: {original_figure_name}"
         figure_name_markup._annotation = annotation
         leaf = abjad.select(container).leaf(0)
         abjad.attach(
-            figure_name_markup,
-            leaf,
-            deactivate=True,
-            tag=abjad.tags.FIGURE_NAME,
+            figure_name_markup, leaf, deactivate=True, tag=abjad.tags.FIGURE_NAME,
         )
 
     def _make_voice_dictionary(self):
@@ -4114,10 +4086,7 @@ class Nest(object):
     ### INITIALIZER ###
 
     def __init__(
-        self,
-        treatments: typing.Sequence[typing.Union[int, str]],
-        *,
-        lmr: LMR = None,
+        self, treatments: typing.Sequence[typing.Union[int, str]], *, lmr: LMR = None,
     ) -> None:
         assert isinstance(treatments, (list, tuple))
         is_treatment = FigureMaker._is_treatment
@@ -4232,9 +4201,7 @@ class Nest(object):
             tuplet_selections = [abjad.select(tuplets)]
         else:
             tuplet_selections = self.lmr(tuplets)
-            tuplet_selections = [
-                abjad.select(list(_)) for _ in tuplet_selections
-            ]
+            tuplet_selections = [abjad.select(list(_)) for _ in tuplet_selections]
         tuplets = []
         for i, tuplet_selection in enumerate(tuplet_selections):
             assert isinstance(tuplet_selection, abjad.Selection)
@@ -4242,9 +4209,7 @@ class Nest(object):
             if treatment is None:
                 tuplets.extend(tuplet_selection)
             else:
-                nested_tuplet = self._make_nested_tuplet(
-                    tuplet_selection, treatment
-                )
+                nested_tuplet = self._make_nested_tuplet(tuplet_selection, treatment)
                 tuplets.append(nested_tuplet)
         selection = abjad.select(tuplets)
         return selection
@@ -4371,8 +4336,7 @@ class RestAffix(object):
     def __call__(
         self, collection_index: int, total_collections: int
     ) -> typing.Tuple[
-        typing.Optional[abjad.IntegerSequence],
-        typing.Optional[abjad.IntegerSequence],
+        typing.Optional[abjad.IntegerSequence], typing.Optional[abjad.IntegerSequence],
     ]:
         r"""
         Calls rest affix.
@@ -4382,10 +4346,7 @@ class RestAffix(object):
         :param total_collections: total collections.
         """
         if self.pattern is None:
-            if (
-                collection_index == 0
-                and collection_index == total_collections - 1
-            ):
+            if collection_index == 0 and collection_index == total_collections - 1:
                 return self.prefix, self.suffix
             if collection_index == 0:
                 return self.prefix, None
@@ -5248,9 +5209,7 @@ class FigureMaker(object):
                 if self.affix is not None:
                     result = self.affix(i, segment_count)
                     rest_prefix, rest_suffix = result
-                    affix_skips_instead_of_rests = (
-                        self.affix.skips_instead_of_rests
-                    )
+                    affix_skips_instead_of_rests = self.affix.skips_instead_of_rests
                 else:
                     rest_prefix, rest_suffix = None, None
                     affix_skips_instead_of_rests = None
@@ -5267,9 +5226,7 @@ class FigureMaker(object):
             if self.affix is not None:
                 result = self.affix(collection_index, total_collections)
                 rest_prefix, rest_suffix = result
-                affix_skips_instead_of_rests = (
-                    self.affix.skips_instead_of_rests
-                )
+                affix_skips_instead_of_rests = self.affix.skips_instead_of_rests
             else:
                 rest_prefix, rest_suffix = None, None
                 affix_skips_instead_of_rests = None
@@ -5319,9 +5276,7 @@ class FigureMaker(object):
             while talea[count] < 0:
                 self._next_attack += 1
                 duration = -talea[count]
-                maker = abjad.LeafMaker(
-                    increase_monotonic=spelling.increase_monotonic
-                )
+                maker = abjad.LeafMaker(increase_monotonic=spelling.increase_monotonic)
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
                 count = self._next_attack
@@ -5353,9 +5308,7 @@ class FigureMaker(object):
             while talea[count] < 0 and not count % len(talea) == 0:
                 self._next_attack += 1
                 duration = -talea[count]
-                maker = abjad.LeafMaker(
-                    increase_monotonic=spelling.increase_monotonic
-                )
+                maker = abjad.LeafMaker(increase_monotonic=spelling.increase_monotonic)
                 leaves_ = maker([None], [duration])
                 leaves.extend(leaves_)
                 count = self._next_attack
@@ -5415,9 +5368,7 @@ class FigureMaker(object):
         return tuplet
 
     @staticmethod
-    def _make_tuplet_with_extra_count(
-        leaf_selection, extra_count, denominator
-    ):
+    def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
         contents_duration = abjad.inspect(leaf_selection).duration()
         contents_duration = contents_duration.with_denominator(denominator)
         contents_count = contents_duration.numerator
@@ -5428,9 +5379,7 @@ class FigureMaker(object):
             extra_count %= math.ceil(contents_count / 2.0)
             extra_count *= -1
         new_contents_count = contents_count + extra_count
-        tuplet_multiplier = abjad.Multiplier(
-            new_contents_count, contents_count
-        )
+        tuplet_multiplier = abjad.Multiplier(new_contents_count, contents_count)
         if not tuplet_multiplier.normalized():
             message = f"{leaf_selection!r} gives {tuplet_multiplier}"
             message += " with {contents_count} and {new_contents_count}."
@@ -6030,9 +5979,7 @@ class FigureMaker(object):
     @property
     def treatments(
         self,
-    ) -> typing.Optional[
-        typing.Sequence[typing.Union[int, str, abjad.Duration]]
-    ]:
+    ) -> typing.Optional[typing.Sequence[typing.Union[int, str, abjad.Duration]]]:
         r"""
         Gets treatments.
 
@@ -7515,9 +7462,7 @@ class Assignment(object):
 
     ### INITIALIZER ###
 
-    def __init__(
-        self, maker: FigureMaker, *, pattern: abjad.Pattern = None
-    ) -> None:
+    def __init__(self, maker: FigureMaker, *, pattern: abjad.Pattern = None) -> None:
         assert isinstance(maker, FigureMaker)
         self._maker = maker
         if pattern is not None:
@@ -7605,9 +7550,8 @@ class Bind(object):
         matches = []
         for i, collection in enumerate(collections):
             for assignment in self.assignments:
-                if (
-                    assignment.pattern is None
-                    or assignment.pattern.matches_index(i, collection_count)
+                if assignment.pattern is None or assignment.pattern.matches_index(
+                    i, collection_count
                 ):
                     match = rmakers.Match(assignment, collection)
                     matches.append(match)
@@ -7615,18 +7559,13 @@ class Bind(object):
             else:
                 raise Exception(f"no maker match for collection {i}.")
         assert len(collections) == len(matches)
-        groups = abjad.sequence(matches).group_by(
-            lambda match: match.assignment.maker
-        )
+        groups = abjad.sequence(matches).group_by(lambda match: match.assignment.maker)
         tuplets: typing.List[abjad.Tuplet] = []
         for group in groups:
             maker = group[0].assignment.maker
             collections_ = [match.payload for match in group]
             selection = maker(
-                collections_,
-                collection_index=None,
-                state=None,
-                total_collections=None,
+                collections_, collection_index=None, state=None, total_collections=None,
             )
             tuplets.extend(selection)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
@@ -10829,9 +10768,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
     return RestAffix(suffix=counts)
 
 
-def rests_around(
-    prefix: typing.List[int], suffix: typing.List[int]
-) -> RestAffix:
+def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffix:
     r"""
     Makes rests around music.
 
@@ -11257,9 +11194,7 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
     return RestAffix(skips_instead_of_rests=True, suffix=counts)
 
 
-def skips_around(
-    prefix: typing.List[int], suffix: typing.List[int]
-) -> RestAffix:
+def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffix:
     r"""
     Makes skips around music.
 

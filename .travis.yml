@@ -59,8 +59,10 @@ install:
     - pip install -e . 
 
 script:
-    - black --target-version=py36 --line-length=79 --check --diff $PACKAGE
-    - mypy --ignore-missing-imports $PACKAGE
+    - black --version
+    - make black-check
+    - mypy --version
+    - if [[ $TRAVIS_PYTHON_VERSION != 3.6 ]]; then make mypy; fi
     - coverage run -a `which baca-doctest` $PACKAGE/*.py
 
 after_success:

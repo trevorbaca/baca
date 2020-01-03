@@ -496,9 +496,7 @@ def bar_line(
     """
     indicator = abjad.BarLine(abbreviation, format_slot=format_slot)
     return commandclasses.IndicatorCommand(
-        indicators=[indicator],
-        selector=selector,
-        tags=[_site(inspect.currentframe())],
+        indicators=[indicator], selector=selector, tags=[_site(inspect.currentframe())],
     )
 
 
@@ -1475,9 +1473,7 @@ def literal(
     """
     literal = abjad.LilyPondLiteral(string, format_slot=format_slot)
     return commandclasses.IndicatorCommand(
-        indicators=[literal],
-        selector=selector,
-        tags=[_site(inspect.currentframe())],
+        indicators=[literal], selector=selector, tags=[_site(inspect.currentframe())],
     )
 
 
@@ -3071,9 +3067,7 @@ def start_markup(
     """
     Attaches start markup.
     """
-    if literal is True or (
-        isinstance(argument, str) and argument.startswith("\\")
-    ):
+    if literal is True or (isinstance(argument, str) and argument.startswith("\\")):
         assert isinstance(argument, str), repr(argument)
         assert argument.startswith("\\"), repr(argument)
         start_markup = abjad.StartMarkup(markup=argument)

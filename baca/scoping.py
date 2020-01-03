@@ -39,10 +39,7 @@ class Scope(object):
     ### INITIALIZER ###
 
     def __init__(
-        self,
-        *,
-        measures: typings.SliceTyping = (1, -1),
-        voice_name: str = None,
+        self, *, measures: typings.SliceTyping = (1, -1), voice_name: str = None,
     ) -> None:
         if isinstance(measures, int):
             measures = (measures, measures)
@@ -260,9 +257,7 @@ class Command(object):
         self._runtime = abjad.OrderedDict()
         self._scope = scope
         selector_ = selector
-        if selector_ is not None and not isinstance(
-            selector_, abjad.Expression
-        ):
+        if selector_ is not None and not isinstance(selector_, abjad.Expression):
             message = "selector must be Abjad expression:\n"
             message += f"   {repr(selector_)}"
             raise Exception(message)
@@ -272,9 +267,7 @@ class Command(object):
 
     ### SPECIAL METHODS ###
 
-    def __call__(
-        self, argument=None, runtime: abjad.OrderedDict = None
-    ) -> None:
+    def __call__(self, argument=None, runtime: abjad.OrderedDict = None) -> None:
         """
         Calls command on ``argument``.
         """
@@ -583,9 +576,7 @@ class Command(object):
         tags = self.tags[:]
         if self.tag_measure_number:
             start_offset = abjad.inspect(leaf).timespan().start_offset
-            measure_number = self.runtime["offset_to_measure_number"].get(
-                start_offset
-            )
+            measure_number = self.runtime["offset_to_measure_number"].get(start_offset)
             if getattr(self, "after", None) is True:
                 measure_number += 1
             if measure_number is not None:

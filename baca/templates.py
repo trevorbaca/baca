@@ -193,9 +193,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
         tag = abjad.Tag(site)
         contexts = tuple(_ for _ in contexts if _ is not None)
         if contexts:
-            return abjad.StaffGroup(
-                contexts, name=f"{stem}_Staff_Group", tag=tag
-            )
+            return abjad.StaffGroup(contexts, name=f"{stem}_Staff_Group", tag=tag)
         else:
             return None
 
@@ -347,9 +345,7 @@ class SingleStaffScoreTemplate(ScoreTemplate):
         )
 
         # SCORE
-        score = abjad.Score(
-            [global_context, music_context], name="Score", tag=tag
-        )
+        score = abjad.Score([global_context, music_context], name="Score", tag=tag)
         self._attach_calltime_defaults(score)
         return score
 
@@ -633,9 +629,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
         # VIOLIN
         violin_music_voice = abjad.Voice(
-            lilypond_type="ViolinMusicVoice",
-            name="Violin_Music_Voice",
-            tag=tag,
+            lilypond_type="ViolinMusicVoice", name="Violin_Music_Voice", tag=tag,
         )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
@@ -648,9 +642,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             short_markup=markups.short_instrument("Vn.", hcenter_in=10),
         )
         abjad.annotate(violin_music_staff, "default_instrument", violin)
-        abjad.annotate(
-            violin_music_staff, "default_clef", abjad.Clef("treble")
-        )
+        abjad.annotate(violin_music_staff, "default_clef", abjad.Clef("treble"))
         self._attach_lilypond_tag("Violin", violin_music_staff)
 
         # VIOLA
@@ -709,9 +701,7 @@ class StringTrioScoreTemplate(ScoreTemplate):
             name="Music_Context",
             tag=tag,
         )
-        score = abjad.Score(
-            [global_context, music_context], name="Score", tag=tag
-        )
+        score = abjad.Score([global_context, music_context], name="Score", tag=tag)
         return score
 
 
@@ -976,9 +966,7 @@ class ThreeVoiceStaffScoreTemplate(ScoreTemplate):
         )
 
         # SCORE
-        score = abjad.Score(
-            [global_context, music_context], name="Score", tag=tag
-        )
+        score = abjad.Score([global_context, music_context], name="Score", tag=tag)
         abjad.attach(abjad.const.THREE_VOICE, score, tag=None)
         return score
 
@@ -1191,9 +1179,7 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         )
 
         # SCORE
-        score = abjad.Score(
-            [global_context, music_context], name="Score", tag=tag
-        )
+        score = abjad.Score([global_context, music_context], name="Score", tag=tag)
         abjad.attach(abjad.const.TWO_VOICE, score, tag=None)
         return score
 
@@ -1340,9 +1326,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
 
         # VIOLIN
         violin_music_voice = abjad.Voice(
-            lilypond_type="ViolinMusicVoice",
-            name="Violin_Music_Voice",
-            tag=tag,
+            lilypond_type="ViolinMusicVoice", name="Violin_Music_Voice", tag=tag,
         )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
@@ -1355,9 +1339,7 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             short_markup=markups.short_instrument("Vn."),
         )
         abjad.annotate(violin_music_staff, "default_instrument", violin)
-        abjad.annotate(
-            violin_music_staff, "default_clef", abjad.Clef("treble")
-        )
+        abjad.annotate(violin_music_staff, "default_clef", abjad.Clef("treble"))
         self._attach_lilypond_tag("Violin", violin_music_staff)
 
         # MUSIC ONTEXT
@@ -1370,7 +1352,5 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         )
 
         # SCORE
-        score = abjad.Score(
-            [global_context, music_context], name="Score", tag=tag
-        )
+        score = abjad.Score([global_context, music_context], name="Score", tag=tag)
         return score

@@ -128,9 +128,7 @@ class OverrideCommand(scoping.Command):
         if lilypond_type in dir(abjad):
             context = getattr(abjad, lilypond_type)
             assert issubclass(context, abjad.Context), repr(context)
-            context = (
-                abjad.inspect(leaves[0]).parentage().get(context) or context()
-            )
+            context = abjad.inspect(leaves[0]).parentage().get(context) or context()
             lilypond_type = context.lilypond_type
             assert isinstance(lilypond_type, str), repr(lilypond_type)
         grob = self.grob
@@ -237,8 +235,7 @@ def accidental_extra_offset(
 
 
 def accidental_font_size(
-    n: abjad.Number,
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    n: abjad.Number, selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> OverrideCommand:
     """
     Overrides accidental font size.
@@ -298,8 +295,7 @@ def accidental_x_extent_false(
 
 
 def accidental_x_offset(
-    n: abjad.Number,
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    n: abjad.Number, selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> OverrideCommand:
     """
     Overrides accidental X-offset.
@@ -314,8 +310,7 @@ def accidental_x_offset(
 
 
 def accidental_y_offset(
-    n: abjad.Number,
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    n: abjad.Number, selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> OverrideCommand:
     """
     Overrides accidental Y-offset.
@@ -712,17 +707,14 @@ def clef_shift(
         assert isinstance(clef, abjad.Clef)
         width = clef._to_width[clef.name]
         extra_offset_x = -width
-    suite = scoping.suite(
-        clef_x_extent_false(), clef_extra_offset((extra_offset_x, 0))
-    )
+    suite = scoping.suite(clef_x_extent_false(), clef_extra_offset((extra_offset_x, 0)))
     scoping.tag(_site(inspect.currentframe()), suite)
     scoping.tag(abjad.tags.SHIFTED_CLEF, suite, tag_measure_number=True)
     return suite
 
 
 def clef_whiteout(
-    n: abjad.Number,
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    n: abjad.Number, selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> OverrideCommand:
     """
     Overrides clef whiteout.
@@ -1140,13 +1132,9 @@ def dynamic_text_extra_offset(
 
     """
     if not isinstance(pair, tuple):
-        raise Exception(
-            f"dynamic text extra offset must be pair (not {pair})."
-        )
+        raise Exception(f"dynamic text extra offset must be pair (not {pair}).")
     if len(pair) != 2:
-        raise Exception(
-            f"dynamic text extra offset must be pair (not {pair})."
-        )
+        raise Exception(f"dynamic text extra offset must be pair (not {pair}).")
     return OverrideCommand(
         attribute="extra_offset",
         value=pair,
@@ -2416,8 +2404,7 @@ def no_ledgers(
 
 
 def note_column_shift(
-    n: abjad.Number,
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    n: abjad.Number, selector: abjad.Expression = classes.Expression().select().leaf(0),
 ) -> OverrideCommand:
     """
     Overrides note column force hshift.
@@ -2432,8 +2419,7 @@ def note_column_shift(
 
 
 def note_head_color(
-    color: str,
-    selector: abjad.Expression = classes.Expression().select().pleaves(),
+    color: str, selector: abjad.Expression = classes.Expression().select().pleaves(),
 ) -> OverrideCommand:
     """
     Overrides note-head color.
@@ -2448,8 +2434,7 @@ def note_head_color(
 
 
 def note_head_duration_log(
-    n: int,
-    selector: abjad.Expression = classes.Expression().select().pleaves(),
+    n: int, selector: abjad.Expression = classes.Expression().select().pleaves(),
 ) -> OverrideCommand:
     """
     Overrides note-head duration-log property.
@@ -2496,8 +2481,7 @@ def note_head_font_size(
 
 
 def note_head_no_ledgers(
-    value: bool,
-    selector: abjad.Expression = classes.Expression().select().pleaf(0),
+    value: bool, selector: abjad.Expression = classes.Expression().select().pleaf(0),
 ) -> OverrideCommand:
     """
     Overrides note-head no-ledgers property.
@@ -2527,8 +2511,7 @@ def note_head_stencil_false(
 
 
 def note_head_style(
-    string: str,
-    selector: abjad.Expression = classes.Expression().select().pleaf(0),
+    string: str, selector: abjad.Expression = classes.Expression().select().pleaf(0),
 ) -> OverrideCommand:
     """
     Overrides note-head style property.
@@ -3125,8 +3108,7 @@ def repeat_tie_up(
 
 
 def rest_color(
-    color: str,
-    selector: abjad.Expression = classes.Expression().select().rest(0),
+    color: str, selector: abjad.Expression = classes.Expression().select().rest(0),
 ) -> OverrideCommand:
     """
     Overrides rest extra offset.
@@ -3247,8 +3229,7 @@ def rest_extra_offset(
 
 
 def rest_position(
-    n: abjad.Number,
-    selector: abjad.Expression = classes.Expression().select().rests(),
+    n: abjad.Number, selector: abjad.Expression = classes.Expression().select().rests(),
 ) -> OverrideCommand:
     r"""
     Overrides rest position.

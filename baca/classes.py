@@ -700,9 +700,7 @@ class Cursor(object):
         """
         cells = []
         for pitch_class_segment in pitch_class_segments:
-            pitch_class_segment = abjad.PitchClassSegment(
-                items=pitch_class_segment
-            )
+            pitch_class_segment = abjad.PitchClassSegment(items=pitch_class_segment)
             cells.append(pitch_class_segment)
         cursor = Cursor(source=cells, cyclic=True)
         return cursor
@@ -3341,9 +3339,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return (
-            super().leaves(exclude=exclude).partition_by_counts(counts=counts)
-        )
+        return super().leaves(exclude=exclude).partition_by_counts(counts=counts)
 
     def lt(
         self, n: int, *, exclude: abjad.Strings = None
@@ -4228,10 +4224,7 @@ class Selection(abjad.Selection):
         return self.logical_ties(exclude=exclude)
 
     def mgroups(
-        self,
-        counts: typing.Sequence[int] = [1],
-        *,
-        exclude: abjad.Strings = None,
+        self, counts: typing.Sequence[int] = [1], *, exclude: abjad.Strings = None,
     ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped leaves.
@@ -4783,10 +4776,7 @@ class Selection(abjad.Selection):
         return self.runs(exclude=exclude).nontrivial()
 
     def omgroups(
-        self,
-        counts: typing.Sequence[int] = [1],
-        *,
-        exclude: abjad.Strings = None,
+        self, counts: typing.Sequence[int] = [1], *, exclude: abjad.Strings = None,
     ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped leaves (with overhang).
@@ -4868,10 +4858,7 @@ class Selection(abjad.Selection):
         return result_
 
     def ompltgroups(
-        self,
-        counts: typing.Sequence[int] = [1],
-        *,
-        exclude: abjad.Strings = None,
+        self, counts: typing.Sequence[int] = [1], *, exclude: abjad.Strings = None,
     ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped plts (with overhang).
@@ -5100,9 +5087,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.plts(exclude=exclude, grace=grace).map(
-            Expression().select()[0]
-        )
+        return self.plts(exclude=exclude, grace=grace).map(Expression().select()[0])
 
     def pleaf(
         self, n: int, *, exclude: abjad.Strings = None, grace: bool = None
@@ -5974,9 +5959,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.logical_ties(
-            exclude=exclude, nontrivial=False, pitched=True
-        )
+        return self.logical_ties(exclude=exclude, nontrivial=False, pitched=True)
 
     def qrun(
         self, n: int, *, exclude: abjad.Strings = None
@@ -7397,9 +7380,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return (
-            self.leaves(exclude=exclude).with_previous_leaf().with_next_leaf()
-        )
+        return self.leaves(exclude=exclude).with_previous_leaf().with_next_leaf()
 
 
 class Sequence(abjad.Sequence):
@@ -7619,11 +7600,7 @@ class Sequence(abjad.Sequence):
         return string_template
 
     def _update_expression(
-        self,
-        frame,
-        evaluation_template=None,
-        map_operand=None,
-        subclass_hook=None,
+        self, frame, evaluation_template=None, map_operand=None, subclass_hook=None,
     ):
         callback = Expression._frame_to_callback(
             frame,
@@ -8579,9 +8556,7 @@ class Sequence(abjad.Sequence):
             raise Exception("do not set indices and counts together.")
         if not indices:
             counts = counts or []
-            sequence = self.partition_by_counts(
-                counts, cyclic=cyclic, overhang=True
-            )
+            sequence = self.partition_by_counts(counts, cyclic=cyclic, overhang=True)
         else:
             sequence = self
         items_ = []
@@ -9005,9 +8980,7 @@ class Sequence(abjad.Sequence):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.partition_by_counts(
-            counts=counts, cyclic=True, overhang=True
-        )
+        return self.partition_by_counts(counts=counts, cyclic=True, overhang=True)
 
     def period_of_rotation(self):
         """
@@ -9483,9 +9456,7 @@ class Sequence(abjad.Sequence):
         numerator, denominator = weight.pair
         ratio = ratios_[_map_index]
         if rounded is True:
-            numerators = abjad.mathtools.partition_integer_by_ratio(
-                numerator, ratio
-            )
+            numerators = abjad.mathtools.partition_integer_by_ratio(numerator, ratio)
             divisions = [
                 abjad.NonreducedFraction((numerator, denominator))
                 for numerator in numerators
@@ -10532,9 +10503,7 @@ class Sequence(abjad.Sequence):
             n = rotate_indexed * _map_index
             durations_ = abjad.sequence(durations).rotate(n=n)
             durations = list(durations_)
-        sequence = abjad.Sequence.split(
-            self, durations, cyclic=cyclic, overhang=True
-        )
+        sequence = abjad.Sequence.split(self, durations, cyclic=cyclic, overhang=True)
         without_overhang = abjad.Sequence.split(
             self, durations, cyclic=cyclic, overhang=False
         )
@@ -10782,9 +10751,7 @@ class Tree(object):
             if self._payload is not None or argument._payload is not None:
                 return self._payload == argument._payload
             if len(self) == len(argument):
-                for x, y in zip(
-                    self._noncyclic_children, argument._noncyclic_children
-                ):
+                for x, y in zip(self._noncyclic_children, argument._noncyclic_children):
                     if not x == y:
                         return False
                 else:
@@ -10890,28 +10857,23 @@ class Tree(object):
         Returns uqbar graph.
         """
         graph = uqbar.graphs.Graph(
-            attributes={
-                'bgcolor': 'transparent',
-                'truecolor': True,
-                },
-            name='G',
-            )
+            attributes={"bgcolor": "transparent", "truecolor": True,}, name="G",
+        )
         node_mapping = {}
         for node in self._iterate_depth_first():
             graphviz_node = uqbar.graphs.Node()
             if list(node):
-                graphviz_node.attributes['shape'] = 'circle'
-                graphviz_node.attributes['label'] = ''
+                graphviz_node.attributes["shape"] = "circle"
+                graphviz_node.attributes["label"] = ""
             else:
-                graphviz_node.attributes['shape'] = 'box'
-                graphviz_node.attributes['label'] = str(node._payload)
+                graphviz_node.attributes["shape"] = "box"
+                graphviz_node.attributes["label"] = str(node._payload)
             graph.append(graphviz_node)
             node_mapping[node] = graphviz_node
             if node._parent is not None:
                 uqbar.graphs.Edge().attach(
-                    node_mapping[node._parent],
-                    node_mapping[node],
-                    )
+                    node_mapping[node._parent], node_mapping[node],
+                )
         return graph
 
     def __hash__(self):
@@ -11101,9 +11063,7 @@ class Tree(object):
             return -self._get_depth()
         return len(self._get_parentage()[1:])
 
-    def _get_next_n_nodes_at_level(
-        self, n, level, nodes_must_be_complete=False
-    ):
+    def _get_next_n_nodes_at_level(self, n, level, nodes_must_be_complete=False):
         """
         Gets next ``n`` nodes ``level``.
 
@@ -11299,10 +11259,7 @@ class Tree(object):
         previous_node = None
         for node in generator:
             if not all_nodes_at_level and len(result) == n:
-                if (
-                    not first_node_returned_is_trimmed
-                    or not nodes_must_be_complete
-                ):
+                if not first_node_returned_is_trimmed or not nodes_must_be_complete:
                     return result
             if not all_nodes_at_level and len(result) == n + 1:
                 return result
@@ -11322,9 +11279,7 @@ class Tree(object):
                             subtree_to_trim = subtree_to_trim._parent
                     # find subtree to trim where level is negative
                     else:
-                        while (
-                            subtree_to_trim._get_level(negative=True) < level
-                        ):
+                        while subtree_to_trim._get_level(negative=True) < level:
                             subtree_to_trim = subtree_to_trim._parent
                     position_of_descendant = subtree_to_trim._get_position_of_descendant(
                         node

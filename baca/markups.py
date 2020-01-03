@@ -273,9 +273,7 @@ def instrument(
 
     Centers markup horizontally in 16 spaces.
     """
-    return make_instrument_name_markup(
-        string, column=column, hcenter_in=hcenter_in
-    )
+    return make_instrument_name_markup(string, column=column, hcenter_in=hcenter_in)
 
 
 def keynoise():
@@ -525,9 +523,7 @@ def PO_NBS():
     return indicators.Markup("PO + NBS")
 
 
-def PO_plus_non_vib(
-    parenthesize_first: bool = False, parenthesize_last: bool = False
-):
+def PO_plus_non_vib(parenthesize_first: bool = False, parenthesize_last: bool = False):
     return plus_statement(
         "PO",
         "non vib.",
@@ -536,9 +532,7 @@ def PO_plus_non_vib(
     )
 
 
-def PO_plus_poco_vib(
-    parenthesize_first: bool = False, parenthesize_last: bool = False
-):
+def PO_plus_poco_vib(parenthesize_first: bool = False, parenthesize_last: bool = False):
     return plus_statement(
         "PO",
         "poco vib.",
@@ -771,9 +765,7 @@ def short_instrument(
 
     Centers markup horizontally in 10 spaces.
     """
-    return make_instrument_name_markup(
-        string, column=column, hcenter_in=hcenter_in
-    )
+    return make_instrument_name_markup(string, column=column, hcenter_in=hcenter_in)
 
 
 def snare_drum():
@@ -781,9 +773,7 @@ def snare_drum():
 
 
 def sparse_clicks():
-    first_line = indicators.Markup(
-        "sparse, individual clicks with extremely slow bow"
-    )
+    first_line = indicators.Markup("sparse, individual clicks with extremely slow bow")
     first_line = first_line.line()
     second_line = indicators.Markup("(1-2/sec. in irregular rhythm)").line()
     markup = indicators.Markup.column([first_line, second_line])
@@ -981,9 +971,7 @@ def XFB_plus_pochiss_pont(
     )
 
 
-def XFB_plus_tasto(
-    parenthesize_first: bool = False, parenthesize_last: bool = False
-):
+def XFB_plus_tasto(parenthesize_first: bool = False, parenthesize_last: bool = False):
     return plus_statement(
         "XFB",
         "tasto",
