@@ -61,11 +61,11 @@ before_install:
     - ls
     - ls /tmp
     - pwd
+    - which baca-doctest
     - which black
     - which flake8
     - which mypy
     - which pytest
-    - which baca-doctest
 
 install:
     - pip install -e . 
@@ -79,7 +79,6 @@ script:
     - if [[ $TRAVIS_PYTHON_VERSION != 3.6 ]]; then make mypy; fi
     - pytest --version
     - make pytest
-    - coverage run -a `which baca-doctest` $PACKAGE/*.py
 
 after_success:
     - pip install --quiet coveralls
