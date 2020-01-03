@@ -6,13 +6,13 @@ mypy:
 errors = E123,E203,E265,E266,E501,E722,F81,W503
 formatPaths = ${project}/ *.py
 testPaths = ${project}/
-flakeOptions = --exclude=boilerplate,abjad/__init__.py,abjad/pitch/__init__.py --max-line-length=90 --isolated
+flakeOptions = --exclude=abjad/pitch/__init__.py --max-line-length=90 --isolated
 
 black-check:
-	black --target-version py36 --exclude '.*boilerplate.*' --check --diff ${formatPaths}
+	black --target-version py37 --check --diff ${formatPaths}
 
 black-reformat:
-	black --target-version py36 --exclude '.*boilerplate.*' ${formatPaths}
+	black --target-version py37 ${formatPaths}
 
 flake8:
 	flake8 ${flakeOptions} --ignore=${errors} ${formatPaths}
@@ -25,7 +25,6 @@ isort:
 		--project abjadext \
 		--recursive \
 		--skip ${project}/__init__.py \
-		--skip-glob '*boilerplate*' \
 		--thirdparty ply \
 		--thirdparty roman \
 		--thirdparty uqbar \

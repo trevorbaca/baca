@@ -1,14 +1,12 @@
 """
 Piecewise library.
 """
-import abjad
 import inspect
 import typing
-from . import classes
-from . import commandclasses
-from . import const
-from . import scoping
-from . import typings
+
+import abjad
+
+from . import classes, commandclasses, const, scoping, typings
 
 
 def _site(frame):

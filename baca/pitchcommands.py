@@ -1,15 +1,11 @@
-import abjad
 import collections
 import inspect
 import numbers
 import typing
-from . import classes
-from . import const
-from . import indicators
-from . import pitchclasses
-from . import scoping
-from . import typings
 
+import abjad
+
+from . import classes, const, indicators, pitchclasses, scoping, typings
 
 ### CLASSES ###
 

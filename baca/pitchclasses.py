@@ -1,14 +1,15 @@
 """
 Pitch library.
 """
-import abjad
 import collections as collections_module
 import copy
 import inspect
 import math
 import typing
-from . import classes
 
+import abjad
+
+from . import classes
 
 ### CLASSES ###
 

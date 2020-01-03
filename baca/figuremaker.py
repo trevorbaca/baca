@@ -1,18 +1,21 @@
-import abjad
 import collections
 import copy
 import math
 import typing
-from abjadext import rmakers
-from . import classes
-from . import commandclasses
-from . import pitchcommands
-from . import pitchclasses
-from . import rhythmcommands
-from . import scoping
-from . import spannercommands
-from . import typings
 
+import abjad
+from abjadext import rmakers
+
+from . import (
+    classes,
+    commandclasses,
+    pitchclasses,
+    pitchcommands,
+    rhythmcommands,
+    scoping,
+    spannercommands,
+    typings,
+)
 
 ### CLASSES ###
 

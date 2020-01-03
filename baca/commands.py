@@ -1,17 +1,21 @@
-import abjad
 import collections
 import inspect
 import typing
-from . import classes
-from . import commandclasses
-from . import const
-from . import indicators
-from . import indicatorcommands
-from . import overrides
-from . import pitchcommands
-from . import rhythmcommands
-from . import scoping
-from . import typings
+
+import abjad
+
+from . import (
+    classes,
+    commandclasses,
+    const,
+    indicatorcommands,
+    indicators,
+    overrides,
+    pitchcommands,
+    rhythmcommands,
+    scoping,
+    typings,
+)
 
 
 def _site(frame, n=None):

@@ -1,11 +1,11 @@
 """
 indicators.Markup library.
 """
-import abjad
 import typing
-from . import indicators
-from . import typings
 
+import abjad
+
+from . import indicators, typings
 
 ### FACTORY FUNCTIONS ###
 

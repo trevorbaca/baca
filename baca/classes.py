@@ -1,12 +1,14 @@
-import abjad
 import collections
 import copy
 import inspect
 import itertools
 import typing
-import uqbar
-from . import typings
 
+import uqbar
+
+import abjad
+
+from . import typings
 
 ### CLASSES ###
 

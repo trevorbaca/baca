@@ -1,12 +1,12 @@
 """
 Override library.
 """
-import abjad
 import inspect
 import typing
-from . import classes
-from . import scoping
-from . import typings
+
+import abjad
+
+from . import classes, scoping, typings
 
 
 def _site(frame):

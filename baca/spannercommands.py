@@ -1,10 +1,9 @@
-import abjad
 import inspect
 import typing
-from . import classes
-from . import commands
-from . import scoping
-from . import typings
+
+import abjad
+
+from . import classes, commands, scoping, typings
 
 
 def _site(frame):

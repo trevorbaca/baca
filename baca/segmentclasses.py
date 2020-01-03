@@ -1,12 +1,9 @@
-import abjad
 import collections
 import typing
-from . import classes
-from . import commandclasses
-from . import indicators
-from . import scoping
-from . import typings
 
+import abjad
+
+from . import classes, commandclasses, indicators, scoping, typings
 
 ### CLASSES ###
 

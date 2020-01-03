@@ -1,12 +1,13 @@
 """
 Pitch array library.
 """
-import abjad
 import copy
 import numbers
 import typing
-from . import classes
 
+import abjad
+
+from . import classes
 
 ### CLASSES ###
 

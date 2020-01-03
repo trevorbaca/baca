@@ -1,4 +1,3 @@
-import abjad
 import copy
 import inspect
 import os
@@ -6,20 +5,23 @@ import pathlib
 import sys
 import traceback
 import typing
+
+import abjad
 from abjadext import rmakers
+
 from . import classes
 from . import commands as baca_commands
-from . import const
-from . import indicators
-from . import markups
+from . import const, indicators, markups
 from . import overrides as baca_overrides
-from . import pitchclasses
-from . import pitchcommands
-from . import rhythmcommands
-from . import scoping
-from . import segmentclasses
-from . import templates
-from . import typings
+from . import (
+    pitchclasses,
+    pitchcommands,
+    rhythmcommands,
+    scoping,
+    segmentclasses,
+    templates,
+    typings,
+)
 
 
 def _site(frame, n=None):

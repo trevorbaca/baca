@@ -1,18 +1,15 @@
 """
 Rhythm library.
 """
-import abjad
 import collections
 import inspect
 import math
 import typing
-from abjadext import rmakers
-from . import classes
-from . import const
-from . import overrides
-from . import scoping
-from . import typings
 
+import abjad
+from abjadext import rmakers
+
+from . import classes, const, overrides, scoping, typings
 
 RhythmMakerTyping = typing.Union[
     rmakers.Assignment, rmakers.RhythmMaker, rmakers.Stack, rmakers.Bind

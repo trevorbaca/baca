@@ -1,7 +1,7 @@
-import abjad
 import collections
 import typing
 
+import abjad
 
 ### CLASSES ###
 

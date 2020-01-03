@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import setuptools
 
-
 install_requires = [
     "abjad",
     "mypy",

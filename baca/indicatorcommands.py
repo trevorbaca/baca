@@ -1,13 +1,17 @@
-import abjad
 import inspect
 import typing
-from . import classes
-from . import commandclasses
-from . import const
-from . import indicators
-from . import markups
-from . import scoping
-from . import typings
+
+import abjad
+
+from . import (
+    classes,
+    commandclasses,
+    const,
+    indicators,
+    markups,
+    scoping,
+    typings,
+)
 
 
 def _site(frame):

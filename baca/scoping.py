@@ -1,12 +1,11 @@
-import abjad
 import copy
 import functools
 import inspect
 import typing
-from . import classes
-from . import indicators
-from . import typings
 
+import abjad
+
+from . import classes, indicators, typings
 
 ### CLASSES ###
 

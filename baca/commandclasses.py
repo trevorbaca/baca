@@ -1,14 +1,17 @@
-import abjad
 import collections
 import typing
-from . import classes
-from . import const
-from . import indicators
-from . import pitchcommands
-from . import rhythmcommands
-from . import scoping
-from . import typings
 
+import abjad
+
+from . import (
+    classes,
+    const,
+    indicators,
+    pitchcommands,
+    rhythmcommands,
+    scoping,
+    typings,
+)
 
 ### CLASSES ###
 
