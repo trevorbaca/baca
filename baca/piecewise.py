@@ -6,7 +6,7 @@ import typing
 
 import abjad
 
-from . import classes, commandclasses, const, scoping, typings
+from . import classes, commandclasses, scoping, typings
 
 
 def _site(frame):
@@ -1054,7 +1054,7 @@ def dynamic(
 
     ..  container:: example
 
-        Works with tweaks:        
+        Works with tweaks:
 
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.SingleStaffScoreTemplate(),

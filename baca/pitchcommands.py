@@ -1,5 +1,4 @@
 import collections
-import inspect
 import numbers
 import typing
 
@@ -619,7 +618,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>2
                                 ^ \markup {
@@ -639,7 +638,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>4.
                                 ^ \markup {
@@ -653,7 +652,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>2
                                 ^ \markup {
@@ -667,7 +666,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>4.
                                 ^ \markup {
@@ -812,7 +811,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <c' e' g'>2
                                 ^ \markup {
@@ -836,7 +835,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <d' f' a'>4.
                                 ^ \markup {
@@ -854,7 +853,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>2
                                 ^ \markup {
@@ -872,7 +871,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <f' a' c''>4.
                                 ^ \markup {
@@ -999,7 +998,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <g' b' d''>2
                                 ^ \markup {
@@ -1023,7 +1022,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <g' b' d''>4.
                                 ^ \markup {
@@ -1041,7 +1040,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <g' b' d''>2
                                 ^ \markup {
@@ -1059,7 +1058,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <g' b' d''>4.
                                 ^ \markup {
@@ -1194,7 +1193,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e'>2
                                 ^ \markup {
@@ -1218,7 +1217,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g'>4.
                                 ^ \markup {
@@ -1236,7 +1235,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>2
                                 ^ \markup {
@@ -1254,7 +1253,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b' d''>4.
                                 ^ \markup {
@@ -1381,7 +1380,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e'>2
                                 ^ \markup {
@@ -1405,7 +1404,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>4.
                                 ^ \markup {
@@ -1423,7 +1422,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e'>2
                                 ^ \markup {
@@ -1441,7 +1440,7 @@ class ClusterCommand(scoping.Command):
                                 \once \override Arpeggio.X-offset = #-2
                                 \once \override NoteHead.stencil = #ly:text-interface::print
                                 \once \override NoteHead.text = \markup {
-                                	\filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
+                                    \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                                 }
                                 <e' g' b'>4.
                                 ^ \markup {
@@ -2750,7 +2749,7 @@ class PitchCommand(scoping.Command):
         >>> maker(
         ...     'Music_Voice',
         ...     baca.make_even_divisions(),
-        ...     baca.pitches('C4 F4 F#4 <B4 C#5> D5'), 
+        ...     baca.pitches('C4 F4 F#4 <B4 C#5> D5'),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -6143,7 +6142,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
     Staff position interpolation command.
 
     :param selector: selector.
- 
+
     :param start: start pitch or start staff position.
 
     :param stop: stop pitch or stop staff position.
@@ -7594,7 +7593,7 @@ def register(
                     }
                 }
             >>
-            
+
     ..  container:: example
 
         Octave-transposes all PLTs to an octave interpolated from -6 to 18:

@@ -5,7 +5,7 @@ import typing
 
 import abjad
 
-from . import indicators, typings
+from . import indicators
 
 ### FACTORY FUNCTIONS ###
 
@@ -666,7 +666,7 @@ def pP_XFB_flaut():
 
 
 def pres_de_la_table():
-    return boxed("près de la table")
+    return indicators.Markup("près de la table")
 
 
 def pT_XFB_flaut():

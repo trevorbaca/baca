@@ -909,7 +909,7 @@ Pitch library.
 .. rubric:: :ref:`baca.rhythmcommands <baca--rhythmcommands>`
    :class: section-header
 
-Rhythm library.
+Rhythm commands.
 
 .. raw:: html
 

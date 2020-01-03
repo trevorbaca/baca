@@ -1,9 +1,7 @@
 """
-Rhythm library.
+Rhythm commands.
 """
-import collections
 import inspect
-import math
 import typing
 
 import abjad

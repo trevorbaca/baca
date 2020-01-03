@@ -6,11 +6,9 @@ import abjad
 from . import (
     classes,
     commandclasses,
-    const,
     indicators,
     markups,
     scoping,
-    typings,
 )
 
 
@@ -1409,7 +1407,7 @@ def laissez_vibrer(
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
-        ..  docs:: 
+        ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \new Score

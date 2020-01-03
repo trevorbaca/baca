@@ -589,7 +589,7 @@ def beam_positions(
         >>> selections = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-        
+
         ..  docs::
 
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
@@ -3491,7 +3491,7 @@ def rest_x_extent_zero(
 ) -> OverrideCommand:
     """
     Overrides rest X-extent.
-    
+
     Note that overriding Rest.X-extent = ##f generates LilyPond warnings.
 
     But overriding Rest.X-extent = #'(0 . 0) does not generate warnings.

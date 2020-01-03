@@ -455,7 +455,6 @@ class ChordalSpacingSpecifier(object):
             pitch_classes = list(sorted(collection.to_pitch_classes()))
         else:
             pitch_classes = list(collection.to_pitch_classes())
-        cardinality = len(pitch_classes)
         bass, soprano, outer = None, None, []
         if self.bass is not None:
             bass = abjad.NumberedPitchClass(self.bass)

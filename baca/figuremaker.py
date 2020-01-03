@@ -1,4 +1,3 @@
-import collections
 import copy
 import math
 import typing
@@ -10,11 +9,7 @@ from . import (
     classes,
     commandclasses,
     pitchclasses,
-    pitchcommands,
     rhythmcommands,
-    scoping,
-    spannercommands,
-    typings,
 )
 
 ### CLASSES ###
@@ -48,7 +43,7 @@ class Stack(object):
         Calls stack on ``argument``.
         """
         if not self.commands:
-            return result
+            return argument
         try:
             result: typing.Any = self.commands[0](argument, **keywords)
         except:
@@ -98,7 +93,6 @@ class Stack(object):
     ### PRIVATE METHODS ###
 
     def _get_format_specification(self):
-        manager = abjad.StorageFormatManager(self)
         return abjad.FormatSpecification(self, storage_format_args_values=self.commands)
 
     ### PUBLIC PROPERTIES ###
@@ -1256,7 +1250,7 @@ class Acciaccatura(object):
     @property
     def lmr(self) -> LMR:
         r"""
-        Gets LMR. 
+        Gets LMR.
 
         ..  container:: example
 
@@ -5250,7 +5244,6 @@ class FigureMaker(object):
         rest_suffix=None,
         affix_skips_instead_of_rests=None,
     ):
-        collection_index = self._next_segment
         self._next_segment += 1
         talea = self._get_talea()
         leaves = []
@@ -5263,7 +5256,7 @@ class FigureMaker(object):
         if self.acciaccatura is not None:
             if isinstance(segment, (set, abjad.Set)):
                 message = "decide how to model chords with acciaccatura."
-                raise NotImplementError(message)
+                raise NotImplementedError(message)
             before_grace_containers, segment = self.acciaccatura(segment)
             assert len(before_grace_containers) == len(segment)
         if isinstance(segment, (set, abjad.Set)):

@@ -5,10 +5,7 @@ import abjad
 
 from . import (
     classes,
-    const,
     indicators,
-    pitchcommands,
-    rhythmcommands,
     scoping,
     typings,
 )
@@ -80,14 +77,12 @@ class BCPCommand(scoping.Command):
             return
         if self.selector:
             argument = self.selector(argument)
-        leaves = classes.Selection(argument).leaves()
         bcps_ = classes.Sequence(self.bcps)
         if self.helper:
             bcps_ = self.helper(bcps_, argument)
         bcps = abjad.CyclicTuple(bcps_)
         lts = classes.Selection(argument).lts()
         assert isinstance(lts, classes.Selection)
-        total = len(lts)
         add_right_text_to_me = None
         if not self.final_spanner:
             rest_count, nonrest_count = 0, 0

@@ -3,7 +3,7 @@ import typing
 
 import abjad
 
-from . import classes, commandclasses, indicators, scoping, typings
+from . import classes, commandclasses, indicators, scoping
 
 ### CLASSES ###
 
@@ -2599,8 +2599,8 @@ def breaks(
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 20, [15, 20, 20]], 
-        ...         [13, 140, [15, 20, 20]], 
+        ...         [1, 20, [15, 20, 20]],
+        ...         [13, 140, [15, 20, 20]],
         ...         ),
         ...     baca.page(
         ...         [23, 20, [15, 20, 20]],
@@ -2617,8 +2617,8 @@ def breaks(
 
         >>> breaks = baca.breaks(
         ...     baca.page(
-        ...         [1, 20, [15, 20, 20]], 
-        ...         [13, 140, [15, 20, 20]], 
+        ...         [1, 20, [15, 20, 20]],
+        ...         [13, 140, [15, 20, 20]],
         ...         number=1,
         ...         ),
         ...     baca.page(
@@ -2627,7 +2627,7 @@ def breaks(
         ...         ),
         ...     )
         Traceback (most recent call last):
-            ... 
+            ...
         Exception: page number (9) is not 2.
 
     ..  container:: example exception
@@ -2734,7 +2734,7 @@ def page(*systems: typing.Any, number: int = None) -> PageSpecifier:
     Makes page specifier.
 
     ..  container:: example exception
-        
+
         Raises exception when systems overlap at Y-offset:
 
         >>> baca.page(
@@ -2814,7 +2814,6 @@ def scorewide_spacing(
     if isinstance(path, tuple):
         assert len(path) == 3, repr(path)
         first_measure_number, measure_count, fermata_measure_numbers = path
-        phantom = None
     else:
         path = abjad.Path(path)
         tuple_ = path.get_measure_profile_metadata()

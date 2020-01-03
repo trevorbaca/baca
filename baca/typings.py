@@ -1,10 +1,9 @@
 """
-Typing library.
+Typings library.
 """
 import typing
 
 import abjad
-from abjadext import rmakers
 
 IntegerList = typing.List[int]
 

@@ -1,11 +1,10 @@
-import copy
 import functools
 import inspect
 import typing
 
 import abjad
 
-from . import classes, indicators, typings
+from . import indicators, typings
 
 ### CLASSES ###
 
@@ -357,7 +356,7 @@ class Command(object):
             if self.match < 0 and -(scope_count - i) != self.match:
                 return False
         elif isinstance(self.match, tuple):
-            assert len(self.match) == 2, repr(command)
+            assert len(self.match) == 2
             triple = slice(*self.match).indices(scope_count)
             if i not in range(*triple):
                 return False

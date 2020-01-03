@@ -9137,7 +9137,7 @@ r"""
                 >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
             <BLANKLINE>
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
-            
+
     ..  container:: example
 
         Redundant tempo trends color pink:

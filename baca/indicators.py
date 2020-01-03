@@ -1,4 +1,3 @@
-import collections
 import typing
 
 import abjad
@@ -525,7 +524,7 @@ class Markup(abjad.Markup):
     def boxed(self):
         r"""
         Makes boxed markup.
-        
+
         ..  container:: example
 
             >>> markup = baca.Markup('Allegro assai')

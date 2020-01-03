@@ -403,7 +403,7 @@ class PitchArray(object):
 
         Returns tuple.
         """
-        return Sequence(self.pitches_by_row).flatten(depth=-1)
+        return classes.Sequence(self.pitches_by_row).flatten(depth=-1)
 
     @property
     def pitches_by_row(self):

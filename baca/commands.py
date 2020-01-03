@@ -1,4 +1,3 @@
-import collections
 import inspect
 import typing
 
@@ -7,12 +6,10 @@ import abjad
 from . import (
     classes,
     commandclasses,
-    const,
     indicatorcommands,
     indicators,
     overrides,
     pitchcommands,
-    rhythmcommands,
     scoping,
     typings,
 )

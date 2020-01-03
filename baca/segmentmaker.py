@@ -2,16 +2,13 @@ import copy
 import inspect
 import os
 import pathlib
-import sys
-import traceback
 import typing
 
 import abjad
 from abjadext import rmakers
 
 from . import classes
-from . import commands as baca_commands
-from . import const, indicators, markups
+from . import indicators
 from . import overrides as baca_overrides
 from . import (
     pitchclasses,
@@ -1252,7 +1249,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
             Traceback (most recent call last):
                 ...
-            Exception: 
+            Exception:
             <BLANKLINE>
             Must be command:
             <BLANKLINE>
@@ -1412,7 +1409,6 @@ class SegmentMaker(abjad.SegmentMaker):
         count = int(timer.elapsed_time)
         if False:
             seconds = abjad.String("second").pluralize(count)
-            message = f" Spacing application {count} {seconds} ..."
             raise Exception(f"spacing application {count} {seconds}!")
         return count
 
@@ -2587,7 +2583,6 @@ class SegmentMaker(abjad.SegmentMaker):
                     abjad.attach(literal, pleaf, tag=tag)
 
     def _color_repeat_pitch_classes_(self):
-        indicator = abjad.const.REPEAT_PITCH_CLASS
         tag = _site(inspect.currentframe())
         tag = tag.append(abjad.tags.REPEAT_PITCH_CLASS_COLORING)
         lts = self._find_repeat_pitch_classes(self.score)
@@ -3080,7 +3075,7 @@ class SegmentMaker(abjad.SegmentMaker):
             final_is_fermata = True
         for measure_index in range(len(skips)):
             measure_number = first_measure_number + measure_index
-            is_fermata, fermata_duration = False, None
+            is_fermata = False
             if measure_number in self._fermata_measure_numbers:
                 is_fermata = True
             skip = skips[measure_index]
@@ -3224,7 +3219,6 @@ class SegmentMaker(abjad.SegmentMaker):
         skips = classes.Selection(self.score["Global_Skips"]).skips()
         if not self.stage_markup:
             return
-        total = len(self.stage_markup)
         for i, item in enumerate(self.stage_markup):
             if len(item) == 2:
                 value, lmn = item
@@ -3486,15 +3480,16 @@ class SegmentMaker(abjad.SegmentMaker):
                 abjad.setting(score).current_bar_number = first_measure_number
 
     def _momento_to_indicator(self, momento):
-        # for class evaluation:
         import baca
 
         if momento.manifest is not None:
             dictionary = getattr(self, momento.manifest)
             if dictionary is None:
-                raise Exception(f"can not find {name!r} manifest.")
+                raise Exception(f"can not find {momento.manifest!r} manifest.")
             return dictionary.get(momento.value)
-        class_ = eval(momento.prototype)
+        globals_ = globals()
+        globals_["baca"] = baca
+        class_ = eval(momento.prototype, globals_)
         if hasattr(class_, "from_string"):
             indicator = class_.from_string(momento.value)
         elif class_ is abjad.Dynamic and momento.value.startswith("\\"):
@@ -3602,7 +3597,6 @@ class SegmentMaker(abjad.SegmentMaker):
     def _reapply_persistent_indicators(self):
         if self.first_segment:
             return
-        string = "persistent_indicators"
         dictionary = self.previous_persist.get("persistent_indicators")
         if not dictionary:
             return
@@ -4169,7 +4163,7 @@ class SegmentMaker(abjad.SegmentMaker):
             if isinstance(measure_token, int):
                 measure_tokens.append(measure_token)
             elif isinstance(measure_token, tuple):
-                assert len(measure_token) == 2, repr(scopes)
+                assert len(measure_token) == 2
                 start, stop = measure_token
                 measure_tokens.append((start, stop))
             else:

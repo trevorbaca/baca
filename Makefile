@@ -6,7 +6,7 @@ mypy:
 errors = E123,E203,E265,E266,E501,E722,F81,W503
 formatPaths = ${project}/ *.py
 testPaths = ${project}/
-flakeOptions = --exclude=abjad/pitch/__init__.py --max-line-length=90 --isolated
+flakeOptions = --exclude=baca/__init__.py --max-line-length=90 --isolated
 
 black-check:
 	black --target-version py37 --check --diff ${formatPaths}

@@ -8,8 +8,6 @@ import uqbar
 
 import abjad
 
-from . import typings
-
 ### CLASSES ###
 
 
@@ -10859,7 +10857,7 @@ class Tree(object):
         Returns uqbar graph.
         """
         graph = uqbar.graphs.Graph(
-            attributes={"bgcolor": "transparent", "truecolor": True,}, name="G",
+            attributes={"bgcolor": "transparent", "truecolor": True}, name="G",
         )
         node_mapping = {}
         for node in self._iterate_depth_first():

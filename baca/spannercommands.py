@@ -3,7 +3,7 @@ import typing
 
 import abjad
 
-from . import classes, commands, scoping, typings
+from . import classes, scoping, typings
 
 
 def _site(frame):
@@ -923,9 +923,9 @@ def trill_spanner(
             >>
 
     ..  container:: example
- 
+
         Tweaks trill spanner:
- 
+
         >>> stack = baca.stack(
         ...     baca.figure(
         ...         [1, 1, 5, -1],
@@ -946,9 +946,9 @@ def trill_spanner(
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
- 
+
         ..  docs::
- 
+
             >>> abjad.f(lilypond_file[abjad.Score], strict=89)
             \new Score
             <<
