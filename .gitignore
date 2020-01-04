@@ -1,7 +1,3 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-
 # C extensions
 *.so
 
@@ -21,15 +17,39 @@ var/
 .installed.cfg
 *.egg
 
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# LaTeX intermediate files
+*.synctex.gz
+
+# mypy
+.mypy_cache
+
+# OS X
+.DS_Store
+
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+# Pytest
+.pytest_cache
+htmlcov/
+
+# Python
+*.py[cod]
+__pycache__/
+
+# Sphinx documentation
+docs/_build/
+
+# Translations
+*.mo
+*.pot
 
 # Unit test / coverage reports
 htmlcov/
@@ -39,22 +59,9 @@ htmlcov/
 nosetests.xml
 coverage.xml
 
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# MacOS
-.DS_Store
-
-# mypy
-.mypy_cache
-.pytest_cache
+# Virtual Environments
+venv/
+Envs/
+ENV/
+.virtualenvs
+.python-version
