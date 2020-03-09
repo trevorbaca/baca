@@ -3346,9 +3346,6 @@ class SegmentMaker(abjad.SegmentMaker):
         for item in lilypond_file.items[:]:
             if getattr(item, "name", None) in block_names:
                 lilypond_file.items.remove(item)
-        if self._midi:
-            block = abjad.Block(name="midi")
-            lilypond_file.items.append(block)
         for item in lilypond_file.items[:]:
             if getattr(item, "name", None) == "header":
                 lilypond_file.items.remove(item)
@@ -3369,6 +3366,9 @@ class SegmentMaker(abjad.SegmentMaker):
             abjad.attach(literal, container, tag=None)
             lilypond_file.score_block.items[:] = [container]
             lilypond_file.score_block.items.append("")
+        if self.midi:
+            block = abjad.Block(name="midi")
+            lilypond_file.score_block.items.append(block)
         self._lilypond_file = lilypond_file
 
     def _make_measure_silences(self, start, stop, measure_start_offsets, voice_name):
