@@ -699,6 +699,7 @@ def clef_shift(
     """
     Shifts clef to left by width of clef.
     """
+    extra_offset_x: typing.Union[int, float]
     if isinstance(clef, str):
         clef = abjad.Clef(clef)
     if isinstance(clef, (int, float)):

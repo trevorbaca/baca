@@ -1448,12 +1448,12 @@ def suite(*commands: CommandTyping, **keywords) -> Suite:
         Traceback (most recent call last):
             ...
         Exception:
-            Must contain only commands, maps, suites.
+            Must contain only commands and suites.
             Not str:
             Allegro
 
     """
-    commands_ = []
+    commands_: typing.List[typing.Union[Command, Suite]] = []
     for item in commands:
         if isinstance(item, (list, tuple)):
             commands_.extend(item)
@@ -1462,7 +1462,7 @@ def suite(*commands: CommandTyping, **keywords) -> Suite:
     for command in commands_:
         if isinstance(command, (Command, Suite)):
             continue
-        message = "\n  Must contain only commands, maps, suites."
+        message = "\n  Must contain only commands and suites."
         message += f"\n  Not {type(command).__name__}:"
         message += f"\n  {format(command)}"
         raise Exception(message)

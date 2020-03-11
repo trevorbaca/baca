@@ -335,6 +335,7 @@ class RhythmCommand(scoping.Command):
         Calls ``RhythmCommand`` on ``time_signatures``.
         """
         rhythm_maker = self.rhythm_maker
+        selection: abjad.Selection
         if isinstance(rhythm_maker, abjad.Selection):
             selection = rhythm_maker
             total_duration = sum([_.duration for _ in time_signatures])
