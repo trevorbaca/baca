@@ -14,6 +14,8 @@ Applications covered in this document:
     * isort
     * Sphinx
 
+    TODO: also flak8?
+
 Check for new versions of LilyPond at www.lilypond.org.
 
 Check for new versions of Python at www.python.org.
@@ -26,20 +28,20 @@ Check for new versions of MacOS under Apple menu > System Preferences > Software
         !py.test -rf
         !make black-check
         !make flake8
-        !make isort
+        !make isort-check
         !make mypy
         cdr .. ..
         !py.test -rf
         !make black-check
         !make flake8
-        !make isort
+        !make isort-check
         !make mypy
         !apim
 
         cdb .. !py.test -rf
         !make black-check
         !make flake8
-        !make isort
+        !make isort-check
         !make mypy
         !apib
 
@@ -50,7 +52,7 @@ Check for new versions of MacOS under Apple menu > System Preferences > Software
         cdi ..
         !make black-check
         !make flake8
-        !make isort
+        !make isort-check
         !make mypy
         !apii
 
