@@ -3,13 +3,7 @@ import typing
 
 import abjad
 
-from . import (
-    classes,
-    commandclasses,
-    indicators,
-    markups,
-    scoping,
-)
+from . import classes, commandclasses, indicators, markups, scoping
 
 
 def _site(frame):

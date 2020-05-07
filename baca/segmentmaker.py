@@ -7,8 +7,7 @@ import typing
 import abjad
 from abjadext import rmakers
 
-from . import classes
-from . import indicators
+from . import classes, indicators
 from . import overrides as baca_overrides
 from . import (
     pitchclasses,

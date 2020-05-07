@@ -3,12 +3,7 @@ import typing
 
 import abjad
 
-from . import (
-    classes,
-    indicators,
-    scoping,
-    typings,
-)
+from . import classes, indicators, scoping, typings
 
 ### CLASSES ###
 

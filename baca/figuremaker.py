@@ -5,12 +5,7 @@ import typing
 import abjad
 from abjadext import rmakers
 
-from . import (
-    classes,
-    commandclasses,
-    pitchclasses,
-    rhythmcommands,
-)
+from . import classes, commandclasses, pitchclasses, rhythmcommands
 
 ### CLASSES ###
 
