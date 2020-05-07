@@ -28,7 +28,7 @@ Check for new versions of MacOS under Apple menu > System Preferences > Software
         !make flake8
         !make isort
         !make mypy
-        cdr .. .. !py.test -rf
+        cdr .. ..
         !py.test -rf
         !make black-check
         !make flake8
