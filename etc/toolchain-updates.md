@@ -11,6 +11,7 @@ Applications covered in this document:
     * pytest
     * mypy
     * black
+    * isort
     * Sphinx
 
 Check for new versions of LilyPond at www.lilypond.org.
@@ -19,58 +20,42 @@ Check for new versions of Python at www.python.org.
 
 Check for new versions of MacOS under Apple menu > System Preferences > Software Update.
 
-1.  Run all tests and build all APIs.
-
-        cdj .. !py.test -rf
-
-        cdr .. .. !py.test -rf
-
-        cdb .. !py.test -rf
-
-        cdi .. tests !py.test -rf
-
-        cds ^^
-
-    Run checkers and beautifiers on all repos:
+1.  Run all tests, checkers, beautifiers; build all APIs:
 
         cdj ..
+        !py.test -rf
         !make black-check
         !make flake8
         !make isort
         !make mypy
-        (rerun tests if anything changes)
-
-        cdr .. ..
+        cdr .. .. !py.test -rf
+        !py.test -rf
         !make black-check
         !make flake8
         !make isort
         !make mypy
-        (rerun tests if anything changes)
+        !apim
 
-        cdb ..
+        cdb .. !py.test -rf
         !make black-check
         !make flake8
         !make isort
         !make mypy
-        (rerun tests if anything changes)
+        !apib
 
-
+        cdi ..
+        ^^
+        ci .. tests
+        !py.test -rf
         cdi ..
         !make black-check
         !make flake8
         !make isort
         !make mypy
-        (rerun tests if anything changes)
+        !apii
 
-    TODO: also run mypy and black on all repos.
-
-        apim
-
-        apib
-
-        apii
-
-        apis
+        cds ^^
+        !apis
 
 2.  Inspect applications:
 
@@ -94,6 +79,10 @@ Check for new versions of MacOS under Apple menu > System Preferences > Software
         (abjad3) ~$ black --version
         black, version 19.10b0
 
+        (abjad3) ~$ isort --version
+        ...
+                                    VERSION 4.3.21
+        
         (abjad3) ~$ sphinx-build --version
         sphinx-build 2.3.0
 
@@ -110,24 +99,4 @@ Check for new versions of MacOS under Apple menu > System Preferences > Software
 
         (abjad3) ~$ pip install --upgrade sphinx
 
-4.  Run all tests and build all APIs.
-
-        cdj .. !py.test -rf
-
-        cdi .. !py.test -rf
-
-        cdb .. !py.test -rf
-
-        cdr .. !py.test -rf
-
-        cds ^^
-
-    TODO: also run mypy and black on all repos.
-
-        apii
-
-        apis
-
-        apib
-
-        apij (?)
+Repeat (1.).
