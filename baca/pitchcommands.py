@@ -7424,7 +7424,7 @@ def pitches(
             "ignore_incomplete must be boolean" f" (not {ignore_incomplete!r})."
         )
     if ignore_incomplete is True and not persist:
-        raise Exception(f"ignore_incomplete is ignored" " when persist is not set.")
+        raise Exception("ignore_incomplete is ignored" " when persist is not set.")
     if persist is not None and not isinstance(persist, str):
         raise Exception(f"persist name must be string (not {persist!r}).")
     return PitchCommand(

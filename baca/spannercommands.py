@@ -1003,7 +1003,7 @@ def trill_spanner(
     if alteration is not None:
         prototype = (abjad.NamedPitch, abjad.NamedInterval, str)
         if not isinstance(alteration, prototype):
-            message = f"trill spanner 'alteration' must be pitch, interval, str:"
+            message = "trill spanner 'alteration' must be pitch, interval, str:"
             message += f"\n   {alteration}"
             raise Exception(message)
     interval = pitch = None

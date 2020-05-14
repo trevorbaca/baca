@@ -2641,7 +2641,7 @@ def markup(
         markup = markup.box().override(("box-padding", 0.5))
     prototype = (str, abjad.Expression)
     if selector is not None and not isinstance(selector, prototype):
-        message = f"selector must be string or expression"
+        message = "selector must be string or expression"
         message += f" (not {selector!r})."
         raise Exception(message)
     selector = selector or classes.Expression().select().phead(0)

@@ -1770,7 +1770,7 @@ class HorizontalSpacingSpecifier(object):
 
     def _coerce_measure_number(self, measure_number, force_local=False):
         if measure_number == 0:
-            raise Exception(f"zero-valued measure number not allowed.")
+            raise Exception("zero-valued measure number not allowed.")
         if force_local is True:
             measure_number = self.first_measure_number + measure_number - 1
         if measure_number < 0:

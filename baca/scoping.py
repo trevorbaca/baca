@@ -1486,7 +1486,7 @@ def tag(
     if isinstance(tags, abjad.Tag):
         tags = [tags]
     if not isinstance(tags, list):
-        message = f"tags must be tag or list of tags"
+        message = "tags must be tag or list of tags"
         message += f" (not {tags!r})."
         raise Exception(message)
     assert all(isinstance(_, abjad.Tag) for _ in tags), repr(tags)

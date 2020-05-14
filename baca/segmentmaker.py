@@ -3139,7 +3139,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if leaf in already_labeled:
                     continue
                 n, d = leaf.multiplier.pair
-                string = fr"\baca-duration-multiplier-markup"
+                string = r"\baca-duration-multiplier-markup"
                 string += f' #"{n}" #"{d}"'
                 markup = abjad.Markup(string, direction=abjad.Up, literal=True)
                 tag_ = tag

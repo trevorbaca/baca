@@ -7297,10 +7297,10 @@ def text_spanner(
         if isinstance(right_text, str):
             if "hook" not in style:
                 if right_text.startswith("\\"):
-                    right_markup = rf"- \baca-text-spanner-right-markup"
+                    right_markup = r"- \baca-text-spanner-right-markup"
                     right_markup += rf" {right_text}"
                 else:
-                    right_markup = rf"- \baca-text-spanner-right-text"
+                    right_markup = r"- \baca-text-spanner-right-text"
                     right_markup += rf' "{right_text}"'
             else:
                 right_markup = abjad.Markup(right_text, literal=True)
