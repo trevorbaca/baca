@@ -1,0 +1,4 @@
+black \
+    --exclude="__metadata__\.py|__persist__\.py|definition\.py|layout\.py|tools\.py|ScoreTemplate.py" \
+    --target-version py36 \
+    $1

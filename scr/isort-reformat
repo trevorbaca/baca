@@ -1,0 +1,19 @@
+# TODO: eventually do not skip __metadata__.py, __persist__.py
+
+isort \
+    --apply \
+    --case-sensitive \
+    --force-grid-wrap=0 \
+    --line-width=88 \
+    --multi-line=3 \
+    --project=abjad \
+    --project=abjadext \
+    --recursive \
+    --skip=__metadata__.py \
+    --skip=__persist__.py \
+    --thirdparty=ply \
+    --thirdparty=roman \
+    --thirdparty=uqbar \
+    --trailing-comma \
+    --use-parentheses \
+    $1
