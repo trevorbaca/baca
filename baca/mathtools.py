@@ -79,5 +79,3 @@ def partition_integer_into_halves(n, bigger=abjad.Left, even="allowed"):
         return (bigger_half, smaller_half)
     else:
         return (smaller_half, bigger_half)
-
-

@@ -34,7 +34,7 @@ before_install:
     # install lilypond:
     - LILYPOND=/tmp/lilypond
     - LILYPOND_URL=http://lilypond.org/download/binaries/linux-64/
-    - LILYPOND_SOURCE=lilypond-2.19.83-1.linux-64.sh
+    - LILYPOND_SOURCE=lilypond-2.19.84-1.linux-64.sh
     - wget -q -O $LILYPOND $LILYPOND_URL/$LILYPOND_SOURCE
     - sh $LILYPOND --batch
 
