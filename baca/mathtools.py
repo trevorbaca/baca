@@ -195,8 +195,6 @@ def _make_new_notes(anchor_pitch, anchor_written_duration, subrun_intervals):
     return new_notes
 
 
-
-
 def negate_elements(sequence, absolute=False, indices=None, period=None):
     """
     Negates ``sequence`` elements.
@@ -523,7 +521,7 @@ def repeat_subruns_to_length(notes, pairs, history=False):
         # new_notes = abjad.mutate(new_notes).copy(n=reps)
         total = []
         for _ in range(reps):
-            new_notes_ = abjad.mutate(new_notes).copy()
+            abjad.mutate(new_notes).copy()
             total.extend(new_notes)
         total = abjad.select(total)
         notes[index:index] = total
