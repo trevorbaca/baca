@@ -76,6 +76,127 @@ def increase_elements(sequence, addenda, indices=None):
     return result
 
 
+def insert_and_transpose(notes, subrun_tokens):
+    """
+    Inserts and transposes nested subruns in ``notes`` according to
+    ``subrun_tokens``.
+
+    >>> notes = [abjad.Note(_, (1, 4)) for _ in [0, 2, 7, 9, 5, 11, 4]]
+    >>> subrun_tokens = [(0, [2, 4]), (4, [3, 1])]
+    >>> baca.insert_and_transpose(notes, subrun_tokens)
+
+    >>> result = []
+    >>> for note in notes:
+    ...   try:
+    ...        result.append(note.written_pitch.number)
+    ...   except AttributeError:
+    ...        result.append([_.written_pitch.number for _ in note])
+
+    >>> result
+    [0, [5, 7], 2, [4, 0, 6, 11], 7, 9, 5, [10, 6, 8], 11, [7], 4]
+
+    Set ``subrun_tokens`` to a list of zero or more ``(index, length_list)``
+    pairs.
+
+    For each ``(index, length_list)`` pair in *subrun_tokens* the function will
+    read *index* mod ``len(notes)`` and insert a subrun of length
+    ``length_list[0]`` immediately after ``notes[index]``, a subrun of length
+    ``length_list[1]`` immediately after ``notes[index+1]``, and, in general, a
+    subrun of ``length_list[i]`` immediately after ``notes[index+i]``, for ``i
+    < length(length_list)``.
+
+    New subruns are wrapped with lists. These wrapper lists are designed to
+    allow inspection of the structural changes to ``notes`` immediately after
+    the function returns. For this reason most calls to this function will be
+    followed by flattening.
+
+    >>> for note in notes:
+    ...     note
+    ...
+    Note("c'4")
+    [Note("f'4"), Note("g'4")]
+    Note("d'4")
+    [Note("e'4"), Note("c'4"), Note("fs'4"), Note("b'4")]
+    Note("g'4")
+    Note("a'4")
+    Note("f'4")
+    [Note("bf'4"), Note("fs'4"), Note("af'4")]
+    Note("b'4")
+    [Note("g'4")]
+    Note("e'4")
+
+    This function is designed to work on a built-in Python list of notes. This
+    function is **not** designed to work on Abjad voices, staves or other
+    containers because the function currently implements no spanner-handling.
+    That is, this function is designed to be used during precomposition.
+
+    Returns list of integers and / or floats.
+    """
+    assert isinstance(notes, list)
+    assert all(isinstance(x, abjad.Note) for x in notes)
+    assert isinstance(subrun_tokens, list)
+    len_notes = len(notes)
+    instructions = []
+    for subrun_token in subrun_tokens:
+        pairs = _make_index_length_pairs(subrun_token)
+        for anchor_index, subrun_length in pairs:
+            anchor_note = notes[anchor_index % len_notes]
+            anchor_pitch = abjad.NamedPitch(anchor_note)
+            anchor_written_duration = anchor_note.written_duration
+            source_start_index = anchor_index + 1
+            source_stop_index = source_start_index + subrun_length + 1
+            cyclic_notes = abjad.CyclicTuple(notes)
+            subrun_source = cyclic_notes[source_start_index:source_stop_index]
+            subrun_intervals = _get_intervals_in_subrun(subrun_source)
+            new_notes = _make_new_notes(
+                anchor_pitch, anchor_written_duration, subrun_intervals
+            )
+            instruction = (anchor_index, new_notes)
+            instructions.append(instruction)
+    for anchor_index, new_notes in reversed(sorted(instructions)):
+        notes.insert(anchor_index + 1, new_notes)
+
+
+def _get_intervals_in_subrun(subrun_source):
+    subrun_source = list(subrun_source)
+    result = [0]
+    for first, second in abjad.Sequence(subrun_source).nwise():
+        first_pitch = abjad.NamedPitch(first)
+        second_pitch = abjad.NamedPitch(second)
+        interval = (
+            abjad.NumberedPitch(second_pitch).number
+            - abjad.NumberedPitch(first_pitch).number
+        )
+        result.append(interval + result[-1])
+    result.pop(0)
+    return result
+
+
+def _make_index_length_pairs(subrun_token):
+    anchor_index, subrun_lengths = subrun_token
+    num_subruns = len(subrun_lengths)
+    pairs = []
+    for i in range(num_subruns):
+        start_index = anchor_index + i
+        subrun_length = subrun_lengths[i]
+        pair = (start_index, subrun_length)
+        pairs.append(pair)
+    return pairs
+
+
+def _make_new_notes(anchor_pitch, anchor_written_duration, subrun_intervals):
+    new_notes = []
+    for subrun_interval in subrun_intervals:
+        new_pc = abjad.NumberedPitch(anchor_pitch).number
+        new_pc += subrun_interval
+        new_pc %= 12
+        new_note = abjad.Note(new_pc, anchor_written_duration)
+        new_notes.append(new_note)
+    return new_notes
+
+
+
+
 def negate_elements(sequence, absolute=False, indices=None, period=None):
     """
     Negates ``sequence`` elements.
