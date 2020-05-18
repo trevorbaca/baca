@@ -22,6 +22,9 @@ mathtools
 .. autosummary::
    :nosignatures:
 
+   ~negate_elements
    ~partition_integer_into_halves
+
+.. autofunction:: negate_elements
 
 .. autofunction:: partition_integer_into_halves

@@ -568,6 +568,7 @@ indicators.Markup library.
 .. autosummary::
    :nosignatures:
 
+   ~baca.mathtools.negate_elements
    ~baca.mathtools.partition_integer_into_halves
 
 .. raw:: html

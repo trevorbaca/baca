@@ -1,6 +1,5 @@
 import abjad
 
-
 # all_ais = []
 #
 # def is_ais(permutation):

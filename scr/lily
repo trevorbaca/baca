@@ -2,7 +2,6 @@
 import os
 import sys
 
-
 LILYPOND = "/Applications/LilyPond.app/Contents/Resources/bin/lilypond"
 _STYLESHEETS = "/Users/trevorbaca/abjad/docs/source/_stylesheets"
 

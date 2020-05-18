@@ -3,7 +3,6 @@ import os
 import pathlib
 import sys
 
-
 if 1 < len(sys.argv):
     arguments = ' '.join(sys.argv[1:])
     print(f'Running xpdf on {arguments} ...')

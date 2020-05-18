@@ -1,4 +1,6 @@
 import abjad
+
+from . import const, markups
 from .classes import *
 from .commandclasses import *
 from .commands import *
@@ -10,8 +12,12 @@ from .overrides import *
 from .persistence import *
 from .piecewise import *
 from .pitcharray import *
-from .pitchcommands import *
 from .pitchclasses import *
+from .pitchclasses import _pitch_class_segment as pitch_class_segment
+from .pitchclasses import _pitch_class_set as pitch_class_set
+from .pitchclasses import _pitch_segment as pitch_segment
+from .pitchclasses import _pitch_set as pitch_set
+from .pitchcommands import *
 from .rhythmcommands import *
 from .scoping import *
 from .segmentclasses import *
@@ -19,14 +25,6 @@ from .segmentmaker import *
 from .spannercommands import *
 from .templates import *
 from .typings import *
-from . import const
-from . import markups
-
-# expression constructors
-from .pitchclasses import _pitch_class_segment as pitch_class_segment
-from .pitchclasses import _pitch_class_set as pitch_class_set
-from .pitchclasses import _pitch_set as pitch_set
-from .pitchclasses import _pitch_segment as pitch_segment
 
 
 def chead(*arguments, **keywords):

@@ -1,7 +1,8 @@
-import abjad
 import sphinx_rtd_theme
 from pygments.formatters.latex import LatexFormatter
 from sphinx.highlighting import PygmentsBridge
+
+import abjad
 
 
 class CustomLatexFormatter(LatexFormatter):
@@ -76,9 +77,7 @@ latex_elements = {
     """,
 }
 
-latex_documents = [
-    ("index", "BačaAPI.tex", "Bača API", "Trevor Bača", "manual")
-]
+latex_documents = [("index", "BačaAPI.tex", "Bača API", "Trevor Bača", "manual")]
 
 latex_domain_indices = False
 

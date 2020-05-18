@@ -3,7 +3,6 @@ import os
 import pathlib
 import sys
 
-
 os.system('clear')
 if 1 < len(sys.argv):
     arguments = ' '.join(sys.argv[1:])
