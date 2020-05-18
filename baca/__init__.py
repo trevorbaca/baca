@@ -5,6 +5,7 @@ from .commands import *
 from .figuremaker import *
 from .indicatorcommands import *
 from .indicators import *
+from .mathtools import *
 from .overrides import *
 from .persistence import *
 from .piecewise import *

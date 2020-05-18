@@ -555,6 +555,25 @@ indicators.Markup library.
 
    <hr/>
 
+.. rubric:: :ref:`baca.mathtools <baca--mathtools>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.mathtools.partition_integer_into_halves
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.overrides <baca--overrides>`
    :class: section-header
 

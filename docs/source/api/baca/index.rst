@@ -29,6 +29,7 @@ baca
    indicatorcommands
    indicators
    markups
+   mathtools
    overrides
    piecewise
    pitcharray
@@ -51,6 +52,7 @@ baca
    indicatorcommands
    indicators
    markups
+   mathtools
    overrides
    piecewise
    pitcharray
