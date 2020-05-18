@@ -299,3 +299,47 @@ def partition_integer_into_halves(n, bigger=abjad.Left, even="allowed"):
         return (bigger_half, smaller_half)
     else:
         return (smaller_half, bigger_half)
+
+
+def repeat_subruns_to_length(notes, pairs, history=False):
+    """
+    Repeats ``notes`` according to ``pairs``.
+
+    ..  container:: example
+
+        >>> list_ = [abjad.Note(_, (1, 4)) for _ in [0, 2, 4, 5, 7, 9, 11]]
+        >>> baca.repeat_subruns_to_length(list_, [(0, 4, 1), (2, 4, 1)])
+        [Note("c'4"), Note("d'4"), Note("e'4"), Note("f'4"), Note("c'4"),
+        Note("d'4"), Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"),
+        Note("e'4"), Note("f'4"), Note("g'4"), Note("a'4"), Note("b'4")]
+
+    Returns list of components.
+    """
+    assert all([isinstance(_, abjad.Note) for _ in notes])
+    assert isinstance(pairs, list)
+    assert all([len(_) == 3 for _ in pairs])
+    assert isinstance(notes, list)
+    instructions = []
+    len_notes = len(notes)
+    for pair in reversed(pairs):
+        new_notes = []
+        for i in range(pair[0], pair[0] + pair[1]):
+            source = notes[i % len_notes]
+            pitch_number = source.written_pitch.number
+            new_note = abjad.Note(pitch_number, source.written_duration)
+            if history:
+                abjad.attach(history, new_note)
+            new_notes.append(new_note)
+        reps = pair[-1]
+        instruction = (pair[0] + pair[1], new_notes, reps)
+        instructions.append(instruction)
+    for index, new_notes, reps in reversed(sorted(instructions)):
+        new_notes = abjad.select(new_notes)
+        # new_notes = abjad.mutate(new_notes).copy(n=reps)
+        total = []
+        for _ in range(reps):
+            new_notes_ = abjad.mutate(new_notes).copy()
+            total.extend(new_notes)
+        total = abjad.select(total)
+        notes[index:index] = total
+    return notes
