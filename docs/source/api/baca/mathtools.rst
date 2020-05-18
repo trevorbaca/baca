@@ -24,10 +24,13 @@ mathtools
 
    ~increase_elements
    ~negate_elements
+   ~overwrite_elements
    ~partition_integer_into_halves
 
 .. autofunction:: increase_elements
 
 .. autofunction:: negate_elements
+
+.. autofunction:: overwrite_elements
 
 .. autofunction:: partition_integer_into_halves
