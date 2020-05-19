@@ -2,5 +2,4 @@ flake8 \
     --exclude=__metadata__.py,__persist__.py \
     --ignore=E266,W503 \
     --max-line-length=88 \
-    --statistics \
     $1
