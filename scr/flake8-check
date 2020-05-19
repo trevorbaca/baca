@@ -1,5 +1,5 @@
 flake8 \
     --exclude=__metadata__.py,__persist__.py \
-    --ignore=E203,E266,W503 \
+    --ignore=E203,E266,E501,W503 \
     --max-line-length=88 \
     $1
