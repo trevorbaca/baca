@@ -1,2 +1,0 @@
-cd ~/ide
-clear; mypy ide
