@@ -1,3 +1,0 @@
-mypy \
-    --ignore-missing-imports \
-    $1
