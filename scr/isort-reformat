@@ -8,6 +8,8 @@ isort \
     --multi-line=3 \
     --project=abjad \
     --project=abjadext \
+    --project=baca \
+    --project=ide \
     --recursive \
     --skip=__metadata__.py \
     --skip=__persist__.py \
