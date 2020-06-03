@@ -3247,6 +3247,9 @@ class ConstellationCircuit(object):
         Constellation(120)
         Constellation(108)
 
+        >>> constellation_circuit[5 - 1][173 - 1]
+        Sequence([-1, 14, 18, 19, 20, 22, 24, 27, 29, 33, 37, 40])
+
     """
 
     ### CLASS VARIABLES ###
