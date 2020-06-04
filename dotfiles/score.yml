@@ -33,9 +33,9 @@ before_install:
     - pip install /tmp/baca
 
     # clone & install baca test:
-    - if [[ $symlink_test_py == true ]]; then git clone https://github.com/trevorbaca/test.git /tmp/test; fi
-    - if [[ $symlink_test_py == true ]]; then unlink $TRAVIS_BUILD_DIR/$name/test.py; fi
-    - if [[ $symlink_test_py == true ]]; then ln -s /tmp/test/test_segments.py $TRAVIS_BUILD_DIR/$name/test.py; fi
+    - if [[ $do_not_symlink_test_py != true ]]; then git clone https://github.com/trevorbaca/test.git /tmp/test; fi
+    - if [[ $do_not_symlink_test_py != true ]]; then unlink $TRAVIS_BUILD_DIR/$name/test.py; fi
+    - if [[ $do_not_symlink_test_py != true ]]; then ln -s /tmp/test/test_segments.py $TRAVIS_BUILD_DIR/$name/test.py; fi
 
     # clone & install ide:
     - git clone https://github.com/Abjad/ide.git /tmp/ide
