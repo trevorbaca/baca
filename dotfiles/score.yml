@@ -1,10 +1,10 @@
 #version: ~> 1.0
 #
-#os: linux
-#
-#dist: xenial
-#
-#language: python
+os: linux
+
+dist: xenial
+
+language: python
 
 python:
     - 3.7
