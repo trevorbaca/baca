@@ -22,18 +22,18 @@ before_install:
     - wget -q -O $lilypond $lilypond_url/$lilypond_source
     - sh $lilypond --batch
 
-#    # clone & install abjad dev branch:
-#    - git clone -b trevor/dev https://github.com/Abjad/abjad.git /tmp/abjad
-#    - pip install /tmp/abjad
-#
-#    # clone & install rmakers:
-#    - git clone https://github.com/Abjad/abjad-ext-rmakers.git /tmp/abjad-ext-rmakers
-#    - pip install /tmp/abjad-ext-rmakers
-#
-#    # clone & install baca:
-#    - git clone https://github.com/trevorbaca/baca.git /tmp/baca
-#    - pip install /tmp/baca
-#
+    # clone & install abjad dev branch:
+    - git clone -b trevor/dev https://github.com/Abjad/abjad.git /tmp/abjad
+    - pip install /tmp/abjad
+
+    # clone & install rmakers:
+    - git clone https://github.com/Abjad/abjad-ext-rmakers.git /tmp/abjad-ext-rmakers
+    - pip install /tmp/abjad-ext-rmakers
+
+    # clone & install baca:
+    - git clone https://github.com/trevorbaca/baca.git /tmp/baca
+    - pip install /tmp/baca
+
 #    # clone & install baca test:
 #    - git clone https://github.com/trevorbaca/test.git /tmp/test
 #    - unlink $TRAVIS_BUILD_DIR/$name/test.py
@@ -52,21 +52,21 @@ before_install:
 #    - echo $PATH
 #    - echo $PYTHONPATH
 #    - echo $TRAVIS_BUILD_DIR
-#
-#install:
-#    # install package
-#    - pip install -e .
-#
-#    # prime abjad parser tables
-#    - /tmp/abjad/scr/devel/prime-parser-tables
-#
-#    # log versions
-#    - black --version
-#    - flake8 --version
-#    - isort --version
-#    - mypy --version
-#    - pytest --version
-#
+
+install:
+    # install package
+    - pip install -e .
+
+    # prime abjad parser tables
+    - /tmp/abjad/scr/devel/prime-parser-tables
+
+    # log versions
+    - black --version
+    - flake8 --version
+    - isort --version
+    - mypy --version
+    - pytest --version
+
 #script:
 #    - /tmp/baca/scr/black-check $TRAVIS_BUILD_DIR/$name
 #    - /tmp/baca/scr/flake8-check $TRAVIS_BUILD_DIR/$name
