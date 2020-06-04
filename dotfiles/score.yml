@@ -1,4 +1,4 @@
-version: ~> 1.0
+# version: ~> 1.0
 
 os: linux
 
@@ -67,13 +67,13 @@ install:
     - mypy --version
     - pytest --version
 
-#script:
-#    - /tmp/baca/scr/black-check $TRAVIS_BUILD_DIR/$name
-#    - /tmp/baca/scr/flake8-check $TRAVIS_BUILD_DIR/$name
-#    - /tmp/baca/scr/isort-check $TRAVIS_BUILD_DIR/$name
-#    - mypy $TRAVIS_BUILD_DIR/$name
-#    - /tmp/baca/scr/baca-doctest $TRAVIS_BUILD_DIR/$name
-#    - py.test -rf $TRAVIS_BUILD_DIR/$name/test.py
-#
-#notifications:
-#    email: false
+script:
+    - /tmp/baca/scr/black-check $TRAVIS_BUILD_DIR/$name
+    - /tmp/baca/scr/flake8-check $TRAVIS_BUILD_DIR/$name
+    - /tmp/baca/scr/isort-check $TRAVIS_BUILD_DIR/$name
+    - mypy $TRAVIS_BUILD_DIR/$name
+    - /tmp/baca/scr/baca-doctest $TRAVIS_BUILD_DIR/$name
+    - py.test -rf $TRAVIS_BUILD_DIR/$name/test.py
+
+notifications:
+    email: false
