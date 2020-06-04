@@ -1,5 +1,3 @@
-# version: ~> 1.0
-
 os: linux
 
 dist: xenial
@@ -35,9 +33,9 @@ before_install:
     - pip install /tmp/baca
 
     # clone & install baca test:
-    - git clone https://github.com/trevorbaca/test.git /tmp/test
-    - unlink $TRAVIS_BUILD_DIR/$name/test.py
-    - ln -s /tmp/test/test_segments.py $TRAVIS_BUILD_DIR/$name/test.py
+    - if [[ $symlink_test_py == true ]]; git clone https://github.com/trevorbaca/test.git /tmp/test; fi
+    - if [[ $symlink_test_py == true ]]; unlink $TRAVIS_BUILD_DIR/$name/test.py; fi
+    - if [[ $symlink_test_py == true ]]; ln -s /tmp/test/test_segments.py $TRAVIS_BUILD_DIR/$name/test.py; fi
 
     # clone & install ide:
     - git clone https://github.com/Abjad/ide.git /tmp/ide
