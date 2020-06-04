@@ -1,17 +1,17 @@
-version: ~> 1.0
-
-os: linux
-
-dist: xenial
-
-language: python
+#version: ~> 1.0
+#
+#os: linux
+#
+#dist: xenial
+#
+#language: python
 
 python:
     - 3.7
     - 3.8
 
-git:
-    depth: false
+#git:
+#    depth: false
 
 #before_install:
 #
