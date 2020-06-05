@@ -125,7 +125,9 @@ if __name__ == '__main__':
         if path.is_file():
             files.append(path)
             continue
-        assert path.is_dir()
+        #assert path.is_dir()
+        if not path.is_dir():
+            raise Exception(path)
         for path_ in path.glob('**/*.py'):
             if path_.is_file():
                 files.append(path_)
