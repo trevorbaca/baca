@@ -834,9 +834,7 @@ class SegmentMaker(abjad.SegmentMaker):
         self._score_template = score_template
         self._segment_bol_measure_numbers: typing.List[int] = []
         if segment_directory is not None:
-            segment_directory = abjad.Path(
-                segment_directory, scores=segment_directory.parent.parent.parent.parent,
-            )
+            segment_directory = abjad.Path(segment_directory)
         self._segment_directory: typing.Optional[abjad.Path] = segment_directory
         self._segment_duration: typing.Optional[abjad.DurationTyping] = None
         self._skips_instead_of_rests = skips_instead_of_rests

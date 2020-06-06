@@ -7372,12 +7372,10 @@ def pitch(
         raise Exception(f"one-note chord {pitch!r}?")
     if allow_out_of_range not in (None, True, False):
         raise Exception(
-            "allow_out_of_range must be boolean" f" (not {allow_out_of_range!r})."
+            f"allow_out_of_range must be boolean (not {allow_out_of_range!r})."
         )
     if do_not_transpose not in (None, True, False):
-        raise Exception(
-            "do_not_transpose must be boolean" f" (not {do_not_transpose!r})."
-        )
+        raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
     if persist is not None and not isinstance(persist, str):
         raise Exception(f"persist name must be string (not {persist!r}).")
     return PitchCommand(
@@ -7412,19 +7410,17 @@ def pitches(
     Makes pitch command.
     """
     if do_not_transpose not in (None, True, False):
-        raise Exception(
-            "do_not_transpose must be boolean" f" (not {do_not_transpose!r})."
-        )
+        raise Exception(f"do_not_transpose must be boolean (not {do_not_transpose!r}).")
     if bool(exact):
         cyclic = False
     else:
         cyclic = True
     if ignore_incomplete not in (None, True, False):
         raise Exception(
-            "ignore_incomplete must be boolean" f" (not {ignore_incomplete!r})."
+            f"ignore_incomplete must be boolean (not {ignore_incomplete!r})."
         )
     if ignore_incomplete is True and not persist:
-        raise Exception("ignore_incomplete is ignored" " when persist is not set.")
+        raise Exception("ignore_incomplete is ignored when persist is not set.")
     if persist is not None and not isinstance(persist, str):
         raise Exception(f"persist name must be string (not {persist!r}).")
     return PitchCommand(
