@@ -41,14 +41,14 @@ class Stack(object):
             return argument
         try:
             result: typing.Any = self.commands[0](argument, **keywords)
-        except:
+        except Exception:
             message = "exception while calling:\n"
             message += f"   {format(self.commands[0])}"
             raise Exception(message)
         for command in self.commands[1:]:
             try:
                 result_ = command(result)
-            except:
+            except Exception:
                 message = "exception while calling:\n"
                 message += f"   {format(command)}"
                 raise Exception(message)
@@ -3784,7 +3784,7 @@ class Accumulator(object):
         floating_selections.sort()
         try:
             first_start_offset = floating_selections[0].start_offset
-        except:
+        except Exception:
             raise Exception(floating_selections, voice_name)
         timespans = abjad.TimespanList(floating_selections)
         gaps = ~timespans

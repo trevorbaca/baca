@@ -2106,7 +2106,7 @@ class SegmentMaker(abjad.SegmentMaker):
             runtime = self._bundle_manifests(voice_name)
             try:
                 command(selection, runtime)
-            except:
+            except Exception:
                 print(f"Interpreting ...\n\n{format(command)}\n")
                 raise
             self._handle_mutator(command)
@@ -2153,7 +2153,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 runtime = self._bundle_manifests(voice.name)
                 try:
                     selection = command._make_selection(time_signatures, runtime)
-                except:
+                except Exception:
                     print(f"Interpreting ...\n\n{format(command)}\n")
                     raise
                 timespan = abjad.AnnotatedTimespan(
@@ -3502,7 +3502,7 @@ class SegmentMaker(abjad.SegmentMaker):
         else:
             try:
                 indicator = class_(momento.value)
-            except:
+            except Exception:
                 raise Exception(format(momento))
         return indicator
 

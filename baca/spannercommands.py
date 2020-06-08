@@ -1010,10 +1010,10 @@ def trill_spanner(
     if alteration is not None:
         try:
             pitch = abjad.NamedPitch(alteration)
-        except:
+        except Exception:
             try:
                 interval = abjad.NamedInterval(alteration)
-            except:
+            except Exception:
                 pass
     start_trill_span = start_trill_span or abjad.StartTrillSpan()
     if pitch is not None or interval is not None:

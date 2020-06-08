@@ -4092,7 +4092,7 @@ def make_dynamic(
         failed = False
         try:
             indicator = abjad.Dynamic(string)
-        except:
+        except Exception:
             failed = True
         if failed:
             message = f"the string {string!r} initializes no known dynamic."

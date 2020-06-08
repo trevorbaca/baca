@@ -8564,10 +8564,10 @@ class Sequence(abjad.Sequence):
             if indices and i not in indices:
                 item_ = item
             else:
-                ###item_ = _divisions(item).sum()
+                # item_ = _divisions(item).sum()
                 item_ = Sequence(item).sum()
             items_.append(item_)
-        ###sequence = _divisions(items_)
+        # sequence = _divisions(items_)
         sequence = Sequence(items_)
         sequence = sequence.flatten(depth=-1)
         return sequence
