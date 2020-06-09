@@ -2,5 +2,5 @@ black \
     --check \
     --diff \
     --exclude="__metadata__\.py|__persist__\.py|definition\.py|layout\.py|tools\.py|ScoreTemplate.py" \
-    --target-version py38 \
+    --target-version=py38 \
     $1
