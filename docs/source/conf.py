@@ -2,8 +2,6 @@ import sphinx_rtd_theme
 from pygments.formatters.latex import LatexFormatter
 from sphinx.highlighting import PygmentsBridge
 
-import abjad
-
 
 class CustomLatexFormatter(LatexFormatter):
     def __init__(self, **options):

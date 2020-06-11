@@ -79,7 +79,7 @@ def is_link_chord(ais):
 
 # link_chords = open('link_chords.py', 'r').read()
 # link_chords = eval(link_chords)
-##link_chords = link_chords[:16]
+# #link_chords = link_chords[:16]
 #
 # chords = []
 # for link_chord in link_chords:
