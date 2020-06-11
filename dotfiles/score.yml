@@ -13,6 +13,9 @@ git:
 
 before_install:
 
+  # get package name
+  - name=`basename $TRAVIS_BUILD_DIR`
+
   # install lilypond:
   - lilypond=/tmp/lilypond
   - lilypond_url=http://lilypond.org/download/binaries/linux-64/
