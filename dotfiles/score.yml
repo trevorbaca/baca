@@ -23,9 +23,10 @@ before_install:
   - wget -q -O $lilypond $lilypond_url/$lilypond_source
   - sh $lilypond --batch
 
-  # clone & install abjad dev branch:
+  # clone & install abjad dev branch;
+  # must install -e editable for abjad/boilerplate/ directory in wrapper:
   - git clone -b trevor/dev https://github.com/Abjad/abjad.git /tmp/abjad
-  - pip install /tmp/abjad
+  - pip install -e /tmp/abjad
 
   # clone & install rmakers:
   - git clone https://github.com/Abjad/abjad-ext-rmakers.git /tmp/abjad-ext-rmakers
@@ -41,7 +42,7 @@ before_install:
   - if [[ $do_not_symlink_test_py != true ]]; then ln -s /tmp/test/test_segments.py $TRAVIS_BUILD_DIR/$name/test.py; fi
 
   # clone & install ide;
-  # must be -e editable to install wrapper directory with ide/scores:
+  # must install -e editable for ide/scores directory in wrapper:
   - git clone https://github.com/Abjad/ide.git /tmp/ide
   - pip install -e /tmp/ide
 
