@@ -40,9 +40,10 @@ before_install:
   - if [[ $do_not_symlink_test_py != true ]]; then unlink $TRAVIS_BUILD_DIR/$name/test.py; fi
   - if [[ $do_not_symlink_test_py != true ]]; then ln -s /tmp/test/test_segments.py $TRAVIS_BUILD_DIR/$name/test.py; fi
 
-  # clone & install ide:
+  # clone & install ide;
+  # must be -e editable to install wrapper directory with ide/scores:
   - git clone https://github.com/Abjad/ide.git /tmp/ide
-  - pip install /tmp/ide
+  - pip install -e /tmp/ide
 
   # configure mypy:
   - export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/baca:/tmp/ide
