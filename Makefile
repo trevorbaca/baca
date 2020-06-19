@@ -56,7 +56,7 @@ pytest:
 	--cov-config=.coveragerc \
 	--cov-report=html \
 	--cov-report=term \
-	--cov=${project}/ \
+	--cov=${project} \
 	--durations=20 \
 	.
 
@@ -67,7 +67,7 @@ pytest-x:
 	--cov-config=.coveragerc \
 	--cov-report=html \
 	--cov-report=term \
-	--cov=${project}/ \
+	--cov=${project} \
 	--durations=20 \
 	.
 
