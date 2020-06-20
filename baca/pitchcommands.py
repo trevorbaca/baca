@@ -6039,7 +6039,10 @@ class StaffPositionCommand(scoping.Command):
             number = self.numbers[i]
             if isinstance(number, list):
                 positions = [abjad.StaffPosition(_) for _ in number]
-                pitches = [_.to_pitch(clef) for _ in positions]
+                pitches = [
+                    abjad.NamedPitch.from_staff_position(_, clef=clef)
+                    for _ in positions
+                ]
                 new_lt = PitchCommand._set_lt_pitch(
                     plt,
                     pitches,
@@ -6052,7 +6055,7 @@ class StaffPositionCommand(scoping.Command):
                     plt = new_lt
             else:
                 position = abjad.StaffPosition(number)
-                pitch = position.to_pitch(clef)
+                pitch = abjad.NamedPitch.from_staff_position(position, clef=clef)
                 new_lt = PitchCommand._set_lt_pitch(
                     plt,
                     pitch,
@@ -6244,7 +6247,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
             clef = abjad.inspect(plt.head).effective(
                 abjad.Clef, default=abjad.Clef("treble")
             )
-            pitch = staff_position.to_pitch(clef=clef)
+            pitch = abjad.NamedPitch.from_staff_position(staff_position, clef=clef)
             new_lt = PitchCommand._set_lt_pitch(
                 plt, pitch, allow_repitch=True, mock=self.mock
             )
@@ -6259,7 +6262,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
             clef = abjad.inspect(plts[0].head).effective(
                 abjad.Clef, default=abjad.Clef("treble")
             )
-            start_pitch = self.start.to_pitch(clef=clef)
+            start_pitch = abjad.NamedPitch.from_staff_position(self.start, clef=clef)
         new_lt = PitchCommand._set_lt_pitch(
             plts[0], start_pitch, allow_repitch=True, mock=self.mock
         )
@@ -6270,7 +6273,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
             clef = abjad.inspect(plts[0].head).effective(
                 abjad.Clef, default=abjad.Clef("treble")
             )
-            stop_pitch = self.stop.to_pitch(clef=clef)
+            stop_pitch = abjad.NamedPitch.from_staff_position(self.stop, clef=clef)
         new_lt = PitchCommand._set_lt_pitch(
             plts[-1], stop_pitch, allow_repitch=True, mock=self.mock
         )

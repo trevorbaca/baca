@@ -2953,6 +2953,61 @@ class Constellation(object):
         markup = abjad.Markup(label)
         abjad.attach(markup, chord)
 
+    @staticmethod
+    def _list_numeric_octave_transpositions(pitch_range, pitch_number_list):
+        result = []
+        pitch_number_set = set(pitch_number_list)
+        start_pitch_number = pitch_range.start_pitch.number
+        stop_pitch_number = pitch_range.stop_pitch.number
+        range_set = set(range(start_pitch_number, stop_pitch_number + 1))
+        while pitch_number_set.issubset(range_set):
+            next_pitch_number = list(pitch_number_set)
+            next_pitch_number.sort()
+            result.extend([next_pitch_number])
+            pitch_number_set = set([_ + 12 for _ in pitch_number_set])
+        pitch_number_set = set([_ - 12 for _ in pitch_number_list])
+        while pitch_number_set.issubset(range_set):
+            next_pitch_number = list(pitch_number_set)
+            next_pitch_number.sort()
+            result.extend([next_pitch_number])
+            pitch_number_set = set([_ - 12 for _ in pitch_number_set])
+        result.sort()
+        return result
+
+    @staticmethod
+    def _list_octave_transpositions(pitch_range, pitch_carrier):
+        if isinstance(pitch_carrier, collections_module.abc.Iterable):
+            if all(isinstance(x, (int, float)) for x in pitch_carrier):
+                return Constellation._list_numeric_octave_transpositions(
+                    pitch_range, pitch_carrier
+                )
+        prototype = (abjad.Chord, abjad.PitchSet)
+        if not isinstance(pitch_carrier, prototype):
+            message = "must be chord or pitch-set: {!r}"
+            message = message.format(pitch_carrier)
+            raise TypeError(message)
+        result = []
+        interval = abjad.NumberedInterval(-12)
+        while True:
+            pitch_carrier_copy = copy.copy(pitch_carrier)
+            candidate = interval.transpose(pitch_carrier_copy)
+            if candidate in pitch_range:
+                result.append(candidate)
+                interval -= 12
+            else:
+                break
+        result.reverse()
+        interval = abjad.NumberedInterval(0)
+        while True:
+            pitch_carrier_copy = copy.copy(pitch_carrier)
+            candidate = interval.transpose(pitch_carrier_copy)
+            if candidate in pitch_range:
+                result.append(candidate)
+                interval += abjad.NumberedInterval(12)
+            else:
+                break
+        return result
+
     def _make_lilypond_file_and_score_from_chords(self, chords):
         score, treble, bass = abjad.Score.make_piano_score(leaves=chords, sketch=True)
         score.override.text_script.staff_padding = 10
@@ -3125,7 +3180,7 @@ class Constellation(object):
             raise TypeError(f"pitch range only: {range!r}.")
         transposition_list = []
         for cell in cells:
-            transpositions = range.list_octave_transpositions(cell)
+            transpositions = Constellation._list_octave_transpositions(range, cell)
             transposition_list.append(transpositions)
         enumerator = abjad.Enumerator(transposition_list)
         result = enumerator.yield_outer_product()

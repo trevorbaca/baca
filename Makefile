@@ -33,7 +33,7 @@ isort-reformat:
 	--apply \
 	--case-sensitive \
 	--line-width=88 \
-	--multi-liner=3 \
+	--multi-line=3 \
 	--project=abjad \
 	--project=abjadext \
 	--recursive \

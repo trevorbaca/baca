@@ -569,9 +569,12 @@ indicators.Markup library.
    :nosignatures:
 
    ~baca.mathtools.increase_elements
+   ~baca.mathtools.insert_and_transpose
    ~baca.mathtools.negate_elements
    ~baca.mathtools.overwrite_elements
    ~baca.mathtools.partition_integer_into_halves
+   ~baca.mathtools.partition_nested_into_inward_pointing_parts
+   ~baca.mathtools.repeat_subruns_to_length
 
 .. raw:: html
 
