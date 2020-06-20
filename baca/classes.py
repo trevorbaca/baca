@@ -1209,7 +1209,8 @@ class Expression(abjad.Expression):
             PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
 
             >>> segment = baca.PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
-            >>> abjad.show(segment, strict=89) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrate(segment)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  container:: example expression
 
@@ -1222,13 +1223,11 @@ class Expression(abjad.Expression):
 
                 >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
                 >>> markup = expression.get_markup()
-                >>> abjad.show(segment, figure_name=markup) # doctest: +SKIP
+                >>> lilypond_file = abjad.illustrate(segment, figure_name=markup)
+                >>> abjad.show(lilypond_file) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> lilypond_file = segment.__illustrate__(
-                    ...     figure_name=markup,
-                    ...     )
                     >>> abjad.f(lilypond_file[abjad.Staff])
                     \new Staff
                     {
@@ -7411,11 +7410,11 @@ class Sequence(abjad.Sequence):
 
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
             >>> collection = abjad.PitchClassSegment(items=items)
-            >>> abjad.show(collection, strict=89) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrate(collection)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = collection.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
                 \new Voice
                 {
@@ -7462,11 +7461,11 @@ class Sequence(abjad.Sequence):
             Sequence([PitchClassSegment([11, 11.5, 7, 8, 11.5, 8])])
 
             >>> collection = sequence.join()[0]
-            >>> abjad.show(collection, strict=89) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrate(collection)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = collection.__illustrate__()
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
                 \new Voice
                 {
@@ -7502,13 +7501,11 @@ class Sequence(abjad.Sequence):
 
             >>> collection = expression(collections)[0]
             >>> markup = expression.get_markup()
-            >>> abjad.show(collection, figure_name=markup, strict=89) # doctest: +SKIP
+            >>> lilypond_file = abjad.illustrate(collection, figure_name=markup)
+            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> lilypond_file = collection.__illustrate__(
-                ...     figure_name=markup,
-                ...     )
                 >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
                 \new Voice
                 {

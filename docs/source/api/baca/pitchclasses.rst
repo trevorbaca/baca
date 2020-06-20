@@ -670,10 +670,6 @@ pitchclasses
 
    .. container:: inherited
 
-      .. automethod:: PitchClassSegment.__illustrate__
-
-   .. container:: inherited
-
       .. automethod:: PitchClassSegment.__iter__
 
    .. container:: inherited
@@ -722,6 +718,10 @@ pitchclasses
    .. container:: inherited
 
       .. automethod:: PitchClassSegment.count
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSegment.foo
 
    .. automethod:: PitchClassSegment.get_matching_transforms
 
@@ -1070,10 +1070,6 @@ pitchclasses
 
    .. container:: inherited
 
-      .. automethod:: PitchSegment.__illustrate__
-
-   .. container:: inherited
-
       .. automethod:: PitchSegment.__iter__
 
    .. container:: inherited
@@ -1120,6 +1116,10 @@ pitchclasses
    .. container:: inherited
 
       .. automethod:: PitchSegment.count
+
+   .. container:: inherited
+
+      .. automethod:: PitchSegment.foo
 
    .. container:: inherited
 
