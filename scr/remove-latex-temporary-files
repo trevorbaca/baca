@@ -4,18 +4,18 @@ import os
 import pathlib
 import sys
 
-if __name__ == '__main__':
-    #os.system('clear')
+if __name__ == "__main__":
+    # os.system('clear')
     if 1 < len(sys.argv):
         target_directory = sys.argv[1]
     else:
-        target_directory = ''
+        target_directory = ""
     total = 0
-    for extension in ('.log', '.aux', '.synctex.gz'):
-        path = pathlib.Path(target_directory, '*' + extension)
+    for extension in (".log", ".aux", ".synctex.gz"):
+        path = pathlib.Path(target_directory, "*" + extension)
         files_to_remove = glob.glob(str(path))
         if files_to_remove:
             total += len(files_to_remove)
-            os.system(f'rm {path}')
+            os.system(f"rm {path}")
     if total:
-        print(f'{total} files removed ...\n')
+        print(f"{total} files removed ...\n")

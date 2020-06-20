@@ -18,27 +18,29 @@ except ImportError:
 
 
 _colors = {
-    'BLUE': '\033[94m',
-    'RED': '\033[91m',
-    'GREEN': '\033[92m',
-    'END': '\033[0m',
-    }
+    "BLUE": "\033[94m",
+    "RED": "\033[91m",
+    "GREEN": "\033[92m",
+    "END": "\033[0m",
+}
+
 
 def _get_globs():
     globs = {}
-    globs['abjad'] = abjad
+    globs["abjad"] = abjad
     globs.update(abjad.__dict__)
-    globs['abjadext'] = abjadext
+    globs["abjadext"] = abjadext
     globs.update(abjadext.__dict__)
-    globs['baca'] = baca
+    globs["baca"] = baca
     globs.update(baca.__dict__)
     try:
-        ide = importlib.import_module('ide')
-        globs['ide'] = ide
+        ide = importlib.import_module("ide")
+        globs["ide"] = ide
         globs.update(ide.__dict__)
     except ModuleNotFoundError:
         pass
     return globs
+
 
 def _doctest_files(files, globs, report_only_first_failure=False):
     if report_only_first_failure:
@@ -46,15 +48,12 @@ def _doctest_files(files, globs, report_only_first_failure=False):
             doctest.NORMALIZE_WHITESPACE
             | doctest.ELLIPSIS
             | doctest.REPORT_ONLY_FIRST_FAILURE
-            )
+        )
     else:
-        optionflags = (
-            doctest.NORMALIZE_WHITESPACE
-            | doctest.ELLIPSIS
-            )
+        optionflags = doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS
     failed_file_paths, error_messages = [], []
     failure_count, test_count = 0, 0
-    current_directory = pathlib.Path('.').absolute()
+    current_directory = pathlib.Path(".").absolute()
     for file_ in files:
         assert file_.is_file(), repr(file_)
         relative_path = os.path.relpath(file_)
@@ -62,11 +61,8 @@ def _doctest_files(files, globs, report_only_first_failure=False):
         with abjad.RedirectedStreams(stdout=string_buffer):
             try:
                 failure_count_, test_count_ = doctest.testfile(
-                    file_,
-                    module_relative=False,
-                    globs=globs,
-                    optionflags=optionflags,
-                    )
+                    file_, module_relative=False, globs=globs, optionflags=optionflags,
+                )
             except UnicodeDecodeError:
                 continue
             failure_count += failure_count_
@@ -75,69 +71,60 @@ def _doctest_files(files, globs, report_only_first_failure=False):
         if failure_count_:
             failed_file_paths.append(os.path.relpath(file_))
             error_messages.append(doctest_output)
-            result_code = ''.join((
-                _colors['RED'],
-                'FAILED',
-                _colors['END'],
-                ))
+            result_code = "".join((_colors["RED"], "FAILED", _colors["END"],))
         else:
-            result_code = ''.join((
-                _colors['BLUE'],
-                'OK',
-                _colors['END'],
-                ))
-        print(f'{relative_path} {result_code}')
+            result_code = "".join((_colors["BLUE"], "OK", _colors["END"],))
+        print(f"{relative_path} {result_code}")
     if failed_file_paths:
         print()
         for error_message in error_messages:
             print(error_message)
     for file_ in failed_file_paths:
-        print(f'FAILED: {file_}')
+        print(f"FAILED: {file_}")
     print()
-    test_identifier = abjad.String('test').pluralize(test_count)
-    module_identifier = abjad.String('module').pluralize(len(names))
+    test_identifier = abjad.String("test").pluralize(test_count)
+    module_identifier = abjad.String("module").pluralize(len(names))
     success_count = test_count - failure_count
     string = (
-        f'{success_count} passed, {failure_count} failed out of '
-        f'{test_count} {test_identifier} '
-        f'in {len(names)} {module_identifier}.'
-        )
+        f"{success_count} passed, {failure_count} failed out of "
+        f"{test_count} {test_identifier} "
+        f"in {len(names)} {module_identifier}."
+    )
     print(string)
     if failed_file_paths:
         return -1
     return 0
-    
-if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     if len(sys.argv) <= 1:
-        print(f'Must specify one or more files ...')
+        print(f"Must specify one or more files ...")
         sys.exit()
     names = sys.argv[1:]
-    if names[0] == '--report-only-first-failure':
+    if names[0] == "--report-only-first-failure":
         report_only_first_failure = True
         names = names[1:]
     else:
         report_only_first_failure = False
     globs = _get_globs()
-    current_directory = pathlib.Path('.').absolute()
+    current_directory = pathlib.Path(".").absolute()
     files = []
     for name in names:
         path = current_directory / name
         if path.is_file():
             files.append(path)
             continue
-        #assert path.is_dir()
-        #if not path.is_dir():
+        # assert path.is_dir()
+        # if not path.is_dir():
         #    raise Exception(path)
         if path.is_dir():
-            for path_ in path.glob('**/*.py'):
+            for path_ in path.glob("**/*.py"):
                 if path_.is_file():
                     files.append(path_)
         else:
             files.append(path)
     files.sort()
     exit_code = _doctest_files(
-        files,
-        globs,
-        report_only_first_failure=report_only_first_failure,
-        )
+        files, globs, report_only_first_failure=report_only_first_failure,
+    )
     sys.exit(exit_code)

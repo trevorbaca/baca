@@ -4,26 +4,26 @@ import pathlib
 import sys
 
 if 1 < len(sys.argv):
-    arguments = ' '.join(sys.argv[1:])
-    print(f'Running xpdf on {arguments} ...')
+    arguments = " ".join(sys.argv[1:])
+    print(f"Running xpdf on {arguments} ...")
 else:
-    arguments = ''
-    print(f'Running xpdf ...')
+    arguments = ""
+    print(f"Running xpdf ...")
 
-log = '~/.abjad/ide/latex.log'
+log = "~/.abjad/ide/latex.log"
 for path in sys.argv[1:]:
     path = pathlib.Path(path)
-    command = f'date > {log};'
-    command += f' xelatex -halt-on-error'
-    command += f' --jobname={path.stem}'
-    command += f' -output-directory={path.parent} {path}'
-    command += f' >> {log} 2>&1'
-    command_called_twice = f'{command}; {command}'
+    command = f"date > {log};"
+    command += f" xelatex -halt-on-error"
+    command += f" --jobname={path.stem}"
+    command += f" -output-directory={path.parent} {path}"
+    command += f" >> {log} 2>&1"
+    command_called_twice = f"{command}; {command}"
     os.system(command_called_twice)
 
-os.system('remove-latex-temporary-files')
+os.system("remove-latex-temporary-files")
 
-paths = [pathlib.Path(_).with_suffix('.pdf') for _ in sys.argv[1:]]
-paths = ' '.join([str(_) for _ in paths])
-command = f'open {paths}'
+paths = [pathlib.Path(_).with_suffix(".pdf") for _ in sys.argv[1:]]
+paths = " ".join([str(_) for _ in paths])
+command = f"open {paths}"
 os.system(command)
