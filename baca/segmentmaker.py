@@ -2287,7 +2287,10 @@ class SegmentMaker(abjad.SegmentMaker):
             if not abjad.inspect(note).has_indicator(abjad.LaissezVibrer):
                 continue
             clef = abjad.inspect(note).effective(abjad.Clef, default=default)
-            staff_position = note.written_pitch.to_staff_position(clef=clef)
+            staff_position = abjad.StaffPosition.from_pitch_and_clef(
+                note.written_pitch,
+                clef,
+            )
             if staff_position == abjad.StaffPosition(0):
                 abjad.override(note).laissez_vibrer_tie.direction = abjad.Up
 
