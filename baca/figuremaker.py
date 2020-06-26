@@ -3,6 +3,7 @@ import math
 import typing
 
 import abjad
+from abjad.illustrate import duration_to_score_markup
 from abjadext import rmakers
 
 from . import classes, commandclasses, pitchclasses, rhythmcommands
@@ -5108,7 +5109,7 @@ class FigureMaker(object):
             abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Left
         duration = abjad.inspect(tuplet).duration()
         duration = abjad.Duration(duration)
-        markup = duration.to_score_markup()
+        markup = duration_to_score_markup(duration)
         markup = markup.scale((0.75, 0.75))
         abjad.override(tuplet).tuplet_number.text = markup
         return tuplet
