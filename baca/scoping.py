@@ -404,7 +404,7 @@ class Command(object):
             prototype = tempo_prototype
         else:
             prototype = type(indicator)
-        stem = abjad.String.to_indicator_stem(indicator)
+        stem = Command._to_indicator_stem(indicator)
         assert stem in (
             "BAR_EXTENT",
             "BEAM",
@@ -456,6 +456,55 @@ class Command(object):
                 message += " expecting 1.\n\n"
                 raise Exception(message)
             return reapplied_indicators[0]
+
+    @staticmethod
+    def _to_indicator_stem(indicator) -> abjad.String:
+        """
+        Changes ``indicator`` to stem.
+
+        ..  container:: example
+
+            >>> baca.Command._to_indicator_stem(abjad.Clef("alto"))
+            'CLEF'
+
+            >>> baca.Command._to_indicator_stem(abjad.Clef("treble"))
+            'CLEF'
+
+            >>> baca.Command._to_indicator_stem(abjad.Dynamic("f"))
+            'DYNAMIC'
+
+            >>> baca.Command._to_indicator_stem(abjad.StartHairpin("<"))
+            'DYNAMIC'
+
+            >>> baca.Command._to_indicator_stem(abjad.Cello())
+            'INSTRUMENT'
+
+            >>> baca.Command._to_indicator_stem(abjad.Violin())
+            'INSTRUMENT'
+
+            >>> metronome_mark = abjad.MetronomeMark((1, 4), 58)
+            >>> baca.Command._to_indicator_stem(metronome_mark)
+            'METRONOME_MARK'
+
+            >>> start_text_span = abjad.StartTextSpan()
+            >>> baca.Command._to_indicator_stem(start_text_span)
+            'TEXT_SPANNER'
+
+            >>> stop_text_span = abjad.StopTextSpan()
+            >>> baca.Command._to_indicator_stem(stop_text_span)
+            'TEXT_SPANNER'
+
+        """
+        assert getattr(indicator, "persistent", False), repr(indicator)
+        if isinstance(indicator, abjad.Instrument):
+            stem = "INSTRUMENT"
+        elif getattr(indicator, "parameter", None) == "TEMPO":
+            stem = "METRONOME_MARK"
+        elif hasattr(indicator, "parameter"):
+            stem = indicator.parameter
+        else:
+            stem = type(indicator).__name__
+        return abjad.String(stem).to_shout_case()
 
     @staticmethod
     def _validate_indexed_tweaks(tweaks):

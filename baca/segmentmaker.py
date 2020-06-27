@@ -1450,7 +1450,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if isinstance(wrapper.indicator, indicators.BarExtent):
             return
-        stem = abjad.String.to_indicator_stem(wrapper.indicator)
+        stem = scoping.Command._to_indicator_stem(wrapper.indicator)
         grob = SegmentMaker._indicator_to_grob(wrapper.indicator)
         context = wrapper._find_correct_effective_context()
         assert isinstance(context, abjad.Context), repr(context)
@@ -3761,7 +3761,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
     def _set_status_tag(wrapper, status, redraw=None, stem=None):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
-        stem = stem or abjad.String.to_indicator_stem(wrapper.indicator)
+        stem = stem or scoping.Command._to_indicator_stem(wrapper.indicator)
         prefix = None
         if redraw is True:
             prefix = "redrawn"
@@ -4112,7 +4112,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ) and not getattr(indicator, "hide", False):
             strings = indicator._get_lilypond_format(context=context)
             literal = abjad.LilyPondLiteral(strings, format_slot="after")
-            stem = abjad.String.to_indicator_stem(indicator)
+            stem = scoping.Command._to_indicator_stem(indicator)
             wrapper_ = abjad.attach(
                 literal,
                 leaf,
