@@ -5168,7 +5168,8 @@ class FigureMaker(object):
 
         Set exponent less than 1 for accelerando.
         """
-        pairs = abjad.mathtools.cumulative_sums_pairwise(durations)
+        sums = abjad.mathtools.cumulative_sums(durations)
+        pairs = list(abjad.sequence(sums).nwise(n=2))
         total_duration = pairs[-1][-1]
         start_offsets = [_[0] for _ in pairs]
         start_offsets = [_ / total_duration for _ in start_offsets]

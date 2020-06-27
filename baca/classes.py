@@ -9453,7 +9453,7 @@ class Sequence(abjad.Sequence):
         numerator, denominator = weight.pair
         ratio = ratios_[_map_index]
         if rounded is True:
-            numerators = abjad.mathtools.partition_integer_by_ratio(numerator, ratio)
+            numerators = ratio.partition_integer(numerator)
             divisions = [
                 abjad.NonreducedFraction((numerator, denominator))
                 for numerator in numerators
