@@ -2424,7 +2424,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 parentage = abjad.inspect(leaf).parentage()
                 first_context = parentage.get(abjad.Context)
                 indicator = wrapper.indicator
-                if isinstance(indicator, abjad.GlissandoIndicator):
+                if isinstance(indicator, abjad.Glissando):
                     continue
                 if isinstance(indicator, abjad.RepeatTie):
                     continue
@@ -4033,7 +4033,7 @@ class SegmentMaker(abjad.SegmentMaker):
         assert isinstance(status, str), repr(status)
         indicator = wrapper.indicator
         prototype = (
-            abjad.GlissandoIndicator,
+            abjad.Glissando,
             abjad.Ottava,
             abjad.RepeatTie,
             abjad.StartBeam,

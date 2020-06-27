@@ -741,10 +741,6 @@ pitchclasses
 
    .. container:: inherited
 
-      .. automethod:: PitchClassSegment.make_notes
-
-   .. container:: inherited
-
       .. automethod:: PitchClassSegment.multiply
 
    .. container:: inherited
@@ -855,10 +851,6 @@ pitchclasses
    .. container:: inherited
 
       .. automethod:: PitchClassSet.__gt__
-
-   .. container:: inherited
-
-      .. automethod:: PitchClassSet.__illustrate__
 
    .. container:: inherited
 
@@ -1135,10 +1127,6 @@ pitchclasses
 
    .. container:: inherited
 
-      .. automethod:: PitchSegment.make_notes
-
-   .. container:: inherited
-
       .. automethod:: PitchSegment.multiply
 
    .. container:: inherited
@@ -1256,10 +1244,6 @@ pitchclasses
    .. container:: inherited
 
       .. automethod:: PitchSet.__gt__
-
-   .. container:: inherited
-
-      .. automethod:: PitchSet.__illustrate__
 
    .. container:: inherited
 
