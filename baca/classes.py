@@ -8299,6 +8299,37 @@ class Sequence(abjad.Sequence):
                         result.append(item)
         return type(self)(items=result)
 
+    def degree_of_rotational_symmetry(self):
+        """
+        Gets degree of rotational symmetry.
+
+        ..  container:: example
+
+            >>> baca.sequence([1, 1, 1, 1, 1, 1]).degree_of_rotational_symmetry()
+            6
+
+            >>> baca.sequence([1, 2, 1, 2, 1, 2]).degree_of_rotational_symmetry()
+            3
+
+            >>> baca.sequence([1, 2, 3, 1, 2, 3]).degree_of_rotational_symmetry()
+            2
+
+            >>> baca.sequence([1, 2, 3, 4, 5, 6]).degree_of_rotational_symmetry()
+            1
+
+            >>> baca.sequence().degree_of_rotational_symmetry()
+            1
+
+        Returns positive integer.
+        """
+        degree_of_rotational_symmetry = 0
+        for index in range(len(self)):
+            rotation = self[index:] + self[:index]
+            if rotation == self:
+                degree_of_rotational_symmetry += 1
+        degree_of_rotational_symmetry = degree_of_rotational_symmetry or 1
+        return degree_of_rotational_symmetry
+
     # TODO: remove ``counts`` in favor of partition-then-``indices`` recipe
     # TODO: generalize ``indices`` to pattern
     @abjad.Signature()
@@ -8568,37 +8599,6 @@ class Sequence(abjad.Sequence):
         sequence = Sequence(items_)
         sequence = sequence.flatten(depth=-1)
         return sequence
-
-    def degree_of_rotational_symmetry(self):
-        """
-        Gets degree of rotational symmetry.
-
-        ..  container:: example
-
-            >>> baca.sequence([1, 1, 1, 1, 1, 1]).degree_of_rotational_symmetry()
-            6
-
-            >>> baca.sequence([1, 2, 1, 2, 1, 2]).degree_of_rotational_symmetry()
-            3
-
-            >>> baca.sequence([1, 2, 3, 1, 2, 3]).degree_of_rotational_symmetry()
-            2
-
-            >>> baca.sequence([1, 2, 3, 4, 5, 6]).degree_of_rotational_symmetry()
-            1
-
-            >>> baca.sequence().degree_of_rotational_symmetry()
-            1
-
-        Returns positive integer.
-        """
-        degree_of_rotational_symmetry = 0
-        for index in range(len(self)):
-            rotation = self[index:] + self[:index]
-            if rotation == self:
-                degree_of_rotational_symmetry += 1
-        degree_of_rotational_symmetry = degree_of_rotational_symmetry or 1
-        return degree_of_rotational_symmetry
 
     def group_by_sign(self, sign=(-1, 0, 1)):
         r"""

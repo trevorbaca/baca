@@ -1389,6 +1389,16 @@ class SegmentMaker(abjad.SegmentMaker):
             synthetic_offset = -momento.synthetic_offset
         return leaf, previous_indicator, status, edition, synthetic_offset
 
+    @staticmethod
+    def _append_tag_to_wrappers(leaf, tag):
+        assert isinstance(tag, abjad.Tag), repr(tag)
+        for wrapper in abjad.inspect(leaf).wrappers():
+            if isinstance(wrapper.indicator, abjad.LilyPondLiteral):
+                if wrapper.indicator.argument == "":
+                    continue
+            tag_ = wrapper.tag.append(tag)
+            wrapper.tag = tag_
+
     def _apply_breaks(self):
         if self.breaks is None:
             return
@@ -3543,16 +3553,6 @@ class SegmentMaker(abjad.SegmentMaker):
             offset = abjad.inspect(skip).timespan().start_offset
             self._offset_to_measure_number[offset] = measure_number
             measure_number += 1
-
-    @staticmethod
-    def _append_tag_to_wrappers(leaf, tag):
-        assert isinstance(tag, abjad.Tag), repr(tag)
-        for wrapper in abjad.inspect(leaf).wrappers():
-            if isinstance(wrapper.indicator, abjad.LilyPondLiteral):
-                if wrapper.indicator.argument == "":
-                    continue
-            tag_ = wrapper.tag.append(tag)
-            wrapper.tag = tag_
 
     def _print_cache(self):
         for context in self._cache:

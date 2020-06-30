@@ -365,6 +365,49 @@ class BarExtent(object):
 
     ### PRIVATE METHODS ###
 
+    def _get_bar_extent(self, component):
+        if not isinstance(component, abjad.Leaf):
+            return None
+        staff = abjad.inspect(component).parentage().get(abjad.Staff)
+        staff_parent = abjad.inspect(staff).parentage().parent
+        if staff_parent[0] is not staff and staff_parent[-1] is not staff:
+            return None
+        bottom, top = -2, 2
+        # 7, 14 used in Huitzil
+        line_count_to_bar_extent = {
+            0: 0,
+            1: 0,
+            2: 0.5,
+            3: 1,
+            4: 1.5,
+            5: 2,
+            6: 2.5,
+            7: 4,
+            14: 4,
+        }
+        if self._staff_is_effectively_topmost(staff):
+            top = line_count_to_bar_extent[self.line_count]
+        if self._staff_is_effectively_bottommost(staff):
+            bottom = -line_count_to_bar_extent[self.line_count]
+        return (bottom, top)
+
+    def _get_lilypond_format_bundle(self, component=None):
+        bundle = abjad.LilyPondFormatBundle()
+        if self.hide:
+            return bundle
+        bar_extent = self._get_bar_extent(component)
+        if bar_extent is None:
+            return bundle
+        bottom, top = bar_extent
+        string = r"\override Staff.BarLine.bar-extent = "
+        string += f"#'({bottom} . {top})"
+        previous = abjad.inspect(component).effective(BarExtent, n=-1)
+        if previous is None or previous.line_count <= self.line_count:
+            bundle.before.commands.append(string)
+        else:
+            bundle.after.commands.append(string)
+        return bundle
+
     @staticmethod
     def _staff_is_effectively_bottommost(staff):
         assert isinstance(staff, abjad.Staff)
@@ -416,49 +459,6 @@ class BarExtent(object):
         if len(staff_grandparent) == 1:
             return True
         return False
-
-    def _get_bar_extent(self, component):
-        if not isinstance(component, abjad.Leaf):
-            return None
-        staff = abjad.inspect(component).parentage().get(abjad.Staff)
-        staff_parent = abjad.inspect(staff).parentage().parent
-        if staff_parent[0] is not staff and staff_parent[-1] is not staff:
-            return None
-        bottom, top = -2, 2
-        # 7, 14 used in Huitzil
-        line_count_to_bar_extent = {
-            0: 0,
-            1: 0,
-            2: 0.5,
-            3: 1,
-            4: 1.5,
-            5: 2,
-            6: 2.5,
-            7: 4,
-            14: 4,
-        }
-        if self._staff_is_effectively_topmost(staff):
-            top = line_count_to_bar_extent[self.line_count]
-        if self._staff_is_effectively_bottommost(staff):
-            bottom = -line_count_to_bar_extent[self.line_count]
-        return (bottom, top)
-
-    def _get_lilypond_format_bundle(self, component=None):
-        bundle = abjad.LilyPondFormatBundle()
-        if self.hide:
-            return bundle
-        bar_extent = self._get_bar_extent(component)
-        if bar_extent is None:
-            return bundle
-        bottom, top = bar_extent
-        string = r"\override Staff.BarLine.bar-extent = "
-        string += f"#'({bottom} . {top})"
-        previous = abjad.inspect(component).effective(BarExtent, n=-1)
-        if previous is None or previous.line_count <= self.line_count:
-            bundle.before.commands.append(string)
-        else:
-            bundle.after.commands.append(string)
-        return bundle
 
     ### PUBLIC PROPERTIES ###
 

@@ -1019,6 +1019,12 @@ class Acciaccatura(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
+    def __format__(self, format_specification="") -> str:
+        """
+        Delegates to format manager.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
     def __hash__(self) -> int:
         """
         Delegates to format manager.
@@ -1029,12 +1035,6 @@ class Acciaccatura(object):
         except TypeError:
             raise TypeError(f"unhashable type: {self}")
         return result
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __repr__(self) -> str:
         """
@@ -4945,6 +4945,12 @@ class FigureMaker(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
+    def __format__(self, format_specification="") -> str:
+        """
+        Delegates to format manager.
+        """
+        return abjad.StorageFormatManager(self).get_storage_format()
+
     def __hash__(self) -> int:
         """
         Delegates to format manager.
@@ -4955,12 +4961,6 @@ class FigureMaker(object):
         except TypeError:
             raise TypeError(f"unhashable type: {self}")
         return result
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __repr__(self) -> str:
         """
