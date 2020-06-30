@@ -177,10 +177,6 @@ indicators
 
    .. container:: inherited
 
-      .. automethod:: Markup.__illustrate__
-
-   .. container:: inherited
-
       .. automethod:: Markup.__lt__
 
    .. container:: inherited

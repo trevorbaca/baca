@@ -579,10 +579,6 @@ classes
 
    .. container:: inherited
 
-      .. automethod:: Selection.__illustrate__
-
-   .. container:: inherited
-
       .. automethod:: Selection.__iter__
 
    .. container:: inherited
