@@ -61,7 +61,7 @@ install:
   - pip install -e .
 
   # prime abjad parser tables
-  - /tmp/abjad/scr/devel/prime-parser-tables
+  - /tmp/abjad/scr/prime-parser-tables
 
   # log versions
   - black --version
