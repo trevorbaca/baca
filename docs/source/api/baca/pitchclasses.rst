@@ -719,10 +719,6 @@ pitchclasses
 
       .. automethod:: PitchClassSegment.count
 
-   .. container:: inherited
-
-      .. automethod:: PitchClassSegment.foo
-
    .. automethod:: PitchClassSegment.get_matching_transforms
 
    .. automethod:: PitchClassSegment.get_transforms
@@ -1108,10 +1104,6 @@ pitchclasses
    .. container:: inherited
 
       .. automethod:: PitchSegment.count
-
-   .. container:: inherited
-
-      .. automethod:: PitchSegment.foo
 
    .. container:: inherited
 
