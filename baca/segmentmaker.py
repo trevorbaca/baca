@@ -2586,7 +2586,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 instrument = abjad.inspect(pleaf).effective(abjad.Instrument)
                 if instrument is None:
                     continue
-                if pleaf not in instrument.pitch_range:
+                if not abjad.sounding_pitches_are_in_range(
+                    pleaf, instrument.pitch_range
+                ):
                     string = r"\baca-out-of-range-coloring"
                     literal = abjad.LilyPondLiteral(string, format_slot="before")
                     abjad.attach(literal, pleaf, tag=tag)
