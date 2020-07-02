@@ -9049,9 +9049,9 @@ class DesignMaker(object):
 
     def partition_cyclic(self, cursor, number, counts, operators=None):
         """
-        Partitions next `number` cells in `cursor` cyclically by `counts`.
+        Partitions next ``number`` cells in ``cursor`` cyclically by ``counts``
 
-        Applies optional `operators` to parts in resulting partition.
+        Applies optional ``operators`` to parts in resulting partition.
 
         Returns none.
         """

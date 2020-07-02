@@ -658,7 +658,7 @@ class Cursor(object):
     @staticmethod
     def from_pitch_class_segments(pitch_class_segments):
         """
-        Makes cursor from `pitch_class_segments`.
+        Makes cursor from ``pitch_class_segments``
 
         ..  container:: example
 
@@ -694,7 +694,7 @@ class Cursor(object):
                 cyclic=True,
                 )
 
-        Coerces numeric `pitch_class_segments`.
+        Coerces numeric ``pitch_class_segments``
 
         Returns cursor.
         """

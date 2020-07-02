@@ -344,15 +344,15 @@ def overwrite_elements(sequence, pairs):
 # TODO: replace string-valued even='allowed' with constant-valued keyword
 def partition_integer_into_halves(n, bigger=abjad.Left, even="allowed"):
     """
-    Partitions `n` into halves.
+    Partitions ``n`` into halves.
 
-    Writes positive integer `n` as the pair ``(left, right)`` such that
+    Writes positive integer ``n`` as the pair ``(left, right)`` such that
     ``n == left + right``.
 
     ..   container:: example
 
-        When `n` is odd the greater part of pair corresponds to the value of
-        `bigger`:
+        When ``n`` is odd the greater part of pair corresponds to the value of
+        ``bigger``
 
         >>> baca.partition_integer_into_halves(7, bigger=abjad.Left)
         (4, 3)
@@ -362,7 +362,7 @@ def partition_integer_into_halves(n, bigger=abjad.Left, even="allowed"):
 
     ..  container:: example
 
-        Likewise when `n` is even and ``even = 'disallowed'``:
+        Likewise when ``n`` is even and ``even = 'disallowed'``:
 
         >>> baca.partition_integer_into_halves(
         ...     8,
@@ -380,8 +380,8 @@ def partition_integer_into_halves(n, bigger=abjad.Left, even="allowed"):
 
     ..  container:: example
 
-        But when `n` is even and ``even = 'allowed'`` then ``left == right``
-        and `bigger` is ignored:
+        But when ``n`` is even and ``even = 'allowed'`` then ``left == right``
+        and ``bigger`` is ignored:
 
         >>> baca.partition_integer_into_halves(8)
         (4, 4)
@@ -394,12 +394,12 @@ def partition_integer_into_halves(n, bigger=abjad.Left, even="allowed"):
 
     ..  container:: example
 
-        When `n` is ``0`` returns ``(0, 0)``:
+        When ``n`` is ``0`` returns ``(0, 0)``:
 
         >>> baca.partition_integer_into_halves(0)
         (0, 0)
 
-    When `n` is ``0`` and ``even = 'disallowed'`` raises partition error.
+    When ``n`` is ``0`` and ``even = 'disallowed'`` raises partition error.
 
     Returns pair of positive integers.
     """

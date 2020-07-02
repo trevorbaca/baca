@@ -8,7 +8,7 @@ import abjad
 
 def update_file(name):
     """
-    Updates file with `name`.
+    Updates file with ``name``
     """
     output = pathlib.Path("/Users/trevorbaca/.tmp/doctest.out")
     os.system(f"baca-doctest {name} > {str(output)}")
