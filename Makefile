@@ -19,7 +19,6 @@ isort-check:
 	--multi-line=3 \
 	--project=abjad \
 	--project=abjadext \
-	--recursive \
 	--skip=baca/__init__.py \
 	--thirdparty=ply \
 	--thirdparty=roman \
@@ -30,13 +29,11 @@ isort-check:
 
 isort-reformat:
 	isort \
-	--apply \
 	--case-sensitive \
 	--line-width=88 \
 	--multi-line=3 \
 	--project=abjad \
 	--project=abjadext \
-	--recursive \
 	--skip=baca/__init__.py \
 	--thirdparty=ply \
 	--thirdparty=roman \
