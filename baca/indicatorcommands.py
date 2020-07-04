@@ -103,7 +103,7 @@ def alternate_bow_strokes(
     selector: abjad.Expression = classes.Expression()
     .select()
     .pheads(exclude=abjad.const.HIDDEN),
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
     downbow_first: bool = True,
     full: bool = None,
 ) -> commandclasses.IndicatorCommand:
@@ -500,7 +500,7 @@ def breathe(
     selector: abjad.Expression = classes.Expression()
     .select()
     .pleaf(-1, exclude=abjad.const.HIDDEN),
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches breathe command.
@@ -607,7 +607,7 @@ def damp(
     selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches damp.
@@ -810,7 +810,7 @@ def down_bow(
     selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
     full: bool = None,
 ) -> commandclasses.IndicatorCommand:
     r"""
@@ -971,7 +971,7 @@ def espressivo(
     selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches espressivo.
@@ -1809,7 +1809,7 @@ def margin_markup(
 def mark(
     argument: str,
     selector: abjad.Expression = classes.Expression().select().leaf(0),
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches mark.
@@ -1927,7 +1927,7 @@ def quadruple_staccato(
 def rehearsal_mark(
     argument: typing.Union[int, str],
     selector: abjad.Expression = classes.Expression().select().leaf(0),
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
     font_size: int = 10,
 ) -> commandclasses.IndicatorCommand:
     """
@@ -3642,7 +3642,7 @@ def up_bow(
     selector: abjad.Expression = classes.Expression()
     .select()
     .phead(0, exclude=abjad.const.HIDDEN),
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
     full: bool = None,
 ) -> commandclasses.IndicatorCommand:
     r"""

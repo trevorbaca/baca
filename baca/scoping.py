@@ -312,7 +312,7 @@ class Command(object):
                     continue
             else:
                 manager_ = item
-            assert isinstance(manager_, abjad.LilyPondTweakManager)
+            assert isinstance(manager_, abjad.TweakInterface)
             literals.append(bool(manager_._literal))
             if manager_._literal is True:
                 manager._literal = True
@@ -512,12 +512,12 @@ class Command(object):
             return
         assert isinstance(tweaks, tuple), repr(tweaks)
         for tweak in tweaks:
-            if isinstance(tweak, abjad.LilyPondTweakManager):
+            if isinstance(tweak, abjad.TweakInterface):
                 continue
             if (
                 isinstance(tweak, tuple)
                 and len(tweak) == 2
-                and isinstance(tweak[0], abjad.LilyPondTweakManager)
+                and isinstance(tweak[0], abjad.TweakInterface)
             ):
                 continue
             raise Exception(tweak)

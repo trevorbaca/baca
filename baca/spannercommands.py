@@ -210,7 +210,7 @@ class SpannerIndicatorCommand(scoping.Command):
 
 
 def beam(
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
     direction: abjad.VerticalAlignment = None,
     selector: abjad.Expression = classes.Expression().select().tleaves(),
     start_beam: abjad.StartBeam = None,
@@ -570,7 +570,7 @@ def ottava_bassa(
 
 
 def slur(
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
     map: abjad.Expression = None,
     selector: abjad.Expression = classes.Expression().select().tleaves(),
     start_slur: abjad.StartSlur = None,
@@ -759,7 +759,7 @@ def sustain_pedal(
 
 
 def trill_spanner(
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
     alteration: str = None,
     harmonic: bool = None,
     left_broken: bool = None,

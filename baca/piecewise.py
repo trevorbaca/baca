@@ -731,7 +731,7 @@ def damp_spanner(
 
 def dynamic(
     dynamic: typing.Union[str, abjad.Dynamic],
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
@@ -1243,7 +1243,7 @@ def dynamic(
 
 def hairpin(
     dynamics: typing.Union[str, typing.List],
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
     bookend: typing.Union[bool, int] = -1,
     final_hairpin: typing.Union[bool, str, abjad.StartHairpin] = None,
     forbid_al_niente_to_bar_line: bool = None,
@@ -3993,10 +3993,10 @@ def make_dynamic(
         Al niente hairpins are special-cased to carry to-barline tweaks:
 
         >>> baca.make_dynamic('>o')
-        StartHairpin(shape='>o', tweaks=LilyPondTweakManager(('_literal', None), ('to_barline', True)))
+        StartHairpin(shape='>o', tweaks=TweakInterface(('_literal', None), ('to_barline', True)))
 
         >>> baca.make_dynamic('|>o')
-        StartHairpin(shape='|>o', tweaks=LilyPondTweakManager(('_literal', None), ('to_barline', True)))
+        StartHairpin(shape='|>o', tweaks=TweakInterface(('_literal', None), ('to_barline', True)))
 
     ..  container:: example exception
 
@@ -4178,7 +4178,7 @@ def metric_modulation_spanner(
 
 def parse_hairpin_descriptor(
     descriptor: str,
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
     forbid_al_niente_to_bar_line: bool = None,
 ) -> typing.List[Bundle]:
     r"""
@@ -4250,7 +4250,7 @@ def parse_hairpin_descriptor(
 
         >>> for item in baca.parse_hairpin_descriptor('f >o'):
         ...     item
-        Bundle(indicator=Dynamic('f'), spanner_start=StartHairpin(shape='>o', tweaks=LilyPondTweakManager(('_literal', None), ('to_barline', True))))
+        Bundle(indicator=Dynamic('f'), spanner_start=StartHairpin(shape='>o', tweaks=TweakInterface(('_literal', None), ('to_barline', True))))
 
         >>> for item in baca.parse_hairpin_descriptor('p mp mf f'):
         ...     item

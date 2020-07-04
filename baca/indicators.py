@@ -58,7 +58,7 @@ class Accelerando(object):
         *,
         hide: bool = None,
         markup: abjad.Markup = None,
-        tweaks: abjad.LilyPondTweakManager = None,
+        tweaks: abjad.TweakInterface = None,
     ) -> None:
         if hide is not None:
             hide = bool(hide)
@@ -67,8 +67,8 @@ class Accelerando(object):
             assert isinstance(markup, abjad.Markup), repr(markup)
         self._markup = markup
         if tweaks is not None:
-            assert isinstance(tweaks, abjad.LilyPondTweakManager), repr(tweaks)
-        self._tweaks = abjad.LilyPondTweakManager.set_tweaks(self, tweaks)
+            assert isinstance(tweaks, abjad.TweakInterface), repr(tweaks)
+        self._tweaks = abjad.TweakInterface.set_tweaks(self, tweaks)
 
     ### SPECIAL METHODS ###
 
@@ -235,7 +235,7 @@ class Accelerando(object):
         return self._persistent
 
     @property
-    def tweaks(self) -> typing.Optional[abjad.LilyPondTweakManager]:
+    def tweaks(self) -> typing.Optional[abjad.TweakInterface]:
         r"""
         Gets tweaks.
 
@@ -265,7 +265,7 @@ class Accelerando(object):
             Tweaks can set at initialization:
 
             >>> baca.Accelerando(tweaks=abjad.tweak('blue').color)
-            Accelerando(tweaks=LilyPondTweakManager(('_literal', None), ('color', 'blue')))
+            Accelerando(tweaks=TweakInterface(('_literal', None), ('color', 'blue')))
 
         ..  container:: example
 
@@ -274,11 +274,11 @@ class Accelerando(object):
             >>> accelerando = baca.Accelerando()
             >>> abjad.tweak(accelerando).color = 'blue'
             >>> accelerando
-            Accelerando(tweaks=LilyPondTweakManager(('_literal', None), ('color', 'blue')))
+            Accelerando(tweaks=TweakInterface(('_literal', None), ('color', 'blue')))
 
             >>> import copy
             >>> copy.copy(accelerando)
-            Accelerando(tweaks=LilyPondTweakManager(('_literal', None), ('color', 'blue')))
+            Accelerando(tweaks=TweakInterface(('_literal', None), ('color', 'blue')))
 
         Tweak extra-offset to align accelerando markup with other metronome
         mark spanner segments.
@@ -633,7 +633,7 @@ class Ritardando(object):
         *,
         hide: bool = None,
         markup: abjad.Markup = None,
-        tweaks: abjad.LilyPondTweakManager = None,
+        tweaks: abjad.TweakInterface = None,
     ) -> None:
         if hide is not None:
             hide = bool(hide)
@@ -642,8 +642,8 @@ class Ritardando(object):
             assert isinstance(markup, abjad.Markup)
         self._markup = markup
         if tweaks is not None:
-            assert isinstance(tweaks, abjad.LilyPondTweakManager), repr(tweaks)
-        self._tweaks = abjad.LilyPondTweakManager.set_tweaks(self, tweaks)
+            assert isinstance(tweaks, abjad.TweakInterface), repr(tweaks)
+        self._tweaks = abjad.TweakInterface.set_tweaks(self, tweaks)
 
     ### SPECIAL METHODS ###
 
@@ -836,7 +836,7 @@ class Ritardando(object):
         return self._persistent
 
     @property
-    def tweaks(self) -> typing.Optional[abjad.LilyPondTweakManager]:
+    def tweaks(self) -> typing.Optional[abjad.TweakInterface]:
         r"""
         Gets tweaks.
 
@@ -866,7 +866,7 @@ class Ritardando(object):
             Tweaks can set at initialization:
 
             >>> baca.Ritardando(tweaks=abjad.tweak('blue').color)
-            Ritardando(tweaks=LilyPondTweakManager(('_literal', None), ('color', 'blue')))
+            Ritardando(tweaks=TweakInterface(('_literal', None), ('color', 'blue')))
 
         ..  container:: example
 
@@ -875,11 +875,11 @@ class Ritardando(object):
             >>> ritardando = baca.Ritardando()
             >>> abjad.tweak(ritardando).color = 'blue'
             >>> ritardando
-            Ritardando(tweaks=LilyPondTweakManager(('_literal', None), ('color', 'blue')))
+            Ritardando(tweaks=TweakInterface(('_literal', None), ('color', 'blue')))
 
             >>> import copy
             >>> copy.copy(ritardando)
-            Ritardando(tweaks=LilyPondTweakManager(('_literal', None), ('color', 'blue')))
+            Ritardando(tweaks=TweakInterface(('_literal', None), ('color', 'blue')))
 
         Tweak extra-offset to align ritardando markup with other metronome
         mark spanner segments.

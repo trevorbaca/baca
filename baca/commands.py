@@ -2450,7 +2450,7 @@ def label(
 
 def markup(
     argument: typing.Union[str, abjad.Markup],
-    *tweaks: abjad.LilyPondTweakManager,
+    *tweaks: abjad.TweakInterface,
     boxed: bool = None,
     # typehinting is weird for some reason
     direction=abjad.Up,

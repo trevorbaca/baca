@@ -822,7 +822,7 @@ class BCPCommand(scoping.Command):
                     abjad.Tag('baca.bcps()'),
                     ],
                 tweaks=(
-                    LilyPondTweakManager(('_literal', None), ('color', 'red')),
+                    TweakInterface(('_literal', None), ('color', 'red')),
                     ),
                 )
 
@@ -838,7 +838,7 @@ class BCPCommand(scoping.Command):
                     abjad.Tag('baca.bcps()'),
                     ],
                 tweaks=(
-                    LilyPondTweakManager(('_literal', None), ('color', 'red')),
+                    TweakInterface(('_literal', None), ('color', 'red')),
                     ),
                 )
 
@@ -1245,7 +1245,7 @@ class GlissandoCommand(scoping.Command):
             argument = self.selector(argument)
         leaves = classes.Selection(argument).leaves()
         tweaks_: typing.List[abjad.IndexedTweakManager] = []
-        prototype = (abjad.LilyPondTweakManager, tuple)
+        prototype = (abjad.TweakInterface, tuple)
         for tweak in self.tweaks or []:
             assert isinstance(tweak, prototype)
             tweaks_.append(tweak)
