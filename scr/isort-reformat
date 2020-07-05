@@ -1,7 +1,6 @@
 # TODO: eventually do not skip __metadata__.py, __persist__.py
 
 isort \
-    --apply \
     --case-sensitive \
     --force-grid-wrap=0 \
     --line-width=88 \
@@ -10,7 +9,6 @@ isort \
     --project=abjadext \
     --project=baca \
     --project=ide \
-    --recursive \
     --skip=__metadata__.py \
     --skip=__persist__.py \
     --thirdparty=ply \
