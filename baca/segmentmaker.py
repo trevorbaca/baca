@@ -2279,11 +2279,13 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         check_beamed_long_notes = not self.do_not_check_beamed_long_notes
         check_out_of_range_pitches = not self.do_not_check_out_of_range_pitches
-        if not abjad.inspect(self.score).wellformed(
+        if not abjad.wellformed(
+            self.score,
             check_beamed_long_notes=check_beamed_long_notes,
             check_out_of_range_pitches=check_out_of_range_pitches,
         ):
-            message = abjad.inspect(self.score).tabulate_wellformedness(
+            message = abjad.Wellformedness.tabulate_wellformedness(
+                self.score,
                 check_beamed_long_notes=check_beamed_long_notes,
                 check_out_of_range_pitches=check_out_of_range_pitches,
             )
