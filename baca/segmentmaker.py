@@ -2540,7 +2540,7 @@ class SegmentMaker(abjad.SegmentMaker):
         if not self.color_octaves:
             return
         score = self.score
-        vertical_moments = abjad.iterate(score).vertical_moments()
+        vertical_moments = abjad.iterate_vertical_moments(score)
         markup = abjad.Markup("OCTAVE", direction=abjad.Up)
         abjad.tweak(markup).color = "red"
         tag = _site(inspect.currentframe())
