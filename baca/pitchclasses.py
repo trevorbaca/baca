@@ -7586,7 +7586,7 @@ class PitchTree(classes.Tree):
         self._color_repeats(color_repeats, voice)
         self._attach_cell_indices(cell_indices, leaf_groups)
         self._label_set_classes(set_classes, leaf_groups)
-        score.add_final_bar_line()
+        abjad.deprecated.add_final_bar_line(score)
         abjad.override(score).bar_line.transparent = True
         abjad.override(score).bar_number.stencil = False
         abjad.override(score).beam.stencil = False
