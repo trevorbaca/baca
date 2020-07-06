@@ -602,7 +602,11 @@ class PitchArray(object):
             >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8"))
             >>> score.append(abjad.Staff("c'4 d'4"))
             >>> tuplet = abjad.Tuplet((2, 3), "c'8 d'8 e'8")
-            >>> score.append(abjad.Staff(2 * tuplet))
+            >>> staff = abjad.Staff([
+            ...     abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
+            ...     abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
+            ... ])
+            >>> score.append(staff)
 
             ..  docs::
 
@@ -653,8 +657,11 @@ class PitchArray(object):
             >>> score = abjad.Score([])
             >>> score.append(abjad.Staff("c'8 d'8 e'8 f'8"))
             >>> score.append(abjad.Staff("c'4 d'4"))
-            >>> tuplet = abjad.Tuplet((2, 3), "c'8 d'8 e'8")
-            >>> score.append(abjad.Staff(2 * tuplet))
+            >>> staff = abjad.Staff([
+            ...     abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
+            ...     abjad.Tuplet((2, 3), "c'8 d'8 e'8"),
+            ... ])
+            >>> score.append(staff)
 
             ..  docs::
 
@@ -2265,7 +2272,8 @@ class PitchArrayList(abjad.TypedList):
         staff_group = abjad.StaffGroup([])
         score.append(staff_group)
         number_staves = self[0].depth
-        staves = number_staves * abjad.Staff([])
+        staff = abjad.Staff()
+        staves = abjad.mutate(staff).copy(number_staves)
         staff_group.extend(staves)
         for pitch_array in self:
             measures = pitch_array.to_measures()
