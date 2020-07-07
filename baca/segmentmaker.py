@@ -2418,14 +2418,14 @@ class SegmentMaker(abjad.SegmentMaker):
         for name, dependent_wrappers in name_to_wrappers.items():
             momentos = []
             wrappers = []
-            dictionary = abjad.Context._get_persistent_wrappers(
+            dictionary = abjad.Inspection._get_persistent_wrappers(
                 dependent_wrappers=dependent_wrappers,
                 omit_with_indicator=abjad.const.PHANTOM,
             )
             for wrapper in dictionary.values():
                 if isinstance(wrapper.indicator, do_not_persist_on_phantom_measure):
                     wrappers.append(wrapper)
-            dictionary = abjad.Context._get_persistent_wrappers(
+            dictionary = abjad.Inspection._get_persistent_wrappers(
                 dependent_wrappers=dependent_wrappers
             )
             for wrapper in dictionary.values():
