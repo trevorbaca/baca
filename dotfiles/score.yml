@@ -70,11 +70,16 @@ install:
   - pytest --version
 
 script:
+  # TODO: replace with make black-check
   - /tmp/baca/scr/black-check $TRAVIS_BUILD_DIR/$name
+  # TODO: replace with make flake8-check
   - /tmp/baca/scr/flake8-check $TRAVIS_BUILD_DIR/$name
-  - /tmp/baca/scr/isort-check $TRAVIS_BUILD_DIR/$name
+  # TODO: replace with make isort-check
+  # - /tmp/baca/scr/isort-check $TRAVIS_BUILD_DIR/$name
+  # TODO: replace with make mypy
   - mypy $TRAVIS_BUILD_DIR/$name
   - /tmp/baca/scr/baca-doctest $TRAVIS_BUILD_DIR/$name
+  # TODO: replace with make pytest
   - py.test -rf $TRAVIS_BUILD_DIR/$name/test.py
 
 notifications:
