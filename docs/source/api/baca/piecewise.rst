@@ -132,10 +132,6 @@ piecewise
 
    .. container:: inherited
 
-      .. automethod:: PiecewiseCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: PiecewiseCommand.__repr__
 
    .. raw:: html

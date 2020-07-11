@@ -10755,61 +10755,6 @@ class Tree(object):
                     return True
         return False
 
-    def __format__(self, format_specification=""):
-        """
-        Formats tree.
-
-        ..  container:: example
-
-            Formats tree:
-
-            >>> items = [[[0, 1], [2, 3]], [4, 5]]
-            >>> tree = baca.Tree(items=items)
-
-            >>> abjad.f(tree, strict=89)
-            baca.Tree(
-                items=[
-                    baca.Tree(
-                        items=[
-                            baca.Tree(
-                                items=[
-                                    baca.Tree(
-                                        items=0,
-                                        ),
-                                    baca.Tree(
-                                        items=1,
-                                        ),
-                                    ],
-                                ),
-                            baca.Tree(
-                                items=[
-                                    baca.Tree(
-                                        items=2,
-                                        ),
-                                    baca.Tree(
-                                        items=3,
-                                        ),
-                                    ],
-                                ),
-                            ],
-                        ),
-                    baca.Tree(
-                        items=[
-                            baca.Tree(
-                                items=4,
-                                ),
-                            baca.Tree(
-                                items=5,
-                                ),
-                            ],
-                        ),
-                    ],
-                )
-
-        Returns string.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
     def __getitem__(self, argument):
         """
         Gets node or node slice identified by ``argument``.

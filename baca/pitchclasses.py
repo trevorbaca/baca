@@ -116,12 +116,6 @@ class ArpeggiationSpacingSpecifier(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
     def __hash__(self) -> int:
         """
         Delegates to format manager.
@@ -381,12 +375,6 @@ class ChordalSpacingSpecifier(object):
         Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
@@ -1068,43 +1056,6 @@ class CollectionList(collections_module.abc.Sequence):
         if not isinstance(argument, type(self)):
             return False
         return self.collections == argument.collections
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-
-        ..  container:: example
-
-            >>> collections = baca.CollectionList([
-            ...     [12, 14, 18, 17],
-            ...     [16, 20, 19],
-            ...     ])
-
-            >>> abjad.f(collections, strict=89)
-            baca.CollectionList(
-                collections=[
-                    baca.PitchSegment(
-                        (
-                            abjad.NumberedPitch(12),
-                            abjad.NumberedPitch(14),
-                            abjad.NumberedPitch(18),
-                            abjad.NumberedPitch(17),
-                            ),
-                        item_class=abjad.NumberedPitch,
-                        ),
-                    baca.PitchSegment(
-                        (
-                            abjad.NumberedPitch(16),
-                            abjad.NumberedPitch(20),
-                            abjad.NumberedPitch(19),
-                            ),
-                        item_class=abjad.NumberedPitch,
-                        ),
-                    ],
-                )
-
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     # QUESTION: how to hint return type?
     def __getitem__(self, argument):
@@ -9175,12 +9126,6 @@ class Registration(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
     def __hash__(self) -> int:
         """
         Delegates to format manager.
@@ -9271,12 +9216,6 @@ class RegistrationComponent(object):
         Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
-
-    def __format__(self, format_specification=""):
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self):
         """

@@ -149,12 +149,6 @@ class PitchArray(object):
                 return True
         return False
 
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
     def __getitem__(self, argument):
         """
         Gets row ``argument`` from pitch array.
@@ -1087,12 +1081,6 @@ class PitchArrayCell(object):
         self._parent_row = None
 
     ### SPECIAL METHODS ###
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __repr__(self) -> str:
         """

@@ -65,10 +65,6 @@ pitchcommands
 
    .. container:: inherited
 
-      .. automethod:: AccidentalAdjustmentCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: AccidentalAdjustmentCommand.__repr__
 
    .. raw:: html
@@ -165,10 +161,6 @@ pitchcommands
 
    .. container:: inherited
 
-      .. automethod:: ClusterCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: ClusterCommand.__repr__
 
    .. raw:: html
@@ -261,10 +253,6 @@ pitchcommands
 
    .. container:: inherited
 
-      .. automethod:: ColorFingeringCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: ColorFingeringCommand.__repr__
 
    .. raw:: html
@@ -353,10 +341,6 @@ pitchcommands
    .. container:: inherited
 
       .. automethod:: DiatonicClusterCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: DiatonicClusterCommand.__format__
 
    .. container:: inherited
 
@@ -513,10 +497,6 @@ pitchcommands
 
    .. container:: inherited
 
-      .. automethod:: MicrotoneDeviationCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: MicrotoneDeviationCommand.__repr__
 
    .. raw:: html
@@ -603,10 +583,6 @@ pitchcommands
    .. container:: inherited
 
       .. automethod:: OctaveDisplacementCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: OctaveDisplacementCommand.__format__
 
    .. container:: inherited
 
@@ -707,10 +683,6 @@ pitchcommands
    .. container:: inherited
 
       .. automethod:: PitchCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: PitchCommand.__format__
 
    .. container:: inherited
 
@@ -825,10 +797,6 @@ pitchcommands
 
    .. container:: inherited
 
-      .. automethod:: RegisterCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: RegisterCommand.__repr__
 
    .. raw:: html
@@ -920,10 +888,6 @@ pitchcommands
 
    .. container:: inherited
 
-      .. automethod:: RegisterInterpolationCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: RegisterInterpolationCommand.__repr__
 
    .. raw:: html
@@ -1011,10 +975,6 @@ pitchcommands
    .. container:: inherited
 
       .. automethod:: RegisterToOctaveCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: RegisterToOctaveCommand.__format__
 
    .. container:: inherited
 
@@ -1112,10 +1072,6 @@ pitchcommands
    .. container:: inherited
 
       .. automethod:: StaffPositionCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: StaffPositionCommand.__format__
 
    .. container:: inherited
 
@@ -1220,10 +1176,6 @@ pitchcommands
    .. container:: inherited
 
       .. automethod:: StaffPositionInterpolationCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: StaffPositionInterpolationCommand.__format__
 
    .. container:: inherited
 

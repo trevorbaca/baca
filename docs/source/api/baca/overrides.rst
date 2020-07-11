@@ -57,10 +57,6 @@ overrides
 
    .. container:: inherited
 
-      .. automethod:: OverrideCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: OverrideCommand.__repr__
 
    .. raw:: html

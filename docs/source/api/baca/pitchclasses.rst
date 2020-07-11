@@ -53,7 +53,6 @@ pitchclasses
 
       __call__
       __eq__
-      __format__
       __hash__
       __repr__
       direction
@@ -69,8 +68,6 @@ pitchclasses
    .. automethod:: ArpeggiationSpacingSpecifier.__call__
 
    .. automethod:: ArpeggiationSpacingSpecifier.__eq__
-
-   .. automethod:: ArpeggiationSpacingSpecifier.__format__
 
    .. automethod:: ArpeggiationSpacingSpecifier.__hash__
 
@@ -101,7 +98,6 @@ pitchclasses
 
       __call__
       __eq__
-      __format__
       __hash__
       __repr__
       bass
@@ -120,8 +116,6 @@ pitchclasses
    .. automethod:: ChordalSpacingSpecifier.__call__
 
    .. automethod:: ChordalSpacingSpecifier.__eq__
-
-   .. automethod:: ChordalSpacingSpecifier.__format__
 
    .. automethod:: ChordalSpacingSpecifier.__hash__
 
@@ -158,7 +152,6 @@ pitchclasses
 
       __add__
       __eq__
-      __format__
       __getitem__
       __illustrate__
       __len__
@@ -209,8 +202,6 @@ pitchclasses
       .. automethod:: CollectionList.__contains__
 
    .. automethod:: CollectionList.__eq__
-
-   .. automethod:: CollectionList.__format__
 
    .. automethod:: CollectionList.__getitem__
 
@@ -1408,10 +1399,6 @@ pitchclasses
 
    .. container:: inherited
 
-      .. automethod:: PitchTree.__format__
-
-   .. container:: inherited
-
       .. automethod:: PitchTree.__getitem__
 
    .. container:: inherited
@@ -1486,7 +1473,6 @@ pitchclasses
 
       __call__
       __eq__
-      __format__
       __hash__
       __repr__
       components
@@ -1501,8 +1487,6 @@ pitchclasses
    .. automethod:: Registration.__call__
 
    .. automethod:: Registration.__eq__
-
-   .. automethod:: Registration.__format__
 
    .. automethod:: Registration.__hash__
 
@@ -1530,7 +1514,6 @@ pitchclasses
       :nosignatures:
 
       __eq__
-      __format__
       __hash__
       __repr__
       source_pitch_range
@@ -1544,8 +1527,6 @@ pitchclasses
       :class: class-header
 
    .. automethod:: RegistrationComponent.__eq__
-
-   .. automethod:: RegistrationComponent.__format__
 
    .. automethod:: RegistrationComponent.__hash__
 

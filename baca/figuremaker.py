@@ -63,12 +63,6 @@ class Stack(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
     def __hash__(self) -> int:
         """
         Delegates to format manager.
@@ -237,12 +231,6 @@ class LMR(object):
         Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
@@ -1018,12 +1006,6 @@ class Acciaccatura(object):
         Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
@@ -1845,12 +1827,6 @@ class Anchor(object):
         Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
@@ -4213,12 +4189,6 @@ class Nest(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
     def __hash__(self) -> int:
         """
         Delegates to format manager.
@@ -4354,12 +4324,6 @@ class RestAffix(object):
         Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
@@ -4944,12 +4908,6 @@ class FigureMaker(object):
         Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """
@@ -7470,12 +7428,6 @@ class Assignment(object):
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
 
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
     def __hash__(self) -> int:
         """
         Delegates to format manager.
@@ -7570,12 +7522,6 @@ class Bind(object):
         Delegates to format manager.
         """
         return abjad.StorageFormatManager.compare_objects(self, argument)
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __hash__(self) -> int:
         """

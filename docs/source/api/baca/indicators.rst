@@ -99,7 +99,6 @@ indicators
       :nosignatures:
 
       __eq__
-      __format__
       __repr__
       context
       hide
@@ -114,8 +113,6 @@ indicators
       :class: class-header
 
    .. automethod:: BarExtent.__eq__
-
-   .. automethod:: BarExtent.__format__
 
    .. automethod:: BarExtent.__repr__
 
@@ -596,7 +593,6 @@ indicators
       :nosignatures:
 
       __eq__
-      __format__
       __repr__
       context
       hide
@@ -611,8 +607,6 @@ indicators
       :class: class-header
 
    .. automethod:: StaffLines.__eq__
-
-   .. automethod:: StaffLines.__format__
 
    .. automethod:: StaffLines.__repr__
 

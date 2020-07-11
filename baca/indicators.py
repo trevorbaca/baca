@@ -351,12 +351,6 @@ class BarExtent(object):
             return False
         return self.line_count == argument.line_count
 
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
     def __repr__(self) -> str:
         """
         Delegates to format manager.
@@ -951,12 +945,6 @@ class StaffLines(object):
         if not isinstance(argument, type(self)):
             return False
         return self.line_count == argument.line_count
-
-    def __format__(self, format_specification="") -> str:
-        """
-        Delegates to format manager.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __repr__(self) -> str:
         """

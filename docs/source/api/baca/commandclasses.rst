@@ -68,10 +68,6 @@ commandclasses
 
    .. container:: inherited
 
-      .. automethod:: BCPCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: BCPCommand.__repr__
 
    .. raw:: html
@@ -156,10 +152,6 @@ commandclasses
    .. container:: inherited
 
       .. automethod:: ColorCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: ColorCommand.__format__
 
    .. container:: inherited
 
@@ -250,10 +242,6 @@ commandclasses
 
    .. container:: inherited
 
-      .. automethod:: ContainerCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: ContainerCommand.__repr__
 
    .. raw:: html
@@ -340,10 +328,6 @@ commandclasses
    .. container:: inherited
 
       .. automethod:: DetachCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: DetachCommand.__format__
 
    .. container:: inherited
 
@@ -443,10 +427,6 @@ commandclasses
    .. container:: inherited
 
       .. automethod:: GlissandoCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: GlissandoCommand.__format__
 
    .. container:: inherited
 
@@ -560,10 +540,6 @@ commandclasses
 
    .. container:: inherited
 
-      .. automethod:: GlobalFermataCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: GlobalFermataCommand.__repr__
 
    .. raw:: html
@@ -658,10 +634,6 @@ commandclasses
 
    .. container:: inherited
 
-      .. automethod:: IndicatorCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: IndicatorCommand.__repr__
 
    .. raw:: html
@@ -746,10 +718,6 @@ commandclasses
    .. container:: inherited
 
       .. automethod:: InstrumentChangeCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: InstrumentChangeCommand.__format__
 
    .. container:: inherited
 
@@ -864,10 +832,6 @@ commandclasses
 
    .. container:: inherited
 
-      .. automethod:: LabelCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: LabelCommand.__repr__
 
    .. raw:: html
@@ -955,10 +919,6 @@ commandclasses
    .. container:: inherited
 
       .. automethod:: MetronomeMarkCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: MetronomeMarkCommand.__format__
 
    .. container:: inherited
 
@@ -1050,10 +1010,6 @@ commandclasses
    .. container:: inherited
 
       .. automethod:: PartAssignmentCommand.__call__
-
-   .. container:: inherited
-
-      .. automethod:: PartAssignmentCommand.__format__
 
    .. container:: inherited
 

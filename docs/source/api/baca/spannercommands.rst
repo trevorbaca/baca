@@ -57,10 +57,6 @@ spannercommands
 
    .. container:: inherited
 
-      .. automethod:: SpannerIndicatorCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: SpannerIndicatorCommand.__repr__
 
    .. raw:: html

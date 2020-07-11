@@ -44,7 +44,6 @@ pitcharray
       __contains__
       __copy__
       __eq__
-      __format__
       __getitem__
       __hash__
       __iadd__
@@ -96,8 +95,6 @@ pitcharray
    .. automethod:: PitchArray.__copy__
 
    .. automethod:: PitchArray.__eq__
-
-   .. automethod:: PitchArray.__format__
 
    .. automethod:: PitchArray.__getitem__
 
@@ -204,7 +201,6 @@ pitcharray
    .. autosummary::
       :nosignatures:
 
-      __format__
       __repr__
       __str__
       append_pitch
@@ -232,8 +228,6 @@ pitcharray
 
    .. rubric:: Special methods
       :class: class-header
-
-   .. automethod:: PitchArrayCell.__format__
 
    .. automethod:: PitchArrayCell.__repr__
 

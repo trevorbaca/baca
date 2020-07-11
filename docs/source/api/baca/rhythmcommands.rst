@@ -59,10 +59,6 @@ rhythmcommands
 
    .. container:: inherited
 
-      .. automethod:: RhythmCommand.__format__
-
-   .. container:: inherited
-
       .. automethod:: RhythmCommand.__repr__
 
    .. raw:: html

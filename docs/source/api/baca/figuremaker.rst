@@ -50,7 +50,6 @@ figuremaker
 
       __call__
       __eq__
-      __format__
       __hash__
       __repr__
       durations
@@ -66,8 +65,6 @@ figuremaker
    .. automethod:: Acciaccatura.__call__
 
    .. automethod:: Acciaccatura.__eq__
-
-   .. automethod:: Acciaccatura.__format__
 
    .. automethod:: Acciaccatura.__hash__
 
@@ -146,7 +143,6 @@ figuremaker
       :nosignatures:
 
       __eq__
-      __format__
       __hash__
       __repr__
       figure_name
@@ -163,8 +159,6 @@ figuremaker
       :class: class-header
 
    .. automethod:: Anchor.__eq__
-
-   .. automethod:: Anchor.__format__
 
    .. automethod:: Anchor.__hash__
 
@@ -200,7 +194,6 @@ figuremaker
       :nosignatures:
 
       __eq__
-      __format__
       __hash__
       __repr__
       maker
@@ -214,8 +207,6 @@ figuremaker
       :class: class-header
 
    .. automethod:: Assignment.__eq__
-
-   .. automethod:: Assignment.__format__
 
    .. automethod:: Assignment.__hash__
 
@@ -246,7 +237,6 @@ figuremaker
 
       __call__
       __eq__
-      __format__
       __hash__
       __repr__
       assignments
@@ -261,8 +251,6 @@ figuremaker
    .. automethod:: Bind.__call__
 
    .. automethod:: Bind.__eq__
-
-   .. automethod:: Bind.__format__
 
    .. automethod:: Bind.__hash__
 
@@ -365,7 +353,6 @@ figuremaker
 
       __call__
       __eq__
-      __format__
       __hash__
       __repr__
       acciaccatura
@@ -386,8 +373,6 @@ figuremaker
    .. automethod:: FigureMaker.__call__
 
    .. automethod:: FigureMaker.__eq__
-
-   .. automethod:: FigureMaker.__format__
 
    .. automethod:: FigureMaker.__hash__
 
@@ -482,7 +467,6 @@ figuremaker
 
       __call__
       __eq__
-      __format__
       __hash__
       __repr__
       left_counts
@@ -508,8 +492,6 @@ figuremaker
    .. automethod:: LMR.__call__
 
    .. automethod:: LMR.__eq__
-
-   .. automethod:: LMR.__format__
 
    .. automethod:: LMR.__hash__
 
@@ -560,7 +542,6 @@ figuremaker
 
       __call__
       __eq__
-      __format__
       __hash__
       __repr__
       lmr
@@ -576,8 +557,6 @@ figuremaker
    .. automethod:: Nest.__call__
 
    .. automethod:: Nest.__eq__
-
-   .. automethod:: Nest.__format__
 
    .. automethod:: Nest.__hash__
 
@@ -608,7 +587,6 @@ figuremaker
 
       __call__
       __eq__
-      __format__
       __hash__
       __repr__
       pattern
@@ -626,8 +604,6 @@ figuremaker
    .. automethod:: RestAffix.__call__
 
    .. automethod:: RestAffix.__eq__
-
-   .. automethod:: RestAffix.__format__
 
    .. automethod:: RestAffix.__hash__
 
@@ -662,7 +638,6 @@ figuremaker
 
       __call__
       __eq__
-      __format__
       __hash__
       __repr__
       commands
@@ -677,8 +652,6 @@ figuremaker
    .. automethod:: Stack.__call__
 
    .. automethod:: Stack.__eq__
-
-   .. automethod:: Stack.__format__
 
    .. automethod:: Stack.__hash__
 

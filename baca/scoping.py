@@ -55,12 +55,6 @@ class Scope(object):
 
     ### SPECIAL METHODS ###
 
-    def __format__(self, format_specification=""):
-        """
-        Formats object.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
-
     def __repr__(self):
         """
         Gets interpreter representation.
@@ -152,12 +146,6 @@ class TimelineScope(object):
         self._scopes = scopes
 
     ### SPECIAL METHODS ###
-
-    def __format__(self, format_specification=""):
-        """
-        Formats object.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __repr__(self):
         """
@@ -281,12 +269,6 @@ class Command(object):
                 self._call(argument=subargument)
         else:
             return self._call(argument=argument)
-
-    def __format__(self, format_specification=""):
-        """
-        Formats object.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __repr__(self):
         """
@@ -786,12 +768,6 @@ class Suite(object):
             return
         for command in self.commands:
             command(argument, runtime=runtime)
-
-    def __format__(self, format_specification=""):
-        """
-        Formats object.
-        """
-        return abjad.StorageFormatManager(self).get_storage_format()
 
     def __iter__(self):
         """

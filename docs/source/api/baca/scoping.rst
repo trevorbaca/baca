@@ -40,7 +40,6 @@ scoping
       :nosignatures:
 
       __call__
-      __format__
       __repr__
       deactivate
       get_tag
@@ -62,8 +61,6 @@ scoping
       :class: class-header
 
    .. automethod:: Command.__call__
-
-   .. automethod:: Command.__format__
 
    .. automethod:: Command.__repr__
 
@@ -115,7 +112,6 @@ scoping
    .. autosummary::
       :nosignatures:
 
-      __format__
       __repr__
       measures
       voice_name
@@ -126,8 +122,6 @@ scoping
 
    .. rubric:: Special methods
       :class: class-header
-
-   .. automethod:: Scope.__format__
 
    .. automethod:: Scope.__repr__
 
@@ -155,7 +149,6 @@ scoping
       :nosignatures:
 
       __call__
-      __format__
       __iter__
       __repr__
       commands
@@ -168,8 +161,6 @@ scoping
       :class: class-header
 
    .. automethod:: Suite.__call__
-
-   .. automethod:: Suite.__format__
 
    .. automethod:: Suite.__iter__
 
@@ -196,7 +187,6 @@ scoping
    .. autosummary::
       :nosignatures:
 
-      __format__
       __repr__
       scopes
       voice_name
@@ -207,8 +197,6 @@ scoping
 
    .. rubric:: Special methods
       :class: class-header
-
-   .. automethod:: TimelineScope.__format__
 
    .. automethod:: TimelineScope.__repr__
 
