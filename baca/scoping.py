@@ -1475,7 +1475,7 @@ def suite(*commands: CommandTyping, **keywords) -> Suite:
         Exception:
             Must contain only commands and suites.
             Not str:
-            Allegro
+            'Allegro'
 
     """
     commands_: typing.List[typing.Union[Command, Suite]] = []
@@ -1489,7 +1489,7 @@ def suite(*commands: CommandTyping, **keywords) -> Suite:
             continue
         message = "\n  Must contain only commands and suites."
         message += f"\n  Not {type(command).__name__}:"
-        message += f"\n  {format(command)}"
+        message += f"\n  {repr(command)}"
         raise Exception(message)
     return Suite(commands_, **keywords)
 

@@ -315,7 +315,7 @@ def lhd_plus_half_clt():
 def lines(items: typing.List, *, boxed: bool = None) -> indicators.Markup:
     if not isinstance(items, list):
         message = f"items must be list (not {type(items).__name__}):"
-        lines = ["    " + _ for _ in format(items).split("\n")]
+        lines = ["    " + _ for _ in abjad.lilypond(items).split("\n")]
         lines = "\n".join(lines)
         message += f"\n{lines}"
         raise Exception(message)

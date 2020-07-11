@@ -1250,7 +1250,7 @@ class SegmentMaker(abjad.SegmentMaker):
             <BLANKLINE>
             Must be command:
             <BLANKLINE>
-            text
+            'text'
 
         ..  container:: example exception
 
@@ -1285,7 +1285,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 raise Exception("use baca.suite().")
             if not isinstance(command, scoping.Command):
                 message = "\n\nMust be command:"
-                message += f"\n\n{format(command)}"
+                message += f"\n\n{repr(command)}"
                 raise Exception(message)
         scope_count = len(scopes_)
         for i, current_scope in enumerate(scopes_):
@@ -1676,7 +1676,7 @@ class SegmentMaker(abjad.SegmentMaker):
                         stripped_left_text = (
                             r"- \baca-metronome-mark-spanner-left-markup"
                         )
-                        string = format(metronome_mark.custom_markup)
+                        string = abjad.lilypond(metronome_mark.custom_markup)
                         assert string.startswith("\\")
                         stripped_left_text += f" {string}"
                     # mixed number
@@ -1697,7 +1697,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 elif metronome_mark.custom_markup is not None:
                     assert metronome_mark.custom_markup.literal
                     left_text = r"- \baca-metronome-mark-spanner-left-markup"
-                    string = format(metronome_mark.custom_markup)
+                    string = abjad.lilypond(metronome_mark.custom_markup)
                     assert string.startswith("\\")
                     left_text += f" {string}"
                 # mixed number
@@ -2117,7 +2117,7 @@ class SegmentMaker(abjad.SegmentMaker):
             try:
                 command(selection, runtime)
             except Exception:
-                print(f"Interpreting ...\n\n{format(command)}\n")
+                print(f"Interpreting ...\n\n{abjad.storage(command)}\n")
                 raise
             self._handle_mutator(command)
             if getattr(command, "persist", None):
@@ -2156,7 +2156,7 @@ class SegmentMaker(abjad.SegmentMaker):
             timespans = []
             for command in commands:
                 if command.scope.measures is None:
-                    raise Exception(format(command))
+                    raise Exception(abjad.storage(command))
                 measures = command.scope.measures
                 result = self._get_measure_time_signatures(*measures)
                 start_offset, time_signatures = result
@@ -2164,7 +2164,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 try:
                     selection = command._make_selection(time_signatures, runtime)
                 except Exception:
-                    print(f"Interpreting ...\n\n{format(command)}\n")
+                    print(f"Interpreting ...\n\n{abjad.storage(command)}\n")
                     raise
                 timespan = abjad.AnnotatedTimespan(
                     start_offset=start_offset, annotation=selection
@@ -2485,7 +2485,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
                 momentos.append(momento)
             if momentos:
-                momentos.sort(key=lambda _: format(_))
+                momentos.sort(key=lambda _: abjad.storage(_))
                 result[name] = momentos
         dictionary = self.previous_persist.get("persistent_indicators")
         if dictionary:
@@ -3519,7 +3519,7 @@ class SegmentMaker(abjad.SegmentMaker):
             try:
                 indicator = class_(momento.value)
             except Exception:
-                raise Exception(format(momento))
+                raise Exception(abjad.storage(momento))
         return indicator
 
     def _move_global_rests(self):
@@ -3710,7 +3710,7 @@ class SegmentMaker(abjad.SegmentMaker):
             leaves.extend(selection)
         selection = abjad.select(leaves)
         if not selection:
-            message = f"EMPTY SELECTION:\n\n{format(command)}"
+            message = f"EMPTY SELECTION:\n\n{abjad.storage(command)}"
             if self.allow_empty_selections:
                 print(message)
             else:

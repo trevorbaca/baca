@@ -44,14 +44,14 @@ class Stack(object):
             result: typing.Any = self.commands[0](argument, **keywords)
         except Exception:
             message = "exception while calling:\n"
-            message += f"   {format(self.commands[0])}"
+            message += f"   {abjad.storage(self.commands[0])}"
             raise Exception(message)
         for command in self.commands[1:]:
             try:
                 result_ = command(result)
             except Exception:
                 message = "exception while calling:\n"
-                message += f"   {format(command)}"
+                message += f"   {abjad.storage(command)}"
                 raise Exception(message)
             if result_ is not None:
                 result = result_
@@ -3663,7 +3663,7 @@ class Accumulator(object):
         )
         if not isinstance(collections, prototype):
             message = "collections must be coerceable:\n"
-            message += f"   {format(collections)}"
+            message += f"   {abjad.storage(collections)}"
             raise Exception(collections)
 
     def _get_figure_start_offset(self, figure_name):
@@ -7479,7 +7479,7 @@ class Bind(object):
         for assignment in assignments:
             if not isinstance(assignment, Assignment):
                 message = "must be assignment:\n"
-                message += f"   {format(assignment)}"
+                message += f"   {abjad.storage(assignment)}"
                 raise Exception(message)
         self._assignments = list(assignments)
 
