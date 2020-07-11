@@ -63,8 +63,6 @@ class PitchArray(object):
 
     __slots__ = ("_columns", "_rows")
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(self, rows=None):
@@ -1061,8 +1059,6 @@ class PitchArrayCell(object):
 
     __slots__ = ("_parent_row", "_pitches", "_row_parent", "_width")
 
-    _publish_storage_format = True
-
     ### INTIALIZER ###
 
     def __init__(self, pitches=None, *, width=1):
@@ -1669,8 +1665,6 @@ class PitchArrayColumn(object):
 
     __slots__ = ("_cells", "_column_index", "_parent_array")
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(self, cells=None):
@@ -2190,8 +2184,6 @@ class PitchArrayList(abjad.TypedList):
 
     __slots__ = ()
 
-    _publish_storage_format = True
-
     ### PUBLIC METHODS ###
 
     def to_score(self) -> abjad.Score:
@@ -2321,8 +2313,6 @@ class PitchArrayRow(object):
     ### CLASS VARIABLES ###
 
     __slots__ = ("_cells", "_parent_array", "_pitch_range")
-
-    _publish_storage_format = True
 
     ### INITIALIZER ###
 

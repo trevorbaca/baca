@@ -42,8 +42,6 @@ class ArpeggiationSpacingSpecifier(object):
 
     __slots__ = ("_direction", "_pattern")
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(self, *, direction=None, pattern=None):
@@ -314,8 +312,6 @@ class ChordalSpacingSpecifier(object):
         "_pattern",
         "_soprano",
     )
-
-    _publish_storage_format = True
 
     ### INITIALIZER ###
 
@@ -9050,8 +9046,6 @@ class Registration(object):
     ### CLASS VARIABLES ###
 
     __slots__ = ("_components",)
-
-    _publish_storage_format = True
 
     ### INITIALIZER ###
 

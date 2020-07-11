@@ -176,8 +176,6 @@ class Cursor(object):
         "_suppress_exception",
     )
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(
@@ -10658,8 +10656,6 @@ class Tree(object):
         "_parent",
         "_payload",
     )
-
-    _publish_storage_format = True
 
     ### INITIALIZER ###
 

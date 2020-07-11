@@ -23,8 +23,6 @@ class Stack(object):
     # to make sure abjad.new() copies commands
     _positional_arguments_name = "commands"
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(self, *commands) -> None:
@@ -1786,8 +1784,6 @@ class Anchor(object):
         "_remote_voice_name",
         "_use_remote_stop_offset",
     )
-
-    _publish_storage_format = True
 
     ### INITIALIZER ###
 
@@ -4268,8 +4264,6 @@ class RestAffix(object):
     ### CLASS VARIABLES ###
 
     __slots__ = ("_pattern", "_prefix", "_skips_instead_of_rests", "_suffix")
-
-    _publish_storage_format = True
 
     ### INITIALIZER ###
 
@@ -7409,8 +7403,6 @@ class Assignment(object):
 
     __slots__ = ("_maker", "_pattern")
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(self, maker: FigureMaker, *, pattern: abjad.Pattern = None) -> None:
@@ -7470,8 +7462,6 @@ class Bind(object):
     ### CLASS ATTRIBUTES ###
 
     __slots__ = ("_assignments",)
-
-    _publish_storage_format = True
 
     ### INITIALIZER ###
 

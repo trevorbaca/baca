@@ -349,8 +349,6 @@ class BreakMeasureMap(object):
         "_tags",
     )
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(
@@ -1614,8 +1612,6 @@ class HorizontalSpacingSpecifier(object):
     )
 
     _magic_lilypond_eol_adjustment = abjad.Multiplier(35, 24)
-
-    _publish_storage_format = True
 
     ### INITIALIZER ###
 

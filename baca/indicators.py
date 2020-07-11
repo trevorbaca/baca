@@ -299,8 +299,6 @@ class BarExtent(object):
 
     _persistent = True
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(self, line_count, *, hide=None):
@@ -893,8 +891,6 @@ class StaffLines(object):
     _context = "Staff"
 
     _persistent = True
-
-    _publish_storage_format = True
 
     ### INITIALIZER ###
 

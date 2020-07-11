@@ -32,8 +32,6 @@ class Scope(object):
 
     __slots__ = ("_measures", "_voice_name")
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(
@@ -129,8 +127,6 @@ class TimelineScope(object):
 
     __slots__ = ("_scopes",)
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(self, *, scopes=None):
@@ -219,8 +215,6 @@ class Command(object):
         "_tag_measure_number",
         "_tags",
     )
-
-    _publish_storage_format = True
 
     ### INITIALIZER ###
 
@@ -737,8 +731,6 @@ class Suite(object):
         "_previous_segment_voice_metadata",
         "_score_template",
     )
-
-    _publish_storage_format = True
 
     ### INITIALIZER ###
 

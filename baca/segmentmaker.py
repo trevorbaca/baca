@@ -687,8 +687,6 @@ class SegmentMaker(abjad.SegmentMaker):
         "abjad.MarginMarkup": "margin_markups",
     }
 
-    _publish_storage_format = True
-
     _status_to_color = {
         "default": "DarkViolet",
         "explicit": "blue",

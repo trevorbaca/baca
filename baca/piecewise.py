@@ -31,8 +31,6 @@ class Bundle(object):
         "_spanner_stop",
     )
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(

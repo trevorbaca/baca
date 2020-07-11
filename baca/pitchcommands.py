@@ -2028,8 +2028,6 @@ class Loop(abjad.CyclicTuple):
 
     __slots__ = ("_intervals", "_items")
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(self, items=None, *, intervals=None):
@@ -5025,8 +5023,6 @@ class RegisterInterpolationCommand(scoping.Command):
 
     __slots__ = ("_start_pitch", "_stop_pitch")
 
-    _publish_storage_format = True
-
     ### INITIALIZER ###
 
     def __init__(
@@ -6158,8 +6154,6 @@ class StaffPositionInterpolationCommand(scoping.Command):
         "_start",
         "_stop",
     )
-
-    _publish_storage_format = True
 
     ### INITIALIZER ###
 
