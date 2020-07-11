@@ -103,10 +103,6 @@ segmentmaker
 
    .. container:: inherited
 
-      .. automethod:: SegmentMaker.__format__
-
-   .. container:: inherited
-
       .. automethod:: SegmentMaker.__hash__
 
    .. container:: inherited

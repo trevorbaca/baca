@@ -194,10 +194,6 @@ classes
 
    .. container:: inherited
 
-      .. automethod:: Expression.__format__
-
-   .. container:: inherited
-
       .. automethod:: Expression.__getattr__
 
    .. container:: inherited
@@ -564,10 +560,6 @@ classes
    .. container:: inherited
 
       .. automethod:: Selection.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: Selection.__format__
 
    .. container:: inherited
 
@@ -945,10 +937,6 @@ classes
    .. container:: inherited
 
       .. automethod:: Sequence.__eq__
-
-   .. container:: inherited
-
-      .. automethod:: Sequence.__format__
 
    .. container:: inherited
 

@@ -169,10 +169,6 @@ indicators
 
    .. container:: inherited
 
-      .. automethod:: Markup.__format__
-
-   .. container:: inherited
-
       .. automethod:: Markup.__hash__
 
    .. container:: inherited

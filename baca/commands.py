@@ -2968,7 +2968,7 @@ def parts(
         Traceback (most recent call last):
             ...
         Exception: Violin_Music_Voice does not allow Flute part assignment:
-            abjad.PartAssignment('Flute')
+            PartAssignment('Flute')
 
     """
     if not isinstance(part_assignment, abjad.PartAssignment):

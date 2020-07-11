@@ -2014,7 +2014,7 @@ r"""
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         >>> score = lilypond_file[abjad.Score]
-        >>> text = format(score, 'lilypond')
+        >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = abjad.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -2374,7 +2374,7 @@ r"""
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         >>> score = lilypond_file[abjad.Score]
-        >>> text = format(score, 'lilypond')
+        >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = abjad.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -2748,7 +2748,7 @@ r"""
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         >>> score = lilypond_file[abjad.Score]
-        >>> text = format(score, 'lilypond')
+        >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = abjad.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -3124,7 +3124,7 @@ r"""
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         >>> score = lilypond_file[abjad.Score]
-        >>> text = format(score, 'lilypond')
+        >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = abjad.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -3507,7 +3507,7 @@ r"""
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         >>> score = lilypond_file[abjad.Score]
-        >>> text = format(score, 'lilypond')
+        >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = abjad.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -3906,7 +3906,7 @@ r"""
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         >>> score = lilypond_file[abjad.Score]
-        >>> text = format(score, 'lilypond')
+        >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = abjad.tags.instrument_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -4302,7 +4302,7 @@ r"""
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         >>> score = lilypond_file[abjad.Score]
-        >>> text = format(score, 'lilypond')
+        >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = abjad.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -4680,7 +4680,7 @@ r"""
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         >>> score = lilypond_file[abjad.Score]
-        >>> text = format(score, 'lilypond')
+        >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = abjad.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -5073,7 +5073,7 @@ r"""
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         >>> score = lilypond_file[abjad.Score]
-        >>> text = format(score, 'lilypond')
+        >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = abjad.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -5473,7 +5473,7 @@ r"""
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         >>> score = lilypond_file[abjad.Score]
-        >>> text = format(score, 'lilypond')
+        >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = abjad.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -5883,7 +5883,7 @@ r"""
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         >>> score = lilypond_file[abjad.Score]
-        >>> text = format(score, 'lilypond')
+        >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = abjad.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))
@@ -6314,7 +6314,7 @@ r"""
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
         >>> score = lilypond_file[abjad.Score]
-        >>> text = format(score, 'lilypond')
+        >>> text = abjad.lilypond(score)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text)
         >>> tags_ = abjad.tags.margin_markup_color_tags()
         >>> match = lambda tags: bool(set(tags) & set(tags_))

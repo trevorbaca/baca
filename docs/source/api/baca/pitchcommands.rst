@@ -453,10 +453,6 @@ pitchcommands
 
       .. automethod:: Loop.__eq__
 
-   .. container:: inherited
-
-      .. automethod:: Loop.__format__
-
    .. automethod:: Loop.__getitem__
 
    .. container:: inherited
