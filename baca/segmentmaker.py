@@ -2586,7 +2586,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 instrument = abjad.inspect(pleaf).effective(abjad.Instrument)
                 if instrument is None:
                     continue
-                if not abjad.sounding_pitches_are_in_range(
+                if not abjad.iterpitches.sounding_pitches_are_in_range(
                     pleaf, instrument.pitch_range
                 ):
                     string = r"\baca-out-of-range-coloring"
@@ -4026,7 +4026,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             if abjad.inspect(pleaf).has_indicator(abjad.const.STAFF_POSITION):
                 continue
-            abjad.Instrument.transpose_from_sounding_pitch(pleaf)
+            abjad.iterpitches.transpose_from_sounding_pitch(pleaf)
 
     @staticmethod
     def _treat_persistent_wrapper(manifests, wrapper, status):
