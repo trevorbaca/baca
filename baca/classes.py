@@ -8729,7 +8729,7 @@ class Sequence(abjad.Sequence):
         Returns nested sequence.
         """
         items = []
-        pairs = itertools.groupby(self, abjad.mathtools.sign)
+        pairs = itertools.groupby(self, abjad.mathx.sign)
         for current_sign, group in pairs:
             if current_sign in sign:
                 items.append(type(self)(group))

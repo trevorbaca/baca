@@ -272,7 +272,7 @@ class PitchArray(object):
             if stop_offset not in offsets:
                 offsets.append(stop_offset)
         offsets.sort()
-        return list(abjad.mathtools.difference_series(offsets))
+        return list(abjad.mathx.difference_series(offsets))
 
     @staticmethod
     def _make_multiplied_quarter_notes(durations):

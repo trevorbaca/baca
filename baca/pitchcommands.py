@@ -475,7 +475,7 @@ class ClusterCommand(scoping.Command):
         if start_pitch is not None:
             start_pitch = abjad.NamedPitch(start_pitch)
         self._start_pitch = start_pitch
-        assert abjad.mathtools.all_are_nonnegative_integers(widths)
+        assert abjad.mathx.all_are_nonnegative_integers(widths)
         widths = abjad.CyclicTuple(widths)
         self._widths = widths
 
@@ -1809,7 +1809,7 @@ class ColorFingeringCommand(scoping.Command):
             selector=selector,
         )
         if numbers is not None:
-            assert abjad.mathtools.all_are_nonnegative_integers(numbers)
+            assert abjad.mathx.all_are_nonnegative_integers(numbers)
             numbers = abjad.CyclicTuple(numbers)
         self._numbers = numbers
         self._validate_indexed_tweaks(tweaks)
@@ -1911,7 +1911,7 @@ class DiatonicClusterCommand(scoping.Command):
             scope=scope,
             selector=selector,
         )
-        assert abjad.mathtools.all_are_nonnegative_integers(widths)
+        assert abjad.mathx.all_are_nonnegative_integers(widths)
         widths = abjad.CyclicTuple(widths)
         self._widths = widths
 

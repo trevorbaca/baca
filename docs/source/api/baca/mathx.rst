@@ -1,16 +1,16 @@
-.. _baca--mathtools:
+.. _baca--mathx:
 
-mathtools
-=========
+mathx
+=====
 
-.. automodule:: baca.mathtools
+.. automodule:: baca.mathx
 
-.. currentmodule:: baca.mathtools
+.. currentmodule:: baca.mathx
 
 .. container:: svg-container
 
    .. inheritance-diagram:: baca
-      :lineage: baca.mathtools
+      :lineage: baca.mathx
 
 .. raw:: html
 

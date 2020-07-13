@@ -555,7 +555,7 @@ indicators.Markup library.
 
    <hr/>
 
-.. rubric:: :ref:`baca.mathtools <baca--mathtools>`
+.. rubric:: :ref:`baca.mathx <baca--mathx>`
    :class: section-header
 
 .. raw:: html
@@ -568,13 +568,13 @@ indicators.Markup library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.mathtools.increase_elements
-   ~baca.mathtools.insert_and_transpose
-   ~baca.mathtools.negate_elements
-   ~baca.mathtools.overwrite_elements
-   ~baca.mathtools.partition_integer_into_halves
-   ~baca.mathtools.partition_nested_into_inward_pointing_parts
-   ~baca.mathtools.repeat_subruns_to_length
+   ~baca.mathx.increase_elements
+   ~baca.mathx.insert_and_transpose
+   ~baca.mathx.negate_elements
+   ~baca.mathx.overwrite_elements
+   ~baca.mathx.partition_integer_into_halves
+   ~baca.mathx.partition_nested_into_inward_pointing_parts
+   ~baca.mathx.repeat_subruns_to_length
 
 .. raw:: html
 

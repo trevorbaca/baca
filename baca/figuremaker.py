@@ -134,7 +134,7 @@ class LMR(object):
         right_reversed: bool = None,
     ) -> None:
         if left_counts is not None:
-            assert abjad.mathtools.all_are_positive_integers(left_counts)
+            assert abjad.mathx.all_are_positive_integers(left_counts)
         self._left_counts = left_counts
         if left_cyclic is not None:
             left_cyclic = bool(left_cyclic)
@@ -147,7 +147,7 @@ class LMR(object):
             left_reversed = bool(left_reversed)
         self._left_reversed = left_reversed
         if middle_counts is not None:
-            assert abjad.mathtools.all_are_positive_integers(middle_counts)
+            assert abjad.mathx.all_are_positive_integers(middle_counts)
         self._middle_counts = middle_counts
         if middle_cyclic is not None:
             middle_cyclic = bool(middle_cyclic)
@@ -159,7 +159,7 @@ class LMR(object):
             assert priority in (abjad.Left, abjad.Right)
         self._priority = priority
         if right_counts is not None:
-            assert abjad.mathtools.all_are_positive_integers(right_counts)
+            assert abjad.mathx.all_are_positive_integers(right_counts)
         self._right_counts = right_counts
         if right_cyclic is not None:
             right_cyclic = bool(right_cyclic)
@@ -5120,7 +5120,7 @@ class FigureMaker(object):
 
         Set exponent less than 1 for accelerando.
         """
-        sums = abjad.mathtools.cumulative_sums(durations)
+        sums = abjad.mathx.cumulative_sums(durations)
         pairs = list(abjad.sequence(sums).nwise(n=2))
         total_duration = pairs[-1][-1]
         start_offsets = [_[0] for _ in pairs]
@@ -5133,7 +5133,7 @@ class FigureMaker(object):
             )
             start_offsets_.append(start_offset_)
         start_offsets_.append(float(total_duration))
-        durations_ = abjad.mathtools.difference_series(start_offsets_)
+        durations_ = abjad.mathx.difference_series(start_offsets_)
         durations_ = rhythm_maker_class._round_durations(durations_, 2 ** 10)
         durations_ = class_._fix_rounding_error(durations_, total_duration)
         multipliers = []
