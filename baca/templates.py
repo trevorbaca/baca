@@ -3,7 +3,7 @@ Score template library.
 """
 import typing
 
-import roman  # type: ignore
+import roman
 
 import abjad
 
