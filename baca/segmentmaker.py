@@ -4136,7 +4136,7 @@ class SegmentMaker(abjad.SegmentMaker):
             for wrapper in abjad.inspect(leaf).wrappers():
                 if not getattr(wrapper.indicator, "persistent", False):
                     continue
-                if wrapper.tag and wrapper.tag.has_persistence_tag():
+                if wrapper.tag and abjad.Tags.has_persistence_tag(wrapper.tag):
                     continue
                 if isinstance(wrapper.indicator, abjad.Instrument):
                     prototype = abjad.Instrument
