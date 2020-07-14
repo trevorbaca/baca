@@ -41,6 +41,7 @@ templates
    .. autosummary::
       :nosignatures:
 
+      attach_defaults
       defaults
       group_families
       make_music_context
@@ -83,9 +84,7 @@ templates
 
       .. automethod:: ScoreTemplate.allows_part_assignment
 
-   .. container:: inherited
-
-      .. automethod:: ScoreTemplate.attach_defaults
+   .. automethod:: ScoreTemplate.attach_defaults
 
    .. automethod:: ScoreTemplate.group_families
 

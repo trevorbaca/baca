@@ -103,6 +103,105 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     ### PUBLIC METHODS ###
 
+    def attach_defaults(self, argument) -> typing.List:
+        """
+        Attaches defaults to all staff and staff group contexts in
+        ``argument`` when ``argument`` is a score.
+
+        Attaches defaults to ``argument`` (without iterating ``argument``) when
+        ``argument`` is a staff or staff group.
+
+        Returns list of one wrapper for every indicator attached.
+        """
+        assert isinstance(argument, (abjad.Score, abjad.Staff, abjad.StaffGroup)), repr(
+            argument
+        )
+        wrappers: typing.List[abjad.Wrapper] = []
+        tag = abjad.const.REMOVE_ALL_EMPTY_STAVES
+        empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
+        prototype = (abjad.Staff, abjad.StaffGroup)
+        if isinstance(argument, abjad.Score):
+            staff__groups = list(abjad.Selection(argument).components(prototype))
+            staves = list(abjad.Selection(argument).components(abjad.Staff))
+        elif isinstance(argument, abjad.Staff):
+            staff__groups = [argument]
+            staves = [argument]
+        else:
+            assert isinstance(argument, abjad.StaffGroup), repr(argument)
+            staff__groups = [argument]
+            staves = []
+        for staff__group in staff__groups:
+            leaf = None
+            voices = abjad.Selection(staff__group).components(abjad.Voice)
+            assert isinstance(voices, abjad.Selection), repr(voices)
+            # find leaf 0 in first nonempty voice
+            for voice in voices:
+                leaves = []
+                for leaf_ in abjad.Iteration(voice).leaves():
+                    if abjad.Inspection(leaf_).has_indicator(abjad.const.HIDDEN):
+                        leaves.append(leaf_)
+                if not all(isinstance(_, empty_prototype) for _ in leaves):
+                    leaf = abjad.Inspection(voice).leaf(0)
+                    break
+            # otherwise, find first leaf in voice in non-removable staff
+            if leaf is None:
+                for voice in voices:
+                    voice_might_vanish = False
+                    for component in abjad.Inspection(voice).parentage():
+                        if abjad.Inspection(component).annotation(tag) is True:
+                            voice_might_vanish = True
+                    if not voice_might_vanish:
+                        leaf = abjad.Inspection(voice).leaf(0)
+                        if leaf is not None:
+                            break
+            # otherwise, as last resort find first leaf in first voice
+            if leaf is None:
+                leaf = abjad.Inspection(voices[0]).leaf(0)
+            if leaf is None:
+                continue
+            instrument = abjad.Inspection(leaf).indicator(abjad.Instrument)
+            if instrument is None:
+                string = "default_instrument"
+                instrument = abjad.Inspection(staff__group).annotation(string)
+                if instrument is not None:
+                    wrapper = abjad.attach(
+                        instrument,
+                        leaf,
+                        context=staff__group.lilypond_type,
+                        tag=abjad.Tag("abjad.ScoreTemplate.attach_defaults(1)"),
+                        wrapper=True,
+                    )
+                    wrappers.append(wrapper)
+            margin_markup = abjad.Inspection(leaf).indicator(abjad.MarginMarkup)
+            if margin_markup is None:
+                string = "default_margin_markup"
+                margin_markup = abjad.Inspection(staff__group).annotation(string)
+                if margin_markup is not None:
+                    wrapper = abjad.attach(
+                        margin_markup,
+                        leaf,
+                        tag=abjad.tags.NOT_PARTS.append(
+                            abjad.Tag("abjad.ScoreTemplate.attach_defaults(2)")
+                        ),
+                        wrapper=True,
+                    )
+                    wrappers.append(wrapper)
+        for staff in staves:
+            leaf = abjad.Inspection(staff).leaf(0)
+            clef = abjad.Inspection(leaf).indicator(abjad.Clef)
+            if clef is not None:
+                continue
+            clef = abjad.Inspection(staff).annotation("default_clef")
+            if clef is not None:
+                wrapper = abjad.attach(
+                    clef,
+                    leaf,
+                    tag=abjad.Tag("abjad.ScoreTemplate.attach_defaults(3)"),
+                    wrapper=True,
+                )
+                wrappers.append(wrapper)
+        return wrappers
+
     def group_families(self, *families) -> typing.List[abjad.Context]:
         """
         Groups ``families`` only when more than one family is passed in.
