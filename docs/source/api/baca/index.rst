@@ -31,6 +31,7 @@ baca
    markups
    mathx
    overrides
+   path
    piecewise
    pitcharray
    pitchclasses
@@ -54,6 +55,7 @@ baca
    markups
    mathx
    overrides
+   path
    piecewise
    pitcharray
    pitchclasses

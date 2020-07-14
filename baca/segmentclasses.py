@@ -3,7 +3,9 @@ import typing
 
 import abjad
 
-from . import classes, commandclasses, indicators, scoping
+from . import classes, commandclasses, indicators
+from . import path as baca_path
+from . import scoping
 
 ### CLASSES ###
 
@@ -2812,7 +2814,7 @@ def scorewide_spacing(
         first_measure_number, measure_count, fermata_measure_numbers = path
     else:
         path = abjad.Path(path)
-        tuple_ = path.get_measure_profile_metadata()
+        tuple_ = baca_path.get_measure_profile_metadata(path)
         first_measure_number = tuple_[0]
         measure_count = tuple_[1]
         fermata_measure_numbers = tuple_[2]

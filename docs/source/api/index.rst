@@ -754,6 +754,25 @@ Override library.
 
    <hr/>
 
+.. rubric:: :ref:`baca.path <baca--path>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.path.get_measure_profile_metadata
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.piecewise <baca--piecewise>`
    :class: section-header
 

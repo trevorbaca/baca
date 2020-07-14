@@ -1,4 +1,5 @@
 import copy
+import importlib
 import inspect
 import os
 import pathlib
@@ -2939,7 +2940,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _import_manifests(self):
         if not self.segment_directory:
             return
-        score_package = self.segment_directory._import_score_package()
+        score_package = importlib.import_module(self.segment_directory.contents.name)
         if not self.instruments:
             instruments = getattr(score_package, "instruments", None)
             self._instruments = instruments
