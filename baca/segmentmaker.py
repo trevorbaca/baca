@@ -2304,6 +2304,27 @@ class SegmentMaker(abjad.SegmentMaker):
             if staff_position == abjad.StaffPosition(0):
                 abjad.override(note).laissez_vibrer_tie.direction = abjad.Up
 
+    def _clean_up_repeat_tie_direction(self):
+        default = abjad.Clef("treble")
+        for leaf in abjad.iterate(self.score).leaves(pitched=True):
+            if leaf.written_duration < 1:
+                continue
+            if not abjad.inspect(leaf).has_indicator(abjad.RepeatTie):
+                continue
+            clef = abjad.inspect(leaf).effective(abjad.Clef, default=default)
+            if hasattr(leaf, "written_pitch"):
+                note_heads = [leaf.note_head]
+            else:
+                note_heads = leaf.note_heads
+            for note_head in note_heads:
+                staff_position = abjad.StaffPosition.from_pitch_and_clef(
+                    note_head.written_pitch, clef
+                )
+                if staff_position.number == 0:
+                    repeat_tie = abjad.inspect(leaf).indicator(abjad.RepeatTie)
+                    abjad.tweak(repeat_tie).direction = abjad.Up
+                    break
+
     def _clean_up_on_beat_grace_containers(self):
         prototype = abjad.OnBeatGraceContainer
         for container in abjad.select(self.score).components(prototype):
@@ -5869,6 +5890,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 self._color_mock_pitch()
                 self._color_not_yet_pitched()
                 self._set_not_yet_pitched_to_staff_position_zero()
+                self._clean_up_repeat_tie_direction()
                 self._clean_up_laissez_vibrer_tie_direction()
                 self._check_all_are_pitched_()
                 self._check_doubled_dynamics()
