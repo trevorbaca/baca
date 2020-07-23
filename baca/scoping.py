@@ -9,7 +9,7 @@ from . import indicators, typings
 ### CLASSES ###
 
 
-class Scope(object):
+class Scope:
     """
     Scope.
 
@@ -81,7 +81,7 @@ class Scope(object):
         return self._voice_name
 
 
-class TimelineScope(object):
+class TimelineScope:
     """
     Timeline scope.
 
@@ -194,7 +194,7 @@ class TimelineScope(object):
 ScopeTyping = typing.Union[Scope, TimelineScope]
 
 
-class Command(object):
+class Command:
     """
     Command.
     """
@@ -614,7 +614,7 @@ class Command(object):
         return None
 
 
-class Suite(object):
+class Suite:
     """
     Suite.
 

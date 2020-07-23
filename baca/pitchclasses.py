@@ -15,7 +15,7 @@ from . import classes
 ### CLASSES ###
 
 
-class ArpeggiationSpacingSpecifier(object):
+class ArpeggiationSpacingSpecifier:
     """
     Arpeggiation spacing specifier.
 
@@ -247,7 +247,7 @@ class ArpeggiationSpacingSpecifier(object):
         return self._pattern
 
 
-class ChordalSpacingSpecifier(object):
+class ChordalSpacingSpecifier:
     """
     Chordal spacing specifier.
 
@@ -2719,7 +2719,7 @@ class CollectionList(collections_module.abc.Sequence):
         return abjad.new(self, collections=collections_)
 
 
-class Constellation(object):
+class Constellation:
     """
     Constellation.
 
@@ -3227,7 +3227,7 @@ class Constellation(object):
         self._show_chords([pivot])
 
 
-class ConstellationCircuit(object):
+class ConstellationCircuit:
     """
     Constellation circuit.
 
@@ -3813,7 +3813,7 @@ class ConstellationCircuit(object):
         return class_(class_.CC1, abjad.PitchRange("[A0, C8]"))
 
 
-class HarmonicSeries(object):
+class HarmonicSeries:
     r"""
     Harmonic series.
 
@@ -4055,7 +4055,7 @@ class HarmonicSeries(object):
         return Partial(fundamental=self.fundamental, number=n)
 
 
-class Partial(object):
+class Partial:
     """
     Partial.
 
@@ -8908,7 +8908,7 @@ class PitchTree(classes.Tree):
         return self._apply_to_leaves_and_emit_new_tree(operator)
 
 
-class DesignMaker(object):
+class DesignMaker:
     """
     Design-maker.
 
@@ -9016,7 +9016,7 @@ class DesignMaker(object):
         self._result.extend(parts)
 
 
-class Registration(object):
+class Registration:
     """
     Registration.
 
@@ -9172,7 +9172,7 @@ class Registration(object):
         return self._components
 
 
-class RegistrationComponent(object):
+class RegistrationComponent:
     """
     Registration component.
 
@@ -9270,7 +9270,7 @@ class RegistrationComponent(object):
         return self._target_octave_start_pitch
 
 
-class ZaggedPitchClassMaker(object):
+class ZaggedPitchClassMaker:
     r"""
     Zagged-pitch-class-maker.
 

@@ -10,7 +10,7 @@ from . import scoping
 ### CLASSES ###
 
 
-class BreakMeasureMap(object):
+class BreakMeasureMap:
     r"""
     Breaks measure map.
 
@@ -516,7 +516,7 @@ class BreakMeasureMap(object):
         return self._tags[:]
 
 
-class HorizontalSpacingSpecifier(object):
+class HorizontalSpacingSpecifier:
     r"""
     Horizontal spacing specifier.
 
@@ -2298,7 +2298,7 @@ class HorizontalSpacingSpecifier(object):
             self._overriden_fermata_measures.extend(measures_)
 
 
-class LBSD(object):
+class LBSD:
     """
     Line-break system details.
     """
@@ -2345,7 +2345,7 @@ class LBSD(object):
         return self._y_offset
 
 
-class PageSpecifier(object):
+class PageSpecifier:
     """
     Page specifier.
     """
@@ -2399,7 +2399,7 @@ class PageSpecifier(object):
         return self._systems
 
 
-class SystemSpecifier(object):
+class SystemSpecifier:
     """
     System specifier.
     """
@@ -2457,7 +2457,7 @@ class SystemSpecifier(object):
         return self._y_offset
 
 
-class TimeSignatureMaker(object):
+class TimeSignatureMaker:
     """
     Time-signature-maker.
 

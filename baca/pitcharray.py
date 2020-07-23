@@ -12,7 +12,7 @@ from . import classes
 ### CLASSES ###
 
 
-class PitchArray(object):
+class PitchArray:
     """
     Pitch array.
 
@@ -902,7 +902,7 @@ class PitchArray(object):
         return containers
 
 
-class PitchArrayCell(object):
+class PitchArrayCell:
     """
     Pitch array cell.
 
@@ -1622,7 +1622,7 @@ class PitchArrayCell(object):
         return False
 
 
-class PitchArrayColumn(object):
+class PitchArrayColumn:
     """Pitch array column.
 
     ..  container:: example
@@ -2262,7 +2262,7 @@ class PitchArrayList(abjad.TypedList):
         return score
 
 
-class PitchArrayRow(object):
+class PitchArrayRow:
     """
     Pitch array row.
 

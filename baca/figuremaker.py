@@ -11,7 +11,7 @@ from . import classes, commandclasses, pitchclasses, rhythmcommands
 ### CLASSES ###
 
 
-class Stack(object):
+class Stack:
     """
     Stack.
     """
@@ -93,7 +93,7 @@ class Stack(object):
         return list(self._commands)
 
 
-class LMR(object):
+class LMR:
     """
     Left-middle-right.
     """
@@ -932,7 +932,7 @@ class LMR(object):
         return self._right_reversed
 
 
-class Acciaccatura(object):
+class Acciaccatura:
     """
     Acciaccatura.
 
@@ -1764,7 +1764,7 @@ class Acciaccatura(object):
         return self._lmr
 
 
-class Anchor(object):
+class Anchor:
     """
     Anchor.
 
@@ -1881,7 +1881,7 @@ class Anchor(object):
         return self._use_remote_stop_offset
 
 
-class Coat(object):
+class Coat:
     """
     Coat.
     """
@@ -1905,7 +1905,7 @@ class Coat(object):
         return self._argument
 
 
-class Imbrication(object):
+class Imbrication:
     """
     Imbrication.
     """
@@ -3446,7 +3446,7 @@ class Imbrication(object):
         return self._voice_name
 
 
-class Accumulator(object):
+class Accumulator:
     """
     Accumulator.
 
@@ -3853,7 +3853,7 @@ class Accumulator(object):
             )
 
 
-class Contribution(object):
+class Contribution:
     """
     Contribution.
     """
@@ -3960,7 +3960,7 @@ class Contribution(object):
         return self._voice_to_selection
 
 
-class Nest(object):
+class Nest:
     r"""
     Nest.
 
@@ -4250,7 +4250,7 @@ class Nest(object):
         return self._treatments
 
 
-class RestAffix(object):
+class RestAffix:
     r"""
     Rest affix.
 
@@ -4690,7 +4690,7 @@ class RestAffix(object):
         return self._suffix
 
 
-class FigureMaker(object):
+class FigureMaker:
     """
     figure-maker.
     """
@@ -7394,7 +7394,7 @@ class FigureMaker(object):
         return self._treatments
 
 
-class Assignment(object):
+class Assignment:
     """
     Assignment.
     """
@@ -7454,7 +7454,7 @@ class Assignment(object):
         return self._pattern
 
 
-class Bind(object):
+class Bind:
     """
     Bind.
     """

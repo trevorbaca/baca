@@ -5,7 +5,7 @@ import abjad
 ### CLASSES ###
 
 
-class Accelerando(object):
+class Accelerando:
     r"""
     Accelerando.
 
@@ -286,7 +286,7 @@ class Accelerando(object):
         return self._tweaks
 
 
-class BarExtent(object):
+class BarExtent:
     """
     Bar extent.
     """
@@ -536,7 +536,7 @@ class Markup(abjad.Markup):
         return self.box().override(("box-padding", 0.5))
 
 
-class Ritardando(object):
+class Ritardando:
     r"""
     Ritardando.
 
@@ -879,7 +879,7 @@ class Ritardando(object):
         return self._tweaks
 
 
-class StaffLines(object):
+class StaffLines:
     """
     Staff lines.
     """
@@ -1034,7 +1034,7 @@ class StaffLines(object):
         return self._persistent
 
 
-class SpacingSection(object):
+class SpacingSection:
     r"""
     Spacing section.
 

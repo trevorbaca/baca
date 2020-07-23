@@ -11,7 +11,7 @@ import abjad
 ### CLASSES ###
 
 
-class Counter(object):
+class Counter:
     """
     Counter.
 
@@ -119,7 +119,7 @@ class Counter(object):
         return self._start
 
 
-class Cursor(object):
+class Cursor:
     """
     Cursor.
 
@@ -1335,7 +1335,7 @@ class Expression(abjad.Expression):
         return abjad.new(expression_, proxy_class=Sequence)
 
 
-class PaddedTuple(object):
+class PaddedTuple:
     """
     Padded tuple.
 
@@ -1673,7 +1673,7 @@ class PaddedTuple(object):
         return self._pad
 
 
-class SchemeManifest(object):
+class SchemeManifest:
     """
     Scheme manifest.
 
@@ -10529,7 +10529,7 @@ class Sequence(abjad.Sequence):
         return sequence
 
 
-class Tree(object):
+class Tree:
     """
     Tree.
 

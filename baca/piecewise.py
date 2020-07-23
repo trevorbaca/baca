@@ -17,7 +17,7 @@ def _site(frame):
 ### CLASSES ###
 
 
-class Bundle(object):
+class Bundle:
     """
     Bundle.
     """
