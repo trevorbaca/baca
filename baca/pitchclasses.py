@@ -2956,7 +2956,7 @@ class Constellation:
         return result
 
     def _make_lilypond_file_and_score_from_chords(self, chords):
-        score, treble, bass = abjad.illustrators._make_piano_score(
+        score, treble, bass = abjad.illustrators.make_piano_score(
             leaves=chords, sketch=True
         )
         score.override.text_script.staff_padding = 10
@@ -3354,7 +3354,7 @@ class ConstellationCircuit:
             self._constellations.append(constellation)
 
     def _illustrate_chords(self, chords):
-        result = abjad.illustrators._make_piano_score(leaves=chords, sketch=True)
+        result = abjad.illustrators.make_piano_score(leaves=chords, sketch=True)
         score, treble, bass = result
         abjad.override(score).text_script.staff_padding = 10
         moment = abjad.SchemeMoment((1, 30))

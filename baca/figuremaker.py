@@ -5059,8 +5059,8 @@ class FigureMaker:
         elif rmakers.FeatherBeamCommand._is_ritardando(leaf_selection):
             abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Left
         duration = abjad.inspect(tuplet).duration()
-        duration = abjad.Duration(duration)
-        markup = abjad.illustrators.duration_to_score_markup(duration)
+        notes = abjad.LeafMaker()([0], [duration])
+        markup = abjad.illustrators.selection_to_score_markup(notes)
         markup = markup.scale((0.75, 0.75))
         abjad.override(tuplet).tuplet_number.text = markup
         return tuplet
