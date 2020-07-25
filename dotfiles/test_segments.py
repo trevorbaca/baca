@@ -2,10 +2,10 @@ import os
 import pathlib
 import sys
 
-import ide
 import pytest
 
 import abjad
+import ide
 
 abjad_ide = ide.AbjadIDE()
 travis_build_dir = os.getenv("TRAVIS_BUILD_DIR")
