@@ -2065,7 +2065,7 @@ class Loop(abjad.CyclicTuple):
             client=self,
             repr_is_indented=False,
             storage_format_args_values=[list(self.items)],
-            storage_format_kwargs_names=["intervals"],
+            storage_format_keyword_names=["intervals"],
         )
 
     ### PUBLIC PROPERTIES ###

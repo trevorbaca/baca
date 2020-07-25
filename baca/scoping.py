@@ -781,7 +781,7 @@ class Suite:
         return abjad.FormatSpecification(
             self,
             storage_format_args_values=self.commands,
-            storage_format_kwargs_names=names,
+            storage_format_keyword_names=names,
         )
 
     ### PUBLIC PROPERTIES ###
