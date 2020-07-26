@@ -3035,9 +3035,19 @@ def select(items=None):
 
 
 def sequence(items=None, **keywords):
-    if items is None:
-        return classes.Expression().sequence(**keywords)
-    return classes.Sequence(items=items, **keywords)
+    if items is not None:
+        return classes.Sequence(items=items, **keywords)
+    name = keywords.pop("name", None)
+    expression = classes.Expression(name=name)
+    callback = expression._make_initializer_callback(
+        classes.Sequence,
+        callback_class=classes.Expression,
+        module_names=["baca"],
+        string_template="{}",
+        **keywords,
+    )
+    expression_ = expression.append_callback(callback)
+    return abjad.new(expression_, proxy_class=classes.Sequence)
 
 
 def untie(selector: abjad.Expression) -> commandclasses.DetachCommand:

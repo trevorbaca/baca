@@ -169,7 +169,6 @@ classes
       :nosignatures:
 
       select
-      sequence
 
    .. raw:: html
 
@@ -247,15 +246,9 @@ classes
 
    .. container:: inherited
 
-      .. automethod:: Expression.pitch_set
-
-   .. container:: inherited
-
       .. automethod:: Expression.print
 
    .. automethod:: Expression.select
-
-   .. automethod:: Expression.sequence
 
    .. container:: inherited
 

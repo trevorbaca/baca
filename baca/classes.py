@@ -1247,22 +1247,6 @@ class Expression(abjad.Expression):
         expression = self.append_callback(callback)
         return abjad.new(expression, proxy_class=class_, template="baca")
 
-    def sequence(self, **keywords) -> "Expression":
-        """
-        Makes sequence expression.
-        """
-        name = keywords.pop("name", None)
-        expression = Expression(name=name)
-        callback = expression._make_initializer_callback(
-            Sequence,
-            callback_class=Expression,
-            module_names=["baca"],
-            string_template="{}",
-            **keywords,
-        )
-        expression_ = expression.append_callback(callback)
-        return abjad.new(expression_, proxy_class=Sequence)
-
 
 class PaddedTuple:
     """
