@@ -168,8 +168,6 @@ classes
    .. autosummary::
       :nosignatures:
 
-      pitch_class_segment
-      pitch_class_segments
       select
       sequence
 
@@ -246,10 +244,6 @@ classes
    .. container:: inherited
 
       .. automethod:: Expression.get_string
-
-   .. automethod:: Expression.pitch_class_segment
-
-   .. automethod:: Expression.pitch_class_segments
 
    .. container:: inherited
 

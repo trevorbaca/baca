@@ -882,8 +882,7 @@ class Expression(abjad.Expression):
         ...     abjad.PitchClassSegment([6, 7, 8, 9]),
         ...     ]
 
-        >>> transposition = baca.Expression()
-        >>> transposition = transposition.pitch_class_segment()
+        >>> transposition = baca.pitch_class_segment()
         >>> transposition = transposition.transpose(n=3)
         >>> expression = baca.sequence(name='J')
         >>> expression = expression.map(transposition)
@@ -929,8 +928,7 @@ class Expression(abjad.Expression):
         ...     abjad.PitchClassSegment([6, 7, 8, 9]),
         ...     ]
 
-        >>> transposition = baca.Expression()
-        >>> transposition = transposition.pitch_class_segment()
+        >>> transposition = baca.pitch_class_segment()
         >>> transposition = transposition.transpose(n=3)
         >>> expression = baca.sequence(name='J')
         >>> expression = expression.map(transposition)
@@ -979,8 +977,7 @@ class Expression(abjad.Expression):
         ...     abjad.PitchClassSegment([6, 7, 8, 9]),
         ...     ]
 
-        >>> transposition = baca.Expression()
-        >>> transposition = transposition.pitch_class_segment()
+        >>> transposition = baca.pitch_class_segment()
         >>> transposition = transposition.transpose(n=3)
         >>> expression = baca.sequence(name='J')
         >>> expression = expression.map(transposition)
@@ -1041,7 +1038,7 @@ class Expression(abjad.Expression):
         >>> transposition = baca.pitch_class_segment().transpose(n=3)
         >>> expression = baca.sequence(name='J').map(transposition)
         >>> expression = expression.flatten(depth=-1).partition([3])
-        >>> expression = expression.pitch_class_segments()
+        >>> expression = expression.map(baca.pitch_class_segment())
 
         >>> for collection in expression(collections):
         ...     collection
@@ -1105,7 +1102,7 @@ class Expression(abjad.Expression):
         >>> transposition = baca.pitch_class_segment().transpose(n=3)
         >>> expression = baca.sequence(name='J').map(transposition)
         >>> expression = expression.flatten(depth=-1).partition([3])
-        >>> expression = expression.pitch_class_segments()
+        >>> expression = expression.map(baca.pitch_class_segment())
         >>> expression = expression.boustrophedon()
 
         >>> for collection in expression(collections):
@@ -1194,82 +1191,6 @@ class Expression(abjad.Expression):
         return result
 
     ### PUBLIC METHODS ###
-
-    def pitch_class_segment(self, **keywords) -> "Expression":
-        r"""
-        Makes pitch-class segment subclass expression.
-
-        ..  container:: example
-
-            Makes expression to apply alpha transform to pitch-class segment:
-
-            >>> baca.PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
-            PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
-
-            >>> segment = baca.PitchClassSegment([-2, -1.5, 6, 7, -1.5, 7])
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
-
-            ..  container:: example expression
-
-                >>> expression = baca.Expression(name='J')
-                >>> expression = expression.pitch_class_segment()
-                >>> expression = expression.alpha()
-
-                >>> expression([-2, -1.5, 6, 7, -1.5, 7])
-                PitchClassSegment([11, 11.5, 7, 6, 11.5, 6])
-
-                >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
-                >>> markup = expression.get_markup()
-                >>> lilypond_file = abjad.illustrate(segment, figure_name=markup)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> abjad.f(lilypond_file[abjad.Staff])
-                    \new Staff
-                    {
-                        \new Voice
-                        {
-                            b'8
-                            ^ \markup {
-                                \concat
-                                    {
-                                        A
-                                        \bold
-                                            J
-                                    }
-                                }
-                            bqs'8
-                            g'8
-                            fs'8
-                            bqs'8
-                            fs'8
-                            \bar "|." %! SCORE_1
-                            \override Score.BarLine.transparent = ##f
-                        }
-                    }
-
-        """
-        from .pitchclasses import PitchClassSegment
-
-        class_ = PitchClassSegment
-        callback = self._make_initializer_callback(
-            class_,
-            callback_class=Expression,
-            module_names=["baca"],
-            string_template="{}",
-            **keywords,
-        )
-        expression = self.append_callback(callback)
-        return abjad.new(expression, proxy_class=class_)
-
-    def pitch_class_segments(self) -> "Expression":
-        """
-        Maps pitch-class segment subclass initializer to expression.
-        """
-        initializer = Expression().pitch_class_segment()
-        return self.map(initializer)
 
     def select(self, **keywords) -> "Expression":
         r"""
@@ -7457,8 +7378,7 @@ class Sequence(abjad.Sequence):
             ...     abjad.PitchClassSegment(items=[7, -1.5, 7]),
             ...     ]
 
-            >>> expression = baca.Expression()
-            >>> expression = expression.pitch_class_segment()
+            >>> expression = baca.pitch_class_segment()
             >>> expression = expression.transpose(n=1)
 
             >>> sequence = baca.sequence(collections)
@@ -7492,8 +7412,7 @@ class Sequence(abjad.Sequence):
             ...     baca.PitchClassSegment(items=[7, -1.5, 7]),
             ...     ]
 
-            >>> transposition = baca.Expression()
-            >>> transposition = transposition.pitch_class_segment()
+            >>> transposition = baca.pitch_class_segment()
             >>> transposition = transposition.transpose(n=1)
             >>> expression = baca.sequence(name='J')
             >>> expression = expression.map(transposition)
@@ -7746,8 +7665,7 @@ class Sequence(abjad.Sequence):
                 >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> transposition = baca.Expression()
-                >>> transposition = transposition.pitch_class_segment()
+                >>> transposition = baca.pitch_class_segment()
                 >>> transposition = transposition.transpose(n=3)
 
                 >>> sequence = baca.sequence([collection_1, collection_2])
@@ -7817,11 +7735,9 @@ class Sequence(abjad.Sequence):
                 >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> transposition = baca.Expression()
-                >>> transposition = transposition.pitch_class_segment()
+                >>> transposition = baca.pitch_class_segment()
                 >>> transposition = transposition.transpose(n=3)
-                >>> alpha = baca.Expression()
-                >>> alpha = alpha.pitch_class_segment()
+                >>> alpha = baca.pitch_class_segment()
                 >>> alpha = alpha.alpha()
 
                 >>> sequence = baca.sequence([collection_1, collection_2])
@@ -7914,8 +7830,7 @@ class Sequence(abjad.Sequence):
                 >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> permutation = baca.Expression()
-                >>> permutation = permutation.pitch_class_segment()
+                >>> permutation = baca.pitch_class_segment()
                 >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
                 >>> permutation = permutation.permute(row)
 
@@ -8018,12 +7933,10 @@ class Sequence(abjad.Sequence):
                 >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> permutation = baca.Expression()
-                >>> permutation = permutation.pitch_class_segment()
+                >>> permutation = baca.pitch_class_segment()
                 >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
                 >>> permutation = permutation.permute(row)
-                >>> transposition = baca.Expression()
-                >>> transposition = transposition.pitch_class_segment()
+                >>> transposition = baca.pitch_class_segment()
                 >>> transposition = transposition.transpose(n=3)
 
                 >>> sequence = baca.sequence([collection_1, collection_2])

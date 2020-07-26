@@ -13,7 +13,7 @@ from .persistence import *
 from .piecewise import *
 from .pitcharray import *
 from .pitchclasses import *
-from .pitchclasses import _pitch_class_segment as pitch_class_segment
+from .pitchclasses import pitch_class_segment
 from .pitchclasses import _pitch_class_set as pitch_class_set
 from .pitchclasses import _pitch_segment as pitch_segment
 from .pitchclasses import _pitch_set as pitch_set

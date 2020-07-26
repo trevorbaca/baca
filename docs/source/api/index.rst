@@ -889,6 +889,18 @@ Pitch library.
 
    <hr/>
 
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.pitchclasses.pitch_class_segment
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.pitchcommands <baca--pitchcommands>`
    :class: section-header
 

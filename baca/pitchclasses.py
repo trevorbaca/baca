@@ -9520,7 +9520,10 @@ class ZaggedPitchClassMaker:
 ### EXPRESSION CONSTRUCTORS ###
 
 
-def _pitch_class_segment(items=None, **keywords):
+def pitch_class_segment(items=None, **keywords):
+    """
+    Makes pitch-class segment or pitch-class segment expression.
+    """
     if items:
         return PitchClassSegment(items=items, **keywords)
     name = keywords.pop("name", None)
