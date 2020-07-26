@@ -237,10 +237,6 @@ classes
 
    .. container:: inherited
 
-      .. automethod:: Expression.color
-
-   .. container:: inherited
-
       .. automethod:: Expression.establish_equivalence
 
    .. container:: inherited
@@ -250,10 +246,6 @@ classes
    .. container:: inherited
 
       .. automethod:: Expression.get_string
-
-   .. container:: inherited
-
-      .. automethod:: Expression.label
 
    .. automethod:: Expression.pitch_class_segment
 
