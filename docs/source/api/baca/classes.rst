@@ -273,10 +273,6 @@ classes
 
    .. container:: inherited
 
-      .. automethod:: Expression.timespan
-
-   .. container:: inherited
-
       .. automethod:: Expression.wrap_in_list
 
    .. raw:: html
@@ -1108,10 +1104,6 @@ classes
    .. container:: inherited
 
       .. automethod:: Sequence.rotate
-
-   .. container:: inherited
-
-      .. automethod:: Sequence.select
 
    .. container:: inherited
 

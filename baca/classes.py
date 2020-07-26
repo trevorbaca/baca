@@ -1255,7 +1255,11 @@ class Expression(abjad.Expression):
 
         class_ = PitchClassSegment
         callback = self._make_initializer_callback(
-            class_, module_names=["baca"], string_template="{}", **keywords
+            class_,
+            callback_class=Expression,
+            module_names=["baca"],
+            string_template="{}",
+            **keywords,
         )
         expression = self.append_callback(callback)
         return abjad.new(expression, proxy_class=class_)
@@ -1317,7 +1321,7 @@ class Expression(abjad.Expression):
         """
         class_ = Selection
         callback = self._make_initializer_callback(
-            class_, module_names=["baca"], **keywords
+            class_, callback_class=Expression, module_names=["baca"], **keywords
         )
         expression = self.append_callback(callback)
         return abjad.new(expression, proxy_class=class_, template="baca")
@@ -1329,7 +1333,11 @@ class Expression(abjad.Expression):
         name = keywords.pop("name", None)
         expression = Expression(name=name)
         callback = expression._make_initializer_callback(
-            Sequence, module_names=["baca"], string_template="{}", **keywords
+            Sequence,
+            callback_class=Expression,
+            module_names=["baca"],
+            string_template="{}",
+            **keywords,
         )
         expression_ = expression.append_callback(callback)
         return abjad.new(expression_, proxy_class=Sequence)

@@ -9526,7 +9526,11 @@ def _pitch_class_segment(items=None, **keywords):
     name = keywords.pop("name", None)
     expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
-        PitchClassSegment, module_names=["baca"], string_template="{}", **keywords,
+        PitchClassSegment,
+        callback_class=classes.Expression,
+        module_names=["baca"],
+        string_template="{}",
+        **keywords,
     )
     expression = expression.append_callback(callback)
     return abjad.new(expression, proxy_class=PitchClassSegment)
@@ -9538,7 +9542,11 @@ def _pitch_class_set(items=None, **keywords):
     name = keywords.pop("name", None)
     expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
-        PitchClassSet, module_names=["baca"], string_template="{}", **keywords
+        PitchClassSet,
+        callback_class=classes.Expression,
+        module_names=["baca"],
+        string_template="{}",
+        **keywords,
     )
     expression = expression.append_callback(callback)
     return abjad.new(expression, proxy_class=PitchClassSet)
@@ -9550,7 +9558,11 @@ def _pitch_segment(items=None, **keywords):
     name = keywords.pop("name", None)
     expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
-        PitchSegment, module_names=["baca"], string_template="{}", **keywords
+        PitchSegment,
+        callback_class=classes.Expression,
+        module_names=["baca"],
+        string_template="{}",
+        **keywords,
     )
     expression = expression.append_callback(callback)
     return abjad.new(expression, proxy_class=PitchSegment)
@@ -9562,7 +9574,11 @@ def _pitch_set(items=None, **keywords):
     name = keywords.pop("name", None)
     expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
-        PitchSet, module_names=["baca"], string_template="{}", **keywords
+        PitchSet,
+        callback_class=classes.Expression,
+        module_names=["baca"],
+        string_template="{}",
+        **keywords,
     )
     expression = expression.append_callback(callback)
     return abjad.new(expression, proxy_class=PitchSet)
