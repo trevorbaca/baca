@@ -290,7 +290,7 @@ class RhythmCommand(scoping.Command):
             abjad.tweak(color).color,
             abjad.tweak(8).staff_padding,
             leak_spanner_stop=True,
-            selector=classes.Expression().select().leaves(),
+            selector=classes.select().leaves(),
         )
         command(leaves)
 
@@ -1078,9 +1078,9 @@ def make_repeat_tied_notes(
     """
     specifier: rmakers.Command
     specifiers_ = list(specifiers)
-    specifier = rmakers.beam(classes.Expression().select().plts())
+    specifier = rmakers.beam(classes.select().plts())
     specifiers_.append(specifier)
-    specifier = rmakers.repeat_tie(classes.Expression().select().pheads()[1:])
+    specifier = rmakers.repeat_tie(classes.select().pheads()[1:])
     specifiers_.append(specifier)
     if not do_not_rewrite_meter:
         command = rmakers.rewrite_meter()
@@ -1135,7 +1135,7 @@ def make_rests(*, measures: typings.SliceTyping = None) -> RhythmCommand:
     return RhythmCommand(
         rmakers.stack(
             rmakers.note(),
-            rmakers.force_rest(classes.Expression().select().lts()),
+            rmakers.force_rest(classes.select().lts()),
             tag=_site(inspect.currentframe()),
         ),
         annotation_spanner_color="darkcyan",
@@ -1189,8 +1189,8 @@ def make_tied_notes(*, measures: typings.SliceTyping = None) -> RhythmCommand:
     return RhythmCommand(
         rmakers.stack(
             rmakers.note(),
-            rmakers.beam(classes.Expression().select().plts()),
-            rmakers.tie(classes.Expression().select().ptails()[:-1]),
+            rmakers.beam(classes.select().plts()),
+            rmakers.tie(classes.select().ptails()[:-1]),
             rmakers.rewrite_meter(),
             tag=_site(inspect.currentframe()),
         ),
@@ -1215,7 +1215,7 @@ def make_tied_repeated_durations(
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
     tie_specifier: rmakers.Command
-    tie_specifier = rmakers.repeat_tie(classes.Expression().select().pheads()[1:])
+    tie_specifier = rmakers.repeat_tie(classes.select().pheads()[1:])
     specifiers.append(tie_specifier)
     tie_specifier = rmakers.force_repeat_tie()
     specifiers.append(tie_specifier)
@@ -1321,7 +1321,7 @@ def tacet(
     color: str = "green",
     *,
     measures: typings.SliceTyping = None,
-    selector: abjad.Expression = classes.Expression().select().mmrests(),
+    selector: abjad.Expression = classes.select().mmrests(),
 ) -> overrides.OverrideCommand:
     """
     Colors multimeasure rests.

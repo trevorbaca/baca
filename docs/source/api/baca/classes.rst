@@ -162,18 +162,6 @@ classes
 
       <hr/>
 
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      select
-
-   .. raw:: html
-
-      <hr/>
-
    .. rubric:: Special methods
       :class: class-header
 
@@ -247,8 +235,6 @@ classes
    .. container:: inherited
 
       .. automethod:: Expression.print
-
-   .. automethod:: Expression.select
 
    .. container:: inherited
 
@@ -1195,3 +1181,17 @@ classes
    .. autoattribute:: Tree.item_class
 
    .. autoattribute:: Tree.items
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: section-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~select
+
+.. autofunction:: select

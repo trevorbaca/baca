@@ -24,7 +24,7 @@ def _site(frame, n=None):
 
 
 def allow_octaves(
-    *, selector: abjad.Expression = classes.Expression().select().leaves()
+    *, selector: abjad.Expression = classes.select().leaves()
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches ALLOW_OCTAVE constant.
@@ -40,7 +40,7 @@ def bcps(
     bow_change_tweaks: abjad.IndexedTweakManagers = None,
     final_spanner: bool = None,
     helper: typing.Callable = None,
-    selector: abjad.Expression = classes.Expression().select().leaves(),
+    selector: abjad.Expression = classes.select().leaves(),
 ) -> commandclasses.BCPCommand:
     r"""
     Makes bow contact point command.
@@ -293,7 +293,7 @@ def bcps(
 
 
 def close_volta(
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.select().leaf(0),
     *,
     format_slot: str = "before",
 ) -> scoping.Suite:
@@ -310,7 +310,7 @@ def close_volta(
 
 
 def color(
-    selector: abjad.Expression = classes.Expression().select().leaves(),
+    selector: abjad.Expression = classes.select().leaves(),
 ) -> commandclasses.ColorCommand:
     r"""
     Makes color command.
@@ -470,9 +470,7 @@ def color(
 
 
 def container(
-    identifier: str = None,
-    *,
-    selector: abjad.Expression = classes.Expression().select().leaves(),
+    identifier: str = None, *, selector: abjad.Expression = classes.select().leaves(),
 ) -> commandclasses.ContainerCommand:
     r"""
     Makes container with ``identifier`` and extends container with
@@ -620,7 +618,7 @@ def container(
 
 
 def cross_staff(
-    *, selector: abjad.Expression = classes.Expression().select().phead(0)
+    *, selector: abjad.Expression = classes.select().phead(0)
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches cross-staff command.
@@ -970,7 +968,7 @@ def cross_staff(
 
 
 def double_volta(
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.select().leaf(0),
 ) -> scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.
@@ -983,7 +981,7 @@ def double_volta(
 
 
 def dynamic_down(
-    *, selector: abjad.Expression = classes.Expression().select().leaf(0)
+    *, selector: abjad.Expression = classes.select().leaf(0)
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches dynamic-down command.
@@ -1070,7 +1068,7 @@ def dynamic_down(
 
 
 def dynamic_up(
-    *, selector: abjad.Expression = classes.Expression().select().leaf(0)
+    *, selector: abjad.Expression = classes.select().leaf(0)
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches dynamic-up command.
@@ -1176,7 +1174,7 @@ def edition(
 
 def finger_pressure_transition(
     *,
-    selector: abjad.Expression = classes.Expression().select().tleaves(),
+    selector: abjad.Expression = classes.select().tleaves(),
     right_broken: bool = None,
 ) -> commandclasses.GlissandoCommand:
     r"""
@@ -1359,7 +1357,7 @@ def flat_glissando(
     right_broken: bool = None,
     right_broken_show_next: bool = None,
     rleak: bool = None,
-    selector: abjad.Expression = classes.Expression().select().pleaves(),
+    selector: abjad.Expression = classes.select().pleaves(),
     stop_pitch: typing.Union[str, abjad.NamedPitch, abjad.StaffPosition] = None,
 ) -> scoping.Suite:
     """
@@ -1439,7 +1437,7 @@ def glissando(
     map: abjad.Expression = None,
     right_broken: bool = None,
     right_broken_show_next: bool = None,
-    selector: abjad.Expression = classes.Expression().select().tleaves(),
+    selector: abjad.Expression = classes.select().tleaves(),
     style: str = None,
     zero_padding: bool = None,
 ) -> commandclasses.GlissandoCommand:
@@ -2155,8 +2153,7 @@ def glissando(
 
 
 def global_fermata(
-    description: str = "fermata",
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    description: str = "fermata", selector: abjad.Expression = classes.select().leaf(0),
 ) -> commandclasses.GlobalFermataCommand:
     """
     Attaches global fermata.
@@ -2174,8 +2171,7 @@ def global_fermata(
 
 
 def instrument(
-    instrument: abjad.Instrument,
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    instrument: abjad.Instrument, selector: abjad.Expression = classes.select().leaf(0),
 ) -> commandclasses.InstrumentChangeCommand:
     """
     Makes instrument change command.
@@ -2191,7 +2187,7 @@ def instrument(
 
 
 def invisible_music(
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.select().leaf(0),
     *,
     map: abjad.Expression = None,
 ) -> scoping.Suite:
@@ -2362,7 +2358,7 @@ def invisible_music(
 
 def label(
     expression: abjad.Expression,
-    selector: abjad.Expression = classes.Expression().select().leaves(),
+    selector: abjad.Expression = classes.select().leaves(),
 ) -> commandclasses.LabelCommand:
     r"""
     Labels ``selector`` output with label ``expression``.
@@ -2458,7 +2454,7 @@ def markup(
     map: abjad.Expression = None,
     match: typings.Indices = None,
     measures: typings.SliceTyping = None,
-    selector: abjad.Expression = classes.Expression().select().pleaf(0),
+    selector: abjad.Expression = classes.select().pleaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Makes markup and inserts into indicator command.
@@ -2644,7 +2640,7 @@ def markup(
         message = "selector must be string or expression"
         message += f" (not {selector!r})."
         raise Exception(message)
-    selector = selector or classes.Expression().select().phead(0)
+    selector = selector or classes.select().phead(0)
     return commandclasses.IndicatorCommand(
         indicators=[markup],
         map=map,
@@ -2658,7 +2654,7 @@ def markup(
 
 def metronome_mark(
     key: typing.Union[str, indicators.Accelerando, indicators.Ritardando],
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.select().leaf(0),
     *,
     redundant: bool = None,
 ) -> typing.Optional[commandclasses.MetronomeMarkCommand]:
@@ -2675,7 +2671,7 @@ def metronome_mark(
 def parts(
     part_assignment: abjad.PartAssignment,
     *,
-    selector: abjad.Expression = classes.Expression().select().leaves(),
+    selector: abjad.Expression = classes.select().leaves(),
 ) -> commandclasses.PartAssignmentCommand:
     r"""
     Inserts ``selector`` output in container and sets part assignment.
@@ -2981,7 +2977,7 @@ def parts(
 
 
 def one_voice(
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.select().leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\oneVoice`` command.
@@ -2992,9 +2988,7 @@ def one_voice(
     )
 
 
-def open_volta(
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
-) -> scoping.Suite:
+def open_volta(selector: abjad.Expression = classes.select().leaf(0),) -> scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.
     """
@@ -3028,12 +3022,6 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     return previous_metadata
 
 
-def select(items=None):
-    if items is None:
-        return classes.Expression().select()
-    return classes.Selection(items=items)
-
-
 def sequence(items=None, **keywords):
     if items is not None:
         return classes.Sequence(items=items, **keywords)
@@ -3058,7 +3046,7 @@ def untie(selector: abjad.Expression) -> commandclasses.DetachCommand:
 
 
 def voice_four(
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.select().leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceFour`` command.
@@ -3070,7 +3058,7 @@ def voice_four(
 
 
 def voice_one(
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.select().leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceOne`` command.
@@ -3082,7 +3070,7 @@ def voice_one(
 
 
 def voice_three(
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.select().leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceThree`` command.
@@ -3094,7 +3082,7 @@ def voice_three(
 
 
 def voice_two(
-    selector: abjad.Expression = classes.Expression().select().leaf(0),
+    selector: abjad.Expression = classes.select().leaf(0),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Makes LilyPond ``\voiceTwo`` command.

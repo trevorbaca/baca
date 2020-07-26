@@ -3721,7 +3721,7 @@ class Accumulator:
             return self._current_offset
         if anchored and remote_voice_name is None:
             return self._score_stop_offset
-        remote_selector = remote_selector or classes.Expression().select().leaf(0)
+        remote_selector = remote_selector or classes.select().leaf(0)
         floating_selections = self._floating_selections[remote_voice_name]
         selections = [_.annotation for _ in floating_selections]
         result = remote_selector(selections)
@@ -8184,7 +8184,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
 
 def extend_beam(
-    selector: abjad.Expression = classes.Expression().select().leaf(-1),
+    selector: abjad.Expression = classes.select().leaf(-1),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches RIGHT_BROKEN_BEAM to selector output.
@@ -11044,7 +11044,7 @@ def resume_after(remote_voice_name) -> Anchor:
     Resumes music after remote selection.
     """
     return Anchor(
-        remote_selector=classes.Expression().select().leaf(-1),
+        remote_selector=classes.select().leaf(-1),
         remote_voice_name=remote_voice_name,
         use_remote_stop_offset=True,
     )

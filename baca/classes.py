@@ -1192,60 +1192,61 @@ class Expression(abjad.Expression):
 
     ### PUBLIC METHODS ###
 
-    def select(self, **keywords) -> "Expression":
-        r"""
-        Makes select expression.
 
-        ..  container:: example
-
-            Makes expression to select leaves:
-
-            ..  container:: example
-
-                >>> staff = abjad.Staff()
-                >>> staff.extend("<c' bf'>8 <g' a'>8")
-                >>> staff.extend("af'8 r8")
-                >>> staff.extend("r8 gf'8")
-                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
-                >>> abjad.show(staff, strict=89) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> abjad.f(staff, strict=89)
-                    \new Staff
-                    {
-                        \time 2/8
-                        <c' bf'>8
-                        <g' a'>8
-                        af'8
-                        r8
-                        r8
-                        gf'8
-                    }
-
-            ..  container:: example expression
-
-                >>> expression = baca.Expression()
-                >>> expression = expression.select()
-                >>> expression = expression.leaves()
-
-                >>> for leaf in expression(staff):
-                ...     leaf
-                ...
-                Chord("<c' bf'>8")
-                Chord("<g' a'>8")
-                Note("af'8")
-                Rest('r8')
-                Rest('r8')
-                Note("gf'8")
-
-        """
-        class_ = Selection
-        callback = self._make_initializer_callback(
-            class_, callback_class=Expression, module_names=["baca"], **keywords
-        )
-        expression = self.append_callback(callback)
-        return abjad.new(expression, proxy_class=class_, template="baca")
+#    def select(self, **keywords) -> "Expression":
+#        r"""
+#        Makes select expression.
+#
+#        ..  container:: example
+#
+#            Makes expression to select leaves:
+#
+#            ..  container:: example
+#
+#                >>> staff = abjad.Staff()
+#                >>> staff.extend("<c' bf'>8 <g' a'>8")
+#                >>> staff.extend("af'8 r8")
+#                >>> staff.extend("r8 gf'8")
+#                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+#                >>> abjad.show(staff, strict=89) # doctest: +SKIP
+#
+#                ..  docs::
+#
+#                    >>> abjad.f(staff, strict=89)
+#                    \new Staff
+#                    {
+#                        \time 2/8
+#                        <c' bf'>8
+#                        <g' a'>8
+#                        af'8
+#                        r8
+#                        r8
+#                        gf'8
+#                    }
+#
+#            ..  container:: example expression
+#
+#                >>> expression = baca.Expression()
+#                >>> expression = expression.select()
+#                >>> expression = expression.leaves()
+#
+#                >>> for leaf in expression(staff):
+#                ...     leaf
+#                ...
+#                Chord("<c' bf'>8")
+#                Chord("<g' a'>8")
+#                Note("af'8")
+#                Rest('r8')
+#                Rest('r8')
+#                Note("gf'8")
+#
+#        """
+#        class_ = Selection
+#        callback = self._make_initializer_callback(
+#            class_, callback_class=Expression, module_names=["baca"], **keywords
+#        )
+#        expression = self.append_callback(callback)
+#        return abjad.new(expression, proxy_class=class_, template="baca")
 
 
 class PaddedTuple:
@@ -2250,7 +2251,7 @@ class Selection(abjad.Selection):
         result = self.leaves(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, cyclic=True)
-        result_ = result.map(Expression().select().flatten())
+        result_ = result.map(select().flatten())
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
@@ -3782,7 +3783,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.plts(exclude=exclude)
         result = result.group_by_pitch()
-        result = result.map(Expression().select().group_by_contiguity())
+        result = result.map(select().group_by_contiguity())
         result = result.flatten(depth=1)
         result = result.map(Selection)
         return result
@@ -4203,7 +4204,7 @@ class Selection(abjad.Selection):
         result = self.leaves(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts)
-        result_ = result.map(Expression().select().flatten())
+        result_ = result.map(select().flatten())
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
@@ -4763,7 +4764,7 @@ class Selection(abjad.Selection):
         result = self.leaves(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, overhang=True)
-        result_ = result.map(Expression().select().flatten())
+        result_ = result.map(select().flatten())
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
@@ -4778,7 +4779,7 @@ class Selection(abjad.Selection):
         result = self.plts(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, overhang=True)
-        result_ = result.map(Expression().select().flatten())
+        result_ = result.map(select().flatten())
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
@@ -4997,7 +4998,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.plts(exclude=exclude, grace=grace).map(Expression().select()[0])
+        return self.plts(exclude=exclude, grace=grace).map(select()[0])
 
     def pleaf(
         self, n: int, *, exclude: abjad.Strings = None, grace: bool = None
@@ -5661,7 +5662,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.plts(exclude=exclude).map(Expression().select()[-1])
+        return self.plts(exclude=exclude).map(select()[-1])
 
     def ptlt(
         self, n: int, *, exclude: abjad.Strings = None
@@ -6080,7 +6081,7 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.pleaves(exclude=exclude)
         result = result.group_by_pitch()
-        result = result.map(Expression().select().group_by_contiguity())
+        result = result.map(select().group_by_contiguity())
         result = result.flatten(depth=1)
         result = result.map(Selection)
         return result
@@ -6641,7 +6642,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        result = self.runs(exclude=exclude).map(Expression().select().rleak())
+        result = self.runs(exclude=exclude).map(select().rleak())
         return result.map(Selection)
 
     def skip(
@@ -11677,3 +11678,17 @@ class Tree:
             else:
                 if node._get_level(negative=True) == level:
                     yield node
+
+
+### FUNCTIONS ####
+
+
+def select(items=None):
+    if items is not None:
+        return Selection(items=items)
+    expression = Expression(proxy_class=Selection)
+    callback = Expression._make_initializer_callback(
+        Selection, callback_class=Expression, module_names=["baca"]
+    )
+    expression = expression.append_callback(callback)
+    return abjad.new(expression, template="baca")

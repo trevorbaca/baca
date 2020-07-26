@@ -125,6 +125,18 @@ Bača API
 
    <hr/>
 
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.classes.select
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.commandclasses <baca--commandclasses>`
    :class: section-header
 
@@ -191,7 +203,6 @@ Bača API
    ~baca.commands.open_volta
    ~baca.commands.parts
    ~baca.commands.previous_metadata
-   ~baca.commands.select
    ~baca.commands.sequence
    ~baca.commands.untie
    ~baca.commands.voice_four

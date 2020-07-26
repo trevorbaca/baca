@@ -864,7 +864,7 @@ class ColorCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.Expression().select().leaves(),
+        selector: abjad.Expression = classes.select().leaves(),
     ) -> None:
         assert selector is not None
         scoping.Command.__init__(
@@ -1047,7 +1047,7 @@ class ContainerCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.Expression().select().leaves(),
+        selector: abjad.Expression = classes.select().leaves(),
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -1206,7 +1206,7 @@ class GlissandoCommand(scoping.Command):
         right_broken: bool = None,
         right_broken_show_next: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.Expression().select().tleaves(),
+        selector: abjad.Expression = classes.select().tleaves(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
         zero_padding: bool = None,
@@ -1377,7 +1377,7 @@ class GlobalFermataCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.Expression().select().leaf(0),
+        selector: abjad.Expression = classes.select().leaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1484,7 +1484,7 @@ class IndicatorCommand(scoping.Command):
         predicate: typing.Callable = None,
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.Expression().select().pheads(),
+        selector: abjad.Expression = classes.select().pheads(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
@@ -1669,7 +1669,7 @@ class LabelCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector=classes.Expression().select().leaves(),
+        selector=classes.select().leaves(),
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -1736,7 +1736,7 @@ class MetronomeMarkCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.Expression().select().leaf(0),
+        selector: abjad.Expression = classes.select().leaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1832,7 +1832,7 @@ class PartAssignmentCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         part_assignment: abjad.PartAssignment = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.Expression().select().leaves(),
+        selector: abjad.Expression = classes.select().leaves(),
     ) -> None:
         scoping.Command.__init__(
             self,
