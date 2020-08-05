@@ -21,6 +21,8 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     __slots__ = ("_defaults",)
 
+    _part_manifest: abjad.PartManifest = abjad.PartManifest()
+
     voice_colors: dict = {}
 
     ### INITIALIZER ###
@@ -101,7 +103,27 @@ class ScoreTemplate(abjad.ScoreTemplate):
         """
         return self._defaults
 
+    @property
+    def part_manifest(self) -> typing.Optional[abjad.PartManifest]:
+        """
+        Gets part manifest.
+        """
+        if self._part_manifest is not None:
+            assert isinstance(self._part_manifest, abjad.PartManifest)
+        return self._part_manifest
+
     ### PUBLIC METHODS ###
+
+    def allows_part_assignment(
+        self, voice_name: str, part_assignment: abjad.PartAssignment
+    ) -> bool:
+        """
+        Is true when ``voice_name`` allows ``part_assignment``.
+        """
+        section = part_assignment.section or "ZZZ"
+        if voice_name.startswith(section):
+            return True
+        return False
 
     def attach_defaults(self, argument) -> typing.List:
         """

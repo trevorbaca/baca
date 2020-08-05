@@ -41,6 +41,7 @@ templates
    .. autosummary::
       :nosignatures:
 
+      allows_part_assignment
       attach_defaults
       defaults
       group_families
@@ -48,6 +49,7 @@ templates
       make_piano_staff
       make_square_staff_group
       make_staff_group
+      part_manifest
       voice_colors
 
    .. raw:: html
@@ -80,9 +82,7 @@ templates
 
       .. automethod:: ScoreTemplate.allows_instrument
 
-   .. container:: inherited
-
-      .. automethod:: ScoreTemplate.allows_part_assignment
+   .. automethod:: ScoreTemplate.allows_part_assignment
 
    .. automethod:: ScoreTemplate.attach_defaults
 
@@ -113,9 +113,7 @@ templates
 
       .. autoattribute:: ScoreTemplate.do_not_require_margin_markup
 
-   .. container:: inherited
-
-      .. autoattribute:: ScoreTemplate.part_manifest
+   .. autoattribute:: ScoreTemplate.part_manifest
 
    .. container:: inherited
 

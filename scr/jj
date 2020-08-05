@@ -1,3 +1,3 @@
-ABJAD_TMP=~/.abjad/abjad_tmp.py
+ABJAD_TMP=~/.abjad/tmp.py
 
 clear; python -i $ABJAD_TMP
