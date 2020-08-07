@@ -1,6 +1,8 @@
 import inspect
 import typing
 
+import ide
+
 import abjad
 
 from . import (
@@ -2669,7 +2671,7 @@ def metronome_mark(
 
 
 def parts(
-    part_assignment: abjad.PartAssignment,
+    part_assignment: ide.PartAssignment,
     *,
     selector: abjad.Expression = classes.select().leaves(),
 ) -> commandclasses.PartAssignmentCommand:
@@ -2686,7 +2688,7 @@ def parts(
         >>> maker(
         ...     'Violin_Music_Voice',
         ...     baca.make_notes(),
-        ...     baca.parts(abjad.PartAssignment('Violin')),
+        ...     baca.parts(ide.PartAssignment('Violin')),
         ...     baca.pitch('E4'),
         ...     )
 
@@ -2951,7 +2953,7 @@ def parts(
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
         ...     )
 
-        >>> part_assignment = abjad.PartAssignment('Flute')
+        >>> part_assignment = ide.PartAssignment('Flute')
 
         >>> maker(
         ...     'Violin_Music_Voice',
@@ -2967,7 +2969,7 @@ def parts(
             PartAssignment('Flute')
 
     """
-    if not isinstance(part_assignment, abjad.PartAssignment):
+    if not isinstance(part_assignment, ide.PartAssignment):
         message = "part_assignment must be part assignment"
         message += f" (not {part_assignment!r})."
         raise Exception(message)

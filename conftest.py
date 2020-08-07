@@ -1,3 +1,4 @@
+import ide
 import pytest
 
 import abjad
@@ -9,4 +10,5 @@ from abjadext import rmakers
 def add_libraries(doctest_namespace):
     doctest_namespace["abjad"] = abjad
     doctest_namespace["baca"] = baca
+    doctest_namespace["ide"] = ide
     doctest_namespace["rmakers"] = rmakers

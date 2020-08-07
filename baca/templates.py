@@ -3,6 +3,7 @@ Score template library.
 """
 import typing
 
+import ide
 import roman
 
 import abjad
@@ -21,7 +22,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     __slots__ = ("_defaults",)
 
-    _part_manifest: abjad.PartManifest = abjad.PartManifest()
+    _part_manifest: ide.PartManifest = ide.PartManifest()
 
     voice_colors: dict = {}
 
@@ -104,18 +105,18 @@ class ScoreTemplate(abjad.ScoreTemplate):
         return self._defaults
 
     @property
-    def part_manifest(self) -> typing.Optional[abjad.PartManifest]:
+    def part_manifest(self) -> typing.Optional[ide.PartManifest]:
         """
         Gets part manifest.
         """
         if self._part_manifest is not None:
-            assert isinstance(self._part_manifest, abjad.PartManifest)
+            assert isinstance(self._part_manifest, ide.PartManifest)
         return self._part_manifest
 
     ### PUBLIC METHODS ###
 
     def allows_part_assignment(
-        self, voice_name: str, part_assignment: abjad.PartAssignment
+        self, voice_name: str, part_assignment: ide.PartAssignment
     ) -> bool:
         """
         Is true when ``voice_name`` allows ``part_assignment``.
@@ -733,10 +734,10 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
     ### CLASS VARIABLES ###
 
-    _part_manifest = abjad.PartManifest(
-        abjad.Part(section="Violin", section_abbreviation="VN"),
-        abjad.Part(section="Viola", section_abbreviation="VA"),
-        abjad.Part(section="Cello", section_abbreviation="VC"),
+    _part_manifest = ide.PartManifest(
+        ide.Part(section="Violin", section_abbreviation="VN"),
+        ide.Part(section="Viola", section_abbreviation="VA"),
+        ide.Part(section="Cello", section_abbreviation="VC"),
     )
 
     ### SPECIAL METHODS ###

@@ -282,7 +282,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Clef',
         ...         value='treble',
@@ -422,7 +422,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Clef',
         ...         value='treble',
@@ -709,7 +709,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Clef',
         ...         value='treble',
@@ -972,7 +972,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Dynamic',
         ...         value='f',
@@ -1107,7 +1107,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Dynamic',
         ...         value='f',
@@ -1365,7 +1365,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Dynamic',
         ...         value='f',
@@ -1621,7 +1621,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         prototype='abjad.Dynamic',
         ...         value='sfz',
@@ -2623,7 +2623,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         manifest='instruments',
         ...         value='Piccolo',
@@ -2999,7 +2999,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         manifest='instruments',
         ...         value='Flute',
@@ -3781,7 +3781,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         manifest='instruments',
         ...         value='Flute',
@@ -4940,7 +4940,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         manifest='margin_markups',
         ...         value='I+II',
@@ -5340,7 +5340,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         manifest='margin_markups',
         ...         value='I+II',
@@ -6181,7 +6181,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         manifest='margin_markups',
         ...         value='I+II',
@@ -6903,7 +6903,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Global_Skips',
         ...         manifest='metronome_marks',
         ...         value='90',
@@ -7057,7 +7057,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Global_Skips',
         ...         manifest='metronome_marks',
         ...         value='90',
@@ -7355,7 +7355,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Global_Skips',
         ...         manifest='metronome_marks',
         ...         value='112',
@@ -7498,7 +7498,7 @@ r"""
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> override = abjad.PersistentOverride(
+        >>> override = ide.PersistentOverride(
         ...     attribute="bar_extent",
         ...     context="Staff",
         ...     grob="bar_line",
@@ -7632,33 +7632,33 @@ r"""
                 (
                     'Music_Staff',
                     [
-                        abjad.Momento(
+                        ide.Momento(
                             context='Music_Voice',
                             edition=abjad.Tag('-PARTS'),
                             prototype='baca.BarExtent',
                             value=1,
                             ),
-                        abjad.Momento(
+                        ide.Momento(
                             context='Music_Voice',
-                            prototype='abjad.PersistentOverride',
-                            value=abjad.PersistentOverride(
+                            prototype='baca.StaffLines',
+                            value=1,
+                            ),
+                        ide.Momento(
+                            context='Music_Voice',
+                            prototype='ide.PersistentOverride',
+                            value=ide.PersistentOverride(
                                 attribute='bar_extent',
                                 context='Staff',
                                 grob='bar_line',
                                 value=(0, 0),
                                 ),
                             ),
-                        abjad.Momento(
-                            context='Music_Voice',
-                            prototype='baca.StaffLines',
-                            value=1,
-                            ),
                         ],
                     ),
                 (
                     'Score',
                     [
-                        abjad.Momento(
+                        ide.Momento(
                             context='Global_Skips',
                             prototype='abjad.TimeSignature',
                             value='3/8',
@@ -7686,10 +7686,10 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
-        ...         prototype='abjad.PersistentOverride',
-        ...         value=abjad.PersistentOverride(
+        ...         prototype='ide.PersistentOverride',
+        ...         value=ide.PersistentOverride(
         ...             after=True,
         ...             attribute='bar_extent',
         ...             context='Staff',
@@ -7815,7 +7815,7 @@ r"""
         ...     spacing=baca.minimum_duration((1, 24)),
         ...     time_signatures=[(3, 8), (3, 8)],
         ...     )
-        >>> override = abjad.PersistentOverride(
+        >>> override = ide.PersistentOverride(
         ...     attribute="bar_extent",
         ...     context="Staff",
         ...     grob="bar_line",
@@ -7834,10 +7834,10 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Voice'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
-        ...         prototype='abjad.PersistentOverride',
-        ...         value=abjad.PersistentOverride(
+        ...         prototype='ide.PersistentOverride',
+        ...         value=ide.PersistentOverride(
         ...             after=True,
         ...             attribute='bar_extent',
         ...             context='Staff',
@@ -8101,7 +8101,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         prototype='baca.StaffLines',
         ...         value=5,
@@ -8239,7 +8239,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         prototype='baca.StaffLines',
         ...         value=5,
@@ -8505,7 +8505,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Music_Staff'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Music_Voice',
         ...         prototype='baca.StaffLines',
         ...         value=5,
@@ -8816,7 +8816,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Global_Skips',
         ...         prototype='baca.Ritardando',
         ...         )
@@ -8989,7 +8989,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Global_Skips',
         ...         prototype='baca.Accelerando',
         ...         )
@@ -9358,7 +9358,7 @@ r"""
         >>> metadata, persist = {}, {}
         >>> persist['persistent_indicators'] = {}
         >>> persist['persistent_indicators']['Score'] = [
-        ...     abjad.Momento(
+        ...     ide.Momento(
         ...         context='Global_Skips',
         ...         prototype='baca.Accelerando',
         ...         )

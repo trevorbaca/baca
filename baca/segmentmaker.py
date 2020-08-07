@@ -5,6 +5,8 @@ import os
 import pathlib
 import typing
 
+import ide
+
 import abjad
 from abjadext import rmakers
 
@@ -1388,7 +1390,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     part_container_count += 1
                     part = container.identifier.strip("%*% ")
                     globals_ = globals()
-                    globals_["PartAssignment"] = abjad.PartAssignment
+                    globals_["PartAssignment"] = ide.PartAssignment
                     part = eval(part, globals_)
                     suffix = abjad.String().base_26(part_container_count).lower()
                     container_identifier = f"{context_identifier}_{suffix}"
@@ -1523,7 +1525,7 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         if getattr(wrapper.indicator, "parameter", None) == "METRONOME_MARK":
             return
-        if isinstance(wrapper.indicator, abjad.PersistentOverride):
+        if isinstance(wrapper.indicator, ide.PersistentOverride):
             return
         if isinstance(wrapper.indicator, indicators.BarExtent):
             return
@@ -2563,7 +2565,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     editions = abjad.Tag(string)
                 else:
                     editions = None
-                momento = abjad.Momento(
+                momento = ide.Momento(
                     context=first_context.name,
                     edition=editions,
                     manifest=manifest,
@@ -3076,7 +3078,7 @@ class SegmentMaker(abjad.SegmentMaker):
             key = SegmentMaker._get_key(manifests["abjad.MetronomeMark"], indicator)
         elif isinstance(indicator, abjad.MarginMarkup):
             key = SegmentMaker._get_key(manifests["abjad.MarginMarkup"], indicator)
-        elif isinstance(indicator, abjad.PersistentOverride):
+        elif isinstance(indicator, ide.PersistentOverride):
             key = indicator
         elif isinstance(indicator, indicators.BarExtent):
             key = indicator.line_count
@@ -4949,11 +4951,12 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  container:: example
 
+            >>> import ide
             >>> metadata = abjad.OrderedDict()
             >>> persist = abjad.OrderedDict()
             >>> persist['persistent_indicators'] = abjad.OrderedDict()
             >>> persist['persistent_indicators']['MusicStaff'] = [
-            ...     abjad.Momento(
+            ...     ide.Momento(
             ...         context='Music_Voice',
             ...         prototype='abjad.Clef',
             ...         value='alto',
@@ -5115,7 +5118,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 (
                                     'MusicStaff',
                                     [
-                                        abjad.Momento(
+                                        ide.Momento(
                                             context='Music_Voice',
                                             prototype='abjad.Clef',
                                             value='alto',
@@ -5125,7 +5128,7 @@ class SegmentMaker(abjad.SegmentMaker):
                                 (
                                     'Score',
                                     [
-                                        abjad.Momento(
+                                        ide.Momento(
                                             context='Global_Skips',
                                             prototype='abjad.TimeSignature',
                                             value='3/8',
