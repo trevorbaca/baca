@@ -33,6 +33,7 @@ version of Python.
 
 install_requires = [
     "abjad",
+    "ide",
     "mypy",
     "roman",
     "sphinx",
