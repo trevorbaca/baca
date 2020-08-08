@@ -2339,7 +2339,7 @@ def invisible_music(
 
     """
     tag = _site(inspect.currentframe(), 1)
-    tag = tag.append(abjad.tags.INVISIBLE_MUSIC_COMMAND)
+    tag = tag.append(ide.tags.INVISIBLE_MUSIC_COMMAND)
     command_1 = commandclasses.IndicatorCommand(
         [abjad.LilyPondLiteral(r"\abjad-invisible-music")],
         deactivate=True,
@@ -2348,7 +2348,7 @@ def invisible_music(
         tags=[tag],
     )
     tag = _site(inspect.currentframe(), 2)
-    tag = tag.append(abjad.tags.INVISIBLE_MUSIC_COLORING)
+    tag = tag.append(ide.tags.INVISIBLE_MUSIC_COLORING)
     command_2 = commandclasses.IndicatorCommand(
         [abjad.LilyPondLiteral(r"\abjad-invisible-music-coloring")],
         map=map,

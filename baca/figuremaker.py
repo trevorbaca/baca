@@ -2,6 +2,8 @@ import copy
 import math
 import typing
 
+import ide
+
 import abjad
 from abjadext import rmakers
 
@@ -3801,7 +3803,7 @@ class Accumulator:
         figure_name_markup._annotation = annotation
         leaf = abjad.select(container).leaf(0)
         abjad.attach(
-            figure_name_markup, leaf, deactivate=True, tag=abjad.tags.FIGURE_NAME,
+            figure_name_markup, leaf, deactivate=True, tag=ide.tags.FIGURE_NAME,
         )
 
     def _make_voice_dictionary(self):

@@ -1,6 +1,8 @@
 import collections
 import typing
 
+import ide
+
 import abjad
 
 from . import classes, commandclasses, indicators
@@ -365,8 +367,8 @@ class BreakMeasureMap:
     ) -> None:
         tags = scoping.Command._preprocess_tags(tags)
         assert scoping.Command._validate_tags(tags), repr(tags)
-        if abjad.tags.BREAK not in tags:
-            tags.append(abjad.tags.BREAK)
+        if ide.tags.BREAK not in tags:
+            tags.append(ide.tags.BREAK)
         self._tags = tags
         self._bol_measure_numbers: typing.List[int] = []
         self._deactivate = deactivate
@@ -1696,7 +1698,7 @@ class HorizontalSpacingSpecifier:
             if measure_index == total - 1:
                 duration = abjad.Duration(1, 4)
             spacing_section = indicators.SpacingSection(duration=duration)
-            tag = abjad.tags.SPACING_COMMAND
+            tag = ide.tags.SPACING_COMMAND
             abjad.attach(
                 spacing_section,
                 skip,
@@ -1706,7 +1708,7 @@ class HorizontalSpacingSpecifier:
             )
             string_ = self._make_annotation(duration, eol_adjusted, duration_)
             if measure_index < total - 1:
-                tag = abjad.tags.SPACING
+                tag = ide.tags.SPACING
                 string = r"- \baca-start-spm-left-only"
                 string += f' "{string_}"'
                 start_text_span = abjad.StartTextSpan(
@@ -1722,7 +1724,7 @@ class HorizontalSpacingSpecifier:
                     ),
                 )
             if 0 < measure_index:
-                tag = abjad.tags.SPACING
+                tag = ide.tags.SPACING
                 stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSPM")
                 abjad.attach(
                     stop_text_span,

@@ -4,6 +4,8 @@ Override library.
 import inspect
 import typing
 
+import ide
+
 import abjad
 
 from . import classes, scoping, typings
@@ -705,7 +707,7 @@ def clef_shift(
         extra_offset_x = -width
     suite = scoping.suite(clef_x_extent_false(), clef_extra_offset((extra_offset_x, 0)))
     scoping.tag(_site(inspect.currentframe()), suite)
-    scoping.tag(abjad.tags.SHIFTED_CLEF, suite, tag_measure_number=True)
+    scoping.tag(ide.tags.SHIFTED_CLEF, suite, tag_measure_number=True)
     return suite
 
 

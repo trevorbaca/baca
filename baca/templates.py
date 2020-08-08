@@ -203,7 +203,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
                     wrapper = abjad.attach(
                         margin_markup,
                         leaf,
-                        tag=abjad.tags.NOT_PARTS.append(
+                        tag=ide.tags.NOT_PARTS.append(
                             abjad.Tag("abjad.ScoreTemplate.attach_defaults(2)")
                         ),
                         wrapper=True,

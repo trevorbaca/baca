@@ -1,4 +1,5 @@
 import abjad
+import ide
 
 from . import const, markups
 from .classes import *
@@ -25,6 +26,7 @@ from .segmentmaker import *
 from .spannercommands import *
 from .templates import *
 from .typings import *
+tags = ide.tags
 
 
 def chead(*arguments, **keywords):

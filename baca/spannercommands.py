@@ -1,6 +1,8 @@
 import inspect
 import typing
 
+import ide
+
 import abjad
 
 from . import classes, scoping, typings
@@ -99,8 +101,8 @@ class SpannerIndicatorCommand(scoping.Command):
                     first_leaf,
                     deactivate=self.deactivate,
                     tag=abjad.Tag("baca.SpannerIndicatorCommand._call(1)")
-                    .append(abjad.tags.SPANNER_START)
-                    .append(abjad.tags.LEFT_BROKEN),
+                    .append(ide.tags.SPANNER_START)
+                    .append(ide.tags.LEFT_BROKEN),
                 )
             else:
                 self._attach_indicator(
@@ -108,7 +110,7 @@ class SpannerIndicatorCommand(scoping.Command):
                     first_leaf,
                     deactivate=self.deactivate,
                     tag=abjad.Tag("baca.SpannerIndicatorCommand._call(2)").append(
-                        abjad.tags.SPANNER_START
+                        ide.tags.SPANNER_START
                     ),
                 )
         if self.stop_indicator is not None:
@@ -123,8 +125,8 @@ class SpannerIndicatorCommand(scoping.Command):
                     final_leaf,
                     deactivate=self.deactivate,
                     tag=abjad.Tag("baca.SpannerIndicatorCommand._call(3)")
-                    .append(abjad.tags.SPANNER_STOP)
-                    .append(abjad.tags.RIGHT_BROKEN),
+                    .append(ide.tags.SPANNER_STOP)
+                    .append(ide.tags.RIGHT_BROKEN),
                 )
             else:
                 self._attach_indicator(
@@ -132,7 +134,7 @@ class SpannerIndicatorCommand(scoping.Command):
                     final_leaf,
                     deactivate=self.deactivate,
                     tag=abjad.Tag("baca.SpannerIndicatorCommand._call(4)").append(
-                        abjad.tags.SPANNER_STOP
+                        ide.tags.SPANNER_STOP
                     ),
                 )
 

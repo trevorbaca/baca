@@ -2,6 +2,8 @@ import functools
 import inspect
 import typing
 
+import ide
+
 import abjad
 
 from . import indicators, typings
@@ -1239,35 +1241,35 @@ def not_mol(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``NOT_MOL`` (not middle-of-line).
     """
-    return tag(abjad.tags.NOT_MOL, command, tag_measure_number=True)
+    return tag(ide.tags.NOT_MOL, command, tag_measure_number=True)
 
 
 def not_parts(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-PARTS``.
     """
-    return tag(abjad.tags.NOT_PARTS, command)
+    return tag(ide.tags.NOT_PARTS, command)
 
 
 def not_score(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-SCORE``.
     """
-    return tag(abjad.tags.NOT_SCORE, command)
+    return tag(ide.tags.NOT_SCORE, command)
 
 
 def not_segment(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``-SEGMENT``.
     """
-    return tag(abjad.tags.NOT_SEGMENT, command)
+    return tag(ide.tags.NOT_SEGMENT, command)
 
 
 def only_mol(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``ONLY_MOL`` (only middle-of-line).
     """
-    return tag(abjad.tags.ONLY_MOL, command, tag_measure_number=True)
+    return tag(ide.tags.ONLY_MOL, command, tag_measure_number=True)
 
 
 def only_parts(command: _command_typing) -> _command_typing:
@@ -1421,21 +1423,21 @@ def only_parts(command: _command_typing) -> _command_typing:
             >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
     """
-    return tag(abjad.tags.ONLY_PARTS, command)
+    return tag(ide.tags.ONLY_PARTS, command)
 
 
 def only_score(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``+SCORE``.
     """
-    return tag(abjad.tags.ONLY_SCORE, command)
+    return tag(ide.tags.ONLY_SCORE, command)
 
 
 def only_segment(command: _command_typing) -> _command_typing:
     """
     Tags ``command`` with ``+SEGMENT``.
     """
-    return tag(abjad.tags.ONLY_SEGMENT, command)
+    return tag(ide.tags.ONLY_SEGMENT, command)
 
 
 def site(frame, prefix, *, n=None) -> abjad.Tag:
