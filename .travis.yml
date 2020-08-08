@@ -56,6 +56,12 @@ before_install:
     - pip install -e $TONALITY
     - export MYPYPATH=$MYPYPATH:$TONALITY
 
+    # clone & install IDE:
+    - IDE=/tmp/ide
+    - git clone https://github.com/Abjad/ide.git $IDE
+    - pip install -e $IDE
+    - export MYPYPATH=$MYPYPATH:$IDE
+
     # log setup:
     - echo $MYPYPATH
     - echo $PATH
