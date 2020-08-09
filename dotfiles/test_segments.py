@@ -6,6 +6,7 @@ import ide
 import pytest
 
 import abjad
+import baca
 
 abjad_ide = ide.AbjadIDE()
 travis_build_dir = os.getenv("TRAVIS_BUILD_DIR")
