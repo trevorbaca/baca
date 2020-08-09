@@ -2680,6 +2680,7 @@ def parts(
 
     ..  container:: example
 
+        >>> import ide
         >>> maker = baca.SegmentMaker(
         ...     score_template=baca.StringTrioScoreTemplate(),
         ...     time_signatures=[(4, 8), (3, 8), (4, 8), (3, 8)],
@@ -3005,10 +3006,10 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     """
     Gets previous segment metadata before ``path``.
     """
-    # reproduces abjad.Path.get_previous_path()
+    # reproduces ide.Path.get_previous_path()
     # because Travis isn't configured for scores-directory calculations
-    definition_py = abjad.Path(path)
-    segment = abjad.Path(definition_py).parent
+    definition_py = ide.Path(path)
+    segment = ide.Path(definition_py).parent
     assert segment.is_segment(), repr(segment)
     segments = segment.parent
     assert segments.is_segments(), repr(segments)

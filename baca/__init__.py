@@ -27,6 +27,7 @@ from .spannercommands import *
 from .templates import *
 from .typings import *
 
+Path = ide.Path
 tags = ide.tags
 
 
