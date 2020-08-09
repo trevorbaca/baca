@@ -5,7 +5,6 @@ import sys
 import ide
 import pytest
 
-import abjad
 import baca
 
 abjad_ide = ide.AbjadIDE()
