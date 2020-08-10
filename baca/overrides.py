@@ -91,7 +91,7 @@ class OverrideCommand(scoping.Command):
         if grob is not None:
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
-        if attribute == "color" and value not in abjad.ly.colors.colors:
+        if attribute == "color" and value not in abjad.lyconst.colors:
             raise Exception(f"{repr(value)} is not a LilyPond color.")
         self._value = value
         if whitelist is not None:
@@ -136,7 +136,7 @@ class OverrideCommand(scoping.Command):
         grob = self.grob
         attribute = self.attribute
         value = self.value
-        if attribute == "color" and value not in abjad.ly.colors.normal_colors:
+        if attribute == "color" and value not in abjad.lyconst.normal_colors:
             value = f"#(x11-color '{value})"
         once = bool(len(leaves) == 1)
         string = abjad.OverrideInterface.make_lilypond_override_string(
