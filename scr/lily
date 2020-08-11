@@ -3,10 +3,12 @@ import os
 import sys
 
 LILYPOND = "/Applications/LilyPond.app/Contents/Resources/bin/lilypond"
-_STYLESHEETS = "/Users/trevorbaca/abjad/docs/source/_stylesheets"
+_STYLESHEETS_ABJAD = "/Users/trevorbaca/abjad/docs/source/_stylesheets"
+_STYLESHEETS_BACA = "/Users/trevorbaca/baca/docs/source/_stylesheets"
 
 command = f"{LILYPOND}"
-command += f" --include={_STYLESHEETS}"
+command += f" --include={_STYLESHEETS_ABJAD}"
+command += f" --include={_STYLESHEETS_BACA}"
 command += f" -dno-point-and-click"
 command += f" {sys.argv[1]}"
 os.system(command)
