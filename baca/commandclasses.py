@@ -1084,7 +1084,7 @@ class ContainerCommand(scoping.Command):
             identifier = f"%*% {self.identifier}"
         container = abjad.Container(identifier=identifier)
         components = classes.Selection(argument).leaves().top()
-        abjad.mutate(components).wrap(container)
+        abjad.mutate.wrap(components, container)
 
     ### PRIVATE METHODS ###
 
@@ -1876,7 +1876,7 @@ class PartAssignmentCommand(scoping.Command):
         identifier = f"%*% {self.part_assignment!s}"
         container = abjad.Container(identifier=identifier)
         components = classes.Selection(argument).leaves().top()
-        abjad.mutate(components).wrap(container)
+        abjad.mutate.wrap(components, container)
 
     ### PRIVATE METHODS ###
 

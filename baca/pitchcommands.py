@@ -517,7 +517,7 @@ class ClusterCommand(scoping.Command):
             indicators = abjad.detach(object, pleaf)
             for indicator in indicators:
                 abjad.attach(indicator, chord)
-            abjad.mutate(pleaf).replace(chord)
+            abjad.mutate.replace(pleaf, chord)
             abjad.attach(key_cluster, chord)
             abjad.attach(abjad.const.ALLOW_REPEAT_PITCH, chord)
             abjad.detach(abjad.const.NOT_YET_PITCHED, chord)
@@ -1940,7 +1940,7 @@ class DiatonicClusterCommand(scoping.Command):
             for pleaf in plt:
                 chord = abjad.Chord(pleaf)
                 chord.note_heads[:] = pitches
-                abjad.mutate(pleaf).replace(chord)
+                abjad.mutate.replace(pleaf, chord)
 
     ### PRIVATE METHODS ###
 
@@ -3318,7 +3318,7 @@ class PitchCommand(scoping.Command):
             else:
                 for leaf in lt:
                     rest = abjad.Rest(leaf.written_duration, multiplier=leaf.multiplier)
-                    abjad.mutate(leaf).replace(rest, wrappers=True)
+                    abjad.mutate.replace(leaf, rest, wrappers=True)
                 new_lt = abjad.inspect(rest).logical_tie()
         elif isinstance(pitch, collections.abc.Iterable):
             if isinstance(lt.head, abjad.Chord):
@@ -3330,7 +3330,7 @@ class PitchCommand(scoping.Command):
                     chord = abjad.Chord(
                         pitch, leaf.written_duration, multiplier=leaf.multiplier,
                     )
-                    abjad.mutate(leaf).replace(chord, wrappers=True)
+                    abjad.mutate.replace(leaf, chord, wrappers=True)
                 new_lt = abjad.inspect(chord).logical_tie()
         else:
             if isinstance(lt.head, abjad.Note):
@@ -3346,7 +3346,7 @@ class PitchCommand(scoping.Command):
                     note = abjad.Note(
                         pitch, leaf.written_duration, multiplier=leaf.multiplier,
                     )
-                    abjad.mutate(leaf).replace(note, wrappers=True)
+                    abjad.mutate.replace(leaf, note, wrappers=True)
                 new_lt = abjad.inspect(note).logical_tie()
         return new_lt
 

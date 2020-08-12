@@ -709,7 +709,7 @@ class PitchArray:
             leaves = abjad.iterate(leaf_iterable).leaves()
             for leaf in leaves:
                 durations.append(abjad.inspect(leaf).duration())
-            parts = abjad.mutate(items).split(durations, cyclic=False)
+            parts = abjad.mutate.split(items, durations, cyclic=False)
             part_lengths = [len(part) for part in parts]
             cells = pitch_array_row.cells
             grouped_cells = classes.Sequence(cells).partition_by_counts(
@@ -2253,7 +2253,7 @@ class PitchArrayList(abjad.TypedList):
         score.append(staff_group)
         number_staves = self[0].depth
         staff = abjad.Staff()
-        staves = abjad.mutate(staff).copy(number_staves)
+        staves = abjad.mutate.copy(staff, number_staves)
         staff_group.extend(staves)
         for pitch_array in self:
             measures = pitch_array.to_measures()

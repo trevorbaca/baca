@@ -1248,7 +1248,7 @@ def music(
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
-        selection = abjad.mutate(container).eject_contents()
+        selection = abjad.mutate.eject_contents(container)
     elif isinstance(argument, abjad.Selection):
         selection = argument
     else:
@@ -1301,7 +1301,7 @@ def skeleton(
     if isinstance(argument, str):
         string = f"{{ {argument} }}"
         container = abjad.parse(string)
-        selection = abjad.mutate(container).eject_contents()
+        selection = abjad.mutate.eject_contents(container)
     elif isinstance(argument, abjad.Selection):
         selection = argument
     else:

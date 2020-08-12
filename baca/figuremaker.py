@@ -2001,12 +2001,12 @@ class Imbrication:
                 for leaf in logical_tie:
                     duration = leaf.written_duration
                     skip = abjad.Skip(duration)
-                    abjad.mutate(leaf).replace([skip])
+                    abjad.mutate.replace(leaf, [skip])
             elif isinstance(logical_tie.head, abjad.Rest):
                 for leaf in logical_tie:
                     duration = leaf.written_duration
                     skip = abjad.Skip(duration)
-                    abjad.mutate(leaf).replace([skip])
+                    abjad.mutate.replace(leaf, [skip])
             elif isinstance(logical_tie.head, abjad.Skip):
                 pass
             elif self._matches_pitch(logical_tie.head, pitch_number):
@@ -2014,7 +2014,7 @@ class Imbrication:
                     for leaf in logical_tie:
                         duration = leaf.written_duration
                         skip = abjad.Skip(duration)
-                        abjad.mutate(leaf).replace([skip])
+                        abjad.mutate.replace(leaf, [skip])
                     pitch_number = cursor.next()
                     continue
                 self._trim_matching_chord(logical_tie, pitch_number)
@@ -2025,7 +2025,7 @@ class Imbrication:
                     for leaf in logical_tie[1:]:
                         duration = leaf.written_duration
                         skip = abjad.Skip(duration)
-                        abjad.mutate(leaf).replace([skip])
+                        abjad.mutate.replace(leaf, [skip])
                     abjad.detach(abjad.Tie, head)
                     next_leaf = abjad.inspect(tail).leaf(1)
                     if next_leaf is not None:
@@ -2034,12 +2034,12 @@ class Imbrication:
                     for leaf in original_logical_tie:
                         duration = leaf.written_duration
                         skip = abjad.Skip(duration)
-                        abjad.mutate(leaf).replace([skip])
+                        abjad.mutate.replace(leaf, [skip])
             else:
                 for leaf in logical_tie:
                     duration = leaf.written_duration
                     skip = abjad.Skip(duration)
-                    abjad.mutate(leaf).replace([skip])
+                    abjad.mutate.replace(leaf, [skip])
         if not self.allow_unused_pitches and not cursor.is_exhausted:
             current, total = cursor.position - 1, len(cursor)
             message = f"{cursor!r} used only {current} of {total} pitches."
@@ -2121,7 +2121,7 @@ class Imbrication:
         for chord in logical_tie:
             duration = chord.written_duration
             note = abjad.Note(pitch_object, duration)
-            abjad.mutate(chord).replace([note])
+            abjad.mutate.replace(chord, [note])
 
     ### PUBLIC PROPERTIES ###
 
@@ -4220,16 +4220,16 @@ class Nest:
             target_duration = contents_duration + addendum
             multiplier = target_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, [])
-            abjad.mutate(tuplet_selection).wrap(tuplet)
+            abjad.mutate.wrap(tuplet_selection, tuplet)
         elif treatment.__class__ is abjad.Multiplier:
             tuplet = abjad.Tuplet(treatment, [])
-            abjad.mutate(tuplet_selection).wrap(tuplet)
+            abjad.mutate.wrap(tuplet_selection, tuplet)
         elif treatment.__class__ is abjad.Duration:
             target_duration = treatment
             contents_duration = abjad.inspect(tuplet_selection).duration()
             multiplier = target_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, [])
-            abjad.mutate(tuplet_selection).wrap(tuplet)
+            abjad.mutate.wrap(tuplet_selection, tuplet)
         else:
             raise Exception(f"bad time treatment: {treatment!r}.")
         return tuplet
