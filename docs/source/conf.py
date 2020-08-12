@@ -24,7 +24,7 @@ extensions = [
     "sphinx.ext.graphviz",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
-    "abjad.ext.sphinx",
+    "abjad.sphinx",
     "sphinx_autodoc_typehints",
     "uqbar.sphinx.api",
     "uqbar.sphinx.book",
@@ -109,7 +109,7 @@ uqbar_book_console_setup = [
 uqbar_book_console_teardown = []
 uqbar_book_extensions = [
     "uqbar.book.extensions.GraphExtension",
-    "abjad.ext.sphinx.LilyPondExtension",
+    "abjad.sphinx.LilyPondExtension",
 ]
 uqbar_book_strict = False
 uqbar_book_use_black = True
