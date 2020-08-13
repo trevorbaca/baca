@@ -5,7 +5,7 @@ import ide
 
 import abjad
 
-from . import classes, commandclasses, indicators, markups, scoping
+from . import classes, commandclasses, const, indicators, markups, scoping
 
 
 def _site(frame):
@@ -17,7 +17,7 @@ def _site(frame):
 
 
 def accent(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches accent.
@@ -100,7 +100,7 @@ def accent(
 
 
 def alternate_bow_strokes(
-    selector: abjad.Expression = classes.select().pheads(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().pheads(exclude=const.HIDDEN),
     *tweaks: abjad.TweakInterface,
     downbow_first: bool = True,
     full: bool = None,
@@ -362,7 +362,7 @@ def alternate_bow_strokes(
 
 
 def arpeggio(
-    selector: abjad.Expression = classes.select().chead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().chead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches arpeggio.
@@ -446,7 +446,7 @@ def arpeggio(
 
 def articulation(
     articulation: str,
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches articulation.
@@ -461,7 +461,7 @@ def articulation(
 
 def articulations(
     articulations: typing.List,
-    selector: abjad.Expression = classes.select().pheads(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().pheads(exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches articulations.
@@ -489,7 +489,7 @@ def bar_line(
 
 
 def breathe(
-    selector: abjad.Expression = classes.select().pleaf(-1, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().pleaf(-1, exclude=const.HIDDEN),
     *tweaks: abjad.TweakInterface,
 ) -> commandclasses.IndicatorCommand:
     """
@@ -594,7 +594,7 @@ def clef(
 
 
 def damp(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
     *tweaks: abjad.TweakInterface,
 ) -> commandclasses.IndicatorCommand:
     """
@@ -609,7 +609,7 @@ def damp(
 
 
 def double_flageolet(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches double flageolet.
@@ -622,7 +622,7 @@ def double_flageolet(
 
 
 def double_staccato(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches double-staccato.
@@ -705,7 +705,7 @@ def double_staccato(
 
 
 def down_arpeggio(
-    selector: abjad.Expression = classes.select().chead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().chead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches down-arpeggio.
@@ -789,7 +789,7 @@ def down_arpeggio(
 
 
 def down_bow(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
     *tweaks: abjad.TweakInterface,
     full: bool = None,
 ) -> commandclasses.IndicatorCommand:
@@ -948,7 +948,7 @@ def down_bow(
 
 
 def espressivo(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
     *tweaks: abjad.TweakInterface,
 ) -> commandclasses.IndicatorCommand:
     r"""
@@ -1116,7 +1116,7 @@ def fermata(
 
 
 def flageolet(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches flageolet.
@@ -1199,7 +1199,7 @@ def flageolet(
 
 
 def hide_black_note_heads(
-    selector: abjad.Expression = classes.select().leaves(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().leaves(exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches note-head stencil false to black note-heads.
@@ -1348,7 +1348,7 @@ def hide_black_note_heads(
 
 
 def laissez_vibrer(
-    selector: abjad.Expression = classes.select().ptail(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().ptail(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches laissez vibrer.
@@ -1529,7 +1529,7 @@ def long_fermata(
 
 
 def marcato(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches marcato.
@@ -1795,7 +1795,7 @@ def mark(
 
 
 def parenthesize(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches LilyPond ``\parenthesize`` command.
@@ -1878,7 +1878,7 @@ def parenthesize(
 
 
 def quadruple_staccato(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches quadruple-staccato.
@@ -2084,7 +2084,7 @@ def short_fermata(
 
 
 def snap_pizzicato(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches snap pizzicato.
@@ -2097,7 +2097,7 @@ def snap_pizzicato(
 
 
 def staccatissimo(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches staccatissimo.
@@ -2180,7 +2180,7 @@ def staccatissimo(
 
 
 def staccato(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches staccato.
@@ -3048,7 +3048,7 @@ def start_markup(
 
 
 def stem_tremolo(
-    selector: abjad.Expression = classes.select().pleaf(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().pleaf(0, exclude=const.HIDDEN),
     *,
     tremolo_flags: int = 32,
 ) -> commandclasses.IndicatorCommand:
@@ -3133,7 +3133,7 @@ def stem_tremolo(
 
 
 def stop_on_string(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
     *,
     map: abjad.Expression = None,
 ) -> commandclasses.IndicatorCommand:
@@ -3240,7 +3240,7 @@ def stop_trill(
 
 
 def stopped(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches stopped +-sign.
@@ -3407,7 +3407,7 @@ def tie(selector: abjad.Expression) -> commandclasses.IndicatorCommand:
 
 
 def tenuto(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches tenuto.
@@ -3490,7 +3490,7 @@ def tenuto(
 
 
 def triple_staccato(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     """
     Attaches triple-staccato.
@@ -3503,7 +3503,7 @@ def triple_staccato(
 
 
 def up_arpeggio(
-    selector: abjad.Expression = classes.select().chead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().chead(0, exclude=const.HIDDEN),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches up-arpeggio.
@@ -3587,7 +3587,7 @@ def up_arpeggio(
 
 
 def up_bow(
-    selector: abjad.Expression = classes.select().phead(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().phead(0, exclude=const.HIDDEN),
     *tweaks: abjad.TweakInterface,
     full: bool = None,
 ) -> commandclasses.IndicatorCommand:

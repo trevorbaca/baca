@@ -8,6 +8,7 @@ import abjad
 from . import (
     classes,
     commandclasses,
+    const,
     indicatorcommands,
     indicators,
     overrides,
@@ -32,7 +33,7 @@ def allow_octaves(
     Attaches ALLOW_OCTAVE constant.
     """
     return commandclasses.IndicatorCommand(
-        indicators=[abjad.const.ALLOW_OCTAVE], selector=selector
+        indicators=[const.ALLOW_OCTAVE], selector=selector
     )
 
 

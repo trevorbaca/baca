@@ -259,7 +259,7 @@ class RhythmCommand(scoping.Command):
         rest_prototype = (abjad.MultimeasureRest, abjad.Rest, abjad.Skip)
         for leaf in abjad.iterate(argument).leaves():
             if isinstance(leaf, (abjad.Note, abjad.Chord)):
-                abjad.attach(abjad.const.NOT_YET_PITCHED, leaf, tag=None)
+                abjad.attach(const.NOT_YET_PITCHED, leaf, tag=None)
             elif isinstance(leaf, rest_prototype):
                 pass
             else:

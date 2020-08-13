@@ -2,6 +2,8 @@ import typing
 
 import abjad
 
+from . import const
+
 ### CLASSES ###
 
 
@@ -410,7 +412,7 @@ class BarExtent:
             return True
         empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
         siblings = staff_parent[:-1]
-        tag = abjad.const.REMOVE_ALL_EMPTY_STAVES
+        tag = const.REMOVE_ALL_EMPTY_STAVES
         for sibling in siblings:
             if not abjad.inspect(sibling).annotation(tag):
                 return True
@@ -436,7 +438,7 @@ class BarExtent:
             return True
         empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
         siblings = staff_parent[1:]
-        tag = abjad.const.REMOVE_ALL_EMPTY_STAVES
+        tag = const.REMOVE_ALL_EMPTY_STAVES
         for sibling in siblings:
             if not abjad.inspect(sibling).annotation(tag):
                 return True

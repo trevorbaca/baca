@@ -519,8 +519,8 @@ class ClusterCommand(scoping.Command):
                 abjad.attach(indicator, chord)
             abjad.mutate.replace(pleaf, chord)
             abjad.attach(key_cluster, chord)
-            abjad.attach(abjad.const.ALLOW_REPEAT_PITCH, chord)
-            abjad.detach(abjad.const.NOT_YET_PITCHED, chord)
+            abjad.attach(const.ALLOW_REPEAT_PITCH, chord)
+            abjad.detach(const.NOT_YET_PITCHED, chord)
 
     def _make_pitches(self, start_pitch, width):
         pitches = [start_pitch]
@@ -3194,16 +3194,16 @@ class PitchCommand(scoping.Command):
                 plt = new_plt
             if self.allow_octaves:
                 for pleaf in plt:
-                    abjad.attach(abjad.const.ALLOW_OCTAVE, pleaf)
+                    abjad.attach(const.ALLOW_OCTAVE, pleaf)
             if self.allow_out_of_range:
                 for pleaf in plt:
-                    abjad.attach(abjad.const.ALLOW_OUT_OF_RANGE, pleaf)
+                    abjad.attach(const.ALLOW_OUT_OF_RANGE, pleaf)
             if self.allow_repeats:
                 for pleaf in plt:
-                    abjad.attach(abjad.const.ALLOW_REPEAT_PITCH, pleaf)
+                    abjad.attach(const.ALLOW_REPEAT_PITCH, pleaf)
             if self.do_not_transpose is True:
                 for pleaf in plt:
-                    abjad.attach(abjad.const.DO_NOT_TRANSPOSE, pleaf)
+                    abjad.attach(const.DO_NOT_TRANSPOSE, pleaf)
             pitches_consumed += 1
         self._state = abjad.OrderedDict()
         pitches_consumed += previous_pitches_consumed
@@ -3296,11 +3296,11 @@ class PitchCommand(scoping.Command):
         lt, pitch, *, allow_repitch=False, mock=False, set_chord_pitches_equal=False,
     ):
         new_lt = None
-        already_pitched = abjad.const.ALREADY_PITCHED
+        already_pitched = const.ALREADY_PITCHED
         for leaf in lt:
-            abjad.detach(abjad.const.NOT_YET_PITCHED, leaf)
+            abjad.detach(const.NOT_YET_PITCHED, leaf)
             if mock is True:
-                abjad.attach(abjad.const.MOCK, leaf)
+                abjad.attach(const.MOCK, leaf)
             if allow_repitch:
                 continue
             if abjad.inspect(leaf).has_indicator(already_pitched):
@@ -3769,7 +3769,7 @@ class RegisterCommand(scoping.Command):
                     pleaf.written_pitches = pitches
                 else:
                     raise TypeError(pleaf)
-                abjad.detach(abjad.const.NOT_YET_REGISTERED, pleaf)
+                abjad.detach(const.NOT_YET_REGISTERED, pleaf)
 
     ### PUBLIC PROPERTIES ###
 
@@ -5072,7 +5072,7 @@ class RegisterInterpolationCommand(scoping.Command):
                     pleaf.written_pitches = written_pitches
                 else:
                     raise TypeError(pleaf)
-                abjad.detach(abjad.const.NOT_YET_REGISTERED, pleaf)
+                abjad.detach(const.NOT_YET_REGISTERED, pleaf)
 
     ### PRIVATE METHODS ###
 
@@ -5769,7 +5769,7 @@ class RegisterToOctaveCommand(scoping.Command):
         elif isinstance(leaf, abjad.Chord):
             pitches = [transposition(_) for _ in leaf.written_pitches]
             leaf.written_pitches = pitches
-        abjad.detach(abjad.const.NOT_YET_REGISTERED, leaf)
+        abjad.detach(const.NOT_YET_REGISTERED, leaf)
 
     ### PUBLIC PROPERTIES ###
 
@@ -6061,12 +6061,12 @@ class StaffPositionCommand(scoping.Command):
                     plt = new_lt
             plt_count += 1
             for pleaf in plt:
-                abjad.attach(abjad.const.STAFF_POSITION, pleaf)
+                abjad.attach(const.STAFF_POSITION, pleaf)
                 if self.allow_out_of_range:
-                    abjad.attach(abjad.const.ALLOW_OUT_OF_RANGE, pleaf)
+                    abjad.attach(const.ALLOW_OUT_OF_RANGE, pleaf)
                 if self.allow_repeats:
-                    abjad.attach(abjad.const.ALLOW_REPEAT_PITCH, pleaf)
-                    abjad.attach(abjad.const.DO_NOT_TRANSPOSE, pleaf)
+                    abjad.attach(const.ALLOW_REPEAT_PITCH, pleaf)
+                    abjad.attach(const.DO_NOT_TRANSPOSE, pleaf)
         if self.exact and plt_count != len(self.numbers):
             message = f"PLT count ({plt_count}) does not match"
             message += f" staff position count ({len(self.numbers)})."
@@ -6248,9 +6248,9 @@ class StaffPositionInterpolationCommand(scoping.Command):
             )
             assert new_lt is None, repr(new_lt)
             for leaf in plt:
-                abjad.attach(abjad.const.ALLOW_REPEAT_PITCH, leaf)
+                abjad.attach(const.ALLOW_REPEAT_PITCH, leaf)
                 if not self.pitches_instead_of_staff_positions:
-                    abjad.attach(abjad.const.STAFF_POSITION, leaf)
+                    abjad.attach(const.STAFF_POSITION, leaf)
         if isinstance(self.start, abjad.NamedPitch):
             start_pitch = self.start
         else:
@@ -6310,8 +6310,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
 
 def bass_to_octave(
-    n: int,
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    n: int, selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -6486,8 +6485,7 @@ def bass_to_octave(
 
 
 def center_to_octave(
-    n: int,
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    n: int, selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -6663,7 +6661,7 @@ def center_to_octave(
 
 def clusters(
     widths: typing.List[int],
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
     *,
     start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
 ) -> ClusterCommand:
@@ -6676,7 +6674,7 @@ def clusters(
 def color_fingerings(
     numbers: typing.List[abjad.Number],
     *tweaks: abjad.IndexedTweakManager,
-    selector: abjad.Expression = classes.select().pheads(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().pheads(exclude=const.HIDDEN),
 ) -> ColorFingeringCommand:
     """
     Adds color fingerings.
@@ -6686,7 +6684,7 @@ def color_fingerings(
 
 def deviation(
     deviations: typing.List[abjad.Number],
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
 ) -> MicrotoneDeviationCommand:
     """
     Sets microtone ``deviations``.
@@ -6696,7 +6694,7 @@ def deviation(
 
 def diatonic_clusters(
     widths: typing.List[int],
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
 ) -> DiatonicClusterCommand:
     """
     Makes diatonic clusters with ``widths``.
@@ -6706,7 +6704,7 @@ def diatonic_clusters(
 
 def displacement(
     displacements: typing.List[int],
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
 ) -> OctaveDisplacementCommand:
     r"""
     Octave-displaces ``selector`` output.
@@ -6840,7 +6838,7 @@ def displacement(
 
 
 def force_accidental(
-    selector: abjad.Expression = classes.select().pleaf(0, exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().pleaf(0, exclude=const.HIDDEN),
 ) -> AccidentalAdjustmentCommand:
     r"""
     Forces accidental.
@@ -6983,7 +6981,7 @@ def force_accidental(
 def interpolate_pitches(
     start: typing.Union[int, str, abjad.NamedPitch],
     stop: typing.Union[int, str, abjad.NamedPitch],
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
     *,
     mock: bool = None,
 ) -> StaffPositionInterpolationCommand:
@@ -7146,7 +7144,7 @@ def interpolate_pitches(
 def interpolate_staff_positions(
     start: typing.Union[int, abjad.StaffPosition],
     stop: typing.Union[int, abjad.StaffPosition],
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
     *,
     mock: bool = None,
 ) -> StaffPositionInterpolationCommand:
@@ -7171,7 +7169,7 @@ def levine_multiphonic(n: int) -> indicators.Markup:
 def loop(
     items: typing.Sequence,
     intervals: typing.Sequence,
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
 ) -> PitchCommand:
     """
     Loops ``items`` at ``intervals``.
@@ -7182,7 +7180,7 @@ def loop(
 
 def natural_clusters(
     widths: typing.Sequence[int],
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
     *,
     start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
 ) -> ClusterCommand:
@@ -7199,7 +7197,7 @@ def natural_clusters(
 
 def pitch(
     pitch,
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
     *,
     allow_out_of_range: bool = None,
     allow_repitch: bool = None,
@@ -7365,7 +7363,7 @@ def pitch(
 
 def pitches(
     pitches,
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
     *,
     allow_octaves: bool = None,
     allow_repeats: bool = None,
@@ -7411,7 +7409,7 @@ def register(
     start: int,
     stop: int = None,
     *,
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
 ) -> typing.Union[RegisterCommand, RegisterInterpolationCommand]:
     r"""
     Octave-transposes ``selector`` output.
@@ -7713,8 +7711,7 @@ def register(
 
 
 def soprano_to_octave(
-    n: int,
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    n: int, selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -7888,7 +7885,7 @@ def soprano_to_octave(
 
 def staff_position(
     argument: typing.Union[int, list, abjad.StaffPosition],
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
     *,
     allow_out_of_range: bool = None,
     allow_repitch: bool = None,
@@ -7914,7 +7911,7 @@ def staff_position(
 
 def staff_positions(
     numbers,
-    selector: abjad.Expression = classes.select().plts(exclude=abjad.const.HIDDEN),
+    selector: abjad.Expression = classes.select().plts(exclude=const.HIDDEN),
     *,
     allow_out_of_range: bool = None,
     allow_repeats: bool = None,

@@ -5,7 +5,7 @@ import ide
 
 import abjad
 
-from . import classes, indicators, scoping, typings
+from . import classes, const, indicators, scoping, typings
 
 ### CLASSES ###
 
@@ -1436,13 +1436,13 @@ class GlobalFermataCommand(scoping.Command):
                 leaf,
                 tag=self.tag.append(abjad.Tag("baca.GlobalFermataCommand._call(2)")),
             )
-            tag = abjad.Tag(abjad.const.FERMATA_MEASURE)
+            tag = abjad.Tag(const.FERMATA_MEASURE)
             tag = tag.append(self.tag)
             tag = tag.append(abjad.Tag("baca.GlobalFermataCommand._call(3)"))
             abjad.attach(
-                abjad.const.FERMATA_MEASURE, leaf, tag=ide.tags.FERMATA_MEASURE,
+                const.FERMATA_MEASURE, leaf, tag=ide.tags.FERMATA_MEASURE,
             )
-            abjad.annotate(leaf, abjad.const.FERMATA_DURATION, fermata_duration)
+            abjad.annotate(leaf, const.FERMATA_DURATION, fermata_duration)
 
     ### PUBLIC PROPERTIES ###
 

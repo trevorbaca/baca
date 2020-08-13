@@ -7,7 +7,7 @@ import ide
 import abjad
 from abjadext import rmakers
 
-from . import classes, commandclasses, pitchclasses, rhythmcommands
+from . import classes, commandclasses, const, pitchclasses, rhythmcommands
 
 ### CLASSES ###
 
@@ -2050,7 +2050,7 @@ class Imbrication:
             pleaves = classes.Selection(container).pleaves()
             assert isinstance(pleaves, abjad.Selection)
             for pleaf in pleaves:
-                abjad.attach(abjad.const.ALLOW_OCTAVE, pleaf)
+                abjad.attach(const.ALLOW_OCTAVE, pleaf)
         return {self.voice_name: selection}
 
     ### PRIVATE METHODS ###
@@ -8509,7 +8509,7 @@ def extend_beam(
 
     """
     return commandclasses.IndicatorCommand(
-        indicators=[abjad.const.RIGHT_BROKEN_BEAM], selector=selector
+        indicators=[const.RIGHT_BROKEN_BEAM], selector=selector
     )
 
 

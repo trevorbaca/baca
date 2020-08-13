@@ -8,7 +8,7 @@ import roman
 
 import abjad
 
-from . import markups
+from . import const, markups
 
 ### CLASSES ###
 
@@ -140,7 +140,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             argument
         )
         wrappers: typing.List[abjad.Wrapper] = []
-        tag = abjad.const.REMOVE_ALL_EMPTY_STAVES
+        tag = const.REMOVE_ALL_EMPTY_STAVES
         empty_prototype = (abjad.MultimeasureRest, abjad.Skip)
         prototype = (abjad.Staff, abjad.StaffGroup)
         if isinstance(argument, abjad.Score):
@@ -161,7 +161,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
             for voice in voices:
                 leaves = []
                 for leaf_ in abjad.Iteration(voice).leaves():
-                    if abjad.Inspection(leaf_).has_indicator(abjad.const.HIDDEN):
+                    if abjad.Inspection(leaf_).has_indicator(const.HIDDEN):
                         leaves.append(leaf_)
                 if not all(isinstance(_, empty_prototype) for _ in leaves):
                     leaf = abjad.Inspection(voice).leaf(0)
@@ -1091,7 +1091,7 @@ class ThreeVoiceStaffScoreTemplate(ScoreTemplate):
 
         # SCORE
         score = abjad.Score([global_context, music_context], name="Score", tag=tag)
-        abjad.attach(abjad.const.THREE_VOICE, score, tag=None)
+        abjad.attach(const.THREE_VOICE, score, tag=None)
         return score
 
 
@@ -1304,7 +1304,7 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
 
         # SCORE
         score = abjad.Score([global_context, music_context], name="Score", tag=tag)
-        abjad.attach(abjad.const.TWO_VOICE, score, tag=None)
+        abjad.attach(const.TWO_VOICE, score, tag=None)
         return score
 
 
