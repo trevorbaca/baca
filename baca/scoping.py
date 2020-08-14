@@ -158,14 +158,14 @@ class TimelineScope:
         assert leaves.are_leaves(), repr(leaves)
 
         def compare(leaf_1, leaf_2):
-            start_offset_1 = abjad.inspect(leaf_1).timespan().start_offset
-            start_offset_2 = abjad.inspect(leaf_2).timespan().start_offset
+            start_offset_1 = abjad.inspectx.timespan(leaf_1).start_offset
+            start_offset_2 = abjad.inspectx.timespan(leaf_2).start_offset
             if start_offset_1 < start_offset_2:
                 return -1
             if start_offset_2 < start_offset_1:
                 return 1
-            index_1 = abjad.inspect(leaf_1).parentage().score_index()
-            index_2 = abjad.inspect(leaf_2).parentage().score_index()
+            index_1 = abjad.inspectx.parentage(leaf_1).score_index()
+            index_2 = abjad.inspectx.parentage(leaf_2).score_index()
             if index_1 < index_2:
                 return -1
             if index_2 < index_1:
@@ -366,7 +366,7 @@ class Command:
             return
         if getattr(indicator, "parameter", None) == "TEXT_SPANNER":
             return
-        if abjad.inspect(leaf).timespan().start_offset != 0:
+        if abjad.inspectx.timespan(leaf).start_offset != 0:
             return
         dynamic_prototype = (abjad.Dynamic, abjad.StartHairpin)
         tempo_prototype = (
@@ -402,14 +402,14 @@ class Command:
         ), repr(stem)
         reapplied_wrappers = []
         reapplied_indicators = []
-        wrappers = list(abjad.inspect(leaf).wrappers())
-        effective_wrapper = abjad.inspect(leaf).effective_wrapper(prototype)
+        wrappers = list(abjad.inspectx.wrappers(leaf))
+        effective_wrapper = abjad.inspectx.effective_wrapper(leaf, prototype)
         if effective_wrapper and effective_wrapper not in wrappers:
             component = effective_wrapper.component
-            start_1 = abjad.inspect(leaf).timespan().start_offset
-            start_2 = abjad.inspect(component).timespan().start_offset
+            start_1 = abjad.inspectx.timespan(leaf).start_offset
+            start_2 = abjad.inspectx.timespan(component).start_offset
             if start_1 == start_2:
-                wrappers_ = abjad.inspect(component).wrappers()
+                wrappers_ = abjad.inspectx.wrappers(component)
                 wrappers.extend(wrappers_)
         for wrapper in wrappers:
             if not wrapper.tag:
@@ -600,7 +600,7 @@ class Command:
         """
         tags = self.tags[:]
         if self.tag_measure_number:
-            start_offset = abjad.inspect(leaf).timespan().start_offset
+            start_offset = abjad.inspectx.timespan(leaf).start_offset
             measure_number = self.runtime["offset_to_measure_number"].get(start_offset)
             if getattr(self, "after", None) is True:
                 measure_number += 1

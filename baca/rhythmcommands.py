@@ -272,14 +272,14 @@ class RhythmCommand(scoping.Command):
             return
         leaves = []
         for leaf in abjad.iterate(selection).leaves():
-            if abjad.inspect(leaf).parentage().get(abjad.OnBeatGraceContainer):
+            if abjad.inspectx.parentage(leaf).get(abjad.OnBeatGraceContainer):
                 continue
             leaves.append(leaf)
-        container = abjad.inspect(leaves[0]).before_grace_container()
+        container = abjad.inspectx.before_grace_container(leaves[0])
         if container is not None:
             leaves_ = abjad.select(container).leaves()
             leaves[0:0] = leaves_
-        container = abjad.inspect(leaves[-1]).after_grace_container()
+        container = abjad.inspectx.after_grace_container(leaves[-1])
         if container is not None:
             leaves_ = abjad.select(container).leaves()
             leaves.extend(leaves_)
@@ -339,7 +339,7 @@ class RhythmCommand(scoping.Command):
         if isinstance(rhythm_maker, abjad.Selection):
             selection = rhythm_maker
             total_duration = sum([_.duration for _ in time_signatures])
-            selection_duration = abjad.inspect(selection).duration()
+            selection_duration = abjad.inspectx.duration(selection)
             if (
                 not self.do_not_check_total_duration
                 and selection_duration != total_duration

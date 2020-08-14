@@ -412,7 +412,7 @@ class BreakMeasureMap:
             tag=self.tag.append(abjad.Tag("baca.BreakMeasureMap.__call__(1)")),
         )
         for skip in skips[:measure_count]:
-            if not abjad.inspect(skip).has_indicator(LBSD):
+            if not abjad.inspectx.has_indicator(skip, LBSD):
                 literal = abjad.LilyPondLiteral(r"\noBreak", "before")
                 abjad.attach(
                     literal,
@@ -1788,13 +1788,13 @@ class HorizontalSpacingSpecifier:
         measure_timespans = []
         durations_by_measure = []
         for skip in skips:
-            measure_timespan = abjad.inspect(skip).timespan()
+            measure_timespan = abjad.inspectx.timespan(skip)
             measure_timespans.append(measure_timespan)
             durations_by_measure.append([])
         leaf_timespans = set()
         leaf_count = 0
         for leaf in leaves:
-            leaf_timespan = abjad.inspect(leaf).timespan()
+            leaf_timespan = abjad.inspectx.timespan(leaf)
             leaf_duration = leaf_timespan.duration
             if leaf.multiplier is not None:
                 leaf_duration = leaf_duration / leaf.multiplier
@@ -1828,7 +1828,7 @@ class HorizontalSpacingSpecifier:
             and measure_number in self.fermata_measure_numbers
         ):
             return True
-        measure_timespan = abjad.inspect(skip).timespan()
+        measure_timespan = abjad.inspectx.timespan(skip)
         return measure_timespan.start_offset in self._fermata_start_offsets
 
     def _make_annotation(self, duration, eol_adjusted, duration_):

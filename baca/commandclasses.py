@@ -96,7 +96,7 @@ class BCPCommand(scoping.Command):
                         break
                     nonrest_count += 1
         if self.final_spanner and not self._is_rest(lts[-1]) and len(lts[-1]) == 1:
-            next_leaf_after_argument = abjad.inspect(lts[-1][-1]).leaf(1)
+            next_leaf_after_argument = abjad.inspectx.leaf(lts[-1][-1], 1)
             if next_leaf_after_argument is None:
                 message = "can not attach final spanner:"
                 message += " argument includes end of score."
@@ -112,8 +112,8 @@ class BCPCommand(scoping.Command):
                     tag=self.tag.append(abjad.Tag("baca.BCPCommand._call(1)")),
                 )
                 break
-            previous_leaf = abjad.inspect(lt.head).leaf(-1)
-            next_leaf = abjad.inspect(lt.head).leaf(1)
+            previous_leaf = abjad.inspectx.leaf(lt.head, -1)
+            next_leaf = abjad.inspectx.leaf(lt.head, 1)
             if self._is_rest(lt.head) and (
                 self._is_rest(previous_leaf) or previous_leaf is None
             ):
@@ -227,7 +227,7 @@ class BCPCommand(scoping.Command):
         prototype = (abjad.Rest, abjad.MultimeasureRest, abjad.Skip)
         if isinstance(argument, prototype):
             return True
-        annotation = abjad.inspect(argument).annotation("is_sounding")
+        annotation = abjad.inspectx.annotation(argument, "is_sounding")
         if annotation is False:
             return True
         return False
@@ -1638,9 +1638,10 @@ class InstrumentChangeCommand(IndicatorCommand):
             argument = self.selector(argument)
         if self.indicators is None:
             return
-        first_leaf = abjad.inspect(argument).leaf(0)
+        first_leaf = abjad.inspectx.leaf(argument, 0)
         if first_leaf is not None:
-            staff = abjad.inspect(first_leaf).parentage().get(abjad.Staff)
+            staff = abjad.inspectx.parentage(first_leaf).get(abjad.Staff)
+            assert isinstance(staff, abjad.Staff)
             instrument = self.indicators[0]
             assert isinstance(instrument, abjad.Instrument), repr(instrument)
             if not self.runtime["score_template"].allows_instrument(
@@ -1861,11 +1862,12 @@ class PartAssignmentCommand(scoping.Command):
             return
         if self.selector is not None:
             argument = self.selector(argument)
-        first_leaf = abjad.inspect(argument).leaf(0)
+        first_leaf = abjad.inspectx.leaf(argument, 0)
         if first_leaf is None:
             return
-        voice = abjad.inspect(first_leaf).parentage().get(abjad.Voice, -1)
+        voice = abjad.inspectx.parentage(first_leaf).get(abjad.Voice, -1)
         if voice is not None and self.part_assignment is not None:
+            assert isinstance(voice, abjad.Voice)
             if not self.runtime["score_template"].allows_part_assignment(
                 voice.name, self.part_assignment
             ):

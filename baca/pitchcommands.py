@@ -494,7 +494,7 @@ class ClusterCommand(scoping.Command):
         if not argument:
             return
         leaf = classes.Selection(argument).leaf(0)
-        root = abjad.inspect(leaf).parentage().root
+        root = abjad.inspectx.parentage(leaf).root
         with abjad.ForbidUpdate(component=root):
             for i, plt in enumerate(classes.Selection(argument).plts()):
                 width = self.widths[i]
@@ -3173,7 +3173,7 @@ class PitchCommand(scoping.Command):
             return
         plts = []
         for pleaf in classes.Selection(argument).pleaves():
-            plt = abjad.inspect(pleaf).logical_tie()
+            plt = abjad.inspectx.logical_tie(pleaf)
             if plt.head is pleaf:
                 plts.append(plt)
         self._check_length(plts)
@@ -3303,8 +3303,8 @@ class PitchCommand(scoping.Command):
                 abjad.attach(const.MOCK, leaf)
             if allow_repitch:
                 continue
-            if abjad.inspect(leaf).has_indicator(already_pitched):
-                voice = abjad.inspect(leaf).parentage().get(abjad.Voice)
+            if abjad.inspectx.has_indicator(leaf, already_pitched):
+                voice = abjad.inspectx.parentage(leaf).get(abjad.Voice)
                 if voice is None:
                     name = "no voice"
                 else:
@@ -3319,7 +3319,7 @@ class PitchCommand(scoping.Command):
                 for leaf in lt:
                     rest = abjad.Rest(leaf.written_duration, multiplier=leaf.multiplier)
                     abjad.mutate.replace(leaf, rest, wrappers=True)
-                new_lt = abjad.inspect(rest).logical_tie()
+                new_lt = abjad.inspectx.logical_tie(rest)
         elif isinstance(pitch, collections.abc.Iterable):
             if isinstance(lt.head, abjad.Chord):
                 for chord in lt:
@@ -3331,7 +3331,7 @@ class PitchCommand(scoping.Command):
                         pitch, leaf.written_duration, multiplier=leaf.multiplier,
                     )
                     abjad.mutate.replace(leaf, chord, wrappers=True)
-                new_lt = abjad.inspect(chord).logical_tie()
+                new_lt = abjad.inspectx.logical_tie(chord)
         else:
             if isinstance(lt.head, abjad.Note):
                 for note in lt:
@@ -3347,7 +3347,7 @@ class PitchCommand(scoping.Command):
                         pitch, leaf.written_duration, multiplier=leaf.multiplier,
                     )
                     abjad.mutate.replace(leaf, note, wrappers=True)
-                new_lt = abjad.inspect(note).logical_tie()
+                new_lt = abjad.inspectx.logical_tie(note)
         return new_lt
 
     ### PUBLIC PROPERTIES ###
@@ -6029,8 +6029,8 @@ class StaffPositionCommand(scoping.Command):
             argument = self.selector(argument)
         plt_count = 0
         for i, plt in enumerate(classes.Selection(argument).plts()):
-            clef = abjad.inspect(plt.head).effective(
-                abjad.Clef, default=abjad.Clef("treble")
+            clef = abjad.inspectx.effective(
+                plt.head, abjad.Clef, default=abjad.Clef("treble"),
             )
             number = self.numbers[i]
             if isinstance(number, list):
@@ -6218,7 +6218,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
             start_staff_position = self.start
         else:
             start_phead = plts[0].head
-            clef = abjad.inspect(start_phead).effective(abjad.Clef)
+            clef = abjad.inspectx.effective(start_phead, abjad.Clef)
             start_staff_position = abjad.StaffPosition.from_pitch_and_clef(
                 self.start, clef,
             )
@@ -6226,8 +6226,8 @@ class StaffPositionInterpolationCommand(scoping.Command):
             stop_staff_position = self.stop
         else:
             stop_phead = plts[-1].head
-            clef = abjad.inspect(stop_phead).effective(
-                abjad.Clef, default=abjad.Clef("treble")
+            clef = abjad.inspectx.effective(
+                stop_phead, abjad.Clef, default=abjad.Clef("treble"),
             )
             stop_staff_position = abjad.StaffPosition.from_pitch_and_clef(
                 self.stop, clef,
@@ -6239,8 +6239,8 @@ class StaffPositionInterpolationCommand(scoping.Command):
             staff_position = unit_distance * i + start_staff_position.number
             staff_position = round(staff_position)
             staff_position = abjad.StaffPosition(staff_position)
-            clef = abjad.inspect(plt.head).effective(
-                abjad.Clef, default=abjad.Clef("treble")
+            clef = abjad.inspectx.effective(
+                plt.head, abjad.Clef, default=abjad.Clef("treble"),
             )
             pitch = staff_position.to_pitch(clef)
             new_lt = PitchCommand._set_lt_pitch(
@@ -6254,8 +6254,8 @@ class StaffPositionInterpolationCommand(scoping.Command):
         if isinstance(self.start, abjad.NamedPitch):
             start_pitch = self.start
         else:
-            clef = abjad.inspect(plts[0].head).effective(
-                abjad.Clef, default=abjad.Clef("treble")
+            clef = abjad.inspectx.effective(
+                plts[0], abjad.Clef, default=abjad.Clef("treble"),
             )
             start_pitch = self.start.to_pitch(clef)
         new_lt = PitchCommand._set_lt_pitch(
@@ -6265,8 +6265,8 @@ class StaffPositionInterpolationCommand(scoping.Command):
         if isinstance(self.stop, abjad.NamedPitch):
             stop_pitch = self.stop
         else:
-            clef = abjad.inspect(plts[0].head).effective(
-                abjad.Clef, default=abjad.Clef("treble")
+            clef = abjad.inspectx.effective(
+                plts[0], abjad.Clef, default=abjad.Clef("treble"),
             )
             stop_pitch = self.stop.to_pitch(clef=clef)
         new_lt = PitchCommand._set_lt_pitch(

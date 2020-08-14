@@ -2027,7 +2027,7 @@ class Imbrication:
                         skip = abjad.Skip(duration)
                         abjad.mutate.replace(leaf, [skip])
                     abjad.detach(abjad.Tie, head)
-                    next_leaf = abjad.inspect(tail).leaf(1)
+                    next_leaf = abjad.inspectx.leaf(tail, 1)
                     if next_leaf is not None:
                         abjad.detach(abjad.RepeatTie, next_leaf)
                 if self.hocket:
@@ -3581,7 +3581,7 @@ class Accumulator:
             figure_name = str(figure_name)
             self._label_figure_name_(container, figure_name)
         selection = abjad.select([container])
-        duration = abjad.inspect(selection).duration()
+        duration = abjad.inspectx.duration(selection)
         if signature is None and maker:
             signature = maker.signature
         if signature is None and command:
@@ -3629,7 +3629,7 @@ class Accumulator:
             if not selection:
                 continue
             start_offset = self._get_start_offset(selection, contribution)
-            stop_offset = start_offset + abjad.inspect(selection).duration()
+            stop_offset = start_offset + abjad.inspectx.duration(selection)
             timespan = abjad.Timespan(start_offset, stop_offset)
             floating_selection = abjad.AnnotatedTimespan(
                 timespan.start_offset, timespan.stop_offset, annotation=selection,
@@ -3669,7 +3669,7 @@ class Accumulator:
                 leaf_start_offset = floating_selection.start_offset
                 leaves = abjad.iterate(floating_selection.annotation).leaves()
                 for leaf in leaves:
-                    markup = abjad.inspect(leaf).indicators(abjad.Markup)
+                    markup = abjad.inspectx.indicators(leaf, abjad.Markup)
                     for markup_ in markup:
                         if isinstance(
                             markup_._annotation, str
@@ -3678,7 +3678,7 @@ class Accumulator:
                             figure_name_ = figure_name_.replace("figure name: ", "")
                             if figure_name_ == figure_name:
                                 return leaf_start_offset
-                    leaf_duration = abjad.inspect(leaf).duration()
+                    leaf_duration = abjad.inspectx.duration(leaf)
                     leaf_start_offset += leaf_duration
         raise Exception(f"can not find figure {figure_name!r}.")
 
@@ -3687,7 +3687,7 @@ class Accumulator:
         for floating_selection in floating_selections:
             leaf_start_offset = abjad.Offset(0)
             for leaf_ in abjad.iterate(floating_selection.annotation).leaves():
-                leaf_duration = abjad.inspect(leaf_).duration()
+                leaf_duration = abjad.inspectx.duration(leaf_)
                 if leaf_ is leaf:
                     found_leaf = True
                     break
@@ -3744,7 +3744,7 @@ class Accumulator:
             selected_leaves = list(abjad.iterate(result).leaves())
             first_selected_leaf = selected_leaves[0]
             dummy_container = abjad.Container(selection)
-            timespan = abjad.inspect(first_selected_leaf).timespan()
+            timespan = abjad.inspectx.timespan(first_selected_leaf)
             del dummy_container[:]
             local_anchor_offset = timespan.start_offset
         start_offset = remote_anchor_offset - local_anchor_offset
@@ -4216,7 +4216,7 @@ class Nest:
             assert isinstance(tuplet, abjad.Tuplet), repr(tuplet)
         if isinstance(treatment, str):
             addendum = abjad.Duration(treatment)
-            contents_duration = abjad.inspect(tuplet_selection).duration()
+            contents_duration = abjad.inspectx.duration(tuplet_selection)
             target_duration = contents_duration + addendum
             multiplier = target_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, [])
@@ -4226,7 +4226,7 @@ class Nest:
             abjad.mutate.wrap(tuplet_selection, tuplet)
         elif treatment.__class__ is abjad.Duration:
             target_duration = treatment
-            contents_duration = abjad.inspect(tuplet_selection).duration()
+            contents_duration = abjad.inspectx.duration(tuplet_selection)
             multiplier = target_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, [])
             abjad.mutate.wrap(tuplet_selection, tuplet)
@@ -5047,7 +5047,7 @@ class FigureMaker:
         tuplet = abjad.Tuplet((1, 1), leaf_selection, hide=True)
         if len(tuplet) == 1:
             return tuplet
-        durations = [abjad.inspect(_).duration() for _ in leaf_selection]
+        durations = [abjad.inspectx.duration(_) for _ in leaf_selection]
         if accelerando_indicator == "accel":
             exponent = 0.625
         elif accelerando_indicator == "rit":
@@ -5060,7 +5060,7 @@ class FigureMaker:
             abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Right
         elif rmakers.FeatherBeamCommand._is_ritardando(leaf_selection):
             abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Left
-        duration = abjad.inspect(tuplet).duration()
+        duration = abjad.inspectx.duration(tuplet)
         notes = abjad.LeafMaker()([0], [duration])
         markup = abjad.illustrators.selection_to_score_markup(notes)
         markup = markup.scale((0.75, 0.75))
@@ -5285,14 +5285,14 @@ class FigureMaker:
             tuplet = abjad.Tuplet(treatment, leaf_selection)
         elif treatment.__class__ is abjad.Duration:
             tuplet_duration = treatment
-            contents_duration = abjad.inspect(leaf_selection).duration()
+            contents_duration = abjad.inspectx.duration(leaf_selection)
             multiplier = tuplet_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, leaf_selection)
             if not tuplet.multiplier.normalized():
                 tuplet.normalize_multiplier()
         elif isinstance(treatment, tuple) and len(treatment) == 2:
             tuplet_duration = abjad.Duration(treatment)
-            contents_duration = abjad.inspect(leaf_selection).duration()
+            contents_duration = abjad.inspectx.duration(leaf_selection)
             multiplier = tuplet_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, leaf_selection)
             if not tuplet.multiplier.normalized():
@@ -5315,7 +5315,7 @@ class FigureMaker:
 
     @staticmethod
     def _make_tuplet_with_extra_count(leaf_selection, extra_count, denominator):
-        contents_duration = abjad.inspect(leaf_selection).duration()
+        contents_duration = abjad.inspectx.duration(leaf_selection)
         contents_duration = contents_duration.with_denominator(denominator)
         contents_count = contents_duration.numerator
         if 0 < extra_count:
