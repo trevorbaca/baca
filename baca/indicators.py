@@ -362,8 +362,8 @@ class BarExtent:
     def _get_bar_extent(self, component):
         if not isinstance(component, abjad.Leaf):
             return None
-        staff = abjad.inspectx.parentage(component).get(abjad.Staff)
-        staff_parent = abjad.inspectx.parentage(staff).parent
+        staff = abjad.get.parentage(component).get(abjad.Staff)
+        staff_parent = abjad.get.parentage(staff).parent
         if staff_parent[0] is not staff and staff_parent[-1] is not staff:
             return None
         bottom, top = -2, 2
@@ -395,7 +395,7 @@ class BarExtent:
         bottom, top = bar_extent
         string = r"\override Staff.BarLine.bar-extent = "
         string += f"#'({bottom} . {top})"
-        previous = abjad.inspectx.effective(component, BarExtent, n=-1)
+        previous = abjad.get.effective(component, BarExtent, n=-1)
         if previous is None or previous.line_count <= self.line_count:
             bundle.before.commands.append(string)
         else:
@@ -405,7 +405,7 @@ class BarExtent:
     @staticmethod
     def _staff_is_effectively_bottommost(staff):
         assert isinstance(staff, abjad.Staff)
-        staff_parent = abjad.inspectx.parentage(staff).parent
+        staff_parent = abjad.get.parentage(staff).parent
         if staff_parent[-1] is not staff:
             return False
         if len(staff_parent) == 1:
@@ -414,12 +414,12 @@ class BarExtent:
         siblings = staff_parent[:-1]
         tag = const.REMOVE_ALL_EMPTY_STAVES
         for sibling in siblings:
-            if not abjad.inspectx.annotation(sibling, tag):
+            if not abjad.get.annotation(sibling, tag):
                 return True
             for leaf in abjad.iterate(sibling).leaves():
                 if not isinstance(leaf, empty_prototype):
                     return True
-        staff_grandparent = abjad.inspectx.parentage(staff_parent).parent
+        staff_grandparent = abjad.get.parentage(staff_parent).parent
         if staff_grandparent is None:
             return True
         if staff_grandparent[-1] is staff_parent:
@@ -431,7 +431,7 @@ class BarExtent:
     @staticmethod
     def _staff_is_effectively_topmost(staff):
         assert isinstance(staff, abjad.Staff)
-        staff_parent = abjad.inspectx.parentage(staff).parent
+        staff_parent = abjad.get.parentage(staff).parent
         if staff_parent[0] is not staff:
             return False
         if len(staff_parent) == 1:
@@ -440,12 +440,12 @@ class BarExtent:
         siblings = staff_parent[1:]
         tag = const.REMOVE_ALL_EMPTY_STAVES
         for sibling in siblings:
-            if not abjad.inspectx.annotation(sibling, tag):
+            if not abjad.get.annotation(sibling, tag):
                 return True
             for leaf in abjad.iterate(sibling).leaves():
                 if not isinstance(leaf, empty_prototype):
                     return True
-        staff_grandparent = abjad.inspectx.parentage(staff_parent).parent
+        staff_grandparent = abjad.get.parentage(staff_parent).parent
         if staff_grandparent is None:
             return True
         if staff_grandparent[0] is staff_parent:
@@ -970,7 +970,7 @@ class StaffLines:
         bundle = abjad.LilyPondFormatBundle()
         if self.hide:
             return bundle
-        staff = abjad.inspectx.parentage(component).get(abjad.Staff)
+        staff = abjad.get.parentage(component).get(abjad.Staff)
         strings = self._get_lilypond_format(context=staff)
         bundle.before.commands.extend(strings)
         return bundle

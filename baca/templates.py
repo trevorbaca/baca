@@ -161,31 +161,31 @@ class ScoreTemplate(abjad.ScoreTemplate):
             for voice in voices:
                 leaves = []
                 for leaf_ in abjad.Iteration(voice).leaves():
-                    if abjad.inspectx.has_indicator(leaf_, const.HIDDEN):
+                    if abjad.get.has_indicator(leaf_, const.HIDDEN):
                         leaves.append(leaf_)
                 if not all(isinstance(_, empty_prototype) for _ in leaves):
-                    leaf = abjad.inspectx.leaf(voice, 0)
+                    leaf = abjad.get.leaf(voice, 0)
                     break
             # otherwise, find first leaf in voice in non-removable staff
             if leaf is None:
                 for voice in voices:
                     voice_might_vanish = False
-                    for component in abjad.inspectx.parentage(voice):
-                        if abjad.inspectx.annotation(component, tag) is True:
+                    for component in abjad.get.parentage(voice):
+                        if abjad.get.annotation(component, tag) is True:
                             voice_might_vanish = True
                     if not voice_might_vanish:
-                        leaf = abjad.inspectx.leaf(voice, 0)
+                        leaf = abjad.get.leaf(voice, 0)
                         if leaf is not None:
                             break
             # otherwise, as last resort find first leaf in first voice
             if leaf is None:
-                leaf = abjad.inspectx.leaf(voices[0], 0)
+                leaf = abjad.get.leaf(voices[0], 0)
             if leaf is None:
                 continue
-            instrument = abjad.inspectx.indicator(leaf, abjad.Instrument)
+            instrument = abjad.get.indicator(leaf, abjad.Instrument)
             if instrument is None:
                 string = "default_instrument"
-                instrument = abjad.inspectx.annotation(staff__group, string)
+                instrument = abjad.get.annotation(staff__group, string)
                 if instrument is not None:
                     wrapper = abjad.attach(
                         instrument,
@@ -195,10 +195,10 @@ class ScoreTemplate(abjad.ScoreTemplate):
                         wrapper=True,
                     )
                     wrappers.append(wrapper)
-            margin_markup = abjad.inspectx.indicator(leaf, abjad.MarginMarkup)
+            margin_markup = abjad.get.indicator(leaf, abjad.MarginMarkup)
             if margin_markup is None:
                 string = "default_margin_markup"
-                margin_markup = abjad.inspectx.annotation(staff__group, string)
+                margin_markup = abjad.get.annotation(staff__group, string)
                 if margin_markup is not None:
                     wrapper = abjad.attach(
                         margin_markup,
@@ -210,11 +210,11 @@ class ScoreTemplate(abjad.ScoreTemplate):
                     )
                     wrappers.append(wrapper)
         for staff in staves:
-            leaf = abjad.inspectx.leaf(staff, 0)
-            clef = abjad.inspectx.indicator(leaf, abjad.Clef)
+            leaf = abjad.get.leaf(staff, 0)
+            clef = abjad.get.indicator(leaf, abjad.Clef)
             if clef is not None:
                 continue
-            clef = abjad.inspectx.annotation(staff, "default_clef")
+            clef = abjad.get.annotation(staff, "default_clef")
             if clef is not None:
                 wrapper = abjad.attach(
                     clef,

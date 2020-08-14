@@ -7528,7 +7528,7 @@ class PitchTree(classes.Tree):
             markup_direction=markup_direction,
         )
         assert leaf_list_stack == [], repr(leaf_list_stack)
-        first_leaf = abjad.inspectx.leaf(voice, n=0)
+        first_leaf = abjad.get.leaf(voice, n=0)
         abjad.attach(abjad.TimeSignature((1, 8)), first_leaf)
         self._color_repeats(color_repeats, voice)
         self._attach_cell_indices(cell_indices, leaf_groups)
@@ -7542,7 +7542,7 @@ class PitchTree(classes.Tree):
         abjad.override(score).stem.stencil = False
         abjad.override(score).text_script.staff_padding = 2
         abjad.override(score).time_signature.stencil = False
-        final_leaf = abjad.inspectx.leaf(score, -1)
+        final_leaf = abjad.get.leaf(score, -1)
         string = r"\override Score.BarLine.transparent = ##f"
         literal = abjad.LilyPondLiteral(string, "after")
         abjad.attach(literal, final_leaf)
@@ -7588,7 +7588,7 @@ class PitchTree(classes.Tree):
     def _attach_cell_indices(self, cell_indices, leaf_groups):
         if not cell_indices:
             return
-        leaf_groups.sort(key=lambda _: abjad.inspectx.timespan(_[1][0]).start_offset)
+        leaf_groups.sort(key=lambda _: abjad.get.timespan(_[1][0]).start_offset)
         if cell_indices is True:
             direction = abjad.Up
         else:
@@ -7670,7 +7670,7 @@ class PitchTree(classes.Tree):
                 leaf = first_note
                 while leaf is not final_note:
                     leaves_with_skips.append(leaf)
-                    leaf = abjad.inspectx.leaf(leaf, n=1)
+                    leaf = abjad.get.leaf(leaf, n=1)
                 leaves_with_skips.append(leaf)
                 negative_level = node._get_level(negative=True)
                 # spanner = PitchTreeSpanner(level=negative_level)
