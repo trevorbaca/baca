@@ -5,8 +5,6 @@ import typing
 
 import abjad
 
-from . import indicators
-
 
 def instrument(
     string: typing.Union[str, typing.List[str]],
