@@ -150,9 +150,3 @@ def short_instrument(
     Centers markup horizontally in 10 spaces.
     """
     return make_instrument_name_markup(string, column=column, hcenter_in=hcenter_in)
-
-
-def string_number(n: int):
-    to_roman_numeral = {1: "I", 2: "II", 3: "III", 4: "IV"}
-    string_number = to_roman_numeral[n]
-    return indicators.Markup(string_number, direction=abjad.Down)
