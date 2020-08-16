@@ -8,7 +8,7 @@ import roman
 
 import abjad
 
-from . import const, markups
+from . import const
 
 ### CLASSES ###
 
@@ -762,8 +762,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             tag=tag,
         )
         violin = abjad.Violin(
-            markup=markups.instrument("Violin", hcenter_in=10),
-            short_markup=markups.short_instrument("Vn.", hcenter_in=10),
+            markup=abjad.Markup(r"\markup \hcenter-in #10 Violin", literal=True),
+            short_markup=abjad.Markup(r"\markup \hcenter-in #10 Vn.", literal=True),
         )
         abjad.annotate(violin_music_staff, "default_instrument", violin)
         abjad.annotate(violin_music_staff, "default_clef", abjad.Clef("treble"))
@@ -783,8 +783,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             viola_music_staff,
             "default_instrument",
             abjad.Viola(
-                markup=markups.instrument("Viola", hcenter_in=10),
-                short_markup=markups.short_instrument("Va.", hcenter_in=10),
+                markup=abjad.Markup(r"\markup \hcenter-in #10 Viola", literal=True),
+                short_markup=abjad.Markup(r"\markup \hcenter-in #10 Va.", literal=True),
             ),
         )
         abjad.annotate(viola_music_staff, "default_clef", abjad.Clef("alto"))
@@ -804,8 +804,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
             cello_music_staff,
             "default_instrument",
             abjad.Cello(
-                markup=markups.instrument("Cello", hcenter_in=10),
-                short_markup=markups.short_instrument("Vc.", hcenter_in=10),
+                markup=abjad.Markup(r"\markup \hcenter-in #10 Cello", literal=True),
+                short_markup=abjad.Markup(r"\markup \hcenter-in #10 Vc.", literal=True),
             ),
         )
         abjad.annotate(cello_music_staff, "default_clef", abjad.Clef("bass"))
@@ -1459,8 +1459,8 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
             tag=tag,
         )
         violin = abjad.Violin(
-            markup=markups.instrument("Violin"),
-            short_markup=markups.short_instrument("Vn."),
+            markup=abjad.Markup(r"\markup \hcenter-in #10 Violin", literal=True),
+            short_markup=abjad.Markup(r"\markup \hcenter-in #10 Vn.", literal=True),
         )
         abjad.annotate(violin_music_staff, "default_instrument", violin)
         abjad.annotate(violin_music_staff, "default_clef", abjad.Clef("treble"))
