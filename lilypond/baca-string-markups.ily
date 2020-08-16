@@ -47,6 +47,18 @@ baca-spazzolato-boxed-markup = \markup
     \box
     spazzolato
 
+baca-string-i = \markup
+    I
+
+baca-string-i = \markup
+    II
+
+baca-string-iii = \markup
+    III
+
+baca-string-iv = \markup
+    IV
+
 baca-tasto-plus-pochiss-scratch-markup = \markup
     \whiteout
     "tasto + pochiss. scratch"

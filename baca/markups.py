@@ -156,10 +156,3 @@ def string_number(n: int):
     to_roman_numeral = {1: "I", 2: "II", 3: "III", 4: "IV"}
     string_number = to_roman_numeral[n]
     return indicators.Markup(string_number, direction=abjad.Down)
-
-
-def string_numbers(numbers: typing.List[int],):
-    to_roman_numeral = {1: "I", 2: "II", 3: "III", 4: "IV"}
-    string_numbers = [to_roman_numeral[_] for _ in numbers]
-    string = "+".join(string_numbers)
-    return indicators.Markup(string, direction=abjad.Down)
