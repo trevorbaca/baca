@@ -364,7 +364,7 @@ Bača API
 .. rubric:: :ref:`baca.markups <baca--markups>`
    :class: section-header
 
-indicators.Markup library.
+Markup library.
 
 .. raw:: html
 
@@ -376,191 +376,14 @@ indicators.Markup library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.markups.FB
-   ~baca.markups.FB_flaut
-   ~baca.markups.MP_XFB_flaut
-   ~baca.markups.OB
-   ~baca.markups.OB_full_bow_strokes
-   ~baca.markups.OB_no_pitch
-   ~baca.markups.OB_terminate_abruptly
-   ~baca.markups.OB_terminate_each_note_abruptly
-   ~baca.markups.PO
-   ~baca.markups.PO_FB_flaut
-   ~baca.markups.PO_NBS
-   ~baca.markups.PO_XFB_flaut
-   ~baca.markups.PO_plus_non_vib
-   ~baca.markups.PO_plus_poco_vib
-   ~baca.markups.PO_scratch
-   ~baca.markups.PO_slow_bow
-   ~baca.markups.P_XFB_flaut
-   ~baca.markups.XFB
-   ~baca.markups.XFB_flaut
-   ~baca.markups.XFB_plus_pochiss_pont
-   ~baca.markups.XFB_plus_tasto
-   ~baca.markups.XFB_sempre
-   ~baca.markups.XP
-   ~baca.markups.XP_FB
-   ~baca.markups.XP_FB_flaut
-   ~baca.markups.XP_XFB
-   ~baca.markups.XP_XFB_flaut
-   ~baca.markups.XP_full_bow_strokes
-   ~baca.markups.XT
-   ~baca.markups.accent_changes_of_direction
-   ~baca.markups.airtone
-   ~baca.markups.allow_bowing_to_convey_accelerando
-   ~baca.markups.arco
-   ~baca.markups.arco_ordinario
-   ~baca.markups.attackless
-   ~baca.markups.bass_drum
-   ~baca.markups.bow_on_tailpiece
-   ~baca.markups.bow_on_wooden_mute
-   ~baca.markups.bowed_crotales
-   ~baca.markups.castanets
-   ~baca.markups.cir
-   ~baca.markups.circles
-   ~baca.markups.clicks_per_second
-   ~baca.markups.col_legno_battuto
-   ~baca.markups.column
-   ~baca.markups.crine
-   ~baca.markups.crotales
-   ~baca.markups.damp
-   ~baca.markups.delicatiss
-   ~baca.markups.delicatissimo
-   ~baca.markups.directly_on_bridge_bow_diagonally
-   ~baca.markups.directly_on_bridge_very_slow_bow
-   ~baca.markups.divisi_1_plus_3
-   ~baca.markups.divisi_2_plus_4
-   ~baca.markups.estr_sul_pont
-   ~baca.markups.ext_pont
-   ~baca.markups.fast_whisked_ellipses
    ~baca.markups.final_markup
-   ~baca.markups.flaut
-   ~baca.markups.flaut_partial_2
-   ~baca.markups.flaut_possibile
-   ~baca.markups.fluttertongue
-   ~baca.markups.fractional_OB
-   ~baca.markups.fractional_scratch
-   ~baca.markups.full_bow_strokes
-   ~baca.markups.glissando_lentissimo
-   ~baca.markups.golden_tone
-   ~baca.markups.grid_possibile
-   ~baca.markups.gridato_possibile
-   ~baca.markups.hair
-   ~baca.markups.half_clt
    ~baca.markups.instrument
-   ~baca.markups.keynoise
-   ~baca.markups.kn_rasg
-   ~baca.markups.knuckle_rasg
-   ~baca.markups.leggieriss
-   ~baca.markups.leggierissimo
-   ~baca.markups.leggierissimo_off_string_bowing_on_staccati
-   ~baca.markups.lh_damp
-   ~baca.markups.lh_damp_plus_half_clt
-   ~baca.markups.lhd_plus_half_clt
    ~baca.markups.lines
-   ~baca.markups.loure
-   ~baca.markups.lv_possibile
    ~baca.markups.make_instrument_name_markup
    ~baca.markups.markup
-   ~baca.markups.molto_flautando
-   ~baca.markups.molto_flautando_e_pont
-   ~baca.markups.molto_gridato
-   ~baca.markups.molto_overpressure
-   ~baca.markups.molto_pont_plus_vib_molto
-   ~baca.markups.molto_scratch
-   ~baca.markups.nail_rasg
-   ~baca.markups.nail_rasgueado
-   ~baca.markups.non_flaut
-   ~baca.markups.non_flautando
-   ~baca.markups.non_flutt
-   ~baca.markups.non_spazz
-   ~baca.markups.nut
-   ~baca.markups.off_string_bowing_on_staccati
-   ~baca.markups.one_click_every
-   ~baca.markups.ord
-   ~baca.markups.ord_poco_scratch
-   ~baca.markups.ord_senza_scratch
-   ~baca.markups.ordinario
-   ~baca.markups.overblow
-   ~baca.markups.pP_XFB_flaut
-   ~baca.markups.pT_XFB_flaut
-   ~baca.markups.pizz
-   ~baca.markups.plus_statement
-   ~baca.markups.po_meno_scratch
-   ~baca.markups.pochiss_pont
-   ~baca.markups.pochiss_scratch
-   ~baca.markups.pochiss_vib
-   ~baca.markups.poco_overpressure
-   ~baca.markups.poco_pont_plus_non_vib
-   ~baca.markups.poco_pont_plus_sub_non_vib
-   ~baca.markups.poco_pont_plus_sub_vib_mod
-   ~baca.markups.poco_pont_plus_vib_mod
-   ~baca.markups.poco_rasp_partial_2
-   ~baca.markups.poco_scratch
-   ~baca.markups.pont
-   ~baca.markups.pont_XFB
-   ~baca.markups.pont_XFB_flaut
-   ~baca.markups.ponticello
-   ~baca.markups.pos_ord
-   ~baca.markups.pos_ord_XFB
-   ~baca.markups.pos_ord_XFB_flaut
-   ~baca.markups.pos_ord_poco_scratch
-   ~baca.markups.pos_ord_senza_vib
-   ~baca.markups.pos_ord_vib_poco
-   ~baca.markups.pres_de_la_table
-   ~baca.markups.put_reed_back_in
-   ~baca.markups.rasp
-   ~baca.markups.rasp_partial_2
-   ~baca.markups.ratchet
-   ~baca.markups.remove_staple
-   ~baca.markups.repeat_count
-   ~baca.markups.scraped_slate
-   ~baca.markups.scratch_moltiss
-   ~baca.markups.senza_pedale
-   ~baca.markups.senza_scratch
-   ~baca.markups.senza_vib
    ~baca.markups.short_instrument
-   ~baca.markups.snare_drum
-   ~baca.markups.sparse_clicks
-   ~baca.markups.spazz
-   ~baca.markups.spazzolato
-   ~baca.markups.spazzolato_1_2_clt
-   ~baca.markups.sponges
-   ~baca.markups.still
    ~baca.markups.string_number
    ~baca.markups.string_numbers
-   ~baca.markups.subito_non_armonichi_e_non_gridato
-   ~baca.markups.subito_ordinario
-   ~baca.markups.suspended_cymbal
-   ~baca.markups.tailpiece
-   ~baca.markups.tam_tam
-   ~baca.markups.tamb_tr
-   ~baca.markups.tasto
-   ~baca.markups.tasto_FB
-   ~baca.markups.tasto_FB_flaut
-   ~baca.markups.tasto_NBS
-   ~baca.markups.tasto_XFB
-   ~baca.markups.tasto_XFB_flaut
-   ~baca.markups.tasto_fractional_scratch
-   ~baca.markups.tasto_half_scratch
-   ~baca.markups.tasto_moltiss
-   ~baca.markups.tasto_plus_non_vib
-   ~baca.markups.tasto_plus_pochiss_scratch
-   ~baca.markups.tasto_plus_poco_scratch
-   ~baca.markups.tasto_plus_poco_vib
-   ~baca.markups.tasto_plus_scratch_moltiss
-   ~baca.markups.tasto_poss
-   ~baca.markups.tasto_senza_vib
-   ~baca.markups.tasto_slow_bow
-   ~baca.markups.terminate_abruptly
-   ~baca.markups.terminate_each_note_abruptly
-   ~baca.markups.trans
-   ~baca.markups.trem_flaut_tast
-   ~baca.markups.vib_moltiss
-   ~baca.markups.vib_pochiss
-   ~baca.markups.vib_poco
-   ~baca.markups.vibraphone
-   ~baca.markups.xylophone
 
 .. raw:: html
 
