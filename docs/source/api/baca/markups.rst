@@ -23,20 +23,11 @@ markups
    :nosignatures:
 
    ~instrument
-   ~lines
    ~make_instrument_name_markup
    ~short_instrument
-   ~string_number
-   ~string_numbers
 
 .. autofunction:: instrument
-
-.. autofunction:: lines
 
 .. autofunction:: make_instrument_name_markup
 
 .. autofunction:: short_instrument
-
-.. autofunction:: string_number
-
-.. autofunction:: string_numbers

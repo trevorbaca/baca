@@ -58,29 +58,6 @@ def instrument(
     return make_instrument_name_markup(string, column=column, hcenter_in=hcenter_in)
 
 
-def lines(items: typing.List, *, boxed: bool = None) -> indicators.Markup:
-    if not isinstance(items, list):
-        message = f"items must be list (not {type(items).__name__}):"
-        lines = ["    " + _ for _ in abjad.lilypond(items).split("\n")]
-        lines = "\n".join(lines)
-        message += f"\n{lines}"
-        raise Exception(message)
-    items_ = []
-    for item in items:
-        if isinstance(item, (str, abjad.Markup)):
-            items_.append(item)
-        else:
-            assert item.indicators is not None
-            assert len(item.indicators) == 1
-            markup = item.indicators[0]
-            items_.append(markup)
-    markup = abjad.MarkupList(items_).column()
-    markup = indicators.Markup(contents=markup.contents)
-    if boxed:
-        markup = markup.boxed()
-    return markup
-
-
 def make_instrument_name_markup(string, *, column=True, hcenter_in=None):
     if hcenter_in is not None:
         assert isinstance(hcenter_in, (int, float)), repr(hcenter_in)

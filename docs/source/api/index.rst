@@ -377,11 +377,8 @@ Markup library.
    :nosignatures:
 
    ~baca.markups.instrument
-   ~baca.markups.lines
    ~baca.markups.make_instrument_name_markup
    ~baca.markups.short_instrument
-   ~baca.markups.string_number
-   ~baca.markups.string_numbers
 
 .. raw:: html
 
