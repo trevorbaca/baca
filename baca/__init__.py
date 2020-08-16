@@ -1,7 +1,7 @@
 import abjad
 import ide
 
-from . import const, markups
+from . import const
 from .classes import *
 from .commandclasses import *
 from .commands import *

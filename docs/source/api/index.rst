@@ -361,29 +361,6 @@ Bača API
 
    <hr/>
 
-.. rubric:: :ref:`baca.markups <baca--markups>`
-   :class: section-header
-
-Markup library.
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.markups.instrument
-   ~baca.markups.make_instrument_name_markup
-   ~baca.markups.short_instrument
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: :ref:`baca.mathx <baca--mathx>`
    :class: section-header
 

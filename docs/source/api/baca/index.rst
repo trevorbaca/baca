@@ -28,7 +28,6 @@ baca
    figuremaker
    indicatorcommands
    indicators
-   markups
    mathx
    overrides
    path
@@ -52,7 +51,6 @@ baca
    figuremaker
    indicatorcommands
    indicators
-   markups
    mathx
    overrides
    path

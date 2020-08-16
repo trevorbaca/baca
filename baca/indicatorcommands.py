@@ -5,7 +5,7 @@ import ide
 
 import abjad
 
-from . import classes, commandclasses, const, indicators, markups, scoping
+from . import classes, commandclasses, const, indicators, scoping
 
 
 def _site(frame):
@@ -3027,9 +3027,23 @@ def start_markup(
         assert isinstance(argument, str), repr(argument)
         assert argument.startswith("\\"), repr(argument)
         start_markup = abjad.StartMarkup(markup=argument)
-    elif isinstance(argument, (list, str)):
-        markup = markups.instrument(argument, hcenter_in=hcenter_in)
-        start_markup = abjad.StartMarkup(markup=markup)
+    elif isinstance(argument, str):
+        width = hcenter_in or 16
+        string = rf'\markup \hcenter-in #{width} "{argument}"'
+        start_markup = abjad.StartMarkup(markup=string)
+    elif isinstance(argument, list) and len(argument) == 2:
+        width = hcenter_in or 16
+        line_1 = rf'\hcenter-in #{width} "{argument[0]}"'
+        line_2 = rf'\hcenter-in #{width} "{argument[1]}"'
+        string = rf"\markup \column {{ {line_1} {line_2} }}"
+        start_markup = abjad.StartMarkup(markup=string)
+    elif isinstance(argument, list) and len(argument) == 3:
+        width = hcenter_in or 16
+        line_1 = rf'\hcenter-in #{width} "{argument[0]}"'
+        line_2 = rf'\hcenter-in #{width} "{argument[1]}"'
+        line_3 = rf'\hcenter-in #{width} "{argument[2]}"'
+        string = rf"\markup \column {{ {line_1} {line_2} {line_3} }}"
+        start_markup = abjad.StartMarkup(markup=string)
     elif isinstance(argument, abjad.Markup):
         markup = abjad.Markup(argument)
         start_markup = abjad.StartMarkup(markup=markup)
