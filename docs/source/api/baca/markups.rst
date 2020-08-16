@@ -22,24 +22,18 @@ markups
 .. autosummary::
    :nosignatures:
 
-   ~final_markup
    ~instrument
    ~lines
    ~make_instrument_name_markup
-   ~markup
    ~short_instrument
    ~string_number
    ~string_numbers
-
-.. autofunction:: final_markup
 
 .. autofunction:: instrument
 
 .. autofunction:: lines
 
 .. autofunction:: make_instrument_name_markup
-
-.. autofunction:: markup
 
 .. autofunction:: short_instrument
 

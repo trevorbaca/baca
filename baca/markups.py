@@ -8,22 +8,6 @@ import abjad
 from . import indicators
 
 
-def final_markup(
-    places: typing.List[str], dates: typing.List[str]
-) -> indicators.Markup:
-    string = r" \hspace #0.75 – \hspace #0.75 ".join(places)
-    places_ = abjad.Markup(string)
-    places_ = abjad.Markup.line([places_])
-    string = r" \hspace #0.75 – \hspace #0.75 ".join(dates)
-    dates_ = abjad.Markup(string)
-    dates_ = abjad.Markup.line([dates_])
-    markup = abjad.Markup.right_column([places_, dates_])
-    markup = markup.with_color("black")
-    markup = markup.override(("font-name", "Palatino"))
-    markup = indicators.Markup(contents=markup.contents)
-    return markup
-
-
 def instrument(
     string: typing.Union[str, typing.List[str]],
     hcenter_in: typing.Optional[abjad.Number] = 16,
@@ -118,10 +102,6 @@ def make_instrument_name_markup(string, *, column=True, hcenter_in=None):
     if hcenter_in is not None:
         markup = markup.hcenter_in(hcenter_in)
     return markup
-
-
-def markup(string):
-    return indicators.Markup(string)
 
 
 def short_instrument(

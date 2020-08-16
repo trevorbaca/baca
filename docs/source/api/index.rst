@@ -376,11 +376,9 @@ Markup library.
 .. autosummary::
    :nosignatures:
 
-   ~baca.markups.final_markup
    ~baca.markups.instrument
    ~baca.markups.lines
    ~baca.markups.make_instrument_name_markup
-   ~baca.markups.markup
    ~baca.markups.short_instrument
    ~baca.markups.string_number
    ~baca.markups.string_numbers
