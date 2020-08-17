@@ -1585,8 +1585,8 @@ def mmrest_text_color(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
+        ...         r"\baca-boxed-markup still",
+        ...         literal=True,
         ...         selector=baca.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_color('red'),
@@ -1655,12 +1655,7 @@ def mmrest_text_color(
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                            ^ \markup {                                                              %! baca.markup():baca.IndicatorCommand._call()
-                                \override                                                            %! baca.markup():baca.IndicatorCommand._call()
-                                    #'(box-padding . 0.5)                                            %! baca.markup():baca.IndicatorCommand._call()
-                                    \box                                                             %! baca.markup():baca.IndicatorCommand._call()
-                                        still                                                        %! baca.markup():baca.IndicatorCommand._call()
-                                }                                                                    %! baca.markup():baca.IndicatorCommand._call()
+                            ^ \baca-boxed-markup still                                               %! baca.markup():baca.IndicatorCommand._call()
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
@@ -1723,8 +1718,8 @@ def mmrest_text_color(
         ...     'Music_Voice',
         ...     baca.make_notes(),
         ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
+        ...         r'\baca-boxed-markup still',
+        ...         literal=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.mmrest_text_color('red', selector=baca.leaves()),
@@ -1763,8 +1758,8 @@ def mmrest_text_extra_offset(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
+        ...         r'\baca-boxed-markup still',
+        ...         literal=True,
         ...         selector=baca.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_extra_offset((0, 2)),
@@ -1833,12 +1828,7 @@ def mmrest_text_extra_offset(
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                            ^ \markup {                                                              %! baca.markup():baca.IndicatorCommand._call()
-                                \override                                                            %! baca.markup():baca.IndicatorCommand._call()
-                                    #'(box-padding . 0.5)                                            %! baca.markup():baca.IndicatorCommand._call()
-                                    \box                                                             %! baca.markup():baca.IndicatorCommand._call()
-                                        still                                                        %! baca.markup():baca.IndicatorCommand._call()
-                                }                                                                    %! baca.markup():baca.IndicatorCommand._call()
+                            ^ \baca-boxed-markup still                                               %! baca.markup():baca.IndicatorCommand._call()
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
@@ -1914,8 +1904,8 @@ def mmrest_text_padding(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
+        ...         r'\baca-boxed-markup still',
+        ...         literal=True,
         ...         selector=baca.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_padding(2),
@@ -1984,12 +1974,7 @@ def mmrest_text_padding(
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                            ^ \markup {                                                              %! baca.markup():baca.IndicatorCommand._call()
-                                \override                                                            %! baca.markup():baca.IndicatorCommand._call()
-                                    #'(box-padding . 0.5)                                            %! baca.markup():baca.IndicatorCommand._call()
-                                    \box                                                             %! baca.markup():baca.IndicatorCommand._call()
-                                        still                                                        %! baca.markup():baca.IndicatorCommand._call()
-                                }                                                                    %! baca.markup():baca.IndicatorCommand._call()
+                            ^ \baca-boxed-markup still                                               %! baca.markup():baca.IndicatorCommand._call()
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
@@ -2065,8 +2050,8 @@ def mmrest_text_parent_center(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
+        ...         r'\baca-boxed-markup still',
+        ...         literal=True,
         ...         selector=baca.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_parent_center(),
@@ -2135,12 +2120,7 @@ def mmrest_text_parent_center(
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                            ^ \markup {                                                              %! baca.markup():baca.IndicatorCommand._call()
-                                \override                                                            %! baca.markup():baca.IndicatorCommand._call()
-                                    #'(box-padding . 0.5)                                            %! baca.markup():baca.IndicatorCommand._call()
-                                    \box                                                             %! baca.markup():baca.IndicatorCommand._call()
-                                        still                                                        %! baca.markup():baca.IndicatorCommand._call()
-                                }                                                                    %! baca.markup():baca.IndicatorCommand._call()
+                            ^ \baca-boxed-markup still                                               %! baca.markup():baca.IndicatorCommand._call()
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
@@ -2216,8 +2196,8 @@ def mmrest_text_staff_padding(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
+        ...         r'\baca-boxed-markup still',
+        ...         literal=True,
         ...         selector=baca.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_staff_padding(2),
@@ -2286,12 +2266,7 @@ def mmrest_text_staff_padding(
             <BLANKLINE>
                             % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
                             R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                            ^ \markup {                                                              %! baca.markup():baca.IndicatorCommand._call()
-                                \override                                                            %! baca.markup():baca.IndicatorCommand._call()
-                                    #'(box-padding . 0.5)                                            %! baca.markup():baca.IndicatorCommand._call()
-                                    \box                                                             %! baca.markup():baca.IndicatorCommand._call()
-                                        still                                                        %! baca.markup():baca.IndicatorCommand._call()
-                                }                                                                    %! baca.markup():baca.IndicatorCommand._call()
+                            ^ \baca-boxed-markup still                                               %! baca.markup():baca.IndicatorCommand._call()
                         %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
             <BLANKLINE>
                             % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
@@ -4681,8 +4656,8 @@ def text_script_color(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
+        ...         r'\baca-boxed-markup still',
+        ...         literal=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_color('red'),
@@ -4805,8 +4780,8 @@ def text_script_down(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
+        ...         r'\baca-boxed-markup still',
+        ...         literal=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_down()
@@ -4853,8 +4828,8 @@ def text_script_extra_offset(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
+        ...         r'\baca-boxed-markup still',
+        ...         literal=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_extra_offset((0, 2)),
@@ -5001,8 +4976,8 @@ def text_script_padding(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
+        ...         r'\baca-boxed-markup still',
+        ...         literal=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_padding(2),
@@ -5172,8 +5147,8 @@ def text_script_staff_padding(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
+        ...         r'\baca-boxed-markkup still',
+        ...         literal=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_staff_padding(2)
@@ -5296,8 +5271,8 @@ def text_script_up(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.markup(
-        ...         'still',
-        ...         boxed=True,
+        ...         r'\baca-boxed-markup still',
+        ...         literal=True,
         ...         selector=baca.leaf(1),
         ...         ),
         ...     baca.text_script_up()

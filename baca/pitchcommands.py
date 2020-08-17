@@ -4,7 +4,7 @@ import typing
 
 import abjad
 
-from . import classes, const, indicators, pitchclasses, scoping, typings
+from . import classes, const, pitchclasses, scoping, typings
 
 ### CLASSES ###
 
@@ -7158,12 +7158,12 @@ def interpolate_staff_positions(
     )
 
 
-def levine_multiphonic(n: int) -> indicators.Markup:
+def levine_multiphonic(n: int) -> abjad.Markup:
     """
     Makes Levine multiphonic markup.
     """
-    string = f"L.{n}"
-    return indicators.Markup(string).boxed()
+    assert isinstance(n, int), repr(n)
+    return abjad.Markup(rf'\baca-boxed-markup "L.{n}"', literal=True)
 
 
 def loop(

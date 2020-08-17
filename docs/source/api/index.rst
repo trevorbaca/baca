@@ -352,7 +352,6 @@ Bača API
 
    ~baca.indicators.Accelerando
    ~baca.indicators.BarExtent
-   ~baca.indicators.Markup
    ~baca.indicators.Ritardando
    ~baca.indicators.SpacingSection
    ~baca.indicators.StaffLines

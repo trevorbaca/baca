@@ -84,6 +84,20 @@ baca-stop-on-string-full-upbow-markup =
         (closepath)
         )
 
+%%% BOXED ABBREVIATION %%%
+
+baca-boxed-markup = #(
+    define-music-function
+    (text)
+    (markup?)
+    #{
+    - \markup
+    \override #'(box-padding . 0.5)
+    \box
+    #text
+    #}
+    )
+
 %%% CIRCLE BOWING MARKUP %%%
 
 baca-circle-bowing-markup =

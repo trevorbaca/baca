@@ -7236,8 +7236,8 @@ def text_spanner(
                 if current_item:
                     item_ = " ".join(current_item)
                     if boxed:
-                        markup = abjad.Markup(item_, literal=True)
-                        markup = markup.box().override(("box-padding", 0.5))
+                        string = rf'\baca-boxed-markup "{item_}"'
+                        markup = abjad.Markup(string, literal=True)
                         items_.append(markup)
                     else:
                         items_.append(item_)
@@ -7248,8 +7248,8 @@ def text_spanner(
         if current_item:
             item_ = " ".join(current_item)
             if boxed:
-                markup = abjad.Markup(item_, literal=True)
-                markup = markup.box().override(("box-padding", 0.5))
+                string = rf'\baca-boxed-markup "{item_}"'
+                markup = abjad.Markup(string, literal=True)
                 items_.append(markup)
             else:
                 items_.append(item_)

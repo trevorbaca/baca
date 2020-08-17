@@ -2450,7 +2450,6 @@ def label(
 def markup(
     argument: typing.Union[str, abjad.Markup],
     *tweaks: abjad.TweakInterface,
-    boxed: bool = None,
     # typehinting is weird for some reason
     direction=abjad.Up,
     literal: bool = False,
@@ -2636,8 +2635,6 @@ def markup(
         message += "  Value of 'argument' must be str or markup.\n"
         message += f"  Not {argument!r}."
         raise Exception(message)
-    if boxed:
-        markup = markup.box().override(("box-padding", 0.5))
     prototype = (str, abjad.Expression)
     if selector is not None and not isinstance(selector, prototype):
         message = "selector must be string or expression"

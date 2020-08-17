@@ -50,7 +50,7 @@ baca-spazzolato-boxed-markup = \markup
 baca-string-i = \markup
     I
 
-baca-string-i = \markup
+baca-string-ii = \markup
     II
 
 baca-string-iii = \markup
