@@ -7335,9 +7335,8 @@ def text_spanner(
         # kerns bookended hook
         if "hook" in style:
             assert isinstance(right_markup, abjad.Markup)
-            line = abjad.Markup.draw_line(0, -1)
-            line = line.raise_(-1)
-            hspace = abjad.Markup.hspace(0.75)
+            line = abjad.Markup(r"\raise #-1 \draw-line #'(0 . -1)")
+            hspace = abjad.Markup(r"\hspace #0.75")
             right_markup = right_markup.general_align("Y", 1)
             right_markup = abjad.Markup.concat([line, hspace, right_markup])
         bookended_spanner_start = abjad.new(start_text_span, right_text=right_markup)

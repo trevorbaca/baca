@@ -3793,9 +3793,9 @@ class Accumulator:
         else:
             raise Exception(f"unrecognized figure name: {figure_name!r}.")
         figure_index = f" ({figure_index})"
-        figure_index = abjad.Markup(figure_index).fontsize(-2).raise_(0.25)
+        figure_index = abjad.Markup(rf"\raise #0.25 \fontsize #-2 {figure_index}")
         figure_name_markup = abjad.Markup.concat(
-            ["[", figure_name, abjad.Markup.hspace(1), figure_index, "]"]
+            ["[", figure_name, abjad.Markup(r"\hspace #1"), figure_index, "]"]
         )
         figure_name_markup = figure_name_markup.fontsize(2)
         figure_name_markup = abjad.Markup(figure_name_markup, direction=abjad.Up)

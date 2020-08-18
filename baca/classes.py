@@ -2310,7 +2310,7 @@ class Selection(abjad.Selection):
                 ...     else:
                 ...         color, direction = 'blue', abjad.Down
                 ...     for leaf in selection:
-                ...         markup = abjad.Markup('*').with_color(color).bold()
+                ...         markup = abjad.Markup(rf'\bold \with-color #{color} "*"')
                 ...         markup = abjad.new(markup, direction=direction)
                 ...         abjad.attach(markup, leaf)
 
