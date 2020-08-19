@@ -4895,22 +4895,7 @@ def text_spanner(
                             \bacaStartTextSpanRhythmAnnotation                                       %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
                             - \abjad-dashed-line-with-hook                                           %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
                             - \baca-text-spanner-left-text "pont."                                   %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                            - \tweak bound-details.right.text \markup {                              %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                \concat                                                              %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                    {                                                                %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                        \raise                                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            #-1                                                      %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            \draw-line                                               %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                                #'(0 . -1)                                           %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                        \hspace                                                      %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            #0.75                                                    %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                        \general-align                                               %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            #Y                                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            #1                                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            \upright                                                 %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                                ord.                                                 %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                    }                                                                %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                }                                                                    %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
+                            - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. } %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
                             - \tweak bound-details.right.padding #1.25                               %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
                             \startTextSpan                                                           %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
@@ -5252,22 +5237,7 @@ def text_spanner(
                             \bacaStartTextSpanRhythmAnnotation                                       %! baca.rhythm_annotation_spanner():RHYTHM_ANNOTATION_SPANNER:baca.PiecewiseCommand._call(2):SPANNER_START
                             - \abjad-solid-line-with-hook                                            %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
                             - \baca-text-spanner-left-text "pont."                                   %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                            - \tweak bound-details.right.text \markup {                              %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                \concat                                                              %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                    {                                                                %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                        \raise                                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            #-1                                                      %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            \draw-line                                               %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                                #'(0 . -1)                                           %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                        \hspace                                                      %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            #0.75                                                    %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                        \general-align                                               %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            #Y                                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            #1                                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            \upright                                                 %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                                ord.                                                 %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                    }                                                                %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                }                                                                    %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
+                            - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright ord. } %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
                             - \tweak bound-details.right.padding #1.25                               %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
                             \startTextSpan                                                           %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
@@ -6783,22 +6753,7 @@ def text_spanner(
                             [                                                                        %! baca.make_even_divisions()
                             - \abjad-solid-line-with-hook                                            %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
                             - \baca-text-spanner-left-text "B"                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                            - \tweak bound-details.right.text \markup {                              %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                \concat                                                              %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                    {                                                                %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                        \raise                                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            #-1                                                      %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            \draw-line                                               %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                                #'(0 . -1)                                           %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                        \hspace                                                      %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            #0.75                                                    %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                        \general-align                                               %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            #Y                                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            #1                                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                            \upright                                                 %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                                A                                                    %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                    }                                                                %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                                }                                                                    %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
+                            - \tweak bound-details.right.text \markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75 \general-align #Y #1 \upright A } %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
                             - \tweak bound-details.right.padding #1.25                               %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
                             - \tweak bound-details.right.stencil-align-dir-y #center                 %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
                             \startTextSpan                                                           %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
@@ -7284,7 +7239,10 @@ def text_spanner(
         else:
             item_markup = item
             assert isinstance(item_markup, abjad.Markup)
-            item_markup = item_markup.upright()
+            assert len(item_markup.contents) == 1, repr(item_markup)
+            assert isinstance(item_markup.contents[0], str), repr(item_markup)
+            string = item_markup.contents[0]
+            item_markup = abjad.Markup(r'\upright {string}', literal=True)
         prototype = (str, abjad.Markup)
         assert isinstance(item_markup, prototype)
         style = "invisible-line"
@@ -7303,12 +7261,13 @@ def text_spanner(
                     right_markup = r"- \baca-text-spanner-right-text"
                     right_markup += rf' "{right_text}"'
             else:
-                right_markup = abjad.Markup(right_text, literal=True)
-                assert isinstance(right_markup, abjad.Markup)
-                right_markup = right_markup.upright()
+                right_markup = abjad.Markup(rf'\upright {right_text}', literal=True)
         else:
             assert isinstance(right_text, abjad.Markup)
-            right_markup = right_text.upright()
+            assert len(right_text.contents) == 1, repr(right_text)
+            assert isinstance(right_text.contents[0], str), repr(right_text)
+            string = right_text.contents[0]
+            right_markup = abjad.Markup(r'\upright {string}', literal=True)
         if lilypond_id is None:
             command = r"\startTextSpan"
         elif lilypond_id == 1:
@@ -7335,10 +7294,12 @@ def text_spanner(
         # kerns bookended hook
         if "hook" in style:
             assert isinstance(right_markup, abjad.Markup)
-            line = abjad.Markup(r"\raise #-1 \draw-line #'(0 . -1)")
-            hspace = abjad.Markup(r"\hspace #0.75")
-            right_markup = right_markup.general_align("Y", 1)
-            right_markup = abjad.Markup.concat([line, hspace, right_markup])
+            assert len(right_markup.contents) == 1, repr(right_markup)
+            assert isinstance(right_markup.contents[0], str), repr(right_markup)
+            content_string = right_markup.contents[0]
+            string = r"\markup \concat { \raise #-1 \draw-line #'(0 . -1) \hspace #0.75"
+            string += rf" \general-align #Y #1 {content_string} }}"
+            right_markup = abjad.Markup(string, literal=True)
         bookended_spanner_start = abjad.new(start_text_span, right_text=right_markup)
         # TODO: find some way to make these tweaks explicit to composer
         manager = abjad.tweak(bookended_spanner_start)
