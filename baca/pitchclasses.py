@@ -7632,11 +7632,9 @@ class PitchTree(classes.Tree):
             set_class = abjad.SetClass.from_pitch_class_set(
                 pitch_class_set, lex_rank=True, transposition_only=True
             )
-            string = str(set_class)
-            markup = abjad.Markup(string, literal=True)
-            label = abjad.Markup.line([markup], direction=abjad.Up)
+            string = rf'\small \line {{ "{set_class}" }}'
+            label = abjad.Markup(string, direction=abjad.Up)
             if label is not None:
-                label = label.small()
                 first_leaf = leaves[0]
                 abjad.attach(label, first_leaf)
 
