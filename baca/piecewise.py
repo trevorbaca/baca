@@ -7230,6 +7230,7 @@ def text_spanner(
     stop_text_span = abjad.StopTextSpan(command=command)
     cyclic_items = abjad.CyclicTuple(items)
     for i, item in enumerate(cyclic_items):
+        item_markup: typing.Union[str, abjad.Markup]
         if item in shape_to_style:
             continue
         if isinstance(item, str) and item.startswith("\\"):
@@ -7242,7 +7243,8 @@ def text_spanner(
             assert len(item_markup.contents) == 1, repr(item_markup)
             assert isinstance(item_markup.contents[0], str), repr(item_markup)
             string = item_markup.contents[0]
-            item_markup = abjad.Markup(r'\upright {string}', literal=True)
+            item_markup = abjad.Markup(r"\upright {string}", literal=True)
+            assert isinstance(item_markup, abjad.Markup)
         prototype = (str, abjad.Markup)
         assert isinstance(item_markup, prototype)
         style = "invisible-line"
@@ -7261,13 +7263,13 @@ def text_spanner(
                     right_markup = r"- \baca-text-spanner-right-text"
                     right_markup += rf' "{right_text}"'
             else:
-                right_markup = abjad.Markup(rf'\upright {right_text}', literal=True)
+                right_markup = abjad.Markup(rf"\upright {right_text}", literal=True)
         else:
             assert isinstance(right_text, abjad.Markup)
             assert len(right_text.contents) == 1, repr(right_text)
             assert isinstance(right_text.contents[0], str), repr(right_text)
             string = right_text.contents[0]
-            right_markup = abjad.Markup(r'\upright {string}', literal=True)
+            right_markup = abjad.Markup(r"\upright {string}", literal=True)
         if lilypond_id is None:
             command = r"\startTextSpan"
         elif lilypond_id == 1:

@@ -3787,18 +3787,15 @@ class Accumulator:
             figure_name = abjad.Markup(body)
         elif len(parts) == 2:
             body, subscript = parts
-            figure_name = abjad.Markup.concat(
-                [abjad.Markup(body), abjad.Markup(subscript).sub()]
-            )
+            string = rf"\markup \concat {{ {body} \sub {subscript} }}"
+            figure_name = abjad.Markup(string, literal=True)
         else:
             raise Exception(f"unrecognized figure name: {figure_name!r}.")
-        figure_index = f" ({figure_index})"
-        figure_index = abjad.Markup(rf"\raise #0.25 \fontsize #-2 {figure_index}")
-        figure_name_markup = abjad.Markup.concat(
-            ["[", figure_name, abjad.Markup(r"\hspace #1"), figure_index, "]"]
-        )
-        figure_name_markup = figure_name_markup.fontsize(2)
-        figure_name_markup = abjad.Markup(figure_name_markup, direction=abjad.Up)
+        figure_index = f"({figure_index})"
+        figure_name = figure_name.contents[0]
+        string = rf"\markup \fontsize #2 \concat {{ [ {figure_name} \hspace #1"
+        string += rf" \raise #0.25 \fontsize #-2 {figure_index} ] }}"
+        figure_name_markup = abjad.Markup(string, direction=abjad.Up, literal=True)
         annotation = f"figure name: {original_figure_name}"
         figure_name_markup._annotation = annotation
         leaf = abjad.select(container).leaf(0)
@@ -5064,6 +5061,9 @@ class FigureMaker:
         notes = abjad.LeafMaker()([0], [duration])
         markup = abjad.illustrators.selection_to_score_markup(notes)
         markup = markup.scale((0.75, 0.75))
+        # assert len(markup.contents) == 1, repr(markup)
+        # string = markup.contents[0]
+        # markup = abjad.Markup(rf"\markup \scale #'(0.75 . 0.75) {string}", literal=True)
         abjad.override(tuplet).tuplet_number.text = markup
         return tuplet
 
