@@ -1735,6 +1735,10 @@ class SegmentMaker(abjad.SegmentMaker):
                         markups.append(abjad.Markup.hspace(0.5))
                         markups.append(abjad.Markup("]").upright())
                         left_text = abjad.Markup.concat(markups)
+                        # string = rf"\concat {{ {left_text} \hspace #2 \upright ["
+                        # string += rf" \line {{ {modulation} }} \hspace #0.5"
+                        # string += r' \upright ] }'
+                        # left_text = abjad.Markup(string, literal=True)
                     else:
                         left_text = self._bracket_metric_modulation(
                             metronome_mark, metric_modulation
@@ -1904,6 +1908,11 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 color = abjad.SchemeColor(color)
                 left_text_with_color = left_text.with_color(color)
+                # assert len(left_text.contents) == 1, repr(left_text)
+                # left_text_with_color = abjad.Markup(
+                #    rf'\with-color #{color} {left_text.contents[0]}',
+                #    literal=True,
+                # )
             if right_text:
                 wrapper = abjad.get.wrapper(skips[-1], abjad.MetronomeMark)
                 tag = wrapper.tag
@@ -1922,6 +1931,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 color = self._status_to_color[status]
                 color = abjad.SchemeColor(color)
                 right_text_with_color = right_text.with_color(color)
+                # assert len(right_text.contents) == 1, repr(right_text)
+                # right_text_with_color = abjad.Markup(
+                #    rf'\with-color #{color} {right_text.contents[0]}',
+                #    literal=True,
+                # )
             else:
                 right_text_with_color = None
             start_text_span = abjad.StartTextSpan(
