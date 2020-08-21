@@ -1721,24 +1721,16 @@ class SegmentMaker(abjad.SegmentMaker):
             if metronome_mark is not None:
                 if metric_modulation is not None:
                     if metronome_mark.custom_markup is not None:
-                        left_text = metronome_mark._get_markup()
-                        markups = []
-                        markups.append(left_text)
-                        markups.append(abjad.Markup.hspace(2))
-                        markups.append(abjad.Markup("[").upright())
-                        modulation = metric_modulation._get_markup()
-                        if modulation.contents[0].startswith(r"\markup"):
-                            string = modulation.contents[0][8:]
-                            modulation = abjad.Markup(string, literal=True)
-                        modulation = abjad.Markup.line([modulation])
-                        markups.append(modulation)
-                        markups.append(abjad.Markup.hspace(0.5))
-                        markups.append(abjad.Markup("]").upright())
-                        left_text = abjad.Markup.concat(markups)
-                        # string = rf"\concat {{ {left_text} \hspace #2 \upright ["
-                        # string += rf" \line {{ {modulation} }} \hspace #0.5"
-                        # string += r' \upright ] }'
-                        # left_text = abjad.Markup(string, literal=True)
+                        left_text = str(metronome_mark._get_markup())
+                        if left_text.startswith(r"\markup"):
+                            left_text = left_text[8:]
+                        modulation = str(metric_modulation._get_markup())
+                        if modulation.startswith(r"\markup"):
+                            modulation = modulation[8:]
+                        string = rf"\concat {{ {left_text} \hspace #2 \upright ["
+                        string += rf" \line {{ {modulation} }} \hspace #0.5"
+                        string += r" \upright ] }"
+                        left_text = abjad.Markup(string, literal=True)
                     else:
                         left_text = self._bracket_metric_modulation(
                             metronome_mark, metric_modulation
