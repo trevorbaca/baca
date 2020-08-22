@@ -7464,23 +7464,26 @@ class Sequence(abjad.Sequence):
     def _make_accumulate_markup(markup, operands=None, count=None):
         if count is None:
             count = abjad.Exact
-        markup_list = abjad.MarkupList()
         operands = operands or [abjad.Exact]
-        operand_markups = []
+        operand_strings = []
         for operand in operands:
             if hasattr(operand, "get_markup"):
-                operand_markup = operand.get_markup(name="X")
+                operand_string = operand.get_markup(name="X")
+                assert len(operand_string.contents) == 1
+                operand_string = str(operand_string.contents[0])
             else:
-                operand_markup = str(operand)
-            operand_markups.append(operand_markup)
-        operand_markup = abjad.MarkupList(operand_markups).concat()
-        markup_list.append(operand_markup)
+                operand_string = str(operand)
+            operand_strings.append(operand_string)
+        string = "\n".join(operand_strings)
+        operand_string = rf"\concat {{ {string} }}"
         infix = "Φ"
         if count != abjad.Exact:
             infix += "/" + str(count)
-        markup_list.append(infix)
-        markup_list.append(markup)
-        markup = markup_list.line()
+        string = rf"\line {{ {operand_string} {infix} {markup.contents[0]} }}"
+        try:
+            markup = abjad.Markup(string)
+        except Exception:
+            raise Exception(string)
         return markup
 
     @staticmethod
