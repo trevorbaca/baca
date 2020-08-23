@@ -27,6 +27,9 @@ baca-ob-markup = \markup
     \box
     "OB"
 
+baca-leggieriss-markup = \markup
+    leggieriss.
+
 baca-pizz-markup = \markup
     \upright
     pizz.
@@ -34,6 +37,8 @@ baca-pizz-markup = \markup
 baca-pochiss-scratch-markup = \markup
     \whiteout
     "pochiss. scratch"
+
+baca-pos-ord-markup = \markup "pos. ord."
 
 baca-spazz-markup = \markup
     \whiteout
@@ -59,9 +64,26 @@ baca-string-iii = \markup
 baca-string-iv = \markup
     IV
 
+baca-tasto-markup = \markup
+    tasto
+
+baca-tasto-plus-half-scratch-markup = \markup
+    \whiteout
+    "tasto + 1/2 scratch"
+
 baca-tasto-plus-pochiss-scratch-markup = \markup
     \whiteout
     "tasto + pochiss. scratch"
+
+baca-tasto-plus-scratch-moltiss-markup = \markup
+    \whiteout
+    "tasto + scratch moltiss."
+
+baca-tasto-plus-xfb-markup = \markup
+    \whiteout
+    "tasto + XFB"
+
+baca-vib-poco-markup = \markup "vib. poco"
 
 baca-xfb-markup = \markup
     \whiteout
