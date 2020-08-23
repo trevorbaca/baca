@@ -21,14 +21,16 @@ baca-col-legno-battuto-markup = \markup
     \box
     "col legno battuto"
 
+baca-half-clt-markup = \baca-boxed-markup "1/2 clt"
+
+baca-leggieriss-markup = \markup
+    leggieriss.
+
 baca-ob-markup = \markup
     \whiteout
     \override #'(box-padding . 0.5)
     \box
     "OB"
-
-baca-leggieriss-markup = \markup
-    leggieriss.
 
 baca-pizz-markup = \markup
     \upright
@@ -37,6 +39,8 @@ baca-pizz-markup = \markup
 baca-pochiss-scratch-markup = \markup
     \whiteout
     "pochiss. scratch"
+
+baca-poco-vib-markup = \markup "poco vib."
 
 baca-pos-ord-markup = \markup "pos. ord."
 
@@ -90,3 +94,5 @@ baca-xfb-markup = \markup
     \override #'(box-padding . 0.5)
     \box
     XFB
+
+baca-xp-markup = \baca-boxed-markup XP
