@@ -52,16 +52,16 @@ baca-spazzolato-boxed-markup = \markup
     \box
     spazzolato
 
-baca-string-i = \markup
+baca-string-i-markup = \markup
     I
 
-baca-string-ii = \markup
+baca-string-ii-markup = \markup
     II
 
-baca-string-iii = \markup
+baca-string-iii-markup = \markup
     III
 
-baca-string-iv = \markup
+baca-string-iv-markup = \markup
     IV
 
 baca-tasto-markup = \markup
