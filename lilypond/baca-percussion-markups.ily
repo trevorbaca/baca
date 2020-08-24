@@ -1,151 +1,141 @@
 %%% BOXED INSTRUMENT MARKUPS %%%
 
-baca-bd-fingertips-markup = \markup
+baca-bass-drum-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
+    "bass drum"
+
+baca-bd-fingertips-markup = \baca-boxed-markup
+    \markup
+    \whiteout
     "BD (fingertips)"
 
-baca-bd-markup = \markup
+baca-bd-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     BD
 
-baca-bd-sponge-markup = \markup
+baca-bd-sponge-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "BD (sponge)"
 
-baca-bd-struck-markup = \markup
+baca-bd-struck-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "BD (struck)"
 
-baca-bd-struck-then-superball-markup = \markup
+baca-bd-struck-then-superball-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "BD (struck then superball)"
 
-baca-bd-superball-markup = \markup
+baca-bd-superball-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "BD (superball)"
 
-baca-bd-rolled-markup = \markup
+baca-bd-rolled-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "BD (rolled)"
 
-baca-brake-drum-markup = \markup
+baca-brake-drum-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "brake drum"
 
-baca-brake-drum-paper-towel-markup = \markup
+baca-brake-drum-paper-towel-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "brake drum (paper towel)"
 
-baca-castanets-markup = \markup
+baca-castanets-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     castanets
 
-baca-crotales-bowed-markup = \markup
+baca-crotales-bowed-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "crotales (bowed)"
 
-baca-glockenspiel-markup = \markup
+baca-glockenspiel-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     glockenspiel
 
-baca-marimba-attackless-markup = \markup
+baca-marimba-attackless-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "marimba (attackless)"
 
-baca-purpleheart-markup = \markup
+baca-purpleheart-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     purpleheart
 
-baca-ratchet-markup = \markup
+baca-ratchet-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     ratchet
 
-baca-slate-brush-markup = \markup
+baca-slate-brush-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "slate (brush)"
 
-baca-slate-scrape-markup = \markup
+baca-slate-scrape-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "slate (scrape)"
 
-baca-struck-markup = \markup
+baca-snare-drum-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
+    "snare drum"
+
+baca-struck-markup = \baca-boxed-markup
+    \markup
+    \whiteout
     struck
 
-baca-superball-markup = \markup
+baca-superball-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     superball
 
-baca-tam-tam-markup = \markup
+baca-tam-tam-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     tam-tam
 
-baca-to-marimba-markup = \markup
+baca-to-marimba-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "to marimba"
 
-baca-triangle-markup = \markup
+baca-triangle-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     triangle
 
-baca-triangle-small-beater-markup = \markup
+baca-triangle-small-beater-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "triangle (small beater)"
 
-baca-very-small-maraca-markup = \markup
+baca-very-small-maraca-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "very small maraca"
 
-baca-woodblock-markup = \markup
+baca-woodblock-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     woodblock
+
+baca-xl-tam-tam-markup = \baca-boxed-markup
+    \markup
+    \whiteout
+    "XL tam-tam"

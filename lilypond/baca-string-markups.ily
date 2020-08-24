@@ -1,35 +1,49 @@
+#(ly:set-option 'relative-includes #t)
+\include "baca-markups.ily"
+
 %%% STRING MARKUPS %%%
 
-baca-arco-markup = \markup
+baca-arco-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     arco
 
-baca-bow-directly-on-bridge-noise-only-markup = \markup
+baca-arco-ordinario-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
+    "arco ordinario"
+
+baca-bow-directly-on-bridge-noise-only-markup = \baca-boxed-markup
+    \markup
+    \whiteout
     \column {
         "bow directly on bridge;"
         "noise only: no pitch"
     }
 
-baca-col-legno-battuto-markup = \markup
+baca-bow-on-wooden-mute-markup = \markup
+    "bow on wooden mute"
+
+baca-bow-on-tailpiece-markup = \markup
+    "bow on tailpiece"
+
+baca-col-legno-battuto-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "col legno battuto"
+
+baca-estr-sul-pont-markup = \markup "estr. sul pont."
 
 baca-half-clt-markup = \baca-boxed-markup "1/2 clt"
 
 baca-leggieriss-markup = \markup
     leggieriss.
 
-baca-ob-markup = \markup
+baca-molto-flautando-markup = \markup "molto flautando"
+
+baca-ob-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "OB"
 
 baca-pizz-markup = \markup
@@ -44,16 +58,14 @@ baca-poco-vib-markup = \markup "poco vib."
 
 baca-pos-ord-markup = \markup "pos. ord."
 
-baca-spazz-markup = \markup
+baca-spazz-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     spazz.
 
-baca-spazzolato-boxed-markup = \markup
+baca-spazzolato-boxed-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     spazzolato
 
 baca-string-i-markup = \markup
@@ -67,6 +79,8 @@ baca-string-iii-markup = \markup
 
 baca-string-iv-markup = \markup
     IV
+
+baca-strings-iii-plus-iv-markup = \markup III+IV
 
 baca-tasto-markup = \markup
     tasto
@@ -89,10 +103,9 @@ baca-tasto-plus-xfb-markup = \markup
 
 baca-vib-poco-markup = \markup "vib. poco"
 
-baca-xfb-markup = \markup
+baca-xfb-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     XFB
 
 baca-xp-markup = \baca-boxed-markup XP

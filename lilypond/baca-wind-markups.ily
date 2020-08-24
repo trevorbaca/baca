@@ -1,49 +1,51 @@
+#(ly:set-option 'relative-includes #t)
+\include "baca-markups.ily"
+
 %%% WIND MARKUPS %%%
 
-baca-airtone-markup = \markup
+baca-airtone-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     airtone
 
-baca-doubletrill-markup = \markup
+baca-fluttertongue-markup = \markup fluttertongue
+
+baca-doubletrill-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     doubletrill
 
-baca-jet-whistle-markup = \markup
+baca-jet-whistle-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "jet whistle"
 
-baca-keynoise-markup = \markup
+baca-keynoise-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     keynoise
 
-baca-put-staple-back-in-markup = \markup
+baca-put-reed-back-in-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
+    "put reed back in"
+
+baca-put-staple-back-in-markup = \baca-boxed-markup
+    \markup
+    \whiteout
     "put staple back in"
 
-baca-remove-staple-markup = \markup
+baca-remove-staple-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "remove staple"
 
-baca-to-bass-clarinet-markup = \markup
+baca-to-bass-clarinet-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "to bass clarinet"
 
-baca-to-bass-flute-markup = \markup
+baca-to-bass-flute-markup = \baca-boxed-markup
+    \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "to bass flute"
