@@ -1,13 +1,12 @@
 %%% PIANO MARKUPS %%%
 
-baca-depress-silently-markup = \markup
+baca-senza-pedale-markup = \markup
+    "senza pedale"
+
+baca-depress-silently-markup = \baca-boxed-markup \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "depress silently"
 
-baca-tuning-pegs-markup = \markup
+baca-tuning-pegs-markup = \baca-boxed-markup \markup
     \whiteout
-    \override #'(box-padding . 0.5)
-    \box
     "tuning pegs"

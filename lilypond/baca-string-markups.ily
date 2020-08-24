@@ -3,18 +3,15 @@
 
 %%% STRING MARKUPS %%%
 
-baca-arco-markup = \baca-boxed-markup
-    \markup
+baca-arco-markup = \baca-boxed-markup \markup
     \whiteout
     arco
 
-baca-arco-ordinario-markup = \baca-boxed-markup
-    \markup
+baca-arco-ordinario-markup = \baca-boxed-markup \markup
     \whiteout
     "arco ordinario"
 
-baca-bow-directly-on-bridge-noise-only-markup = \baca-boxed-markup
-    \markup
+baca-bow-directly-on-bridge-noise-only-markup = \baca-boxed-markup \markup
     \whiteout
     \column {
         "bow directly on bridge;"
@@ -27,8 +24,7 @@ baca-bow-on-wooden-mute-markup = \markup
 baca-bow-on-tailpiece-markup = \markup
     "bow on tailpiece"
 
-baca-col-legno-battuto-markup = \baca-boxed-markup
-    \markup
+baca-col-legno-battuto-markup = \baca-boxed-markup \markup
     \whiteout
     "col legno battuto"
 
@@ -36,15 +32,19 @@ baca-estr-sul-pont-markup = \markup "estr. sul pont."
 
 baca-half-clt-markup = \baca-boxed-markup "1/2 clt"
 
-baca-leggieriss-markup = \markup
-    leggieriss.
+baca-leggieriss-markup = \markup leggieriss.
+
+baca-leggierissimo-markup = \markup leggierissimo
 
 baca-molto-flautando-markup = \markup "molto flautando"
 
-baca-ob-markup = \baca-boxed-markup
-    \markup
+baca-non-flautando-markup = \markup "non flautando"
+
+baca-ob-markup = \baca-boxed-markup \markup
     \whiteout
     "OB"
+
+baca-ordinario-markup = \markup ordinario
 
 baca-pizz-markup = \markup
     \upright
@@ -58,13 +58,15 @@ baca-poco-vib-markup = \markup "poco vib."
 
 baca-pos-ord-markup = \markup "pos. ord."
 
-baca-spazz-markup = \baca-boxed-markup
-    \markup
+baca-scratch-molto-markup = \markup "scratch molto"
+
+baca-scratch-poss-markup = \markup "scratch poss."
+
+baca-spazz-markup = \baca-boxed-markup \markup
     \whiteout
     spazz.
 
-baca-spazzolato-boxed-markup = \baca-boxed-markup
-    \markup
+baca-spazzolato-boxed-markup = \baca-boxed-markup \markup
     \whiteout
     spazzolato
 
@@ -81,6 +83,8 @@ baca-string-iv-markup = \markup
     IV
 
 baca-strings-iii-plus-iv-markup = \markup III+IV
+
+baca-subito-ordinario-markup = \markup "subito ordinario"
 
 baca-tasto-markup = \markup
     tasto
@@ -103,8 +107,7 @@ baca-tasto-plus-xfb-markup = \markup
 
 baca-vib-poco-markup = \markup "vib. poco"
 
-baca-xfb-markup = \baca-boxed-markup
-    \markup
+baca-xfb-markup = \baca-boxed-markup \markup
     \whiteout
     XFB
 
