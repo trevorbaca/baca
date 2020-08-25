@@ -30,11 +30,11 @@ class BreakMeasureMap:
         ...     baca.pitch('E4'),
         ...     )
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.StringTrioScoreTemplate.__call__()
             <<                                                                                       %! baca.StringTrioScoreTemplate.__call__()
@@ -538,11 +538,11 @@ class HorizontalSpacingSpecifier:
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -699,11 +699,11 @@ class HorizontalSpacingSpecifier:
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -867,11 +867,11 @@ class HorizontalSpacingSpecifier:
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1036,11 +1036,11 @@ class HorizontalSpacingSpecifier:
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1206,11 +1206,11 @@ class HorizontalSpacingSpecifier:
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1378,11 +1378,11 @@ class HorizontalSpacingSpecifier:
         ... )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()

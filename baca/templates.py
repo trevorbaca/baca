@@ -334,11 +334,11 @@ class SingleStaffScoreTemplate(ScoreTemplate):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -486,11 +486,11 @@ class StringTrioScoreTemplate(ScoreTemplate):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.StringTrioScoreTemplate.__call__()
             <<                                                                                       %! baca.StringTrioScoreTemplate.__call__()
@@ -841,11 +841,11 @@ class ThreeVoiceStaffScoreTemplate(ScoreTemplate):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.ThreeVoiceStaffScoreTemplate.__call__()
@@ -1107,11 +1107,11 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -1320,11 +1320,11 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.ViolinSoloScoreTemplate.__call__()
             <<                                                                                       %! baca.ViolinSoloScoreTemplate.__call__()

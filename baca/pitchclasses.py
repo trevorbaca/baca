@@ -150,11 +150,11 @@ class ArpeggiationSpacingSpecifier:
             >>> collections = collections.arpeggiate_up()
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -199,11 +199,11 @@ class ArpeggiationSpacingSpecifier:
             >>> collections = collections.arpeggiate_down()
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -1108,12 +1108,12 @@ class CollectionList(collections_module.abc.Sequence):
             ...     [16, 20, 19],
             ...     ])
 
-            >>> abjad.show(collections, strict=89) # doctest: +SKIP
+            >>> abjad.show(collections, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = collections.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -1683,7 +1683,7 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList([[5, 12, 14, 18], [16, 17]])
             >>> cursor = collections.cursor()
 
-            >>> abjad.f(cursor, strict=89)
+            >>> abjad.f(cursor, align_tags=89)
             baca.Cursor(
                 source=baca.CollectionList(
                     collections=[
@@ -2977,7 +2977,7 @@ class Constellation:
 
     def _show_chords(self, chords):
         lilypond_file, score = self._make_lilypond_file_and_score_from_chords(chords)
-        abjad.show(lilypond_file, strict=89)
+        abjad.show(lilypond_file, align_tags=89)
 
     ### PUBLIC PROPERTIES ###
 
@@ -3007,11 +3007,11 @@ class Constellation:
             >>> class_ = baca.ConstellationCircuit
             >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation = constellation_circuit[0]
-            >>> abjad.show(constellation.generator_chord, strict=89) # doctest: +SKIP
+            >>> abjad.show(constellation.generator_chord, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(constellation.generator_chord, strict=89)
+                >>> abjad.f(constellation.generator_chord, align_tags=89)
                 <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                 - \markup { 1-80 }
 
@@ -3070,11 +3070,11 @@ class Constellation:
             >>> class_ = baca.ConstellationCircuit
             >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> constellation = constellation_circuit[0]
-            >>> abjad.show(constellation.pivot_chord, strict=89) # doctest: +SKIP
+            >>> abjad.show(constellation.pivot_chord, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(constellation.pivot_chord, strict=89)
+                >>> abjad.f(constellation.pivot_chord, align_tags=89)
                 <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                 - \markup { 1-80 }
 
@@ -3477,11 +3477,11 @@ class ConstellationCircuit:
             >>> class_ = baca.ConstellationCircuit
             >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords()
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -3536,11 +3536,11 @@ class ConstellationCircuit:
             >>> class_ = baca.ConstellationCircuit
             >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> lilypond_file = constellation_circuit.illustrate_colored_generator_chords_and_pivot_chords()
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -3611,11 +3611,11 @@ class ConstellationCircuit:
             >>> class_ = baca.ConstellationCircuit
             >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> lilypond_file = constellation_circuit.illustrate_generator_chords()
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -3668,11 +3668,11 @@ class ConstellationCircuit:
             >>> class_ = baca.ConstellationCircuit
             >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> lilypond_file = constellation_circuit.illustrate_generator_chords_and_pivot_chords()
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -3743,11 +3743,11 @@ class ConstellationCircuit:
             >>> class_ = baca.ConstellationCircuit
             >>> constellation_circuit = class_.make_constellation_circuit_1()
             >>> lilypond_file = constellation_circuit.illustrate_pivot_chords()
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -4166,11 +4166,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
             >>> segment = baca.pitch_class_segment(items=items)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     bf'8
@@ -4188,11 +4188,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> expression = baca.pitch_class_segment()
             >>> segment = expression(items=[-2, -1.5, 6, 7, -1.5, 7])
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     bf'8
@@ -4252,7 +4252,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> J = baca.pitch_class_segment(items=items)
 
             >>> lilypond_file = abjad.illustrate(J)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  container:: example
 
@@ -4265,11 +4265,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> segment = J.alpha()
                 >>> lilypond_file = abjad.illustrate(segment)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                    >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                     \new Voice
                     {
                         b'8
@@ -4291,11 +4291,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
                 >>> lilypond_file = abjad.illustrate(segment)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                    >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                     \new Voice
                     {
                         b'8
@@ -4319,11 +4319,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 >>> segment = J.alpha().alpha()
                 >>> lilypond_file = abjad.illustrate(segment)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                    >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                     \new Voice
                     {
                         bf'8
@@ -4354,11 +4354,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
                 >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
                 >>> markup = expression.get_markup()
                 >>> lilypond_file = abjad.illustrate(segment, figure_name=markup)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                    >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                     \new Voice
                     {
                         bf'8
@@ -4427,11 +4427,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
             PitchSegment([42, 36, 28, 17, 8])
 
             >>> lilypond_file = abjad.illustrate(segment.arpeggiate_down())
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -4475,11 +4475,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
             PitchSegment([6, 12, 16, 17, 20])
 
             >>> lilypond_file = abjad.illustrate(segment.arpeggiate_up())
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -4523,11 +4523,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
             PitchClassSet([6, 7, 10, 10.5])
 
             >>> lilypond_file = abjad.illustrate(segment.chord())
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     <fs' g' bf' bqf'>1
@@ -4556,12 +4556,12 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> items = [-2, -1, 6, 7, -1, 7]
             >>> segment_1 = baca.PitchClassSegment(items=items)
             >>> lilypond_file = abjad.illustrate(segment_1)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             >>> items = [9, 2, 1, 6, 2, 6]
             >>> segment_2 = baca.PitchClassSegment(items=items)
             >>> lilypond_file = abjad.illustrate(segment_2)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  container:: example
 
@@ -4653,7 +4653,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> items = [-2, -1, 6, 7, -1, 7]
             >>> J = baca.PitchClassSegment(items=items)
             >>> lilypond_file = abjad.illustrate(J)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  container:: example
 
@@ -5024,11 +5024,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> items = [-2, -1.5, 6, 7]
             >>> segment = baca.pitch_class_segment(items=items)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     bf'8
@@ -5047,11 +5047,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
             >>> segment = baca.pitch_class_segment(items=items)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     bf'8
@@ -5080,11 +5080,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
             >>> segment = baca.pitch_class_segment(items=items)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     bf'8
@@ -5105,11 +5105,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
             >>> items = [-2, -1.5, 6, 7, 7]
             >>> segment = baca.pitch_class_segment(items=items)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     bf'8
@@ -5141,11 +5141,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     bf'8
@@ -5172,11 +5172,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     bf'8
@@ -5193,11 +5193,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             >>> segment = segment.space_down(bass=6, soprano=7)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -5254,11 +5254,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     bf'8
@@ -5275,11 +5275,11 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             >>> segment = segment.space_up(bass=6, soprano=7)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -5338,11 +5338,11 @@ class PitchClassSet(abjad.PitchClassSet):
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
             >>> setting = baca.pitch_class_set(items=items)
             >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     <fs' g' bf' bqf'>1
@@ -5436,11 +5436,11 @@ class PitchSegment(abjad.PitchSegment):
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
             >>> segment = baca.pitch_segment(items=items)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5485,11 +5485,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5519,11 +5519,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = segment.bass_to_octave(n=4)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5568,11 +5568,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5602,11 +5602,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = segment.center_to_octave(n=3)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5655,11 +5655,11 @@ class PitchSegment(abjad.PitchSegment):
             PitchSet([-2, -1.5, 6, 7])
 
             >>> lilypond_file = abjad.illustrate(segment.chord())
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -5690,11 +5690,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = baca.pitch_segment([-2, -1.5, 6, 7, -1.5, 7])
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5724,11 +5724,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = segment.soprano_to_octave(n=3)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5773,11 +5773,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = baca.pitch_segment([12, 14, 21, 22])
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5803,11 +5803,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = segment.space_down(bass=0)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5834,11 +5834,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = baca.pitch_segment([12, 14, 21, 22])
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5864,11 +5864,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = segment.space_down(bass=2)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5911,11 +5911,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = baca.pitch_segment([12, 14, 21, 22])
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5941,11 +5941,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = segment.space_up(bass=0)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5972,11 +5972,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = baca.pitch_segment([12, 14, 21, 22])
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -6002,11 +6002,11 @@ class PitchSegment(abjad.PitchSegment):
 
             >>> segment = segment.space_up(bass=2)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -6047,11 +6047,11 @@ class PitchSegment(abjad.PitchSegment):
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
             >>> segment = baca.pitch_segment(items=items)
             >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -6082,11 +6082,11 @@ class PitchSegment(abjad.PitchSegment):
             PitchSegment([6, 7, 7])
 
             >>> lilypond_file = abjad.illustrate(upper)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -6109,11 +6109,11 @@ class PitchSegment(abjad.PitchSegment):
             PitchSegment([-2, -1.5, -1.5])
 
             >>> lilypond_file = abjad.illustrate(lower)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -6157,11 +6157,11 @@ class PitchSet(abjad.PitchSet):
 
             >>> setting = baca.pitch_set([-2, -1.5, 6, 7, -1.5, 7])
             >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new PianoStaff
@@ -6225,11 +6225,11 @@ class PitchSet(abjad.PitchSet):
 
             >>> setting = baca.pitch_set([12, 14, 21, 22])
             >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6253,11 +6253,11 @@ class PitchSet(abjad.PitchSet):
 
             >>> setting = setting.space_down(bass=0)
             >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6282,11 +6282,11 @@ class PitchSet(abjad.PitchSet):
 
             >>> setting = baca.pitch_set([12, 14, 21, 22])
             >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6310,11 +6310,11 @@ class PitchSet(abjad.PitchSet):
 
             >>> setting = setting.space_down(bass=2)
             >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6355,11 +6355,11 @@ class PitchSet(abjad.PitchSet):
 
             >>> setting = baca.pitch_set([12, 14, 21, 22])
             >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6383,11 +6383,11 @@ class PitchSet(abjad.PitchSet):
 
             >>> setting = setting.space_up(bass=0)
             >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6412,11 +6412,11 @@ class PitchSet(abjad.PitchSet):
 
             >>> setting = baca.pitch_set([12, 14, 21, 22])
             >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6440,11 +6440,11 @@ class PitchSet(abjad.PitchSet):
 
             >>> setting = setting.space_up(bass=2)
             >>> lilypond_file = abjad.illustrate(setting)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], strict=89)
+                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6511,12 +6511,12 @@ class PitchTree(classes.Tree):
 
         >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
         >>> tree = baca.PitchTree(items=items)
-        >>> abjad.show(tree, strict=89) # doctest: +SKIP
+        >>> abjad.show(tree, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             \with
             {
@@ -6588,12 +6588,12 @@ class PitchTree(classes.Tree):
         ...     items=items,
         ...     item_class=abjad.NamedPitch,
         ...     )
-        >>> abjad.show(tree, strict=89) # doctest: +SKIP
+        >>> abjad.show(tree, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             \with
             {
@@ -6661,12 +6661,12 @@ class PitchTree(classes.Tree):
         ...     items=items,
         ...     item_class=abjad.NumberedPitchClass,
         ...     )
-        >>> abjad.show(tree, strict=89) # doctest: +SKIP
+        >>> abjad.show(tree, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             \with
             {
@@ -6738,12 +6738,12 @@ class PitchTree(classes.Tree):
         ...     items=items,
         ...     item_class=abjad.NamedPitchClass,
         ...     )
-        >>> abjad.show(tree, strict=89) # doctest: +SKIP
+        >>> abjad.show(tree, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             \with
             {
@@ -6815,11 +6815,11 @@ class PitchTree(classes.Tree):
         >>> lilypond_file = tree.__illustrate__(
         ...     cell_indices=False,
         ...     )
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             \with
             {
@@ -6886,12 +6886,12 @@ class PitchTree(classes.Tree):
         ...     ]
         >>> items = [segment.rotate(n=1) for segment in items]
         >>> tree = baca.PitchTree(items=items)
-        >>> abjad.show(tree, cell_indices=False, strict=89) # doctest: +SKIP
+        >>> abjad.show(tree, cell_indices=False, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             \with
             {
@@ -6964,7 +6964,7 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> graph_ = tree.__graph__() # doctest: +SKIP
-            >>> abjad.f(graph_, strict=89) # doctest: +SKIP
+            >>> abjad.f(graph_, align_tags=89) # doctest: +SKIP
             digraph G {
                 graph [bgcolor=transparent,
                     truecolor=true];
@@ -7023,12 +7023,12 @@ class PitchTree(classes.Tree):
                 node_13 -> node_17;
             }
 
-        >>> abjad.show(tree, cell_indices=False, strict=89) # doctest: +SKIP
+        >>> abjad.show(tree, cell_indices=False, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             \with
             {
@@ -7116,7 +7116,7 @@ class PitchTree(classes.Tree):
     #            ..  docs::
     #
     #                >>> tree_graph = tree.__graph__()
-    #                >>> abjad.f(tree_graph, strict=89)
+    #                >>> abjad.f(tree_graph, align_tags=89)
     #                digraph G {
     #                    graph [bgcolor=transparent,
     #                        truecolor=true];
@@ -7187,7 +7187,7 @@ class PitchTree(classes.Tree):
     #            ..  docs::
     #
     #                >>> tree_graph = tree.__graph__()
-    #                >>> abjad.f(tree_graph, strict=89)
+    #                >>> abjad.f(tree_graph, align_tags=89)
     #                digraph G {
     #                    graph [bgcolor=transparent,
     #                        truecolor=true];
@@ -7268,11 +7268,11 @@ class PitchTree(classes.Tree):
             >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -7341,11 +7341,11 @@ class PitchTree(classes.Tree):
             ...     cell_indices=abjad.Down,
             ...     set_classes=True,
             ...     )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -7443,11 +7443,11 @@ class PitchTree(classes.Tree):
             >>> lilypond_file = tree.__illustrate__(
             ...     cell_indices=abjad.Down,
             ...     )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -7713,7 +7713,7 @@ class PitchTree(classes.Tree):
 
                 >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [1, 2, 2, 4]]
                 >>> tree = baca.PitchTree(items=items)
-                >>> abjad.show(tree, strict=89) # doctest: +SKIP
+                >>> abjad.show(tree, align_tags=89) # doctest: +SKIP
 
             >>> tree.has_repeats()
             True
@@ -7721,7 +7721,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -7792,7 +7792,7 @@ class PitchTree(classes.Tree):
 
             >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree, strict=89) # doctest: +SKIP
+            >>> abjad.show(tree, align_tags=89) # doctest: +SKIP
 
             >>> tree.has_repeats()
             False
@@ -7800,7 +7800,7 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -7877,12 +7877,12 @@ class PitchTree(classes.Tree):
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree, strict=89) # doctest: +SKIP
+            >>> abjad.show(tree, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -7946,12 +7946,12 @@ class PitchTree(classes.Tree):
             Inverts tree about first pitch when axis is none:
 
             >>> inversion = tree.invert()
-            >>> abjad.show(inversion, strict=89) # doctest: +SKIP
+            >>> abjad.show(inversion, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -8015,12 +8015,12 @@ class PitchTree(classes.Tree):
             Inverts tree about pitch 0:
 
             >>> inversion = tree.invert(axis=0)
-            >>> abjad.show(inversion, strict=89) # doctest: +SKIP
+            >>> abjad.show(inversion, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -8084,12 +8084,12 @@ class PitchTree(classes.Tree):
             Inverts tree about pitch 13:
 
             >>> inversion = tree.invert(axis=13)
-            >>> abjad.show(inversion, strict=89) # doctest: +SKIP
+            >>> abjad.show(inversion, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -8172,12 +8172,12 @@ class PitchTree(classes.Tree):
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree, strict=89) # doctest: +SKIP
+            >>> abjad.show(tree, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -8241,12 +8241,12 @@ class PitchTree(classes.Tree):
             Gets retrograde of tree:
 
             >>> retrograde = tree.retrograde()
-            >>> abjad.show(retrograde, strict=89) # doctest: +SKIP
+            >>> abjad.show(retrograde, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = retrograde.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -8328,12 +8328,12 @@ class PitchTree(classes.Tree):
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree, strict=89) # doctest: +SKIP
+            >>> abjad.show(tree, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -8397,12 +8397,12 @@ class PitchTree(classes.Tree):
             Rotates tree to the right:
 
             >>> rotation = tree.rotate(n=1)
-            >>> abjad.show(rotation, strict=89) # doctest: +SKIP
+            >>> abjad.show(rotation, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -8466,12 +8466,12 @@ class PitchTree(classes.Tree):
             Rotates tree to the left:
 
             >>> rotation = tree.rotate(n=-1)
-            >>> abjad.show(rotation, strict=89) # doctest: +SKIP
+            >>> abjad.show(rotation, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -8535,12 +8535,12 @@ class PitchTree(classes.Tree):
             Rotates by zero:
 
             >>> rotation = tree.rotate(n=0)
-            >>> abjad.show(rotation, strict=89) # doctest: +SKIP
+            >>> abjad.show(rotation, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -8623,12 +8623,12 @@ class PitchTree(classes.Tree):
 
             >>> items = [[16, 18, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
             >>> tree = baca.PitchTree(items=items)
-            >>> abjad.show(tree, strict=89) # doctest: +SKIP
+            >>> abjad.show(tree, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -8692,12 +8692,12 @@ class PitchTree(classes.Tree):
             Transposes tree by positive index:
 
             >>> transposition = tree.transpose(n=13)
-            >>> abjad.show(transposition, strict=89) # doctest: +SKIP
+            >>> abjad.show(transposition, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -8761,12 +8761,12 @@ class PitchTree(classes.Tree):
             Transposes tree by negative index:
 
             >>> transposition = tree.transpose(n=-13)
-            >>> abjad.show(transposition, strict=89) # doctest: +SKIP
+            >>> abjad.show(transposition, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -8830,12 +8830,12 @@ class PitchTree(classes.Tree):
             Transposes tree by zero index:
 
             >>> transposition = tree.transpose(n=0)
-            >>> abjad.show(transposition, strict=89) # doctest: +SKIP
+            >>> abjad.show(transposition, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -9025,7 +9025,7 @@ class Registration:
         >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
         >>> registration = baca.Registration(components)
 
-        >>> abjad.f(registration, strict=89)
+        >>> abjad.f(registration, align_tags=89)
         baca.Registration(
             components=[
                 baca.RegistrationComponent(
@@ -9287,7 +9287,7 @@ class ZaggedPitchClassMaker:
         ...         grouping_counts=[1, 1, 1, 2, 3],
         ...     )
         >>> pitch_class_tree = maker()
-        >>> abjad.show(pitch_class_tree, strict=89) # doctest: +SKIP
+        >>> abjad.show(pitch_class_tree, align_tags=89) # doctest: +SKIP
 
         >>> for tree in pitch_class_tree:
         ...     tree.get_payload(nested=True)
@@ -9420,7 +9420,7 @@ class ZaggedPitchClassMaker:
             ...     grouping_counts=None,
             ...     )
             >>> pitch_class_tree = maker()
-            >>> abjad.show(pitch_class_tree, strict=89) # doctest: +SKIP
+            >>> abjad.show(pitch_class_tree, align_tags=89) # doctest: +SKIP
 
             >>> for tree in pitch_class_tree:
             ...     tree.get_payload(nested=True)
@@ -9447,7 +9447,7 @@ class ZaggedPitchClassMaker:
             ...     grouping_counts=None,
             ...     )
             >>> pitch_class_tree = maker()
-            >>> abjad.show(pitch_class_tree, strict=89) # doctest: +SKIP
+            >>> abjad.show(pitch_class_tree, align_tags=89) # doctest: +SKIP
 
             >>> for tree in pitch_class_tree:
             ...     tree.get_payload(nested=True)
@@ -9487,7 +9487,7 @@ class ZaggedPitchClassMaker:
             ...     grouping_counts=[1, 2],
             ...     )
             >>> pitch_class_tree = maker()
-            >>> abjad.show(pitch_class_tree, strict=89) # doctest: +SKIP
+            >>> abjad.show(pitch_class_tree, align_tags=89) # doctest: +SKIP
 
             >>> for tree in pitch_class_tree:
             ...     tree.get_payload(nested=True)

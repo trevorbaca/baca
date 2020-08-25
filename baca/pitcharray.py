@@ -25,7 +25,7 @@ class PitchArray:
         [ ] [     ] [ ]
         [     ] [ ] [ ]
 
-        >>> abjad.f(pitch_array, strict=89)
+        >>> abjad.f(pitch_array, align_tags=89)
         baca.PitchArray(
             rows=(
                 baca.PitchArrayRow(
@@ -602,7 +602,7 @@ class PitchArray:
 
             ..  docs::
 
-                >>> abjad.f(score, strict=89)
+                >>> abjad.f(score, align_tags=89)
                 \new Score
                 <<
                     \new Staff
@@ -632,7 +632,7 @@ class PitchArray:
                     }
                 >>
 
-            >>> abjad.show(score, strict=89) # doctest: +SKIP
+            >>> abjad.show(score, align_tags=89) # doctest: +SKIP
 
             >>> array = baca.PitchArray.from_score(
             ...     score, populate=False)
@@ -657,7 +657,7 @@ class PitchArray:
 
             ..  docs::
 
-                >>> abjad.f(score, strict=89)
+                >>> abjad.f(score, align_tags=89)
                 \new Score
                 <<
                     \new Staff
@@ -687,7 +687,7 @@ class PitchArray:
                     }
                 >>
 
-            >>> abjad.show(score, strict=89) # doctest: +SKIP
+            >>> abjad.show(score, align_tags=89) # doctest: +SKIP
 
             >>> array = baca.PitchArray.from_score(
             ...     score, populate=True)
@@ -873,11 +873,11 @@ class PitchArray:
 
             >>> measures = array.to_measures()
             >>> staff = abjad.Staff(measures)
-            >>> abjad.show(staff, strict=89) # doctest: +SKIP
+            >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 {
                     {
@@ -935,7 +935,7 @@ class PitchArrayCell:
         >>> cell.next
         PitchArrayCell(width=1)
 
-        >>> abjad.f(cell.parent_array, strict=89)
+        >>> abjad.f(cell.parent_array, align_tags=89)
         baca.PitchArray(
             rows=(
                 baca.PitchArrayRow(
@@ -967,7 +967,7 @@ class PitchArrayCell:
                 ),
             )
 
-        >>> abjad.f(cell.parent_column, strict=89)
+        >>> abjad.f(cell.parent_column, align_tags=89)
         baca.PitchArrayColumn(
             cells=(
                 baca.PitchArrayCell(
@@ -979,7 +979,7 @@ class PitchArrayCell:
                 ),
             )
 
-        >>> abjad.f(cell.parent_row, strict=89)
+        >>> abjad.f(cell.parent_row, align_tags=89)
         baca.PitchArrayRow(
             cells=(
                 baca.PitchArrayCell(
@@ -1640,7 +1640,7 @@ class PitchArrayColumn:
         [  ] [d'] [bqf    ]
         [g'     ] [fs'] [ ]
 
-        >>> abjad.f(array.columns[0], strict=89)
+        >>> abjad.f(array.columns[0], align_tags=89)
         baca.PitchArrayColumn(
             cells=(
                 baca.PitchArrayCell(
@@ -2099,7 +2099,7 @@ class PitchArrayList(abjad.TypedList):
         >>> arrays = [array_1, array_2]
         >>> arrays = baca.PitchArrayList(arrays)
 
-        >>> abjad.f(arrays, strict=89)
+        >>> abjad.f(arrays, align_tags=89)
         baca.PitchArrayList(
             [
                 baca.PitchArray(
@@ -2204,11 +2204,11 @@ class PitchArrayList(abjad.TypedList):
             >>> arrays = baca.PitchArrayList(arrays)
 
             >>> score = arrays.to_score()
-            >>> abjad.show(score, strict=89) # doctest: +SKIP
+            >>> abjad.show(score, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(score, strict=89)
+                >>> abjad.f(score, align_tags=89)
                 \new Score
                 <<
                     \new StaffGroup
@@ -2278,7 +2278,7 @@ class PitchArrayRow:
         [c'] [d'    ] [  ]
         [       ] [ ] [e']
 
-        >>> abjad.f(array[0], strict=89)
+        >>> abjad.f(array[0], align_tags=89)
         baca.PitchArrayRow(
             cells=(
                 baca.PitchArrayCell(
@@ -2976,11 +2976,11 @@ class PitchArrayRow:
 
             >>> measure = array.rows[0].to_measure()
             >>> staff = abjad.Staff([measure])
-            >>> abjad.show(staff, strict=89) # doctest: +SKIP
+            >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 {
                     {

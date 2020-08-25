@@ -667,7 +667,7 @@ class Cursor:
             ...     number_lists,
             ...     )
 
-            >>> abjad.f(cursor, strict=89)
+            >>> abjad.f(cursor, align_tags=89)
             baca.Cursor(
                 source=abjad.CyclicTuple(
                     [
@@ -897,11 +897,11 @@ class Expression(abjad.Expression):
         'T3(X) /@ J'
 
         >>> markup = expression.get_markup()
-        >>> abjad.show(markup, strict=89) # doctest: +SKIP
+        >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(markup, strict=89)
+            >>> abjad.f(markup, align_tags=89)
             \markup {
                 \line
                     {
@@ -941,11 +941,11 @@ class Expression(abjad.Expression):
         'join(T3(X) /@ J)'
 
         >>> markup = expression.get_markup()
-        >>> abjad.show(markup, strict=89) # doctest: +SKIP
+        >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(markup, strict=89)
+            >>> abjad.f(markup, align_tags=89)
             \markup {
                 \concat
                     {
@@ -999,11 +999,11 @@ class Expression(abjad.Expression):
         'flatten(T3(X) /@ J, depth=-1)'
 
         >>> markup = expression.get_markup()
-        >>> abjad.show(markup, strict=89) # doctest: +SKIP
+        >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(markup, strict=89)
+            >>> abjad.f(markup, align_tags=89)
             \markup {
                 \concat
                     {
@@ -1051,11 +1051,11 @@ class Expression(abjad.Expression):
         'X /@ P[3](flatten(T3(X) /@ J, depth=-1))'
 
         >>> markup = expression.get_markup()
-        >>> abjad.show(markup, strict=89) # doctest: +SKIP
+        >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(markup, strict=89)
+            >>> abjad.f(markup, align_tags=89)
             \markup {
                 \line
                     {
@@ -1119,11 +1119,11 @@ class Expression(abjad.Expression):
         'β2(X /@ P[3](flatten(T3(X) /@ J, depth=-1)))'
 
         >>> markup = expression.get_markup()
-        >>> abjad.show(markup, strict=89) # doctest: +SKIP
+        >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(markup, strict=89)
+            >>> abjad.f(markup, align_tags=89)
             \markup {
                 \concat
                     {
@@ -1208,11 +1208,11 @@ class Expression(abjad.Expression):
 #                >>> staff.extend("af'8 r8")
 #                >>> staff.extend("r8 gf'8")
 #                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
-#                >>> abjad.show(staff, strict=89) # doctest: +SKIP
+#                >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 #
 #                ..  docs::
 #
-#                    >>> abjad.f(staff, strict=89)
+#                    >>> abjad.f(staff, align_tags=89)
 #                    \new Staff
 #                    {
 #                        \time 2/8
@@ -1877,7 +1877,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).chead(-1)
 
@@ -1893,11 +1893,11 @@ class Selection(abjad.Selection):
                 Chord("<fs' gs'>4")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -1968,7 +1968,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).cheads()
 
@@ -1996,11 +1996,11 @@ class Selection(abjad.Selection):
                 Chord("<fs' gs'>4")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -2076,7 +2076,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).clparts([2, 3, 4])
 
@@ -2104,11 +2104,11 @@ class Selection(abjad.Selection):
                 Selection([Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -2280,7 +2280,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).leaves().enchain([5])
 
@@ -2315,11 +2315,11 @@ class Selection(abjad.Selection):
                 ...         abjad.attach(markup, leaf)
 
                 >>> abjad.override(staff).text_script.staff_padding = 6
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -2560,7 +2560,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -2658,7 +2658,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -2749,7 +2749,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -2847,7 +2847,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -2903,7 +2903,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> baca.select(staff).tuplets()[1:2].lleaf(0)
                 Chord("<d' e'>16")
@@ -2917,11 +2917,11 @@ class Selection(abjad.Selection):
                 Chord("<d' e'>16")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -2979,7 +2979,7 @@ class Selection(abjad.Selection):
 
                 >>> staff = abjad.Staff("c'8 r8 d'8 e'8 r8 f'8 g'8 a'8")
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.show(staff, strict=89) # doctest: +SKIP
+                >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).runs().map(baca.lleak())
 
@@ -3001,11 +3001,11 @@ class Selection(abjad.Selection):
                 Selection([Rest('r8'), Note("f'8"), Note("g'8"), Note("a'8")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(staff, strict=89) # doctest: +SKIP
+                >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -3061,7 +3061,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).tuplets()[1:2].lleaves()
 
@@ -3091,11 +3091,11 @@ class Selection(abjad.Selection):
                 Chord("<e' fs'>16")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -3172,7 +3172,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).lparts([2, 3, 4])
 
@@ -3194,11 +3194,11 @@ class Selection(abjad.Selection):
                 Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -3277,7 +3277,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).lt(-1)
 
@@ -3293,11 +3293,11 @@ class Selection(abjad.Selection):
                 LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -3369,7 +3369,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ltleaf(0)
 
@@ -3385,11 +3385,11 @@ class Selection(abjad.Selection):
                 Note("bf'16")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -3459,7 +3459,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ltleaves()
 
@@ -3509,11 +3509,11 @@ class Selection(abjad.Selection):
                 Rest('r16')
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -3599,7 +3599,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ltqrun(-1)
 
@@ -3615,11 +3615,11 @@ class Selection(abjad.Selection):
                 Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -3691,7 +3691,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ltqruns()
 
@@ -3719,11 +3719,11 @@ class Selection(abjad.Selection):
                 Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -3813,7 +3813,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ltrun(-1)
 
@@ -3829,11 +3829,11 @@ class Selection(abjad.Selection):
                 Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -3908,7 +3908,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ltruns()
 
@@ -3930,11 +3930,11 @@ class Selection(abjad.Selection):
                 Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -4021,7 +4021,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).lts()
 
@@ -4067,11 +4067,11 @@ class Selection(abjad.Selection):
                 LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -4402,7 +4402,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -4460,7 +4460,7 @@ class Selection(abjad.Selection):
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -4505,7 +4505,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ntrun(-1)
 
@@ -4521,11 +4521,11 @@ class Selection(abjad.Selection):
                 Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -4600,7 +4600,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ntruns()
 
@@ -4622,11 +4622,11 @@ class Selection(abjad.Selection):
                 Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -4808,7 +4808,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).phead(-1)
 
@@ -4824,11 +4824,11 @@ class Selection(abjad.Selection):
                 Chord("<fs' gs'>4")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -4899,7 +4899,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).pheads()
 
@@ -4939,11 +4939,11 @@ class Selection(abjad.Selection):
                 Chord("<fs' gs'>4")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -5025,7 +5025,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).pleaf(-1)
 
@@ -5041,11 +5041,11 @@ class Selection(abjad.Selection):
                 Chord("<fs' gs'>16")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -5116,7 +5116,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).pleaves()
 
@@ -5162,11 +5162,11 @@ class Selection(abjad.Selection):
                 Chord("<fs' gs'>16")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -5251,7 +5251,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).plt(-1)
 
@@ -5267,11 +5267,11 @@ class Selection(abjad.Selection):
                 LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -5343,7 +5343,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).plts()
 
@@ -5383,11 +5383,11 @@ class Selection(abjad.Selection):
                 LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -5472,7 +5472,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ptail(-1)
 
@@ -5488,11 +5488,11 @@ class Selection(abjad.Selection):
                 Chord("<fs' gs'>16")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -5563,7 +5563,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ptails()
 
@@ -5603,11 +5603,11 @@ class Selection(abjad.Selection):
                 Chord("<fs' gs'>16")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -5689,7 +5689,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ptlt(-1)
 
@@ -5705,11 +5705,11 @@ class Selection(abjad.Selection):
                 LogicalTie([Note("e'16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -5780,7 +5780,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ptlts()
 
@@ -5814,11 +5814,11 @@ class Selection(abjad.Selection):
                 LogicalTie([Note("e'16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -5897,7 +5897,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).qrun(-1)
 
@@ -5913,11 +5913,11 @@ class Selection(abjad.Selection):
                 Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -5989,7 +5989,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).qruns()
 
@@ -6017,11 +6017,11 @@ class Selection(abjad.Selection):
                 Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -6111,7 +6111,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> baca.select(staff).tuplets()[1:2].rleaf(-1)
                 Rest('r16')
@@ -6125,11 +6125,11 @@ class Selection(abjad.Selection):
                 Rest('r16')
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -6189,7 +6189,7 @@ class Selection(abjad.Selection):
 
                 >>> staff = abjad.Staff("c'8 r8 d'8 e'8 r8 f'8 g'8 a'8")
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.show(staff, strict=89) # doctest: +SKIP
+                >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).runs().map(baca.rleak())
 
@@ -6211,11 +6211,11 @@ class Selection(abjad.Selection):
                 Selection([Note("f'8"), Note("g'8"), Note("a'8")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(staff, strict=89) # doctest: +SKIP
+                >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -6271,7 +6271,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).tuplets()[1:2].rleaves()
 
@@ -6301,11 +6301,11 @@ class Selection(abjad.Selection):
                 Rest('r16')
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -6460,7 +6460,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).rrun(1)
 
@@ -6476,11 +6476,11 @@ class Selection(abjad.Selection):
                 Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -6556,7 +6556,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).rruns()
 
@@ -6578,11 +6578,11 @@ class Selection(abjad.Selection):
                 Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -6662,7 +6662,7 @@ class Selection(abjad.Selection):
                 >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
                 >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
                 >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
-                >>> abjad.show(staff, strict=89) # doctest: +SKIP
+                >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).skip(-1)
 
@@ -6678,11 +6678,11 @@ class Selection(abjad.Selection):
                 Skip('s8')
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(staff, strict=89) # doctest: +SKIP
+                >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -6725,7 +6725,7 @@ class Selection(abjad.Selection):
                 >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
                 >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
                 >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
-                >>> abjad.show(staff, strict=89) # doctest: +SKIP
+                >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).skips()
 
@@ -6746,11 +6746,11 @@ class Selection(abjad.Selection):
                 Skip('s8')
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(staff, strict=89) # doctest: +SKIP
+                >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -6803,7 +6803,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).tleaf(0)
 
@@ -6819,11 +6819,11 @@ class Selection(abjad.Selection):
                 Note("bf'16")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -6894,7 +6894,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).tleaves()
 
@@ -6944,11 +6944,11 @@ class Selection(abjad.Selection):
                 Chord("<fs' gs'>16")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -7036,7 +7036,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> baca.select(staff).tuplets()[1:2].wleaf(0)
                 Chord("<d' e'>16")
@@ -7050,11 +7050,11 @@ class Selection(abjad.Selection):
                 Chord("<d' e'>16")
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -7115,7 +7115,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> baca.select(staff).tuplets()[1:2].wleaf(-1)
                 Rest('r16')
@@ -7129,11 +7129,11 @@ class Selection(abjad.Selection):
                 Rest('r16')
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -7204,7 +7204,7 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).auto_beaming = False
                 >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
                 >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).tuplets()[1:2].wleaves()
 
@@ -7236,11 +7236,11 @@ class Selection(abjad.Selection):
                 Rest('r16')
 
                 >>> abjad.label(result).by_selector(selector)
-                >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+                >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(staff, strict=89)
+                >>> abjad.f(staff, align_tags=89)
                 \new Staff
                 \with
                 {
@@ -7323,11 +7323,11 @@ class Sequence(abjad.Sequence):
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
             >>> collection = abjad.PitchClassSegment(items=items)
             >>> lilypond_file = abjad.illustrate(collection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     bf'8
@@ -7373,11 +7373,11 @@ class Sequence(abjad.Sequence):
 
             >>> collection = sequence.join()[0]
             >>> lilypond_file = abjad.illustrate(collection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     b'8
@@ -7412,11 +7412,11 @@ class Sequence(abjad.Sequence):
             >>> collection = expression(collections)[0]
             >>> markup = expression.get_markup()
             >>> lilypond_file = abjad.illustrate(collection, figure_name=markup)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
                 \new Voice
                 {
                     b'8
@@ -7563,11 +7563,11 @@ class Sequence(abjad.Sequence):
                 'Exact Φ J'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \line
                             {
@@ -7619,11 +7619,11 @@ class Sequence(abjad.Sequence):
                 'A(X) Φ J'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \line
                             {
@@ -7687,11 +7687,11 @@ class Sequence(abjad.Sequence):
                 'T3(X) Φ J'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \line
                             {
@@ -7776,11 +7776,11 @@ class Sequence(abjad.Sequence):
                 '[A(X), T3(X)] Φ J'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \line
                             {
@@ -7886,11 +7886,11 @@ class Sequence(abjad.Sequence):
                 'permute(X, row=[10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]) Φ J'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \line
                             {
@@ -7986,11 +7986,11 @@ class Sequence(abjad.Sequence):
                 '[permute(X, row=[10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]), T3(X)] Φ J'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \line
                             {
@@ -8160,11 +8160,11 @@ class Sequence(abjad.Sequence):
             'β3(J)'
 
             >>> markup = expression.get_markup()
-            >>> abjad.show(markup, strict=89) # doctest: +SKIP
+            >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(markup, strict=89)
+                >>> abjad.f(markup, align_tags=89)
                 \markup {
                     \concat
                         {
@@ -8266,11 +8266,11 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, divisions)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -8301,11 +8301,11 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -8338,11 +8338,11 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -8380,11 +8380,11 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -8441,11 +8441,11 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -8864,11 +8864,11 @@ class Sequence(abjad.Sequence):
                 'P[3](J)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \concat
                             {
@@ -8979,11 +8979,11 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -9049,11 +9049,11 @@ class Sequence(abjad.Sequence):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
             ... )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -9104,11 +9104,11 @@ class Sequence(abjad.Sequence):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
             ... )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -9154,11 +9154,11 @@ class Sequence(abjad.Sequence):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
             ... )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -9211,11 +9211,11 @@ class Sequence(abjad.Sequence):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
             ... )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -9262,11 +9262,11 @@ class Sequence(abjad.Sequence):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
             ...     )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -9324,11 +9324,11 @@ class Sequence(abjad.Sequence):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
             ...     )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -9401,11 +9401,11 @@ class Sequence(abjad.Sequence):
                 'repeat_by(J)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \concat
                             {
@@ -9475,11 +9475,11 @@ class Sequence(abjad.Sequence):
                 'repeat_by(J, counts=[2])'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \concat
                             {
@@ -9534,11 +9534,11 @@ class Sequence(abjad.Sequence):
                 'repeat_by(J, counts=[2], cyclic=True)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \concat
                             {
@@ -9595,11 +9595,11 @@ class Sequence(abjad.Sequence):
                 'reveal(J)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \concat
                             {
@@ -9630,11 +9630,11 @@ class Sequence(abjad.Sequence):
                 'reveal(J, count=0)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \concat
                             {
@@ -9683,11 +9683,11 @@ class Sequence(abjad.Sequence):
                 'reveal(J, count=2)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \concat
                             {
@@ -9736,11 +9736,11 @@ class Sequence(abjad.Sequence):
                 'reveal(J, count=-2)'
 
                 >>> markup = expression.get_markup()
-                >>> abjad.show(markup, strict=89) # doctest: +SKIP
+                >>> abjad.show(markup, align_tags=89) # doctest: +SKIP
 
                 ..  docs::
 
-                    >>> abjad.f(markup, strict=89)
+                    >>> abjad.f(markup, align_tags=89)
                     \markup {
                         \concat
                             {
@@ -9856,11 +9856,11 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -9905,11 +9905,11 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -9956,11 +9956,11 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -10008,11 +10008,11 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -10068,11 +10068,11 @@ class Sequence(abjad.Sequence):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
             ... )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -10134,11 +10134,11 @@ class Sequence(abjad.Sequence):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
             ...     )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -10194,11 +10194,11 @@ class Sequence(abjad.Sequence):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
             ...     )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -10243,11 +10243,11 @@ class Sequence(abjad.Sequence):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
             ...     )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -10290,11 +10290,11 @@ class Sequence(abjad.Sequence):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
             ...     )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -10352,11 +10352,11 @@ class Sequence(abjad.Sequence):
             >>> lilypond_file = abjad.LilyPondFile.rhythm(
             ...     music, time_signatures
             ... )
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -10464,7 +10464,7 @@ class Tree:
         >>> tree[1]
         Tree(items=[Tree(items=4), Tree(items=5)])
 
-        >>> abjad.f(tree[1], strict=89)
+        >>> abjad.f(tree[1], align_tags=89)
         baca.Tree(
             items=[
                 baca.Tree(
@@ -10489,7 +10489,7 @@ class Tree:
         >>> tree[1][0]
         Tree(items=4)
 
-        >>> abjad.f(tree[1][0], strict=89)
+        >>> abjad.f(tree[1][0], align_tags=89)
         baca.Tree(
             items=4,
             )
@@ -10514,7 +10514,7 @@ class Tree:
         ..  docs::
 
             >>> graph_ = tree.__graph__() # doctest: +SKIP
-            >>> abjad.f(graph_, strict=89) # doctest: +SKIP
+            >>> abjad.f(graph_, align_tags=89) # doctest: +SKIP
             digraph G {
                 graph [bgcolor=transparent,
                     truecolor=true];

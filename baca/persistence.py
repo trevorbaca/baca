@@ -27,11 +27,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -156,11 +156,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -297,11 +297,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -438,11 +438,11 @@ r"""
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
 
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -569,11 +569,11 @@ r"""
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
 
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -725,11 +725,11 @@ r"""
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
 
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -854,11 +854,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -987,11 +987,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1122,11 +1122,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1245,11 +1245,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1380,11 +1380,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1501,11 +1501,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1636,11 +1636,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1760,11 +1760,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1905,11 +1905,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2022,7 +2022,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -2135,7 +2135,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -2265,11 +2265,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2382,7 +2382,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -2496,7 +2496,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -2638,11 +2638,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2756,7 +2756,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -2870,7 +2870,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -3014,11 +3014,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -3132,7 +3132,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -3247,7 +3247,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -3388,11 +3388,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -3515,7 +3515,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -3638,7 +3638,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -3796,11 +3796,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -3914,7 +3914,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -4028,7 +4028,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -4187,11 +4187,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -4310,7 +4310,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -4429,7 +4429,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -4565,11 +4565,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -4688,7 +4688,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -4807,7 +4807,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -4955,11 +4955,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -5081,7 +5081,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -5203,7 +5203,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -5355,11 +5355,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -5481,7 +5481,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -5603,7 +5603,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -5752,11 +5752,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -5891,7 +5891,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -6026,7 +6026,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -6196,11 +6196,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -6322,7 +6322,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -6444,7 +6444,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
@@ -6602,11 +6602,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -6768,11 +6768,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -6918,11 +6918,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -7072,11 +7072,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -7213,11 +7213,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -7370,11 +7370,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -7521,11 +7521,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -7707,11 +7707,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -7855,11 +7855,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -7980,11 +7980,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -8116,11 +8116,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -8254,11 +8254,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -8379,11 +8379,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -8520,11 +8520,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -8661,11 +8661,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -8814,11 +8814,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -8971,11 +8971,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -9119,11 +9119,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -9292,11 +9292,11 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()

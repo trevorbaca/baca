@@ -274,11 +274,11 @@ class BCPCommand(scoping.Command):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -570,7 +570,7 @@ class BCPCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -917,7 +917,7 @@ class ContainerCommand(scoping.Command):
 
         >>> lilypond_file = maker.run(environment='docs')
 
-        >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+        >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
         <BLANKLINE>
         \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
         <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()

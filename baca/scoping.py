@@ -22,7 +22,7 @@ class Scope:
         ...     voice_name='ViolinMusicVoice',
         ...     )
 
-        >>> abjad.f(scope, strict=89)
+        >>> abjad.f(scope, align_tags=89)
         baca.Scope(
             measures=(1, 9),
             voice_name='ViolinMusicVoice',
@@ -96,7 +96,7 @@ class TimelineScope:
         ...     ('OboeMusicVoice', (9, 12)),
         ...     ])
 
-        >>> abjad.f(scope, strict=89)
+        >>> abjad.f(scope, align_tags=89)
         baca.TimelineScope(
             scopes=(
                 baca.Scope(
@@ -850,11 +850,11 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1047,11 +1047,11 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1295,11 +1295,11 @@ def only_parts(command: _command_typing) -> _command_typing:
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()

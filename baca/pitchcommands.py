@@ -33,11 +33,11 @@ class AccidentalAdjustmentCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -271,11 +271,11 @@ class ClusterCommand(scoping.Command):
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -561,7 +561,7 @@ class ClusterCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -754,7 +754,7 @@ class ClusterCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -941,7 +941,7 @@ class ClusterCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1136,7 +1136,7 @@ class ClusterCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1323,7 +1323,7 @@ class ClusterCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1508,11 +1508,11 @@ class ClusterCommand(scoping.Command):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1648,11 +1648,11 @@ class ColorFingeringCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1872,11 +1872,11 @@ class DiatonicClusterCommand(scoping.Command):
         >>> staff = abjad.Staff("c' d' e' f'")
         >>> command = baca.diatonic_clusters([4, 6])
         >>> command(staff)
-        >>> abjad.show(staff, strict=89) # doctest: +SKIP
+        >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(staff, strict=89)
+            >>> abjad.f(staff, align_tags=89)
             \new Staff
             {
                 <c' d' e' f'>4
@@ -1973,7 +1973,7 @@ class Loop(abjad.CyclicTuple):
     ..  container:: example
 
         >>> loop = baca.Loop([0, 2, 4], intervals=[1])
-        >>> abjad.f(loop, strict=89)
+        >>> abjad.f(loop, align_tags=89)
         baca.Loop(
             [
                 abjad.NamedPitch("c'"),
@@ -2006,7 +2006,7 @@ class Loop(abjad.CyclicTuple):
     ..  container:: example
 
         >>> command = baca.loop([0, 2, 4], [1])
-        >>> abjad.f(command, strict=89)
+        >>> abjad.f(command, align_tags=89)
         baca.PitchCommand(
             cyclic=True,
             pitches=baca.Loop(
@@ -2106,11 +2106,11 @@ class MicrotoneDeviationCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2348,11 +2348,11 @@ class OctaveDisplacementCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2595,11 +2595,11 @@ class PitchCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2751,11 +2751,11 @@ class PitchCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2907,11 +2907,11 @@ class PitchCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -3058,11 +3058,11 @@ class PitchCommand(scoping.Command):
 
         >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
         >>> command(staff)
-        >>> abjad.show(staff, strict=89) # doctest: +SKIP
+        >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(staff, strict=89)
+            >>> abjad.f(staff, align_tags=89)
             \new Staff
             {
                 g''8
@@ -3481,11 +3481,11 @@ class RegisterCommand(scoping.Command):
         ... )
         >>> selection = stack([[10, 12, 14], [10, 12, 14], [10, 12, 14]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -3543,7 +3543,7 @@ class RegisterCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -3692,11 +3692,11 @@ class RegisterCommand(scoping.Command):
         ... )
         >>> selection = stack([{10, 12, 14}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -3786,7 +3786,7 @@ class RegisterCommand(scoping.Command):
             ...         ),
             ...     )
 
-            >>> abjad.f(command.registration, strict=89)
+            >>> abjad.f(command.registration, align_tags=89)
             baca.Registration(
                 components=[
                     baca.RegistrationComponent(
@@ -3827,11 +3827,11 @@ class RegisterInterpolationCommand(scoping.Command):
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -3892,11 +3892,11 @@ class RegisterInterpolationCommand(scoping.Command):
         >>> collections = [set(_) for _ in collections]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -3949,7 +3949,7 @@ class RegisterInterpolationCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -4167,7 +4167,7 @@ class RegisterInterpolationCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -4385,7 +4385,7 @@ class RegisterInterpolationCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -4603,7 +4603,7 @@ class RegisterInterpolationCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -4821,7 +4821,7 @@ class RegisterInterpolationCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -5107,11 +5107,11 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5182,11 +5182,11 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5260,11 +5260,11 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5370,11 +5370,11 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([{0, 14, 28}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -5401,11 +5401,11 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([{0, 14, 28}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -5432,11 +5432,11 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([{0, 14, 28}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -5467,11 +5467,11 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([[0, 14, 28]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -5502,11 +5502,11 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([[0, 14, 28]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -5537,11 +5537,11 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([[0, 14, 28]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -5576,11 +5576,11 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([[10, 12, 14]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -5611,11 +5611,11 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([[10, 12, 14]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -5646,11 +5646,11 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([[10, 12, 14]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -5791,7 +5791,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=89)
+                >>> abjad.f(chord, align_tags=89)
                 <c'' d''' e''''>1
 
         ..  container:: example
@@ -5807,7 +5807,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=89)
+                >>> abjad.f(chord, align_tags=89)
                 <c' d'' e'''>1
 
         ..  container:: example
@@ -5823,7 +5823,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=89)
+                >>> abjad.f(chord, align_tags=89)
                 <c d' e''>1
 
         """
@@ -5839,11 +5839,11 @@ class RegisterToOctaveCommand(scoping.Command):
             >>> chord = abjad.Chord("<c, d e'>1")
             >>> staff = abjad.Staff([chord])
             >>> abjad.attach(abjad.Clef('bass'), staff[0])
-            >>> abjad.show(staff, strict=89) # doctest: +SKIP
+            >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=89)
+                >>> abjad.f(chord, align_tags=89)
                 \clef "bass"
                 <c, d e'>1
 
@@ -5855,7 +5855,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=89)
+                >>> abjad.f(chord, align_tags=89)
                 <c,, d, e>1
 
         ..  container:: example
@@ -5866,7 +5866,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=89)
+                >>> abjad.f(chord, align_tags=89)
                 <c, d e'>1
 
         ..  container:: example
@@ -5877,7 +5877,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=89)
+                >>> abjad.f(chord, align_tags=89)
                 <c d' e''>1
 
         ..  container:: example
@@ -5888,7 +5888,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=89)
+                >>> abjad.f(chord, align_tags=89)
                 <c' d'' e'''>1
 
         ..  container:: example
@@ -5899,7 +5899,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(chord, strict=89)
+                >>> abjad.f(chord, align_tags=89)
                 <c'' d''' e''''>1
 
         """
@@ -5916,11 +5916,11 @@ class StaffPositionCommand(scoping.Command):
         >>> abjad.attach(abjad.Clef('treble'), staff[0])
         >>> command = baca.staff_positions([0, 2])
         >>> command(staff)
-        >>> abjad.show(staff, strict=89) # doctest: +SKIP
+        >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(staff, strict=89)
+            >>> abjad.f(staff, align_tags=89)
             \new Staff
             {
                 \clef "treble"
@@ -5936,11 +5936,11 @@ class StaffPositionCommand(scoping.Command):
         >>> abjad.attach(abjad.Clef('percussion'), staff[0])
         >>> command = baca.staff_positions([0, 2])
         >>> command(staff)
-        >>> abjad.show(staff, strict=89) # doctest: +SKIP
+        >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(staff, strict=89)
+            >>> abjad.f(staff, align_tags=89)
             \new Staff
             {
                 \clef "percussion"
@@ -6328,11 +6328,11 @@ def bass_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -6411,11 +6411,11 @@ def bass_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -6503,11 +6503,11 @@ def center_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -6586,11 +6586,11 @@ def center_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -6727,11 +6727,11 @@ def displacement(
         ... )
         >>> selection = stack(3 * [[0, 2, 3]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -6796,11 +6796,11 @@ def displacement(
         ... )
         >>> selection = stack(6 * [{0, 2, 3}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -6860,11 +6860,11 @@ def force_accidental(
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -7001,11 +7001,11 @@ def interpolate_pitches(
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -7068,11 +7068,11 @@ def interpolate_pitches(
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -7228,11 +7228,11 @@ def pitch(
         ... )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -7432,11 +7432,11 @@ def register(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -7499,11 +7499,11 @@ def register(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -7574,11 +7574,11 @@ def register(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -7642,11 +7642,11 @@ def register(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -7729,11 +7729,11 @@ def soprano_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -7812,11 +7812,11 @@ def soprano_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext

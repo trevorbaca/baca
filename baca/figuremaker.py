@@ -1052,11 +1052,11 @@ class Acciaccatura:
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -1148,11 +1148,11 @@ class Acciaccatura:
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -1251,11 +1251,11 @@ class Acciaccatura:
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -1354,11 +1354,11 @@ class Acciaccatura:
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -1463,11 +1463,11 @@ class Acciaccatura:
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -1574,11 +1574,11 @@ class Acciaccatura:
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -1682,11 +1682,11 @@ class Acciaccatura:
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -2164,11 +2164,11 @@ class Imbrication:
             ... )
             >>> accumulator.populate_segment_maker(maker)
             >>> lilypond_file = maker.run(environment="docs")
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -2493,11 +2493,11 @@ class Imbrication:
             ... )
             >>> accumulator.populate_segment_maker(maker)
             >>> lilypond_file = maker.run(environment="docs")
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -2817,11 +2817,11 @@ class Imbrication:
             ... )
             >>> accumulator.populate_segment_maker(maker)
             >>> lilypond_file = maker.run(environment="docs")
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -3170,11 +3170,11 @@ class Imbrication:
             ... )
             >>> accumulator.populate_segment_maker(maker)
             >>> lilypond_file = maker.run(environment="docs")
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -3979,11 +3979,11 @@ class Nest:
         ... ]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -4084,11 +4084,11 @@ class Nest:
             ... ]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -4357,11 +4357,11 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -4414,11 +4414,11 @@ class RestAffix:
             >>> collections = [[18, 16, 15, 20, 19]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -4460,11 +4460,11 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -4520,11 +4520,11 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -4584,11 +4584,11 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -4647,11 +4647,11 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -4784,11 +4784,11 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -4833,11 +4833,11 @@ class FigureMaker:
             >>> state = {'_next_attack': 2}
             >>> selections = stack(collections, state=state)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5371,11 +5371,11 @@ class FigureMaker:
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -5466,11 +5466,11 @@ class FigureMaker:
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
             >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -5581,11 +5581,11 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5642,11 +5642,11 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5706,11 +5706,11 @@ class FigureMaker:
             >>> collections = [[0, 2, 10, 8]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5734,11 +5734,11 @@ class FigureMaker:
             >>> collections = [[18, 16, 15, 20, 19]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5763,11 +5763,11 @@ class FigureMaker:
             >>> collections = [[9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5786,11 +5786,11 @@ class FigureMaker:
             >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5838,11 +5838,11 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5894,11 +5894,11 @@ class FigureMaker:
             >>> collections = [[0, 2]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5941,11 +5941,11 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -5992,11 +5992,11 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -6049,11 +6049,11 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -6315,11 +6315,11 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -6581,11 +6581,11 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -6807,11 +6807,11 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 <<
                     \new GlobalContext
@@ -7058,11 +7058,11 @@ class FigureMaker:
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
             >>> abjad.override(staff).stem.direction = abjad.Down
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -7150,11 +7150,11 @@ class FigureMaker:
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
             >>> abjad.override(staff).stem.direction = abjad.Down
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -7239,11 +7239,11 @@ class FigureMaker:
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).beam.positions = (-6, -6)
             >>> abjad.override(staff).stem.direction = abjad.Down
-            >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
                 \new Score
                 \with
                 {
@@ -7579,11 +7579,11 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -7843,11 +7843,11 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -8161,11 +8161,11 @@ def extend_beam(
         ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -8483,11 +8483,11 @@ def imbricate(
         ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -8796,11 +8796,11 @@ def imbricate(
         ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.ThreeVoiceStaffScoreTemplate.__call__()
@@ -9207,11 +9207,11 @@ def imbricate(
         ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -9538,11 +9538,11 @@ def imbricate(
         ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -9791,11 +9791,11 @@ def imbricate(
         ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -10072,11 +10072,11 @@ def imbricate(
         ... )
         >>> accumulator.populate_segment_maker(maker)
         >>> lilypond_file = maker.run(environment="docs")
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -10463,11 +10463,11 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -10573,11 +10573,11 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -10645,11 +10645,11 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -10714,11 +10714,11 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> staff = lilypond_file[abjad.Score]
         >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             \with
             {
@@ -10780,11 +10780,11 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> staff = lilypond_file[abjad.Score]
         >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             \with
             {
@@ -10847,11 +10847,11 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -10909,11 +10909,11 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -10999,11 +10999,11 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -11071,11 +11071,11 @@ def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -11144,11 +11144,11 @@ def skips_before(counts: typing.List[int],) -> RestAffix:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             <<
                 \new GlobalContext
@@ -11222,11 +11222,11 @@ def stack(*commands) -> Stack:
         >>> staff = lilypond_file[abjad.Score]
         >>> abjad.override(staff).beam.positions = (-6, -6)
         >>> abjad.override(staff).stem.direction = abjad.Down
-        >>> abjad.show(lilypond_file, strict=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], strict=89)
+            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
             \new Score
             \with
             {
