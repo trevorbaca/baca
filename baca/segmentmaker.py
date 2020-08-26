@@ -3027,7 +3027,8 @@ class SegmentMaker(abjad.SegmentMaker):
     def _import_manifests(self):
         if not self.segment_directory:
             return
-        score_package = importlib.import_module(self.segment_directory.contents.name)
+        name = self.segment_directory.parent.parent.name
+        score_package = importlib.import_module(name)
         if not self.instruments:
             instruments = getattr(score_package, "instruments", None)
             self._instruments = instruments
