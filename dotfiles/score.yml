@@ -64,7 +64,9 @@ install:
 
   # set scores directory for IDE path management
   - cat ~/.abjad/abjad.cfg
-  - echo composer_scores_directory = $TRAVIS_BUILD_DIR > ~/.abjad/abjad.cfg
+  - composer_scores_directory = $(dirname $TRAVIS_BUILD_DIR)
+  - echo $composer_scores_directory
+  - echo composer_scores_directory = $composer_scores_directory > ~/.abjad/abjad.cfg
   - cat ~/.abjad/abjad.cfg
 
   # log versions
