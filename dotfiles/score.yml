@@ -40,6 +40,11 @@ before_install:
   - if [[ $do_not_symlink_test_py != true ]]; then unlink $TRAVIS_BUILD_DIR/$name/test.py; fi
   - if [[ $do_not_symlink_test_py != true ]]; then ln -s /tmp/baca/dotfiles/test_segments.py $TRAVIS_BUILD_DIR/$name/test.py; fi
 
+  # set scores directory for IDE path management
+  - cat ~/.abjad/abjad.cfg
+  - echo composer_scores_directory = $TRAVIS_BUILD_DIR > ~/.abjad/abjad.cfg
+  - cat ~/.abjad/abjad.cfg
+  
   # clone & install ide;
   # must install -e editable for ide/scores directory in wrapper:
   - git clone https://github.com/Abjad/ide.git /tmp/ide
