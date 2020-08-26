@@ -1249,14 +1249,20 @@ class CollectionList(collections_module.abc.Sequence):
         elif isinstance(argument, set):
             if item_class in (abjad.NumberedPitch, abjad.NamedPitch):
                 return abjad.PitchSet(items=items, item_class=item_class)
-            elif item_class in (abjad.NumberedPitchClass, abjad.NamedPitchClass,):
+            elif item_class in (
+                abjad.NumberedPitchClass,
+                abjad.NamedPitchClass,
+            ):
                 return PitchClassSet(items=items, item_class=item_class)
             else:
                 raise TypeError(item_class)
         elif self.item_class is not None:
             if item_class in (abjad.NumberedPitch, abjad.NamedPitch):
                 return PitchSegment(items=items, item_class=item_class)
-            elif item_class in (abjad.NumberedPitchClass, abjad.NamedPitchClass,):
+            elif item_class in (
+                abjad.NumberedPitchClass,
+                abjad.NamedPitchClass,
+            ):
                 return PitchClassSegment(items=items, item_class=item_class)
             else:
                 raise TypeError(item_class)
@@ -3659,7 +3665,9 @@ class ConstellationCircuit:
         """
         return self._illustrate_chords(self.generator_chords)
 
-    def illustrate_generator_chords_and_pivot_chords(self,) -> abjad.LilyPondFile:
+    def illustrate_generator_chords_and_pivot_chords(
+        self,
+    ) -> abjad.LilyPondFile:
         r"""
         Illustrates generator chords and pivot chords.
 
@@ -4073,7 +4081,9 @@ class Partial:
     ### INITIALIZER ###
 
     def __init__(
-        self, fundamental: typing.Union[str, abjad.NamedPitch] = "C1", number: int = 1,
+        self,
+        fundamental: typing.Union[str, abjad.NamedPitch] = "C1",
+        number: int = 1,
     ) -> None:
         fundamental = abjad.NamedPitch(fundamental)
         self._fundamental = fundamental
@@ -5316,7 +5326,10 @@ class PitchClassSegment(abjad.PitchClassSegment):
         Returns pitch segment.
         """
         specifier = ChordalSpacingSpecifier(
-            bass=bass, direction=abjad.Up, minimum_semitones=semitones, soprano=soprano,
+            bass=bass,
+            direction=abjad.Up,
+            minimum_semitones=semitones,
+            soprano=soprano,
         )
         segments = specifier([self])
         assert len(segments) == 1, repr(segments)
@@ -6030,7 +6043,10 @@ class PitchSegment(abjad.PitchSegment):
         Returns new pitch segment.
         """
         specifier = ChordalSpacingSpecifier(
-            bass=bass, direction=abjad.Up, minimum_semitones=semitones, soprano=soprano,
+            bass=bass,
+            direction=abjad.Up,
+            minimum_semitones=semitones,
+            soprano=soprano,
         )
         result = specifier([self])
         assert isinstance(result, CollectionList), repr(result)
@@ -6466,7 +6482,10 @@ class PitchSet(abjad.PitchSet):
         Returns new pitch segment.
         """
         specifier = ChordalSpacingSpecifier(
-            bass=bass, direction=abjad.Up, minimum_semitones=semitones, soprano=soprano,
+            bass=bass,
+            direction=abjad.Up,
+            minimum_semitones=semitones,
+            soprano=soprano,
         )
         result = specifier([self])
         assert isinstance(result, CollectionList), repr(result)

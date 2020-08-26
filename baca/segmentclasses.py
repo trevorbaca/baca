@@ -1685,7 +1685,10 @@ class HorizontalSpacingSpecifier:
         for measure_index, skip in enumerate(skips):
             measure_number = first_measure_number + measure_index
             duration, eol_adjusted, duration_ = self._calculate_duration(
-                measure_index, measure_number, skip, minimum_durations_by_measure,
+                measure_index,
+                measure_number,
+                skip,
+                minimum_durations_by_measure,
             )
             if measure_index == total - 1:
                 duration = abjad.Duration(1, 4)
@@ -2714,7 +2717,9 @@ def breaks(
     return breaks
 
 
-def minimum_duration(duration: abjad.DurationTyping,) -> HorizontalSpacingSpecifier:
+def minimum_duration(
+    duration: abjad.DurationTyping,
+) -> HorizontalSpacingSpecifier:
     """
     Makes horizontal spacing specifier with ``duration`` minimum width.
     """

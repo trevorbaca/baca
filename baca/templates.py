@@ -753,7 +753,9 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
         # VIOLIN
         violin_music_voice = abjad.Voice(
-            lilypond_type="ViolinMusicVoice", name="Violin_Music_Voice", tag=tag,
+            lilypond_type="ViolinMusicVoice",
+            name="Violin_Music_Voice",
+            tag=tag,
         )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],
@@ -1450,7 +1452,9 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
 
         # VIOLIN
         violin_music_voice = abjad.Voice(
-            lilypond_type="ViolinMusicVoice", name="Violin_Music_Voice", tag=tag,
+            lilypond_type="ViolinMusicVoice",
+            name="Violin_Music_Voice",
+            tag=tag,
         )
         violin_music_staff = abjad.Staff(
             [violin_music_voice],

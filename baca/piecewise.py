@@ -4075,7 +4075,10 @@ def make_dynamic(
             sforzando = False
         name_is_textual = not (sforzando)
         indicator = abjad.Dynamic(
-            name, command=command, name_is_textual=name_is_textual, sforzando=sforzando,
+            name,
+            command=command,
+            name_is_textual=name_is_textual,
+            sforzando=sforzando,
         )
     elif string.startswith('"'):
         assert string.endswith('"')

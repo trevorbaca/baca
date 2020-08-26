@@ -484,7 +484,9 @@ def bar_line(
     """
     indicator = abjad.BarLine(abbreviation, format_slot=format_slot)
     return commandclasses.IndicatorCommand(
-        indicators=[indicator], selector=selector, tags=[_site(inspect.currentframe())],
+        indicators=[indicator],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -1441,7 +1443,9 @@ def literal(
     """
     literal = abjad.LilyPondLiteral(string, format_slot=format_slot)
     return commandclasses.IndicatorCommand(
-        indicators=[literal], selector=selector, tags=[_site(inspect.currentframe())],
+        indicators=[literal],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 

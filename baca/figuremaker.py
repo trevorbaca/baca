@@ -3632,7 +3632,9 @@ class Accumulator:
             stop_offset = start_offset + abjad.get.duration(selection)
             timespan = abjad.Timespan(start_offset, stop_offset)
             floating_selection = abjad.AnnotatedTimespan(
-                timespan.start_offset, timespan.stop_offset, annotation=selection,
+                timespan.start_offset,
+                timespan.stop_offset,
+                annotation=selection,
             )
             self._floating_selections[voice_name].append(floating_selection)
         self._current_offset = stop_offset
@@ -3800,7 +3802,10 @@ class Accumulator:
         figure_name_markup._annotation = annotation
         leaf = abjad.select(container).leaf(0)
         abjad.attach(
-            figure_name_markup, leaf, deactivate=True, tag=ide.tags.FIGURE_NAME,
+            figure_name_markup,
+            leaf,
+            deactivate=True,
+            tag=ide.tags.FIGURE_NAME,
         )
 
     def _make_voice_dictionary(self):
@@ -4049,7 +4054,10 @@ class Nest:
     ### INITIALIZER ###
 
     def __init__(
-        self, treatments: typing.Sequence[typing.Union[int, str]], *, lmr: LMR = None,
+        self,
+        treatments: typing.Sequence[typing.Union[int, str]],
+        *,
+        lmr: LMR = None,
     ) -> None:
         assert isinstance(treatments, (list, tuple))
         is_treatment = FigureMaker._is_treatment
@@ -4291,7 +4299,8 @@ class RestAffix:
     def __call__(
         self, collection_index: int, total_collections: int
     ) -> typing.Tuple[
-        typing.Optional[abjad.IntegerSequence], typing.Optional[abjad.IntegerSequence],
+        typing.Optional[abjad.IntegerSequence],
+        typing.Optional[abjad.IntegerSequence],
     ]:
         r"""
         Calls rest affix.
@@ -7429,7 +7438,10 @@ class Bind:
             maker = group[0].assignment.maker
             collections_ = [match.payload for match in group]
             selection = maker(
-                collections_, collection_index=None, state=None, total_collections=None,
+                collections_,
+                collection_index=None,
+                state=None,
+                total_collections=None,
             )
             tuplets.extend(selection)
         assert all(isinstance(_, abjad.Tuplet) for _ in tuplets)
@@ -11125,7 +11137,9 @@ def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
     return RestAffix(prefix=prefix, skips_instead_of_rests=True, suffix=suffix)
 
 
-def skips_before(counts: typing.List[int],) -> RestAffix:
+def skips_before(
+    counts: typing.List[int],
+) -> RestAffix:
     r"""
     Makes skips before music.
 

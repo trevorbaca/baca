@@ -1440,7 +1440,9 @@ class GlobalFermataCommand(scoping.Command):
             tag = tag.append(self.tag)
             tag = tag.append(abjad.Tag("baca.GlobalFermataCommand._call(3)"))
             abjad.attach(
-                const.FERMATA_MEASURE, leaf, tag=ide.tags.FERMATA_MEASURE,
+                const.FERMATA_MEASURE,
+                leaf,
+                tag=ide.tags.FERMATA_MEASURE,
             )
             abjad.annotate(leaf, const.FERMATA_DURATION, fermata_duration)
 
@@ -1788,7 +1790,11 @@ class MetronomeMarkCommand(scoping.Command):
         leaf = classes.Selection(argument).leaf(0)
         reapplied = self._remove_reapplied_wrappers(leaf, indicator)
         wrapper = abjad.attach(
-            indicator, leaf, deactivate=self.deactivate, tag=self.tag, wrapper=True,
+            indicator,
+            leaf,
+            deactivate=self.deactivate,
+            tag=self.tag,
+            wrapper=True,
         )
         if indicator == reapplied:
             SegmentMaker._treat_persistent_wrapper(

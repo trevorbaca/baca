@@ -4135,7 +4135,10 @@ class Selection(abjad.Selection):
         return self.logical_ties(exclude=exclude)
 
     def mgroups(
-        self, counts: typing.Sequence[int] = [1], *, exclude: abjad.Strings = None,
+        self,
+        counts: typing.Sequence[int] = [1],
+        *,
+        exclude: abjad.Strings = None,
     ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped leaves.
@@ -4687,7 +4690,10 @@ class Selection(abjad.Selection):
         return self.runs(exclude=exclude).nontrivial()
 
     def omgroups(
-        self, counts: typing.Sequence[int] = [1], *, exclude: abjad.Strings = None,
+        self,
+        counts: typing.Sequence[int] = [1],
+        *,
+        exclude: abjad.Strings = None,
     ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped leaves (with overhang).
@@ -4769,7 +4775,10 @@ class Selection(abjad.Selection):
         return result_
 
     def ompltgroups(
-        self, counts: typing.Sequence[int] = [1], *, exclude: abjad.Strings = None,
+        self,
+        counts: typing.Sequence[int] = [1],
+        *,
+        exclude: abjad.Strings = None,
     ) -> typing.Union[abjad.Expression, "Selection"]:
         r"""
         Partitions measure-grouped plts (with overhang).
@@ -7510,7 +7519,11 @@ class Sequence(abjad.Sequence):
         return string_template
 
     def _update_expression(
-        self, frame, evaluation_template=None, map_operand=None, subclass_hook=None,
+        self,
+        frame,
+        evaluation_template=None,
+        map_operand=None,
+        subclass_hook=None,
     ):
         callback = Expression._frame_to_callback(
             frame,
@@ -10704,7 +10717,8 @@ class Tree:
         Returns uqbar graph.
         """
         graph = uqbar.graphs.Graph(
-            attributes={"bgcolor": "transparent", "truecolor": True}, name="G",
+            attributes={"bgcolor": "transparent", "truecolor": True},
+            name="G",
         )
         node_mapping = {}
         for node in self._iterate_depth_first():
@@ -10719,7 +10733,8 @@ class Tree:
             node_mapping[node] = graphviz_node
             if node._parent is not None:
                 uqbar.graphs.Edge().attach(
-                    node_mapping[node._parent], node_mapping[node],
+                    node_mapping[node._parent],
+                    node_mapping[node],
                 )
         return graph
 
@@ -11128,8 +11143,8 @@ class Tree:
                     else:
                         while subtree_to_trim._get_level(negative=True) < level:
                             subtree_to_trim = subtree_to_trim._parent
-                    position_of_descendant = subtree_to_trim._get_position_of_descendant(
-                        node
+                    position_of_descendant = (
+                        subtree_to_trim._get_position_of_descendant(node)
                     )
                     first_subtree = copy.deepcopy(subtree_to_trim)
                     reference_node = first_subtree._get_node_at_position(

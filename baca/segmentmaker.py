@@ -768,7 +768,9 @@ class SegmentMaker(abjad.SegmentMaker):
         test_container_identifiers: bool = None,
         time_signatures: typing.Sequence[
             typing.Union[
-                abjad.NonreducedFraction, abjad.TimeSignature, abjad.IntegerPair,
+                abjad.NonreducedFraction,
+                abjad.TimeSignature,
+                abjad.IntegerPair,
             ]
         ] = None,
         transpose_score: bool = None,
@@ -1511,12 +1513,19 @@ class SegmentMaker(abjad.SegmentMaker):
         if not getattr(wrapper.indicator, "redraw", False):
             return
         SegmentMaker._attach_color_literal(
-            wrapper, status, existing_deactivate=wrapper.deactivate, cancelation=True,
+            wrapper,
+            status,
+            existing_deactivate=wrapper.deactivate,
+            cancelation=True,
         )
 
     @staticmethod
     def _attach_color_literal(
-        wrapper, status, existing_deactivate=None, redraw=False, cancelation=False,
+        wrapper,
+        status,
+        existing_deactivate=None,
+        redraw=False,
+        cancelation=False,
     ):
         assert isinstance(wrapper, abjad.Wrapper), repr(wrapper)
         if getattr(wrapper.indicator, "hide", False) is True:
@@ -1578,7 +1587,10 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = _site(inspect.currentframe(), 2)
             tag = tag.append(status_tag)
             abjad.attach(
-                literal, wrapper.component, deactivate=existing_deactivate, tag=tag,
+                literal,
+                wrapper.component,
+                deactivate=existing_deactivate,
+                tag=tag,
             )
 
     @staticmethod
@@ -1590,7 +1602,10 @@ class SegmentMaker(abjad.SegmentMaker):
         if getattr(wrapper.indicator, "hide", False):
             return
         SegmentMaker._attach_color_literal(
-            wrapper, status, existing_deactivate=wrapper.deactivate, redraw=True,
+            wrapper,
+            status,
+            existing_deactivate=wrapper.deactivate,
+            redraw=True,
         )
 
     def _attach_fermatas(self):
@@ -1901,7 +1916,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 color = abjad.SchemeColor(color)
                 assert len(left_text.contents) == 1, repr(left_text)
                 left_text_with_color = abjad.Markup(
-                    rf"\with-color #{color} {left_text.contents[0]}", literal=True,
+                    rf"\with-color #{color} {left_text.contents[0]}",
+                    literal=True,
                 )
             if right_text:
                 wrapper = abjad.get.wrapper(skips[-1], abjad.MetronomeMark)
@@ -1922,7 +1938,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 color = abjad.SchemeColor(color)
                 assert len(right_text.contents) == 1, repr(right_text)
                 right_text_with_color = abjad.Markup(
-                    rf"\with-color #{color} {right_text.contents[0]}", literal=True,
+                    rf"\with-color #{color} {right_text.contents[0]}",
+                    literal=True,
                 )
             else:
                 right_text_with_color = None
@@ -2255,7 +2272,10 @@ class SegmentMaker(abjad.SegmentMaker):
                 if isinstance(final_leaf, abjad.MultimeasureRest):
                     suppress_note = True
                 container = self._make_multimeasure_rest_container(
-                    voice.name, (1, 4), phantom=True, suppress_note=suppress_note,
+                    voice.name,
+                    (1, 4),
+                    phantom=True,
+                    suppress_note=suppress_note,
                 )
                 selection = abjad.select(container)
                 selections.append(selection)
@@ -2368,7 +2388,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             clef = abjad.get.effective(note, abjad.Clef, default=default)
             staff_position = abjad.StaffPosition.from_pitch_and_clef(
-                note.written_pitch, clef,
+                note.written_pitch,
+                clef,
             )
             if staff_position == abjad.StaffPosition(0):
                 abjad.override(note).laissez_vibrer_tie.direction = abjad.Up
@@ -3341,7 +3362,11 @@ class SegmentMaker(abjad.SegmentMaker):
                 command=r"\bacaStartTextSpanSNM", left_text=string
             )
             abjad.attach(
-                start_text_span, skip, context="GlobalSkips", deactivate=True, tag=tag,
+                start_text_span,
+                skip,
+                context="GlobalSkips",
+                deactivate=True,
+                tag=tag,
             )
             if 0 < i:
                 tag = ide.tags.STAGE_NUMBER
@@ -3359,7 +3384,11 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = tag.append(_site(inspect.currentframe()))
         stop_text_span = abjad.StopTextSpan(command=r"\bacaStopTextSpanSNM")
         abjad.attach(
-            stop_text_span, skip, context="GlobalSkips", deactivate=True, tag=tag,
+            stop_text_span,
+            skip,
+            context="GlobalSkips",
+            deactivate=True,
+            tag=tag,
         )
 
     def _magnify_staves_(self):
@@ -3429,7 +3458,9 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = ide.tags.EMPTY_START_BAR
         tag = tag.append(ide.tags.ONLY_SEGMENT)
         abjad.attach(
-            literal, first_skip, tag=tag.append(_site(inspect.currentframe(), 4)),
+            literal,
+            first_skip,
+            tag=tag.append(_site(inspect.currentframe(), 4)),
         )
 
     def _make_lilypond_file(self):
@@ -3559,7 +3590,9 @@ class SegmentMaker(abjad.SegmentMaker):
         tag = _site(inspect.currentframe(), 7)
         tag = tag.append(phantom_tag)
         container = abjad.Container(
-            [hidden_note_voice, multimeasure_rest_voice], simultaneous=True, tag=tag,
+            [hidden_note_voice, multimeasure_rest_voice],
+            simultaneous=True,
+            tag=tag,
         )
         abjad.attach(const.MULTIMEASURE_REST_CONTAINER, container)
         if phantom is True:
@@ -3698,7 +3731,13 @@ class SegmentMaker(abjad.SegmentMaker):
                 result = self._analyze_momento(context, momento)
                 if result is None:
                     continue
-                (leaf, previous_indicator, status, edition, synthetic_offset,) = result
+                (
+                    leaf,
+                    previous_indicator,
+                    status,
+                    edition,
+                    synthetic_offset,
+                ) = result
                 if isinstance(previous_indicator, abjad.TimeSignature):
                     if status in (None, "explicit"):
                         continue
@@ -3846,7 +3885,9 @@ class SegmentMaker(abjad.SegmentMaker):
                 continue
             pleaves.append(pleaf)
         command = pitchcommands.staff_position(
-            0, classes.select().plts(), set_chord_pitches_equal=True,
+            0,
+            classes.select().plts(),
+            set_chord_pitches_equal=True,
         )
         command(pleaves)
 
@@ -3923,7 +3964,9 @@ class SegmentMaker(abjad.SegmentMaker):
                     previous_staff_lines != empty_staff_lines
                 ) and not abjad.get.has_indicator(leaf, indicators.StaffLines):
                     abjad.attach(
-                        empty_staff_lines, leaf, tag=_site(inspect.currentframe(), 1),
+                        empty_staff_lines,
+                        leaf,
+                        tag=_site(inspect.currentframe(), 1),
                     )
                     if not self.final_segment:
                         abjad.attach(
@@ -4054,7 +4097,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     rest = context[-1]
                     break
             self._append_tag_to_wrappers(
-                rest, _site(inspect.currentframe(), 4).append(ide.tags.PHANTOM),
+                rest,
+                _site(inspect.currentframe(), 4).append(ide.tags.PHANTOM),
             )
         start_offset = abjad.get.timespan(skip).start_offset
         enumeration = const.MULTIMEASURE_REST_CONTAINER
@@ -4076,7 +4120,8 @@ class SegmentMaker(abjad.SegmentMaker):
         for container in containers:
             for leaf in abjad.select(container).leaves():
                 self._append_tag_to_wrappers(
-                    leaf, _site(inspect.currentframe(), 5).append(ide.tags.PHANTOM),
+                    leaf,
+                    _site(inspect.currentframe(), 5).append(ide.tags.PHANTOM),
                 )
                 if not isinstance(leaf, abjad.MultimeasureRest):
                     continue
@@ -4419,7 +4464,9 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._check_all_are_pitched
 
     @property
-    def clock_time_extra_offset(self,) -> typing.Union[bool, typings.Pair, None]:
+    def clock_time_extra_offset(
+        self,
+    ) -> typing.Union[bool, typings.Pair, None]:
         """
         Gets clock time extra offset.
         """
@@ -4826,7 +4873,9 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._do_not_include_layout_ly
 
     @property
-    def fermata_measure_empty_overrides(self,) -> typing.Optional[typing.Sequence[int]]:
+    def fermata_measure_empty_overrides(
+        self,
+    ) -> typing.Optional[typing.Sequence[int]]:
         """
         Gets fermata measure empty overrides.
         """
@@ -4929,7 +4978,9 @@ class SegmentMaker(abjad.SegmentMaker):
         return 0
 
     @property
-    def measure_number_extra_offset(self,) -> typing.Union[bool, typings.Pair, None]:
+    def measure_number_extra_offset(
+        self,
+    ) -> typing.Union[bool, typings.Pair, None]:
         """
         Gets measure number extra offset.
         """
@@ -5157,7 +5208,9 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._nonfirst_segment_lilypond_include
 
     @property
-    def parts_metric_modulation_multiplier(self,) -> typing.Optional[abjad.NumberPair]:
+    def parts_metric_modulation_multiplier(
+        self,
+    ) -> typing.Optional[abjad.NumberPair]:
         """
         Gets parts metric modulation multiplier.
         """
@@ -5445,7 +5498,9 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._skips_instead_of_rests
 
     @property
-    def spacing(self,) -> typing.Optional[segmentclasses.HorizontalSpacingSpecifier]:
+    def spacing(
+        self,
+    ) -> typing.Optional[segmentclasses.HorizontalSpacingSpecifier]:
         """
         Gets spacing.
         """
@@ -5466,7 +5521,9 @@ class SegmentMaker(abjad.SegmentMaker):
         return self._stage_markup
 
     @property
-    def stage_number_extra_offset(self,) -> typing.Union[bool, typings.Pair, None]:
+    def stage_number_extra_offset(
+        self,
+    ) -> typing.Union[bool, typings.Pair, None]:
         """
         Gets stage number extra offset.
         """

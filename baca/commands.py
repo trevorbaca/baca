@@ -473,7 +473,9 @@ def color(
 
 
 def container(
-    identifier: str = None, *, selector: abjad.Expression = classes.select().leaves(),
+    identifier: str = None,
+    *,
+    selector: abjad.Expression = classes.select().leaves(),
 ) -> commandclasses.ContainerCommand:
     r"""
     Makes container with ``identifier`` and extends container with
@@ -1348,7 +1350,10 @@ def finger_pressure_transition(
 
 def flat_glissando(
     pitch: typing.Union[
-        str, abjad.NamedPitch, abjad.StaffPosition, typing.List[abjad.StaffPosition],
+        str,
+        abjad.NamedPitch,
+        abjad.StaffPosition,
+        typing.List[abjad.StaffPosition],
     ] = None,
     *tweaks,
     allow_repitch: bool = None,
@@ -1394,12 +1399,18 @@ def flat_glissando(
             isinstance(pitch, list) and isinstance(pitch[0], abjad.StaffPosition)
         ):
             staff_position_command = pitchcommands.staff_position(
-                pitch, allow_repitch=allow_repitch, mock=mock, selector=selector,
+                pitch,
+                allow_repitch=allow_repitch,
+                mock=mock,
+                selector=selector,
             )
             commands.append(staff_position_command)
         else:
             pitch_command = pitchcommands.pitch(
-                pitch, allow_repitch=allow_repitch, mock=mock, selector=selector,
+                pitch,
+                allow_repitch=allow_repitch,
+                mock=mock,
+                selector=selector,
             )
             commands.append(pitch_command)
     elif pitch is not None and stop_pitch is not None:
@@ -2156,7 +2167,8 @@ def glissando(
 
 
 def global_fermata(
-    description: str = "fermata", selector: abjad.Expression = classes.select().leaf(0),
+    description: str = "fermata",
+    selector: abjad.Expression = classes.select().leaf(0),
 ) -> commandclasses.GlobalFermataCommand:
     """
     Attaches global fermata.
@@ -2174,7 +2186,8 @@ def global_fermata(
 
 
 def instrument(
-    instrument: abjad.Instrument, selector: abjad.Expression = classes.select().leaf(0),
+    instrument: abjad.Instrument,
+    selector: abjad.Expression = classes.select().leaf(0),
 ) -> commandclasses.InstrumentChangeCommand:
     """
     Makes instrument change command.
@@ -2985,11 +2998,15 @@ def one_voice(
     """
     literal = abjad.LilyPondLiteral(r"\oneVoice")
     return commandclasses.IndicatorCommand(
-        indicators=[literal], selector=selector, tags=[_site(inspect.currentframe())],
+        indicators=[literal],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
-def open_volta(selector: abjad.Expression = classes.select().leaf(0),) -> scoping.Suite:
+def open_volta(
+    selector: abjad.Expression = classes.select().leaf(0),
+) -> scoping.Suite:
     """
     Attaches bar line and overrides bar line X-extent.
     """
@@ -3054,7 +3071,9 @@ def voice_four(
     """
     literal = abjad.LilyPondLiteral(r"\voiceFour")
     return commandclasses.IndicatorCommand(
-        indicators=[literal], selector=selector, tags=[_site(inspect.currentframe())],
+        indicators=[literal],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -3066,7 +3085,9 @@ def voice_one(
     """
     literal = abjad.LilyPondLiteral(r"\voiceOne")
     return commandclasses.IndicatorCommand(
-        indicators=[literal], selector=selector, tags=[_site(inspect.currentframe())],
+        indicators=[literal],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -3078,7 +3099,9 @@ def voice_three(
     """
     literal = abjad.LilyPondLiteral(r"\voiceThree")
     return commandclasses.IndicatorCommand(
-        indicators=[literal], selector=selector, tags=[_site(inspect.currentframe())],
+        indicators=[literal],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )
 
 
@@ -3090,5 +3113,7 @@ def voice_two(
     """
     literal = abjad.LilyPondLiteral(r"\voiceTwo")
     return commandclasses.IndicatorCommand(
-        indicators=[literal], selector=selector, tags=[_site(inspect.currentframe())],
+        indicators=[literal],
+        selector=selector,
+        tags=[_site(inspect.currentframe())],
     )

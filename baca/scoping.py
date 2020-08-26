@@ -37,7 +37,10 @@ class Scope:
     ### INITIALIZER ###
 
     def __init__(
-        self, *, measures: typings.SliceTyping = (1, -1), voice_name: str = None,
+        self,
+        *,
+        measures: typings.SliceTyping = (1, -1),
+        voice_name: str = None,
     ) -> None:
         if isinstance(measures, int):
             measures = (measures, measures)

@@ -733,7 +733,9 @@ def make_even_divisions(*, measures: typings.SliceTyping = None) -> RhythmComman
 
 
 def make_fused_tuplet_monads(
-    *, measures: typings.SliceTyping = None, tuplet_ratio: typing.Tuple[int] = None,
+    *,
+    measures: typings.SliceTyping = None,
+    tuplet_ratio: typing.Tuple[int] = None,
 ) -> RhythmCommand:
     """
     Makes fused tuplet monads.
@@ -760,7 +762,9 @@ def make_fused_tuplet_monads(
     )
 
 
-def make_monads(fractions: str,) -> RhythmCommand:
+def make_monads(
+    fractions: str,
+) -> RhythmCommand:
     r"""
     Makes monads.
 
@@ -920,7 +924,9 @@ def make_multimeasure_rests(*, measures: typings.SliceTyping = None) -> RhythmCo
 
 
 def make_notes(
-    *specifiers, measures: typings.SliceTyping = None, repeat_ties: bool = False,
+    *specifiers,
+    measures: typings.SliceTyping = None,
+    repeat_ties: bool = False,
 ) -> RhythmCommand:
     """
     Makes notes; rewrites meter.
