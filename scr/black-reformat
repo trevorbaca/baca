@@ -1,4 +1,1 @@
-black \
-    --exclude="__metadata__\.py|__persist__\.py|layout\.py|tools\.py|ScoreTemplate.py" \
-    --target-version=py38 \
-    $1
+black --target-version=py38 $1
