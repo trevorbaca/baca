@@ -1,0 +1,7 @@
+clear
+start-abjad-ide mra gg ipm q
+start-abjad-ide myr gg ipm q
+start-abjad-ide nae gg ipm q
+start-abjad-ide rec gg A ipn q
+start-abjad-ide str gg ipm q
+start-abjad-ide tra gg ipm q
