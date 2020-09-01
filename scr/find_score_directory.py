@@ -1,7 +1,7 @@
-import ide
 import os
 import sys
 
+import ide
 
 if __name__ == "__main__":
     directory = sys.argv[1]
