@@ -5,3 +5,4 @@ start-abjad-ide nae gg ipm q
 start-abjad-ide rec gg A ipn q
 start-abjad-ide str gg ipm q
 start-abjad-ide tra gg ipm q
+say "rerendered segments for score group 3"

@@ -4,3 +4,4 @@ start-abjad-ide akl gg ipm q
 start-abjad-ide ani gg ipm q
 start-abjad-ide dor gg ipm q
 start-abjad-ide fab gg ipm q
+say "rerendered segments for score group 1"

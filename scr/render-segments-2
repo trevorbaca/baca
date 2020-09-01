@@ -6,3 +6,4 @@ start-abjad-ide ikr gg ipm q
 start-abjad-ide ins gg ipm q
 start-abjad-ide kha gg ipm q
 start-abjad-ide kru gg ipm q
+say "rerendered segments for score group 2"
