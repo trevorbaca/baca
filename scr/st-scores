@@ -3,15 +3,11 @@ import os
 import sys
 
 import ide
-from ide.AbjadIDE import _get_repository_root
 
 import abjad
 
 
 def _git_st(directory):
-    if not _get_repository_root(directory):
-        print(f"missing {directory.trim()} repository ...")
-        return
     with abjad.TemporaryDirectoryChange(directory=directory):
         command = "git status ."
         print(f"Running {command} ...")

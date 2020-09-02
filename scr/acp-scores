@@ -3,7 +3,6 @@ import os
 import sys
 
 import ide
-from ide.AbjadIDE import _get_repository_root
 
 import abjad
 

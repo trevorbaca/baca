@@ -3,15 +3,11 @@ import os
 import sys
 
 import ide
-from ide.AbjadIDE import _get_repository_root
 
 import abjad
 
 
 def _git_pull(directory):
-    if not _get_repository_root(directory):
-        print(f"missing {directory.trim()} repository ...")
-        return
     with abjad.TemporaryDirectoryChange(directory=directory):
         command = "git pull"
         print(f"Running {command} ...")
