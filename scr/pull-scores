@@ -1,0 +1,29 @@
+#! /usr/bin/env python
+import os
+import sys
+
+import ide
+from ide.AbjadIDE import _get_repository_root
+
+import abjad
+
+
+def _git_pull(directory):
+    if not _get_repository_root(directory):
+        print(f"missing {directory.trim()} repository ...")
+        return
+    with abjad.TemporaryDirectoryChange(directory=directory):
+        command = "git pull"
+        print(f"Running {command} ...")
+        lines = abjad.iox.run_command(command)
+        for line in lines:
+            if line == "":
+                continue
+            print(line)
+    
+
+if __name__ == "__main__":
+    for path in ide.Path("/Users/trevorbaca/Scores").list_paths():
+        print(f"{path} ...")
+        _git_pull(path)
+        print()
