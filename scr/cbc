@@ -1,0 +1,11 @@
+realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
+CLIPBOARD=~/tmp/clipboard
+
+for FILE in "$@"
+    do
+    FILE=$(realpath $FILE)
+    echo $FILE >> $CLIPBOARD
+    done
