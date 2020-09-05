@@ -1,0 +1,31 @@
+source realpath
+source interpret-ly-file
+
+paths=$(find . -name illustration.ly | sort)
+PATH_COUNT=0
+
+for path in $paths; do
+    PATH_COUNT=$((PATH_COUNT+1))
+done
+
+for path in $paths; do
+    LY=$(realpath $path)
+    SEGMENT_DIRECTORY=$(dirname "$LY")
+    PDF="$SEGMENT_DIRECTORY"/illustration.pdf
+    SECONDS=0
+    interpret_ly "$LY"
+    if [ -f "$PDF" ]; then
+        echo Found "$PDF" ...
+        if [ "$PATH_COUNT" -eq 1 ]; then
+            open "$PDF"
+        fi
+    else
+        echo Can not produce "$PDF" ...
+    fi
+    if [ "$SECONDS" -eq 1 ]; then
+        echo "Total time ${SECONDS} second ..."
+    else
+        echo "Total time ${SECONDS} seconds ..."
+    fi
+    echo
+done
