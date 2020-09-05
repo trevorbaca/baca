@@ -84,6 +84,11 @@ script:
   # TODO: replace with make mypy
   - mypy $TRAVIS_BUILD_DIR/$name
   - /tmp/baca/scr/baca-doctest $TRAVIS_BUILD_DIR/$name
+
+  - cd $TRAVIS_BUILD_DIR/$name/segments
+  - /tmp/baca/scr/dpc
+  - cd -
+
   # TODO: replace with make pytest
   - py.test -rf $TRAVIS_BUILD_DIR/$name/test.py
 
