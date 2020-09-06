@@ -1,0 +1,43 @@
+#! /usr/bin/env bash
+
+boilerplate=/Users/trevorbaca/ide/boilerplate
+
+make_segment_ly() {
+    definition_py_path="$1"
+    if [ ! -f "$definition_py_path" ]; then
+        echo Can not find "$definition_py_path" ...
+    fi
+    segment_directory=$(dirname "$definition_py_path")
+    illustration_ly_path="$segment_directory"/illustration.ly
+    if [ -f "$illustration_ly_path" ]; then
+        echo Removing "$illustration_ly_path" ...
+    fi
+    maker_name=__make_segment_ly__.py
+    maker_source="$boilerplate"/"$maker_name"
+    maker_target="$segment_directory"/"$maker_name"
+    if [ -f "$maker_target" ]; then
+        rm "$maker_target"
+    fi
+    echo Writing "$maker_target" ...
+    cp "$maker_source" "$maker_target"
+
+    previous_segment=$(get_previous_package "$segment_directory")
+    # do stuff here
+    statement="FOO"
+    persist_statement="BAR"
+
+    boil "$maker_target" previous_segment_metadata_statement "$statement" previous_segment_persist_import_statement "$persist_statement"
+    
+#    BASENAME=$(basename "$definition_py_path")
+#    WITHOUT_SUFFIX=${BASENAME%".ly"}
+#    WITHOUT_SUFFIX=${segment_directory}/${WITHOUT_SUFFIX}
+#    LOG="$segment_directory/.log"
+#    PDF="$segment_directory"/illustration.pdf
+#    BACKUP_PDF="$segment_directory"/illustration._backup.pdf
+#    if [ -f "$PDF" ]; then
+#        trash "$PDF"
+#    fi
+#    echo Interpreting "$definition_py_path" ...
+#    date +%Y-%m-%d\ %H:%M:%S > "$LOG"
+#    lilypond -dno-point-and-click -o ${WITHOUT_SUFFIX} ${definition_py_path} >>${LOG} 2>&1
+}
