@@ -1,0 +1,25 @@
+#! /usr/bin/env bash
+
+make_layout_ly() {
+    layout_py_path="$1"
+    boilerplate="/Users/trevorbaca/ide/boilerplate"
+    directory=$(dirname "$layout_py_path")
+
+    stem=$(basename -- "$layout_py_path")
+    stem="${stem%.*}"
+    layout_ly_path="$directory"/"$stem".ly
+
+    maker_name=__make_layout_ly__.py
+    maker_source=$boilerplate/$maker_name
+    maker_target=$directory/$maker_name
+    if [ -f $maker_target ]; then
+        echo Removing $maker_target ...
+    fi
+    echo Writing $maker_target ...
+    cp $maker_source $maker_target
+    boil $maker_target layout_module_name $stem
+    echo Interpreting $maker_target ...
+    python $maker_target > /dev/null
+    echo Removing $maker_target ...
+    rm $maker_target
+}

@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 interpret_ly() {
     LY="$1"
     if [ ! -f "$LY" ]; then

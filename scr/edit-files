@@ -1,9 +1,10 @@
+#! /usr/bin/env bash
+
 paths=$(find . -name $1 | sort)
 for path in $paths; do
     echo Editing $path ...
 done
-file_count=$(echo $paths | wc -w | xargs)
-prompt="${file_count} files ok?> "
+path_count=$(echo $paths | wc -w | xargs)
+prompt="${path_count} files ok?> "
 read -p "$prompt" confirm && [[ $confirm == y ]] || exit 1
-echo "continuing ..."
 vim $paths

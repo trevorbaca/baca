@@ -1,0 +1,63 @@
+#! /usr/bin/env python
+
+
+def _make_segment_pdf(directory, layout=True, open_after=True):
+    assert directory.is_segment()
+    if layout is True:
+        self.make_layout_ly(directory)
+    definition = directory / "definition.py"
+    if not definition.is_file():
+        self.io.display(f"can not find {definition.trim()} ...")
+        return -1
+    self.io.display(f"making segment {directory.name} PDF ...")
+    ly = directory / "illustration.ly"
+    if ly.exists():
+        self.io.display(f"removing {ly.trim()} ...")
+        ly.remove()
+    pdf = directory / "illustration.pdf"
+    if pdf.exists():
+        self.io.display(f"removing {pdf.trim()} ...")
+        pdf.remove()
+    maker = directory / "__make_segment_pdf__.py"
+    maker.remove()
+    with self.cleanup([maker]):
+        self._copy_boilerplate(directory, maker.name)
+        previous_segment = directory.get_previous_package()
+        if previous_segment is None:
+            statement = "previous_metadata = None"
+            persist_statement = "previous_persist = None"
+        else:
+            metadata = previous_segment / "__metadata__.py"
+            statement = f'file = ide.Path("{metadata}")'
+            statement += "\n        lines = file.read_text()"
+            statement += "\n        exec(lines)"
+            statement += "\n        previous_metadata = metadata"
+            persist = previous_segment / "__persist__.py"
+            persist_statement = f'file = ide.Path("{persist}")'
+            persist_statement += "\n        lines = file.read_text()"
+            persist_statement += "\n        exec(lines)"
+            persist_statement += "\n        previous_persist = persist"
+        template = maker.read_text()
+        completed_template = template.format(
+            previous_segment_metadata_import_statement=statement,
+            previous_segment_persist_import_statement=persist_statement,
+        )
+        maker.write_text(completed_template)
+        self.io.display(f"interpreting {maker.trim()} ...")
+        result = self._interpret_file(maker)
+        if ly.is_file():
+            self.io.display(f"found {ly.trim()} ...")
+        if pdf.is_file():
+            self.io.display(f"found {pdf.trim()} ...")
+        self.io.display(f"removing {maker.trim()} ...")
+    stdout_lines, stderr_lines, exit_code = result
+    if exit_code:
+        self.io.display(stderr_lines, raw=True)
+        return exit_code
+    if pdf.is_file() and open_after:
+        self._open_files([pdf])
+    return 0
+
+
+if __name__ == "__main__":
+    print("hello")
