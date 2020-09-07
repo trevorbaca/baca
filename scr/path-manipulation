@@ -1,0 +1,123 @@
+#! /usr/bin/env bash
+
+SCORES_DIRECTORY=/Users/trevorbaca/Scores
+
+get_next_score() {
+    package_subtree=${1#$SCORES_DIRECTORY/}
+    IFS=/ read -a dirs <<< "$package_subtree"
+    package_name=$(IFS=/; echo "${dirs[*]:0:1}")
+    score_packages=$(ls -d $SCORES_DIRECTORY/*/)
+    get_next=0
+    next_score_name=NOT_FOUND
+    for score_package in $score_packages; do
+        score_name=$(basename $score_package)
+        if [ $get_next -eq 1 ]; then
+            next_score_name=$score_name
+            get_next=0
+        fi
+        if [ $score_name = $package_name ]; then
+            get_next=1
+        fi
+    done
+    if [ $next_score_name = NOT_FOUND ]; then
+        for score_package in $score_packages; do
+            score_name=$(basename $score_package)
+            if [ $get_next -eq 1 ]; then
+                next_score_name=$score_name
+                get_next=0
+            fi
+        done
+    fi
+    echo ${SCORES_DIRECTORY}/${next_score_name}/${next_score_name}
+}
+
+get_previous_score() {
+    package_subtree=${1#$SCORES_DIRECTORY/}
+    IFS=/ read -a dirs <<< "$package_subtree"
+    package_name=$(IFS=/; echo "${dirs[*]:0:1}")
+    score_packages=$(ls -d $SCORES_DIRECTORY/*/)
+    get_next=0
+    next_score_name=NOT_FOUND
+    for x in ${score_packages}; do reversed="${x} ${reversed}"; done
+    score_packages=${reversed}
+    for score_package in $score_packages; do
+        score_name=$(basename $score_package)
+        if [ $get_next -eq 1 ]; then
+            next_score_name=$score_name
+            get_next=0
+        fi
+        if [ $score_name = $package_name ]; then
+            get_next=1
+        fi
+    done
+    if [ $next_score_name = NOT_FOUND ]; then
+        for score_package in $score_packages; do
+            score_name=$(basename $score_package)
+            if [ $get_next -eq 1 ]; then
+                next_score_name=$score_name
+                get_next=0
+            fi
+        done
+    fi
+    echo ${SCORES_DIRECTORY}/${next_score_name}/${next_score_name}
+}
+
+
+get_next_sibling_directory() {
+    me=$(basename ${1})
+    directory=$(dirname ${1})
+    sibling_directories=$(ls -d ${directory}/[0-9]*/)
+    get_next=0
+    next_sibling_name=NOT_FOUND
+    for path in $sibling_directories; do
+        name=$(basename $path)
+        if [ $get_next -eq 1 ]; then
+            next_name=$name
+            get_next=0
+        fi
+        if [ $name = $me ]; then
+            get_next=1
+        fi
+    done
+    if [ $next_sibling_name = NOT_FOUND ]; then
+        for path in $sibling_directories; do
+            name=$(basename $path)
+            if [ $get_next -eq 1 ]; then
+                next_name=$name
+                get_next=0
+            fi
+        done
+    fi
+    echo ${directory}/${next_name}
+}
+
+
+get_previous_sibling_directory() {
+    me=$(basename ${1})
+    directory=$(dirname ${1})
+    sibling_directories=$(ls -d ${directory}/[0-9]*/)
+    for x in ${sibling_directories}; do reversed="${x} ${reversed}"; done
+    sibling_directories=${reversed}
+    get_next=0
+    next_sibling_name=NOT_FOUND
+    for path in $sibling_directories; do
+        name=$(basename $path)
+        if [ $get_next -eq 1 ]; then
+            next_name=$name
+            get_next=0
+        fi
+        if [ $name = $me ]; then
+            get_next=1
+        fi
+    done
+    if [ $next_sibling_name = NOT_FOUND ]; then
+        for path in $sibling_directories; do
+            name=$(basename $path)
+            if [ $get_next -eq 1 ]; then
+                next_name=$name
+                get_next=0
+            fi
+        done
+    fi
+    echo ${directory}/${next_name}
+}
