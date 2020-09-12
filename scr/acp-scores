@@ -1,40 +1,13 @@
-#! /usr/bin/env python
-import os
-import sys
+#! /usr/bin/env bash
 
-import ide
+current_directory=$(pwd)
+read -p "Enter commit message> " COMMIT_MESSAGE
 
-import abjad
-
-
-def _git_ci(directory, commit_message):
-    with abjad.TemporaryDirectoryChange(directory=directory):
-        command = f"git add -A {directory}"
-        print(f"Running {command} ...")
-        lines = abjad.iox.run_command(command)
-        for line in lines:
-            if line == "":
-                continue
-            print(line)
-        command = f'git commit -m "{commit_message}" {directory}'
-        print(f"Running {command} ...")
-        lines = abjad.iox.run_command(command)
-        for line in lines:
-            if line == "":
-                continue
-            print(line)
-        command = "git push"
-        print(f"Running {command} ...")
-        lines = abjad.iox.run_command(command)
-        for line in lines:
-            if line == "":
-                continue
-            print(line)
-
-
-if __name__ == "__main__":
-    commit_message = input("Enter commit message> ")
-    os.system("clear")
-    for directory in ide.Path("/Users/trevorbaca/Scores").list_paths():
-        _git_ci(directory, commit_message)
-        print()
+clear;
+for repo in $(ls -d "$SCORES"/*/); do
+    cd "$repo";
+    echo $(pwd) ...;
+    git add -A "$repo";
+    git commit -m "${COMMIT_MESSAGE}" "$repo";
+    git push;
+done

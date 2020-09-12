@@ -1,25 +1,8 @@
-#! /usr/bin/env python
-import os
-import sys
+#! /usr/bin/env bash
 
-import ide
+current_directory=$(pwd)
 
-import abjad
-
-
-def _git_pull(directory):
-    with abjad.TemporaryDirectoryChange(directory=directory):
-        command = "git pull"
-        print(f"Running {command} ...")
-        lines = abjad.iox.run_command(command)
-        for line in lines:
-            if line == "":
-                continue
-            print(line)
-    
-
-if __name__ == "__main__":
-    for path in ide.Path("/Users/trevorbaca/Scores").list_paths():
-        print(f"{path} ...")
-        _git_pull(path)
-        print()
+clear;
+for repo in $(ls -d "$SCORES"/*/); do
+    cd "$repo"; echo $(pwd) ...; git pull; echo;
+done
