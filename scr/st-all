@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+
+repos=("$ABJAD" "$IDE" "$BACA" "$MISCELLANEOUS")
+current_directory=$(pwd)
+
+clear;
+for repo in ${repos[*]}; do
+    cd "$repo"; echo $(pwd) ...; git st; echo;
+done

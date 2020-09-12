@@ -19,6 +19,7 @@ def _git_st(directory):
     
 
 if __name__ == "__main__":
+    os.system("clear")
     for path in ide.Path("/Users/trevorbaca/Scores").list_paths():
         print(f"{path} ...")
         _git_st(path)
