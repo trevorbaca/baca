@@ -128,3 +128,13 @@ get_previous_sibling_directory() {
     fi
     echo ${directory}/${next_name}
 }
+
+go_to_score() {
+    package_subtree=${1#$SCORES_DIRECTORY/}
+    IFS=/ read -a dirs <<< "$package_subtree"
+    package_name=$(IFS=/; echo "${dirs[*]:0:1}")
+    contents=${SCORES_DIRECTORY}/${package_name}/${package_name}
+    clear;
+    cd ${contents};
+    ls
+}

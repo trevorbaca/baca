@@ -2,7 +2,6 @@
 import pathlib
 import sys
 
-
 if __name__ == "__main__":
     target = pathlib.Path(sys.argv[1])
     key = sys.argv[2]
