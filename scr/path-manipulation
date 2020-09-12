@@ -2,6 +2,13 @@
 
 SCORES_DIRECTORY=/Users/trevorbaca/Scores
 
+find_score_contents_directory() {
+    package_subtree=${PWD#$SCORES_DIRECTORY/}
+    IFS=/ read -a dirs <<< "$package_subtree"
+    package_name=$(IFS=/; echo "${dirs[*]:0:1}")
+    echo ${SCORES_DIRECTORY}/${package_name}/${package_name}
+}
+
 get_next_score() {
     package_subtree=${1#$SCORES_DIRECTORY/}
     IFS=/ read -a dirs <<< "$package_subtree"
