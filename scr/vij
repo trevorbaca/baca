@@ -1,4 +1,0 @@
-ABJAD_TMP=~/.abjad/tmp.py
-
-vim $ABJAD_TMP
-clear; python -i $ABJAD_TMP

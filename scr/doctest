@@ -33,12 +33,9 @@ def _get_globs():
     globs.update(abjadext.__dict__)
     globs["baca"] = baca
     globs.update(baca.__dict__)
-    try:
-        ide = importlib.import_module("ide")
-        globs["ide"] = ide
-        globs.update(ide.__dict__)
-    except ModuleNotFoundError:
-        pass
+    ide = importlib.import_module("ide")
+    globs["ide"] = ide
+    globs.update(ide.__dict__)
     return globs
 
 
