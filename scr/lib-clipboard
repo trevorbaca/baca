@@ -1,0 +1,25 @@
+#! /usr/bin/env bash
+
+source lib-path-manipulation
+
+CLIPBOARD=~/tmp/clipboard
+
+cbc() {
+    for FILE in "$@"
+        do
+        FILE=$(realpath "$FILE")
+        echo "$FILE" >> "$CLIPBOARD"
+        done
+}
+
+cbs() { cat "$CLIPBOARD"; }
+
+cbv() {
+    while read -r line; do
+        echo "$line"
+        BASENAME=$(basename "$line")
+        cp -R "$line" ./"$BASENAME"
+    done < "$CLIPBOARD"
+
+    > "$CLIPBOARD"
+}

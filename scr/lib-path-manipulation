@@ -136,3 +136,7 @@ go_to_score() {
     cd ${contents};
     ls
 }
+
+realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}

@@ -1,0 +1,39 @@
+#! /usr/bin/env bash
+
+clear
+group="OK"
+
+case $1 in
+    1)
+        start-abjad-ide aka gg ipm q
+        start-abjad-ide akl gg ipm q
+        start-abjad-ide ani gg ipm q
+        start-abjad-ide dor gg ipm q
+        start-abjad-ide fab gg ipm q
+        ;;
+    2)
+        start-abjad-ide har gg ipm q
+        start-abjad-ide hij gg ipm q
+        start-abjad-ide hui gg ipm q
+        start-abjad-ide ikr gg ipm q
+        start-abjad-ide ins gg ipm q
+        start-abjad-ide kha gg ipm q
+        start-abjad-ide kru gg ipm q
+        ;;
+    3)
+        start-abjad-ide mra gg ipm q
+        start-abjad-ide myr gg ipm q
+        start-abjad-ide nae gg ipm q
+        start-abjad-ide rec gg A ipn q
+        start-abjad-ide str gg ipm q
+        start-abjad-ide tra gg ipm q
+        ;;
+    *)
+        echo Group not found: "$1"
+        group="BAD"
+        ;;
+esac
+
+if [[ "$group" = "OK" ]]; then
+    say "Rerendered segments for score group ${1}."
+fi

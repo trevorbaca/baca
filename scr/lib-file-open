@@ -1,0 +1,22 @@
+#! /usr/bin/env bash
+
+bcpo() { open back-cover.pdf; }
+export -f bcpo
+
+fcpo() { open front-cover.pdf; }
+export -f fcpo
+
+ipo() { open illustration.pdf; }
+export -f ipo
+
+mpo() { open music.pdf; }
+export -f mpo
+
+ppo() { open part.pdf; }
+export -f ppo
+
+pfpo() { open preface.pdf; }
+export -f pfpo
+
+spo() { open score.pdf; }
+export -f spo

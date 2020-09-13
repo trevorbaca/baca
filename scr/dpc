@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-source realpath
+source lib-path-manipulation
 
 paths=$(find . -name definition.py | sort)
 RC=0

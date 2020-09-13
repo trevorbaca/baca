@@ -1,5 +1,0 @@
-#! /usr/bin/env bash
-
-ABJAD_TMP=~/.abjad/tmp.py
-
-clear; python -i $ABJAD_TMP

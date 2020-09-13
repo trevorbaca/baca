@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-source realpath
+source lib-path-manipulation
 source make-layout-ly
 
 paths=$(find . -name *layout.py | sort)

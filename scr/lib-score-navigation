@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-source path-manipulation
+source lib-path-manipulation
 
 bb() {
     clear;
