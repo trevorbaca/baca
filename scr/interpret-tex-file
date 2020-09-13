@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 interpret_tex() {
     TEX="$PWD/"$1".tex"
 

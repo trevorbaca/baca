@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 CLIPBOARD=~/tmp/clipboard
 
 while read -r line; do

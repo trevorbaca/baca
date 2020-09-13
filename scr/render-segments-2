@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 clear
 start-abjad-ide har gg ipm q
 start-abjad-ide hij gg ipm q

@@ -1,1 +1,3 @@
+#! /usr/bin/env bash
+
 cat ~/tmp/clipboard

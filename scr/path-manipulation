@@ -1,19 +1,17 @@
 #! /usr/bin/env bash
 
-SCORES_DIRECTORY=/Users/trevorbaca/Scores
-
 find_score_contents_directory() {
-    package_subtree=${PWD#$SCORES_DIRECTORY/}
+    package_subtree=${PWD#$SCORES/}
     IFS=/ read -a dirs <<< "$package_subtree"
     package_name=$(IFS=/; echo "${dirs[*]:0:1}")
-    echo ${SCORES_DIRECTORY}/${package_name}/${package_name}
+    echo ${SCORES}/${package_name}/${package_name}
 }
 
 get_next_score() {
-    package_subtree=${1#$SCORES_DIRECTORY/}
+    package_subtree=${1#$SCORES/}
     IFS=/ read -a dirs <<< "$package_subtree"
     package_name=$(IFS=/; echo "${dirs[*]:0:1}")
-    score_packages=$(ls -d $SCORES_DIRECTORY/*/)
+    score_packages=$(ls -d $SCORES/*/)
     get_next=0
     next_score_name=NOT_FOUND
     for score_package in $score_packages; do
@@ -35,14 +33,14 @@ get_next_score() {
             fi
         done
     fi
-    echo ${SCORES_DIRECTORY}/${next_score_name}/${next_score_name}
+    echo ${SCORES}/${next_score_name}/${next_score_name}
 }
 
 get_previous_score() {
-    package_subtree=${1#$SCORES_DIRECTORY/}
+    package_subtree=${1#$SCORES/}
     IFS=/ read -a dirs <<< "$package_subtree"
     package_name=$(IFS=/; echo "${dirs[*]:0:1}")
-    score_packages=$(ls -d $SCORES_DIRECTORY/*/)
+    score_packages=$(ls -d $SCORES/*/)
     get_next=0
     next_score_name=NOT_FOUND
     for x in ${score_packages}; do reversed="${x} ${reversed}"; done
@@ -66,7 +64,7 @@ get_previous_score() {
             fi
         done
     fi
-    echo ${SCORES_DIRECTORY}/${next_score_name}/${next_score_name}
+    echo ${SCORES}/${next_score_name}/${next_score_name}
 }
 
 
@@ -130,10 +128,10 @@ get_previous_sibling_directory() {
 }
 
 go_to_score() {
-    package_subtree=${1#$SCORES_DIRECTORY/}
+    package_subtree=${1#$SCORES/}
     IFS=/ read -a dirs <<< "$package_subtree"
     package_name=$(IFS=/; echo "${dirs[*]:0:1}")
-    contents=${SCORES_DIRECTORY}/${package_name}/${package_name}
+    contents=${SCORES}/${package_name}/${package_name}
     clear;
     cd ${contents};
     ls

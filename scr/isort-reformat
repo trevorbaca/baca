@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 # TODO: eventually do not skip __metadata__.py, __persist__.py
 
 isort \

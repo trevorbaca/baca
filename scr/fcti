@@ -1,2 +1,4 @@
+#! /usr/bin/env bash
+
 source interpret-tex-file
 interpret_tex front-cover
