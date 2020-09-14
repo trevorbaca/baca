@@ -68,7 +68,7 @@ before_install:
     - ls
     - ls /tmp
     - pwd
-    - which baca-doctest
+    - which doctest
     - which black
     - which flake8
     - which mypy
