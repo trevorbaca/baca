@@ -83,7 +83,7 @@ script:
   # - /tmp/baca/scr/isort-check $TRAVIS_BUILD_DIR/$name
   # TODO: replace with make mypy
   - mypy $TRAVIS_BUILD_DIR/$name
-  - /tmp/baca/scr/baca-doctest $TRAVIS_BUILD_DIR/$name
+  - /tmp/baca/scr/doctest $TRAVIS_BUILD_DIR/$name
 
   - cd $TRAVIS_BUILD_DIR/$name/segments
   - /tmp/baca/scr/dpc
