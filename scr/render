@@ -24,7 +24,7 @@ case $1 in
         start-abjad-ide mra gg ipm q
         start-abjad-ide myr gg ipm q
         start-abjad-ide nae gg ipm q
-        start-abjad-ide rec gg A ipn q
+        start-abjad-ide rec gg 01 ipn q
         start-abjad-ide str gg ipm q
         start-abjad-ide tra gg ipm q
         ;;
