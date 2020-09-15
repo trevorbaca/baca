@@ -10,16 +10,12 @@ flake_options = --isolated --max-line-length=88
 flake8:
 	flake8 ${flake_exclude} ${flake_ignore} ${flake_options}
 
-# TODO: eventually do not skip __metadata__.py, __persist__.py
-
 isort-check:
 	isort \
 	--case-sensitive \
 	--check-only \
 	--line-width=88 \
 	--multi-line=3 \
-	--skip=__metadata__.py \
-	--skip=__persist__.py \
 	--thirdparty=abjad \
 	--thirdparty=abjadext \
 	--thirdparty=baca \
@@ -35,8 +31,6 @@ isort-reformat:
 	--case-sensitive \
 	--line-width=88 \
 	--multi-line=3 \
-	--skip=__metadata__.py \
-	--skip=__persist__.py \
 	--thirdparty=abjad \
 	--thirdparty=abjadext \
 	--thirdparty=baca \
