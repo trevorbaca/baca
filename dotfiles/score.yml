@@ -76,13 +76,17 @@ install:
 
 script:
   # TODO: replace with make black-check
-  - /tmp/baca/scr/black-check $TRAVIS_BUILD_DIR/$name
+  #- /tmp/baca/scr/black-check $TRAVIS_BUILD_DIR/$name
+  - make black-check
   # TODO: replace with make flake8-check
   - /tmp/baca/scr/flake8-check $TRAVIS_BUILD_DIR/$name
+  - make flake8
   # TODO: replace with make isort-check
   # - /tmp/baca/scr/isort-check $TRAVIS_BUILD_DIR/$name
+  - make isort-check
   # TODO: replace with make mypy
-  - mypy $TRAVIS_BUILD_DIR/$name
+  #- mypy $TRAVIS_BUILD_DIR/$name
+  - make mypy
   - /tmp/baca/scr/doctest $TRAVIS_BUILD_DIR/$name
 
   - cd $TRAVIS_BUILD_DIR/$name/segments

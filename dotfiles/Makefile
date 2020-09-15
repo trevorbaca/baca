@@ -50,24 +50,24 @@ isort-reformat:
 mypy:
 	mypy .
 
-project = baca
-
-pytest:
-	rm -Rf htmlcov/
-	pytest \
-	--cov-config=.coveragerc \
-	--cov-report=html \
-	--cov=${project} \
-	.
-
-pytest-x:
-	rm -Rf htmlcov/
-	pytest \
-	-x \
-	--cov-config=.coveragerc \
-	--cov-report=html \
-	--cov=${project} \
-	.
+#project = baca
+#
+#pytest:
+#	rm -Rf htmlcov/
+#	pytest \
+#	--cov-config=.coveragerc \
+#	--cov-report=html \
+#	--cov=${project} \
+#	.
+#
+#pytest-x:
+#	rm -Rf htmlcov/
+#	pytest \
+#	-x \
+#	--cov-config=.coveragerc \
+#	--cov-report=html \
+#	--cov=${project} \
+#	.
 
 reformat:
 	make black-reformat
@@ -84,4 +84,4 @@ test:
 	make flake8
 	make isort-check
 	make mypy
-	make pytest
+	# make pytest
