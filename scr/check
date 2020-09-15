@@ -1,6 +1,0 @@
-#! /usr/bin/env bash
-
-black-check .
-flake8-check .
-# isort-check .
-# mypy .

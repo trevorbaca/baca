@@ -14,7 +14,7 @@ git:
 before_install:
 
   # get package name
-  - name=$(basename $TRAVIS_BUILD_DIR)
+  - name=$(basename "$TRAVIS_BUILD_DIR")
 
   # install lilypond:
   - lilypond=/tmp/lilypond
@@ -35,10 +35,10 @@ before_install:
   # clone & install baca:
   - git clone https://github.com/trevorbaca/baca.git /tmp/baca
   - pip install /tmp/baca
-  - rm $TRAVIS_BUILD_DIR/Makefile
-  - ln -s /tmp/baca/dotfiles/Makefile $TRAVIS_BUILD_DIR/Makefile
-  - if [[ $do_not_symlink_test_py != true ]]; then unlink $TRAVIS_BUILD_DIR/$name/test.py; fi
-  - if [[ $do_not_symlink_test_py != true ]]; then ln -s /tmp/baca/dotfiles/test_segments.py $TRAVIS_BUILD_DIR/$name/test.py; fi
+  - rm "$TRAVIS_BUILD_DIR"/Makefile
+  - ln -s /tmp/baca/dotfiles/Makefile "$TRAVIS_BUILD_DIR"/Makefile
+  - if [[ $do_not_symlink_test_py != true ]]; then rm "$TRAVIS_BUILD_DIR"/$name/test.py; fi
+  - if [[ $do_not_symlink_test_py != true ]]; then ln -s /tmp/baca/dotfiles/test_segments.py "$TRAVIS_BUILD_DIR"/$name/test.py; fi
 
   # clone & install ide;
   # must install -e editable for ide/scores directory in wrapper:
@@ -64,7 +64,7 @@ install:
 
   # set scores directory for IDE path management
   - cat ~/.abjad/abjad.cfg
-  - echo composer_scores_directory = $(dirname $TRAVIS_BUILD_DIR) > ~/.abjad/abjad.cfg
+  - echo composer_scores_directory = $(dirname "$TRAVIS_BUILD_DIR") > ~/.abjad/abjad.cfg
   - cat ~/.abjad/abjad.cfg
 
   # log versions
@@ -75,28 +75,17 @@ install:
   - pytest --version
 
 script:
-  - pwd
-  - ls
-  # TODO: replace with make black-check
-  #- /tmp/baca/scr/black-check $TRAVIS_BUILD_DIR/$name
   - make black-check
-  # TODO: replace with make flake8-check
-  - /tmp/baca/scr/flake8-check $TRAVIS_BUILD_DIR/$name
   - make flake8
-  # TODO: replace with make isort-check
-  # - /tmp/baca/scr/isort-check $TRAVIS_BUILD_DIR/$name
   - make isort-check
-  # TODO: replace with make mypy
-  #- mypy $TRAVIS_BUILD_DIR/$name
   - make mypy
-  - /tmp/baca/scr/doctest $TRAVIS_BUILD_DIR/$name
+  - /tmp/baca/scr/doctest "$TRAVIS_BUILD_DIR"/$name
 
-  - cd $TRAVIS_BUILD_DIR/$name/segments
+  - cd "$TRAVIS_BUILD_DIR"/$name/segments
   - /tmp/baca/scr/dpc
   - cd -
 
-  # TODO: replace with make pytest
-  - py.test -rf $TRAVIS_BUILD_DIR/$name/test.py
+  - py.test -rf "$TRAVIS_BUILD_DIR"/$name/test.py
 
 notifications:
   email: false
