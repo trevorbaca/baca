@@ -5,88 +5,91 @@ dist: xenial
 language: python
 
 python:
-    - 3.7
-    - 3.8
+  - 3.7
+  - 3.8
 
 before_install:
-    # alias package
-    - PACKAGE=`pwd`/baca
-    - export PATH=$PATH:`pwd`/scr
+  # alias package
+  - PACKAGE=`pwd`/baca
+  - export PATH=$PATH:`pwd`/scr
 
-    # upgrade pip:
-    - pip install --upgrade pip
+  # upgrade pip:
+  - pip install --upgrade pip
 
-    # install coverage
-    - pip install --upgrade coverage
+  # install coverage
+  - pip install --upgrade coverage
 
-    # install pytest helpers namespace
-    - pip install pytest-helpers-namespace
+  # install pytest helpers namespace
+  - pip install pytest-helpers-namespace
 
-    # install pytest-cov
-    - pip install pytest-cov
+  # install pytest-cov
+  - pip install pytest-cov
 
-    # install flake8
-    - pip install --upgrade flake8
+  # install flake8
+  - pip install --upgrade flake8
 
-    # install mypy:
-    - pip install --upgrade mypy
+  # install mypy:
+  - pip install --upgrade mypy
 
-    # install lilypond:
-    - LILYPOND=/tmp/lilypond
-    - LILYPOND_URL=http://lilypond.org/download/binaries/linux-64/
-    - LILYPOND_SOURCE=lilypond-2.19.84-1.linux-64.sh
-    - wget -q -O $LILYPOND $LILYPOND_URL/$LILYPOND_SOURCE
-    - sh $LILYPOND --batch
+  # install lilypond:
+  - LILYPOND=/tmp/lilypond
+  - LILYPOND_URL=http://lilypond.org/download/binaries/linux-64/
+  - LILYPOND_SOURCE=lilypond-2.19.84-1.linux-64.sh
+  - wget -q -O $LILYPOND $LILYPOND_URL/$LILYPOND_SOURCE
+  - sh $LILYPOND --batch
 
-    # clone & install abjad dev branch:
-    - ABJAD=/tmp/abjad
-    - git clone -b trevor/dev https://github.com/Abjad/abjad.git $ABJAD
-    - pip install -e $ABJAD
-    - export MYPYPATH=$ABJAD
+  # clone & install abjad dev branch:
+  - ABJAD=/tmp/abjad
+  - git clone -b trevor/dev https://github.com/Abjad/abjad.git $ABJAD
+  - pip install -e $ABJAD
+  - export MYPYPATH=$ABJAD
 
-    # clone & install rmakers:
-    - RMAKERS=/tmp/abjad-ext-rmakers
-    - git clone https://github.com/Abjad/abjad-ext-rmakers.git $RMAKERS
-    - pip install -e $RMAKERS
-    - export MYPYPATH=$MYPYPATH:$RMAKERS
+  # clone & install rmakers:
+  - RMAKERS=/tmp/abjad-ext-rmakers
+  - git clone https://github.com/Abjad/abjad-ext-rmakers.git $RMAKERS
+  - pip install -e $RMAKERS
+  - export MYPYPATH=$MYPYPATH:$RMAKERS
 
-    # clone & install tonality:
-    - TONALITY=/tmp/abjad-ext-tonality
-    - git clone https://github.com/Abjad/abjad-ext-tonality.git $TONALITY
-    - pip install -e $TONALITY
-    - export MYPYPATH=$MYPYPATH:$TONALITY
+  # clone & install tonality:
+  - TONALITY=/tmp/abjad-ext-tonality
+  - git clone https://github.com/Abjad/abjad-ext-tonality.git $TONALITY
+  - pip install -e $TONALITY
+  - export MYPYPATH=$MYPYPATH:$TONALITY
 
-    # clone & install IDE:
-    - IDE=/tmp/ide
-    - git clone https://github.com/Abjad/ide.git $IDE
-    - pip install -e $IDE
-    - export MYPYPATH=$MYPYPATH:$IDE
+  # clone & install IDE:
+  - IDE=/tmp/ide
+  - git clone https://github.com/Abjad/ide.git $IDE
+  - pip install -e $IDE
+  - export MYPYPATH=$MYPYPATH:$IDE
 
-    # log setup:
-    - echo $MYPYPATH
-    - echo $PATH
-    - ls
-    - ls /tmp
-    - pwd
-    - which doctest
-    - which black
-    - which flake8
-    - which mypy
-    - which pytest
+  # log setup:
+  - echo $MYPYPATH
+  - echo $PATH
+  - ls
+  - ls /tmp
+  - pwd
+  - which doctest
+  - which black
+  - which flake8
+  - which mypy
+  - which pytest
+
+  # log versions
+  - black --version
+  - flake8 --version
+  - isort --version
+  - mypy --version
+  - pytest --version
 
 install:
-    - pip install -e . 
+  - pip install -e . 
 
 script:
-    - black --version
-    - make black-check
-    - flake8 --version
-    - make flake8
-    - mypy --version
-    - make mypy
-    - pytest --version
-    - make pytest
+  - make black-check
+  - make flake8
+  - make mypy
+  - make pytest
 
 after_success:
-    - pip install --quiet coveralls
-    - coveralls
+  - pip install --quiet coveralls
+  - coveralls
