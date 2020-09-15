@@ -37,6 +37,7 @@ before_install:
   - pip install /tmp/baca
 
   # clone & install baca test:
+  - ln -s /tmp/baca/dotfiles/Makefile
   - if [[ $do_not_symlink_test_py != true ]]; then unlink $TRAVIS_BUILD_DIR/$name/test.py; fi
   - if [[ $do_not_symlink_test_py != true ]]; then ln -s /tmp/baca/dotfiles/test_segments.py $TRAVIS_BUILD_DIR/$name/test.py; fi
 
