@@ -14,7 +14,7 @@ git:
 before_install:
 
   # get package name
-  - name=`basename $TRAVIS_BUILD_DIR`
+  - name=$(basename $TRAVIS_BUILD_DIR)
 
   # install lilypond:
   - lilypond=/tmp/lilypond
@@ -49,7 +49,8 @@ before_install:
   - export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/baca:/tmp/ide
   - ln -s /tmp/baca/dotfiles/mypy.ini ~/.mypy.ini
 
-  # log environment variables
+  # log environment
+  - pwd
   - echo $MYPYPATH
   - echo $PATH
   - echo $PYTHONPATH
