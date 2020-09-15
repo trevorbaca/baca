@@ -35,7 +35,8 @@ before_install:
   # clone & install baca:
   - git clone https://github.com/trevorbaca/baca.git /tmp/baca
   - pip install /tmp/baca
-  # - ln -s /tmp/baca/dotfiles/Makefile
+  - rm $TRAVIS_BUILD_DIR/Makefile
+  - ln -s /tmp/baca/dotfiles/Makefile $TRAVIS_BUILD_DIR/Makefile
   - if [[ $do_not_symlink_test_py != true ]]; then unlink $TRAVIS_BUILD_DIR/$name/test.py; fi
   - if [[ $do_not_symlink_test_py != true ]]; then ln -s /tmp/baca/dotfiles/test_segments.py $TRAVIS_BUILD_DIR/$name/test.py; fi
 
@@ -48,8 +49,7 @@ before_install:
   - export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/baca:/tmp/ide
   - ln -s /tmp/baca/dotfiles/mypy.ini ~/.mypy.ini
 
-  # log environment
-  - pwd
+  # log environment variables
   - echo $MYPYPATH
   - echo $PATH
   - echo $PYTHONPATH
