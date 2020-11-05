@@ -27,7 +27,7 @@ Then make sure the virtualenv and virtualenvwrapper packages are installed:
 
 Upgrade virtualenv if necessary:
 
-    $ sudo pip install --upgrade pip
+    $ sudo -H pip install --upgrade pip
     $ sudo -H pip install --upgrade virtualenv
     Collecting virtualenv
     Downloading virtualenv-15.1.0-py2.py3-none-any.whl (1.8MB)
