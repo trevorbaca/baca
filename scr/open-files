@@ -7,6 +7,4 @@ done
 path_count=$(echo $paths | wc -w | xargs)
 prompt="${path_count} files ok?> "
 read -p "$prompt" confirm && [[ $confirm == y ]] || exit 1
-for path in $paths; do
-    open $path
-done
+open $paths
