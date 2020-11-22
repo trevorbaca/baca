@@ -419,6 +419,10 @@ pitcharray
 
    .. container:: inherited
 
+      .. automethod:: PitchArrayList.__class_getitem__
+
+   .. container:: inherited
+
       .. automethod:: PitchArrayList.__contains__
 
    .. container:: inherited

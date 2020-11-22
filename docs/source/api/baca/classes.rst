@@ -516,6 +516,10 @@ classes
 
    .. container:: inherited
 
+      .. automethod:: Selection.__class_getitem__
+
+   .. container:: inherited
+
       .. automethod:: Selection.__contains__
 
    .. container:: inherited
@@ -890,6 +894,10 @@ classes
    .. container:: inherited
 
       .. automethod:: Sequence.__add__
+
+   .. container:: inherited
+
+      .. automethod:: Sequence.__class_getitem__
 
    .. container:: inherited
 

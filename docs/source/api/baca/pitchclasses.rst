@@ -199,6 +199,10 @@ pitchclasses
 
    .. container:: inherited
 
+      .. automethod:: CollectionList.__class_getitem__
+
+   .. container:: inherited
+
       .. automethod:: CollectionList.__contains__
 
    .. automethod:: CollectionList.__eq__
@@ -647,6 +651,10 @@ pitchclasses
 
    .. container:: inherited
 
+      .. automethod:: PitchClassSegment.__class_getitem__
+
+   .. container:: inherited
+
       .. automethod:: PitchClassSegment.__contains__
 
    .. automethod:: PitchClassSegment.__eq__
@@ -816,6 +824,10 @@ pitchclasses
    .. container:: inherited
 
       .. automethod:: PitchClassSet.__and__
+
+   .. container:: inherited
+
+      .. automethod:: PitchClassSet.__class_getitem__
 
    .. container:: inherited
 
@@ -1021,6 +1033,10 @@ pitchclasses
 
    .. container:: inherited
 
+      .. automethod:: PitchSegment.__class_getitem__
+
+   .. container:: inherited
+
       .. automethod:: PitchSegment.__contains__
 
    .. container:: inherited
@@ -1197,6 +1213,10 @@ pitchclasses
    .. container:: inherited
 
       .. automethod:: PitchSet.__and__
+
+   .. container:: inherited
+
+      .. automethod:: PitchSet.__class_getitem__
 
    .. container:: inherited
 
