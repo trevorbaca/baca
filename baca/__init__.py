@@ -2,6 +2,7 @@ import abjad
 import ide
 
 from . import const
+from . import tonality
 from .classes import *
 from .commandclasses import *
 from .commands import *

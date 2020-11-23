@@ -980,3 +980,49 @@ Score template library.
    ~baca.templates.ThreeVoiceStaffScoreTemplate
    ~baca.templates.TwoVoiceStaffScoreTemplate
    ~baca.templates.ViolinSoloScoreTemplate
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: :ref:`baca.tonality <baca--tonality>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.tonality.ChordExtent
+   ~baca.tonality.ChordInversion
+   ~baca.tonality.ChordQuality
+   ~baca.tonality.ChordSuspension
+   ~baca.tonality.RomanNumeral
+   ~baca.tonality.RootedChordClass
+   ~baca.tonality.RootlessChordClass
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.tonality.analyze_chords
+   ~baca.tonality.analyze_incomplete_chords
+   ~baca.tonality.analyze_incomplete_tonal_functions
+   ~baca.tonality.analyze_neighbor_notes
+   ~baca.tonality.analyze_passing_tones
+   ~baca.tonality.analyze_tonal_functions
+   ~baca.tonality.are_scalar_notes
+   ~baca.tonality.are_stepwise_ascending_notes
+   ~baca.tonality.are_stepwise_descending_notes
+   ~baca.tonality.are_stepwise_notes

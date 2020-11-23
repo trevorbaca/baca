@@ -41,6 +41,7 @@ baca
    segmentmaker
    spannercommands
    templates
+   tonality
 
 .. autosummary::
    :nosignatures:
@@ -64,6 +65,7 @@ baca
    segmentmaker
    spannercommands
    templates
+   tonality
 
 .. raw:: html
 
