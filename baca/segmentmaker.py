@@ -3123,7 +3123,7 @@ class SegmentMaker(abjad.SegmentMaker):
     def _intercalate_silences(self, timespans, voice_name):
         selections = []
         durations = [_.duration for _ in self.time_signatures]
-        measure_start_offsets = abjad.mathx.cumulative_sums(durations)
+        measure_start_offsets = abjad.math.cumulative_sums(durations)
         segment_duration = measure_start_offsets[-1]
         self._segment_duration = segment_duration
         previous_stop_offset = abjad.Offset(0)
@@ -3510,7 +3510,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 offsets.append(measure_start_offset)
         offsets.append(stop)
         silences = []
-        durations = abjad.mathx.difference_series(offsets)
+        durations = abjad.math.difference_series(offsets)
         for i, duration in enumerate(durations):
             if i == 0:
                 silence = self._make_multimeasure_rest_container(voice_name, duration)

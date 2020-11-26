@@ -4410,7 +4410,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         for pc in self:
             pc = abs(float(pc.number))
             is_integer = True
-            if not abjad.mathx.is_integer_equivalent_number(pc):
+            if not abjad.math.is_integer_equivalent_number(pc):
                 is_integer = False
                 fraction_part = pc - int(pc)
                 pc = int(pc)

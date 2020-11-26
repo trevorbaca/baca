@@ -1997,7 +1997,7 @@ def _analyze_chord(argument):
     for x in range(len(ordered_npcs)):
         ordered_npcs = ordered_npcs.rotate(1)
         segment = abjad.IntervalClassSegment(
-            items=abjad.mathx.difference_series(list(ordered_npcs)),
+            items=abjad.math.difference_series(list(ordered_npcs)),
             item_class=abjad.NamedInversionEquivalentIntervalClass,
         )
         if segment.is_tertian:
@@ -2110,9 +2110,9 @@ def _is_neighbor_note(note):
         return False
     notes = [previous_note, note, next_note]
     preceding_interval = note.written_pitch - previous_note.written_pitch
-    preceding_interval_direction = abjad.mathx.sign(preceding_interval.direction_number)
+    preceding_interval_direction = abjad.math.sign(preceding_interval.direction_number)
     following_interval = next_note.written_pitch - note.written_pitch
-    following_interval_direction = abjad.mathx.sign(following_interval.direction_number)
+    following_interval_direction = abjad.math.sign(following_interval.direction_number)
     if are_stepwise_notes(notes):
         if preceding_interval_direction != following_interval_direction:
             return True
