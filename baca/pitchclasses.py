@@ -3137,7 +3137,7 @@ class Constellation:
         for cell in cells:
             transpositions = Constellation._list_octave_transpositions(range, cell)
             transposition_list.append(transpositions)
-        result = abjad.enumeratex.yield_outer_product(transposition_list)
+        result = abjad.enumerate.yield_outer_product(transposition_list)
         result = list(result)
         for i, part in enumerate(result):
             result[i] = classes.Sequence(part).flatten(depth=-1)
