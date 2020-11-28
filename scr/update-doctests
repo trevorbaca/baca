@@ -11,7 +11,7 @@ def update_file(name):
     Updates file with ``name``
     """
     output = pathlib.Path("/Users/trevorbaca/.tmp/doctest.out")
-    os.system(f"baca-doctest {name} > {str(output)}")
+    os.system(f"doctest {name} > {str(output)}")
     file_location_line = None
     got = False
     line_number_to_correct_lines = {}
