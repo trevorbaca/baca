@@ -16,6 +16,12 @@ except ImportError:
     # ignore when running this script against scores on Travis
     pass
 
+try:
+    from abjadext import nauert
+except ImportError:
+    # ignore when running this script against scores on Travis
+    pass
+
 
 _colors = {
     "BLUE": "\033[94m",
@@ -28,14 +34,12 @@ _colors = {
 def _get_globs():
     globs = {}
     globs["abjad"] = abjad
-    globs.update(abjad.__dict__)
     globs["abjadext"] = abjadext
-    globs.update(abjadext.__dict__)
     globs["baca"] = baca
+    # eventually remove:
     globs.update(baca.__dict__)
     ide = importlib.import_module("ide")
     globs["ide"] = ide
-    globs.update(ide.__dict__)
     return globs
 
 
