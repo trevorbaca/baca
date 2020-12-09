@@ -59,7 +59,7 @@ set smartcase
 set softtabstop=4
 set scrolloff=7
 set tabstop=4
-"set textwidth=89
+set textwidth=89
 "set notitle
 set undolevels=700
 set wildignore+=*.pyc
