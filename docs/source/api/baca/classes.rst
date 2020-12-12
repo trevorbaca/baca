@@ -763,10 +763,6 @@ classes
 
    .. automethod:: Selection.pheads
 
-   .. container:: inherited
-
-      .. automethod:: Selection.pitch_segment
-
    .. automethod:: Selection.pleaf
 
    .. automethod:: Selection.pleaves
