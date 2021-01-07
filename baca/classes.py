@@ -9082,11 +9082,11 @@ class Sequence(abjad.Sequence):
                         ~
                         c'8
                         \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
+                        \times 16/24 {
                             c'4..
                         }
                         \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
+                        \times 16/24 {
                             c'2
                             ~
                             c'8.
@@ -9184,13 +9184,13 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
+                        \times 16/24 {
                             c'2
                             ~
                             c'8
                         }
                         \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
+                        \times 16/24 {
                             c'4
                             ~
                             c'16
@@ -9292,13 +9292,13 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
+                        \times 16/24 {
                             c'2
                             ~
                             c'8
                         }
                         \tweak edge-height #'(0.7 . 0)
-                        \times 2/3 {
+                        \times 16/24 {
                             c'4
                             ~
                             c'16

@@ -901,6 +901,8 @@ def make_monads(
     for fraction in fractions.split():
         leaves = maker([pitch], [fraction])
         components.extend(leaves)
+    for tuplet in abjad.select(components).tuplets():
+        tuplet.multiplier = abjad.Multiplier(tuplet.multiplier)
     rhythm_maker = abjad.select(components)
     return RhythmCommand(
         rhythm_maker,

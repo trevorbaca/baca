@@ -5297,14 +5297,14 @@ class FigureMaker:
             contents_duration = abjad.get.duration(leaf_selection)
             multiplier = tuplet_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, leaf_selection)
-            if not tuplet.multiplier.normalized():
+            if not abjad.Multiplier(tuplet.multiplier).normalized():
                 tuplet.normalize_multiplier()
         elif isinstance(treatment, tuple) and len(treatment) == 2:
             tuplet_duration = abjad.Duration(treatment)
             contents_duration = abjad.get.duration(leaf_selection)
             multiplier = tuplet_duration / contents_duration
             tuplet = abjad.Tuplet(multiplier, leaf_selection)
-            if not tuplet.multiplier.normalized():
+            if not abjad.Multiplier(tuplet.multiplier).normalized():
                 tuplet.normalize_multiplier()
         else:
             raise Exception(f"bad time treatment: {treatment!r}.")
