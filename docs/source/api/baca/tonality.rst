@@ -29,6 +29,8 @@ tonality
    ~RomanNumeral
    ~RootedChordClass
    ~RootlessChordClass
+   ~Scale
+   ~ScaleDegree
 
 .. autoclass:: ChordExtent
 
@@ -690,6 +692,271 @@ tonality
    .. container:: inherited
 
       .. autoattribute:: RootlessChordClass.spread
+
+.. autoclass:: Scale
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __getitem__
+      create_named_pitch_set_in_pitch_range
+      dominant
+      from_selection
+      key_signature
+      leading_tone
+      mediant
+      named_interval_class_segment
+      named_pitch_class_to_scale_degree
+      scale_degree_to_named_pitch_class
+      subdominant
+      submediant
+      superdominant
+      tonic
+      voice_scale_degrees_in_open_position
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__add__
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__class_getitem__
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__contains__
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__eq__
+
+   .. automethod:: Scale.__getitem__
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__hash__
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__iter__
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__len__
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__mul__
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__radd__
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__repr__
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__reversed__
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__rmul__
+
+   .. container:: inherited
+
+      .. automethod:: Scale.__str__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Methods
+      :class: class-header
+
+   .. container:: inherited
+
+      .. automethod:: Scale.count
+
+   .. automethod:: Scale.create_named_pitch_set_in_pitch_range
+
+   .. container:: inherited
+
+      .. automethod:: Scale.has_duplicates
+
+   .. container:: inherited
+
+      .. automethod:: Scale.index
+
+   .. container:: inherited
+
+      .. automethod:: Scale.invert
+
+   .. container:: inherited
+
+      .. automethod:: Scale.multiply
+
+   .. automethod:: Scale.named_pitch_class_to_scale_degree
+
+   .. container:: inherited
+
+      .. automethod:: Scale.permute
+
+   .. container:: inherited
+
+      .. automethod:: Scale.retrograde
+
+   .. container:: inherited
+
+      .. automethod:: Scale.rotate
+
+   .. automethod:: Scale.scale_degree_to_named_pitch_class
+
+   .. container:: inherited
+
+      .. automethod:: Scale.to_pitch_classes
+
+   .. container:: inherited
+
+      .. automethod:: Scale.to_pitches
+
+   .. container:: inherited
+
+      .. automethod:: Scale.transpose
+
+   .. container:: inherited
+
+      .. automethod:: Scale.voice_horizontally
+
+   .. automethod:: Scale.voice_scale_degrees_in_open_position
+
+   .. container:: inherited
+
+      .. automethod:: Scale.voice_vertically
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Class & static methods
+      :class: class-header
+
+   .. automethod:: Scale.from_selection
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: Scale.dominant
+
+   .. container:: inherited
+
+      .. autoattribute:: Scale.item_class
+
+   .. container:: inherited
+
+      .. autoattribute:: Scale.items
+
+   .. autoattribute:: Scale.key_signature
+
+   .. autoattribute:: Scale.leading_tone
+
+   .. autoattribute:: Scale.mediant
+
+   .. autoattribute:: Scale.named_interval_class_segment
+
+   .. autoattribute:: Scale.subdominant
+
+   .. autoattribute:: Scale.submediant
+
+   .. autoattribute:: Scale.superdominant
+
+   .. autoattribute:: Scale.tonic
+
+.. autoclass:: ScaleDegree
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Attributes Summary
+      :class: class-header
+
+   .. autosummary::
+      :nosignatures:
+
+      __eq__
+      __hash__
+      __repr__
+      __str__
+      accidental
+      from_accidental_and_number
+      name
+      number
+      roman_numeral_string
+      string
+      title_string
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Special methods
+      :class: class-header
+
+   .. automethod:: ScaleDegree.__eq__
+
+   .. automethod:: ScaleDegree.__hash__
+
+   .. automethod:: ScaleDegree.__repr__
+
+   .. automethod:: ScaleDegree.__str__
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Class & static methods
+      :class: class-header
+
+   .. automethod:: ScaleDegree.from_accidental_and_number
+
+   .. raw:: html
+
+      <hr/>
+
+   .. rubric:: Read-only properties
+      :class: class-header
+
+   .. autoattribute:: ScaleDegree.accidental
+
+   .. autoattribute:: ScaleDegree.name
+
+   .. autoattribute:: ScaleDegree.number
+
+   .. autoattribute:: ScaleDegree.roman_numeral_string
+
+   .. autoattribute:: ScaleDegree.string
+
+   .. autoattribute:: ScaleDegree.title_string
 
 .. raw:: html
 

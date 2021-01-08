@@ -1005,6 +1005,8 @@ Score template library.
    ~baca.tonality.RomanNumeral
    ~baca.tonality.RootedChordClass
    ~baca.tonality.RootlessChordClass
+   ~baca.tonality.Scale
+   ~baca.tonality.ScaleDegree
 
 .. raw:: html
 
