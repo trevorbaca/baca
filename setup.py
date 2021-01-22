@@ -55,7 +55,7 @@ if __name__ == "__main__":
         install_requires=install_requires,
         keywords=", ".join(keywords),
         license="MIT",
-        name="Bača Composition API",
+        name="baca",
         packages=["baca"],
         platforms="Any",
         url="https://github.com/trevorbaca/baca",
