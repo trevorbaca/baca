@@ -8,6 +8,6 @@ for repo in $(ls -d "$SCORES"/*/); do
     cd "$repo";
     echo $(pwd) ...;
     git add -A "$repo";
-    git commit -m "${COMMIT_MESSAGE}" "$repo";
+    git commit -S -m "${COMMIT_MESSAGE}" "$repo";
     git push;
 done
