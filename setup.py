@@ -44,7 +44,6 @@ keywords = [
     "abjad",
     "music composition",
     "music notation",
-    "formalized score control",
     "lilypond",
 ]
 
@@ -52,6 +51,7 @@ if __name__ == "__main__":
     setuptools.setup(
         author="Trevor Bača",
         author_email="trevor.baca@gmail.com",
+        description="Trevor Bača's Abjad library.",
         install_requires=install_requires,
         keywords=", ".join(keywords),
         license="MIT",
@@ -59,4 +59,5 @@ if __name__ == "__main__":
         packages=["baca"],
         platforms="Any",
         url="https://github.com/trevorbaca/baca",
+        version="3.2",
     )
