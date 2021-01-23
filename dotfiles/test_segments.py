@@ -7,9 +7,9 @@ import pytest
 import baca  # isort:skip
 
 abjad_ide = ide.AbjadIDE()
-travis_build_dir = os.getenv("GITHUB_WORKSPACE")
-assert isinstance(travis_build_dir, str), repr(travis_build_dir)
-wrapper = pathlib.Path(travis_build_dir)
+github_workspace = os.getenv("GITHUB_WORKSPACE")
+assert isinstance(github_workspace, str), repr(github_workspace)
+wrapper = pathlib.Path(github_workspace)
 assert isinstance(wrapper, pathlib.Path), repr(wrapper)
 segments = wrapper / wrapper.name / "segments"
 segments = baca.Path(segments, scores=wrapper.parent)
