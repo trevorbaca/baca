@@ -1,0 +1,140 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Repo checked out into $GITHUB_WORKSPACE
+# $GITHUB_WORKSPACE is wrapper directory
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Log environment variables
+      run: |
+        python --version
+        python -m pip install --upgrade pip
+        echo $HOME
+        echo $GITHUB_WORKSPACE
+        name=$(basename "$GITHUB_WORKSPACE")
+        echo $name
+
+    - name: Install LilyPond
+      run: |
+        lilypond=/tmp/lilypond
+        lilypond_url=http://lilypond.org/download/binaries/linux-64/
+        lilypond_source=lilypond-2.21.82-1.linux-64.sh
+        wget -q -O $lilypond $lilypond_url/$lilypond_source
+        sh $lilypond --batch
+
+    - name: Install Abjad
+      run: |
+        git clone -b trevor/dev https://github.com/Abjad/abjad.git /tmp/abjad
+        pip install -e /tmp/abjad
+
+    - name: Install rmakers
+      run: |
+        git clone https://github.com/Abjad/abjad-ext-rmakers.git /tmp/abjad-ext-rmakers
+        pip install /tmp/abjad-ext-rmakers
+
+    - name: Install Bača
+      run: |
+        git clone https://github.com/trevorbaca/baca.git /tmp/baca
+        pip install /tmp/baca
+        rm "$GITHUB_WORKSPACE"/Makefile
+        ln -s /tmp/baca/dotfiles/Makefile "$GITHUB_WORKSPACE"/Makefile
+
+        name=$(basename "$GITHUB_WORKSPACE")
+        echo $name
+
+        if [[ $do_not_symlink_test_py != true ]]; then rm "$GITHUB_WORKSPACE"/$name/test.py; fi
+        if [[ $do_not_symlink_test_py != true ]]; then ln -s /tmp/baca/dotfiles/test_segments.py "$GITHUB_WORKSPACE"/$name/test.py; fi
+
+    - name: Install IDE
+      run: |
+        # must install -e editable for ide/scores directory in wrapper:
+        git clone https://github.com/Abjad/ide.git /tmp/ide
+        pip install -e /tmp/ide
+
+    - name: Configure mypy
+      run: |
+        export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/baca:/tmp/ide
+        ln -s /tmp/baca/dotfiles/mypy.ini ~/.mypy.ini
+
+    - name: Log environment variables
+      run: |
+        echo $MYPYPATH
+        echo $PATH
+        echo $PYTHONPATH
+        echo $GITHUB_WORKSPACE
+
+    - name: Install this score
+      run: pip install -e .
+
+    - name: Prime parser tables
+      run: /tmp/abjad/scr/prime-parser-tables
+
+    - name: Set scores directory for IDE path management
+      run: |
+        cat ~/.abjad/abjad.cfg
+        echo
+        echo composer_scores_directory = $(dirname "$GITHUB_WORKSPACE") > ~/.abjad/abjad.cfg
+        echo
+        cat ~/.abjad/abjad.cfg
+
+    - name: Log versions
+      run: |
+        black --version
+        flake8 --version
+        isort --version
+        mypy --version
+        pytest --version
+
+    - name: Run black
+      run: make black-check
+
+    - name: Run flake8
+      run: make flake8
+
+    - name: Run isort
+      run: make isort-check
+
+    - name: Run mypy
+      run: 
+        export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/baca:/tmp/ide
+        echo $MYPYPATH
+        make mypy
+
+    - name: Run doctest
+      run: /tmp/baca/scr/doctest "$GITHUB_WORKSPACE"
+
+    - name: Check definition files
+      run: |
+        NAME=$(basename "$GITHUB_WORKSPACE")
+        cd "$GITHUB_WORKSPACE"/"$NAME"/segments
+        pwd
+        export PATH=/tmp/baca/scr:${PATH}
+        /tmp/baca/scr/dpc
+        cd -
+
+    - name: Run pytest
+      run: |
+        export PATH=/home/runner/bin:${PATH}
+        NAME=$(basename "$GITHUB_WORKSPACE")
+        py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test.py
