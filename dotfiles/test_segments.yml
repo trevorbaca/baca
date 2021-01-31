@@ -140,4 +140,9 @@ jobs:
       run: |
         export PATH=/home/runner/bin:${PATH}
         NAME=$(basename "$GITHUB_WORKSPACE")
-        py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test.py
+        if [ -f "$GITHUB_WORKSPACE"/$name/test_custom.py ]; then
+            py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test_custom.py
+        fi
+        if [ -f "$GITHUB_WORKSPACE"/$name/test.py ]; then
+            py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test.py
+        fi
