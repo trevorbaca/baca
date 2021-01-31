@@ -106,11 +106,10 @@ jobs:
         mypy --version
         pytest --version
 
-    - name: Run black
-      run: make black-check
-
-    - name: Run flake8
-      run: make flake8
+    - name: Run black, flake8
+      run: |
+        make black-check
+        make flake8
 
     - name: Run isort
       run: make isort-check
