@@ -121,7 +121,9 @@ jobs:
         make mypy
 
     - name: Run doctest
-      run: /tmp/baca/scr/doctest "$GITHUB_WORKSPACE"
+      run: |
+        export PATH=/home/runner/bin:${PATH}
+        /tmp/baca/scr/doctest "$GITHUB_WORKSPACE"
 
     - name: Check definition files
       run: |
