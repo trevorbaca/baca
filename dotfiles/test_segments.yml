@@ -32,8 +32,7 @@ jobs:
         python -m pip install --upgrade pip
         echo $HOME
         echo $GITHUB_WORKSPACE
-        name=$(basename "$GITHUB_WORKSPACE")
-        echo $name
+        echo $PATH
 
     - name: Install LilyPond
       run: |
@@ -59,29 +58,17 @@ jobs:
         pip install /tmp/baca
         rm "$GITHUB_WORKSPACE"/Makefile
         ln -s /tmp/baca/dotfiles/Makefile "$GITHUB_WORKSPACE"/Makefile
-        name=$(basename "$GITHUB_WORKSPACE")
-        echo $name
-        echo "$GITHUB_WORKSPACE"/$name/test.py
-        rm -f "$GITHUB_WORKSPACE"/$name/test.py
-        ln -s /tmp/baca/dotfiles/test_segments.py "$GITHUB_WORKSPACE"/$name/test.py
+        NAME=$(basename "$GITHUB_WORKSPACE")
+        echo "$GITHUB_WORKSPACE"/$NAME/test.py
+        rm -f "$GITHUB_WORKSPACE"/$NAME/test.py
+        ln -s /tmp/baca/dotfiles/test_segments.py "$GITHUB_WORKSPACE"/$NAME/test.py
+        ln -s /tmp/baca/dotfiles/mypy.ini ~/.mypy.ini
 
     - name: Install IDE
       run: |
         # must install -e editable for ide/scores directory in wrapper:
         git clone https://github.com/Abjad/ide.git /tmp/ide
         pip install -e /tmp/ide
-
-    - name: Configure mypy
-      run: |
-        export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/baca:/tmp/ide
-        ln -s /tmp/baca/dotfiles/mypy.ini ~/.mypy.ini
-
-    - name: Log environment variables
-      run: |
-        echo $MYPYPATH
-        echo $PATH
-        echo $PYTHONPATH
-        echo $GITHUB_WORKSPACE
 
     - name: Install this score
       run: pip install -e .
@@ -91,10 +78,7 @@ jobs:
 
     - name: Set scores directory for IDE path management
       run: |
-        cat ~/.abjad/abjad.cfg
-        echo
         echo composer_scores_directory = $(dirname "$GITHUB_WORKSPACE") > ~/.abjad/abjad.cfg
-        echo
         cat ~/.abjad/abjad.cfg
 
     - name: Log versions
@@ -105,20 +89,11 @@ jobs:
         mypy --version
         pytest --version
 
-    - name: Run black, flake8
+    - name: Run black, flake8, isort, mypy
       run: |
-        pwd
-        ls
-        name=$(basename "$GITHUB_WORKSPACE")
-        ls ./$name
         make black-check
         make flake8
-
-    - name: Run isort
-      run: make isort-check
-
-    - name: Run mypy
-      run: 
+        make isort-check
         export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/baca:/tmp/ide
         echo $MYPYPATH
         make mypy
@@ -132,10 +107,8 @@ jobs:
       run: |
         NAME=$(basename "$GITHUB_WORKSPACE")
         cd "$GITHUB_WORKSPACE"/"$NAME"/segments
-        pwd
         export PATH=/tmp/baca/scr:${PATH}
         /tmp/baca/scr/dpc
-        cd -
 
     - name: Run pytest
       run: |
