@@ -86,7 +86,8 @@ jobs:
         black --version
         flake8 --version
         isort --version
-        mypy --version
+        # uncomment after mypy 0.800 fixes are made in all scores
+        # mypy --version
         pytest --version
 
     - name: Run black, flake8, isort, mypy
