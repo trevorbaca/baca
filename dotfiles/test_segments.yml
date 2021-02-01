@@ -115,9 +115,15 @@ jobs:
       run: |
         export PATH=/home/runner/bin:${PATH}
         NAME=$(basename "$GITHUB_WORKSPACE")
-        if [ -f "$GITHUB_WORKSPACE"/$name/test_custom.py ]; then
+        if [ -e "$GITHUB_WORKSPACE"/$name/test_custom.py ]; then
+            echo found test_custom.py
             py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test_custom.py
+        else
+            echo did NOT find test_custom.py
         fi
-        if [ -f "$GITHUB_WORKSPACE"/$name/test.py ]; then
+        if [ -e "$GITHUB_WORKSPACE"/$name/test.py ]; then
+            echo found test.py
             py.test -rf "$GITHUB_WORKSPACE"/"$NAME"/test.py
+        else
+            echo did NOT find test.py
         fi
