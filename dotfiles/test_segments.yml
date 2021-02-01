@@ -110,6 +110,10 @@ jobs:
 
     - name: Run black, flake8
       run: |
+        pwd
+        ls
+        name=$(basename "$GITHUB_WORKSPACE")
+        ls ./$name
         make black-check
         make flake8
 
