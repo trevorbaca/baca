@@ -64,8 +64,11 @@ jobs:
         echo $name
 
         if [ -f "$GITHUB_WORKSPACE"/$name/test.py ]; then
+          echo found existing test.py symlink
           rm "$GITHUB_WORKSPACE"/$name/test.py
           ln -s /tmp/baca/dotfiles/test_segments.py "$GITHUB_WORKSPACE"/$name/test.py
+        else
+          echo did NOT find existing test.py symlink
         fi
 
     - name: Install IDE
