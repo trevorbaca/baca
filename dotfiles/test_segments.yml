@@ -59,23 +59,11 @@ jobs:
         pip install /tmp/baca
         rm "$GITHUB_WORKSPACE"/Makefile
         ln -s /tmp/baca/dotfiles/Makefile "$GITHUB_WORKSPACE"/Makefile
-
         name=$(basename "$GITHUB_WORKSPACE")
         echo $name
-
-        echo ZEBRA
         echo "$GITHUB_WORKSPACE"/$name/test.py
-        echo FLAMINGO
-        ls "$GITHUB_WORKSPACE"/$name
-        echo AARDVARK
-
-        if [ -f "$GITHUB_WORKSPACE"/$name/test.py ]; then
-          echo found existing test.py symlink
-          rm "$GITHUB_WORKSPACE"/$name/test.py
-          ln -s /tmp/baca/dotfiles/test_segments.py "$GITHUB_WORKSPACE"/$name/test.py
-        else
-          echo did NOT find existing test.py symlink
-        fi
+        rm -f "$GITHUB_WORKSPACE"/$name/test.py
+        ln -s /tmp/baca/dotfiles/test_segments.py "$GITHUB_WORKSPACE"/$name/test.py
 
     - name: Install IDE
       run: |
