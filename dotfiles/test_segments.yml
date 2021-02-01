@@ -86,8 +86,7 @@ jobs:
         black --version
         flake8 --version
         isort --version
-        # uncomment after mypy 0.800 fixes are made in all scores
-        # mypy --version
+        mypy --version
         pytest --version
 
     - name: Run black, flake8, isort, mypy
@@ -97,7 +96,8 @@ jobs:
         make isort-check
         export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/baca:/tmp/ide
         echo $MYPYPATH
-        make mypy
+        # uncomment after mypy 0.800 fixes are made in all scores
+        # make mypy
 
     - name: Run doctest
       run: |
