@@ -2966,17 +2966,14 @@ class Constellation:
             leaves=chords, sketch=True
         )
         score.override.text_script.staff_padding = 10
-        score.set.proportional_notation_duration = abjad.SchemeMoment((1, 30))
+        score.set.proportionalNotationDuration = "#(ly:make-moment 1 30)"
         lilypond_file = abjad.LilyPondFile.new(score)
         lilypond_file.default_paper_size = "letter", "landscape"
         lilypond_file.global_staff_size = 18
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.ragged_right = True
         lilypond_file.paper_block.system_system_spacing = abjad.SchemeVector(
-            abjad.SchemePair("basic_distance", 0),
-            abjad.SchemePair("minimum_distance", 0),
-            abjad.SchemePair("padding", 12),
-            abjad.SchemePair("stretchability", 0),
+            0, 0, 12, 0
         )
         lilypond_file.paper_block.top_margin = 24
         return lilypond_file, score
@@ -3362,8 +3359,7 @@ class ConstellationCircuit:
         result = abjad.illustrators.make_piano_score(leaves=chords, sketch=True)
         score, treble, bass = result
         abjad.override(score).text_script.staff_padding = 10
-        moment = abjad.SchemeMoment((1, 30))
-        abjad.setting(score).proportional_notation_duration = moment
+        abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 30)"
         lilypond_file = abjad.LilyPondFile.new(score, global_staff_size=18)
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.ragged_right = True
@@ -4028,8 +4024,7 @@ class HarmonicSeries:
         abjad.override(staff).text_script.staff_padding = 6
         abjad.override(staff).time_signature.stencil = False
         score = abjad.Score([staff])
-        moment = abjad.SchemeMoment((1, 8))
-        abjad.setting(score).proportional_notation_duration = moment
+        abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 8)"
         lilypond_file = abjad.LilyPondFile.new(score)
         return lilypond_file
 
@@ -7565,8 +7560,7 @@ class PitchTree(classes.Tree):
         string = r"\override Score.BarLine.transparent = ##f"
         literal = abjad.LilyPondLiteral(string, "after")
         abjad.attach(literal, final_leaf)
-        moment = abjad.SchemeMoment((1, 16))
-        abjad.setting(score).proportional_notation_duration = moment
+        abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 16)"
         lilypond_file = abjad.LilyPondFile.new(
             date_time_token=False,
             global_staff_size=global_staff_size,

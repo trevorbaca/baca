@@ -1913,7 +1913,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 )
                 left_text_with_color = f"{string} #'{color}"
             else:
-                color = abjad.SchemeColor(color)
+                color = f"(x11-color '{color})"
                 assert len(left_text.contents) == 1, repr(left_text)
                 left_text_with_color = abjad.Markup(
                     rf"\with-color #{color} {left_text.contents[0]}",
@@ -1935,7 +1935,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     status = None
                 assert status is not None
                 color = self._status_to_color[status]
-                color = abjad.SchemeColor(color)
+                color = f"(x11-color '{color})"
                 assert len(right_text.contents) == 1, repr(right_text)
                 right_text_with_color = abjad.Markup(
                     rf"\with-color #{color} {right_text.contents[0]}",

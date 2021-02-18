@@ -116,8 +116,7 @@ def is_link_chord(ais):
 # abjad.override(score).bar_number.stencil = False
 # abjad.override(score).span_bar.stencil = False
 # abjad.override(score).time_signature.stencil = False
-# moment = abjad.SchemeMoment((1, 2))
-# abjad.setting(score).proportional_notation_duration = moment
+# abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 2)"
 #
 # abjad.label(rh_staff).with_indices()
 # abjad.override(rh_staff).text_script.staff_padding = 10
