@@ -125,12 +125,6 @@ def is_link_chord(ais):
 #    score,
 #    global_staff_size=12,
 #    )
-# lilypond_file.paper_block.system_system_spacing = abjad.SpacingVector(
-#    minimum_distance=24,
-#    )
-# lilypond_file.paper_block.markup_system_spacing = abjad.SpacingVector(
-#    minimum_distance=24,
-#    )
 # lilypond_file.layout_block.indent = 0
 # lilypond_file.header_block.title = abjad.Markup('Link chords (provisional)')
 # abjad.show(lilypond_file)

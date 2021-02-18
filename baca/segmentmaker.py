@@ -2876,46 +2876,36 @@ class SegmentMaker(abjad.SegmentMaker):
         includes.append(self._score_package_stylesheet_path)
         if self.clock_time_extra_offset is not None:
             value = self.clock_time_extra_offset
-            if isinstance(value, tuple):
-                string = f"#'({value[0]} . {value[1]})"
-            else:
-                string = abjad.Scheme.format_embedded_scheme_value(value)
+            assert isinstance(value, tuple)
+            string = f"#'({value[0]} . {value[1]})"
             string = f"clock-time-extra-offset = {string}"
             literal = abjad.LilyPondLiteral(string)
             includes.append(literal)
         if self.local_measure_number_extra_offset is not None:
             value = self.local_measure_number_extra_offset
-            if isinstance(value, tuple):
-                string = f"#'({value[0]} . {value[1]})"
-            else:
-                string = abjad.Scheme.format_embedded_scheme_value(value)
+            assert isinstance(value, tuple)
+            string = f"#'({value[0]} . {value[1]})"
             string = f"local-measure-number-extra-offset = {string}"
             literal = abjad.LilyPondLiteral(string)
             includes.append(literal)
         if self.measure_number_extra_offset is not None:
             value = self.measure_number_extra_offset
-            if isinstance(value, tuple):
-                string = f"#'({value[0]} . {value[1]})"
-            else:
-                string = abjad.Scheme.format_embedded_scheme_value(value)
+            assert isinstance(value, tuple)
+            string = f"#'({value[0]} . {value[1]})"
             string = f"measure-number-extra-offset = {string}"
             literal = abjad.LilyPondLiteral(string)
             includes.append(literal)
         if self.spacing_extra_offset is not None:
             value = self.spacing_extra_offset
-            if isinstance(value, tuple):
-                string = f"#'({value[0]} . {value[1]})"
-            else:
-                string = abjad.Scheme.format_embedded_scheme_value(value)
+            assert isinstance(value, tuple)
+            string = f"#'({value[0]} . {value[1]})"
             string = f"spacing-extra-offset = {string}"
             literal = abjad.LilyPondLiteral(string)
             includes.append(literal)
         if self.stage_number_extra_offset is not None:
             value = self.stage_number_extra_offset
-            if isinstance(value, tuple):
-                string = f"#'({value[0]} . {value[1]})"
-            else:
-                string = abjad.Scheme.format_embedded_scheme_value(value)
+            assert isinstance(value, tuple)
+            string = f"#'({value[0]} . {value[1]})"
             string = f"stage-number-extra-offset = {string}"
             literal = abjad.LilyPondLiteral(string)
             includes.append(literal)

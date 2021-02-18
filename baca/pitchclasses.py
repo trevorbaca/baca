@@ -2972,9 +2972,6 @@ class Constellation:
         lilypond_file.global_staff_size = 18
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.ragged_right = True
-        lilypond_file.paper_block.system_system_spacing = abjad.SchemeVector(
-            0, 0, 12, 0
-        )
         lilypond_file.paper_block.top_margin = 24
         return lilypond_file, score
 
@@ -3363,8 +3360,8 @@ class ConstellationCircuit:
         lilypond_file = abjad.LilyPondFile.new(score, global_staff_size=18)
         lilypond_file.layout_block.indent = 0
         lilypond_file.layout_block.ragged_right = True
-        vector = abjad.SpacingVector(0, 0, 12, 0)
-        lilypond_file.paper_block.system_system_spacing = vector
+        string = "#'((basic-distance . 0) (minimum-distance . 0) (padding . 12) (stretchability . 0))"
+        lilypond_file.paper_block.system_system_spacing = string
         lilypond_file.paper_block.top_margin = 24
         return lilypond_file
 

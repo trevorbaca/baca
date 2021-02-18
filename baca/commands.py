@@ -2513,7 +2513,7 @@ def markup(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
-                        ^ \markup { "più mosso" }                                                    %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { più mosso }                                                    %! baca.markup():baca.IndicatorCommand._call()
                         [
                         d'16
                         ]

@@ -4666,7 +4666,7 @@ def text_script_color(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
-                        ^ \markup { "più mosso" }                                                    %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { più mosso }                                                    %! baca.markup():baca.IndicatorCommand._call()
                         [
                         d'16
                         ]
@@ -4678,7 +4678,7 @@ def text_script_color(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { lo stesso tempo }                                              %! baca.markup():baca.IndicatorCommand._call()
                         [
                         e''16
                         ]
@@ -4790,7 +4790,7 @@ def text_script_down(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
-                        ^ \markup { "più mosso" }                                                    %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { più mosso }                                                    %! baca.markup():baca.IndicatorCommand._call()
                         [
                         d'16
                         ]
@@ -4802,7 +4802,7 @@ def text_script_down(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { lo stesso tempo }                                              %! baca.markup():baca.IndicatorCommand._call()
                         [
                         e''16
                         ]
@@ -4986,7 +4986,7 @@ def text_script_padding(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
-                        ^ \markup { "più mosso" }                                                    %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { più mosso }                                                    %! baca.markup():baca.IndicatorCommand._call()
                         [
                         d'16
                         ]
@@ -4998,7 +4998,7 @@ def text_script_padding(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { lo stesso tempo }                                              %! baca.markup():baca.IndicatorCommand._call()
                         [
                         e''16
                         ]
@@ -5157,7 +5157,7 @@ def text_script_staff_padding(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
-                        ^ \markup { "più mosso" }                                                    %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { più mosso }                                                    %! baca.markup():baca.IndicatorCommand._call()
                         [
                         d'16
                         ]
@@ -5169,7 +5169,7 @@ def text_script_staff_padding(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { lo stesso tempo }                                              %! baca.markup():baca.IndicatorCommand._call()
                         [
                         e''16
                         ]
@@ -5281,7 +5281,7 @@ def text_script_up(
                         \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
                         r8
                         c'16
-                        ^ \markup { "più mosso" }                                                    %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { più mosso }                                                    %! baca.markup():baca.IndicatorCommand._call()
                         [
                         d'16
                         ]
@@ -5293,7 +5293,7 @@ def text_script_up(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { "lo stesso tempo" }                                              %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { lo stesso tempo }                                              %! baca.markup():baca.IndicatorCommand._call()
                         [
                         e''16
                         ]
