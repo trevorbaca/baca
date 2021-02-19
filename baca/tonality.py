@@ -2092,7 +2092,8 @@ class RootedChordClass(abjad.PitchClassSet):
             string = " ".join(inversion.split("/"))
             inv += rf" \column {{ {string} }}"
             markup += inv
-        return abjad.Markup(markup, direction=abjad.Down)
+            markup = rf"\markup {{ {markup} }}"
+        return abjad.Markup(markup, direction=abjad.Down, literal=True)
 
     @property
     def quality_pair(self) -> typing.Tuple[str, str]:
