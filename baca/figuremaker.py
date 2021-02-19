@@ -6106,7 +6106,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6149,7 +6149,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6193,7 +6193,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6240,7 +6240,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6286,7 +6286,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6372,7 +6372,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6415,7 +6415,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6459,7 +6459,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6506,7 +6506,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6552,7 +6552,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6637,7 +6637,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6683,7 +6683,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6732,7 +6732,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6778,7 +6778,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6863,7 +6863,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6921,7 +6921,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -6969,7 +6969,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }
@@ -7027,7 +7027,7 @@ class FigureMaker:
                                     }
                                 >>
                                 \layout {
-                                    indent = #0
+                                    indent = 0
                                     ragged-right = ##t
                                 }
                             }

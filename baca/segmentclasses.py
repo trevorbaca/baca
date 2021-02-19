@@ -1457,7 +1457,7 @@ class HorizontalSpacingSpecifier:
                                         }
                                     >>
                                     \layout {
-                                        indent = #0
+                                        indent = 0
                                         ragged-right = ##t
                                     }
                                 }
@@ -1519,7 +1519,7 @@ class HorizontalSpacingSpecifier:
                                         }
                                     >>
                                     \layout {
-                                        indent = #0
+                                        indent = 0
                                         ragged-right = ##t
                                     }
                                 }
