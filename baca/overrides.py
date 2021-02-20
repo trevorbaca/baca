@@ -139,7 +139,7 @@ class OverrideCommand(scoping.Command):
         if attribute == "color" and value not in abjad.lyconst.normal_colors:
             value = f"#(x11-color '{value})"
         once = bool(len(leaves) == 1)
-        string = abjad.OverrideInterface.make_lilypond_override_string(
+        string = abjad.overrides.make_lilypond_override_string(
             grob, attribute, value, context=lilypond_type, once=once
         )
         format_slot = "before"
@@ -154,7 +154,7 @@ class OverrideCommand(scoping.Command):
         abjad.attach(literal, leaves[0], deactivate=self.deactivate, tag=tag)
         if once:
             return
-        string = abjad.OverrideInterface.make_lilypond_revert_string(
+        string = abjad.overrides.make_lilypond_revert_string(
             grob, attribute, context=lilypond_type
         )
         literal = abjad.LilyPondLiteral(string, "after")
