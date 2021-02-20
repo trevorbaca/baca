@@ -5068,10 +5068,7 @@ class FigureMaker:
             abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Left
         duration = abjad.get.duration(tuplet)
         notes = abjad.LeafMaker()([0], [duration])
-        markup = abjad.illustrators.selection_to_score_markup(notes)
-        # markup = markup.scale((0.75, 0.75))
-        assert len(markup.contents) == 1, repr(markup)
-        string = markup.contents[0]
+        string = abjad.illustrators.selection_to_score_markup_string(notes)
         markup = abjad.Markup(rf"\markup \scale #'(0.75 . 0.75) {string}", literal=True)
         abjad.override(tuplet).tuplet_number.text = markup
         return tuplet
