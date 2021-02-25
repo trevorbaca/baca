@@ -4529,7 +4529,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                >>> voice = lilypond_file[abjad.Score][0][0]
+                >>> abjad.f(voice, align_tags=89)
                 \new Voice
                 {
                     <fs' g' bf' bqf'>1
@@ -5347,7 +5348,8 @@ class PitchClassSet(abjad.PitchClassSet):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                >>> voice = lilypond_file[abjad.Score][0][0]
+                >>> abjad.f(voice, align_tags=89)
                 \new Voice
                 {
                     <fs' g' bf' bqf'>1
