@@ -44,7 +44,8 @@ def accent(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -132,7 +133,8 @@ def alternate_bow_strokes(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -209,7 +211,8 @@ def alternate_bow_strokes(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -286,7 +289,8 @@ def alternate_bow_strokes(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -382,7 +386,8 @@ def arpeggio(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -538,7 +543,8 @@ def clef(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -651,7 +657,8 @@ def double_staccato(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -727,7 +734,8 @@ def down_arpeggio(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -820,7 +828,8 @@ def down_bow(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -889,7 +898,8 @@ def down_bow(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -978,7 +988,8 @@ def espressivo(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -1062,7 +1073,8 @@ def fermata(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -1145,7 +1157,8 @@ def flageolet(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -1224,7 +1237,8 @@ def hide_black_note_heads(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1377,7 +1391,8 @@ def laissez_vibrer(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -1477,7 +1492,8 @@ def long_fermata(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -1560,7 +1576,8 @@ def marcato(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -1644,7 +1661,8 @@ def margin_markup(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1826,7 +1844,8 @@ def parenthesize(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -1946,7 +1965,8 @@ def repeat_tie(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -2032,7 +2052,8 @@ def short_fermata(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -2128,7 +2149,8 @@ def staccatissimo(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -2211,7 +2233,8 @@ def staccato(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -2295,7 +2318,8 @@ def staff_lines(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2441,7 +2465,8 @@ def staff_lines(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2588,7 +2613,8 @@ def staff_lines(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2733,7 +2759,8 @@ def staff_lines(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2878,7 +2905,8 @@ def staff_lines(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -3095,7 +3123,8 @@ def stem_tremolo(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3180,7 +3209,8 @@ def stop_on_string(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3285,7 +3315,8 @@ def stopped(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3369,7 +3400,8 @@ def tie(selector: abjad.Expression) -> commandclasses.IndicatorCommand:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3452,7 +3484,8 @@ def tenuto(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3541,7 +3574,8 @@ def up_arpeggio(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3634,7 +3668,8 @@ def up_bow(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3722,7 +3757,8 @@ def very_long_fermata(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext

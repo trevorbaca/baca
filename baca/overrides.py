@@ -402,7 +402,9 @@ def bar_line_transparent(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -597,7 +599,8 @@ def beam_positions(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -805,7 +808,8 @@ def dls_staff_padding(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -906,7 +910,8 @@ def dls_up(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -1079,7 +1084,8 @@ def dynamic_text_extra_offset(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -1460,7 +1466,9 @@ def mmrest_color(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1622,7 +1630,9 @@ def mmrest_text_color(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1796,7 +1806,9 @@ def mmrest_text_extra_offset(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1943,7 +1955,9 @@ def mmrest_text_padding(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2089,7 +2103,9 @@ def mmrest_text_parent_center(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2236,7 +2252,9 @@ def mmrest_text_staff_padding(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2540,7 +2558,8 @@ def note_head_style_cross(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -2626,7 +2645,8 @@ def note_head_style_harmonic(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -2893,7 +2913,8 @@ def repeat_tie_down(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3033,7 +3054,8 @@ def repeat_tie_up(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3138,7 +3160,8 @@ def rest_down(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3245,7 +3268,8 @@ def rest_position(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3331,7 +3355,8 @@ def rest_transparent(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3417,7 +3442,8 @@ def rest_up(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3524,7 +3550,8 @@ def script_color(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3620,7 +3647,8 @@ def script_down(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3717,7 +3745,8 @@ def script_extra_offset(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3844,7 +3873,8 @@ def script_up(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -3956,7 +3986,8 @@ def slur_down(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -4050,7 +4081,8 @@ def slur_up(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -4205,7 +4237,8 @@ def stem_color(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -4292,7 +4325,8 @@ def stem_down(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -4440,7 +4474,8 @@ def stem_up(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -4549,7 +4584,8 @@ def sustain_pedal_staff_padding(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -4650,7 +4686,8 @@ def text_script_color(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -4774,7 +4811,8 @@ def text_script_down(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -4970,7 +5008,8 @@ def text_script_padding(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -5141,7 +5180,8 @@ def text_script_staff_padding(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -5265,7 +5305,8 @@ def text_script_up(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -5466,7 +5507,9 @@ def text_spanner_staff_padding(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -5609,7 +5652,8 @@ def tie_down(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -5695,7 +5739,8 @@ def tie_up(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -5780,7 +5825,8 @@ def time_signature_extra_offset(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -5883,7 +5929,8 @@ def time_signature_transparent(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -5986,7 +6033,8 @@ def tuplet_bracket_down(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -6073,7 +6121,8 @@ def tuplet_bracket_extra_offset(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -6206,7 +6255,8 @@ def tuplet_bracket_staff_padding(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -6305,7 +6355,8 @@ def tuplet_bracket_up(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -6407,7 +6458,8 @@ def tuplet_number_extra_offset(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext

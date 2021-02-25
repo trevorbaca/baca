@@ -52,7 +52,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -241,7 +243,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -438,7 +442,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             \with                                                                                    %! baca.SingleStaffScoreTemplate.__call__()
@@ -890,7 +896,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+                >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1077,7 +1085,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+                >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -4504,7 +4514,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+                >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.StringTrioScoreTemplate.__call__()
                 \with                                                                                    %! baca.StringTrioScoreTemplate.__call__()
@@ -5010,7 +5022,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+                >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -5115,7 +5129,8 @@ class SegmentMaker(abjad.SegmentMaker):
                 <BLANKLINE>
                 >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
 
-            >>> abjad.f(maker.metadata, align_tags=89)
+            >>> string = abjad.storage(maker.metadata)
+            >>> print(string)
             abjad.OrderedDict(
                 [
                     ('final_measure_number', 4),
@@ -5128,7 +5143,8 @@ class SegmentMaker(abjad.SegmentMaker):
                     ]
                 )
 
-            >>> abjad.f(maker.persist, align_tags=89)
+            >>> string = abjad.storage(maker.persist)
+            >>> print(string)
             abjad.OrderedDict(
                 [
                     (
@@ -5272,7 +5288,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+                >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -5390,7 +5408,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+                >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -5564,7 +5584,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+                >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -5726,7 +5748,9 @@ class SegmentMaker(abjad.SegmentMaker):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+                >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()

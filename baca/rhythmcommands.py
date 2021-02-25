@@ -52,7 +52,9 @@ class RhythmCommand(scoping.Command):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -497,7 +499,9 @@ class RhythmCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+                >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -786,7 +790,9 @@ def make_monads(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -980,7 +986,9 @@ def make_repeat_tied_notes(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()

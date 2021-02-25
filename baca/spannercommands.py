@@ -245,7 +245,9 @@ def beam(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -425,7 +427,9 @@ def ottava(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -514,7 +518,9 @@ def ottava_bassa(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -604,7 +610,9 @@ def slur(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -699,7 +707,9 @@ def sustain_pedal(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -796,7 +806,9 @@ def trill_spanner(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -870,7 +882,9 @@ def trill_spanner(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext
@@ -951,7 +965,9 @@ def trill_spanner(
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             \new Score
             <<
                 \new GlobalContext

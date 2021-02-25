@@ -25,7 +25,8 @@ class PitchArray:
         [ ] [     ] [ ]
         [     ] [ ] [ ]
 
-        >>> abjad.f(pitch_array, align_tags=89)
+        >>> string = abjad.storage(pitch_array)
+        >>> print(string)
         baca.PitchArray(
             rows=(
                 baca.PitchArrayRow(
@@ -602,7 +603,8 @@ class PitchArray:
 
             ..  docs::
 
-                >>> abjad.f(score, align_tags=89)
+                >>> string = abjad.lilypond(score)
+                >>> print(string)
                 \new Score
                 <<
                     \new Staff
@@ -657,7 +659,8 @@ class PitchArray:
 
             ..  docs::
 
-                >>> abjad.f(score, align_tags=89)
+                >>> string = abjad.lilypond(score)
+                >>> print(string)
                 \new Score
                 <<
                     \new Staff
@@ -877,7 +880,8 @@ class PitchArray:
 
             ..  docs::
 
-                >>> abjad.f(staff, align_tags=89)
+                >>> string = abjad.lilypond(staff)
+                >>> print(string)
                 \new Staff
                 {
                     {
@@ -935,7 +939,8 @@ class PitchArrayCell:
         >>> cell.next
         PitchArrayCell(width=1)
 
-        >>> abjad.f(cell.parent_array, align_tags=89)
+        >>> string = abjad.storage(cell.parent_array)
+        >>> print(string)
         baca.PitchArray(
             rows=(
                 baca.PitchArrayRow(
@@ -967,7 +972,8 @@ class PitchArrayCell:
                 ),
             )
 
-        >>> abjad.f(cell.parent_column, align_tags=89)
+        >>> string = abjad.storage(cell.parent_column)
+        >>> print(string)
         baca.PitchArrayColumn(
             cells=(
                 baca.PitchArrayCell(
@@ -979,7 +985,8 @@ class PitchArrayCell:
                 ),
             )
 
-        >>> abjad.f(cell.parent_row, align_tags=89)
+        >>> string = abjad.storage(cell.parent_row)
+        >>> print(string)
         baca.PitchArrayRow(
             cells=(
                 baca.PitchArrayCell(
@@ -1640,7 +1647,8 @@ class PitchArrayColumn:
         [  ] [d'] [bqf    ]
         [g'     ] [fs'] [ ]
 
-        >>> abjad.f(array.columns[0], align_tags=89)
+        >>> string = abjad.storage(array.columns[0])
+        >>> print(string)
         baca.PitchArrayColumn(
             cells=(
                 baca.PitchArrayCell(
@@ -2099,7 +2107,8 @@ class PitchArrayList(abjad.TypedList):
         >>> arrays = [array_1, array_2]
         >>> arrays = baca.PitchArrayList(arrays)
 
-        >>> abjad.f(arrays, align_tags=89)
+        >>> string = abjad.storage(arrays)
+        >>> print(string)
         baca.PitchArrayList(
             [
                 baca.PitchArray(
@@ -2208,7 +2217,8 @@ class PitchArrayList(abjad.TypedList):
 
             ..  docs::
 
-                >>> abjad.f(score, align_tags=89)
+                >>> string = abjad.lilypond(score)
+                >>> print(string)
                 \new Score
                 <<
                     \new StaffGroup
@@ -2278,7 +2288,8 @@ class PitchArrayRow:
         [c'] [d'    ] [  ]
         [       ] [ ] [e']
 
-        >>> abjad.f(array[0], align_tags=89)
+        >>> string = abjad.storage(array[0])
+        >>> print(string)
         baca.PitchArrayRow(
             cells=(
                 baca.PitchArrayCell(
@@ -2980,7 +2991,8 @@ class PitchArrayRow:
 
             ..  docs::
 
-                >>> abjad.f(staff, align_tags=89)
+                >>> string = abjad.lilypond(staff)
+                >>> print(string)
                 \new Staff
                 {
                     {

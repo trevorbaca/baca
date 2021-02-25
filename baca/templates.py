@@ -338,7 +338,8 @@ class SingleStaffScoreTemplate(ScoreTemplate):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -490,7 +491,8 @@ class StringTrioScoreTemplate(ScoreTemplate):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.StringTrioScoreTemplate.__call__()
             <<                                                                                       %! baca.StringTrioScoreTemplate.__call__()
@@ -847,7 +849,8 @@ class ThreeVoiceStaffScoreTemplate(ScoreTemplate):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.ThreeVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.ThreeVoiceStaffScoreTemplate.__call__()
@@ -1113,7 +1116,8 @@ class TwoVoiceStaffScoreTemplate(ScoreTemplate):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.TwoVoiceStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.TwoVoiceStaffScoreTemplate.__call__()
@@ -1326,7 +1330,8 @@ class ViolinSoloScoreTemplate(ScoreTemplate):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.ViolinSoloScoreTemplate.__call__()
             <<                                                                                       %! baca.ViolinSoloScoreTemplate.__call__()

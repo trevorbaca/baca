@@ -2055,7 +2055,8 @@ class RootedChordClass(abjad.PitchClassSet):
 
             ..  docs::
 
-                >>> abjad.f(markup)
+                >>> string = abjad.lilypond(markup)
+                >>> print(string)
                 \markup {
                     \fontsize
                         #1
@@ -2827,7 +2828,8 @@ def analyze_chords(selection) -> typing.Optional[typing.List[RootedChordClass]]:
 
         ..  docs::
 
-            >>> abjad.f(staff)
+            >>> string = abjad.lilypond(staff)
+            >>> print(string)
             \new Staff
             {
                 <c' e' g'>4
@@ -2856,7 +2858,8 @@ def analyze_chords(selection) -> typing.Optional[typing.List[RootedChordClass]]:
 
         ..  docs::
 
-            >>> abjad.f(staff)
+            >>> string = abjad.lilypond(staff)
+            >>> print(string)
             \new Staff
             {
                 <a' c'' e''>4
@@ -2886,7 +2889,8 @@ def analyze_chords(selection) -> typing.Optional[typing.List[RootedChordClass]]:
 
         ..  docs::
 
-            >>> abjad.f(staff)
+            >>> string = abjad.lilypond(staff)
+            >>> print(string)
             \new Staff
             {
                 <c' e' g' bf'>4
@@ -2919,7 +2923,8 @@ def analyze_chords(selection) -> typing.Optional[typing.List[RootedChordClass]]:
 
         ..  docs::
 
-            >>> abjad.f(staff)
+            >>> string = abjad.lilypond(staff)
+            >>> print(string)
             \new Staff
             {
                 <c' e' g' bf' d''>4
@@ -3030,7 +3035,8 @@ def analyze_neighbor_notes(selection) -> typing.List[bool]:
 
         ..  docs::
 
-            >>> abjad.f(staff)
+            >>> string = abjad.lilypond(staff)
+            >>> print(string)
             \new Staff
             {
                 c'8
@@ -3061,7 +3067,8 @@ def analyze_passing_tones(selection) -> typing.List[bool]:
 
         ..  docs::
 
-            >>> abjad.f(staff)
+            >>> string = abjad.lilypond(staff)
+            >>> print(string)
             \new Staff
             {
                 c'8

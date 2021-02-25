@@ -154,7 +154,8 @@ class ArpeggiationSpacingSpecifier:
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 <<
                     \new GlobalContext
@@ -203,7 +204,8 @@ class ArpeggiationSpacingSpecifier:
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 <<
                     \new GlobalContext
@@ -1113,7 +1115,8 @@ class CollectionList(collections_module.abc.Sequence):
             ..  docs::
 
                 >>> lilypond_file = collections.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -1689,7 +1692,8 @@ class CollectionList(collections_module.abc.Sequence):
             >>> collections = baca.CollectionList([[5, 12, 14, 18], [16, 17]])
             >>> cursor = collections.cursor()
 
-            >>> abjad.f(cursor, align_tags=89)
+            >>> string = abjad.storage(cursor)
+            >>> print(string)
             baca.Cursor(
                 source=baca.CollectionList(
                     collections=[
@@ -3011,7 +3015,8 @@ class Constellation:
 
             ..  docs::
 
-                >>> abjad.f(constellation.generator_chord, align_tags=89)
+                >>> string = abjad.lilypond(constellation.generator_chord)
+                >>> print(string)
                 <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                 - \markup { 1-80 }
 
@@ -3074,7 +3079,8 @@ class Constellation:
 
             ..  docs::
 
-                >>> abjad.f(constellation.pivot_chord, align_tags=89)
+                >>> string = abjad.lilypond(constellation.pivot_chord)
+                >>> print(string)
                 <c d bf e' af' b' f'' g'' ef''' fs''' a''' cs''''>4
                 - \markup { 1-80 }
 
@@ -3480,7 +3486,8 @@ class ConstellationCircuit:
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -3539,7 +3546,8 @@ class ConstellationCircuit:
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -3614,7 +3622,8 @@ class ConstellationCircuit:
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -3673,7 +3682,8 @@ class ConstellationCircuit:
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -3748,7 +3758,8 @@ class ConstellationCircuit:
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -3826,7 +3837,8 @@ class HarmonicSeries:
         ..  docs::
 
             >>> lilypond_file = harmonic_series.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Staff])
+            >>> string = abjad.lilypond(lilypond_file[abjad.Staff])
+            >>> print(string)
             \new Staff
             \with
             {
@@ -3922,7 +3934,8 @@ class HarmonicSeries:
             ..  docs::
 
                 >>> lilypond_file = harmonic_series.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Staff])
+                >>> string = abjad.lilypond(lilypond_file[abjad.Staff])
+                >>> print(string)
                 \new Staff
                 \with
                 {
@@ -4172,7 +4185,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                >>> print(string)
                 \new Voice
                 {
                     bf'8
@@ -4194,7 +4208,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                >>> print(string)
                 \new Voice
                 {
                     bf'8
@@ -4271,7 +4286,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 ..  docs::
 
-                    >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                    >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                    >>> print(string)
                     \new Voice
                     {
                         b'8
@@ -4297,7 +4313,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 ..  docs::
 
-                    >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                    >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                    >>> print(string)
                     \new Voice
                     {
                         b'8
@@ -4325,7 +4342,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 ..  docs::
 
-                    >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                    >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                    >>> print(string)
                     \new Voice
                     {
                         bf'8
@@ -4360,7 +4378,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
                 ..  docs::
 
-                    >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                    >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                    >>> print(string)
                     \new Voice
                     {
                         bf'8
@@ -4433,7 +4452,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -4481,7 +4501,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -4530,7 +4551,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
             ..  docs::
 
                 >>> voice = lilypond_file[abjad.Score][0][0]
-                >>> abjad.f(voice, align_tags=89)
+                >>> string = abjad.lilypond(voice)
+                >>> print(string)
                 \new Voice
                 {
                     <fs' g' bf' bqf'>1
@@ -5031,7 +5053,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                >>> print(string)
                 \new Voice
                 {
                     bf'8
@@ -5054,7 +5077,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                >>> print(string)
                 \new Voice
                 {
                     bf'8
@@ -5087,7 +5111,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                >>> print(string)
                 \new Voice
                 {
                     bf'8
@@ -5112,7 +5137,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                >>> print(string)
                 \new Voice
                 {
                     bf'8
@@ -5148,7 +5174,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                >>> print(string)
                 \new Voice
                 {
                     bf'8
@@ -5179,7 +5206,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                >>> print(string)
                 \new Voice
                 {
                     bf'8
@@ -5200,7 +5228,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -5261,7 +5290,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Voice], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                >>> print(string)
                 \new Voice
                 {
                     bf'8
@@ -5282,7 +5312,8 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -5349,7 +5380,8 @@ class PitchClassSet(abjad.PitchClassSet):
             ..  docs::
 
                 >>> voice = lilypond_file[abjad.Score][0][0]
-                >>> abjad.f(voice, align_tags=89)
+                >>> string = abjad.lilypond(voice)
+                >>> print(string)
                 \new Voice
                 {
                     <fs' g' bf' bqf'>1
@@ -5447,7 +5479,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5496,7 +5529,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5530,7 +5564,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5579,7 +5614,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5613,7 +5649,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5666,7 +5703,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -5701,7 +5739,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5735,7 +5774,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5784,7 +5824,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5814,7 +5855,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5845,7 +5887,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5875,7 +5918,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5922,7 +5966,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5952,7 +5997,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -5983,7 +6029,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -6013,7 +6060,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -6061,7 +6109,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -6096,7 +6145,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -6123,7 +6173,8 @@ class PitchSegment(abjad.PitchSegment):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \context Staff = "Treble_Staff"
@@ -6171,7 +6222,8 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 <<
                     \new PianoStaff
@@ -6239,7 +6291,8 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6267,7 +6320,8 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6296,7 +6350,8 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6324,7 +6379,8 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6369,7 +6425,8 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6397,7 +6454,8 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6426,7 +6484,8 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6454,7 +6513,8 @@ class PitchSet(abjad.PitchSet):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.StaffGroup], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.StaffGroup])
+                >>> print(string)
                 \new PianoStaff
                 <<
                     \new Staff
@@ -6529,7 +6589,8 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             \with
             {
@@ -6606,7 +6667,8 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             \with
             {
@@ -6679,7 +6741,8 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             \with
             {
@@ -6756,7 +6819,8 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__()
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             \with
             {
@@ -6832,7 +6896,8 @@ class PitchTree(classes.Tree):
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             \with
             {
@@ -6904,7 +6969,8 @@ class PitchTree(classes.Tree):
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             \with
             {
@@ -6973,75 +7039,13 @@ class PitchTree(classes.Tree):
         >>> items = [[segment_1, segment_2], segment_3]
         >>> tree = baca.PitchTree(items=items)
         >>> abjad.graph(tree) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> graph_ = tree.__graph__() # doctest: +SKIP
-            >>> abjad.f(graph_, align_tags=89) # doctest: +SKIP
-            digraph G {
-                graph [bgcolor=transparent,
-                    truecolor=true];
-                node_0 [label="",
-                    shape=circle];
-                node_1 [label="",
-                    shape=circle];
-                node_2 [label="",
-                    shape=circle];
-                node_3 [label="5",
-                    shape=box];
-                node_4 [label="7",
-                    shape=box];
-                node_5 [label="11",
-                    shape=box];
-                node_6 [label="",
-                    shape=circle];
-                node_7 [label="10",
-                    shape=box];
-                node_8 [label="8",
-                    shape=box];
-                node_9 [label="9",
-                    shape=box];
-                node_10 [label="0",
-                    shape=box];
-                node_11 [label="10",
-                    shape=box];
-                node_12 [label="2",
-                    shape=box];
-                node_13 [label="",
-                    shape=circle];
-                node_14 [label="1",
-                    shape=box];
-                node_15 [label="3",
-                    shape=box];
-                node_16 [label="4",
-                    shape=box];
-                node_17 [label="6",
-                    shape=box];
-                node_0 -> node_1;
-                node_0 -> node_13;
-                node_1 -> node_2;
-                node_1 -> node_6;
-                node_2 -> node_3;
-                node_2 -> node_4;
-                node_2 -> node_5;
-                node_6 -> node_7;
-                node_6 -> node_8;
-                node_6 -> node_9;
-                node_6 -> node_10;
-                node_6 -> node_11;
-                node_6 -> node_12;
-                node_13 -> node_14;
-                node_13 -> node_15;
-                node_13 -> node_16;
-                node_13 -> node_17;
-            }
-
         >>> abjad.show(tree, cell_indices=False, align_tags=89) # doctest: +SKIP
 
         ..  docs::
 
             >>> lilypond_file = tree.__illustrate__(cell_indices=False)
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             \new Score
             \with
             {
@@ -7113,153 +7117,6 @@ class PitchTree(classes.Tree):
 
     ### SPECIAL METHODS ###
 
-    #    def __graph__(self, **keywords):
-    #        r"""
-    #        Graphs pitch tree.
-    #
-    #        ..  container:: example
-    #
-    #            Graphs numbered pitch tree:
-    #
-    #            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-    #            >>> tree = PitchTree(items=items)
-    #
-    #            >>> abjad.graph(tree) # doctest: +SKIP
-    #
-    #            ..  docs::
-    #
-    #                >>> tree_graph = tree.__graph__()
-    #                >>> abjad.f(tree_graph, align_tags=89)
-    #                digraph G {
-    #                    graph [bgcolor=transparent,
-    #                        truecolor=true];
-    #                    node_0 [label="",
-    #                        shape=circle];
-    #                    node_1 [label="",
-    #                        shape=circle];
-    #                    node_2 [label="4",
-    #                        shape=box];
-    #                    node_3 [label="6",
-    #                        shape=box];
-    #                    node_4 [label="10",
-    #                        shape=box];
-    #                    node_5 [label="",
-    #                        shape=circle];
-    #                    node_6 [label="9",
-    #                        shape=box];
-    #                    node_7 [label="7",
-    #                        shape=box];
-    #                    node_8 [label="8",
-    #                        shape=box];
-    #                    node_9 [label="11",
-    #                        shape=box];
-    #                    node_10 [label="9",
-    #                        shape=box];
-    #                    node_11 [label="1",
-    #                        shape=box];
-    #                    node_12 [label="",
-    #                        shape=circle];
-    #                    node_13 [label="0",
-    #                        shape=box];
-    #                    node_14 [label="2",
-    #                        shape=box];
-    #                    node_15 [label="3",
-    #                        shape=box];
-    #                    node_16 [label="5",
-    #                        shape=box];
-    #                    node_0 -> node_1;
-    #                    node_0 -> node_5;
-    #                    node_0 -> node_12;
-    #                    node_1 -> node_2;
-    #                    node_1 -> node_3;
-    #                    node_1 -> node_4;
-    #                    node_5 -> node_6;
-    #                    node_5 -> node_7;
-    #                    node_5 -> node_8;
-    #                    node_5 -> node_9;
-    #                    node_5 -> node_10;
-    #                    node_5 -> node_11;
-    #                    node_12 -> node_13;
-    #                    node_12 -> node_14;
-    #                    node_12 -> node_15;
-    #                    node_12 -> node_16;
-    #                }
-    #
-    #        ..  container:: example
-    #
-    #            Graphs named pitch tree:
-    #
-    #            >>> items = [[4, 6, 10], [9, 7, 8, 11, 9, 1], [0, 2, 3, 5]]
-    #            >>> tree = PitchTree(
-    #            ...     items=items,
-    #            ...     item_class=abjad.NamedPitch,
-    #            ...     )
-    #
-    #            >>> abjad.graph(tree) # doctest: +SKIP
-    #
-    #            ..  docs::
-    #
-    #                >>> tree_graph = tree.__graph__()
-    #                >>> abjad.f(tree_graph, align_tags=89)
-    #                digraph G {
-    #                    graph [bgcolor=transparent,
-    #                        truecolor=true];
-    #                    node_0 [label="",
-    #                        shape=circle];
-    #                    node_1 [label="",
-    #                        shape=circle];
-    #                    node_2 [label="e'",
-    #                        shape=box];
-    #                    node_3 [label="fs'",
-    #                        shape=box];
-    #                    node_4 [label="bf'",
-    #                        shape=box];
-    #                    node_5 [label="",
-    #                        shape=circle];
-    #                    node_6 [label="a'",
-    #                        shape=box];
-    #                    node_7 [label="g'",
-    #                        shape=box];
-    #                    node_8 [label="af'",
-    #                        shape=box];
-    #                    node_9 [label="b'",
-    #                        shape=box];
-    #                    node_10 [label="a'",
-    #                        shape=box];
-    #                    node_11 [label="cs'",
-    #                        shape=box];
-    #                    node_12 [label="",
-    #                        shape=circle];
-    #                    node_13 [label="c'",
-    #                        shape=box];
-    #                    node_14 [label="d'",
-    #                        shape=box];
-    #                    node_15 [label="ef'",
-    #                        shape=box];
-    #                    node_16 [label="f'",
-    #                        shape=box];
-    #                    node_0 -> node_1;
-    #                    node_0 -> node_5;
-    #                    node_0 -> node_12;
-    #                    node_1 -> node_2;
-    #                    node_1 -> node_3;
-    #                    node_1 -> node_4;
-    #                    node_5 -> node_6;
-    #                    node_5 -> node_7;
-    #                    node_5 -> node_8;
-    #                    node_5 -> node_9;
-    #                    node_5 -> node_10;
-    #                    node_5 -> node_11;
-    #                    node_12 -> node_13;
-    #                    node_12 -> node_14;
-    #                    node_12 -> node_15;
-    #                    node_12 -> node_16;
-    #                }
-    #
-    #        Returns Graphviz graph.
-    #        """
-    #        return super().__graph__(**keywords)
-
     def __illustrate__(
         self,
         after_cell_spacing=True,
@@ -7285,7 +7142,8 @@ class PitchTree(classes.Tree):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -7358,7 +7216,8 @@ class PitchTree(classes.Tree):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -7460,7 +7319,8 @@ class PitchTree(classes.Tree):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -7733,7 +7593,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -7812,7 +7673,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -7894,7 +7756,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -7963,7 +7826,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -8032,7 +7896,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -8101,7 +7966,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = inversion.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -8189,7 +8055,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -8258,7 +8125,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = retrograde.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -8345,7 +8213,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -8414,7 +8283,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -8483,7 +8353,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -8552,7 +8423,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = rotation.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -8640,7 +8512,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = tree.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -8709,7 +8582,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -8778,7 +8652,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -8847,7 +8722,8 @@ class PitchTree(classes.Tree):
             ..  docs::
 
                 >>> lilypond_file = transposition.__illustrate__()
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> print(string)
                 \new Score
                 \with
                 {
@@ -9037,7 +8913,8 @@ class Registration:
         >>> components = [('[A0, C4)', 15), ('[C4, C8)', 27)]
         >>> registration = baca.Registration(components)
 
-        >>> abjad.f(registration, align_tags=89)
+        >>> string = abjad.storage(registration)
+        >>> print(string)
         baca.Registration(
             components=[
                 baca.RegistrationComponent(

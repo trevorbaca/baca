@@ -34,7 +34,9 @@ class BreakMeasureMap:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.StringTrioScoreTemplate.__call__()
             <<                                                                                       %! baca.StringTrioScoreTemplate.__call__()
@@ -542,7 +544,9 @@ class HorizontalSpacingSpecifier:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -703,7 +707,9 @@ class HorizontalSpacingSpecifier:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -871,7 +877,9 @@ class HorizontalSpacingSpecifier:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1040,7 +1048,9 @@ class HorizontalSpacingSpecifier:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1210,7 +1220,9 @@ class HorizontalSpacingSpecifier:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1382,7 +1394,9 @@ class HorizontalSpacingSpecifier:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -2082,7 +2096,8 @@ class HorizontalSpacingSpecifier:
             ...     fallback_duration=(1, 20),
             ...     )
 
-            >>> abjad.f(spacing.measures)
+            >>> string = abjad.storage(spacing.measures)
+            >>> print(string)
             abjad.OrderedDict(
                 [
                     (
@@ -2109,7 +2124,8 @@ class HorizontalSpacingSpecifier:
                 )
 
             >>> spacing.override((1, -1), (1, 24))
-            >>> abjad.f(spacing.measures)
+            >>> string = abjad.storage(spacing.measures)
+            >>> print(string)
             abjad.OrderedDict(
                 [
                     (
@@ -2139,7 +2155,8 @@ class HorizontalSpacingSpecifier:
 
             >>> spacing.override((1, -1), (1, 16))
             >>> spacing.override(95, (1, 24))
-            >>> abjad.f(spacing.measures)
+            >>> string = abjad.storage(spacing.measures)
+            >>> print(string)
             abjad.OrderedDict(
                 [
                     (
@@ -2169,7 +2186,8 @@ class HorizontalSpacingSpecifier:
 
             >>> spacing.override((1, -1), (1, 16))
             >>> spacing.override((95, 97), (1, 24))
-            >>> abjad.f(spacing.measures)
+            >>> string = abjad.storage(spacing.measures)
+            >>> print(string)
             abjad.OrderedDict(
                 [
                     (
@@ -2199,7 +2217,8 @@ class HorizontalSpacingSpecifier:
 
             >>> spacing.override((1, -1), (1, 16))
             >>> spacing.override([95, 97, 99], (1, 24))
-            >>> abjad.f(spacing.measures)
+            >>> string = abjad.storage(spacing.measures)
+            >>> print(string)
             abjad.OrderedDict(
                 [
                     (
@@ -2229,7 +2248,8 @@ class HorizontalSpacingSpecifier:
 
             >>> spacing.override((1, -1), (1, 16))
             >>> spacing.override([-3, -1], (1, 24))
-            >>> abjad.f(spacing.measures)
+            >>> string = abjad.storage(spacing.measures)
+            >>> print(string)
             abjad.OrderedDict(
                 [
                     (

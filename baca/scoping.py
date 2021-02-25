@@ -22,7 +22,8 @@ class Scope:
         ...     voice_name='ViolinMusicVoice',
         ...     )
 
-        >>> abjad.f(scope, align_tags=89)
+        >>> string = abjad.storage(scope)
+        >>> print(string)
         baca.Scope(
             measures=(1, 9),
             voice_name='ViolinMusicVoice',
@@ -99,7 +100,8 @@ class TimelineScope:
         ...     ('OboeMusicVoice', (9, 12)),
         ...     ])
 
-        >>> abjad.f(scope, align_tags=89)
+        >>> string = abjad.storage(scope)
+        >>> print(string)
         baca.TimelineScope(
             scopes=(
                 baca.Scope(
@@ -632,7 +634,8 @@ class Suite:
         ...     selector=baca.pleaves(),
         ...     )
 
-        >>> abjad.f(suite)
+        >>> string = abjad.storage(suite)
+        >>> print(string)
         baca.Suite(
             baca.IndicatorCommand(
                 abjad.CyclicTuple(
@@ -669,7 +672,8 @@ class Suite:
         ...     baca.tenuto(),
         ...     measures=(1, 2),
         ...     )
-        >>> abjad.f(suite)
+        >>> string = abjad.storage(suite)
+        >>> print(string)
         baca.Suite(
             baca.IndicatorCommand(
                 abjad.CyclicTuple(
@@ -698,7 +702,8 @@ class Suite:
             )
 
         >>> new_suite = abjad.new(suite, measures=(3, 4))
-        >>> abjad.f(new_suite)
+        >>> string = abjad.storage(new_suite)
+        >>> print(string)
         baca.Suite(
             baca.IndicatorCommand(
                 abjad.CyclicTuple(
@@ -857,7 +862,8 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1054,7 +1060,8 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -1302,7 +1309,8 @@ def only_parts(command: _command_typing) -> _command_typing:
 
         ..  docs::
 
-            >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+            >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+            >>> print(string)
             <BLANKLINE>
             \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
             <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()

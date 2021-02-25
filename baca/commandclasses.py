@@ -278,7 +278,9 @@ class BCPCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+                >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -570,7 +572,9 @@ class BCPCommand(scoping.Command):
 
             ..  docs::
 
-                >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+                >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+                >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
                 <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
@@ -813,7 +817,8 @@ class BCPCommand(scoping.Command):
             ...     [(1, 2), (1, 4)],
             ...     abjad.tweak('red').color,
             ...     )
-            >>> abjad.f(command)
+            >>> string = abjad.storage(command)
+            >>> print(string)
             baca.BCPCommand(
                 bcps=[
                     (1, 2),
@@ -829,7 +834,8 @@ class BCPCommand(scoping.Command):
                 )
 
             >>> new_command = abjad.new(command)
-            >>> abjad.f(new_command)
+            >>> string = abjad.storage(new_command)
+            >>> print(string)
             baca.BCPCommand(
                 bcps=[
                     (1, 2),
@@ -917,7 +923,9 @@ class ContainerCommand(scoping.Command):
 
         >>> lilypond_file = maker.run(environment='docs')
 
-        >>> abjad.f(lilypond_file[abjad.Score], align_tags=89)
+        >>> string = abjad.lilypond(lilypond_file[abjad.Score])
+        >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
+        >>> print(string)
         <BLANKLINE>
         \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
         <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
