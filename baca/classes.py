@@ -7402,7 +7402,8 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                >>> voice = lilypond_file[abjad.Score][0][0]
+                >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \new Voice
                 {
@@ -7453,7 +7454,8 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                >>> voice = lilypond_file[abjad.Score][0][0]
+                >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \new Voice
                 {
@@ -7493,7 +7495,8 @@ class Sequence(abjad.Sequence):
 
             ..  docs::
 
-                >>> string = abjad.lilypond(lilypond_file[abjad.Voice])
+                >>> voice = lilypond_file[abjad.Score][0][0]
+                >>> string = abjad.lilypond(voice)
                 >>> print(string)
                 \new Voice
                 {
