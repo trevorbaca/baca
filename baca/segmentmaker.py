@@ -437,7 +437,7 @@ class SegmentMaker(abjad.SegmentMaker):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.setting(lilypond_file['Score']).auto_beaming = False
+        >>> abjad.setting(lilypond_file['Score']).autoBeaming = False
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -4504,7 +4504,7 @@ class SegmentMaker(abjad.SegmentMaker):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.setting(lilypond_file['Score']).auto_beaming = False
+            >>> abjad.setting(lilypond_file['Score']).autoBeaming = False
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
