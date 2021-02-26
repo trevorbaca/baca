@@ -2969,7 +2969,7 @@ class Constellation:
         score, treble, bass = abjad.illustrators.make_piano_score(
             leaves=chords, sketch=True
         )
-        score.override.text_script.staff_padding = 10
+        score.override.TextScript.staff_padding = 10
         score.set.proportionalNotationDuration = "#(ly:make-moment 1 30)"
         lilypond_file = abjad.LilyPondFile(items=[score])
         lilypond_file.default_paper_size = "letter", "landscape"
@@ -3361,7 +3361,7 @@ class ConstellationCircuit:
     def _illustrate_chords(self, chords):
         result = abjad.illustrators.make_piano_score(leaves=chords, sketch=True)
         score, treble, bass = result
-        abjad.override(score).text_script.staff_padding = 10
+        abjad.override(score).TextScript.staff_padding = 10
         abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 30)"
         preamble = r"""#(set-global-staff-size 18)
 
@@ -4036,11 +4036,11 @@ class HarmonicSeries:
                 if abjad.NamedPitch("C4") <= note.written_pitch:
                     abjad.attach(abjad.Clef("treble"), note)
                     break
-        abjad.override(staff).bar_line.stencil = False
-        abjad.override(staff).stem.transparent = True
-        abjad.override(staff).text_script.font_size = -1
-        abjad.override(staff).text_script.staff_padding = 6
-        abjad.override(staff).time_signature.stencil = False
+        abjad.override(staff).BarLine.stencil = False
+        abjad.override(staff).Stem.transparent = True
+        abjad.override(staff).TextScript.font_size = -1
+        abjad.override(staff).TextScript.staff_padding = 6
+        abjad.override(staff).TimeSignature.stencil = False
         score = abjad.Score([staff])
         abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 8)"
         lilypond_file = abjad.LilyPondFile(items=[score])
@@ -7460,14 +7460,14 @@ class PitchTree(classes.Tree):
         self._attach_cell_indices(cell_indices, leaf_groups)
         self._label_set_classes(set_classes, leaf_groups)
         abjad.deprecated.add_final_bar_line(score)
-        abjad.override(score).bar_line.transparent = True
-        abjad.override(score).bar_number.stencil = False
-        abjad.override(score).beam.stencil = False
-        abjad.override(score).flag.stencil = False
-        abjad.override(score).horizontal_bracket.staff_padding = 4
-        abjad.override(score).stem.stencil = False
-        abjad.override(score).text_script.staff_padding = 2
-        abjad.override(score).time_signature.stencil = False
+        abjad.override(score).BarLine.transparent = True
+        abjad.override(score).BarNumber.stencil = False
+        abjad.override(score).Beam.stencil = False
+        abjad.override(score).Flag.stencil = False
+        abjad.override(score).HorizontalBracket.staff_padding = 4
+        abjad.override(score).Stem.stencil = False
+        abjad.override(score).TextScript.staff_padding = 2
+        abjad.override(score).TimeSignature.stencil = False
         final_leaf = abjad.get.leaf(score, -1)
         string = r"\override Score.BarLine.transparent = ##f"
         literal = abjad.LilyPondLiteral(string, "after")
@@ -7480,10 +7480,10 @@ class PitchTree(classes.Tree):
             includes=["/Users/trevorbaca/baca/lilypond/baca.ily"],
             items=[preamble, score],
         )
-        abjad.override(score).spacing_spanner.strict_grace_spacing = True
-        abjad.override(score).spacing_spanner.strict_note_spacing = True
-        abjad.override(score).spacing_spanner.uniform_stretching = True
-        abjad.override(score).text_script.X_extent = False
+        abjad.override(score).SpacingSpanner.strict_grace_spacing = True
+        abjad.override(score).SpacingSpanner.strict_note_spacing = True
+        abjad.override(score).SpacingSpanner.uniform_stretching = True
+        abjad.override(score).TextScript.X_extent = False
         if "title" in keywords:
             title = keywords.get("title")
             if not isinstance(title, abjad.Markup):

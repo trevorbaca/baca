@@ -1882,8 +1882,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).chead(-1)
@@ -1974,8 +1974,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).cheads()
@@ -2083,8 +2083,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).clparts([2, 3, 4])
@@ -2289,8 +2289,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).leaves().enchain([5])
@@ -2326,7 +2326,7 @@ class Selection(abjad.Selection):
                 ...         markup = abjad.new(markup, direction=direction)
                 ...         abjad.attach(markup, leaf)
 
-                >>> abjad.override(staff).text_script.staff_padding = 6
+                >>> abjad.override(staff).TextScript.staff_padding = 6
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -2922,8 +2922,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> baca.select(staff).tuplets()[1:2].lleaf(0)
@@ -3082,8 +3082,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).tuplets()[1:2].lleaves()
@@ -3194,8 +3194,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).lparts([2, 3, 4])
@@ -3300,8 +3300,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).lt(-1)
@@ -3393,8 +3393,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ltleaf(0)
@@ -3484,8 +3484,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ltleaves()
@@ -3625,8 +3625,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ltqrun(-1)
@@ -3718,8 +3718,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ltqruns()
@@ -3841,8 +3841,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ltrun(-1)
@@ -3937,8 +3937,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ltruns()
@@ -4051,8 +4051,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).lts()
@@ -4544,8 +4544,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ntrun(-1)
@@ -4640,8 +4640,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ntruns()
@@ -4856,8 +4856,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).phead(-1)
@@ -4948,8 +4948,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).pheads()
@@ -5075,8 +5075,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).pleaf(-1)
@@ -5167,8 +5167,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).pleaves()
@@ -5303,8 +5303,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).plt(-1)
@@ -5396,8 +5396,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).plts()
@@ -5526,8 +5526,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ptail(-1)
@@ -5618,8 +5618,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ptails()
@@ -5745,8 +5745,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ptlt(-1)
@@ -5837,8 +5837,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).ptlts()
@@ -5955,8 +5955,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).qrun(-1)
@@ -6048,8 +6048,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).qruns()
@@ -6171,8 +6171,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> baca.select(staff).tuplets()[1:2].rleaf(-1)
@@ -6333,8 +6333,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).tuplets()[1:2].rleaves()
@@ -6524,8 +6524,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).rrun(1)
@@ -6621,8 +6621,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).rruns()
@@ -6871,8 +6871,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).tleaf(0)
@@ -6963,8 +6963,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).tleaves()
@@ -7106,8 +7106,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> baca.select(staff).tuplets()[1:2].wleaf(0)
@@ -7186,8 +7186,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> baca.select(staff).tuplets()[1:2].wleaf(-1)
@@ -7276,8 +7276,8 @@ class Selection(abjad.Selection):
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).auto_beaming = False
-                >>> abjad.override(staff).tuplet_bracket.direction = abjad.Up
-                >>> abjad.override(staff).tuplet_bracket.staff_padding = 3
+                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+                >>> abjad.override(staff).TupletBracket.staff_padding = 3
                 >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
                 >>> result = baca.select(staff).tuplets()[1:2].wleaves()

@@ -1050,8 +1050,8 @@ class Acciaccatura:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -1147,8 +1147,8 @@ class Acciaccatura:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -1251,8 +1251,8 @@ class Acciaccatura:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -1355,8 +1355,8 @@ class Acciaccatura:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -1465,8 +1465,8 @@ class Acciaccatura:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -1577,8 +1577,8 @@ class Acciaccatura:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -1686,8 +1686,8 @@ class Acciaccatura:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -1979,8 +1979,8 @@ class Imbrication:
         """
         original_container = container
         container = copy.deepcopy(container)
-        abjad.override(container).tuplet_bracket.stencil = False
-        abjad.override(container).tuplet_number.stencil = False
+        abjad.override(container).TupletBracket.stencil = False
+        abjad.override(container).TupletNumber.stencil = False
         segment = classes.Sequence(self.segment).flatten(depth=-1)
         if self.by_pitch_class:
             segment = [abjad.NumberedPitchClass(_) for _ in segment]
@@ -5088,14 +5088,14 @@ class FigureMaker:
         for multiplier, leaf in zip(multipliers, leaf_selection):
             leaf.multiplier = multiplier
         if rmakers.FeatherBeamCommand._is_accelerando(leaf_selection):
-            abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Right
+            abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.Right
         elif rmakers.FeatherBeamCommand._is_ritardando(leaf_selection):
-            abjad.override(leaf_selection[0]).beam.grow_direction = abjad.Left
+            abjad.override(leaf_selection[0]).Beam.grow_direction = abjad.Left
         duration = abjad.get.duration(tuplet)
         notes = abjad.LeafMaker()([0], [duration])
         string = abjad.illustrators.selection_to_score_markup_string(notes)
         markup = abjad.Markup(rf"\markup \scale #'(0.75 . 0.75) {string}", literal=True)
-        abjad.override(tuplet).tuplet_number.text = markup
+        abjad.override(tuplet).TupletNumber.text = markup
         return tuplet
 
     @classmethod
@@ -5400,8 +5400,8 @@ class FigureMaker:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -5496,8 +5496,8 @@ class FigureMaker:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> score = lilypond_file[abjad.Score]
-            >>> abjad.override(score).spacing_spanner.strict_grace_spacing = False
-            >>> abjad.override(score).spacing_spanner.strict_note_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
+            >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -7103,8 +7103,8 @@ class FigureMaker:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).beam.positions = (-6, -6)
-            >>> abjad.override(staff).stem.direction = abjad.Down
+            >>> abjad.override(staff).Beam.positions = (-6, -6)
+            >>> abjad.override(staff).Stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -7196,8 +7196,8 @@ class FigureMaker:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).beam.positions = (-6, -6)
-            >>> abjad.override(staff).stem.direction = abjad.Down
+            >>> abjad.override(staff).Beam.positions = (-6, -6)
+            >>> abjad.override(staff).Stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -7286,8 +7286,8 @@ class FigureMaker:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).beam.positions = (-6, -6)
-            >>> abjad.override(staff).stem.direction = abjad.Down
+            >>> abjad.override(staff).Beam.positions = (-6, -6)
+            >>> abjad.override(staff).Stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -10787,7 +10787,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> staff = lilypond_file[abjad.Score]
-        >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
+        >>> abjad.override(staff).TupletBracket.staff_padding = 4
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -10854,7 +10854,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> staff = lilypond_file[abjad.Score]
-        >>> abjad.override(staff).tuplet_bracket.staff_padding = 4
+        >>> abjad.override(staff).TupletBracket.staff_padding = 4
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -11303,8 +11303,8 @@ def stack(*commands) -> Stack:
         >>> selections = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
         >>> staff = lilypond_file[abjad.Score]
-        >>> abjad.override(staff).beam.positions = (-6, -6)
-        >>> abjad.override(staff).stem.direction = abjad.Down
+        >>> abjad.override(staff).Beam.positions = (-6, -6)
+        >>> abjad.override(staff).Stem.direction = abjad.Down
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
