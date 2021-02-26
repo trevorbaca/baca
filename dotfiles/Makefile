@@ -52,7 +52,8 @@ check:
 	make black-check
 	make flake8
 	make isort-check
-	make mypy
+	# teach mypy to iterate segment directories individually
+	# make mypy
 
 test:
 	make black-check

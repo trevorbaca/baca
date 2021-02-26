@@ -406,56 +406,56 @@ def bar_line_transparent(
             >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            \context Score = "Score"
+            <<
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                \context GlobalContext = "Global_Context"
+                <<
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    \context GlobalSkips = "Global_Skips"
+                    {
             <BLANKLINE>
-                        % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 1]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 2]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 3]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 4]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
-                        \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
-                        s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
-                        \once \override Score.BarLine.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
-                        \once \override Score.SpanBar.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
+                        % [Global_Skips measure 5]
+                        \time 1/4
+                        \baca-time-signature-transparent
+                        s1 * 1/4
+                        \once \override Score.BarLine.transparent = ##t
+                        \once \override Score.SpanBar.transparent = ##t
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                >>
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                \context MusicContext = "Music_Context"
+                <<
             <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    \context Staff = "Music_Staff"
+                    {
             <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        \context Voice = "Music_Voice"
+                        {
             <BLANKLINE>
-                            % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            % [Music_Voice measure 1]
                             e'8
                             [
             <BLANKLINE>
@@ -466,8 +466,8 @@ def bar_line_transparent(
             <BLANKLINE>
                             r8
             <BLANKLINE>
-                            % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override Score.BarLine.transparent = ##t                                %! baca.bar_line_transparent():baca.OverrideCommand._call(1)
+                            % [Music_Voice measure 2]
+                            \override Score.BarLine.transparent = ##t
                             e''8
                             [
             <BLANKLINE>
@@ -475,9 +475,9 @@ def bar_line_transparent(
             <BLANKLINE>
                             f''8
                             ]
-                            \revert Score.BarLine.transparent                                        %! baca.bar_line_transparent():baca.OverrideCommand._call(2)
+                            \revert Score.BarLine.transparent
             <BLANKLINE>
-                            % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            % [Music_Voice measure 3]
                             r8
             <BLANKLINE>
                             e'8
@@ -488,7 +488,7 @@ def bar_line_transparent(
                             f'8
                             ]
             <BLANKLINE>
-                            % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
+                            % [Music_Voice measure 4]
                             r8
             <BLANKLINE>
                             e''8
@@ -497,43 +497,43 @@ def bar_line_transparent(
                             g'8
                             ]
             <BLANKLINE>
-                            <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice"                                       %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                \context Voice = "Music_Voice"
+                                {
             <BLANKLINE>
-                                    % [Music_Voice measure 5]                                        %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \abjad-invisible-music-coloring                                  %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:NOTE:INVISIBLE_MUSIC_COLORING:baca.SegmentMaker._style_phantom_measures(5)
-                                %@% \abjad-invisible-music                                           %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:NOTE:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
-                                    \baca-not-yet-pitched-coloring                                   %! baca.SegmentMaker._color_not_yet_pitched():NOT_YET_PITCHED_COLORING:HIDDEN:NOTE:baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    b'1 * 1/4                                                        %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:NOTE
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:NOTE:PHANTOM:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Music_Voice measure 5]
+                                    \abjad-invisible-music-coloring
+                                    %@% \abjad-invisible-music
+                                    \baca-not-yet-pitched-coloring
+                                    b'1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice"                                        %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                \context Voice = "Rest_Voice"
+                                {
             <BLANKLINE>
-                                    % [Rest_Voice measure 5]                                         %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \once \override Score.TimeSignature.X-extent = ##f               %! baca.SegmentMaker._style_phantom_measures(6):PHANTOM
-                                    \once \override MultiMeasureRest.transparent = ##t               %! baca.SegmentMaker._style_phantom_measures(7):PHANTOM
-                                    \stopStaff                                                       %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:PHANTOM:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Rest_Voice measure 5]
+                                    \once \override Score.TimeSignature.X-extent = ##f
+                                    \once \override MultiMeasureRest.transparent = ##t
+                                    \stopStaff
+                                    \once \override Staff.StaffSymbol.transparent = ##t
+                                    \startStaff
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                }
             <BLANKLINE>
-                            >>                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            >>
             <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        }
             <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                >>
             <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            >>
 
     """
     return OverrideCommand(
@@ -611,10 +611,10 @@ def beam_positions(
                 \new Staff
                 {
                     \times 4/5 {
-                        \override Beam.positions = #'(6 . 6)                                         %! baca.beam_positions():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #4                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override Beam.positions = #'(6 . 6)
+                        \override TupletBracket.staff-padding = #4
                         r8
-                        \override Stem.direction = #up                                               %! baca.stem_up():baca.OverrideCommand._call(1)
+                        \override Stem.direction = #up
                         c'16
                         [
                         d'16
@@ -632,10 +632,10 @@ def beam_positions(
                     }
                     \times 4/5 {
                         a'16
-                        \revert Stem.direction                                                       %! baca.stem_up():baca.OverrideCommand._call(2)
+                        \revert Stem.direction
                         r4
-                        \revert Beam.positions                                                       %! baca.beam_positions():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert Beam.positions
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -821,26 +821,26 @@ def dls_staff_padding(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override DynamicLineSpanner.staff-padding = #4                              %! baca.dls_staff_padding():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override DynamicLineSpanner.staff-padding = #4
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
-                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
-                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_START
+                        \p
+                        \<
                         [
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
-                        \f                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(3):SPANNER_STOP
+                        \f
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
-                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_START
+                        \p
+                        \<
                         [
                         e''16
                         ]
@@ -851,15 +851,15 @@ def dls_staff_padding(
                         af''16
                         [
                         g''16
-                        \f                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(3):SPANNER_STOP
+                        \f
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
+                        \p
                         r4
-                        \revert DynamicLineSpanner.staff-padding                                     %! baca.dls_staff_padding():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert DynamicLineSpanner.staff-padding
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -923,26 +923,26 @@ def dls_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override DynamicLineSpanner.direction = #up                                 %! baca.dls_up():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override DynamicLineSpanner.direction = #up
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
-                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
-                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_START
+                        \p
+                        \<
                         [
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
-                        \f                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(3):SPANNER_STOP
+                        \f
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
-                        \<                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_START
+                        \p
+                        \<
                         [
                         e''16
                         ]
@@ -953,15 +953,15 @@ def dls_up(
                         af''16
                         [
                         g''16
-                        \f                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(3):SPANNER_STOP
+                        \f
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        \p                                                                           %! baca.hairpin():baca.PiecewiseCommand._call(2):SPANNER_STOP
+                        \p
                         r4
-                        \revert DynamicLineSpanner.direction                                         %! baca.dls_up():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert DynamicLineSpanner.direction
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -1097,11 +1097,11 @@ def dynamic_text_extra_offset(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
                         r8
-                        \once \override DynamicText.extra-offset = #'(-3 . 0)                        %! baca.dynamic_text_extra_offset():baca.OverrideCommand._call(1)
+                        \once \override DynamicText.extra-offset = #'(-3 . 0)
                         c'16
-                        \p                                                                           %! baca.dynamic():baca.IndicatorCommand._call()
+                        \p
                         [
                         d'16
                         ]
@@ -1113,7 +1113,7 @@ def dynamic_text_extra_offset(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        \f                                                                           %! baca.dynamic():baca.IndicatorCommand._call()
+                        \f
                         [
                         e''16
                         ]
@@ -1129,7 +1129,7 @@ def dynamic_text_extra_offset(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -1470,109 +1470,109 @@ def mmrest_color(
             >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            \context Score = "Score"
+            <<
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                \context GlobalContext = "Global_Context"
+                <<
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    \context GlobalSkips = "Global_Skips"
+                    {
             <BLANKLINE>
-                        % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 1]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 2]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 3]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 4]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
-                        \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
-                        s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
-                        \once \override Score.BarLine.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
-                        \once \override Score.SpanBar.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
+                        % [Global_Skips measure 5]
+                        \time 1/4
+                        \baca-time-signature-transparent
+                        s1 * 1/4
+                        \once \override Score.BarLine.transparent = ##t
+                        \once \override Score.SpanBar.transparent = ##t
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                >>
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                \context MusicContext = "Music_Context"
+                <<
             <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    \context Staff = "Music_Staff"
+                    {
             <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        \context Voice = "Music_Voice"
+                        {
             <BLANKLINE>
-                            % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)              %! baca.mmrest_color():baca.OverrideCommand._call(1)
-                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 1]
+                            \override MultiMeasureRest.color = #(x11-color 'DarkOrchid)
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 2]
+                            R1 * 3/8
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 3]
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
-                            \revert MultiMeasureRest.color                                           %! baca.mmrest_color():baca.OverrideCommand._call(2)
+                            % [Music_Voice measure 4]
+                            R1 * 3/8
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            \revert MultiMeasureRest.color
             <BLANKLINE>
-                            <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice"                                       %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                \context Voice = "Music_Voice"
+                                {
             <BLANKLINE>
-                                    % [Music_Voice measure 5]                                        %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \abjad-invisible-music-coloring                                  %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:MULTIMEASURE_REST:INVISIBLE_MUSIC_COLORING:baca.SegmentMaker._style_phantom_measures(5)
-                                %@% \abjad-invisible-music                                           %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:MULTIMEASURE_REST:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:MULTIMEASURE_REST:PHANTOM:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Music_Voice measure 5]
+                                    \abjad-invisible-music-coloring
+                                    %@% \abjad-invisible-music
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice"                                        %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                \context Voice = "Rest_Voice"
+                                {
             <BLANKLINE>
-                                    % [Rest_Voice measure 5]                                         %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \once \override Score.TimeSignature.X-extent = ##f               %! baca.SegmentMaker._style_phantom_measures(6):PHANTOM
-                                    \once \override MultiMeasureRest.transparent = ##t               %! baca.SegmentMaker._style_phantom_measures(7):PHANTOM
-                                    \stopStaff                                                       %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:PHANTOM:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Rest_Voice measure 5]
+                                    \once \override Score.TimeSignature.X-extent = ##f
+                                    \once \override MultiMeasureRest.transparent = ##t
+                                    \stopStaff
+                                    \once \override Staff.StaffSymbol.transparent = ##t
+                                    \startStaff
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                }
             <BLANKLINE>
-                            >>                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            >>
             <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        }
             <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                >>
             <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            >>
 
     """
     return OverrideCommand(
@@ -1634,110 +1634,110 @@ def mmrest_text_color(
             >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            \context Score = "Score"
+            <<
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                \context GlobalContext = "Global_Context"
+                <<
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    \context GlobalSkips = "Global_Skips"
+                    {
             <BLANKLINE>
-                        % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 1]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 2]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 3]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 4]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
-                        \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
-                        s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
-                        \once \override Score.BarLine.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
-                        \once \override Score.SpanBar.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
+                        % [Global_Skips measure 5]
+                        \time 1/4
+                        \baca-time-signature-transparent
+                        s1 * 1/4
+                        \once \override Score.BarLine.transparent = ##t
+                        \once \override Score.SpanBar.transparent = ##t
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                >>
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                \context MusicContext = "Music_Context"
+                <<
             <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    \context Staff = "Music_Staff"
+                    {
             <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        \context Voice = "Music_Voice"
+                        {
             <BLANKLINE>
-                            % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override MultiMeasureRestText.color = #red                              %! baca.mmrest_text_color():baca.OverrideCommand._call(1)
-                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 1]
+                            \override MultiMeasureRestText.color = #red
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                            ^ \baca-boxed-markup still                                               %! baca.markup():baca.IndicatorCommand._call()
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 2]
+                            R1 * 3/8
+                            ^ \baca-boxed-markup still
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 3]
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
-                            \revert MultiMeasureRestText.color                                       %! baca.mmrest_text_color():baca.OverrideCommand._call(2)
+                            % [Music_Voice measure 4]
+                            R1 * 3/8
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            \revert MultiMeasureRestText.color
             <BLANKLINE>
-                            <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice"                                       %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                \context Voice = "Music_Voice"
+                                {
             <BLANKLINE>
-                                    % [Music_Voice measure 5]                                        %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \abjad-invisible-music-coloring                                  %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:MULTIMEASURE_REST:INVISIBLE_MUSIC_COLORING:baca.SegmentMaker._style_phantom_measures(5)
-                                %@% \abjad-invisible-music                                           %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:MULTIMEASURE_REST:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:MULTIMEASURE_REST:PHANTOM:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Music_Voice measure 5]
+                                    \abjad-invisible-music-coloring
+                                    %@% \abjad-invisible-music
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice"                                        %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                \context Voice = "Rest_Voice"
+                                {
             <BLANKLINE>
-                                    % [Rest_Voice measure 5]                                         %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \once \override Score.TimeSignature.X-extent = ##f               %! baca.SegmentMaker._style_phantom_measures(6):PHANTOM
-                                    \once \override MultiMeasureRest.transparent = ##t               %! baca.SegmentMaker._style_phantom_measures(7):PHANTOM
-                                    \stopStaff                                                       %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:PHANTOM:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Rest_Voice measure 5]
+                                    \once \override Score.TimeSignature.X-extent = ##f
+                                    \once \override MultiMeasureRest.transparent = ##t
+                                    \stopStaff
+                                    \once \override Staff.StaffSymbol.transparent = ##t
+                                    \startStaff
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                }
             <BLANKLINE>
-                            >>                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            >>
             <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        }
             <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                >>
             <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            >>
 
     ..  container:: example exception
 
@@ -1810,110 +1810,110 @@ def mmrest_text_extra_offset(
             >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            \context Score = "Score"
+            <<
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                \context GlobalContext = "Global_Context"
+                <<
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    \context GlobalSkips = "Global_Skips"
+                    {
             <BLANKLINE>
-                        % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 1]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 2]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 3]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 4]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
-                        \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
-                        s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
-                        \once \override Score.BarLine.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
-                        \once \override Score.SpanBar.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
+                        % [Global_Skips measure 5]
+                        \time 1/4
+                        \baca-time-signature-transparent
+                        s1 * 1/4
+                        \once \override Score.BarLine.transparent = ##t
+                        \once \override Score.SpanBar.transparent = ##t
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                >>
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                \context MusicContext = "Music_Context"
+                <<
             <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    \context Staff = "Music_Staff"
+                    {
             <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        \context Voice = "Music_Voice"
+                        {
             <BLANKLINE>
-                            % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override MultiMeasureRestText.extra-offset = #'(0 . 2)                  %! baca.mmrest_text_extra_offset():baca.OverrideCommand._call(1)
-                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 1]
+                            \override MultiMeasureRestText.extra-offset = #'(0 . 2)
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                            ^ \baca-boxed-markup still                                               %! baca.markup():baca.IndicatorCommand._call()
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 2]
+                            R1 * 3/8
+                            ^ \baca-boxed-markup still
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 3]
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
-                            \revert MultiMeasureRestText.extra-offset                                %! baca.mmrest_text_extra_offset():baca.OverrideCommand._call(2)
+                            % [Music_Voice measure 4]
+                            R1 * 3/8
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            \revert MultiMeasureRestText.extra-offset
             <BLANKLINE>
-                            <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice"                                       %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                \context Voice = "Music_Voice"
+                                {
             <BLANKLINE>
-                                    % [Music_Voice measure 5]                                        %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \abjad-invisible-music-coloring                                  %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:MULTIMEASURE_REST:INVISIBLE_MUSIC_COLORING:baca.SegmentMaker._style_phantom_measures(5)
-                                %@% \abjad-invisible-music                                           %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:MULTIMEASURE_REST:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:MULTIMEASURE_REST:PHANTOM:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Music_Voice measure 5]
+                                    \abjad-invisible-music-coloring
+                                    %@% \abjad-invisible-music
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice"                                        %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                \context Voice = "Rest_Voice"
+                                {
             <BLANKLINE>
-                                    % [Rest_Voice measure 5]                                         %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \once \override Score.TimeSignature.X-extent = ##f               %! baca.SegmentMaker._style_phantom_measures(6):PHANTOM
-                                    \once \override MultiMeasureRest.transparent = ##t               %! baca.SegmentMaker._style_phantom_measures(7):PHANTOM
-                                    \stopStaff                                                       %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:PHANTOM:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Rest_Voice measure 5]
+                                    \once \override Score.TimeSignature.X-extent = ##f
+                                    \once \override MultiMeasureRest.transparent = ##t
+                                    \stopStaff
+                                    \once \override Staff.StaffSymbol.transparent = ##t
+                                    \startStaff
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                }
             <BLANKLINE>
-                            >>                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            >>
             <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        }
             <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                >>
             <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            >>
 
     """
     return OverrideCommand(
@@ -1959,110 +1959,110 @@ def mmrest_text_padding(
             >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            \context Score = "Score"
+            <<
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                \context GlobalContext = "Global_Context"
+                <<
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    \context GlobalSkips = "Global_Skips"
+                    {
             <BLANKLINE>
-                        % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 1]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 2]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 3]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 4]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
-                        \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
-                        s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
-                        \once \override Score.BarLine.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
-                        \once \override Score.SpanBar.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
+                        % [Global_Skips measure 5]
+                        \time 1/4
+                        \baca-time-signature-transparent
+                        s1 * 1/4
+                        \once \override Score.BarLine.transparent = ##t
+                        \once \override Score.SpanBar.transparent = ##t
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                >>
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                \context MusicContext = "Music_Context"
+                <<
             <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    \context Staff = "Music_Staff"
+                    {
             <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        \context Voice = "Music_Voice"
+                        {
             <BLANKLINE>
-                            % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override MultiMeasureRestText.padding = #2                              %! baca.mmrest_text_padding():baca.OverrideCommand._call(1)
-                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 1]
+                            \override MultiMeasureRestText.padding = #2
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                            ^ \baca-boxed-markup still                                               %! baca.markup():baca.IndicatorCommand._call()
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 2]
+                            R1 * 3/8
+                            ^ \baca-boxed-markup still
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 3]
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
-                            \revert MultiMeasureRestText.padding                                     %! baca.mmrest_text_padding():baca.OverrideCommand._call(2)
+                            % [Music_Voice measure 4]
+                            R1 * 3/8
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            \revert MultiMeasureRestText.padding
             <BLANKLINE>
-                            <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice"                                       %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                \context Voice = "Music_Voice"
+                                {
             <BLANKLINE>
-                                    % [Music_Voice measure 5]                                        %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \abjad-invisible-music-coloring                                  %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:MULTIMEASURE_REST:INVISIBLE_MUSIC_COLORING:baca.SegmentMaker._style_phantom_measures(5)
-                                %@% \abjad-invisible-music                                           %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:MULTIMEASURE_REST:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:MULTIMEASURE_REST:PHANTOM:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Music_Voice measure 5]
+                                    \abjad-invisible-music-coloring
+                                    %@% \abjad-invisible-music
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice"                                        %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                \context Voice = "Rest_Voice"
+                                {
             <BLANKLINE>
-                                    % [Rest_Voice measure 5]                                         %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \once \override Score.TimeSignature.X-extent = ##f               %! baca.SegmentMaker._style_phantom_measures(6):PHANTOM
-                                    \once \override MultiMeasureRest.transparent = ##t               %! baca.SegmentMaker._style_phantom_measures(7):PHANTOM
-                                    \stopStaff                                                       %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:PHANTOM:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Rest_Voice measure 5]
+                                    \once \override Score.TimeSignature.X-extent = ##f
+                                    \once \override MultiMeasureRest.transparent = ##t
+                                    \stopStaff
+                                    \once \override Staff.StaffSymbol.transparent = ##t
+                                    \startStaff
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                }
             <BLANKLINE>
-                            >>                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            >>
             <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        }
             <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                >>
             <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            >>
 
     """
     return OverrideCommand(
@@ -2107,110 +2107,110 @@ def mmrest_text_parent_center(
             >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            \context Score = "Score"
+            <<
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                \context GlobalContext = "Global_Context"
+                <<
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    \context GlobalSkips = "Global_Skips"
+                    {
             <BLANKLINE>
-                        % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 1]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 2]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 3]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 4]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
-                        \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
-                        s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
-                        \once \override Score.BarLine.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
-                        \once \override Score.SpanBar.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
+                        % [Global_Skips measure 5]
+                        \time 1/4
+                        \baca-time-signature-transparent
+                        s1 * 1/4
+                        \once \override Score.BarLine.transparent = ##t
+                        \once \override Score.SpanBar.transparent = ##t
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                >>
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                \context MusicContext = "Music_Context"
+                <<
             <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    \context Staff = "Music_Staff"
+                    {
             <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        \context Voice = "Music_Voice"
+                        {
             <BLANKLINE>
-                            % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override MultiMeasureRestText.parent-alignment-X = #0                   %! baca.mmrest_text_parent_center():baca.OverrideCommand._call(1)
-                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 1]
+                            \override MultiMeasureRestText.parent-alignment-X = #0
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                            ^ \baca-boxed-markup still                                               %! baca.markup():baca.IndicatorCommand._call()
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 2]
+                            R1 * 3/8
+                            ^ \baca-boxed-markup still
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 3]
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
-                            \revert MultiMeasureRestText.parent-alignment-X                          %! baca.mmrest_text_parent_center():baca.OverrideCommand._call(2)
+                            % [Music_Voice measure 4]
+                            R1 * 3/8
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            \revert MultiMeasureRestText.parent-alignment-X
             <BLANKLINE>
-                            <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice"                                       %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                \context Voice = "Music_Voice"
+                                {
             <BLANKLINE>
-                                    % [Music_Voice measure 5]                                        %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \abjad-invisible-music-coloring                                  %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:MULTIMEASURE_REST:INVISIBLE_MUSIC_COLORING:baca.SegmentMaker._style_phantom_measures(5)
-                                %@% \abjad-invisible-music                                           %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:MULTIMEASURE_REST:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:MULTIMEASURE_REST:PHANTOM:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Music_Voice measure 5]
+                                    \abjad-invisible-music-coloring
+                                    %@% \abjad-invisible-music
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice"                                        %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                \context Voice = "Rest_Voice"
+                                {
             <BLANKLINE>
-                                    % [Rest_Voice measure 5]                                         %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \once \override Score.TimeSignature.X-extent = ##f               %! baca.SegmentMaker._style_phantom_measures(6):PHANTOM
-                                    \once \override MultiMeasureRest.transparent = ##t               %! baca.SegmentMaker._style_phantom_measures(7):PHANTOM
-                                    \stopStaff                                                       %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:PHANTOM:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Rest_Voice measure 5]
+                                    \once \override Score.TimeSignature.X-extent = ##f
+                                    \once \override MultiMeasureRest.transparent = ##t
+                                    \stopStaff
+                                    \once \override Staff.StaffSymbol.transparent = ##t
+                                    \startStaff
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                }
             <BLANKLINE>
-                            >>                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            >>
             <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        }
             <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                >>
             <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            >>
 
     """
     return OverrideCommand(
@@ -2256,110 +2256,110 @@ def mmrest_text_staff_padding(
             >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
-            \context Score = "Score"                                                                 %! baca.SingleStaffScoreTemplate.__call__()
-            <<                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            \context Score = "Score"
+            <<
             <BLANKLINE>
-                \context GlobalContext = "Global_Context"                                            %! abjad.ScoreTemplate._make_global_context()
-                <<                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                \context GlobalContext = "Global_Context"
+                <<
             <BLANKLINE>
-                    \context GlobalSkips = "Global_Skips"                                            %! abjad.ScoreTemplate._make_global_context()
-                    {                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    \context GlobalSkips = "Global_Skips"
+                    {
             <BLANKLINE>
-                        % [Global_Skips measure 1]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 1]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 2]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 2]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 3]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 4/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 1/2                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 3]
+                        \time 4/8
+                        \baca-time-signature-color #'blue
+                        s1 * 1/2
             <BLANKLINE>
-                        % [Global_Skips measure 4]                                                   %! baca.SegmentMaker._comment_measure_numbers()
-                        \time 3/8                                                                    %! baca.SegmentMaker._make_global_skips(2):baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE
-                        \baca-time-signature-color #'blue                                            %! baca.SegmentMaker._attach_color_literal(2):EXPLICIT_TIME_SIGNATURE_COLOR
-                        s1 * 3/8                                                                     %! baca.SegmentMaker._make_global_skips(1)
+                        % [Global_Skips measure 4]
+                        \time 3/8
+                        \baca-time-signature-color #'blue
+                        s1 * 3/8
             <BLANKLINE>
-                        % [Global_Skips measure 5]                                                   %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(1):PHANTOM
-                        \time 1/4                                                                    %! baca.SegmentMaker._make_global_skips(3):PHANTOM:baca.SegmentMaker._set_status_tag():EXPLICIT_TIME_SIGNATURE:baca.SegmentMaker._style_phantom_measures(1)
-                        \baca-time-signature-transparent                                             %! baca.SegmentMaker._style_phantom_measures(2):PHANTOM
-                        s1 * 1/4                                                                     %! baca.SegmentMaker._make_global_skips(3):PHANTOM
-                        \once \override Score.BarLine.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
-                        \once \override Score.SpanBar.transparent = ##t                              %! baca.SegmentMaker._style_phantom_measures(3):PHANTOM
+                        % [Global_Skips measure 5]
+                        \time 1/4
+                        \baca-time-signature-transparent
+                        s1 * 1/4
+                        \once \override Score.BarLine.transparent = ##t
+                        \once \override Score.SpanBar.transparent = ##t
             <BLANKLINE>
-                    }                                                                                %! abjad.ScoreTemplate._make_global_context()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! abjad.ScoreTemplate._make_global_context()
+                >>
             <BLANKLINE>
-                \context MusicContext = "Music_Context"                                              %! baca.SingleStaffScoreTemplate.__call__()
-                <<                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                \context MusicContext = "Music_Context"
+                <<
             <BLANKLINE>
-                    \context Staff = "Music_Staff"                                                   %! baca.SingleStaffScoreTemplate.__call__()
-                    {                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    \context Staff = "Music_Staff"
+                    {
             <BLANKLINE>
-                        \context Voice = "Music_Voice"                                               %! baca.SingleStaffScoreTemplate.__call__()
-                        {                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        \context Voice = "Music_Voice"
+                        {
             <BLANKLINE>
-                            % [Music_Voice measure 1]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            \override MultiMeasureRestText.staff-padding = #2                        %! baca.mmrest_text_staff_padding():baca.OverrideCommand._call(1)
-                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 1]
+                            \override MultiMeasureRestText.staff-padding = #2
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 2]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                            ^ \baca-boxed-markup still                                               %! baca.markup():baca.IndicatorCommand._call()
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 2]
+                            R1 * 3/8
+                            ^ \baca-boxed-markup still
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 3]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 4/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"4" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
+                            % [Music_Voice measure 3]
+                            R1 * 4/8
+                            %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
-                            % [Music_Voice measure 4]                                                %! baca.SegmentMaker._comment_measure_numbers()
-                            R1 * 3/8                                                                 %! baca.SegmentMaker._call_rhythm_commands()
-                        %@% ^ \baca-duration-multiplier-markup #"3" #"8"                             %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER
-                            \revert MultiMeasureRestText.staff-padding                               %! baca.mmrest_text_staff_padding():baca.OverrideCommand._call(2)
+                            % [Music_Voice measure 4]
+                            R1 * 3/8
+                            %@% ^ \baca-duration-multiplier-markup #"3" #"8"
+                            \revert MultiMeasureRestText.staff-padding
             <BLANKLINE>
-                            <<                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            <<
             <BLANKLINE>
-                                \context Voice = "Music_Voice"                                       %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                \context Voice = "Music_Voice"
+                                {
             <BLANKLINE>
-                                    % [Music_Voice measure 5]                                        %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \abjad-invisible-music-coloring                                  %! baca.SegmentMaker._make_multimeasure_rest_container(2):PHANTOM:MULTIMEASURE_REST:INVISIBLE_MUSIC_COLORING:baca.SegmentMaker._style_phantom_measures(5)
-                                %@% \abjad-invisible-music                                           %! baca.SegmentMaker._make_multimeasure_rest_container(3):PHANTOM:MULTIMEASURE_REST:INVISIBLE_MUSIC_COMMAND:baca.SegmentMaker._style_phantom_measures(5)
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(1):PHANTOM:HIDDEN:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:HIDDEN:MULTIMEASURE_REST:PHANTOM:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Music_Voice measure 5]
+                                    \abjad-invisible-music-coloring
+                                    %@% \abjad-invisible-music
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(4):PHANTOM
+                                }
             <BLANKLINE>
-                                \context Voice = "Rest_Voice"                                        %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
-                                {                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                \context Voice = "Rest_Voice"
+                                {
             <BLANKLINE>
-                                    % [Rest_Voice measure 5]                                         %! baca.SegmentMaker._comment_measure_numbers():baca.SegmentMaker._style_phantom_measures(5):PHANTOM
-                                    \once \override Score.TimeSignature.X-extent = ##f               %! baca.SegmentMaker._style_phantom_measures(6):PHANTOM
-                                    \once \override MultiMeasureRest.transparent = ##t               %! baca.SegmentMaker._style_phantom_measures(7):PHANTOM
-                                    \stopStaff                                                       %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \once \override Staff.StaffSymbol.transparent = ##t              %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    \startStaff                                                      %! baca.SegmentMaker._style_phantom_measures(8):PHANTOM
-                                    R1 * 1/4                                                         %! baca.SegmentMaker._make_multimeasure_rest_container(5):PHANTOM:REST_VOICE:MULTIMEASURE_REST
-                                %@% ^ \baca-duration-multiplier-markup #"1" #"4"                     %! baca.SegmentMaker._label_duration_multipliers():DURATION_MULTIPLIER:MULTIMEASURE_REST:PHANTOM:REST_VOICE:baca.SegmentMaker._style_phantom_measures(5)
+                                    % [Rest_Voice measure 5]
+                                    \once \override Score.TimeSignature.X-extent = ##f
+                                    \once \override MultiMeasureRest.transparent = ##t
+                                    \stopStaff
+                                    \once \override Staff.StaffSymbol.transparent = ##t
+                                    \startStaff
+                                    R1 * 1/4
+                                    %@% ^ \baca-duration-multiplier-markup #"1" #"4"
             <BLANKLINE>
-                                }                                                                    %! baca.SegmentMaker._make_multimeasure_rest_container(6):PHANTOM
+                                }
             <BLANKLINE>
-                            >>                                                                       %! baca.SegmentMaker._make_multimeasure_rest_container(7):PHANTOM
+                            >>
             <BLANKLINE>
-                        }                                                                            %! baca.SingleStaffScoreTemplate.__call__()
+                        }
             <BLANKLINE>
-                    }                                                                                %! baca.SingleStaffScoreTemplate.__call__()
+                    }
             <BLANKLINE>
-                >>                                                                                   %! baca.SingleStaffScoreTemplate.__call__()
+                >>
             <BLANKLINE>
-            >>                                                                                       %! baca.SingleStaffScoreTemplate.__call__()
+            >>
 
     """
     return OverrideCommand(
@@ -2571,9 +2571,9 @@ def note_head_style_cross(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
                         r8
-                        \override NoteHead.style = #'cross                                           %! baca.note_head_style_cross():baca.OverrideCommand._call(1)
+                        \override NoteHead.style = #'cross
                         c'16
                         [
                         d'16
@@ -2600,9 +2600,9 @@ def note_head_style_cross(
                     }
                     \times 4/5 {
                         a'16
-                        \revert NoteHead.style                                                       %! baca.note_head_style_cross():baca.OverrideCommand._call(2)
+                        \revert NoteHead.style
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -2658,9 +2658,9 @@ def note_head_style_harmonic(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
                         r8
-                        \override NoteHead.style = #'harmonic                                        %! baca.note_head_style_harmonic():baca.OverrideCommand._call(1)
+                        \override NoteHead.style = #'harmonic
                         c'16
                         [
                         d'16
@@ -2687,9 +2687,9 @@ def note_head_style_harmonic(
                     }
                     \times 4/5 {
                         a'16
-                        \revert NoteHead.style                                                       %! baca.note_head_style_harmonic():baca.OverrideCommand._call(2)
+                        \revert NoteHead.style
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -2926,19 +2926,19 @@ def repeat_tie_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
                         r8
-                        \override RepeatTie.direction = #down                                        %! baca.repeat_tie_down():baca.OverrideCommand._call(1)
-                        \override Stem.direction = #up                                               %! baca.stem_up():baca.OverrideCommand._call(1)
+                        \override RepeatTie.direction = #down
+                        \override Stem.direction = #up
                         b'16
                         [
                         b'16
-                        \repeatTie                                                                   %! baca.repeat_tie():baca.IndicatorCommand._call()
+                        \repeatTie
                         ]
                         c''4
                         ~
                         c''16
-                        \repeatTie                                                                   %! baca.repeat_tie():baca.IndicatorCommand._call()
+                        \repeatTie
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
@@ -2946,21 +2946,21 @@ def repeat_tie_down(
                         b'16
                         [
                         b'16
-                        \repeatTie                                                                   %! baca.repeat_tie():baca.IndicatorCommand._call()
+                        \repeatTie
                         ]
                         b'4
-                        \repeatTie                                                                   %! baca.repeat_tie():baca.IndicatorCommand._call()
+                        \repeatTie
                         ~
                         b'16
-                        \repeatTie                                                                   %! baca.repeat_tie():baca.IndicatorCommand._call()
+                        \repeatTie
                         r16
                     }
                     \times 4/5 {
                         b'16
-                        \revert RepeatTie.direction                                                  %! baca.repeat_tie_down():baca.OverrideCommand._call(2)
-                        \revert Stem.direction                                                       %! baca.stem_up():baca.OverrideCommand._call(2)
+                        \revert RepeatTie.direction
+                        \revert Stem.direction
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -3067,19 +3067,19 @@ def repeat_tie_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
                         r8
-                        \override RepeatTie.direction = #up                                          %! baca.repeat_tie_up():baca.OverrideCommand._call(1)
-                        \override Stem.direction = #down                                             %! baca.stem_down():baca.OverrideCommand._call(1)
+                        \override RepeatTie.direction = #up
+                        \override Stem.direction = #down
                         b'16
                         [
                         b'16
-                        \repeatTie                                                                   %! baca.repeat_tie():baca.IndicatorCommand._call()
+                        \repeatTie
                         ]
                         c''4
                         ~
                         c''16
-                        \repeatTie                                                                   %! baca.repeat_tie():baca.IndicatorCommand._call()
+                        \repeatTie
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
@@ -3087,21 +3087,21 @@ def repeat_tie_up(
                         b'16
                         [
                         b'16
-                        \repeatTie                                                                   %! baca.repeat_tie():baca.IndicatorCommand._call()
+                        \repeatTie
                         ]
                         b'4
-                        \repeatTie                                                                   %! baca.repeat_tie():baca.IndicatorCommand._call()
+                        \repeatTie
                         ~
                         b'16
-                        \repeatTie                                                                   %! baca.repeat_tie():baca.IndicatorCommand._call()
+                        \repeatTie
                         r16
                     }
                     \times 4/5 {
                         b'16
-                        \revert RepeatTie.direction                                                  %! baca.repeat_tie_up():baca.OverrideCommand._call(2)
-                        \revert Stem.direction                                                       %! baca.stem_down():baca.OverrideCommand._call(2)
+                        \revert RepeatTie.direction
+                        \revert Stem.direction
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -3173,8 +3173,8 @@ def rest_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Rest.direction = #down                                             %! baca.rest_down():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override Rest.direction = #down
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
                         [
@@ -3203,8 +3203,8 @@ def rest_down(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert Rest.direction                                                       %! baca.rest_down():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert Rest.direction
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -3281,8 +3281,8 @@ def rest_position(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Rest.staff-position = #-6                                          %! baca.rest_position():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override Rest.staff-position = #-6
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
                         [
@@ -3311,8 +3311,8 @@ def rest_position(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert Rest.staff-position                                                  %! baca.rest_position():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert Rest.staff-position
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -3368,8 +3368,8 @@ def rest_transparent(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Rest.transparent = ##t                                             %! baca.rest_transparent():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override Rest.transparent = ##t
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
                         [
@@ -3398,8 +3398,8 @@ def rest_transparent(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert Rest.transparent                                                     %! baca.rest_transparent():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert Rest.transparent
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -3455,8 +3455,8 @@ def rest_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Rest.direction = #up                                               %! baca.rest_up():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override Rest.direction = #up
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
                         [
@@ -3485,8 +3485,8 @@ def rest_up(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert Rest.direction                                                       %! baca.rest_up():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert Rest.direction
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -3563,17 +3563,17 @@ def script_color(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Script.color = #red                                                %! baca.script_color():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override Script.color = #red
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         [
                         d'16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ]
                         bf'4
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ~
                         bf'16
                         r16
@@ -3581,29 +3581,29 @@ def script_color(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         [
                         e''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ]
                         ef''4
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ~
                         ef''16
                         r16
                         af''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         [
                         g''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         r4
-                        \revert Script.color                                                         %! baca.script_color():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert Script.color
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -3660,17 +3660,17 @@ def script_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Script.direction = #down                                           %! baca.script_down():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override Script.direction = #down
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         [
                         d'16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ]
                         bf'4
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ~
                         bf'16
                         r16
@@ -3678,29 +3678,29 @@ def script_down(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         [
                         e''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ]
                         ef''4
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ~
                         ef''16
                         r16
                         af''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         [
                         g''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         r4
-                        \revert Script.direction                                                     %! baca.script_down():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert Script.direction
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -3758,17 +3758,17 @@ def script_extra_offset(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
                         r8
-                        \once \override Script.extra-offset = #'(-1.5 . 0)                           %! baca.script_extra_offset():baca.OverrideCommand._call(1)
+                        \once \override Script.extra-offset = #'(-1.5 . 0)
                         c'16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         [
                         d'16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ]
                         bf'4
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ~
                         bf'16
                         r16
@@ -3776,28 +3776,28 @@ def script_extra_offset(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         [
                         e''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ]
                         ef''4
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ~
                         ef''16
                         r16
                         af''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         [
                         g''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -3886,17 +3886,17 @@ def script_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Script.direction = #up                                             %! baca.script_up():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override Script.direction = #up
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         [
                         d'16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ]
                         bf'4
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ~
                         bf'16
                         r16
@@ -3904,29 +3904,29 @@ def script_up(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         [
                         e''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ]
                         ef''4
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ~
                         ef''16
                         r16
                         af''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         [
                         g''16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        - \accent                                                                    %! baca.accent():baca.IndicatorCommand._call()
+                        - \accent
                         r4
-                        \revert Script.direction                                                     %! baca.script_up():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert Script.direction
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -3999,25 +3999,25 @@ def slur_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Slur.direction = #down                                             %! baca.slur_down():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override Slur.direction = #down
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
                         [
-                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_START
+                        (
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
-                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
+                        )
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
                         [
-                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_START
+                        (
                         e''16
                         ]
                         ef''4
@@ -4027,14 +4027,14 @@ def slur_down(
                         af''16
                         [
                         g''16
-                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
+                        )
                         ]
                     }
                     \times 4/5 {
                         a'16
                         r4
-                        \revert Slur.direction                                                       %! baca.slur_down():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert Slur.direction
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -4094,27 +4094,27 @@ def slur_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Slur.direction = #up                                               %! baca.slur_up():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
-                        \override TupletBracket.direction = #down                                    %! baca.tuplet_bracket_down():baca.OverrideCommand._call(1)
+                        \override Slur.direction = #up
+                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.direction = #down
                         r8
-                        \override Stem.direction = #down                                             %! baca.stem_down():baca.OverrideCommand._call(1)
+                        \override Stem.direction = #down
                         c'16
                         [
-                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_START
+                        (
                         d'16
                         ]
                         bf'4
                         ~
                         bf'16
-                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
+                        )
                         r16
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
                         [
-                        (                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(2):SPANNER_START
+                        (
                         e''16
                         ]
                         ef''4
@@ -4124,16 +4124,16 @@ def slur_up(
                         af''16
                         [
                         g''16
-                        )                                                                            %! baca.slur():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
+                        )
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        \revert Stem.direction                                                       %! baca.stem_down():baca.OverrideCommand._call(2)
+                        \revert Stem.direction
                         r4
-                        \revert Slur.direction                                                       %! baca.slur_up():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.direction                                              %! baca.tuplet_bracket_down():baca.OverrideCommand._call(2)
+                        \revert Slur.direction
+                        \revert TupletBracket.staff-padding
+                        \revert TupletBracket.direction
                     }
                 }
             >>
@@ -4250,9 +4250,9 @@ def stem_color(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
                         r8
-                        \override Stem.color = #red                                                  %! baca.stem_color():baca.OverrideCommand._call(1)
+                        \override Stem.color = #red
                         c'16
                         [
                         d'16
@@ -4279,9 +4279,9 @@ def stem_color(
                     }
                     \times 4/5 {
                         a'16
-                        \revert Stem.color                                                           %! baca.stem_color():baca.OverrideCommand._call(2)
+                        \revert Stem.color
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -4338,9 +4338,9 @@ def stem_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
                         r8
-                        \override Stem.direction = #down                                             %! baca.stem_down():baca.OverrideCommand._call(1)
+                        \override Stem.direction = #down
                         c'16
                         [
                         d'16
@@ -4367,9 +4367,9 @@ def stem_down(
                     }
                     \times 4/5 {
                         a'16
-                        \revert Stem.direction                                                       %! baca.stem_down():baca.OverrideCommand._call(2)
+                        \revert Stem.direction
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -4487,9 +4487,9 @@ def stem_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
                         r8
-                        \override Stem.direction = #up                                               %! baca.stem_up():baca.OverrideCommand._call(1)
+                        \override Stem.direction = #up
                         c'16
                         [
                         d'16
@@ -4516,9 +4516,9 @@ def stem_up(
                     }
                     \times 4/5 {
                         a'16
-                        \revert Stem.direction                                                       %! baca.stem_up():baca.OverrideCommand._call(2)
+                        \revert Stem.direction
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -4597,10 +4597,10 @@ def sustain_pedal_staff_padding(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Staff.SustainPedalLineSpanner.staff-padding = #4                   %! baca.sustain_pedal_staff_padding():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override Staff.SustainPedalLineSpanner.staff-padding = #4
+                        \override TupletBracket.staff-padding = #2
                         r8
-                        \sustainOn                                                                   %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(2):SPANNER_START
+                        \sustainOn
                         c'16
                         [
                         d'16
@@ -4609,13 +4609,13 @@ def sustain_pedal_staff_padding(
                         ~
                         bf'16
                         r16
-                        \sustainOff                                                                  %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
+                        \sustainOff
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
                         [
-                        \sustainOn                                                                   %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(2):SPANNER_START
+                        \sustainOn
                         e''16
                         ]
                         ef''4
@@ -4625,16 +4625,16 @@ def sustain_pedal_staff_padding(
                         af''16
                         [
                         g''16
-                        \sustainOff                                                                  %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
+                        \sustainOff
                         ]
                     }
                     \times 4/5 {
                         a'16
-                        \sustainOn                                                                   %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(2):SPANNER_START
+                        \sustainOn
                         r4
-                        \sustainOff                                                                  %! baca.sustain_pedal():baca.SpannerIndicatorCommand._call(4):SPANNER_STOP
-                        \revert Staff.SustainPedalLineSpanner.staff-padding                          %! baca.sustain_pedal_staff_padding():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \sustainOff
+                        \revert Staff.SustainPedalLineSpanner.staff-padding
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -4699,11 +4699,11 @@ def text_script_color(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TextScript.color = #red                                            %! baca.text_script_color():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TextScript.color = #red
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
-                        ^ \markup { più mosso }                                                    %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { più mosso }
                         [
                         d'16
                         ]
@@ -4715,7 +4715,7 @@ def text_script_color(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { lo stesso tempo }                                              %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { lo stesso tempo }
                         [
                         e''16
                         ]
@@ -4731,8 +4731,8 @@ def text_script_color(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TextScript.color                                                     %! baca.text_script_color():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TextScript.color
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -4824,11 +4824,11 @@ def text_script_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TextScript.direction = #down                                       %! baca.text_script_down():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TextScript.direction = #down
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
-                        ^ \markup { più mosso }                                                    %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { più mosso }
                         [
                         d'16
                         ]
@@ -4840,7 +4840,7 @@ def text_script_down(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { lo stesso tempo }                                              %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { lo stesso tempo }
                         [
                         e''16
                         ]
@@ -4856,8 +4856,8 @@ def text_script_down(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TextScript.direction                                                 %! baca.text_script_down():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TextScript.direction
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -5021,11 +5021,11 @@ def text_script_padding(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TextScript.padding = #4                                            %! baca.text_script_padding():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TextScript.padding = #4
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
-                        ^ \markup { più mosso }                                                    %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { più mosso }
                         [
                         d'16
                         ]
@@ -5037,7 +5037,7 @@ def text_script_padding(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { lo stesso tempo }                                              %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { lo stesso tempo }
                         [
                         e''16
                         ]
@@ -5053,8 +5053,8 @@ def text_script_padding(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TextScript.padding                                                   %! baca.text_script_padding():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TextScript.padding
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -5193,11 +5193,11 @@ def text_script_staff_padding(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TextScript.staff-padding = #4                                      %! baca.text_script_staff_padding():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TextScript.staff-padding = #4
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
-                        ^ \markup { più mosso }                                                    %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { più mosso }
                         [
                         d'16
                         ]
@@ -5209,7 +5209,7 @@ def text_script_staff_padding(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { lo stesso tempo }                                              %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { lo stesso tempo }
                         [
                         e''16
                         ]
@@ -5225,8 +5225,8 @@ def text_script_staff_padding(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TextScript.staff-padding                                             %! baca.text_script_staff_padding():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TextScript.staff-padding
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -5318,11 +5318,11 @@ def text_script_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TextScript.direction = #up                                         %! baca.text_script_up():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TextScript.direction = #up
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
-                        ^ \markup { più mosso }                                                    %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { più mosso }
                         [
                         d'16
                         ]
@@ -5334,7 +5334,7 @@ def text_script_up(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         fs''16
-                        ^ \markup { lo stesso tempo }                                              %! baca.markup():baca.IndicatorCommand._call()
+                        ^ \markup { lo stesso tempo }
                         [
                         e''16
                         ]
@@ -5350,8 +5350,8 @@ def text_script_up(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TextScript.direction                                                 %! baca.text_script_up():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TextScript.direction
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -5521,18 +5521,18 @@ def text_spanner_staff_padding(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TextSpanner.staff-padding = #6                                     %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(1)
-                        \override TextScript.staff-padding = #6                                      %! baca.text_script_staff_padding():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TextSpanner.staff-padding = #6
+                        \override TextScript.staff-padding = #6
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
                         [
-                        - \abjad-dashed-line-with-arrow                                              %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                        - \baca-text-spanner-left-text "pont."                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                        - \baca-text-spanner-right-text "ord."                                       %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                        - \tweak bound-details.right.padding #0.5                                    %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                        - \tweak bound-details.right.stencil-align-dir-y #center                     %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
-                        \startTextSpan                                                               %! baca.text_spanner():baca.PiecewiseCommand._call(2):SPANNER_START
+                        - \abjad-dashed-line-with-arrow
+                        - \baca-text-spanner-left-text "pont."
+                        - \baca-text-spanner-right-text "ord."
+                        - \tweak bound-details.right.padding #0.5
+                        - \tweak bound-details.right.stencil-align-dir-y #center
+                        \startTextSpan
                         d'16
                         ]
                         bf'4
@@ -5557,11 +5557,11 @@ def text_spanner_staff_padding(
                     }
                     \times 4/5 {
                         a'16
-                        \stopTextSpan                                                                %! baca.text_spanner():baca.PiecewiseCommand._call(3):SPANNER_STOP
+                        \stopTextSpan
                         r4
-                        \revert TextSpanner.staff-padding                                            %! baca.text_spanner_staff_padding():baca.OverrideCommand._call(2)
-                        \revert TextScript.staff-padding                                             %! baca.text_script_staff_padding():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TextSpanner.staff-padding
+                        \revert TextScript.staff-padding
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -5665,13 +5665,13 @@ def tie_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
                         r8
-                        \override Stem.direction = #up                                               %! baca.stem_up():baca.OverrideCommand._call(1)
-                        \override Tie.direction = #down                                              %! baca.tie_down():baca.OverrideCommand._call(1)
+                        \override Stem.direction = #up
+                        \override Tie.direction = #down
                         b'16
                         [
-                        ~                                                                            %! baca.tie():baca.IndicatorCommand._call()
+                        ~
                         b'16
                         ]
                         c''4
@@ -5692,10 +5692,10 @@ def tie_down(
                     }
                     \times 4/5 {
                         b'16
-                        \revert Stem.direction                                                       %! baca.stem_up():baca.OverrideCommand._call(2)
-                        \revert Tie.direction                                                        %! baca.tie_down():baca.OverrideCommand._call(2)
+                        \revert Stem.direction
+                        \revert Tie.direction
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -5752,10 +5752,10 @@ def tie_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
                         r8
-                        \override Stem.direction = #down                                             %! baca.stem_down():baca.OverrideCommand._call(1)
-                        \override Tie.direction = #up                                                %! baca.tie_up():baca.OverrideCommand._call(1)
+                        \override Stem.direction = #down
+                        \override Tie.direction = #up
                         b'16
                         [
                         b'16
@@ -5778,10 +5778,10 @@ def tie_up(
                     }
                     \times 4/5 {
                         b'16
-                        \revert Stem.direction                                                       %! baca.stem_down():baca.OverrideCommand._call(2)
-                        \revert Tie.direction                                                        %! baca.tie_up():baca.OverrideCommand._call(2)
+                        \revert Stem.direction
+                        \revert Tie.direction
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -5838,8 +5838,8 @@ def time_signature_extra_offset(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)                %! baca.time_signature_extra_offset():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
                         [
@@ -5868,7 +5868,7 @@ def time_signature_extra_offset(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -5942,8 +5942,8 @@ def time_signature_transparent(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Score.TimeSignature.transparent = ##t                              %! baca.time_signature_transparent():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override Score.TimeSignature.transparent = ##t
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
                         [
@@ -5972,8 +5972,8 @@ def time_signature_transparent(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert Score.TimeSignature.transparent                                      %! baca.time_signature_transparent():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert Score.TimeSignature.transparent
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -6046,8 +6046,8 @@ def tuplet_bracket_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
-                        \override TupletBracket.direction = #down                                    %! baca.tuplet_bracket_down():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.direction = #down
                         r8
                         c'16
                         [
@@ -6076,8 +6076,8 @@ def tuplet_bracket_down(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.direction                                              %! baca.tuplet_bracket_down():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
+                        \revert TupletBracket.direction
                     }
                 }
             >>
@@ -6134,8 +6134,8 @@ def tuplet_bracket_extra_offset(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \once \override TupletBracket.extra-offset = #'(-1 . 0)                      %! baca.tuplet_bracket_extra_offset():baca.OverrideCommand._call(1)
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \once \override TupletBracket.extra-offset = #'(-1 . 0)
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
                         [
@@ -6164,7 +6164,7 @@ def tuplet_bracket_extra_offset(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -6268,7 +6268,7 @@ def tuplet_bracket_staff_padding(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
                         r8
                         c'16
                         [
@@ -6297,7 +6297,7 @@ def tuplet_bracket_staff_padding(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
@@ -6368,8 +6368,8 @@ def tuplet_bracket_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
-                        \override TupletBracket.direction = #up                                      %! baca.tuplet_bracket_up():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.direction = #up
                         r8
                         c'16
                         [
@@ -6398,8 +6398,8 @@ def tuplet_bracket_up(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
-                        \revert TupletBracket.direction                                              %! baca.tuplet_bracket_up():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
+                        \revert TupletBracket.direction
                     }
                 }
             >>
@@ -6471,8 +6471,8 @@ def tuplet_number_extra_offset(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2                                   %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(1)
-                        \once \override TupletNumber.extra-offset = #'(-1 . 0)                       %! baca.tuplet_number_extra_offset():baca.OverrideCommand._call(1)
+                        \override TupletBracket.staff-padding = #2
+                        \once \override TupletNumber.extra-offset = #'(-1 . 0)
                         r8
                         c'16
                         [
@@ -6501,7 +6501,7 @@ def tuplet_number_extra_offset(
                     \times 4/5 {
                         a'16
                         r4
-                        \revert TupletBracket.staff-padding                                          %! baca.tuplet_bracket_staff_padding():baca.OverrideCommand._call(2)
+                        \revert TupletBracket.staff-padding
                     }
                 }
             >>
