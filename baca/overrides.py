@@ -229,7 +229,7 @@ def accidental_extra_offset(
     """
     return OverrideCommand(
         attribute="extra_offset",
-        grob="accidental",
+        grob="Accidental",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
@@ -245,7 +245,7 @@ def accidental_font_size(
     """
     return OverrideCommand(
         attribute="font_size",
-        grob="accidental",
+        grob="Accidental",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -260,7 +260,7 @@ def accidental_stencil_false(
     """
     return OverrideCommand(
         attribute="stencil",
-        grob="accidental",
+        grob="Accidental",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
@@ -276,7 +276,7 @@ def accidental_transparent(
     return OverrideCommand(
         attribute="transparent",
         value=True,
-        grob="accidental",
+        grob="Accidental",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -290,7 +290,7 @@ def accidental_x_extent_false(
     """
     return OverrideCommand(
         attribute="X_extent",
-        grob="accidental",
+        grob="Accidental",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
@@ -306,7 +306,7 @@ def accidental_x_offset(
     """
     return OverrideCommand(
         attribute="X_offset",
-        grob="accidental",
+        grob="Accidental",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -322,7 +322,7 @@ def accidental_y_offset(
     """
     return OverrideCommand(
         attribute="Y_offset",
-        grob="accidental",
+        grob="Accidental",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -344,7 +344,7 @@ def bar_line_color(
         attribute="color",
         value=color,
         context=context,
-        grob="bar_line",
+        grob="BarLine",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -365,7 +365,7 @@ def bar_line_extra_offset(
         attribute="extra_offset",
         value=pair,
         context=context,
-        grob="bar_line",
+        grob="BarLine",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -540,7 +540,7 @@ def bar_line_transparent(
         attribute="transparent",
         value=True,
         context="Score",
-        grob="bar_line",
+        grob="BarLine",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -563,7 +563,7 @@ def bar_line_x_extent(
         value=pair,
         context=context,
         measures=measures,
-        grob="bar_line",
+        grob="BarLine",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -647,7 +647,7 @@ def beam_positions(
     return OverrideCommand(
         attribute="positions",
         value=(n, n),
-        grob="beam",
+        grob="Beam",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -661,7 +661,7 @@ def beam_stencil_false(
     """
     return OverrideCommand(
         attribute="stencil",
-        grob="beam",
+        grob="Beam",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
@@ -677,7 +677,7 @@ def beam_transparent(
     return OverrideCommand(
         attribute="transparent",
         value=True,
-        grob="beam",
+        grob="Beam",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -693,7 +693,7 @@ def clef_extra_offset(
     return OverrideCommand(
         attribute="extra_offset",
         context="Staff",
-        grob="clef",
+        grob="Clef",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
@@ -732,7 +732,7 @@ def clef_whiteout(
     return OverrideCommand(
         attribute="whiteout",
         context="Staff",
-        grob="clef",
+        grob="Clef",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -748,7 +748,7 @@ def clef_x_extent_false(
     return OverrideCommand(
         attribute="X_extent",
         context="Staff",
-        grob="clef",
+        grob="Clef",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
@@ -765,7 +765,7 @@ def dls_padding(
     return OverrideCommand(
         attribute="padding",
         value=n,
-        grob="dynamic_line_spanner",
+        grob="DynamicLineSpanner",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -868,7 +868,7 @@ def dls_staff_padding(
     return OverrideCommand(
         attribute="staff_padding",
         value=n,
-        grob="dynamic_line_spanner",
+        grob="DynamicLineSpanner",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -970,7 +970,7 @@ def dls_up(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Up,
-        grob="dynamic_line_spanner",
+        grob="DynamicLineSpanner",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -985,7 +985,7 @@ def dots_extra_offset(
     """
     return OverrideCommand(
         attribute="extra_offset",
-        grob="dots",
+        grob="Dots",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
@@ -1000,7 +1000,7 @@ def dots_stencil_false(
     """
     return OverrideCommand(
         attribute="stencil",
-        grob="dots",
+        grob="Dots",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
@@ -1016,7 +1016,7 @@ def dots_transparent(
     return OverrideCommand(
         attribute="transparent",
         value=True,
-        grob="dots",
+        grob="Dots",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1030,7 +1030,7 @@ def dots_x_extent_false(
     """
     return OverrideCommand(
         attribute="X_extent",
-        grob="dots",
+        grob="Dots",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
@@ -1047,7 +1047,7 @@ def dynamic_text_color(
     return OverrideCommand(
         attribute="color",
         value=color,
-        grob="dynamic_text",
+        grob="DynamicText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1151,7 +1151,7 @@ def dynamic_text_extra_offset(
     return OverrideCommand(
         attribute="extra_offset",
         value=pair,
-        grob="dynamic_text",
+        grob="DynamicText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1167,7 +1167,7 @@ def dynamic_text_parent_alignment_x(
     return OverrideCommand(
         attribute="parent_alignment_X",
         value=n,
-        grob="dynamic_text",
+        grob="DynamicText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1183,7 +1183,7 @@ def dynamic_text_self_alignment_x(
     return OverrideCommand(
         attribute="self_alignment_X",
         value=n,
-        grob="dynamic_text",
+        grob="DynamicText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1198,7 +1198,7 @@ def dynamic_text_stencil_false(
     return OverrideCommand(
         attribute="stencil",
         value=False,
-        grob="dynamic_text",
+        grob="DynamicText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1213,7 +1213,7 @@ def dynamic_text_transparent(
     return OverrideCommand(
         attribute="transparent",
         value=True,
-        grob="dynamic_text",
+        grob="DynamicText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1228,7 +1228,7 @@ def dynamic_text_x_extent_zero(
     return OverrideCommand(
         attribute="X_extent",
         value=(0, 0),
-        grob="dynamic_text",
+        grob="DynamicText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1244,7 +1244,7 @@ def dynamic_text_x_offset(
     return OverrideCommand(
         attribute="X_offset",
         value=n,
-        grob="dynamic_text",
+        grob="DynamicText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1260,7 +1260,7 @@ def dynamic_text_y_offset(
     return OverrideCommand(
         attribute="Y_offset",
         value=n,
-        grob="dynamic_text",
+        grob="DynamicText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1275,7 +1275,7 @@ def flag_extra_offset(
     """
     return OverrideCommand(
         attribute="extra_offset",
-        grob="flag",
+        grob="Flag",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
@@ -1290,7 +1290,7 @@ def flag_stencil_false(
     """
     return OverrideCommand(
         attribute="stencil",
-        grob="flag",
+        grob="Flag",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
@@ -1306,7 +1306,7 @@ def flag_transparent(
     return OverrideCommand(
         attribute="transparent",
         value=True,
-        grob="flag",
+        grob="Flag",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1322,7 +1322,7 @@ def glissando_thickness(
     return OverrideCommand(
         attribute="thickness",
         value=str(n),
-        grob="glissando",
+        grob="Glissando",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1338,7 +1338,7 @@ def hairpin_shorten_pair(
     return OverrideCommand(
         attribute="shorten_pair",
         value=pair,
-        grob="hairpin",
+        grob="Hairpin",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1373,7 +1373,7 @@ def hairpin_stencil_false(
     return OverrideCommand(
         attribute="stencil",
         value=False,
-        grob="hairpin",
+        grob="Hairpin",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1388,7 +1388,7 @@ def hairpin_to_barline(
     return OverrideCommand(
         attribute="to_barline",
         value=True,
-        grob="hairpin",
+        grob="Hairpin",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1403,7 +1403,7 @@ def hairpin_transparent(
     return OverrideCommand(
         attribute="transparent",
         value=True,
-        grob="hairpin",
+        grob="Hairpin",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1418,7 +1418,7 @@ def laissez_vibrer_tie_down(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Down,
-        grob="laissez_vibrer_tie",
+        grob="LaissezVibrerTie",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1433,7 +1433,7 @@ def laissez_vibrer_tie_up(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Up,
-        grob="laissez_vibrer_tie",
+        grob="LaissezVibrerTie",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -1578,7 +1578,7 @@ def mmrest_color(
     return OverrideCommand(
         attribute="color",
         value=color,
-        grob="multi_measure_rest",
+        grob="MultiMeasureRest",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         whitelist=(abjad.MultimeasureRest,),
@@ -1594,7 +1594,7 @@ def mmrest_transparent(
     return OverrideCommand(
         attribute="transparent",
         value=True,
-        grob="multi_measure_rest",
+        grob="MultiMeasureRest",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         whitelist=(abjad.MultimeasureRest,),
@@ -1770,7 +1770,7 @@ def mmrest_text_color(
     return OverrideCommand(
         attribute="color",
         value=color,
-        grob="multi_measure_rest_text",
+        grob="MultiMeasureRestText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         whitelist=(abjad.MultimeasureRest,),
@@ -1919,7 +1919,7 @@ def mmrest_text_extra_offset(
     return OverrideCommand(
         attribute="extra_offset",
         value=pair,
-        grob="multi_measure_rest_text",
+        grob="MultiMeasureRestText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         whitelist=(abjad.MultimeasureRest,),
@@ -2068,7 +2068,7 @@ def mmrest_text_padding(
     return OverrideCommand(
         attribute="padding",
         value=n,
-        grob="multi_measure_rest_text",
+        grob="MultiMeasureRestText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         whitelist=(abjad.MultimeasureRest,),
@@ -2216,7 +2216,7 @@ def mmrest_text_parent_center(
     return OverrideCommand(
         attribute="parent_alignment_X",
         value=0,
-        grob="multi_measure_rest_text",
+        grob="MultiMeasureRestText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         whitelist=(abjad.MultimeasureRest,),
@@ -2365,7 +2365,7 @@ def mmrest_text_staff_padding(
     return OverrideCommand(
         attribute="staff_padding",
         value=n,
-        grob="multi_measure_rest_text",
+        grob="MultiMeasureRestText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         whitelist=(abjad.MultimeasureRest,),
@@ -2381,7 +2381,7 @@ def mmrest_text_transparent(
     return OverrideCommand(
         attribute="transparent",
         value=True,
-        grob="multi_measure_rest_text",
+        grob="MultiMeasureRestText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         whitelist=(abjad.MultimeasureRest,),
@@ -2397,7 +2397,7 @@ def no_ledgers(
     return OverrideCommand(
         attribute="no_ledgers",
         value=True,
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2413,7 +2413,7 @@ def note_column_shift(
     return OverrideCommand(
         attribute="force_hshift",
         value=n,
-        grob="note_column",
+        grob="NoteColumn",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2428,7 +2428,7 @@ def note_head_color(
     """
     return OverrideCommand(
         attribute="color",
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=color,
@@ -2444,7 +2444,7 @@ def note_head_duration_log(
     """
     return OverrideCommand(
         attribute="duration_log",
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -2460,7 +2460,7 @@ def note_head_extra_offset(
     """
     return OverrideCommand(
         attribute="extra_offset",
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
@@ -2476,7 +2476,7 @@ def note_head_font_size(
     """
     return OverrideCommand(
         attribute="font_size",
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -2492,7 +2492,7 @@ def note_head_no_ledgers(
     """
     return OverrideCommand(
         attribute="no_ledgers",
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=value,
@@ -2507,7 +2507,7 @@ def note_head_stencil_false(
     """
     return OverrideCommand(
         attribute="stencil",
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
@@ -2523,7 +2523,7 @@ def note_head_style(
     """
     return OverrideCommand(
         attribute="style",
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=string,
@@ -2611,7 +2611,7 @@ def note_head_style_cross(
     return OverrideCommand(
         attribute="style",
         value="cross",
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2698,7 +2698,7 @@ def note_head_style_harmonic(
     return OverrideCommand(
         attribute="style",
         value="harmonic",
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2713,7 +2713,7 @@ def note_head_style_harmonic_black(
     return OverrideCommand(
         attribute="style",
         value="harmonic-black",
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2728,7 +2728,7 @@ def note_head_transparent(
     return OverrideCommand(
         attribute="transparent",
         value=True,
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2745,7 +2745,7 @@ def note_head_x_extent_zero(
     """
     return OverrideCommand(
         attribute="X_extent",
-        grob="note_head",
+        grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=(0, 0),
@@ -2763,7 +2763,7 @@ def ottava_bracket_shorten_pair(
         attribute="shorten_pair",
         context="Staff",
         value=pair,
-        grob="ottava_bracket",
+        grob="OttavaBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2780,7 +2780,7 @@ def ottava_bracket_staff_padding(
         attribute="staff_padding",
         context="Staff",
         value=n,
-        grob="ottava_bracket",
+        grob="OttavaBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2798,7 +2798,7 @@ def rehearsal_mark_down(
         attribute="direction",
         value=abjad.Down,
         context=context,
-        grob="rehearsal_mark",
+        grob="RehearsalMark",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2817,7 +2817,7 @@ def rehearsal_mark_extra_offset(
         attribute="extra_offset",
         value=pair,
         context=context,
-        grob="rehearsal_mark",
+        grob="RehearsalMark",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2836,7 +2836,7 @@ def rehearsal_mark_padding(
         attribute="padding",
         value=n,
         context=context,
-        grob="rehearsal_mark",
+        grob="RehearsalMark",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2855,7 +2855,7 @@ def rehearsal_mark_self_alignment_x(
         attribute="self_alignment_X",
         value=n,
         context=context,
-        grob="rehearsal_mark",
+        grob="RehearsalMark",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2874,7 +2874,7 @@ def rehearsal_mark_y_offset(
         attribute="Y_offset",
         value=n,
         context=context,
-        grob="rehearsal_mark",
+        grob="RehearsalMark",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2969,7 +2969,7 @@ def repeat_tie_down(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Down,
-        grob="repeat_tie",
+        grob="RepeatTie",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -2984,7 +2984,7 @@ def repeat_tie_extra_offset(
     """
     return OverrideCommand(
         attribute="extra_offset",
-        grob="repeat_tie",
+        grob="RepeatTie",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
@@ -2999,7 +2999,7 @@ def repeat_tie_stencil_false(
     """
     return OverrideCommand(
         attribute="stencil",
-        grob="repeat_tie",
+        grob="RepeatTie",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
@@ -3015,7 +3015,7 @@ def repeat_tie_transparent(
     return OverrideCommand(
         attribute="transparent",
         value=True,
-        grob="repeat_tie",
+        grob="RepeatTie",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3110,7 +3110,7 @@ def repeat_tie_up(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Up,
-        grob="repeat_tie",
+        grob="RepeatTie",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3126,7 +3126,7 @@ def rest_color(
     return OverrideCommand(
         attribute="color",
         value=color,
-        grob="rest",
+        grob="Rest",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3213,7 +3213,7 @@ def rest_down(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Down,
-        grob="rest",
+        grob="Rest",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3233,7 +3233,7 @@ def rest_extra_offset(
     return OverrideCommand(
         attribute="extra_offset",
         value=pair,
-        grob="rest",
+        grob="Rest",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3321,7 +3321,7 @@ def rest_position(
     return OverrideCommand(
         attribute="staff_position",
         value=n,
-        grob="rest",
+        grob="Rest",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3408,7 +3408,7 @@ def rest_transparent(
     return OverrideCommand(
         attribute="transparent",
         value=True,
-        grob="rest",
+        grob="Rest",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3495,7 +3495,7 @@ def rest_up(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Up,
-        grob="rest",
+        grob="Rest",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3513,7 +3513,7 @@ def rest_x_extent_zero(
     """
     return OverrideCommand(
         attribute="X_extent",
-        grob="rest",
+        grob="Rest",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=(0, 0),
@@ -3612,7 +3612,7 @@ def script_color(
     return OverrideCommand(
         attribute="color",
         value=color,
-        grob="script",
+        grob="Script",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3709,7 +3709,7 @@ def script_down(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Down,
-        grob="script",
+        grob="Script",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3806,7 +3806,7 @@ def script_extra_offset(
     return OverrideCommand(
         attribute="extra_offset",
         value=pair,
-        grob="script",
+        grob="Script",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3822,7 +3822,7 @@ def script_padding(
     return OverrideCommand(
         attribute="padding",
         value=number,
-        grob="script",
+        grob="Script",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3838,7 +3838,7 @@ def script_staff_padding(
     return OverrideCommand(
         attribute="staff_padding",
         value=n,
-        grob="script",
+        grob="Script",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3935,7 +3935,7 @@ def script_up(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Up,
-        grob="script",
+        grob="Script",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -3950,7 +3950,7 @@ def script_x_extent_zero(
     return OverrideCommand(
         attribute="X_extent",
         value=(0, 0),
-        grob="script",
+        grob="Script",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4043,7 +4043,7 @@ def slur_down(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Down,
-        grob="slur",
+        grob="Slur",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4142,7 +4142,7 @@ def slur_up(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Up,
-        grob="slur",
+        grob="Slur",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4163,7 +4163,7 @@ def span_bar_color(
         attribute="color",
         value=color,
         context=context,
-        grob="span_bar",
+        grob="SpanBar",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4184,7 +4184,7 @@ def span_bar_extra_offset(
         attribute="extra_offset",
         value=pair,
         context=context,
-        grob="span_bar",
+        grob="SpanBar",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4200,7 +4200,7 @@ def span_bar_transparent(
         attribute="transparent",
         value=True,
         context="Score",
-        grob="span_bar",
+        grob="SpanBar",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4291,7 +4291,7 @@ def stem_color(
         attribute="color",
         value=color,
         context=context,
-        grob="stem",
+        grob="Stem",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4378,7 +4378,7 @@ def stem_down(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Down,
-        grob="stem",
+        grob="Stem",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4393,7 +4393,7 @@ def stem_extra_offset(
     """
     return OverrideCommand(
         attribute="extra_offset",
-        grob="stem",
+        grob="Stem",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
@@ -4408,7 +4408,7 @@ def stem_stencil_false(
     """
     return OverrideCommand(
         attribute="stencil",
-        grob="stem",
+        grob="Stem",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
@@ -4424,7 +4424,7 @@ def stem_transparent(
     return OverrideCommand(
         attribute="transparent",
         value=True,
-        grob="stem",
+        grob="Stem",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4439,7 +4439,7 @@ def stem_tremolo_extra_offset(
     """
     return OverrideCommand(
         attribute="extra_offset",
-        grob="stem_tremolo",
+        grob="StemTremolo",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
@@ -4527,7 +4527,7 @@ def stem_up(
     return OverrideCommand(
         attribute="direction",
         value=abjad.Up,
-        grob="stem",
+        grob="Stem",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4543,7 +4543,7 @@ def strict_note_spacing_off(
         attribute="strict_note_spacing",
         value=False,
         context="Score",
-        grob="spacing_spanner",
+        grob="SpacingSpanner",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4644,7 +4644,7 @@ def sustain_pedal_staff_padding(
         attribute="staff_padding",
         value=n,
         context=context,
-        grob="sustain_pedal_line_spanner",
+        grob="SustainPedalLineSpanner",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4770,7 +4770,7 @@ def text_script_color(
         attribute="color",
         blacklist=blacklist,
         value=color,
-        grob="text_script",
+        grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4895,7 +4895,7 @@ def text_script_down(
         attribute="direction",
         blacklist=blacklist,
         value=abjad.Down,
-        grob="text_script",
+        grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4943,7 +4943,7 @@ def text_script_extra_offset(
         attribute="extra_offset",
         blacklist=blacklist,
         value=pair,
-        grob="text_script",
+        grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -4966,7 +4966,7 @@ def text_script_font_size(
         attribute="font_size",
         blacklist=blacklist,
         value=n,
-        grob="text_script",
+        grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -5092,7 +5092,7 @@ def text_script_padding(
         attribute="padding",
         blacklist=blacklist,
         value=n,
-        grob="text_script",
+        grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -5114,7 +5114,7 @@ def text_script_parent_alignment_x(
     return OverrideCommand(
         attribute="parent_alignment_X",
         blacklist=blacklist,
-        grob="text_script",
+        grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -5137,7 +5137,7 @@ def text_script_self_alignment_x(
     return OverrideCommand(
         attribute="self_alignment_X",
         blacklist=blacklist,
-        grob="text_script",
+        grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -5264,7 +5264,7 @@ def text_script_staff_padding(
         attribute="staff_padding",
         blacklist=blacklist,
         value=n,
-        grob="text_script",
+        grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -5388,7 +5388,7 @@ def text_script_up(
     return OverrideCommand(
         attribute="direction",
         blacklist=blacklist,
-        grob="text_script",
+        grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=abjad.Up,
@@ -5411,7 +5411,7 @@ def text_script_x_offset(
     return OverrideCommand(
         attribute="X_offset",
         blacklist=blacklist,
-        grob="text_script",
+        grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -5434,7 +5434,7 @@ def text_script_y_offset(
     return OverrideCommand(
         attribute="Y_offset",
         blacklist=blacklist,
-        grob="text_script",
+        grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -5450,7 +5450,7 @@ def text_spanner_left_padding(
     """
     return OverrideCommand(
         attribute="bound_details__left__padding",
-        grob="text_spanner",
+        grob="TextSpanner",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -5466,7 +5466,7 @@ def text_spanner_right_padding(
     """
     return OverrideCommand(
         attribute="bound_details__right__padding",
-        grob="text_spanner",
+        grob="TextSpanner",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -5570,7 +5570,7 @@ def text_spanner_staff_padding(
     return OverrideCommand(
         attribute="staff_padding",
         value=n,
-        grob="text_spanner",
+        grob="TextSpanner",
         selector=selector,
         tags=[_site(inspect.currentframe())],
     )
@@ -5584,7 +5584,7 @@ def text_spanner_stencil_false(
     """
     return OverrideCommand(
         attribute="stencil",
-        grob="text_spanner",
+        grob="TextSpanner",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
@@ -5599,7 +5599,7 @@ def text_spanner_transparent(
     """
     return OverrideCommand(
         attribute="transparent",
-        grob="text_spanner",
+        grob="TextSpanner",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=True,
@@ -5615,7 +5615,7 @@ def text_spanner_y_offset(
     """
     return OverrideCommand(
         attribute="Y_offset",
-        grob="text_spanner",
+        grob="TextSpanner",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -5703,7 +5703,7 @@ def tie_down(
     """
     return OverrideCommand(
         attribute="direction",
-        grob="tie",
+        grob="Tie",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=abjad.Down,
@@ -5789,7 +5789,7 @@ def tie_up(
     """
     return OverrideCommand(
         attribute="direction",
-        grob="tie",
+        grob="Tie",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=abjad.Up,
@@ -5878,7 +5878,7 @@ def time_signature_extra_offset(
     return OverrideCommand(
         attribute="extra_offset",
         context="Score",
-        grob="time_signature",
+        grob="TimeSignature",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
@@ -5894,7 +5894,7 @@ def time_signature_stencil_false(
     return OverrideCommand(
         attribute="stencil",
         context="Score",
-        grob="time_signature",
+        grob="TimeSignature",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=False,
@@ -5982,7 +5982,7 @@ def time_signature_transparent(
     return OverrideCommand(
         attribute="transparent",
         context="Score",
-        grob="time_signature",
+        grob="TimeSignature",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=True,
@@ -5998,7 +5998,7 @@ def trill_spanner_staff_padding(
     """
     return OverrideCommand(
         attribute="staff_padding",
-        grob="trill_spanner",
+        grob="TrillSpanner",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -6085,7 +6085,7 @@ def tuplet_bracket_down(
     """
     return OverrideCommand(
         attribute="direction",
-        grob="tuplet_bracket",
+        grob="TupletBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=abjad.Down,
@@ -6172,7 +6172,7 @@ def tuplet_bracket_extra_offset(
     """
     return OverrideCommand(
         attribute="extra_offset",
-        grob="tuplet_bracket",
+        grob="TupletBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
@@ -6188,7 +6188,7 @@ def tuplet_bracket_outside_staff_priority(
     """
     return OverrideCommand(
         attribute="outside_staff_priority",
-        grob="tuplet_bracket",
+        grob="TupletBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -6204,7 +6204,7 @@ def tuplet_bracket_padding(
     """
     return OverrideCommand(
         attribute="padding",
-        grob="tuplet_bracket",
+        grob="TupletBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -6220,7 +6220,7 @@ def tuplet_bracket_shorten_pair(
     """
     return OverrideCommand(
         attribute="shorten_pair",
-        grob="tuplet_bracket",
+        grob="TupletBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
@@ -6305,7 +6305,7 @@ def tuplet_bracket_staff_padding(
     """
     return OverrideCommand(
         attribute="staff_padding",
-        grob="tuplet_bracket",
+        grob="TupletBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=n,
@@ -6320,7 +6320,7 @@ def tuplet_bracket_transparent(
     """
     return OverrideCommand(
         attribute="transparent",
-        grob="tuplet_bracket",
+        grob="TupletBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=True,
@@ -6407,7 +6407,7 @@ def tuplet_bracket_up(
     """
     return OverrideCommand(
         attribute="direction",
-        grob="tuplet_bracket",
+        grob="TupletBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=abjad.Up,
@@ -6422,7 +6422,7 @@ def tuplet_number_denominator(
     """
     return OverrideCommand(
         attribute="text",
-        grob="tuplet_number",
+        grob="TupletNumber",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value="tuplet-number::calc-denominator-text",
@@ -6509,7 +6509,7 @@ def tuplet_number_extra_offset(
     """
     return OverrideCommand(
         attribute="extra_offset",
-        grob="tuplet_number",
+        grob="TupletNumber",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=pair,
@@ -6526,7 +6526,7 @@ def tuplet_number_text(
     assert isinstance(markup, abjad.Markup), repr(markup)
     return OverrideCommand(
         attribute="text",
-        grob="tuplet_number",
+        grob="TupletNumber",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=markup,
@@ -6541,7 +6541,7 @@ def tuplet_number_transparent(
     """
     return OverrideCommand(
         attribute="transparent",
-        grob="tuplet_number",
+        grob="TupletNumber",
         selector=selector,
         tags=[_site(inspect.currentframe())],
         value=True,

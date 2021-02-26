@@ -7565,7 +7565,7 @@ r"""
         >>> override = ide.PersistentOverride(
         ...     attribute="bar_extent",
         ...     context="Staff",
-        ...     grob="bar_line",
+        ...     grob="BarLine",
         ...     value=(0, 0),
         ... )
         >>> tag = "baca.bar_extent_persistent"
@@ -7716,7 +7716,7 @@ r"""
                             value=ide.PersistentOverride(
                                 attribute='bar_extent',
                                 context='Staff',
-                                grob='bar_line',
+                                grob='BarLine',
                                 value=(0, 0),
                                 ),
                             ),
@@ -7734,7 +7734,6 @@ r"""
                     ),
                 ]
             )
-
 
     ..  container:: example
 
@@ -7760,7 +7759,7 @@ r"""
         ...             after=True,
         ...             attribute='bar_extent',
         ...             context='Staff',
-        ...             grob='bar_line',
+        ...             grob='BarLine',
         ...             value=(0, 0),
         ...             ),
         ...         )
@@ -7887,7 +7886,7 @@ r"""
         >>> override = ide.PersistentOverride(
         ...     attribute="bar_extent",
         ...     context="Staff",
-        ...     grob="bar_line",
+        ...     grob="BarLine",
         ...     value=(0, 0),
         ... )
         >>> tag = "baca.bar_extent_persistent"
@@ -7910,7 +7909,7 @@ r"""
         ...             after=True,
         ...             attribute='bar_extent',
         ...             context='Staff',
-        ...             grob='bar_line',
+        ...             grob='BarLine',
         ...             value=(0, 0),
         ...             ),
         ...         )
