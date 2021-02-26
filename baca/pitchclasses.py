@@ -2971,7 +2971,7 @@ class Constellation:
         )
         score.override.text_script.staff_padding = 10
         score.set.proportionalNotationDuration = "#(ly:make-moment 1 30)"
-        lilypond_file = abjad.LilyPondFile.new(score)
+        lilypond_file = abjad.LilyPondFile(items=[score])
         lilypond_file.default_paper_size = "letter", "landscape"
         lilypond_file.global_staff_size = 18
         lilypond_file.layout_block.indent = 0
@@ -3363,12 +3363,18 @@ class ConstellationCircuit:
         score, treble, bass = result
         abjad.override(score).text_script.staff_padding = 10
         abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 30)"
-        lilypond_file = abjad.LilyPondFile.new(score, global_staff_size=18)
-        lilypond_file.layout_block.indent = 0
-        lilypond_file.layout_block.ragged_right = True
-        string = "#'((basic-distance . 0) (minimum-distance . 0) (padding . 12) (stretchability . 0))"
-        lilypond_file.paper_block.system_system_spacing = string
-        lilypond_file.paper_block.top_margin = 24
+        preamble = r"""#(set-global-staff-size 18)
+
+\layout {
+    indent = 0
+    ragged-right = True
+}
+
+\paper {
+    system-system-spacing = #'((basic-distance . 0) (minimum-distance . 0) (padding . 12) (stretchability . 0))
+    top-margin = 24
+}"""
+        lilypond_file = abjad.LilyPondFile(items=[preamble, score])
         return lilypond_file
 
     ### PUBLIC PROPERTIES ###
@@ -3837,7 +3843,8 @@ class HarmonicSeries:
         ..  docs::
 
             >>> lilypond_file = harmonic_series.__illustrate__()
-            >>> string = abjad.lilypond(lilypond_file[abjad.Staff])
+            >>> staff = lilypond_file[abjad.Score][0]
+            >>> string = abjad.lilypond(staff)
             >>> print(string)
             \new Staff
             \with
@@ -3934,7 +3941,8 @@ class HarmonicSeries:
             ..  docs::
 
                 >>> lilypond_file = harmonic_series.__illustrate__()
-                >>> string = abjad.lilypond(lilypond_file[abjad.Staff])
+                >>> staff = lilypond_file[abjad.Score][0]
+                >>> string = abjad.lilypond(staff)
                 >>> print(string)
                 \new Staff
                 \with
@@ -4035,7 +4043,7 @@ class HarmonicSeries:
         abjad.override(staff).time_signature.stencil = False
         score = abjad.Score([staff])
         abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 8)"
-        lilypond_file = abjad.LilyPondFile.new(score)
+        lilypond_file = abjad.LilyPondFile(items=[score])
         return lilypond_file
 
     ### PUBLIC PROPERTIES ###
@@ -7465,11 +7473,12 @@ class PitchTree(classes.Tree):
         literal = abjad.LilyPondLiteral(string, "after")
         abjad.attach(literal, final_leaf)
         abjad.setting(score).proportionalNotationDuration = "#(ly:make-moment 1 16)"
-        lilypond_file = abjad.LilyPondFile.new(
+        preamble = "#(set-global-staff-size 16)"
+        lilypond_file = abjad.LilyPondFile(
             date_time_token=False,
             global_staff_size=global_staff_size,
             includes=["/Users/trevorbaca/baca/lilypond/baca.ily"],
-            music=score,
+            items=[preamble, score],
         )
         abjad.override(score).spacing_spanner.strict_grace_spacing = True
         abjad.override(score).spacing_spanner.strict_note_spacing = True
@@ -7483,21 +7492,6 @@ class PitchTree(classes.Tree):
         if "subtitle" in keywords:
             markup = abjad.Markup(keywords.get("subtitle"))
             lilypond_file.header_block.subtitle = markup
-        string = r"\accidentalStyle dodecaphonic"
-        literal = abjad.LilyPondLiteral(string)
-        lilypond_file.layout_block.items.append(literal)
-        lilypond_file.layout_block.indent = 0
-        lilypond_file.layout_block.line_width = 287.5
-        lilypond_file.layout_block.ragged_right = True
-        string = "markup-system-spacing.padding = 8"
-        literal = abjad.LilyPondLiteral(string)
-        lilypond_file.paper_block.items.append(literal)
-        string = "system-system-spacing.padding = 10"
-        literal = abjad.LilyPondLiteral(string)
-        lilypond_file.paper_block.items.append(literal)
-        string = "top-markup-spacing.padding = 4"
-        literal = abjad.LilyPondLiteral(string)
-        lilypond_file.paper_block.items.append(literal)
         return lilypond_file
 
     ### PRIVATE METHODS ###

@@ -121,8 +121,8 @@ def is_link_chord(ais):
 # abjad.label(rh_staff).with_indices()
 # abjad.override(rh_staff).text_script.staff_padding = 10
 #
-# lilypond_file = abjad.LilyPondFile.new(
-#    score,
+# lilypond_file = abjad.LilyPondFile(
+#    items=[score],
 #    global_staff_size=12,
 #    )
 # lilypond_file.layout_block.indent = 0

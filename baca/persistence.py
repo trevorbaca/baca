@@ -25,6 +25,11 @@ r"""
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -156,6 +161,11 @@ r"""
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -299,6 +309,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -441,6 +456,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
 
@@ -574,6 +594,11 @@ r"""
         ...     )
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
 
@@ -732,6 +757,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
 
@@ -864,6 +894,11 @@ r"""
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -1930,6 +1965,11 @@ r"""
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2051,7 +2091,7 @@ r"""
         >>> text, count = abjad.deactivate(text, match)
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
-        >>> lilypond_file.score_block.items[:] = lines
+        >>> # lilypond_file.score_block.items[:] = lines
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -2292,6 +2332,11 @@ r"""
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -2667,6 +2712,11 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3045,6 +3095,11 @@ r"""
         ...     previous_metadata=metadata,
         ...     previous_persist=persist,
         ...     )
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3421,6 +3476,11 @@ r"""
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -3832,6 +3892,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -4224,6 +4289,11 @@ r"""
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4604,6 +4674,11 @@ r"""
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
@@ -4997,6 +5072,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -5399,6 +5479,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -5798,6 +5883,11 @@ r"""
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -6244,6 +6334,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -6652,6 +6747,11 @@ r"""
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -6820,6 +6920,11 @@ r"""
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -6972,6 +7077,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -7128,6 +7238,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -7271,6 +7386,11 @@ r"""
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -7430,6 +7550,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -7583,6 +7708,11 @@ r"""
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -7772,6 +7902,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -7922,6 +8057,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -8049,6 +8189,11 @@ r"""
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -8187,6 +8332,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -8327,6 +8477,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -8454,6 +8609,11 @@ r"""
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -8597,6 +8757,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -8740,6 +8905,11 @@ r"""
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -8895,6 +9065,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -9054,6 +9229,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -9204,6 +9384,11 @@ r"""
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
@@ -9379,6 +9564,11 @@ r"""
         ...     previous_persist=persist,
         ...     )
         >>> block = abjad.Block(name='layout')
+        >>> assert len(lilypond_file.items) == 1
+        >>> score = lilypond_file.items[0]
+        >>> block = abjad.Block(name="score")
+        >>> block.items.append(score)
+        >>> lilypond_file.items[:] = [block]
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP

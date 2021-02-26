@@ -3466,20 +3466,13 @@ class SegmentMaker(abjad.SegmentMaker):
     def _make_lilypond_file(self):
         includes = self._get_lilypond_includes()
         tag = _site(inspect.currentframe())
-        lilypond_file = abjad.LilyPondFile.new(
-            music=self.score,
+        lilypond_file = abjad.LilyPondFile(
+            items=[self.score],
             date_time_token=False,
             includes=includes,
             tag=tag,
             use_relative_includes=False,
         )
-        block_names = ("layout", "paper")
-        for item in lilypond_file.items[:]:
-            if getattr(item, "name", None) in block_names:
-                lilypond_file.items.remove(item)
-        for item in lilypond_file.items[:]:
-            if getattr(item, "name", None) == "header":
-                lilypond_file.items.remove(item)
         if self.environment != "docs" and not self.do_not_include_layout_ly:
             assert len(lilypond_file.score_block.items) == 1
             score = lilypond_file.score_block.items[0]
