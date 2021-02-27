@@ -1336,7 +1336,7 @@ def skeleton(
 
 
 def tacet(
-    color: str = "green",
+    color: str = "#green",
     *,
     measures: typings.SliceTyping = None,
     selector: abjad.Expression = classes.select().mmrests(),

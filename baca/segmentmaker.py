@@ -3354,7 +3354,7 @@ class SegmentMaker(abjad.SegmentMaker):
             tag = tag.append(_site(inspect.currentframe()))
             if color is not None:
                 string = r"- \baca-start-snm-colored-left-only"
-                string += f' "{value}" #{color}'
+                string += f' "{value}" {color}'
             else:
                 string = r"- \baca-start-snm-left-only"
                 string += f' "{value}"'
