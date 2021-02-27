@@ -2606,7 +2606,7 @@ def note_head_style_cross(
     """
     return OverrideCommand(
         attribute="style",
-        value="cross",
+        value="#'cross",
         grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2693,7 +2693,7 @@ def note_head_style_harmonic(
     """
     return OverrideCommand(
         attribute="style",
-        value="harmonic",
+        value="#'harmonic",
         grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2708,7 +2708,7 @@ def note_head_style_harmonic_black(
     """
     return OverrideCommand(
         attribute="style",
-        value="harmonic-black",
+        value="#'harmonic-black",
         grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -6421,7 +6421,7 @@ def tuplet_number_denominator(
         grob="TupletNumber",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value="tuplet-number::calc-denominator-text",
+        value="#tuplet-number::calc-denominator-text",
     )
 
 

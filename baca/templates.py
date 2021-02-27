@@ -81,7 +81,7 @@ class ScoreTemplate(abjad.ScoreTemplate):
 
     @staticmethod
     def _set_square_delimiter(staff_group):
-        abjad.setting(staff_group).system_start_delimiter = "SystemStartSquare"
+        abjad.setting(staff_group).system_start_delimiter = "#'SystemStartSquare"
 
     @staticmethod
     def _to_roman(n):

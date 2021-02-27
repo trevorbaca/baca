@@ -7170,7 +7170,7 @@ def interpolate_pitches(
                 \new Staff
                 {
                     \scaleDurations #'(1 . 1) {
-                        \override Glissando.thickness = #'3
+                        \override Glissando.thickness = 3
                         \clef "treble"
                         ef'16
                         [
