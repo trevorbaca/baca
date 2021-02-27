@@ -7103,7 +7103,7 @@ class FigureMaker:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).Beam.positions = (-6, -6)
+            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
             >>> abjad.override(staff).Stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
@@ -7196,7 +7196,7 @@ class FigureMaker:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).Beam.positions = (-6, -6)
+            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
             >>> abjad.override(staff).Stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
@@ -7286,7 +7286,7 @@ class FigureMaker:
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
             >>> staff = lilypond_file[abjad.Score]
-            >>> abjad.override(staff).Beam.positions = (-6, -6)
+            >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
             >>> abjad.override(staff).Stem.direction = abjad.Down
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
@@ -11303,7 +11303,7 @@ def stack(*commands) -> Stack:
         >>> selections = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
         >>> staff = lilypond_file[abjad.Score]
-        >>> abjad.override(staff).Beam.positions = (-6, -6)
+        >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
         >>> abjad.override(staff).Stem.direction = abjad.Down
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 

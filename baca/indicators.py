@@ -247,7 +247,7 @@ class Accelerando:
             >>> note = abjad.Note("c'4")
             >>> accelerando = baca.Accelerando()
             >>> abjad.tweak(accelerando).color = "#blue"
-            >>> abjad.tweak(accelerando).extra_offset = (0, 2)
+            >>> abjad.tweak(accelerando).extra_offset = "#'(0 . 2)"
             >>> abjad.attach(accelerando, note)
             >>> abjad.show(note) # doctest: +SKIP
 
@@ -811,7 +811,7 @@ class Ritardando:
             >>> note = abjad.Note("c'4")
             >>> ritardando = baca.Ritardando()
             >>> abjad.tweak(ritardando).color = "#blue"
-            >>> abjad.tweak(ritardando).extra_offset = (0, 2)
+            >>> abjad.tweak(ritardando).extra_offset = "#'(0 . 2)"
             >>> abjad.attach(ritardando, note)
             >>> abjad.show(note) # doctest: +SKIP
 

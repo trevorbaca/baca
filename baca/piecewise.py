@@ -1072,7 +1072,7 @@ def dynamic(
         ...     'Music_Voice',
         ...     baca.dls_staff_padding(5),
         ...     baca.make_even_divisions(),
-        ...     baca.dynamic('p', abjad.tweak((-4, 0)).extra_offset),
+        ...     baca.dynamic('p', abjad.tweak("#'(-4 . 0)").extra_offset),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
 

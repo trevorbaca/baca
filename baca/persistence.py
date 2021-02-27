@@ -7566,7 +7566,7 @@ r"""
         ...     attribute="bar_extent",
         ...     context="Staff",
         ...     grob="BarLine",
-        ...     value=(0, 0),
+        ...     value="#'(0 . 0)",
         ... )
         >>> tag = "baca.bar_extent_persistent"
         >>> command = baca.IndicatorCommand(
@@ -7717,7 +7717,7 @@ r"""
                                 attribute='bar_extent',
                                 context='Staff',
                                 grob='BarLine',
-                                value=(0, 0),
+                                value="#'(0 . 0)",
                                 ),
                             ),
                         ],
@@ -7760,7 +7760,7 @@ r"""
         ...             attribute='bar_extent',
         ...             context='Staff',
         ...             grob='BarLine',
-        ...             value=(0, 0),
+        ...             value="#'(0 . 0)",
         ...             ),
         ...         )
         ...     ]
@@ -7887,7 +7887,7 @@ r"""
         ...     attribute="bar_extent",
         ...     context="Staff",
         ...     grob="BarLine",
-        ...     value=(0, 0),
+        ...     value="#'(0 . 0)",
         ... )
         >>> tag = "baca.bar_extent_persistent"
         >>> command = baca.IndicatorCommand(
@@ -7910,7 +7910,7 @@ r"""
         ...             attribute='bar_extent',
         ...             context='Staff',
         ...             grob='BarLine',
-        ...             value=(0, 0),
+        ...             value="#'(0 . 0)",
         ...             ),
         ...         )
         ...     ]

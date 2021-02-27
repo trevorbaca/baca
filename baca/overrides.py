@@ -228,7 +228,7 @@ def accidental_extra_offset(
         grob="Accidental",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -359,7 +359,7 @@ def bar_line_extra_offset(
     return OverrideCommand(
         after=after,
         attribute="extra_offset",
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
         context=context,
         grob="BarLine",
         selector=selector,
@@ -556,7 +556,7 @@ def bar_line_x_extent(
     return OverrideCommand(
         after=after,
         attribute="X_extent",
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
         context=context,
         measures=measures,
         grob="BarLine",
@@ -642,7 +642,7 @@ def beam_positions(
         raise Exception(message)
     return OverrideCommand(
         attribute="positions",
-        value=(n, n),
+        value=f"#'({n} . {n})",
         grob="Beam",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -692,7 +692,7 @@ def clef_extra_offset(
         grob="Clef",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -984,7 +984,7 @@ def dots_extra_offset(
         grob="Dots",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -1146,7 +1146,7 @@ def dynamic_text_extra_offset(
         raise Exception(f"dynamic text extra offset must be pair (not {pair}).")
     return OverrideCommand(
         attribute="extra_offset",
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
         grob="DynamicText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1274,7 +1274,7 @@ def flag_extra_offset(
         grob="Flag",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -1333,7 +1333,7 @@ def hairpin_shorten_pair(
     """
     return OverrideCommand(
         attribute="shorten_pair",
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
         grob="Hairpin",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -1914,7 +1914,7 @@ def mmrest_text_extra_offset(
     """
     return OverrideCommand(
         attribute="extra_offset",
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
         grob="MultiMeasureRestText",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2459,7 +2459,7 @@ def note_head_extra_offset(
         grob="NoteHead",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -2758,7 +2758,7 @@ def ottava_bracket_shorten_pair(
     return OverrideCommand(
         attribute="shorten_pair",
         context="Staff",
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
         grob="OttavaBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -2811,7 +2811,7 @@ def rehearsal_mark_extra_offset(
     """
     return OverrideCommand(
         attribute="extra_offset",
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
         context=context,
         grob="RehearsalMark",
         selector=selector,
@@ -2983,7 +2983,7 @@ def repeat_tie_extra_offset(
         grob="RepeatTie",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -3228,7 +3228,7 @@ def rest_extra_offset(
         raise Exception(f"rest extra offset must be pair (not {pair!r}).")
     return OverrideCommand(
         attribute="extra_offset",
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
         grob="Rest",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -3801,7 +3801,7 @@ def script_extra_offset(
     """
     return OverrideCommand(
         attribute="extra_offset",
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
         grob="Script",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -4178,7 +4178,7 @@ def span_bar_extra_offset(
     return OverrideCommand(
         after=after,
         attribute="extra_offset",
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
         context=context,
         grob="SpanBar",
         selector=selector,
@@ -4392,7 +4392,7 @@ def stem_extra_offset(
         grob="Stem",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -4438,7 +4438,7 @@ def stem_tremolo_extra_offset(
         grob="StemTremolo",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -4938,7 +4938,7 @@ def text_script_extra_offset(
     return OverrideCommand(
         attribute="extra_offset",
         blacklist=blacklist,
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
         grob="TextScript",
         selector=selector,
         tags=[_site(inspect.currentframe())],
@@ -5877,7 +5877,7 @@ def time_signature_extra_offset(
         grob="TimeSignature",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -6171,7 +6171,7 @@ def tuplet_bracket_extra_offset(
         grob="TupletBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -6219,7 +6219,7 @@ def tuplet_bracket_shorten_pair(
         grob="TupletBracket",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
@@ -6508,7 +6508,7 @@ def tuplet_number_extra_offset(
         grob="TupletNumber",
         selector=selector,
         tags=[_site(inspect.currentframe())],
-        value=pair,
+        value=f"#'({pair[0]} . {pair[1]})",
     )
 
 
