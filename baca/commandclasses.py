@@ -337,16 +337,16 @@ class BCPCommand(scoping.Command):
                             {
                 <BLANKLINE>
                                 % [Music_Voice measure 1]
-                                \override Script.staff-padding = #5.5
-                                \override TextSpanner.staff-padding = #2.5
+                                \override Script.staff-padding = 5.5
+                                \override TextSpanner.staff-padding = 2.5
                                 e'8
                                 - \downbow
                                 [
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #1 #5
@@ -631,20 +631,20 @@ class BCPCommand(scoping.Command):
                             {
                 <BLANKLINE>
                                 % [Music_Voice measure 1]
-                                \override Script.staff-padding = #5
+                                \override Script.staff-padding = 5
                                 e'8
                                 - \downbow
                                 [
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #1 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 f'8
@@ -653,7 +653,7 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #2 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 e'8
@@ -662,7 +662,7 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #1 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 f'8
@@ -672,7 +672,7 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #2 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 % [Music_Voice measure 2]
@@ -683,7 +683,7 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #1 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 f'8
@@ -692,7 +692,7 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #2 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 e'8
@@ -702,7 +702,7 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #1 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 % [Music_Voice measure 3]
@@ -713,7 +713,7 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #2 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 e'8
@@ -722,7 +722,7 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #1 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 f'8
@@ -731,7 +731,7 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #2 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 e'8
@@ -741,7 +741,7 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #1 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 % [Music_Voice measure 4]
@@ -752,7 +752,7 @@ class BCPCommand(scoping.Command):
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #2 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 e'8
@@ -762,7 +762,7 @@ class BCPCommand(scoping.Command):
                                 - \baca-bcp-spanner-left-text #1 #5
                                 - \baca-bcp-spanner-right-text #2 #5
                                 - \tweak color #red
-                                - \tweak staff-padding #2.5
+                                - \tweak staff-padding 2.5
                                 \bacaStartTextSpanBCP
                 <BLANKLINE>
                                 f'8
@@ -982,9 +982,9 @@ class ContainerCommand(scoping.Command):
                             e'2
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
         <BLANKLINE>
                             % [Music_Voice measure 2]

@@ -115,9 +115,9 @@ class BreakMeasureMap:
                                 [
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                                 \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)
             <BLANKLINE>
@@ -602,9 +602,9 @@ class HorizontalSpacingSpecifier:
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             f'8
@@ -770,9 +770,9 @@ class HorizontalSpacingSpecifier:
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             f'8
@@ -940,9 +940,9 @@ class HorizontalSpacingSpecifier:
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             f'8
@@ -1111,9 +1111,9 @@ class HorizontalSpacingSpecifier:
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             f'8
@@ -1283,9 +1283,9 @@ class HorizontalSpacingSpecifier:
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             f'8
@@ -1445,7 +1445,7 @@ class HorizontalSpacingSpecifier:
                                     \new Score
                                     \with
                                     {
-                                        \override SpacingSpanner.spacing-increment = #0.5
+                                        \override SpacingSpanner.spacing-increment = 0.5
                                         proportionalNotationDuration = ##f
                                     }
                                     <<
@@ -1455,14 +1455,14 @@ class HorizontalSpacingSpecifier:
                                             \remove Time_signature_engraver
                                             \remove Staff_symbol_engraver
                                             \override Stem.direction = #up
-                                            \override Stem.length = #5
+                                            \override Stem.length = 5
                                             \override TupletBracket.bracket-visibility = ##t
                                             \override TupletBracket.direction = #up
-                                            \override TupletBracket.minimum-length = #4
-                                            \override TupletBracket.padding = #1.25
+                                            \override TupletBracket.minimum-length = 4
+                                            \override TupletBracket.padding = 1.25
                                             \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                             \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                            \override TupletNumber.font-size = #0
+                                            \override TupletNumber.font-size = 0
                                             \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                             tupletFullLength = ##t
                                         }
@@ -1507,7 +1507,7 @@ class HorizontalSpacingSpecifier:
                                     \new Score
                                     \with
                                     {
-                                        \override SpacingSpanner.spacing-increment = #0.5
+                                        \override SpacingSpanner.spacing-increment = 0.5
                                         proportionalNotationDuration = ##f
                                     }
                                     <<
@@ -1517,14 +1517,14 @@ class HorizontalSpacingSpecifier:
                                             \remove Time_signature_engraver
                                             \remove Staff_symbol_engraver
                                             \override Stem.direction = #up
-                                            \override Stem.length = #5
+                                            \override Stem.length = 5
                                             \override TupletBracket.bracket-visibility = ##t
                                             \override TupletBracket.direction = #up
-                                            \override TupletBracket.minimum-length = #4
-                                            \override TupletBracket.padding = #1.25
+                                            \override TupletBracket.minimum-length = 4
+                                            \override TupletBracket.padding = 1.25
                                             \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                             \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                            \override TupletNumber.font-size = #0
+                                            \override TupletNumber.font-size = 0
                                             \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                             tupletFullLength = ##t
                                         }

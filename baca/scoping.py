@@ -925,9 +925,9 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring
@@ -1123,9 +1123,9 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             \baca-not-yet-pitched-coloring
@@ -1375,9 +1375,9 @@ def only_parts(command: _command_typing) -> _command_typing:
                             \<
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]

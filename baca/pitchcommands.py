@@ -94,9 +94,9 @@ class AccidentalAdjustmentCommand(scoping.Command):
                             e'!2
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -632,9 +632,9 @@ class ClusterCommand(scoping.Command):
                                     }
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                 % [Music_Voice measure 2]
@@ -831,9 +831,9 @@ class ClusterCommand(scoping.Command):
                                     }
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                 % [Music_Voice measure 2]
@@ -1020,9 +1020,9 @@ class ClusterCommand(scoping.Command):
                                     }
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                 % [Music_Voice measure 2]
@@ -1217,9 +1217,9 @@ class ClusterCommand(scoping.Command):
                                     }
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                 % [Music_Voice measure 2]
@@ -1406,9 +1406,9 @@ class ClusterCommand(scoping.Command):
                                     }
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                 % [Music_Voice measure 2]
@@ -1582,9 +1582,9 @@ class ClusterCommand(scoping.Command):
                                 e'2
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                 % [Music_Voice measure 2]
@@ -1724,9 +1724,9 @@ class ColorFingeringCommand(scoping.Command):
                             e'2
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -2170,9 +2170,9 @@ class MicrotoneDeviationCommand(scoping.Command):
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             eqs'!8
@@ -2414,9 +2414,9 @@ class OctaveDisplacementCommand(scoping.Command):
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             g'8
@@ -2663,9 +2663,9 @@ class PitchCommand(scoping.Command):
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             cs''!8
@@ -2821,9 +2821,9 @@ class PitchCommand(scoping.Command):
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             f'8
@@ -2979,9 +2979,9 @@ class PitchCommand(scoping.Command):
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             <c' d' e' f' g' a' b'>8
@@ -3624,9 +3624,9 @@ class RegisterCommand(scoping.Command):
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             gqs''!8
@@ -4056,9 +4056,9 @@ class RegisterInterpolationCommand(scoping.Command):
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             e''8
@@ -4276,9 +4276,9 @@ class RegisterInterpolationCommand(scoping.Command):
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             e''8
@@ -4496,9 +4496,9 @@ class RegisterInterpolationCommand(scoping.Command):
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             e'8
@@ -4716,9 +4716,9 @@ class RegisterInterpolationCommand(scoping.Command):
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             e''8
@@ -4936,9 +4936,9 @@ class RegisterInterpolationCommand(scoping.Command):
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             e8
@@ -6824,7 +6824,7 @@ def displacement(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -7004,9 +7004,9 @@ def force_accidental(
                             %@% e'!2
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -7539,7 +7539,7 @@ def register(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -7608,7 +7608,7 @@ def register(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -7685,7 +7685,7 @@ def register(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -7755,7 +7755,7 @@ def register(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [

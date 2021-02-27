@@ -307,9 +307,9 @@ def beam(
                             c'8
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             _ [
             <BLANKLINE>
@@ -441,7 +441,7 @@ def ottava(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \ottava 1
                         c'16
@@ -532,7 +532,7 @@ def ottava_bassa(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \ottava -1
                         c'16
@@ -625,7 +625,7 @@ def slur(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override Slur.direction = #down
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -721,8 +721,8 @@ def sustain_pedal(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Staff.SustainPedalLineSpanner.staff-padding = #4
-                        \override TupletBracket.staff-padding = #2
+                        \override Staff.SustainPedalLineSpanner.staff-padding = 4
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \sustainOn
                         c'16
@@ -820,7 +820,7 @@ def trill_spanner(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -896,7 +896,7 @@ def trill_spanner(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -979,7 +979,7 @@ def trill_spanner(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \pitchedTrill
                         c'16

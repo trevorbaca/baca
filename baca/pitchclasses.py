@@ -1124,13 +1124,13 @@ class CollectionList(collections_module.abc.Sequence):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -3500,7 +3500,7 @@ class ConstellationCircuit:
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
-                    \override TextScript.staff-padding = #10
+                    \override TextScript.staff-padding = 10
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 30)
                 }
@@ -3560,7 +3560,7 @@ class ConstellationCircuit:
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
-                    \override TextScript.staff-padding = #10
+                    \override TextScript.staff-padding = 10
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 30)
                 }
@@ -3636,7 +3636,7 @@ class ConstellationCircuit:
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
-                    \override TextScript.staff-padding = #10
+                    \override TextScript.staff-padding = 10
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 30)
                 }
@@ -3696,7 +3696,7 @@ class ConstellationCircuit:
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
-                    \override TextScript.staff-padding = #10
+                    \override TextScript.staff-padding = 10
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 30)
                 }
@@ -3772,7 +3772,7 @@ class ConstellationCircuit:
                     \override BarLine.stencil = ##f
                     \override BarNumber.transparent = ##t
                     \override SpanBar.stencil = ##f
-                    \override TextScript.staff-padding = #10
+                    \override TextScript.staff-padding = 10
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 30)
                 }
@@ -3851,8 +3851,8 @@ class HarmonicSeries:
             {
                 \override BarLine.stencil = ##f
                 \override Stem.transparent = ##t
-                \override TextScript.font-size = #-1
-                \override TextScript.staff-padding = #6
+                \override TextScript.font-size = -1
+                \override TextScript.staff-padding = 6
                 \override TimeSignature.stencil = ##f
             }
             {
@@ -3949,8 +3949,8 @@ class HarmonicSeries:
                 {
                     \override BarLine.stencil = ##f
                     \override Stem.transparent = ##t
-                    \override TextScript.font-size = #-1
-                    \override TextScript.staff-padding = #6
+                    \override TextScript.font-size = -1
+                    \override TextScript.staff-padding = 6
                     \override TimeSignature.stencil = ##f
                 }
                 {
@@ -6651,13 +6651,13 @@ class PitchTree(classes.Tree):
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
                 \override Flag.stencil = ##f
-                \override HorizontalBracket.staff-padding = #4
+                \override HorizontalBracket.staff-padding = 4
                 \override SpacingSpanner.strict-grace-spacing = ##t
                 \override SpacingSpanner.strict-note-spacing = ##t
                 \override SpacingSpanner.uniform-stretching = ##t
                 \override Stem.stencil = ##f
                 \override TextScript.X-extent = ##f
-                \override TextScript.staff-padding = #2
+                \override TextScript.staff-padding = 2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
@@ -6729,13 +6729,13 @@ class PitchTree(classes.Tree):
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
                 \override Flag.stencil = ##f
-                \override HorizontalBracket.staff-padding = #4
+                \override HorizontalBracket.staff-padding = 4
                 \override SpacingSpanner.strict-grace-spacing = ##t
                 \override SpacingSpanner.strict-note-spacing = ##t
                 \override SpacingSpanner.uniform-stretching = ##t
                 \override Stem.stencil = ##f
                 \override TextScript.X-extent = ##f
-                \override TextScript.staff-padding = #2
+                \override TextScript.staff-padding = 2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
@@ -6803,13 +6803,13 @@ class PitchTree(classes.Tree):
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
                 \override Flag.stencil = ##f
-                \override HorizontalBracket.staff-padding = #4
+                \override HorizontalBracket.staff-padding = 4
                 \override SpacingSpanner.strict-grace-spacing = ##t
                 \override SpacingSpanner.strict-note-spacing = ##t
                 \override SpacingSpanner.uniform-stretching = ##t
                 \override Stem.stencil = ##f
                 \override TextScript.X-extent = ##f
-                \override TextScript.staff-padding = #2
+                \override TextScript.staff-padding = 2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
@@ -6881,13 +6881,13 @@ class PitchTree(classes.Tree):
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
                 \override Flag.stencil = ##f
-                \override HorizontalBracket.staff-padding = #4
+                \override HorizontalBracket.staff-padding = 4
                 \override SpacingSpanner.strict-grace-spacing = ##t
                 \override SpacingSpanner.strict-note-spacing = ##t
                 \override SpacingSpanner.uniform-stretching = ##t
                 \override Stem.stencil = ##f
                 \override TextScript.X-extent = ##f
-                \override TextScript.staff-padding = #2
+                \override TextScript.staff-padding = 2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
@@ -6958,13 +6958,13 @@ class PitchTree(classes.Tree):
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
                 \override Flag.stencil = ##f
-                \override HorizontalBracket.staff-padding = #4
+                \override HorizontalBracket.staff-padding = 4
                 \override SpacingSpanner.strict-grace-spacing = ##t
                 \override SpacingSpanner.strict-note-spacing = ##t
                 \override SpacingSpanner.uniform-stretching = ##t
                 \override Stem.stencil = ##f
                 \override TextScript.X-extent = ##f
-                \override TextScript.staff-padding = #2
+                \override TextScript.staff-padding = 2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
@@ -7031,13 +7031,13 @@ class PitchTree(classes.Tree):
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
                 \override Flag.stencil = ##f
-                \override HorizontalBracket.staff-padding = #4
+                \override HorizontalBracket.staff-padding = 4
                 \override SpacingSpanner.strict-grace-spacing = ##t
                 \override SpacingSpanner.strict-note-spacing = ##t
                 \override SpacingSpanner.uniform-stretching = ##t
                 \override Stem.stencil = ##f
                 \override TextScript.X-extent = ##f
-                \override TextScript.staff-padding = #2
+                \override TextScript.staff-padding = 2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
@@ -7106,13 +7106,13 @@ class PitchTree(classes.Tree):
                 \override BarNumber.stencil = ##f
                 \override Beam.stencil = ##f
                 \override Flag.stencil = ##f
-                \override HorizontalBracket.staff-padding = #4
+                \override HorizontalBracket.staff-padding = 4
                 \override SpacingSpanner.strict-grace-spacing = ##t
                 \override SpacingSpanner.strict-note-spacing = ##t
                 \override SpacingSpanner.uniform-stretching = ##t
                 \override Stem.stencil = ##f
                 \override TextScript.X-extent = ##f
-                \override TextScript.staff-padding = #2
+                \override TextScript.staff-padding = 2
                 \override TimeSignature.stencil = ##f
                 proportionalNotationDuration = #(ly:make-moment 1 16)
             }
@@ -7204,13 +7204,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -7278,13 +7278,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -7306,7 +7306,7 @@ class PitchTree(classes.Tree):
                                             "SC(3-9){0, 2, 6}"
                                         }
                                 }
-                            - \tweak staff-padding #7
+                            - \tweak staff-padding 7
                             _ \markup { 0 }
                             \startGroup
                             fs'8
@@ -7321,7 +7321,7 @@ class PitchTree(classes.Tree):
                                             "SC(5-6){0, 1, 2, 4, 6}"
                                         }
                                 }
-                            - \tweak staff-padding #7
+                            - \tweak staff-padding 7
                             _ \markup { 1 }
                             \startGroup
                             g'8
@@ -7339,7 +7339,7 @@ class PitchTree(classes.Tree):
                                             "SC(4-19){0, 2, 3, 5}"
                                         }
                                 }
-                            - \tweak staff-padding #7
+                            - \tweak staff-padding 7
                             _ \markup { 2 }
                             \startGroup
                             d'8
@@ -7381,13 +7381,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -7402,7 +7402,7 @@ class PitchTree(classes.Tree):
                         {
                             \time 1/8
                             f'8
-                            - \tweak staff-padding #7
+                            - \tweak staff-padding 7
                             _ \markup { 0 }
                             \startGroup
                             \startGroup
@@ -7411,7 +7411,7 @@ class PitchTree(classes.Tree):
                             \stopGroup
                             s8
                             bf'8
-                            - \tweak staff-padding #7
+                            - \tweak staff-padding 7
                             _ \markup { 1 }
                             \startGroup
                             af'8
@@ -7423,7 +7423,7 @@ class PitchTree(classes.Tree):
                             \stopGroup
                             s8
                             cs'8
-                            - \tweak staff-padding #7
+                            - \tweak staff-padding 7
                             _ \markup { 2 }
                             \startGroup
                             ef'8
@@ -7656,13 +7656,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -7739,13 +7739,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -7809,13 +7809,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -7879,13 +7879,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -7949,13 +7949,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -8038,13 +8038,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -8108,13 +8108,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -8196,13 +8196,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -8266,13 +8266,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -8336,13 +8336,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -8406,13 +8406,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -8495,13 +8495,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -8565,13 +8565,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -8635,13 +8635,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }
@@ -8705,13 +8705,13 @@ class PitchTree(classes.Tree):
                     \override BarNumber.stencil = ##f
                     \override Beam.stencil = ##f
                     \override Flag.stencil = ##f
-                    \override HorizontalBracket.staff-padding = #4
+                    \override HorizontalBracket.staff-padding = 4
                     \override SpacingSpanner.strict-grace-spacing = ##t
                     \override SpacingSpanner.strict-note-spacing = ##t
                     \override SpacingSpanner.uniform-stretching = ##t
                     \override Stem.stencil = ##f
                     \override TextScript.X-extent = ##f
-                    \override TextScript.staff-padding = #2
+                    \override TextScript.staff-padding = 2
                     \override TimeSignature.stencil = ##f
                     proportionalNotationDuration = #(ly:make-moment 1 16)
                 }

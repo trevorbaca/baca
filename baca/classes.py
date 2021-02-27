@@ -1910,7 +1910,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -2014,7 +2014,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -2123,7 +2123,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -2336,172 +2336,62 @@ class Selection(abjad.Selection):
                 \new Staff
                 \with
                 {
-                    \override TextScript.staff-padding = #6
+                    \override TextScript.staff-padding = 6
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
-                        ^ \markup {
-                            \bold
-                                \with-color
-                                    #red
-                                    *
-                            }
+                        ^ \markup { \bold \with-color #red * }
                         bf'16
-                        ^ \markup {
-                            \bold
-                                \with-color
-                                    #red
-                                    *
-                            }
+                        ^ \markup { \bold \with-color #red * }
                         <a'' b''>16
-                        ^ \markup {
-                            \bold
-                                \with-color
-                                    #red
-                                    *
-                            }
+                        ^ \markup { \bold \with-color #red * }
                         c'16
-                        ^ \markup {
-                            \bold
-                                \with-color
-                                    #red
-                                    *
-                            }
+                        ^ \markup { \bold \with-color #red * }
                         <d' e'>4
-                        ^ \markup {
-                            \bold
-                                \with-color
-                                    #red
-                                    *
-                            }
-                        _ \markup {
-                            \bold
-                                \with-color
-                                    #blue
-                                    *
-                            }
+                        ^ \markup { \bold \with-color #red * }
+                        _ \markup { \bold \with-color #blue * }
                         ~
                         <d' e'>16
-                        _ \markup {
-                            \bold
-                                \with-color
-                                    #blue
-                                    *
-                            }
+                        _ \markup { \bold \with-color #blue * }
                     }
                     \times 8/9 {
                         r16
-                        _ \markup {
-                            \bold
-                                \with-color
-                                    #blue
-                                    *
-                            }
+                        _ \markup { \bold \with-color #blue * }
                         bf'16
-                        _ \markup {
-                            \bold
-                                \with-color
-                                    #blue
-                                    *
-                            }
+                        _ \markup { \bold \with-color #blue * }
                         <a'' b''>16
-                        ^ \markup {
-                            \bold
-                                \with-color
-                                    #red
-                                    *
-                            }
-                        _ \markup {
-                            \bold
-                                \with-color
-                                    #blue
-                                    *
-                            }
+                        ^ \markup { \bold \with-color #red * }
+                        _ \markup { \bold \with-color #blue * }
                         d'16
-                        ^ \markup {
-                            \bold
-                                \with-color
-                                    #red
-                                    *
-                            }
+                        ^ \markup { \bold \with-color #red * }
                         <e' fs'>4
-                        ^ \markup {
-                            \bold
-                                \with-color
-                                    #red
-                                    *
-                            }
+                        ^ \markup { \bold \with-color #red * }
                         ~
                         <e' fs'>16
-                        ^ \markup {
-                            \bold
-                                \with-color
-                                    #red
-                                    *
-                            }
+                        ^ \markup { \bold \with-color #red * }
                     }
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
-                        ^ \markup {
-                            \bold
-                                \with-color
-                                    #red
-                                    *
-                            }
-                        _ \markup {
-                            \bold
-                                \with-color
-                                    #blue
-                                    *
-                            }
+                        ^ \markup { \bold \with-color #red * }
+                        _ \markup { \bold \with-color #blue * }
                         bf'16
-                        _ \markup {
-                            \bold
-                                \with-color
-                                    #blue
-                                    *
-                            }
+                        _ \markup { \bold \with-color #blue * }
                         <a'' b''>16
-                        _ \markup {
-                            \bold
-                                \with-color
-                                    #blue
-                                    *
-                            }
+                        _ \markup { \bold \with-color #blue * }
                         e'16
-                        _ \markup {
-                            \bold
-                                \with-color
-                                    #blue
-                                    *
-                            }
+                        _ \markup { \bold \with-color #blue * }
                         <fs' gs'>4
-                        ^ \markup {
-                            \bold
-                                \with-color
-                                    #red
-                                    *
-                            }
-                        _ \markup {
-                            \bold
-                                \with-color
-                                    #blue
-                                    *
-                            }
+                        ^ \markup { \bold \with-color #red * }
+                        _ \markup { \bold \with-color #blue * }
                         ~
                         <fs' gs'>16
-                        ^ \markup {
-                            \bold
-                                \with-color
-                                    #red
-                                    *
-                            }
+                        ^ \markup { \bold \with-color #red * }
                     }
                 }
 
@@ -2948,7 +2838,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -3124,7 +3014,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -3228,7 +3118,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -3328,7 +3218,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -3421,7 +3311,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -3546,7 +3436,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -3653,7 +3543,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -3758,7 +3648,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -3869,7 +3759,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -3971,7 +3861,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -4109,7 +3999,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -4572,7 +4462,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -4674,7 +4564,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -4884,7 +4774,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -5000,7 +4890,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -5103,7 +4993,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -5225,7 +5115,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -5331,7 +5221,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -5448,7 +5338,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -5554,7 +5444,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -5670,7 +5560,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -5773,7 +5663,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -5883,7 +5773,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -5983,7 +5873,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -6088,7 +5978,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -6197,7 +6087,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -6375,7 +6265,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -6552,7 +6442,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -6655,7 +6545,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -6899,7 +6789,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -7025,7 +6915,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -7132,7 +7022,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -7212,7 +7102,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {
@@ -7320,7 +7210,7 @@ class Selection(abjad.Selection):
                 \with
                 {
                     \override TupletBracket.direction = #up
-                    \override TupletBracket.staff-padding = #3
+                    \override TupletBracket.staff-padding = 3
                     autoBeaming = ##f
                 }
                 {

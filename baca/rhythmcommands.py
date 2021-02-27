@@ -556,8 +556,8 @@ class RhythmCommand(scoping.Command):
                             {
                 <BLANKLINE>
                                 % [Music_Voice measure 1]
-                                \override TextScript.font-size = #-2
-                                \override TextScript.staff-padding = #5
+                                \override TextScript.font-size = -2
+                                \override TextScript.staff-padding = 5
                                 \baca-not-yet-pitched-coloring
                                 b'8.
                                 _ \markup {
@@ -838,9 +838,9 @@ def make_monads(
                                 b'2
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_monads('2/5 2/5 1/5')"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             }
@@ -1031,9 +1031,9 @@ def make_repeat_tied_notes(
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_repeat_tied_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             - \tweak stencil ##f
                             ~

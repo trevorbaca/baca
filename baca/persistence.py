@@ -921,9 +921,9 @@ r"""
                             \f
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -1057,9 +1057,9 @@ r"""
                             \p
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -1194,9 +1194,9 @@ r"""
                             \f
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -1318,9 +1318,9 @@ r"""
                             \f
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -1456,9 +1456,9 @@ r"""
                             \f
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -1578,9 +1578,9 @@ r"""
                             \sfz
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -1716,9 +1716,9 @@ r"""
                             \sfz
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -1841,9 +1841,9 @@ r"""
                             \mf
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -1995,9 +1995,9 @@ r"""
                             ^ \baca-default-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -2112,9 +2112,9 @@ r"""
                             ^ \baca-default-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -2225,9 +2225,9 @@ r"""
                             ^ \baca-default-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -2357,9 +2357,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -2474,9 +2474,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -2588,9 +2588,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -2733,9 +2733,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -2851,9 +2851,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -2965,9 +2965,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -3111,9 +3111,9 @@ r"""
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -3229,9 +3229,9 @@ r"""
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -3344,9 +3344,9 @@ r"""
                             ^ \baca-reapplied-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -3491,9 +3491,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -3618,9 +3618,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -3741,9 +3741,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -3897,9 +3897,9 @@ r"""
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -4015,9 +4015,9 @@ r"""
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -4129,9 +4129,9 @@ r"""
                             ^ \baca-redundant-indicator-markup "(“Flute”)"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -4292,9 +4292,9 @@ r"""
                             ^ \baca-default-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'violet)
                             \set Staff.shortInstrumentName =
@@ -4415,9 +4415,9 @@ r"""
                             ^ \baca-default-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'violet)
                             \set Staff.shortInstrumentName =
@@ -4534,9 +4534,9 @@ r"""
                             ^ \baca-default-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'violet)
                             \set Staff.shortInstrumentName =
@@ -4672,9 +4672,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
@@ -4795,9 +4795,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
@@ -4914,9 +4914,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
@@ -5067,9 +5067,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "[“III+IV”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
@@ -5193,9 +5193,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "[“III+IV”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
@@ -5315,9 +5315,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "[“III+IV”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
@@ -5469,9 +5469,9 @@ r"""
                             ^ \baca-reapplied-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                             \set Staff.shortInstrumentName =
@@ -5595,9 +5595,9 @@ r"""
                             ^ \baca-reapplied-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                             \set Staff.shortInstrumentName =
@@ -5717,9 +5717,9 @@ r"""
                             ^ \baca-reapplied-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'OliveDrab)
                             \set Staff.shortInstrumentName =
@@ -5870,9 +5870,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
@@ -6009,9 +6009,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
@@ -6144,9 +6144,9 @@ r"""
                             ^ \baca-explicit-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
@@ -6314,9 +6314,9 @@ r"""
                             ^ \baca-redundant-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
@@ -6440,9 +6440,9 @@ r"""
                             ^ \baca-redundant-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
@@ -6562,9 +6562,9 @@ r"""
                             ^ \baca-redundant-indicator-markup "[“I+II”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepPink4)
                             \set Staff.shortInstrumentName =
@@ -6728,9 +6728,9 @@ r"""
                             %@% ^ \baca-explicit-indicator-markup "[“III+IV”]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
@@ -6888,9 +6888,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -6993,7 +6993,7 @@ r"""
             <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
-                        \override TextSpanner.staff-padding = #4
+                        \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
                         \noBreak
                         \baca-lbsd #4 #'(8)
@@ -7043,9 +7043,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -7149,7 +7149,7 @@ r"""
             <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
-                        \override TextSpanner.staff-padding = #4
+                        \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
                         \noBreak
                         \baca-lbsd #4 #'(8)
@@ -7199,9 +7199,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -7346,9 +7346,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -7451,7 +7451,7 @@ r"""
             <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
-                        \override TextSpanner.staff-padding = #4
+                        \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
                         \noBreak
                         \baca-lbsd #4 #'(8)
@@ -7501,9 +7501,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -7643,9 +7643,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -7827,9 +7827,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.BarLine.bar-extent = #'(0 . 0)
             <BLANKLINE>
@@ -7978,9 +7978,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -8108,9 +8108,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -8247,9 +8247,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -8386,9 +8386,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -8513,9 +8513,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -8657,9 +8657,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -8811,9 +8811,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -8915,7 +8915,7 @@ r"""
             <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
-                        \override TextSpanner.staff-padding = #4
+                        \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
                         \noBreak
                         \baca-lbsd #4 #'(8)
@@ -8969,9 +8969,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -9074,7 +9074,7 @@ r"""
             <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
-                        \override TextSpanner.staff-padding = #4
+                        \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
                         \noBreak
                         \baca-lbsd #4 #'(8)
@@ -9128,9 +9128,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -9291,9 +9291,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -9399,7 +9399,7 @@ r"""
             <BLANKLINE>
                         % [Global_Skips measure 1]
                         \baca-new-spacing-section #1 #24
-                        \override TextSpanner.staff-padding = #4
+                        \override TextSpanner.staff-padding = 4
                         \autoPageBreaksOff
                         \noBreak
                         \baca-lbsd #4 #'(8)
@@ -9453,9 +9453,9 @@ r"""
                             b'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]

@@ -131,16 +131,16 @@ def bcps(
                             {
                 <BLANKLINE>
                                 % [Music_Voice measure 1]
-                                \override Script.staff-padding = #5.5
-                                \override TextSpanner.staff-padding = #2.5
+                                \override Script.staff-padding = 5.5
+                                \override TextSpanner.staff-padding = 2.5
                                 e'8
                                 - \downbow
                                 [
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                                 - \abjad-solid-line-with-arrow
                                 - \baca-bcp-spanner-left-text #1 #5
@@ -359,7 +359,7 @@ def color(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         \abjad-color-music #'red
                         r8
                         \abjad-color-music #'blue
@@ -439,7 +439,7 @@ def color(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         d'16
@@ -563,9 +563,9 @@ def container(
                             e'2
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
         <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -748,9 +748,9 @@ def cross_staff(
                                         ^ \baca-default-indicator-markup "(Violin)"
                                         - \abjad-dashed-line-with-hook
                                         - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding #2.75
+                                        - \tweak bound-details.right.padding 2.75
                                         - \tweak color #darkcyan
-                                        - \tweak staff-padding #8
+                                        - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
                                         \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)
             <BLANKLINE>
@@ -834,9 +834,9 @@ def cross_staff(
                                         ^ \baca-default-indicator-markup "(Viola)"
                                         - \abjad-dashed-line-with-hook
                                         - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding #2.75
+                                        - \tweak bound-details.right.padding 2.75
                                         - \tweak color #darkcyan
-                                        - \tweak staff-padding #8
+                                        - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
                                         \override ViolaMusicStaff.Clef.color = #(x11-color 'violet)
             <BLANKLINE>
@@ -1039,7 +1039,7 @@ def dynamic_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         \dynamicDown
                         r8
                         c'16
@@ -1128,7 +1128,7 @@ def dynamic_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         \dynamicUp
                         r8
                         c'16
@@ -1285,14 +1285,14 @@ def finger_pressure_transition(
                             c''2
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
-                            - \tweak arrow-length #2
-                            - \tweak arrow-width #0.5
+                            - \tweak arrow-length 2
+                            - \tweak arrow-width 0.5
                             - \tweak bound-details.right.arrow ##t
-                            - \tweak thickness #3
+                            - \tweak thickness 3
                             \glissando
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -1301,10 +1301,10 @@ def finger_pressure_transition(
                             % [Music_Voice measure 3]
                             \once \override NoteHead.style = #'harmonic
                             c''2
-                            - \tweak arrow-length #2
-                            - \tweak arrow-width #0.5
+                            - \tweak arrow-length 2
+                            - \tweak arrow-width 0.5
                             - \tweak bound-details.right.arrow ##t
-                            - \tweak thickness #3
+                            - \tweak thickness 3
                             \glissando
             <BLANKLINE>
                             % [Music_Voice measure 4]
@@ -1553,9 +1553,9 @@ def glissando(
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \glissando
             <BLANKLINE>
@@ -1726,9 +1726,9 @@ def glissando(
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \glissando
             <BLANKLINE>
@@ -1889,9 +1889,9 @@ def glissando(
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             - \tweak color #red
                             \glissando
@@ -2077,9 +2077,9 @@ def glissando(
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             - \tweak color #red
                             \glissando
@@ -2320,9 +2320,9 @@ def invisible_music(
                             c''2
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -2441,7 +2441,7 @@ def label(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         ^ \markup { C4 }
@@ -2539,8 +2539,8 @@ def markup(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.outside-staff-priority = #1000
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.outside-staff-priority = 1000
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         ^ \markup { più mosso }
@@ -2616,8 +2616,8 @@ def markup(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.outside-staff-priority = #1000
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.outside-staff-priority = 1000
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         ^ \markup { \baca-triple-diamond-markup }
@@ -2807,9 +2807,9 @@ def parts(
                                 ^ \baca-default-indicator-markup "(Violin)"
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_notes()"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                                 \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)
         <BLANKLINE>

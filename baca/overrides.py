@@ -608,7 +608,7 @@ def beam_positions(
                 {
                     \times 4/5 {
                         \override Beam.positions = #'(6 . 6)
-                        \override TupletBracket.staff-padding = #4
+                        \override TupletBracket.staff-padding = 4
                         r8
                         \override Stem.direction = #up
                         c'16
@@ -817,8 +817,8 @@ def dls_staff_padding(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override DynamicLineSpanner.staff-padding = #4
-                        \override TupletBracket.staff-padding = #2
+                        \override DynamicLineSpanner.staff-padding = 4
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         \p
@@ -920,7 +920,7 @@ def dls_up(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override DynamicLineSpanner.direction = #up
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         \p
@@ -1093,7 +1093,7 @@ def dynamic_text_extra_offset(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \once \override DynamicText.extra-offset = #'(-3 . 0)
                         c'16
@@ -2005,7 +2005,7 @@ def mmrest_text_padding(
                         {
             <BLANKLINE>
                             % [Music_Voice measure 1]
-                            \override MultiMeasureRestText.padding = #2
+                            \override MultiMeasureRestText.padding = 2
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
@@ -2153,7 +2153,7 @@ def mmrest_text_parent_center(
                         {
             <BLANKLINE>
                             % [Music_Voice measure 1]
-                            \override MultiMeasureRestText.parent-alignment-X = #0
+                            \override MultiMeasureRestText.parent-alignment-X = 0
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
@@ -2302,7 +2302,7 @@ def mmrest_text_staff_padding(
                         {
             <BLANKLINE>
                             % [Music_Voice measure 1]
-                            \override MultiMeasureRestText.staff-padding = #2
+                            \override MultiMeasureRestText.staff-padding = 2
                             R1 * 4/8
                             %@% ^ \baca-duration-multiplier-markup #"4" #"8"
             <BLANKLINE>
@@ -2567,7 +2567,7 @@ def note_head_style_cross(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \override NoteHead.style = #'cross
                         c'16
@@ -2654,7 +2654,7 @@ def note_head_style_harmonic(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \override NoteHead.style = #'harmonic
                         c'16
@@ -2922,7 +2922,7 @@ def repeat_tie_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \override RepeatTie.direction = #down
                         \override Stem.direction = #up
@@ -3063,7 +3063,7 @@ def repeat_tie_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \override RepeatTie.direction = #up
                         \override Stem.direction = #down
@@ -3170,7 +3170,7 @@ def rest_down(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override Rest.direction = #down
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -3277,8 +3277,8 @@ def rest_position(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Rest.staff-position = #-6
-                        \override TupletBracket.staff-padding = #2
+                        \override Rest.staff-position = -6
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -3365,7 +3365,7 @@ def rest_transparent(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override Rest.transparent = ##t
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -3452,7 +3452,7 @@ def rest_up(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override Rest.direction = #up
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -3560,7 +3560,7 @@ def script_color(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override Script.color = #red
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \accent
@@ -3657,7 +3657,7 @@ def script_down(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override Script.direction = #down
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \accent
@@ -3754,7 +3754,7 @@ def script_extra_offset(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \once \override Script.extra-offset = #'(-1.5 . 0)
                         c'16
@@ -3883,7 +3883,7 @@ def script_up(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override Script.direction = #up
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \accent
@@ -3996,7 +3996,7 @@ def slur_down(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override Slur.direction = #down
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -4091,7 +4091,7 @@ def slur_up(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override Slur.direction = #up
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         \override TupletBracket.direction = #down
                         r8
                         \override Stem.direction = #down
@@ -4246,7 +4246,7 @@ def stem_color(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \override Stem.color = #red
                         c'16
@@ -4334,7 +4334,7 @@ def stem_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \override Stem.direction = #down
                         c'16
@@ -4483,7 +4483,7 @@ def stem_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \override Stem.direction = #up
                         c'16
@@ -4593,8 +4593,8 @@ def sustain_pedal_staff_padding(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override Staff.SustainPedalLineSpanner.staff-padding = #4
-                        \override TupletBracket.staff-padding = #2
+                        \override Staff.SustainPedalLineSpanner.staff-padding = 4
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \sustainOn
                         c'16
@@ -4696,7 +4696,7 @@ def text_script_color(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override TextScript.color = #red
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         ^ \markup { più mosso }
@@ -4821,7 +4821,7 @@ def text_script_down(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override TextScript.direction = #down
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         ^ \markup { più mosso }
@@ -5017,8 +5017,8 @@ def text_script_padding(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TextScript.padding = #4
-                        \override TupletBracket.staff-padding = #2
+                        \override TextScript.padding = 4
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         ^ \markup { più mosso }
@@ -5189,8 +5189,8 @@ def text_script_staff_padding(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TextScript.staff-padding = #4
-                        \override TupletBracket.staff-padding = #2
+                        \override TextScript.staff-padding = 4
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         ^ \markup { più mosso }
@@ -5315,7 +5315,7 @@ def text_script_up(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override TextScript.direction = #up
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         ^ \markup { più mosso }
@@ -5517,16 +5517,16 @@ def text_spanner_staff_padding(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TextSpanner.staff-padding = #6
-                        \override TextScript.staff-padding = #6
-                        \override TupletBracket.staff-padding = #2
+                        \override TextSpanner.staff-padding = 6
+                        \override TextScript.staff-padding = 6
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
                         - \abjad-dashed-line-with-arrow
                         - \baca-text-spanner-left-text "pont."
                         - \baca-text-spanner-right-text "ord."
-                        - \tweak bound-details.right.padding #0.5
+                        - \tweak bound-details.right.padding 0.5
                         - \tweak bound-details.right.stencil-align-dir-y #center
                         \startTextSpan
                         d'16
@@ -5661,7 +5661,7 @@ def tie_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \override Stem.direction = #up
                         \override Tie.direction = #down
@@ -5748,7 +5748,7 @@ def tie_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \override Stem.direction = #down
                         \override Tie.direction = #up
@@ -5835,7 +5835,7 @@ def time_signature_extra_offset(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \once \override Score.TimeSignature.extra-offset = #'(-6 . 0)
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -5939,7 +5939,7 @@ def time_signature_transparent(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \override Score.TimeSignature.transparent = ##t
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -6042,7 +6042,7 @@ def tuplet_bracket_down(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         \override TupletBracket.direction = #down
                         r8
                         c'16
@@ -6131,7 +6131,7 @@ def tuplet_bracket_extra_offset(
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
                         \once \override TupletBracket.extra-offset = #'(-1 . 0)
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -6264,7 +6264,7 @@ def tuplet_bracket_staff_padding(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -6364,7 +6364,7 @@ def tuplet_bracket_up(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         \override TupletBracket.direction = #up
                         r8
                         c'16
@@ -6467,7 +6467,7 @@ def tuplet_number_extra_offset(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         \once \override TupletNumber.extra-offset = #'(-1 . 0)
                         r8
                         c'16

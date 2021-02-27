@@ -57,7 +57,7 @@ def accent(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \accent
@@ -146,7 +146,7 @@ def alternate_bow_strokes(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \downbow
@@ -224,7 +224,7 @@ def alternate_bow_strokes(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #6
+                        \override TupletBracket.staff-padding = 6
                         r8
                         c'16
                         - \upbow
@@ -302,7 +302,7 @@ def alternate_bow_strokes(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #6
+                        \override TupletBracket.staff-padding = 6
                         r8
                         c'16
                         - \baca-full-downbow
@@ -556,7 +556,7 @@ def clef(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #7
+                        \override TupletBracket.staff-padding = 7
                         \clef "alto"
                         r8
                         c'16
@@ -670,7 +670,7 @@ def double_staccato(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \baca-staccati #2
@@ -841,7 +841,7 @@ def down_bow(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \downbow
@@ -911,7 +911,7 @@ def down_bow(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \baca-full-downbow
@@ -1001,7 +1001,7 @@ def espressivo(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \espressivo
@@ -1086,7 +1086,7 @@ def fermata(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         - \fermata
                         c'16
@@ -1170,7 +1170,7 @@ def flageolet(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \flageolet
@@ -1294,9 +1294,9 @@ def hide_black_note_heads(
                             b'2
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             % [Music_Voice measure 2]
@@ -1404,7 +1404,7 @@ def laissez_vibrer(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         \laissezVibrer
@@ -1505,7 +1505,7 @@ def long_fermata(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         - \longfermata
                         c'16
@@ -1589,7 +1589,7 @@ def marcato(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \marcato
@@ -1721,9 +1721,9 @@ def margin_markup(
                             ^ \baca-explicit-indicator-markup "[MarginMarkup]"
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes(repeat_ties=True)"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.InstrumentName.color = #(x11-color 'DeepSkyBlue2)
                             \set Staff.shortInstrumentName =
@@ -1857,7 +1857,7 @@ def parenthesize(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         \parenthesize
                         c'16
@@ -1978,7 +1978,7 @@ def repeat_tie(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -2065,7 +2065,7 @@ def short_fermata(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         - \shortfermata
                         c'16
@@ -2162,7 +2162,7 @@ def staccatissimo(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \staccatissimo
@@ -2246,7 +2246,7 @@ def staccato(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \staccato
@@ -2386,9 +2386,9 @@ def staff_lines(
                             a4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
             <BLANKLINE>
@@ -2533,9 +2533,9 @@ def staff_lines(
                             b,4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
             <BLANKLINE>
@@ -2681,9 +2681,9 @@ def staff_lines(
                             a4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
             <BLANKLINE>
@@ -2827,9 +2827,9 @@ def staff_lines(
                             b,4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
             <BLANKLINE>
@@ -2973,9 +2973,9 @@ def staff_lines(
                             g'4.
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_notes()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
                             \override Staff.Clef.color = #(x11-color 'DeepSkyBlue2)
             <BLANKLINE>
@@ -3136,7 +3136,7 @@ def stem_tremolo(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         :32
@@ -3222,7 +3222,7 @@ def stop_on_string(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -3328,7 +3328,7 @@ def stopped(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \stopped
@@ -3413,7 +3413,7 @@ def tie(selector: abjad.Expression) -> commandclasses.IndicatorCommand:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         d'16
                         [
@@ -3497,7 +3497,7 @@ def tenuto(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \tenuto
@@ -3681,7 +3681,7 @@ def up_bow(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         - \upbow
@@ -3770,7 +3770,7 @@ def very_long_fermata(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         - \verylongfermata
                         c'16

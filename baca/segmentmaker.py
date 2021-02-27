@@ -111,9 +111,9 @@ class SegmentMaker(abjad.SegmentMaker):
                             [
                             - \abjad-dashed-line-with-hook
                             - \baca-text-spanner-left-text "make_even_divisions()"
-                            - \tweak bound-details.right.padding #2.75
+                            - \tweak bound-details.right.padding 2.75
                             - \tweak color #darkcyan
-                            - \tweak staff-padding #8
+                            - \tweak staff-padding 8
                             \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             %@% \baca-not-yet-pitched-coloring
@@ -307,9 +307,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 e'16
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "baca.music()"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             }
@@ -511,9 +511,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 ^ \baca-explicit-indicator-markup "(Violin)"
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "baca.music()"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                             }
@@ -956,9 +956,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 [
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                 \baca-not-yet-pitched-coloring
@@ -1145,9 +1145,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 [
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                 \baca-not-yet-pitched-coloring
@@ -4572,9 +4572,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                         ^ \baca-default-indicator-markup "(Violin)"
                                         - \abjad-dashed-line-with-hook
                                         - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding #2.75
+                                        - \tweak bound-details.right.padding 2.75
                                         - \tweak color #darkcyan
-                                        - \tweak staff-padding #8
+                                        - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
                                         \override ViolinMusicStaff.Clef.color = #(x11-color 'violet)
                 <BLANKLINE>
@@ -4724,9 +4724,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                         ^ \baca-default-indicator-markup "(Cello)"
                                         - \abjad-dashed-line-with-hook
                                         - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding #2.75
+                                        - \tweak bound-details.right.padding 2.75
                                         - \tweak color #darkcyan
-                                        - \tweak staff-padding #8
+                                        - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
                                         \override CelloMusicStaff.Clef.color = #(x11-color 'violet)
                 <BLANKLINE>
@@ -5638,9 +5638,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 [
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                 g'8
@@ -5802,9 +5802,9 @@ class SegmentMaker(abjad.SegmentMaker):
                                 [
                                 - \abjad-dashed-line-with-hook
                                 - \baca-text-spanner-left-text "make_even_divisions()"
-                                - \tweak bound-details.right.padding #2.75
+                                - \tweak bound-details.right.padding 2.75
                                 - \tweak color #darkcyan
-                                - \tweak staff-padding #8
+                                - \tweak staff-padding 8
                                 \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                 f'8

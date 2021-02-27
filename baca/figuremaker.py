@@ -2226,9 +2226,9 @@ class Imbrication:
                                         [
                                         - \abjad-dashed-line-with-hook
                                         - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding #2.75
+                                        - \tweak bound-details.right.padding 2.75
                                         - \tweak color #darkcyan
-                                        - \tweak staff-padding #8
+                                        - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
@@ -2317,9 +2317,9 @@ class Imbrication:
                                         [
                                         - \abjad-dashed-line-with-hook
                                         - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding #2.75
+                                        - \tweak bound-details.right.padding 2.75
                                         - \tweak color #darkcyan
-                                        - \tweak staff-padding #8
+                                        - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
@@ -2557,9 +2557,9 @@ class Imbrication:
                                         [
                                         - \abjad-dashed-line-with-hook
                                         - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding #2.75
+                                        - \tweak bound-details.right.padding 2.75
                                         - \tweak color #darkcyan
-                                        - \tweak staff-padding #8
+                                        - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
@@ -2668,9 +2668,9 @@ class Imbrication:
                                         [
                                         - \abjad-dashed-line-with-hook
                                         - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding #2.75
+                                        - \tweak bound-details.right.padding 2.75
                                         - \tweak color #darkcyan
-                                        - \tweak staff-padding #8
+                                        - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                         s16
@@ -2883,9 +2883,9 @@ class Imbrication:
                                         [
                                         - \abjad-dashed-line-with-hook
                                         - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding #2.75
+                                        - \tweak bound-details.right.padding 2.75
                                         - \tweak color #darkcyan
-                                        - \tweak staff-padding #8
+                                        - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                         s16
@@ -3001,9 +3001,9 @@ class Imbrication:
                                         [
                                         - \abjad-dashed-line-with-hook
                                         - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding #2.75
+                                        - \tweak bound-details.right.padding 2.75
                                         - \tweak color #darkcyan
-                                        - \tweak staff-padding #8
+                                        - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                         \set stemLeftBeamCount = 2
@@ -3238,9 +3238,9 @@ class Imbrication:
                                         [
                                         - \abjad-dashed-line-with-hook
                                         - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding #2.75
+                                        - \tweak bound-details.right.padding 2.75
                                         - \tweak color #darkcyan
-                                        - \tweak staff-padding #8
+                                        - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                         s32
@@ -3348,9 +3348,9 @@ class Imbrication:
                                         [
                                         - \abjad-dashed-line-with-hook
                                         - \baca-text-spanner-left-text "baca.music()"
-                                        - \tweak bound-details.right.padding #2.75
+                                        - \tweak bound-details.right.padding 2.75
                                         - \tweak color #darkcyan
-                                        - \tweak staff-padding #8
+                                        - \tweak staff-padding 8
                                         \bacaStartTextSpanRhythmAnnotation
                 <BLANKLINE>
                                         c'32
@@ -6115,7 +6115,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6125,14 +6125,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6158,7 +6158,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6168,14 +6168,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6202,7 +6202,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6212,14 +6212,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6247,7 +6247,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6257,14 +6257,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6295,7 +6295,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6305,14 +6305,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6382,7 +6382,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6392,14 +6392,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6425,7 +6425,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6435,14 +6435,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6469,7 +6469,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6479,14 +6479,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6514,7 +6514,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6524,14 +6524,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6562,7 +6562,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6572,14 +6572,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6646,7 +6646,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6656,14 +6656,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6694,7 +6694,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6704,14 +6704,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6741,7 +6741,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6751,14 +6751,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6789,7 +6789,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6799,14 +6799,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6873,7 +6873,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6883,14 +6883,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6931,7 +6931,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6941,14 +6941,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -6979,7 +6979,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -6989,14 +6989,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -7037,7 +7037,7 @@ class FigureMaker:
                                 \new Score
                                 \with
                                 {
-                                    \override SpacingSpanner.spacing-increment = #0.5
+                                    \override SpacingSpanner.spacing-increment = 0.5
                                     proportionalNotationDuration = ##f
                                 }
                                 <<
@@ -7047,14 +7047,14 @@ class FigureMaker:
                                         \remove Time_signature_engraver
                                         \remove Staff_symbol_engraver
                                         \override Stem.direction = #up
-                                        \override Stem.length = #5
+                                        \override Stem.length = 5
                                         \override TupletBracket.bracket-visibility = ##t
                                         \override TupletBracket.direction = #up
-                                        \override TupletBracket.minimum-length = #4
-                                        \override TupletBracket.padding = #1.25
+                                        \override TupletBracket.minimum-length = 4
+                                        \override TupletBracket.padding = 1.25
                                         \override TupletBracket.shorten-pair = #'(-1 . -1.5)
                                         \override TupletBracket.springs-and-rods = #ly:spanner::set-spacing-rods
-                                        \override TupletNumber.font-size = #0
+                                        \override TupletNumber.font-size = 0
                                         \override TupletNumber.text = #tuplet-number::calc-fraction-text
                                         tupletFullLength = ##t
                                     }
@@ -7686,9 +7686,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     s8
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     s16
@@ -7778,9 +7778,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     r8
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     c'16
@@ -7956,9 +7956,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     s16
@@ -8065,9 +8065,9 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     d'16
@@ -8278,9 +8278,9 @@ def extend_beam(
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
@@ -8390,9 +8390,9 @@ def extend_beam(
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
@@ -8596,9 +8596,9 @@ def imbricate(
                                     s16
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
@@ -8704,9 +8704,9 @@ def imbricate(
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
@@ -8913,9 +8913,9 @@ def imbricate(
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
@@ -9018,9 +9018,9 @@ def imbricate(
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
@@ -9140,9 +9140,9 @@ def imbricate(
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     s16
@@ -9326,9 +9326,9 @@ def imbricate(
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
@@ -9440,9 +9440,9 @@ def imbricate(
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     \set stemLeftBeamCount = 2
@@ -9658,9 +9658,9 @@ def imbricate(
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     s8.
@@ -9751,9 +9751,9 @@ def imbricate(
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     d'8.
@@ -9914,9 +9914,9 @@ def imbricate(
                                     d'16
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                 }
@@ -10012,9 +10012,9 @@ def imbricate(
                                     [
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                 }
@@ -10195,9 +10195,9 @@ def imbricate(
                                     s8
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     s16
@@ -10304,9 +10304,9 @@ def imbricate(
                                     r8
                                     - \abjad-dashed-line-with-hook
                                     - \baca-text-spanner-left-text "baca.music()"
-                                    - \tweak bound-details.right.padding #2.75
+                                    - \tweak bound-details.right.padding 2.75
                                     - \tweak color #darkcyan
-                                    - \tweak staff-padding #8
+                                    - \tweak staff-padding 8
                                     \bacaStartTextSpanRhythmAnnotation
             <BLANKLINE>
                                     \set stemLeftBeamCount = 0
@@ -10553,7 +10553,7 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
                     \times 13/11 {
                         \tweak text #tuplet-number::calc-fraction-text
                         \times 9/10 {
-                            \override TupletBracket.staff-padding = #2
+                            \override TupletBracket.staff-padding = 2
                             r8
                             c'16
                             [
@@ -10662,7 +10662,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 7/8 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         c'16
                         [
                         d'16
@@ -10735,7 +10735,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -10797,7 +10797,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
             \new Score
             \with
             {
-                \override TupletBracket.staff-padding = #4
+                \override TupletBracket.staff-padding = 4
             }
             <<
                 \new GlobalContext
@@ -10864,7 +10864,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
             \new Score
             \with
             {
-                \override TupletBracket.staff-padding = #4
+                \override TupletBracket.staff-padding = 4
             }
             <<
                 \new GlobalContext
@@ -11003,7 +11003,7 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         r8
                         c'16
                         [
@@ -11094,7 +11094,7 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 7/8 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         c'16
                         [
                         d'16
@@ -11167,7 +11167,7 @@ def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         s8
                         c'16
                         [
@@ -11243,7 +11243,7 @@ def skips_before(
                 {
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 9/10 {
-                        \override TupletBracket.staff-padding = #2
+                        \override TupletBracket.staff-padding = 2
                         s8
                         c'16
                         [
