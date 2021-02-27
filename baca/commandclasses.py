@@ -558,7 +558,7 @@ class BCPCommand(scoping.Command):
             ...     baca.make_even_divisions(),
             ...     baca.bcps(
             ...         [(1, 5), (2, 5)],
-            ...         abjad.tweak('red').color,
+            ...         abjad.tweak("#red").color,
             ...         abjad.tweak(2.5).staff_padding,
             ...         ),
             ...     baca.pitches('E4 F4'),
@@ -815,7 +815,7 @@ class BCPCommand(scoping.Command):
 
             >>> command = baca.bcps(
             ...     [(1, 2), (1, 4)],
-            ...     abjad.tweak('red').color,
+            ...     abjad.tweak("#red").color,
             ...     )
             >>> string = abjad.storage(command)
             >>> print(string)
@@ -829,7 +829,7 @@ class BCPCommand(scoping.Command):
                     abjad.Tag('baca.bcps()'),
                     ],
                 tweaks=(
-                    TweakInterface(('_literal', None), ('color', 'red')),
+                    TweakInterface(('_literal', None), ('color', '#red')),
                     ),
                 )
 
@@ -846,7 +846,7 @@ class BCPCommand(scoping.Command):
                     abjad.Tag('baca.bcps()'),
                     ],
                 tweaks=(
-                    TweakInterface(('_literal', None), ('color', 'red')),
+                    TweakInterface(('_literal', None), ('color', '#red')),
                     ),
                 )
 

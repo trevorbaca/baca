@@ -288,7 +288,7 @@ class RhythmCommand(scoping.Command):
         string = self.annotation_spanner_text
         if string is None:
             string = self._make_rhythm_annotation_string()
-        color = self.annotation_spanner_color or "darkyellow"
+        color = self.annotation_spanner_color or "#darkyellow"
         command = piecewise.rhythm_annotation_spanner(
             string,
             abjad.tweak(color).color,
@@ -730,7 +730,7 @@ def make_even_divisions(*, measures: typings.SliceTyping = None) -> RhythmComman
             rmakers.extract_trivial(),
             tag=_site(inspect.currentframe()),
         ),
-        annotation_spanner_color="darkcyan",
+        annotation_spanner_color="#darkcyan",
         frame=inspect.currentframe(),
         measures=measures,
     )
@@ -760,7 +760,7 @@ def make_fused_tuplet_monads(
             preprocessor=abjad.sequence().sum().sequence(),
             tag=_site(inspect.currentframe()),
         ),
-        annotation_spanner_color="darkcyan",
+        annotation_spanner_color="#darkcyan",
         frame=inspect.currentframe(),
         measures=measures,
     )
@@ -912,7 +912,7 @@ def make_monads(
     rhythm_maker = abjad.select(components)
     return RhythmCommand(
         rhythm_maker,
-        annotation_spanner_color="darkcyan",
+        annotation_spanner_color="#darkcyan",
         attach_not_yet_pitched=True,
         frame=inspect.currentframe(),
     )
@@ -951,7 +951,7 @@ def make_notes(
             *repeat_tie_specifier,
             tag=_site(inspect.currentframe()),
         ),
-        annotation_spanner_color="darkcyan",
+        annotation_spanner_color="#darkcyan",
         frame=inspect.currentframe(),
         measures=measures,
     )
@@ -1107,7 +1107,7 @@ def make_repeat_tied_notes(
     specifiers_.append(specifier)
     return RhythmCommand(
         rmakers.stack(rmakers.note(), *specifiers_, tag=_site(inspect.currentframe())),
-        annotation_spanner_color="darkcyan",
+        annotation_spanner_color="#darkcyan",
         frame=inspect.currentframe(),
     )
 
@@ -1140,7 +1140,7 @@ def make_repeated_duration_notes(
             preprocessor=divisions,
             tag=_site(inspect.currentframe()),
         ),
-        annotation_spanner_color="darkcyan",
+        annotation_spanner_color="#darkcyan",
         frame=inspect.currentframe(),
         measures=measures,
     )
@@ -1156,7 +1156,7 @@ def make_rests(*, measures: typings.SliceTyping = None) -> RhythmCommand:
             rmakers.force_rest(classes.select().lts()),
             tag=_site(inspect.currentframe()),
         ),
-        annotation_spanner_color="darkcyan",
+        annotation_spanner_color="#darkcyan",
         frame=inspect.currentframe(),
         measures=measures,
     )
@@ -1183,7 +1183,7 @@ def make_single_attack(
             rmakers.extract_trivial(),
             tag=_site(inspect.currentframe()),
         ),
-        annotation_spanner_color="darkcyan",
+        annotation_spanner_color="#darkcyan",
         frame=inspect.currentframe(),
         measures=measures,
     )
@@ -1212,7 +1212,7 @@ def make_tied_notes(*, measures: typings.SliceTyping = None) -> RhythmCommand:
             rmakers.rewrite_meter(),
             tag=_site(inspect.currentframe()),
         ),
-        annotation_spanner_color="darkcyan",
+        annotation_spanner_color="#darkcyan",
         frame=inspect.currentframe(),
         measures=measures,
     )
@@ -1246,7 +1246,7 @@ def make_tied_repeated_durations(
             preprocessor=divisions,
             tag=_site(inspect.currentframe()),
         ),
-        annotation_spanner_color="darkcyan",
+        annotation_spanner_color="#darkcyan",
         frame=inspect.currentframe(),
         measures=measures,
     )
@@ -1275,7 +1275,7 @@ def music(
         tag_selection(selection, tag)
     return RhythmCommand(
         selection,
-        annotation_spanner_color="darkcyan",
+        annotation_spanner_color="#darkcyan",
         annotation_spanner_text="baca.music() =|",
         do_not_check_total_duration=do_not_check_total_duration,
     )
@@ -1328,7 +1328,7 @@ def skeleton(
         tag_selection(selection, tag)
     return RhythmCommand(
         selection,
-        annotation_spanner_color="darkcyan",
+        annotation_spanner_color="#darkcyan",
         annotation_spanner_text="baca.skeleton() =|",
         attach_not_yet_pitched=True,
         do_not_check_total_duration=do_not_check_total_duration,

@@ -2317,10 +2317,10 @@ class Selection(abjad.Selection):
 
                 >>> for i, selection in enumerate(result):
                 ...     if i % 2 == 0:
-                ...         color, direction = 'red', abjad.Up
+                ...         color, direction = "#red", abjad.Up
                 ...     else:
-                ...         color, direction = 'blue', abjad.Down
-                ...     string = rf'\markup {{ \bold \with-color #{color} * }}'
+                ...         color, direction = "#blue", abjad.Down
+                ...     string = rf'\markup {{ \bold \with-color {color} * }}'
                 ...     for leaf in selection:
                 ...         markup = abjad.Markup(string, literal=True)
                 ...         markup = abjad.new(markup, direction=direction)

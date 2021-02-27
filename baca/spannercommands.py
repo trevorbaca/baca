@@ -953,7 +953,7 @@ def trill_spanner(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.trill_spanner(
-        ...             abjad.tweak('red').color,
+        ...             abjad.tweak("#red").color,
         ...             alteration='M2',
         ...             ),
         ...         ),

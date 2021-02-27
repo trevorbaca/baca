@@ -91,8 +91,6 @@ class OverrideCommand(scoping.Command):
         if grob is not None:
             assert isinstance(grob, str), repr(grob)
         self._grob = grob
-        if attribute == "color" and value not in abjad.lyconst.colors:
-            raise Exception(f"{repr(value)} is not a LilyPond color.")
         self._value = value
         if whitelist is not None:
             assert isinstance(whitelist, tuple), repr(whitelist)
@@ -136,8 +134,6 @@ class OverrideCommand(scoping.Command):
         grob = self.grob
         attribute = self.attribute
         value = self.value
-        if attribute == "color" and value not in abjad.lyconst.normal_colors:
-            value = f"#(x11-color '{value})"
         once = bool(len(leaves) == 1)
         string = abjad.overrides.make_lilypond_override_string(
             grob, attribute, value, context=lilypond_type, once=once
@@ -1038,7 +1034,7 @@ def dots_x_extent_false(
 
 
 def dynamic_text_color(
-    color: str = "red",
+    color: str = "#red",
     selector: abjad.Expression = classes.select().pleaf(0),
 ) -> OverrideCommand:
     """
@@ -1440,7 +1436,7 @@ def laissez_vibrer_tie_up(
 
 
 def mmrest_color(
-    color: str = "red",
+    color: str = "#red",
     selector: abjad.Expression = classes.select().mmrests(),
 ) -> OverrideCommand:
     r"""
@@ -1458,7 +1454,7 @@ def mmrest_color(
 
         >>> maker(
         ...     'Music_Voice',
-        ...     baca.mmrest_color('DarkOrchid'),
+        ...     baca.mmrest_color("#(x11-color 'DarkOrchid)"),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -1602,7 +1598,7 @@ def mmrest_transparent(
 
 
 def mmrest_text_color(
-    color: str = "red",
+    color: str = "#red",
     selector: abjad.Expression = classes.select().mmrests(),
 ) -> OverrideCommand:
     r"""
@@ -1622,7 +1618,7 @@ def mmrest_text_color(
         ...         literal=True,
         ...         selector=baca.mmrest(1),
         ...         ),
-        ...     baca.mmrest_text_color('red'),
+        ...     baca.mmrest_text_color("#red"),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -1757,7 +1753,7 @@ def mmrest_text_color(
         ...         literal=True,
         ...         selector=baca.leaf(1),
         ...         ),
-        ...     baca.mmrest_text_color('red', selector=baca.leaves()),
+        ...     baca.mmrest_text_color("#red", selector=baca.leaves()),
         ...     baca.pitches([2, 4]),
         ...     )
 
@@ -3521,7 +3517,7 @@ def rest_x_extent_zero(
 
 
 def script_color(
-    color: str = "red",
+    color: str = "#red",
     selector: abjad.Expression = classes.select().leaves(),
 ) -> OverrideCommand:
     r"""
@@ -3541,7 +3537,7 @@ def script_color(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.accent(selector=baca.pheads()),
-        ...     baca.script_color('red'),
+        ...     baca.script_color("#red"),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -4207,7 +4203,7 @@ def span_bar_transparent(
 
 
 def stem_color(
-    color: str = "red",
+    color: str = "#red",
     selector: abjad.Expression = classes.select().pleaves(),
     *,
     context: str = None,
@@ -4228,7 +4224,7 @@ def stem_color(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.stem_color(color='red'),
+        ...     baca.stem_color(color="#red"),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -4651,7 +4647,7 @@ def sustain_pedal_staff_padding(
 
 
 def text_script_color(
-    color: str = "red",
+    color: str = "#red",
     selector: abjad.Expression = classes.select().leaves(),
     *,
     allow_mmrests: bool = False,
@@ -4677,7 +4673,7 @@ def text_script_color(
         ...         'lo stesso tempo',
         ...         selector=baca.tuplets()[1:2].phead(0),
         ...         ),
-        ...     baca.text_script_color('red'),
+        ...     baca.text_script_color("#red"),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -4753,7 +4749,7 @@ def text_script_color(
         ...         literal=True,
         ...         selector=baca.leaf(1),
         ...         ),
-        ...     baca.text_script_color('red'),
+        ...     baca.text_script_color("#red"),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')

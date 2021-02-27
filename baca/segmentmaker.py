@@ -2662,7 +2662,7 @@ class SegmentMaker(abjad.SegmentMaker):
         score = self.score
         vertical_moments = abjad.iterate_vertical_moments(score)
         markup = abjad.Markup("OCTAVE", direction=abjad.Up)
-        abjad.tweak(markup).color = "red"
+        abjad.tweak(markup).color = "#red"
         tag = _site(inspect.currentframe())
         tag = tag.append(ide.tags.OCTAVE_COLORING)
         for vertical_moment in vertical_moments:

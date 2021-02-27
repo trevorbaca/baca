@@ -1822,7 +1822,7 @@ def glissando(
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.glissando(
-        ...         abjad.tweak('red').color,
+        ...         abjad.tweak("#red").color,
         ...         ),
         ...     )
 
@@ -2009,8 +2009,8 @@ def glissando(
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
         ...     baca.glissando(
-        ...         (abjad.tweak('red').color, 0),
-        ...         (abjad.tweak('red').color, -1),
+        ...         (abjad.tweak("#red").color, 0),
+        ...         (abjad.tweak("#red").color, -1),
         ...         ),
         ...     )
 

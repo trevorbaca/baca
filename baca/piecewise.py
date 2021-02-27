@@ -4192,7 +4192,7 @@ def metric_modulation_spanner(
     Makes metric modulation spanner.
     """
     # TODO: tag red tweak with METRIC_MODULATION_SPANNER_COLOR
-    # red_tweak = abjad.tweak("red").color
+    # red_tweak = abjad.tweak("#red").color
     # tweaks = tweaks + (red_tweak,)
     tag = _site(inspect.currentframe())
     tag = tag.append(ide.tags.METRIC_MODULATION_SPANNER)
@@ -6340,10 +6340,10 @@ def text_spanner(
         ...     'Music_Voice',
         ...     baca.text_spanner(
         ...         'P -> T ->',
-        ...         (abjad.tweak('red').color, 0),
-        ...         (abjad.tweak('blue').color, 1),
-        ...         (abjad.tweak('green').color, 2),
-        ...         (abjad.tweak('purple').color, 3),
+        ...         (abjad.tweak("#red").color, 0),
+        ...         (abjad.tweak("#blue").color, 1),
+        ...         (abjad.tweak("#green").color, 2),
+        ...         (abjad.tweak("#purple").color, 3),
         ...         final_piece_spanner=False,
         ...         pieces=baca.plts(),
         ...     ),

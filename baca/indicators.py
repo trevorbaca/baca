@@ -246,7 +246,7 @@ class Accelerando:
 
             >>> note = abjad.Note("c'4")
             >>> accelerando = baca.Accelerando()
-            >>> abjad.tweak(accelerando).color = 'blue'
+            >>> abjad.tweak(accelerando).color = "#blue"
             >>> abjad.tweak(accelerando).extra_offset = (0, 2)
             >>> abjad.attach(accelerando, note)
             >>> abjad.show(note) # doctest: +SKIP
@@ -268,21 +268,21 @@ class Accelerando:
 
             Tweaks can set at initialization:
 
-            >>> baca.Accelerando(tweaks=abjad.tweak('blue').color)
-            Accelerando(tweaks=TweakInterface(('_literal', None), ('color', 'blue')))
+            >>> baca.Accelerando(tweaks=abjad.tweak("#blue").color)
+            Accelerando(tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
 
         ..  container:: example
 
             Tweaks survive copy:
 
             >>> accelerando = baca.Accelerando()
-            >>> abjad.tweak(accelerando).color = 'blue'
+            >>> abjad.tweak(accelerando).color = "#blue"
             >>> accelerando
-            Accelerando(tweaks=TweakInterface(('_literal', None), ('color', 'blue')))
+            Accelerando(tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
 
             >>> import copy
             >>> copy.copy(accelerando)
-            Accelerando(tweaks=TweakInterface(('_literal', None), ('color', 'blue')))
+            Accelerando(tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
 
         Tweak extra-offset to align accelerando markup with other metronome
         mark spanner segments.
@@ -810,7 +810,7 @@ class Ritardando:
 
             >>> note = abjad.Note("c'4")
             >>> ritardando = baca.Ritardando()
-            >>> abjad.tweak(ritardando).color = 'blue'
+            >>> abjad.tweak(ritardando).color = "#blue"
             >>> abjad.tweak(ritardando).extra_offset = (0, 2)
             >>> abjad.attach(ritardando, note)
             >>> abjad.show(note) # doctest: +SKIP
@@ -832,21 +832,21 @@ class Ritardando:
 
             Tweaks can set at initialization:
 
-            >>> baca.Ritardando(tweaks=abjad.tweak('blue').color)
-            Ritardando(tweaks=TweakInterface(('_literal', None), ('color', 'blue')))
+            >>> baca.Ritardando(tweaks=abjad.tweak("#blue").color)
+            Ritardando(tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
 
         ..  container:: example
 
             Tweaks survive copy:
 
             >>> ritardando = baca.Ritardando()
-            >>> abjad.tweak(ritardando).color = 'blue'
+            >>> abjad.tweak(ritardando).color = "#blue"
             >>> ritardando
-            Ritardando(tweaks=TweakInterface(('_literal', None), ('color', 'blue')))
+            Ritardando(tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
 
             >>> import copy
             >>> copy.copy(ritardando)
-            Ritardando(tweaks=TweakInterface(('_literal', None), ('color', 'blue')))
+            Ritardando(tweaks=TweakInterface(('_literal', None), ('color', '#blue')))
 
         Tweak extra-offset to align ritardando markup with other metronome
         mark spanner segments.

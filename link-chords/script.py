@@ -108,7 +108,7 @@ def is_link_chord(ais):
 #            for pitch in sextuple:
 #                for note_head in note_heads:
 #                    if note_head.written_pitch == pitch:
-#                        note_head.tweak.color = 'red'
+#                        note_head.tweak.color = "#red"
 #            break
 #
 # abjad.override(score).spacing_spanner.strict_note_spacing = True
