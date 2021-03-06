@@ -80,17 +80,12 @@ jobs:
         # lilypond is installed in /home/runner/bin
         export PATH=/home/runner/bin:${PATH}
         # export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
-        export MYPYPATH=/tmp/abjad-ext-rmakers:/tmp/ide
+        export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
         echo $MYPYPATH
-        ls ~
-        echo "foo"
-        ls $GITHUB_WORKSPACE
-        ln -s $GITHUB_WORKSPACE/dotfiles/mypy.ini ~/.mypy.ini
-        echo "hello"
-        cat ~/.mypy.ini
-        echo "world"
+        cat $GITHUB_WORKSPACE/dotfiles/mypy.ini
         make black-check
         make flake8
         make isort-check
-        make mypy
+        # make mypy
+        mypy --config-file=$GITHUB_WORKSPACE/dotfiles/mypy.ini .
         make pytest
