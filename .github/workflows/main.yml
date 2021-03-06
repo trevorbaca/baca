@@ -83,9 +83,10 @@ jobs:
         export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
         echo $MYPYPATH
         cat $GITHUB_WORKSPACE/dotfiles/mypy.ini
+        mypy --config-file=$GITHUB_WORKSPACE/dotfiles/mypy.ini baca
+
         make black-check
         make flake8
         make isort-check
         # make mypy
-        mypy --config-file=$GITHUB_WORKSPACE/dotfiles/mypy.ini .
         make pytest
