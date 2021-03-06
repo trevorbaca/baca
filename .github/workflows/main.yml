@@ -8,7 +8,6 @@ on:
 
 env:
   MYPYPATH: /tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
-  # PATH: /home/runner/bin:${PATH}
 
 jobs:
   build:
@@ -28,12 +27,9 @@ jobs:
 
     - name: Log environment
       run: |
-        echo "\$HOME:"
-        echo $HOME
-        echo "\$GITHUB_WORKSPACE:"
-        echo $GITHUB_WORKSPACE
-        echo "\$PATH:"
-        echo $PATH
+        echo "\$HOME:" $HOME
+        echo "\$GITHUB_WORKSPACE:" $GITHUB_WORKSPACE
+        echo "\$PATH:" $PATH
 
     - name: Install LilyPond
       run: |
@@ -83,7 +79,6 @@ jobs:
         pytest --version
         echo; echo Running lilypond --version ...
         export PATH=/home/runner/bin:${PATH}
-        echo $PATH
         lilypond --version
 
     - name: Run checks
@@ -95,12 +90,9 @@ jobs:
         echo; echo Running isort ...
         make isort-check
         echo; echo Running mypy ...
-        # export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
-        echo $MYPYPATH
         mypy --config-file=$GITHUB_WORKSPACE/mypy.ini baca
 
     - name: Run pytest
       run: |
         export PATH=/home/runner/bin:${PATH}
-        echo $PATH
         make pytest
