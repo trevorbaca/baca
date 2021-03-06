@@ -8,7 +8,7 @@ on:
 
 env:
   MYPYPATH: /tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
-  PATH: /home/runner/bin:${PATH}
+  # PATH: /home/runner/bin:${PATH}
 
 jobs:
   build:
@@ -82,7 +82,7 @@ jobs:
         echo; echo Running pytest --version ...
         pytest --version
         echo; echo Running lilypond --version ...
-        # PATH=/home/runner/bin:${PATH}
+        export PATH=/home/runner/bin:${PATH}
         echo $PATH
         lilypond --version
 
@@ -101,6 +101,6 @@ jobs:
 
     - name: Run pytest
       run: |
-        # PATH=/home/runner/bin:${PATH}
+        export PATH=/home/runner/bin:${PATH}
         echo $PATH
         make pytest
