@@ -22,14 +22,13 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Log environment variables
+    - name: Log environment
       run: |
-        python --version
-        echo "$HOME:"
+        echo "\$HOME:"
         echo $HOME
-        echo "$GITHUB_WORKSPACE:"
+        echo "\$GITHUB_WORKSPACE:"
         echo $GITHUB_WORKSPACE
-        echo "$PATH:"
+        echo "\$PATH:"
         echo $PATH
 
     - name: Install LilyPond
@@ -68,7 +67,7 @@ jobs:
 
     - name: Log versions
       run: |
-        PATH=/home/runner/bin:${PATH}
+        # PATH=/home/runner/bin:${PATH}
         echo; echo Running black --version ...
         black --version
         echo; echo Running flake8 --version ...
@@ -84,7 +83,6 @@ jobs:
 
     - name: Run checks
       run: |
-        # PATH=/home/runner/bin:${PATH}
         echo; echo Running black ...
         make black-check
         echo; echo Running flake8 ...
@@ -98,5 +96,5 @@ jobs:
 
     - name: Run pytest
       run: |
-        PATH=/home/runner/bin:${PATH}
+        # PATH=/home/runner/bin:${PATH}
         make pytest
