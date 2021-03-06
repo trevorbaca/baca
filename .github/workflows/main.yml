@@ -79,9 +79,11 @@ jobs:
       run: |
         # lilypond is installed in /home/runner/bin
         export PATH=/home/runner/bin:${PATH}
-        export MYPYPATH=$MYPYPATH:/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
+        # export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
+        export MYPYPATH=/tmp/abjad-ext-rmakers:/tmp/ide
         echo $MYPYPATH
         ls ~
+        echo "foo"
         ls $GITHUB_WORKSPACE
         ln -s $GITHUB_WORKSPACE/dotfiles/mypy.ini ~/.mypy.ini
         echo "hello"
