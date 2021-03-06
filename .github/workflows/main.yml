@@ -80,10 +80,10 @@ jobs:
       run: |
         # lilypond is installed in /home/runner/bin
         export PATH=/home/runner/bin:${PATH}
-        export MYPYPATH=$MYPYPATH:/tmp/abjad
+        export MYPYPATH=$MYPYPATH:/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
         echo $MYPYPATH
         make black-check
         make flake8
         make isort-check
-        # make mypy
+        make mypy
         make pytest
