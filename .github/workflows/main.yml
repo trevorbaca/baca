@@ -65,7 +65,6 @@ jobs:
 
     - name: Log versions
       run: |
-        # lilypond is installed in /home/runner/bin
         PATH=/home/runner/bin:${PATH}
         black --version
         flake8 --version
@@ -75,14 +74,21 @@ jobs:
         pytest --version
         lilypond --version
 
-    - name: Run checks and tests
+    - name: Run checks
       run: |
-        # lilypond is installed in /home/runner/bin
         PATH=/home/runner/bin:${PATH}
         MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
         echo $MYPYPATH
+        echo black ...
         make black-check
+        echo flake8 ...
         make flake8
+        echo isort ...
         make isort-check
+        echo mypy ...
         mypy --config-file=$GITHUB_WORKSPACE/mypy.ini baca
+
+    - name: Run tests
+      run: |
+        PATH=/home/runner/bin:${PATH}
         make pytest
