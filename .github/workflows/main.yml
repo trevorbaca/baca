@@ -66,7 +66,7 @@ jobs:
     - name: Log versions
       run: |
         # lilypond is installed in /home/runner/bin
-        PATH=/home/runner/bin:${PATH}
+        export PATH=/home/runner/bin:${PATH}
         black --version
         flake8 --version
         isort --version
@@ -78,8 +78,8 @@ jobs:
     - name: Run checks and tests
       run: |
         # lilypond is installed in /home/runner/bin
-        PATH=/home/runner/bin:${PATH}
-        MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
+        export PATH=/home/runner/bin:${PATH}
+        export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
         $MYPYPATH
         make black-check
         make flake8
