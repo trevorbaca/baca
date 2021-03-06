@@ -25,7 +25,6 @@ jobs:
     - name: Log environment variables
       run: |
         python --version
-        python -m pip install --upgrade pip
         echo $HOME
         echo $GITHUB_WORKSPACE
         echo $PATH
@@ -85,6 +84,9 @@ jobs:
         ls ~
         ls $GITHUB_WORKSPACE
         ln -s $GITHUB_WORKSPACE/dotfiles/mypy.ini ~/.mypy.ini
+        echo "hello"
+        cat ~/.mypy.ini
+        echo "world"
         make black-check
         make flake8
         make isort-check
