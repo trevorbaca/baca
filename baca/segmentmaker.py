@@ -1,7 +1,6 @@
 import copy
 import importlib
 import inspect
-import os
 import pathlib
 import typing
 
@@ -1494,8 +1493,6 @@ class SegmentMaker(abjad.SegmentMaker):
             return
         with abjad.Timer() as timer:
             self.spacing(self)
-        if os.getenv("TRAVIS"):
-            return
         count = int(timer.elapsed_time)
         if False:
             seconds = abjad.String("second").pluralize(count)
