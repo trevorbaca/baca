@@ -25,8 +25,11 @@ jobs:
     - name: Log environment variables
       run: |
         python --version
+        echo "$HOME:"
         echo $HOME
+        echo "$GITHUB_WORKSPACE:"
         echo $GITHUB_WORKSPACE
+        echo "$PATH:"
         echo $PATH
 
     - name: Install LilyPond
@@ -66,29 +69,34 @@ jobs:
     - name: Log versions
       run: |
         PATH=/home/runner/bin:${PATH}
+        echo; echo Running black --version ...
         black --version
+        echo; echo Running flake8 --version ...
         flake8 --version
+        echo; echo Running isort --version ...
         isort --version
+        echo; echo Running mypy --version ...
         mypy --version
-        pip --version
+        echo; echo Running pytest --version ...
         pytest --version
+        echo; echo Running lilypond --version ...
         lilypond --version
 
     - name: Run checks
       run: |
-        PATH=/home/runner/bin:${PATH}
-        echo; echo black ...
+        # PATH=/home/runner/bin:${PATH}
+        echo; echo Running black ...
         make black-check
-        echo; echo flake8 ...
+        echo; echo Running flake8 ...
         make flake8
-        echo; echo isort ...
+        echo; echo Running isort ...
         make isort-check
-        echo; echo mypy ...
+        echo; echo Running mypy ...
         export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
         echo $MYPYPATH
         mypy --config-file=$GITHUB_WORKSPACE/mypy.ini baca
 
-    - name: Run tests
+    - name: Run pytest
       run: |
         PATH=/home/runner/bin:${PATH}
         make pytest
