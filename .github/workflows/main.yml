@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  MYPYPATH: /tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
+  PATH: /home/runner/bin:${PATH}
+
 jobs:
   build:
 
@@ -67,7 +71,6 @@ jobs:
 
     - name: Log versions
       run: |
-        # PATH=/home/runner/bin:${PATH}
         echo; echo Running black --version ...
         black --version
         echo; echo Running flake8 --version ...
@@ -79,6 +82,8 @@ jobs:
         echo; echo Running pytest --version ...
         pytest --version
         echo; echo Running lilypond --version ...
+        # PATH=/home/runner/bin:${PATH}
+        echo $PATH
         lilypond --version
 
     - name: Run checks
@@ -90,11 +95,12 @@ jobs:
         echo; echo Running isort ...
         make isort-check
         echo; echo Running mypy ...
-        export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
+        # export MYPYPATH=/tmp/abjad:/tmp/abjad-ext-rmakers:/tmp/ide
         echo $MYPYPATH
         mypy --config-file=$GITHUB_WORKSPACE/mypy.ini baca
 
     - name: Run pytest
       run: |
         # PATH=/home/runner/bin:${PATH}
+        echo $PATH
         make pytest
