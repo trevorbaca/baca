@@ -1880,6 +1880,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -1917,6 +1918,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -1943,6 +1947,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -1972,6 +1979,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -2021,6 +2029,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         \abjad-color-music #'red
                         <a'' b''>16
@@ -2052,6 +2063,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -2081,6 +2095,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -2131,6 +2146,9 @@ class Selection(abjad.Selection):
                     \times 10/9 {
                         \abjad-color-music #'red
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -2173,6 +2191,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'blue
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -2287,6 +2308,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -2345,6 +2367,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         ^ \markup { \bold \with-color #red * }
                         bf'16
                         ^ \markup { \bold \with-color #red * }
@@ -2391,6 +2416,9 @@ class Selection(abjad.Selection):
                         _ \markup { \bold \with-color #blue * }
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                         ^ \markup { \bold \with-color #red * }
                     }
                 }
@@ -2810,6 +2838,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -2845,6 +2874,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -2871,6 +2903,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -2970,6 +3005,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3021,6 +3057,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -3053,6 +3092,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -3082,6 +3124,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3126,6 +3169,9 @@ class Selection(abjad.Selection):
                     \times 10/9 {
                         \abjad-color-music #'red
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -3159,6 +3205,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -3188,6 +3237,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3225,6 +3275,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -3252,6 +3305,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -3281,6 +3337,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3318,6 +3375,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'green
                         bf'16
                         <a'' b''>16
@@ -3343,6 +3403,9 @@ class Selection(abjad.Selection):
                         e'16
                         r4
                         r16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -3372,6 +3435,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3443,6 +3507,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -3484,6 +3551,9 @@ class Selection(abjad.Selection):
                         r4
                         \abjad-color-music #'red
                         r16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -3513,6 +3583,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3550,6 +3621,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         c'16
                         c'16
@@ -3577,6 +3651,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -3606,6 +3683,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3655,6 +3733,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         c'16
                         \abjad-color-music #'red
@@ -3695,6 +3776,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'blue
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -3729,6 +3813,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3766,6 +3851,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         c'16
                         c'16
@@ -3796,6 +3884,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -3825,6 +3916,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3868,6 +3960,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         c'16
                         \abjad-color-music #'red
@@ -3908,6 +4003,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'red
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -3939,6 +4037,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -4007,6 +4106,9 @@ class Selection(abjad.Selection):
                     \times 10/9 {
                         \abjad-color-music #'red
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'blue
                         bf'16
                         \abjad-color-music #'red
@@ -4049,6 +4151,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'red
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -4432,6 +4537,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -4469,6 +4575,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         c'16
                         c'16
@@ -4499,6 +4608,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -4528,6 +4640,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -4571,6 +4684,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         c'16
                         \abjad-color-music #'red
@@ -4611,6 +4727,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'red
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -4744,6 +4863,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -4781,6 +4901,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -4807,6 +4930,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -4836,6 +4962,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -4897,6 +5024,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -4934,6 +5064,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -4963,6 +5096,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5000,6 +5134,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -5026,6 +5163,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -5055,6 +5195,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5122,6 +5263,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -5162,6 +5306,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'red
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -5191,6 +5338,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5228,6 +5376,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -5255,6 +5406,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -5284,6 +5438,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5345,6 +5500,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -5385,6 +5543,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'blue
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -5414,6 +5575,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5451,6 +5613,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -5477,6 +5642,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -5506,6 +5674,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5567,6 +5736,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -5604,6 +5776,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'blue
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -5633,6 +5808,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5670,6 +5846,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -5696,6 +5875,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -5725,6 +5907,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5780,6 +5963,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -5814,6 +6000,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -5843,6 +6032,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5880,6 +6070,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         c'16
                         c'16
@@ -5907,6 +6100,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'green
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -5936,6 +6132,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5985,6 +6182,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         c'16
                         \abjad-color-music #'red
@@ -6025,6 +6225,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'blue
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -6059,6 +6262,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6094,6 +6298,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -6120,6 +6327,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -6221,6 +6431,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6272,6 +6483,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -6304,6 +6518,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -6412,6 +6629,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6449,6 +6667,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         c'16
                         c'16
@@ -6480,6 +6701,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -6509,6 +6733,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6552,6 +6777,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         c'16
                         \abjad-color-music #'red
@@ -6594,6 +6822,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'red
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -6759,6 +6990,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6796,6 +7028,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'green
                         bf'16
                         <a'' b''>16
@@ -6822,6 +7057,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -6851,6 +7089,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6922,6 +7161,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'red
                         bf'16
                         \abjad-color-music #'blue
@@ -6964,6 +7206,9 @@ class Selection(abjad.Selection):
                         ~
                         \abjad-color-music #'red
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -6994,6 +7239,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -7029,6 +7275,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -7055,6 +7304,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -7074,6 +7326,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -7109,6 +7362,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -7135,6 +7391,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -7164,6 +7423,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+                >>> rmakers.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -7217,6 +7477,9 @@ class Selection(abjad.Selection):
                     \tweak text #tuplet-number::calc-fraction-text
                     \times 10/9 {
                         r16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         bf'16
                         <a'' b''>16
                         c'16
@@ -7250,6 +7513,9 @@ class Selection(abjad.Selection):
                         <fs' gs'>4
                         ~
                         <fs' gs'>16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
 
@@ -8248,6 +8514,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, divisions)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -8284,6 +8551,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -8300,7 +8568,13 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'2
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'1.
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 >>
 
@@ -8322,6 +8596,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -8338,8 +8613,14 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'2
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'1
                         c'2
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 >>
 
@@ -8365,6 +8646,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -8381,8 +8663,14 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'2.
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'2..
                         c'4
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 >>
 
@@ -8427,6 +8715,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -8443,6 +8732,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         c'16
                         c'16
@@ -8466,6 +8758,9 @@ class Sequence(abjad.Sequence):
                         c'4
                         ~
                         c'16
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 >>
 
@@ -8967,6 +9262,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -8983,6 +9279,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'4
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'4
                         c'4
                         c'8
@@ -8991,6 +9290,9 @@ class Sequence(abjad.Sequence):
                         c'4
                         c'4
                         c'8
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 >>
 
@@ -9035,9 +9337,8 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     music, time_signatures
-            ... )
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -9056,6 +9357,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'2
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         ~
                         c'8
                         \tweak edge-height #'(0.7 . 0)
@@ -9091,9 +9395,8 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     music, time_signatures
-            ... )
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -9112,6 +9415,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'2
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         ~
                         c'8
                         c'4
@@ -9142,9 +9448,8 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     music, time_signatures
-            ... )
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -9165,6 +9470,9 @@ class Sequence(abjad.Sequence):
                         \tweak edge-height #'(0.7 . 0)
                         \times 16/24 {
                             c'2
+                            - \tweak staff-padding 11
+                            - \tweak transparent ##t
+                            ^ \markup I
                             ~
                             c'8
                         }
@@ -9200,9 +9508,8 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     music, time_signatures
-            ... )
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -9221,6 +9528,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'4.
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'4
                         c'2
                         c'4
@@ -9252,9 +9562,8 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     music, time_signatures
-            ...     )
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -9275,6 +9584,9 @@ class Sequence(abjad.Sequence):
                         \tweak edge-height #'(0.7 . 0)
                         \times 16/24 {
                             c'2
+                            - \tweak staff-padding 11
+                            - \tweak transparent ##t
+                            ^ \markup I
                             ~
                             c'8
                         }
@@ -9315,9 +9627,8 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     music, time_signatures
-            ...     )
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -9336,6 +9647,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'4.
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'4
                         c'4
                         c'4
@@ -9858,6 +10172,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -9874,6 +10189,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'4
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'4
                         c'4
                         c'4
@@ -9881,6 +10199,9 @@ class Sequence(abjad.Sequence):
                         c'4
                         c'4
                         c'8
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 >>
 
@@ -9908,6 +10229,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -9924,12 +10246,18 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'4
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'4
                         c'4
                         c'4
                         c'4
                         c'4
                         c'4.
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 >>
 
@@ -9960,6 +10288,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -9976,6 +10305,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'4
                         c'4
                         c'4
@@ -9983,6 +10315,9 @@ class Sequence(abjad.Sequence):
                         c'4
                         c'4
                         c'4
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 >>
 
@@ -10013,6 +10348,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -10029,12 +10365,18 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'4.
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'4
                         c'4
                         c'4
                         c'4
                         c'4
                         c'4
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 >>
 
@@ -10071,9 +10413,8 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     music, time_signatures
-            ... )
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -10094,6 +10435,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'4
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'4
                         c'4
                         c'8
@@ -10103,6 +10447,9 @@ class Sequence(abjad.Sequence):
                         c'8
                         c'4
                         c'8.
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 >>
 
@@ -10138,9 +10485,8 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     music, time_signatures
-            ...     )
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -10161,6 +10507,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'4
                         c'4
                         c'4
@@ -10170,6 +10519,9 @@ class Sequence(abjad.Sequence):
                         c'4
                         c'8.
                         c'4
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 >>
 
@@ -10199,9 +10551,8 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     music, time_signatures
-            ...     )
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -10218,6 +10569,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'4
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'4.
                     }
                 >>
@@ -10297,9 +10651,8 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     music, time_signatures
-            ...     )
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -10318,6 +10671,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'4
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'4
                         c'4
                         c'4.
@@ -10360,9 +10716,8 @@ class Sequence(abjad.Sequence):
 
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
-            >>> lilypond_file = abjad.LilyPondFile.rhythm(
-            ...     music, time_signatures
-            ... )
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -10383,6 +10738,9 @@ class Sequence(abjad.Sequence):
                     \new RhythmicStaff
                     {
                         c'16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'8
                         c'4
                         c'8

@@ -341,6 +341,7 @@ def color(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -362,6 +363,9 @@ def color(
                         \override TupletBracket.staff-padding = 2
                         \abjad-color-music #'red
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \abjad-color-music #'blue
                         c'16
                         \abjad-color-music #'red
@@ -421,6 +425,7 @@ def color(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -441,6 +446,9 @@ def color(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         d'16
                         bf'4
@@ -1021,6 +1029,7 @@ def dynamic_down(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -1042,6 +1051,9 @@ def dynamic_down(
                         \override TupletBracket.staff-padding = 2
                         \dynamicDown
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         \p
                         [
@@ -1110,6 +1122,7 @@ def dynamic_up(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -1131,6 +1144,9 @@ def dynamic_up(
                         \override TupletBracket.staff-padding = 2
                         \dynamicUp
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         \p
                         [
@@ -2423,6 +2439,7 @@ def label(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -2443,6 +2460,9 @@ def label(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         ^ \markup { C4 }
                         [
@@ -2521,6 +2541,7 @@ def markup(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -2542,6 +2563,9 @@ def markup(
                         \override TupletBracket.outside-staff-priority = 1000
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         ^ \markup { più mosso }
                         [
@@ -2598,6 +2622,7 @@ def markup(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -2619,6 +2644,9 @@ def markup(
                         \override TupletBracket.outside-staff-priority = 1000
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         ^ \markup { \baca-triple-diamond-markup }
                         [

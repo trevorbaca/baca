@@ -423,6 +423,7 @@ def ottava(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -443,6 +444,9 @@ def ottava(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \ottava 1
                         c'16
                         [
@@ -514,6 +518,7 @@ def ottava_bassa(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -534,6 +539,9 @@ def ottava_bassa(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \ottava -1
                         c'16
                         [
@@ -606,6 +614,7 @@ def slur(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -627,6 +636,9 @@ def slur(
                         \override Slur.direction = #down
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         [
                         (
@@ -703,6 +715,7 @@ def sustain_pedal(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -724,6 +737,9 @@ def sustain_pedal(
                         \override Staff.SustainPedalLineSpanner.staff-padding = 4
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \sustainOn
                         c'16
                         [
@@ -802,6 +818,7 @@ def trill_spanner(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -822,6 +839,9 @@ def trill_spanner(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         [
                         \startTrillSpan
@@ -878,6 +898,7 @@ def trill_spanner(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -898,6 +919,9 @@ def trill_spanner(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         [
                         \startTrillSpan
@@ -961,6 +985,7 @@ def trill_spanner(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -981,6 +1006,9 @@ def trill_spanner(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \pitchedTrill
                         c'16
                         [

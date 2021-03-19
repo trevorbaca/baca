@@ -273,6 +273,7 @@ class ClusterCommand(scoping.Command):
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -297,6 +298,9 @@ class ClusterCommand(scoping.Command):
                                 \filled-box #'(-0.6 . 0.6) #'(-0.7 . 0.7) #0.25
                         }
                         <c' e' g'>16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         ^ \markup {
                             \center-align
                                 \concat
@@ -3503,6 +3507,7 @@ class RegisterCommand(scoping.Command):
         ... )
         >>> selection = stack([[10, 12, 14], [10, 12, 14], [10, 12, 14]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -3520,6 +3525,9 @@ class RegisterCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         bf''16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         [
                         c'''16
                         d'''16
@@ -3717,6 +3725,7 @@ class RegisterCommand(scoping.Command):
         ... )
         >>> selection = stack([{10, 12, 14}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -3734,6 +3743,9 @@ class RegisterCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         <bf c' d'>16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
             >>
@@ -3854,6 +3866,7 @@ class RegisterInterpolationCommand(scoping.Command):
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -3871,6 +3884,9 @@ class RegisterInterpolationCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         fs'16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         [
                         e'16
                         ef'16
@@ -3920,6 +3936,7 @@ class RegisterInterpolationCommand(scoping.Command):
         >>> collections = [set(_) for _ in collections]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -3937,6 +3954,9 @@ class RegisterInterpolationCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         <e' fs'>16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                     \scaleDurations #'(1 . 1) {
                         <f' ef''>16
@@ -5146,6 +5166,7 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -5164,6 +5185,9 @@ class RegisterInterpolationCommand(scoping.Command):
                         \scaleDurations #'(1 . 1) {
                             \abjad-color-music #'green
                             fs'16
+                            - \tweak staff-padding 11
+                            - \tweak transparent ##t
+                            ^ \markup I
                             [
                             \abjad-color-music #'green
                             e'16
@@ -5222,6 +5246,7 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -5239,6 +5264,9 @@ class RegisterInterpolationCommand(scoping.Command):
                     {
                         \scaleDurations #'(1 . 1) {
                             fs'16
+                            - \tweak staff-padding 11
+                            - \tweak transparent ##t
+                            ^ \markup I
                             [
                             e'16
                             ef'16
@@ -5301,6 +5329,7 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+            >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
             ..  docs::
@@ -5319,6 +5348,9 @@ class RegisterInterpolationCommand(scoping.Command):
                         \scaleDurations #'(1 . 1) {
                             \abjad-color-music #'red
                             fs'16
+                            - \tweak staff-padding 11
+                            - \tweak transparent ##t
+                            ^ \markup I
                             [
                             \abjad-color-music #'red
                             e'16
@@ -5412,6 +5444,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([{0, 14, 28}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -5429,6 +5462,9 @@ class RegisterToOctaveCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         <c' d'' e'''>16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
             >>
@@ -5444,6 +5480,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([{0, 14, 28}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -5461,6 +5498,9 @@ class RegisterToOctaveCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         <c d' e''>16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
             >>
@@ -5476,6 +5516,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([{0, 14, 28}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -5493,6 +5534,9 @@ class RegisterToOctaveCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         <c, d e'>16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
             >>
@@ -5512,6 +5556,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([[0, 14, 28]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -5529,6 +5574,9 @@ class RegisterToOctaveCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         c'16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         [
                         d''16
                         e'''16
@@ -5548,6 +5596,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([[0, 14, 28]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -5565,6 +5614,9 @@ class RegisterToOctaveCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         c16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         [
                         d'16
                         e''16
@@ -5584,6 +5636,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([[0, 14, 28]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -5601,6 +5654,9 @@ class RegisterToOctaveCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         c,16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         [
                         d16
                         e'16
@@ -5624,6 +5680,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([[10, 12, 14]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -5641,6 +5698,9 @@ class RegisterToOctaveCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         bf'16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         [
                         c''16
                         d''16
@@ -5660,6 +5720,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([[10, 12, 14]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -5677,6 +5738,9 @@ class RegisterToOctaveCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         bf16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         [
                         c'16
                         d'16
@@ -5696,6 +5760,7 @@ class RegisterToOctaveCommand(scoping.Command):
 
         >>> selection = stack([[10, 12, 14]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -5713,6 +5778,9 @@ class RegisterToOctaveCommand(scoping.Command):
                 {
                     \scaleDurations #'(1 . 1) {
                         bf16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         [
                         c'16
                         d'16
@@ -6403,6 +6471,7 @@ def bass_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -6421,6 +6490,9 @@ def bass_to_octave(
                     \scaleDurations #'(1 . 1) {
                         \abjad-color-music #'green
                         <c d bf>8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         ~
                         [
                         \abjad-color-music #'green
@@ -6487,6 +6559,7 @@ def bass_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -6505,6 +6578,9 @@ def bass_to_octave(
                     \scaleDurations #'(1 . 1) {
                         \abjad-color-music #'red
                         <c d bf>8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         ~
                         [
                         \abjad-color-music #'red
@@ -6581,6 +6657,7 @@ def center_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -6599,6 +6676,9 @@ def center_to_octave(
                     \scaleDurations #'(1 . 1) {
                         \abjad-color-music #'green
                         <c, d, bf,>8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         ~
                         [
                         \abjad-color-music #'green
@@ -6665,6 +6745,7 @@ def center_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -6683,6 +6764,9 @@ def center_to_octave(
                     \scaleDurations #'(1 . 1) {
                         \abjad-color-music #'red
                         <c d bf>8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         ~
                         [
                         \abjad-color-music #'red
@@ -6807,6 +6891,7 @@ def displacement(
         ... )
         >>> selection = stack(3 * [[0, 2, 3]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -6826,6 +6911,9 @@ def displacement(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         [
                         d'16
@@ -6857,6 +6945,9 @@ def displacement(
                         ef16
                         r16
                         r4
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                         \revert TupletBracket.staff-padding
                     }
                 }
@@ -6877,6 +6968,7 @@ def displacement(
         ... )
         >>> selection = stack(6 * [{0, 2, 3}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -6894,6 +6986,9 @@ def displacement(
                 {
                     \scaleDurations #'(1 . 1) {
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         <c' d' ef'>4
                     }
                     \scaleDurations #'(1 . 1) {
@@ -6911,6 +7006,9 @@ def displacement(
                     \scaleDurations #'(1 . 1) {
                         <c'' d'' ef''>4
                         r4
+                        - \tweak staff-padding 18
+                        - \tweak transparent ##t
+                        ^ \markup I
                     }
                 }
             >>
@@ -7085,6 +7183,7 @@ def interpolate_pitches(
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -7103,6 +7202,9 @@ def interpolate_pitches(
                     \scaleDurations #'(1 . 1) {
                         \clef "treble"
                         ef'16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         [
                         e'16
                         f'16
@@ -7153,6 +7255,7 @@ def interpolate_pitches(
         >>> collections = 2 * [[6, 4, 3, 5, 9, 10, 0, 11, 8, 7, 1, 2]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -7173,6 +7276,9 @@ def interpolate_pitches(
                         \override Glissando.thickness = 3
                         \clef "treble"
                         ef'16
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         [
                         \glissando
                         \hide NoteHead
@@ -7521,6 +7627,7 @@ def register(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -7541,6 +7648,9 @@ def register(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         [
                         d'16
@@ -7590,6 +7700,7 @@ def register(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -7610,6 +7721,9 @@ def register(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         [
                         d'16
@@ -7667,6 +7781,7 @@ def register(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -7687,6 +7802,9 @@ def register(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         [
                         d'16
@@ -7737,6 +7855,7 @@ def register(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -7757,6 +7876,9 @@ def register(
                     \times 9/10 {
                         \override TupletBracket.staff-padding = 2
                         r8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         c'16
                         [
                         d'16
@@ -7827,6 +7949,7 @@ def soprano_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -7846,6 +7969,9 @@ def soprano_to_octave(
                     \scaleDurations #'(1 . 1) {
                         \abjad-color-music #'green
                         <c,, d,, bf,,>8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         ~
                         [
                         \abjad-color-music #'green
@@ -7912,6 +8038,7 @@ def soprano_to_octave(
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
+        >>> rmakers.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
 
         ..  docs::
@@ -7930,6 +8057,9 @@ def soprano_to_octave(
                     \scaleDurations #'(1 . 1) {
                         \abjad-color-music #'red
                         <c d bf>8
+                        - \tweak staff-padding 11
+                        - \tweak transparent ##t
+                        ^ \markup I
                         ~
                         [
                         \abjad-color-music #'red
