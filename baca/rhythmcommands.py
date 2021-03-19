@@ -48,7 +48,7 @@ class RhythmCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -495,7 +495,7 @@ class RhythmCommand(scoping.Command):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -786,7 +786,7 @@ def make_monads(
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -982,7 +982,7 @@ def make_repeat_tied_notes(
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 

@@ -858,7 +858,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1056,7 +1056,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1305,7 +1305,7 @@ def only_parts(command: _command_typing) -> _command_typing:
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 

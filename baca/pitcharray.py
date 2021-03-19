@@ -634,7 +634,7 @@ class PitchArray:
                     }
                 >>
 
-            >>> abjad.show(score, align_tags=89) # doctest: +SKIP
+            >>> abjad.show(score) # doctest: +SKIP
 
             >>> array = baca.PitchArray.from_score(
             ...     score, populate=False)
@@ -690,7 +690,7 @@ class PitchArray:
                     }
                 >>
 
-            >>> abjad.show(score, align_tags=89) # doctest: +SKIP
+            >>> abjad.show(score) # doctest: +SKIP
 
             >>> array = baca.PitchArray.from_score(
             ...     score, populate=True)
@@ -876,7 +876,7 @@ class PitchArray:
 
             >>> measures = array.to_measures()
             >>> staff = abjad.Staff(measures)
-            >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -2213,7 +2213,7 @@ class PitchArrayList(abjad.TypedList):
             >>> arrays = baca.PitchArrayList(arrays)
 
             >>> score = arrays.to_score()
-            >>> abjad.show(score, align_tags=89) # doctest: +SKIP
+            >>> abjad.show(score) # doctest: +SKIP
 
             ..  docs::
 
@@ -2987,7 +2987,7 @@ class PitchArrayRow:
 
             >>> measure = array.rows[0].to_measure()
             >>> staff = abjad.Staff([measure])
-            >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 

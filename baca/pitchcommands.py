@@ -33,7 +33,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -274,7 +274,7 @@ class ClusterCommand(scoping.Command):
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1525,7 +1525,7 @@ class ClusterCommand(scoping.Command):
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
-            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1667,7 +1667,7 @@ class ColorFingeringCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1875,7 +1875,7 @@ class DiatonicClusterCommand(scoping.Command):
         >>> staff = abjad.Staff("c' d' e' f'")
         >>> command = baca.diatonic_clusters([4, 6])
         >>> command(staff)
-        >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
@@ -2112,7 +2112,7 @@ class MicrotoneDeviationCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2356,7 +2356,7 @@ class OctaveDisplacementCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2605,7 +2605,7 @@ class PitchCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2763,7 +2763,7 @@ class PitchCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2921,7 +2921,7 @@ class PitchCommand(scoping.Command):
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -3074,7 +3074,7 @@ class PitchCommand(scoping.Command):
 
         >>> staff = abjad.Staff("c'8 c' c' c' c' c' c' c'")
         >>> command(staff)
-        >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
@@ -3508,7 +3508,7 @@ class RegisterCommand(scoping.Command):
         >>> selection = stack([[10, 12, 14], [10, 12, 14], [10, 12, 14]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -3726,7 +3726,7 @@ class RegisterCommand(scoping.Command):
         >>> selection = stack([{10, 12, 14}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -3867,7 +3867,7 @@ class RegisterInterpolationCommand(scoping.Command):
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -3937,7 +3937,7 @@ class RegisterInterpolationCommand(scoping.Command):
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5167,7 +5167,7 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
             >>> rmakers.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5247,7 +5247,7 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
             >>> rmakers.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5330,7 +5330,7 @@ class RegisterInterpolationCommand(scoping.Command):
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
             >>> rmakers.attach_markup_struts(lilypond_file)
-            >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5445,7 +5445,7 @@ class RegisterToOctaveCommand(scoping.Command):
         >>> selection = stack([{0, 14, 28}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5481,7 +5481,7 @@ class RegisterToOctaveCommand(scoping.Command):
         >>> selection = stack([{0, 14, 28}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5517,7 +5517,7 @@ class RegisterToOctaveCommand(scoping.Command):
         >>> selection = stack([{0, 14, 28}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5557,7 +5557,7 @@ class RegisterToOctaveCommand(scoping.Command):
         >>> selection = stack([[0, 14, 28]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5597,7 +5597,7 @@ class RegisterToOctaveCommand(scoping.Command):
         >>> selection = stack([[0, 14, 28]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5637,7 +5637,7 @@ class RegisterToOctaveCommand(scoping.Command):
         >>> selection = stack([[0, 14, 28]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5681,7 +5681,7 @@ class RegisterToOctaveCommand(scoping.Command):
         >>> selection = stack([[10, 12, 14]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5721,7 +5721,7 @@ class RegisterToOctaveCommand(scoping.Command):
         >>> selection = stack([[10, 12, 14]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5761,7 +5761,7 @@ class RegisterToOctaveCommand(scoping.Command):
         >>> selection = stack([[10, 12, 14]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5961,7 +5961,7 @@ class RegisterToOctaveCommand(scoping.Command):
             >>> chord = abjad.Chord("<c, d e'>1")
             >>> staff = abjad.Staff([chord])
             >>> abjad.attach(abjad.Clef('bass'), staff[0])
-            >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -6044,7 +6044,7 @@ class StaffPositionCommand(scoping.Command):
         >>> abjad.attach(abjad.Clef('treble'), staff[0])
         >>> command = baca.staff_positions([0, 2])
         >>> command(staff)
-        >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
@@ -6065,7 +6065,7 @@ class StaffPositionCommand(scoping.Command):
         >>> abjad.attach(abjad.Clef('percussion'), staff[0])
         >>> command = baca.staff_positions([0, 2])
         >>> command(staff)
-        >>> abjad.show(staff, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(staff) # doctest: +SKIP
 
         ..  docs::
 
@@ -6472,7 +6472,7 @@ def bass_to_octave(
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -6560,7 +6560,7 @@ def bass_to_octave(
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -6658,7 +6658,7 @@ def center_to_octave(
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -6746,7 +6746,7 @@ def center_to_octave(
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -6892,7 +6892,7 @@ def displacement(
         >>> selection = stack(3 * [[0, 2, 3]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -6969,7 +6969,7 @@ def displacement(
         >>> selection = stack(6 * [{0, 2, 3}])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7040,7 +7040,7 @@ def force_accidental(
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7184,7 +7184,7 @@ def interpolate_pitches(
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7256,7 +7256,7 @@ def interpolate_pitches(
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7421,7 +7421,7 @@ def pitch(
         ... )
 
         >>> lilypond_file = maker.run(environment='docs')
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7628,7 +7628,7 @@ def register(
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7701,7 +7701,7 @@ def register(
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7782,7 +7782,7 @@ def register(
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7856,7 +7856,7 @@ def register(
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7950,7 +7950,7 @@ def soprano_to_octave(
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -8039,7 +8039,7 @@ def soprano_to_octave(
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
         >>> rmakers.attach_markup_struts(lilypond_file)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 

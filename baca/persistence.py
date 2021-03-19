@@ -27,7 +27,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -158,7 +158,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -301,7 +301,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -444,7 +444,7 @@ r"""
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
 
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -577,7 +577,7 @@ r"""
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
 
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -735,7 +735,7 @@ r"""
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
 
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -866,7 +866,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1001,7 +1001,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1138,7 +1138,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1263,7 +1263,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1400,7 +1400,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1523,7 +1523,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1660,7 +1660,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1786,7 +1786,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -1933,7 +1933,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2052,7 +2052,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> # lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2165,7 +2165,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2295,7 +2295,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2414,7 +2414,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2528,7 +2528,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2670,7 +2670,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2790,7 +2790,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -2904,7 +2904,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -3048,7 +3048,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -3168,7 +3168,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -3283,7 +3283,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -3424,7 +3424,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -3553,7 +3553,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -3676,7 +3676,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -3834,7 +3834,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -3954,7 +3954,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -4068,7 +4068,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -4227,7 +4227,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -4352,7 +4352,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -4471,7 +4471,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -4607,7 +4607,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -4732,7 +4732,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -4851,7 +4851,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -4999,7 +4999,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5127,7 +5127,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5249,7 +5249,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5401,7 +5401,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5529,7 +5529,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5651,7 +5651,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5800,7 +5800,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -5941,7 +5941,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -6076,7 +6076,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -6246,7 +6246,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -6374,7 +6374,7 @@ r"""
         >>> text = abjad.LilyPondFormatManager.left_shift_tags(text, 89)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -6496,7 +6496,7 @@ r"""
         >>> text, count = abjad.activate(text, match)
         >>> lines = [_.strip('\n') for _ in text.split('\n')]
         >>> lilypond_file.score_block.items[:] = lines
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -6654,7 +6654,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -6822,7 +6822,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -6974,7 +6974,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7130,7 +7130,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7273,7 +7273,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7432,7 +7432,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7585,7 +7585,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7773,7 +7773,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -7923,7 +7923,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -8050,7 +8050,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -8188,7 +8188,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -8328,7 +8328,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -8455,7 +8455,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -8598,7 +8598,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -8741,7 +8741,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -8896,7 +8896,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -9055,7 +9055,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -9205,7 +9205,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
@@ -9380,7 +9380,7 @@ r"""
         >>> block = abjad.Block(name='layout')
         >>> block.indent = 0
         >>> lilypond_file.items.insert(0, block)
-        >>> abjad.show(lilypond_file, align_tags=89) # doctest: +SKIP
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
 
