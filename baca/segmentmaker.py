@@ -27,6 +27,11 @@ def _site(frame, n=None):
     return scoping.site(frame, prefix, n=n)
 
 
+nonfirst_preamble = r"""\header { composer = ##f poet = ##f title = ##f }
+\layout { indent = 0 }
+\paper { print-first-page-number = ##t }"""
+
+
 class SegmentMaker(abjad.SegmentMaker):
     r"""
     Segment-maker.
@@ -644,7 +649,6 @@ class SegmentMaker(abjad.SegmentMaker):
         "_parts_metric_modulation_multiplier",
         "_metronome_marks",
         "_midi",
-        "_nonfirst_segment_lilypond_include",
         "_offset_to_measure_number",
         "_previously_alive_contexts",
         "_remove_phantom_measure",
@@ -722,10 +726,6 @@ class SegmentMaker(abjad.SegmentMaker):
         "..", "..", "stylesheets", "stylesheet.ily"
     )
 
-    _score_package_nonfirst_segment_path = pathlib.Path(
-        "..", "..", "stylesheets", "nonfirst-segment.ily"
-    )
-
     ### INITIALIZER ###
 
     def __init__(
@@ -759,7 +759,6 @@ class SegmentMaker(abjad.SegmentMaker):
         margin_markups: abjad.OrderedDict = None,
         measure_number_extra_offset: typing.Union[bool, typings.Pair] = None,
         metronome_marks: abjad.OrderedDict = None,
-        nonfirst_segment_lilypond_include: bool = None,
         parts_metric_modulation_multiplier: abjad.NumberPair = None,
         phantom: bool = None,
         remove_phantom_measure: bool = None,
@@ -821,7 +820,6 @@ class SegmentMaker(abjad.SegmentMaker):
             first_segment = bool(first_segment)
         self._first_segment = first_segment
         self._ignore_repeat_pitch_classes = ignore_repeat_pitch_classes
-        self._nonfirst_segment_lilypond_include = nonfirst_segment_lilypond_include
         self._instruments = instruments
         self._final_measure_is_fermata = False
         self._final_segment = final_segment
@@ -2916,8 +2914,9 @@ class SegmentMaker(abjad.SegmentMaker):
             string = f"stage-number-extra-offset = {string}"
             literal = abjad.LilyPondLiteral(string)
             includes.append(literal)
-        if not self.first_segment or self.nonfirst_segment_lilypond_include:
-            includes.append(self._score_package_nonfirst_segment_path)
+        # if not self.first_segment:
+        #     path = pathlib.Path("..", "..", "stylesheets", "nonfirst-segment.ily")
+        #    includes.append(path)
         includes.extend(self.includes or [])
         return includes
 
@@ -3461,12 +3460,18 @@ class SegmentMaker(abjad.SegmentMaker):
         )
 
     def _make_lilypond_file(self):
-        includes = self._get_lilypond_includes()
         tag = _site(inspect.currentframe())
+        items = []
+        includes = self._get_lilypond_includes()
+        if not self.first_segment:
+            lines = abjad.tag.tag(nonfirst_preamble.split("\n"), tag=tag)
+            line = "\n".join(lines)
+            items.append(line)
         block = abjad.Block(name="score")
         block.items.append(self.score)
+        items.append(block)
         lilypond_file = abjad.LilyPondFile(
-            items=[block],
+            items=items,
             date_time_token=False,
             includes=includes,
             tag=tag,
@@ -5197,13 +5202,6 @@ class SegmentMaker(abjad.SegmentMaker):
         Is true when segment-maker outputs MIDI.
         """
         return self._midi
-
-    @property
-    def nonfirst_segment_lilypond_include(self) -> typing.Optional[bool]:
-        """
-        Is true when nonfirst segment lilypond include appears in output file.
-        """
-        return self._nonfirst_segment_lilypond_include
 
     @property
     def parts_metric_modulation_multiplier(
