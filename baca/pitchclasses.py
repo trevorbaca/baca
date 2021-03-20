@@ -7492,14 +7492,6 @@ class PitchTree(classes.Tree):
         abjad.override(score).SpacingSpanner.strict_note_spacing = True
         abjad.override(score).SpacingSpanner.uniform_stretching = True
         abjad.override(score).TextScript.X_extent = False
-        if "title" in keywords:
-            title = keywords.get("title")
-            if not isinstance(title, abjad.Markup):
-                title = abjad.Markup(title)
-            lilypond_file.header_block.title = title
-        if "subtitle" in keywords:
-            markup = abjad.Markup(keywords.get("subtitle"))
-            lilypond_file.header_block.subtitle = markup
         return lilypond_file
 
     ### PRIVATE METHODS ###
