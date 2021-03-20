@@ -2878,7 +2878,8 @@ class SegmentMaker(abjad.SegmentMaker):
             else:
                 return [self._absolute_string_trio_stylesheet_path]
         includes = []
-        includes.append(self._score_package_stylesheet_path)
+        path = pathlib.Path("..", "..", "stylesheet.ily")
+        includes.append(path)
         if self.clock_time_extra_offset is not None:
             value = self.clock_time_extra_offset
             assert isinstance(value, tuple)
