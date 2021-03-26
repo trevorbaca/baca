@@ -2204,7 +2204,6 @@ class Imbrication:
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -2535,7 +2534,6 @@ class Imbrication:
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -2861,7 +2859,6 @@ class Imbrication:
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -3216,7 +3213,6 @@ class Imbrication:
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -7790,7 +7786,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8056,7 +8051,6 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8376,7 +8370,6 @@ def extend_beam(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -8700,7 +8693,6 @@ def imbricate(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -9015,7 +9007,6 @@ def imbricate(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -9428,7 +9419,6 @@ def imbricate(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -9761,7 +9751,6 @@ def imbricate(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -10016,7 +10005,6 @@ def imbricate(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -10299,7 +10287,6 @@ def imbricate(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"

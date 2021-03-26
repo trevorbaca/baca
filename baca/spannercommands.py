@@ -246,7 +246,6 @@ def beam(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -429,7 +428,6 @@ def ottava(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -524,7 +522,6 @@ def ottava_bassa(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -620,7 +617,6 @@ def slur(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -721,7 +717,6 @@ def sustain_pedal(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -824,7 +819,6 @@ def trill_spanner(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -904,7 +898,6 @@ def trill_spanner(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -991,7 +984,6 @@ def trill_spanner(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<

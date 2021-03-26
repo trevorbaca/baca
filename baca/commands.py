@@ -73,7 +73,6 @@ def bcps(
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -347,7 +346,6 @@ def color(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -431,7 +429,6 @@ def color(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -513,7 +510,6 @@ def container(
         >>> lilypond_file = maker.run(environment='docs')
 
         >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-        >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
         >>> print(string)
         <BLANKLINE>
         \context Score = "Score"
@@ -693,7 +689,6 @@ def cross_staff(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1035,7 +1030,6 @@ def dynamic_down(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -1128,7 +1122,6 @@ def dynamic_up(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -1239,7 +1232,6 @@ def finger_pressure_transition(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1512,7 +1504,6 @@ def glissando(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1685,7 +1676,6 @@ def glissando(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1848,7 +1838,6 @@ def glissando(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2036,7 +2025,6 @@ def glissando(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2275,7 +2263,6 @@ def invisible_music(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2445,7 +2432,6 @@ def label(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -2547,7 +2533,6 @@ def markup(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -2628,7 +2613,6 @@ def markup(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -2768,7 +2752,6 @@ def parts(
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-        >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
         >>> print(string)
         <BLANKLINE>
         \context Score = "Score"

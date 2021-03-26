@@ -399,7 +399,6 @@ def bar_line_transparent(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1479,7 +1478,6 @@ def mmrest_color(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1643,7 +1641,6 @@ def mmrest_text_color(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1819,7 +1816,6 @@ def mmrest_text_extra_offset(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -1968,7 +1964,6 @@ def mmrest_text_padding(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2116,7 +2111,6 @@ def mmrest_text_parent_center(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2265,7 +2259,6 @@ def mmrest_text_staff_padding(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -5613,7 +5606,6 @@ def text_spanner_staff_padding(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<

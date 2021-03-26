@@ -38,7 +38,6 @@ class AccidentalAdjustmentCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -569,7 +568,6 @@ class ClusterCommand(scoping.Command):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -764,7 +762,6 @@ class ClusterCommand(scoping.Command):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -953,7 +950,6 @@ class ClusterCommand(scoping.Command):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -1150,7 +1146,6 @@ class ClusterCommand(scoping.Command):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -1339,7 +1334,6 @@ class ClusterCommand(scoping.Command):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -1530,7 +1524,6 @@ class ClusterCommand(scoping.Command):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -1672,7 +1665,6 @@ class ColorFingeringCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2117,7 +2109,6 @@ class MicrotoneDeviationCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2361,7 +2352,6 @@ class OctaveDisplacementCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2610,7 +2600,6 @@ class PitchCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2768,7 +2757,6 @@ class PitchCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -2926,7 +2914,6 @@ class PitchCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -3575,7 +3562,6 @@ class RegisterCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -3999,7 +3985,6 @@ class RegisterInterpolationCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -4219,7 +4204,6 @@ class RegisterInterpolationCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -4439,7 +4423,6 @@ class RegisterInterpolationCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -4659,7 +4642,6 @@ class RegisterInterpolationCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -4879,7 +4861,6 @@ class RegisterInterpolationCommand(scoping.Command):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -7045,7 +7026,6 @@ def force_accidental(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -7261,7 +7241,6 @@ def interpolate_pitches(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -7426,7 +7405,6 @@ def pitch(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -7633,7 +7611,6 @@ def register(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -7706,7 +7683,6 @@ def register(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -7787,7 +7763,6 @@ def register(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -7861,7 +7836,6 @@ def register(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<
@@ -7955,7 +7929,6 @@ def soprano_to_octave(
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             \new Score
             <<

@@ -57,7 +57,6 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -248,7 +247,6 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -447,7 +445,6 @@ class SegmentMaker(abjad.SegmentMaker):
         ..  docs::
 
             >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-            >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
             >>> print(string)
             <BLANKLINE>
             \context Score = "Score"
@@ -894,7 +891,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -1083,7 +1079,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -4513,7 +4508,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -5021,7 +5015,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -5280,7 +5273,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -5400,7 +5392,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -5576,7 +5567,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
@@ -5740,7 +5730,6 @@ class SegmentMaker(abjad.SegmentMaker):
             ..  docs::
 
                 >>> string = abjad.lilypond(lilypond_file[abjad.Score])
-                >>> string = abjad.LilyPondFormatManager.align_tags(string, 89)
                 >>> print(string)
                 <BLANKLINE>
                 \context Score = "Score"
