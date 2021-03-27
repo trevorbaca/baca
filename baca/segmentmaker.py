@@ -3460,7 +3460,7 @@ class SegmentMaker(abjad.SegmentMaker):
         items = []
         includes = self._get_lilypond_includes()
         if not self.first_segment:
-            lines = abjad.tag.tag(nonfirst_preamble.split("\n"), tag=tag)
+            lines = abjad.tag.double_tag(nonfirst_preamble.split("\n"), tag)
             line = "\n".join(lines)
             items.append(line)
         block = abjad.Block(name="score")
