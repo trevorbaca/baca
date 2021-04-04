@@ -892,7 +892,7 @@ class ColorCommand(scoping.Command):
             return
         assert self.selector is not None
         argument = self.selector(argument)
-        abjad.label(argument).by_selector(self.selector)
+        abjad.Label(argument).by_selector(self.selector)
 
 
 class ContainerCommand(scoping.Command):
@@ -1689,8 +1689,6 @@ class LabelCommand(scoping.Command):
             scope=scope,
             selector=selector,
         )
-        if expression is not None:
-            assert isinstance(expression, abjad.Expression)
         self._expression = expression
 
     ### SPECIAL METHODS ###

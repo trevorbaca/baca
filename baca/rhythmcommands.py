@@ -481,13 +481,14 @@ class RhythmCommand(scoping.Command):
             ...     ),
             ... )
 
-            >>> label = abjad.label().with_durations(
-            ...     direction=abjad.Down,
-            ...     denominator=16,
+            >>> def label_with_durations(music):
+            ...     return abjad.Label(music).with_durations(
+            ...         direction=abjad.Down,
+            ...         denominator=16,
             ...     )
             >>> maker(
             ...     'Music_Voice',
-            ...     baca.label(label),
+            ...     baca.label(label_with_durations),
             ...     baca.text_script_font_size(-2),
             ...     baca.text_script_staff_padding(5),
             ...     command,

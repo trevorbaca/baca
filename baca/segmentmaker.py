@@ -882,7 +882,7 @@ class SegmentMaker(abjad.SegmentMaker):
             >>> maker(
             ...     'Music_Voice',
             ...     baca.make_even_divisions(),
-            ...     baca.label(abjad.label().with_indices()),
+            ...     baca.label(lambda _: abjad.Label(_).with_indices()),
             ...     )
 
             >>> lilypond_file = maker.run(environment='docs')
@@ -1066,7 +1066,7 @@ class SegmentMaker(abjad.SegmentMaker):
 
             >>> commands = []
             >>> commands.append(baca.make_even_divisions())
-            >>> commands.append(baca.label(abjad.label().with_indices()))
+            >>> commands.append(baca.label(lambda _: abjad.Label(_).with_indices()))
 
             >>> maker(
             ...     'Music_Voice',

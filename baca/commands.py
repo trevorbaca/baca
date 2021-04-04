@@ -2421,7 +2421,7 @@ def label(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.label(abjad.label().with_pitches(locale='us')),
+        ...     baca.label(lambda _: abjad.Label(_).with_pitches(locale="us")),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])

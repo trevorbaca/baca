@@ -2863,7 +2863,7 @@ class Constellation:
     @property
     def _colored_generator(self):
         generator_chord = self.generator_chord
-        abjad.label(generator_chord).color_note_heads(self._color_map)
+        abjad.Label(generator_chord).color_note_heads(self._color_map)
         return generator_chord
 
     @property
@@ -3205,7 +3205,7 @@ class Constellation:
     def make_labeled_colored_chords(self):
         result = self.make_labeled_chords()
         for chord in result:
-            abjad.label(chord).color_note_heads(self._color_map)
+            abjad.Label(chord).color_note_heads(self._color_map)
         return result
 
     def show_colored_generator_chord(self):
@@ -7421,8 +7421,8 @@ class PitchTree(classes.Tree):
         for left, right in pairs:
             if not left.written_pitch == right.written_pitch:
                 continue
-            abjad.label(left).color_leaves(current_color)
-            abjad.label(right).color_leaves(current_color)
+            abjad.Label(left).color_leaves(current_color)
+            abjad.Label(right).color_leaves(current_color)
             if current_color == "#red":
                 current_color = "#blue"
             else:

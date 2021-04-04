@@ -1544,7 +1544,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Chord("<fs' gs'>4")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1655,7 +1655,7 @@ class Selection(abjad.Selection):
                 Chord("<a'' b''>16")
                 Chord("<fs' gs'>4")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1771,7 +1771,7 @@ class Selection(abjad.Selection):
                 Selection([Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")])
                 Selection([Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -1886,7 +1886,7 @@ class Selection(abjad.Selection):
                 Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
                 Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -2131,7 +2131,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Note("gf'16")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -2231,7 +2231,7 @@ class Selection(abjad.Selection):
                 Note("af'16")
                 Note("gf'16")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -2324,7 +2324,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Note("d'8")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -2424,7 +2424,7 @@ class Selection(abjad.Selection):
                 Note("e'8")
                 Note("f'8")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -2500,7 +2500,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Chord("<d' e'>16")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2591,7 +2591,7 @@ class Selection(abjad.Selection):
                 Selection([Rest('r8'), Note("d'8"), Note("e'8")])
                 Selection([Rest('r8'), Note("f'8"), Note("g'8"), Note("a'8")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -2683,7 +2683,7 @@ class Selection(abjad.Selection):
                 Chord("<e' fs'>4")
                 Chord("<e' fs'>16")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2794,7 +2794,7 @@ class Selection(abjad.Selection):
                 Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
                 Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -2901,7 +2901,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3001,7 +3001,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Note("bf'16")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3133,7 +3133,7 @@ class Selection(abjad.Selection):
                 Rest('r4')
                 Rest('r16')
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3247,7 +3247,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3359,7 +3359,7 @@ class Selection(abjad.Selection):
                 Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")])])
                 Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3477,7 +3477,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3586,7 +3586,7 @@ class Selection(abjad.Selection):
                 Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
                 Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3731,7 +3731,7 @@ class Selection(abjad.Selection):
                 LogicalTie([Note("e'16")])
                 LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -3843,7 +3843,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -3930,7 +3930,7 @@ class Selection(abjad.Selection):
                 Note("a'8")
                 Note("b'8")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -4001,7 +4001,7 @@ class Selection(abjad.Selection):
                 Note("b'8")
                 Rest('r8')
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -4075,7 +4075,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 MultimeasureRest('R1')
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -4134,7 +4134,7 @@ class Selection(abjad.Selection):
                 MultimeasureRest('R1')
                 MultimeasureRest('R1')
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -4201,7 +4201,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4310,7 +4310,7 @@ class Selection(abjad.Selection):
                 Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
                 Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4422,7 +4422,7 @@ class Selection(abjad.Selection):
                 Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
                 Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8'), Note("d''8")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -4527,7 +4527,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Chord("<fs' gs'>4")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4650,7 +4650,7 @@ class Selection(abjad.Selection):
                 Note("e'16")
                 Chord("<fs' gs'>4")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4760,7 +4760,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Chord("<fs' gs'>16")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4889,7 +4889,7 @@ class Selection(abjad.Selection):
                 Chord("<fs' gs'>4")
                 Chord("<fs' gs'>16")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5002,7 +5002,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5126,7 +5126,7 @@ class Selection(abjad.Selection):
                 LogicalTie([Note("e'16")])
                 LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5239,7 +5239,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Chord("<fs' gs'>16")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5362,7 +5362,7 @@ class Selection(abjad.Selection):
                 Note("e'16")
                 Chord("<fs' gs'>16")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5472,7 +5472,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 LogicalTie([Note("e'16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5589,7 +5589,7 @@ class Selection(abjad.Selection):
                 LogicalTie([Chord("<a'' b''>16")])
                 LogicalTie([Note("e'16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5696,7 +5696,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5808,7 +5808,7 @@ class Selection(abjad.Selection):
                 Selection([Note("e'16"), Note("e'16"), Note("e'16")])
                 Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5924,7 +5924,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Rest('r16')
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6017,7 +6017,7 @@ class Selection(abjad.Selection):
                 Selection([Note("d'8"), Note("e'8"), Rest('r8')])
                 Selection([Note("f'8"), Note("g'8"), Note("a'8")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -6109,7 +6109,7 @@ class Selection(abjad.Selection):
                 Chord("<e' fs'>16")
                 Rest('r16')
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6215,7 +6215,7 @@ class Selection(abjad.Selection):
                 Note("f'8")
                 Note("g'8")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -6293,7 +6293,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6403,7 +6403,7 @@ class Selection(abjad.Selection):
                 Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
                 Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6510,7 +6510,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Skip('s8')
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -6579,7 +6579,7 @@ class Selection(abjad.Selection):
                 Skip('s8')
                 Skip('s8')
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
@@ -6654,7 +6654,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Note("bf'16")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6787,7 +6787,7 @@ class Selection(abjad.Selection):
                 Chord("<fs' gs'>4")
                 Chord("<fs' gs'>16")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6901,7 +6901,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Chord("<d' e'>16")
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6988,7 +6988,7 @@ class Selection(abjad.Selection):
                 >>> selector.print(result)
                 Rest('r16')
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7103,7 +7103,7 @@ class Selection(abjad.Selection):
                 Chord("<e' fs'>16")
                 Rest('r16')
 
-                >>> abjad.label(result).by_selector(selector)
+                >>> abjad.Label(result).by_selector(selector)
                 >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
