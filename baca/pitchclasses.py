@@ -1391,8 +1391,7 @@ class CollectionList(collections_module.abc.Sequence):
             ...     item_class=abjad.NumberedPitchClass,
             ...     )
 
-            >>> transposition = baca.pitch_class_segment().transpose(n=3)
-            >>> for collection in collections.accumulate([transposition]):
+            >>> for collection in collections.accumulate([lambda _: _.transpose(n=3)]):
             ...     collection
             ...
             PitchClassSegment([0, 2, 6, 5])
@@ -1413,9 +1412,7 @@ class CollectionList(collections_module.abc.Sequence):
             ...     item_class=abjad.NumberedPitchClass,
             ...     )
 
-            >>> transposition = baca.pitch_class_segment().transpose(n=3)
-            >>> alpha = baca.pitch_class_segment().alpha()
-            >>> operands = [transposition, alpha]
+            >>> operands = [lambda _: _.transpose(n=3), lambda _: _.alpha()]
             >>> for collection in collections.accumulate(operands):
             ...     collection
             ...
@@ -4216,30 +4213,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \override Score.BarLine.transparent = ##f
                 }
 
-        ..  container:: example expression
-
-            >>> expression = baca.pitch_class_segment()
-            >>> segment = expression(items=[-2, -1.5, 6, 7, -1.5, 7])
-            >>> lilypond_file = abjad.illustrate(segment)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> voice = lilypond_file[abjad.Score][0][0]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \new Voice
-                {
-                    bf'8
-                    bqf'8
-                    fs'8
-                    g'8
-                    bqf'8
-                    g'8
-                    \bar "|."
-                    \override Score.BarLine.transparent = ##f
-                }
-
     """
 
     ### CLASS VARIABLES ###
@@ -4319,34 +4292,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
                         \override Score.BarLine.transparent = ##f
                     }
 
-            ..  container:: example expression
-
-                >>> expression = baca.pitch_class_segment(name='J')
-                >>> expression = expression.alpha()
-                >>> expression([-2, -1.5, 6, 7, -1.5, 7])
-                PitchClassSegment([11, 11.5, 7, 6, 11.5, 6])
-
-                >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
-                >>> lilypond_file = abjad.illustrate(segment)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> voice = lilypond_file[abjad.Score][0][0]
-                    >>> string = abjad.lilypond(voice)
-                    >>> print(string)
-                    \new Voice
-                    {
-                        b'8
-                        bqs'8
-                        g'8
-                        fs'8
-                        bqs'8
-                        fs'8
-                        \bar "|."
-                        \override Score.BarLine.transparent = ##f
-                    }
-
         ..  container:: example
 
             Gets alpha transform of alpha transform of segment:
@@ -4368,55 +4313,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
                     \new Voice
                     {
                         bf'8
-                        bqf'8
-                        fs'8
-                        g'8
-                        bqf'8
-                        g'8
-                        \bar "|."
-                        \override Score.BarLine.transparent = ##f
-                    }
-
-                >>> segment == J
-                True
-
-            ..  container:: example expression
-
-                >>> expression = baca.pitch_class_segment(name='J')
-                >>> expression = expression.alpha()
-                >>> expression = expression.alpha()
-
-                >>> expression([-2, -1.5, 6, 7, -1.5, 7])
-                PitchClassSegment([10, 10.5, 6, 7, 10.5, 7])
-
-                >>> expression.get_string()
-                'A(A(J))'
-
-                >>> segment = expression([-2, -1.5, 6, 7, -1.5, 7])
-                >>> markup = expression.get_markup()
-                >>> lilypond_file = abjad.illustrate(segment, figure_name=markup)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> voice = lilypond_file[abjad.Score][0][0]
-                    >>> string = abjad.lilypond(voice)
-                    >>> print(string)
-                    \new Voice
-                    {
-                        bf'8
-                        ^ \markup {
-                            \concat
-                                {
-                                    A
-                                    \concat
-                                        {
-                                            A
-                                            \bold
-                                                J
-                                        }
-                                }
-                            }
                         bqf'8
                         fs'8
                         g'8
@@ -9375,25 +9271,3 @@ class ZaggedPitchClassMaker:
         Returns list of number lists.
         """
         return self._pc_cells
-
-
-### EXPRESSION CONSTRUCTORS ###
-
-
-def pitch_class_segment(items=None, **keywords):
-    """
-    Makes pitch-class segment or pitch-class segment expression.
-    """
-    if items:
-        return PitchClassSegment(items=items, **keywords)
-    name = keywords.pop("name", None)
-    expression = classes.Expression(name=name)
-    callback = expression._make_initializer_callback(
-        PitchClassSegment,
-        callback_class=classes.Expression,
-        module_names=["baca"],
-        string_template="{}",
-        **keywords,
-    )
-    expression = expression.append_callback(callback)
-    return abjad.new(expression, proxy_class=PitchClassSegment)

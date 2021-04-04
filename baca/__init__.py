@@ -15,7 +15,6 @@ from .persistence import *
 from .piecewise import *
 from .pitcharray import *
 from .pitchclasses import *
-from .pitchclasses import pitch_class_segment
 from .pitchcommands import *
 from .rhythmcommands import *
 from .scoping import *

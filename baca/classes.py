@@ -871,305 +871,8 @@ class Cursor:
 
 
 class Expression(abjad.Expression):
-    r"""
+    """
     Expression.
-
-    ..  container:: example expression
-
-        Transposes collections:
-
-        >>> collections = [
-        ...     abjad.PitchClassSegment([0, 1, 2, 3]),
-        ...     abjad.PitchClassSegment([6, 7, 8, 9]),
-        ...     ]
-
-        >>> transposition = baca.pitch_class_segment()
-        >>> transposition = transposition.transpose(n=3)
-        >>> expression = baca.sequence(name='J')
-        >>> expression = expression.map(transposition)
-
-        >>> for collection in expression(collections):
-        ...     collection
-        ...
-        PitchClassSegment([3, 4, 5, 6])
-        PitchClassSegment([9, 10, 11, 0])
-
-        >>> expression.get_string()
-        'T3(X) /@ J'
-
-        >>> markup = expression.get_markup()
-        >>> abjad.show(markup) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(markup)
-            >>> print(string)
-            \markup {
-                \line
-                    {
-                        \concat
-                            {
-                                T
-                                \sub
-                                    3
-                                \bold
-                                    X
-                            }
-                        /@
-                        \bold
-                            J
-                    }
-                }
-
-    ..  container:: example expression
-
-        Transposes and joins:
-
-        >>> collections = [
-        ...     abjad.PitchClassSegment([0, 1, 2, 3]),
-        ...     abjad.PitchClassSegment([6, 7, 8, 9]),
-        ...     ]
-
-        >>> transposition = baca.pitch_class_segment()
-        >>> transposition = transposition.transpose(n=3)
-        >>> expression = baca.sequence(name='J')
-        >>> expression = expression.map(transposition)
-        >>> expression = expression.join()
-
-        >>> expression(collections)
-        Sequence([PitchClassSegment([3, 4, 5, 6, 9, 10, 11, 0])])
-
-        >>> expression.get_string()
-        'join(T3(X) /@ J)'
-
-        >>> markup = expression.get_markup()
-        >>> abjad.show(markup) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(markup)
-            >>> print(string)
-            \markup {
-                \concat
-                    {
-                        join(
-                        \line
-                            {
-                                \concat
-                                    {
-                                        T
-                                        \sub
-                                            3
-                                        \bold
-                                            X
-                                    }
-                                /@
-                                \bold
-                                    J
-                            }
-                        )
-                    }
-                }
-
-    ..  container:: example expression
-
-        Transposes and flattens:
-
-        >>> collections = [
-        ...     abjad.PitchClassSegment([0, 1, 2, 3]),
-        ...     abjad.PitchClassSegment([6, 7, 8, 9]),
-        ...     ]
-
-        >>> transposition = baca.pitch_class_segment()
-        >>> transposition = transposition.transpose(n=3)
-        >>> expression = baca.sequence(name='J')
-        >>> expression = expression.map(transposition)
-        >>> expression = expression.flatten(depth=-1)
-
-        >>> for collection in expression(collections):
-        ...     collection
-        ...
-        NumberedPitchClass(3)
-        NumberedPitchClass(4)
-        NumberedPitchClass(5)
-        NumberedPitchClass(6)
-        NumberedPitchClass(9)
-        NumberedPitchClass(10)
-        NumberedPitchClass(11)
-        NumberedPitchClass(0)
-
-        >>> expression.get_string()
-        'flatten(T3(X) /@ J, depth=-1)'
-
-        >>> markup = expression.get_markup()
-        >>> abjad.show(markup) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(markup)
-            >>> print(string)
-            \markup {
-                \concat
-                    {
-                        flatten(
-                        \line
-                            {
-                                \concat
-                                    {
-                                        T
-                                        \sub
-                                            3
-                                        \bold
-                                            X
-                                    }
-                                /@
-                                \bold
-                                    J
-                            }
-                        ", depth=-1)"
-                    }
-                }
-
-    ..  container:: example expression
-
-        Transposes and repartitions:
-
-        >>> collections = [
-        ...     abjad.PitchClassSegment([0, 1, 2, 3]),
-        ...     abjad.PitchClassSegment([6, 7, 8, 9]),
-        ...     ]
-
-        >>> transposition = baca.pitch_class_segment().transpose(n=3)
-        >>> expression = baca.sequence(name='J').map(transposition)
-        >>> expression = expression.flatten(depth=-1).partition([3])
-        >>> expression = expression.map(baca.pitch_class_segment())
-
-        >>> for collection in expression(collections):
-        ...     collection
-        ...
-        PitchClassSegment([3, 4, 5])
-        PitchClassSegment([6, 9, 10])
-        PitchClassSegment([11, 0])
-
-        >>> expression.get_string()
-        'X /@ P[3](flatten(T3(X) /@ J, depth=-1))'
-
-        >>> markup = expression.get_markup()
-        >>> abjad.show(markup) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(markup)
-            >>> print(string)
-            \markup {
-                \line
-                    {
-                        \bold
-                            X
-                        /@
-                        \concat
-                            {
-                                P
-                                \sub
-                                    [3]
-                                \concat
-                                    {
-                                        flatten(
-                                        \line
-                                            {
-                                                \concat
-                                                    {
-                                                        T
-                                                        \sub
-                                                            3
-                                                        \bold
-                                                            X
-                                                    }
-                                                /@
-                                                \bold
-                                                    J
-                                            }
-                                        ", depth=-1)"
-                                    }
-                            }
-                    }
-                }
-
-    ..  container:: example expression
-
-        Transposes, repartitions and ox-plows:
-
-        >>> collections = [
-        ...     abjad.PitchClassSegment([0, 1, 2, 3]),
-        ...     abjad.PitchClassSegment([6, 7, 8, 9]),
-        ...     ]
-
-        >>> transposition = baca.pitch_class_segment().transpose(n=3)
-        >>> expression = baca.sequence(name='J').map(transposition)
-        >>> expression = expression.flatten(depth=-1).partition([3])
-        >>> expression = expression.map(baca.pitch_class_segment())
-        >>> expression = expression.boustrophedon()
-
-        >>> for collection in expression(collections):
-        ...     collection
-        ...
-        PitchClassSegment([3, 4, 5])
-        PitchClassSegment([6, 9, 10])
-        PitchClassSegment([11, 0])
-        PitchClassSegment([11])
-        PitchClassSegment([10, 9, 6])
-        PitchClassSegment([5, 4, 3])
-
-        >>> expression.get_string()
-        'β2(X /@ P[3](flatten(T3(X) /@ J, depth=-1)))'
-
-        >>> markup = expression.get_markup()
-        >>> abjad.show(markup) # doctest: +SKIP
-
-        ..  docs::
-
-            >>> string = abjad.lilypond(markup)
-            >>> print(string)
-            \markup {
-                \concat
-                    {
-                        β
-                        \super
-                            2
-                        \line
-                            {
-                                \bold
-                                    X
-                                /@
-                                \concat
-                                    {
-                                        P
-                                        \sub
-                                            [3]
-                                        \concat
-                                            {
-                                                flatten(
-                                                \line
-                                                    {
-                                                        \concat
-                                                            {
-                                                                T
-                                                                \sub
-                                                                    3
-                                                                \bold
-                                                                    X
-                                                            }
-                                                        /@
-                                                        \bold
-                                                            J
-                                                    }
-                                                ", depth=-1)"
-                                            }
-                                    }
-                            }
-                    }
-                }
-
     """
 
     ### CLASS VARIABLES ###
@@ -1195,65 +898,6 @@ class Expression(abjad.Expression):
         except (NameError, SyntaxError, TypeError) as e:
             raise Exception(f"{statement!r} raises {e!r}.")
         return result
-
-    ### PUBLIC METHODS ###
-
-
-#    def select(self, **keywords) -> "Expression":
-#        r"""
-#        Makes select expression.
-#
-#        ..  container:: example
-#
-#            Makes expression to select leaves:
-#
-#            ..  container:: example
-#
-#                >>> staff = abjad.Staff()
-#                >>> staff.extend("<c' bf'>8 <g' a'>8")
-#                >>> staff.extend("af'8 r8")
-#                >>> staff.extend("r8 gf'8")
-#                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
-#                >>> abjad.show(staff) # doctest: +SKIP
-#
-#                ..  docs::
-#
-#                    >>> string = abjad.lilypond(staff)
-#                    >>> print(string)
-#                    \new Staff
-#                    {
-#                        \time 2/8
-#                        <c' bf'>8
-#                        <g' a'>8
-#                        af'8
-#                        r8
-#                        r8
-#                        gf'8
-#                    }
-#
-#            ..  container:: example expression
-#
-#                >>> expression = baca.Expression()
-#                >>> expression = expression.select()
-#                >>> expression = expression.leaves()
-#
-#                >>> for leaf in expression(staff):
-#                ...     leaf
-#                ...
-#                Chord("<c' bf'>8")
-#                Chord("<g' a'>8")
-#                Note("af'8")
-#                Rest('r8')
-#                Rest('r8')
-#                Note("gf'8")
-#
-#        """
-#        class_ = Selection
-#        callback = self._make_initializer_callback(
-#            class_, callback_class=Expression, module_names=["baca"], **keywords
-#        )
-#        expression = self.append_callback(callback)
-#        return abjad.new(expression, proxy_class=class_, template="baca")
 
 
 class PaddedTuple:
@@ -7596,11 +7240,8 @@ class Sequence(abjad.Sequence):
             ...     abjad.PitchClassSegment(items=[7, -1.5, 7]),
             ...     ]
 
-            >>> expression = baca.pitch_class_segment()
-            >>> expression = expression.transpose(n=1)
-
             >>> sequence = baca.sequence(collections)
-            >>> sequence = sequence.map(expression)
+            >>> sequence = sequence.map(lambda _: _.transpose(n=1))
             >>> sequence.join()
             Sequence([PitchClassSegment([11, 11.5, 7, 8, 11.5, 8])])
 
@@ -7616,68 +7257,6 @@ class Sequence(abjad.Sequence):
                 \new Voice
                 {
                     b'8
-                    bqs'8
-                    g'8
-                    af'8
-                    bqs'8
-                    af'8
-                    \bar "|."
-                    \override Score.BarLine.transparent = ##f
-                }
-
-        ..  container:: example expression
-
-            >>> collections = [
-            ...     baca.PitchClassSegment(items=[-2, -1.5, 6]),
-            ...     baca.PitchClassSegment(items=[7, -1.5, 7]),
-            ...     ]
-
-            >>> transposition = baca.pitch_class_segment()
-            >>> transposition = transposition.transpose(n=1)
-            >>> expression = baca.sequence(name='J')
-            >>> expression = expression.map(transposition)
-            >>> expression = expression.join()
-
-            >>> expression(collections)
-            Sequence([PitchClassSegment([11, 11.5, 7, 8, 11.5, 8])])
-
-            >>> expression.get_string()
-            'join(T1(X) /@ J)'
-
-            >>> collection = expression(collections)[0]
-            >>> markup = expression.get_markup()
-            >>> lilypond_file = abjad.illustrate(collection, figure_name=markup)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> voice = lilypond_file[abjad.Score][0][0]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \new Voice
-                {
-                    b'8
-                    ^ \markup {
-                        \concat
-                            {
-                                join(
-                                \line
-                                    {
-                                        \concat
-                                            {
-                                                T
-                                                \sub
-                                                    1
-                                                \bold
-                                                    X
-                                            }
-                                        /@
-                                        \bold
-                                            J
-                                    }
-                                )
-                            }
-                        }
                     bqs'8
                     g'8
                     af'8
@@ -7834,56 +7413,12 @@ class Sequence(abjad.Sequence):
                 >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> alpha = baca.pitch_class_segment().alpha()
-
                 >>> sequence = baca.sequence([collection_1, collection_2])
-                >>> for item in sequence.accumulate([alpha]):
+                >>> for item in sequence.accumulate([lambda _: _.alpha()]):
                 ...     item
                 ...
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
                 Sequence([PitchClassSegment([1, 0, 3, 2]), PitchClassSegment([5, 4])])
-
-            ..  container:: example expression
-
-                >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                >>> collection_2 = baca.PitchClassSegment([4, 5])
-
-                >>> alpha = baca.pitch_class_segment().alpha()
-                >>> expression = baca.sequence(name='J').accumulate([alpha])
-
-                >>> for sequence in expression([collection_1, collection_2]):
-                ...     sequence
-                ...
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-                Sequence([PitchClassSegment([1, 0, 3, 2]), PitchClassSegment([5, 4])])
-
-                >>> expression.get_string()
-                'A(X) Φ J'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \line
-                            {
-                                \concat
-                                    {
-                                        \concat
-                                            {
-                                                A
-                                                \bold
-                                                    X
-                                            }
-                                    }
-                                Φ
-                                \bold
-                                    J
-                            }
-                        }
 
         ..  container:: example
 
@@ -7896,65 +7431,14 @@ class Sequence(abjad.Sequence):
                 >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> transposition = baca.pitch_class_segment()
-                >>> transposition = transposition.transpose(n=3)
-
                 >>> sequence = baca.sequence([collection_1, collection_2])
-                >>> for item in sequence.accumulate([transposition]):
+                >>> for item in sequence.accumulate([lambda _: _.transpose(n=3)]):
                 ...     item
                 ...
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
                 Sequence([PitchClassSegment([3, 4, 5, 6]), PitchClassSegment([7, 8])])
                 Sequence([PitchClassSegment([6, 7, 8, 9]), PitchClassSegment([10, 11])])
                 Sequence([PitchClassSegment([9, 10, 11, 0]), PitchClassSegment([1, 2])])
-
-            ..  container:: example expression
-
-                >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                >>> collection_2 = baca.PitchClassSegment([4, 5])
-
-                >>> transposition = baca.pitch_class_segment().transpose(n=3)
-                >>> expression = baca.sequence(name='J').accumulate(
-                ...     [transposition],
-                ...     )
-
-                >>> for sequence in expression([collection_1, collection_2]):
-                ...     sequence
-                ...
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-                Sequence([PitchClassSegment([3, 4, 5, 6]), PitchClassSegment([7, 8])])
-                Sequence([PitchClassSegment([6, 7, 8, 9]), PitchClassSegment([10, 11])])
-                Sequence([PitchClassSegment([9, 10, 11, 0]), PitchClassSegment([1, 2])])
-
-                >>> expression.get_string()
-                'T3(X) Φ J'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \line
-                            {
-                                \concat
-                                    {
-                                        \concat
-                                            {
-                                                T
-                                                \sub
-                                                    3
-                                                \bold
-                                                    X
-                                            }
-                                    }
-                                Φ
-                                \bold
-                                    J
-                            }
-                        }
 
         ..  container:: example
 
@@ -7967,13 +7451,8 @@ class Sequence(abjad.Sequence):
                 >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> transposition = baca.pitch_class_segment()
-                >>> transposition = transposition.transpose(n=3)
-                >>> alpha = baca.pitch_class_segment()
-                >>> alpha = alpha.alpha()
-
                 >>> sequence = baca.sequence([collection_1, collection_2])
-                >>> for item in sequence.accumulate([alpha, transposition]):
+                >>> for item in sequence.accumulate([lambda _: _.alpha(), lambda _: _.transpose(n=3)]):
                 ...     item
                 ...
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
@@ -7988,69 +7467,6 @@ class Sequence(abjad.Sequence):
                 Sequence([PitchClassSegment([5, 8, 7, 10]), PitchClassSegment([9, 0])])
                 Sequence([PitchClassSegment([8, 11, 10, 1]), PitchClassSegment([0, 3])])
                 Sequence([PitchClassSegment([9, 10, 11, 0]), PitchClassSegment([1, 2])])
-
-            ..  container:: example expression
-
-                >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                >>> collection_2 = baca.PitchClassSegment([4, 5])
-
-                >>> alpha = baca.pitch_class_segment().alpha()
-                >>> transposition = baca.pitch_class_segment().transpose(n=3)
-                >>> expression = baca.sequence(name='J').accumulate(
-                ...     [alpha, transposition],
-                ...     )
-
-                >>> for sequence in expression([collection_1, collection_2]):
-                ...     sequence
-                ...
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-                Sequence([PitchClassSegment([1, 0, 3, 2]), PitchClassSegment([5, 4])])
-                Sequence([PitchClassSegment([4, 3, 6, 5]), PitchClassSegment([8, 7])])
-                Sequence([PitchClassSegment([5, 2, 7, 4]), PitchClassSegment([9, 6])])
-                Sequence([PitchClassSegment([8, 5, 10, 7]), PitchClassSegment([0, 9])])
-                Sequence([PitchClassSegment([9, 4, 11, 6]), PitchClassSegment([1, 8])])
-                Sequence([PitchClassSegment([0, 7, 2, 9]), PitchClassSegment([4, 11])])
-                Sequence([PitchClassSegment([1, 6, 3, 8]), PitchClassSegment([5, 10])])
-                Sequence([PitchClassSegment([4, 9, 6, 11]), PitchClassSegment([8, 1])])
-                Sequence([PitchClassSegment([5, 8, 7, 10]), PitchClassSegment([9, 0])])
-                Sequence([PitchClassSegment([8, 11, 10, 1]), PitchClassSegment([0, 3])])
-                Sequence([PitchClassSegment([9, 10, 11, 0]), PitchClassSegment([1, 2])])
-
-                >>> expression.get_string()
-                '[A(X), T3(X)] Φ J'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \line
-                            {
-                                \concat
-                                    {
-                                        \concat
-                                            {
-                                                A
-                                                \bold
-                                                    X
-                                            }
-                                        \concat
-                                            {
-                                                T
-                                                \sub
-                                                    3
-                                                \bold
-                                                    X
-                                            }
-                                    }
-                                Φ
-                                \bold
-                                    J
-                            }
-                        }
 
         ..  container:: example
 
@@ -8063,12 +7479,9 @@ class Sequence(abjad.Sequence):
                 >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> permutation = baca.pitch_class_segment()
                 >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
-                >>> permutation = permutation.permute(row)
-
                 >>> sequence = baca.sequence([collection_1, collection_2])
-                >>> for item in sequence.accumulate([permutation]):
+                >>> for item in sequence.accumulate([lambda _: _.permute(row)]):
                 ...     item
                 ...
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
@@ -8092,70 +7505,6 @@ class Sequence(abjad.Sequence):
                 Sequence([PitchClassSegment([8, 4, 2, 5]), PitchClassSegment([0, 3])])
                 Sequence([PitchClassSegment([1, 8, 2, 7]), PitchClassSegment([10, 6])])
 
-            ..  container:: example expression
-
-                >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                >>> collection_2 = baca.PitchClassSegment([4, 5])
-
-                >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
-                >>> permutation = baca.pitch_class_segment().permute(row)
-                >>> expression = baca.sequence(name='J').accumulate(
-                ...     [permutation],
-                ...     )
-
-                >>> for sequence in expression([collection_1, collection_2]):
-                ...     sequence
-                ...
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-                Sequence([PitchClassSegment([10, 0, 2, 6]), PitchClassSegment([8, 7])])
-                Sequence([PitchClassSegment([4, 10, 2, 5]), PitchClassSegment([1, 3])])
-                Sequence([PitchClassSegment([8, 4, 2, 7]), PitchClassSegment([0, 6])])
-                Sequence([PitchClassSegment([1, 8, 2, 3]), PitchClassSegment([10, 5])])
-                Sequence([PitchClassSegment([0, 1, 2, 6]), PitchClassSegment([4, 7])])
-                Sequence([PitchClassSegment([10, 0, 2, 5]), PitchClassSegment([8, 3])])
-                Sequence([PitchClassSegment([4, 10, 2, 7]), PitchClassSegment([1, 6])])
-                Sequence([PitchClassSegment([8, 4, 2, 3]), PitchClassSegment([0, 5])])
-                Sequence([PitchClassSegment([1, 8, 2, 6]), PitchClassSegment([10, 7])])
-                Sequence([PitchClassSegment([0, 1, 2, 5]), PitchClassSegment([4, 3])])
-                Sequence([PitchClassSegment([10, 0, 2, 7]), PitchClassSegment([8, 6])])
-                Sequence([PitchClassSegment([4, 10, 2, 3]), PitchClassSegment([1, 5])])
-                Sequence([PitchClassSegment([8, 4, 2, 6]), PitchClassSegment([0, 7])])
-                Sequence([PitchClassSegment([1, 8, 2, 5]), PitchClassSegment([10, 3])])
-                Sequence([PitchClassSegment([0, 1, 2, 7]), PitchClassSegment([4, 6])])
-                Sequence([PitchClassSegment([10, 0, 2, 3]), PitchClassSegment([8, 5])])
-                Sequence([PitchClassSegment([4, 10, 2, 6]), PitchClassSegment([1, 7])])
-                Sequence([PitchClassSegment([8, 4, 2, 5]), PitchClassSegment([0, 3])])
-                Sequence([PitchClassSegment([1, 8, 2, 7]), PitchClassSegment([10, 6])])
-
-                >>> expression.get_string()
-                'permute(X, row=[10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]) Φ J'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \line
-                            {
-                                \concat
-                                    {
-                                        \concat
-                                            {
-                                                permute(
-                                                \bold
-                                                    X
-                                                ", row=[10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11])"
-                                            }
-                                    }
-                                Φ
-                                \bold
-                                    J
-                            }
-                        }
-
         ..  container:: example
 
             Accumulates permutation followed by transposition:
@@ -8167,15 +7516,10 @@ class Sequence(abjad.Sequence):
                 >>> baca.sequence([collection_1, collection_2])
                 Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> permutation = baca.pitch_class_segment()
                 >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
-                >>> permutation = permutation.permute(row)
-                >>> transposition = baca.pitch_class_segment()
-                >>> transposition = transposition.transpose(n=3)
-
                 >>> sequence = baca.sequence([collection_1, collection_2])
                 >>> for item in sequence.accumulate(
-                ...     [permutation, transposition],
+                ...     [lambda _: _.permute(row), lambda _: _.transpose(n=3)],
                 ...     ):
                 ...     item
                 ...
@@ -8196,75 +7540,6 @@ class Sequence(abjad.Sequence):
                 Sequence([PitchClassSegment([9, 0, 11, 1]), PitchClassSegment([8, 2])])
                 Sequence([PitchClassSegment([9, 10, 11, 0]), PitchClassSegment([1, 2])])
 
-            ..  container:: example expression
-
-                >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                >>> collection_2 = baca.PitchClassSegment([4, 5])
-
-                >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
-                >>> permutation = baca.pitch_class_segment().permute(row)
-                >>> transposition = baca.pitch_class_segment().transpose(n=3)
-                >>> expression = baca.sequence(name='J').accumulate(
-                ...     [permutation, transposition],
-                ...     )
-
-                >>> for sequence in expression([collection_1, collection_2]):
-                ...     sequence
-                ...
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-                Sequence([PitchClassSegment([10, 0, 2, 6]), PitchClassSegment([8, 7])])
-                Sequence([PitchClassSegment([1, 3, 5, 9]), PitchClassSegment([11, 10])])
-                Sequence([PitchClassSegment([0, 6, 7, 9]), PitchClassSegment([11, 4])])
-                Sequence([PitchClassSegment([3, 9, 10, 0]), PitchClassSegment([2, 7])])
-                Sequence([PitchClassSegment([6, 9, 4, 10]), PitchClassSegment([2, 3])])
-                Sequence([PitchClassSegment([9, 0, 7, 1]), PitchClassSegment([5, 6])])
-                Sequence([PitchClassSegment([9, 10, 3, 0]), PitchClassSegment([7, 5])])
-                Sequence([PitchClassSegment([0, 1, 6, 3]), PitchClassSegment([10, 8])])
-                Sequence([PitchClassSegment([10, 0, 5, 6]), PitchClassSegment([4, 1])])
-                Sequence([PitchClassSegment([1, 3, 8, 9]), PitchClassSegment([7, 4])])
-                Sequence([PitchClassSegment([0, 6, 1, 9]), PitchClassSegment([3, 8])])
-                Sequence([PitchClassSegment([3, 9, 4, 0]), PitchClassSegment([6, 11])])
-                Sequence([PitchClassSegment([6, 9, 8, 10]), PitchClassSegment([5, 11])])
-                Sequence([PitchClassSegment([9, 0, 11, 1]), PitchClassSegment([8, 2])])
-                Sequence([PitchClassSegment([9, 10, 11, 0]), PitchClassSegment([1, 2])])
-
-                >>> expression.get_string()
-                '[permute(X, row=[10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]), T3(X)] Φ J'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \line
-                            {
-                                \concat
-                                    {
-                                        \concat
-                                            {
-                                                permute(
-                                                \bold
-                                                    X
-                                                ", row=[10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11])"
-                                            }
-                                        \concat
-                                            {
-                                                T
-                                                \sub
-                                                    3
-                                                \bold
-                                                    X
-                                            }
-                                    }
-                                Φ
-                                \bold
-                                    J
-                            }
-                        }
-
         Returns sequence of accumulated sequences.
 
         Returns sequence of length ``count`` + 1 with integer ``count``.
@@ -8280,7 +7555,7 @@ class Sequence(abjad.Sequence):
                 subclass_hook="_evaluate_accumulate",
                 map_operand=operands,
             )
-        operands = operands or [Expression()]
+        operands = operands or [lambda _: _]
         if not isinstance(operands, list):
             operands = [operands]
         items = [self]

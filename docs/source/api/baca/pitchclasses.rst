@@ -1607,17 +1607,3 @@ pitchclasses
    .. autoattribute:: ZaggedPitchClassMaker.grouping_counts
 
    .. autoattribute:: ZaggedPitchClassMaker.pc_cells
-
-.. raw:: html
-
-   <hr/>
-
-.. rubric:: Functions
-   :class: section-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~pitch_class_segment
-
-.. autofunction:: pitch_class_segment
