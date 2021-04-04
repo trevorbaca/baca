@@ -4195,7 +4195,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         ..  container:: example
 
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> segment = baca.pitch_class_segment(items=items)
+            >>> segment = baca.PitchClassSegment(items=items)
             >>> lilypond_file = abjad.illustrate(segment)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -4284,7 +4284,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
             Example segment:
 
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> J = baca.pitch_class_segment(items=items)
+            >>> J = baca.PitchClassSegment(items=items)
 
             >>> lilypond_file = abjad.illustrate(J)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -4464,7 +4464,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> segment = baca.pitch_class_segment([6, 0, 4, 5, 8])
+            >>> segment = baca.PitchClassSegment([6, 0, 4, 5, 8])
 
             >>> segment.arpeggiate_down()
             PitchSegment([42, 36, 28, 17, 8])
@@ -4514,7 +4514,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> segment = baca.pitch_class_segment([6, 0, 4, 5, 8])
+            >>> segment = baca.PitchClassSegment([6, 0, 4, 5, 8])
 
             >>> segment.arpeggiate_up()
             PitchSegment([6, 12, 16, 17, 20])
@@ -4564,7 +4564,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> segment = baca.pitch_class_segment([-2, -1.5, 6, 7])
+            >>> segment = baca.PitchClassSegment([-2, -1.5, 6, 7])
 
             >>> segment.chord()
             PitchClassSet([6, 7, 10, 10.5])
@@ -5071,7 +5071,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         ..  container:: example
 
             >>> items = [-2, -1.5, 6, 7]
-            >>> segment = baca.pitch_class_segment(items=items)
+            >>> segment = baca.PitchClassSegment(items=items)
             >>> lilypond_file = abjad.illustrate(segment)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5096,7 +5096,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         ..  container:: example
 
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> segment = baca.pitch_class_segment(items=items)
+            >>> segment = baca.PitchClassSegment(items=items)
             >>> lilypond_file = abjad.illustrate(segment)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5131,7 +5131,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         ..  container:: example
 
             >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> segment = baca.pitch_class_segment(items=items)
+            >>> segment = baca.PitchClassSegment(items=items)
             >>> lilypond_file = abjad.illustrate(segment)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5158,7 +5158,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
         ..  container:: example
 
             >>> items = [-2, -1.5, 6, 7, 7]
-            >>> segment = baca.pitch_class_segment(items=items)
+            >>> segment = baca.PitchClassSegment(items=items)
             >>> lilypond_file = abjad.illustrate(segment)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5196,7 +5196,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
+            >>> segment = baca.PitchClassSegment([10, 11, 5, 6, 7])
             >>> lilypond_file = abjad.illustrate(segment)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5229,7 +5229,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
+            >>> segment = baca.PitchClassSegment([10, 11, 5, 6, 7])
             >>> lilypond_file = abjad.illustrate(segment)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -5315,7 +5315,7 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
         ..  container:: example
 
-            >>> segment = baca.pitch_class_segment([10, 11, 5, 6, 7])
+            >>> segment = baca.PitchClassSegment([10, 11, 5, 6, 7])
             >>> lilypond_file = abjad.illustrate(segment)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
@@ -9386,7 +9386,6 @@ def pitch_class_segment(items=None, **keywords):
     """
     if items:
         return PitchClassSegment(items=items, **keywords)
-    # raise Exception("NO MORE BAČA PC SEGMENT EXPRESSIONS, PLEASE")
     name = keywords.pop("name", None)
     expression = classes.Expression(name=name)
     callback = expression._make_initializer_callback(
@@ -9398,54 +9397,3 @@ def pitch_class_segment(items=None, **keywords):
     )
     expression = expression.append_callback(callback)
     return abjad.new(expression, proxy_class=PitchClassSegment)
-
-
-# def _pitch_class_set(items=None, **keywords):
-#    if items:
-#        return PitchClassSet(items=items, **keywords)
-#    raise Exception("NO MORE BAČA PC SET EXPRESSIONS, PLEASE")
-#    name = keywords.pop("name", None)
-#    expression = classes.Expression(name=name)
-#    callback = expression._make_initializer_callback(
-#        PitchClassSet,
-#        callback_class=classes.Expression,
-#        module_names=["baca"],
-#        string_template="{}",
-#        **keywords,
-#    )
-#    expression = expression.append_callback(callback)
-#    return abjad.new(expression, proxy_class=PitchClassSet)
-#
-#
-# def _pitch_segment(items=None, **keywords):
-#    if items:
-#        return PitchSegment(items=items, **keywords)
-#    raise Exception("NO MORE BAČA PITCH SEGMENT EXPRESSIONS, PLEASE")
-#    name = keywords.pop("name", None)
-#    expression = classes.Expression(name=name)
-#    callback = expression._make_initializer_callback(
-#        PitchSegment,
-#        callback_class=classes.Expression,
-#        module_names=["baca"],
-#        string_template="{}",
-#        **keywords,
-#    )
-#    expression = expression.append_callback(callback)
-#    return abjad.new(expression, proxy_class=PitchSegment)
-#
-#
-# def _pitch_set(items=None, **keywords):
-#    if items:
-#        return PitchSet(items=items, **keywords)
-#    raise Exception("NO MORE BAČA PITCH SET EXPRESSIONS, PLEASE")
-#    name = keywords.pop("name", None)
-#    expression = classes.Expression(name=name)
-#    callback = expression._make_initializer_callback(
-#        PitchSet,
-#        callback_class=classes.Expression,
-#        module_names=["baca"],
-#        string_template="{}",
-#        **keywords,
-#    )
-#    expression = expression.append_callback(callback)
-#    return abjad.new(expression, proxy_class=PitchSet)
