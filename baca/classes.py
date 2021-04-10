@@ -8812,17 +8812,23 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
-            Splits divisions with alternating exact ``2:1`` and ``1:1:1``
-            ratios:
+            Splits divisions with alternating exact ``2:1`` and ``1:1:1`` ratios:
 
-            >>> split = baca.sequence().ratios([(2, 1), (1, 1, 1)])
-            >>> expression = baca.sequence().map(split)
+            >>> class splitstate:
+            ...     def __init__(self, ratios):
+            ...         self.count = 0
+            ...         self.ratios = abjad.CyclicTuple(ratios)
+            ...     def __call__(self, sequence):
+            ...         ratio = self.ratios[self.count]
+            ...         self.count += 1
+            ...         return baca.Sequence(sequence).ratios([ratio])
 
+            >>> split = splitstate([(2, 1), (1, 1, 1)])
             >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
             >>> divisions = baca.sequence(time_signatures)
-            >>> divisions = expression(divisions)
+            >>> divisions = divisions.map(split)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
