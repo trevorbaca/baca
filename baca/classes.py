@@ -7169,6 +7169,32 @@ class Selection(abjad.Selection):
         return self.leaves(exclude=exclude).with_previous_leaf().with_next_leaf()
 
 
+class splitstate:
+    def __init__(self, ratios, rounded=False):
+        self.count = 0
+        self.ratios = abjad.CyclicTuple(ratios)
+        self.rounded = rounded
+
+    def __call__(self, sequence):
+        ratio = self.ratios[self.count]
+        self.count += 1
+        return Sequence(sequence).ratios([ratio], rounded=self.rounded)
+
+
+class split_and_rotate:
+    def __init__(self, ratios):
+        self.count = 0
+        self.ratios = Sequence(ratios)
+
+    def __call__(self, sequence):
+        ratios = self.ratios.rotate(n=-self.count)
+        self.count += 1
+        sequence = Sequence(sequence)
+        sequence = sequence.split_divisions(ratios, cyclic=True)
+        sequence = sequence.flatten(depth=-1)
+        return sequence
+
+
 class Sequence(abjad.Sequence):
     r"""
     Sequence.
@@ -7177,94 +7203,74 @@ class Sequence(abjad.Sequence):
 
         Initializes from numbers:
 
-        ..  container:: example
-
-            >>> baca.sequence([1, 2, 3, 4, 5, 6])
-            Sequence([1, 2, 3, 4, 5, 6])
-
-        ..  container:: example expression
-
-            >>> expression = baca.sequence()
-
-            >>> expression([1, 2, 3, 4, 5, 6])
-            Sequence([1, 2, 3, 4, 5, 6])
+        >>> baca.Sequence([1, 2, 3, 4, 5, 6])
+        Sequence([1, 2, 3, 4, 5, 6])
 
     ..  container:: example
 
         Initializes from collection:
 
-        ..  container:: example
+        >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+        >>> collection = abjad.PitchClassSegment(items=items)
+        >>> lilypond_file = abjad.illustrate(collection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> collection = abjad.PitchClassSegment(items=items)
-            >>> lilypond_file = abjad.illustrate(collection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        ..  docs::
 
-            ..  docs::
+            >>> voice = lilypond_file[abjad.Score][0][0]
+            >>> string = abjad.lilypond(voice)
+            >>> print(string)
+            \new Voice
+            {
+                bf'8
+                bqf'8
+                fs'8
+                g'8
+                bqf'8
+                g'8
+                \bar "|."
+                \override Score.BarLine.transparent = ##f
+            }
 
-                >>> voice = lilypond_file[abjad.Score][0][0]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \new Voice
-                {
-                    bf'8
-                    bqf'8
-                    fs'8
-                    g'8
-                    bqf'8
-                    g'8
-                    \bar "|."
-                    \override Score.BarLine.transparent = ##f
-                }
-
-            >>> baca.sequence(collection)
-            Sequence([NumberedPitchClass(10), NumberedPitchClass(10.5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(10.5), NumberedPitchClass(7)])
-
-        ..  container:: example expression
-
-            >>> expression = baca.sequence()
-
-            >>> expression(collection)
-            Sequence([NumberedPitchClass(10), NumberedPitchClass(10.5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(10.5), NumberedPitchClass(7)])
+        >>> baca.Sequence(collection)
+        Sequence([NumberedPitchClass(10), NumberedPitchClass(10.5), NumberedPitchClass(6), NumberedPitchClass(7), NumberedPitchClass(10.5), NumberedPitchClass(7)])
 
     ..  container:: example
 
         Maps transposition to multiple collections:
 
-        ..  container:: example
+        >>> items = [-2, -1.5, 6, 7, -1.5, 7]
+        >>> collection = abjad.PitchClassSegment(items=items)
+        >>> collections = [
+        ...     abjad.PitchClassSegment(items=[-2, -1.5, 6]),
+        ...     abjad.PitchClassSegment(items=[7, -1.5, 7]),
+        ...     ]
 
-            >>> items = [-2, -1.5, 6, 7, -1.5, 7]
-            >>> collection = abjad.PitchClassSegment(items=items)
-            >>> collections = [
-            ...     abjad.PitchClassSegment(items=[-2, -1.5, 6]),
-            ...     abjad.PitchClassSegment(items=[7, -1.5, 7]),
-            ...     ]
+        >>> sequence = baca.Sequence(collections)
+        >>> sequence = sequence.map(lambda _: _.transpose(n=1))
+        >>> sequence.join()
+        Sequence([PitchClassSegment([11, 11.5, 7, 8, 11.5, 8])])
 
-            >>> sequence = baca.sequence(collections)
-            >>> sequence = sequence.map(lambda _: _.transpose(n=1))
-            >>> sequence.join()
-            Sequence([PitchClassSegment([11, 11.5, 7, 8, 11.5, 8])])
+        >>> collection = sequence.join()[0]
+        >>> lilypond_file = abjad.illustrate(collection)
+        >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-            >>> collection = sequence.join()[0]
-            >>> lilypond_file = abjad.illustrate(collection)
-            >>> abjad.show(lilypond_file) # doctest: +SKIP
+        ..  docs::
 
-            ..  docs::
-
-                >>> voice = lilypond_file[abjad.Score][0][0]
-                >>> string = abjad.lilypond(voice)
-                >>> print(string)
-                \new Voice
-                {
-                    b'8
-                    bqs'8
-                    g'8
-                    af'8
-                    bqs'8
-                    af'8
-                    \bar "|."
-                    \override Score.BarLine.transparent = ##f
-                }
+            >>> voice = lilypond_file[abjad.Score][0][0]
+            >>> string = abjad.lilypond(voice)
+            >>> print(string)
+            \new Voice
+            {
+                b'8
+                bqs'8
+                g'8
+                af'8
+                bqs'8
+                af'8
+                \bar "|."
+                \override Score.BarLine.transparent = ##f
+            }
 
     """
 
@@ -7354,191 +7360,144 @@ class Sequence(abjad.Sequence):
 
             Accumulates identity operator:
 
-            ..  container:: example
+            >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+            >>> collection_2 = baca.PitchClassSegment([4, 5])
+            >>> baca.Sequence([collection_1, collection_2])
+            Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                >>> collection_2 = baca.PitchClassSegment([4, 5])
-                >>> baca.sequence([collection_1, collection_2])
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-
-                >>> sequence = baca.sequence([collection_1, collection_2])
-                >>> for item in sequence.accumulate():
-                ...     item
-                ...
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-
-            ..  container:: example expression
-
-                >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                >>> collection_2 = baca.PitchClassSegment([4, 5])
-
-                >>> expression = baca.sequence(name='J').accumulate()
-
-                >>> for item in expression([collection_1, collection_2]):
-                ...     item
-                ...
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-
-                >>> expression.get_string()
-                'Exact Φ J'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \line
-                            {
-                                \concat
-                                    {
-                                        Exact
-                                    }
-                                Φ
-                                \bold
-                                    J
-                            }
-                        }
+            >>> sequence = baca.Sequence([collection_1, collection_2])
+            >>> for item in sequence.accumulate():
+            ...     item
+            ...
+            Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
         ..  container:: example
 
             Accumulates alpha:
 
-            ..  container:: example
+            >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+            >>> collection_2 = baca.PitchClassSegment([4, 5])
+            >>> baca.Sequence([collection_1, collection_2])
+            Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                >>> collection_2 = baca.PitchClassSegment([4, 5])
-                >>> baca.sequence([collection_1, collection_2])
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-
-                >>> sequence = baca.sequence([collection_1, collection_2])
-                >>> for item in sequence.accumulate([lambda _: _.alpha()]):
-                ...     item
-                ...
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-                Sequence([PitchClassSegment([1, 0, 3, 2]), PitchClassSegment([5, 4])])
+            >>> sequence = baca.Sequence([collection_1, collection_2])
+            >>> for item in sequence.accumulate([lambda _: _.alpha()]):
+            ...     item
+            ...
+            Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
+            Sequence([PitchClassSegment([1, 0, 3, 2]), PitchClassSegment([5, 4])])
 
         ..  container:: example
 
             Accumulates transposition:
 
-            ..  container:: example
+            >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+            >>> collection_2 = baca.PitchClassSegment([4, 5])
+            >>> baca.Sequence([collection_1, collection_2])
+            Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                >>> collection_2 = baca.PitchClassSegment([4, 5])
-                >>> baca.sequence([collection_1, collection_2])
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-
-                >>> sequence = baca.sequence([collection_1, collection_2])
-                >>> for item in sequence.accumulate([lambda _: _.transpose(n=3)]):
-                ...     item
-                ...
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-                Sequence([PitchClassSegment([3, 4, 5, 6]), PitchClassSegment([7, 8])])
-                Sequence([PitchClassSegment([6, 7, 8, 9]), PitchClassSegment([10, 11])])
-                Sequence([PitchClassSegment([9, 10, 11, 0]), PitchClassSegment([1, 2])])
+            >>> sequence = baca.Sequence([collection_1, collection_2])
+            >>> for item in sequence.accumulate([lambda _: _.transpose(n=3)]):
+            ...     item
+            ...
+            Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
+            Sequence([PitchClassSegment([3, 4, 5, 6]), PitchClassSegment([7, 8])])
+            Sequence([PitchClassSegment([6, 7, 8, 9]), PitchClassSegment([10, 11])])
+            Sequence([PitchClassSegment([9, 10, 11, 0]), PitchClassSegment([1, 2])])
 
         ..  container:: example
 
             Accumulates alpha followed by transposition:
 
-            ..  container:: example
+            >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+            >>> collection_2 = baca.PitchClassSegment([4, 5])
+            >>> baca.Sequence([collection_1, collection_2])
+            Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                >>> collection_2 = baca.PitchClassSegment([4, 5])
-                >>> baca.sequence([collection_1, collection_2])
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-
-                >>> sequence = baca.sequence([collection_1, collection_2])
-                >>> for item in sequence.accumulate([lambda _: _.alpha(), lambda _: _.transpose(n=3)]):
-                ...     item
-                ...
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-                Sequence([PitchClassSegment([1, 0, 3, 2]), PitchClassSegment([5, 4])])
-                Sequence([PitchClassSegment([4, 3, 6, 5]), PitchClassSegment([8, 7])])
-                Sequence([PitchClassSegment([5, 2, 7, 4]), PitchClassSegment([9, 6])])
-                Sequence([PitchClassSegment([8, 5, 10, 7]), PitchClassSegment([0, 9])])
-                Sequence([PitchClassSegment([9, 4, 11, 6]), PitchClassSegment([1, 8])])
-                Sequence([PitchClassSegment([0, 7, 2, 9]), PitchClassSegment([4, 11])])
-                Sequence([PitchClassSegment([1, 6, 3, 8]), PitchClassSegment([5, 10])])
-                Sequence([PitchClassSegment([4, 9, 6, 11]), PitchClassSegment([8, 1])])
-                Sequence([PitchClassSegment([5, 8, 7, 10]), PitchClassSegment([9, 0])])
-                Sequence([PitchClassSegment([8, 11, 10, 1]), PitchClassSegment([0, 3])])
-                Sequence([PitchClassSegment([9, 10, 11, 0]), PitchClassSegment([1, 2])])
+            >>> sequence = baca.Sequence([collection_1, collection_2])
+            >>> for item in sequence.accumulate([lambda _: _.alpha(), lambda _: _.transpose(n=3)]):
+            ...     item
+            ...
+            Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
+            Sequence([PitchClassSegment([1, 0, 3, 2]), PitchClassSegment([5, 4])])
+            Sequence([PitchClassSegment([4, 3, 6, 5]), PitchClassSegment([8, 7])])
+            Sequence([PitchClassSegment([5, 2, 7, 4]), PitchClassSegment([9, 6])])
+            Sequence([PitchClassSegment([8, 5, 10, 7]), PitchClassSegment([0, 9])])
+            Sequence([PitchClassSegment([9, 4, 11, 6]), PitchClassSegment([1, 8])])
+            Sequence([PitchClassSegment([0, 7, 2, 9]), PitchClassSegment([4, 11])])
+            Sequence([PitchClassSegment([1, 6, 3, 8]), PitchClassSegment([5, 10])])
+            Sequence([PitchClassSegment([4, 9, 6, 11]), PitchClassSegment([8, 1])])
+            Sequence([PitchClassSegment([5, 8, 7, 10]), PitchClassSegment([9, 0])])
+            Sequence([PitchClassSegment([8, 11, 10, 1]), PitchClassSegment([0, 3])])
+            Sequence([PitchClassSegment([9, 10, 11, 0]), PitchClassSegment([1, 2])])
 
         ..  container:: example
 
             Accumulates permutation:
 
-            ..  container:: example
+            >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+            >>> collection_2 = baca.PitchClassSegment([4, 5])
+            >>> baca.Sequence([collection_1, collection_2])
+            Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                >>> collection_2 = baca.PitchClassSegment([4, 5])
-                >>> baca.sequence([collection_1, collection_2])
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-
-                >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
-                >>> sequence = baca.sequence([collection_1, collection_2])
-                >>> for item in sequence.accumulate([lambda _: _.permute(row)]):
-                ...     item
-                ...
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-                Sequence([PitchClassSegment([10, 0, 2, 6]), PitchClassSegment([8, 7])])
-                Sequence([PitchClassSegment([4, 10, 2, 5]), PitchClassSegment([1, 3])])
-                Sequence([PitchClassSegment([8, 4, 2, 7]), PitchClassSegment([0, 6])])
-                Sequence([PitchClassSegment([1, 8, 2, 3]), PitchClassSegment([10, 5])])
-                Sequence([PitchClassSegment([0, 1, 2, 6]), PitchClassSegment([4, 7])])
-                Sequence([PitchClassSegment([10, 0, 2, 5]), PitchClassSegment([8, 3])])
-                Sequence([PitchClassSegment([4, 10, 2, 7]), PitchClassSegment([1, 6])])
-                Sequence([PitchClassSegment([8, 4, 2, 3]), PitchClassSegment([0, 5])])
-                Sequence([PitchClassSegment([1, 8, 2, 6]), PitchClassSegment([10, 7])])
-                Sequence([PitchClassSegment([0, 1, 2, 5]), PitchClassSegment([4, 3])])
-                Sequence([PitchClassSegment([10, 0, 2, 7]), PitchClassSegment([8, 6])])
-                Sequence([PitchClassSegment([4, 10, 2, 3]), PitchClassSegment([1, 5])])
-                Sequence([PitchClassSegment([8, 4, 2, 6]), PitchClassSegment([0, 7])])
-                Sequence([PitchClassSegment([1, 8, 2, 5]), PitchClassSegment([10, 3])])
-                Sequence([PitchClassSegment([0, 1, 2, 7]), PitchClassSegment([4, 6])])
-                Sequence([PitchClassSegment([10, 0, 2, 3]), PitchClassSegment([8, 5])])
-                Sequence([PitchClassSegment([4, 10, 2, 6]), PitchClassSegment([1, 7])])
-                Sequence([PitchClassSegment([8, 4, 2, 5]), PitchClassSegment([0, 3])])
-                Sequence([PitchClassSegment([1, 8, 2, 7]), PitchClassSegment([10, 6])])
+            >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
+            >>> sequence = baca.Sequence([collection_1, collection_2])
+            >>> for item in sequence.accumulate([lambda _: _.permute(row)]):
+            ...     item
+            ...
+            Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
+            Sequence([PitchClassSegment([10, 0, 2, 6]), PitchClassSegment([8, 7])])
+            Sequence([PitchClassSegment([4, 10, 2, 5]), PitchClassSegment([1, 3])])
+            Sequence([PitchClassSegment([8, 4, 2, 7]), PitchClassSegment([0, 6])])
+            Sequence([PitchClassSegment([1, 8, 2, 3]), PitchClassSegment([10, 5])])
+            Sequence([PitchClassSegment([0, 1, 2, 6]), PitchClassSegment([4, 7])])
+            Sequence([PitchClassSegment([10, 0, 2, 5]), PitchClassSegment([8, 3])])
+            Sequence([PitchClassSegment([4, 10, 2, 7]), PitchClassSegment([1, 6])])
+            Sequence([PitchClassSegment([8, 4, 2, 3]), PitchClassSegment([0, 5])])
+            Sequence([PitchClassSegment([1, 8, 2, 6]), PitchClassSegment([10, 7])])
+            Sequence([PitchClassSegment([0, 1, 2, 5]), PitchClassSegment([4, 3])])
+            Sequence([PitchClassSegment([10, 0, 2, 7]), PitchClassSegment([8, 6])])
+            Sequence([PitchClassSegment([4, 10, 2, 3]), PitchClassSegment([1, 5])])
+            Sequence([PitchClassSegment([8, 4, 2, 6]), PitchClassSegment([0, 7])])
+            Sequence([PitchClassSegment([1, 8, 2, 5]), PitchClassSegment([10, 3])])
+            Sequence([PitchClassSegment([0, 1, 2, 7]), PitchClassSegment([4, 6])])
+            Sequence([PitchClassSegment([10, 0, 2, 3]), PitchClassSegment([8, 5])])
+            Sequence([PitchClassSegment([4, 10, 2, 6]), PitchClassSegment([1, 7])])
+            Sequence([PitchClassSegment([8, 4, 2, 5]), PitchClassSegment([0, 3])])
+            Sequence([PitchClassSegment([1, 8, 2, 7]), PitchClassSegment([10, 6])])
 
         ..  container:: example
 
             Accumulates permutation followed by transposition:
 
-            ..  container:: example
+            >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
+            >>> collection_2 = baca.PitchClassSegment([4, 5])
+            >>> baca.Sequence([collection_1, collection_2])
+            Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
 
-                >>> collection_1 = baca.PitchClassSegment([0, 1, 2, 3])
-                >>> collection_2 = baca.PitchClassSegment([4, 5])
-                >>> baca.sequence([collection_1, collection_2])
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-
-                >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
-                >>> sequence = baca.sequence([collection_1, collection_2])
-                >>> for item in sequence.accumulate(
-                ...     [lambda _: _.permute(row), lambda _: _.transpose(n=3)],
-                ...     ):
-                ...     item
-                ...
-                Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
-                Sequence([PitchClassSegment([10, 0, 2, 6]), PitchClassSegment([8, 7])])
-                Sequence([PitchClassSegment([1, 3, 5, 9]), PitchClassSegment([11, 10])])
-                Sequence([PitchClassSegment([0, 6, 7, 9]), PitchClassSegment([11, 4])])
-                Sequence([PitchClassSegment([3, 9, 10, 0]), PitchClassSegment([2, 7])])
-                Sequence([PitchClassSegment([6, 9, 4, 10]), PitchClassSegment([2, 3])])
-                Sequence([PitchClassSegment([9, 0, 7, 1]), PitchClassSegment([5, 6])])
-                Sequence([PitchClassSegment([9, 10, 3, 0]), PitchClassSegment([7, 5])])
-                Sequence([PitchClassSegment([0, 1, 6, 3]), PitchClassSegment([10, 8])])
-                Sequence([PitchClassSegment([10, 0, 5, 6]), PitchClassSegment([4, 1])])
-                Sequence([PitchClassSegment([1, 3, 8, 9]), PitchClassSegment([7, 4])])
-                Sequence([PitchClassSegment([0, 6, 1, 9]), PitchClassSegment([3, 8])])
-                Sequence([PitchClassSegment([3, 9, 4, 0]), PitchClassSegment([6, 11])])
-                Sequence([PitchClassSegment([6, 9, 8, 10]), PitchClassSegment([5, 11])])
-                Sequence([PitchClassSegment([9, 0, 11, 1]), PitchClassSegment([8, 2])])
-                Sequence([PitchClassSegment([9, 10, 11, 0]), PitchClassSegment([1, 2])])
+            >>> row = [10, 0, 2, 6, 8, 7, 5, 3, 1, 9, 4, 11]
+            >>> sequence = baca.Sequence([collection_1, collection_2])
+            >>> for item in sequence.accumulate(
+            ...     [lambda _: _.permute(row), lambda _: _.transpose(n=3)],
+            ...     ):
+            ...     item
+            ...
+            Sequence([PitchClassSegment([0, 1, 2, 3]), PitchClassSegment([4, 5])])
+            Sequence([PitchClassSegment([10, 0, 2, 6]), PitchClassSegment([8, 7])])
+            Sequence([PitchClassSegment([1, 3, 5, 9]), PitchClassSegment([11, 10])])
+            Sequence([PitchClassSegment([0, 6, 7, 9]), PitchClassSegment([11, 4])])
+            Sequence([PitchClassSegment([3, 9, 10, 0]), PitchClassSegment([2, 7])])
+            Sequence([PitchClassSegment([6, 9, 4, 10]), PitchClassSegment([2, 3])])
+            Sequence([PitchClassSegment([9, 0, 7, 1]), PitchClassSegment([5, 6])])
+            Sequence([PitchClassSegment([9, 10, 3, 0]), PitchClassSegment([7, 5])])
+            Sequence([PitchClassSegment([0, 1, 6, 3]), PitchClassSegment([10, 8])])
+            Sequence([PitchClassSegment([10, 0, 5, 6]), PitchClassSegment([4, 1])])
+            Sequence([PitchClassSegment([1, 3, 8, 9]), PitchClassSegment([7, 4])])
+            Sequence([PitchClassSegment([0, 6, 1, 9]), PitchClassSegment([3, 8])])
+            Sequence([PitchClassSegment([3, 9, 4, 0]), PitchClassSegment([6, 11])])
+            Sequence([PitchClassSegment([6, 9, 8, 10]), PitchClassSegment([5, 11])])
+            Sequence([PitchClassSegment([9, 0, 11, 1]), PitchClassSegment([8, 2])])
+            Sequence([PitchClassSegment([9, 10, 11, 0]), PitchClassSegment([1, 2])])
 
         Returns sequence of accumulated sequences.
 
@@ -7589,7 +7548,7 @@ class Sequence(abjad.Sequence):
 
             Iterates atoms boustrophedon:
 
-            >>> sequence = baca.sequence([1, 2, 3, 4, 5])
+            >>> sequence = baca.Sequence([1, 2, 3, 4, 5])
 
             >>> sequence.boustrophedon(count=0)
             Sequence([])
@@ -7611,7 +7570,7 @@ class Sequence(abjad.Sequence):
             ...     baca.PitchClassSegment([1, 2, 3]),
             ...     baca.PitchClassSegment([4, 5, 6]),
             ...     ]
-            >>> sequence = baca.sequence(collections)
+            >>> sequence = baca.Sequence(collections)
 
             >>> sequence.boustrophedon(count=0)
             Sequence([])
@@ -7645,7 +7604,7 @@ class Sequence(abjad.Sequence):
             Iterates mixed items boustrophedon:
 
             >>> collection = baca.PitchClassSegment([1, 2, 3])
-            >>> sequence = baca.sequence([collection, 4, 5])
+            >>> sequence = baca.Sequence([collection, 4, 5])
             >>> for item in sequence.boustrophedon(count=3):
             ...     item
             ...
@@ -7657,47 +7616,6 @@ class Sequence(abjad.Sequence):
             PitchClassSegment([2, 3])
             4
             5
-
-        ..  container:: example expression
-
-            >>> collections = [
-            ...     baca.PitchClassSegment([1, 2, 3]),
-            ...     baca.PitchClassSegment([4, 5, 6]),
-            ...     ]
-
-            >>> expression = baca.sequence(name='J')
-            >>> expression = expression.boustrophedon(count=3)
-
-            >>> for collection in expression(collections):
-            ...     collection
-            ...
-            PitchClassSegment([1, 2, 3])
-            PitchClassSegment([4, 5, 6])
-            PitchClassSegment([5, 4])
-            PitchClassSegment([3, 2, 1])
-            PitchClassSegment([2, 3])
-            PitchClassSegment([4, 5, 6])
-
-            >>> expression.get_string()
-            'β3(J)'
-
-            >>> markup = expression.get_markup()
-            >>> abjad.show(markup) # doctest: +SKIP
-
-            ..  docs::
-
-                >>> string = abjad.lilypond(markup)
-                >>> print(string)
-                \markup {
-                    \concat
-                        {
-                            β
-                            \super
-                                3
-                            \bold
-                                J
-                        }
-                    }
 
         Returns new sequence.
         """
@@ -7735,19 +7653,19 @@ class Sequence(abjad.Sequence):
 
         ..  container:: example
 
-            >>> baca.sequence([1, 1, 1, 1, 1, 1]).degree_of_rotational_symmetry()
+            >>> baca.Sequence([1, 1, 1, 1, 1, 1]).degree_of_rotational_symmetry()
             6
 
-            >>> baca.sequence([1, 2, 1, 2, 1, 2]).degree_of_rotational_symmetry()
+            >>> baca.Sequence([1, 2, 1, 2, 1, 2]).degree_of_rotational_symmetry()
             3
 
-            >>> baca.sequence([1, 2, 3, 1, 2, 3]).degree_of_rotational_symmetry()
+            >>> baca.Sequence([1, 2, 3, 1, 2, 3]).degree_of_rotational_symmetry()
             2
 
-            >>> baca.sequence([1, 2, 3, 4, 5, 6]).degree_of_rotational_symmetry()
+            >>> baca.Sequence([1, 2, 3, 4, 5, 6]).degree_of_rotational_symmetry()
             1
 
-            >>> baca.sequence().degree_of_rotational_symmetry()
+            >>> baca.Sequence().degree_of_rotational_symmetry()
             1
 
         Returns positive integer.
@@ -7773,15 +7691,12 @@ class Sequence(abjad.Sequence):
         r"""
         Fuses sequence by ``counts``.
 
-        ..  container:: example expression
+        ..  container:: example
 
             Fuses items:
 
-            >>> expression = baca.sequence().fuse()
-
             >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
-            >>> divisions = baca.sequence(divisions)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(divisions).fuse()
             >>> divisions = divisions.flatten(depth=-1)
             >>> divisions
             Sequence([NonreducedFraction(15, 8)])
@@ -7809,15 +7724,12 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
             Fuses first two items and then remaining items:
 
-            >>> expression = baca.sequence().fuse([2])
-
             >>> divisions = baca.fractions([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
-            >>> divisions = baca.sequence(divisions)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(divisions).fuse([2])
             >>> for division in divisions:
             ...     division
             NonreducedFraction(4, 8)
@@ -7853,15 +7765,12 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
             Fuses items two at a time:
 
-            >>> expression = baca.sequence().fuse([2], cyclic=True)
-
             >>> divisions = baca.fractions([(2, 8), (2, 8), (4, 8), (4, 8), (2, 4)])
-            >>> divisions = baca.sequence(divisions)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(divisions).fuse([2], cyclic=True)
             >>> for division in divisions:
             ...     division
             NonreducedFraction(4, 8)
@@ -7899,19 +7808,17 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
-            Splits each item by ``3/8``;  then flattens; then fuses into
-            differently sized groups:
-
-            >>> split = expression.split_divisions([(3, 8)], cyclic=True)
-            >>> expression = baca.sequence().map(split)
-            >>> expression = expression.flatten(depth=-1)
-            >>> expression = expression.fuse([2, 3, 1])
+            Splits each item by ``3/8``;  then flattens; then fuses into differently
+            sized groups:
 
             >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
-            >>> divisions = baca.sequence(divisions)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(divisions).map(
+            ...     lambda _: baca.Sequence(_).split_divisions([(3, 8)], cyclic=True)
+            ... )
+            >>> divisions = divisions.flatten(depth=-1)
+            >>> divisions = divisions.fuse([2, 3, 1])
             >>> for division in divisions:
             ...     division
             NonreducedFraction(6, 8)
@@ -7949,23 +7856,20 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
             Splits into sixteenths; partitions; then fuses every other part:
 
-            >>> split = baca.sequence().split_divisions([(1, 16)], cyclic=True)
-            >>> expression = baca.sequence().fuse()
-            >>> expression = expression.map(split)
-            >>> expression = expression.flatten(depth=-1)
-            >>> expression = expression.partition_by_ratio_of_lengths(
-            ...     (1, 1, 1, 1, 1, 1),
-            ... )
-            >>> expression = expression.fuse(indices=[1, 3, 5])
-            >>> expression = expression.flatten(depth=-1)
-
             >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
-            >>> divisions = baca.sequence(divisions)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(divisions)
+            >>> divisions = divisions.fuse()
+            >>> divisions = divisions.map(
+            ...     lambda _: baca.Sequence(_).split_divisions([(1, 16)], cyclic=True)
+            ... )
+            >>> divisions = divisions.flatten(depth=-1)
+            >>> divisions = divisions.partition_by_ratio_of_lengths((1, 1, 1, 1, 1, 1))
+            >>> divisions = divisions.fuse(indices=[1, 3, 5])
+            >>> divisions = divisions.flatten(depth=-1)
             >>> for division in divisions:
             ...     division
             NonreducedFraction(1, 16)
@@ -8068,9 +7972,7 @@ class Sequence(abjad.Sequence):
         r"""
         Groups sequence by sign of items.
 
-        >>> sequence = baca.sequence(
-        ...     [0, 0, -1, -1, 2, 3, -5, 1, 2, 5, -5, -6],
-        ...     )
+        >>> sequence = baca.Sequence([0, 0, -1, -1, 2, 3, -5, 1, 2, 5, -5, -6])
 
         ..  container:: example
 
@@ -8213,142 +8115,69 @@ class Sequence(abjad.Sequence):
 
             Helianthates list of lists:
 
-            ..  container:: example
-
-                >>> sequence = baca.sequence([[1, 2, 3], [4, 5], [6, 7, 8]])
-                >>> sequence = sequence.helianthate(n=-1, m=1)
-                >>> for item in sequence:
-                ...     item
-                ...
-                [1, 2, 3]
-                [4, 5]
-                [6, 7, 8]
-                [5, 4]
-                [8, 6, 7]
-                [3, 1, 2]
-                [7, 8, 6]
-                [2, 3, 1]
-                [4, 5]
-                [1, 2, 3]
-                [5, 4]
-                [6, 7, 8]
-                [4, 5]
-                [8, 6, 7]
-                [3, 1, 2]
-                [7, 8, 6]
-                [2, 3, 1]
-                [5, 4]
-
-            ..  container:: example expression
-
-
-                >>> expression = baca.sequence()
-                >>> expression = expression.helianthate(n=-1, m=1)
-
-                >>> sequence = expression([[1, 2, 3], [4, 5], [6, 7, 8]])
-                >>> for item in sequence:
-                ...     item
-                [1, 2, 3]
-                [4, 5]
-                [6, 7, 8]
-                [5, 4]
-                [8, 6, 7]
-                [3, 1, 2]
-                [7, 8, 6]
-                [2, 3, 1]
-                [4, 5]
-                [1, 2, 3]
-                [5, 4]
-                [6, 7, 8]
-                [4, 5]
-                [8, 6, 7]
-                [3, 1, 2]
-                [7, 8, 6]
-                [2, 3, 1]
-                [5, 4]
+            >>> sequence = baca.Sequence([[1, 2, 3], [4, 5], [6, 7, 8]])
+            >>> sequence = sequence.helianthate(n=-1, m=1)
+            >>> for item in sequence:
+            ...     item
+            ...
+            [1, 2, 3]
+            [4, 5]
+            [6, 7, 8]
+            [5, 4]
+            [8, 6, 7]
+            [3, 1, 2]
+            [7, 8, 6]
+            [2, 3, 1]
+            [4, 5]
+            [1, 2, 3]
+            [5, 4]
+            [6, 7, 8]
+            [4, 5]
+            [8, 6, 7]
+            [3, 1, 2]
+            [7, 8, 6]
+            [2, 3, 1]
+            [5, 4]
 
         ..  container:: example
 
             Helianthates list of collections:
 
-            ..  container:: example
-
-                >>> J = baca.PitchClassSegment(items=[0, 2, 4])
-                >>> K = baca.PitchClassSegment(items=[5, 6])
-                >>> L = baca.PitchClassSegment(items=[7, 9, 11])
-                >>> sequence = baca.sequence([J, K, L])
-                >>> sequence = sequence.helianthate(n=-1, m=1)
-                >>> for collection in sequence:
-                ...     collection
-                ...
-                PitchClassSegment([0, 2, 4])
-                PitchClassSegment([5, 6])
-                PitchClassSegment([7, 9, 11])
-                PitchClassSegment([6, 5])
-                PitchClassSegment([11, 7, 9])
-                PitchClassSegment([4, 0, 2])
-                PitchClassSegment([9, 11, 7])
-                PitchClassSegment([2, 4, 0])
-                PitchClassSegment([5, 6])
-                PitchClassSegment([0, 2, 4])
-                PitchClassSegment([6, 5])
-                PitchClassSegment([7, 9, 11])
-                PitchClassSegment([5, 6])
-                PitchClassSegment([11, 7, 9])
-                PitchClassSegment([4, 0, 2])
-                PitchClassSegment([9, 11, 7])
-                PitchClassSegment([2, 4, 0])
-                PitchClassSegment([6, 5])
-
-            ..  container:: example expression
-
-                >>> J = baca.PitchClassSegment(items=[0, 2, 4])
-                >>> K = baca.PitchClassSegment(items=[5, 6])
-                >>> L = baca.PitchClassSegment(items=[7, 9, 11])
-
-                >>> expression = baca.sequence()
-                >>> expression = expression.helianthate(n=-1, m=1)
-
-                >>> for collection in expression([J, K, L]):
-                ...     collection
-                ...
-                PitchClassSegment([0, 2, 4])
-                PitchClassSegment([5, 6])
-                PitchClassSegment([7, 9, 11])
-                PitchClassSegment([6, 5])
-                PitchClassSegment([11, 7, 9])
-                PitchClassSegment([4, 0, 2])
-                PitchClassSegment([9, 11, 7])
-                PitchClassSegment([2, 4, 0])
-                PitchClassSegment([5, 6])
-                PitchClassSegment([0, 2, 4])
-                PitchClassSegment([6, 5])
-                PitchClassSegment([7, 9, 11])
-                PitchClassSegment([5, 6])
-                PitchClassSegment([11, 7, 9])
-                PitchClassSegment([4, 0, 2])
-                PitchClassSegment([9, 11, 7])
-                PitchClassSegment([2, 4, 0])
-                PitchClassSegment([6, 5])
+            >>> J = baca.PitchClassSegment(items=[0, 2, 4])
+            >>> K = baca.PitchClassSegment(items=[5, 6])
+            >>> L = baca.PitchClassSegment(items=[7, 9, 11])
+            >>> sequence = baca.Sequence([J, K, L])
+            >>> sequence = sequence.helianthate(n=-1, m=1)
+            >>> for collection in sequence:
+            ...     collection
+            ...
+            PitchClassSegment([0, 2, 4])
+            PitchClassSegment([5, 6])
+            PitchClassSegment([7, 9, 11])
+            PitchClassSegment([6, 5])
+            PitchClassSegment([11, 7, 9])
+            PitchClassSegment([4, 0, 2])
+            PitchClassSegment([9, 11, 7])
+            PitchClassSegment([2, 4, 0])
+            PitchClassSegment([5, 6])
+            PitchClassSegment([0, 2, 4])
+            PitchClassSegment([6, 5])
+            PitchClassSegment([7, 9, 11])
+            PitchClassSegment([5, 6])
+            PitchClassSegment([11, 7, 9])
+            PitchClassSegment([4, 0, 2])
+            PitchClassSegment([9, 11, 7])
+            PitchClassSegment([2, 4, 0])
+            PitchClassSegment([6, 5])
 
         ..  container:: example
 
             Trivial helianthation:
 
-            ..  container:: example
-
-                >>> items = [[1, 2, 3], [4, 5], [6, 7, 8]]
-                >>> sequence = baca.sequence(items)
-                >>> sequence.helianthate()
-                Sequence([[1, 2, 3], [4, 5], [6, 7, 8]])
-
-            ..  container:: example expression
-
-                >>> expression = baca.sequence()
-                >>> expression = expression.helianthate()
-
-                >>> expression([[1, 2, 3], [4, 5], [6, 7, 8]])
-                Sequence([[1, 2, 3], [4, 5], [6, 7, 8]])
+            >>> items = [[1, 2, 3], [4, 5], [6, 7, 8]]
+            >>> sequence = baca.Sequence(items)
+            >>> sequence.helianthate()
+            Sequence([[1, 2, 3], [4, 5], [6, 7, 8]])
 
         """
         if self._expression:
@@ -8390,53 +8219,17 @@ class Sequence(abjad.Sequence):
 
         ..  container:: example
 
-            ..  container:: example
+            >>> sequence = baca.Sequence(range(16))
+            >>> parts = sequence.partition([3])
 
-                >>> sequence = baca.sequence(range(16))
-                >>> parts = sequence.partition([3])
-
-                >>> for part in parts:
-                ...     part
-                Sequence([0, 1, 2])
-                Sequence([3, 4, 5])
-                Sequence([6, 7, 8])
-                Sequence([9, 10, 11])
-                Sequence([12, 13, 14])
-                Sequence([15])
-
-            ..  container:: example expression
-
-                >>> expression = baca.sequence(name='J').partition([3])
-
-                >>> for part in expression(range(16)):
-                ...     part
-                Sequence([0, 1, 2])
-                Sequence([3, 4, 5])
-                Sequence([6, 7, 8])
-                Sequence([9, 10, 11])
-                Sequence([12, 13, 14])
-                Sequence([15])
-
-                >>> expression.get_string()
-                'P[3](J)'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \concat
-                            {
-                                P
-                                \sub
-                                    [3]
-                                \bold
-                                    J
-                            }
-                        }
+            >>> for part in parts:
+            ...     part
+            Sequence([0, 1, 2])
+            Sequence([3, 4, 5])
+            Sequence([6, 7, 8])
+            Sequence([9, 10, 11])
+            Sequence([12, 13, 14])
+            Sequence([15])
 
         Returns new sequence.
         """
@@ -8450,23 +8243,23 @@ class Sequence(abjad.Sequence):
 
         ..  container:: example
 
-            >>> baca.sequence([1, 2, 3, 4, 5, 6]).period_of_rotation()
+            >>> baca.Sequence([1, 2, 3, 4, 5, 6]).period_of_rotation()
             6
 
-            >>> baca.sequence([1, 2, 3, 1, 2, 3]).period_of_rotation()
+            >>> baca.Sequence([1, 2, 3, 1, 2, 3]).period_of_rotation()
             3
 
-            >>> baca.sequence([1, 2, 1, 2, 1, 2]).period_of_rotation()
+            >>> baca.Sequence([1, 2, 1, 2, 1, 2]).period_of_rotation()
             2
 
-            >>> baca.sequence([1, 1, 1, 1, 1, 1]).period_of_rotation()
+            >>> baca.Sequence([1, 1, 1, 1, 1, 1]).period_of_rotation()
             1
 
-            >>> baca.sequence().period_of_rotation()
+            >>> baca.Sequence().period_of_rotation()
             0
 
-        Defined equal to length of sequence divided by degree of rotational
-        symmetry of sequence.
+        Defined equal to length of sequence divided by degree of rotational symmetry of
+        sequence.
 
         Returns positive integer.
         """
@@ -8482,10 +8275,10 @@ class Sequence(abjad.Sequence):
         r"""
         Splits sequence into quarter-note durations.
 
-        ..  container:: example expression
+        ..  container:: example
 
-            >>> expression = baca.sequence().quarters()
-            >>> for item in expression(baca.fractions([(2, 4), (6, 4)])):
+            >>> list_ = baca.fractions([(2, 4), (6, 4)])
+            >>> for item in baca.Sequence(list_).quarters():
             ...     item
             ...
             Sequence([NonreducedFraction(1, 4)])
@@ -8497,10 +8290,10 @@ class Sequence(abjad.Sequence):
             Sequence([NonreducedFraction(1, 4)])
             Sequence([NonreducedFraction(1, 4)])
 
-        ..  container:: example expression
+        ..  container:: example
 
-            >>> expression = baca.sequence().quarters(compound=(3, 2))
-            >>> for item in expression(baca.fractions([(6, 4)])):
+            >>> list_ = baca.fractions([(6, 4)])
+            >>> for item in baca.Sequence(list_).quarters(compound=(3, 2)):
             ...     item
             ...
             Sequence([NonreducedFraction(3, 8)])
@@ -8508,15 +8301,14 @@ class Sequence(abjad.Sequence):
             Sequence([NonreducedFraction(3, 8)])
             Sequence([NonreducedFraction(3, 8)])
 
-        ..  container:: example expression
+        ..  container:: example
 
             Maps to each division: splits by ``1/4`` with remainder on right:
 
-            >>> expression = baca.sequence().map(baca.sequence().quarters())
-
             >>> divisions = baca.fractions([(7, 8), (3, 8), (5, 8)])
-            >>> divisions = baca.sequence(divisions)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(divisions).map(
+            ...     lambda _: baca.Sequence(_).quarters()
+            ... )
             >>> for sequence in divisions:
             ...     print("sequence:")
             ...     for division in sequence:
@@ -8590,16 +8382,13 @@ class Sequence(abjad.Sequence):
         r"""
         Splits sequence by ``ratios``.
 
-        ..  container:: example expression
+        ..  container:: example
 
             Splits sequence by exact ``2:1`` ratio:
 
-            >>> expression = baca.sequence()
-            >>> expression = expression.ratios([(2, 1)])
-
             >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
-            >>> divisions = baca.sequence(time_signatures)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(time_signatures)
+            >>> divisions = divisions.ratios([(2, 1)])
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -8652,12 +8441,9 @@ class Sequence(abjad.Sequence):
 
             Splits divisions by rounded ``2:1`` ratio:
 
-            >>> expression = baca.sequence()
-            >>> expression = expression.ratios([(2, 1)], rounded=True)
-
             >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
-            >>> divisions = baca.sequence(time_signatures)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(time_signatures)
+            >>> divisions = divisions.ratios([(2, 1)], rounded=True)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -8700,16 +8486,14 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
             Splits each division by exact ``2:1`` ratio:
 
-            >>> split = baca.sequence().ratios([(2, 1)])
-            >>> expression = baca.sequence().map(split)
-
             >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
-            >>> divisions = baca.sequence(time_signatures)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(time_signatures).map(
+            ...     lambda _: baca.Sequence(_).ratios([(2, 1)])
+            ... )
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -8764,12 +8548,10 @@ class Sequence(abjad.Sequence):
 
             Splits each division by rounded ``2:1`` ratio:
 
-            >>> split = baca.sequence().ratios([(2, 1)], rounded=True)
-            >>> expression = baca.sequence().map(split)
-
             >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
-            >>> divisions = baca.sequence(time_signatures)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(time_signatures).map(
+            ...     lambda _: baca.Sequence(_).ratios([(2, 1)], rounded=True)
+            ... )
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -8816,18 +8598,9 @@ class Sequence(abjad.Sequence):
 
             Splits divisions with alternating exact ``2:1`` and ``1:1:1`` ratios:
 
-            >>> class splitstate:
-            ...     def __init__(self, ratios):
-            ...         self.count = 0
-            ...         self.ratios = abjad.CyclicTuple(ratios)
-            ...     def __call__(self, sequence):
-            ...         ratio = self.ratios[self.count]
-            ...         self.count += 1
-            ...         return baca.Sequence(sequence).ratios([ratio])
-
-            >>> split = splitstate([(2, 1), (1, 1, 1)])
+            >>> split = baca.splitstate([(2, 1), (1, 1, 1)])
             >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
-            >>> divisions = baca.sequence(time_signatures)
+            >>> divisions = baca.Sequence(time_signatures)
             >>> divisions = divisions.map(split)
             >>> for item in divisions:
             ...     print("sequence:")
@@ -8883,17 +8656,11 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-            Splits divisions with alternating rounded ``2:1`` and ``1:1:1``
-            ratios:
+            Splits divisions with alternating rounded ``2:1`` and ``1:1:1`` ratios:
 
-            >>> split = baca.sequence().ratios(
-            ...     [(2, 1), (1, 1, 1)], rounded=True
-            ... )
-            >>> expression = baca.sequence().map(split)
-
+            >>> split = baca.splitstate([(2, 1), (1, 1, 1)], rounded=True)
             >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
-            >>> divisions = baca.sequence(time_signatures)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(time_signatures).map(split)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -8977,41 +8744,14 @@ class Sequence(abjad.Sequence):
 
             ..  container:: example
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).repeat_by()
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).repeat_by()
                 Sequence([[1, 2, 3], 4, [5, 6]])
-
-            ..  container:: example expression
-
-                >>> expression = baca.sequence(name='J').repeat_by()
-
-                >>> expression([[1, 2, 3], 4, [5, 6]])
-                Sequence([[1, 2, 3], 4, [5, 6]])
-
-                >>> expression.get_string()
-                'repeat_by(J)'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \concat
-                            {
-                                repeat_by(
-                                \bold
-                                    J
-                                )
-                            }
-                        }
 
         ..  container:: example
 
             With acyclic counts:
 
-            >>> sequence = baca.sequence([[1, 2, 3], 4, [5, 6]])
+            >>> sequence = baca.Sequence([[1, 2, 3], 4, [5, 6]])
 
             ..  container:: example
 
@@ -9055,33 +8795,6 @@ class Sequence(abjad.Sequence):
                 >>> sequence.repeat_by([1, 1, 3])
                 Sequence([[1, 2, 3], 4, [5, 6], [5, 6], [5, 6]])
 
-            ..  container:: example expression
-
-                >>> expression = baca.sequence(name='J').repeat_by([2])
-
-                >>> expression([[1, 2, 3], 4, [5, 6]])
-                Sequence([[1, 2, 3], [1, 2, 3], 4, [5, 6]])
-
-                >>> expression.get_string()
-                'repeat_by(J, counts=[2])'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \concat
-                            {
-                                repeat_by(
-                                \bold
-                                    J
-                                ", counts=[2])"
-                            }
-                        }
-
         ..  container:: example
 
             With cyclic counts:
@@ -9113,34 +8826,6 @@ class Sequence(abjad.Sequence):
 
                 >>> sequence.repeat_by([2, 3], cyclic=True)
                 Sequence([[1, 2, 3], [1, 2, 3], 4, 4, 4, [5, 6], [5, 6]])
-
-            ..  container:: example expression
-
-                >>> expression = baca.sequence(name='J')
-                >>> expression = expression.repeat_by([2], cyclic=True)
-
-                >>> expression([[1, 2, 3], 4, [5, 6]])
-                Sequence([[1, 2, 3], [1, 2, 3], 4, 4, [5, 6], [5, 6]])
-
-                >>> expression.get_string()
-                'repeat_by(J, counts=[2], cyclic=True)'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \concat
-                            {
-                                repeat_by(
-                                \bold
-                                    J
-                                ", counts=[2], cyclic=True)"
-                            }
-                        }
 
         Raises exception on negative counts.
 
@@ -9174,71 +8859,17 @@ class Sequence(abjad.Sequence):
 
             ..  container:: example
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal()
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal()
                 Sequence([[1, 2, 3], 4, [5, 6]])
-
-            ..  container:: example expression
-
-                >>> expression = baca.sequence(name='J').reveal()
-
-                >>> expression([[1, 2, 3], 4, [5, 6]])
-                Sequence([[1, 2, 3], 4, [5, 6]])
-
-                >>> expression.get_string()
-                'reveal(J)'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \concat
-                            {
-                                reveal(
-                                \bold
-                                    J
-                                )
-                            }
-                        }
 
         ..  container:: example
 
             With zero count:
 
-            ..  container:: example expression
+            ..  container:: example
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=0)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=0)
                 Sequence([])
-
-            ..  container:: example expression
-
-                >>> expression = baca.sequence(name='J').reveal(count=0)
-
-                >>> expression([[1, 2, 3], 4, [5, 6]])
-                Sequence([])
-
-                >>> expression.get_string()
-                'reveal(J, count=0)'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \concat
-                            {
-                                reveal(
-                                \bold
-                                    J
-                                ", count=0)"
-                            }
-                        }
 
         ..  container:: example
 
@@ -9246,53 +8877,26 @@ class Sequence(abjad.Sequence):
 
             ..  container:: example
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=1)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=1)
                 Sequence([[1]])
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=2)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=2)
                 Sequence([[1, 2]])
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=3)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=3)
                 Sequence([[1, 2, 3]])
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=4)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=4)
                 Sequence([[1, 2, 3], 4])
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=5)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=5)
                 Sequence([[1, 2, 3], 4, [5]])
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=6)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=6)
                 Sequence([[1, 2, 3], 4, [5, 6]])
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=99)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=99)
                 Sequence([[1, 2, 3], 4, [5, 6]])
-
-            ..  container:: example expression
-
-                >>> expression = baca.sequence(name='J').reveal(count=2)
-
-                >>> expression([[1, 2, 3], 4, [5, 6]])
-                Sequence([[1, 2]])
-
-                >>> expression.get_string()
-                'reveal(J, count=2)'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \concat
-                            {
-                                reveal(
-                                \bold
-                                    J
-                                ", count=2)"
-                            }
-                        }
 
         ..  container:: example
 
@@ -9300,53 +8904,26 @@ class Sequence(abjad.Sequence):
 
             ..  container:: example
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-1)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-1)
                 Sequence([[6]])
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-2)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-2)
                 Sequence([[5, 6]])
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-3)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-3)
                 Sequence([4, [5, 6]])
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-4)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-4)
                 Sequence([[3], 4, [5, 6]])
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-5)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-5)
                 Sequence([[2, 3], 4, [5, 6]])
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-6)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-6)
                 Sequence([[1, 2, 3], 4, [5, 6]])
 
-                >>> baca.sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-99)
+                >>> baca.Sequence([[1, 2, 3], 4, [5, 6]]).reveal(count=-99)
                 Sequence([[1, 2, 3], 4, [5, 6]])
-
-            ..  container:: example expression
-
-                >>> expression = baca.sequence(name='J').reveal(count=-2)
-
-                >>> expression([[1, 2, 3], 4, [5, 6]])
-                Sequence([[5, 6]])
-
-                >>> expression.get_string()
-                'reveal(J, count=-2)'
-
-                >>> markup = expression.get_markup()
-                >>> abjad.show(markup) # doctest: +SKIP
-
-                ..  docs::
-
-                    >>> string = abjad.lilypond(markup)
-                    >>> print(string)
-                    \markup {
-                        \concat
-                            {
-                                reveal(
-                                \bold
-                                    J
-                                ", count=-2)"
-                            }
-                        }
 
         Returns new sequence.
         """
@@ -9402,10 +8979,7 @@ class Sequence(abjad.Sequence):
             Splits every five sixteenths:
 
             >>> divisions = baca.fractions(10 * [(1, 8)])
-            >>> divisions = baca.sequence(divisions)
-
-            Splits division sequence every five sixteenths:
-
+            >>> divisions = baca.Sequence(divisions)
             >>> divisions = divisions.split_divisions([(5, 16)], cyclic=True)
             >>> for i, sequence_ in enumerate(divisions):
             ...     print(f"sequence {i}")
@@ -9428,17 +9002,14 @@ class Sequence(abjad.Sequence):
                 NonreducedFraction(1, 8)
                 NonreducedFraction(1, 8)
 
-        ..  container:: example expression
+        ..  container:: example
 
             Fuses divisions and then splits by ``1/4`` with remainder on right:
 
-            >>> expression = baca.sequence().fuse()
-            >>> expression = expression.split_divisions([(1, 4)], cyclic=True)
-
             >>> divisions = [(7, 8), (3, 8), (5, 8)]
             >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
-            >>> divisions = baca.sequence(divisions)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(divisions).fuse()
+            >>> divisions = divisions.split_divisions([(1, 4)], cyclic=True)
             >>> for item in divisions:
             ...     item
             Sequence([NonreducedFraction(2, 8)])
@@ -9488,15 +9059,14 @@ class Sequence(abjad.Sequence):
 
             Fuses remainder:
 
-            >>> expression = baca.sequence().fuse()
-            >>> expression = expression.split_divisions(
-            ...     [(1, 4)], cyclic=True, remainder_fuse_threshold=(1, 8)
-            ... )
-
             >>> divisions = [(7, 8), (3, 8), (5, 8)]
             >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
-            >>> divisions = baca.sequence(divisions)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(divisions).fuse()
+            >>> divisions = divisions.split_divisions(
+            ...     [(1, 4)],
+            ...     cyclic=True,
+            ...     remainder_fuse_threshold=(1, 8),
+            ... )
             >>> for item in divisions:
             ...     item
             Sequence([NonreducedFraction(2, 8)])
@@ -9542,19 +9112,18 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
             Fuses divisions and then splits by ``1/4`` with remainder on left:
 
-            >>> expression = baca.sequence().fuse()
-            >>> expression = expression.split_divisions(
-            ...     [(1, 4)], cyclic=True, remainder=abjad.Left
-            ... )
-
             >>> divisions = [(7, 8), (3, 8), (5, 8)]
             >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
-            >>> divisions = baca.sequence(divisions)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(divisions).fuse()
+            >>> divisions = divisions.split_divisions(
+            ...     [(1, 4)],
+            ...     cyclic=True,
+            ...     remainder=abjad.Left,
+            ... )
             >>> for item in divisions:
             ...     item
             Sequence([NonreducedFraction(1, 8)])
@@ -9604,18 +9173,15 @@ class Sequence(abjad.Sequence):
 
             Fuses remainder:
 
-            >>> expression = baca.sequence().fuse()
-            >>> expression = expression.split_divisions(
+            >>> divisions = [(7, 8), (3, 8), (5, 8)]
+            >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
+            >>> divisions = baca.Sequence(divisions).fuse()
+            >>> divisions = divisions.split_divisions(
             ...     [(1, 4)],
             ...     cyclic=True,
             ...     remainder=abjad.Left,
             ...     remainder_fuse_threshold=(1, 8),
             ... )
-
-            >>> divisions = [(7, 8), (3, 8), (5, 8)]
-            >>> divisions = [abjad.NonreducedFraction(_) for _ in divisions]
-            >>> divisions = baca.sequence(divisions)
-            >>> divisions = expression(divisions)
             >>> for item in divisions:
             ...     item
             Sequence([NonreducedFraction(3, 8)])
@@ -9661,19 +9227,19 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
-            Splits each division into quarters and positions remainder at
-            right:
+            Splits each division into quarters and positions remainder at right:
 
-            >>> expression = baca.sequence()
-            >>> quarters = baca.sequence().quarters().flatten(depth=-1)
-            >>> expression = expression.map(quarters)
+            >>> def quarters(sequence):
+            ...     sequence = baca.Sequence(sequence)
+            ...     sequence = sequence.quarters()
+            ...     sequence = sequence.flatten(depth=-1)
+            ...     return sequence
 
             >>> time_signatures = baca.fractions([(7, 8), (7, 8), (7, 16)])
             >>> time_signatures = [abjad.NonreducedFraction(_) for _ in time_signatures]
-            >>> divisions = baca.sequence(time_signatures)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(time_signatures).map(quarters)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -9734,18 +9300,19 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
             Splits each division into quarters and positions remainder at left:
 
-            >>> quarters = baca.sequence().quarters(remainder=abjad.Left)
-            >>> quarters = quarters.flatten(depth=-1)
-            >>> expression = expression.map(quarters)
+            >>> def quarters(sequence):
+            ...     sequence = baca.Sequence(sequence)
+            ...     sequence = sequence.quarters(remainder=abjad.Left)
+            ...     sequence = sequence.flatten(depth=-1)
+            ...     return sequence
 
             >>> time_signatures = [(7, 8), (7, 8), (7, 16)]
             >>> time_signatures = [abjad.NonreducedFraction(_) for _ in time_signatures]
-            >>> divisions = baca.sequence(time_signatures)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(time_signatures).map(quarters)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -9806,22 +9373,23 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
-            Splits each division into quarters and fuses remainder less than or
-            equal to ``1/8`` to the right:
+            Splits each division into quarters and fuses remainder less than or equal to
+            ``1/8`` to the right:
 
-            >>> quarters = baca.sequence().split_divisions(
-            ...     [(1, 4)],
-            ...     cyclic=True,
-            ...     remainder_fuse_threshold=(1, 8)
-            ... )
-            >>> quarters = quarters.flatten(depth=-1)
-            >>> expression = baca.sequence().map(quarters)
+            >>> def quarters(sequence):
+            ...     sequence = baca.Sequence(sequence)
+            ...     sequence = sequence.split_divisions(
+            ...         [(1, 4)],
+            ...         cyclic=True,
+            ...         remainder_fuse_threshold=(1, 8),
+            ...     )
+            ...     sequence = sequence.flatten(depth=-1)
+            ...     return sequence
 
             >>> time_signatures = [abjad.NonreducedFraction(5, 8)]
-            >>> divisions = baca.sequence(time_signatures)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(time_signatures).map(quarters)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -9857,23 +9425,24 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
-            Splits each division into quarters and fuses remainder less than or
-            equal to ``1/8`` to the left:
+            Splits each division into quarters and fuses remainder less than or equal to
+            ``1/8`` to the left:
 
-            >>> quarters = baca.sequence().split_divisions(
-            ...     [(1, 4)],
-            ...     cyclic=True,
-            ...     remainder=abjad.Left,
-            ...     remainder_fuse_threshold=(1, 8)
-            ... )
-            >>> quarters = quarters.flatten(depth=-1)
-            >>> expression = baca.sequence().map(quarters)
+            >>> def quarters(sequence):
+            ...     sequence = baca.Sequence(sequence)
+            ...     sequence = sequence.split_divisions(
+            ...         [(1, 4)],
+            ...         cyclic=True,
+            ...         remainder=abjad.Left,
+            ...         remainder_fuse_threshold=(1, 8),
+            ...     )
+            ...     sequence = sequence.flatten(depth=-1)
+            ...     return sequence
 
             >>> time_signatures = [abjad.NonreducedFraction(5, 8)]
-            >>> divisions = baca.sequence(time_signatures)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(time_signatures).map(quarters)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -9907,17 +9476,19 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
             Splits each division into compound quarters:
 
-            >>> quarters = baca.sequence().quarters(compound=(3, 2))
-            >>> quarters = quarters.flatten(depth=-1)
-            >>> expression = baca.sequence().map(quarters)
+            >>> def quarters(sequence):
+            ...     sequence = baca.Sequence(sequence)
+            ...     sequence = sequence.quarters(compound=(3, 2))
+            ...     sequence = sequence.flatten(depth=-1)
+            ...     return sequence
 
             >>> time_signatures = baca.fractions([(3, 4), (6, 8)])
-            >>> divisions = baca.sequence(time_signatures)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(time_signatures)
+            >>> divisions = divisions.map(quarters)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -9962,22 +9533,14 @@ class Sequence(abjad.Sequence):
                     }
                 >>
 
-        ..  container:: example expression
+        ..  container:: example
 
-            Splits each division by durations and rotates durations one to the
-            left at each new division:
+            Splits each division by durations and rotates durations one to the left at
+            each new division:
 
-            >>> split = baca.sequence().split_divisions(
-            ...     [(1, 16), (1, 8), (1, 4)],
-            ...     cyclic=True,
-            ...     rotate_indexed=-1,
-            ...     )
-            >>> split = split.flatten(depth=-1)
-            >>> expression = baca.sequence().map(split)
-
+            >>> split = baca.split_and_rotate([(1, 16), (1, 8), (1, 4)])
             >>> time_signatures = baca.fractions([(7, 16), (7, 16), (7, 16)])
-            >>> divisions = baca.sequence(time_signatures)
-            >>> divisions = expression(divisions)
+            >>> divisions = baca.Sequence(time_signatures).map(split)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:

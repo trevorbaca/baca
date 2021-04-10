@@ -120,6 +120,8 @@ Bača API
    ~baca.classes.Selection
    ~baca.classes.Sequence
    ~baca.classes.Tree
+   ~baca.classes.split_and_rotate
+   ~baca.classes.splitstate
 
 .. raw:: html
 
