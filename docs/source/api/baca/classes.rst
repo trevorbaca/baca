@@ -30,8 +30,6 @@ classes
    ~Selection
    ~Sequence
    ~Tree
-   ~split_and_rotate
-   ~splitstate
 
 .. autoclass:: Counter
 
@@ -1187,52 +1185,6 @@ classes
    .. autoattribute:: Tree.item_class
 
    .. autoattribute:: Tree.items
-
-.. autoclass:: split_and_rotate
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: split_and_rotate.__call__
-
-.. autoclass:: splitstate
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Attributes Summary
-      :class: class-header
-
-   .. autosummary::
-      :nosignatures:
-
-      __call__
-
-   .. raw:: html
-
-      <hr/>
-
-   .. rubric:: Special methods
-      :class: class-header
-
-   .. automethod:: splitstate.__call__
 
 .. raw:: html
 

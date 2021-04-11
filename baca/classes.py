@@ -7169,32 +7169,6 @@ class Selection(abjad.Selection):
         return self.leaves(exclude=exclude).with_previous_leaf().with_next_leaf()
 
 
-class splitstate:
-    def __init__(self, ratios, rounded=False):
-        self.count = 0
-        self.ratios = abjad.CyclicTuple(ratios)
-        self.rounded = rounded
-
-    def __call__(self, sequence):
-        ratio = self.ratios[self.count]
-        self.count += 1
-        return Sequence(sequence).ratios([ratio], rounded=self.rounded)
-
-
-class split_and_rotate:
-    def __init__(self, ratios):
-        self.count = 0
-        self.ratios = Sequence(ratios)
-
-    def __call__(self, sequence):
-        ratios = self.ratios.rotate(n=-self.count)
-        self.count += 1
-        sequence = Sequence(sequence)
-        sequence = sequence.split_divisions(ratios, cyclic=True)
-        sequence = sequence.flatten(depth=-1)
-        return sequence
-
-
 class Sequence(abjad.Sequence):
     r"""
     Sequence.
@@ -8598,10 +8572,16 @@ class Sequence(abjad.Sequence):
 
             Splits divisions with alternating exact ``2:1`` and ``1:1:1`` ratios:
 
-            >>> split = baca.splitstate([(2, 1), (1, 1, 1)])
+            >>> ratios = abjad.CyclicTuple([(2, 1), (1, 1, 1)])
             >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
-            >>> divisions = baca.Sequence(time_signatures)
-            >>> divisions = divisions.map(split)
+            >>> divisions = []
+            >>> for i, time_signature in enumerate(time_signatures):
+            ...     ratio = ratios[i]
+            ...     sequence = baca.Sequence(time_signature)
+            ...     sequence = sequence.ratios([ratio])
+            ...     divisions.append(sequence)
+            ...
+            >>> divisions = baca.Sequence(divisions)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -8658,9 +8638,16 @@ class Sequence(abjad.Sequence):
 
             Splits divisions with alternating rounded ``2:1`` and ``1:1:1`` ratios:
 
-            >>> split = baca.splitstate([(2, 1), (1, 1, 1)], rounded=True)
+            >>> ratios = abjad.CyclicTuple([(2, 1), (1, 1, 1)])
             >>> time_signatures = baca.fractions([(5, 8), (6, 8)])
-            >>> divisions = baca.Sequence(time_signatures).map(split)
+            >>> divisions = []
+            >>> for i, time_signature in enumerate(time_signatures):
+            ...     ratio = ratios[i]
+            ...     sequence = baca.Sequence(time_signature)
+            ...     sequence = sequence.ratios([ratio], rounded=True)
+            ...     divisions.append(sequence)
+            ...
+            >>> divisions = baca.Sequence(divisions)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -9538,9 +9525,17 @@ class Sequence(abjad.Sequence):
             Splits each division by durations and rotates durations one to the left at
             each new division:
 
-            >>> split = baca.split_and_rotate([(1, 16), (1, 8), (1, 4)])
+            >>> durations = baca.Sequence([(1, 16), (1, 8), (1, 4)])
             >>> time_signatures = baca.fractions([(7, 16), (7, 16), (7, 16)])
-            >>> divisions = baca.Sequence(time_signatures).map(split)
+            >>> divisions = []
+            >>> for i, time_signature in enumerate(time_signatures):
+            ...     durations_ = durations.rotate(n=-i)
+            ...     sequence = baca.Sequence(time_signature)
+            ...     sequence = sequence.split_divisions(durations_)
+            ...     sequence = sequence.flatten(depth=-1)
+            ...     divisions.append(sequence)
+            ...
+            >>> divisions = baca.Sequence(divisions)
             >>> for item in divisions:
             ...     print("sequence:")
             ...     for division in item:
@@ -9559,7 +9554,8 @@ class Sequence(abjad.Sequence):
                 NonreducedFraction(2, 16)
 
             >>> rhythm_maker = rmakers.note()
-            >>> music = rhythm_maker(divisions.flatten(depth=-1))
+            >>> divisions = divisions.flatten(depth=-1)
+            >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
             >>> rmakers.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
