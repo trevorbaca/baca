@@ -7254,78 +7254,8 @@ class Sequence(abjad.Sequence):
 
     __slots__ = ()
 
-    ### PRIVATE METHODS ###
-
-    @staticmethod
-    def _make_accumulate_markup(markup, operands=None, count=None):
-        if count is None:
-            count = abjad.Exact
-        operands = operands or [abjad.Exact]
-        operand_strings = []
-        for operand in operands:
-            if hasattr(operand, "get_markup"):
-                operand_string = operand.get_markup(name="X")
-                assert len(operand_string.contents) == 1
-                operand_string = str(operand_string.contents[0])
-            else:
-                operand_string = str(operand)
-            operand_strings.append(operand_string)
-        string = "\n".join(operand_strings)
-        operand_string = rf"\concat {{ {string} }}"
-        infix = "Φ"
-        if count != abjad.Exact:
-            infix += "/" + str(count)
-        string = rf"\line {{ {operand_string} {infix} {markup.contents[0]} }}"
-        try:
-            markup = abjad.Markup(string)
-        except Exception:
-            raise Exception(string)
-        return markup
-
-    @staticmethod
-    def _make_accumulate_string_template(operands=None, count=None):
-        if count is None:
-            count = abjad.Exact
-        operands = operands or [abjad.Exact]
-        operand_strings = []
-        for operand in operands:
-            if hasattr(operand, "get_string"):
-                operand_string = operand.get_string(name="X")
-            else:
-                operand_string = str(operand)
-            operand_strings.append(operand_string)
-        if len(operand_strings) == 1:
-            operands = operand_strings[0]
-        else:
-            operands = ", ".join(operand_strings)
-            operands = "[" + operands + "]"
-        if count == abjad.Exact:
-            string_template = f"{operands} Φ {{}}"
-        else:
-            string_template = f"{operands} Φ/{count} {{}}"
-        return string_template
-
-    def _update_expression(
-        self,
-        frame,
-        evaluation_template=None,
-        map_operand=None,
-        subclass_hook=None,
-    ):
-        callback = Expression._frame_to_callback(
-            frame,
-            evaluation_template=evaluation_template,
-            map_operand=map_operand,
-            subclass_hook=subclass_hook,
-        )
-        return self._expression.append_callback(callback)
-
     ### PUBLIC METHODS ###
 
-    @abjad.Signature(
-        markup_maker_callback="_make_accumulate_markup",
-        string_template_callback="_make_accumulate_string_template",
-    )
     def accumulate(self, operands=None, count=None):
         r"""
         Accumulates ``operands`` calls against sequence to identity.
@@ -7481,13 +7411,6 @@ class Sequence(abjad.Sequence):
         """
         if count is None:
             count = abjad.Exact
-        if self._expression:
-            return self._update_expression(
-                inspect.currentframe(),
-                evaluation_template="accumulate",
-                subclass_hook="_evaluate_accumulate",
-                map_operand=operands,
-            )
         operands = operands or [lambda _: _]
         if not isinstance(operands, list):
             operands = [operands]
@@ -7513,7 +7436,6 @@ class Sequence(abjad.Sequence):
                     items.append(sequence)
         return type(self)(items=items)
 
-    @abjad.Signature(method_name="β", is_operator=True, superscript="count")
     def boustrophedon(self, count=2):
         r"""
         Iterates sequence boustrophedon.
@@ -7593,8 +7515,6 @@ class Sequence(abjad.Sequence):
 
         Returns new sequence.
         """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
         result = []
         for i in range(count):
             if i == 0:
@@ -7654,7 +7574,6 @@ class Sequence(abjad.Sequence):
 
     # TODO: remove ``counts`` in favor of partition-then-``indices`` recipe
     # TODO: generalize ``indices`` to pattern
-    @abjad.Signature()
     def fuse(
         self,
         counts: typing.List[int] = None,
@@ -7918,8 +7837,6 @@ class Sequence(abjad.Sequence):
                 >>
 
         """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
         if indices is not None:
             assert all(isinstance(_, int) for _ in indices), repr(indices)
         if indices and counts:
@@ -8080,7 +7997,6 @@ class Sequence(abjad.Sequence):
                     items.append(type(self)([item]))
         return type(self)(items=items)
 
-    @abjad.Signature(method_name="H")
     def helianthate(self, n=0, m=0):
         r"""
         Helianthates sequence.
@@ -8154,8 +8070,6 @@ class Sequence(abjad.Sequence):
             Sequence([[1, 2, 3], [4, 5], [6, 7, 8]])
 
         """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
         start = list(self[:])
         result = list(self[:])
         assert isinstance(n, int), repr(n)
@@ -8186,7 +8100,6 @@ class Sequence(abjad.Sequence):
                 raise Exception(message)
         return type(self)(items=result)
 
-    @abjad.Signature(is_operator=True, method_name="P", subscript="counts")
     def partition(self, counts=None):
         r"""
         Partitions sequence cyclically by ``counts`` with overhang.
@@ -8207,8 +8120,6 @@ class Sequence(abjad.Sequence):
 
         Returns new sequence.
         """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
         return self.partition_by_counts(counts=counts, cyclic=True, overhang=True)
 
     def period_of_rotation(self):
@@ -8239,7 +8150,6 @@ class Sequence(abjad.Sequence):
         """
         return len(self) // self.degree_of_rotational_symmetry()
 
-    @abjad.Signature()
     def quarters(
         self,
         *,
@@ -8338,20 +8248,16 @@ class Sequence(abjad.Sequence):
                 >>
 
         """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
         sequence = self.split_divisions(
             [(1, 4)], cyclic=True, compound=compound, remainder=remainder
         )
         return sequence
 
-    @abjad.Signature()
     def ratios(
         self,
         ratios: typing.Sequence[abjad.RatioTyping],
         *,
         rounded: bool = None,
-        _map_index: int = None,
     ):
         r"""
         Splits sequence by ``ratios``.
@@ -8693,16 +8599,13 @@ class Sequence(abjad.Sequence):
                 >>
 
         """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
         ratios_ = abjad.CyclicTuple([abjad.Ratio(_) for _ in ratios])
         if rounded is not None:
             rounded = bool(rounded)
-        _map_index = _map_index or 0
         weight = sum(self)
         assert isinstance(weight, abjad.NonreducedFraction)
         numerator, denominator = weight.pair
-        ratio = ratios_[_map_index]
+        ratio = ratios_[0]
         if rounded is True:
             numerators = ratio.partition_integer(numerator)
             divisions = [
@@ -8720,7 +8623,6 @@ class Sequence(abjad.Sequence):
         sequence = Sequence(sequence)
         return sequence
 
-    @abjad.Signature()
     def repeat_by(self, counts=None, cyclic=None):
         r"""
         Repeat sequence elements at ``counts``.
@@ -8818,8 +8720,6 @@ class Sequence(abjad.Sequence):
 
         Returns new sequence.
         """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
         if counts is None:
             return type(self)(self)
         counts = counts or [1]
@@ -8835,7 +8735,6 @@ class Sequence(abjad.Sequence):
             items.extend(count * [item])
         return type(self)(items)
 
-    @abjad.Signature()
     def reveal(self, count=None):
         r"""
         Reveals contents of sequence.
@@ -8914,8 +8813,6 @@ class Sequence(abjad.Sequence):
 
         Returns new sequence.
         """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
         if count is None:
             return type(self)(items=self)
         if count == 0:
@@ -8946,7 +8843,6 @@ class Sequence(abjad.Sequence):
                     return type(self)(items=items_)
         return type(self)(items=items_)
 
-    @abjad.Signature()
     def split_divisions(
         self,
         durations: typing.List[abjad.DurationTyping],
@@ -8955,8 +8851,6 @@ class Sequence(abjad.Sequence):
         cyclic: bool = None,
         remainder: abjad.HorizontalAlignment = None,
         remainder_fuse_threshold: abjad.DurationTyping = None,
-        rotate_indexed: int = None,
-        _map_index: int = None,
     ):
         r"""
         Splits sequence divisions by ``durations``.
@@ -9593,8 +9487,6 @@ class Sequence(abjad.Sequence):
                 >>
 
         """
-        if self._expression:
-            return self._update_expression(inspect.currentframe())
         durations = [abjad.Duration(_) for _ in durations]
         if compound is not None:
             compound = abjad.Multiplier(compound)
@@ -9605,18 +9497,10 @@ class Sequence(abjad.Sequence):
                 durations = [compound * _ for _ in durations]
         if cyclic is not None:
             cyclic = bool(cyclic)
-        if rotate_indexed is not None:
-            assert isinstance(rotate_indexed, int)
-        rotate_indexed = rotate_indexed or 0
         if remainder is not None:
             assert remainder in (abjad.Left, abjad.Right), repr(remainder)
         if remainder_fuse_threshold is not None:
             remainder_fuse_threshold = abjad.Duration(remainder_fuse_threshold)
-        if _map_index is not None:
-            assert isinstance(_map_index, int), repr(_map_index)
-            n = rotate_indexed * _map_index
-            durations_ = abjad.sequence(durations).rotate(n=n)
-            durations = list(durations_)
         sequence = abjad.Sequence.split(self, durations, cyclic=cyclic, overhang=True)
         without_overhang = abjad.Sequence.split(
             self, durations, cyclic=cyclic, overhang=False
@@ -9629,8 +9513,8 @@ class Sequence(abjad.Sequence):
                     items.insert(0, remaining_item)
                 elif sum(remaining_item) <= remainder_fuse_threshold:
                     fused_value = Sequence([remaining_item, items[0]])
-                    fused_value = fused_value.flatten(depth=-1)
-                    fused_value = fused_value.fuse()
+                    fused_value_ = fused_value.flatten(depth=-1)
+                    fused_value = Sequence(fused_value_).fuse()
                     items[0] = fused_value
                 else:
                     items.insert(0, remaining_item)
@@ -9639,8 +9523,8 @@ class Sequence(abjad.Sequence):
                     items.append(remaining_item)
                 elif sum(remaining_item) <= remainder_fuse_threshold:
                     fused_value = Sequence([items[-1], remaining_item])
-                    fused_value = fused_value.flatten(depth=-1)
-                    fused_value = fused_value.fuse()
+                    fused_value_ = fused_value.flatten(depth=-1)
+                    fused_value = Sequence(fused_value_).fuse()
                     items[-1] = fused_value
                 else:
                     items.append(remaining_item)

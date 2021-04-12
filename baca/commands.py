@@ -3085,22 +3085,6 @@ def previous_metadata(path: str) -> abjad.OrderedDict:
     return previous_metadata
 
 
-def sequence(items=None, **keywords):
-    if items is not None:
-        return classes.Sequence(items=items, **keywords)
-    name = keywords.pop("name", None)
-    expression = classes.Expression(name=name)
-    callback = expression._make_initializer_callback(
-        classes.Sequence,
-        callback_class=classes.Expression,
-        module_names=["baca"],
-        string_template="{}",
-        **keywords,
-    )
-    expression_ = expression.append_callback(callback)
-    return abjad.new(expression_, proxy_class=classes.Sequence)
-
-
 def untie(selector: abjad.Expression) -> commandclasses.DetachCommand:
     """
     Makes (repeat-)tie detach command.

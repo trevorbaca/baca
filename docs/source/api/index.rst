@@ -203,7 +203,6 @@ Bača API
    ~baca.commands.open_volta
    ~baca.commands.parts
    ~baca.commands.previous_metadata
-   ~baca.commands.sequence
    ~baca.commands.untie
    ~baca.commands.voice_four
    ~baca.commands.voice_one

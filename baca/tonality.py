@@ -1616,21 +1616,21 @@ class RootlessChordClass(abjad.IntervalSegment):
     @staticmethod
     def _invert_chord_quality(intervals, inversion):
         if isinstance(inversion, int):
-            intervals = abjad.sequence(intervals).rotate(n=-inversion)
+            intervals = abjad.Sequence(intervals).rotate(n=-inversion)
             rotation = -inversion
         elif inversion == "root":
             rotation = 0
         elif inversion == "first":
-            intervals = abjad.sequence(intervals).rotate(n=-1)
+            intervals = abjad.Sequence(intervals).rotate(n=-1)
             rotation = -1
         elif inversion == "second":
-            intervals = abjad.sequence(intervals).rotate(n=-2)
+            intervals = abjad.Sequence(intervals).rotate(n=-2)
             rotation = -2
         elif inversion == "third":
-            intervals = abjad.sequence(intervals).rotate(n=-3)
+            intervals = abjad.Sequence(intervals).rotate(n=-3)
             rotation = -3
         elif inversion == "fourth":
-            intervals = abjad.sequence(intervals).rotate(n=-4)
+            intervals = abjad.Sequence(intervals).rotate(n=-4)
             rotation = -4
         else:
             raise ValueError(f"unknown chord inversion: {inversion!r}.")
@@ -3196,7 +3196,7 @@ def are_scalar_notes(selection) -> bool:
     """
     direction_number = None
     notes = abjad.iterate(selection).components(abjad.Note)
-    for left, right in abjad.sequence(notes).nwise():
+    for left, right in abjad.Sequence(notes).nwise():
         try:
             assert not (left.written_pitch == right.written_pitch)
             mdi = abjad.NamedInterval.from_pitch_carriers(left, right)
@@ -3243,7 +3243,7 @@ def are_stepwise_ascending_notes(selection) -> bool:
 
     """
     notes = abjad.iterate(selection).components(abjad.Note)
-    for left, right in abjad.sequence(notes).nwise():
+    for left, right in abjad.Sequence(notes).nwise():
         try:
             assert not (left.written_pitch == right.written_pitch)
             mdi = abjad.NamedInterval.from_pitch_carriers(left, right)
@@ -3287,7 +3287,7 @@ def are_stepwise_descending_notes(selection) -> bool:
 
     """
     notes = abjad.iterate(selection).components(abjad.Note)
-    for left, right in abjad.sequence(notes).nwise():
+    for left, right in abjad.Sequence(notes).nwise():
         try:
             assert not (left.written_pitch == right.written_pitch)
             mdi = abjad.NamedInterval.from_pitch_carriers(left, right)
@@ -3331,7 +3331,7 @@ def are_stepwise_notes(selection) -> bool:
 
     """
     notes = abjad.iterate(selection).components(abjad.Note)
-    for left, right in abjad.sequence(notes).nwise():
+    for left, right in abjad.Sequence(notes).nwise():
         try:
             assert not (left.written_pitch == right.written_pitch)
             hdi = abjad.NamedInterval.from_pitch_carriers(left, right)

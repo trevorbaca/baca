@@ -2421,7 +2421,7 @@ class CollectionList(collections_module.abc.Sequence):
             PitchSegment([16, 19])
 
         """
-        collections = classes.Sequence(items=self)
+        collections = abjad.Sequence(items=self)
         collections = collections.repeat(n=n)
         collections = collections.flatten(depth=1)
         return abjad.new(self, collections=collections)
@@ -3617,8 +3617,8 @@ class ConstellationCircuit:
 
         """
         chords = list(zip(self._colored_generator_chords, self.pivot_chords))
-        chords = classes.Sequence(chords).flatten(depth=1)
-        return self._illustrate_chords(chords)
+        chords_ = classes.Sequence(chords).flatten(depth=1)
+        return self._illustrate_chords(chords_)
 
     def illustrate_generator_chords(self) -> abjad.LilyPondFile:
         r"""
@@ -3753,8 +3753,8 @@ class ConstellationCircuit:
 
         """
         chords = list(zip(self.generator_chords, self.pivot_chords))
-        chords = classes.Sequence(chords).flatten(depth=1)
-        return self._illustrate_chords(chords)
+        chords_ = classes.Sequence(chords).flatten(depth=1)
+        return self._illustrate_chords(chords_)
 
     def illustrate_pivot_chords(self) -> abjad.LilyPondFile:
         r"""
@@ -8362,7 +8362,7 @@ class PitchTree(classes.Tree):
 
         """
         items = list(self.items)
-        items = abjad.sequence(items)
+        items = abjad.Sequence(items)
         items = items.rotate(n=n)
         result = abjad.new(self, items=items)
         return result
@@ -8745,10 +8745,10 @@ class DesignMaker:
         operators = operators or []
         for operator in operators:
             segment = self._apply_operator(segment, operator)
-        sequence = abjad.sequence(segment)
+        sequence = abjad.Sequence(segment)
         parts = sequence.partition_by_counts(counts, overhang=True)
-        parts = [PitchClassSegment(_) for _ in parts]
-        self._result.extend(parts)
+        parts_ = [PitchClassSegment(_) for _ in parts]
+        self._result.extend(parts_)
 
     def partition_cyclic(self, cursor, number, counts, operators=None):
         """
@@ -8766,7 +8766,7 @@ class DesignMaker:
         operators = operators or []
         for operator in operators:
             segment = self._apply_operator(segment, operator)
-        sequence = abjad.sequence(segment)
+        sequence = abjad.Sequence(segment)
         parts = sequence.partition_by_counts(counts, cyclic=True, overhang=True)
         parts = [PitchClassSegment(_) for _ in parts]
         self._result.extend(parts)

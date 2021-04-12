@@ -167,10 +167,6 @@ classes
 
    .. container:: inherited
 
-      .. automethod:: Expression.__add__
-
-   .. container:: inherited
-
       .. automethod:: Expression.__call__
 
    .. container:: inherited
@@ -227,10 +223,6 @@ classes
    .. container:: inherited
 
       .. automethod:: Expression.get_markup
-
-   .. container:: inherited
-
-      .. automethod:: Expression.get_string
 
    .. container:: inherited
 
@@ -1099,10 +1091,6 @@ classes
    .. container:: inherited
 
       .. automethod:: Sequence.weight
-
-   .. container:: inherited
-
-      .. automethod:: Sequence.zebra
 
    .. container:: inherited
 

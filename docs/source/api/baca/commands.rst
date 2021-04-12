@@ -46,7 +46,6 @@ commands
    ~open_volta
    ~parts
    ~previous_metadata
-   ~sequence
    ~untie
    ~voice_four
    ~voice_one
@@ -100,8 +99,6 @@ commands
 .. autofunction:: parts
 
 .. autofunction:: previous_metadata
-
-.. autofunction:: sequence
 
 .. autofunction:: untie
 

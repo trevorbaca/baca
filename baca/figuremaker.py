@@ -183,14 +183,14 @@ class LMR:
         """
         assert isinstance(sequence, (list, abjad.Segment)), repr(sequence)
         top_lengths = self._get_top_lengths(len(sequence))
-        top_parts = abjad.sequence(sequence).partition_by_counts(
+        top_parts = abjad.Sequence(sequence).partition_by_counts(
             top_lengths, cyclic=False, overhang=abjad.Exact
         )
         parts: typing.List[abjad.Sequence] = []
         left_part, middle_part, right_part = top_parts
         if left_part:
             if self.left_counts:
-                parts_ = abjad.sequence(left_part).partition_by_counts(
+                parts_ = abjad.Sequence(left_part).partition_by_counts(
                     self.left_counts,
                     cyclic=self.left_cyclic,
                     overhang=True,
@@ -201,7 +201,7 @@ class LMR:
                 parts.append(left_part)
         if middle_part:
             if self.middle_counts:
-                parts_ = abjad.sequence(middle_part).partition_by_counts(
+                parts_ = abjad.Sequence(middle_part).partition_by_counts(
                     self.middle_counts,
                     cyclic=self.middle_cyclic,
                     overhang=True,
@@ -212,7 +212,7 @@ class LMR:
                 parts.append(middle_part)
         if right_part:
             if self.right_counts:
-                parts_ = abjad.sequence(right_part).partition_by_counts(
+                parts_ = abjad.Sequence(right_part).partition_by_counts(
                     self.right_counts,
                     cyclic=self.right_cyclic,
                     overhang=True,
@@ -2011,7 +2011,7 @@ class Imbrication:
         abjad.override(container).TupletNumber.stencil = False
         segment = classes.Sequence(self.segment).flatten(depth=-1)
         if self.by_pitch_class:
-            segment = [abjad.NumberedPitchClass(_) for _ in segment]
+            segment = classes.Sequence([abjad.NumberedPitchClass(_) for _ in segment])
         cursor = classes.Cursor(
             singletons=True, source=segment, suppress_exception=True
         )
@@ -5217,7 +5217,7 @@ class FigureMaker:
         Set exponent less than 1 for accelerando.
         """
         sums = abjad.math.cumulative_sums(durations)
-        pairs = list(abjad.sequence(sums).nwise(n=2))
+        pairs = list(abjad.Sequence(sums).nwise(n=2))
         total_duration = pairs[-1][-1]
         start_offsets = [_[0] for _ in pairs]
         start_offsets = [_ / total_duration for _ in start_offsets]
@@ -7622,7 +7622,7 @@ class Bind:
             else:
                 raise Exception(f"no maker match for collection {i}.")
         assert len(collections) == len(matches)
-        groups = abjad.sequence(matches).group_by(lambda match: match.assignment.maker)
+        groups = abjad.Sequence(matches).group_by(lambda match: match.assignment.maker)
         tuplets: typing.List[abjad.Tuplet] = []
         for group in groups:
             maker = group[0].assignment.maker

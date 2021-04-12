@@ -1311,7 +1311,7 @@ class SegmentMaker(abjad.SegmentMaker):
                 if not command._matches_scope_index(scope_count, i):
                     continue
                 if isinstance(command, scoping.Command):
-                    commands_ = [command]
+                    commands_ = classes.Sequence([command])
                 else:
                     commands_ = command
                 for command_ in commands_:

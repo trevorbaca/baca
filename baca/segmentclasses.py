@@ -2575,7 +2575,7 @@ class TimeSignatureMaker:
         if not self.count:
             raise Exception("must specify count with run().")
         result = []
-        time_signatures = classes.Sequence(self.time_signatures)
+        time_signatures = abjad.Sequence(self.time_signatures)
         time_signatures = time_signatures.rotate(self.rotation)
         time_signatures = time_signatures.flatten(depth=1)
         time_signatures_ = abjad.CyclicTuple(time_signatures)

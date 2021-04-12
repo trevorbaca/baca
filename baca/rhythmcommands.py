@@ -9,7 +9,7 @@ import ide
 import abjad
 from abjadext import rmakers
 
-from . import classes, commands, const, overrides, scoping, typings
+from . import classes, const, overrides, scoping, typings
 
 RhythmMakerTyping = typing.Union[
     rmakers.Assignment, rmakers.RhythmMaker, rmakers.Stack, rmakers.Bind
@@ -756,7 +756,7 @@ def make_fused_tuplet_monads(
             rmakers.trivialize(),
             rmakers.extract_trivial(),
             rmakers.force_repeat_tie(),
-            preprocessor=abjad.sequence().sum().sequence(),
+            preprocessor=lambda _: classes.Sequence([classes.Sequence(_).sum()]),
             tag=_site(inspect.currentframe()),
         ),
         annotation_spanner_color="#darkcyan",
@@ -1123,8 +1123,13 @@ def make_repeated_duration_notes(
     elif isinstance(durations, tuple):
         assert len(durations) == 2
         durations = [abjad.Duration(durations)]
-    divisions = commands.sequence().fuse()
-    divisions = divisions.split_divisions(durations, cyclic=True)
+
+    def preprocessor(divisions):
+        divisions = classes.Sequence(divisions)
+        divisions = divisions.fuse()
+        divisions = divisions.split_divisions(durations, cyclic=True)
+        return divisions
+
     rewrite_specifiers: typing.List[rmakers.Command] = []
     if not do_not_rewrite_meter:
         rewrite_specifiers.append(rmakers.rewrite_meter())
@@ -1134,7 +1139,7 @@ def make_repeated_duration_notes(
             *specifiers,
             *rewrite_specifiers,
             rmakers.force_repeat_tie(),
-            preprocessor=divisions,
+            preprocessor=preprocessor,
             tag=_site(inspect.currentframe()),
         ),
         annotation_spanner_color="#darkcyan",
@@ -1234,13 +1239,18 @@ def make_tied_repeated_durations(
     specifiers.append(tie_specifier)
     tie_specifier = rmakers.force_repeat_tie()
     specifiers.append(tie_specifier)
-    divisions = commands.sequence().fuse()
-    divisions = divisions.split_divisions(durations, cyclic=True)
+
+    def preprocessor(divisions):
+        divisions = classes.Sequence(divisions)
+        divisions = divisions.fuse()
+        divisions = divisions.split_divisions(durations, cyclic=True)
+        return divisions
+
     return RhythmCommand(
         rmakers.stack(
             rmakers.note(),
             *specifiers,
-            preprocessor=divisions,
+            preprocessor=preprocessor,
             tag=_site(inspect.currentframe()),
         ),
         annotation_spanner_color="#darkcyan",
