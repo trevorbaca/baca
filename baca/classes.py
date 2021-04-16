@@ -870,36 +870,6 @@ class Cursor:
         self._position = 0
 
 
-class Expression(abjad.Expression):
-    """
-    Expression.
-    """
-
-    ### CLASS VARIABLES ###
-
-    __documentation_section__ = "Classes"
-
-    ### PRIVATE METHODS ###
-
-    def _evaluate_accumulate(self, *arguments):
-        assert len(arguments) == 1, repr(arguments)
-        globals_ = self._make_globals()
-        assert "__argument_0" not in globals_
-        __argument_0 = arguments[0]
-        assert isinstance(__argument_0, Sequence), repr(__argument_0)
-        class_ = type(__argument_0)
-        operands = self.map_operand
-        globals_["__argument_0"] = __argument_0
-        globals_["class_"] = class_
-        globals_["operands"] = operands
-        statement = "__argument_0.accumulate(operands=operands)"
-        try:
-            result = eval(statement, globals_)
-        except (NameError, SyntaxError, TypeError) as e:
-            raise Exception(f"{statement!r} raises {e!r}.")
-        return result
-
-
 class PaddedTuple:
     """
     Padded tuple.
@@ -10745,9 +10715,9 @@ class Tree:
 def select(items=None):
     if items is not None:
         return Selection(items=items)
-    expression = Expression(proxy_class=Selection)
-    callback = Expression._make_initializer_callback(
-        Selection, callback_class=Expression, module_names=["baca"]
+    expression = abjad.Expression(proxy_class=Selection)
+    callback = abjad.Expression._make_initializer_callback(
+        Selection, callback_class=abjad.Expression, module_names=["baca"]
     )
     expression = expression.append_callback(callback)
     return abjad.new(expression, template="baca")

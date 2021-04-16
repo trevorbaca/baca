@@ -114,7 +114,6 @@ Bača API
 
    ~baca.classes.Counter
    ~baca.classes.Cursor
-   ~baca.classes.Expression
    ~baca.classes.PaddedTuple
    ~baca.classes.SchemeManifest
    ~baca.classes.Selection
