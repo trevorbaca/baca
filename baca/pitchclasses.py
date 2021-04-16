@@ -4247,7 +4247,6 @@ class PitchClassSegment(abjad.PitchClassSegment):
 
     ### PUBLIC METHODS ###
 
-    @abjad.Signature(is_operator=True, method_name="A")
     def alpha(self):
         r"""
         Gets alpha transform of segment.
