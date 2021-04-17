@@ -6,7 +6,7 @@ import ide
 
 import abjad
 
-from . import indicators, typings
+from . import indicators, selectors, typings
 
 ### CLASSES ###
 
@@ -244,7 +244,8 @@ class Command:
         self._runtime = abjad.OrderedDict()
         self._scope = scope
         selector_ = selector
-        if selector_ is not None and not isinstance(selector_, abjad.Expression):
+        prototype = (abjad.Expression, selectors.Selector)
+        if selector_ is not None and not isinstance(selector_, prototype):
             message = "selector must be Abjad expression:\n"
             message += f"   {repr(selector_)}"
             raise Exception(message)

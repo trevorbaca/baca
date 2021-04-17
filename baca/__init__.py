@@ -20,6 +20,7 @@ from .rhythmcommands import *
 from .scoping import *
 from .segmentclasses import *
 from .segmentmaker import *
+from .selectors import leaves_, rleaf_
 from .spannercommands import *
 from .templates import *
 from .typings import *
