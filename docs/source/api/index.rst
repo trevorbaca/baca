@@ -909,6 +909,38 @@ Rhythm commands.
 
    <hr/>
 
+.. rubric:: :ref:`baca.selectors <baca--selectors>`
+   :class: section-header
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Classes
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.selectors.Selector
+
+.. raw:: html
+
+   <hr/>
+
+.. rubric:: Functions
+   :class: subsection-header
+
+.. autosummary::
+   :nosignatures:
+
+   ~baca.selectors.leaves_
+   ~baca.selectors.rleaf_
+
+.. raw:: html
+
+   <hr/>
+
 .. rubric:: :ref:`baca.spannercommands <baca--spannercommands>`
    :class: section-header
 

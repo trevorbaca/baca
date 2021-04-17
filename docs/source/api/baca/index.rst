@@ -39,6 +39,7 @@ baca
    scoping
    segmentclasses
    segmentmaker
+   selectors
    spannercommands
    templates
    tonality
@@ -63,6 +64,7 @@ baca
    scoping
    segmentclasses
    segmentmaker
+   selectors
    spannercommands
    templates
    tonality
