@@ -21,13 +21,16 @@ from .scoping import *
 from .segmentclasses import *
 from .segmentmaker import *
 from .selectors import (
-    leaf_in_each_tuplet,
     leaves_,
     rleaf_,
+    leaf_after_each_ptail,
+    leaf_in_each_rleak_run,
     leaf_in_each_run,
+    leaf_in_each_tuplet,
     leaves_in_each_plt,
     leaves_in_each_run,
     leaves_in_each_tuplet,
+    rleak_runs,
 )
 from .spannercommands import *
 from .templates import *

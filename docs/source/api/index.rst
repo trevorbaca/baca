@@ -916,26 +916,22 @@ Rhythm commands.
 
    <hr/>
 
-.. rubric:: Classes
-   :class: subsection-header
-
-.. autosummary::
-   :nosignatures:
-
-   ~baca.selectors.Selector
-
-.. raw:: html
-
-   <hr/>
-
 .. rubric:: Functions
    :class: subsection-header
 
 .. autosummary::
    :nosignatures:
 
+   ~baca.selectors.leaf_after_each_ptail
+   ~baca.selectors.leaf_in_each_rleak_run
+   ~baca.selectors.leaf_in_each_run
+   ~baca.selectors.leaf_in_each_tuplet
    ~baca.selectors.leaves_
+   ~baca.selectors.leaves_in_each_plt
+   ~baca.selectors.leaves_in_each_run
+   ~baca.selectors.leaves_in_each_tuplet
    ~baca.selectors.rleaf_
+   ~baca.selectors.rleak_runs
 
 .. raw:: html
 

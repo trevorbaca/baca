@@ -7,6 +7,26 @@ from .classes import Selection
 ### NEW ###
 
 
+def leaf_after_each_ptail():
+    def selector(argument):
+        selection = Selection(argument)
+        selection = selection.ptails()
+        list_ = [Selection(_).rleak()[-1] for _ in selection]
+        return Selection(list_)
+
+    return selector
+
+
+def leaf_in_each_rleak_run(n):
+    def selector(argument):
+        selection = Selection(argument)
+        selection = selection.runs()
+        list_ = [Selection(_).leaves().rleak()[n] for _ in selection]
+        return Selection(list_)
+
+    return selector
+
+
 def leaf_in_each_run(n):
     assert isinstance(n, int), repr(n)
 
@@ -65,6 +85,18 @@ def leaves_in_each_tuplet(start=0, stop=None):
         selection = Selection(argument)
         selection = selection.tuplets()
         list_ = [Selection(_).leaves()[start:stop] for _ in selection]
+        return Selection(list_)
+
+    return selector
+
+
+def rleak_runs(start=0, stop=None):
+    def selector(argument):
+        selection = Selection(argument)
+        selection = selection.runs()
+        if start != 0 or stop is not None:
+            selection = selection[start:stop]
+        list_ = [Selection(_).leaves().rleak() for _ in selection]
         return Selection(list_)
 
     return selector

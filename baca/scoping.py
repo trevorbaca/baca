@@ -262,9 +262,12 @@ class Command:
             assert isinstance(runtime, abjad.OrderedDict)
         self._runtime = runtime or abjad.OrderedDict()
         if self.map is not None:
-            assert isinstance(self.map, abjad.Expression)
+            assert callable(self.map)
             argument = self.map(argument)
-            if self.map._is_singular_get_item():
+            if (
+                hasattr(self.map, "_is_singular_get_item")
+                and self.map._is_singular_get_item()
+            ):
                 argument = [argument]
             for subargument in argument:
                 self._call(argument=subargument)
