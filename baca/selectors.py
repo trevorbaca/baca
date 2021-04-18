@@ -4,19 +4,73 @@ import abjad
 
 from .classes import Selection
 
+### NEW ###
 
-class Selector:
 
-    __slots__ = ("function",)
+def leaf_in_each_run(n):
+    assert isinstance(n, int), repr(n)
 
-    def __init__(self, function):
-        self.function = function
+    def selector(argument):
+        selection = Selection(argument)
+        selection = selection.runs()
+        list_ = [Selection(_).leaf(n) for _ in selection]
+        return Selection(list_)
 
-    def __call__(self, selection):
-        return self.function(selection)
+    return selector
 
-    def __repr__(self):
-        return self.__class__.__name__
+
+def leaf_in_each_tuplet(n):
+    assert isinstance(n, int), repr(n)
+
+    def selector(argument):
+        selection = Selection(argument)
+        selection = selection.tuplets()
+        list_ = [Selection(_).leaf(n) for _ in selection]
+        return Selection(list_)
+
+    return selector
+
+
+def leaves_in_each_plt(start=0, stop=None):
+    assert isinstance(start, (int, type(None))), repr(start)
+    assert isinstance(stop, (int, type(None))), repr(stop)
+
+    def selector(argument):
+        selection = Selection(argument)
+        selection = selection.plts()
+        list_ = [Selection(_).leaves()[start:stop] for _ in selection]
+        return Selection(list_)
+
+    return selector
+
+
+def leaves_in_each_run(start=0, stop=None):
+    assert isinstance(start, (int, type(None))), repr(start)
+    assert isinstance(stop, (int, type(None))), repr(stop)
+
+    def selector(argument):
+        selection = Selection(argument)
+        selection = selection.runs()
+        list_ = [Selection(_).leaves()[start:stop] for _ in selection]
+        return Selection(list_)
+
+    return selector
+
+
+def leaves_in_each_tuplet(start=0, stop=None):
+    assert isinstance(start, (int, type(None))), repr(start)
+    assert isinstance(stop, (int, type(None))), repr(stop)
+
+    def selector(argument):
+        selection = Selection(argument)
+        selection = selection.tuplets()
+        list_ = [Selection(_).leaves()[start:stop] for _ in selection]
+        return Selection(list_)
+
+    return selector
+
+
+### REPLACEMENTS ###
 
 
 def leaves_(
@@ -32,7 +86,7 @@ def leaves_(
     tail: bool = None,
     trim: typing.Union[bool, int] = None,
 ):
-    def select(argument):
+    def selector(argument):
         selection = abjad.select(argument).leaves(
             prototype=prototype,
             exclude=exclude,
@@ -46,12 +100,14 @@ def leaves_(
         selection = selection[start:stop]
         return selection
 
-    return Selector(select)
+    return selector
 
 
-def rleaf_(n: int = 0, *, exclude: abjad.Strings = None):
-    def select(argument):
+def rleaf_(n=0, *, exclude: abjad.Strings = None):
+    assert isinstance(n, int), repr(n)
+
+    def selector(argument):
         selection = Selection(argument).rleaf(n=n, exclude=exclude)
         return selection
 
-    return Selector(select)
+    return selector

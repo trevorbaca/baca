@@ -20,7 +20,15 @@ from .rhythmcommands import *
 from .scoping import *
 from .segmentclasses import *
 from .segmentmaker import *
-from .selectors import leaves_, rleaf_
+from .selectors import (
+    leaf_in_each_tuplet,
+    leaves_,
+    rleaf_,
+    leaf_in_each_run,
+    leaves_in_each_plt,
+    leaves_in_each_run,
+    leaves_in_each_tuplet,
+)
 from .spannercommands import *
 from .templates import *
 from .typings import *
