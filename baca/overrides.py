@@ -4019,7 +4019,12 @@ def slur_down(
 
         Overrides slur direction on leaves:
 
-        >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
+        >>> def selector(argument):
+        ...     selection = baca.Selection(argument).tuplets()
+        ...     items = [baca.Selection(_).tleaves() for _ in selection]
+        ...     selection = baca.Selection(items).nontrivial()
+        ...     return selection
+        ...
         >>> stack = baca.stack(
         ...     baca.figure(
         ...         [1, 1, 5, -1],
@@ -4116,7 +4121,12 @@ def slur_up(
 
         Up-overrides slur direction on leaves:
 
-        >>> selector = baca.tuplets().map(baca.tleaves()).nontrivial()
+        >>> def selector(argument):
+        ...     selection = baca.Selection(argument).tuplets()
+        ...     items = [baca.Selection(_).tleaves() for _ in selection]
+        ...     selection = baca.Selection(items).nontrivial()
+        ...     return selection
+        ...
         >>> stack = baca.stack(
         ...     baca.figure(
         ...         [1, 1, 5, -1],

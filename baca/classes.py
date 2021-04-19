@@ -1897,7 +1897,9 @@ class Selection(abjad.Selection):
         result = self.leaves(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, cyclic=True)
-        result_ = result.map(select().flatten())
+        assert isinstance(result, Selection)
+        items = [Selection(_).flatten() for _ in result]
+        result_ = Selection(items)
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
@@ -2542,7 +2544,8 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.show(staff) # doctest: +SKIP
 
-                >>> result = baca.select(staff).runs().map(baca.lleak())
+                >>> result = baca.Selection(staff).runs()
+                >>> result = [baca.Selection(_).lleak() for _ in result]
 
                 >>> for item in result:
                 ...     item
@@ -2553,10 +2556,16 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().runs().map(baca.lleak())
+                >>> def selector(argument):
+                ...     selection = baca.Selection(argument).runs()
+                ...     selection = [baca.Selection(_).lleak() for _ in selection]
+                ...     return baca.Selection(selection)
+                ...
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> for item in result:
+                ...     item
+                ...
                 Selection([Note("c'8")])
                 Selection([Rest('r8'), Note("d'8"), Note("e'8")])
                 Selection([Rest('r8'), Note("f'8"), Note("g'8"), Note("a'8")])
@@ -3401,9 +3410,12 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.plts(exclude=exclude)
         result = result.group_by_pitch()
-        result = result.map(select().group_by_contiguity())
+        assert isinstance(result, Selection)
+        items = [Selection(_).group_by_contiguity() for _ in result]
+        result = Selection(items)
         result = result.flatten(depth=1)
-        result = result.map(Selection)
+        assert isinstance(result, Selection)
+        result = Selection([Selection(_) for _ in result])
         return result
 
     def ltrun(
@@ -3628,7 +3640,9 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.logical_ties(exclude=exclude, pitched=True)
         result = result.group_by_contiguity()
-        return result.map(Selection)
+        assert isinstance(result, Selection)
+        result = Selection([Selection(_) for _ in result])
+        return result
 
     def lts(
         self, *, exclude: abjad.Strings = None
@@ -3850,7 +3864,8 @@ class Selection(abjad.Selection):
         result = self.leaves(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts)
-        result_ = result.map(select().flatten())
+        assert isinstance(result, Selection)
+        result_ = Selection(Selection(_).flatten() for _ in result)
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
@@ -4434,7 +4449,8 @@ class Selection(abjad.Selection):
         result = self.leaves(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, overhang=True)
-        result_ = result.map(select().flatten())
+        assert isinstance(result, Selection)
+        result_ = Selection(Selection(_).flatten() for _ in result)
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
@@ -4452,7 +4468,8 @@ class Selection(abjad.Selection):
         result = self.plts(exclude=exclude)
         result = result.group_by_measure()
         result = result.partition_by_counts(counts, overhang=True)
-        result_ = result.map(select().flatten())
+        assert isinstance(result, Selection)
+        result_ = Selection(Selection(_).flatten() for _ in result)
         assert isinstance(result_, Selection), repr(result_)
         return result_
 
@@ -4687,7 +4704,10 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.plts(exclude=exclude, grace=grace).map(select()[0])
+        result = self.plts(exclude=exclude, grace=grace)
+        assert isinstance(result, Selection)
+        result = Selection(Selection(_)[0] for _ in result)
+        return result
 
     def pleaf(
         self, n: int, *, exclude: abjad.Strings = None, grace: bool = None
@@ -5399,7 +5419,10 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.plts(exclude=exclude).map(select()[-1])
+        result = self.plts(exclude=exclude)
+        assert isinstance(result, Selection)
+        result = Selection(Selection(_)[-1] for _ in result)
+        return result
 
     def ptlt(
         self, n: int, *, exclude: abjad.Strings = None
@@ -5850,9 +5873,11 @@ class Selection(abjad.Selection):
             return self._update_expression(inspect.currentframe())
         result = self.pleaves(exclude=exclude)
         result = result.group_by_pitch()
-        result = result.map(select().group_by_contiguity())
+        assert isinstance(result, Selection)
+        result = Selection(Selection(_).group_by_contiguity() for _ in result)
         result = result.flatten(depth=1)
-        result = result.map(Selection)
+        assert isinstance(result, Selection)
+        result = Selection(Selection(_) for _ in result)
         return result
 
     def rleaf(
@@ -5968,7 +5993,8 @@ class Selection(abjad.Selection):
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.show(staff) # doctest: +SKIP
 
-                >>> result = baca.select(staff).runs().map(baca.rleak())
+                >>> result = baca.Selection(staff).runs()
+                >>> result = [baca.Selection(_).rleak() for _ in result]
 
                 >>> for item in result:
                 ...     item
@@ -5979,10 +6005,16 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.select().runs().map(baca.rleak())
+                >>> def selector(argument):
+                ...     selection = baca.Selection(argument).runs()
+                ...     selection = [baca.Selection(_).rleak() for _ in selection]
+                ...     return baca.Selection(selection)
+                ...
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> for item in result:
+                ...     item
+                ...
                 Selection([Note("c'8"), Rest('r8')])
                 Selection([Note("d'8"), Note("e'8"), Rest('r8')])
                 Selection([Note("f'8"), Note("g'8"), Note("a'8")])
@@ -6445,8 +6477,10 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        result = self.runs(exclude=exclude).map(select().rleak())
-        return result.map(Selection)
+        result = self.runs(exclude=exclude)
+        assert isinstance(result, Selection)
+        result = Selection(Selection(_).rleak() for _ in result)
+        return result
 
     def skip(
         self, n: int, *, exclude: abjad.Strings = None
