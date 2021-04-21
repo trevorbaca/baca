@@ -927,9 +927,13 @@ Rhythm commands.
    ~baca.selectors.leaf_in_each_run
    ~baca.selectors.leaf_in_each_tuplet
    ~baca.selectors.leaves_
+   ~baca.selectors.leaves_in_each_lt
    ~baca.selectors.leaves_in_each_plt
    ~baca.selectors.leaves_in_each_run
    ~baca.selectors.leaves_in_each_tuplet
+   ~baca.selectors.leaves_in_get_tuplets
+   ~baca.selectors.pleaf_in_each_tuplet
+   ~baca.selectors.ptail_in_each_tuplet
    ~baca.selectors.rleaf_
    ~baca.selectors.rleak_runs
 

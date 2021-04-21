@@ -11,8 +11,7 @@ def leaf_after_each_ptail():
     def selector(argument):
         selection = Selection(argument)
         selection = selection.ptails()
-        list_ = [Selection(_).rleak()[-1] for _ in selection]
-        return Selection(list_)
+        return Selection(Selection(_).rleak()[-1] for _ in selection)
 
     return selector
 
@@ -21,8 +20,7 @@ def leaf_in_each_rleak_run(n):
     def selector(argument):
         selection = Selection(argument)
         selection = selection.runs()
-        list_ = [Selection(_).leaves().rleak()[n] for _ in selection]
-        return Selection(list_)
+        return Selection(Selection(_).leaves().rleak()[n] for _ in selection)
 
     return selector
 
@@ -33,8 +31,7 @@ def leaf_in_each_run(n):
     def selector(argument):
         selection = Selection(argument)
         selection = selection.runs()
-        list_ = [Selection(_).leaf(n) for _ in selection]
-        return Selection(list_)
+        return Selection(Selection(_).leaf(n) for _ in selection)
 
     return selector
 
@@ -45,8 +42,7 @@ def leaf_in_each_tuplet(n):
     def selector(argument):
         selection = Selection(argument)
         selection = selection.tuplets()
-        list_ = [Selection(_).leaf(n) for _ in selection]
-        return Selection(list_)
+        return Selection(Selection(_).leaf(n) for _ in selection)
 
     return selector
 
@@ -58,8 +54,7 @@ def leaves_in_each_lt(start=0, stop=None):
     def selector(argument):
         selection = Selection(argument)
         selection = selection.lts()
-        list_ = [Selection(_).leaves()[start:stop] for _ in selection]
-        return Selection(list_)
+        return Selection(Selection(_).leaves()[start:stop] for _ in selection)
 
     return selector
 
@@ -71,8 +66,7 @@ def leaves_in_each_plt(start=0, stop=None):
     def selector(argument):
         selection = Selection(argument)
         selection = selection.plts()
-        list_ = [Selection(_).leaves()[start:stop] for _ in selection]
-        return Selection(list_)
+        return Selection(Selection(_).leaves()[start:stop] for _ in selection)
 
     return selector
 
@@ -84,8 +78,7 @@ def leaves_in_each_run(start=0, stop=None):
     def selector(argument):
         selection = Selection(argument)
         selection = selection.runs()
-        list_ = [Selection(_).leaves()[start:stop] for _ in selection]
-        return Selection(list_)
+        return Selection(Selection(_).leaves()[start:stop] for _ in selection)
 
     return selector
 
@@ -97,8 +90,48 @@ def leaves_in_each_tuplet(start=0, stop=None):
     def selector(argument):
         selection = Selection(argument)
         selection = selection.tuplets()
-        list_ = [Selection(_).leaves()[start:stop] for _ in selection]
-        return Selection(list_)
+        return Selection(Selection(_).leaves()[start:stop] for _ in selection)
+
+    return selector
+
+
+def leaves_in_get_tuplets(pattern, pair):
+    start, stop = pair
+    assert isinstance(start, (int, type(None))), repr(start)
+    assert isinstance(stop, (int, type(None))), repr(stop)
+
+    def selector(argument):
+        selection = Selection(argument).tuplets()
+        selection = selection.get(*pattern)
+        return Selection(Selection(_).leaves()[start:stop] for _ in selection)
+
+    return selector
+
+
+def pleaf_in_each_tuplet(n, pair=None):
+    assert isinstance(n, int), repr(n)
+    if pair is None:
+        start, stop = None, None
+    else:
+        start, stop = pair
+
+    def selector(argument):
+        selection = Selection(argument).tuplets()[start:stop]
+        return Selection(Selection(_).pleaf(n) for _ in selection)
+
+    return selector
+
+
+def ptail_in_each_tuplet(n, pair=None):
+    assert isinstance(n, int), repr(n)
+    if pair is None:
+        start, stop = None, None
+    else:
+        start, stop = pair
+
+    def selector(argument):
+        selection = Selection(argument).tuplets()[start:stop]
+        return Selection(Selection(_).ptail(n) for _ in selection)
 
     return selector
 
@@ -109,8 +142,7 @@ def rleak_runs(start=0, stop=None):
         selection = selection.runs()
         if start != 0 or stop is not None:
             selection = selection[start:stop]
-        list_ = [Selection(_).leaves().rleak() for _ in selection]
-        return Selection(list_)
+        return Selection(Selection(_).leaves().rleak() for _ in selection)
 
     return selector
 
