@@ -215,7 +215,7 @@ class PiecewiseCommand(scoping.Command):
             left_broken = bool(left_broken)
         self._left_broken = left_broken
         if pieces is not None:
-            assert isinstance(pieces, abjad.Expression), repr(pieces)
+            assert callable(pieces), repr(pieces)
         self._pieces = pieces
         if remove_length_1_spanner_start is not None:
             remove_length_1_spanner_start = bool(remove_length_1_spanner_start)
