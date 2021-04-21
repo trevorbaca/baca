@@ -51,6 +51,19 @@ def leaf_in_each_tuplet(n):
     return selector
 
 
+def leaves_in_each_lt(start=0, stop=None):
+    assert isinstance(start, (int, type(None))), repr(start)
+    assert isinstance(stop, (int, type(None))), repr(stop)
+
+    def selector(argument):
+        selection = Selection(argument)
+        selection = selection.lts()
+        list_ = [Selection(_).leaves()[start:stop] for _ in selection]
+        return Selection(list_)
+
+    return selector
+
+
 def leaves_in_each_plt(start=0, stop=None):
     assert isinstance(start, (int, type(None))), repr(start)
     assert isinstance(stop, (int, type(None))), repr(stop)
