@@ -95,17 +95,33 @@ def leaves_in_each_tuplet(start=0, stop=None):
     return selector
 
 
-def leaves_in_get_tuplets(pattern, pair):
+def _leaves_in_get_tuplets(pattern, pair, exclude=False):
     start, stop = pair
     assert isinstance(start, (int, type(None))), repr(start)
     assert isinstance(stop, (int, type(None))), repr(stop)
 
     def selector(argument):
         selection = Selection(argument).tuplets()
-        selection = selection.get(*pattern)
+        if exclude is True:
+            method = selection.exclude
+        else:
+            method = selection.get
+        if isinstance(pattern, tuple):
+            selection = method(*pattern)
+        else:
+            assert isinstance(pattern, list)
+            selection = method(pattern)
         return Selection(Selection(_).leaves()[start:stop] for _ in selection)
 
     return selector
+
+
+def leaves_in_get_tuplets(pattern, pair):
+    return _leaves_in_get_tuplets(pattern, pair)
+
+
+def leaves_in_exclude_tuplets(pattern, pair):
+    return _leaves_in_get_tuplets(pattern, pair, exclude=True)
 
 
 def pleaf_in_each_tuplet(n, pair=None):

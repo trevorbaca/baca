@@ -31,6 +31,7 @@ selectors
    ~leaves_in_each_plt
    ~leaves_in_each_run
    ~leaves_in_each_tuplet
+   ~leaves_in_exclude_tuplets
    ~leaves_in_get_tuplets
    ~pleaf_in_each_tuplet
    ~ptail_in_each_tuplet
@@ -54,6 +55,8 @@ selectors
 .. autofunction:: leaves_in_each_run
 
 .. autofunction:: leaves_in_each_tuplet
+
+.. autofunction:: leaves_in_exclude_tuplets
 
 .. autofunction:: leaves_in_get_tuplets
 

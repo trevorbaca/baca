@@ -18,14 +18,14 @@ copyright = "1997-2021, Trevor Bača"
 exclude_patterns = []
 
 extensions = [
+    "abjad.ext.sphinx",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.coverage",
     "sphinx.ext.graphviz",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
-    "abjad.ext.sphinx",
-    "abjad.ext.viewcode",
+    "sphinx.ext.viewcode",
     "sphinx_autodoc_typehints",
     "uqbar.sphinx.api",
     "uqbar.sphinx.book",
