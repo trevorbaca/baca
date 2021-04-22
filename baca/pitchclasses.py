@@ -150,7 +150,7 @@ class ArpeggiationSpacingSpecifier:
             >>> collections = collections.arpeggiate_up()
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -204,7 +204,7 @@ class ArpeggiationSpacingSpecifier:
             >>> collections = collections.arpeggiate_down()
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::

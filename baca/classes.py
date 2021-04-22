@@ -1494,7 +1494,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -1593,7 +1593,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -1709,7 +1709,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -1924,7 +1924,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -2454,7 +2454,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -2628,7 +2628,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -2747,7 +2747,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -2860,7 +2860,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -2960,7 +2960,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3058,7 +3058,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3206,7 +3206,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3306,7 +3306,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3439,7 +3439,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3542,7 +3542,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -3665,7 +3665,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -4166,7 +4166,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -4269,7 +4269,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -4494,7 +4494,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -4593,7 +4593,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -4730,7 +4730,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -4829,7 +4829,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -4972,7 +4972,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5072,7 +5072,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5209,7 +5209,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5308,7 +5308,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5445,7 +5445,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5544,7 +5544,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5669,7 +5669,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5769,7 +5769,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -5901,7 +5901,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6077,7 +6077,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6275,7 +6275,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6379,7 +6379,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6638,7 +6638,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6737,7 +6737,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6887,7 +6887,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -6974,7 +6974,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -7071,7 +7071,7 @@ class Selection(abjad.Selection):
                 >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
                 >>> tuplets = [abjad.select(tuplets)]
                 >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> rmakers.attach_markup_struts(lilypond_file)
+                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
                 >>> staff = lilypond_file[abjad.Staff]
                 >>> abjad.setting(staff).autoBeaming = False
                 >>> abjad.override(staff).TupletBracket.direction = abjad.Up
@@ -7601,7 +7601,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, divisions)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7635,7 +7635,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7677,7 +7677,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7725,7 +7725,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7791,7 +7791,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -8217,7 +8217,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -8286,7 +8286,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -8341,7 +8341,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -8392,7 +8392,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -8450,7 +8450,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -8507,7 +8507,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -8573,7 +8573,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -8909,7 +8909,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -8965,7 +8965,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -9023,7 +9023,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -9080,7 +9080,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -9146,7 +9146,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -9219,7 +9219,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -9286,7 +9286,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -9389,7 +9389,7 @@ class Sequence(abjad.Sequence):
             >>> rhythm_maker = rmakers.note()
             >>> music = rhythm_maker(divisions.flatten(depth=-1))
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -9455,7 +9455,7 @@ class Sequence(abjad.Sequence):
             >>> divisions = divisions.flatten(depth=-1)
             >>> music = rhythm_maker(divisions)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(music, time_signatures)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::

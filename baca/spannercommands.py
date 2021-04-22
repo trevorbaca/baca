@@ -422,7 +422,7 @@ def ottava(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -516,7 +516,7 @@ def ottava_bassa(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -611,7 +611,7 @@ def slur(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -711,7 +711,7 @@ def sustain_pedal(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -813,7 +813,7 @@ def trill_spanner(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -892,7 +892,7 @@ def trill_spanner(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -978,7 +978,7 @@ def trill_spanner(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::

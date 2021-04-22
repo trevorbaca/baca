@@ -1049,7 +1049,7 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
             >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
@@ -1150,7 +1150,7 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
             >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
@@ -1258,7 +1258,7 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
             >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
@@ -1366,7 +1366,7 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
             >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
@@ -1480,7 +1480,7 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
             >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
@@ -1596,7 +1596,7 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
             >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
@@ -1709,7 +1709,7 @@ class Acciaccatura:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
             >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
@@ -4023,7 +4023,7 @@ class Nest:
         ... ]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -4136,7 +4136,7 @@ class Nest:
             ... ]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4415,7 +4415,7 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4477,7 +4477,7 @@ class RestAffix:
             >>> collections = [[18, 16, 15, 20, 19]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4528,7 +4528,7 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4593,7 +4593,7 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4662,7 +4662,7 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4730,7 +4730,7 @@ class RestAffix:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selection = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4872,7 +4872,7 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -4926,7 +4926,7 @@ class FigureMaker:
             >>> state = {'_next_attack': 2}
             >>> selections = stack(collections, state=state)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5463,7 +5463,7 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
             >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
@@ -5563,7 +5563,7 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> score = lilypond_file[abjad.Score]
             >>> abjad.override(score).SpacingSpanner.strict_grace_spacing = False
             >>> abjad.override(score).SpacingSpanner.strict_note_spacing = False
@@ -5686,7 +5686,7 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5752,7 +5752,7 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5821,7 +5821,7 @@ class FigureMaker:
             >>> collections = [[0, 2, 10, 8]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5854,7 +5854,7 @@ class FigureMaker:
             >>> collections = [[18, 16, 15, 20, 19]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5888,7 +5888,7 @@ class FigureMaker:
             >>> collections = [[9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5916,7 +5916,7 @@ class FigureMaker:
             >>> collections = [[0, 2, 10, 8], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -5973,7 +5973,7 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6034,7 +6034,7 @@ class FigureMaker:
             >>> collections = [[0, 2]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6086,7 +6086,7 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6142,7 +6142,7 @@ class FigureMaker:
             >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6204,7 +6204,7 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6475,7 +6475,7 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6746,7 +6746,7 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -6977,7 +6977,7 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
@@ -7233,7 +7233,7 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
             >>> abjad.override(staff).Stem.direction = abjad.Down
@@ -7333,7 +7333,7 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
             >>> abjad.override(staff).Stem.direction = abjad.Down
@@ -7427,7 +7427,7 @@ class FigureMaker:
             ... ]
             >>> selections = stack(collections)
             >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-            >>> rmakers.attach_markup_struts(lilypond_file)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
             >>> staff = lilypond_file[abjad.Score]
             >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
             >>> abjad.override(staff).Stem.direction = abjad.Down
@@ -10674,7 +10674,7 @@ def nest(treatments: typing.Sequence, *, lmr: LMR = None) -> Nest:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -10792,7 +10792,7 @@ def rests_after(counts: typing.Sequence[int]) -> RestAffix:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -10869,7 +10869,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -10941,7 +10941,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> staff = lilypond_file[abjad.Score]
         >>> abjad.override(staff).TupletBracket.staff_padding = 4
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -11015,7 +11015,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> staff = lilypond_file[abjad.Score]
         >>> abjad.override(staff).TupletBracket.staff_padding = 4
         >>> abjad.show(lilypond_file) # doctest: +SKIP
@@ -11092,7 +11092,7 @@ def rests_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         >>> collections = [[0, 2, 10], [18, 16, 15, 20, 19], [9]]
         >>> selection = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -11159,7 +11159,7 @@ def rests_before(counts: typing.List[int]) -> RestAffix:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -11254,7 +11254,7 @@ def skips_after(counts: typing.List[int]) -> RestAffix:
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -11331,7 +11331,7 @@ def skips_around(prefix: typing.List[int], suffix: typing.List[int]) -> RestAffi
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -11411,7 +11411,7 @@ def skips_before(
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> abjad.show(lilypond_file) # doctest: +SKIP
 
         ..  docs::
@@ -11491,7 +11491,7 @@ def stack(*commands) -> Stack:
         ...     ]
         >>> selections = stack(collections)
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selections)
-        >>> rmakers.attach_markup_struts(lilypond_file)
+        >>> abjad.illustrators.attach_markup_struts(lilypond_file)
         >>> staff = lilypond_file[abjad.Score]
         >>> abjad.override(staff).Beam.positions = "#'(-6 . -6)"
         >>> abjad.override(staff).Stem.direction = abjad.Down
