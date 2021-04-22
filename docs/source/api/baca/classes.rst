@@ -520,10 +520,6 @@ classes
 
    .. automethod:: Selection.lts
 
-   .. container:: inherited
-
-      .. automethod:: Selection.map
-
    .. automethod:: Selection.mgroups
 
    .. automethod:: Selection.mleaves
