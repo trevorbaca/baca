@@ -822,7 +822,7 @@ class BCPCommand(scoping.Command):
                     (1, 2),
                     (1, 4),
                     ],
-                selector=baca.leaves(),
+                selector=...,
                 tags=[
                     abjad.Tag('baca.bcps()'),
                     ],
@@ -839,7 +839,7 @@ class BCPCommand(scoping.Command):
                     (1, 2),
                     (1, 4),
                     ],
-                selector=baca.leaves(),
+                selector=...,
                 tags=[
                     abjad.Tag('baca.bcps()'),
                     ],
@@ -870,7 +870,7 @@ class ColorCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.select().leaves(),
+        selector=lambda _: classes.Selection(_).leaves(),
     ) -> None:
         assert selector is not None
         scoping.Command.__init__(
@@ -898,11 +898,6 @@ class ColorCommand(scoping.Command):
 class ContainerCommand(scoping.Command):
     r"""
     Container command.
-
-    ..  container:: example
-
-        >>> baca.ContainerCommand()
-        ContainerCommand(selector=baca.leaves())
 
     ..  container:: example
 
@@ -1054,7 +1049,7 @@ class ContainerCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.select().leaves(),
+        selector=lambda _: classes.Selection(_).leaves(),
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -1172,12 +1167,6 @@ class DetachCommand(scoping.Command):
 class GlissandoCommand(scoping.Command):
     """
     Glissando command.
-
-    ..  container:: example
-
-        >>> baca.GlissandoCommand()
-        GlissandoCommand(selector=baca.tleaves(), tags=[])
-
     """
 
     ### CLASS VARIABLES ###
@@ -1213,7 +1202,7 @@ class GlissandoCommand(scoping.Command):
         right_broken: bool = None,
         right_broken_show_next: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.select().tleaves(),
+        selector=lambda _: classes.Selection(_).tleaves(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
         zero_padding: bool = None,
@@ -1355,12 +1344,6 @@ class GlissandoCommand(scoping.Command):
 class GlobalFermataCommand(scoping.Command):
     """
     Global fermata command.
-
-    ..  container:: example
-
-        >>> baca.GlobalFermataCommand()
-        GlobalFermataCommand(selector=baca.leaf(0), tags=[])
-
     """
 
     ### CLASS VARIABLES ###
@@ -1384,7 +1367,7 @@ class GlobalFermataCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.select().leaf(0),
+        selector=lambda _: classes.Selection(_).leaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1493,7 +1476,7 @@ class IndicatorCommand(scoping.Command):
         predicate: typing.Callable = None,
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.select().pheads(),
+        selector=lambda _: classes.Selection(_).pheads(),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
         tweaks: abjad.IndexedTweakManagers = None,
     ) -> None:
@@ -1679,7 +1662,7 @@ class LabelCommand(scoping.Command):
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
         scope: scoping.ScopeTyping = None,
-        selector=classes.select().leaves(),
+        selector=lambda _: classes.Selection(_).leaves(),
     ) -> None:
         scoping.Command.__init__(
             self,
@@ -1720,12 +1703,6 @@ class LabelCommand(scoping.Command):
 class MetronomeMarkCommand(scoping.Command):
     """
     Metronome mark command.
-
-    ..  container:: example
-
-        >>> baca.MetronomeMarkCommand()
-        MetronomeMarkCommand(selector=baca.leaf(0), tags=[])
-
     """
 
     ### CLASS VARIABLES ###
@@ -1744,7 +1721,7 @@ class MetronomeMarkCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         redundant: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.select().leaf(0),
+        selector=lambda _: classes.Selection(_).leaf(0),
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
     ) -> None:
         scoping.Command.__init__(
@@ -1844,7 +1821,7 @@ class PartAssignmentCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         part_assignment: ide.PartAssignment = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.select().leaves(),
+        selector=lambda _: classes.Selection(_).leaves(),
     ) -> None:
         scoping.Command.__init__(
             self,

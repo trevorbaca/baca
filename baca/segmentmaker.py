@@ -3879,7 +3879,7 @@ class SegmentMaker(abjad.SegmentMaker):
             pleaves.append(pleaf)
         command = pitchcommands.staff_position(
             0,
-            classes.select().plts(),
+            lambda _: classes.Selection(_).plts(),
             set_chord_pitches_equal=True,
         )
         command(pleaves)
@@ -3911,7 +3911,7 @@ class SegmentMaker(abjad.SegmentMaker):
                     continue
                 clef = wrapper.indicator
                 suite = baca_overrides.clef_shift(
-                    clef, selector=classes.select().leaf(0)
+                    clef, selector=lambda _: classes.Selection(_).leaf(0)
                 )
                 runtime = self._bundle_manifests()
                 suite(leaf, runtime=runtime)

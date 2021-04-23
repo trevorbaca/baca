@@ -43,7 +43,7 @@ isort-reformat:
 	.
 
 mypy:
-	mypy baca
+	# mypy baca
 
 project = baca
 

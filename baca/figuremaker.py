@@ -1835,15 +1835,11 @@ class Anchor:
         if figure_name is not None:
             assert isinstance(figure_name, str), repr(figure_name)
         self._figure_name = figure_name
-        if local_selector is not None and not isinstance(
-            local_selector, abjad.Expression
-        ):
-            raise TypeError(f"must be selector: {local_selector!r}.")
+        if local_selector is not None and not callable(local_selector):
+            raise TypeError(f"must be callable: {local_selector!r}.")
         self._local_selector = local_selector
-        if remote_selector is not None and not isinstance(
-            remote_selector, abjad.Expression
-        ):
-            raise TypeError(f"must be selector: {remote_selector!r}.")
+        if remote_selector is not None and not callable(remote_selector):
+            raise TypeError(f"must be callable: {remote_selector!r}.")
         self._remote_selector = remote_selector
         if remote_voice_name is not None and not isinstance(remote_voice_name, str):
             raise TypeError(f"must be string: {remote_voice_name!r}.")
@@ -8318,7 +8314,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
 
 
 def extend_beam(
-    selector: abjad.Expression = classes.select().leaf(-1),
+    selector=lambda _: classes.Selection(_).leaf(-1),
 ) -> commandclasses.IndicatorCommand:
     r"""
     Attaches RIGHT_BROKEN_BEAM to selector output.
@@ -11229,7 +11225,7 @@ def resume_after(remote_voice_name) -> Anchor:
     Resumes music after remote selection.
     """
     return Anchor(
-        remote_selector=classes.select().leaf(-1),
+        remote_selector=lambda _: classes.Selection(_).leaf(-1),
         remote_voice_name=remote_voice_name,
         use_remote_stop_offset=True,
     )

@@ -46,7 +46,7 @@ class SpannerIndicatorCommand(scoping.Command):
         measures: typings.SliceTyping = None,
         right_broken: bool = None,
         scope: scoping.ScopeTyping = None,
-        selector: abjad.Expression = classes.select().leaves(),
+        selector=lambda _: classes.Selection(_).leaves(),
         start_indicator: typing.Any = None,
         stop_indicator: typing.Any = None,
         tags: typing.List[typing.Optional[abjad.Tag]] = None,
@@ -214,7 +214,7 @@ class SpannerIndicatorCommand(scoping.Command):
 def beam(
     *tweaks: abjad.TweakInterface,
     direction: abjad.VerticalAlignment = None,
-    selector: abjad.Expression = classes.select().tleaves(),
+    selector=lambda _: classes.Selection(_).tleaves(),
     start_beam: abjad.StartBeam = None,
     stop_beam: abjad.StopBeam = None,
 ) -> SpannerIndicatorCommand:
@@ -399,7 +399,7 @@ def ottava(
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot="after"),
     *,
     right_broken: bool = None,
-    selector: abjad.Expression = classes.select().tleaves(),
+    selector=lambda _: classes.Selection(_).tleaves(),
 ) -> SpannerIndicatorCommand:
     r"""
     Attaches ottava indicators.
@@ -493,7 +493,7 @@ def ottava_bassa(
     start_ottava: abjad.Ottava = abjad.Ottava(n=-1),
     stop_ottava: abjad.Ottava = abjad.Ottava(n=0, format_slot="after"),
     *,
-    selector: abjad.Expression = classes.select().tleaves(),
+    selector=lambda _: classes.Selection(_).tleaves(),
 ) -> SpannerIndicatorCommand:
     r"""
     Attaches ottava bassa indicators.
@@ -585,7 +585,7 @@ def ottava_bassa(
 def slur(
     *tweaks: abjad.TweakInterface,
     map: abjad.Expression = None,
-    selector: abjad.Expression = classes.select().tleaves(),
+    selector=lambda _: classes.Selection(_).tleaves(),
     start_slur: abjad.StartSlur = None,
     stop_slur: abjad.StopSlur = None,
 ) -> SpannerIndicatorCommand:
@@ -685,7 +685,7 @@ def slur(
 
 def sustain_pedal(
     *,
-    selector: abjad.Expression = classes.select().leaves(),
+    selector=lambda _: classes.Selection(_).leaves(),
     start_piano_pedal: abjad.StartPianoPedal = None,
     stop_piano_pedal: abjad.StopPianoPedal = None,
 ) -> SpannerIndicatorCommand:
@@ -788,7 +788,7 @@ def trill_spanner(
     left_broken: bool = None,
     map: abjad.Expression = None,
     right_broken: bool = None,
-    selector: abjad.Expression = classes.select().tleaves().rleak(),
+    selector=lambda _: classes.Selection(_).tleaves().rleak(),
     start_trill_span: abjad.StartTrillSpan = None,
     stop_trill_span: abjad.StopTrillSpan = None,
 ) -> SpannerIndicatorCommand:
