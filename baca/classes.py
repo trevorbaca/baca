@@ -1457,12 +1457,6 @@ class SchemeManifest:
 class Selection(abjad.Selection):
     """
     Selection.
-
-    ..  container:: example
-
-        >>> baca.select()
-        baca
-
     """
 
     ### CLASS VARIABLES ###
@@ -3253,7 +3247,7 @@ class Selection(abjad.Selection):
         return result
 
     def lts(
-        self, *, exclude: abjad.Strings = None
+        self, *, exclude: abjad.Strings = None, nontrivial: bool = None
     ) -> typing.Union[abjad.Selection, abjad.Expression]:
         r"""
         Selects logical ties.
@@ -3370,7 +3364,7 @@ class Selection(abjad.Selection):
         """
         if self._expression:
             return self._update_expression(inspect.currentframe())
-        return self.logical_ties(exclude=exclude)
+        return self.logical_ties(exclude=exclude, nontrivial=nontrivial)
 
     def mgroups(
         self,

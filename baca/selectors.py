@@ -166,6 +166,20 @@ def rleak_runs(start=0, stop=None):
 ### REPLACEMENTS ###
 
 
+def clparts(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).clparts(*arguments, **keywords)
+
+    return selector
+
+
+def cmgroups(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).cmgroups(*arguments, **keywords)
+
+    return selector
+
+
 def leaves_(
     prototype=None,
     *,
@@ -192,6 +206,20 @@ def leaves_(
         )
         selection = selection[start:stop]
         return selection
+
+    return selector
+
+
+def lleaf(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).lleaf(*arguments, **keywords)
+
+    return selector
+
+
+def lparts(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).lparts(*arguments, **keywords)
 
     return selector
 

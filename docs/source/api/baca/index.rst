@@ -84,13 +84,8 @@ baca
 .. autosummary::
    :nosignatures:
 
-   ~clparts
-   ~cmgroups
    ~leaf
    ~leaves
-   ~lleaf
-   ~logical_ties
-   ~lparts
    ~lt
    ~ltleaves
    ~ltqruns
@@ -122,19 +117,9 @@ baca
    ~tuplets
    ~persistence.persistence
 
-.. autofunction:: clparts
-
-.. autofunction:: cmgroups
-
 .. autofunction:: leaf
 
 .. autofunction:: leaves
-
-.. autofunction:: lleaf
-
-.. autofunction:: logical_ties
-
-.. autofunction:: lparts
 
 .. autofunction:: lt
 

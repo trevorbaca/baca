@@ -45,20 +45,6 @@ Path = ide.Path
 tags = ide.tags
 
 
-def clparts(*arguments, **keywords):
-    return select().clparts(*arguments, **keywords)
-
-
-clparts.__doc__ = Selection.clparts.__doc__
-
-
-def cmgroups(*arguments, **keywords):
-    return select().cmgroups(*arguments, **keywords)
-
-
-cmgroups.__doc__ = Selection.cmgroups.__doc__
-
-
 def leaf(*arguments, **keywords):
     return select().leaf(*arguments, **keywords)
 
@@ -71,27 +57,6 @@ def leaves(*arguments, **keywords):
 
 
 leaves.__doc__ = Selection.leaves.__doc__
-
-
-def lleaf(*arguments, **keywords):
-    return select().lleaf(*arguments, **keywords)
-
-
-lleaf.__doc__ = Selection.lleaf.__doc__
-
-
-def logical_ties(*arguments, **keywords):
-    return select().logical_ties(*arguments, **keywords)
-
-
-logical_ties.__doc__ = Selection.logical_ties.__doc__
-
-
-def lparts(*arguments, **keywords):
-    return select().lparts(*arguments, **keywords)
-
-
-lparts.__doc__ = Selection.lparts.__doc__
 
 
 def lt(*arguments, **keywords):

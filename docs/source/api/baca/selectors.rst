@@ -22,6 +22,8 @@ selectors
 .. autosummary::
    :nosignatures:
 
+   ~clparts
+   ~cmgroups
    ~leaf_after_each_ptail
    ~leaf_in_each_rleak_run
    ~leaf_in_each_run
@@ -33,10 +35,16 @@ selectors
    ~leaves_in_each_tuplet
    ~leaves_in_exclude_tuplets
    ~leaves_in_get_tuplets
+   ~lleaf
+   ~lparts
    ~pleaf_in_each_tuplet
    ~ptail_in_each_tuplet
    ~rleaf_
    ~rleak_runs
+
+.. autofunction:: clparts
+
+.. autofunction:: cmgroups
 
 .. autofunction:: leaf_after_each_ptail
 
@@ -59,6 +67,10 @@ selectors
 .. autofunction:: leaves_in_exclude_tuplets
 
 .. autofunction:: leaves_in_get_tuplets
+
+.. autofunction:: lleaf
+
+.. autofunction:: lparts
 
 .. autofunction:: pleaf_in_each_tuplet
 

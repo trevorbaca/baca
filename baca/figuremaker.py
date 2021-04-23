@@ -3760,7 +3760,11 @@ class Accumulator:
             return self._current_offset
         if anchored and remote_voice_name is None:
             return self._score_stop_offset
-        remote_selector = remote_selector or classes.select().leaf(0)
+        if remote_selector is None:
+
+            def remote_selector(argument):
+                return classes.Selection(argument).leaf(0)
+
         floating_selections = self._floating_selections[remote_voice_name]
         selections = [_.annotation for _ in floating_selections]
         result = remote_selector(selections)

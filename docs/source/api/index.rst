@@ -23,13 +23,8 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.clparts
-   ~baca.cmgroups
    ~baca.leaf
    ~baca.leaves
-   ~baca.lleaf
-   ~baca.logical_ties
-   ~baca.lparts
    ~baca.lt
    ~baca.ltleaves
    ~baca.ltqruns
@@ -888,6 +883,8 @@ Rhythm commands.
 .. autosummary::
    :nosignatures:
 
+   ~baca.selectors.clparts
+   ~baca.selectors.cmgroups
    ~baca.selectors.leaf_after_each_ptail
    ~baca.selectors.leaf_in_each_rleak_run
    ~baca.selectors.leaf_in_each_run
@@ -899,6 +896,8 @@ Rhythm commands.
    ~baca.selectors.leaves_in_each_tuplet
    ~baca.selectors.leaves_in_exclude_tuplets
    ~baca.selectors.leaves_in_get_tuplets
+   ~baca.selectors.lleaf
+   ~baca.selectors.lparts
    ~baca.selectors.pleaf_in_each_tuplet
    ~baca.selectors.ptail_in_each_tuplet
    ~baca.selectors.rleaf_

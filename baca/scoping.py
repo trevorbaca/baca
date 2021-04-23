@@ -1053,7 +1053,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...         baca.marcato(),
         ...         baca.slur(),
         ...         baca.staccato(),
-        ...         selector=baca.cmgroups()[1:-1],
+        ...         selector=lambda _: baca.Selection(_).cmgroups()[1:-1],
         ...         ),
         ...     baca.make_even_divisions(),
         ...     )
