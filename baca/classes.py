@@ -1483,39 +1483,27 @@ class Selection(abjad.Selection):
 
             Selects chord head -1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).chead(-1)
+            >>> result
+            Chord("<fs' gs'>4")
 
-                >>> result = baca.select(staff).chead(-1)
-
-                >>> result
-                Chord("<fs' gs'>4")
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).chead(-1)
-                >>> result = selector(staff)
-
-                >>> result
-                Chord("<fs' gs'>4")
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1582,52 +1570,34 @@ class Selection(abjad.Selection):
 
             Selects chord heads:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).cheads()
+            >>> for item in result:
+            ...     item
+            ...
+            Chord("<a'' b''>16")
+            Chord("<d' e'>4")
+            Chord("<a'' b''>16")
+            Chord("<e' fs'>4")
+            Chord("<a'' b''>16")
+            Chord("<fs' gs'>4")
 
-                >>> result = baca.select(staff).cheads()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Chord("<a'' b''>16")
-                Chord("<d' e'>4")
-                Chord("<a'' b''>16")
-                Chord("<e' fs'>4")
-                Chord("<a'' b''>16")
-                Chord("<fs' gs'>4")
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).cheads()
-                >>> result = selector(staff)
-
-                >>> for item in result:
-                ...     item
-                Chord("<a'' b''>16")
-                Chord("<d' e'>4")
-                Chord("<a'' b''>16")
-                Chord("<e' fs'>4")
-                Chord("<a'' b''>16")
-                Chord("<fs' gs'>4")
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1699,51 +1669,34 @@ class Selection(abjad.Selection):
 
             Selects leaves cyclically partitioned 2, 3, 4:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).clparts([2, 3, 4])
+            >>> for item in result:
+            ...     item
+            ...
+            Selection([Rest('r16'), Note("bf'16")])
+            Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
+            Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
+            Selection([Note("d'16"), Chord("<e' fs'>4")])
+            Selection([Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")])
+            Selection([Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> result = baca.select(staff).clparts([2, 3, 4])
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Rest('r16'), Note("bf'16")])
-                Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-                Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
-                Selection([Note("d'16"), Chord("<e' fs'>4")])
-                Selection([Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")])
-                Selection([Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-            ..  container:: example expression
-
-                >>> selector = baca.clparts([2, 3, 4])
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Selection([Rest('r16'), Note("bf'16")])
-                Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-                Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
-                Selection([Note("d'16"), Chord("<e' fs'>4")])
-                Selection([Chord("<e' fs'>16"), Rest('r16'), Note("bf'16")])
-                Selection([Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -1831,34 +1784,21 @@ class Selection(abjad.Selection):
 
             Partitions measure-grouped leaves into pairs:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+            >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+            >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-                >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
-                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
-                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).cmgroups([2])
+            >>> for item in result:
+            ...     item
+            ...
+            Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
+            Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
 
-                >>> result = baca.select(staff).cmgroups([2])
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
-                Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().cmgroups([2])
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
-                Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8')])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -1914,59 +1854,43 @@ class Selection(abjad.Selection):
 
             Enchains leaves in alternating groups of 5:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).leaves().enchain([5])
+            >>> for item in result:
+            ...     item
+            Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
+            Selection([Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
+            Selection([Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
+            Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4")])
+            Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> result = baca.select(staff).leaves().enchain([5])
+            >>> for i, selection in enumerate(result):
+            ...     if i % 2 == 0:
+            ...         color, direction = "#red", abjad.Up
+            ...     else:
+            ...         color, direction = "#blue", abjad.Down
+            ...     string = rf'\markup {{ \bold \with-color {color} * }}'
+            ...     for leaf in selection:
+            ...         markup = abjad.Markup(string, literal=True)
+            ...         markup = abjad.new(markup, direction=direction)
+            ...         abjad.attach(markup, leaf)
 
-                >>> for item in result:
-                ...     item
-                Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-                Selection([Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
-                Selection([Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
-                Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4")])
-                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-            ..  container:: example expression
-
-                >>> selector = baca.leaves().enchain([5])
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-                Selection([Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
-                Selection([Chord("<a'' b''>16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
-                Selection([Rest('r16'), Note("bf'16"), Chord("<a'' b''>16"), Note("e'16"), Chord("<fs' gs'>4")])
-                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-                >>> for i, selection in enumerate(result):
-                ...     if i % 2 == 0:
-                ...         color, direction = "#red", abjad.Up
-                ...     else:
-                ...         color, direction = "#blue", abjad.Down
-                ...     string = rf'\markup {{ \bold \with-color {color} * }}'
-                ...     for leaf in selection:
-                ...         markup = abjad.Markup(string, literal=True)
-                ...         markup = abjad.new(markup, direction=direction)
-                ...         abjad.attach(markup, leaf)
-
-                >>> abjad.override(staff).TextScript.staff_padding = 6
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.override(staff).TextScript.staff_padding = 6
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2058,54 +1982,19 @@ class Selection(abjad.Selection):
 
             Selects grace -1:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
+            >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
+            >>> abjad.attach(container, staff[1])
+            >>> container = abjad.AfterGraceContainer("af'16 gf'16")
+            >>> abjad.attach(container, staff[1])
+            >>> abjad.setting(staff).autoBeaming = False
 
-                >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
-                >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
-                >>> abjad.attach(container, staff[1])
-                >>> container = abjad.AfterGraceContainer("af'16 gf'16")
-                >>> abjad.attach(container, staff[1])
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).grace(-1)
+            >>> result
+            Note("gf'16")
 
-                ..  docs::
-
-                    >>> string = abjad.lilypond(staff)
-                    >>> print(string)
-                    \new Staff
-                    \with
-                    {
-                        autoBeaming = ##f
-                    }
-                    {
-                        c'8
-                        \grace {
-                            cf''16
-                            bf'16
-                        }
-                        \afterGrace
-                        d'8
-                        {
-                            af'16
-                            gf'16
-                        }
-                        e'8
-                        f'8
-                    }
-
-                >>> baca.select(staff).grace(-1)
-                Note("gf'16")
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().grace(-1)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Note("gf'16")
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -2148,64 +2037,24 @@ class Selection(abjad.Selection):
 
             Selects graces:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
+            >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
+            >>> abjad.attach(container, staff[1])
+            >>> container = abjad.AfterGraceContainer("af'16 gf'16")
+            >>> abjad.attach(container, staff[1])
+            >>> abjad.setting(staff).autoBeaming = False
 
-                >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
-                >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
-                >>> abjad.attach(container, staff[1])
-                >>> container = abjad.AfterGraceContainer("af'16 gf'16")
-                >>> abjad.attach(container, staff[1])
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).graces()
+            >>> for item in result:
+            ...     item
+            ...
+            Note("cf''16")
+            Note("bf'16")
+            Note("af'16")
+            Note("gf'16")
 
-                ..  docs::
-
-                    >>> string = abjad.lilypond(staff)
-                    >>> print(string)
-                    \new Staff
-                    \with
-                    {
-                        autoBeaming = ##f
-                    }
-                    {
-                        c'8
-                        \grace {
-                            cf''16
-                            bf'16
-                        }
-                        \afterGrace
-                        d'8
-                        {
-                            af'16
-                            gf'16
-                        }
-                        e'8
-                        f'8
-                    }
-
-                >>> result = baca.select(staff).graces()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Note("cf''16")
-                Note("bf'16")
-                Note("af'16")
-                Note("gf'16")
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().graces()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Note("cf''16")
-                Note("bf'16")
-                Note("af'16")
-                Note("gf'16")
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -2251,54 +2100,19 @@ class Selection(abjad.Selection):
 
             Selects haupt leaf 1:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
+            >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
+            >>> abjad.attach(container, staff[1])
+            >>> container = abjad.AfterGraceContainer("af'16 gf'16")
+            >>> abjad.attach(container, staff[1])
+            >>> abjad.setting(staff).autoBeaming = False
 
-                >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
-                >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
-                >>> abjad.attach(container, staff[1])
-                >>> container = abjad.AfterGraceContainer("af'16 gf'16")
-                >>> abjad.attach(container, staff[1])
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).hleaf(1)
+            >>> result
+            Note("d'8")
 
-                ..  docs::
-
-                    >>> string = abjad.lilypond(staff)
-                    >>> print(string)
-                    \new Staff
-                    \with
-                    {
-                        autoBeaming = ##f
-                    }
-                    {
-                        c'8
-                        \grace {
-                            cf''16
-                            bf'16
-                        }
-                        \afterGrace
-                        d'8
-                        {
-                            af'16
-                            gf'16
-                        }
-                        e'8
-                        f'8
-                    }
-
-                >>> baca.select(staff).hleaf(1)
-                Note("d'8")
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().hleaf(1)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Note("d'8")
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -2341,64 +2155,24 @@ class Selection(abjad.Selection):
 
             Selects haupt leaves:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
+            >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
+            >>> abjad.attach(container, staff[1])
+            >>> container = abjad.AfterGraceContainer("af'16 gf'16")
+            >>> abjad.attach(container, staff[1])
+            >>> abjad.setting(staff).autoBeaming = False
 
-                >>> staff = abjad.Staff("c'8 d'8 e'8 f'8")
-                >>> container = abjad.BeforeGraceContainer("cf''16 bf'16")
-                >>> abjad.attach(container, staff[1])
-                >>> container = abjad.AfterGraceContainer("af'16 gf'16")
-                >>> abjad.attach(container, staff[1])
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).hleaves()
+            >>> for item in result:
+            ...     item
+            ...
+            Note("c'8")
+            Note("d'8")
+            Note("e'8")
+            Note("f'8")
 
-                ..  docs::
-
-                    >>> string = abjad.lilypond(staff)
-                    >>> print(string)
-                    \new Staff
-                    \with
-                    {
-                        autoBeaming = ##f
-                    }
-                    {
-                        c'8
-                        \grace {
-                            cf''16
-                            bf'16
-                        }
-                        \afterGrace
-                        d'8
-                        {
-                            af'16
-                            gf'16
-                        }
-                        e'8
-                        f'8
-                    }
-
-                >>> result = baca.select(staff).hleaves()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Note("c'8")
-                Note("d'8")
-                Note("e'8")
-                Note("f'8")
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().hleaves()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Note("c'8")
-                Note("d'8")
-                Note("e'8")
-                Note("f'8")
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -2444,37 +2218,27 @@ class Selection(abjad.Selection):
 
             Selects leaf 0 from leaves (leaked to the left) in tuplet 1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).tuplets()[1:2].lleaf(0)
+            >>> result
+            Chord("<d' e'>16")
 
-                >>> baca.select(staff).tuplets()[1:2].lleaf(0)
-                Chord("<d' e'>16")
-
-            ..  container:: example expression
-
-                >>> selector = baca.tuplets()[1:2].lleaf(0)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Chord("<d' e'>16")
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2539,40 +2303,20 @@ class Selection(abjad.Selection):
 
             Selects runs (each leaked to the left):
 
-            ..  container:: example
+            >>> staff = abjad.Staff("c'8 r8 d'8 e'8 r8 f'8 g'8 a'8")
+            >>> abjad.setting(staff).autoBeaming = False
 
-                >>> staff = abjad.Staff("c'8 r8 d'8 e'8 r8 f'8 g'8 a'8")
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.Selection(staff).runs()
+            >>> result = [baca.Selection(_).lleak() for _ in result]
+            >>> for item in result:
+            ...     item
+            ...
+            Selection([Note("c'8")])
+            Selection([Rest('r8'), Note("d'8"), Note("e'8")])
+            Selection([Rest('r8'), Note("f'8"), Note("g'8"), Note("a'8")])
 
-                >>> result = baca.Selection(staff).runs()
-                >>> result = [baca.Selection(_).lleak() for _ in result]
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Note("c'8")])
-                Selection([Rest('r8'), Note("d'8"), Note("e'8")])
-                Selection([Rest('r8'), Note("f'8"), Note("g'8"), Note("a'8")])
-
-            ..  container:: example expression
-
-                >>> def selector(argument):
-                ...     selection = baca.Selection(argument).runs()
-                ...     selection = [baca.Selection(_).lleak() for _ in selection]
-                ...     return baca.Selection(selection)
-                ...
-                >>> result = selector(staff)
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Note("c'8")])
-                Selection([Rest('r8'), Note("d'8"), Note("e'8")])
-                Selection([Rest('r8'), Note("f'8"), Note("g'8"), Note("a'8")])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -2618,53 +2362,35 @@ class Selection(abjad.Selection):
 
             Selects leaves (leaked to the left) in tuplet 1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).tuplets()[1:2].lleaves()
+            >>> for item in result:
+            ...     item
+            ...
+            Chord("<d' e'>16")
+            Rest('r16')
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("d'16")
+            Chord("<e' fs'>4")
+            Chord("<e' fs'>16")
 
-                >>> result = baca.select(staff).tuplets()[1:2].lleaves()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Chord("<d' e'>16")
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Chord("<e' fs'>16")
-
-            ..  container:: example expression
-
-                >>> selector = baca.tuplets()[1:2].lleaves()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Chord("<d' e'>16")
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Chord("<e' fs'>16")
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2737,45 +2463,31 @@ class Selection(abjad.Selection):
 
             Selects leaves partitioned 2, 3, 4:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).lparts([2, 3, 4])
+            >>> for item in result:
+            ...     item
+            ...
+            Selection([Rest('r16'), Note("bf'16")])
+            Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
+            Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
 
-                >>> result = baca.select(staff).lparts([2, 3, 4])
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Rest('r16'), Note("bf'16")])
-                Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-                Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
-
-            ..  container:: example expression
-
-                >>> selector = baca.lparts([2, 3, 4])
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Selection([Rest('r16'), Note("bf'16")])
-                Selection([Chord("<a'' b''>16"), Note("c'16"), Chord("<d' e'>4")])
-                Selection([Chord("<d' e'>16"), Rest('r16'), Note("bf'16"), Chord("<a'' b''>16")])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2850,39 +2562,27 @@ class Selection(abjad.Selection):
 
             Selects logical tie -1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).lt(-1)
+            >>> result
+            LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> result = baca.select(staff).lt(-1)
-
-                >>> result
-                LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-            ..  container:: example expression
-
-                >>> selector = baca.lt(-1)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -2952,37 +2652,27 @@ class Selection(abjad.Selection):
 
             ..  container:: example
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 r4 r16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 r4 r16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> result = baca.select(staff).ltleaf(0)
+            >>> result = baca.select(staff).ltleaf(0)
+            >>> result
+            Note("bf'16")
 
-                >>> result
-                Note("bf'16")
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).ltleaf(0)
-                >>> result = selector(staff)
-
-                >>> result
-                Note("bf'16")
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3048,73 +2738,45 @@ class Selection(abjad.Selection):
 
             Selects left-trimmed leaves:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 r4 r16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 r4 r16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).ltleaves()
+            >>> for item in result:
+            ...     item
+            ...
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("c'16")
+            Chord("<d' e'>4")
+            Chord("<d' e'>16")
+            Rest('r16')
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("d'16")
+            Chord("<e' fs'>4")
+            Chord("<e' fs'>16")
+            Rest('r16')
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("e'16")
+            Rest('r4')
+            Rest('r16')
 
-                >>> result = baca.select(staff).ltleaves()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("c'16")
-                Chord("<d' e'>4")
-                Chord("<d' e'>16")
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Chord("<e' fs'>16")
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("e'16")
-                Rest('r4')
-                Rest('r16')
-
-            ..  container:: example expression
-
-                >>> selector = baca.ltleaves()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("c'16")
-                Chord("<d' e'>4")
-                Chord("<d' e'>16")
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Chord("<e' fs'>16")
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("e'16")
-                Rest('r4')
-                Rest('r16')
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3196,39 +2858,27 @@ class Selection(abjad.Selection):
 
             Selects logical tie equipitch run -1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).ltqrun(-1)
+            >>> result
+            Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
-                >>> result = baca.select(staff).ltqrun(-1)
-
-                >>> result
-                Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).ltqrun(-1)
-                >>> result = selector(staff)
-
-                >>> result
-                Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3296,51 +2946,34 @@ class Selection(abjad.Selection):
 
             Selects logical tie equipitch runs:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).ltqruns()
+            >>> for item in result:
+            ...     item
+            ...
+            Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
+            Selection([LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
+            Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")])])
+            Selection([LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
+            Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")])])
+            Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
-                >>> result = baca.select(staff).ltqruns()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
-                Selection([LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
-                Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")])])
-                Selection([LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
-                Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")])])
-                Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
-
-            ..  container:: example expression
-
-                >>> selector = baca.ltqruns()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")])])
-                Selection([LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
-                Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")])])
-                Selection([LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
-                Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")])])
-                Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3429,39 +3062,27 @@ class Selection(abjad.Selection):
 
             Selects logical tie run -1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).ltrun(-1)
+            >>> result
+            Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
-                >>> result = baca.select(staff).ltrun(-1)
-
-                >>> result
-                Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).ltrun(-1)
-                >>> result = selector(staff)
-
-                >>> result
-                Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3532,46 +3153,31 @@ class Selection(abjad.Selection):
 
             Selects logical tie runs:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).ltruns()
+            >>> for item in result:
+            ...     item
+            ...
+            Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
+            Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
+            Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
-                >>> result = baca.select(staff).ltruns()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
-                Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
-                Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).ltruns()
-                >>> result = selector(staff)
-
-                >>> for item in result:
-                ...     item
-                Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
-                Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
-                Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3656,69 +3262,43 @@ class Selection(abjad.Selection):
 
             Selects logical ties:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).lts()
+            >>> for item in result:
+            ...     item
+            ...
+            LogicalTie([Rest('r16')])
+            LogicalTie([Note("bf'16")])
+            LogicalTie([Chord("<a'' b''>16")])
+            LogicalTie([Note("c'16")])
+            LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])
+            LogicalTie([Rest('r16')])
+            LogicalTie([Note("bf'16")])
+            LogicalTie([Chord("<a'' b''>16")])
+            LogicalTie([Note("d'16")])
+            LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+            LogicalTie([Rest('r16')])
+            LogicalTie([Note("bf'16")])
+            LogicalTie([Chord("<a'' b''>16")])
+            LogicalTie([Note("e'16")])
+            LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> result = baca.select(staff).lts()
-
-                >>> for item in result:
-                ...     item
-                ...
-                LogicalTie([Rest('r16')])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("c'16")])
-                LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])
-                LogicalTie([Rest('r16')])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("d'16")])
-                LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                LogicalTie([Rest('r16')])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("e'16")])
-                LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-            ..  container:: example expression
-
-                >>> selector = baca.lts()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                LogicalTie([Rest('r16')])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("c'16")])
-                LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])
-                LogicalTie([Rest('r16')])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("d'16")])
-                LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                LogicalTie([Rest('r16')])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("e'16")])
-                LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -3805,32 +3385,20 @@ class Selection(abjad.Selection):
 
             Partitions measure-grouped leaves into one part of length 2:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+            >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+            >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-                >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
-                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
-                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).mgroups([2])
+            >>> for item in result:
+            ...     item
+            ...
+            Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
 
-                >>> result = baca.select(staff).mgroups([2])
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().mgroups([2])
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -3881,44 +3449,26 @@ class Selection(abjad.Selection):
 
             Selects leaves in first three measures:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+            >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+            >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-                >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
-                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
-                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).mleaves(3)
+            >>> for item in result:
+            ...     item
+            ...
+            Rest('r8')
+            Note("d'8")
+            Note("e'8")
+            Note("f'8")
+            Note("g'8")
+            Note("a'8")
+            Note("b'8")
 
-                >>> result = baca.select(staff).mleaves(3)
-
-                >>> for item in result:
-                ...     item
-                ...
-                Rest('r8')
-                Note("d'8")
-                Note("e'8")
-                Note("f'8")
-                Note("g'8")
-                Note("a'8")
-                Note("b'8")
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().mleaves(3)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Rest('r8')
-                Note("d'8")
-                Note("e'8")
-                Note("f'8")
-                Note("g'8")
-                Note("a'8")
-                Note("b'8")
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -3954,42 +3504,25 @@ class Selection(abjad.Selection):
 
             Selects leaves in last three measures:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+            >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+            >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-                >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
-                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
-                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).mleaves(-3)
+            >>> for item in result:
+            ...     item
+            ...
+            Note("e'8")
+            Note("f'8")
+            Note("g'8")
+            Note("a'8")
+            Note("b'8")
+            Rest('r8')
 
-                >>> result = baca.select(staff).mleaves(-3)
-
-                >>> for item in result:
-                ...     item
-                ...
-                Note("e'8")
-                Note("f'8")
-                Note("g'8")
-                Note("a'8")
-                Note("b'8")
-                Rest('r8')
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().mleaves(-3)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Note("e'8")
-                Note("f'8")
-                Note("g'8")
-                Note("a'8")
-                Note("b'8")
-                Rest('r8')
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -4043,27 +3576,15 @@ class Selection(abjad.Selection):
 
             Selects multimeasure rest -1:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("R1 R1 R1")
+            >>> abjad.setting(staff).autoBeaming = False
 
-                >>> staff = abjad.Staff("R1 R1 R1")
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).mmrest(-1)
+            >>> result
+            MultimeasureRest('R1')
 
-                >>> result = baca.select(staff).mmrest(-1)
-
-                >>> result
-                MultimeasureRest('R1')
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().mmrest(-1)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                MultimeasureRest('R1')
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -4096,33 +3617,20 @@ class Selection(abjad.Selection):
 
             Selects multimeasure rests:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("R1 R1 R1")
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.show(staff) # doctest: +SKIP
 
-                >>> staff = abjad.Staff("R1 R1 R1")
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).mmrests()
+            >>> for item in result:
+            ...     item
+            ...
+            MultimeasureRest('R1')
+            MultimeasureRest('R1')
+            MultimeasureRest('R1')
 
-                >>> result = baca.select(staff).mmrests()
-
-                >>> for item in result:
-                ...     item
-                ...
-                MultimeasureRest('R1')
-                MultimeasureRest('R1')
-                MultimeasureRest('R1')
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().mmrests()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                MultimeasureRest('R1')
-                MultimeasureRest('R1')
-                MultimeasureRest('R1')
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -4157,39 +3665,27 @@ class Selection(abjad.Selection):
 
             Selects nontrivial run -1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).ntrun(-1)
+            >>> result
+            Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> result = baca.select(staff).ntrun(-1)
-
-                >>> result
-                Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).ntrun(-1)
-                >>> result = selector(staff)
-
-                >>> result
-                Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4260,45 +3756,31 @@ class Selection(abjad.Selection):
 
             Selects nontrivial runs:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).ntruns()
+            >>> for item in result:
+            ...     item
+            ...
+            Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
+            Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+            Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> result = baca.select(staff).ntruns()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
-                Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-            ..  container:: example expression
-
-                >>> selector = baca.ntruns()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16")])
-                Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4380,37 +3862,24 @@ class Selection(abjad.Selection):
 
         ..  container:: example
 
-            Partitions measure-grouped leaves into one part of length 2
-            followed by an overhang part of remaining measures:
+            Partitions measure-grouped leaves into one part of length 2 followed by an
+            overhang part of remaining measures:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+            >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+            >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-                >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r d''")
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
-                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
-                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).omgroups([2])
+            >>> for item in result:
+            ...     item
+            ...
+            Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
+            Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8'), Note("d''8")])
 
-                >>> result = baca.select(staff).omgroups([2])
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
-                Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8'), Note("d''8")])
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().omgroups([2])
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Selection([Rest('r8'), Note("d'8"), Note("e'8"), Note("f'8")])
-                Selection([Note("g'8"), Note("a'8"), Note("b'8"), Rest('r8'), Note("d''8")])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -4485,39 +3954,27 @@ class Selection(abjad.Selection):
 
             Selects pitched head -1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).phead(-1)
+            >>> result
+            Chord("<fs' gs'>4")
 
-                >>> result = baca.select(staff).phead(-1)
-
-                >>> result
-                Chord("<fs' gs'>4")
-
-            ..  container:: example expression
-
-                >>> selector = baca.phead(-1)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Chord("<fs' gs'>4")
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4584,63 +4041,41 @@ class Selection(abjad.Selection):
 
             Selects pitched heads:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).pheads()
+            >>> for item in result:
+            ...     item
+            ...
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("c'16")
+            Chord("<d' e'>4")
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("d'16")
+            Chord("<e' fs'>4")
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("e'16")
+            Chord("<fs' gs'>4")
 
-                >>> result = baca.select(staff).pheads()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("c'16")
-                Chord("<d' e'>4")
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("e'16")
-                Chord("<fs' gs'>4")
-
-            ..  container:: example expression
-
-                >>> selector = baca.pheads()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("c'16")
-                Chord("<d' e'>4")
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("e'16")
-                Chord("<fs' gs'>4")
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4721,39 +4156,27 @@ class Selection(abjad.Selection):
 
             Selects pitched leaf -1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).pleaf(-1)
+            >>> result
+            Chord("<fs' gs'>16")
 
-                >>> result = baca.select(staff).pleaf(-1)
-
-                >>> result
-                Chord("<fs' gs'>16")
-
-            ..  container:: example expression
-
-                >>> selector = baca.pleaf(-1)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Chord("<fs' gs'>16")
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4820,69 +4243,43 @@ class Selection(abjad.Selection):
 
             Selects pitched leaves:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).pleaves()
+            >>> for item in result:
+            ...     item
+            ...
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("c'16")
+            Chord("<d' e'>4")
+            Chord("<d' e'>16")
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("d'16")
+            Chord("<e' fs'>4")
+            Chord("<e' fs'>16")
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("e'16")
+            Chord("<fs' gs'>4")
+            Chord("<fs' gs'>16")
 
-                >>> result = baca.select(staff).pleaves()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("c'16")
-                Chord("<d' e'>4")
-                Chord("<d' e'>16")
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Chord("<e' fs'>16")
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("e'16")
-                Chord("<fs' gs'>4")
-                Chord("<fs' gs'>16")
-
-            ..  container:: example expression
-
-                >>> selector = baca.pleaves()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("c'16")
-                Chord("<d' e'>4")
-                Chord("<d' e'>16")
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Chord("<e' fs'>16")
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("e'16")
-                Chord("<fs' gs'>4")
-                Chord("<fs' gs'>16")
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -4963,39 +4360,27 @@ class Selection(abjad.Selection):
 
             Selects pitched logical tie -1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).plt(-1)
+            >>> result
+            LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> result = baca.select(staff).plt(-1)
-
-                >>> result
-                LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-            ..  container:: example expression
-
-                >>> selector = baca.plt(-1)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5063,63 +4448,40 @@ class Selection(abjad.Selection):
 
             Selects pitched logical ties:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).plts()
+            >>> for item in result:
+            ...     item
+            ...
+            LogicalTie([Note("bf'16")])
+            LogicalTie([Chord("<a'' b''>16")])
+            LogicalTie([Note("c'16")])
+            LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])
+            LogicalTie([Note("bf'16")])
+            LogicalTie([Chord("<a'' b''>16")])
+            LogicalTie([Note("d'16")])
+            LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+            LogicalTie([Note("bf'16")])
+            LogicalTie([Chord("<a'' b''>16")])
+            LogicalTie([Note("e'16")])
+            LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> result = baca.select(staff).plts()
-
-                >>> for item in result:
-                ...     item
-                ...
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("c'16")])
-                LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("d'16")])
-                LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("e'16")])
-                LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-            ..  container:: example expression
-
-                >>> selector = baca.plts()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("c'16")])
-                LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("d'16")])
-                LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("e'16")])
-                LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5200,39 +4562,27 @@ class Selection(abjad.Selection):
 
             Selects pitched tail -1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).ptail(-1)
+            >>> result
+            Chord("<fs' gs'>16")
 
-                >>> result = baca.select(staff).ptail(-1)
-
-                >>> result
-                Chord("<fs' gs'>16")
-
-            ..  container:: example expression
-
-                >>> selector = baca.ptail(-1)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Chord("<fs' gs'>16")
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5299,63 +4649,40 @@ class Selection(abjad.Selection):
 
             Selects pitched tails:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).ptails()
+            >>> for item in result:
+            ...     item
+            ...
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("c'16")
+            Chord("<d' e'>16")
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("d'16")
+            Chord("<e' fs'>16")
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("e'16")
+            Chord("<fs' gs'>16")
 
-                >>> result = baca.select(staff).ptails()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("c'16")
-                Chord("<d' e'>16")
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>16")
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("e'16")
-                Chord("<fs' gs'>16")
-
-            ..  container:: example expression
-
-                >>> selector = baca.ptails()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("c'16")
-                Chord("<d' e'>16")
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>16")
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("e'16")
-                Chord("<fs' gs'>16")
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5436,39 +4763,27 @@ class Selection(abjad.Selection):
 
             Selects pitched trivial logical tie -1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).ptlt(-1)
+            >>> result
+            LogicalTie([Note("e'16")])
 
-                >>> result = baca.select(staff).ptlt(-1)
-
-                >>> result
-                LogicalTie([Note("e'16")])
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).ptlt(-1)
-                >>> result = selector(staff)
-
-                >>> result
-                LogicalTie([Note("e'16")])
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5535,58 +4850,37 @@ class Selection(abjad.Selection):
 
             Selects pitched trivial logical ties:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).ptlts()
+            >>> for item in result:
+            ...     item
+            ...
+            LogicalTie([Note("bf'16")])
+            LogicalTie([Chord("<a'' b''>16")])
+            LogicalTie([Note("c'16")])
+            LogicalTie([Note("bf'16")])
+            LogicalTie([Chord("<a'' b''>16")])
+            LogicalTie([Note("d'16")])
+            LogicalTie([Note("bf'16")])
+            LogicalTie([Chord("<a'' b''>16")])
+            LogicalTie([Note("e'16")])
 
-                >>> result = baca.select(staff).ptlts()
-
-                >>> for item in result:
-                ...     item
-                ...
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("c'16")])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("d'16")])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("e'16")])
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).ptlts()
-                >>> result = selector(staff)
-
-                >>> for item in result:
-                ...     item
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("c'16")])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("d'16")])
-                LogicalTie([Note("bf'16")])
-                LogicalTie([Chord("<a'' b''>16")])
-                LogicalTie([Note("e'16")])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5661,39 +4955,27 @@ class Selection(abjad.Selection):
 
             Selects equipitch run -1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).qrun(-1)
+            >>> result
+            Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> result = baca.select(staff).qrun(-1)
-
-                >>> result
-                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).qrun(-1)
-                >>> result = selector(staff)
-
-                >>> result
-                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5761,51 +5043,35 @@ class Selection(abjad.Selection):
 
             Selects equipitch runs:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-                >>> tuplets = [
-                ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).qruns()
+            >>> for item in result:
+            ...     item
+            ...
+            Selection([Note("c'16"), Note("c'16"), Note("c'16")])
+            Selection([Chord("<d' e'>4"), Chord("<d' e'>16")])
+            Selection([Note("d'16"), Note("d'16"), Note("d'16")])
+            Selection([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
+            Selection([Note("e'16"), Note("e'16"), Note("e'16")])
+            Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> result = baca.select(staff).qruns()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Note("c'16"), Note("c'16"), Note("c'16")])
-                Selection([Chord("<d' e'>4"), Chord("<d' e'>16")])
-                Selection([Note("d'16"), Note("d'16"), Note("d'16")])
-                Selection([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                Selection([Note("e'16"), Note("e'16"), Note("e'16")])
-                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-            ..  container:: example expression
-
-                >>> selector = baca.qruns()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Selection([Note("c'16"), Note("c'16"), Note("c'16")])
-                Selection([Chord("<d' e'>4"), Chord("<d' e'>16")])
-                Selection([Note("d'16"), Note("d'16"), Note("d'16")])
-                Selection([Chord("<e' fs'>4"), Chord("<e' fs'>16")])
-                Selection([Note("e'16"), Note("e'16"), Note("e'16")])
-                Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5893,37 +5159,28 @@ class Selection(abjad.Selection):
 
             Selects leaf -1 from leaves (leaked to the right) in tuplet 1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).tuplets()[1:2].rleaf(-1)
+            >>> result
+            Rest('r16')
 
-                >>> baca.select(staff).tuplets()[1:2].rleaf(-1)
-                Rest('r16')
-
-            ..  container:: example expression
-
-                >>> selector = baca.tuplets()[1:2].rleaf(-1)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Rest('r16')
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -5990,40 +5247,20 @@ class Selection(abjad.Selection):
 
             Selects runs (each leaked to the right):
 
-            ..  container:: example
+            >>> staff = abjad.Staff("c'8 r8 d'8 e'8 r8 f'8 g'8 a'8")
+            >>> abjad.setting(staff).autoBeaming = False
 
-                >>> staff = abjad.Staff("c'8 r8 d'8 e'8 r8 f'8 g'8 a'8")
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.Selection(staff).runs()
+            >>> result = [baca.Selection(_).rleak() for _ in result]
+            >>> for item in result:
+            ...     item
+            ...
+            Selection([Note("c'8"), Rest('r8')])
+            Selection([Note("d'8"), Note("e'8"), Rest('r8')])
+            Selection([Note("f'8"), Note("g'8"), Note("a'8")])
 
-                >>> result = baca.Selection(staff).runs()
-                >>> result = [baca.Selection(_).rleak() for _ in result]
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Note("c'8"), Rest('r8')])
-                Selection([Note("d'8"), Note("e'8"), Rest('r8')])
-                Selection([Note("f'8"), Note("g'8"), Note("a'8")])
-
-            ..  container:: example expression
-
-                >>> def selector(argument):
-                ...     selection = baca.Selection(argument).runs()
-                ...     selection = [baca.Selection(_).rleak() for _ in selection]
-                ...     return baca.Selection(selection)
-                ...
-                >>> result = selector(staff)
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Note("c'8"), Rest('r8')])
-                Selection([Note("d'8"), Note("e'8"), Rest('r8')])
-                Selection([Note("f'8"), Note("g'8"), Note("a'8")])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -6069,53 +5306,35 @@ class Selection(abjad.Selection):
 
             Selects leaves (leaked to the right) in tuplet 1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).tuplets()[1:2].rleaves()
+            >>> for item in result:
+            ...     item
+            ...
+            Rest('r16')
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("d'16")
+            Chord("<e' fs'>4")
+            Chord("<e' fs'>16")
+            Rest('r16')
 
-                >>> result = baca.select(staff).tuplets()[1:2].rleaves()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Chord("<e' fs'>16")
-                Rest('r16')
-
-            ..  container:: example expression
-
-                >>> selector = baca.tuplets()[1:2].rleaves()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Chord("<e' fs'>16")
-                Rest('r16')
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6188,40 +5407,24 @@ class Selection(abjad.Selection):
 
             Selects leaves in first two measures, leaked on leaf to the right:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+            >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+            >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-                >>> staff = abjad.Staff("r8 d' e' f' g' a' b' r")
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
-                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
-                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).rmleaves(2)
+            >>> for item in result:
+            ...     item
+            ...
+            Rest('r8')
+            Note("d'8")
+            Note("e'8")
+            Note("f'8")
+            Note("g'8")
 
-                >>> result = baca.select(staff).rmleaves(2)
-
-                >>> for item in result:
-                ...     item
-                ...
-                Rest('r8')
-                Note("d'8")
-                Note("e'8")
-                Note("f'8")
-                Note("g'8")
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().rmleaves(2)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Rest('r8')
-                Note("d'8")
-                Note("e'8")
-                Note("f'8")
-                Note("g'8")
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -6267,39 +5470,27 @@ class Selection(abjad.Selection):
 
             Selects run 1 (leaked to the right):
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).rrun(1)
+            >>> result
+            Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
 
-                >>> result = baca.select(staff).rrun(1)
-
-                >>> result
-                Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).rrun(1)
-                >>> result = selector(staff)
-
-                >>> result
-                Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6371,46 +5562,31 @@ class Selection(abjad.Selection):
 
             Selects runs (leaked to the right):
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 c'16 c'16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 d'16 d'16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 e'16 e'16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).rruns()
+            >>> for item in result:
+            ...     item
+            ...
+            Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16')])
+            Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
+            Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
-                >>> result = baca.select(staff).rruns()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16')])
-                Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
-                Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).rruns()
-                >>> result = selector(staff)
-
-                >>> for item in result:
-                ...     item
-                Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16')])
-                Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
-                Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6496,30 +5672,18 @@ class Selection(abjad.Selection):
 
             Selects skip -1:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("c'8 s e' f' g' s b' s")
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+            >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+            >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-                >>> staff = abjad.Staff("c'8 s e' f' g' s b' s")
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
-                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
-                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).skip(-1)
+            >>> result
+            Skip('s8')
 
-                >>> result = baca.select(staff).skip(-1)
-
-                >>> result
-                Skip('s8')
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().skip(-1)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Skip('s8')
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -6560,35 +5724,21 @@ class Selection(abjad.Selection):
 
             Selects skips:
 
-            ..  container:: example
+            >>> staff = abjad.Staff("c'8 s e' f' g' s b' s")
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
+            >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
+            >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
 
-                >>> staff = abjad.Staff("c'8 s e' f' g' s b' s")
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.attach(abjad.TimeSignature((2, 8)), staff[0])
-                >>> abjad.attach(abjad.TimeSignature((3, 8)), staff[4])
-                >>> abjad.attach(abjad.TimeSignature((1, 8)), staff[7])
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> result = baca.select(staff).skips()
+            >>> for item in result:
+            ...     item
+            Skip('s8')
+            Skip('s8')
+            Skip('s8')
 
-                >>> result = baca.select(staff).skips()
-
-                >>> for item in result:
-                ...     item
-                Skip('s8')
-                Skip('s8')
-                Skip('s8')
-
-            ..  container:: example expression
-
-                >>> selector = baca.select().skips()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Skip('s8')
-                Skip('s8')
-                Skip('s8')
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(staff) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(staff) # doctest: +SKIP
 
             ..  docs::
 
@@ -6631,39 +5781,27 @@ class Selection(abjad.Selection):
 
             Selects trimmed leaf 0:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).tleaf(0)
+            >>> result
+            Note("bf'16")
 
-                >>> result = baca.select(staff).tleaf(0)
-
-                >>> result
-                Note("bf'16")
-
-            ..  container:: example expression
-
-                >>> selector = lambda _: baca.Selection(_).tleaf(0)
-                >>> result = selector(staff)
-
-                >>> result
-                Note("bf'16")
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6730,73 +5868,45 @@ class Selection(abjad.Selection):
 
             Selects trimmed leaves:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).tleaves()
+            >>> for item in result:
+            ...     item
+            ...
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("c'16")
+            Chord("<d' e'>4")
+            Chord("<d' e'>16")
+            Rest('r16')
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("d'16")
+            Chord("<e' fs'>4")
+            Chord("<e' fs'>16")
+            Rest('r16')
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("e'16")
+            Chord("<fs' gs'>4")
+            Chord("<fs' gs'>16")
 
-                >>> result = baca.select(staff).tleaves()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("c'16")
-                Chord("<d' e'>4")
-                Chord("<d' e'>16")
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Chord("<e' fs'>16")
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("e'16")
-                Chord("<fs' gs'>4")
-                Chord("<fs' gs'>16")
-
-            ..  container:: example expression
-
-                >>> selector = baca.tleaves()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("c'16")
-                Chord("<d' e'>4")
-                Chord("<d' e'>16")
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Chord("<e' fs'>16")
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("e'16")
-                Chord("<fs' gs'>4")
-                Chord("<fs' gs'>16")
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6877,40 +5987,29 @@ class Selection(abjad.Selection):
 
         ..  container:: example
 
-            Selects leaf 0 from leaves (leaked to both the left and right) in
-            tuplet 1:
+            Selects leaf 0 from leaves (leaked to both the left and right) in tuplet 1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).tuplets()[1:2].wleaf(0)
+            >>> result
+            Chord("<d' e'>16")
 
-                >>> baca.select(staff).tuplets()[1:2].wleaf(0)
-                Chord("<d' e'>16")
-
-            ..  container:: example expression
-
-                >>> selector = baca.tuplets()[1:2].wleaf(0)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Chord("<d' e'>16")
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -6964,40 +6063,29 @@ class Selection(abjad.Selection):
 
         ..  container:: example
 
-            Selects leaf -1 from leaves (leaked to both the left and right) in
-            tuplet 1:
+            Selects leaf -1 from leaves (leaked to both the left and right) in tuplet 1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).tuplets()[1:2].wleaf(-1)
+            >>> result
+            Rest('r16')
 
-                >>> baca.select(staff).tuplets()[1:2].wleaf(-1)
-                Rest('r16')
-
-            ..  container:: example expression
-
-                >>> selector = baca.tuplets()[1:2].wleaf(-1)
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Rest('r16')
-
-                >>> abjad.Label(result).by_selector(lone=True)
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector(lone=True)
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
@@ -7064,55 +6152,36 @@ class Selection(abjad.Selection):
 
             Selects leaves (leaked wide) in tuplet 1:
 
-            ..  container:: example
+            >>> tuplets = [
+            ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
+            ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
+            ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
+            ...     ]
+            >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
+            >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
+            >>> tuplets = [abjad.select(tuplets)]
+            >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
+            >>> abjad.illustrators.attach_markup_struts(lilypond_file)
+            >>> staff = lilypond_file[abjad.Staff]
+            >>> abjad.setting(staff).autoBeaming = False
+            >>> abjad.override(staff).TupletBracket.direction = abjad.Up
+            >>> abjad.override(staff).TupletBracket.staff_padding = 3
 
-                >>> tuplets = [
-                ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
-                ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
-                ...     "r16 bf'16 <a'' b''>16 e'16 <fs' gs'>4 ~ <fs' gs'>16",
-                ...     ]
-                >>> tuplets = zip([(10, 9), (8, 9), (10, 9)], tuplets)
-                >>> tuplets = [abjad.Tuplet(*_) for _ in tuplets]
-                >>> tuplets = [abjad.select(tuplets)]
-                >>> lilypond_file = abjad.LilyPondFile.rhythm(tuplets)
-                >>> abjad.illustrators.attach_markup_struts(lilypond_file)
-                >>> staff = lilypond_file[abjad.Staff]
-                >>> abjad.setting(staff).autoBeaming = False
-                >>> abjad.override(staff).TupletBracket.direction = abjad.Up
-                >>> abjad.override(staff).TupletBracket.staff_padding = 3
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> result = baca.select(staff).tuplets()[1:2].wleaves()
+            >>> for item in result:
+            ...     item
+            ...
+            Chord("<d' e'>16")
+            Rest('r16')
+            Note("bf'16")
+            Chord("<a'' b''>16")
+            Note("d'16")
+            Chord("<e' fs'>4")
+            Chord("<e' fs'>16")
+            Rest('r16')
 
-                >>> result = baca.select(staff).tuplets()[1:2].wleaves()
-
-                >>> for item in result:
-                ...     item
-                ...
-                Chord("<d' e'>16")
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Chord("<e' fs'>16")
-                Rest('r16')
-
-            ..  container:: example expression
-
-                >>> selector = baca.tuplets()[1:2].wleaves()
-                >>> result = selector(staff)
-
-                >>> selector.print(result)
-                Chord("<d' e'>16")
-                Rest('r16')
-                Note("bf'16")
-                Chord("<a'' b''>16")
-                Note("d'16")
-                Chord("<e' fs'>4")
-                Chord("<e' fs'>16")
-                Rest('r16')
-
-                >>> abjad.Label(result).by_selector()
-                >>> abjad.show(lilypond_file) # doctest: +SKIP
+            >>> abjad.Label(result).by_selector()
+            >>> abjad.show(lilypond_file) # doctest: +SKIP
 
             ..  docs::
 
