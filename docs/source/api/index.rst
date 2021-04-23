@@ -23,45 +23,24 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.chead
-   ~baca.cheads
-   ~baca.chord
-   ~baca.chords
    ~baca.clparts
    ~baca.cmgroups
-   ~baca.components
-   ~baca.enchain
-   ~baca.grace
-   ~baca.graces
-   ~baca.group
-   ~baca.group_by_measure
-   ~baca.hleaf
-   ~baca.hleaves
    ~baca.leaf
    ~baca.leaves
    ~baca.lleaf
-   ~baca.lleak
-   ~baca.lleaves
    ~baca.logical_ties
    ~baca.lparts
    ~baca.lt
-   ~baca.ltleaf
    ~baca.ltleaves
-   ~baca.ltqrun
    ~baca.ltqruns
-   ~baca.ltrun
-   ~baca.ltruns
    ~baca.lts
    ~baca.mgroups
    ~baca.mleaves
    ~baca.mmrest
-   ~baca.mmrests
    ~baca.note
    ~baca.notes
-   ~baca.ntrun
    ~baca.ntruns
    ~baca.omgroups
-   ~baca.ompltgroups
    ~baca.phead
    ~baca.pheads
    ~baca.pleaf
@@ -70,29 +49,16 @@ Bača API
    ~baca.plts
    ~baca.ptail
    ~baca.ptails
-   ~baca.ptlt
-   ~baca.ptlts
-   ~baca.qrun
    ~baca.qruns
    ~baca.rest
    ~baca.rests
-   ~baca.rleaf
-   ~baca.rleak
    ~baca.rleaves
-   ~baca.rmleaves
-   ~baca.rrun
-   ~baca.rruns
    ~baca.run
    ~baca.runs
    ~baca.skip
-   ~baca.skips
-   ~baca.tleaf
    ~baca.tleaves
-   ~baca.top
    ~baca.tuplet
    ~baca.tuplets
-   ~baca.wleaf
-   ~baca.wleaves
    ~baca.persistence.persistence
 
 .. raw:: html

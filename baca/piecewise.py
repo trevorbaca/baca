@@ -3428,7 +3428,7 @@ def hairpin(
         ...     baca.hairpin(
         ...         'mf niente o< p',
         ...         bookend=False,
-        ...         pieces=baca.mgroups([1, 2, 1]),
+        ...         pieces=lambda _: baca.Selection(_).mgroups([1, 2, 1]),
         ...         ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),
@@ -6492,7 +6492,7 @@ def text_spanner(
         ...     baca.text_spanner(
         ...         r'\baca-damp-markup =|',
         ...         bookend=False,
-        ...         selector=baca.rmleaves(2),
+        ...         selector=lambda _: baca.Selection(_).rmleaves(2),
         ...         ),
         ...     baca.make_even_divisions(),
         ...     baca.pitches('E4 D5 F4 E5 G4 F5'),

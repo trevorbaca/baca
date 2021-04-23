@@ -1508,10 +1508,10 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.chead(-1)
+                >>> selector = lambda _: baca.Selection(_).chead(-1)
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> result
                 Chord("<fs' gs'>4")
 
                 >>> abjad.Label(result).by_selector(lone=True)
@@ -1614,10 +1614,11 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.cheads()
+                >>> selector = lambda _: baca.Selection(_).cheads()
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> for item in result:
+                ...     item
                 Chord("<a'' b''>16")
                 Chord("<d' e'>4")
                 Chord("<a'' b''>16")
@@ -2974,10 +2975,10 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.ltleaf(0)
+                >>> selector = lambda _: baca.Selection(_).ltleaf(0)
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> result
                 Note("bf'16")
 
                 >>> abjad.Label(result).by_selector(lone=True)
@@ -3220,10 +3221,10 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.ltqrun(-1)
+                >>> selector = lambda _: baca.Selection(_).ltqrun(-1)
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> result
                 Selection([LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
                 >>> abjad.Label(result).by_selector(lone=True)
@@ -3453,10 +3454,10 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.ltrun(-1)
+                >>> selector = lambda _: baca.Selection(_).ltrun(-1)
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> result
                 Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
 
                 >>> abjad.Label(result).by_selector(lone=True)
@@ -3560,10 +3561,11 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.ltruns()
+                >>> selector = lambda _: baca.Selection(_).ltruns()
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> for item in result:
+                ...     item
                 Selection([LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Note("c'16")]), LogicalTie([Chord("<d' e'>4"), Chord("<d' e'>16")])])
                 Selection([LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Note("d'16")]), LogicalTie([Chord("<e' fs'>4"), Chord("<e' fs'>16")])])
                 Selection([LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Note("e'16")]), LogicalTie([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])])
@@ -4180,10 +4182,10 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.ntrun(-1)
+                >>> selector = lambda _: baca.Selection(_).ntrun(-1)
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> result
                 Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> abjad.Label(result).by_selector(lone=True)
@@ -5459,10 +5461,10 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.ptlt(-1)
+                >>> selector = lambda _: baca.Selection(_).ptlt(-1)
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> result
                 LogicalTie([Note("e'16")])
 
                 >>> abjad.Label(result).by_selector(lone=True)
@@ -5568,10 +5570,11 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.ptlts()
+                >>> selector = lambda _: baca.Selection(_).ptlts()
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> for item in result:
+                ...     item
                 LogicalTie([Note("bf'16")])
                 LogicalTie([Chord("<a'' b''>16")])
                 LogicalTie([Note("c'16")])
@@ -5683,10 +5686,10 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.qrun(-1)
+                >>> selector = lambda _: baca.Selection(_).qrun(-1)
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> result
                 Selection([Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
 
                 >>> abjad.Label(result).by_selector(lone=True)
@@ -6289,10 +6292,10 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.rrun(1)
+                >>> selector = lambda _: baca.Selection(_).rrun(1)
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> result
                 Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
 
                 >>> abjad.Label(result).by_selector(lone=True)
@@ -6397,10 +6400,11 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.rruns()
+                >>> selector = lambda _: baca.Selection(_).rruns()
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> for item in result:
+                ...     item
                 Selection([Note("c'16"), Note("c'16"), Note("c'16"), Chord("<d' e'>4"), Chord("<d' e'>16"), Rest('r16')])
                 Selection([Note("d'16"), Note("d'16"), Note("d'16"), Chord("<e' fs'>4"), Chord("<e' fs'>16"), Rest('r16')])
                 Selection([Note("e'16"), Note("e'16"), Note("e'16"), Chord("<fs' gs'>4"), Chord("<fs' gs'>16")])
@@ -6652,10 +6656,10 @@ class Selection(abjad.Selection):
 
             ..  container:: example expression
 
-                >>> selector = baca.tleaf(0)
+                >>> selector = lambda _: baca.Selection(_).tleaf(0)
                 >>> result = selector(staff)
 
-                >>> selector.print(result)
+                >>> result
                 Note("bf'16")
 
                 >>> abjad.Label(result).by_selector(lone=True)

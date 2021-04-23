@@ -390,8 +390,10 @@ def bar_line_transparent(
         ...         rmakers.beam(),
         ...         rmakers.extract_trivial(),
         ...     ),
-        ...     baca.bar_line_transparent(selector=baca.group_by_measure()[1]),
-        ...     )
+        ...     baca.bar_line_transparent(
+        ...         selector=lambda _: baca.Selection(_).group_by_measure()[1]
+        ...     ),
+        ... )
 
         >>> lilypond_file = maker.run(environment='docs')
         >>> abjad.show(lilypond_file) # doctest: +SKIP
