@@ -21,8 +21,6 @@ from .scoping import *
 from .segmentclasses import *
 from .segmentmaker import *
 from .selectors import (
-    leaves_,
-    rleaf_,
     leaf_after_each_ptail,
     leaf_in_each_rleak_run,
     leaf_in_each_run,
@@ -66,46 +64,11 @@ def lt(*arguments, **keywords):
 lt.__doc__ = Selection.lt.__doc__
 
 
-def ltleaves(*arguments, **keywords):
-    return select().ltleaves(*arguments, **keywords)
-
-
-ltleaves.__doc__ = Selection.ltleaves.__doc__
-
-
-def ltqruns(*arguments, **keywords):
-    return select().ltqruns(*arguments, **keywords)
-
-
-ltqruns.__doc__ = Selection.ltqruns.__doc__
-
-
 def lts(*arguments, **keywords):
     return select().lts(*arguments, **keywords)
 
 
 lts.__doc__ = Selection.lts.__doc__
-
-
-def mgroups(*arguments, **keywords):
-    return select().mgroups(*arguments, **keywords)
-
-
-mgroups.__doc__ = Selection.mgroups.__doc__
-
-
-def mleaves(*arguments, **keywords):
-    return select().mleaves(*arguments, **keywords)
-
-
-mleaves.__doc__ = Selection.mleaves.__doc__
-
-
-def mmrest(*arguments, **keywords):
-    return select().mmrest(*arguments, **keywords)
-
-
-mmrest.__doc__ = Selection.mmrest.__doc__
 
 
 def note(*arguments, **keywords):
@@ -120,20 +83,6 @@ def notes(*arguments, **keywords):
 
 
 notes.__doc__ = Selection.notes.__doc__
-
-
-def ntruns(*arguments, **keywords):
-    return select().ntruns(*arguments, **keywords)
-
-
-ntruns.__doc__ = Selection.ntruns.__doc__
-
-
-def omgroups(*arguments, **keywords):
-    return select().omgroups(*arguments, **keywords)
-
-
-omgroups.__doc__ = Selection.omgroups.__doc__
 
 
 def phead(*arguments, **keywords):
@@ -192,13 +141,6 @@ def ptails(*arguments, **keywords):
 ptails.__doc__ = Selection.ptails.__doc__
 
 
-def qruns(*arguments, **keywords):
-    return select().qruns(*arguments, **keywords)
-
-
-qruns.__doc__ = Selection.qruns.__doc__
-
-
 def rest(*arguments, **keywords):
     return select().rest(*arguments, **keywords)
 
@@ -225,13 +167,6 @@ def run(*arguments, **keywords):
 
 
 run.__doc__ = Selection.run.__doc__
-
-
-def runs(*arguments, **keywords):
-    return select().runs(*arguments, **keywords)
-
-
-runs.__doc__ = Selection.runs.__doc__
 
 
 def skip(*arguments, **keywords):

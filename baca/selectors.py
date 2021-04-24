@@ -4,6 +4,18 @@ import abjad
 
 from .classes import Selection
 
+
+def _handle_pair(selection, pair):
+    if isinstance(pair, tuple):
+        if isinstance(pair[0], list):
+            indices, period = pair
+            selection = selection.get(indices, period)
+        else:
+            start, stop = pair
+            selection = selection[start:stop]
+    return selection
+
+
 ### NEW ###
 
 
@@ -124,6 +136,13 @@ def leaves_in_exclude_tuplets(pattern, pair):
     return _leaves_in_get_tuplets(pattern, pair, exclude=True)
 
 
+def ltleaves_rleak():
+    def selector(argument):
+        return Selection(argument).ltleaves().rleak()
+
+    return selector
+
+
 def pleaf_in_each_tuplet(n, pair=None):
     assert isinstance(n, int), repr(n)
     if pair is None:
@@ -180,16 +199,15 @@ def cmgroups(*arguments, **keywords):
     return selector
 
 
-def leaves_(
-    prototype=None,
+def leaves(
+    pair=None,
     *,
     exclude: abjad.typings.Strings = None,
     grace: bool = None,
     head: bool = None,
     pitched: bool = None,
+    prototype=None,
     reverse: bool = None,
-    start: bool = None,
-    stop: bool = None,
     tail: bool = None,
     trim: typing.Union[bool, int] = None,
 ):
@@ -204,7 +222,7 @@ def leaves_(
             tail=tail,
             trim=trim,
         )
-        selection = selection[start:stop]
+        selection = _handle_pair(selection, pair)
         return selection
 
     return selector
@@ -224,11 +242,77 @@ def lparts(*arguments, **keywords):
     return selector
 
 
-def rleaf_(n=0, *, exclude: abjad.Strings = None):
+def ltleaves(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).ltleaves(*arguments, **keywords)
+
+    return selector
+
+
+def ltqruns(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).ltqrun(*arguments, **keywords)
+
+    return selector
+
+
+def mgroups(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).mgroups(*arguments, **keywords)
+
+    return selector
+
+
+def mmrest(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).mmrest(*arguments, **keywords)
+
+    return selector
+
+
+def ntruns(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).ntruns(*arguments, **keywords)
+
+    return selector
+
+
+def omgroups(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).omgroups(*arguments, **keywords)
+
+    return selector
+
+
+def qruns(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).qruns(*arguments, **keywords)
+
+    return selector
+
+
+def rleaf(n=0, *, exclude: abjad.Strings = None):
     assert isinstance(n, int), repr(n)
 
     def selector(argument):
         selection = Selection(argument).rleaf(n=n, exclude=exclude)
         return selection
+
+    return selector
+
+
+def runs(pair=None, exclude=None, rleak=False):
+    def selector(argument):
+        result = Selection(argument).runs(exclude=exclude)
+        if isinstance(pair, tuple):
+            if isinstance(pair[0], list):
+                indices, period = pair
+                result = result.get(indices, period)
+            else:
+                start, stop = pair
+                result = result[start:stop]
+        if rleak is True:
+            result = result.rleak()
+        return result
 
     return selector

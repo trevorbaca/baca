@@ -87,16 +87,9 @@ baca
    ~leaf
    ~leaves
    ~lt
-   ~ltleaves
-   ~ltqruns
    ~lts
-   ~mgroups
-   ~mleaves
-   ~mmrest
    ~note
    ~notes
-   ~ntruns
-   ~omgroups
    ~phead
    ~pheads
    ~pleaf
@@ -105,12 +98,10 @@ baca
    ~plts
    ~ptail
    ~ptails
-   ~qruns
    ~rest
    ~rests
    ~rleaves
    ~run
-   ~runs
    ~skip
    ~tleaves
    ~tuplet
@@ -123,25 +114,11 @@ baca
 
 .. autofunction:: lt
 
-.. autofunction:: ltleaves
-
-.. autofunction:: ltqruns
-
 .. autofunction:: lts
-
-.. autofunction:: mgroups
-
-.. autofunction:: mleaves
-
-.. autofunction:: mmrest
 
 .. autofunction:: note
 
 .. autofunction:: notes
-
-.. autofunction:: ntruns
-
-.. autofunction:: omgroups
 
 .. autofunction:: phead
 
@@ -159,8 +136,6 @@ baca
 
 .. autofunction:: ptails
 
-.. autofunction:: qruns
-
 .. autofunction:: rest
 
 .. autofunction:: rests
@@ -168,8 +143,6 @@ baca
 .. autofunction:: rleaves
 
 .. autofunction:: run
-
-.. autofunction:: runs
 
 .. autofunction:: skip
 

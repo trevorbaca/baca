@@ -1632,7 +1632,7 @@ def mmrest_text_color(
         ...     baca.markup(
         ...         r"\baca-boxed-markup still",
         ...         literal=True,
-        ...         selector=baca.mmrest(1),
+        ...         selector=baca.selectors.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_color("#red"),
         ...     )
@@ -1807,7 +1807,7 @@ def mmrest_text_extra_offset(
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
         ...         literal=True,
-        ...         selector=baca.mmrest(1),
+        ...         selector=baca.selectors.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_extra_offset((0, 2)),
         ...     )
@@ -1955,7 +1955,7 @@ def mmrest_text_padding(
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
         ...         literal=True,
-        ...         selector=baca.mmrest(1),
+        ...         selector=baca.selectors.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_padding(2),
         ...     )
@@ -2102,7 +2102,7 @@ def mmrest_text_parent_center(
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
         ...         literal=True,
-        ...         selector=baca.mmrest(1),
+        ...         selector=baca.selectors.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_parent_center(),
         ...     )
@@ -2250,7 +2250,7 @@ def mmrest_text_staff_padding(
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
         ...         literal=True,
-        ...         selector=baca.mmrest(1),
+        ...         selector=baca.selectors.mmrest(1),
         ...         ),
         ...     baca.mmrest_text_staff_padding(2),
         ...     )
@@ -2916,7 +2916,7 @@ def repeat_tie_down(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.repeat_tie(selector=baca.pleaves()[1:]),
-        ...         map=baca.qruns(),
+        ...         map=baca.selectors.qruns(),
         ...         ),
         ...     baca.repeat_tie_down(),
         ...     baca.stem_up(),
@@ -3061,7 +3061,7 @@ def repeat_tie_up(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.repeat_tie(selector=baca.pleaves()[1:]),
-        ...         map=baca.qruns(),
+        ...         map=baca.selectors.qruns(),
         ...         ),
         ...     baca.repeat_tie_up(),
         ...     baca.stem_down(),

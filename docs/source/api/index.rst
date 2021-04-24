@@ -26,16 +26,9 @@ Bača API
    ~baca.leaf
    ~baca.leaves
    ~baca.lt
-   ~baca.ltleaves
-   ~baca.ltqruns
    ~baca.lts
-   ~baca.mgroups
-   ~baca.mleaves
-   ~baca.mmrest
    ~baca.note
    ~baca.notes
-   ~baca.ntruns
-   ~baca.omgroups
    ~baca.phead
    ~baca.pheads
    ~baca.pleaf
@@ -44,12 +37,10 @@ Bača API
    ~baca.plts
    ~baca.ptail
    ~baca.ptails
-   ~baca.qruns
    ~baca.rest
    ~baca.rests
    ~baca.rleaves
    ~baca.run
-   ~baca.runs
    ~baca.skip
    ~baca.tleaves
    ~baca.tuplet
@@ -889,7 +880,7 @@ Rhythm commands.
    ~baca.selectors.leaf_in_each_rleak_run
    ~baca.selectors.leaf_in_each_run
    ~baca.selectors.leaf_in_each_tuplet
-   ~baca.selectors.leaves_
+   ~baca.selectors.leaves
    ~baca.selectors.leaves_in_each_lt
    ~baca.selectors.leaves_in_each_plt
    ~baca.selectors.leaves_in_each_run
@@ -898,10 +889,19 @@ Rhythm commands.
    ~baca.selectors.leaves_in_get_tuplets
    ~baca.selectors.lleaf
    ~baca.selectors.lparts
+   ~baca.selectors.ltleaves
+   ~baca.selectors.ltleaves_rleak
+   ~baca.selectors.ltqruns
+   ~baca.selectors.mgroups
+   ~baca.selectors.mmrest
+   ~baca.selectors.ntruns
+   ~baca.selectors.omgroups
    ~baca.selectors.pleaf_in_each_tuplet
    ~baca.selectors.ptail_in_each_tuplet
-   ~baca.selectors.rleaf_
+   ~baca.selectors.qruns
+   ~baca.selectors.rleaf
    ~baca.selectors.rleak_runs
+   ~baca.selectors.runs
 
 .. raw:: html
 
