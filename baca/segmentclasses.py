@@ -2705,7 +2705,12 @@ def breaks(
                 alignment_distances = system.distances
             else:
                 alignment_distances = system[2]
+            assert 0 <= skip_index
+
             selector = classes.select().skip(skip_index)
+            # def selector(argument):
+            #    return classes.Selection(argument).skips()[skip_index:skip_index + 1]
+
             if j == 0:
                 break_ = abjad.LilyPondLiteral(r"\pageBreak")
             else:

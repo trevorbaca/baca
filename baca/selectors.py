@@ -16,7 +16,18 @@ def _handle_pair(selection, pair):
     return selection
 
 
-### NEW ###
+def clparts(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).clparts(*arguments, **keywords)
+
+    return selector
+
+
+def cmgroups(*arguments, **keywords):
+    def selector(argument):
+        return Selection(argument).cmgroups(*arguments, **keywords)
+
+    return selector
 
 
 def leaf_after_each_ptail():
@@ -55,6 +66,35 @@ def leaf_in_each_tuplet(n):
         selection = Selection(argument)
         selection = selection.tuplets()
         return Selection(Selection(_).leaf(n) for _ in selection)
+
+    return selector
+
+
+def leaves(
+    pair=None,
+    *,
+    exclude: abjad.typings.Strings = None,
+    grace: bool = None,
+    head: bool = None,
+    pitched: bool = None,
+    prototype=None,
+    reverse: bool = None,
+    tail: bool = None,
+    trim: typing.Union[bool, int] = None,
+):
+    def selector(argument):
+        selection = abjad.select(argument).leaves(
+            prototype=prototype,
+            exclude=exclude,
+            grace=grace,
+            head=head,
+            pitched=pitched,
+            reverse=reverse,
+            tail=tail,
+            trim=trim,
+        )
+        selection = _handle_pair(selection, pair)
+        return selection
 
     return selector
 
@@ -136,98 +176,6 @@ def leaves_in_exclude_tuplets(pattern, pair):
     return _leaves_in_get_tuplets(pattern, pair, exclude=True)
 
 
-def ltleaves_rleak():
-    def selector(argument):
-        return Selection(argument).ltleaves().rleak()
-
-    return selector
-
-
-def pleaf_in_each_tuplet(n, pair=None):
-    assert isinstance(n, int), repr(n)
-    if pair is None:
-        start, stop = None, None
-    else:
-        start, stop = pair
-
-    def selector(argument):
-        selection = Selection(argument).tuplets()[start:stop]
-        return Selection(Selection(_).pleaf(n) for _ in selection)
-
-    return selector
-
-
-def ptail_in_each_tuplet(n, pair=None):
-    assert isinstance(n, int), repr(n)
-    if pair is None:
-        start, stop = None, None
-    else:
-        start, stop = pair
-
-    def selector(argument):
-        selection = Selection(argument).tuplets()[start:stop]
-        return Selection(Selection(_).ptail(n) for _ in selection)
-
-    return selector
-
-
-def rleak_runs(start=0, stop=None):
-    def selector(argument):
-        selection = Selection(argument)
-        selection = selection.runs()
-        if start != 0 or stop is not None:
-            selection = selection[start:stop]
-        return Selection(Selection(_).leaves().rleak() for _ in selection)
-
-    return selector
-
-
-### REPLACEMENTS ###
-
-
-def clparts(*arguments, **keywords):
-    def selector(argument):
-        return Selection(argument).clparts(*arguments, **keywords)
-
-    return selector
-
-
-def cmgroups(*arguments, **keywords):
-    def selector(argument):
-        return Selection(argument).cmgroups(*arguments, **keywords)
-
-    return selector
-
-
-def leaves(
-    pair=None,
-    *,
-    exclude: abjad.typings.Strings = None,
-    grace: bool = None,
-    head: bool = None,
-    pitched: bool = None,
-    prototype=None,
-    reverse: bool = None,
-    tail: bool = None,
-    trim: typing.Union[bool, int] = None,
-):
-    def selector(argument):
-        selection = abjad.select(argument).leaves(
-            prototype=prototype,
-            exclude=exclude,
-            grace=grace,
-            head=head,
-            pitched=pitched,
-            reverse=reverse,
-            tail=tail,
-            trim=trim,
-        )
-        selection = _handle_pair(selection, pair)
-        return selection
-
-    return selector
-
-
 def lleaf(*arguments, **keywords):
     def selector(argument):
         return Selection(argument).lleaf(*arguments, **keywords)
@@ -245,6 +193,13 @@ def lparts(*arguments, **keywords):
 def ltleaves(*arguments, **keywords):
     def selector(argument):
         return Selection(argument).ltleaves(*arguments, **keywords)
+
+    return selector
+
+
+def ltleaves_rleak():
+    def selector(argument):
+        return Selection(argument).ltleaves().rleak()
 
     return selector
 
@@ -284,6 +239,43 @@ def omgroups(*arguments, **keywords):
     return selector
 
 
+def pleaf_in_each_tuplet(n, pair=None):
+    assert isinstance(n, int), repr(n)
+    if pair is None:
+        start, stop = None, None
+    else:
+        start, stop = pair
+
+    def selector(argument):
+        selection = Selection(argument).tuplets()[start:stop]
+        return Selection(Selection(_).pleaf(n) for _ in selection)
+
+    return selector
+
+
+def plts(pair=None):
+    def selector(argument):
+        result = Selection(argument).plts()
+        result = _handle_pair(result, pair)
+        return result
+
+    return selector
+
+
+def ptail_in_each_tuplet(n, pair=None):
+    assert isinstance(n, int), repr(n)
+    if pair is None:
+        start, stop = None, None
+    else:
+        start, stop = pair
+
+    def selector(argument):
+        selection = Selection(argument).tuplets()[start:stop]
+        return Selection(Selection(_).ptail(n) for _ in selection)
+
+    return selector
+
+
 def qruns(*arguments, **keywords):
     def selector(argument):
         return Selection(argument).qruns(*arguments, **keywords)
@@ -297,6 +289,17 @@ def rleaf(n=0, *, exclude: abjad.Strings = None):
     def selector(argument):
         selection = Selection(argument).rleaf(n=n, exclude=exclude)
         return selection
+
+    return selector
+
+
+def rleak_runs(start=0, stop=None):
+    def selector(argument):
+        selection = Selection(argument)
+        selection = selection.runs()
+        if start != 0 or stop is not None:
+            selection = selection[start:stop]
+        return Selection(Selection(_).leaves().rleak() for _ in selection)
 
     return selector
 

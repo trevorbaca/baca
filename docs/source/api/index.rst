@@ -897,6 +897,7 @@ Rhythm commands.
    ~baca.selectors.ntruns
    ~baca.selectors.omgroups
    ~baca.selectors.pleaf_in_each_tuplet
+   ~baca.selectors.plts
    ~baca.selectors.ptail_in_each_tuplet
    ~baca.selectors.qruns
    ~baca.selectors.rleaf

@@ -268,6 +268,7 @@ class Command:
                 hasattr(self.map, "_is_singular_get_item")
                 and self.map._is_singular_get_item()
             ):
+                raise Exception("ASDF")
                 argument = [argument]
             for subargument in argument:
                 self._call(argument=subargument)

@@ -45,6 +45,7 @@ selectors
    ~ntruns
    ~omgroups
    ~pleaf_in_each_tuplet
+   ~plts
    ~ptail_in_each_tuplet
    ~qruns
    ~rleaf
@@ -96,6 +97,8 @@ selectors
 .. autofunction:: omgroups
 
 .. autofunction:: pleaf_in_each_tuplet
+
+.. autofunction:: plts
 
 .. autofunction:: ptail_in_each_tuplet
 

@@ -3397,7 +3397,7 @@ r"""
         ...     baca.instrument(instruments['Flute']),
         ...     baca.new(
         ...         baca.instrument(instruments['Flute']),
-        ...         map=baca.leaves()[1],
+        ...         map=baca.selectors.leaves((1, 2)),
         ...         ),
         ...     baca.make_notes(),
         ...     )
@@ -5767,7 +5767,7 @@ r"""
         ...     baca.margin_markup(margin_markups['I+II']),
         ...     baca.new(
         ...         baca.margin_markup(margin_markups['I+II']),
-        ...         map=baca.leaves()[1],
+        ...         map=baca.selectors.leaves((1, 2)),
         ...         ),
         ...     baca.make_notes(),
         ...     )

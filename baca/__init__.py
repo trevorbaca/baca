@@ -2,6 +2,7 @@ import abjad
 import ide
 
 from . import const
+from . import selectors
 from . import tonality
 from .classes import *
 from .commandclasses import *
@@ -20,21 +21,6 @@ from .rhythmcommands import *
 from .scoping import *
 from .segmentclasses import *
 from .segmentmaker import *
-from .selectors import (
-    leaf_after_each_ptail,
-    leaf_in_each_rleak_run,
-    leaf_in_each_run,
-    leaf_in_each_tuplet,
-    leaves_in_each_lt,
-    leaves_in_each_plt,
-    leaves_in_each_run,
-    leaves_in_each_tuplet,
-    leaves_in_exclude_tuplets,
-    leaves_in_get_tuplets,
-    pleaf_in_each_tuplet,
-    ptail_in_each_tuplet,
-    rleak_runs,
-)
 from .spannercommands import *
 from .templates import *
 from .typings import *
