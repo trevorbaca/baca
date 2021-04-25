@@ -55,6 +55,7 @@ selectors
    ~rleaf
    ~rleak_runs
    ~runs
+   ~tleaves
    ~tuplet
    ~tuplets
 
@@ -123,6 +124,8 @@ selectors
 .. autofunction:: rleak_runs
 
 .. autofunction:: runs
+
+.. autofunction:: tleaves
 
 .. autofunction:: tuplet
 

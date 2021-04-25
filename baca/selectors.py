@@ -351,6 +351,17 @@ def runs(pair=None, exclude=None, rleak=False):
     return selector
 
 
+def tleaves(pair=None, exclude=None, grace=None, rleak=False):
+    def selector(argument):
+        result = Selection(argument).tleaves(exclude=exclude, grace=grace)
+        result = _handle_pair(result, pair)
+        if rleak is True:
+            result = result.rleak()
+        return result
+
+    return selector
+
+
 def tuplet(n):
     def selector(argument):
         return Selection(argument).tuplet(n)

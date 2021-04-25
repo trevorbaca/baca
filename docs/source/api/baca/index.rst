@@ -100,7 +100,6 @@ baca
    ~rleaves
    ~run
    ~skip
-   ~tleaves
    ~persistence.persistence
 
 .. autofunction:: leaf
@@ -134,5 +133,3 @@ baca
 .. autofunction:: run
 
 .. autofunction:: skip
-
-.. autofunction:: tleaves

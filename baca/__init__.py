@@ -139,10 +139,3 @@ def skip(*arguments, **keywords):
 
 
 skip.__doc__ = Selection.skip.__doc__
-
-
-def tleaves(*arguments, **keywords):
-    return select().tleaves(*arguments, **keywords)
-
-
-tleaves.__doc__ = Selection.tleaves.__doc__

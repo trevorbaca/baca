@@ -39,7 +39,6 @@ Bača API
    ~baca.rleaves
    ~baca.run
    ~baca.skip
-   ~baca.tleaves
    ~baca.persistence.persistence
 
 .. raw:: html
@@ -902,6 +901,7 @@ Rhythm commands.
    ~baca.selectors.rleaf
    ~baca.selectors.rleak_runs
    ~baca.selectors.runs
+   ~baca.selectors.tleaves
    ~baca.selectors.tuplet
    ~baca.selectors.tuplets
 

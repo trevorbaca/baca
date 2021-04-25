@@ -797,7 +797,7 @@ def dls_staff_padding(
         ...         baca.hairpin(
         ...             'p < f',
         ...             remove_length_1_spanner_start=True,
-        ...             selector=baca.tleaves(),
+        ...             selector=baca.selectors.tleaves(),
         ...             ),
         ...         map=baca.selectors.tuplets(),
         ...         ),
@@ -903,7 +903,7 @@ def dls_up(
         ...         baca.hairpin(
         ...             'p < f',
         ...             remove_length_1_spanner_start=True,
-        ...             selector=baca.tleaves(),
+        ...             selector=baca.selectors.tleaves(),
         ...             ),
         ...         map=baca.selectors.tuplets(),
         ...         ),
@@ -5606,7 +5606,7 @@ def text_spanner_staff_padding(
         ...     baca.text_script_staff_padding(6),
         ...     baca.text_spanner(
         ...         'pont. => ord.',
-        ...         selector=baca.tleaves(),
+        ...         selector=baca.selectors.tleaves(),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
