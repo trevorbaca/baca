@@ -54,6 +54,7 @@ selectors
    ~qruns
    ~rleaf
    ~rleak_runs
+   ~rleaves
    ~runs
    ~tleaves
    ~tuplet
@@ -122,6 +123,8 @@ selectors
 .. autofunction:: rleaf
 
 .. autofunction:: rleak_runs
+
+.. autofunction:: rleaves
 
 .. autofunction:: runs
 

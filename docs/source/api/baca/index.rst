@@ -97,7 +97,6 @@ baca
    ~ptails
    ~rest
    ~rests
-   ~rleaves
    ~run
    ~skip
    ~persistence.persistence
@@ -127,8 +126,6 @@ baca
 .. autofunction:: rest
 
 .. autofunction:: rests
-
-.. autofunction:: rleaves
 
 .. autofunction:: run
 

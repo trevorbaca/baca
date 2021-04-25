@@ -120,13 +120,6 @@ def rests(*arguments, **keywords):
 rests.__doc__ = Selection.rests.__doc__
 
 
-def rleaves(*arguments, **keywords):
-    return select().rleaves(*arguments, **keywords)
-
-
-rleaves.__doc__ = Selection.rleaves.__doc__
-
-
 def run(*arguments, **keywords):
     return select().run(*arguments, **keywords)
 

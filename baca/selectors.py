@@ -340,6 +340,15 @@ def rleak_runs(start=0, stop=None):
     return selector
 
 
+def rleaves(pair=None):
+    def selector(argument):
+        result = Selection(argument).rleaves()
+        result = _handle_pair(result, pair)
+        return result
+
+    return selector
+
+
 def runs(pair=None, exclude=None, rleak=False):
     def selector(argument):
         result = Selection(argument).runs(exclude=exclude)

@@ -4657,7 +4657,7 @@ def sustain_pedal_staff_padding(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
-        ...         baca.sustain_pedal(selector=baca.rleaves()),
+        ...         baca.sustain_pedal(selector=baca.selectors.rleaves()),
         ...         map=baca.selectors.tuplets(),
         ...         ),
         ...     baca.sustain_pedal_staff_padding(4),
