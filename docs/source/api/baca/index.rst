@@ -84,7 +84,6 @@ baca
 .. autosummary::
    :nosignatures:
 
-   ~leaf
    ~leaves
    ~lts
    ~pleaves
@@ -97,8 +96,6 @@ baca
    ~run
    ~skip
    ~persistence.persistence
-
-.. autofunction:: leaf
 
 .. autofunction:: leaves
 

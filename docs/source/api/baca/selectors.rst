@@ -24,6 +24,7 @@ selectors
 
    ~clparts
    ~cmgroups
+   ~leaf
    ~leaf_after_each_ptail
    ~leaf_in_each_rleak_run
    ~leaf_in_each_run
@@ -67,6 +68,8 @@ selectors
 .. autofunction:: clparts
 
 .. autofunction:: cmgroups
+
+.. autofunction:: leaf
 
 .. autofunction:: leaf_after_each_ptail
 

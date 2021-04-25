@@ -35,6 +35,13 @@ def cmgroups(*arguments, **keywords):
     return selector
 
 
+def leaf(n, grace=None):
+    def selector(argument):
+        return Selection(argument).leaf(n, grace=grace)
+
+    return selector
+
+
 def leaf_after_each_ptail():
     def selector(argument):
         selection = Selection(argument)

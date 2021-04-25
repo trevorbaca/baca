@@ -23,7 +23,6 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.leaf
    ~baca.leaves
    ~baca.lts
    ~baca.pleaves
@@ -866,6 +865,7 @@ Rhythm commands.
 
    ~baca.selectors.clparts
    ~baca.selectors.cmgroups
+   ~baca.selectors.leaf
    ~baca.selectors.leaf_after_each_ptail
    ~baca.selectors.leaf_in_each_rleak_run
    ~baca.selectors.leaf_in_each_run

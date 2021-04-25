@@ -1766,7 +1766,7 @@ def mmrest_text_color(
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
         ...         literal=True,
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.selectors.leaf(1),
         ...         ),
         ...     baca.mmrest_text_color("#red", selector=baca.leaves()),
         ...     baca.pitches([2, 4]),
@@ -3785,7 +3785,7 @@ def script_extra_offset(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.accent(selector=baca.selectors.pheads()),
-        ...     baca.script_extra_offset((-1.5, 0), selector=baca.leaf(1)),
+        ...     baca.script_extra_offset((-1.5, 0), selector=baca.selectors.leaf(1)),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
@@ -4846,7 +4846,7 @@ def text_script_color(
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
         ...         literal=True,
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.selectors.leaf(1),
         ...         ),
         ...     baca.text_script_color("#red"),
         ...     )
@@ -4975,7 +4975,7 @@ def text_script_down(
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
         ...         literal=True,
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.selectors.leaf(1),
         ...         ),
         ...     baca.text_script_down()
         ...     )
@@ -5023,7 +5023,7 @@ def text_script_extra_offset(
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
         ...         literal=True,
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.selectors.leaf(1),
         ...         ),
         ...     baca.text_script_extra_offset((0, 2)),
         ...     )
@@ -5176,7 +5176,7 @@ def text_script_padding(
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
         ...         literal=True,
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.selectors.leaf(1),
         ...         ),
         ...     baca.text_script_padding(2),
         ...     )
@@ -5352,7 +5352,7 @@ def text_script_staff_padding(
         ...     baca.markup(
         ...         r'\baca-boxed-markkup still',
         ...         literal=True,
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.selectors.leaf(1),
         ...         ),
         ...     baca.text_script_staff_padding(2)
         ...     )
@@ -5481,7 +5481,7 @@ def text_script_up(
         ...     baca.markup(
         ...         r'\baca-boxed-markup still',
         ...         literal=True,
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.selectors.leaf(1),
         ...         ),
         ...     baca.text_script_up()
         ...     )

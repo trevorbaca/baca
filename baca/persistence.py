@@ -565,8 +565,8 @@ r"""
         ...     )
         >>> maker(
         ...     'Music_Voice',
-        ...     baca.clef('treble', selector=baca.leaf(0)),
-        ...     baca.clef('treble', selector=baca.leaf(1)),
+        ...     baca.clef('treble', selector=baca.selectors.leaf(0)),
+        ...     baca.clef('treble', selector=baca.selectors.leaf(1)),
         ...     )
         >>> lilypond_file = maker.run(environment='docs')
         >>> block = abjad.Block(name='layout')
@@ -1247,7 +1247,7 @@ r"""
         ...     'Music_Voice',
         ...     baca.make_notes(),
         ...     baca.dynamic('f'),
-        ...     baca.dynamic('f', selector=baca.leaf(1)),
+        ...     baca.dynamic('f', selector=baca.selectors.leaf(1)),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -1505,7 +1505,7 @@ r"""
         ...     'Music_Voice',
         ...     baca.make_notes(),
         ...     baca.dynamic('sfz'),
-        ...     baca.dynamic('sfz', selector=baca.leaf(1)),
+        ...     baca.dynamic('sfz', selector=baca.selectors.leaf(1)),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -1766,7 +1766,7 @@ r"""
         ...     'Music_Voice',
         ...     baca.make_notes(),
         ...     baca.dynamic('mf'),
-        ...     baca.dynamic('"mf"', selector=baca.leaf(1)),
+        ...     baca.dynamic('"mf"', selector=baca.selectors.leaf(1)),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -7232,7 +7232,7 @@ r"""
         >>> maker(
         ...     'Global_Skips',
         ...     baca.metronome_mark('112'),
-        ...     baca.metronome_mark('112', selector=baca.leaf(1)),
+        ...     baca.metronome_mark('112', selector=baca.selectors.leaf(1)),
         ...     )
         >>> maker(
         ...     'Music_Voice',
@@ -7538,7 +7538,7 @@ r"""
         ... )
         >>> tag = "baca.bar_extent_persistent"
         >>> command = baca.IndicatorCommand(
-        ...     indicators=[override], selector=baca.leaf(0), tags=[tag]
+        ...     indicators=[override], selector=baca.selectors.leaf(0), tags=[tag]
         ... )
 
         >>> maker(
@@ -7857,7 +7857,7 @@ r"""
         ... )
         >>> tag = "baca.bar_extent_persistent"
         >>> command = baca.IndicatorCommand(
-        ...     indicators=[override], selector=baca.leaf(0), tags=[tag]
+        ...     indicators=[override], selector=baca.selectors.leaf(0), tags=[tag]
         ... )
         >>> maker(
         ...     'Music_Voice',
@@ -8410,7 +8410,7 @@ r"""
         ...     'Music_Voice',
         ...     baca.make_notes(),
         ...     baca.staff_lines(5),
-        ...     baca.staff_lines(5, selector=baca.leaf(1)),
+        ...     baca.staff_lines(5, selector=baca.selectors.leaf(1)),
         ...     )
 
         >>> lilypond_file = maker.run(environment='docs')
@@ -9150,7 +9150,7 @@ r"""
         ...     baca.metronome_mark(baca.Accelerando()),
         ...     baca.metronome_mark(
         ...         baca.Accelerando(),
-        ...         selector=baca.leaf(1),
+        ...         selector=baca.selectors.leaf(1),
         ...         ),
         ...     )
         >>> maker(
