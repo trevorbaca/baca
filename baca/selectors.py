@@ -13,6 +13,10 @@ def _handle_pair(selection, pair):
         else:
             start, stop = pair
             selection = selection[start:stop]
+    elif isinstance(pair, list):
+        selection = selection.get(pair)
+    elif isinstance(pair, abjad.Pattern):
+        selection = selection.get(pair)
     return selection
 
 
@@ -190,6 +194,13 @@ def lparts(*arguments, **keywords):
     return selector
 
 
+def lt(n):
+    def selector(argument):
+        return Selection(argument).lt(n)
+
+    return selector
+
+
 def ltleaves(*arguments, **keywords):
     def selector(argument):
         return Selection(argument).ltleaves(*arguments, **keywords)
@@ -211,6 +222,15 @@ def ltqruns(*arguments, **keywords):
     return selector
 
 
+def lts(pair=None):
+    def selector(argument):
+        result = Selection(argument).lts()
+        result = _handle_pair(result, pair)
+        return result
+
+    return selector
+
+
 def mgroups(*arguments, **keywords):
     def selector(argument):
         return Selection(argument).mgroups(*arguments, **keywords)
@@ -221,6 +241,22 @@ def mgroups(*arguments, **keywords):
 def mmrest(*arguments, **keywords):
     def selector(argument):
         return Selection(argument).mmrest(*arguments, **keywords)
+
+    return selector
+
+
+def note(n):
+    def selector(argument):
+        return Selection(argument).note(n)
+
+    return selector
+
+
+def notes(pair=None):
+    def selector(argument):
+        result = Selection(argument).notes()
+        result = _handle_pair(result, pair)
+        return result
 
     return selector
 
@@ -307,15 +343,25 @@ def rleak_runs(start=0, stop=None):
 def runs(pair=None, exclude=None, rleak=False):
     def selector(argument):
         result = Selection(argument).runs(exclude=exclude)
-        if isinstance(pair, tuple):
-            if isinstance(pair[0], list):
-                indices, period = pair
-                result = result.get(indices, period)
-            else:
-                start, stop = pair
-                result = result[start:stop]
+        result = _handle_pair(result, pair)
         if rleak is True:
             result = result.rleak()
+        return result
+
+    return selector
+
+
+def tuplet(n):
+    def selector(argument):
+        return Selection(argument).tuplet(n)
+
+    return selector
+
+
+def tuplets(pair=None):
+    def selector(argument):
+        result = Selection(argument).tuplets()
+        result = _handle_pair(result, pair)
         return result
 
     return selector

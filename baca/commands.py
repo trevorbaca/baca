@@ -315,11 +315,10 @@ def close_volta(
 
 def color(
     selector=lambda _: classes.Selection(_).leaves(),
+    lone=False,
 ) -> commandclasses.ColorCommand:
     r"""
     Makes color command.
-
-    :param selector: selector.
 
     ..  container:: example
 
@@ -417,7 +416,7 @@ def color(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.color(baca.tuplets()[1:2].leaves()),
+        ...     baca.color(lambda _: baca.Selection(_).tuplets()[1:2].leaves()),
         ...     rmakers.unbeam(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -480,7 +479,7 @@ def color(
             >>
 
     """
-    return commandclasses.ColorCommand(selector=selector)
+    return commandclasses.ColorCommand(selector=selector, lone=lone)
 
 
 def container(
@@ -1018,7 +1017,7 @@ def dynamic_down(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.dynamic('p'),
-        ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
+        ...     baca.dynamic('f', selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0)),
         ...     baca.dynamic_down(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -1110,7 +1109,7 @@ def dynamic_up(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.dynamic('p'),
-        ...     baca.dynamic('f', selector=baca.tuplets()[1:2].phead(0)),
+        ...     baca.dynamic('f', selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0)),
         ...     baca.dynamic_up(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -1218,11 +1217,11 @@ def finger_pressure_transition(
 
         >>> maker(
         ...     'Music_Voice',
-        ...     baca.finger_pressure_transition(selector=baca.notes()[:2]),
-        ...     baca.finger_pressure_transition(selector=baca.notes()[2:]),
+        ...     baca.finger_pressure_transition(selector=baca.selectors.notes((None, 2))),
+        ...     baca.finger_pressure_transition(selector=baca.selectors.notes((2, None))),
         ...     baca.make_notes(),
-        ...     baca.note_head_style_harmonic(selector=baca.note(0)),
-        ...     baca.note_head_style_harmonic(selector=baca.note(2)),
+        ...     baca.note_head_style_harmonic(selector=baca.selectors.note(0)),
+        ...     baca.note_head_style_harmonic(selector=baca.selectors.note(2)),
         ...     baca.pitch('C5'),
         ...     )
 

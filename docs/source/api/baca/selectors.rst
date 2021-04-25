@@ -37,11 +37,15 @@ selectors
    ~leaves_in_get_tuplets
    ~lleaf
    ~lparts
+   ~lt
    ~ltleaves
    ~ltleaves_rleak
    ~ltqruns
+   ~lts
    ~mgroups
    ~mmrest
+   ~note
+   ~notes
    ~ntruns
    ~omgroups
    ~pleaf_in_each_tuplet
@@ -51,6 +55,8 @@ selectors
    ~rleaf
    ~rleak_runs
    ~runs
+   ~tuplet
+   ~tuplets
 
 .. autofunction:: clparts
 
@@ -82,15 +88,23 @@ selectors
 
 .. autofunction:: lparts
 
+.. autofunction:: lt
+
 .. autofunction:: ltleaves
 
 .. autofunction:: ltleaves_rleak
 
 .. autofunction:: ltqruns
 
+.. autofunction:: lts
+
 .. autofunction:: mgroups
 
 .. autofunction:: mmrest
+
+.. autofunction:: note
+
+.. autofunction:: notes
 
 .. autofunction:: ntruns
 
@@ -109,3 +123,7 @@ selectors
 .. autofunction:: rleak_runs
 
 .. autofunction:: runs
+
+.. autofunction:: tuplet
+
+.. autofunction:: tuplets

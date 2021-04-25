@@ -43,32 +43,11 @@ def leaves(*arguments, **keywords):
 leaves.__doc__ = Selection.leaves.__doc__
 
 
-def lt(*arguments, **keywords):
-    return select().lt(*arguments, **keywords)
-
-
-lt.__doc__ = Selection.lt.__doc__
-
-
 def lts(*arguments, **keywords):
     return select().lts(*arguments, **keywords)
 
 
 lts.__doc__ = Selection.lts.__doc__
-
-
-def note(*arguments, **keywords):
-    return select().note(*arguments, **keywords)
-
-
-note.__doc__ = Selection.note.__doc__
-
-
-def notes(*arguments, **keywords):
-    return select().notes(*arguments, **keywords)
-
-
-notes.__doc__ = Selection.notes.__doc__
 
 
 def phead(*arguments, **keywords):
@@ -167,17 +146,3 @@ def tleaves(*arguments, **keywords):
 
 
 tleaves.__doc__ = Selection.tleaves.__doc__
-
-
-def tuplet(*arguments, **keywords):
-    return select().tuplet(*arguments, **keywords)
-
-
-tuplet.__doc__ = Selection.tuplet.__doc__
-
-
-def tuplets(*arguments, **keywords):
-    return select().tuplets(*arguments, **keywords)
-
-
-tuplets.__doc__ = Selection.tuplets.__doc__

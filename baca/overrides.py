@@ -799,7 +799,7 @@ def dls_staff_padding(
         ...             remove_length_1_spanner_start=True,
         ...             selector=baca.tleaves(),
         ...             ),
-        ...         map=baca.tuplets(),
+        ...         map=baca.selectors.tuplets(),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -905,7 +905,7 @@ def dls_up(
         ...             remove_length_1_spanner_start=True,
         ...             selector=baca.tleaves(),
         ...             ),
-        ...         map=baca.tuplets(),
+        ...         map=baca.selectors.tuplets(),
         ...         ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -1083,7 +1083,7 @@ def dynamic_text_extra_offset(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.dynamic('p'),
-        ...     baca.dynamic('f', selector=baca.tuplets()[1:2].pleaf(0)),
+        ...     baca.dynamic('f', selector=lambda _: baca.Selection(_).tuplets()[1:2].pleaf(0)),
         ...     baca.dynamic_text_extra_offset((-3, 0)),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -4658,7 +4658,7 @@ def sustain_pedal_staff_padding(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.sustain_pedal(selector=baca.rleaves()),
-        ...         map=baca.tuplets(),
+        ...         map=baca.selectors.tuplets(),
         ...         ),
         ...     baca.sustain_pedal_staff_padding(4),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -4764,7 +4764,7 @@ def text_script_color(
         ...     baca.markup('più mosso'),
         ...     baca.markup(
         ...         'lo stesso tempo',
-        ...         selector=baca.tuplets()[1:2].phead(0),
+        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.text_script_color("#red"),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -4893,7 +4893,7 @@ def text_script_down(
         ...     baca.markup('più mosso'),
         ...     baca.markup(
         ...         'lo stesso tempo',
-        ...         selector=baca.tuplets()[1:2].phead(0),
+        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.text_script_down(),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -5094,7 +5094,7 @@ def text_script_padding(
         ...     baca.markup('più mosso'),
         ...     baca.markup(
         ...         'lo stesso tempo',
-        ...         selector=baca.tuplets()[1:2].phead(0),
+        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.text_script_padding(4),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -5270,7 +5270,7 @@ def text_script_staff_padding(
         ...     baca.markup('più mosso'),
         ...     baca.markup(
         ...         'lo stesso tempo',
-        ...         selector=baca.tuplets()[1:2].phead(0),
+        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.text_script_staff_padding(n=4),
         ...     baca.tuplet_bracket_staff_padding(2),
@@ -5399,7 +5399,7 @@ def text_script_up(
         ...     baca.markup('più mosso'),
         ...     baca.markup(
         ...         'lo stesso tempo',
-        ...         selector=baca.tuplets()[1:2].phead(0),
+        ...         selector=lambda _: baca.Selection(_).tuplets()[1:2].phead(0),
         ...         ),
         ...     baca.text_script_up(),
         ...     baca.tuplet_bracket_staff_padding(2),

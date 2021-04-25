@@ -86,10 +86,7 @@ baca
 
    ~leaf
    ~leaves
-   ~lt
    ~lts
-   ~note
-   ~notes
    ~phead
    ~pheads
    ~pleaf
@@ -104,21 +101,13 @@ baca
    ~run
    ~skip
    ~tleaves
-   ~tuplet
-   ~tuplets
    ~persistence.persistence
 
 .. autofunction:: leaf
 
 .. autofunction:: leaves
 
-.. autofunction:: lt
-
 .. autofunction:: lts
-
-.. autofunction:: note
-
-.. autofunction:: notes
 
 .. autofunction:: phead
 
@@ -147,7 +136,3 @@ baca
 .. autofunction:: skip
 
 .. autofunction:: tleaves
-
-.. autofunction:: tuplet
-
-.. autofunction:: tuplets

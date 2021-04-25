@@ -859,13 +859,14 @@ class ColorCommand(scoping.Command):
 
     ### CLASS VARIABLES ###
 
-    __slots__ = ()
+    __slots__ = ("lone",)
 
     ### INITIALIZER ###
 
     def __init__(
         self,
         *,
+        lone: bool = None,
         map: abjad.Expression = None,
         match: typings.Indices = None,
         measures: typings.SliceTyping = None,
@@ -881,6 +882,7 @@ class ColorCommand(scoping.Command):
             scope=scope,
             selector=selector,
         )
+        self.lone = lone
 
     ### SPECIAL METHODS ###
 
@@ -892,7 +894,7 @@ class ColorCommand(scoping.Command):
             return
         assert self.selector is not None
         argument = self.selector(argument)
-        abjad.Label(argument).by_selector(self.selector)
+        abjad.Label(argument).by_selector(self.selector, lone=self.lone)
 
 
 class ContainerCommand(scoping.Command):
