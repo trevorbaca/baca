@@ -905,7 +905,10 @@ def dynamic(
         ...     baca.make_even_divisions(),
         ...     baca.dynamic('p'),
         ...     baca.dynamic('<'),
-        ...     baca.dynamic('!', selector=baca.pleaf(-1)),
+        ...     baca.dynamic(
+        ...         '!',
+        ...         selector=baca.selectors.pleaf(-1),
+        ...     ),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
 

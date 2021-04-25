@@ -661,7 +661,9 @@ def cross_staff(
         ...     'Viola_Music_Voice',
         ...     [[0, 2, 4, 5, 7]],
         ...     *commands,
-        ...     baca.cross_staff(selector=baca.pleaves()[-2:]),
+        ...     baca.cross_staff(
+        ...         selector=baca.selectors.pleaves((-2, None)),
+        ...     ),
         ...     rmakers.unbeam(),
         ...     baca.stem_up(),
         ...     anchor=baca.anchor('Violin_Music_Voice'),

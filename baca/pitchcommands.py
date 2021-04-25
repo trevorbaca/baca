@@ -27,7 +27,7 @@ class AccidentalAdjustmentCommand(scoping.Command):
 
         >>> maker(
         ...     'Music_Voice',
-        ...     baca.force_accidental(selector=baca.pleaves()[:2]),
+        ...     baca.force_accidental(selector=baca.selectors.pleaves((None, 2))),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches('E4 F4'),
         ...     )
@@ -7009,7 +7009,9 @@ def force_accidental(
 
         >>> maker(
         ...     'Music_Voice',
-        ...     baca.not_parts(baca.force_accidental(selector=baca.pleaves()[:2])),
+        ...     baca.not_parts(baca.force_accidental(
+        ...         selector=baca.selectors.pleaves((None, 2)),
+        ...     )),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches('E4 F4'),
         ...     )

@@ -2915,7 +2915,7 @@ def repeat_tie_down(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
-        ...         baca.repeat_tie(selector=baca.pleaves()[1:]),
+        ...         baca.repeat_tie(selector=baca.selectors.pleaves((1, None))),
         ...         map=baca.selectors.qruns(),
         ...         ),
         ...     baca.repeat_tie_down(),
@@ -3060,7 +3060,9 @@ def repeat_tie_up(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.new(
-        ...         baca.repeat_tie(selector=baca.pleaves()[1:]),
+        ...         baca.repeat_tie(
+        ...             selector=baca.selectors.pleaves((1, None)),
+        ...         ),
         ...         map=baca.selectors.qruns(),
         ...         ),
         ...     baca.repeat_tie_up(),
@@ -3579,7 +3581,7 @@ def script_color(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.accent(selector=baca.pheads()),
+        ...     baca.accent(selector=baca.selectors.pheads()),
         ...     baca.script_color("#red"),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -3680,7 +3682,7 @@ def script_down(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.accent(selector=baca.pheads()),
+        ...     baca.accent(selector=baca.selectors.pheads()),
         ...     baca.script_down(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -3782,7 +3784,7 @@ def script_extra_offset(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.accent(selector=baca.pheads()),
+        ...     baca.accent(selector=baca.selectors.pheads()),
         ...     baca.script_extra_offset((-1.5, 0), selector=baca.leaf(1)),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -3914,7 +3916,7 @@ def script_up(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.accent(selector=baca.pheads()),
+        ...     baca.accent(selector=baca.selectors.pheads()),
         ...     baca.script_up(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -5754,7 +5756,9 @@ def tie_down(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.stem_up(),
-        ...     baca.tie(selector=baca.pleaf(0)),
+        ...     baca.tie(
+        ...         selector=baca.selectors.pleaf(0),
+        ...     ),
         ...     baca.tie_down(),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )

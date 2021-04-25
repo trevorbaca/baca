@@ -26,9 +26,6 @@ Bača API
    ~baca.leaf
    ~baca.leaves
    ~baca.lts
-   ~baca.phead
-   ~baca.pheads
-   ~baca.pleaf
    ~baca.pleaves
    ~baca.plt
    ~baca.plts
@@ -893,7 +890,11 @@ Rhythm commands.
    ~baca.selectors.notes
    ~baca.selectors.ntruns
    ~baca.selectors.omgroups
+   ~baca.selectors.phead
+   ~baca.selectors.pheads
+   ~baca.selectors.pleaf
    ~baca.selectors.pleaf_in_each_tuplet
+   ~baca.selectors.pleaves
    ~baca.selectors.plts
    ~baca.selectors.ptail_in_each_tuplet
    ~baca.selectors.qruns

@@ -87,9 +87,6 @@ baca
    ~leaf
    ~leaves
    ~lts
-   ~phead
-   ~pheads
-   ~pleaf
    ~pleaves
    ~plt
    ~plts
@@ -106,12 +103,6 @@ baca
 .. autofunction:: leaves
 
 .. autofunction:: lts
-
-.. autofunction:: phead
-
-.. autofunction:: pheads
-
-.. autofunction:: pleaf
 
 .. autofunction:: pleaves
 

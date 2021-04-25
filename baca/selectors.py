@@ -8,6 +8,7 @@ from .classes import Selection
 def _handle_pair(selection, pair):
     if isinstance(pair, tuple):
         if isinstance(pair[0], list):
+            assert len(pair) == 2, repr(pair)
             indices, period = pair
             selection = selection.get(indices, period)
         else:
@@ -275,6 +276,29 @@ def omgroups(*arguments, **keywords):
     return selector
 
 
+def phead(n, exclude=None):
+    def selector(argument):
+        return Selection(argument).phead(n, exclude=exclude)
+
+    return selector
+
+
+def pheads(pair=None, exclude=None, grace=None):
+    def selector(argument):
+        result = Selection(argument).pheads(exclude=exclude, grace=grace)
+        result = _handle_pair(result, pair)
+        return result
+
+    return selector
+
+
+def pleaf(n, grace=None):
+    def selector(argument):
+        return Selection(argument).pleaf(n, grace=grace)
+
+    return selector
+
+
 def pleaf_in_each_tuplet(n, pair=None):
     assert isinstance(n, int), repr(n)
     if pair is None:
@@ -285,6 +309,19 @@ def pleaf_in_each_tuplet(n, pair=None):
     def selector(argument):
         selection = Selection(argument).tuplets()[start:stop]
         return Selection(Selection(_).pleaf(n) for _ in selection)
+
+    return selector
+
+
+def pleaves(pair=None, exclude=None, grace=None, lleak=False, rleak=False):
+    def selector(argument):
+        result = Selection(argument).pleaves(exclude=exclude, grace=grace)
+        result = _handle_pair(result, pair)
+        if lleak is True:
+            result = result.lleak()
+        if rleak is True:
+            result = result.rleak()
+        return result
 
     return selector
 

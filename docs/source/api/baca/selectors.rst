@@ -48,7 +48,11 @@ selectors
    ~notes
    ~ntruns
    ~omgroups
+   ~phead
+   ~pheads
+   ~pleaf
    ~pleaf_in_each_tuplet
+   ~pleaves
    ~plts
    ~ptail_in_each_tuplet
    ~qruns
@@ -112,7 +116,15 @@ selectors
 
 .. autofunction:: omgroups
 
+.. autofunction:: phead
+
+.. autofunction:: pheads
+
+.. autofunction:: pleaf
+
 .. autofunction:: pleaf_in_each_tuplet
+
+.. autofunction:: pleaves
 
 .. autofunction:: plts
 

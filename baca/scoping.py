@@ -635,7 +635,7 @@ class Suite:
         ...     baca.accent(),
         ...     baca.tenuto(),
         ...     measures=(1, 2),
-        ...     selector=baca.pleaves(),
+        ...     selector=baca.selectors.pleaves(),
         ...     )
 
         >>> string = abjad.storage(suite)
@@ -648,7 +648,7 @@ class Suite:
                         ]
                     ),
                 measures=(1, 2),
-                selector=baca.pleaves(),
+                selector=...,
                 tags=[
                     abjad.Tag('baca.accent()'),
                     ],
@@ -660,7 +660,7 @@ class Suite:
                         ]
                     ),
                 measures=(1, 2),
-                selector=baca.pleaves(),
+                selector=...,
                 tags=[
                     abjad.Tag('baca.tenuto()'),
                     ],

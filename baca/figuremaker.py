@@ -2180,11 +2180,11 @@ class Imbrication:
             ...     baca.imbricate(
             ...         "Music_Voice_One",
             ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(selector=baca.pheads()),
+            ...         baca.accent(selector=baca.selectors.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         allow_unused_pitches=True,
             ...     ),
-            ...     baca.staccato(selector=baca.pheads()),
+            ...     baca.staccato(selector=baca.selectors.pheads()),
             ... )
 
             >>> maker = baca.SegmentMaker(
@@ -2456,11 +2456,11 @@ class Imbrication:
             ...     baca.imbricate(
             ...         "Music_Voice_One",
             ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(selector=baca.pheads()),
+            ...         baca.accent(selector=baca.selectors.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         allow_unused_pitches=False,
             ...     ),
-            ...     baca.staccato(selector=baca.pheads()),
+            ...     baca.staccato(selector=baca.selectors.pheads()),
             ... )
             Traceback (most recent call last):
                 ...
@@ -2510,11 +2510,11 @@ class Imbrication:
             ...     baca.imbricate(
             ...         "Music_Voice_One",
             ...         [2, 19, 9, 18, 16],
-            ...         baca.accent(selector=baca.pheads()),
+            ...         baca.accent(selector=baca.selectors.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         hocket=True,
             ...     ),
-            ...     baca.staccato(selector=baca.pheads()),
+            ...     baca.staccato(selector=baca.selectors.pheads()),
             ... )
 
             >>> maker = baca.SegmentMaker(
@@ -2836,11 +2836,11 @@ class Imbrication:
             ...     baca.imbricate(
             ...         "Music_Voice_One",
             ...         [2, 18, 16, 15],
-            ...         baca.accent(selector=baca.pheads()),
+            ...         baca.accent(selector=baca.selectors.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
             ...         selector=baca.plts()[-9:],
             ...     ),
-            ...     baca.staccato(selector=baca.pheads()),
+            ...     baca.staccato(selector=baca.selectors.pheads()),
             ... )
 
             >>> maker = baca.SegmentMaker(
@@ -8034,7 +8034,7 @@ def coat(pitch: typing.Union[int, str, abjad.Pitch]) -> Coat:
         ...     baca.imbricate(
         ...         "Music_Voice_One",
         ...         segment,
-        ...         baca.accent(selector=baca.pheads()),
+        ...         baca.accent(selector=baca.selectors.pheads()),
         ...         rmakers.beam_groups(beam_rests=True),
         ...     ),
         ... )
@@ -8338,7 +8338,7 @@ def extend_beam(
         ...     baca.imbricate(
         ...         "Music_Voice_One",
         ...         [2, 10],
-        ...         baca.staccato(selector=baca.pheads()),
+        ...         baca.staccato(selector=baca.selectors.pheads()),
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.extend_beam(),
         ...     ),
@@ -8352,7 +8352,7 @@ def extend_beam(
         ...     baca.imbricate(
         ...         "Music_Voice_One",
         ...         [13, 9],
-        ...         baca.staccato(selector=baca.pheads()),
+        ...         baca.staccato(selector=baca.selectors.pheads()),
         ...         rmakers.beam_groups(beam_rests=True),
         ...     ),
         ... )
@@ -8983,14 +8983,14 @@ def imbricate(
         ...         [2, 19, 9],
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.beam_positions(6),
-        ...         baca.staccato(selector=baca.pheads()),
+        ...         baca.staccato(selector=baca.selectors.pheads()),
         ...         ),
         ...     baca.imbricate(
         ...         "Music_Voice_Three",
         ...         [16, 10, 18],
         ...         rmakers.beam_groups(beam_rests=True),
         ...         baca.beam_positions(8),
-        ...         baca.accent(selector=baca.pheads()),
+        ...         baca.accent(selector=baca.selectors.pheads()),
         ...         ),
         ...     rmakers.beam_groups(),
         ... )
@@ -9401,10 +9401,10 @@ def imbricate(
         ...     baca.imbricate(
         ...         "Music_Voice_One",
         ...         [2, 19, 9, 18, 16],
-        ...         baca.accent(selector=baca.pheads()),
+        ...         baca.accent(selector=baca.selectors.pheads()),
         ...         rmakers.beam_groups(beam_rests=True),
         ...     ),
-        ...     baca.staccato(selector=baca.pheads()),
+        ...     baca.staccato(selector=baca.selectors.pheads()),
         ... )
 
         >>> maker = baca.SegmentMaker(
@@ -9734,7 +9734,7 @@ def imbricate(
         ...     baca.imbricate(
         ...         "Music_Voice_One",
         ...         segment,
-        ...         baca.accent(selector=baca.pheads()),
+        ...         baca.accent(selector=baca.selectors.pheads()),
         ...         rmakers.beam_groups(beam_rests=True),
         ...     ),
         ... )

@@ -50,27 +50,6 @@ def lts(*arguments, **keywords):
 lts.__doc__ = Selection.lts.__doc__
 
 
-def phead(*arguments, **keywords):
-    return select().phead(*arguments, **keywords)
-
-
-phead.__doc__ = Selection.phead.__doc__
-
-
-def pheads(*arguments, **keywords):
-    return select().pheads(*arguments, **keywords)
-
-
-pheads.__doc__ = Selection.pheads.__doc__
-
-
-def pleaf(*arguments, **keywords):
-    return select().pleaf(*arguments, **keywords)
-
-
-pleaf.__doc__ = Selection.pleaf.__doc__
-
-
 def pleaves(*arguments, **keywords):
     return select().pleaves(*arguments, **keywords)
 

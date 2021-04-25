@@ -2023,7 +2023,9 @@ def repeat_tie(
         ...     rmakers.beam(),
         ...     baca.chunk(
         ...         baca.pitch(0, selector=baca.plt(1)),
-        ...         baca.repeat_tie(baca.phead(1)),
+        ...         baca.repeat_tie(
+        ...             baca.selectors.phead(1),
+        ...         ),
         ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
@@ -3288,7 +3290,9 @@ def stop_on_string(
         ...         treatments=[-1],
         ...     ),
         ...     rmakers.beam(),
-        ...     baca.stop_on_string(selector=baca.pleaf(-1)),
+        ...     baca.stop_on_string(
+        ...         selector=baca.selectors.pleaf(-1),
+        ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )
         >>> selection = stack([[0, 2, 10], [18, 16, 15, 20, 19], [9]])
