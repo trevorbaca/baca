@@ -299,9 +299,9 @@ def pheads(pair=None, exclude=None, grace=None):
     return selector
 
 
-def pleaf(n, grace=None):
+def pleaf(n, exclude=None, grace=None):
     def selector(argument):
-        return Selection(argument).pleaf(n, grace=grace)
+        return Selection(argument).pleaf(n, exclude=exclude, grace=grace)
 
     return selector
 
@@ -333,11 +333,25 @@ def pleaves(pair=None, exclude=None, grace=None, lleak=False, rleak=False):
     return selector
 
 
-def plts(pair=None):
+def plt(n):
     def selector(argument):
-        result = Selection(argument).plts()
+        return Selection(argument).plt(n)
+
+    return selector
+
+
+def plts(pair=None, exclude=None):
+    def selector(argument):
+        result = Selection(argument).plts(exclude=exclude)
         result = _handle_pair(result, pair)
         return result
+
+    return selector
+
+
+def ptail(n):
+    def selector(argument):
+        return Selection(argument).ptail(n)
 
     return selector
 
@@ -356,9 +370,34 @@ def ptail_in_each_tuplet(n, pair=None):
     return selector
 
 
+def ptails(pair=None, exclude=None):
+    def selector(argument):
+        result = Selection(argument).ptails(exclude=exclude)
+        result = _handle_pair(result, pair)
+        return result
+
+    return selector
+
+
 def qruns(*arguments, **keywords):
     def selector(argument):
         return Selection(argument).qruns(*arguments, **keywords)
+
+    return selector
+
+
+def rest(n):
+    def selector(argument):
+        return Selection(argument).rest(n)
+
+    return selector
+
+
+def rests(pair=None):
+    def selector(argument):
+        result = Selection(argument).rests()
+        result = _handle_pair(result, pair)
+        return result
 
     return selector
 
@@ -393,6 +432,13 @@ def rleaves(pair=None):
     return selector
 
 
+def run(n):
+    def selector(argument):
+        return Selection(argument).run(n)
+
+    return selector
+
+
 def runs(pair=None, exclude=None, rleak=False):
     def selector(argument):
         result = Selection(argument).runs(exclude=exclude)
@@ -400,6 +446,13 @@ def runs(pair=None, exclude=None, rleak=False):
         if rleak is True:
             result = result.rleak()
         return result
+
+    return selector
+
+
+def skip(n):
+    def selector(argument):
+        return Selection(argument).skip(n)
 
     return selector
 

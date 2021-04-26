@@ -1984,8 +1984,8 @@ class Imbrication:
             hocket = bool(hocket)
         self._hocket = hocket
         if selector is not None:
-            if not isinstance(selector, abjad.Expression):
-                raise TypeError(f"selector or none only: {selector!r}.")
+            if not callable(selector):
+                raise TypeError(f"callable or none only: {selector!r}.")
         self._selector = selector
         if truncate_ties is not None:
             truncate_ties = bool(truncate_ties)
@@ -2838,7 +2838,7 @@ class Imbrication:
             ...         [2, 18, 16, 15],
             ...         baca.accent(selector=baca.selectors.pheads()),
             ...         rmakers.beam_groups(beam_rests=True),
-            ...         selector=baca.plts()[-9:],
+            ...         selector=baca.selectors.plts((-9, None)),
             ...     ),
             ...     baca.staccato(selector=baca.selectors.pheads()),
             ... )

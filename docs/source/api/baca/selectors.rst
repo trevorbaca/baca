@@ -54,13 +54,20 @@ selectors
    ~pleaf
    ~pleaf_in_each_tuplet
    ~pleaves
+   ~plt
    ~plts
+   ~ptail
    ~ptail_in_each_tuplet
+   ~ptails
    ~qruns
+   ~rest
+   ~rests
    ~rleaf
    ~rleak_runs
    ~rleaves
+   ~run
    ~runs
+   ~skip
    ~tleaves
    ~tuplet
    ~tuplets
@@ -129,11 +136,21 @@ selectors
 
 .. autofunction:: pleaves
 
+.. autofunction:: plt
+
 .. autofunction:: plts
+
+.. autofunction:: ptail
 
 .. autofunction:: ptail_in_each_tuplet
 
+.. autofunction:: ptails
+
 .. autofunction:: qruns
+
+.. autofunction:: rest
+
+.. autofunction:: rests
 
 .. autofunction:: rleaf
 
@@ -141,7 +158,11 @@ selectors
 
 .. autofunction:: rleaves
 
+.. autofunction:: run
+
 .. autofunction:: runs
+
+.. autofunction:: skip
 
 .. autofunction:: tleaves
 

@@ -26,13 +26,7 @@ Bača API
    ~baca.leaves
    ~baca.lts
    ~baca.pleaves
-   ~baca.plt
    ~baca.plts
-   ~baca.ptail
-   ~baca.ptails
-   ~baca.rest
-   ~baca.rests
-   ~baca.run
    ~baca.skip
    ~baca.persistence.persistence
 
@@ -895,13 +889,20 @@ Rhythm commands.
    ~baca.selectors.pleaf
    ~baca.selectors.pleaf_in_each_tuplet
    ~baca.selectors.pleaves
+   ~baca.selectors.plt
    ~baca.selectors.plts
+   ~baca.selectors.ptail
    ~baca.selectors.ptail_in_each_tuplet
+   ~baca.selectors.ptails
    ~baca.selectors.qruns
+   ~baca.selectors.rest
+   ~baca.selectors.rests
    ~baca.selectors.rleaf
    ~baca.selectors.rleak_runs
    ~baca.selectors.rleaves
+   ~baca.selectors.run
    ~baca.selectors.runs
+   ~baca.selectors.skip
    ~baca.selectors.tleaves
    ~baca.selectors.tuplet
    ~baca.selectors.tuplets

@@ -6329,7 +6329,7 @@ def text_spanner(
         ...         (abjad.tweak("#green").color, 2),
         ...         (abjad.tweak("#purple").color, 3),
         ...         final_piece_spanner=False,
-        ...         pieces=baca.plts(),
+        ...         pieces=baca.selectors.plts(),
         ...     ),
         ...     baca.skeleton('{ c2 c4. c2 c4. }'),
         ...     baca.pitches('C4 D4 E4 F4'),
@@ -6863,7 +6863,7 @@ def text_spanner(
         ...     'Music_Voice',
         ...     baca.text_spanner(
         ...         'P -> T -> P',
-        ...         pieces=baca.plts(),
+        ...         pieces=baca.selectors.plts(),
         ...     ),
         ...     baca.make_notes(),
         ...     baca.pitches('C4 D4 E4 F4 G4 A4'),
@@ -7047,7 +7047,7 @@ def text_spanner(
         ...     baca.text_spanner(
         ...         'P -> T ->',
         ...         final_piece_spanner=False,
-        ...         pieces=baca.plts(),
+        ...         pieces=baca.selectors.plts(),
         ...     ),
         ...     baca.skeleton('{ c2 c4. c2 c4 ~ c8 }'),
         ...     baca.pitches('C4 D4 E4 F4'),

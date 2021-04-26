@@ -50,53 +50,11 @@ def pleaves(*arguments, **keywords):
 pleaves.__doc__ = Selection.pleaves.__doc__
 
 
-def plt(*arguments, **keywords):
-    return select().plt(*arguments, **keywords)
-
-
-plt.__doc__ = Selection.plt.__doc__
-
-
 def plts(*arguments, **keywords):
     return select().plts(*arguments, **keywords)
 
 
 plts.__doc__ = Selection.plts.__doc__
-
-
-def ptail(*arguments, **keywords):
-    return select().ptail(*arguments, **keywords)
-
-
-ptail.__doc__ = Selection.ptail.__doc__
-
-
-def ptails(*arguments, **keywords):
-    return select().ptails(*arguments, **keywords)
-
-
-ptails.__doc__ = Selection.ptails.__doc__
-
-
-def rest(*arguments, **keywords):
-    return select().rest(*arguments, **keywords)
-
-
-rest.__doc__ = Selection.rest.__doc__
-
-
-def rests(*arguments, **keywords):
-    return select().rests(*arguments, **keywords)
-
-
-rests.__doc__ = Selection.rests.__doc__
-
-
-def run(*arguments, **keywords):
-    return select().run(*arguments, **keywords)
-
-
-run.__doc__ = Selection.run.__doc__
 
 
 def skip(*arguments, **keywords):

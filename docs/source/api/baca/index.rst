@@ -87,13 +87,7 @@ baca
    ~leaves
    ~lts
    ~pleaves
-   ~plt
    ~plts
-   ~ptail
-   ~ptails
-   ~rest
-   ~rests
-   ~run
    ~skip
    ~persistence.persistence
 
@@ -103,18 +97,6 @@ baca
 
 .. autofunction:: pleaves
 
-.. autofunction:: plt
-
 .. autofunction:: plts
-
-.. autofunction:: ptail
-
-.. autofunction:: ptails
-
-.. autofunction:: rest
-
-.. autofunction:: rests
-
-.. autofunction:: run
 
 .. autofunction:: skip

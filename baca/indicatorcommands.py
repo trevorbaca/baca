@@ -2022,7 +2022,10 @@ def repeat_tie(
         ...     ),
         ...     rmakers.beam(),
         ...     baca.chunk(
-        ...         baca.pitch(0, selector=baca.plt(1)),
+        ...         baca.pitch(
+        ...             0,
+        ...             selector=baca.selectors.plt(1),
+        ...         ),
         ...         baca.repeat_tie(
         ...             baca.selectors.phead(1),
         ...         ),
@@ -3489,8 +3492,11 @@ def tie(selector: abjad.Expression) -> commandclasses.IndicatorCommand:
         ...     ),
         ...     rmakers.beam(),
         ...     baca.chunk(
-        ...         baca.pitch(2, selector=baca.plt(0)),
-        ...         baca.tie(baca.ptail(0)),
+        ...         baca.pitch(
+        ...             2,
+        ...             selector=baca.selectors.plt(0),
+        ...         ),
+        ...         baca.tie(baca.selectors.ptail(0)),
         ...     ),
         ...     baca.tuplet_bracket_staff_padding(2),
         ... )

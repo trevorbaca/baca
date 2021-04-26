@@ -4,7 +4,9 @@ import typing
 
 import abjad
 
-from . import classes, const, pitchclasses, scoping, typings
+from . import classes, const, pitchclasses, scoping
+from . import selectors as _selectors
+from . import typings
 
 ### CLASSES ###
 
@@ -6428,7 +6430,7 @@ class StaffPositionInterpolationCommand(scoping.Command):
 
 def bass_to_octave(
     n: int,
-    selector=lambda _: classes.Selection(_).plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=const.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -6442,7 +6444,7 @@ def bass_to_octave(
         ...     baca.figure([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.bass_to_octave(3),
-        ...     baca.color(baca.plts().group()),
+        ...     baca.color(baca.selectors.plts(), lone=True),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
@@ -6528,9 +6530,9 @@ def bass_to_octave(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.bass_to_octave(3),
-        ...         map=baca.plts(),
+        ...         map=baca.selectors.plts(),
         ...         ),
-        ...     baca.color(baca.plts()),
+        ...     baca.color(baca.selectors.plts()),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
@@ -6614,7 +6616,7 @@ def bass_to_octave(
 
 def center_to_octave(
     n: int,
-    selector=lambda _: classes.Selection(_).plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=const.HIDDEN),
 ) -> RegisterToOctaveCommand:
     r"""
     Octave-transposes music.
@@ -6628,7 +6630,7 @@ def center_to_octave(
         ...     baca.figure([5, -3], 32),
         ...     rmakers.beam(),
         ...     baca.center_to_octave(3),
-        ...     baca.color(baca.plts().group()),
+        ...     baca.color(baca.selectors.plts(), lone=True),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
@@ -6714,9 +6716,9 @@ def center_to_octave(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.center_to_octave(3),
-        ...         map=baca.plts(),
+        ...         map=baca.selectors.plts(),
         ...         ),
-        ...     baca.color(baca.plts()),
+        ...     baca.color(baca.selectors.plts()),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
@@ -6800,7 +6802,7 @@ def center_to_octave(
 
 def clusters(
     widths: typing.List[int],
-    selector=lambda _: classes.Selection(_).plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=const.HIDDEN),
     *,
     start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
 ) -> ClusterCommand:
@@ -6813,7 +6815,7 @@ def clusters(
 def color_fingerings(
     numbers: typing.List[abjad.Number],
     *tweaks: abjad.IndexedTweakManager,
-    selector=lambda _: classes.Selection(_).pheads(exclude=const.HIDDEN),
+    selector=_selectors.pheads(exclude=const.HIDDEN),
 ) -> ColorFingeringCommand:
     """
     Adds color fingerings.
@@ -6823,7 +6825,7 @@ def color_fingerings(
 
 def deviation(
     deviations: typing.List[abjad.Number],
-    selector=lambda _: classes.Selection(_).plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=const.HIDDEN),
 ) -> MicrotoneDeviationCommand:
     """
     Sets microtone ``deviations``.
@@ -6833,7 +6835,7 @@ def deviation(
 
 def diatonic_clusters(
     widths: typing.List[int],
-    selector=lambda _: classes.Selection(_).plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=const.HIDDEN),
 ) -> DiatonicClusterCommand:
     """
     Makes diatonic clusters with ``widths``.
@@ -6843,7 +6845,7 @@ def diatonic_clusters(
 
 def displacement(
     displacements: typing.List[int],
-    selector=lambda _: classes.Selection(_).plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=const.HIDDEN),
 ) -> OctaveDisplacementCommand:
     r"""
     Octave-displaces ``selector`` output.
@@ -6993,7 +6995,7 @@ def displacement(
 
 
 def force_accidental(
-    selector=lambda _: classes.Selection(_).pleaf(0, exclude=const.HIDDEN),
+    selector=_selectors.pleaf(0, exclude=const.HIDDEN),
 ) -> AccidentalAdjustmentCommand:
     r"""
     Forces accidental.
@@ -7139,7 +7141,7 @@ def force_accidental(
 def interpolate_pitches(
     start: typing.Union[int, str, abjad.NamedPitch],
     stop: typing.Union[int, str, abjad.NamedPitch],
-    selector=lambda _: classes.Selection(_).plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=const.HIDDEN),
     *,
     mock: bool = None,
 ) -> StaffPositionInterpolationCommand:
@@ -7312,7 +7314,7 @@ def interpolate_pitches(
 def interpolate_staff_positions(
     start: typing.Union[int, abjad.StaffPosition],
     stop: typing.Union[int, abjad.StaffPosition],
-    selector=lambda _: classes.Selection(_).plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=const.HIDDEN),
     *,
     mock: bool = None,
 ) -> StaffPositionInterpolationCommand:
@@ -7337,7 +7339,7 @@ def levine_multiphonic(n: int) -> abjad.Markup:
 def loop(
     items: typing.Sequence,
     intervals: typing.Sequence,
-    selector=lambda _: classes.Selection(_).plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=const.HIDDEN),
 ) -> PitchCommand:
     """
     Loops ``items`` at ``intervals``.
@@ -7348,7 +7350,7 @@ def loop(
 
 def natural_clusters(
     widths: typing.Sequence[int],
-    selector=lambda _: classes.Selection(_).plts(exclude=const.HIDDEN),
+    selector=_selectors.plts(exclude=const.HIDDEN),
     *,
     start_pitch: typing.Union[int, str, abjad.NamedPitch] = None,
 ) -> ClusterCommand:
@@ -7914,7 +7916,7 @@ def soprano_to_octave(
         >>> stack = baca.stack(
         ...     baca.figure([5, -3], 32),
         ...     rmakers.beam(),
-        ...     baca.color(baca.plts().group()),
+        ...     baca.color(baca.selectors.plts(), lone=True),
         ...     baca.soprano_to_octave(3),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
@@ -8001,9 +8003,9 @@ def soprano_to_octave(
         ...     rmakers.beam(),
         ...     baca.new(
         ...         baca.soprano_to_octave(3),
-        ...         map=baca.plts(),
+        ...         map=baca.selectors.plts(),
         ...         ),
-        ...     baca.color(baca.plts()),
+        ...     baca.color(baca.selectors.plts()),
         ... )
         >>> selection = stack([{0, 2, 10}, [17], {15, 16, 30}, {7, 20}, [9]])
         >>> lilypond_file = abjad.LilyPondFile.rhythm(selection)
