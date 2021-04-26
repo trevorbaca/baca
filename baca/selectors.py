@@ -91,6 +91,7 @@ def leaves(
     pitched: bool = None,
     prototype=None,
     reverse: bool = None,
+    rleak: bool = False,
     tail: bool = None,
     trim: typing.Union[bool, int] = None,
 ):
@@ -106,6 +107,8 @@ def leaves(
             trim=trim,
         )
         selection = _handle_pair(selection, pair)
+        if rleak is True:
+            selection = Selection(selection).rleak()
         return selection
 
     return selector
@@ -424,6 +427,8 @@ def rleak_runs(start=0, stop=None):
 
 
 def rleaves(pair=None):
+    assert pair is None, repr(pair)
+
     def selector(argument):
         result = Selection(argument).rleaves()
         result = _handle_pair(result, pair)
