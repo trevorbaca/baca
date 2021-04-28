@@ -88,6 +88,7 @@ def leaves(
     exclude: abjad.typings.Strings = None,
     grace: bool = None,
     head: bool = None,
+    lleak: bool = None,
     pitched: bool = None,
     prototype=None,
     reverse: bool = None,
@@ -107,6 +108,8 @@ def leaves(
             trim=trim,
         )
         selection = _handle_pair(selection, pair)
+        if lleak is True:
+            selection = Selection(selection).lleak()
         if rleak is True:
             selection = Selection(selection).rleak()
         return selection

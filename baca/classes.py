@@ -2644,8 +2644,6 @@ class Selection(abjad.Selection):
 
             Selects left-trimmed leaf 0:
 
-            ..  container:: example
-
             >>> tuplets = [
             ...     "r16 bf'16 <a'' b''>16 c'16 <d' e'>4 ~ <d' e'>16",
             ...     "r16 bf'16 <a'' b''>16 d'16 <e' fs'>4 ~ <e' fs'>16",
