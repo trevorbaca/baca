@@ -427,8 +427,6 @@ def rleak_runs(start=0, stop=None):
 
 
 def rleaves(pair=None):
-    assert pair is None, repr(pair)
-
     def selector(argument):
         result = Selection(argument).rleaves()
         result = _handle_pair(result, pair)
