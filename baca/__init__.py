@@ -36,13 +36,6 @@ def leaves(*arguments, **keywords):
 leaves.__doc__ = Selection.leaves.__doc__
 
 
-def lts(*arguments, **keywords):
-    return select().lts(*arguments, **keywords)
-
-
-lts.__doc__ = Selection.lts.__doc__
-
-
 def pleaves(*arguments, **keywords):
     return select().pleaves(*arguments, **keywords)
 

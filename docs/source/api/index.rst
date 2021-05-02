@@ -24,7 +24,6 @@ Bača API
    :nosignatures:
 
    ~baca.leaves
-   ~baca.lts
    ~baca.pleaves
    ~baca.plts
    ~baca.skip

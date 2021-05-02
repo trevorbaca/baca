@@ -85,15 +85,12 @@ baca
    :nosignatures:
 
    ~leaves
-   ~lts
    ~pleaves
    ~plts
    ~skip
    ~persistence.persistence
 
 .. autofunction:: leaves
-
-.. autofunction:: lts
 
 .. autofunction:: pleaves
 

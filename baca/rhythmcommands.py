@@ -462,7 +462,9 @@ class RhythmCommand(scoping.Command):
 
             >>> note_command = rmakers.stack(
             ...     rmakers.note(),
-            ...     rmakers.force_rest(baca.lts()),
+            ...     rmakers.force_rest(
+            ...         baca.selectors.lts(),
+            ...     ),
             ...     rmakers.beam(baca.selectors.plts()),
             ... )
             >>> talea_command = rmakers.stack(
