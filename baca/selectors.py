@@ -363,9 +363,9 @@ def plt(n):
     return selector
 
 
-def plts(pair=None, exclude=None):
+def plts(pair=None, *, exclude=None, grace=None):
     def selector(argument):
-        result = Selection(argument).plts(exclude=exclude)
+        result = Selection(argument).plts(exclude=exclude, grace=grace)
         result = _handle_pair(result, pair)
         return result
 
