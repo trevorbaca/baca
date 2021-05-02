@@ -856,7 +856,7 @@ def new(*commands: CommandTyping, **keywords) -> CommandTyping:
         ...         baca.marcato(),
         ...         baca.slur(),
         ...         baca.staccato(),
-        ...         selector=baca.leaves()[4:-3],
+        ...         selector=baca.selectors.leaves((4, -3)),
         ...         ),
         ...     baca.make_even_divisions(),
         ...     )

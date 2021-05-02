@@ -500,8 +500,8 @@ def container(
 
         >>> maker(
         ...     'Music_Voice',
-        ...     baca.container('ViolinI', selector=baca.leaves()[:2]),
-        ...     baca.container('ViolinII', selector=baca.leaves()[2:]),
+        ...     baca.container('ViolinI', selector=baca.selectors.leaves((None, 2))),
+        ...     baca.container('ViolinII', selector=baca.selectors.leaves((2, None))),
         ...     baca.make_notes(repeat_ties=True),
         ...     baca.pitches('E4 F4'),
         ...     )
@@ -2262,7 +2262,7 @@ def invisible_music(
         >>> maker(
         ...     'Music_Voice',
         ...     baca.invisible_music(
-        ...         selector=baca.leaves()[1:-1],
+        ...         selector=baca.selectors.leaves((1, -1)),
         ...         ),
         ...     baca.make_notes(),
         ...     baca.pitch('C5'),

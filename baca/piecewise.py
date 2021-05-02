@@ -1986,11 +1986,11 @@ def hairpin(
         ...     baca.make_even_divisions(),
         ...     baca.hairpin(
         ...         '"mp" <| "f"',
-        ...         selector=baca.leaves()[:7],
+        ...         selector=baca.selectors.leaves((None, 7)),
         ...         ),
         ...     baca.hairpin(
         ...         '"mf" |> "p"',
-        ...         selector=baca.leaves()[7:],
+        ...         selector=baca.selectors.leaves((7, None)),
         ...         ),
         ...     baca.pitches('E4 D5 F4 C5 G4 F5'),
         ...     )
@@ -3259,12 +3259,12 @@ def hairpin(
         ...     baca.hairpin(
         ...         'p -- niente',
         ...         abjad.tweak(True).to_barline,
-        ...         selector=baca.leaves()[:2],
+        ...         selector=baca.selectors.leaves((None, 2)),
         ...         ),
         ...     baca.hairpin(
         ...         'f -- niente',
         ...         abjad.tweak(True).to_barline,
-        ...         selector=baca.leaves()[2:],
+        ...         selector=baca.selectors.leaves((2, None)),
         ...         ),
         ...     baca.pitches('C4 D4'),
         ...     baca.skeleton('{ c2 r4. c2 r4. }'),

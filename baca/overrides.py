@@ -1768,7 +1768,7 @@ def mmrest_text_color(
         ...         literal=True,
         ...         selector=baca.selectors.leaf(1),
         ...         ),
-        ...     baca.mmrest_text_color("#red", selector=baca.leaves()),
+        ...     baca.mmrest_text_color("#red", selector=baca.selectors.leaves()),
         ...     baca.pitches([2, 4]),
         ...     )
 

@@ -23,7 +23,6 @@ Bača API
 .. autosummary::
    :nosignatures:
 
-   ~baca.leaves
    ~baca.pleaves
    ~baca.plts
    ~baca.skip

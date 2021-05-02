@@ -911,8 +911,8 @@ class ContainerCommand(scoping.Command):
         >>> maker(
         ...     'Music_Voice',
         ...     baca.make_notes(repeat_ties=True),
-        ...     baca.container('ViolinI', selector=baca.leaves()[:2]),
-        ...     baca.container('ViolinII', selector=baca.leaves()[2:]),
+        ...     baca.container('ViolinI', selector=baca.selectors.leaves((None, 2))),
+        ...     baca.container('ViolinII', selector=baca.selectors.leaves((2, None))),
         ...     baca.pitches('E4 F4'),
         ...     )
 
@@ -1110,8 +1110,8 @@ class DetachCommand(scoping.Command):
     ..  container:: example
 
         >>> arguments = [abjad.RepeatTie, abjad.Tie]
-        >>> baca.DetachCommand(arguments, baca.leaves())
-        DetachCommand([RepeatTie, Tie], baca.leaves())
+        >>> baca.DetachCommand(arguments, baca.selectors.leaves())
+        DetachCommand([RepeatTie, Tie], ...)
 
     """
 

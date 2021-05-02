@@ -29,13 +29,6 @@ Path = ide.Path
 tags = ide.tags
 
 
-def leaves(*arguments, **keywords):
-    return select().leaves(*arguments, **keywords)
-
-
-leaves.__doc__ = Selection.leaves.__doc__
-
-
 def pleaves(*arguments, **keywords):
     return select().pleaves(*arguments, **keywords)
 
