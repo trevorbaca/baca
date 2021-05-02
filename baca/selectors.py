@@ -5,6 +5,22 @@ import abjad
 from .classes import Selection
 
 
+def _handle_omit(selection, pair):
+    if isinstance(pair, tuple):
+        if isinstance(pair[0], list):
+            assert len(pair) == 2, repr(pair)
+            indices, period = pair
+            selection = selection.exclude(indices, period)
+        else:
+            start, stop = pair
+            selection = selection[start:stop]
+    elif isinstance(pair, list):
+        selection = selection.exclude(pair)
+    elif isinstance(pair, abjad.Pattern):
+        selection = selection.exclude(pair)
+    return selection
+
+
 def _handle_pair(selection, pair):
     if isinstance(pair, tuple):
         if isinstance(pair[0], list):
@@ -236,10 +252,11 @@ def ltqruns(*arguments, **keywords):
     return selector
 
 
-def lts(pair=None):
+def lts(pair=None, *, nontrivial=None, omit=False):
     def selector(argument):
-        result = Selection(argument).lts()
+        result = Selection(argument).lts(nontrivial=nontrivial)
         result = _handle_pair(result, pair)
+        result = _handle_omit(result, omit)
         return result
 
     return selector
