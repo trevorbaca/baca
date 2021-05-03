@@ -41,10 +41,3 @@ def plts(*arguments, **keywords):
 
 
 plts.__doc__ = Selection.plts.__doc__
-
-
-def skip(*arguments, **keywords):
-    return select().skip(*arguments, **keywords)
-
-
-skip.__doc__ = Selection.skip.__doc__

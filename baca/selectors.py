@@ -363,10 +363,35 @@ def plt(n):
     return selector
 
 
-def plts(pair=None, *, exclude=None, grace=None):
+def plts(pair=None, *, exclude=None, grace=None, lleak=None, omit=None, rleak=None):
     def selector(argument):
         result = Selection(argument).plts(exclude=exclude, grace=grace)
         result = _handle_pair(result, pair)
+        result = _handle_omit(result, omit)
+        if lleak is True:
+            result = result.lleak()
+        if rleak is True:
+            result = result.rleak()
+        return result
+
+    return selector
+
+
+def plts_filter_duration(inequality, preprolated=None):
+    def selector(argument):
+        result = Selection(argument).plts()
+        comparator, duration = inequality
+        result = result.filter_duration(comparator, duration, preprolated=preprolated)
+        return result
+
+    return selector
+
+
+def plts_filter_length(inequality, preprolated=None):
+    def selector(argument):
+        result = Selection(argument).plts()
+        comparator, length = inequality
+        result = result.filter_length(comparator, length)
         return result
 
     return selector
