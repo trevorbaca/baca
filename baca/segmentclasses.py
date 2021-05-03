@@ -8,6 +8,7 @@ import abjad
 from . import classes, commandclasses, indicators
 from . import path as baca_path
 from . import scoping
+from . import selectors as _selectors
 
 ### CLASSES ###
 
@@ -2706,11 +2707,7 @@ def breaks(
             else:
                 alignment_distances = system[2]
             assert 0 <= skip_index
-
-            selector = classes.select().skip(skip_index)
-            # def selector(argument):
-            #    return classes.Selection(argument).skips()[skip_index:skip_index + 1]
-
+            selector = _selectors.skip(skip_index)
             if j == 0:
                 break_ = abjad.LilyPondLiteral(r"\pageBreak")
             else:
