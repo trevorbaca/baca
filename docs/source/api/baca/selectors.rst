@@ -56,6 +56,8 @@ selectors
    ~pleaves
    ~plt
    ~plts
+   ~plts_filter_duration
+   ~plts_filter_length
    ~ptail
    ~ptail_in_each_tuplet
    ~ptails
@@ -139,6 +141,10 @@ selectors
 .. autofunction:: plt
 
 .. autofunction:: plts
+
+.. autofunction:: plts_filter_duration
+
+.. autofunction:: plts_filter_length
 
 .. autofunction:: ptail
 

@@ -24,8 +24,6 @@ Bača API
    :nosignatures:
 
    ~baca.pleaves
-   ~baca.plts
-   ~baca.skip
    ~baca.persistence.persistence
 
 .. raw:: html
@@ -889,6 +887,8 @@ Rhythm commands.
    ~baca.selectors.pleaves
    ~baca.selectors.plt
    ~baca.selectors.plts
+   ~baca.selectors.plts_filter_duration
+   ~baca.selectors.plts_filter_length
    ~baca.selectors.ptail
    ~baca.selectors.ptail_in_each_tuplet
    ~baca.selectors.ptails

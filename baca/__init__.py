@@ -34,10 +34,3 @@ def pleaves(*arguments, **keywords):
 
 
 pleaves.__doc__ = Selection.pleaves.__doc__
-
-
-def plts(*arguments, **keywords):
-    return select().plts(*arguments, **keywords)
-
-
-plts.__doc__ = Selection.plts.__doc__
