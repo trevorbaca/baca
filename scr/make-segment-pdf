@@ -1,0 +1,104 @@
+#! /usr/bin/env bash
+
+source lib-path-manipulation
+source make-layout-ly
+
+boilerplate=/Users/trevorbaca/ide/boilerplate
+
+
+make-segment-pdf() {
+
+    if [ -a layout.py ]; then
+        layout_py_path=$(realpath layout.py)
+        directory=$(dirname "$layout_py_path")
+        filename=$(basename -- "$layout_py_path")
+        filename="${filename%.*}"
+        layout_ly_path="$directory"/"$filename".ly
+        SECONDS=0
+        make_layout_ly "$layout_py_path"
+        if [ -f "$layout_ly_path" ]; then
+            echo Found "$layout_ly_path" ...
+        else
+            echo Can not produce "$layout_ly_path" ...
+        fi
+        if [ "$SECONDS" -eq 1 ]; then
+            echo "Total time ${SECONDS} second ..."
+        else
+            echo "Total time ${SECONDS} seconds ..."
+        fi
+    fi
+
+    segment_directory=$(pwd)
+    segment_name=$(basename $segment_directory)
+    definition="$segment_directory"/definition.py
+    if [ ! -f "$definition" ]; then
+        echo "Can not find $definition ..."
+    fi
+    echo "Making segment $(basename $segment_directory) PDF ..."
+    ly="$segment_directory"/illustration.ly
+    if [ -a "$ly" ]; then
+        echo "Removing $ly ..."
+        rm "$ly"
+    fi
+
+    pdf="$segment_directory"/illustration.pdf
+    backup_pdf="$segment_directory"/illustartion._backup.pdf
+    if [ -a "$pdf" ]; then
+        cp "$pdf" "$backup_pdf"
+        echo "Removing $pdf ..."
+        rm "$pdf"
+    fi
+
+    maker_name=__make_segment_pdf__.py
+    maker_source="$boilerplate"/"$maker_name"
+    maker_target="$segment_directory"/"$maker_name"
+    if [ -a "$maker_target" ]; then
+        rm "$maker_target"
+    fi
+    echo Writing "$maker_target" ...
+    cp "$maker_source" "$maker_target"
+
+    if [ "$segment_name" == "01" ]; then
+        statement="previous_metadata = None"
+        persist_statement="previous_persist = None"
+    else
+        previous_segment=$(get_previous_sibling_directory "$segment_directory")
+        metadata="$previous_segment"/__metadata__.py
+        statement="file = ide.Path('$metadata')"
+        statement="$statement
+        lines = file.read_text()"
+        statement="$statement
+        exec(lines)"
+        statement="$statement
+        previous_metadata = metadata"
+        persist="$previous_segment"/__persist__.py
+        persist_statement="file = ide.Path('$persist')"
+        persist_statement="$persist_statement
+        lines = file.read_text()"
+        persist_statement="$persist_statement
+        exec(lines)"
+        persist_statement="$persist_statement
+        previous_persist = persist"
+    fi
+
+    boil "$maker_target" previous_segment_metadata_import_statement "$statement" \
+        previous_segment_persist_import_statement "$persist_statement"
+
+    echo Interpreting "$maker_target" ...
+    python "$maker_target"
+    echo Removing "$maker_target" ...
+    rm "$maker_target"
+    ly="$segment_directory"/illustration.ly
+    if [ -a "$ly" ]; then
+        echo Found "$ly" ...
+    fi
+    if [ -a "$pdf" ]; then
+        echo Found "$pdf" ...
+        rm "$backup_pdf"
+        echo Opening "$pdf" ...
+        open "$pdf"
+    elif [ -a "$backup_pdf" ]; then
+        cp "$backup_pdf" "$pdf"
+    fi
+
+}

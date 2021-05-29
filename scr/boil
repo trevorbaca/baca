@@ -4,9 +4,14 @@ import sys
 
 if __name__ == "__main__":
     target = pathlib.Path(sys.argv[1])
+    values = {}
     key = sys.argv[2]
     value = sys.argv[3]
-    values = {key: value}
+    values[key] = value
+    if 4 < len(sys.argv):
+        key = sys.argv[4]
+        value = sys.argv[5]
+        values[key] = value
     template = target.read_text()
     template = template.format(**values)
     target.write_text(template)

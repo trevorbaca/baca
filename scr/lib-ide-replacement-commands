@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+source make-segment-pdf
+
+ipm() {
+    make-segment-pdf
+}
