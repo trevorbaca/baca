@@ -6,7 +6,9 @@ source make-layout-ly
 boilerplate=/Users/trevorbaca/ide/boilerplate
 
 
-make-segment-pdf() {
+helper() {
+
+    segment_directory=$1
 
     if [ -a layout.py ]; then
         layout_py_path=$(realpath layout.py)
@@ -17,9 +19,9 @@ make-segment-pdf() {
         SECONDS=0
         make_layout_ly "$layout_py_path"
         if [ -f "$layout_ly_path" ]; then
-            echo Found "$layout_ly_path" ...
+            echo Found $(trim_score_path "$layout_ly_path") ...
         else
-            echo Can not produce "$layout_ly_path" ...
+            echo Can not produce $(trim_score_path "$layout_ly_path") ...
         fi
         if [ "$SECONDS" -eq 1 ]; then
             echo "Total time ${SECONDS} second ..."
@@ -28,24 +30,24 @@ make-segment-pdf() {
         fi
     fi
 
-    segment_directory=$(pwd)
-    segment_name=$(basename $segment_directory)
+    segment_name=$(basename "$segment_directory")
     definition="$segment_directory"/definition.py
     if [ ! -f "$definition" ]; then
         echo "Can not find $definition ..."
+        return
     fi
-    echo "Making segment $(basename $segment_directory) PDF ..."
+    echo "Making segment $(basename "$segment_directory") PDF ..."
     ly="$segment_directory"/illustration.ly
     if [ -a "$ly" ]; then
-        echo "Removing $ly ..."
+        echo "Removing $(trim_score_path "$ly") ..."
         rm "$ly"
     fi
 
     pdf="$segment_directory"/illustration.pdf
-    backup_pdf="$segment_directory"/illustartion._backup.pdf
+    backup_pdf="$segment_directory"/illustration._backup.pdf
     if [ -a "$pdf" ]; then
         cp "$pdf" "$backup_pdf"
-        echo "Removing $pdf ..."
+        echo "Removing $(trim_score_path "$pdf") ..."
         rm "$pdf"
     fi
 
@@ -55,7 +57,7 @@ make-segment-pdf() {
     if [ -a "$maker_target" ]; then
         rm "$maker_target"
     fi
-    echo Writing "$maker_target" ...
+    echo Writing $(trim_score_path "$maker_target") ...
     cp "$maker_source" "$maker_target"
 
     if [ "$segment_name" == "01" ]; then
@@ -84,21 +86,47 @@ make-segment-pdf() {
     boil "$maker_target" previous_segment_metadata_import_statement "$statement" \
         previous_segment_persist_import_statement "$persist_statement"
 
-    echo Interpreting "$maker_target" ...
+    echo Interpreting $(trim_score_path "$maker_target") ...
     python "$maker_target"
-    echo Removing "$maker_target" ...
+    echo Removing $(trim_score_path "$maker_target") ...
     rm "$maker_target"
     ly="$segment_directory"/illustration.ly
     if [ -a "$ly" ]; then
-        echo Found "$ly" ...
+        echo Found $(trim_score_path "$ly") ...
     fi
     if [ -a "$pdf" ]; then
-        echo Found "$pdf" ...
+        echo Found $(trim_score_path "$pdf") ...
         rm "$backup_pdf"
-        echo Opening "$pdf" ...
-        open "$pdf"
+        if [ $2 == "do_open" ]; then
+            echo Opening $(trim_score_path "$pdf") ...
+            open "$pdf"
+        fi
     elif [ -a "$backup_pdf" ]; then
         cp "$backup_pdf" "$pdf"
     fi
 
+}
+
+
+make_segment_pdf() {
+    current_directory=$(pwd)
+    current_basename=$(basename "$current_directory")
+    parent_basename=$(basename $(dirname "$current_directory"))
+    if [ $current_basename != segments ]; then
+        if [ $parent_basename != segments ]; then
+            echo Call in segment directory or segments directory ...
+            return
+        fi
+        helper $(pwd) do_open
+        echo
+    else
+        paths=$(ls -d [0-9]*)
+        for path in $paths; do
+            segment_directory=$(realpath $path)
+            cd $segment_directory
+            helper $segment_directory do_not_open
+            cd $current_directory
+            echo
+        done
+    fi
 }

@@ -3,5 +3,5 @@
 source make-segment-pdf
 
 ipm() {
-    make-segment-pdf
+    make_segment_pdf
 }
