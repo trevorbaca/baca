@@ -97,7 +97,7 @@ helper() {
     if [ -a "$pdf" ]; then
         echo Found $(trim_score_path "$pdf") ...
         rm "$backup_pdf"
-        if [ $2 == "do_open" ]; then
+        if [[ "$2" != "--do-not-open" ]]; then
             echo Opening $(trim_score_path "$pdf") ...
             open "$pdf"
         fi
@@ -117,14 +117,14 @@ make_segment_pdf() {
             echo Call in segment directory or segments directory ...
             return
         fi
-        helper $(pwd) do_open
+        helper $(pwd) "$1"
         echo
     else
         paths=$(ls -d [0-9]*)
         for path in $paths; do
             segment_directory=$(realpath $path)
             cd $segment_directory
-            helper $segment_directory do_not_open
+            helper $segment_directory --do-not-open
             cd $current_directory
             echo
         done

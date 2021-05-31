@@ -27,8 +27,7 @@ case $1 in
         mra; gg; ipm
         myr; gg; ipm
         nae; gg; ipm
-        #rec; gg; 01 ipn q
-        rec; gg; 01 ipm
+        rec; gg; cd 01; ipm --do-not-open
         str; gg; ipm
         tra; gg; ipm
         ;;
