@@ -23,7 +23,6 @@ directories = segments.list_paths()
 
 @pytest.mark.parametrize("directory", directories)
 def test_segments(directory):
-    # abjad_ide._test_segment_illustration(directory)
     # only run on GitHub because segment illustration usually takes a while
     if not os.getenv("GITHUB_WORKSPACE"):
         return
